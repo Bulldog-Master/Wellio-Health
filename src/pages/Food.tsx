@@ -68,10 +68,10 @@ const Food = () => {
   const totalCalories = mealLogs.reduce((sum, meal) => sum + (meal.calories || 0), 0);
 
   const handleAddMeal = async () => {
-    if (!food || !calories) {
+    if (!food.trim() || !calories.trim() || isNaN(Number(calories)) || Number(calories) <= 0) {
       toast({
         title: "Missing information",
-        description: "Please enter food name and calories.",
+        description: "Please enter a valid food name and calories.",
         variant: "destructive",
       });
       return;
