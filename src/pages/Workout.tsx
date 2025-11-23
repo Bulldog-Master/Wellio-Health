@@ -240,6 +240,18 @@ const Workout = () => {
                       Intense
                     </div>
                   </SelectItem>
+                  <SelectItem value="HIT">
+                    <div className="flex items-center gap-2">
+                      <Zap className="w-3 h-3 text-accent" />
+                      HIT
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="HIIT">
+                    <div className="flex items-center gap-2">
+                      <Zap className="w-3 h-3 text-accent" />
+                      HIIT
+                    </div>
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>

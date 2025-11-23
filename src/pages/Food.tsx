@@ -2,8 +2,9 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Utensils, Plus, Clock } from "lucide-react";
-import { useState, useEffect } from "react";
+import { Textarea } from "@/components/ui/textarea";
+import { Utensils, Plus, Clock, Camera, Sparkles, Loader2 } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
@@ -22,13 +23,18 @@ interface MealLog {
 const Food = () => {
   const { toast } = useToast();
   const [selectedMeal, setSelectedMeal] = useState("breakfast");
-  const [food, setFood] = useState("");
-  const [calories, setCalories] = useState("");
-  const [protein, setProtein] = useState("");
-  const [carbs, setCarbs] = useState("");
-  const [fat, setFat] = useState("");
+  const [mealDescription, setMealDescription] = useState("");
+  const [nutritionData, setNutritionData] = useState<{
+    calories: number;
+    protein: number;
+    carbs: number;
+    fat: number;
+  } | null>(null);
   const [mealLogs, setMealLogs] = useState<MealLog[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const mealTypes = [
     { value: "breakfast", label: "Breakfast" },
@@ -67,24 +73,87 @@ const Food = () => {
 
   const totalCalories = mealLogs.reduce((sum, meal) => sum + (meal.calories || 0), 0);
 
-  const handleAddMeal = async () => {
-    const trimmedFood = food.trim();
-    const trimmedCalories = calories.trim();
-    const caloriesNum = parseFloat(trimmedCalories);
-    
-    if (!trimmedFood) {
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleAnalyzeMeal = async () => {
+    if (!mealDescription.trim() && !imagePreview) {
       toast({
-        title: "Missing food name",
-        description: "Please enter what you ate.",
+        title: "Input required",
+        description: "Please describe your meal or upload a photo.",
         variant: "destructive",
       });
       return;
     }
-    
-    if (!trimmedCalories || isNaN(caloriesNum) || caloriesNum <= 0) {
+
+    setIsAnalyzing(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('analyze-meal', {
+        body: {
+          mealDescription: mealDescription.trim() || null,
+          imageBase64: imagePreview || null
+        }
+      });
+
+      if (error) {
+        console.error('Error analyzing meal:', error);
+        throw error;
+      }
+
+      if (!data) {
+        throw new Error('No data returned from analysis');
+      }
+
+      // If image analysis returned a food name, use it
+      if (data.foodName) {
+        setMealDescription(data.foodName);
+      }
+
+      setNutritionData({
+        calories: Math.round(data.calories),
+        protein: Math.round(data.protein),
+        carbs: Math.round(data.carbs),
+        fat: Math.round(data.fat)
+      });
+
       toast({
-        title: "Invalid calories",
-        description: "Please enter a valid calorie amount (number greater than 0).",
+        title: "Analysis complete!",
+        description: "Nutrition data has been estimated. Review and save.",
+      });
+    } catch (error) {
+      console.error("Error analyzing meal:", error);
+      toast({
+        title: "Analysis failed",
+        description: "Could not analyze the meal. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
+  const handleAddMeal = async () => {
+    if (!mealDescription.trim()) {
+      toast({
+        title: "Missing information",
+        description: "Please describe what you ate.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!nutritionData) {
+      toast({
+        title: "Analysis required",
+        description: "Please analyze your meal first to get nutrition data.",
         variant: "destructive",
       });
       return;
@@ -106,26 +175,27 @@ const Food = () => {
         .insert({
           user_id: user.id,
           meal_type: selectedMeal,
-          food_name: trimmedFood,
-          calories: caloriesNum,
-          protein_grams: protein.trim() ? parseFloat(protein) : null,
-          carbs_grams: carbs.trim() ? parseFloat(carbs) : null,
-          fat_grams: fat.trim() ? parseFloat(fat) : null,
+          food_name: mealDescription.trim(),
+          calories: nutritionData.calories,
+          protein_grams: nutritionData.protein,
+          carbs_grams: nutritionData.carbs,
+          fat_grams: nutritionData.fat,
         });
 
       if (error) throw error;
 
       toast({
         title: "Meal logged",
-        description: `${food} (${calories} cal) added to ${mealTypes.find(m => m.value === selectedMeal)?.label}`,
+        description: `${mealDescription} (${nutritionData.calories} cal) added to ${mealTypes.find(m => m.value === selectedMeal)?.label}`,
       });
 
-      setFood("");
-      setCalories("");
-      setProtein("");
-      setCarbs("");
-      setFat("");
-      
+      setMealDescription("");
+      setNutritionData(null);
+      setImagePreview(null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+
       fetchMealLogs();
     } catch (error) {
       console.error('Error logging meal:', error);
@@ -145,7 +215,7 @@ const Food = () => {
         </div>
         <div>
           <h1 className="text-3xl font-bold">Food Log</h1>
-          <p className="text-muted-foreground">Track your daily nutrition</p>
+          <p className="text-muted-foreground">Track your daily nutrition with AI</p>
         </div>
       </div>
 
@@ -175,69 +245,102 @@ const Food = () => {
           </div>
 
           <div>
-            <Label htmlFor="food">What did you eat?</Label>
-            <Input
-              id="food"
-              placeholder="e.g., Grilled chicken with rice and vegetables"
-              value={food}
-              onChange={(e) => setFood(e.target.value)}
+            <Label htmlFor="meal">What did you eat?</Label>
+            <Textarea
+              id="meal"
+              placeholder="e.g., 3 eggs sunny side up, 6 pieces of bacon, 1/2 avocado, 2 cups of coffee"
+              value={mealDescription}
+              onChange={(e) => setMealDescription(e.target.value)}
               className="mt-1.5"
+              rows={3}
             />
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div>
-              <Label htmlFor="calories">Calories *</Label>
+          <div>
+            <Label>Or upload a photo</Label>
+            <div className="flex gap-2 mt-1.5">
               <Input
-                id="calories"
-                type="number"
-                placeholder="350"
-                value={calories}
-                onChange={(e) => setCalories(e.target.value)}
-                className="mt-1.5"
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="flex-1"
               />
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                <Camera className="w-4 h-4" />
+              </Button>
             </div>
-            <div>
-              <Label htmlFor="protein">Protein (g)</Label>
-              <Input
-                id="protein"
-                type="number"
-                step="0.1"
-                placeholder="30"
-                value={protein}
-                onChange={(e) => setProtein(e.target.value)}
-                className="mt-1.5"
-              />
-            </div>
-            <div>
-              <Label htmlFor="carbs">Carbs (g)</Label>
-              <Input
-                id="carbs"
-                type="number"
-                step="0.1"
-                placeholder="45"
-                value={carbs}
-                onChange={(e) => setCarbs(e.target.value)}
-                className="mt-1.5"
-              />
-            </div>
-            <div>
-              <Label htmlFor="fat">Fat (g)</Label>
-              <Input
-                id="fat"
-                type="number"
-                step="0.1"
-                placeholder="15"
-                value={fat}
-                onChange={(e) => setFat(e.target.value)}
-                className="mt-1.5"
-              />
-            </div>
+            {imagePreview && (
+              <div className="relative mt-2">
+                <img src={imagePreview} alt="Meal preview" className="w-full h-40 object-cover rounded-md" />
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  className="absolute top-2 right-2"
+                  onClick={() => {
+                    setImagePreview(null);
+                    if (fileInputRef.current) fileInputRef.current.value = '';
+                  }}
+                >
+                  Remove
+                </Button>
+              </div>
+            )}
           </div>
 
-          <Button onClick={handleAddMeal} className="w-full gap-2">
+          <Button
+            onClick={handleAnalyzeMeal}
+            className="w-full gap-2"
+            disabled={isAnalyzing || (!mealDescription.trim() && !imagePreview)}
+          >
+            {isAnalyzing ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                Analyzing with AI...
+              </>
+            ) : (
+              <>
+                <Sparkles className="w-4 h-4" />
+                Analyze with AI
+              </>
+            )}
+          </Button>
+
+          {nutritionData && (
+            <Card className="p-4 bg-accent/10 border-accent">
+              <h4 className="font-semibold mb-3 text-accent">Estimated Nutrition</h4>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="text-center p-3 bg-background rounded-lg">
+                  <p className="text-xs text-muted-foreground">Calories</p>
+                  <p className="text-2xl font-bold text-accent">{nutritionData.calories}</p>
+                </div>
+                <div className="text-center p-3 bg-background rounded-lg">
+                  <p className="text-xs text-muted-foreground">Protein</p>
+                  <p className="text-2xl font-bold text-accent">{nutritionData.protein}g</p>
+                </div>
+                <div className="text-center p-3 bg-background rounded-lg">
+                  <p className="text-xs text-muted-foreground">Carbs</p>
+                  <p className="text-2xl font-bold text-accent">{nutritionData.carbs}g</p>
+                </div>
+                <div className="text-center p-3 bg-background rounded-lg">
+                  <p className="text-xs text-muted-foreground">Fat</p>
+                  <p className="text-2xl font-bold text-accent">{nutritionData.fat}g</p>
+                </div>
+              </div>
+            </Card>
+          )}
+
+          <Button
+            onClick={handleAddMeal}
+            className="w-full gap-2"
+            disabled={!nutritionData}
+          >
             <Plus className="w-4 h-4" />
-            Add Meal
+            Save Meal
           </Button>
         </div>
       </Card>
