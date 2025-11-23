@@ -6,9 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Activity, Mail, Lock, User as UserIcon, Sparkles } from "lucide-react";
+import { Activity, Mail, Lock, User as UserIcon, Sparkles, Fingerprint } from "lucide-react";
 import { z } from "zod";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { isWebAuthnSupported, registerPasskey, authenticatePasskey } from "@/lib/webauthn";
 
 const emailSchema = z.string().email("Invalid email address");
 const passwordSchema = z.string().min(6, "Password must be at least 6 characters");
@@ -19,9 +20,14 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [authMethod, setAuthMethod] = useState<"password" | "magiclink">("password");
+  const [authMethod, setAuthMethod] = useState<"password" | "magiclink" | "passkey">("password");
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [passkeySupported, setPasskeySupported] = useState(false);
+
+  useEffect(() => {
+    setPasskeySupported(isWebAuthnSupported());
+  }, []);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
@@ -162,6 +168,106 @@ const Auth = () => {
       setLoading(false);
     }
   };
+  const handlePasskey = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!passkeySupported) {
+      toast({
+        title: "Not supported",
+        description: "Passkey authentication is not supported on this device.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      emailSchema.parse(email);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast({
+          title: "Validation Error",
+          description: error.issues[0].message,
+          variant: "destructive",
+        });
+      }
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      if (isLogin) {
+        // Authenticate with passkey
+        const authData = await authenticatePasskey(email);
+        
+        const { data, error } = await supabase.functions.invoke('passkey-authenticate', {
+          body: {
+            credentialId: authData.credentialId,
+            email: email,
+          }
+        });
+
+        if (error) throw error;
+        if (!data?.success) throw new Error('Authentication failed');
+
+        // The user is authenticated, redirect will happen via auth state change
+        toast({
+          title: "Welcome back!",
+          description: "Authenticated with passkey successfully.",
+        });
+      } else {
+        // Register new passkey
+        // First create the account with password auth
+        const tempPassword = crypto.randomUUID();
+        const redirectUrl = `${window.location.origin}/`;
+        
+        const { error: signUpError } = await supabase.auth.signUp({
+          email,
+          password: tempPassword,
+          options: {
+            emailRedirectTo: redirectUrl,
+            data: {
+              name: name,
+            },
+          },
+        });
+
+        if (signUpError) throw signUpError;
+
+        // Wait for auth to complete
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        // Now register the passkey
+        const passkeyData = await registerPasskey(email);
+        
+        const { error: registerError } = await supabase.functions.invoke('passkey-register', {
+          body: {
+            credentialId: passkeyData.credentialId,
+            publicKey: passkeyData.publicKey,
+            counter: passkeyData.counter,
+            deviceType: 'platform',
+          }
+        });
+
+        if (registerError) throw registerError;
+
+        toast({
+          title: "Passkey registered!",
+          description: "You can now sign in with your biometric authentication.",
+        });
+        setIsLogin(true);
+      }
+    } catch (error: any) {
+      console.error('Passkey error:', error);
+      toast({
+        title: "Error",
+        description: error.message || "Passkey authentication failed. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   return (
@@ -181,12 +287,16 @@ const Auth = () => {
           </p>
         </div>
 
-        <Tabs value={authMethod} onValueChange={(v) => setAuthMethod(v as "password" | "magiclink")} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-6">
+        <Tabs value={authMethod} onValueChange={(v) => setAuthMethod(v as "password" | "magiclink" | "passkey")} className="w-full">
+          <TabsList className="grid w-full grid-cols-3 mb-6">
             <TabsTrigger value="password">Password</TabsTrigger>
             <TabsTrigger value="magiclink" className="gap-2">
               <Sparkles className="h-4 w-4" />
               Magic Link
+            </TabsTrigger>
+            <TabsTrigger value="passkey" className="gap-2" disabled={!passkeySupported}>
+              <Fingerprint className="h-4 w-4" />
+              Passkey
             </TabsTrigger>
           </TabsList>
 
@@ -284,9 +394,67 @@ const Auth = () => {
             </form>
           </TabsContent>
 
+          <TabsContent value="passkey">
+            <form onSubmit={handlePasskey} className="space-y-4">
+              {!isLogin && (
+                <div className="space-y-2">
+                  <Label htmlFor="passkey-name">Name</Label>
+                  <div className="relative">
+                    <UserIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="passkey-name"
+                      type="text"
+                      placeholder="John Doe"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="pl-10"
+                      required={!isLogin}
+                    />
+                  </div>
+                </div>
+              )}
+
+              <div className="space-y-2">
+                <Label htmlFor="passkey-email">Email</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="passkey-email"
+                    type="email"
+                    placeholder="you@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="pl-10"
+                    required
+                  />
+                </div>
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
+                disabled={loading || !passkeySupported}
+              >
+                {loading ? "Processing..." : (
+                  <>
+                    <Fingerprint className="mr-2 h-4 w-4" />
+                    {isLogin ? "Sign In with Passkey" : "Register Passkey"}
+                  </>
+                )}
+              </Button>
+
+              <p className="text-xs text-center text-muted-foreground">
+                {isLogin 
+                  ? "Use your device's biometric authentication (Face ID, Touch ID, or fingerprint) to sign in securely."
+                  : "Set up biometric authentication for quick and secure access to your account."
+                }
+              </p>
+            </form>
+          </TabsContent>
+
         </Tabs>
 
-{authMethod === "password" && (
+        {authMethod === "password" && (
           <div className="mt-6 text-center">
             <button
               type="button"
@@ -295,6 +463,20 @@ const Auth = () => {
             >
               {isLogin
                 ? "Don't have an account? Sign up"
+                : "Already have an account? Sign in"}
+            </button>
+          </div>
+        )}
+
+        {authMethod === "passkey" && (
+          <div className="mt-6 text-center">
+            <button
+              type="button"
+              onClick={() => setIsLogin(!isLogin)}
+              className="text-sm text-primary hover:underline"
+            >
+              {isLogin
+                ? "Don't have an account? Register passkey"
                 : "Already have an account? Sign in"}
             </button>
           </div>
