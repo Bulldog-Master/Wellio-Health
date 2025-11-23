@@ -211,29 +211,43 @@ const Auth = () => {
         // Sign in with existing passkey
         console.log('[Passkey] Starting authentication for:', email);
         
-        const authData = await authenticatePasskey(email);
-        console.log('[Passkey] Biometric auth successful, verifying with backend');
-        
-        const { data, error } = await supabase.functions.invoke('passkey-authenticate', {
-          body: {
-            credentialId: authData.credentialId,
-            email: email,
+        try {
+          const authData = await authenticatePasskey(email);
+          console.log('[Passkey] Biometric auth successful, verifying with backend');
+          
+          const { data, error } = await supabase.functions.invoke('passkey-authenticate', {
+            body: {
+              credentialId: authData.credentialId,
+              email: email,
+            }
+          });
+
+          if (error) {
+            console.error('[Passkey] Backend verification failed:', error);
+            throw error;
           }
-        });
+          
+          if (!data?.success) {
+            throw new Error('Authentication failed - no matching passkey found');
+          }
 
-        if (error) {
-          console.error('[Passkey] Backend verification failed:', error);
-          throw error;
+          toast({
+            title: "Welcome back!",
+            description: "Authenticated successfully with passkey.",
+          });
+        } catch (authError: any) {
+          // If passkey auth fails, offer to add a passkey to existing account
+          console.log('[Passkey] No passkey found, offering to add one');
+          
+          if (authError.message?.includes('no matching passkey') || authError.name === 'NotAllowedError') {
+            toast({
+              title: "No passkey found",
+              description: "Would you like to add a passkey to your account? Please log in with password first.",
+              variant: "destructive",
+            });
+          }
+          throw authError;
         }
-        
-        if (!data?.success) {
-          throw new Error('Authentication failed - no matching passkey found');
-        }
-
-        toast({
-          title: "Welcome back!",
-          description: "Authenticated successfully with passkey.",
-        });
       } else {
         // Register new passkey
         console.log('[Passkey] Starting registration for:', email);
