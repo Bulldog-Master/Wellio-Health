@@ -243,7 +243,12 @@ const Auth = () => {
           },
         });
 
-        if (signUpError) throw signUpError;
+        if (signUpError) {
+          if (signUpError.message?.includes('already registered') || signUpError.message?.includes('already exists')) {
+            throw new Error('This email is already registered. Please use the "Sign in" option to add a passkey to your existing account.');
+          }
+          throw signUpError;
+        }
 
         // Wait for auth to complete
         await new Promise(resolve => setTimeout(resolve, 1000));
