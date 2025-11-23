@@ -2,52 +2,121 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Dumbbell, Plus, Clock, Flame } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { useUserPreferences } from "@/hooks/useUserPreferences";
+import { formatDistance, parseDistance } from "@/lib/unitConversion";
 
-interface WorkoutEntry {
-  exercise: string;
-  duration: number;
-  calories: number;
-  notes: string;
+interface ActivityLog {
+  id: string;
+  activity_type: string;
+  duration_minutes: number;
+  calories_burned: number | null;
+  distance_miles: number | null;
+  notes: string | null;
+  logged_at: string;
 }
 
 const Workout = () => {
   const { toast } = useToast();
+  const { preferredUnit } = useUserPreferences();
   const [exercise, setExercise] = useState("");
   const [duration, setDuration] = useState("");
   const [calories, setCalories] = useState("");
+  const [distance, setDistance] = useState("");
   const [notes, setNotes] = useState("");
+  const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const todaysWorkouts: WorkoutEntry[] = [
-    { exercise: "Morning Run", duration: 30, calories: 300, notes: "5K run at moderate pace" },
-    { exercise: "Weight Training", duration: 45, calories: 250, notes: "Upper body focus - chest and arms" },
-  ];
+  useEffect(() => {
+    fetchActivityLogs();
+  }, []);
 
-  const totalDuration = todaysWorkouts.reduce((sum, w) => sum + w.duration, 0);
-  const totalCalories = todaysWorkouts.reduce((sum, w) => sum + w.calories, 0);
+  const fetchActivityLogs = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
 
-  const handleAddWorkout = () => {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const { data, error } = await supabase
+        .from('activity_logs')
+        .select('*')
+        .eq('user_id', user.id)
+        .gte('logged_at', today.toISOString())
+        .order('logged_at', { ascending: false });
+
+      if (error) throw error;
+      setActivityLogs(data || []);
+    } catch (error) {
+      console.error('Error fetching activity logs:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const totalDuration = activityLogs.reduce((sum, log) => sum + log.duration_minutes, 0);
+  const totalCalories = activityLogs.reduce((sum, log) => sum + (log.calories_burned || 0), 0);
+
+  const handleAddWorkout = async () => {
     if (!exercise || !duration) {
       toast({
         title: "Missing information",
-        description: "Please provide at least exercise name and duration.",
+        description: "Please enter activity type and duration.",
         variant: "destructive",
       });
       return;
     }
 
-    toast({
-      title: "Workout logged",
-      description: `${exercise} (${duration} min) has been added to your log.`,
-    });
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        toast({
+          title: "Authentication required",
+          description: "Please log in to track your workouts.",
+          variant: "destructive",
+        });
+        return;
+      }
 
-    setExercise("");
-    setDuration("");
-    setCalories("");
-    setNotes("");
+      const distanceMiles = distance ? parseDistance(distance, preferredUnit) : null;
+
+      const { error } = await supabase
+        .from('activity_logs')
+        .insert({
+          user_id: user.id,
+          activity_type: exercise,
+          duration_minutes: parseInt(duration),
+          calories_burned: calories ? parseInt(calories) : null,
+          distance_miles: distanceMiles,
+          notes: notes || null,
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: "Workout logged",
+        description: `${exercise} for ${duration} minutes has been recorded.`,
+      });
+
+      setExercise("");
+      setDuration("");
+      setCalories("");
+      setDistance("");
+      setNotes("");
+      
+      fetchActivityLogs();
+    } catch (error) {
+      console.error('Error logging workout:', error);
+      toast({
+        title: "Error",
+        description: "Failed to log workout. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
