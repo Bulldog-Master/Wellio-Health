@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Slider } from "@/components/ui/slider";
-import { AlertCircle, Plus } from "lucide-react";
+import { AlertCircle, Plus, Trash2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -95,6 +95,31 @@ const Symptoms = () => {
     }
   };
 
+  const handleDeleteSymptom = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from('symptoms')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      toast({
+        title: "Symptom deleted",
+        description: "The symptom entry has been removed.",
+      });
+
+      fetchSymptoms();
+    } catch (error) {
+      console.error('Error deleting symptom:', error);
+      toast({
+        title: "Error",
+        description: "Failed to delete symptom.",
+        variant: "destructive",
+      });
+    }
+  };
+
   const getSeverityColor = (severity: number) => {
     if (severity <= 3) return "text-green-500";
     if (severity <= 6) return "text-yellow-500";
@@ -171,21 +196,30 @@ const Symptoms = () => {
             symptoms.map((symptom) => (
               <div key={symptom.id} className="p-4 bg-secondary rounded-lg">
                 <div className="flex items-start justify-between mb-2">
-                  <div>
+                  <div className="flex-1">
                     <h4 className="font-semibold text-lg">{symptom.symptom_name}</h4>
                     <p className="text-sm text-muted-foreground">
                       {symptom.logged_at && format(new Date(symptom.logged_at), "PPp")}
                     </p>
+                    {symptom.description && (
+                      <p className="text-sm text-muted-foreground mt-2">{symptom.description}</p>
+                    )}
                   </div>
-                  {symptom.severity && (
-                    <span className={`font-bold ${getSeverityColor(symptom.severity)}`}>
-                      {symptom.severity}/10
-                    </span>
-                  )}
+                  <div className="flex items-center gap-2">
+                    {symptom.severity && (
+                      <span className={`font-bold ${getSeverityColor(symptom.severity)}`}>
+                        {symptom.severity}/10
+                      </span>
+                    )}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleDeleteSymptom(symptom.id)}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
-                {symptom.description && (
-                  <p className="text-sm text-muted-foreground mt-2">{symptom.description}</p>
-                )}
               </div>
             ))
           ) : (

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Utensils, Plus, Clock, Camera, Sparkles, Loader2 } from "lucide-react";
+import { Utensils, Plus, Clock, Camera, Sparkles, Loader2, Pencil, Trash2 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -35,6 +35,7 @@ const Food = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [editingMeal, setEditingMeal] = useState<MealLog | null>(null);
 
   const mealTypes = [
     { value: "breakfast", label: "Breakfast" },
@@ -207,6 +208,31 @@ const Food = () => {
     }
   };
 
+  const handleDeleteMeal = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from('nutrition_logs')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      toast({
+        title: "Meal deleted",
+        description: "The meal entry has been removed.",
+      });
+
+      fetchMealLogs();
+    } catch (error) {
+      console.error('Error deleting meal:', error);
+      toast({
+        title: "Error",
+        description: "Failed to delete meal.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="space-y-6 max-w-4xl">
       <div className="flex items-center gap-3">
@@ -361,7 +387,7 @@ const Food = () => {
                 <div key={mealType.value} className="space-y-2">
                   <h4 className="font-medium text-primary">{mealType.label}</h4>
                   {meals.map((meal) => (
-                    <div key={meal.id} className="p-4 bg-secondary rounded-lg">
+                     <div key={meal.id} className="p-4 bg-secondary rounded-lg">
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
                           <p className="font-medium">{meal.food_name}</p>
@@ -377,7 +403,16 @@ const Food = () => {
                             </div>
                           )}
                         </div>
-                        <span className="font-bold text-primary">{meal.calories} cal</span>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-primary">{meal.calories} cal</span>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => handleDeleteMeal(meal.id)}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
                       </div>
                     </div>
                   ))}

@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dumbbell, Plus, Clock, Flame, Zap, MapPin } from "lucide-react";
+import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -144,6 +144,31 @@ const Workout = () => {
       toast({
         title: "Error",
         description: "Failed to log workout. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleDeleteWorkout = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from('activity_logs')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      toast({
+        title: "Workout deleted",
+        description: "The workout entry has been removed.",
+      });
+
+      fetchActivityLogs();
+    } catch (error) {
+      console.error('Error deleting workout:', error);
+      toast({
+        title: "Error",
+        description: "Failed to delete workout.",
         variant: "destructive",
       });
     }
@@ -311,23 +336,34 @@ const Workout = () => {
             activityLogs.map((log) => (
               <div key={log.id} className="p-4 bg-secondary rounded-lg">
                 <div className="flex items-start justify-between mb-2">
-                  <h4 className="font-semibold text-lg">{log.activity_type}</h4>
-                  {log.calories_burned && (
-                    <span className="font-bold text-accent">{log.calories_burned} cal</span>
-                  )}
-                </div>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-2">
-                  <div className="flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
-                    <span>{log.duration_minutes} min</span>
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-lg">{log.activity_type}</h4>
+                    <div className="flex items-center gap-4 text-sm text-muted-foreground mt-2">
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        <span>{log.duration_minutes} min</span>
+                      </div>
+                      {log.distance_miles && (
+                        <span>{formatDistance(log.distance_miles, preferredUnit)}</span>
+                      )}
+                    </div>
+                    {log.notes && (
+                      <p className="text-sm text-muted-foreground mt-2">{log.notes}</p>
+                    )}
                   </div>
-                  {log.distance_miles && (
-                    <span>{formatDistance(log.distance_miles, preferredUnit)}</span>
-                  )}
+                  <div className="flex items-center gap-2">
+                    {log.calories_burned && (
+                      <span className="font-bold text-accent">{log.calories_burned} cal</span>
+                    )}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleDeleteWorkout(log.id)}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
-                {log.notes && (
-                  <p className="text-sm text-muted-foreground">{log.notes}</p>
-                )}
               </div>
             ))
           ) : (
