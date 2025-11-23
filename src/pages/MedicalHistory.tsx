@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Plus, Pill } from "lucide-react";
+import { FileText, Plus, Pill, Upload } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -50,6 +50,7 @@ const MedicalHistory = () => {
     result_value: "",
     result_unit: "",
     notes: "",
+    file_url: "",
   });
 
   useEffect(() => {
@@ -168,6 +169,7 @@ const MedicalHistory = () => {
           result_value: testFormData.result_value || null,
           result_unit: testFormData.result_unit || null,
           notes: testFormData.notes || null,
+          file_url: testFormData.file_url || null,
         });
 
       if (error) throw error;
@@ -183,6 +185,7 @@ const MedicalHistory = () => {
         result_value: "",
         result_unit: "",
         notes: "",
+        file_url: "",
       });
       fetchTestResults();
     } catch (error) {
@@ -373,6 +376,25 @@ const MedicalHistory = () => {
                   onChange={(e) => setTestFormData({ ...testFormData, notes: e.target.value })}
                   className="mt-1.5 min-h-20"
                 />
+              </div>
+
+              <div>
+                <Label htmlFor="file-url">File URL (optional)</Label>
+                <div className="flex gap-2 mt-1.5">
+                  <Input
+                    id="file-url"
+                    placeholder="https://example.com/test-result.pdf"
+                    value={testFormData.file_url}
+                    onChange={(e) => setTestFormData({ ...testFormData, file_url: e.target.value })}
+                    className="flex-1"
+                  />
+                  <Button variant="outline" size="icon" type="button">
+                    <Upload className="w-4 h-4" />
+                  </Button>
+                </div>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Upload your test result to cloud storage and paste the URL here
+                </p>
               </div>
 
               <Button onClick={handleAddTestResult} className="w-full gap-2">

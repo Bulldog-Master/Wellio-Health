@@ -33,7 +33,10 @@ serve(async (req) => {
       });
     }
 
+    console.log("[generate-insights] Starting insight generation for user:", user.id);
+
     // Fetch user's health data
+    console.log("[generate-insights] Fetching health data...");
     const [
       { data: weightLogs },
       { data: activityLogs },
@@ -72,6 +75,14 @@ serve(async (req) => {
         .eq("is_active", true),
     ]);
 
+    console.log("[generate-insights] Data fetched:", {
+      weightLogs: weightLogs?.length,
+      activityLogs: activityLogs?.length,
+      nutritionLogs: nutritionLogs?.length,
+      symptoms: symptoms?.length,
+      habits: habits?.length,
+    });
+
     // Build context for AI
     const dataSummary = {
       weight_logs_count: weightLogs?.length || 0,
@@ -109,9 +120,11 @@ Provide 3-5 actionable insights in this exact JSON format:
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
+      console.error("[generate-insights] LOVABLE_API_KEY not configured");
       throw new Error("LOVABLE_API_KEY not configured");
     }
 
+    console.log("[generate-insights] Calling AI gateway...");
     const aiResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -130,6 +143,8 @@ Provide 3-5 actionable insights in this exact JSON format:
       }),
     });
 
+    console.log("[generate-insights] AI response status:", aiResponse.status);
+    
     if (!aiResponse.ok) {
       if (aiResponse.status === 429) {
         return new Response(
@@ -159,6 +174,7 @@ Provide 3-5 actionable insights in this exact JSON format:
     }
 
     const aiData = await aiResponse.json();
+    console.log("[generate-insights] AI response received");
     const content = aiData.choices[0].message.content;
 
     // Parse the JSON response
@@ -187,6 +203,7 @@ Provide 3-5 actionable insights in this exact JSON format:
     }
 
     // Store insights in database
+    console.log("[generate-insights] Storing", insights.length, "insights...");
     const insightsToStore = insights.map((insight: { type: string; text: string }) => ({
       user_id: user.id,
       insight_text: insight.text,
@@ -196,6 +213,7 @@ Provide 3-5 actionable insights in this exact JSON format:
 
     await supabaseClient.from("ai_insights").insert(insightsToStore);
 
+    console.log("[generate-insights] Success! Returning insights.");
     return new Response(
       JSON.stringify({
         insights,
