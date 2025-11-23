@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2 } from "lucide-react";
+import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -31,6 +31,7 @@ const Workout = () => {
   const [notes, setNotes] = useState("");
   const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [editingWorkout, setEditingWorkout] = useState<string | null>(null);
 
   // Calorie calculation based on activity, duration, and intensity
   const calculateCalories = (activityType: string, durationMin: number, intensityLevel: string): number => {
@@ -114,23 +115,44 @@ const Workout = () => {
       const distanceMiles = distance ? parseDistance(distance, preferredUnit) : null;
       const calculatedCalories = calculateCalories(exercise, parseInt(duration), intensity);
 
-      const { error } = await supabase
-        .from('activity_logs')
-        .insert({
-          user_id: user.id,
-          activity_type: exercise,
-          duration_minutes: parseInt(duration),
-          calories_burned: calculatedCalories,
-          distance_miles: distanceMiles,
-          notes: notes || null,
+      if (editingWorkout) {
+        const { error } = await supabase
+          .from('activity_logs')
+          .update({
+            activity_type: exercise,
+            duration_minutes: parseInt(duration),
+            calories_burned: calculatedCalories,
+            distance_miles: distanceMiles,
+            notes: notes || null,
+          })
+          .eq('id', editingWorkout);
+
+        if (error) throw error;
+
+        toast({
+          title: "Workout updated",
+          description: `${exercise} has been updated.`,
         });
+        setEditingWorkout(null);
+      } else {
+        const { error } = await supabase
+          .from('activity_logs')
+          .insert({
+            user_id: user.id,
+            activity_type: exercise,
+            duration_minutes: parseInt(duration),
+            calories_burned: calculatedCalories,
+            distance_miles: distanceMiles,
+            notes: notes || null,
+          });
 
-      if (error) throw error;
+        if (error) throw error;
 
-      toast({
-        title: "Workout logged",
-        description: `${exercise} for ${duration} minutes has been recorded.`,
-      });
+        toast({
+          title: "Workout logged",
+          description: `${exercise} for ${duration} minutes has been recorded.`,
+        });
+      }
 
       setExercise("");
       setDuration("");
@@ -147,6 +169,16 @@ const Workout = () => {
         variant: "destructive",
       });
     }
+  };
+
+  const handleEditWorkout = (log: ActivityLog) => {
+    setExercise(log.activity_type);
+    setDuration(log.duration_minutes.toString());
+    setIntensity("moderate");
+    setDistance(log.distance_miles ? formatDistance(log.distance_miles, preferredUnit).split(' ')[0] : "");
+    setNotes(log.notes || "");
+    setEditingWorkout(log.id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleDeleteWorkout = async (id: string) => {
@@ -207,7 +239,9 @@ const Workout = () => {
       </div>
 
       <Card className="p-6 bg-gradient-card shadow-md">
-        <h3 className="text-lg font-semibold mb-6">Log Workout</h3>
+        <h3 className="text-lg font-semibold mb-6">
+          {editingWorkout ? "Edit Workout" : "Log Workout"}
+        </h3>
         <div className="space-y-4">
           <div>
             <Label htmlFor="exercise">Activity Type</Label>
@@ -320,10 +354,37 @@ const Workout = () => {
             />
           </div>
 
-          <Button onClick={handleAddWorkout} className="w-full gap-2">
-            <Plus className="w-4 h-4" />
-            Add Workout
-          </Button>
+          <div className="flex gap-2">
+            {editingWorkout && (
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setEditingWorkout(null);
+                  setExercise("");
+                  setDuration("");
+                  setIntensity("moderate");
+                  setDistance("");
+                  setNotes("");
+                }}
+                className="flex-1"
+              >
+                Cancel
+              </Button>
+            )}
+            <Button onClick={handleAddWorkout} className="flex-1 gap-2">
+              {editingWorkout ? (
+                <>
+                  <Pencil className="w-4 h-4" />
+                  Update Workout
+                </>
+              ) : (
+                <>
+                  <Plus className="w-4 h-4" />
+                  Add Workout
+                </>
+              )}
+            </Button>
+          </div>
         </div>
       </Card>
 
@@ -355,6 +416,13 @@ const Workout = () => {
                     {log.calories_burned && (
                       <span className="font-bold text-accent">{log.calories_burned} cal</span>
                     )}
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleEditWorkout(log)}
+                    >
+                      <Pencil className="w-4 h-4" />
+                    </Button>
                     <Button
                       variant="ghost"
                       size="icon"
