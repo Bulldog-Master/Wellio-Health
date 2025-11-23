@@ -68,10 +68,23 @@ const Food = () => {
   const totalCalories = mealLogs.reduce((sum, meal) => sum + (meal.calories || 0), 0);
 
   const handleAddMeal = async () => {
-    if (!food.trim() || !calories.trim() || isNaN(Number(calories)) || Number(calories) <= 0) {
+    const trimmedFood = food.trim();
+    const trimmedCalories = calories.trim();
+    const caloriesNum = parseFloat(trimmedCalories);
+    
+    if (!trimmedFood) {
       toast({
-        title: "Missing information",
-        description: "Please enter a valid food name and calories.",
+        title: "Missing food name",
+        description: "Please enter what you ate.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (!trimmedCalories || isNaN(caloriesNum) || caloriesNum <= 0) {
+      toast({
+        title: "Invalid calories",
+        description: "Please enter a valid calorie amount (number greater than 0).",
         variant: "destructive",
       });
       return;
@@ -93,11 +106,11 @@ const Food = () => {
         .insert({
           user_id: user.id,
           meal_type: selectedMeal,
-          food_name: food,
-          calories: parseInt(calories),
-          protein_grams: protein ? parseFloat(protein) : null,
-          carbs_grams: carbs ? parseFloat(carbs) : null,
-          fat_grams: fat ? parseFloat(fat) : null,
+          food_name: trimmedFood,
+          calories: caloriesNum,
+          protein_grams: protein.trim() ? parseFloat(protein) : null,
+          carbs_grams: carbs.trim() ? parseFloat(carbs) : null,
+          fat_grams: fat.trim() ? parseFloat(fat) : null,
         });
 
       if (error) throw error;

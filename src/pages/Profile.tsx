@@ -3,12 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { User, Save } from "lucide-react";
+import { User, Save, Share2, Copy, Check } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
 const Profile = () => {
   const { toast } = useToast();
+  const [copied, setCopied] = useState(false);
+  const [referralCode] = useState("WELLIO-" + Math.random().toString(36).substr(2, 6).toUpperCase());
+  const referralLink = `${window.location.origin}/auth?ref=${referralCode}`;
+  
   const [formData, setFormData] = useState({
     name: "John Doe",
     age: "30",
@@ -26,6 +30,40 @@ const Profile = () => {
       title: "Profile updated",
       description: "Your profile information has been saved successfully.",
     });
+  };
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(referralLink);
+      setCopied(true);
+      toast({
+        title: "Copied!",
+        description: "Referral link copied to clipboard",
+      });
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to copy link",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const shareReferral = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Join Wellio!",
+          text: "Start your fitness journey with me on Wellio!",
+          url: referralLink,
+        });
+      } catch (error) {
+        console.log("Share cancelled");
+      }
+    } else {
+      copyToClipboard();
+    }
   };
 
   return (
@@ -138,9 +176,18 @@ const Profile = () => {
                 onChange={(e) => setFormData({ ...formData, targetWeight: e.target.value })}
                 className="flex-1"
               />
-              <span className="flex items-center text-muted-foreground min-w-12">
-                {formData.weightUnit}
-              </span>
+              <div className="flex flex-col justify-center min-w-[100px] text-sm">
+                <span className="text-muted-foreground">
+                  {formData.weightUnit === 'lbs' 
+                    ? `${formData.targetWeight} lbs` 
+                    : `${formData.targetWeight} kg`}
+                </span>
+                <span className="text-xs text-muted-foreground/60">
+                  {formData.weightUnit === 'lbs'
+                    ? `(${(parseFloat(formData.targetWeight) * 0.453592).toFixed(1)} kg)`
+                    : `(${(parseFloat(formData.targetWeight) * 2.20462).toFixed(1)} lbs)`}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -158,6 +205,36 @@ const Profile = () => {
               </SelectContent>
             </Select>
           </div>
+        </div>
+      </Card>
+
+      <Card className="p-6 bg-gradient-card shadow-md">
+        <h3 className="text-lg font-semibold mb-4">Your Referral Link</h3>
+        <p className="text-sm text-muted-foreground mb-4">Share Wellio with friends and earn rewards</p>
+        <div className="space-y-3">
+          <div className="flex gap-2">
+            <Input
+              value={referralLink}
+              readOnly
+              className="font-mono text-sm"
+            />
+            <Button
+              onClick={copyToClipboard}
+              variant="outline"
+              size="icon"
+              className="shrink-0"
+            >
+              {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+            </Button>
+          </div>
+          <Button
+            onClick={shareReferral}
+            variant="secondary"
+            className="w-full gap-2"
+          >
+            <Share2 className="w-4 h-4" />
+            Share Link
+          </Button>
         </div>
       </Card>
 
