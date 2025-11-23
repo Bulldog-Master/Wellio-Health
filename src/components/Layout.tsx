@@ -12,7 +12,7 @@ const Layout = ({ children }: LayoutProps) => {
         <aside className="hidden md:block md:w-64 md:border-r md:border-border md:min-h-screen">
           <div className="sticky top-0 p-6">
             <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-8">
-              FitTrack Pro
+              Wellio
             </h1>
             <Navigation />
           </div>
