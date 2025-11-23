@@ -208,8 +208,11 @@ const Auth = () => {
 
     try {
       if (isLogin) {
-        // Authenticate with passkey
+        // Sign in with existing passkey
+        console.log('[Passkey] Starting authentication for:', email);
+        
         const authData = await authenticatePasskey(email);
+        console.log('[Passkey] Biometric auth successful, verifying with backend');
         
         const { data, error } = await supabase.functions.invoke('passkey-authenticate', {
           body: {
@@ -218,44 +221,64 @@ const Auth = () => {
           }
         });
 
-        if (error) throw error;
-        if (!data?.success) throw new Error('Authentication failed');
+        if (error) {
+          console.error('[Passkey] Backend verification failed:', error);
+          throw error;
+        }
+        
+        if (!data?.success) {
+          throw new Error('Authentication failed - no matching passkey found');
+        }
 
-        // The user is authenticated, redirect will happen via auth state change
         toast({
           title: "Welcome back!",
-          description: "Authenticated with passkey successfully.",
+          description: "Authenticated successfully with passkey.",
         });
       } else {
         // Register new passkey
-        // First create the account with password auth
+        console.log('[Passkey] Starting registration for:', email);
+        
+        if (!name) {
+          throw new Error('Please enter your name');
+        }
+        
+        // First, trigger the biometric prompt to create the passkey
+        // This way if the user cancels, we don't create an account
+        console.log('[Passkey] Requesting biometric authentication...');
+        const passkeyData = await registerPasskey(email);
+        console.log('[Passkey] Biometric registration successful, creating account...');
+        
+        // Now create the account
         const tempPassword = crypto.randomUUID();
         const redirectUrl = `${window.location.origin}/`;
         
-        const { error: signUpError } = await supabase.auth.signUp({
+        const { data: authData, error: signUpError } = await supabase.auth.signUp({
           email,
           password: tempPassword,
           options: {
             emailRedirectTo: redirectUrl,
             data: {
-              name: name,
+              full_name: name,
+              username: email,
             },
           },
         });
 
         if (signUpError) {
-          if (signUpError.message?.includes('already registered') || signUpError.message?.includes('already exists')) {
-            throw new Error('This email is already registered. Please use the "Sign in" option to add a passkey to your existing account.');
+          console.error('[Passkey] Account creation failed:', signUpError);
+          if (signUpError.message?.includes('already registered')) {
+            throw new Error('Email already registered. Please use "Sign in" mode instead.');
           }
           throw signUpError;
         }
 
-        // Wait for auth to complete
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        if (!authData.user) {
+          throw new Error('Failed to create account');
+        }
 
-        // Now register the passkey
-        const passkeyData = await registerPasskey(email);
-        
+        console.log('[Passkey] Account created, storing passkey credential...');
+
+        // Store the passkey in the database
         const { error: registerError } = await supabase.functions.invoke('passkey-register', {
           body: {
             credentialId: passkeyData.credentialId,
@@ -265,19 +288,35 @@ const Auth = () => {
           }
         });
 
-        if (registerError) throw registerError;
+        if (registerError) {
+          console.error('[Passkey] Failed to store credential:', registerError);
+          throw new Error('Account created but passkey registration failed');
+        }
 
+        console.log('[Passkey] Registration complete!');
+        
         toast({
-          title: "Passkey registered!",
-          description: "You can now sign in with your biometric authentication.",
+          title: "Success!",
+          description: "Your account has been created with passkey authentication.",
         });
-        setIsLogin(true);
       }
     } catch (error: any) {
-      console.error('Passkey error:', error);
+      console.error('[Passkey] Error:', error);
+      
+      let errorMessage = error.message || "Passkey authentication failed.";
+      
+      // Provide helpful error messages
+      if (error.message?.includes('cancelled') || error.message?.includes('blocked')) {
+        errorMessage = "Please allow the biometric prompt when it appears to use passkey authentication.";
+      } else if (error.name === 'NotAllowedError') {
+        errorMessage = "Passkey authentication was cancelled. Please try again and approve the prompt.";
+      } else if (error.message?.includes('no matching passkey')) {
+        errorMessage = "No passkey found for this email. Please register first or use another sign-in method.";
+      }
+      
       toast({
-        title: "Error",
-        description: error.message || "Passkey authentication failed. Please try again.",
+        title: "Passkey Error",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
