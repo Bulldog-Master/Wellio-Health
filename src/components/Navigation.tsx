@@ -1,4 +1,4 @@
-import { Home, User, Scale, Utensils, Dumbbell } from "lucide-react";
+import { Home, User, Scale, Utensils, Dumbbell, Gift } from "lucide-react";
 import { NavLink } from "./NavLink";
 import { cn } from "@/lib/utils";
 
@@ -9,6 +9,7 @@ const Navigation = () => {
     { to: "/weight", icon: Scale, label: "Weight" },
     { to: "/food", icon: Utensils, label: "Food" },
     { to: "/workout", icon: Dumbbell, label: "Workout" },
+    { to: "/referral", icon: Gift, label: "Referral" },
   ];
 
   return (
