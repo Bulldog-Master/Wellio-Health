@@ -24,9 +24,11 @@ const Auth = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [passkeySupported, setPasskeySupported] = useState(false);
+  const [isInIframe, setIsInIframe] = useState(false);
 
   useEffect(() => {
     setPasskeySupported(isWebAuthnSupported());
+    setIsInIframe(window.self !== window.top);
   }, []);
 
   useEffect(() => {
@@ -170,6 +172,15 @@ const Auth = () => {
   };
   const handlePasskey = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isInIframe) {
+      toast({
+        title: "Open in new tab",
+        description: "Passkey authentication doesn't work in preview mode. Click the 'Open in New Tab' button below.",
+        variant: "destructive",
+      });
+      return;
+    }
 
     if (!passkeySupported) {
       toast({
@@ -395,6 +406,26 @@ const Auth = () => {
           </TabsContent>
 
           <TabsContent value="passkey">
+            {isInIframe && (
+              <div className="mb-4 p-4 bg-accent/20 border border-accent rounded-lg">
+                <p className="text-sm text-accent font-semibold mb-2">Preview Mode Limitation</p>
+                <p className="text-xs text-muted-foreground mb-3">
+                  Passkey authentication doesn't work in the Lovable preview due to iframe security restrictions.
+                </p>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => window.open(window.location.href, '_blank')}
+                >
+                  Open in New Tab to Test
+                </Button>
+                <p className="text-xs text-muted-foreground mt-2 text-center">
+                  Passkeys will work normally when your app is published.
+                </p>
+              </div>
+            )}
+            
             <form onSubmit={handlePasskey} className="space-y-4">
               {!isLogin && (
                 <div className="space-y-2">
