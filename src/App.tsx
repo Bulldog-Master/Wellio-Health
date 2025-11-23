@@ -9,6 +9,12 @@ import Profile from "./pages/Profile";
 import Weight from "./pages/Weight";
 import Food from "./pages/Food";
 import Workout from "./pages/Workout";
+import Activity from "./pages/Activity";
+import Habits from "./pages/Habits";
+import Symptoms from "./pages/Symptoms";
+import MedicalHistory from "./pages/MedicalHistory";
+import AIInsights from "./pages/AIInsights";
+import Socials from "./pages/Socials";
 import Referral from "./pages/Referral";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
@@ -29,6 +35,12 @@ const App = () => (
           <Route path="/weight" element={<ProtectedRoute><Layout><Weight /></Layout></ProtectedRoute>} />
           <Route path="/food" element={<ProtectedRoute><Layout><Food /></Layout></ProtectedRoute>} />
           <Route path="/workout" element={<ProtectedRoute><Layout><Workout /></Layout></ProtectedRoute>} />
+          <Route path="/activity" element={<ProtectedRoute><Layout><Activity /></Layout></ProtectedRoute>} />
+          <Route path="/habits" element={<ProtectedRoute><Layout><Habits /></Layout></ProtectedRoute>} />
+          <Route path="/symptoms" element={<ProtectedRoute><Layout><Symptoms /></Layout></ProtectedRoute>} />
+          <Route path="/medical" element={<ProtectedRoute><Layout><MedicalHistory /></Layout></ProtectedRoute>} />
+          <Route path="/insights" element={<ProtectedRoute><Layout><AIInsights /></Layout></ProtectedRoute>} />
+          <Route path="/socials" element={<ProtectedRoute><Layout><Socials /></Layout></ProtectedRoute>} />
           <Route path="/referral" element={<ProtectedRoute><Layout><Referral /></Layout></ProtectedRoute>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

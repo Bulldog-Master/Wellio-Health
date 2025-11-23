@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { Dumbbell, Plus, Clock, Flame } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -211,21 +212,28 @@ const Workout = () => {
       <Card className="p-6 bg-gradient-card shadow-md">
         <h3 className="text-lg font-semibold mb-4">Today's Workouts</h3>
         <div className="space-y-3">
-          {todaysWorkouts.length > 0 ? (
-            todaysWorkouts.map((workout, idx) => (
-              <div key={idx} className="p-4 bg-secondary rounded-lg">
+          {isLoading ? (
+            <p className="text-center text-muted-foreground py-8">Loading...</p>
+          ) : activityLogs.length > 0 ? (
+            activityLogs.map((log) => (
+              <div key={log.id} className="p-4 bg-secondary rounded-lg">
                 <div className="flex items-start justify-between mb-2">
-                  <h4 className="font-semibold text-lg">{workout.exercise}</h4>
-                  <span className="font-bold text-accent">{workout.calories} cal</span>
+                  <h4 className="font-semibold text-lg">{log.activity_type}</h4>
+                  {log.calories_burned && (
+                    <span className="font-bold text-accent">{log.calories_burned} cal</span>
+                  )}
                 </div>
                 <div className="flex items-center gap-4 text-sm text-muted-foreground mb-2">
                   <div className="flex items-center gap-1">
                     <Clock className="w-3 h-3" />
-                    <span>{workout.duration} min</span>
+                    <span>{log.duration_minutes} min</span>
                   </div>
+                  {log.distance_miles && (
+                    <span>{formatDistance(log.distance_miles, preferredUnit)}</span>
+                  )}
                 </div>
-                {workout.notes && (
-                  <p className="text-sm text-muted-foreground">{workout.notes}</p>
+                {log.notes && (
+                  <p className="text-sm text-muted-foreground">{log.notes}</p>
                 )}
               </div>
             ))
