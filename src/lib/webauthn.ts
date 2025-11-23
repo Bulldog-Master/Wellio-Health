@@ -38,11 +38,19 @@ export const registerPasskey = async (email: string): Promise<{
   const challenge = new Uint8Array(32);
   crypto.getRandomValues(challenge);
 
+  // Use the base domain for rpId
+  const hostname = window.location.hostname;
+  const rpId = hostname.includes('lovableproject.com') 
+    ? 'lovableproject.com' 
+    : hostname;
+
+  console.log('Registering passkey with rpId:', rpId);
+
   const publicKeyCredentialCreationOptions: PublicKeyCredentialCreationOptions = {
     challenge: challenge,
     rp: {
       name: 'Wellio',
-      id: window.location.hostname,
+      id: rpId,
     },
     user: {
       id: new TextEncoder().encode(email),
@@ -62,21 +70,32 @@ export const registerPasskey = async (email: string): Promise<{
     attestation: 'none',
   };
 
-  const credential = await navigator.credentials.create({
-    publicKey: publicKeyCredentialCreationOptions,
-  }) as PublicKeyCredential;
+  try {
+    const credential = await navigator.credentials.create({
+      publicKey: publicKeyCredentialCreationOptions,
+    }) as PublicKeyCredential;
 
-  if (!credential) {
-    throw new Error('Failed to create credential');
+    if (!credential) {
+      throw new Error('Failed to create credential');
+    }
+
+    const response = credential.response as AuthenticatorAttestationResponse;
+
+    return {
+      credentialId: bufferToBase64(credential.rawId),
+      publicKey: bufferToBase64(response.getPublicKey()!),
+      counter: 0,
+    };
+  } catch (error) {
+    console.error('Passkey registration error:', error);
+    if (error instanceof Error) {
+      if (error.name === 'NotAllowedError') {
+        throw new Error('Registration cancelled or blocked by browser. Please ensure you allow the biometric prompt.');
+      }
+      throw error;
+    }
+    throw new Error('Failed to register passkey');
   }
-
-  const response = credential.response as AuthenticatorAttestationResponse;
-
-  return {
-    credentialId: bufferToBase64(credential.rawId),
-    publicKey: bufferToBase64(response.getPublicKey()!),
-    counter: 0,
-  };
 };
 
 export const authenticatePasskey = async (email: string): Promise<{
@@ -92,27 +111,46 @@ export const authenticatePasskey = async (email: string): Promise<{
   const challenge = new Uint8Array(32);
   crypto.getRandomValues(challenge);
 
+  // Use the base domain for rpId
+  const hostname = window.location.hostname;
+  const rpId = hostname.includes('lovableproject.com') 
+    ? 'lovableproject.com' 
+    : hostname;
+
+  console.log('Authenticating passkey with rpId:', rpId);
+
   const publicKeyCredentialRequestOptions: PublicKeyCredentialRequestOptions = {
     challenge: challenge,
-    rpId: window.location.hostname,
+    rpId: rpId,
     timeout: 60000,
     userVerification: 'required',
   };
 
-  const credential = await navigator.credentials.get({
-    publicKey: publicKeyCredentialRequestOptions,
-  }) as PublicKeyCredential;
+  try {
+    const credential = await navigator.credentials.get({
+      publicKey: publicKeyCredentialRequestOptions,
+    }) as PublicKeyCredential;
 
-  if (!credential) {
-    throw new Error('Failed to get credential');
+    if (!credential) {
+      throw new Error('Failed to get credential');
+    }
+
+    const response = credential.response as AuthenticatorAssertionResponse;
+
+    return {
+      credentialId: bufferToBase64(credential.rawId),
+      signature: bufferToBase64(response.signature),
+      authenticatorData: bufferToBase64(response.authenticatorData),
+      clientDataJSON: bufferToBase64(response.clientDataJSON),
+    };
+  } catch (error) {
+    console.error('Passkey authentication error:', error);
+    if (error instanceof Error) {
+      if (error.name === 'NotAllowedError') {
+        throw new Error('Authentication cancelled or blocked. Please try again and allow the biometric prompt.');
+      }
+      throw error;
+    }
+    throw new Error('Failed to authenticate with passkey');
   }
-
-  const response = credential.response as AuthenticatorAssertionResponse;
-
-  return {
-    credentialId: bufferToBase64(credential.rawId),
-    signature: bufferToBase64(response.signature),
-    authenticatorData: bufferToBase64(response.authenticatorData),
-    clientDataJSON: bufferToBase64(response.clientDataJSON),
-  };
 };
