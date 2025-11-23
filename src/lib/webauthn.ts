@@ -38,11 +38,8 @@ export const registerPasskey = async (email: string): Promise<{
   const challenge = new Uint8Array(32);
   crypto.getRandomValues(challenge);
 
-  // Use the base domain for rpId
-  const hostname = window.location.hostname;
-  const rpId = hostname.includes('lovableproject.com') 
-    ? 'lovableproject.com' 
-    : hostname;
+  // Use the exact hostname for rpId
+  const rpId = window.location.hostname;
 
   console.log('Registering passkey with rpId:', rpId);
 
@@ -111,11 +108,8 @@ export const authenticatePasskey = async (email: string): Promise<{
   const challenge = new Uint8Array(32);
   crypto.getRandomValues(challenge);
 
-  // Use the base domain for rpId
-  const hostname = window.location.hostname;
-  const rpId = hostname.includes('lovableproject.com') 
-    ? 'lovableproject.com' 
-    : hostname;
+  // Use the exact hostname for rpId
+  const rpId = window.location.hostname;
 
   console.log('Authenticating passkey with rpId:', rpId);
 
