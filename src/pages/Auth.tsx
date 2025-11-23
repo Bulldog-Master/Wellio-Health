@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Activity, Mail, Lock, User as UserIcon, Sparkles, Fingerprint } from "lucide-react";
+import { Activity, Mail, Lock, User as UserIcon, Sparkles } from "lucide-react";
 import { z } from "zod";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -19,7 +19,7 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [authMethod, setAuthMethod] = useState<"password" | "magiclink" | "passkey">("password");
+  const [authMethod, setAuthMethod] = useState<"password" | "magiclink">("password");
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -163,47 +163,6 @@ const Auth = () => {
     }
   };
 
-  const handlePasskey = async () => {
-    setLoading(true);
-    
-    try {
-      // Check if WebAuthn is supported
-      if (!window.PublicKeyCredential) {
-        throw new Error("Passkeys are not supported in this browser");
-      }
-
-      toast({
-        title: "Passkey authentication",
-        description: "Please use your device's biometric authentication",
-      });
-
-      // This is a placeholder - full passkey implementation requires backend support
-      // For now, fall back to magic link
-      const redirectUrl = `${window.location.origin}/`;
-      
-      const { error } = await supabase.auth.signInWithOtp({
-        email,
-        options: {
-          emailRedirectTo: redirectUrl,
-        },
-      });
-
-      if (error) throw error;
-
-      toast({
-        title: "Authentication link sent!",
-        description: "Check your email to complete sign in.",
-      });
-    } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message || "Passkey authentication failed. Please try another method.",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-hero relative overflow-hidden">
@@ -222,16 +181,12 @@ const Auth = () => {
           </p>
         </div>
 
-        <Tabs value={authMethod} onValueChange={(v) => setAuthMethod(v as "password" | "magiclink" | "passkey")} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-6">
+        <Tabs value={authMethod} onValueChange={(v) => setAuthMethod(v as "password" | "magiclink")} className="w-full">
+          <TabsList className="grid w-full grid-cols-2 mb-6">
             <TabsTrigger value="password">Password</TabsTrigger>
             <TabsTrigger value="magiclink" className="gap-2">
               <Sparkles className="h-4 w-4" />
               Magic Link
-            </TabsTrigger>
-            <TabsTrigger value="passkey" className="gap-2">
-              <Fingerprint className="h-4 w-4" />
-              Passkey
             </TabsTrigger>
           </TabsList>
 
@@ -324,46 +279,11 @@ const Auth = () => {
               </Button>
 
               <p className="text-xs text-center text-muted-foreground">
-                We'll send you a secure login link to your email
+                We'll send a one-time login link to your email. Click it to sign in instantly without a password.
               </p>
             </form>
           </TabsContent>
 
-          <TabsContent value="passkey">
-            <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="passkey-email">Email</Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="passkey-email"
-                    type="email"
-                    placeholder="you@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="pl-10"
-                    required
-                  />
-                </div>
-              </div>
-
-              <Button
-                type="button"
-                onClick={handlePasskey}
-                className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
-                disabled={loading}
-              >
-                {loading ? "Authenticating..." : "Sign In with Passkey"}
-              </Button>
-
-              <div className="flex items-start gap-2 p-3 rounded-lg bg-muted/50 border border-border">
-                <Fingerprint className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                <p className="text-xs text-muted-foreground">
-                  Use your device's biometric authentication (fingerprint, face recognition, or security key) for quick and secure access
-                </p>
-              </div>
-            </div>
-          </TabsContent>
         </Tabs>
 
 {authMethod === "password" && (
