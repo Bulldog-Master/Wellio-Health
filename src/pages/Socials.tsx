@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Users, Plus, Trash2, Instagram, Youtube, Twitter } from "lucide-react";
+import { Users, Plus, Trash2, Instagram, Youtube, Twitter, ExternalLink } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -25,7 +25,7 @@ const Socials = () => {
     platform: "instagram",
     username: "",
     profile_url: "",
-    connection_type: "friend",
+    connection_type: "personal",
   });
 
   useEffect(() => {
@@ -87,7 +87,7 @@ const Socials = () => {
         platform: "instagram",
         username: "",
         profile_url: "",
-        connection_type: "friend",
+        connection_type: "personal",
       });
       setShowAddForm(false);
       fetchConnections();
@@ -129,15 +129,18 @@ const Socials = () => {
   const getPlatformIcon = (platform: string) => {
     switch (platform) {
       case 'instagram':
-        return Instagram;
+        return <Instagram className="w-5 h-5 text-primary" />;
       case 'youtube':
-        return Youtube;
+        return <Youtube className="w-5 h-5 text-primary" />;
       case 'twitter':
-        return Twitter;
+        return <Twitter className="w-5 h-5 text-primary" />;
       default:
-        return Users;
+        return <Users className="w-5 h-5 text-primary" />;
     }
   };
+
+  const personalConnections = connections.filter(c => c.connection_type === 'personal');
+  const creatorConnections = connections.filter(c => c.connection_type === 'creator');
 
   return (
     <div className="space-y-6 max-w-4xl">
@@ -148,7 +151,7 @@ const Socials = () => {
           </div>
           <div>
             <h1 className="text-3xl font-bold">Social Connections</h1>
-            <p className="text-muted-foreground">Connect with friends and fitness partners</p>
+            <p className="text-muted-foreground">Connect with friends and fitness creators</p>
           </div>
         </div>
         <Button onClick={() => setShowAddForm(!showAddForm)} className="gap-2">
@@ -164,8 +167,8 @@ const Socials = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="platform">Platform</Label>
-                <Select 
-                  value={formData.platform} 
+                <Select
+                  value={formData.platform}
                   onValueChange={(value) => setFormData({ ...formData, platform: value })}
                 >
                   <SelectTrigger className="mt-1.5">
@@ -205,18 +208,16 @@ const Socials = () => {
 
             <div>
               <Label htmlFor="connection-type">Connection Type</Label>
-              <Select 
-                value={formData.connection_type} 
+              <Select
+                value={formData.connection_type}
                 onValueChange={(value) => setFormData({ ...formData, connection_type: value })}
               >
                 <SelectTrigger className="mt-1.5">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="friend">Friend</SelectItem>
-                  <SelectItem value="trainer">Trainer</SelectItem>
-                  <SelectItem value="accountability">Accountability Partner</SelectItem>
-                  <SelectItem value="inspiration">Inspiration</SelectItem>
+                  <SelectItem value="personal">Personal Account</SelectItem>
+                  <SelectItem value="creator">Creator / Following</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -229,25 +230,23 @@ const Socials = () => {
         </Card>
       )}
 
-      <Card className="p-6 bg-gradient-card shadow-md">
-        <h3 className="text-lg font-semibold mb-4">Your Connections</h3>
-        <div className="space-y-3">
-          {isLoading ? (
-            <p className="text-center text-muted-foreground py-8">Loading...</p>
-          ) : connections.length > 0 ? (
-            connections.map((connection) => {
-              const Icon = getPlatformIcon(connection.platform);
-              return (
+      {/* Personal Accounts Section */}
+      <div>
+        <h2 className="text-2xl font-semibold mb-4">Personal Accounts</h2>
+        <Card className="p-6 bg-gradient-card shadow-md">
+          <div className="space-y-3">
+            {isLoading ? (
+              <p className="text-center text-muted-foreground py-8">Loading...</p>
+            ) : personalConnections.length > 0 ? (
+              personalConnections.map((connection) => (
                 <div key={connection.id} className="p-4 bg-secondary rounded-lg flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-primary/10 rounded-lg">
-                      <Icon className="w-5 h-5 text-primary" />
+                      {getPlatformIcon(connection.platform)}
                     </div>
                     <div>
                       <h4 className="font-semibold">{connection.username}</h4>
-                      <p className="text-sm text-muted-foreground capitalize">
-                        {connection.platform} • {connection.connection_type}
-                      </p>
+                      <p className="text-sm text-muted-foreground capitalize">{connection.platform}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -257,7 +256,7 @@ const Socials = () => {
                         variant="outline"
                         onClick={() => window.open(connection.profile_url!, '_blank')}
                       >
-                        View Profile
+                        <ExternalLink className="w-4 h-4" />
                       </Button>
                     )}
                     <Button
@@ -269,15 +268,61 @@ const Socials = () => {
                     </Button>
                   </div>
                 </div>
-              );
-            })
-          ) : (
-            <p className="text-center text-muted-foreground py-8">
-              No connections yet. Add your first connection!
-            </p>
-          )}
-        </div>
-      </Card>
+              ))
+            ) : (
+              <p className="text-center text-muted-foreground py-8">
+                No personal accounts yet. Add one above!
+              </p>
+            )}
+          </div>
+        </Card>
+      </div>
+
+      {/* Creators & Following Section */}
+      <div>
+        <h2 className="text-2xl font-semibold mb-4">Creators & Following</h2>
+        <Card className="p-6 bg-gradient-card shadow-md">
+          <div className="space-y-3">
+            {creatorConnections.length > 0 ? (
+              creatorConnections.map((connection) => (
+                <div key={connection.id} className="p-4 bg-secondary rounded-lg flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-primary/10 rounded-lg">
+                      {getPlatformIcon(connection.platform)}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold">{connection.username}</h4>
+                      <p className="text-sm text-muted-foreground capitalize">{connection.platform}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {connection.profile_url && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => window.open(connection.profile_url!, '_blank')}
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </Button>
+                    )}
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      onClick={() => handleDeleteConnection(connection.id)}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-center text-muted-foreground py-8">
+                Not following any creators yet. Add one above!
+              </p>
+            )}
+          </div>
+        </Card>
+      </div>
     </div>
   );
 };
