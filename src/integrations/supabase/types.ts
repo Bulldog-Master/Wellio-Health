@@ -148,6 +148,39 @@ export type Database = {
         }
         Relationships: []
       }
+      medical_records: {
+        Row: {
+          category: string
+          created_at: string
+          file_url: string | null
+          id: string
+          notes: string | null
+          record_date: string
+          record_name: string
+          user_id: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          file_url?: string | null
+          id?: string
+          notes?: string | null
+          record_date: string
+          record_name: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          file_url?: string | null
+          id?: string
+          notes?: string | null
+          record_date?: string
+          record_name?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       medical_test_results: {
         Row: {
           created_at: string | null
