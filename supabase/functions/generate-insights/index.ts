@@ -1,0 +1,220 @@
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
+
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+};
+
+serve(async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
+  }
+
+  try {
+    const supabaseClient = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_ANON_KEY") ?? "",
+      {
+        global: {
+          headers: { Authorization: req.headers.get("Authorization")! },
+        },
+      }
+    );
+
+    const {
+      data: { user },
+    } = await supabaseClient.auth.getUser();
+
+    if (!user) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // Fetch user's health data
+    const [
+      { data: weightLogs },
+      { data: activityLogs },
+      { data: nutritionLogs },
+      { data: symptoms },
+      { data: habits },
+    ] = await Promise.all([
+      supabaseClient
+        .from("weight_logs")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("logged_at", { ascending: false })
+        .limit(30),
+      supabaseClient
+        .from("activity_logs")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("logged_at", { ascending: false })
+        .limit(30),
+      supabaseClient
+        .from("nutrition_logs")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("logged_at", { ascending: false })
+        .limit(30),
+      supabaseClient
+        .from("symptoms")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("logged_at", { ascending: false })
+        .limit(30),
+      supabaseClient
+        .from("habits")
+        .select("*, habit_completions(*)")
+        .eq("user_id", user.id)
+        .eq("is_active", true),
+    ]);
+
+    // Build context for AI
+    const dataSummary = {
+      weight_logs_count: weightLogs?.length || 0,
+      activity_logs_count: activityLogs?.length || 0,
+      nutrition_logs_count: nutritionLogs?.length || 0,
+      symptoms_count: symptoms?.length || 0,
+      active_habits_count: habits?.length || 0,
+      total_activity_minutes: activityLogs?.reduce((sum, log) => sum + (log.duration_minutes || 0), 0) || 0,
+      average_calories_consumed: nutritionLogs
+        ? Math.round(nutritionLogs.reduce((sum, log) => sum + (log.calories || 0), 0) / (nutritionLogs.length || 1))
+        : 0,
+    };
+
+    const prompt = `As a health and wellness AI assistant, analyze the following user health data and provide 3-5 personalized insights, recommendations, or observations. Be encouraging and specific.
+
+Data Summary:
+- Weight logs: ${dataSummary.weight_logs_count} entries
+- Activity logs: ${dataSummary.activity_logs_count} entries (${dataSummary.total_activity_minutes} total minutes)
+- Nutrition logs: ${dataSummary.nutrition_logs_count} entries (avg ${dataSummary.average_calories_consumed} cal/day)
+- Symptoms tracked: ${dataSummary.symptoms_count} entries
+- Active habits: ${dataSummary.active_habits_count}
+
+Recent Activity: ${activityLogs?.slice(0, 5).map(a => `${a.activity_type} for ${a.duration_minutes} min`).join(", ") || "No recent activity"}
+Recent Symptoms: ${symptoms?.slice(0, 3).map(s => `${s.symptom_name} (severity ${s.severity}/10)`).join(", ") || "No recent symptoms"}
+
+Provide 3-5 actionable insights in this exact JSON format:
+{
+  "insights": [
+    {
+      "type": "recommendation" | "trend" | "alert" | "achievement",
+      "text": "Your insight text here"
+    }
+  ]
+}`;
+
+    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    if (!LOVABLE_API_KEY) {
+      throw new Error("LOVABLE_API_KEY not configured");
+    }
+
+    const aiResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "google/gemini-2.5-flash",
+        messages: [
+          {
+            role: "system",
+            content: "You are a supportive health and wellness coach. Provide actionable, encouraging insights.",
+          },
+          { role: "user", content: prompt },
+        ],
+      }),
+    });
+
+    if (!aiResponse.ok) {
+      if (aiResponse.status === 429) {
+        return new Response(
+          JSON.stringify({
+            error: "Rate limit exceeded. Please try again in a moment.",
+          }),
+          {
+            status: 429,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+      if (aiResponse.status === 402) {
+        return new Response(
+          JSON.stringify({
+            error: "AI credits exhausted. Please add more credits to continue.",
+          }),
+          {
+            status: 402,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+      const errorText = await aiResponse.text();
+      console.error("AI gateway error:", aiResponse.status, errorText);
+      throw new Error("AI gateway error");
+    }
+
+    const aiData = await aiResponse.json();
+    const content = aiData.choices[0].message.content;
+
+    // Parse the JSON response
+    let insights;
+    try {
+      const jsonMatch = content.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        const parsed = JSON.parse(jsonMatch[0]);
+        insights = parsed.insights;
+      } else {
+        // Fallback if AI doesn't return proper JSON
+        insights = [
+          {
+            type: "recommendation",
+            text: content,
+          },
+        ];
+      }
+    } catch (e) {
+      insights = [
+        {
+          type: "recommendation",
+          text: content,
+        },
+      ];
+    }
+
+    // Store insights in database
+    const insightsToStore = insights.map((insight: { type: string; text: string }) => ({
+      user_id: user.id,
+      insight_text: insight.text,
+      insight_type: insight.type,
+      data_summary: dataSummary,
+    }));
+
+    await supabaseClient.from("ai_insights").insert(insightsToStore);
+
+    return new Response(
+      JSON.stringify({
+        insights,
+        data_summary: dataSummary,
+      }),
+      {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      }
+    );
+  } catch (error: unknown) {
+    console.error("Error in generate-insights:", error);
+    return new Response(
+      JSON.stringify({
+        error: error instanceof Error ? error.message : "Unknown error",
+      }),
+      {
+        status: 500,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      }
+    );
+  }
+});
