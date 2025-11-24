@@ -23,14 +23,7 @@ const Dashboard = () => {
         <p className="text-muted-foreground">Here's your fitness overview for today</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <MetricCard
-          title="Current Weight"
-          value={`${currentWeight} lbs`}
-          subtitle="-2 lbs"
-          icon={Activity}
-          trend="down"
-        />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <MetricCard
           title="Calories Today"
           value={caloriesConsumed}
@@ -58,38 +51,46 @@ const Dashboard = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="p-6 bg-gradient-card shadow-md">
-          <h3 className="text-lg font-semibold mb-4">Weight Progress</h3>
+          <h3 className="text-lg font-semibold mb-4">Weight Goal Progress</h3>
           <div className="space-y-4">
             <div>
               <div className="flex justify-between mb-2">
-                <span className="text-sm text-muted-foreground">Current: {currentWeight} lbs</span>
-                <span className="text-sm text-muted-foreground">Target: {targetWeight} lbs</span>
+                <span className="text-sm font-medium">Progress to Target</span>
+                <span className="text-sm font-medium text-primary">{Math.round(100 - weightProgress)}%</span>
               </div>
               <Progress value={100 - weightProgress} className="h-3" />
             </div>
-            <p className="text-sm text-muted-foreground">
-              You're {currentWeight - targetWeight} lbs away from your goal. Keep it up!
-            </p>
+            <div className="pt-2 border-t">
+              <p className="text-sm text-muted-foreground">
+                Target: {targetWeight} lbs
+              </p>
+              <p className="text-sm text-muted-foreground">
+                {currentWeight - targetWeight} lbs remaining to reach your goal
+              </p>
+            </div>
           </div>
         </Card>
 
         <Card className="p-6 bg-gradient-card shadow-md">
-          <h3 className="text-lg font-semibold mb-4">Today's Nutrition</h3>
+          <h3 className="text-lg font-semibold mb-4">Daily Calorie Goal</h3>
           <div className="space-y-4">
             <div>
               <div className="flex justify-between mb-2">
-                <span className="text-sm text-muted-foreground">
-                  {caloriesConsumed} / {caloriesTarget} cal
-                </span>
+                <span className="text-sm font-medium">Today's Progress</span>
                 <span className="text-sm font-medium text-primary">
                   {Math.round(caloriesProgress)}%
                 </span>
               </div>
               <Progress value={caloriesProgress} className="h-3" />
             </div>
-            <p className="text-sm text-muted-foreground">
-              You have {caloriesTarget - caloriesConsumed} calories remaining for today.
-            </p>
+            <div className="pt-2 border-t">
+              <p className="text-sm text-muted-foreground">
+                Daily Goal: {caloriesTarget} calories
+              </p>
+              <p className="text-sm text-muted-foreground">
+                {caloriesTarget - caloriesConsumed} calories remaining
+              </p>
+            </div>
           </div>
         </Card>
       </div>
