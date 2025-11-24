@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Plus, Pill, Upload, FolderOpen, AlertCircle } from "lucide-react";
+import { FileText, Plus, Pill, Upload, FolderOpen, AlertCircle, Trash2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -41,12 +42,21 @@ interface MedicalRecord {
   file_url: string | null;
 }
 
+interface Symptom {
+  id: string;
+  symptom_name: string;
+  severity: number | null;
+  description: string | null;
+  logged_at: string | null;
+}
+
 const MedicalHistory = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [medications, setMedications] = useState<Medication[]>([]);
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [medicalRecords, setMedicalRecords] = useState<MedicalRecord[]>([]);
+  const [symptoms, setSymptoms] = useState<Symptom[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const [medFormData, setMedFormData] = useState({
@@ -74,10 +84,15 @@ const MedicalHistory = () => {
     file_url: "",
   });
 
+  const [symptomName, setSymptomName] = useState("");
+  const [severity, setSeverity] = useState([5]);
+  const [symptomDescription, setSymptomDescription] = useState("");
+
   useEffect(() => {
     fetchMedications();
     fetchTestResults();
     fetchMedicalRecords();
+    fetchSymptoms();
   }, []);
 
   const fetchMedications = async () => {
@@ -133,6 +148,25 @@ const MedicalHistory = () => {
       setMedicalRecords(data || []);
     } catch (error) {
       console.error('Error fetching medical records:', error);
+    }
+  };
+
+  const fetchSymptoms = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from('symptoms')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('logged_at', { ascending: false })
+        .limit(20);
+
+      if (error) throw error;
+      setSymptoms(data || []);
+    } catch (error) {
+      console.error('Error fetching symptoms:', error);
     }
   };
 
@@ -288,6 +322,81 @@ const MedicalHistory = () => {
     }
   };
 
+  const handleAddSymptom = async () => {
+    if (!symptomName) {
+      toast({
+        title: "Missing information",
+        description: "Please enter a symptom name.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { error } = await supabase
+        .from('symptoms')
+        .insert({
+          user_id: user.id,
+          symptom_name: symptomName,
+          severity: severity[0],
+          description: symptomDescription || null,
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: "Symptom logged",
+        description: `${symptomName} has been recorded.`,
+      });
+
+      setSymptomName("");
+      setSeverity([5]);
+      setSymptomDescription("");
+      fetchSymptoms();
+    } catch (error) {
+      console.error('Error logging symptom:', error);
+      toast({
+        title: "Error",
+        description: "Failed to log symptom. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleDeleteSymptom = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from('symptoms')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      toast({
+        title: "Symptom deleted",
+        description: "The symptom entry has been removed.",
+      });
+
+      fetchSymptoms();
+    } catch (error) {
+      console.error('Error deleting symptom:', error);
+      toast({
+        title: "Error",
+        description: "Failed to delete symptom.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const getSeverityColor = (severity: number) => {
+    if (severity <= 3) return "text-yellow-600";
+    if (severity <= 7) return "text-orange-600";
+    return "text-red-600";
+  };
+
   return (
     <div className="space-y-6 max-w-4xl">
       <div className="flex items-center gap-3">
@@ -300,44 +409,10 @@ const MedicalHistory = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card 
-          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
-          onClick={() => {
-            const element = document.getElementById('medications-section');
-            element?.scrollIntoView({ behavior: 'smooth' });
-          }}
-        >
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-primary/10 rounded-xl">
-              <Pill className="w-6 h-6 text-primary" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold">Medications</h3>
-              <p className="text-sm text-muted-foreground">Manage your medications and records</p>
-            </div>
-          </div>
-        </Card>
-
-        <Card 
-          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
-          onClick={() => navigate('/symptoms')}
-        >
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-accent/10 rounded-xl">
-              <AlertCircle className="w-6 h-6 text-accent" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold">Symptoms</h3>
-              <p className="text-sm text-muted-foreground">Track and log your symptoms</p>
-            </div>
-          </div>
-        </Card>
-      </div>
-
-      <Tabs defaultValue="medications" className="w-full" id="medications-section">
-        <TabsList className="grid w-full grid-cols-3">
+      <Tabs defaultValue="medications" className="w-full">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="medications">Medications</TabsTrigger>
+          <TabsTrigger value="symptoms">Symptoms</TabsTrigger>
           <TabsTrigger value="tests">Test Results</TabsTrigger>
           <TabsTrigger value="records">Medical Records</TabsTrigger>
         </TabsList>
@@ -438,6 +513,100 @@ const MedicalHistory = () => {
               ) : (
                 <p className="text-center text-muted-foreground py-8">
                   No active medications.
+                </p>
+              )}
+            </div>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="symptoms" className="space-y-6">
+          <Card className="p-6 bg-gradient-card shadow-md">
+            <h3 className="text-lg font-semibold mb-6">Log Symptom</h3>
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="symptom-name">Symptom Name</Label>
+                <Input
+                  id="symptom-name"
+                  placeholder="e.g., Headache, Fatigue"
+                  value={symptomName}
+                  onChange={(e) => setSymptomName(e.target.value)}
+                  className="mt-1.5"
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="severity">Severity (1-10)</Label>
+                <div className="flex items-center gap-4 mt-1.5">
+                  <Slider
+                    id="severity"
+                    min={1}
+                    max={10}
+                    step={1}
+                    value={severity}
+                    onValueChange={setSeverity}
+                    className="flex-1"
+                  />
+                  <span className="text-lg font-semibold w-8">{severity[0]}</span>
+                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="symptom-description">Description (optional)</Label>
+                <Textarea
+                  id="symptom-description"
+                  placeholder="Describe the symptom..."
+                  value={symptomDescription}
+                  onChange={(e) => setSymptomDescription(e.target.value)}
+                  className="mt-1.5 min-h-20"
+                />
+              </div>
+
+              <Button onClick={handleAddSymptom} className="w-full gap-2">
+                <Plus className="w-4 h-4" />
+                Log Symptom
+              </Button>
+            </div>
+          </Card>
+
+          <Card className="p-6 bg-gradient-card shadow-md">
+            <h3 className="text-lg font-semibold mb-4">Recent Symptoms</h3>
+            <div className="space-y-3">
+              {isLoading ? (
+                <p className="text-center text-muted-foreground py-8">Loading...</p>
+              ) : symptoms.length > 0 ? (
+                symptoms.map((symptom) => (
+                  <div key={symptom.id} className="p-4 bg-secondary rounded-lg">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <AlertCircle className="w-4 h-4" />
+                          <h4 className="font-semibold">{symptom.symptom_name}</h4>
+                        </div>
+                        {symptom.severity && (
+                          <p className={`text-sm font-medium ${getSeverityColor(symptom.severity)}`}>
+                            Severity: {symptom.severity}/10
+                          </p>
+                        )}
+                        {symptom.description && (
+                          <p className="text-sm text-muted-foreground mt-2">{symptom.description}</p>
+                        )}
+                        <p className="text-xs text-muted-foreground mt-2">
+                          {symptom.logged_at && format(new Date(symptom.logged_at), "PPp")}
+                        </p>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => handleDeleteSymptom(symptom.id)}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="text-center text-muted-foreground py-8">
+                  No symptoms logged yet.
                 </p>
               )}
             </div>
