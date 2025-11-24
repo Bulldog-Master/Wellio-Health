@@ -1143,58 +1143,94 @@ const Workout = () => {
         <Dialog open={showAddSample} onOpenChange={setShowAddSample}>
           <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/30 border-2 border-teal-200 dark:border-teal-800 shadow-2xl">
             <DialogHeader>
-              <DialogTitle className="text-2xl text-teal-900 dark:text-teal-100">Add Sample Routine</DialogTitle>
+              <DialogTitle className="text-2xl text-teal-900 dark:text-teal-100">Upload from Social Media</DialogTitle>
             </DialogHeader>
             
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="sample-name">Routine Name</Label>
+            <div className="space-y-6">
+              {/* Platform Selection */}
+              <div className="grid grid-cols-3 gap-3">
+                {['Instagram', 'YouTube', 'TikTok'].map((platform) => (
+                  <Button
+                    key={platform}
+                    variant={samplePlatform === platform ? "default" : "outline"}
+                    onClick={() => setSamplePlatform(platform)}
+                    className="h-20 flex-col gap-2"
+                  >
+                    <Video className="w-6 h-6" />
+                    <span className="text-sm">{platform}</span>
+                  </Button>
+                ))}
+              </div>
+
+              {/* Video/Link Upload */}
+              <div className="space-y-4 p-4 bg-white/50 dark:bg-black/20 rounded-lg border-2 border-dashed border-teal-300 dark:border-teal-700">
+                <div className="text-center space-y-2">
+                  <Upload className="w-12 h-12 mx-auto text-teal-600 dark:text-teal-400" />
+                  <div>
+                    <Label htmlFor="sample-url" className="text-lg font-semibold">Paste Video URL</Label>
+                    <p className="text-sm text-muted-foreground mt-1">Or upload a video file from your device</p>
+                  </div>
+                </div>
+                
                 <Input
-                  id="sample-name"
-                  placeholder="e.g., Arnold's Upper Body Workout"
-                  value={sampleName}
-                  onChange={(e) => setSampleName(e.target.value)}
-                  className="mt-1.5"
+                  id="sample-url"
+                  placeholder="https://instagram.com/p/... or https://youtube.com/watch?v=..."
+                  value={sampleUrl}
+                  onChange={(e) => setSampleUrl(e.target.value)}
+                  className="text-center"
+                />
+                
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t border-teal-300 dark:border-teal-700" />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/30 px-2 text-muted-foreground">Or</span>
+                  </div>
+                </div>
+
+                <Button variant="outline" className="w-full gap-2" onClick={() => document.getElementById('video-upload')?.click()}>
+                  <Video className="w-4 h-4" />
+                  Upload Video File
+                </Button>
+                <input
+                  id="video-upload"
+                  type="file"
+                  accept="video/*"
+                  className="hidden"
                 />
               </div>
 
-              <div>
-                <Label htmlFor="sample-description">Description (optional)</Label>
-                <Textarea
-                  id="sample-description"
-                  placeholder="Brief description of this routine..."
-                  value={sampleDescription}
-                  onChange={(e) => setSampleDescription(e.target.value)}
-                  className="mt-1.5"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
+              {/* Routine Details */}
+              <div className="space-y-4">
                 <div>
-                  <Label htmlFor="sample-platform">Source Platform (optional)</Label>
+                  <Label htmlFor="sample-name">Routine Name</Label>
                   <Input
-                    id="sample-platform"
-                    placeholder="e.g., Instagram, YouTube"
-                    value={samplePlatform}
-                    onChange={(e) => setSamplePlatform(e.target.value)}
+                    id="sample-name"
+                    placeholder="e.g., Arnold's Upper Body Blast"
+                    value={sampleName}
+                    onChange={(e) => setSampleName(e.target.value)}
                     className="mt-1.5"
                   />
                 </div>
+
                 <div>
-                  <Label htmlFor="sample-url">Source URL (optional)</Label>
-                  <Input
-                    id="sample-url"
-                    placeholder="https://..."
-                    value={sampleUrl}
-                    onChange={(e) => setSampleUrl(e.target.value)}
+                  <Label htmlFor="sample-description">Description (optional)</Label>
+                  <Textarea
+                    id="sample-description"
+                    placeholder="What makes this routine special..."
+                    value={sampleDescription}
+                    onChange={(e) => setSampleDescription(e.target.value)}
                     className="mt-1.5"
+                    rows={3}
                   />
                 </div>
               </div>
 
+              {/* Quick Exercise Add */}
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <Label>Exercises</Label>
+                <div className="flex items-center justify-between mb-3">
+                  <Label className="text-lg">Exercises from Video</Label>
                   <Button
                     variant="outline"
                     size="sm"
@@ -1206,87 +1242,63 @@ const Workout = () => {
                   </Button>
                 </div>
                 
-                <div className="space-y-3">
+                <div className="space-y-2 max-h-60 overflow-y-auto">
                   {sampleExercises.map((exercise, idx) => (
-                    <Card key={idx} className="p-3">
-                      <div className="space-y-2">
-                        <div className="flex gap-2">
-                          <Input
-                            placeholder="Exercise name"
-                            value={exercise.name}
-                            onChange={(e) => {
-                              const updated = [...sampleExercises];
-                              updated[idx] = { ...updated[idx], name: e.target.value };
-                              setSampleExercises(updated);
-                            }}
-                            className="flex-1"
-                          />
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => setSampleExercises(sampleExercises.filter((_, i) => i !== idx))}
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
-                        </div>
-                        
-                        <div className="grid grid-cols-3 gap-2">
-                          <div>
-                            <Label className="text-xs">Sets</Label>
-                            <Input
-                              type="number"
-                              placeholder="3"
-                              value={exercise.sets || ''}
-                              onChange={(e) => {
-                                const updated = [...sampleExercises];
-                                updated[idx] = { ...updated[idx], sets: parseInt(e.target.value) || 0 };
-                                setSampleExercises(updated);
-                              }}
-                              className="mt-1"
-                            />
-                          </div>
-                          <div>
-                            <Label className="text-xs">Reps</Label>
-                            <Input
-                              type="number"
-                              placeholder="10"
-                              value={exercise.reps || ''}
-                              onChange={(e) => {
-                                const updated = [...sampleExercises];
-                                updated[idx] = { ...updated[idx], reps: parseInt(e.target.value) || 0 };
-                                setSampleExercises(updated);
-                              }}
-                              className="mt-1"
-                            />
-                          </div>
-                          <div>
-                            <Label className="text-xs">Duration (min)</Label>
-                            <Input
-                              type="number"
-                              placeholder="5"
-                              value={exercise.duration || ''}
-                              onChange={(e) => {
-                                const updated = [...sampleExercises];
-                                updated[idx] = { ...updated[idx], duration: parseInt(e.target.value) || 0 };
-                                setSampleExercises(updated);
-                              }}
-                              className="mt-1"
-                            />
-                          </div>
-                        </div>
+                    <Card key={idx} className="p-3 bg-white/50 dark:bg-black/20">
+                      <div className="flex gap-2 items-center">
+                        <Input
+                          placeholder="Exercise name"
+                          value={exercise.name}
+                          onChange={(e) => {
+                            const updated = [...sampleExercises];
+                            updated[idx] = { ...updated[idx], name: e.target.value };
+                            setSampleExercises(updated);
+                          }}
+                          className="flex-1"
+                        />
+                        <Input
+                          type="number"
+                          placeholder="Sets"
+                          value={exercise.sets || ''}
+                          onChange={(e) => {
+                            const updated = [...sampleExercises];
+                            updated[idx] = { ...updated[idx], sets: parseInt(e.target.value) || 0 };
+                            setSampleExercises(updated);
+                          }}
+                          className="w-20"
+                        />
+                        <span className="text-muted-foreground">×</span>
+                        <Input
+                          type="number"
+                          placeholder="Reps"
+                          value={exercise.reps || ''}
+                          onChange={(e) => {
+                            const updated = [...sampleExercises];
+                            updated[idx] = { ...updated[idx], reps: parseInt(e.target.value) || 0 };
+                            setSampleExercises(updated);
+                          }}
+                          className="w-20"
+                        />
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => setSampleExercises(sampleExercises.filter((_, i) => i !== idx))}
+                        >
+                          <Trash2 className="w-4 h-4 text-red-500" />
+                        </Button>
                       </div>
                     </Card>
                   ))}
                   
                   {sampleExercises.length === 0 && (
-                    <p className="text-center text-muted-foreground text-sm py-4">
-                      Add exercises to your sample routine
+                    <p className="text-center text-muted-foreground text-sm py-6 bg-white/30 dark:bg-black/10 rounded-lg">
+                      Add exercises you see in the video
                     </p>
                   )}
                 </div>
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex gap-3 pt-4 border-t">
                 <Button
                   variant="outline"
                   onClick={() => {
@@ -1301,8 +1313,8 @@ const Workout = () => {
                 >
                   Cancel
                 </Button>
-                <Button onClick={handleSaveSampleRoutine} className="flex-1">
-                  Save Sample
+                <Button onClick={handleSaveSampleRoutine} className="flex-1 bg-teal-600 hover:bg-teal-700">
+                  Save to Library
                 </Button>
               </div>
             </div>
