@@ -694,33 +694,42 @@ const Workout = () => {
 
                         <div className="space-y-2">
                           <Label className="text-xs">Example Photo/Video (optional)</Label>
-                          <div className="flex gap-2 items-center">
-                            <Input
-                              type="file"
-                              accept="image/*,video/*"
-                              onChange={(e) => handleExerciseMediaUpload(e, idx)}
-                              className="hidden"
-                              id={`exercise-media-${idx}`}
-                              disabled={uploadingExerciseMedia === idx}
-                            />
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="gap-2"
-                              onClick={() => document.getElementById(`exercise-media-${idx}`)?.click()}
-                              disabled={uploadingExerciseMedia === idx}
-                            >
-                              <Upload className="w-4 h-4" />
-                              {uploadingExerciseMedia === idx ? "Uploading..." : "Upload Media"}
-                            </Button>
+                          <div className="flex gap-2 items-start">
+                            <div className="flex-1">
+                              <Input
+                                type="file"
+                                accept="image/*,video/*"
+                                onChange={(e) => handleExerciseMediaUpload(e, idx)}
+                                className="hidden"
+                                id={`exercise-media-${idx}`}
+                                disabled={uploadingExerciseMedia === idx}
+                              />
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="gap-2 w-full"
+                                onClick={() => document.getElementById(`exercise-media-${idx}`)?.click()}
+                                disabled={uploadingExerciseMedia === idx}
+                              >
+                                <Upload className="w-4 h-4" />
+                                {uploadingExerciseMedia === idx ? "Uploading..." : "Upload Media"}
+                              </Button>
+                            </div>
                             {exercise.media_url && (
-                              <div className="flex items-center gap-2">
-                                {exercise.media_url.includes('video') || exercise.media_url.match(/\.(mp4|mov|avi|webm)$/i) ? (
-                                  <Video className="w-4 h-4 text-primary" />
+                              <div className="w-24 h-24 rounded-lg overflow-hidden bg-muted border-2 border-primary">
+                                {exercise.media_url.match(/\.(mp4|mov|avi|webm)$/i) ? (
+                                  <video
+                                    src={exercise.media_url}
+                                    className="w-full h-full object-cover"
+                                    controls
+                                  />
                                 ) : (
-                                  <ImageIcon className="w-4 h-4 text-primary" />
+                                  <img
+                                    src={exercise.media_url}
+                                    alt={exercise.name}
+                                    className="w-full h-full object-cover"
+                                  />
                                 )}
-                                <span className="text-xs text-muted-foreground">Media added</span>
                               </div>
                             )}
                           </div>
