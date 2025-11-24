@@ -1,10 +1,15 @@
 import { Card } from "@/components/ui/card";
-import { Activity as ActivityIcon, TrendingUp, Calendar, Flame, Watch, Heart, Moon, Footprints } from "lucide-react";
+import { Activity as ActivityIcon, TrendingUp, Calendar, Flame, Watch, Heart, Moon, Footprints, Plus } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import { formatDistance } from "@/lib/unitConversion";
 import { format, subDays, startOfDay } from "date-fns";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
 
 interface ActivityLog {
   id: string;
@@ -26,10 +31,32 @@ interface WearableData {
 }
 
 const Activity = () => {
+  const { toast } = useToast();
   const { preferredUnit } = useUserPreferences();
   const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
   const [wearableData, setWearableData] = useState<WearableData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+  
+  const [wearableForm, setWearableForm] = useState({
+    deviceName: "fitbit",
+    customDevice: "",
+    steps: "",
+    caloriesBurned: "",
+    heartRate: "",
+    sleepHours: "",
+    dataDate: format(new Date(), 'yyyy-MM-dd'),
+  });
+
+  const commonDevices = [
+    { value: "fitbit", label: "Fitbit" },
+    { value: "apple_watch", label: "Apple Watch" },
+    { value: "garmin", label: "Garmin" },
+    { value: "samsung_health", label: "Samsung Health" },
+    { value: "whoop", label: "Whoop" },
+    { value: "oura", label: "Oura Ring" },
+    { value: "custom", label: "Custom Device" },
+  ];
 
   useEffect(() => {
     fetchActivityLogs();
@@ -87,6 +114,75 @@ const Activity = () => {
     workoutCount: activityLogs.length,
   };
 
+  const handleSaveWearableData = async () => {
+    if (!wearableForm.steps && !wearableForm.caloriesBurned && !wearableForm.heartRate && !wearableForm.sleepHours) {
+      toast({
+        title: "No data entered",
+        description: "Please enter at least one metric.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSaving(true);
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        toast({
+          title: "Authentication required",
+          description: "Please log in to save wearable data.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const deviceName = wearableForm.deviceName === "custom" 
+        ? wearableForm.customDevice 
+        : commonDevices.find(d => d.value === wearableForm.deviceName)?.label || wearableForm.deviceName;
+
+      const { error } = await supabase
+        .from('wearable_data')
+        .insert({
+          user_id: user.id,
+          device_name: deviceName,
+          steps: wearableForm.steps ? parseInt(wearableForm.steps) : null,
+          calories_burned: wearableForm.caloriesBurned ? parseInt(wearableForm.caloriesBurned) : null,
+          heart_rate: wearableForm.heartRate ? parseInt(wearableForm.heartRate) : null,
+          sleep_hours: wearableForm.sleepHours ? parseFloat(wearableForm.sleepHours) : null,
+          data_date: wearableForm.dataDate,
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: "Data saved",
+        description: "Wearable data has been logged successfully.",
+      });
+
+      // Reset form
+      setWearableForm({
+        deviceName: "fitbit",
+        customDevice: "",
+        steps: "",
+        caloriesBurned: "",
+        heartRate: "",
+        sleepHours: "",
+        dataDate: format(new Date(), 'yyyy-MM-dd'),
+      });
+
+      fetchWearableData();
+    } catch (error) {
+      console.error('Error saving wearable data:', error);
+      toast({
+        title: "Error",
+        description: "Failed to save wearable data.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   return (
     <div className="space-y-6 max-w-4xl">
       <div className="flex items-center gap-3">
@@ -140,6 +236,117 @@ const Activity = () => {
           <p className="text-sm text-muted-foreground">{preferredUnit === 'metric' ? 'km' : 'mi'}</p>
         </Card>
       </div>
+
+      <Card className="p-6 bg-gradient-card shadow-md">
+        <div className="flex items-center gap-2 mb-6">
+          <Plus className="w-5 h-5 text-primary" />
+          <h3 className="text-lg font-semibold">Log Wearable Data</h3>
+        </div>
+        <div className="space-y-4">
+          <div>
+            <Label htmlFor="deviceName">Device</Label>
+            <Select 
+              value={wearableForm.deviceName} 
+              onValueChange={(value) => setWearableForm({ ...wearableForm, deviceName: value })}
+            >
+              <SelectTrigger className="mt-1.5">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {commonDevices.map((device) => (
+                  <SelectItem key={device.value} value={device.value}>
+                    {device.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {wearableForm.deviceName === "custom" && (
+            <div>
+              <Label htmlFor="customDevice">Custom Device Name</Label>
+              <Input
+                id="customDevice"
+                value={wearableForm.customDevice}
+                onChange={(e) => setWearableForm({ ...wearableForm, customDevice: e.target.value })}
+                placeholder="Enter device name"
+                className="mt-1.5"
+              />
+            </div>
+          )}
+
+          <div>
+            <Label htmlFor="dataDate">Date</Label>
+            <Input
+              id="dataDate"
+              type="date"
+              value={wearableForm.dataDate}
+              onChange={(e) => setWearableForm({ ...wearableForm, dataDate: e.target.value })}
+              className="mt-1.5"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="steps">Steps</Label>
+              <Input
+                id="steps"
+                type="number"
+                value={wearableForm.steps}
+                onChange={(e) => setWearableForm({ ...wearableForm, steps: e.target.value })}
+                placeholder="10000"
+                className="mt-1.5"
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="caloriesBurned">Calories Burned</Label>
+              <Input
+                id="caloriesBurned"
+                type="number"
+                value={wearableForm.caloriesBurned}
+                onChange={(e) => setWearableForm({ ...wearableForm, caloriesBurned: e.target.value })}
+                placeholder="500"
+                className="mt-1.5"
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="heartRate">Heart Rate (bpm)</Label>
+              <Input
+                id="heartRate"
+                type="number"
+                value={wearableForm.heartRate}
+                onChange={(e) => setWearableForm({ ...wearableForm, heartRate: e.target.value })}
+                placeholder="75"
+                className="mt-1.5"
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="sleepHours">Sleep Hours</Label>
+              <Input
+                id="sleepHours"
+                type="number"
+                step="0.1"
+                value={wearableForm.sleepHours}
+                onChange={(e) => setWearableForm({ ...wearableForm, sleepHours: e.target.value })}
+                placeholder="7.5"
+                className="mt-1.5"
+              />
+            </div>
+          </div>
+
+          <Button 
+            onClick={handleSaveWearableData} 
+            className="w-full gap-2"
+            disabled={isSaving}
+          >
+            <Plus className="w-4 h-4" />
+            {isSaving ? "Saving..." : "Save Wearable Data"}
+          </Button>
+        </div>
+      </Card>
 
       <Card className="p-6 bg-gradient-card shadow-md">
         <div className="flex items-center gap-2 mb-4">
