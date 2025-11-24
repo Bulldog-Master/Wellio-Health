@@ -226,9 +226,8 @@ const Profile = () => {
       </div>
 
       {/* Personal Information Section */}
-      {(!openSection || openSection === 'personal-info') && (
-        <Card className="bg-gradient-card shadow-md overflow-hidden">
-          <Collapsible open={openPersonalInfo} onOpenChange={setOpenPersonalInfo}>
+      <Card className="bg-gradient-card shadow-md overflow-hidden">
+        <Collapsible open={openPersonalInfo} onOpenChange={setOpenPersonalInfo}>
           <CollapsibleTrigger className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-secondary/20 rounded-lg">
@@ -365,12 +364,10 @@ const Profile = () => {
           </CollapsibleContent>
         </Collapsible>
       </Card>
-      )}
 
       {/* Fitness Goals Section */}
-      {(!openSection || openSection === 'fitness-goals') && (
-        <Card ref={fitnessGoalsRef} className="bg-gradient-card shadow-md overflow-hidden">
-          <Collapsible open={openFitnessGoals} onOpenChange={setOpenFitnessGoals}>
+      <Card ref={fitnessGoalsRef} className="bg-gradient-card shadow-md overflow-hidden">
+        <Collapsible open={openFitnessGoals} onOpenChange={setOpenFitnessGoals}>
           <CollapsibleTrigger className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-accent/20 rounded-lg">
@@ -437,12 +434,10 @@ const Profile = () => {
           </CollapsibleContent>
         </Collapsible>
       </Card>
-      )}
 
       {/* Settings Section */}
-      {(!openSection || openSection === 'settings') && (
-        <Card className="bg-gradient-card shadow-md overflow-hidden">
-          <Collapsible open={openSettings} onOpenChange={setOpenSettings}>
+      <Card className="bg-gradient-card shadow-md overflow-hidden">
+        <Collapsible open={openSettings} onOpenChange={setOpenSettings}>
           <CollapsibleTrigger className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-primary/20 rounded-lg">
@@ -515,10 +510,8 @@ const Profile = () => {
           </CollapsibleContent>
         </Collapsible>
       </Card>
-      )}
 
       {/* Referral Link Card */}
-      {!openSection && (
       <Card className="p-6 bg-gradient-card shadow-md">
         <h3 className="text-lg font-semibold mb-4">Your Referral Link</h3>
         <p className="text-sm text-muted-foreground mb-4">Share Wellio with friends and earn rewards</p>
@@ -548,16 +541,13 @@ const Profile = () => {
           </Button>
         </div>
       </Card>
-      )}
 
-      {!openSection && (
       <div className="flex justify-end">
         <Button onClick={handleSave} className="gap-2" disabled={isLoading}>
           <Save className="w-4 h-4" />
           Save Changes
         </Button>
       </div>
-      )}
     </div>
   );
 };
