@@ -3,10 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Target, Plus, Check, Trash2 } from "lucide-react";
+import { Target, Plus, Check, Trash2, ArrowLeft } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 interface Habit {
   id: string;
@@ -27,6 +28,7 @@ interface HabitCompletion {
 
 const Habits = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [habits, setHabits] = useState<Habit[]>([]);
   const [completions, setCompletions] = useState<HabitCompletion[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -190,6 +192,15 @@ const Habits = () => {
 
   return (
     <div className="space-y-6 max-w-4xl">
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => navigate("/activity")}
+        className="gap-2 mb-2"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Back to Activity
+      </Button>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="p-3 bg-primary/10 rounded-xl">

@@ -2,13 +2,14 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Scale, Plus, TrendingDown } from "lucide-react";
+import { Scale, Plus, TrendingDown, ArrowLeft } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import { formatWeight, parseWeight } from "@/lib/unitConversion";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useNavigate } from "react-router-dom";
 
 interface WeightLog {
   id: string;
@@ -19,6 +20,7 @@ interface WeightLog {
 
 const Weight = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const { preferredUnit, updatePreferredUnit, isLoading: prefsLoading } = useUserPreferences();
   const [morning, setMorning] = useState("");
   const [evening, setEvening] = useState("");
@@ -107,6 +109,15 @@ const Weight = () => {
 
   return (
     <div className="space-y-6 max-w-4xl">
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => navigate("/activity")}
+        className="gap-2 mb-2"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Back to Activity
+      </Button>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="p-3 bg-primary/10 rounded-xl">

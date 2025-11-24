@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown, ChevronDown, Library, BookOpen, Smartphone } from "lucide-react";
+import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown, ChevronDown, Library, BookOpen, Smartphone, ArrowLeft } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
@@ -15,6 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import { formatDistance, parseDistance } from "@/lib/unitConversion";
+import { useNavigate } from "react-router-dom";
 
 interface ActivityLog {
   id: string;
@@ -72,6 +73,7 @@ interface WorkoutMedia {
 
 const Workout = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const { preferredUnit } = useUserPreferences();
   const [exercise, setExercise] = useState("");
   const [duration, setDuration] = useState("");
@@ -849,6 +851,15 @@ const Workout = () => {
 
   return (
     <div className="space-y-6 max-w-4xl">
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => navigate("/activity")}
+        className="gap-2 mb-2"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Back to Activity
+      </Button>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="p-3 bg-primary/10 rounded-xl">
