@@ -31,7 +31,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen bg-background">
       <div className="flex flex-col md:flex-row max-w-7xl mx-auto">
-        <aside className="hidden md:block md:w-64 md:border-r md:border-border md:min-h-screen">
+        <aside className="hidden md:block md:w-64 md:border-r md:border-sidebar-border md:min-h-screen bg-sidebar">
           <div className="sticky top-0 p-6 space-y-8">
             <div className="flex items-center justify-between">
               <h1 className="text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent">
