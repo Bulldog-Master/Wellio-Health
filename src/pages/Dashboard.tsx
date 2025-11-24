@@ -3,8 +3,11 @@ import MetricCard from "@/components/MetricCard";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  
   // Mock data - will be replaced with real data later
   const currentWeight = 165;
   const targetWeight = 155;
@@ -96,19 +99,34 @@ const Dashboard = () => {
           <h3 className="text-lg font-semibold">Quick Actions</h3>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <Button className="h-auto py-4 flex-col gap-2 bg-primary hover:bg-primary/90">
+          <Button 
+            onClick={() => navigate('/weight')}
+            className="h-auto py-4 flex-col gap-2 bg-primary hover:bg-primary/90"
+          >
             <Activity className="w-5 h-5" />
             <span className="text-sm">Log Weight</span>
           </Button>
-          <Button variant="secondary" className="h-auto py-4 flex-col gap-2">
+          <Button 
+            onClick={() => navigate('/food')}
+            variant="secondary" 
+            className="h-auto py-4 flex-col gap-2"
+          >
             <Flame className="w-5 h-5" />
             <span className="text-sm">Add Meal</span>
           </Button>
-          <Button variant="secondary" className="h-auto py-4 flex-col gap-2">
+          <Button 
+            onClick={() => navigate('/workout')}
+            variant="secondary" 
+            className="h-auto py-4 flex-col gap-2"
+          >
             <TrendingUp className="w-5 h-5" />
             <span className="text-sm">Log Workout</span>
           </Button>
-          <Button variant="secondary" className="h-auto py-4 flex-col gap-2">
+          <Button 
+            onClick={() => navigate('/profile')}
+            variant="secondary" 
+            className="h-auto py-4 flex-col gap-2"
+          >
             <Target className="w-5 h-5" />
             <span className="text-sm">View Goals</span>
           </Button>

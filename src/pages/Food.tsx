@@ -171,28 +171,52 @@ const Food = () => {
         return;
       }
 
-      const { error } = await supabase
-        .from('nutrition_logs')
-        .insert({
-          user_id: user.id,
-          meal_type: selectedMeal,
-          food_name: mealDescription.trim(),
-          calories: nutritionData.calories,
-          protein_grams: nutritionData.protein,
-          carbs_grams: nutritionData.carbs,
-          fat_grams: nutritionData.fat,
+      if (editingMeal) {
+        // Update existing meal
+        const { error } = await supabase
+          .from('nutrition_logs')
+          .update({
+            meal_type: selectedMeal,
+            food_name: mealDescription.trim(),
+            calories: nutritionData.calories,
+            protein_grams: nutritionData.protein,
+            carbs_grams: nutritionData.carbs,
+            fat_grams: nutritionData.fat,
+          })
+          .eq('id', editingMeal.id);
+
+        if (error) throw error;
+
+        toast({
+          title: "Meal updated",
+          description: "Your meal has been updated successfully.",
         });
+      } else {
+        // Insert new meal
+        const { error } = await supabase
+          .from('nutrition_logs')
+          .insert({
+            user_id: user.id,
+            meal_type: selectedMeal,
+            food_name: mealDescription.trim(),
+            calories: nutritionData.calories,
+            protein_grams: nutritionData.protein,
+            carbs_grams: nutritionData.carbs,
+            fat_grams: nutritionData.fat,
+          });
 
-      if (error) throw error;
+        if (error) throw error;
 
-      toast({
-        title: "Meal logged",
-        description: `${mealDescription} (${nutritionData.calories} cal) added to ${mealTypes.find(m => m.value === selectedMeal)?.label}`,
-      });
+        toast({
+          title: "Meal logged",
+          description: `${mealDescription} (${nutritionData.calories} cal) added to ${mealTypes.find(m => m.value === selectedMeal)?.label}`,
+        });
+      }
 
       setMealDescription("");
       setNutritionData(null);
       setImagePreview(null);
+      setEditingMeal(null);
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
@@ -205,6 +229,29 @@ const Food = () => {
         description: "Failed to log meal. Please try again.",
         variant: "destructive",
       });
+    }
+  };
+
+  const handleEditMeal = (meal: MealLog) => {
+    setEditingMeal(meal);
+    setSelectedMeal(meal.meal_type);
+    setMealDescription(meal.food_name);
+    setNutritionData({
+      calories: meal.calories,
+      protein: meal.protein_grams || 0,
+      carbs: meal.carbs_grams || 0,
+      fat: meal.fat_grams || 0,
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleCancelEdit = () => {
+    setEditingMeal(null);
+    setMealDescription("");
+    setNutritionData(null);
+    setImagePreview(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
     }
   };
 
@@ -252,7 +299,14 @@ const Food = () => {
       </Card>
 
       <Card className="p-6 bg-gradient-card shadow-md">
-        <h3 className="text-lg font-semibold mb-6">Log New Meal</h3>
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-lg font-semibold">{editingMeal ? 'Edit Meal' : 'Log New Meal'}</h3>
+          {editingMeal && (
+            <Button variant="ghost" size="sm" onClick={handleCancelEdit}>
+              Cancel
+            </Button>
+          )}
+        </div>
         <div className="space-y-4">
           <div>
             <Label htmlFor="mealType">Meal Type</Label>
@@ -366,7 +420,7 @@ const Food = () => {
             disabled={!nutritionData}
           >
             <Plus className="w-4 h-4" />
-            Save Meal
+            {editingMeal ? 'Update Meal' : 'Save Meal'}
           </Button>
         </div>
       </Card>
@@ -405,6 +459,13 @@ const Food = () => {
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="font-bold text-primary">{meal.calories} cal</span>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => handleEditMeal(meal)}
+                          >
+                            <Pencil className="w-4 h-4" />
+                          </Button>
                           <Button
                             variant="ghost"
                             size="icon"
