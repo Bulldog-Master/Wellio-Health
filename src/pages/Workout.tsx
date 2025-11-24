@@ -5,7 +5,10 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video } from "lucide-react";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -57,6 +60,28 @@ const Workout = () => {
   const [workoutMedia, setWorkoutMedia] = useState<Record<string, WorkoutMedia[]>>({});
   const [showCreateRoutine, setShowCreateRoutine] = useState(false);
   const [editingRoutineId, setEditingRoutineId] = useState<string | null>(null);
+  const [openExercisePopover, setOpenExercisePopover] = useState<number | null>(null);
+
+  const commonExercises = [
+    "Bench Press", "Incline Bench Press", "Decline Bench Press", "Dumbbell Press", "Chest Fly",
+    "Squats", "Front Squats", "Bulgarian Split Squats", "Leg Press", "Hack Squat",
+    "Deadlift", "Romanian Deadlift", "Sumo Deadlift", "Trap Bar Deadlift",
+    "Pull-ups", "Chin-ups", "Lat Pulldown", "Cable Rows", "Bent Over Rows", "T-Bar Rows",
+    "Push-ups", "Diamond Push-ups", "Wide Push-ups",
+    "Shoulder Press", "Arnold Press", "Lateral Raises", "Front Raises", "Rear Delt Fly",
+    "Bicep Curls", "Hammer Curls", "Preacher Curls", "Cable Curls", "Concentration Curls",
+    "Tricep Dips", "Tricep Extensions", "Skull Crushers", "Cable Pushdowns",
+    "Lunges", "Walking Lunges", "Reverse Lunges", "Curtsy Lunges",
+    "Leg Curls", "Leg Extensions", "Calf Raises", "Seated Calf Raises",
+    "Planks", "Side Planks", "Crunches", "Bicycle Crunches", "Russian Twists",
+    "Mountain Climbers", "Burpees", "Jump Squats", "Box Jumps",
+    "Barbell Rows", "Dumbbell Rows", "Face Pulls", "Shrugs",
+    "Hip Thrusts", "Glute Bridges", "Good Mornings",
+    "Farmer's Walk", "Kettlebell Swings", "Turkish Get-ups",
+    "Battle Ropes", "Sled Push", "Sled Pull",
+    "Running", "Cycling", "Swimming", "Rowing", "Jump Rope",
+    "Yoga", "Pilates", "Stretching"
+  ].sort();
   const [routineName, setRoutineName] = useState("");
   const [routineDescription, setRoutineDescription] = useState("");
   const [routineExercises, setRoutineExercises] = useState<Array<{ name: string; sets?: number; reps?: number; duration?: number }>>([]);
@@ -572,34 +597,51 @@ const Workout = () => {
                       <Card key={idx} className="p-3">
                         <div className="space-y-2">
                           <div className="flex gap-2">
-                            <Select
-                              value={exercise.name}
-                              onValueChange={(value) => handleUpdateRoutineExercise(idx, 'name', value)}
-                            >
-                              <SelectTrigger className="flex-1">
-                                <SelectValue placeholder="Select exercise" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="Bench Press">Bench Press</SelectItem>
-                                <SelectItem value="Squats">Squats</SelectItem>
-                                <SelectItem value="Deadlift">Deadlift</SelectItem>
-                                <SelectItem value="Pull-ups">Pull-ups</SelectItem>
-                                <SelectItem value="Push-ups">Push-ups</SelectItem>
-                                <SelectItem value="Shoulder Press">Shoulder Press</SelectItem>
-                                <SelectItem value="Bicep Curls">Bicep Curls</SelectItem>
-                                <SelectItem value="Tricep Dips">Tricep Dips</SelectItem>
-                                <SelectItem value="Lunges">Lunges</SelectItem>
-                                <SelectItem value="Leg Press">Leg Press</SelectItem>
-                                <SelectItem value="Lat Pulldown">Lat Pulldown</SelectItem>
-                                <SelectItem value="Cable Rows">Cable Rows</SelectItem>
-                                <SelectItem value="Leg Curls">Leg Curls</SelectItem>
-                                <SelectItem value="Leg Extensions">Leg Extensions</SelectItem>
-                                <SelectItem value="Calf Raises">Calf Raises</SelectItem>
-                                <SelectItem value="Planks">Planks</SelectItem>
-                                <SelectItem value="Crunches">Crunches</SelectItem>
-                                <SelectItem value="Custom">Custom Exercise</SelectItem>
-                              </SelectContent>
-                            </Select>
+                            <Popover open={openExercisePopover === idx} onOpenChange={(open) => setOpenExercisePopover(open ? idx : null)}>
+                              <PopoverTrigger asChild>
+                                <Button
+                                  variant="outline"
+                                  role="combobox"
+                                  aria-expanded={openExercisePopover === idx}
+                                  className="flex-1 justify-between"
+                                >
+                                  {exercise.name || "Select or type exercise..."}
+                                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                </Button>
+                              </PopoverTrigger>
+                              <PopoverContent className="w-[300px] p-0">
+                                <Command>
+                                  <CommandInput 
+                                    placeholder="Search or type exercise..." 
+                                    value={exercise.name}
+                                    onValueChange={(value) => handleUpdateRoutineExercise(idx, 'name', value)}
+                                  />
+                                  <CommandList>
+                                    <CommandEmpty>Press Enter to use "{exercise.name}"</CommandEmpty>
+                                    <CommandGroup>
+                                      {commonExercises.map((ex) => (
+                                        <CommandItem
+                                          key={ex}
+                                          value={ex}
+                                          onSelect={(currentValue) => {
+                                            handleUpdateRoutineExercise(idx, 'name', currentValue);
+                                            setOpenExercisePopover(null);
+                                          }}
+                                        >
+                                          <Check
+                                            className={cn(
+                                              "mr-2 h-4 w-4",
+                                              exercise.name === ex ? "opacity-100" : "opacity-0"
+                                            )}
+                                          />
+                                          {ex}
+                                        </CommandItem>
+                                      ))}
+                                    </CommandGroup>
+                                  </CommandList>
+                                </Command>
+                              </PopoverContent>
+                            </Popover>
                             <Button
                               variant="ghost"
                               size="icon"
@@ -608,14 +650,6 @@ const Workout = () => {
                               <Trash2 className="w-4 h-4" />
                             </Button>
                           </div>
-                          
-                          {exercise.name === 'Custom' && (
-                            <Input
-                              placeholder="Enter custom exercise name"
-                              value={exercise.name === 'Custom' ? '' : exercise.name}
-                              onChange={(e) => handleUpdateRoutineExercise(idx, 'name', e.target.value)}
-                            />
-                          )}
                           
                           <div className="grid grid-cols-3 gap-2">
                             <div>
