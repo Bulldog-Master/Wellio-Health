@@ -943,7 +943,7 @@ const Workout = () => {
                               setShowRoutineDialog(true);
                             }}
                           >
-                            <Pencil className="w-4 h-4" />
+                            <Pencil className="w-4 h-4 text-primary" />
                           </Button>
                           <Button
                             variant="ghost"
@@ -953,7 +953,7 @@ const Workout = () => {
                               handleDeleteRoutine(routine.id);
                             }}
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <Trash2 className="w-4 h-4 text-destructive" />
                           </Button>
                         </div>
                       </div>
@@ -1070,7 +1070,7 @@ const Workout = () => {
                               handleDeleteSampleRoutine(routine.id);
                             }}
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <Trash2 className="w-4 h-4 text-destructive" />
                           </Button>
                         </div>
                       </div>
