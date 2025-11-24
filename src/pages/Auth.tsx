@@ -348,9 +348,12 @@ const Auth = () => {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-primary mb-4 shadow-glow">
             <Activity className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold bg-gradient-hero bg-clip-text text-transparent mb-2">
+          <h1 className="text-3xl font-bold bg-gradient-hero bg-clip-text text-transparent mb-1">
             Wellio
           </h1>
+          <p className="text-sm text-muted-foreground/80 mb-3">
+            Welcome to your Health and Wellness APP
+          </p>
           <p className="text-muted-foreground">
             {isLogin ? "Welcome back! Sign in to continue" : "Create your account to get started"}
           </p>
