@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Activity as ActivityIcon, TrendingUp, Calendar, Flame, Watch, Heart, Moon, Footprints, Plus, Scale, Dumbbell, CheckSquare, Pill } from "lucide-react";
+import { Activity as ActivityIcon, TrendingUp, Calendar, Flame, Watch, Heart, Moon, Footprints, Plus, Scale, Dumbbell, CheckSquare, Pill, Timer } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
@@ -254,6 +254,21 @@ const Activity = () => {
             <div>
               <h3 className="text-lg font-semibold">Supplements</h3>
               <p className="text-sm text-muted-foreground">Manage your supplements</p>
+            </div>
+          </div>
+        </Card>
+
+        <Card 
+          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+          onClick={() => navigate('/interval-timer')}
+        >
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-accent/10 rounded-xl">
+              <Timer className="w-6 h-6 text-accent" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">Interval Timer</h3>
+              <p className="text-sm text-muted-foreground">Custom workout timers</p>
             </div>
           </div>
         </Card>

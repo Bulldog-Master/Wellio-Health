@@ -148,6 +148,63 @@ export type Database = {
         }
         Relationships: []
       }
+      interval_timers: {
+        Row: {
+          countdown_beeps: boolean | null
+          created_at: string | null
+          end_with_interim: boolean | null
+          id: string
+          include_reps: boolean | null
+          include_sets: boolean | null
+          interim_interval_seconds: number | null
+          intervals: Json | null
+          name: string
+          show_elapsed_time: boolean | null
+          show_line_numbers: boolean | null
+          text_to_speech: boolean | null
+          updated_at: string | null
+          use_for_notifications: boolean | null
+          use_interim_interval: boolean | null
+          user_id: string
+        }
+        Insert: {
+          countdown_beeps?: boolean | null
+          created_at?: string | null
+          end_with_interim?: boolean | null
+          id?: string
+          include_reps?: boolean | null
+          include_sets?: boolean | null
+          interim_interval_seconds?: number | null
+          intervals?: Json | null
+          name: string
+          show_elapsed_time?: boolean | null
+          show_line_numbers?: boolean | null
+          text_to_speech?: boolean | null
+          updated_at?: string | null
+          use_for_notifications?: boolean | null
+          use_interim_interval?: boolean | null
+          user_id: string
+        }
+        Update: {
+          countdown_beeps?: boolean | null
+          created_at?: string | null
+          end_with_interim?: boolean | null
+          id?: string
+          include_reps?: boolean | null
+          include_sets?: boolean | null
+          interim_interval_seconds?: number | null
+          intervals?: Json | null
+          name?: string
+          show_elapsed_time?: boolean | null
+          show_line_numbers?: boolean | null
+          text_to_speech?: boolean | null
+          updated_at?: string | null
+          use_for_notifications?: boolean | null
+          use_interim_interval?: boolean | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       medical_records: {
         Row: {
           category: string
