@@ -1191,10 +1191,15 @@ const Workout = () => {
                 
                 <Input
                   id="sample-url"
+                  type="url"
                   placeholder="https://instagram.com/p/... or https://youtube.com/watch?v=..."
                   value={sampleUrl}
                   onChange={(e) => setSampleUrl(e.target.value)}
-                  className="text-center"
+                  onPaste={(e) => {
+                    console.log('URL pasted:', e.clipboardData.getData('text'));
+                  }}
+                  className="text-center bg-white dark:bg-gray-900"
+                  autoComplete="off"
                 />
                 
                 <div className="relative">
