@@ -33,16 +33,16 @@ const MetricCard = ({
 
   return (
     <Card className={cn(
-      "p-6 shadow-md hover:shadow-lg transition-smooth",
+      "p-6 shadow-sm hover:shadow-md transition-smooth border",
       variantStyles[variant]
     )}>
       <div className="flex items-start justify-between mb-4">
         <div className={cn(
-          "p-3 rounded-xl",
+          "p-3 rounded-lg",
           variant === "default" ? "bg-primary/10" : "bg-white/20"
         )}>
           <Icon className={cn(
-            "w-6 h-6",
+            "w-5 h-5",
             variant === "default" ? "text-primary" : "text-current"
           )} />
         </div>
