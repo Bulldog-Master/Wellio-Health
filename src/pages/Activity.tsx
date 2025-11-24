@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Activity as ActivityIcon, TrendingUp, Calendar, Flame } from "lucide-react";
+import { Activity as ActivityIcon, TrendingUp, Calendar, Flame, Watch, Heart, Moon, Footprints } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
@@ -15,13 +15,25 @@ interface ActivityLog {
   logged_at: string;
 }
 
+interface WearableData {
+  id: string;
+  device_name: string;
+  steps: number | null;
+  calories_burned: number | null;
+  heart_rate: number | null;
+  sleep_hours: number | null;
+  data_date: string;
+}
+
 const Activity = () => {
   const { preferredUnit } = useUserPreferences();
   const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
+  const [wearableData, setWearableData] = useState<WearableData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchActivityLogs();
+    fetchWearableData();
   }, []);
 
   const fetchActivityLogs = async () => {
@@ -44,6 +56,27 @@ const Activity = () => {
       console.error('Error fetching activity logs:', error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const fetchWearableData = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const sevenDaysAgo = subDays(startOfDay(new Date()), 7);
+
+      const { data, error } = await supabase
+        .from('wearable_data')
+        .select('*')
+        .eq('user_id', user.id)
+        .gte('data_date', format(sevenDaysAgo, 'yyyy-MM-dd'))
+        .order('data_date', { ascending: false });
+
+      if (error) throw error;
+      setWearableData(data || []);
+    } catch (error) {
+      console.error('Error fetching wearable data:', error);
     }
   };
 
@@ -107,6 +140,59 @@ const Activity = () => {
           <p className="text-sm text-muted-foreground">{preferredUnit === 'metric' ? 'km' : 'mi'}</p>
         </Card>
       </div>
+
+      <Card className="p-6 bg-gradient-card shadow-md">
+        <div className="flex items-center gap-2 mb-4">
+          <Watch className="w-5 h-5 text-primary" />
+          <h3 className="text-lg font-semibold">Wearable Device Data</h3>
+        </div>
+        <div className="space-y-3">
+          {wearableData.length > 0 ? (
+            wearableData.map((data) => (
+              <div key={data.id} className="p-4 bg-secondary rounded-lg">
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <h4 className="font-semibold">{data.device_name}</h4>
+                    <p className="text-sm text-muted-foreground">
+                      {format(new Date(data.data_date), "PPP")}
+                    </p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {data.steps && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Footprints className="w-4 h-4 text-primary" />
+                      <span>{data.steps.toLocaleString()} steps</span>
+                    </div>
+                  )}
+                  {data.calories_burned && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Flame className="w-4 h-4 text-accent" />
+                      <span>{data.calories_burned} cal</span>
+                    </div>
+                  )}
+                  {data.heart_rate && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Heart className="w-4 h-4 text-red-500" />
+                      <span>{data.heart_rate} bpm</span>
+                    </div>
+                  )}
+                  {data.sleep_hours && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Moon className="w-4 h-4 text-blue-500" />
+                      <span>{data.sleep_hours}h sleep</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-center text-muted-foreground py-8">
+              No wearable data synced yet. Connect your fitness device to track steps, heart rate, and more!
+            </p>
+          )}
+        </div>
+      </Card>
 
       <Card className="p-6 bg-gradient-card shadow-md">
         <h3 className="text-lg font-semibold mb-4">Recent Activities (Last 7 Days)</h3>
