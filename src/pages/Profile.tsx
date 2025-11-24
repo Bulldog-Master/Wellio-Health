@@ -4,7 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User, Save, Share2, Copy, Check, Upload } from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { User, Save, Share2, Copy, Check, Upload, Settings, ChevronDown, Shield, CreditCard, Bell, HelpCircle, UserCircle } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -17,6 +18,8 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [openPersonalInfo, setOpenPersonalInfo] = useState(true);
+  const [openSettings, setOpenSettings] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -184,195 +187,288 @@ const Profile = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-4xl">
+    <div className="space-y-6 max-w-4xl pb-20">
       <div className="flex items-center gap-3">
         <div className="p-3 bg-primary/10 rounded-xl">
           <User className="w-6 h-6 text-primary" />
         </div>
         <div>
           <h1 className="text-3xl font-bold">Profile</h1>
-          <p className="text-muted-foreground">Manage your personal information</p>
+          <p className="text-muted-foreground">Manage your account</p>
         </div>
       </div>
 
-      <Card className="p-6 bg-gradient-card shadow-md">
-        <h3 className="text-lg font-semibold mb-6">Personal Information</h3>
-        <div className="space-y-4">
-          <div className="flex items-center gap-4 pb-4 border-b">
-            <Avatar className="w-24 h-24">
-              <AvatarImage src={avatarUrl || undefined} alt={formData.name} />
-              <AvatarFallback>
-                <User className="w-12 h-12" />
-              </AvatarFallback>
-            </Avatar>
-            <div className="flex-1">
-              <Input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleAvatarUpload}
-                className="hidden"
-              />
-              <Button
-                variant="outline"
-                onClick={() => fileInputRef.current?.click()}
-                disabled={isLoading}
-                className="gap-2"
-              >
-                <Upload className="w-4 h-4" />
-                Upload Photo
-              </Button>
-            </div>
-          </div>
-
-          <div>
-            <Label htmlFor="name">Full Name</Label>
-            <Input
-              id="name"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              placeholder="John Doe"
-              className="mt-1.5"
-            />
-          </div>
-
-          <div>
-            <Label htmlFor="username">Username</Label>
-            <Input
-              id="username"
-              value={formData.username}
-              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-              placeholder="johndoe"
-              className="mt-1.5"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="age">Age</Label>
-              <Input
-                id="age"
-                type="number"
-                value={formData.age}
-                onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-                className="mt-1.5"
-              />
-            </div>
-            <div>
-              <Label htmlFor="gender">Gender</Label>
-              <Select value={formData.gender} onValueChange={(value) => setFormData({ ...formData, gender: value })}>
-                <SelectTrigger className="mt-1.5">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="male">Male</SelectItem>
-                  <SelectItem value="female">Female</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="height">Height</Label>
-              <div className="flex gap-2 mt-1.5">
-                <Input
-                  id="height"
-                  type="number"
-                  value={formData.height}
-                  onChange={(e) => setFormData({ ...formData, height: e.target.value })}
-                  className="flex-1"
-                />
-                <Select value={formData.heightUnit} onValueChange={(value) => setFormData({ ...formData, heightUnit: value })}>
-                  <SelectTrigger className="w-24">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="inches">in</SelectItem>
-                    <SelectItem value="cm">cm</SelectItem>
-                  </SelectContent>
-                </Select>
+      {/* Personal Information Section */}
+      <Card className="bg-gradient-card shadow-md overflow-hidden">
+        <Collapsible open={openPersonalInfo} onOpenChange={setOpenPersonalInfo}>
+          <CollapsibleTrigger className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-accent/20 rounded-lg">
+                <UserCircle className="w-5 h-5 text-accent" />
+              </div>
+              <div className="text-left">
+                <h3 className="text-lg font-semibold">Personal Information</h3>
+                <p className="text-sm text-muted-foreground">Your profile details and fitness data</p>
               </div>
             </div>
-            <div>
-              <Label htmlFor="weight">Current Weight</Label>
-              <div className="flex gap-2 mt-1.5">
+            <ChevronDown className={`w-5 h-5 transition-transform ${openPersonalInfo ? 'rotate-180' : ''}`} />
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <div className="p-6 pt-0 space-y-4 border-t">
+              <div className="flex items-center gap-4 pb-4 border-b">
+                <Avatar className="w-24 h-24">
+                  <AvatarImage src={avatarUrl || undefined} alt={formData.name} />
+                  <AvatarFallback>
+                    <User className="w-12 h-12" />
+                  </AvatarFallback>
+                </Avatar>
+                <div className="flex-1">
+                  <Input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleAvatarUpload}
+                    className="hidden"
+                  />
+                  <Button
+                    variant="outline"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isLoading}
+                    className="gap-2"
+                  >
+                    <Upload className="w-4 h-4" />
+                    Upload Photo
+                  </Button>
+                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="name">Full Name</Label>
                 <Input
-                  id="weight"
-                  type="number"
-                  value={formData.weight}
-                  onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
-                  className="flex-1"
+                  id="name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  placeholder="John Doe"
+                  className="mt-1.5"
                 />
-                <Select value={formData.weightUnit} onValueChange={(value) => setFormData({ ...formData, weightUnit: value })}>
-                  <SelectTrigger className="w-24">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="lbs">lbs</SelectItem>
-                    <SelectItem value="kg">kg</SelectItem>
-                  </SelectContent>
-                </Select>
+              </div>
+
+              <div>
+                <Label htmlFor="username">Username</Label>
+                <Input
+                  id="username"
+                  value={formData.username}
+                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                  placeholder="johndoe"
+                  className="mt-1.5"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="age">Age</Label>
+                  <Input
+                    id="age"
+                    type="number"
+                    value={formData.age}
+                    onChange={(e) => setFormData({ ...formData, age: e.target.value })}
+                    className="mt-1.5"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="gender">Gender</Label>
+                  <Select value={formData.gender} onValueChange={(value) => setFormData({ ...formData, gender: value })}>
+                    <SelectTrigger className="mt-1.5">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="male">Male</SelectItem>
+                      <SelectItem value="female">Female</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="height">Height</Label>
+                  <div className="flex gap-2 mt-1.5">
+                    <Input
+                      id="height"
+                      type="number"
+                      value={formData.height}
+                      onChange={(e) => setFormData({ ...formData, height: e.target.value })}
+                      className="flex-1"
+                    />
+                    <Select value={formData.heightUnit} onValueChange={(value) => setFormData({ ...formData, heightUnit: value })}>
+                      <SelectTrigger className="w-24">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="inches">in</SelectItem>
+                        <SelectItem value="cm">cm</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                <div>
+                  <Label htmlFor="weight">Current Weight</Label>
+                  <div className="flex gap-2 mt-1.5">
+                    <Input
+                      id="weight"
+                      type="number"
+                      value={formData.weight}
+                      onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
+                      className="flex-1"
+                    />
+                    <Select value={formData.weightUnit} onValueChange={(value) => setFormData({ ...formData, weightUnit: value })}>
+                      <SelectTrigger className="w-24">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="lbs">lbs</SelectItem>
+                        <SelectItem value="kg">kg</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t">
+                <h4 className="font-semibold mb-4">Fitness Goals</h4>
+                <div className="space-y-4">
+                  <div>
+                    <Label htmlFor="targetWeight">Target Weight</Label>
+                    <div className="flex gap-2 mt-1.5">
+                      <Input
+                        id="targetWeight"
+                        type="number"
+                        value={formData.targetWeight}
+                        onChange={(e) => setFormData({ ...formData, targetWeight: e.target.value })}
+                        placeholder="155"
+                        className="flex-1"
+                      />
+                      <Select
+                        value={formData.targetWeightUnit}
+                        onValueChange={(value: "lbs" | "kg") => setFormData({ ...formData, targetWeightUnit: value })}
+                      >
+                        <SelectTrigger className="w-24">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="lbs">lbs</SelectItem>
+                          <SelectItem value="kg">kg</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    {formData.targetWeight && (
+                      <p className="text-sm text-muted-foreground mt-2">
+                        = {formData.targetWeightUnit === 'lbs'
+                          ? `${(parseFloat(formData.targetWeight) * 0.453592).toFixed(1)} kg`
+                          : `${(parseFloat(formData.targetWeight) * 2.20462).toFixed(1)} lbs`
+                        }
+                      </p>
+                    )}
+                  </div>
+
+                  <div>
+                    <Label htmlFor="goal">Primary Goal</Label>
+                    <Select value={formData.goal} onValueChange={(value) => setFormData({ ...formData, goal: value })}>
+                      <SelectTrigger className="mt-1.5">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="leaner">Get Leaner</SelectItem>
+                        <SelectItem value="stronger">Build Strength</SelectItem>
+                        <SelectItem value="cardio">Improve Cardio</SelectItem>
+                        <SelectItem value="maintain">Maintain Weight</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          </CollapsibleContent>
+        </Collapsible>
       </Card>
 
-      <Card className="p-6 bg-gradient-card shadow-md">
-        <h3 className="text-lg font-semibold mb-6">Fitness Goals</h3>
-        <div className="space-y-4">
-          <div>
-            <Label htmlFor="targetWeight">Target Weight</Label>
-            <div className="flex gap-2 mt-1.5">
-              <Input
-                id="targetWeight"
-                type="number"
-                value={formData.targetWeight}
-                onChange={(e) => setFormData({ ...formData, targetWeight: e.target.value })}
-                placeholder="155"
-                className="flex-1"
-              />
-              <Select
-                value={formData.targetWeightUnit}
-                onValueChange={(value: "lbs" | "kg") => setFormData({ ...formData, targetWeightUnit: value })}
-              >
-                <SelectTrigger className="w-24">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="lbs">lbs</SelectItem>
-                  <SelectItem value="kg">kg</SelectItem>
-                </SelectContent>
-              </Select>
+      {/* Settings Section */}
+      <Card className="bg-gradient-card shadow-md overflow-hidden">
+        <Collapsible open={openSettings} onOpenChange={setOpenSettings}>
+          <CollapsibleTrigger className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-primary/20 rounded-lg">
+                <Settings className="w-5 h-5 text-primary" />
+              </div>
+              <div className="text-left">
+                <h3 className="text-lg font-semibold">Settings</h3>
+                <p className="text-sm text-muted-foreground">Account preferences and configuration</p>
+              </div>
             </div>
-            {formData.targetWeight && (
-              <p className="text-sm text-muted-foreground mt-2">
-                = {formData.targetWeightUnit === 'lbs'
-                  ? `${(parseFloat(formData.targetWeight) * 0.453592).toFixed(1)} kg`
-                  : `${(parseFloat(formData.targetWeight) * 2.20462).toFixed(1)} lbs`
-                }
-              </p>
-            )}
-          </div>
+            <ChevronDown className={`w-5 h-5 transition-transform ${openSettings ? 'rotate-180' : ''}`} />
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <div className="border-t">
+              {/* Profile Settings */}
+              <button className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left border-b">
+                <div className="p-2 bg-accent/20 rounded-lg">
+                  <UserCircle className="w-5 h-5 text-accent" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-medium">Profile</h4>
+                  <p className="text-sm text-muted-foreground">Manage your profile settings</p>
+                </div>
+              </button>
 
-          <div>
-            <Label htmlFor="goal">Primary Goal</Label>
-            <Select value={formData.goal} onValueChange={(value) => setFormData({ ...formData, goal: value })}>
-              <SelectTrigger className="mt-1.5">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="leaner">Get Leaner</SelectItem>
-                <SelectItem value="stronger">Build Strength</SelectItem>
-                <SelectItem value="cardio">Improve Cardio</SelectItem>
-                <SelectItem value="maintain">Maintain Weight</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
+              {/* Privacy & Security */}
+              <button className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left border-b">
+                <div className="p-2 bg-destructive/20 rounded-lg">
+                  <Shield className="w-5 h-5 text-destructive" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-medium">Privacy & Security</h4>
+                  <p className="text-sm text-muted-foreground">Control your privacy settings and security options</p>
+                </div>
+              </button>
+
+              {/* Orders & Payments */}
+              <button className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left border-b">
+                <div className="p-2 bg-warning/20 rounded-lg">
+                  <CreditCard className="w-5 h-5 text-warning" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-medium">Orders & Payments</h4>
+                  <p className="text-sm text-muted-foreground">View your orders and manage payment methods</p>
+                </div>
+              </button>
+
+              {/* Notifications */}
+              <button className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left border-b">
+                <div className="p-2 bg-secondary/20 rounded-lg">
+                  <Bell className="w-5 h-5 text-secondary" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-medium">Notifications</h4>
+                  <p className="text-sm text-muted-foreground">Configure your notification preferences</p>
+                </div>
+              </button>
+
+              {/* Support */}
+              <button className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left">
+                <div className="p-2 bg-primary/20 rounded-lg">
+                  <HelpCircle className="w-5 h-5 text-primary" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-medium">Support</h4>
+                  <p className="text-sm text-muted-foreground">Get help and contact support</p>
+                </div>
+              </button>
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
       </Card>
 
+      {/* Referral Link Card */}
       <Card className="p-6 bg-gradient-card shadow-md">
         <h3 className="text-lg font-semibold mb-4">Your Referral Link</h3>
         <p className="text-sm text-muted-foreground mb-4">Share Wellio with friends and earn rewards</p>
