@@ -1082,14 +1082,19 @@ const Workout = () => {
                           <p className="text-sm text-muted-foreground mb-3">{routine.description}</p>
                         )}
                         {routine.source_url && (
-                          <a 
-                            href={routine.source_url} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-sm text-primary hover:underline mb-3 block"
-                          >
-                            View Source
-                          </a>
+                          <div className="mb-3 p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg border border-orange-300 dark:border-orange-700">
+                            <div className="flex items-center gap-2">
+                              <Video className="w-4 h-4 text-orange-600" />
+                              <a 
+                                href={routine.source_url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-sm font-semibold text-orange-700 dark:text-orange-300 hover:underline"
+                              >
+                                Watch Original Video →
+                              </a>
+                            </div>
+                          </div>
                         )}
                         <div className="space-y-3">
                           {routine.exercises.map((exercise, idx) => (
