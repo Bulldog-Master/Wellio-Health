@@ -9,44 +9,19 @@ import { User, Save, Share2, Copy, Check, Upload, Settings, ChevronDown, Shield,
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { useLocation } from "react-router-dom";
 
 const Profile = () => {
   const { toast } = useToast();
-  const location = useLocation();
   const [copied, setCopied] = useState(false);
   const [referralCode] = useState("WELLIO-" + Math.random().toString(36).substr(2, 6).toUpperCase());
   const referralLink = `${window.location.origin}/auth?ref=${referralCode}`;
   const [isLoading, setIsLoading] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const fitnessGoalsRef = useRef<HTMLDivElement>(null);
   
-  // Get the section to open from navigation state - this runs on every render
-  const openSection = (location.state as any)?.openSection;
-  
-  // Initialize state based on navigation
-  const [openPersonalInfo, setOpenPersonalInfo] = useState(false);
+  const [openPersonalInfo, setOpenPersonalInfo] = useState(true);
   const [openFitnessGoals, setOpenFitnessGoals] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
-
-  // Handle opening the correct section when navigating with state
-  useEffect(() => {
-    console.log('Profile navigation state:', openSection);
-    if (openSection === 'fitness-goals') {
-      setOpenFitnessGoals(true);
-      setOpenPersonalInfo(false);
-      setOpenSettings(false);
-    } else if (openSection === 'personal-info') {
-      setOpenPersonalInfo(true);
-      setOpenFitnessGoals(false);
-      setOpenSettings(false);
-    } else if (openSection === 'settings') {
-      setOpenSettings(true);
-      setOpenPersonalInfo(false);
-      setOpenFitnessGoals(false);
-    }
-  }, [openSection]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -366,7 +341,7 @@ const Profile = () => {
       </Card>
 
       {/* Fitness Goals Section */}
-      <Card ref={fitnessGoalsRef} className="bg-gradient-card shadow-md overflow-hidden">
+      <Card className="bg-gradient-card shadow-md overflow-hidden">
         <Collapsible open={openFitnessGoals} onOpenChange={setOpenFitnessGoals}>
           <CollapsibleTrigger className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors">
             <div className="flex items-center gap-3">
