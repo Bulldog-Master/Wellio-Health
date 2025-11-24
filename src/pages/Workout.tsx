@@ -127,6 +127,56 @@ const Workout = () => {
     }
   };
 
+  const handleOpenApp = (appUrl: string | null, appName: string) => {
+    if (!appUrl) {
+      toast({
+        title: "No URL available",
+        description: "This app doesn't have a URL configured.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Deep link schemes for popular apps
+    const deepLinkMap: Record<string, string> = {
+      'myfitnesspal': 'myfitnesspal://',
+      'strava': 'strava://',
+      'strong': 'strong://',
+      'fitbod': 'fitbod://',
+      'nike training': 'niketraining://',
+      'peloton': 'peloton://',
+      'cronometer': 'cronometer://',
+      'headspace': 'headspace://',
+    };
+
+    // Check if we have a deep link for this app
+    const appNameLower = appName.toLowerCase();
+    const deepLink = Object.keys(deepLinkMap).find(key => appNameLower.includes(key));
+
+    if (deepLink && /iPad|iPhone|iPod|Android/i.test(navigator.userAgent)) {
+      // Try to open the native app first
+      const deepLinkUrl = deepLinkMap[deepLink];
+      const timeout = setTimeout(() => {
+        // If app didn't open after 2 seconds, go to store URL
+        window.location.href = appUrl;
+      }, 2000);
+
+      window.location.href = deepLinkUrl;
+
+      // Clear timeout if page visibility changes (app opened)
+      const handleVisibilityChange = () => {
+        if (document.hidden) {
+          clearTimeout(timeout);
+          document.removeEventListener('visibilitychange', handleVisibilityChange);
+        }
+      };
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+    } else {
+      // Just open the URL directly
+      window.open(appUrl, '_blank');
+    }
+  };
+
   const baseExercises = [
     "Bench Press", "Incline Bench Press", "Decline Bench Press", "Dumbbell Press", "Chest Fly",
     "Squats", "Front Squats", "Bulgarian Split Squats", "Leg Press", "Hack Squat",
@@ -1803,14 +1853,12 @@ const Workout = () => {
                           )}
                         </div>
                         {app.app_url && (
-                          <a
-                            href={app.app_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                          <button
+                            onClick={() => handleOpenApp(app.app_url, app.app_name)}
                             className="text-sm text-emerald-600 dark:text-emerald-400 hover:underline mt-2 inline-block"
                           >
                             Open App →
-                          </a>
+                          </button>
                         )}
                       </div>
                     </div>
