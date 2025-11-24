@@ -124,7 +124,7 @@ const Dashboard = () => {
             <span className="text-sm">Log Workout</span>
           </Button>
           <Button 
-            onClick={() => navigate('/profile#fitness-goals')}
+            onClick={() => navigate('/profile', { state: { openSection: 'fitness-goals' } })}
             variant="secondary" 
             className="h-auto py-4 flex-col gap-2"
           >
