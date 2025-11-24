@@ -7,6 +7,7 @@ import { Utensils, Plus, Clock, Camera, Sparkles, Loader2, Pencil, Trash2 } from
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { supabase } from "@/integrations/supabase/client";
 
 interface MealLog {
@@ -18,6 +19,7 @@ interface MealLog {
   carbs_grams: number | null;
   fat_grams: number | null;
   logged_at: string;
+  image_url: string | null;
 }
 
 const Food = () => {
@@ -34,6 +36,7 @@ const Food = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [saveImage, setSaveImage] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [editingMeal, setEditingMeal] = useState<MealLog | null>(null);
 
@@ -171,18 +174,57 @@ const Food = () => {
         return;
       }
 
+      let uploadedImageUrl: string | null = null;
+
+      // Upload image to storage if saveImage is checked and we have an image
+      if (saveImage && imagePreview) {
+        const base64Data = imagePreview.split(',')[1];
+        const byteCharacters = atob(base64Data);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: 'image/jpeg' });
+
+        const fileName = `${user.id}/${Date.now()}.jpg`;
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from('food-images')
+          .upload(fileName, blob);
+
+        if (uploadError) {
+          console.error('Error uploading image:', uploadError);
+          toast({
+            title: "Image upload failed",
+            description: "Meal will be saved without the image.",
+            variant: "destructive",
+          });
+        } else {
+          const { data: { publicUrl } } = supabase.storage
+            .from('food-images')
+            .getPublicUrl(fileName);
+          uploadedImageUrl = publicUrl;
+        }
+      }
+
       if (editingMeal) {
         // Update existing meal
+        const updateData: any = {
+          meal_type: selectedMeal,
+          food_name: mealDescription.trim(),
+          calories: nutritionData.calories,
+          protein_grams: nutritionData.protein,
+          carbs_grams: nutritionData.carbs,
+          fat_grams: nutritionData.fat,
+        };
+
+        if (uploadedImageUrl) {
+          updateData.image_url = uploadedImageUrl;
+        }
+
         const { error } = await supabase
           .from('nutrition_logs')
-          .update({
-            meal_type: selectedMeal,
-            food_name: mealDescription.trim(),
-            calories: nutritionData.calories,
-            protein_grams: nutritionData.protein,
-            carbs_grams: nutritionData.carbs,
-            fat_grams: nutritionData.fat,
-          })
+          .update(updateData)
           .eq('id', editingMeal.id);
 
         if (error) throw error;
@@ -203,6 +245,7 @@ const Food = () => {
             protein_grams: nutritionData.protein,
             carbs_grams: nutritionData.carbs,
             fat_grams: nutritionData.fat,
+            image_url: uploadedImageUrl,
           });
 
         if (error) throw error;
@@ -216,6 +259,7 @@ const Food = () => {
       setMealDescription("");
       setNutritionData(null);
       setImagePreview(null);
+      setSaveImage(false);
       setEditingMeal(null);
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
@@ -250,6 +294,7 @@ const Food = () => {
     setMealDescription("");
     setNutritionData(null);
     setImagePreview(null);
+    setSaveImage(false);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -355,19 +400,32 @@ const Food = () => {
               </Button>
             </div>
             {imagePreview && (
-              <div className="relative mt-2">
-                <img src={imagePreview} alt="Meal preview" className="w-full h-40 object-cover rounded-md" />
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  className="absolute top-2 right-2"
-                  onClick={() => {
-                    setImagePreview(null);
-                    if (fileInputRef.current) fileInputRef.current.value = '';
-                  }}
-                >
-                  Remove
-                </Button>
+              <div className="space-y-2 mt-2">
+                <div className="relative">
+                  <img src={imagePreview} alt="Meal preview" className="w-full h-40 object-cover rounded-md" />
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    className="absolute top-2 right-2"
+                    onClick={() => {
+                      setImagePreview(null);
+                      setSaveImage(false);
+                      if (fileInputRef.current) fileInputRef.current.value = '';
+                    }}
+                  >
+                    Remove
+                  </Button>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="saveImage"
+                    checked={saveImage}
+                    onCheckedChange={(checked) => setSaveImage(checked as boolean)}
+                  />
+                  <Label htmlFor="saveImage" className="text-sm cursor-pointer">
+                    Save this photo with meal log
+                  </Label>
+                </div>
               </div>
             )}
           </div>
@@ -441,38 +499,49 @@ const Food = () => {
                 <div key={mealType.value} className="space-y-2">
                   <h4 className="font-medium text-primary">{mealType.label}</h4>
                   {meals.map((meal) => (
-                     <div key={meal.id} className="p-4 bg-secondary rounded-lg">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <p className="font-medium">{meal.food_name}</p>
-                          <div className="flex items-center gap-2 mt-1 text-sm text-muted-foreground">
-                            <Clock className="w-3 h-3" />
-                            <span>{new Date(meal.logged_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-                          </div>
-                          {(meal.protein_grams || meal.carbs_grams || meal.fat_grams) && (
-                            <div className="flex gap-3 mt-2 text-xs text-muted-foreground">
-                              {meal.protein_grams && <span>P: {meal.protein_grams}g</span>}
-                              {meal.carbs_grams && <span>C: {meal.carbs_grams}g</span>}
-                              {meal.fat_grams && <span>F: {meal.fat_grams}g</span>}
+                    <div key={meal.id} className="p-4 bg-secondary rounded-lg">
+                      <div className="flex items-start gap-3">
+                        {meal.image_url && (
+                          <img 
+                            src={meal.image_url} 
+                            alt={meal.food_name}
+                            className="w-20 h-20 object-cover rounded-md flex-shrink-0"
+                          />
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between gap-2">
+                            <div className="flex-1">
+                              <p className="font-medium">{meal.food_name}</p>
+                              <div className="flex items-center gap-2 mt-1 text-sm text-muted-foreground">
+                                <Clock className="w-3 h-3" />
+                                <span>{new Date(meal.logged_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                              </div>
+                              {(meal.protein_grams || meal.carbs_grams || meal.fat_grams) && (
+                                <div className="flex gap-3 mt-2 text-xs text-muted-foreground">
+                                  {meal.protein_grams && <span>P: {meal.protein_grams}g</span>}
+                                  {meal.carbs_grams && <span>C: {meal.carbs_grams}g</span>}
+                                  {meal.fat_grams && <span>F: {meal.fat_grams}g</span>}
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-bold text-primary">{meal.calories} cal</span>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => handleEditMeal(meal)}
-                          >
-                            <Pencil className="w-4 h-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => handleDeleteMeal(meal.id)}
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
+                            <div className="flex items-center gap-2">
+                              <span className="font-bold text-primary whitespace-nowrap">{meal.calories} cal</span>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => handleEditMeal(meal)}
+                              >
+                                <Pencil className="w-4 h-4" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => handleDeleteMeal(meal.id)}
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>

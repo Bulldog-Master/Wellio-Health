@@ -264,6 +264,7 @@ export type Database = {
           fat_grams: number | null
           food_name: string
           id: string
+          image_url: string | null
           logged_at: string | null
           meal_type: string
           notes: string | null
@@ -277,6 +278,7 @@ export type Database = {
           fat_grams?: number | null
           food_name: string
           id?: string
+          image_url?: string | null
           logged_at?: string | null
           meal_type: string
           notes?: string | null
@@ -290,6 +292,7 @@ export type Database = {
           fat_grams?: number | null
           food_name?: string
           id?: string
+          image_url?: string | null
           logged_at?: string | null
           meal_type?: string
           notes?: string | null
