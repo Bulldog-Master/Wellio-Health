@@ -5,9 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Timer, Plus, Trash2, Play, X, ChevronRight } from "lucide-react";
+import { Timer, Plus, Trash2, Play, X, ChevronRight, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 interface IntervalTimer {
   id: string;
@@ -27,6 +28,7 @@ interface IntervalTimer {
 
 const IntervalTimer = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [timers, setTimers] = useState<IntervalTimer[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -191,6 +193,15 @@ const IntervalTimer = () => {
 
   return (
     <div className="space-y-6 max-w-4xl">
+      <Button 
+        variant="ghost" 
+        onClick={() => navigate('/activity')}
+        className="gap-2 mb-2"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Back to Activity
+      </Button>
+
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="p-3 bg-primary/10 rounded-xl">
