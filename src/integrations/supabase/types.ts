@@ -355,6 +355,42 @@ export type Database = {
         }
         Relationships: []
       }
+      sample_routines: {
+        Row: {
+          created_at: string
+          description: string | null
+          exercises: Json
+          id: string
+          name: string
+          source_platform: string | null
+          source_url: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          exercises?: Json
+          id?: string
+          name: string
+          source_platform?: string | null
+          source_url?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          exercises?: Json
+          id?: string
+          name?: string
+          source_platform?: string | null
+          source_url?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       social_connections: {
         Row: {
           connection_type: string

@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown, ChevronDown } from "lucide-react";
+import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown, ChevronDown, Library, BookOpen } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
@@ -30,6 +30,21 @@ interface WorkoutRoutine {
   id: string;
   name: string;
   description: string | null;
+  exercises: Array<{
+    name: string;
+    sets?: number;
+    reps?: number;
+    duration?: number;
+    media_url?: string;
+  }>;
+}
+
+interface SampleRoutine {
+  id: string;
+  name: string;
+  description: string | null;
+  source_platform: string | null;
+  source_url: string | null;
   exercises: Array<{
     name: string;
     sets?: number;
@@ -69,6 +84,15 @@ const Workout = () => {
     const saved = localStorage.getItem('customExercises');
     return saved ? JSON.parse(saved) : [];
   });
+  const [showSampleLibrary, setShowSampleLibrary] = useState(false);
+  const [sampleRoutines, setSampleRoutines] = useState<SampleRoutine[]>([]);
+  const [sortOrder, setSortOrder] = useState<'name' | 'date' | 'custom'>('date');
+  const [sampleName, setSampleName] = useState("");
+  const [sampleDescription, setSampleDescription] = useState("");
+  const [samplePlatform, setSamplePlatform] = useState("");
+  const [sampleUrl, setSampleUrl] = useState("");
+  const [sampleExercises, setSampleExercises] = useState<Array<{ name: string; sets?: number; reps?: number; duration?: number; media_url?: string }>>([]);
+  const [showAddSample, setShowAddSample] = useState(false);
 
   const baseExercises = [
     "Bench Press", "Incline Bench Press", "Decline Bench Press", "Dumbbell Press", "Chest Fly",
@@ -126,6 +150,7 @@ const Workout = () => {
   useEffect(() => {
     fetchActivityLogs();
     fetchWorkoutRoutines();
+    fetchSampleRoutines();
   }, []);
 
   const fetchActivityLogs = async () => {
@@ -194,6 +219,33 @@ const Workout = () => {
       })));
     } catch (error) {
       console.error('Error fetching workout routines:', error);
+    }
+  };
+
+  const fetchSampleRoutines = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from('sample_routines')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setSampleRoutines((data || []).map(routine => ({
+        ...routine,
+        exercises: routine.exercises as Array<{
+          name: string;
+          sets?: number;
+          reps?: number;
+          duration?: number;
+          media_url?: string;
+        }>
+      })));
+    } catch (error) {
+      console.error('Error fetching sample routines:', error);
     }
   };
 
@@ -535,6 +587,88 @@ const Workout = () => {
     }
   };
 
+  const handleSaveSampleRoutine = async () => {
+    if (!sampleName || sampleExercises.length === 0) {
+      toast({
+        title: "Missing information",
+        description: "Please provide a routine name and at least one exercise.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("User not authenticated");
+
+      const { error } = await supabase
+        .from('sample_routines')
+        .insert({
+          user_id: user.id,
+          name: sampleName,
+          description: sampleDescription || null,
+          source_platform: samplePlatform || null,
+          source_url: sampleUrl || null,
+          exercises: sampleExercises,
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: "Sample routine saved",
+        description: "Your sample routine has been saved.",
+      });
+
+      setSampleName("");
+      setSampleDescription("");
+      setSamplePlatform("");
+      setSampleUrl("");
+      setSampleExercises([]);
+      setShowAddSample(false);
+      fetchSampleRoutines();
+    } catch (error) {
+      console.error('Error saving sample routine:', error);
+      toast({
+        title: "Error",
+        description: "Failed to save sample routine.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleDeleteSampleRoutine = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from('sample_routines')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      toast({
+        title: "Sample routine deleted",
+        description: "The sample routine has been removed.",
+      });
+
+      fetchSampleRoutines();
+    } catch (error) {
+      console.error('Error deleting sample routine:', error);
+      toast({
+        title: "Error",
+        description: "Failed to delete sample routine.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const getSortedSampleRoutines = () => {
+    const sorted = [...sampleRoutines];
+    if (sortOrder === 'name') {
+      return sorted.sort((a, b) => a.name.localeCompare(b.name));
+    }
+    return sorted;
+  };
+
   return (
     <div className="space-y-6 max-w-4xl">
       <div className="flex items-center justify-between">
@@ -549,8 +683,12 @@ const Workout = () => {
         </div>
         <div className="flex gap-2">
           <Button variant="outline" className="gap-2" onClick={() => setShowLibrary(true)}>
-            <ListOrdered className="w-4 h-4" />
-            Routine Library
+            <Library className="w-4 h-4" />
+            Personal Library
+          </Button>
+          <Button variant="outline" className="gap-2" onClick={() => setShowSampleLibrary(true)}>
+            <BookOpen className="w-4 h-4" />
+            Sample Library
           </Button>
           <Dialog open={showRoutineDialog} onOpenChange={setShowRoutineDialog}>
             <DialogTrigger asChild>
@@ -772,7 +910,7 @@ const Workout = () => {
         <Dialog open={showLibrary} onOpenChange={setShowLibrary}>
           <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle>Routine Library</DialogTitle>
+              <DialogTitle>Personal Library</DialogTitle>
             </DialogHeader>
             
             <div className="mt-2">
@@ -868,6 +1006,302 @@ const Workout = () => {
                   No routines saved yet. Create your first routine!
                 </p>
               )}
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        <Dialog open={showSampleLibrary} onOpenChange={setShowSampleLibrary}>
+          <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle className="flex items-center justify-between">
+                <span>Sample Library</span>
+                <Button variant="outline" size="sm" onClick={() => setShowAddSample(true)}>
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Sample
+                </Button>
+              </DialogTitle>
+            </DialogHeader>
+            
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <Label>Sort by:</Label>
+                <Select value={sortOrder} onValueChange={(value: 'name' | 'date' | 'custom') => setSortOrder(value)}>
+                  <SelectTrigger className="w-40">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="date">Date Added</SelectItem>
+                    <SelectItem value="name">Alphabetical</SelectItem>
+                    <SelectItem value="custom">Custom</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {getSortedSampleRoutines().length > 0 ? (
+                <Accordion type="single" collapsible className="space-y-2">
+                  {getSortedSampleRoutines().map((routine) => (
+                    <AccordionItem key={routine.id} value={routine.id} className="border rounded-lg px-4 bg-card">
+                      <div className="flex items-center justify-between">
+                        <AccordionTrigger className="flex-1 hover:no-underline py-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                              <BookOpen className="w-5 h-5 text-primary" />
+                            </div>
+                            <div className="text-left">
+                              <h4 className="font-semibold text-base">{routine.name}</h4>
+                              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                <span>{routine.exercises.length} exercise{routine.exercises.length !== 1 ? 's' : ''}</span>
+                                {routine.source_platform && (
+                                  <>
+                                    <span>•</span>
+                                    <span>{routine.source_platform}</span>
+                                  </>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </AccordionTrigger>
+                        <div className="flex gap-1 ml-2">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDeleteSampleRoutine(routine.id);
+                            }}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                      <AccordionContent className="pt-2 pb-4">
+                        {routine.description && (
+                          <p className="text-sm text-muted-foreground mb-3">{routine.description}</p>
+                        )}
+                        {routine.source_url && (
+                          <a 
+                            href={routine.source_url} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-sm text-primary hover:underline mb-3 block"
+                          >
+                            View Source
+                          </a>
+                        )}
+                        <div className="space-y-3">
+                          {routine.exercises.map((exercise, idx) => (
+                            <div key={idx} className="p-3 bg-secondary/50 rounded-lg">
+                              <div className="flex items-start gap-3">
+                                <div className="flex-1">
+                                  <p className="font-medium">{exercise.name}</p>
+                                  <div className="flex gap-3 text-sm text-muted-foreground mt-1">
+                                    {exercise.sets && exercise.reps && (
+                                      <span>{exercise.sets} sets × {exercise.reps} reps</span>
+                                    )}
+                                    {exercise.duration && (
+                                      <span>{exercise.duration} min</span>
+                                    )}
+                                  </div>
+                                </div>
+                                {exercise.media_url && (
+                                  <div className="w-20 h-20 rounded overflow-hidden bg-muted border-2 border-primary">
+                                    {exercise.media_url.match(/\.(mp4|mov|avi|webm)$/i) ? (
+                                      <video
+                                        src={exercise.media_url}
+                                        className="w-full h-full object-cover"
+                                        controls
+                                      />
+                                    ) : (
+                                      <img
+                                        src={exercise.media_url}
+                                        alt={exercise.name}
+                                        className="w-full h-full object-cover"
+                                      />
+                                    )}
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              ) : (
+                <p className="text-center text-muted-foreground py-8">
+                  No sample routines saved yet. Add your first sample routine!
+                </p>
+              )}
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        <Dialog open={showAddSample} onOpenChange={setShowAddSample}>
+          <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>Add Sample Routine</DialogTitle>
+            </DialogHeader>
+            
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="sample-name">Routine Name</Label>
+                <Input
+                  id="sample-name"
+                  placeholder="e.g., Arnold's Upper Body Workout"
+                  value={sampleName}
+                  onChange={(e) => setSampleName(e.target.value)}
+                  className="mt-1.5"
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="sample-description">Description (optional)</Label>
+                <Textarea
+                  id="sample-description"
+                  placeholder="Brief description of this routine..."
+                  value={sampleDescription}
+                  onChange={(e) => setSampleDescription(e.target.value)}
+                  className="mt-1.5"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="sample-platform">Source Platform (optional)</Label>
+                  <Input
+                    id="sample-platform"
+                    placeholder="e.g., Instagram, YouTube"
+                    value={samplePlatform}
+                    onChange={(e) => setSamplePlatform(e.target.value)}
+                    className="mt-1.5"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="sample-url">Source URL (optional)</Label>
+                  <Input
+                    id="sample-url"
+                    placeholder="https://..."
+                    value={sampleUrl}
+                    onChange={(e) => setSampleUrl(e.target.value)}
+                    className="mt-1.5"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <Label>Exercises</Label>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setSampleExercises([...sampleExercises, { name: "", sets: 3, reps: 10 }])}
+                    className="gap-2"
+                  >
+                    <Plus className="w-3 h-3" />
+                    Add Exercise
+                  </Button>
+                </div>
+                
+                <div className="space-y-3">
+                  {sampleExercises.map((exercise, idx) => (
+                    <Card key={idx} className="p-3">
+                      <div className="space-y-2">
+                        <div className="flex gap-2">
+                          <Input
+                            placeholder="Exercise name"
+                            value={exercise.name}
+                            onChange={(e) => {
+                              const updated = [...sampleExercises];
+                              updated[idx] = { ...updated[idx], name: e.target.value };
+                              setSampleExercises(updated);
+                            }}
+                            className="flex-1"
+                          />
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => setSampleExercises(sampleExercises.filter((_, i) => i !== idx))}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                        
+                        <div className="grid grid-cols-3 gap-2">
+                          <div>
+                            <Label className="text-xs">Sets</Label>
+                            <Input
+                              type="number"
+                              placeholder="3"
+                              value={exercise.sets || ''}
+                              onChange={(e) => {
+                                const updated = [...sampleExercises];
+                                updated[idx] = { ...updated[idx], sets: parseInt(e.target.value) || 0 };
+                                setSampleExercises(updated);
+                              }}
+                              className="mt-1"
+                            />
+                          </div>
+                          <div>
+                            <Label className="text-xs">Reps</Label>
+                            <Input
+                              type="number"
+                              placeholder="10"
+                              value={exercise.reps || ''}
+                              onChange={(e) => {
+                                const updated = [...sampleExercises];
+                                updated[idx] = { ...updated[idx], reps: parseInt(e.target.value) || 0 };
+                                setSampleExercises(updated);
+                              }}
+                              className="mt-1"
+                            />
+                          </div>
+                          <div>
+                            <Label className="text-xs">Duration (min)</Label>
+                            <Input
+                              type="number"
+                              placeholder="5"
+                              value={exercise.duration || ''}
+                              onChange={(e) => {
+                                const updated = [...sampleExercises];
+                                updated[idx] = { ...updated[idx], duration: parseInt(e.target.value) || 0 };
+                                setSampleExercises(updated);
+                              }}
+                              className="mt-1"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                  
+                  {sampleExercises.length === 0 && (
+                    <p className="text-center text-muted-foreground text-sm py-4">
+                      Add exercises to your sample routine
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setShowAddSample(false);
+                    setSampleName("");
+                    setSampleDescription("");
+                    setSamplePlatform("");
+                    setSampleUrl("");
+                    setSampleExercises([]);
+                  }}
+                  className="flex-1"
+                >
+                  Cancel
+                </Button>
+                <Button onClick={handleSaveSampleRoutine} className="flex-1">
+                  Save Sample
+                </Button>
+              </div>
             </div>
           </DialogContent>
         </Dialog>
