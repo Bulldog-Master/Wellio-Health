@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Activity as ActivityIcon, TrendingUp, Calendar, Flame, Watch, Heart, Moon, Footprints, Plus } from "lucide-react";
+import { Activity as ActivityIcon, TrendingUp, Calendar, Flame, Watch, Heart, Moon, Footprints, Plus, Scale, Dumbbell, CheckSquare } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 interface ActivityLog {
   id: string;
@@ -32,6 +33,7 @@ interface WearableData {
 
 const Activity = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const { preferredUnit } = useUserPreferences();
   const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
   const [wearableData, setWearableData] = useState<WearableData[]>([]);
@@ -190,9 +192,56 @@ const Activity = () => {
           <ActivityIcon className="w-6 h-6 text-primary" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold">Activity Overview</h1>
-          <p className="text-muted-foreground">Your fitness activity summary</p>
+          <h1 className="text-3xl font-bold">Activity</h1>
+          <p className="text-muted-foreground">Track fitness, weight, workouts, and habits</p>
         </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <Card 
+          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+          onClick={() => navigate('/weight')}
+        >
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-primary/10 rounded-xl">
+              <Scale className="w-6 h-6 text-primary" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">Weight</h3>
+              <p className="text-sm text-muted-foreground">Track your weight progress</p>
+            </div>
+          </div>
+        </Card>
+
+        <Card 
+          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+          onClick={() => navigate('/workout')}
+        >
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-secondary/10 rounded-xl">
+              <Dumbbell className="w-6 h-6 text-secondary" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">Workout</h3>
+              <p className="text-sm text-muted-foreground">Log and plan workouts</p>
+            </div>
+          </div>
+        </Card>
+
+        <Card 
+          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+          onClick={() => navigate('/habits')}
+        >
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-accent/10 rounded-xl">
+              <CheckSquare className="w-6 h-6 text-accent" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">Habits</h3>
+              <p className="text-sm text-muted-foreground">Build and track habits</p>
+            </div>
+          </div>
+        </Card>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

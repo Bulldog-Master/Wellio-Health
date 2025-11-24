@@ -4,11 +4,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Plus, Pill, Upload, FolderOpen } from "lucide-react";
+import { FileText, Plus, Pill, Upload, FolderOpen, AlertCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 interface Medication {
   id: string;
@@ -42,6 +43,7 @@ interface MedicalRecord {
 
 const MedicalHistory = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [medications, setMedications] = useState<Medication[]>([]);
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [medicalRecords, setMedicalRecords] = useState<MedicalRecord[]>([]);
@@ -293,9 +295,26 @@ const MedicalHistory = () => {
           <FileText className="w-6 h-6 text-primary" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold">Medical History</h1>
-          <p className="text-muted-foreground">Track medications and test results</p>
+          <h1 className="text-3xl font-bold">Health</h1>
+          <p className="text-muted-foreground">Track medications, tests, and symptoms</p>
         </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4">
+        <Card 
+          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+          onClick={() => navigate('/symptoms')}
+        >
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-accent/10 rounded-xl">
+              <AlertCircle className="w-6 h-6 text-accent" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">Symptoms</h3>
+              <p className="text-sm text-muted-foreground">Track and log your symptoms</p>
+            </div>
+          </div>
+        </Card>
       </div>
 
       <Tabs defaultValue="medications" className="w-full">
