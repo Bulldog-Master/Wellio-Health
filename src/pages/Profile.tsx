@@ -22,22 +22,21 @@ const Profile = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const fitnessGoalsRef = useRef<HTMLDivElement>(null);
   
-  // Get the section to open from navigation state
-  const openSection = location.state?.openSection;
+  // Get the section to open from navigation state - this runs on every render
+  const openSection = (location.state as any)?.openSection;
   
-  const [openPersonalInfo, setOpenPersonalInfo] = useState(openSection === 'personal-info');
-  const [openFitnessGoals, setOpenFitnessGoals] = useState(openSection === 'fitness-goals');
-  const [openSettings, setOpenSettings] = useState(openSection === 'settings');
+  // Initialize state based on navigation
+  const [openPersonalInfo, setOpenPersonalInfo] = useState(false);
+  const [openFitnessGoals, setOpenFitnessGoals] = useState(false);
+  const [openSettings, setOpenSettings] = useState(false);
 
+  // Handle opening the correct section when navigating with state
   useEffect(() => {
-    // When navigation state changes, update which section is open
+    console.log('Profile navigation state:', openSection);
     if (openSection === 'fitness-goals') {
       setOpenFitnessGoals(true);
       setOpenPersonalInfo(false);
       setOpenSettings(false);
-      setTimeout(() => {
-        fitnessGoalsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
     } else if (openSection === 'personal-info') {
       setOpenPersonalInfo(true);
       setOpenFitnessGoals(false);
