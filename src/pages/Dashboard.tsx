@@ -129,7 +129,7 @@ const Dashboard = () => {
             className="h-auto py-4 flex-col gap-2"
           >
             <Target className="w-5 h-5" />
-            <span className="text-sm">View Goals</span>
+            <span className="text-sm">Fitness Goals</span>
           </Button>
         </div>
       </Card>
