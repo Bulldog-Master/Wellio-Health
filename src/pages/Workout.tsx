@@ -697,9 +697,9 @@ const Workout = () => {
                 Create Routine
               </Button>
             </DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-2 border-blue-200 dark:border-blue-800 shadow-2xl">
             <DialogHeader>
-              <DialogTitle>{editingRoutineId ? "Edit Routine" : "Create New Routine"}</DialogTitle>
+              <DialogTitle className="text-2xl text-blue-900 dark:text-blue-100">{editingRoutineId ? "Edit Routine" : "Create New Routine"}</DialogTitle>
             </DialogHeader>
             
             <div className="space-y-4">
@@ -908,9 +908,9 @@ const Workout = () => {
         </Dialog>
 
         <Dialog open={showLibrary} onOpenChange={setShowLibrary}>
-          <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+          <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30 border-2 border-purple-200 dark:border-purple-800 shadow-2xl">
             <DialogHeader>
-              <DialogTitle>Personal Library</DialogTitle>
+              <DialogTitle className="text-2xl text-purple-900 dark:text-purple-100">Personal Library</DialogTitle>
             </DialogHeader>
             
             <div className="mt-2">
@@ -1013,11 +1013,11 @@ const Workout = () => {
         </Dialog>
 
         <Dialog open={showSampleLibrary} onOpenChange={setShowSampleLibrary}>
-          <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+          <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/30 border-2 border-orange-200 dark:border-orange-800 shadow-2xl">
             <DialogHeader>
-              <DialogTitle className="flex items-center justify-between">
+              <DialogTitle className="text-2xl text-orange-900 dark:text-orange-100 flex items-center justify-between">
                 <span>Sample Library</span>
-                <Button variant="outline" size="sm" onClick={() => setShowAddSample(true)}>
+                <Button variant="outline" size="sm" onClick={() => setShowAddSample(true)} className="bg-orange-100 dark:bg-orange-900/50 border-orange-300 dark:border-orange-700 hover:bg-orange-200 dark:hover:bg-orange-900">
                   <Plus className="w-4 h-4 mr-2" />
                   Add Sample
                 </Button>
@@ -1141,9 +1141,9 @@ const Workout = () => {
         </Dialog>
 
         <Dialog open={showAddSample} onOpenChange={setShowAddSample}>
-          <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/30 border-2 border-teal-200 dark:border-teal-800 shadow-2xl">
             <DialogHeader>
-              <DialogTitle>Add Sample Routine</DialogTitle>
+              <DialogTitle className="text-2xl text-teal-900 dark:text-teal-100">Add Sample Routine</DialogTitle>
             </DialogHeader>
             
             <div className="space-y-4">
