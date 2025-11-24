@@ -67,14 +67,14 @@ All colors MUST be HSL.
     --sidebar-border: 210 20% 85%;
     --sidebar-ring: 210 55% 45%;
     
-    --nav-icon-1: 210 55% 45%;
-    --nav-icon-2: 180 45% 50%;
-    --nav-icon-3: 25 75% 55%;
-    --nav-icon-4: 145 50% 45%;
-    --nav-icon-5: 0 65% 50%;
-    --nav-icon-6: 280 50% 55%;
-    --nav-icon-7: 330 55% 55%;
-    --nav-icon-8: 40 80% 50%;
+    --nav-icon-1: 210 60% 50%;
+    --nav-icon-2: 180 50% 48%;
+    --nav-icon-3: 35 70% 52%;
+    --nav-icon-4: 155 55% 48%;
+    --nav-icon-5: 340 60% 52%;
+    --nav-icon-6: 270 55% 55%;
+    --nav-icon-7: 200 55% 52%;
+    --nav-icon-8: 45 75% 50%;
   }
 
   .dark {
@@ -133,14 +133,14 @@ All colors MUST be HSL.
     --sidebar-border: 215 30% 22%;
     --sidebar-ring: 210 60% 55%;
     
-    --nav-icon-1: 210 60% 60%;
-    --nav-icon-2: 180 50% 55%;
-    --nav-icon-3: 25 75% 60%;
-    --nav-icon-4: 145 50% 50%;
-    --nav-icon-5: 0 70% 55%;
-    --nav-icon-6: 280 55% 60%;
-    --nav-icon-7: 330 60% 60%;
-    --nav-icon-8: 40 85% 55%;
+    --nav-icon-1: 210 65% 65%;
+    --nav-icon-2: 180 55% 60%;
+    --nav-icon-3: 35 75% 65%;
+    --nav-icon-4: 155 60% 58%;
+    --nav-icon-5: 340 65% 60%;
+    --nav-icon-6: 270 60% 65%;
+    --nav-icon-7: 200 60% 62%;
+    --nav-icon-8: 45 80% 60%;
   }
 }
 
