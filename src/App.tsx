@@ -13,6 +13,7 @@ import Recipes from "./pages/Recipes";
 import Workout from "./pages/Workout";
 import Activity from "./pages/Activity";
 import Habits from "./pages/Habits";
+import Supplements from "./pages/Supplements";
 import Symptoms from "./pages/Symptoms";
 import MedicalHistory from "./pages/MedicalHistory";
 import AIInsights from "./pages/AIInsights";
@@ -44,6 +45,7 @@ const App = () => {
             <Route path="/workout" element={<ProtectedRoute><Layout><Workout /></Layout></ProtectedRoute>} />
             <Route path="/activity" element={<ProtectedRoute><Layout><Activity /></Layout></ProtectedRoute>} />
             <Route path="/habits" element={<ProtectedRoute><Layout><Habits /></Layout></ProtectedRoute>} />
+            <Route path="/supplements" element={<ProtectedRoute><Layout><Supplements /></Layout></ProtectedRoute>} />
             <Route path="/symptoms" element={<ProtectedRoute><Layout><Symptoms /></Layout></ProtectedRoute>} />
             <Route path="/medical" element={<ProtectedRoute><Layout><MedicalHistory /></Layout></ProtectedRoute>} />
             <Route path="/insights" element={<ProtectedRoute><Layout><AIInsights /></Layout></ProtectedRoute>} />
