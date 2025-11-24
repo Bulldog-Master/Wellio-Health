@@ -7,7 +7,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown } from "lucide-react";
+import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown, ChevronDown } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -774,76 +775,94 @@ const Workout = () => {
               <DialogTitle>Routine Library</DialogTitle>
             </DialogHeader>
             
-            <div className="space-y-4">
+            <div className="mt-2">
               {workoutRoutines.length > 0 ? (
-                workoutRoutines.map((routine) => (
-                  <Card key={routine.id} className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-xl">{routine.name}</h4>
+                <Accordion type="single" collapsible className="space-y-2">
+                  {workoutRoutines.map((routine) => (
+                    <AccordionItem key={routine.id} value={routine.id} className="border rounded-lg px-4 bg-card">
+                      <div className="flex items-center justify-between">
+                        <AccordionTrigger className="flex-1 hover:no-underline py-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                              <Dumbbell className="w-5 h-5 text-primary" />
+                            </div>
+                            <div className="text-left">
+                              <h4 className="font-semibold text-base">{routine.name}</h4>
+                              <p className="text-xs text-muted-foreground">
+                                {routine.exercises.length} exercise{routine.exercises.length !== 1 ? 's' : ''}
+                              </p>
+                            </div>
+                          </div>
+                        </AccordionTrigger>
+                        <div className="flex gap-1 ml-2">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleEditRoutine(routine);
+                              setShowLibrary(false);
+                              setShowRoutineDialog(true);
+                            }}
+                          >
+                            <Pencil className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDeleteRoutine(routine.id);
+                            }}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                      <AccordionContent className="pt-2 pb-4">
                         {routine.description && (
-                          <p className="text-sm text-muted-foreground mt-1">{routine.description}</p>
+                          <p className="text-sm text-muted-foreground mb-3">{routine.description}</p>
                         )}
-                      </div>
-                      <div className="flex gap-2">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => {
-                            handleEditRoutine(routine);
-                            setShowLibrary(false);
-                            setShowRoutineDialog(true);
-                          }}
-                        >
-                          <Pencil className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handleDeleteRoutine(routine.id)}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    </div>
-                    <div className="space-y-3">
-                      {routine.exercises.map((exercise, idx) => (
-                        <div key={idx} className="p-3 bg-secondary/50 rounded-lg">
-                          <div className="flex items-start gap-3">
-                            <div className="flex-1">
-                              <p className="font-medium">{exercise.name}</p>
-                              <div className="flex gap-3 text-sm text-muted-foreground mt-1">
-                                {exercise.sets && exercise.reps && (
-                                  <span>{exercise.sets} sets × {exercise.reps} reps</span>
-                                )}
-                                {exercise.duration && (
-                                  <span>{exercise.duration} min</span>
+                        <div className="space-y-3">
+                          {routine.exercises.map((exercise, idx) => (
+                            <div key={idx} className="p-3 bg-secondary/50 rounded-lg">
+                              <div className="flex items-start gap-3">
+                                <div className="flex-1">
+                                  <p className="font-medium">{exercise.name}</p>
+                                  <div className="flex gap-3 text-sm text-muted-foreground mt-1">
+                                    {exercise.sets && exercise.reps && (
+                                      <span>{exercise.sets} sets × {exercise.reps} reps</span>
+                                    )}
+                                    {exercise.duration && (
+                                      <span>{exercise.duration} min</span>
+                                    )}
+                                  </div>
+                                </div>
+                                {exercise.media_url && (
+                                  <div className="w-20 h-20 rounded overflow-hidden bg-muted border-2 border-primary">
+                                    {exercise.media_url.match(/\.(mp4|mov|avi|webm)$/i) ? (
+                                      <video
+                                        src={exercise.media_url}
+                                        className="w-full h-full object-cover"
+                                        controls
+                                      />
+                                    ) : (
+                                      <img
+                                        src={exercise.media_url}
+                                        alt={exercise.name}
+                                        className="w-full h-full object-cover"
+                                      />
+                                    )}
+                                  </div>
                                 )}
                               </div>
                             </div>
-                            {exercise.media_url && (
-                              <div className="w-20 h-20 rounded overflow-hidden bg-muted">
-                                {exercise.media_url.match(/\.(mp4|mov|avi|webm)$/i) ? (
-                                  <video
-                                    src={exercise.media_url}
-                                    className="w-full h-full object-cover"
-                                    controls
-                                  />
-                                ) : (
-                                  <img
-                                    src={exercise.media_url}
-                                    alt={exercise.name}
-                                    className="w-full h-full object-cover"
-                                  />
-                                )}
-                              </div>
-                            )}
-                          </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                  </Card>
-                ))
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
               ) : (
                 <p className="text-center text-muted-foreground py-8">
                   No routines saved yet. Create your first routine!
