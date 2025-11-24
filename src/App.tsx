@@ -8,6 +8,7 @@ import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
 import Weight from "./pages/Weight";
 import Food from "./pages/Food";
+import FoodLog from "./pages/FoodLog";
 import Recipes from "./pages/Recipes";
 import Workout from "./pages/Workout";
 import Activity from "./pages/Activity";
@@ -37,6 +38,8 @@ const App = () => {
             <Route path="/profile" element={<ProtectedRoute><Layout><Profile /></Layout></ProtectedRoute>} />
             <Route path="/weight" element={<ProtectedRoute><Layout><Weight /></Layout></ProtectedRoute>} />
             <Route path="/food" element={<ProtectedRoute><Layout><Food /></Layout></ProtectedRoute>} />
+            <Route path="/food/log" element={<ProtectedRoute><Layout><FoodLog /></Layout></ProtectedRoute>} />
+            <Route path="/food/recipes" element={<ProtectedRoute><Layout><Recipes /></Layout></ProtectedRoute>} />
             <Route path="/recipes" element={<ProtectedRoute><Layout><Recipes /></Layout></ProtectedRoute>} />
             <Route path="/workout" element={<ProtectedRoute><Layout><Workout /></Layout></ProtectedRoute>} />
             <Route path="/activity" element={<ProtectedRoute><Layout><Activity /></Layout></ProtectedRoute>} />
