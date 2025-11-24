@@ -400,6 +400,9 @@ const Workout = () => {
         title: "Upload successful",
         description: "Exercise media has been uploaded.",
       });
+      
+      // Reset the input so the same file can be selected again
+      event.target.value = '';
     } catch (error) {
       console.error('Error uploading exercise media:', error);
       toast({
@@ -407,6 +410,8 @@ const Workout = () => {
         description: "Failed to upload media.",
         variant: "destructive",
       });
+      // Reset the input even on error
+      event.target.value = '';
     } finally {
       setUploadingExerciseMedia(null);
     }
