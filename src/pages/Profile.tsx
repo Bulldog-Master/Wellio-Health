@@ -9,9 +9,11 @@ import { User, Save, Share2, Copy, Check, Upload, Settings, ChevronDown, Shield,
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useLocation } from "react-router-dom";
 
 const Profile = () => {
   const { toast } = useToast();
+  const location = useLocation();
   const [copied, setCopied] = useState(false);
   const [referralCode] = useState("WELLIO-" + Math.random().toString(36).substr(2, 6).toUpperCase());
   const referralLink = `${window.location.origin}/auth?ref=${referralCode}`;
@@ -21,6 +23,24 @@ const Profile = () => {
   const [openPersonalInfo, setOpenPersonalInfo] = useState(false);
   const [openFitnessGoals, setOpenFitnessGoals] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
+
+  useEffect(() => {
+    // Check URL hash to open specific section
+    const hash = location.hash.replace('#', '');
+    if (hash === 'fitness-goals') {
+      setOpenFitnessGoals(true);
+      setOpenPersonalInfo(false);
+      setOpenSettings(false);
+    } else if (hash === 'personal-info') {
+      setOpenPersonalInfo(true);
+      setOpenFitnessGoals(false);
+      setOpenSettings(false);
+    } else if (hash === 'settings') {
+      setOpenSettings(true);
+      setOpenPersonalInfo(false);
+      setOpenFitnessGoals(false);
+    }
+  }, [location.hash]);
 
   const [formData, setFormData] = useState({
     name: "",
