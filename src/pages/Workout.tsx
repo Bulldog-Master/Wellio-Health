@@ -55,6 +55,10 @@ const Workout = () => {
   const [showRoutineDialog, setShowRoutineDialog] = useState(false);
   const [uploadingFiles, setUploadingFiles] = useState(false);
   const [workoutMedia, setWorkoutMedia] = useState<Record<string, WorkoutMedia[]>>({});
+  const [showCreateRoutine, setShowCreateRoutine] = useState(false);
+  const [routineName, setRoutineName] = useState("");
+  const [routineDescription, setRoutineDescription] = useState("");
+  const [routineExercises, setRoutineExercises] = useState<Array<{ name: string; sets?: number; reps?: number; duration?: number }>>([]);
 
   // Calorie calculation based on activity, duration, and intensity
   const calculateCalories = (activityType: string, durationMin: number, intensityLevel: string): number => {
@@ -328,6 +332,65 @@ const Workout = () => {
     }
   };
 
+  const handleAddExerciseToRoutine = () => {
+    setRoutineExercises([...routineExercises, { name: "", sets: 3, reps: 10 }]);
+  };
+
+  const handleUpdateRoutineExercise = (index: number, field: string, value: string | number) => {
+    const updated = [...routineExercises];
+    updated[index] = { ...updated[index], [field]: value };
+    setRoutineExercises(updated);
+  };
+
+  const handleRemoveRoutineExercise = (index: number) => {
+    setRoutineExercises(routineExercises.filter((_, i) => i !== index));
+  };
+
+  const handleSaveRoutine = async () => {
+    if (!routineName || routineExercises.length === 0) {
+      toast({
+        title: "Missing information",
+        description: "Please provide a routine name and at least one exercise.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("User not authenticated");
+
+      const { error } = await supabase
+        .from('workout_routines')
+        .insert({
+          user_id: user.id,
+          name: routineName,
+          description: routineDescription || null,
+          exercises: routineExercises,
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: "Routine saved",
+        description: "Your workout routine has been saved.",
+      });
+
+      setRoutineName("");
+      setRoutineDescription("");
+      setRoutineExercises([]);
+      setShowCreateRoutine(false);
+      fetchWorkoutRoutines();
+    } catch (error) {
+      console.error('Error saving routine:', error);
+      toast({
+        title: "Error",
+        description: "Failed to save routine.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="space-y-6 max-w-4xl">
       <div className="flex items-center justify-between">
@@ -347,43 +410,172 @@ const Workout = () => {
               Routines
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl">
+          <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Workout Routines</DialogTitle>
             </DialogHeader>
-            <div className="space-y-4 max-h-[60vh] overflow-y-auto">
-              {workoutRoutines.length > 0 ? (
-                workoutRoutines.map((routine) => (
-                  <Card key={routine.id} className="p-4">
-                    <h4 className="font-semibold text-lg mb-2">{routine.name}</h4>
-                    {routine.description && (
-                      <p className="text-sm text-muted-foreground mb-3">{routine.description}</p>
-                    )}
-                    <div className="space-y-2">
-                      {routine.exercises.map((exercise, idx) => (
-                        <div key={idx} className="text-sm p-2 bg-secondary/50 rounded">
-                          <span className="font-medium">{exercise.name}</span>
-                          {exercise.sets && exercise.reps && (
-                            <span className="text-muted-foreground ml-2">
-                              {exercise.sets} sets × {exercise.reps} reps
-                            </span>
-                          )}
-                          {exercise.duration && (
-                            <span className="text-muted-foreground ml-2">
-                              {exercise.duration} min
-                            </span>
-                          )}
+            
+            {!showCreateRoutine ? (
+              <div className="space-y-4">
+                <Button onClick={() => setShowCreateRoutine(true)} className="w-full gap-2">
+                  <Plus className="w-4 h-4" />
+                  Create New Routine
+                </Button>
+                
+                <div className="space-y-3">
+                  {workoutRoutines.length > 0 ? (
+                    workoutRoutines.map((routine) => (
+                      <Card key={routine.id} className="p-4">
+                        <h4 className="font-semibold text-lg mb-2">{routine.name}</h4>
+                        {routine.description && (
+                          <p className="text-sm text-muted-foreground mb-3">{routine.description}</p>
+                        )}
+                        <div className="space-y-2">
+                          {routine.exercises.map((exercise, idx) => (
+                            <div key={idx} className="text-sm p-2 bg-secondary/50 rounded">
+                              <span className="font-medium">{exercise.name}</span>
+                              {exercise.sets && exercise.reps && (
+                                <span className="text-muted-foreground ml-2">
+                                  {exercise.sets} sets × {exercise.reps} reps
+                                </span>
+                              )}
+                              {exercise.duration && (
+                                <span className="text-muted-foreground ml-2">
+                                  {exercise.duration} min
+                                </span>
+                              )}
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                  </Card>
-                ))
-              ) : (
-                <p className="text-center text-muted-foreground py-8">
-                  No routines saved yet
-                </p>
-              )}
-            </div>
+                      </Card>
+                    ))
+                  ) : (
+                    <p className="text-center text-muted-foreground py-8">
+                      No routines saved yet. Create your first routine!
+                    </p>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="routine-name">Routine Name</Label>
+                  <Input
+                    id="routine-name"
+                    placeholder="e.g., Upper Body Day"
+                    value={routineName}
+                    onChange={(e) => setRoutineName(e.target.value)}
+                    className="mt-1.5"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="routine-description">Description (optional)</Label>
+                  <Textarea
+                    id="routine-description"
+                    placeholder="Brief description of this routine..."
+                    value={routineDescription}
+                    onChange={(e) => setRoutineDescription(e.target.value)}
+                    className="mt-1.5"
+                  />
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <Label>Exercises</Label>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleAddExerciseToRoutine}
+                      className="gap-2"
+                    >
+                      <Plus className="w-3 h-3" />
+                      Add Exercise
+                    </Button>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    {routineExercises.map((exercise, idx) => (
+                      <Card key={idx} className="p-3">
+                        <div className="space-y-2">
+                          <div className="flex gap-2">
+                            <Input
+                              placeholder="Exercise name"
+                              value={exercise.name}
+                              onChange={(e) => handleUpdateRoutineExercise(idx, 'name', e.target.value)}
+                              className="flex-1"
+                            />
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => handleRemoveRoutineExercise(idx)}
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </div>
+                          <div className="grid grid-cols-3 gap-2">
+                            <div>
+                              <Label className="text-xs">Sets</Label>
+                              <Input
+                                type="number"
+                                placeholder="3"
+                                value={exercise.sets || ''}
+                                onChange={(e) => handleUpdateRoutineExercise(idx, 'sets', parseInt(e.target.value) || 0)}
+                                className="mt-1"
+                              />
+                            </div>
+                            <div>
+                              <Label className="text-xs">Reps</Label>
+                              <Input
+                                type="number"
+                                placeholder="10"
+                                value={exercise.reps || ''}
+                                onChange={(e) => handleUpdateRoutineExercise(idx, 'reps', parseInt(e.target.value) || 0)}
+                                className="mt-1"
+                              />
+                            </div>
+                            <div>
+                              <Label className="text-xs">Duration (min)</Label>
+                              <Input
+                                type="number"
+                                placeholder="5"
+                                value={exercise.duration || ''}
+                                onChange={(e) => handleUpdateRoutineExercise(idx, 'duration', parseInt(e.target.value) || 0)}
+                                className="mt-1"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </Card>
+                    ))}
+                    
+                    {routineExercises.length === 0 && (
+                      <p className="text-center text-muted-foreground text-sm py-4">
+                        Add exercises to your routine
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setShowCreateRoutine(false);
+                      setRoutineName("");
+                      setRoutineDescription("");
+                      setRoutineExercises([]);
+                    }}
+                    className="flex-1"
+                  >
+                    Cancel
+                  </Button>
+                  <Button onClick={handleSaveRoutine} className="flex-1">
+                    Save Routine
+                  </Button>
+                </div>
+              </div>
+            )}
           </DialogContent>
         </Dialog>
       </div>
