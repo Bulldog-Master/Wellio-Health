@@ -572,12 +572,34 @@ const Workout = () => {
                       <Card key={idx} className="p-3">
                         <div className="space-y-2">
                           <div className="flex gap-2">
-                            <Input
-                              placeholder="Exercise name"
+                            <Select
                               value={exercise.name}
-                              onChange={(e) => handleUpdateRoutineExercise(idx, 'name', e.target.value)}
-                              className="flex-1"
-                            />
+                              onValueChange={(value) => handleUpdateRoutineExercise(idx, 'name', value)}
+                            >
+                              <SelectTrigger className="flex-1">
+                                <SelectValue placeholder="Select exercise" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="Bench Press">Bench Press</SelectItem>
+                                <SelectItem value="Squats">Squats</SelectItem>
+                                <SelectItem value="Deadlift">Deadlift</SelectItem>
+                                <SelectItem value="Pull-ups">Pull-ups</SelectItem>
+                                <SelectItem value="Push-ups">Push-ups</SelectItem>
+                                <SelectItem value="Shoulder Press">Shoulder Press</SelectItem>
+                                <SelectItem value="Bicep Curls">Bicep Curls</SelectItem>
+                                <SelectItem value="Tricep Dips">Tricep Dips</SelectItem>
+                                <SelectItem value="Lunges">Lunges</SelectItem>
+                                <SelectItem value="Leg Press">Leg Press</SelectItem>
+                                <SelectItem value="Lat Pulldown">Lat Pulldown</SelectItem>
+                                <SelectItem value="Cable Rows">Cable Rows</SelectItem>
+                                <SelectItem value="Leg Curls">Leg Curls</SelectItem>
+                                <SelectItem value="Leg Extensions">Leg Extensions</SelectItem>
+                                <SelectItem value="Calf Raises">Calf Raises</SelectItem>
+                                <SelectItem value="Planks">Planks</SelectItem>
+                                <SelectItem value="Crunches">Crunches</SelectItem>
+                                <SelectItem value="Custom">Custom Exercise</SelectItem>
+                              </SelectContent>
+                            </Select>
                             <Button
                               variant="ghost"
                               size="icon"
@@ -586,6 +608,15 @@ const Workout = () => {
                               <Trash2 className="w-4 h-4" />
                             </Button>
                           </div>
+                          
+                          {exercise.name === 'Custom' && (
+                            <Input
+                              placeholder="Enter custom exercise name"
+                              value={exercise.name === 'Custom' ? '' : exercise.name}
+                              onChange={(e) => handleUpdateRoutineExercise(idx, 'name', e.target.value)}
+                            />
+                          )}
+                          
                           <div className="grid grid-cols-3 gap-2">
                             <div>
                               <Label className="text-xs">Sets</Label>
