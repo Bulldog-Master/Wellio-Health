@@ -3,12 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Utensils, Plus, Clock, Camera, Sparkles, Loader2, Pencil, Trash2 } from "lucide-react";
+import { Utensils, Plus, Clock, Camera, Sparkles, Loader2, Pencil, Trash2, ArrowLeft } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 interface MealLog {
   id: string;
@@ -24,6 +25,7 @@ interface MealLog {
 
 const FoodLog = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [selectedMeal, setSelectedMeal] = useState("breakfast");
   const [mealDescription, setMealDescription] = useState("");
   const [nutritionData, setNutritionData] = useState<{
@@ -328,6 +330,14 @@ const FoodLog = () => {
   return (
     <div className="space-y-6 max-w-4xl">
       <div className="flex items-center gap-3">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate('/food')}
+          className="shrink-0"
+        >
+          <ArrowLeft className="w-5 h-5" />
+        </Button>
         <div className="p-3 bg-primary/10 rounded-xl">
           <Utensils className="w-6 h-6 text-primary" />
         </div>
