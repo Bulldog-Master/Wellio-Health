@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown, ChevronDown, Library, BookOpen } from "lucide-react";
+import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown, ChevronDown, Library, BookOpen, Smartphone } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
@@ -54,6 +54,16 @@ interface SampleRoutine {
   }>;
 }
 
+interface SavedApp {
+  id: string;
+  app_name: string;
+  app_description: string | null;
+  app_url: string | null;
+  app_category: string | null;
+  platform: string | null;
+  app_icon_url: string | null;
+}
+
 interface WorkoutMedia {
   id: string;
   file_url: string;
@@ -93,6 +103,15 @@ const Workout = () => {
   const [sampleUrl, setSampleUrl] = useState("");
   const [sampleExercises, setSampleExercises] = useState<Array<{ name: string; sets?: number; reps?: number; duration?: number; media_url?: string }>>([]);
   const [showAddSample, setShowAddSample] = useState(false);
+  const [showAppsLibrary, setShowAppsLibrary] = useState(false);
+  const [showAddApp, setShowAddApp] = useState(false);
+  const [savedApps, setSavedApps] = useState<SavedApp[]>([]);
+  const [appName, setAppName] = useState("");
+  const [appDescription, setAppDescription] = useState("");
+  const [appUrl, setAppUrl] = useState("");
+  const [appCategory, setAppCategory] = useState("");
+  const [appPlatform, setAppPlatform] = useState("");
+  const [appIconUrl, setAppIconUrl] = useState("");
 
   const baseExercises = [
     "Bench Press", "Incline Bench Press", "Decline Bench Press", "Dumbbell Press", "Chest Fly",
@@ -151,6 +170,7 @@ const Workout = () => {
     fetchActivityLogs();
     fetchWorkoutRoutines();
     fetchSampleRoutines();
+    fetchSavedApps();
   }, []);
 
   const fetchActivityLogs = async () => {
@@ -246,6 +266,24 @@ const Workout = () => {
       })));
     } catch (error) {
       console.error('Error fetching sample routines:', error);
+    }
+  };
+
+  const fetchSavedApps = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from('saved_apps')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setSavedApps(data || []);
+    } catch (error) {
+      console.error('Error fetching saved apps:', error);
     }
   };
 
@@ -669,6 +707,82 @@ const Workout = () => {
     return sorted;
   };
 
+  const handleSaveApp = async () => {
+    if (!appName) {
+      toast({
+        title: "Missing information",
+        description: "Please provide an app name.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("User not authenticated");
+
+      const { error } = await supabase
+        .from('saved_apps')
+        .insert({
+          user_id: user.id,
+          app_name: appName,
+          app_description: appDescription || null,
+          app_url: appUrl || null,
+          app_category: appCategory || null,
+          platform: appPlatform || null,
+          app_icon_url: appIconUrl || null,
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: "App saved",
+        description: "Your app has been saved to the library.",
+      });
+
+      setAppName("");
+      setAppDescription("");
+      setAppUrl("");
+      setAppCategory("");
+      setAppPlatform("");
+      setAppIconUrl("");
+      setShowAddApp(false);
+      fetchSavedApps();
+    } catch (error) {
+      console.error('Error saving app:', error);
+      toast({
+        title: "Error",
+        description: "Failed to save app.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleDeleteApp = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from('saved_apps')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      toast({
+        title: "App deleted",
+        description: "The app has been removed.",
+      });
+
+      fetchSavedApps();
+    } catch (error) {
+      console.error('Error deleting app:', error);
+      toast({
+        title: "Error",
+        description: "Failed to delete app.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="space-y-6 max-w-4xl">
       <div className="flex items-center justify-between">
@@ -689,6 +803,10 @@ const Workout = () => {
           <Button variant="outline" className="gap-2" onClick={() => setShowSampleLibrary(true)}>
             <BookOpen className="w-4 h-4" />
             Sample Library
+          </Button>
+          <Button variant="outline" className="gap-2" onClick={() => setShowAppsLibrary(true)}>
+            <Smartphone className="w-4 h-4" />
+            Apps
           </Button>
           <Dialog open={showRoutineDialog} onOpenChange={setShowRoutineDialog}>
             <DialogTrigger asChild>
@@ -1610,6 +1728,189 @@ const Workout = () => {
           )}
         </div>
       </Card>
+
+      {/* Apps Library Dialog */}
+      <Dialog open={showAppsLibrary} onOpenChange={setShowAppsLibrary}>
+        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30 border-2 border-emerald-200 dark:border-emerald-800 shadow-2xl">
+          <DialogHeader>
+            <DialogTitle className="text-2xl text-emerald-900 dark:text-emerald-100 flex items-center justify-between">
+              <span>Apps Library</span>
+              <Button variant="outline" size="sm" onClick={() => setShowAddApp(true)} className="bg-emerald-100 dark:bg-emerald-900/50 border-emerald-300 dark:border-emerald-700 hover:bg-emerald-200 dark:hover:bg-emerald-900">
+                <Plus className="w-4 h-4 mr-2" />
+                Add App
+              </Button>
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="mt-2">
+            {savedApps.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {savedApps.map((app) => (
+                  <Card key={app.id} className="p-4 bg-white/70 dark:bg-black/30 hover:shadow-lg transition-shadow">
+                    <div className="flex gap-4">
+                      <div className="w-16 h-16 rounded-xl bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center flex-shrink-0">
+                        {app.app_icon_url ? (
+                          <img src={app.app_icon_url} alt={app.app_name} className="w-full h-full rounded-xl object-cover" />
+                        ) : (
+                          <Smartphone className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-start justify-between gap-2 mb-2">
+                          <h3 className="font-semibold text-lg truncate">{app.app_name}</h3>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => handleDeleteApp(app.id)}
+                            className="flex-shrink-0 hover:bg-red-500/10"
+                          >
+                            <Trash2 className="w-4 h-4 text-red-500" />
+                          </Button>
+                        </div>
+                        {app.app_description && (
+                          <p className="text-sm text-muted-foreground mb-2 line-clamp-2">{app.app_description}</p>
+                        )}
+                        <div className="flex flex-wrap gap-2 text-xs">
+                          {app.platform && (
+                            <span className="px-2 py-1 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 rounded-full">
+                              {app.platform}
+                            </span>
+                          )}
+                          {app.app_category && (
+                            <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full">
+                              {app.app_category}
+                            </span>
+                          )}
+                        </div>
+                        {app.app_url && (
+                          <a
+                            href={app.app_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm text-emerald-600 dark:text-emerald-400 hover:underline mt-2 inline-block"
+                          >
+                            Open App →
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-muted-foreground py-8">
+                No apps saved yet. Add your first fitness app!
+              </p>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add App Dialog */}
+      <Dialog open={showAddApp} onOpenChange={setShowAddApp}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-lime-50 to-green-50 dark:from-lime-950/30 dark:to-green-950/30 border-2 border-lime-200 dark:border-lime-800 shadow-2xl">
+          <DialogHeader>
+            <DialogTitle className="text-2xl text-lime-900 dark:text-lime-100">Add Fitness App</DialogTitle>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="app-name">App Name</Label>
+              <Input
+                id="app-name"
+                placeholder="e.g., MyFitnessPal, Strava"
+                value={appName}
+                onChange={(e) => setAppName(e.target.value)}
+                className="mt-1.5"
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="app-description">Description (optional)</Label>
+              <Textarea
+                id="app-description"
+                placeholder="What's this app for..."
+                value={appDescription}
+                onChange={(e) => setAppDescription(e.target.value)}
+                className="mt-1.5"
+                rows={3}
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="app-platform">Platform</Label>
+                <Select value={appPlatform} onValueChange={setAppPlatform}>
+                  <SelectTrigger className="mt-1.5">
+                    <SelectValue placeholder="Select platform" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="iOS">iOS</SelectItem>
+                    <SelectItem value="Android">Android</SelectItem>
+                    <SelectItem value="Web">Web</SelectItem>
+                    <SelectItem value="Cross-platform">Cross-platform</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label htmlFor="app-category">Category (optional)</Label>
+                <Input
+                  id="app-category"
+                  placeholder="e.g., Tracking, Training"
+                  value={appCategory}
+                  onChange={(e) => setAppCategory(e.target.value)}
+                  className="mt-1.5"
+                />
+              </div>
+            </div>
+
+            <div>
+              <Label htmlFor="app-url">App URL or Store Link (optional)</Label>
+              <Input
+                id="app-url"
+                type="url"
+                placeholder="https://..."
+                value={appUrl}
+                onChange={(e) => setAppUrl(e.target.value)}
+                className="mt-1.5"
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="app-icon">App Icon URL (optional)</Label>
+              <Input
+                id="app-icon"
+                type="url"
+                placeholder="https://..."
+                value={appIconUrl}
+                onChange={(e) => setAppIconUrl(e.target.value)}
+                className="mt-1.5"
+              />
+            </div>
+
+            <div className="flex gap-3 pt-4 border-t">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setShowAddApp(false);
+                  setAppName("");
+                  setAppDescription("");
+                  setAppUrl("");
+                  setAppCategory("");
+                  setAppPlatform("");
+                  setAppIconUrl("");
+                }}
+                className="flex-1"
+              >
+                Cancel
+              </Button>
+              <Button onClick={handleSaveApp} className="flex-1 bg-lime-600 hover:bg-lime-700">
+                Save App
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

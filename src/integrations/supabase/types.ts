@@ -391,6 +391,45 @@ export type Database = {
         }
         Relationships: []
       }
+      saved_apps: {
+        Row: {
+          app_category: string | null
+          app_description: string | null
+          app_icon_url: string | null
+          app_name: string
+          app_url: string | null
+          created_at: string
+          id: string
+          platform: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          app_category?: string | null
+          app_description?: string | null
+          app_icon_url?: string | null
+          app_name: string
+          app_url?: string | null
+          created_at?: string
+          id?: string
+          platform?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          app_category?: string | null
+          app_description?: string | null
+          app_icon_url?: string | null
+          app_name?: string
+          app_url?: string | null
+          created_at?: string
+          id?: string
+          platform?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       social_connections: {
         Row: {
           connection_type: string
