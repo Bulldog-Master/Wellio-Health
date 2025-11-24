@@ -56,6 +56,7 @@ const Workout = () => {
   const [uploadingFiles, setUploadingFiles] = useState(false);
   const [workoutMedia, setWorkoutMedia] = useState<Record<string, WorkoutMedia[]>>({});
   const [showCreateRoutine, setShowCreateRoutine] = useState(false);
+  const [editingRoutineId, setEditingRoutineId] = useState<string | null>(null);
   const [routineName, setRoutineName] = useState("");
   const [routineDescription, setRoutineDescription] = useState("");
   const [routineExercises, setRoutineExercises] = useState<Array<{ name: string; sets?: number; reps?: number; duration?: number }>>([]);
@@ -346,6 +347,39 @@ const Workout = () => {
     setRoutineExercises(routineExercises.filter((_, i) => i !== index));
   };
 
+  const handleEditRoutine = (routine: WorkoutRoutine) => {
+    setEditingRoutineId(routine.id);
+    setRoutineName(routine.name);
+    setRoutineDescription(routine.description || "");
+    setRoutineExercises(routine.exercises);
+    setShowCreateRoutine(true);
+  };
+
+  const handleDeleteRoutine = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from('workout_routines')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      toast({
+        title: "Routine deleted",
+        description: "The workout routine has been removed.",
+      });
+
+      fetchWorkoutRoutines();
+    } catch (error) {
+      console.error('Error deleting routine:', error);
+      toast({
+        title: "Error",
+        description: "Failed to delete routine.",
+        variant: "destructive",
+      });
+    }
+  };
+
   const handleSaveRoutine = async () => {
     if (!routineName || routineExercises.length === 0) {
       toast({
@@ -360,25 +394,44 @@ const Workout = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("User not authenticated");
 
-      const { error } = await supabase
-        .from('workout_routines')
-        .insert({
-          user_id: user.id,
-          name: routineName,
-          description: routineDescription || null,
-          exercises: routineExercises,
+      if (editingRoutineId) {
+        const { error } = await supabase
+          .from('workout_routines')
+          .update({
+            name: routineName,
+            description: routineDescription || null,
+            exercises: routineExercises,
+          })
+          .eq('id', editingRoutineId);
+
+        if (error) throw error;
+
+        toast({
+          title: "Routine updated",
+          description: "Your workout routine has been updated.",
         });
+      } else {
+        const { error } = await supabase
+          .from('workout_routines')
+          .insert({
+            user_id: user.id,
+            name: routineName,
+            description: routineDescription || null,
+            exercises: routineExercises,
+          });
 
-      if (error) throw error;
+        if (error) throw error;
 
-      toast({
-        title: "Routine saved",
-        description: "Your workout routine has been saved.",
-      });
+        toast({
+          title: "Routine saved",
+          description: "Your workout routine has been saved.",
+        });
+      }
 
       setRoutineName("");
       setRoutineDescription("");
       setRoutineExercises([]);
+      setEditingRoutineId(null);
       setShowCreateRoutine(false);
       fetchWorkoutRoutines();
     } catch (error) {
@@ -426,10 +479,30 @@ const Workout = () => {
                   {workoutRoutines.length > 0 ? (
                     workoutRoutines.map((routine) => (
                       <Card key={routine.id} className="p-4">
-                        <h4 className="font-semibold text-lg mb-2">{routine.name}</h4>
-                        {routine.description && (
-                          <p className="text-sm text-muted-foreground mb-3">{routine.description}</p>
-                        )}
+                        <div className="flex items-start justify-between mb-2">
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-lg">{routine.name}</h4>
+                            {routine.description && (
+                              <p className="text-sm text-muted-foreground mt-1">{routine.description}</p>
+                            )}
+                          </div>
+                          <div className="flex gap-2">
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => handleEditRoutine(routine)}
+                            >
+                              <Pencil className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => handleDeleteRoutine(routine.id)}
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        </div>
                         <div className="space-y-2">
                           {routine.exercises.map((exercise, idx) => (
                             <div key={idx} className="text-sm p-2 bg-secondary/50 rounded">
@@ -562,6 +635,7 @@ const Workout = () => {
                     variant="outline"
                     onClick={() => {
                       setShowCreateRoutine(false);
+                      setEditingRoutineId(null);
                       setRoutineName("");
                       setRoutineDescription("");
                       setRoutineExercises([]);
@@ -571,7 +645,7 @@ const Workout = () => {
                     Cancel
                   </Button>
                   <Button onClick={handleSaveRoutine} className="flex-1">
-                    Save Routine
+                    {editingRoutineId ? "Update Routine" : "Save Routine"}
                   </Button>
                 </div>
               </div>
