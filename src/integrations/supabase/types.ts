@@ -153,6 +153,7 @@ export type Database = {
           countdown_beeps: boolean | null
           created_at: string | null
           end_with_interim: boolean | null
+          folder_id: string | null
           id: string
           include_reps: boolean | null
           include_sets: boolean | null
@@ -171,6 +172,7 @@ export type Database = {
           countdown_beeps?: boolean | null
           created_at?: string | null
           end_with_interim?: boolean | null
+          folder_id?: string | null
           id?: string
           include_reps?: boolean | null
           include_sets?: boolean | null
@@ -189,6 +191,7 @@ export type Database = {
           countdown_beeps?: boolean | null
           created_at?: string | null
           end_with_interim?: boolean | null
+          folder_id?: string | null
           id?: string
           include_reps?: boolean | null
           include_sets?: boolean | null
@@ -203,7 +206,15 @@ export type Database = {
           use_interim_interval?: boolean | null
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "interval_timers_folder_id_fkey"
+            columns: ["folder_id"]
+            isOneToOne: false
+            referencedRelation: "timer_folders"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       medical_records: {
         Row: {
@@ -630,6 +641,30 @@ export type Database = {
           logged_at?: string | null
           severity?: number | null
           symptom_name?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      timer_folders: {
+        Row: {
+          created_at: string | null
+          id: string
+          name: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          name: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          name?: string
+          updated_at?: string | null
           user_id?: string
         }
         Relationships: []
