@@ -20,6 +20,7 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const fitnessGoalsRef = useRef<HTMLDivElement>(null);
   const [openPersonalInfo, setOpenPersonalInfo] = useState(false);
   const [openFitnessGoals, setOpenFitnessGoals] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
@@ -31,6 +32,10 @@ const Profile = () => {
       setOpenFitnessGoals(true);
       setOpenPersonalInfo(false);
       setOpenSettings(false);
+      // Scroll to fitness goals section after a brief delay
+      setTimeout(() => {
+        fitnessGoalsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
     } else if (hash === 'personal-info') {
       setOpenPersonalInfo(true);
       setOpenFitnessGoals(false);
@@ -360,7 +365,7 @@ const Profile = () => {
       </Card>
 
       {/* Fitness Goals Section */}
-      <Card className="bg-gradient-card shadow-md overflow-hidden">
+      <Card ref={fitnessGoalsRef} className="bg-gradient-card shadow-md overflow-hidden">
         <Collapsible open={openFitnessGoals} onOpenChange={setOpenFitnessGoals}>
           <CollapsibleTrigger className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors">
             <div className="flex items-center gap-3">
