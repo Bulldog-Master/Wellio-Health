@@ -1,11 +1,260 @@
 import { Card } from "@/components/ui/card";
-import { BookOpen, ChevronDown, ArrowLeft } from "lucide-react";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { BookOpen, ArrowLeft, Plus, Upload, Trash2, Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+interface Recipe {
+  id: string;
+  category: string;
+  name: string;
+  description: string | null;
+  ingredients: string | null;
+  instructions: string | null;
+  image_url: string | null;
+}
 
 const Recipes = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [openCategory, setOpenCategory] = useState<string | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [categoryDialogOpen, setCategoryDialogOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [editingRecipe, setEditingRecipe] = useState<Recipe | null>(null);
+  
+  const [recipeName, setRecipeName] = useState("");
+  const [recipeDescription, setRecipeDescription] = useState("");
+  const [recipeIngredients, setRecipeIngredients] = useState("");
+  const [recipeInstructions, setRecipeInstructions] = useState("");
+  const [recipeImage, setRecipeImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+
+  const defaultCategories = ["🌱 Vegan", "🥑 Keto", "💪 High Protein", "🐟 Mediterranean", "🧀 Dairy"];
+
+  useEffect(() => {
+    fetchRecipes();
+  }, []);
+
+  const fetchRecipes = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from('recipes')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      setRecipes(data || []);
+      
+      // Get unique categories from recipes
+      const uniqueCategories = [...new Set(data?.map(r => r.category) || [])];
+      const allCategories = [...new Set([...defaultCategories, ...uniqueCategories])];
+      setCategories(allCategories);
+    } catch (error) {
+      console.error('Error fetching recipes:', error);
+      toast({
+        title: "Error",
+        description: "Failed to load recipes.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setRecipeImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSaveRecipe = async () => {
+    if (!recipeName.trim() || !selectedCategory) {
+      toast({
+        title: "Missing information",
+        description: "Please provide at least a recipe name and category.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      let imageUrl: string | null = null;
+
+      // Upload image if provided
+      if (recipeImage) {
+        const fileName = `${user.id}/${Date.now()}-${recipeImage.name}`;
+        const { error: uploadError } = await supabase.storage
+          .from('food-images')
+          .upload(fileName, recipeImage);
+
+        if (uploadError) {
+          console.error('Error uploading image:', uploadError);
+        } else {
+          const { data: { publicUrl } } = supabase.storage
+            .from('food-images')
+            .getPublicUrl(fileName);
+          imageUrl = publicUrl;
+        }
+      }
+
+      if (editingRecipe) {
+        // Update existing recipe
+        const { error } = await supabase
+          .from('recipes')
+          .update({
+            category: selectedCategory,
+            name: recipeName,
+            description: recipeDescription || null,
+            ingredients: recipeIngredients || null,
+            instructions: recipeInstructions || null,
+            image_url: imageUrl || editingRecipe.image_url,
+          })
+          .eq('id', editingRecipe.id);
+
+        if (error) throw error;
+
+        toast({
+          title: "Recipe updated",
+          description: "Your recipe has been updated successfully.",
+        });
+      } else {
+        // Create new recipe
+        const { error } = await supabase
+          .from('recipes')
+          .insert({
+            user_id: user.id,
+            category: selectedCategory,
+            name: recipeName,
+            description: recipeDescription || null,
+            ingredients: recipeIngredients || null,
+            instructions: recipeInstructions || null,
+            image_url: imageUrl,
+          });
+
+        if (error) throw error;
+
+        toast({
+          title: "Recipe added",
+          description: `${recipeName} has been added to ${selectedCategory}.`,
+        });
+      }
+
+      resetForm();
+      setDialogOpen(false);
+      fetchRecipes();
+    } catch (error) {
+      console.error('Error saving recipe:', error);
+      toast({
+        title: "Error",
+        description: "Failed to save recipe.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleDeleteRecipe = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from('recipes')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      toast({
+        title: "Recipe deleted",
+        description: "The recipe has been removed.",
+      });
+
+      fetchRecipes();
+    } catch (error) {
+      console.error('Error deleting recipe:', error);
+      toast({
+        title: "Error",
+        description: "Failed to delete recipe.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleEditRecipe = (recipe: Recipe) => {
+    setEditingRecipe(recipe);
+    setSelectedCategory(recipe.category);
+    setRecipeName(recipe.name);
+    setRecipeDescription(recipe.description || "");
+    setRecipeIngredients(recipe.ingredients || "");
+    setRecipeInstructions(recipe.instructions || "");
+    setImagePreview(recipe.image_url);
+    setDialogOpen(true);
+  };
+
+  const resetForm = () => {
+    setEditingRecipe(null);
+    setSelectedCategory("");
+    setRecipeName("");
+    setRecipeDescription("");
+    setRecipeIngredients("");
+    setRecipeInstructions("");
+    setRecipeImage(null);
+    setImagePreview(null);
+  };
+
+  const handleAddCategory = async () => {
+    if (!newCategoryName.trim()) {
+      toast({
+        title: "Missing category name",
+        description: "Please enter a category name.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const newCategory = newCategoryName.trim();
+    if (!categories.includes(newCategory)) {
+      setCategories([...categories, newCategory]);
+      toast({
+        title: "Category added",
+        description: `${newCategory} has been added to your categories.`,
+      });
+    }
+
+    setNewCategoryName("");
+    setCategoryDialogOpen(false);
+  };
+
+  const toggleCategory = (category: string) => {
+    setOpenCategory(openCategory === category ? null : category);
+  };
+
+  const getRecipesByCategory = (category: string) => {
+    return recipes.filter(r => r.category === category);
+  };
   
   return (
     <div className="space-y-6 max-w-4xl">
@@ -21,95 +270,225 @@ const Recipes = () => {
         <div className="p-3 bg-primary/10 rounded-xl">
           <BookOpen className="w-6 h-6 text-primary" />
         </div>
-        <div>
+        <div className="flex-1">
           <h1 className="text-3xl font-bold">Recipes</h1>
-          <p className="text-muted-foreground">Browse recipes by category</p>
+          <p className="text-muted-foreground">Browse and manage your recipes</p>
         </div>
+        <Dialog open={categoryDialogOpen} onOpenChange={setCategoryDialogOpen}>
+          <DialogTrigger asChild>
+            <Button variant="outline" size="sm">
+              <Plus className="w-4 h-4 mr-2" />
+              New Category
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Add New Category</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4 pt-4">
+              <div>
+                <Label htmlFor="categoryName">Category Name</Label>
+                <Input
+                  id="categoryName"
+                  value={newCategoryName}
+                  onChange={(e) => setNewCategoryName(e.target.value)}
+                  placeholder="e.g., 🍝 Italian, 🌮 Mexican"
+                  className="mt-1.5"
+                />
+              </div>
+              <Button onClick={handleAddCategory} className="w-full">
+                Add Category
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
 
       <Card className="p-6 bg-gradient-card shadow-md">
-        <h3 className="text-lg font-semibold mb-6">Recipe Categories</h3>
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-lg font-semibold">Recipe Categories</h3>
+          <Dialog open={dialogOpen} onOpenChange={(open) => {
+            setDialogOpen(open);
+            if (!open) resetForm();
+          }}>
+            <DialogTrigger asChild>
+              <Button>
+                <Plus className="w-4 h-4 mr-2" />
+                Add Recipe
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle>{editingRecipe ? 'Edit Recipe' : 'Add New Recipe'}</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-4 pt-4">
+                <div>
+                  <Label htmlFor="category">Category</Label>
+                  <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                    <SelectTrigger className="mt-1.5">
+                      <SelectValue placeholder="Select a category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {categories.map((cat) => (
+                        <SelectItem key={cat} value={cat}>
+                          {cat}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
 
-        <div className="space-y-3">
-          {/* Vegan Category */}
-          <Collapsible>
-            <CollapsibleTrigger className="w-full">
-              <div className="flex items-center justify-between p-4 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors">
-                <span className="font-medium">🌱 Vegan</span>
-                <ChevronDown className="w-4 h-4" />
-              </div>
-            </CollapsibleTrigger>
-            <CollapsibleContent className="mt-2 ml-4 space-y-2">
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🥖 Bread</div>
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🥬 Vegetables</div>
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🍎 Fruits</div>
-            </CollapsibleContent>
-          </Collapsible>
+                <div>
+                  <Label htmlFor="recipeName">Recipe Name</Label>
+                  <Input
+                    id="recipeName"
+                    value={recipeName}
+                    onChange={(e) => setRecipeName(e.target.value)}
+                    placeholder="e.g., Chocolate Chip Cookies"
+                    className="mt-1.5"
+                  />
+                </div>
 
-          {/* Keto Category */}
-          <Collapsible>
-            <CollapsibleTrigger className="w-full">
-              <div className="flex items-center justify-between p-4 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors">
-                <span className="font-medium">🥑 Keto</span>
-                <ChevronDown className="w-4 h-4" />
-              </div>
-            </CollapsibleTrigger>
-            <CollapsibleContent className="mt-2 ml-4 space-y-2">
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🥩 Meats (Beef, Chicken, Pork)</div>
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🧀 Dairy</div>
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🥬 Low-Carb Vegetables</div>
-            </CollapsibleContent>
-          </Collapsible>
+                <div>
+                  <Label htmlFor="description">Description</Label>
+                  <Textarea
+                    id="description"
+                    value={recipeDescription}
+                    onChange={(e) => setRecipeDescription(e.target.value)}
+                    placeholder="Brief description of the recipe"
+                    className="mt-1.5"
+                    rows={2}
+                  />
+                </div>
 
-          {/* High Protein Category */}
-          <Collapsible>
-            <CollapsibleTrigger className="w-full">
-              <div className="flex items-center justify-between p-4 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors">
-                <span className="font-medium">💪 High Protein</span>
-                <ChevronDown className="w-4 h-4" />
-              </div>
-            </CollapsibleTrigger>
-            <CollapsibleContent className="mt-2 ml-4 space-y-2">
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🍗 Chicken</div>
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🥩 Beef</div>
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🐟 Fish & Seafood</div>
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🥚 Eggs</div>
-            </CollapsibleContent>
-          </Collapsible>
+                <div>
+                  <Label htmlFor="ingredients">Ingredients</Label>
+                  <Textarea
+                    id="ingredients"
+                    value={recipeIngredients}
+                    onChange={(e) => setRecipeIngredients(e.target.value)}
+                    placeholder="List ingredients (one per line)"
+                    className="mt-1.5"
+                    rows={4}
+                  />
+                </div>
 
-          {/* Mediterranean Category */}
-          <Collapsible>
-            <CollapsibleTrigger className="w-full">
-              <div className="flex items-center justify-between p-4 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors">
-                <span className="font-medium">🫒 Mediterranean</span>
-                <ChevronDown className="w-4 h-4" />
-              </div>
-            </CollapsibleTrigger>
-            <CollapsibleContent className="mt-2 ml-4 space-y-2">
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🐟 Fish & Seafood</div>
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🥬 Vegetables</div>
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🫒 Olive Oil & Nuts</div>
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🥖 Whole Grains</div>
-            </CollapsibleContent>
-          </Collapsible>
+                <div>
+                  <Label htmlFor="instructions">Instructions</Label>
+                  <Textarea
+                    id="instructions"
+                    value={recipeInstructions}
+                    onChange={(e) => setRecipeInstructions(e.target.value)}
+                    placeholder="Step-by-step instructions"
+                    className="mt-1.5"
+                    rows={4}
+                  />
+                </div>
 
-          {/* Custom Category */}
-          <Collapsible>
-            <CollapsibleTrigger className="w-full">
-              <div className="flex items-center justify-between p-4 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors">
-                <span className="font-medium">⭐ Custom</span>
-                <ChevronDown className="w-4 h-4" />
+                <div>
+                  <Label htmlFor="image">Recipe Image</Label>
+                  <Input
+                    id="image"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="mt-1.5"
+                  />
+                  {imagePreview && (
+                    <img src={imagePreview} alt="Preview" className="mt-2 w-full h-40 object-cover rounded-md" />
+                  )}
+                </div>
+
+                <Button onClick={handleSaveRecipe} className="w-full">
+                  {editingRecipe ? 'Update Recipe' : 'Save Recipe'}
+                </Button>
               </div>
-            </CollapsibleTrigger>
-            <CollapsibleContent className="mt-2 ml-4 space-y-2">
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🥖 Bread</div>
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🥬 Vegetables</div>
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🥩 Meats</div>
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🍎 Fruits</div>
-              <div className="p-3 bg-accent/10 rounded-lg text-sm">🧀 Dairy</div>
-            </CollapsibleContent>
-          </Collapsible>
+            </DialogContent>
+          </Dialog>
         </div>
+
+        {isLoading ? (
+          <p className="text-center text-muted-foreground py-8">Loading...</p>
+        ) : (
+          <div className="space-y-3">
+            {categories.map((category) => {
+              const categoryRecipes = getRecipesByCategory(category);
+              return (
+                <div key={category} className="space-y-2">
+                  <button
+                    onClick={() => toggleCategory(category)}
+                    className="w-full flex items-center justify-between p-4 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors"
+                  >
+                    <span className="font-medium">{category}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-muted-foreground">
+                        {categoryRecipes.length} {categoryRecipes.length === 1 ? 'recipe' : 'recipes'}
+                      </span>
+                    </div>
+                  </button>
+
+                  {openCategory === category && (
+                    <div className="ml-4 space-y-2">
+                      {categoryRecipes.length === 0 ? (
+                        <div className="p-4 bg-accent/10 rounded-lg text-sm text-muted-foreground text-center">
+                          No recipes in this category yet. Click "Add Recipe" above to add one!
+                        </div>
+                      ) : (
+                        categoryRecipes.map((recipe) => (
+                          <Card key={recipe.id} className="p-4 bg-accent/5">
+                            <div className="flex gap-4">
+                              {recipe.image_url && (
+                                <img 
+                                  src={recipe.image_url} 
+                                  alt={recipe.name}
+                                  className="w-24 h-24 object-cover rounded-md"
+                                />
+                              )}
+                              <div className="flex-1">
+                                <h4 className="font-semibold mb-1">{recipe.name}</h4>
+                                {recipe.description && (
+                                  <p className="text-sm text-muted-foreground mb-2">{recipe.description}</p>
+                                )}
+                                {recipe.ingredients && (
+                                  <details className="text-sm">
+                                    <summary className="cursor-pointer text-primary">View Ingredients</summary>
+                                    <pre className="mt-2 whitespace-pre-wrap">{recipe.ingredients}</pre>
+                                  </details>
+                                )}
+                                {recipe.instructions && (
+                                  <details className="text-sm mt-2">
+                                    <summary className="cursor-pointer text-primary">View Instructions</summary>
+                                    <pre className="mt-2 whitespace-pre-wrap">{recipe.instructions}</pre>
+                                  </details>
+                                )}
+                              </div>
+                              <div className="flex flex-col gap-2">
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  onClick={() => handleEditRecipe(recipe)}
+                                >
+                                  <Pencil className="w-4 h-4" />
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  onClick={() => handleDeleteRecipe(recipe.id)}
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </Button>
+                              </div>
+                            </div>
+                          </Card>
+                        ))
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
       </Card>
     </div>
   );
