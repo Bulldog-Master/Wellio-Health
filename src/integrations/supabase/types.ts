@@ -502,6 +502,51 @@ export type Database = {
         }
         Relationships: []
       }
+      supplements: {
+        Row: {
+          category: string | null
+          created_at: string
+          description: string | null
+          dosage: string | null
+          frequency: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          notes: string | null
+          product_link: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          dosage?: string | null
+          frequency?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          notes?: string | null
+          product_link?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          dosage?: string | null
+          frequency?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          notes?: string | null
+          product_link?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       symptoms: {
         Row: {
           created_at: string | null
