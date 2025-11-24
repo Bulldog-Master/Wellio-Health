@@ -1,19 +1,33 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Pill, ListChecks, TrendingUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Pill, ListChecks, TrendingUp, ArrowLeft, Plus } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Supplements = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="space-y-6 max-w-4xl">
-      <div className="flex items-center gap-3">
-        <div className="p-3 bg-primary/10 rounded-xl">
-          <Pill className="w-6 h-6 text-primary" />
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="p-3 bg-primary/10 rounded-xl">
+            <Pill className="w-6 h-6 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold">Supplements</h1>
+            <p className="text-muted-foreground">Track and discover supplements</p>
+          </div>
         </div>
-        <div>
-          <h1 className="text-3xl font-bold">Supplements</h1>
-          <p className="text-muted-foreground">Track and discover supplements</p>
-        </div>
+        <Button 
+          variant="outline" 
+          onClick={() => navigate('/activity')}
+          className="gap-2"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Activity
+        </Button>
       </div>
 
       <Tabs defaultValue="personal" className="w-full">
@@ -30,7 +44,13 @@ const Supplements = () => {
 
         <TabsContent value="personal" className="space-y-4 mt-6">
           <Card className="p-6 bg-gradient-card shadow-md">
-            <h3 className="text-lg font-semibold mb-4">My Supplements</h3>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold">My Supplements</h3>
+              <Button size="sm" className="gap-2">
+                <Plus className="w-4 h-4" />
+                Add Supplement
+              </Button>
+            </div>
             <div className="text-center text-muted-foreground py-8">
               <p>No supplements added yet.</p>
               <p className="text-sm mt-2">Start adding supplements to track your intake.</p>
@@ -40,7 +60,13 @@ const Supplements = () => {
 
         <TabsContent value="popular" className="space-y-4 mt-6">
           <Card className="p-6 bg-gradient-card shadow-md">
-            <h3 className="text-lg font-semibold mb-4">Popular Supplements</h3>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold">Popular Supplements</h3>
+              <Button size="sm" className="gap-2">
+                <Plus className="w-4 h-4" />
+                Add Custom
+              </Button>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
                 { name: "Vitamin D3", description: "Supports bone health and immunity", category: "Vitamin" },
