@@ -300,7 +300,25 @@ const MedicalHistory = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Card 
+          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+          onClick={() => {
+            const element = document.getElementById('medications-section');
+            element?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        >
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-primary/10 rounded-xl">
+              <Pill className="w-6 h-6 text-primary" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">Medications</h3>
+              <p className="text-sm text-muted-foreground">Manage your medications and records</p>
+            </div>
+          </div>
+        </Card>
+
         <Card 
           className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
           onClick={() => navigate('/symptoms')}
@@ -317,7 +335,7 @@ const MedicalHistory = () => {
         </Card>
       </div>
 
-      <Tabs defaultValue="medications" className="w-full">
+      <Tabs defaultValue="medications" className="w-full" id="medications-section">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="medications">Medications</TabsTrigger>
           <TabsTrigger value="tests">Test Results</TabsTrigger>
