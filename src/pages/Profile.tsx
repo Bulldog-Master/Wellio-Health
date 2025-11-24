@@ -5,13 +5,15 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { User, Save, Share2, Copy, Check, Upload, Settings, ChevronDown, Shield, CreditCard, Bell, HelpCircle, UserCircle, Target } from "lucide-react";
+import { User, Save, Share2, Copy, Check, Upload, Settings, ChevronDown, Shield, CreditCard, Bell, HelpCircle, UserCircle, Target, LogOut } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
   const [referralCode] = useState("WELLIO-" + Math.random().toString(36).substr(2, 6).toUpperCase());
   const referralLink = `${window.location.origin}/auth?ref=${referralCode}`;
@@ -185,6 +187,19 @@ const Profile = () => {
       }
     } else {
       copyToClipboard();
+    }
+  };
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast({
+        title: "Error signing out",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      navigate("/auth");
     }
   };
 
@@ -517,10 +532,14 @@ const Profile = () => {
         </div>
       </Card>
 
-      <div className="flex justify-end">
+      <div className="flex justify-between items-center">
         <Button onClick={handleSave} className="gap-2" disabled={isLoading}>
           <Save className="w-4 h-4" />
           Save Changes
+        </Button>
+        <Button onClick={handleLogout} variant="destructive" className="gap-2">
+          <LogOut className="w-4 h-4" />
+          Sign Out
         </Button>
       </div>
     </div>

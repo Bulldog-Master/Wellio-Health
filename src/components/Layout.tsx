@@ -1,11 +1,9 @@
 import { ReactNode } from "react";
 import Navigation from "./Navigation";
 import ThemeToggle from "./ThemeToggle";
-import { LogOut } from "lucide-react";
+import { User } from "lucide-react";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
 
 interface LayoutProps {
   children: ReactNode;
@@ -13,20 +11,6 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const navigate = useNavigate();
-  const { toast } = useToast();
-
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      toast({
-        title: "Error signing out",
-        description: error.message,
-        variant: "destructive",
-      });
-    } else {
-      navigate("/auth");
-    }
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -37,23 +21,32 @@ const Layout = ({ children }: LayoutProps) => {
               <h1 className="text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent">
                 Wellio
               </h1>
-              <ThemeToggle />
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => navigate("/profile")}
+                  className="hover:bg-sidebar-accent"
+                >
+                  <User className="w-5 h-5" />
+                </Button>
+                <ThemeToggle />
+              </div>
             </div>
             <Navigation />
-            <Button
-              variant="outline"
-              className="w-full gap-2"
-              onClick={handleLogout}
-            >
-              <LogOut className="w-4 h-4" />
-              Sign Out
-            </Button>
           </div>
         </aside>
         
         <main className="flex-1 pb-20 md:pb-0">
           <div className="p-4 md:p-8">
-            <div className="flex justify-end mb-4 md:hidden">
+            <div className="flex justify-end gap-2 mb-4 md:hidden">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate("/profile")}
+              >
+                <User className="w-5 h-5" />
+              </Button>
               <ThemeToggle />
             </div>
             {children}

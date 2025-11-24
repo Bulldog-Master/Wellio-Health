@@ -5,14 +5,9 @@ import { cn } from "@/lib/utils";
 const Navigation = () => {
   const navItems = [
     { to: "/", icon: Home, label: "Dashboard" },
-    { to: "/profile", icon: User, label: "Profile" },
-    { to: "/weight", icon: Scale, label: "Weight" },
     { to: "/food", icon: Utensils, label: "Food" },
-    { to: "/workout", icon: Dumbbell, label: "Workout" },
     { to: "/activity", icon: Activity, label: "Activity" },
-    { to: "/habits", icon: CheckSquare, label: "Habits" },
-    { to: "/symptoms", icon: Stethoscope, label: "Symptoms" },
-    { to: "/medical", icon: FileHeart, label: "Medical" },
+    { to: "/medical", icon: FileHeart, label: "Health" },
     { to: "/insights", icon: Sparkles, label: "AI Insights" },
     { to: "/socials", icon: Users, label: "Socials" },
     { to: "/referral", icon: Gift, label: "Referral" },

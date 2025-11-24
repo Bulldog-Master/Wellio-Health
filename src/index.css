@@ -58,13 +58,13 @@ All colors MUST be HSL.
     
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    --sidebar-background: 220 25% 96%;
+    --sidebar-background: 245 60% 96%;
     --sidebar-foreground: 220 15% 20%;
     --sidebar-primary: 262 83% 58%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 20% 88%;
+    --sidebar-accent: 245 55% 90%;
     --sidebar-accent-foreground: 262 83% 58%;
-    --sidebar-border: 220 15% 82%;
+    --sidebar-border: 240 15% 85%;
     --sidebar-ring: 262 83% 58%;
   }
 
