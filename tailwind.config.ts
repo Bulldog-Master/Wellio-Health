@@ -65,6 +65,16 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        "nav-icon": {
+          "1": "hsl(var(--nav-icon-1))",
+          "2": "hsl(var(--nav-icon-2))",
+          "3": "hsl(var(--nav-icon-3))",
+          "4": "hsl(var(--nav-icon-4))",
+          "5": "hsl(var(--nav-icon-5))",
+          "6": "hsl(var(--nav-icon-6))",
+          "7": "hsl(var(--nav-icon-7))",
+          "8": "hsl(var(--nav-icon-8))",
+        },
       },
       backgroundImage: {
         "gradient-primary": "var(--gradient-primary)",
