@@ -1148,18 +1148,35 @@ const Workout = () => {
             
             <div className="space-y-6">
               {/* Platform Selection */}
-              <div className="grid grid-cols-3 gap-3">
-                {['Instagram', 'YouTube', 'TikTok'].map((platform) => (
-                  <Button
-                    key={platform}
-                    variant={samplePlatform === platform ? "default" : "outline"}
-                    onClick={() => setSamplePlatform(platform)}
-                    className="h-20 flex-col gap-2"
-                  >
-                    <Video className="w-6 h-6" />
-                    <span className="text-sm">{platform}</span>
-                  </Button>
-                ))}
+              <div>
+                <Label className="text-base mb-3 block">Select Platform</Label>
+                <div className="grid grid-cols-3 gap-3">
+                  {['Instagram', 'YouTube', 'TikTok'].map((platform) => (
+                    <Button
+                      key={platform}
+                      variant={samplePlatform === platform ? "default" : "outline"}
+                      onClick={() => {
+                        setSamplePlatform(platform);
+                        console.log(`Selected platform: ${platform}`);
+                      }}
+                      className={cn(
+                        "h-20 flex-col gap-2 transition-all",
+                        samplePlatform === platform && "ring-2 ring-teal-500 ring-offset-2 scale-105"
+                      )}
+                    >
+                      <Video className="w-6 h-6" />
+                      <span className="text-sm font-semibold">{platform}</span>
+                      {samplePlatform === platform && (
+                        <Check className="w-4 h-4 absolute top-2 right-2 text-teal-600" />
+                      )}
+                    </Button>
+                  ))}
+                </div>
+                {samplePlatform && (
+                  <p className="text-sm text-teal-700 dark:text-teal-300 mt-2 text-center animate-in fade-in">
+                    ✓ {samplePlatform} selected - paste URL or upload video below
+                  </p>
+                )}
               </div>
 
               {/* Video/Link Upload */}
