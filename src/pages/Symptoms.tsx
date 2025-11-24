@@ -4,11 +4,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Slider } from "@/components/ui/slider";
-import { AlertCircle, Plus, Trash2 } from "lucide-react";
+import { AlertCircle, Plus, Trash2, ArrowLeft } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 interface Symptom {
   id: string;
@@ -20,6 +21,7 @@ interface Symptom {
 
 const Symptoms = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [symptoms, setSymptoms] = useState<Symptom[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [symptomName, setSymptomName] = useState("");
@@ -128,6 +130,15 @@ const Symptoms = () => {
 
   return (
     <div className="space-y-6 max-w-4xl">
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => navigate("/medical")}
+        className="gap-2 mb-2"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Back to Health
+      </Button>
       <div className="flex items-center gap-3">
         <div className="p-3 bg-primary/10 rounded-xl">
           <AlertCircle className="w-6 h-6 text-primary" />
