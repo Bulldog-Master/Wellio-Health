@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { User, Save, Share2, Copy, Check, Upload, Settings, ChevronDown, Shield, CreditCard, Bell, HelpCircle, UserCircle } from "lucide-react";
+import { User, Save, Share2, Copy, Check, Upload, Settings, ChevronDown, Shield, CreditCard, Bell, HelpCircle, UserCircle, Target } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -19,6 +19,7 @@ const Profile = () => {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [openPersonalInfo, setOpenPersonalInfo] = useState(true);
+  const [openFitnessGoals, setOpenFitnessGoals] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -203,12 +204,12 @@ const Profile = () => {
         <Collapsible open={openPersonalInfo} onOpenChange={setOpenPersonalInfo}>
           <CollapsibleTrigger className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-accent/20 rounded-lg">
-                <UserCircle className="w-5 h-5 text-accent" />
+              <div className="p-2 bg-secondary/20 rounded-lg">
+                <UserCircle className="w-5 h-5 text-secondary" />
               </div>
               <div className="text-left">
                 <h3 className="text-lg font-semibold">Personal Information</h3>
-                <p className="text-sm text-muted-foreground">Your profile details and fitness data</p>
+                <p className="text-sm text-muted-foreground">Your profile details and account info</p>
               </div>
             </div>
             <ChevronDown className={`w-5 h-5 transition-transform ${openPersonalInfo ? 'rotate-180' : ''}`} />
@@ -333,59 +334,75 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
+      </Card>
 
-              <div className="pt-4 border-t">
-                <h4 className="font-semibold mb-4">Fitness Goals</h4>
-                <div className="space-y-4">
-                  <div>
-                    <Label htmlFor="targetWeight">Target Weight</Label>
-                    <div className="flex gap-2 mt-1.5">
-                      <Input
-                        id="targetWeight"
-                        type="number"
-                        value={formData.targetWeight}
-                        onChange={(e) => setFormData({ ...formData, targetWeight: e.target.value })}
-                        placeholder="155"
-                        className="flex-1"
-                      />
-                      <Select
-                        value={formData.targetWeightUnit}
-                        onValueChange={(value: "lbs" | "kg") => setFormData({ ...formData, targetWeightUnit: value })}
-                      >
-                        <SelectTrigger className="w-24">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="lbs">lbs</SelectItem>
-                          <SelectItem value="kg">kg</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    {formData.targetWeight && (
-                      <p className="text-sm text-muted-foreground mt-2">
-                        = {formData.targetWeightUnit === 'lbs'
-                          ? `${(parseFloat(formData.targetWeight) * 0.453592).toFixed(1)} kg`
-                          : `${(parseFloat(formData.targetWeight) * 2.20462).toFixed(1)} lbs`
-                        }
-                      </p>
-                    )}
-                  </div>
-
-                  <div>
-                    <Label htmlFor="goal">Primary Goal</Label>
-                    <Select value={formData.goal} onValueChange={(value) => setFormData({ ...formData, goal: value })}>
-                      <SelectTrigger className="mt-1.5">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="leaner">Get Leaner</SelectItem>
-                        <SelectItem value="stronger">Build Strength</SelectItem>
-                        <SelectItem value="cardio">Improve Cardio</SelectItem>
-                        <SelectItem value="maintain">Maintain Weight</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+      {/* Fitness Goals Section */}
+      <Card className="bg-gradient-card shadow-md overflow-hidden">
+        <Collapsible open={openFitnessGoals} onOpenChange={setOpenFitnessGoals}>
+          <CollapsibleTrigger className="w-full p-6 flex items-center justify-between hover:bg-muted/50 transition-colors">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-accent/20 rounded-lg">
+                <Target className="w-5 h-5 text-accent" />
+              </div>
+              <div className="text-left">
+                <h3 className="text-lg font-semibold">Fitness Goals</h3>
+                <p className="text-sm text-muted-foreground">Your target weight and fitness objectives</p>
+              </div>
+            </div>
+            <ChevronDown className={`w-5 h-5 transition-transform ${openFitnessGoals ? 'rotate-180' : ''}`} />
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <div className="p-6 pt-0 space-y-4 border-t">
+              <div>
+                <Label htmlFor="targetWeight">Target Weight</Label>
+                <div className="flex gap-2 mt-1.5">
+                  <Input
+                    id="targetWeight"
+                    type="number"
+                    value={formData.targetWeight}
+                    onChange={(e) => setFormData({ ...formData, targetWeight: e.target.value })}
+                    placeholder="155"
+                    className="flex-1"
+                  />
+                  <Select
+                    value={formData.targetWeightUnit}
+                    onValueChange={(value: "lbs" | "kg") => setFormData({ ...formData, targetWeightUnit: value })}
+                  >
+                    <SelectTrigger className="w-24">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="lbs">lbs</SelectItem>
+                      <SelectItem value="kg">kg</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
+                {formData.targetWeight && (
+                  <p className="text-sm text-muted-foreground mt-2">
+                    = {formData.targetWeightUnit === 'lbs'
+                      ? `${(parseFloat(formData.targetWeight) * 0.453592).toFixed(1)} kg`
+                      : `${(parseFloat(formData.targetWeight) * 2.20462).toFixed(1)} lbs`
+                    }
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <Label htmlFor="goal">Primary Goal</Label>
+                <Select value={formData.goal} onValueChange={(value) => setFormData({ ...formData, goal: value })}>
+                  <SelectTrigger className="mt-1.5">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="leaner">Get Leaner</SelectItem>
+                    <SelectItem value="stronger">Build Strength</SelectItem>
+                    <SelectItem value="cardio">Improve Cardio</SelectItem>
+                    <SelectItem value="maintain">Maintain Weight</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </CollapsibleContent>
