@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Activity as ActivityIcon, TrendingUp, Calendar, Flame, Watch, Heart, Moon, Footprints, Plus, Scale, Dumbbell, CheckSquare } from "lucide-react";
+import { Activity as ActivityIcon, TrendingUp, Calendar, Flame, Watch, Heart, Moon, Footprints, Plus, Scale, Dumbbell, CheckSquare, Pill } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
@@ -197,7 +197,7 @@ const Activity = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card 
           className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
           onClick={() => navigate('/weight')}
@@ -239,6 +239,21 @@ const Activity = () => {
             <div>
               <h3 className="text-lg font-semibold">Habits</h3>
               <p className="text-sm text-muted-foreground">Build and track habits</p>
+            </div>
+          </div>
+        </Card>
+
+        <Card 
+          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+          onClick={() => navigate('/supplements')}
+        >
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-gradient-primary/20 rounded-xl">
+              <Pill className="w-6 h-6 text-primary" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">Supplements</h3>
+              <p className="text-sm text-muted-foreground">Manage your supplements</p>
             </div>
           </div>
         </Card>
