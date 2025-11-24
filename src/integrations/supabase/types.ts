@@ -300,31 +300,58 @@ export type Database = {
       }
       profiles: {
         Row: {
+          age: number | null
           avatar_url: string | null
           created_at: string | null
           full_name: string | null
+          gender: string | null
+          goal: string | null
+          height: number | null
+          height_unit: string | null
           id: string
           preferred_unit: string | null
+          target_weight: number | null
+          target_weight_unit: string | null
           updated_at: string | null
           username: string | null
+          weight: number | null
+          weight_unit: string | null
         }
         Insert: {
+          age?: number | null
           avatar_url?: string | null
           created_at?: string | null
           full_name?: string | null
+          gender?: string | null
+          goal?: string | null
+          height?: number | null
+          height_unit?: string | null
           id: string
           preferred_unit?: string | null
+          target_weight?: number | null
+          target_weight_unit?: string | null
           updated_at?: string | null
           username?: string | null
+          weight?: number | null
+          weight_unit?: string | null
         }
         Update: {
+          age?: number | null
           avatar_url?: string | null
           created_at?: string | null
           full_name?: string | null
+          gender?: string | null
+          goal?: string | null
+          height?: number | null
+          height_unit?: string | null
           id?: string
           preferred_unit?: string | null
+          target_weight?: number | null
+          target_weight_unit?: string | null
           updated_at?: string | null
           username?: string | null
+          weight?: number | null
+          weight_unit?: string | null
         }
         Relationships: []
       }

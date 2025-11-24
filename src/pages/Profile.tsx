@@ -52,6 +52,15 @@ const Profile = () => {
           ...prev,
           name: profile.full_name || "",
           username: profile.username || "",
+          age: profile.age?.toString() || "",
+          gender: profile.gender || "male",
+          height: profile.height?.toString() || "",
+          heightUnit: profile.height_unit || "inches",
+          weight: profile.weight?.toString() || "",
+          weightUnit: profile.weight_unit || "lbs",
+          targetWeight: profile.target_weight?.toString() || "",
+          targetWeightUnit: (profile.target_weight_unit as "lbs" | "kg") || "lbs",
+          goal: profile.goal || "leaner",
         }));
         setAvatarUrl(profile.avatar_url);
       }
@@ -110,6 +119,15 @@ const Profile = () => {
         .update({
           full_name: formData.name,
           username: formData.username,
+          age: formData.age ? parseInt(formData.age) : null,
+          gender: formData.gender,
+          height: formData.height ? parseFloat(formData.height) : null,
+          height_unit: formData.heightUnit,
+          weight: formData.weight ? parseFloat(formData.weight) : null,
+          weight_unit: formData.weightUnit,
+          target_weight: formData.targetWeight ? parseFloat(formData.targetWeight) : null,
+          target_weight_unit: formData.targetWeightUnit,
+          goal: formData.goal,
         })
         .eq('id', user.id);
 
