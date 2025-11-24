@@ -921,8 +921,8 @@ const Workout = () => {
                       <div className="flex items-center justify-between">
                         <AccordionTrigger className="flex-1 hover:no-underline py-4">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                              <Dumbbell className="w-5 h-5 text-primary" />
+                            <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+                              <Dumbbell className="w-5 h-5 text-purple-600" />
                             </div>
                             <div className="text-left">
                               <h4 className="font-semibold text-base">{routine.name}</h4>
@@ -942,8 +942,9 @@ const Workout = () => {
                               setShowLibrary(false);
                               setShowRoutineDialog(true);
                             }}
+                            className="hover:bg-blue-500/10"
                           >
-                            <Pencil className="w-4 h-4 text-primary" />
+                            <Pencil className="w-4 h-4 text-blue-500" />
                           </Button>
                           <Button
                             variant="ghost"
@@ -952,8 +953,9 @@ const Workout = () => {
                               e.stopPropagation();
                               handleDeleteRoutine(routine.id);
                             }}
+                            className="hover:bg-red-500/10"
                           >
-                            <Trash2 className="w-4 h-4 text-destructive" />
+                            <Trash2 className="w-4 h-4 text-red-500" />
                           </Button>
                         </div>
                       </div>
@@ -1044,8 +1046,8 @@ const Workout = () => {
                       <div className="flex items-center justify-between">
                         <AccordionTrigger className="flex-1 hover:no-underline py-4">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                              <BookOpen className="w-5 h-5 text-primary" />
+                            <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
+                              <BookOpen className="w-5 h-5 text-orange-600" />
                             </div>
                             <div className="text-left">
                               <h4 className="font-semibold text-base">{routine.name}</h4>
@@ -1069,8 +1071,9 @@ const Workout = () => {
                               e.stopPropagation();
                               handleDeleteSampleRoutine(routine.id);
                             }}
+                            className="hover:bg-red-500/10"
                           >
-                            <Trash2 className="w-4 h-4 text-destructive" />
+                            <Trash2 className="w-4 h-4 text-red-500" />
                           </Button>
                         </div>
                       </div>
