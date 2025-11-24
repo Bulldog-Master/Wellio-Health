@@ -18,7 +18,7 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [openPersonalInfo, setOpenPersonalInfo] = useState(true);
+  const [openPersonalInfo, setOpenPersonalInfo] = useState(false);
   const [openFitnessGoals, setOpenFitnessGoals] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
 
