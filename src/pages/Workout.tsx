@@ -112,82 +112,20 @@ const Workout = () => {
   const [appCategory, setAppCategory] = useState("");
   const [appPlatform, setAppPlatform] = useState("");
   const [appIconUrl, setAppIconUrl] = useState("");
-  const [showAppCatalog, setShowAppCatalog] = useState(false);
+  const handleBrowseApps = () => {
+    const userAgent = navigator.userAgent || navigator.vendor;
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent);
+    const isAndroid = /android/i.test(userAgent);
 
-  const popularApps = [
-    {
-      name: "MyFitnessPal",
-      description: "Track calories, macros, and nutrition",
-      category: "Nutrition Tracking",
-      platform: "Cross-platform",
-      iosUrl: "https://apps.apple.com/us/app/myfitnesspal/id341232718",
-      androidUrl: "https://play.google.com/store/apps/details?id=com.myfitnesspal.android",
-      iconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/57/7f/77/577f7735-4e6d-5f6a-d96c-f6f3d3d3c5d8/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp"
-    },
-    {
-      name: "Strava",
-      description: "Track running and cycling activities",
-      category: "Activity Tracking",
-      platform: "Cross-platform",
-      iosUrl: "https://apps.apple.com/us/app/strava-run-ride-swim/id426826309",
-      androidUrl: "https://play.google.com/store/apps/details?id=com.strava",
-      iconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/e9/3f/88/e93f8898-8e2e-3c2e-2e82-4e3d2e3d2e3d/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp"
-    },
-    {
-      name: "Strong",
-      description: "Workout tracker and gym planner",
-      category: "Workout Tracking",
-      platform: "Cross-platform",
-      iosUrl: "https://apps.apple.com/us/app/strong-workout-tracker-gym-log/id464254577",
-      androidUrl: "https://play.google.com/store/apps/details?id=io.strongapp.strong",
-      iconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/6e/7e/8e/6e7e8e9e-8e2e-3c2e-2e82-4e3d2e3d2e3d/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp"
-    },
-    {
-      name: "Fitbod",
-      description: "AI-powered workout builder",
-      category: "Training",
-      platform: "iOS",
-      iosUrl: "https://apps.apple.com/us/app/fitbod-workout-fitness-planner/id1041517385",
-      androidUrl: "",
-      iconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/7e/8e/9e/7e8e9e9e-8e2e-3c2e-2e82-4e3d2e3d2e3d/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp"
-    },
-    {
-      name: "Nike Training Club",
-      description: "Free workouts from Nike trainers",
-      category: "Training",
-      platform: "Cross-platform",
-      iosUrl: "https://apps.apple.com/us/app/nike-training-club/id301521403",
-      androidUrl: "https://play.google.com/store/apps/details?id=com.nike.ntc",
-      iconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/8e/9e/ae/8e9eaeae-8e2e-3c2e-2e82-4e3d2e3d2e3d/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp"
-    },
-    {
-      name: "Peloton",
-      description: "Live and on-demand fitness classes",
-      category: "Training",
-      platform: "Cross-platform",
-      iosUrl: "https://apps.apple.com/us/app/peloton-fitness-workouts/id792750948",
-      androidUrl: "https://play.google.com/store/apps/details?id=com.onepeloton.callisto",
-      iconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/9e/ae/be/9eaebebe-8e2e-3c2e-2e82-4e3d2e3d2e3d/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp"
-    },
-    {
-      name: "Cronometer",
-      description: "Detailed nutrition and macro tracking",
-      category: "Nutrition Tracking",
-      platform: "Cross-platform",
-      iosUrl: "https://apps.apple.com/us/app/cronometer-nutrition-tracker/id1145935738",
-      androidUrl: "https://play.google.com/store/apps/details?id=com.cronometer.android.gold",
-      iconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/ae/be/ce/aebecece-8e2e-3c2e-2e82-4e3d2e3d2e3d/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp"
-    },
-    {
-      name: "Headspace",
-      description: "Meditation and mindfulness",
-      category: "Recovery & Wellness",
-      platform: "Cross-platform",
-      iosUrl: "https://apps.apple.com/us/app/headspace-meditation-sleep/id493145008",
-      androidUrl: "https://play.google.com/store/apps/details?id=com.getsomeheadspace.android",
-      iconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/be/ce/de/becedede-8e2e-3c2e-2e82-4e3d2e3d2e3d/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/230x0w.webp"
+    if (isIOS) {
+      window.open('https://apps.apple.com/us/genre/ios-health-fitness/id6013', '_blank');
+    } else if (isAndroid) {
+      window.open('https://play.google.com/store/apps/category/HEALTH_AND_FITNESS', '_blank');
+    } else {
+      // For desktop/other devices, show both options or default to iOS
+      window.open('https://apps.apple.com/us/genre/ios-health-fitness/id6013', '_blank');
     }
-  ];
+  };
 
   const baseExercises = [
     "Bench Press", "Incline Bench Press", "Decline Bench Press", "Dumbbell Press", "Chest Fly",
@@ -823,50 +761,6 @@ const Workout = () => {
       setAppPlatform("");
       setAppIconUrl("");
       setShowAddApp(false);
-      fetchSavedApps();
-    } catch (error) {
-      console.error('Error saving app:', error);
-      toast({
-        title: "Error",
-        description: "Failed to save app.",
-        variant: "destructive",
-      });
-    }
-  };
-
-  const handleSaveAppFromCatalog = async (app: typeof popularApps[0]) => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error("User not authenticated");
-
-      // Determine the URL based on platform preference
-      let appUrl = app.iosUrl; // Default to iOS
-      if (app.platform === "Android" && app.androidUrl) {
-        appUrl = app.androidUrl;
-      } else if (app.platform === "Cross-platform") {
-        // For cross-platform, prioritize iOS but could show both
-        appUrl = app.iosUrl || app.androidUrl;
-      }
-
-      const { error } = await supabase
-        .from('saved_apps')
-        .insert({
-          user_id: user.id,
-          app_name: app.name,
-          app_description: app.description,
-          app_url: appUrl,
-          app_category: app.category,
-          platform: app.platform,
-          app_icon_url: app.iconUrl,
-        });
-
-      if (error) throw error;
-
-      toast({
-        title: "App saved",
-        description: `${app.name} has been added to your library.`,
-      });
-
       fetchSavedApps();
     } catch (error) {
       console.error('Error saving app:', error);
@@ -1856,7 +1750,7 @@ const Workout = () => {
             <DialogTitle className="text-2xl text-emerald-900 dark:text-emerald-100 flex items-center justify-between">
               <span>Apps Library</span>
               <div className="flex gap-2">
-                <Button variant="outline" size="sm" onClick={() => setShowAppCatalog(true)} className="bg-emerald-100 dark:bg-emerald-900/50 border-emerald-300 dark:border-emerald-700 hover:bg-emerald-200 dark:hover:bg-emerald-900">
+                <Button variant="outline" size="sm" onClick={handleBrowseApps} className="bg-emerald-100 dark:bg-emerald-900/50 border-emerald-300 dark:border-emerald-700 hover:bg-emerald-200 dark:hover:bg-emerald-900">
                   <Smartphone className="w-4 h-4 mr-2" />
                   Browse Apps
                 </Button>
@@ -2038,47 +1932,6 @@ const Workout = () => {
         </DialogContent>
       </Dialog>
 
-      {/* App Catalog Dialog */}
-      <Dialog open={showAppCatalog} onOpenChange={setShowAppCatalog}>
-        <DialogContent className="max-w-6xl max-h-[85vh] overflow-y-auto bg-gradient-to-br from-sky-50 to-blue-50 dark:from-sky-950/30 dark:to-blue-950/30 border-2 border-sky-200 dark:border-sky-800 shadow-2xl">
-          <DialogHeader>
-            <DialogTitle className="text-2xl text-sky-900 dark:text-sky-100">Browse Popular Fitness Apps</DialogTitle>
-            <p className="text-sm text-muted-foreground mt-2">Click any app to save it to your library</p>
-          </DialogHeader>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-            {popularApps.map((app, idx) => (
-              <Card key={idx} className="p-4 bg-white/70 dark:bg-black/30 hover:shadow-lg transition-all hover:scale-105 cursor-pointer" onClick={() => handleSaveAppFromCatalog(app)}>
-                <div className="flex flex-col gap-3">
-                  <div className="flex items-start gap-3">
-                    <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-sky-100 to-blue-100 dark:from-sky-900/50 dark:to-blue-900/50 flex items-center justify-center flex-shrink-0 overflow-hidden">
-                      {app.iconUrl ? (
-                        <img src={app.iconUrl} alt={app.name} className="w-full h-full object-cover" />
-                      ) : (
-                        <Smartphone className="w-8 h-8 text-sky-600 dark:text-sky-400" />
-                      )}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-lg truncate">{app.name}</h3>
-                      <span className="text-xs px-2 py-1 bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300 rounded-full inline-block mt-1">
-                        {app.platform}
-                      </span>
-                    </div>
-                  </div>
-                  <p className="text-sm text-muted-foreground line-clamp-2">{app.description}</p>
-                  <div className="flex items-center justify-between pt-2 border-t">
-                    <span className="text-xs text-muted-foreground">{app.category}</span>
-                    <Button size="sm" variant="ghost" className="text-sky-600 dark:text-sky-400 hover:bg-sky-100 dark:hover:bg-sky-900/50">
-                      <Plus className="w-4 h-4 mr-1" />
-                      Add
-                    </Button>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };
