@@ -21,31 +21,33 @@ const Profile = () => {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const fitnessGoalsRef = useRef<HTMLDivElement>(null);
-  const [openPersonalInfo, setOpenPersonalInfo] = useState(false);
-  const [openFitnessGoals, setOpenFitnessGoals] = useState(false);
-  const [openSettings, setOpenSettings] = useState(false);
+  
+  // Get the section to open from navigation state
+  const openSection = location.state?.openSection;
+  
+  const [openPersonalInfo, setOpenPersonalInfo] = useState(openSection === 'personal-info');
+  const [openFitnessGoals, setOpenFitnessGoals] = useState(openSection === 'fitness-goals');
+  const [openSettings, setOpenSettings] = useState(openSection === 'settings');
 
   useEffect(() => {
-    // Check URL hash to open specific section
-    const hash = location.hash.replace('#', '');
-    if (hash === 'fitness-goals') {
+    // When navigation state changes, update which section is open
+    if (openSection === 'fitness-goals') {
       setOpenFitnessGoals(true);
       setOpenPersonalInfo(false);
       setOpenSettings(false);
-      // Scroll to fitness goals section after a brief delay
       setTimeout(() => {
         fitnessGoalsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
-    } else if (hash === 'personal-info') {
+    } else if (openSection === 'personal-info') {
       setOpenPersonalInfo(true);
       setOpenFitnessGoals(false);
       setOpenSettings(false);
-    } else if (hash === 'settings') {
+    } else if (openSection === 'settings') {
       setOpenSettings(true);
       setOpenPersonalInfo(false);
       setOpenFitnessGoals(false);
     }
-  }, [location.hash]);
+  }, [openSection]);
 
   const [formData, setFormData] = useState({
     name: "",
