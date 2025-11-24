@@ -4,7 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -21,6 +22,24 @@ interface ActivityLog {
   logged_at: string;
 }
 
+interface WorkoutRoutine {
+  id: string;
+  name: string;
+  description: string | null;
+  exercises: Array<{
+    name: string;
+    sets?: number;
+    reps?: number;
+    duration?: number;
+  }>;
+}
+
+interface WorkoutMedia {
+  id: string;
+  file_url: string;
+  file_type: string;
+}
+
 const Workout = () => {
   const { toast } = useToast();
   const { preferredUnit } = useUserPreferences();
@@ -32,6 +51,10 @@ const Workout = () => {
   const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [editingWorkout, setEditingWorkout] = useState<string | null>(null);
+  const [workoutRoutines, setWorkoutRoutines] = useState<WorkoutRoutine[]>([]);
+  const [showRoutineDialog, setShowRoutineDialog] = useState(false);
+  const [uploadingFiles, setUploadingFiles] = useState(false);
+  const [workoutMedia, setWorkoutMedia] = useState<Record<string, WorkoutMedia[]>>({});
 
   // Calorie calculation based on activity, duration, and intensity
   const calculateCalories = (activityType: string, durationMin: number, intensityLevel: string): number => {
@@ -62,6 +85,7 @@ const Workout = () => {
 
   useEffect(() => {
     fetchActivityLogs();
+    fetchWorkoutRoutines();
   }, []);
 
   const fetchActivityLogs = async () => {
@@ -81,10 +105,54 @@ const Workout = () => {
 
       if (error) throw error;
       setActivityLogs(data || []);
+      
+      // Fetch media for each activity log
+      if (data && data.length > 0) {
+        const mediaPromises = data.map(async (log) => {
+          const { data: mediaData } = await supabase
+            .from('workout_media')
+            .select('*')
+            .eq('activity_log_id', log.id);
+          return { logId: log.id, media: mediaData || [] };
+        });
+        
+        const mediaResults = await Promise.all(mediaPromises);
+        const mediaMap: Record<string, WorkoutMedia[]> = {};
+        mediaResults.forEach(({ logId, media }) => {
+          mediaMap[logId] = media;
+        });
+        setWorkoutMedia(mediaMap);
+      }
     } catch (error) {
       console.error('Error fetching activity logs:', error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const fetchWorkoutRoutines = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from('workout_routines')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setWorkoutRoutines((data || []).map(routine => ({
+        ...routine,
+        exercises: routine.exercises as Array<{
+          name: string;
+          sets?: number;
+          reps?: number;
+          duration?: number;
+        }>
+      })));
+    } catch (error) {
+      console.error('Error fetching workout routines:', error);
     }
   };
 
@@ -206,16 +274,118 @@ const Workout = () => {
     }
   };
 
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>, activityLogId: string) => {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
+
+    setUploadingFiles(true);
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("User not authenticated");
+
+      for (const file of Array.from(files)) {
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${user.id}/${Date.now()}.${fileExt}`;
+        const filePath = `${fileName}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from('workout-media')
+          .upload(filePath, file);
+
+        if (uploadError) throw uploadError;
+
+        const { data: { publicUrl } } = supabase.storage
+          .from('workout-media')
+          .getPublicUrl(filePath);
+
+        const { error: dbError } = await supabase
+          .from('workout_media')
+          .insert({
+            user_id: user.id,
+            activity_log_id: activityLogId,
+            file_url: publicUrl,
+            file_type: file.type,
+          });
+
+        if (dbError) throw dbError;
+      }
+
+      toast({
+        title: "Upload successful",
+        description: "Your media has been uploaded.",
+      });
+
+      fetchActivityLogs();
+    } catch (error) {
+      console.error('Error uploading files:', error);
+      toast({
+        title: "Upload failed",
+        description: "Failed to upload media.",
+        variant: "destructive",
+      });
+    } finally {
+      setUploadingFiles(false);
+    }
+  };
+
   return (
     <div className="space-y-6 max-w-4xl">
-      <div className="flex items-center gap-3">
-        <div className="p-3 bg-primary/10 rounded-xl">
-          <Dumbbell className="w-6 h-6 text-primary" />
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="p-3 bg-primary/10 rounded-xl">
+            <Dumbbell className="w-6 h-6 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold">Workout Log</h1>
+            <p className="text-muted-foreground">Track your daily exercises</p>
+          </div>
         </div>
-        <div>
-          <h1 className="text-3xl font-bold">Workout Log</h1>
-          <p className="text-muted-foreground">Track your daily exercises</p>
-        </div>
+        <Dialog open={showRoutineDialog} onOpenChange={setShowRoutineDialog}>
+          <DialogTrigger asChild>
+            <Button variant="outline" className="gap-2">
+              <ListOrdered className="w-4 h-4" />
+              Routines
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>Workout Routines</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4 max-h-[60vh] overflow-y-auto">
+              {workoutRoutines.length > 0 ? (
+                workoutRoutines.map((routine) => (
+                  <Card key={routine.id} className="p-4">
+                    <h4 className="font-semibold text-lg mb-2">{routine.name}</h4>
+                    {routine.description && (
+                      <p className="text-sm text-muted-foreground mb-3">{routine.description}</p>
+                    )}
+                    <div className="space-y-2">
+                      {routine.exercises.map((exercise, idx) => (
+                        <div key={idx} className="text-sm p-2 bg-secondary/50 rounded">
+                          <span className="font-medium">{exercise.name}</span>
+                          {exercise.sets && exercise.reps && (
+                            <span className="text-muted-foreground ml-2">
+                              {exercise.sets} sets × {exercise.reps} reps
+                            </span>
+                          )}
+                          {exercise.duration && (
+                            <span className="text-muted-foreground ml-2">
+                              {exercise.duration} min
+                            </span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </Card>
+                ))
+              ) : (
+                <p className="text-center text-muted-foreground py-8">
+                  No routines saved yet
+                </p>
+              )}
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -411,11 +581,48 @@ const Workout = () => {
                     {log.notes && (
                       <p className="text-sm text-muted-foreground mt-2">{log.notes}</p>
                     )}
+                    {workoutMedia[log.id] && workoutMedia[log.id].length > 0 && (
+                      <div className="flex gap-2 mt-3 flex-wrap">
+                        {workoutMedia[log.id].map((media) => (
+                          <a
+                            key={media.id}
+                            href={media.file_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="relative w-20 h-20 rounded-lg overflow-hidden border border-border hover:opacity-80 transition-opacity"
+                          >
+                            {media.file_type.startsWith('image/') ? (
+                              <img src={media.file_url} alt="Workout" className="w-full h-full object-cover" />
+                            ) : (
+                              <div className="w-full h-full bg-secondary flex items-center justify-center">
+                                <Video className="w-6 h-6 text-muted-foreground" />
+                              </div>
+                            )}
+                          </a>
+                        ))}
+                      </div>
+                    )}
                   </div>
                   <div className="flex items-center gap-2">
                     {log.calories_burned && (
                       <span className="font-bold text-accent">{log.calories_burned} cal</span>
                     )}
+                    <input
+                      type="file"
+                      id={`upload-${log.id}`}
+                      className="hidden"
+                      accept="image/*,video/*"
+                      multiple
+                      onChange={(e) => handleFileUpload(e, log.id)}
+                    />
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => document.getElementById(`upload-${log.id}`)?.click()}
+                      disabled={uploadingFiles}
+                    >
+                      <Upload className="w-4 h-4" />
+                    </Button>
                     <Button
                       variant="ghost"
                       size="icon"
