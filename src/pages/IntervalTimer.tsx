@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Timer, Plus, Trash2, Play, X, ChevronRight, ArrowLeft } from "lucide-react";
+import { Timer, Plus, Trash2, Play, X, ChevronRight, ArrowLeft, FolderOpen, FolderPlus, MoreVertical, Folder } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
@@ -24,14 +24,26 @@ interface IntervalTimer {
   show_line_numbers: boolean;
   show_elapsed_time: boolean;
   intervals: any;
+  folder_id?: string | null;
+}
+
+interface TimerFolder {
+  id: string;
+  name: string;
+  created_at: string;
 }
 
 const IntervalTimer = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [timers, setTimers] = useState<IntervalTimer[]>([]);
+  const [folders, setFolders] = useState<TimerFolder[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isLibraryOpen, setIsLibraryOpen] = useState(false);
+  const [isFolderDialogOpen, setIsFolderDialogOpen] = useState(false);
+  const [selectedFolder, setSelectedFolder] = useState<TimerFolder | null>(null);
+  const [folderName, setFolderName] = useState("");
   const [editingTimer, setEditingTimer] = useState<IntervalTimer | null>(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -49,6 +61,7 @@ const IntervalTimer = () => {
 
   useEffect(() => {
     fetchTimers();
+    fetchFolders();
   }, []);
 
   const fetchTimers = async () => {
@@ -73,6 +86,24 @@ const IntervalTimer = () => {
       });
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const fetchFolders = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from('timer_folders')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setFolders(data || []);
+    } catch (error) {
+      console.error('Error fetching folders:', error);
     }
   };
 
@@ -191,6 +222,51 @@ const IntervalTimer = () => {
     }
   };
 
+  const handleCreateFolder = async () => {
+    if (!folderName.trim()) {
+      toast({
+        title: "Name required",
+        description: "Please enter a folder name.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Not authenticated");
+
+      const { error } = await supabase
+        .from('timer_folders')
+        .insert({
+          name: folderName,
+          user_id: user.id,
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: "Folder created",
+        description: "Your folder has been created successfully.",
+      });
+
+      setFolderName("");
+      setIsFolderDialogOpen(false);
+      fetchFolders();
+    } catch (error) {
+      console.error('Error creating folder:', error);
+      toast({
+        title: "Error",
+        description: "Failed to create folder.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const getFolderTimers = (folderId: string | null) => {
+    return timers.filter(timer => timer.folder_id === folderId);
+  };
+
   return (
     <div className="space-y-6 max-w-4xl">
       <Button 
@@ -212,10 +288,16 @@ const IntervalTimer = () => {
             <p className="text-muted-foreground">Create custom workout timers</p>
           </div>
         </div>
-        <Button onClick={handleCreate} className="gap-2">
-          <Plus className="w-4 h-4" />
-          New Timer
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button onClick={() => setIsLibraryOpen(true)} variant="outline" className="gap-2">
+            <FolderOpen className="w-4 h-4" />
+            Library
+          </Button>
+          <Button onClick={handleCreate} className="gap-2">
+            <Plus className="w-4 h-4" />
+            New Timer
+          </Button>
+        </div>
       </div>
 
       <Card className="p-6 bg-gradient-card shadow-md">
@@ -419,6 +501,141 @@ const IntervalTimer = () => {
             </Button>
             <Button onClick={handleSave}>
               Save Timer
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Library Dialog */}
+      <Dialog open={isLibraryOpen} onOpenChange={setIsLibraryOpen}>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center justify-between">
+              <span>Your Library</span>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsFolderDialogOpen(true)}
+                className="gap-2"
+              >
+                <FolderPlus className="w-4 h-4" />
+              </Button>
+            </DialogTitle>
+          </DialogHeader>
+
+          <div className="space-y-6 py-4">
+            <div className="space-y-2">
+              <div className="text-sm font-medium text-muted-foreground mb-3">TIMERS</div>
+              
+              {/* Unfiled Timers */}
+              {getFolderTimers(null).length > 0 && (
+                <div className="space-y-2">
+                  {getFolderTimers(null).map((timer) => (
+                    <div key={timer.id} className="flex items-center justify-between p-3 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors">
+                      <div className="flex items-center gap-3 flex-1">
+                        <Timer className="w-4 h-4 text-muted-foreground" />
+                        <span className="font-medium">{timer.name}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Button variant="ghost" size="sm" onClick={() => handleEdit(timer)}>
+                          Edit
+                        </Button>
+                        <Button variant="ghost" size="icon" onClick={() => handleDelete(timer.id)}>
+                          <Trash2 className="w-4 h-4 text-destructive" />
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Folders */}
+              {folders.map((folder) => (
+                <div key={folder.id} className="space-y-2">
+                  <div 
+                    className="flex items-center justify-between p-3 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors cursor-pointer"
+                    onClick={() => setSelectedFolder(selectedFolder?.id === folder.id ? null : folder)}
+                  >
+                    <div className="flex items-center gap-3">
+                      <Folder className="w-4 h-4 text-primary" />
+                      <span className="font-medium">{folder.name}</span>
+                      <span className="text-xs text-muted-foreground">
+                        ({getFolderTimers(folder.id).length})
+                      </span>
+                    </div>
+                    <ChevronRight className={`w-4 h-4 transition-transform ${selectedFolder?.id === folder.id ? 'rotate-90' : ''}`} />
+                  </div>
+                  
+                  {/* Timers in folder */}
+                  {selectedFolder?.id === folder.id && (
+                    <div className="ml-8 space-y-2">
+                      {getFolderTimers(folder.id).map((timer) => (
+                        <div key={timer.id} className="flex items-center justify-between p-3 bg-background rounded-lg">
+                          <div className="flex items-center gap-3 flex-1">
+                            <Timer className="w-4 h-4 text-muted-foreground" />
+                            <span>{timer.name}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Button variant="ghost" size="sm" onClick={() => handleEdit(timer)}>
+                              Edit
+                            </Button>
+                            <Button variant="ghost" size="icon" onClick={() => handleDelete(timer.id)}>
+                              <Trash2 className="w-4 h-4 text-destructive" />
+                            </Button>
+                          </div>
+                        </div>
+                      ))}
+                      {getFolderTimers(folder.id).length === 0 && (
+                        <p className="text-sm text-muted-foreground text-center py-4">No timers in this folder</p>
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {folders.length === 0 && getFolderTimers(null).length === 0 && (
+              <div className="text-center py-12">
+                <FolderOpen className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
+                <p className="text-muted-foreground mb-4">No folders or timers yet</p>
+                <Button onClick={() => setIsFolderDialogOpen(true)} variant="outline" className="gap-2">
+                  <FolderPlus className="w-4 h-4" />
+                  Create Your First Folder
+                </Button>
+              </div>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Create Folder Dialog */}
+      <Dialog open={isFolderDialogOpen} onOpenChange={setIsFolderDialogOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>New folder</DialogTitle>
+            <DialogDescription>Please enter a name</DialogDescription>
+          </DialogHeader>
+
+          <div className="py-4">
+            <Input
+              value={folderName}
+              onChange={(e) => setFolderName(e.target.value)}
+              placeholder="Folder name"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') handleCreateFolder();
+              }}
+            />
+          </div>
+
+          <div className="flex justify-end gap-2">
+            <Button variant="ghost" onClick={() => {
+              setIsFolderDialogOpen(false);
+              setFolderName("");
+            }}>
+              Cancel
+            </Button>
+            <Button onClick={handleCreateFolder}>
+              OK
             </Button>
           </div>
         </DialogContent>
