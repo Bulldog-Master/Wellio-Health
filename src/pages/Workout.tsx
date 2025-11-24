@@ -64,8 +64,12 @@ const Workout = () => {
   const [openExercisePopover, setOpenExercisePopover] = useState<number | null>(null);
   const [showLibrary, setShowLibrary] = useState(false);
   const [uploadingExerciseMedia, setUploadingExerciseMedia] = useState<number | null>(null);
+  const [customExercises, setCustomExercises] = useState<string[]>(() => {
+    const saved = localStorage.getItem('customExercises');
+    return saved ? JSON.parse(saved) : [];
+  });
 
-  const commonExercises = [
+  const baseExercises = [
     "Bench Press", "Incline Bench Press", "Decline Bench Press", "Dumbbell Press", "Chest Fly",
     "Squats", "Front Squats", "Bulgarian Split Squats", "Leg Press", "Hack Squat",
     "Deadlift", "Romanian Deadlift", "Sumo Deadlift", "Trap Bar Deadlift",
@@ -84,7 +88,9 @@ const Workout = () => {
     "Battle Ropes", "Sled Push", "Sled Pull",
     "Running", "Cycling", "Swimming", "Rowing", "Jump Rope",
     "Yoga", "Pilates", "Stretching"
-  ].sort();
+  ];
+  
+  const allExercises = [...new Set([...baseExercises, ...customExercises])].sort();
   const [routineName, setRoutineName] = useState("");
   const [routineDescription, setRoutineDescription] = useState("");
   const [routineExercises, setRoutineExercises] = useState<Array<{ name: string; sets?: number; reps?: number; duration?: number; media_url?: string }>>([]);
@@ -410,6 +416,16 @@ const Workout = () => {
     const updated = [...routineExercises];
     updated[index] = { ...updated[index], [field]: value };
     setRoutineExercises(updated);
+    
+    // If updating the name field with a custom exercise, add it to the custom list
+    if (field === 'name' && typeof value === 'string' && value.trim()) {
+      const exerciseName = value.trim();
+      if (!baseExercises.includes(exerciseName) && !customExercises.includes(exerciseName)) {
+        const updatedCustom = [...customExercises, exerciseName].sort();
+        setCustomExercises(updatedCustom);
+        localStorage.setItem('customExercises', JSON.stringify(updatedCustom));
+      }
+    }
   };
 
   const handleRemoveRoutineExercise = (index: number) => {
@@ -598,15 +614,15 @@ const Workout = () => {
                             </PopoverTrigger>
                             <PopoverContent className="w-[300px] p-0">
                               <Command>
-                                <CommandInput 
-                                  placeholder="Search or type exercise..." 
-                                  value={exercise.name}
-                                  onValueChange={(value) => handleUpdateRoutineExercise(idx, 'name', value)}
-                                />
-                                <CommandList>
-                                  <CommandEmpty>Press Enter to use "{exercise.name}"</CommandEmpty>
-                                  <CommandGroup>
-                                    {commonExercises.map((ex) => (
+                                  <CommandInput 
+                                    placeholder="Search or type exercise..." 
+                                    value={exercise.name}
+                                    onValueChange={(value) => handleUpdateRoutineExercise(idx, 'name', value)}
+                                  />
+                                  <CommandList>
+                                    <CommandEmpty>Press Enter to use "{exercise.name}"</CommandEmpty>
+                                    <CommandGroup>
+                                      {allExercises.map((ex) => (
                                       <CommandItem
                                         key={ex}
                                         value={ex}
