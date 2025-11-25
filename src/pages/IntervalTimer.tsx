@@ -27,14 +27,14 @@ const IntervalTimer = () => {
   const [timers, setTimers] = useState<IntervalTimer[]>([]);
   const [isFolderDialogOpen, setIsFolderDialogOpen] = useState(false);
   const [isNewTimerOpen, setIsNewTimerOpen] = useState(false);
+  const [isSoundPickerOpen, setIsSoundPickerOpen] = useState(false);
+  const [soundPickerType, setSoundPickerType] = useState<'interval' | 'timer' | 'doublebeep'>('interval');
   const [folderName, setFolderName] = useState("");
   const [timerName, setTimerName] = useState("");
   const [timerSettings, setTimerSettings] = useState({
-    intervalCompleteSound: "bell",
-    timerCompleteSound: "bell", 
-    doubleBeepRepeat: false,
-    soundEnabled: true,
-    soundVolume: 100,
+    intervalCompleteSound: "beep",
+    timerCompleteSound: "beep", 
+    doubleBeepSound: "doublebeep",
     textToSpeech: false,
     includeSets: false,
     includeReps: false,
@@ -48,6 +48,138 @@ const IntervalTimer = () => {
   });
   const { toast } = useToast();
   const navigate = useNavigate();
+
+  const soundOptions = [
+    { id: 'none', name: 'No sound' },
+    { id: 'beep', name: 'Beep' },
+    { id: 'doublebeep', name: 'Double beep' },
+    { id: 'triplet', name: 'Triplet' },
+    { id: 'om', name: 'Om' },
+    { id: 'alert', name: 'Alert' },
+    { id: 'pipes', name: 'Pipes' },
+    { id: 'pluck', name: 'Pluck' },
+    { id: 'flourish', name: 'Flourish' },
+    { id: 'sonar', name: 'Sonar' },
+    { id: 'chime', name: 'Chime' },
+    { id: 'bell', name: 'Bell' },
+    { id: 'gong', name: 'Gong' },
+    { id: 'singingbowl', name: 'Singing bowl' },
+    { id: 'meditationbowl', name: 'Meditation bowl' },
+    { id: 'meditationtriplet', name: 'Meditation triplet' },
+  ];
+
+  const playSound = (soundId: string) => {
+    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+    
+    const playSingleBeep = (frequency: number, startTime: number, duration: number) => {
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+      
+      osc.frequency.setValueAtTime(frequency, startTime);
+      gain.gain.setValueAtTime(0.3, startTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+      
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+    };
+    
+    const now = audioContext.currentTime;
+    
+    switch(soundId) {
+      case 'beep':
+        playSingleBeep(800, now, 0.15);
+        break;
+      case 'doublebeep':
+        playSingleBeep(800, now, 0.1);
+        playSingleBeep(800, now + 0.15, 0.1);
+        break;
+      case 'triplet':
+        playSingleBeep(800, now, 0.08);
+        playSingleBeep(800, now + 0.12, 0.08);
+        playSingleBeep(800, now + 0.24, 0.08);
+        break;
+      case 'om':
+        playSingleBeep(200, now, 0.8);
+        break;
+      case 'alert':
+        playSingleBeep(1000, now, 0.1);
+        playSingleBeep(800, now + 0.15, 0.1);
+        break;
+      case 'pipes':
+        playSingleBeep(600, now, 0.3);
+        playSingleBeep(700, now + 0.1, 0.3);
+        break;
+      case 'pluck':
+        playSingleBeep(1200, now, 0.05);
+        break;
+      case 'flourish':
+        playSingleBeep(600, now, 0.1);
+        playSingleBeep(800, now + 0.1, 0.1);
+        playSingleBeep(1000, now + 0.2, 0.15);
+        break;
+      case 'sonar':
+        playSingleBeep(400, now, 0.3);
+        break;
+      case 'chime':
+        playSingleBeep(1500, now, 0.4);
+        playSingleBeep(1200, now + 0.1, 0.4);
+        break;
+      case 'bell':
+        playSingleBeep(1000, now, 0.5);
+        break;
+      case 'gong':
+        playSingleBeep(150, now, 1.0);
+        break;
+      case 'singingbowl':
+        playSingleBeep(400, now, 1.2);
+        break;
+      case 'meditationbowl':
+        playSingleBeep(300, now, 1.5);
+        break;
+      case 'meditationtriplet':
+        playSingleBeep(350, now, 0.5);
+        playSingleBeep(350, now + 0.6, 0.5);
+        playSingleBeep(350, now + 1.2, 0.5);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleSoundSelect = (soundId: string) => {
+    playSound(soundId);
+    
+    if (soundPickerType === 'interval') {
+      setTimerSettings({ ...timerSettings, intervalCompleteSound: soundId });
+    } else if (soundPickerType === 'timer') {
+      setTimerSettings({ ...timerSettings, timerCompleteSound: soundId });
+    } else if (soundPickerType === 'doublebeep') {
+      setTimerSettings({ ...timerSettings, doubleBeepSound: soundId });
+    }
+    
+    setIsSoundPickerOpen(false);
+  };
+
+  const openSoundPicker = (type: 'interval' | 'timer' | 'doublebeep') => {
+    setSoundPickerType(type);
+    setIsSoundPickerOpen(true);
+  };
+
+  const getCurrentSound = () => {
+    if (soundPickerType === 'interval') return timerSettings.intervalCompleteSound;
+    if (soundPickerType === 'timer') return timerSettings.timerCompleteSound;
+    return timerSettings.doubleBeepSound;
+  };
 
   useEffect(() => {
     fetchTimers();
@@ -223,14 +355,18 @@ const IntervalTimer = () => {
               
               <div className="flex items-center justify-between py-3">
                 <Label className="text-lg text-foreground font-normal">Interval complete</Label>
-                <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                <button onClick={() => openSoundPicker('interval')}>
+                  <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                </button>
               </div>
 
               <div className="flex items-center justify-between py-3">
                 <Label className="text-lg text-foreground font-normal">Timer complete</Label>
                 <div className="flex items-center gap-2">
                   <Label className="text-sm text-muted-foreground font-normal">Double beep (repeat)</Label>
-                  <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                  <button onClick={() => openSoundPicker('doublebeep')}>
+                    <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                  </button>
                 </div>
               </div>
             </div>
@@ -368,6 +504,55 @@ const IntervalTimer = () => {
                 </p>
               </div>
             </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Sound Picker Dialog */}
+      <Dialog open={isSoundPickerOpen} onOpenChange={setIsSoundPickerOpen}>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-background p-0">
+          <div className="sticky top-0 bg-background border-b border-border z-10">
+            <div className="flex items-center justify-between p-4">
+              <button
+                onClick={() => setIsSoundPickerOpen(false)}
+                className="text-primary"
+              >
+                <ArrowLeft className="h-6 w-6" />
+              </button>
+              <h2 className="text-xl font-semibold text-foreground">Sounds</h2>
+              <div className="w-6"></div>
+            </div>
+          </div>
+
+          <div className="p-0">
+            {/* No sound option */}
+            <button
+              onClick={() => handleSoundSelect('none')}
+              className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors border-b border-border"
+            >
+              <span className="text-lg text-foreground">No sound</span>
+              {getCurrentSound() === 'none' && (
+                <span className="text-primary text-2xl">✓</span>
+              )}
+            </button>
+
+            {/* Select a sound section */}
+            <div className="p-4 bg-muted/30">
+              <h3 className="text-sm font-semibold text-muted-foreground">SELECT A SOUND</h3>
+            </div>
+
+            {soundOptions.slice(1).map((sound) => (
+              <button
+                key={sound.id}
+                onClick={() => handleSoundSelect(sound.id)}
+                className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors border-b border-border"
+              >
+                <span className="text-lg text-foreground">{sound.name}</span>
+                {getCurrentSound() === sound.id && (
+                  <span className="text-primary text-2xl">✓</span>
+                )}
+              </button>
+            ))}
           </div>
         </DialogContent>
       </Dialog>
