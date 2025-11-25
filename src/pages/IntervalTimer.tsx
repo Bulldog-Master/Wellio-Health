@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Timer, FolderPlus, MoreHorizontal, ArrowLeft, X, ChevronRight } from "lucide-react";
+import { Timer, FolderPlus, MoreHorizontal, ArrowLeft, X, ChevronRight, ChevronLeft, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import {
@@ -47,6 +47,7 @@ const IntervalTimer = () => {
   const [newIntervalName, setNewIntervalName] = useState("");
   const [newIntervalDuration, setNewIntervalDuration] = useState("");
   const [newIntervalColor, setNewIntervalColor] = useState("#3B82F6");
+  const [currentIntervalIndex, setCurrentIntervalIndex] = useState(0);
   const [timerSettings, setTimerSettings] = useState({
     intervalCompleteSound: "beep",
     timerCompleteSound: "beep",
@@ -217,6 +218,38 @@ const IntervalTimer = () => {
 
   const handleDeleteInterval = (id: string) => {
     setIntervals(intervals.filter(interval => interval.id !== id));
+  };
+
+  const handlePreviousInterval = () => {
+    setCurrentIntervalIndex((prev) => (prev > 0 ? prev - 1 : intervals.length - 1));
+  };
+
+  const handleNextInterval = () => {
+    setCurrentIntervalIndex((prev) => (prev < intervals.length - 1 ? prev + 1 : 0));
+  };
+
+  const calculateTotalTime = () => {
+    const totalSeconds = intervals.reduce((sum, interval) => sum + interval.duration, 0) * repeatCount;
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  };
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const handleTimerSelect = (timer: any) => {
+    setTimerName(timer.name);
+    setSelectedTimerId(timer.id);
+    
+    // Load timer intervals
+    const timerIntervals = (timer.intervals || []) as Array<{ id: string; name: string; duration: number; color: string }>;
+    setIntervals(timerIntervals);
+    setCurrentIntervalIndex(0);
+    setRepeatCount(1); // Default repeat count
   };
 
   const playSound = (soundId: string) => {
@@ -530,11 +563,15 @@ const IntervalTimer = () => {
                     </div>
                   </button>
                 )}
-                <div className="flex-1">
+                <button 
+                  className="flex-1 text-left"
+                  onClick={() => handleTimerSelect(timer)}
+                  disabled={isSelectMoveMode || isEditMode}
+                >
                   <span className="text-lg font-medium text-foreground">
                     {timer.name}
                   </span>
-                </div>
+                </button>
                 <div className="flex items-center gap-3">
                   <span className="text-lg text-muted-foreground">
                     {formatDuration(timer.intervals)}
@@ -776,119 +813,98 @@ const IntervalTimer = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Interval Management Section - Shows when timer is selected */}
-      {timerName && timerName !== "New Timer" && (
-        <div className="mt-6 space-y-4">
-          {/* Repeat Count */}
-          <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
-            <Label htmlFor="repeat" className="text-base">Repeat</Label>
-            <Input
-              id="repeat"
-              type="number"
-              min="1"
-              value={repeatCount}
-              onChange={(e) => setRepeatCount(parseInt(e.target.value) || 1)}
-              className="w-20"
-            />
+      {/* Timer Display Section */}
+      {selectedTimerId && intervals.length > 0 ? (
+        <div className="mt-6 space-y-6 px-4 pb-20">
+          {/* Large Timer Card */}
+          <div
+            className="relative rounded-2xl p-8 flex items-center justify-center min-h-[300px]"
+            style={{ 
+              backgroundColor: intervals[currentIntervalIndex]?.color || "#3b82f6",
+            }}
+          >
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/20"
+              onClick={handlePreviousInterval}
+            >
+              <ChevronLeft className="h-8 w-8" />
+            </Button>
+            
+            <div className="text-center text-white">
+              <p className="text-8xl font-bold tracking-tight">
+                {formatTime(intervals[currentIntervalIndex]?.duration || 0)}
+              </p>
+            </div>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/20"
+              onClick={handleNextInterval}
+            >
+              <ChevronRight className="h-8 w-8" />
+            </Button>
           </div>
 
-          {/* Existing Intervals */}
-          {intervals.length > 0 && (
-            <div className="space-y-2">
-              <h3 className="text-sm font-medium px-4">Intervals</h3>
-              {intervals.map((interval) => (
-                <div
-                  key={interval.id}
-                  className="flex items-center justify-between p-3 bg-muted/50 rounded-lg mx-4"
-                >
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="w-8 h-8 rounded"
-                      style={{ backgroundColor: interval.color }}
-                    />
-                    <div>
-                      <p className="font-medium">{interval.name}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {interval.duration} seconds
-                      </p>
-                    </div>
-                  </div>
-                  {isEditMode && (
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => handleDeleteInterval(interval.id)}
-                    >
-                      <X className="h-4 w-4" />
-                    </Button>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
+          {/* Action Buttons */}
+          <div className="flex gap-3">
+            <Button 
+              variant="outline" 
+              className="flex-1" 
+              size="lg"
+              onClick={() => {
+                setSelectedTimerId(null);
+                setTimerName("");
+                setIntervals([]);
+              }}
+            >
+              Cancel
+            </Button>
+            <Button 
+              className="flex-1" 
+              size="lg"
+              style={{ backgroundColor: "#22c55e", color: "white" }}
+            >
+              Start
+            </Button>
+          </div>
 
-          {/* Add Interval Form */}
-          <div className="space-y-3 p-4 bg-muted/50 rounded-lg mx-4">
-            <h3 className="text-sm font-medium">Add an Interval</h3>
-            <div className="space-y-2">
-              <Input
-                placeholder="Interval name"
-                value={newIntervalName}
-                onChange={(e) => setNewIntervalName(e.target.value)}
-              />
-              <Input
-                type="number"
-                placeholder="Duration (seconds)"
-                value={newIntervalDuration}
-                onChange={(e) => setNewIntervalDuration(e.target.value)}
-              />
-              <div className="flex items-center gap-2">
-                <Label className="text-sm">Color:</Label>
-                <div className="flex gap-2">
-                  <button
-                    className={`w-8 h-8 rounded ${
-                      newIntervalColor === "#3B82F6" ? "ring-2 ring-offset-2 ring-primary" : ""
-                    }`}
-                    style={{ backgroundColor: "#3B82F6" }}
-                    onClick={() => setNewIntervalColor("#3B82F6")}
+          {/* Total Time */}
+          <div className="flex justify-between items-center text-lg">
+            <span className="font-semibold">Total</span>
+            <span className="font-bold">{calculateTotalTime()}</span>
+          </div>
+
+          {/* Repeat Count */}
+          <div className="flex justify-between items-center text-lg">
+            <span className="font-semibold">Repeat</span>
+            <span className="font-bold">x{repeatCount}</span>
+          </div>
+
+          {/* Intervals List */}
+          <div className="space-y-2">
+            {intervals.map((interval, index) => (
+              <div
+                key={interval.id}
+                className={`flex items-center justify-between p-4 rounded-lg transition-colors ${
+                  index === currentIntervalIndex ? "bg-muted" : ""
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-3 h-3 rounded-full"
+                    style={{ backgroundColor: interval.color }}
                   />
-                  <button
-                    className={`w-8 h-8 rounded ${
-                      newIntervalColor === "#10B981" ? "ring-2 ring-offset-2 ring-primary" : ""
-                    }`}
-                    style={{ backgroundColor: "#10B981" }}
-                    onClick={() => setNewIntervalColor("#10B981")}
-                  />
-                  <button
-                    className={`w-8 h-8 rounded ${
-                      newIntervalColor === "#F59E0B" ? "ring-2 ring-offset-2 ring-primary" : ""
-                    }`}
-                    style={{ backgroundColor: "#F59E0B" }}
-                    onClick={() => setNewIntervalColor("#F59E0B")}
-                  />
-                  <button
-                    className={`w-8 h-8 rounded ${
-                      newIntervalColor === "#EF4444" ? "ring-2 ring-offset-2 ring-primary" : ""
-                    }`}
-                    style={{ backgroundColor: "#EF4444" }}
-                    onClick={() => setNewIntervalColor("#EF4444")}
-                  />
-                  <button
-                    className={`w-8 h-8 rounded ${
-                      newIntervalColor === "#8B5CF6" ? "ring-2 ring-offset-2 ring-primary" : ""
-                    }`}
-                    style={{ backgroundColor: "#8B5CF6" }}
-                    onClick={() => setNewIntervalColor("#8B5CF6")}
-                  />
+                  <span className="font-medium">{interval.name}</span>
                 </div>
+                <span className="font-mono">{formatTime(interval.duration)}</span>
               </div>
-              <Button onClick={handleAddInterval} className="w-full">
-                Add Interval
-              </Button>
-            </div>
+            ))}
           </div>
         </div>
-      )}
+      ) : null}
 
       {/* Sound Picker Dialog */}
       <Dialog open={isSoundPickerOpen} onOpenChange={setIsSoundPickerOpen}>
