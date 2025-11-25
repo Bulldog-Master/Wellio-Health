@@ -1137,7 +1137,14 @@ const IntervalTimer = () => {
                     setTimerSettings({ ...timerSettings, interimRepetitions: num });
                   }
                 }}
-                onFocus={(e) => e.target.select()}
+                onFocus={(e) => {
+                  if (timerSettings.interimRepetitions === 1) {
+                    setTimerSettings({ ...timerSettings, interimRepetitions: 1 });
+                    e.target.value = '';
+                  } else {
+                    e.target.select();
+                  }
+                }}
                 onBlur={(e) => {
                   if (e.target.value === '') {
                     setTimerSettings({ ...timerSettings, interimRepetitions: 1 });
@@ -1161,7 +1168,14 @@ const IntervalTimer = () => {
                     setTimerSettings({ ...timerSettings, interimSets: num });
                   }
                 }}
-                onFocus={(e) => e.target.select()}
+                onFocus={(e) => {
+                  if (timerSettings.interimSets === 1) {
+                    setTimerSettings({ ...timerSettings, interimSets: 1 });
+                    e.target.value = '';
+                  } else {
+                    e.target.select();
+                  }
+                }}
                 onBlur={(e) => {
                   if (e.target.value === '') {
                     setTimerSettings({ ...timerSettings, interimSets: 1 });
