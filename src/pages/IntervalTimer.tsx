@@ -30,6 +30,7 @@ const IntervalTimer = () => {
   const [isSoundPickerOpen, setIsSoundPickerOpen] = useState(false);
   const [isInterimIntervalOpen, setIsInterimIntervalOpen] = useState(false);
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
+  const [isInterimSoundPickerOpen, setIsInterimSoundPickerOpen] = useState(false);
   const [soundPickerType, setSoundPickerType] = useState<'interval' | 'timer' | 'doublebeep'>('interval');
   const [folderName, setFolderName] = useState("");
   const [timerName, setTimerName] = useState("");
@@ -47,6 +48,7 @@ const IntervalTimer = () => {
     interimIntervalSeconds: 10,
     interimRepetitions: 1,
     interimColor: "none",
+    interimSound: "beep",
     endWithInterval: false,
     showLineNumbers: false,
     showElapsedTime: false,
@@ -727,13 +729,18 @@ const IntervalTimer = () => {
             </button>
 
             {/* Sound */}
-            <div className="flex items-center justify-between py-3 border-t border-border">
+            <button 
+              onClick={() => setIsInterimSoundPickerOpen(true)}
+              className="flex items-center justify-between py-3 border-t border-border w-full"
+            >
               <Label className="text-lg text-foreground font-normal">Sound</Label>
               <div className="flex items-center gap-2">
-                <span className="text-lg text-muted-foreground">Beep</span>
+                <span className="text-lg text-muted-foreground capitalize">
+                  {soundOptions.find(s => s.id === timerSettings.interimSound)?.name || 'Beep'}
+                </span>
                 <ChevronRight className="h-5 w-5 text-muted-foreground" />
               </div>
-            </div>
+            </button>
 
             {/* Rep-based interval */}
             <div className="border-t border-border pt-4">
@@ -794,6 +801,67 @@ const IntervalTimer = () => {
                     <span className="text-lg text-foreground">{color.name}</span>
                   </div>
                   {timerSettings.interimColor === color.id && (
+                    <span className="text-primary text-2xl">✓</span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Interim Sound Picker Dialog */}
+      <Dialog open={isInterimSoundPickerOpen} onOpenChange={setIsInterimSoundPickerOpen}>
+        <DialogContent className="max-w-2xl bg-background p-0">
+          <div className="sticky top-0 bg-background border-b border-border z-10">
+            <div className="flex items-center justify-between p-4">
+              <button
+                onClick={() => setIsInterimSoundPickerOpen(false)}
+                className="text-primary flex items-center gap-2"
+              >
+                <ArrowLeft className="h-6 w-6" />
+                <span className="text-lg">Back</span>
+              </button>
+              <h2 className="text-xl font-semibold text-foreground absolute left-1/2 transform -translate-x-1/2">
+                Sounds
+              </h2>
+              <div className="w-20"></div>
+            </div>
+          </div>
+
+          <div className="p-6">
+            {/* No sound option */}
+            <button
+              onClick={() => {
+                setTimerSettings({ ...timerSettings, interimSound: 'none' });
+                setIsInterimSoundPickerOpen(false);
+                setTimeout(() => setIsInterimIntervalOpen(true), 0);
+              }}
+              className="w-full flex items-center justify-between py-4 border-b border-border hover:bg-muted/50 transition-colors"
+            >
+              <span className="text-lg text-foreground">No sound</span>
+              {timerSettings.interimSound === 'none' && (
+                <span className="text-primary text-2xl">✓</span>
+              )}
+            </button>
+
+            <h3 className="text-sm text-muted-foreground mt-6 mb-4 uppercase tracking-wider">
+              SELECT A SOUND
+            </h3>
+            <div className="space-y-1">
+              {soundOptions.filter(s => s.id !== 'none').map((sound) => (
+                <button
+                  key={sound.id}
+                  onClick={() => {
+                    playSound(sound.id);
+                    setTimerSettings({ ...timerSettings, interimSound: sound.id });
+                    setIsInterimSoundPickerOpen(false);
+                    setTimeout(() => setIsInterimIntervalOpen(true), 0);
+                  }}
+                  className="w-full flex items-center justify-between py-4 hover:bg-muted/50 transition-colors"
+                >
+                  <span className="text-lg text-foreground">{sound.name}</span>
+                  {timerSettings.interimSound === sound.id && (
                     <span className="text-primary text-2xl">✓</span>
                   )}
                 </button>
