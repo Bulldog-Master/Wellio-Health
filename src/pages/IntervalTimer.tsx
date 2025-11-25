@@ -361,18 +361,17 @@ const IntervalTimer = () => {
               </div>
 
               <div className="flex items-center justify-between py-3">
-                <button 
-                  onClick={() => openSoundPicker('timer')}
-                  className="flex-1 text-left"
-                >
-                  <Label className="text-lg text-foreground font-normal cursor-pointer">Timer complete</Label>
+                <Label className="text-lg text-foreground font-normal">Timer complete</Label>
+                <button onClick={() => openSoundPicker('timer')}>
+                  <ChevronRight className="h-5 w-5 text-muted-foreground" />
                 </button>
-                <div className="flex items-center gap-2">
-                  <Label className="text-sm text-muted-foreground font-normal">Double beep (repeat)</Label>
-                  <button onClick={() => openSoundPicker('doublebeep')}>
-                    <ChevronRight className="h-5 w-5 text-muted-foreground" />
-                  </button>
-                </div>
+              </div>
+
+              <div className="flex items-center justify-between py-3">
+                <Label className="text-sm text-muted-foreground font-normal">Double beep (repeat)</Label>
+                <button onClick={() => openSoundPicker('doublebeep')}>
+                  <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                </button>
               </div>
             </div>
 
