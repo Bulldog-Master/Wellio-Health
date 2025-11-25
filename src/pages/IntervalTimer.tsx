@@ -125,14 +125,20 @@ const IntervalTimer = () => {
 
   const moveTimersMutation = useMutation({
     mutationFn: async (folderId: string | null) => {
+      console.log("Moving timers:", selectedTimerIds, "to folder:", folderId);
       const { error } = await supabase
         .from("interval_timers")
         .update({ folder_id: folderId })
         .in("id", selectedTimerIds);
 
-      if (error) throw error;
+      if (error) {
+        console.error("Move error:", error);
+        throw error;
+      }
+      console.log("Move successful");
     },
     onSuccess: () => {
+      // Invalidate all timer queries to refresh the data
       queryClient.invalidateQueries({ queryKey: ["interval-timers"] });
       toast({
         title: "Success",
