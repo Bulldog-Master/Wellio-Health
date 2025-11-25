@@ -608,13 +608,13 @@ const IntervalTimer = () => {
               <div
                 key={timer.id}
                 onDragOver={(e) => {
-                  if (!isSelectMoveMode && !isEditMode && draggedTimerIndex !== null && draggedTimerIndex !== index) {
+                  if (!isEditMode && draggedTimerIndex !== null && draggedTimerIndex !== index) {
                     e.preventDefault();
                     e.dataTransfer.dropEffect = "move";
                   }
                 }}
                 onDrop={(e) => {
-                  if (!isSelectMoveMode && !isEditMode && draggedTimerIndex !== null && draggedTimerIndex !== index) {
+                  if (!isEditMode && draggedTimerIndex !== null && draggedTimerIndex !== index) {
                     e.preventDefault();
                     const newTimers = [...timers];
                     const [draggedTimer] = newTimers.splice(draggedTimerIndex, 1);
@@ -627,7 +627,7 @@ const IntervalTimer = () => {
                   draggedTimerIndex === index ? 'opacity-50' : ''
                 }`}
               >
-                {!isSelectMoveMode && !isEditMode && (
+                {!isEditMode && (
                   <div 
                     draggable={true}
                     onDragStart={(e) => {
