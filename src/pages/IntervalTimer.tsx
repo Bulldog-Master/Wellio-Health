@@ -29,6 +29,7 @@ const IntervalTimer = () => {
   const [isNewTimerOpen, setIsNewTimerOpen] = useState(false);
   const [isSoundPickerOpen, setIsSoundPickerOpen] = useState(false);
   const [isInterimIntervalOpen, setIsInterimIntervalOpen] = useState(false);
+  const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
   const [soundPickerType, setSoundPickerType] = useState<'interval' | 'timer' | 'doublebeep'>('interval');
   const [folderName, setFolderName] = useState("");
   const [timerName, setTimerName] = useState("");
@@ -45,6 +46,7 @@ const IntervalTimer = () => {
     useInterimInterval: false,
     interimIntervalSeconds: 10,
     interimRepetitions: 1,
+    interimColor: "none",
     endWithInterval: false,
     showLineNumbers: false,
     showElapsedTime: false,
@@ -69,6 +71,17 @@ const IntervalTimer = () => {
     { id: 'singingbowl', name: 'Singing bowl' },
     { id: 'meditationbowl', name: 'Meditation bowl' },
     { id: 'meditationtriplet', name: 'Meditation triplet' },
+  ];
+
+  const colorOptions = [
+    { id: 'none', name: 'None', hex: null },
+    { id: 'red', name: 'Red', hex: '#ef4444' },
+    { id: 'orange', name: 'Orange', hex: '#f97316' },
+    { id: 'yellow', name: 'Yellow', hex: '#eab308' },
+    { id: 'green', name: 'Green', hex: '#22c55e' },
+    { id: 'blue', name: 'Blue', hex: '#3b82f6' },
+    { id: 'purple', name: 'Purple', hex: '#a855f7' },
+    { id: 'brown', name: 'Brown', hex: '#92400e' },
   ];
 
   const playSound = (soundId: string) => {
@@ -696,13 +709,22 @@ const IntervalTimer = () => {
             </div>
 
             {/* Color */}
-            <div className="flex items-center justify-between py-3 border-t border-border">
+            <button 
+              onClick={() => setIsColorPickerOpen(true)}
+              className="flex items-center justify-between py-3 border-t border-border w-full"
+            >
               <Label className="text-lg text-foreground font-normal">Color</Label>
               <div className="flex items-center gap-2">
-                <span className="text-lg text-muted-foreground">None</span>
+                {timerSettings.interimColor !== 'none' && (
+                  <div 
+                    className="w-5 h-5 rounded"
+                    style={{ backgroundColor: colorOptions.find(c => c.id === timerSettings.interimColor)?.hex || 'transparent' }}
+                  />
+                )}
+                <span className="text-lg text-muted-foreground capitalize">{timerSettings.interimColor}</span>
                 <ChevronRight className="h-5 w-5 text-muted-foreground" />
               </div>
-            </div>
+            </button>
 
             {/* Sound */}
             <div className="flex items-center justify-between py-3 border-t border-border">
@@ -725,6 +747,55 @@ const IntervalTimer = () => {
               <p className="text-sm text-muted-foreground mt-2">
                 Rep-based intervals will not have a time set. The navigation buttons can be used to move between reps, or the Skip button can be used to move to the next interval.
               </p>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Color Picker Dialog */}
+      <Dialog open={isColorPickerOpen} onOpenChange={setIsColorPickerOpen}>
+        <DialogContent className="max-w-2xl bg-background p-0">
+          <div className="sticky top-0 bg-background border-b border-border z-10">
+            <div className="flex items-center justify-between p-4">
+              <button
+                onClick={() => setIsColorPickerOpen(false)}
+                className="text-primary flex items-center gap-2"
+              >
+                <ArrowLeft className="h-6 w-6" />
+                <span className="text-lg">Interim Interval</span>
+              </button>
+              <div className="w-20"></div>
+            </div>
+          </div>
+
+          <div className="p-6">
+            <h3 className="text-sm text-muted-foreground mb-4 uppercase tracking-wider">
+              SELECT A BACKGROUND COLOR
+            </h3>
+            <div className="space-y-1">
+              {colorOptions.map((color) => (
+                <button
+                  key={color.id}
+                  onClick={() => {
+                    setTimerSettings({ ...timerSettings, interimColor: color.id });
+                    setIsColorPickerOpen(false);
+                  }}
+                  className="w-full flex items-center justify-between py-4 hover:bg-muted/50 transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    {color.hex && (
+                      <div 
+                        className="w-6 h-6 rounded"
+                        style={{ backgroundColor: color.hex }}
+                      />
+                    )}
+                    <span className="text-lg text-foreground">{color.name}</span>
+                  </div>
+                  {timerSettings.interimColor === color.id && (
+                    <span className="text-primary text-2xl">✓</span>
+                  )}
+                </button>
+              ))}
             </div>
           </div>
         </DialogContent>
