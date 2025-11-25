@@ -35,6 +35,7 @@ const IntervalTimer = () => {
     useForNotifications: false,
     soundEnabled: true,
     soundVolume: 100,
+    doubleBeepRepeat: false,
     countdownBeeps: false,
     useInterimInterval: false,
     interimIntervalSeconds: 10,
@@ -255,6 +256,26 @@ const IntervalTimer = () => {
             <div className="space-y-4">
               <h3 className="text-sm font-semibold text-muted-foreground">SOUND</h3>
               
+              <div className="flex items-center justify-between py-3">
+                <Label className="text-lg text-muted-foreground font-normal">Interval complete</Label>
+                <ChevronRight className="h-5 w-5 text-muted-foreground" />
+              </div>
+
+              <div className="flex items-center justify-between py-3">
+                <Label className="text-lg text-muted-foreground font-normal">Timer complete</Label>
+                <ChevronRight className="h-5 w-5 text-muted-foreground" />
+              </div>
+
+              <div className="flex items-center justify-between py-3">
+                <Label className="text-lg text-muted-foreground font-normal">Double beep (repeat)</Label>
+                <Switch
+                  checked={timerSettings.doubleBeepRepeat}
+                  onCheckedChange={(checked) =>
+                    setTimerSettings({ ...timerSettings, doubleBeepRepeat: checked })
+                  }
+                />
+              </div>
+
               <div className="flex items-center justify-between py-3">
                 <Label className="text-lg text-foreground font-normal">Sound</Label>
                 <Switch
