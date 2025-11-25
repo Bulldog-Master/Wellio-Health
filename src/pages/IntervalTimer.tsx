@@ -959,14 +959,48 @@ const IntervalTimer = () => {
                   index === currentIntervalIndex ? "bg-muted" : ""
                 }`}
               >
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-3 h-3 rounded-full"
-                    style={{ backgroundColor: interval.color }}
-                  />
-                  <span className="font-medium">{interval.name}</span>
+                <div className="flex items-center gap-3 flex-1">
+                  <button
+                    onClick={() => {
+                      if (index > 0) {
+                        const newIntervals = [...intervals];
+                        [newIntervals[index], newIntervals[index - 1]] = [newIntervals[index - 1], newIntervals[index]];
+                        setIntervals(newIntervals);
+                        if (currentIntervalIndex === index) {
+                          setCurrentIntervalIndex(index - 1);
+                        } else if (currentIntervalIndex === index - 1) {
+                          setCurrentIntervalIndex(index);
+                        }
+                      }
+                    }}
+                    disabled={index === 0}
+                    className={`p-1 ${index === 0 ? 'opacity-0 pointer-events-none' : 'hover:bg-accent rounded'}`}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </button>
+                  
+                  <span className="font-medium flex-1">{interval.name}</span>
+                  
+                  <button
+                    onClick={() => {
+                      if (index < intervals.length - 1) {
+                        const newIntervals = [...intervals];
+                        [newIntervals[index], newIntervals[index + 1]] = [newIntervals[index + 1], newIntervals[index]];
+                        setIntervals(newIntervals);
+                        if (currentIntervalIndex === index) {
+                          setCurrentIntervalIndex(index + 1);
+                        } else if (currentIntervalIndex === index + 1) {
+                          setCurrentIntervalIndex(index);
+                        }
+                      }
+                    }}
+                    disabled={index === intervals.length - 1}
+                    className={`p-1 ${index === intervals.length - 1 ? 'opacity-0 pointer-events-none' : 'hover:bg-accent rounded'}`}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </button>
                 </div>
-                <span className="font-mono">{formatTime(interval.duration)}</span>
+                <span className="font-mono ml-3">{formatTime(interval.duration)}</span>
               </div>
             ))}
           </div>
