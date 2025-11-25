@@ -72,6 +72,8 @@ const IntervalTimer = () => {
   const [interimHoursInput, setInterimHoursInput] = useState("0");
   const [interimMinsInput, setInterimMinsInput] = useState("0");
   const [interimSecsInput, setInterimSecsInput] = useState("10");
+  const [interimRepsInput, setInterimRepsInput] = useState("1");
+  const [interimSetsInput, setInterimSetsInput] = useState("1");
   const { toast } = useToast();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -155,6 +157,8 @@ const IntervalTimer = () => {
       setInterimHoursInput("0");
       setInterimMinsInput("0");
       setInterimSecsInput("10");
+      setInterimRepsInput("1");
+      setInterimSetsInput("1");
     },
     onError: (error) => {
       toast({
@@ -1129,24 +1133,19 @@ const IntervalTimer = () => {
               <Input
                 type="text"
                 inputMode="numeric"
-                value={timerSettings.interimRepetitions}
+                value={interimRepsInput}
                 onChange={(e) => {
                   const value = e.target.value;
                   if (value === '' || /^\d+$/.test(value)) {
+                    setInterimRepsInput(value);
                     const num = value === '' ? 1 : Math.max(1, parseInt(value));
                     setTimerSettings({ ...timerSettings, interimRepetitions: num });
                   }
                 }}
-                onFocus={(e) => {
-                  if (timerSettings.interimRepetitions === 1) {
-                    setTimerSettings({ ...timerSettings, interimRepetitions: 1 });
-                    e.target.value = '';
-                  } else {
-                    e.target.select();
-                  }
-                }}
+                onFocus={(e) => e.target.select()}
                 onBlur={(e) => {
                   if (e.target.value === '') {
+                    setInterimRepsInput('1');
                     setTimerSettings({ ...timerSettings, interimRepetitions: 1 });
                   }
                 }}
@@ -1160,24 +1159,19 @@ const IntervalTimer = () => {
               <Input
                 type="text"
                 inputMode="numeric"
-                value={timerSettings.interimSets}
+                value={interimSetsInput}
                 onChange={(e) => {
                   const value = e.target.value;
                   if (value === '' || /^\d+$/.test(value)) {
+                    setInterimSetsInput(value);
                     const num = value === '' ? 1 : Math.max(1, parseInt(value));
                     setTimerSettings({ ...timerSettings, interimSets: num });
                   }
                 }}
-                onFocus={(e) => {
-                  if (timerSettings.interimSets === 1) {
-                    setTimerSettings({ ...timerSettings, interimSets: 1 });
-                    e.target.value = '';
-                  } else {
-                    e.target.select();
-                  }
-                }}
+                onFocus={(e) => e.target.select()}
                 onBlur={(e) => {
                   if (e.target.value === '') {
+                    setInterimSetsInput('1');
                     setTimerSettings({ ...timerSettings, interimSets: 1 });
                   }
                 }}
