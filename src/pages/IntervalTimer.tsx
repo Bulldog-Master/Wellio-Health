@@ -629,13 +629,15 @@ const IntervalTimer = () => {
               >
                 {!isSelectMoveMode && !isEditMode && (
                   <div 
-                    draggable
+                    draggable={true}
                     onDragStart={(e) => {
                       setDraggedTimerIndex(index);
                       e.dataTransfer.effectAllowed = "move";
+                      e.stopPropagation();
                     }}
                     onDragEnd={() => setDraggedTimerIndex(null)}
-                    className="cursor-grab active:cursor-grabbing p-1 -ml-2"
+                    className="cursor-grab active:cursor-grabbing p-1 -ml-2 touch-none"
+                    onClick={(e) => e.stopPropagation()}
                   >
                     <GripVertical className="h-5 w-5 text-muted-foreground" />
                   </div>
