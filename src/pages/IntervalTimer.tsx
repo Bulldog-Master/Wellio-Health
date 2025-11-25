@@ -607,15 +607,25 @@ const IntervalTimer = () => {
             timers.map((timer, index) => (
               <div
                 key={timer.id}
+                draggable={!isEditMode}
+                onDragStart={(e) => {
+                  if (!isEditMode) {
+                    console.log('Drag started for timer:', timer.name, 'at index:', index);
+                    setDraggedTimerIndex(index);
+                    e.dataTransfer.effectAllowed = "move";
+                  }
+                }}
                 onDragOver={(e) => {
                   if (!isEditMode && draggedTimerIndex !== null && draggedTimerIndex !== index) {
                     e.preventDefault();
                     e.dataTransfer.dropEffect = "move";
+                    console.log('Dragging over timer at index:', index);
                   }
                 }}
                 onDrop={(e) => {
                   if (!isEditMode && draggedTimerIndex !== null && draggedTimerIndex !== index) {
                     e.preventDefault();
+                    console.log('Dropped at index:', index, 'from index:', draggedTimerIndex);
                     const newTimers = [...timers];
                     const [draggedTimer] = newTimers.splice(draggedTimerIndex, 1);
                     newTimers.splice(index, 0, draggedTimer);
@@ -623,22 +633,17 @@ const IntervalTimer = () => {
                     setDraggedTimerIndex(null);
                   }
                 }}
+                onDragEnd={() => {
+                  console.log('Drag ended');
+                  setDraggedTimerIndex(null);
+                }}
                 className={`flex items-center gap-3 py-4 transition-opacity ${
                   draggedTimerIndex === index ? 'opacity-50' : ''
-                }`}
+                } ${!isEditMode ? 'cursor-move' : ''}`}
               >
                 {!isEditMode && (
-                  <div 
-                    draggable={true}
-                    onDragStart={(e) => {
-                      setDraggedTimerIndex(index);
-                      e.dataTransfer.effectAllowed = "move";
-                    }}
-                    onDragEnd={() => setDraggedTimerIndex(null)}
-                    className="cursor-grab active:cursor-grabbing p-1 -ml-2 select-none"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <GripVertical className="h-5 w-5 text-muted-foreground pointer-events-none" />
+                  <div className="p-1 -ml-2 select-none pointer-events-none">
+                    <GripVertical className="h-5 w-5 text-muted-foreground" />
                   </div>
                 )}
                 {isSelectMoveMode && (
