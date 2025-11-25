@@ -166,8 +166,6 @@ const IntervalTimer = () => {
     } else if (soundPickerType === 'doublebeep') {
       setTimerSettings({ ...timerSettings, doubleBeepSound: soundId });
     }
-    
-    setIsSoundPickerOpen(false);
   };
 
   const openSoundPicker = (type: 'interval' | 'timer' | 'doublebeep') => {
