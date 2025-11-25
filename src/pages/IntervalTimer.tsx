@@ -43,6 +43,10 @@ const IntervalTimer = () => {
   const [folderName, setFolderName] = useState("");
   const [timerName, setTimerName] = useState("New Timer");
   const [intervals, setIntervals] = useState<any[]>([]);
+  const [repeatCount, setRepeatCount] = useState(1);
+  const [newIntervalName, setNewIntervalName] = useState("");
+  const [newIntervalDuration, setNewIntervalDuration] = useState("");
+  const [newIntervalColor, setNewIntervalColor] = useState("#3B82F6");
   const [timerSettings, setTimerSettings] = useState({
     intervalCompleteSound: "beep",
     timerCompleteSound: "beep",
@@ -182,6 +186,38 @@ const IntervalTimer = () => {
     { id: 'purple', name: 'Purple', hex: '#a855f7' },
     { id: 'brown', name: 'Brown', hex: '#92400e' },
   ];
+
+  const handleAddInterval = () => {
+    if (!newIntervalName || !newIntervalDuration) {
+      toast({
+        title: "Error",
+        description: "Please enter both name and duration for the interval",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const newInterval = {
+      id: Date.now().toString(),
+      name: newIntervalName,
+      duration: parseInt(newIntervalDuration),
+      color: newIntervalColor,
+    };
+
+    setIntervals([...intervals, newInterval]);
+    setNewIntervalName("");
+    setNewIntervalDuration("");
+    setNewIntervalColor("#3B82F6");
+    
+    toast({
+      title: "Interval Added",
+      description: `${newIntervalName} added successfully`,
+    });
+  };
+
+  const handleDeleteInterval = (id: string) => {
+    setIntervals(intervals.filter(interval => interval.id !== id));
+  };
 
   const playSound = (soundId: string) => {
     const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
@@ -739,6 +775,120 @@ const IntervalTimer = () => {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Interval Management Section - Shows when timer is selected */}
+      {timerName && timerName !== "New Timer" && (
+        <div className="mt-6 space-y-4">
+          {/* Repeat Count */}
+          <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
+            <Label htmlFor="repeat" className="text-base">Repeat</Label>
+            <Input
+              id="repeat"
+              type="number"
+              min="1"
+              value={repeatCount}
+              onChange={(e) => setRepeatCount(parseInt(e.target.value) || 1)}
+              className="w-20"
+            />
+          </div>
+
+          {/* Existing Intervals */}
+          {intervals.length > 0 && (
+            <div className="space-y-2">
+              <h3 className="text-sm font-medium px-4">Intervals</h3>
+              {intervals.map((interval) => (
+                <div
+                  key={interval.id}
+                  className="flex items-center justify-between p-3 bg-muted/50 rounded-lg mx-4"
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="w-8 h-8 rounded"
+                      style={{ backgroundColor: interval.color }}
+                    />
+                    <div>
+                      <p className="font-medium">{interval.name}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {interval.duration} seconds
+                      </p>
+                    </div>
+                  </div>
+                  {isEditMode && (
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleDeleteInterval(interval.id)}
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Add Interval Form */}
+          <div className="space-y-3 p-4 bg-muted/50 rounded-lg mx-4">
+            <h3 className="text-sm font-medium">Add an Interval</h3>
+            <div className="space-y-2">
+              <Input
+                placeholder="Interval name"
+                value={newIntervalName}
+                onChange={(e) => setNewIntervalName(e.target.value)}
+              />
+              <Input
+                type="number"
+                placeholder="Duration (seconds)"
+                value={newIntervalDuration}
+                onChange={(e) => setNewIntervalDuration(e.target.value)}
+              />
+              <div className="flex items-center gap-2">
+                <Label className="text-sm">Color:</Label>
+                <div className="flex gap-2">
+                  <button
+                    className={`w-8 h-8 rounded ${
+                      newIntervalColor === "#3B82F6" ? "ring-2 ring-offset-2 ring-primary" : ""
+                    }`}
+                    style={{ backgroundColor: "#3B82F6" }}
+                    onClick={() => setNewIntervalColor("#3B82F6")}
+                  />
+                  <button
+                    className={`w-8 h-8 rounded ${
+                      newIntervalColor === "#10B981" ? "ring-2 ring-offset-2 ring-primary" : ""
+                    }`}
+                    style={{ backgroundColor: "#10B981" }}
+                    onClick={() => setNewIntervalColor("#10B981")}
+                  />
+                  <button
+                    className={`w-8 h-8 rounded ${
+                      newIntervalColor === "#F59E0B" ? "ring-2 ring-offset-2 ring-primary" : ""
+                    }`}
+                    style={{ backgroundColor: "#F59E0B" }}
+                    onClick={() => setNewIntervalColor("#F59E0B")}
+                  />
+                  <button
+                    className={`w-8 h-8 rounded ${
+                      newIntervalColor === "#EF4444" ? "ring-2 ring-offset-2 ring-primary" : ""
+                    }`}
+                    style={{ backgroundColor: "#EF4444" }}
+                    onClick={() => setNewIntervalColor("#EF4444")}
+                  />
+                  <button
+                    className={`w-8 h-8 rounded ${
+                      newIntervalColor === "#8B5CF6" ? "ring-2 ring-offset-2 ring-primary" : ""
+                    }`}
+                    style={{ backgroundColor: "#8B5CF6" }}
+                    onClick={() => setNewIntervalColor("#8B5CF6")}
+                  />
+                </div>
+              </div>
+              <Button onClick={handleAddInterval} className="w-full">
+                Add Interval
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Sound Picker Dialog */}
       <Dialog open={isSoundPickerOpen} onOpenChange={setIsSoundPickerOpen}>
