@@ -40,6 +40,7 @@ const IntervalTimer = () => {
   const [isSelectMoveMode, setIsSelectMoveMode] = useState(false);
   const [selectedTimerIds, setSelectedTimerIds] = useState<string[]>([]);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isFolderSelectionOpen, setIsFolderSelectionOpen] = useState(false);
   const [folderName, setFolderName] = useState("");
   const [timerName, setTimerName] = useState("New Timer");
   const [intervals, setIntervals] = useState<any[]>([]);
@@ -92,6 +93,52 @@ const IntervalTimer = () => {
 
       if (error) throw error;
       return data || [];
+    },
+  });
+
+  const { data: folders = [] } = useQuery({
+    queryKey: ["timer-folders"],
+    queryFn: async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Not authenticated");
+
+      const { data, error } = await supabase
+        .from("timer_folders")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+      return data || [];
+    },
+  });
+
+  const moveTimersMutation = useMutation({
+    mutationFn: async (folderId: string | null) => {
+      const { error } = await supabase
+        .from("interval_timers")
+        .update({ folder_id: folderId })
+        .in("id", selectedTimerIds);
+
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["interval-timers"] });
+      toast({
+        title: "Success",
+        description: `Moved ${selectedTimerIds.length} timer(s)`,
+      });
+      setSelectedTimerIds([]);
+      setIsSelectMoveMode(false);
+      setIsFolderSelectionOpen(false);
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: "Failed to move timers. Please try again.",
+        variant: "destructive",
+      });
+      console.error("Error moving timers:", error);
     },
   });
 
@@ -514,10 +561,7 @@ const IntervalTimer = () => {
                 className={`text-lg ${selectedTimerIds.length === 0 ? 'text-muted-foreground' : 'text-primary'}`}
                 onClick={() => {
                   if (selectedTimerIds.length > 0) {
-                    toast({
-                      title: "Move timers",
-                      description: "Folder selection will be implemented soon",
-                    });
+                    setIsFolderSelectionOpen(true);
                   }
                 }}
               >
@@ -1431,6 +1475,43 @@ const IntervalTimer = () => {
           </div>
         </SheetContent>
       </Sheet>
+
+      {/* Folder Selection Dialog for Move */}
+      <Dialog open={isFolderSelectionOpen} onOpenChange={setIsFolderSelectionOpen}>
+        <DialogContent className="bg-background">
+          <DialogHeader>
+            <DialogTitle>Move to folder</DialogTitle>
+          </DialogHeader>
+          <div className="py-4 space-y-2">
+            <button
+              onClick={() => moveTimersMutation.mutate(null)}
+              className="w-full p-4 text-left hover:bg-accent rounded-lg transition-colors"
+              disabled={moveTimersMutation.isPending}
+            >
+              <span className="text-foreground">No folder</span>
+            </button>
+            {folders.map((folder) => (
+              <button
+                key={folder.id}
+                onClick={() => moveTimersMutation.mutate(folder.id)}
+                className="w-full p-4 text-left hover:bg-accent rounded-lg transition-colors"
+                disabled={moveTimersMutation.isPending}
+              >
+                <span className="text-foreground">{folder.name}</span>
+              </button>
+            ))}
+          </div>
+          <DialogFooter>
+            <Button
+              variant="ghost"
+              onClick={() => setIsFolderSelectionOpen(false)}
+              disabled={moveTimersMutation.isPending}
+            >
+              Cancel
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Create Folder Dialog */}
       <Dialog open={isFolderDialogOpen} onOpenChange={setIsFolderDialogOpen}>
