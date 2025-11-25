@@ -43,6 +43,7 @@ const IntervalTimer = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [draggedTimerIndex, setDraggedTimerIndex] = useState<number | null>(null);
   const [isFolderSelectionOpen, setIsFolderSelectionOpen] = useState(false);
+  const [currentFolderId, setCurrentFolderId] = useState<string | null>(null);
   const [folderName, setFolderName] = useState("");
   const [timerName, setTimerName] = useState("New Timer");
   const [intervals, setIntervals] = useState<any[]>([]);
@@ -82,16 +83,23 @@ const IntervalTimer = () => {
   const queryClient = useQueryClient();
 
   const { data: timers = [] } = useQuery({
-    queryKey: ["interval-timers"],
+    queryKey: ["interval-timers", currentFolderId],
     queryFn: async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Not authenticated");
 
-      const { data, error } = await supabase
+      let query = supabase
         .from("interval_timers")
         .select("*")
-        .eq("user_id", user.id)
-        .order("created_at", { ascending: false });
+        .eq("user_id", user.id);
+
+      if (currentFolderId) {
+        query = query.eq("folder_id", currentFolderId);
+      } else {
+        query = query.is("folder_id", null);
+      }
+
+      const { data, error } = await query.order("created_at", { ascending: false });
 
       if (error) throw error;
       return data || [];
@@ -552,12 +560,22 @@ const IntervalTimer = () => {
           ) : (
             <>
               <div className="flex items-center gap-4 text-muted-foreground">
-                <Timer className="h-6 w-6" />
-                <FolderPlus className="h-6 w-6" />
+                {currentFolderId ? (
+                  <button onClick={() => setCurrentFolderId(null)}>
+                    <ArrowLeft className="h-6 w-6" />
+                  </button>
+                ) : (
+                  <>
+                    <Timer className="h-6 w-6" />
+                    <FolderPlus className="h-6 w-6" />
+                  </>
+                )}
               </div>
 
               <h1 className="text-xl font-semibold text-foreground absolute left-1/2 transform -translate-x-1/2">
-                Your library
+                {currentFolderId 
+                  ? folders.find(f => f.id === currentFolderId)?.name || 'Folder'
+                  : 'Your library'}
               </h1>
 
               <button
@@ -573,7 +591,7 @@ const IntervalTimer = () => {
 
       {/* Content */}
       <div className="p-4">
-        {folders.length > 0 && (
+        {!currentFolderId && folders.length > 0 && (
           <>
             <h2 className="text-sm font-semibold text-muted-foreground mb-3">
               FOLDERS
@@ -583,13 +601,7 @@ const IntervalTimer = () => {
                 <div
                   key={folder.id}
                   className="flex items-center justify-between py-4 cursor-pointer hover:bg-accent/30"
-                  onClick={() => {
-                    // TODO: Navigate to folder view
-                    toast({
-                      title: "Folder",
-                      description: `Opening "${folder.name}"`,
-                    });
-                  }}
+                  onClick={() => setCurrentFolderId(folder.id)}
                 >
                   <div className="flex items-center gap-3">
                     <FolderPlus className="h-5 w-5 text-muted-foreground" />
