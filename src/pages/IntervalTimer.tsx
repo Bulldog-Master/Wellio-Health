@@ -1042,11 +1042,7 @@ const IntervalTimer = () => {
                       setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + mins * 60 + secs });
                     }
                   }}
-                  onFocus={(e) => {
-                    if (e.target.value === '0') {
-                      setInterimHoursInput('');
-                    }
-                  }}
+                  onFocus={(e) => e.target.select()}
                   onBlur={(e) => {
                     if (e.target.value === '') {
                       setInterimHoursInput('0');
@@ -1072,11 +1068,7 @@ const IntervalTimer = () => {
                       setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + mins * 60 + secs });
                     }
                   }}
-                  onFocus={(e) => {
-                    if (e.target.value === '0') {
-                      setInterimMinsInput('');
-                    }
-                  }}
+                  onFocus={(e) => e.target.select()}
                   onBlur={(e) => {
                     if (e.target.value === '') {
                       setInterimMinsInput('0');
@@ -1102,11 +1094,7 @@ const IntervalTimer = () => {
                       setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + mins * 60 + secs });
                     }
                   }}
-                  onFocus={(e) => {
-                    if (e.target.value === '0') {
-                      setInterimSecsInput('');
-                    }
-                  }}
+                  onFocus={(e) => e.target.select()}
                   onBlur={(e) => {
                     if (e.target.value === '') {
                       setInterimSecsInput('0');
