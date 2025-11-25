@@ -591,6 +591,7 @@ const IntervalTimer = () => {
                   if (selectedMoveTimerId === timer.id) {
                     setDraggedTimerIndex(index);
                     e.dataTransfer.effectAllowed = "move";
+                    e.dataTransfer.setData("text/plain", timer.id);
                   }
                 }}
                 onDragOver={(e) => {
@@ -623,7 +624,7 @@ const IntervalTimer = () => {
                 }}
                 className={`flex items-center gap-3 py-4 transition-all ${
                   draggedTimerIndex === index ? 'opacity-50' : ''
-                } ${selectedMoveTimerId === timer.id ? 'bg-accent/50 cursor-move' : ''} ${
+                } ${selectedMoveTimerId === timer.id ? 'bg-accent/50 cursor-move select-none' : ''} ${
                   isMoveMode && !selectedMoveTimerId ? 'cursor-pointer hover:bg-accent/30' : ''
                 }`}
               >
@@ -667,7 +668,7 @@ const IntervalTimer = () => {
                   </button>
                 )}
                 <div 
-                  className="flex-1 text-left cursor-pointer"
+                  className={`flex-1 text-left ${isMoveMode && selectedMoveTimerId === timer.id ? '' : 'cursor-pointer'}`}
                   onClick={(e) => {
                     if (!isSelectMoveMode && !isEditMode && !isMoveMode) {
                       e.stopPropagation();
@@ -675,7 +676,7 @@ const IntervalTimer = () => {
                     }
                   }}
                 >
-                  <span className="text-lg font-medium text-foreground">
+                  <span className={`text-lg font-medium text-foreground ${selectedMoveTimerId === timer.id ? 'select-none' : ''}`}>
                     {timer.name}
                   </span>
                 </div>
