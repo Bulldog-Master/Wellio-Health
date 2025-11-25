@@ -659,6 +659,7 @@ const IntervalTimer = () => {
               <Input
                 value={timerName}
                 onChange={(e) => setTimerName(e.target.value)}
+                onFocus={(e) => e.target.select()}
                 placeholder="Timer name"
                 className="text-lg"
               />
