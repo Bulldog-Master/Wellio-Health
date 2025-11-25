@@ -502,18 +502,20 @@ const IntervalTimer = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Back button */}
-      <div className="p-4 pb-0">
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => navigate("/activity")}
-          className="gap-2"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to Activity
-        </Button>
-      </div>
+      {/* Back button - only show when not in a folder */}
+      {!currentFolderId && (
+        <div className="p-4 pb-0">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => navigate("/activity")}
+            className="gap-2"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Activity
+          </Button>
+        </div>
+      )}
 
       <div className="bg-card border-b border-border">
         <div className="flex items-center justify-between p-4">
