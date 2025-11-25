@@ -680,6 +680,7 @@ const IntervalTimer = () => {
                   </button>
                 )}
                 <button 
+                  draggable={false}
                   className="flex-1 text-left"
                   onClick={() => handleTimerSelect(timer)}
                   disabled={isSelectMoveMode || isEditMode}
