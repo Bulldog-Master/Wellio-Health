@@ -603,11 +603,42 @@ const IntervalTimer = () => {
               No timers yet. Create a folder to get started!
             </p>
           ) : (
-            timers.map((timer) => (
+            timers.map((timer, index) => (
               <div
                 key={timer.id}
-                className="flex items-center justify-between py-4"
+                className="flex items-center gap-3 py-4"
               >
+                {!isSelectMoveMode && !isEditMode && (
+                  <div className="flex flex-col gap-1">
+                    <button
+                      onClick={() => {
+                        if (index > 0) {
+                          const newTimers = [...timers];
+                          [newTimers[index], newTimers[index - 1]] = [newTimers[index - 1], newTimers[index]];
+                          queryClient.setQueryData(["interval-timers"], newTimers);
+                        }
+                      }}
+                      disabled={index === 0}
+                      className={`p-1 rounded hover:bg-accent transition-colors ${index === 0 ? 'invisible' : ''}`}
+                    >
+                      <ChevronUp className="h-5 w-5 text-muted-foreground" />
+                    </button>
+                    
+                    <button
+                      onClick={() => {
+                        if (index < timers.length - 1) {
+                          const newTimers = [...timers];
+                          [newTimers[index], newTimers[index + 1]] = [newTimers[index + 1], newTimers[index]];
+                          queryClient.setQueryData(["interval-timers"], newTimers);
+                        }
+                      }}
+                      disabled={index === timers.length - 1}
+                      className={`p-1 rounded hover:bg-accent transition-colors ${index === timers.length - 1 ? 'invisible' : ''}`}
+                    >
+                      <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                    </button>
+                  </div>
+                )}
                 {isSelectMoveMode && (
                   <button
                     onClick={() => {
