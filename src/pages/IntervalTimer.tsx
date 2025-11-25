@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Timer, FolderPlus, MoreHorizontal, ArrowLeft, X, ChevronRight, ChevronLeft, Clock } from "lucide-react";
+import { Timer, FolderPlus, MoreHorizontal, ArrowLeft, X, ChevronRight, ChevronLeft, ChevronUp, ChevronDown, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import {
@@ -955,11 +955,11 @@ const IntervalTimer = () => {
             {intervals.map((interval, index) => (
               <div
                 key={interval.id}
-                className={`flex items-center justify-between p-4 rounded-lg transition-colors ${
+                className={`flex items-center gap-3 p-4 rounded-lg transition-colors ${
                   index === currentIntervalIndex ? "bg-muted" : ""
                 }`}
               >
-                <div className="flex items-center gap-3 flex-1">
+                <div className="flex flex-col gap-1">
                   <button
                     onClick={() => {
                       if (index > 0) {
@@ -974,12 +974,10 @@ const IntervalTimer = () => {
                       }
                     }}
                     disabled={index === 0}
-                    className={`p-1 ${index === 0 ? 'opacity-0 pointer-events-none' : 'hover:bg-accent rounded'}`}
+                    className={`p-1 rounded hover:bg-accent transition-colors ${index === 0 ? 'invisible' : ''}`}
                   >
-                    <ChevronLeft className="h-4 w-4" />
+                    <ChevronUp className="h-5 w-5 text-muted-foreground" />
                   </button>
-                  
-                  <span className="font-medium flex-1">{interval.name}</span>
                   
                   <button
                     onClick={() => {
@@ -995,12 +993,14 @@ const IntervalTimer = () => {
                       }
                     }}
                     disabled={index === intervals.length - 1}
-                    className={`p-1 ${index === intervals.length - 1 ? 'opacity-0 pointer-events-none' : 'hover:bg-accent rounded'}`}
+                    className={`p-1 rounded hover:bg-accent transition-colors ${index === intervals.length - 1 ? 'invisible' : ''}`}
                   >
-                    <ChevronRight className="h-4 w-4" />
+                    <ChevronDown className="h-5 w-5 text-muted-foreground" />
                   </button>
                 </div>
-                <span className="font-mono ml-3">{formatTime(interval.duration)}</span>
+                
+                <span className="font-medium flex-1">{interval.name}</span>
+                <span className="font-mono">{formatTime(interval.duration)}</span>
               </div>
             ))}
           </div>
