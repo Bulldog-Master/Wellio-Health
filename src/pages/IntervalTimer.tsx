@@ -40,6 +40,7 @@ const IntervalTimer = () => {
   const [isSelectMoveMode, setIsSelectMoveMode] = useState(false);
   const [selectedTimerIds, setSelectedTimerIds] = useState<string[]>([]);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [draggedTimerIndex, setDraggedTimerIndex] = useState<number | null>(null);
   const [isFolderSelectionOpen, setIsFolderSelectionOpen] = useState(false);
   const [folderName, setFolderName] = useState("");
   const [timerName, setTimerName] = useState("New Timer");
@@ -606,39 +607,34 @@ const IntervalTimer = () => {
             timers.map((timer, index) => (
               <div
                 key={timer.id}
-                className="flex items-center gap-3 py-4"
+                draggable={!isSelectMoveMode && !isEditMode}
+                onDragStart={(e) => {
+                  if (!isSelectMoveMode && !isEditMode) {
+                    setDraggedTimerIndex(index);
+                    e.dataTransfer.effectAllowed = "move";
+                  }
+                }}
+                onDragOver={(e) => {
+                  if (!isSelectMoveMode && !isEditMode && draggedTimerIndex !== null && draggedTimerIndex !== index) {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = "move";
+                  }
+                }}
+                onDrop={(e) => {
+                  if (!isSelectMoveMode && !isEditMode && draggedTimerIndex !== null && draggedTimerIndex !== index) {
+                    e.preventDefault();
+                    const newTimers = [...timers];
+                    const [draggedTimer] = newTimers.splice(draggedTimerIndex, 1);
+                    newTimers.splice(index, 0, draggedTimer);
+                    queryClient.setQueryData(["interval-timers"], newTimers);
+                    setDraggedTimerIndex(null);
+                  }
+                }}
+                onDragEnd={() => setDraggedTimerIndex(null)}
+                className={`flex items-center gap-3 py-4 transition-opacity ${
+                  draggedTimerIndex === index ? 'opacity-50' : ''
+                } ${!isSelectMoveMode && !isEditMode ? 'cursor-move' : ''}`}
               >
-                {!isSelectMoveMode && !isEditMode && (
-                  <div className="flex flex-col gap-1">
-                    <button
-                      onClick={() => {
-                        if (index > 0) {
-                          const newTimers = [...timers];
-                          [newTimers[index], newTimers[index - 1]] = [newTimers[index - 1], newTimers[index]];
-                          queryClient.setQueryData(["interval-timers"], newTimers);
-                        }
-                      }}
-                      disabled={index === 0}
-                      className={`p-1 rounded hover:bg-accent transition-colors ${index === 0 ? 'invisible' : ''}`}
-                    >
-                      <ChevronUp className="h-5 w-5 text-muted-foreground" />
-                    </button>
-                    
-                    <button
-                      onClick={() => {
-                        if (index < timers.length - 1) {
-                          const newTimers = [...timers];
-                          [newTimers[index], newTimers[index + 1]] = [newTimers[index + 1], newTimers[index]];
-                          queryClient.setQueryData(["interval-timers"], newTimers);
-                        }
-                      }}
-                      disabled={index === timers.length - 1}
-                      className={`p-1 rounded hover:bg-accent transition-colors ${index === timers.length - 1 ? 'invisible' : ''}`}
-                    >
-                      <ChevronDown className="h-5 w-5 text-muted-foreground" />
-                    </button>
-                  </div>
-                )}
                 {isSelectMoveMode && (
                   <button
                     onClick={() => {
