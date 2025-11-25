@@ -390,7 +390,9 @@ const IntervalTimer = () => {
               </div>
 
               <div className="flex items-center justify-between py-3">
-                <Label className="text-lg text-muted-foreground font-normal">Include sets</Label>
+                <Label className={`text-lg font-normal ${timerSettings.textToSpeech ? 'text-foreground' : 'text-muted-foreground'}`}>
+                  Include sets
+                </Label>
                 <Switch
                   checked={timerSettings.includeSets}
                   onCheckedChange={(checked) =>
@@ -401,7 +403,9 @@ const IntervalTimer = () => {
               </div>
 
               <div className="flex items-center justify-between py-3">
-                <Label className="text-lg text-muted-foreground font-normal">Include reps</Label>
+                <Label className={`text-lg font-normal ${timerSettings.textToSpeech ? 'text-foreground' : 'text-muted-foreground'}`}>
+                  Include reps
+                </Label>
                 <Switch
                   checked={timerSettings.includeReps}
                   onCheckedChange={(checked) =>
@@ -412,7 +416,9 @@ const IntervalTimer = () => {
               </div>
 
               <div className="flex items-center justify-between py-3">
-                <Label className="text-lg text-muted-foreground font-normal">Use for notifications</Label>
+                <Label className={`text-lg font-normal ${timerSettings.textToSpeech ? 'text-foreground' : 'text-muted-foreground'}`}>
+                  Use for notifications
+                </Label>
                 <Switch
                   checked={timerSettings.useForNotifications}
                   onCheckedChange={(checked) =>
