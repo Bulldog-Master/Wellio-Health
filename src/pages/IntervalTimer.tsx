@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Timer, FolderPlus, MoreHorizontal, ArrowLeft, X, ChevronRight, ChevronLeft, ChevronUp, ChevronDown, Clock } from "lucide-react";
+import { Timer, FolderPlus, MoreHorizontal, ArrowLeft, X, ChevronRight, ChevronLeft, ChevronUp, ChevronDown, Clock, GripVertical } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import {
@@ -607,13 +607,6 @@ const IntervalTimer = () => {
             timers.map((timer, index) => (
               <div
                 key={timer.id}
-                draggable={!isSelectMoveMode && !isEditMode}
-                onDragStart={(e) => {
-                  if (!isSelectMoveMode && !isEditMode) {
-                    setDraggedTimerIndex(index);
-                    e.dataTransfer.effectAllowed = "move";
-                  }
-                }}
                 onDragOver={(e) => {
                   if (!isSelectMoveMode && !isEditMode && draggedTimerIndex !== null && draggedTimerIndex !== index) {
                     e.preventDefault();
@@ -630,11 +623,23 @@ const IntervalTimer = () => {
                     setDraggedTimerIndex(null);
                   }
                 }}
-                onDragEnd={() => setDraggedTimerIndex(null)}
                 className={`flex items-center gap-3 py-4 transition-opacity ${
                   draggedTimerIndex === index ? 'opacity-50' : ''
-                } ${!isSelectMoveMode && !isEditMode ? 'cursor-move' : ''}`}
+                }`}
               >
+                {!isSelectMoveMode && !isEditMode && (
+                  <div 
+                    draggable
+                    onDragStart={(e) => {
+                      setDraggedTimerIndex(index);
+                      e.dataTransfer.effectAllowed = "move";
+                    }}
+                    onDragEnd={() => setDraggedTimerIndex(null)}
+                    className="cursor-grab active:cursor-grabbing p-1 -ml-2"
+                  >
+                    <GripVertical className="h-5 w-5 text-muted-foreground" />
+                  </div>
+                )}
                 {isSelectMoveMode && (
                   <button
                     onClick={() => {
