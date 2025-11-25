@@ -1120,11 +1120,23 @@ const IntervalTimer = () => {
             <div className="flex items-center justify-between py-3">
               <Label className="text-lg text-foreground font-normal">Repetitions</Label>
               <Input
-                type="number"
+                type="text"
+                inputMode="numeric"
                 value={timerSettings.interimRepetitions}
-                onChange={(e) => setTimerSettings({ ...timerSettings, interimRepetitions: parseInt(e.target.value) || 1 })}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value === '' || /^\d+$/.test(value)) {
+                    const num = value === '' ? 1 : Math.max(1, parseInt(value));
+                    setTimerSettings({ ...timerSettings, interimRepetitions: num });
+                  }
+                }}
+                onFocus={(e) => e.target.select()}
+                onBlur={(e) => {
+                  if (e.target.value === '') {
+                    setTimerSettings({ ...timerSettings, interimRepetitions: 1 });
+                  }
+                }}
                 className="w-24 text-center"
-                min="1"
               />
             </div>
 
@@ -1132,11 +1144,23 @@ const IntervalTimer = () => {
             <div className="flex items-center justify-between py-3 border-t border-border">
               <Label className="text-lg text-foreground font-normal">Sets</Label>
               <Input
-                type="number"
+                type="text"
+                inputMode="numeric"
                 value={timerSettings.interimSets}
-                onChange={(e) => setTimerSettings({ ...timerSettings, interimSets: parseInt(e.target.value) || 1 })}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value === '' || /^\d+$/.test(value)) {
+                    const num = value === '' ? 1 : Math.max(1, parseInt(value));
+                    setTimerSettings({ ...timerSettings, interimSets: num });
+                  }
+                }}
+                onFocus={(e) => e.target.select()}
+                onBlur={(e) => {
+                  if (e.target.value === '') {
+                    setTimerSettings({ ...timerSettings, interimSets: 1 });
+                  }
+                }}
                 className="w-24 text-center"
-                min="1"
               />
             </div>
 
