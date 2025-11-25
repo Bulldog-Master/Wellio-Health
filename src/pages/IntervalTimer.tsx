@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Timer, FolderPlus, MoreHorizontal } from "lucide-react";
+import { Timer, FolderPlus, MoreHorizontal, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -25,6 +26,7 @@ const IntervalTimer = () => {
   const [isFolderDialogOpen, setIsFolderDialogOpen] = useState(false);
   const [folderName, setFolderName] = useState("");
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchTimers();
@@ -95,6 +97,19 @@ const IntervalTimer = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Back button */}
+      <div className="p-4 pb-0">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigate("/activity")}
+          className="gap-2"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to Activity
+        </Button>
+      </div>
+
       {/* Header */}
       <div className="bg-card border-b border-border">
         <div className="flex items-center justify-between p-4">
