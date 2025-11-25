@@ -553,7 +553,7 @@ const IntervalTimer = () => {
                     }
                   />
                 </div>
-                <div className="px-4 pb-4 border-b border-border">
+                <div className="px-4 pb-4">
                   <p className="text-sm text-muted-foreground">
                     Play sound on repeat when timer ends. If app is running in background, sound will play for 30 seconds.
                   </p>
