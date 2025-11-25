@@ -61,6 +61,7 @@ const IntervalTimer = () => {
     useInterimInterval: false,
     interimIntervalSeconds: 10,
     interimRepetitions: 1,
+    interimSets: 1,
     interimColor: "none",
     interimSound: "beep",
     endWithInterval: false,
@@ -68,6 +69,9 @@ const IntervalTimer = () => {
     showElapsedTime: false,
     isRepBased: false,
   });
+  const [interimHoursInput, setInterimHoursInput] = useState("0");
+  const [interimMinsInput, setInterimMinsInput] = useState("0");
+  const [interimSecsInput, setInterimSecsInput] = useState("10");
   const { toast } = useToast();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -140,6 +144,7 @@ const IntervalTimer = () => {
         useInterimInterval: false,
         interimIntervalSeconds: 10,
         interimRepetitions: 1,
+        interimSets: 1,
         interimColor: "none",
         interimSound: "beep",
         endWithInterval: false,
@@ -147,6 +152,9 @@ const IntervalTimer = () => {
         showElapsedTime: false,
         isRepBased: false,
       });
+      setInterimHoursInput("0");
+      setInterimMinsInput("0");
+      setInterimSecsInput("10");
     },
     onError: (error) => {
       toast({
@@ -1021,72 +1029,90 @@ const IntervalTimer = () => {
             <div className="flex items-center justify-center gap-4">
               <div className="flex flex-col items-center">
                 <Input
-                  type="number"
-                  value={Math.floor(timerSettings.interimIntervalSeconds / 3600)}
+                  type="text"
+                  inputMode="numeric"
+                  value={interimHoursInput}
                   onChange={(e) => {
-                    const hours = e.target.value === '' ? 0 : Math.max(0, Math.min(23, parseInt(e.target.value)));
-                    const mins = Math.floor((timerSettings.interimIntervalSeconds % 3600) / 60);
-                    const secs = timerSettings.interimIntervalSeconds % 60;
-                    setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + mins * 60 + secs });
+                    const value = e.target.value;
+                    if (value === '' || /^\d+$/.test(value)) {
+                      setInterimHoursInput(value);
+                      const hours = value === '' ? 0 : Math.max(0, Math.min(23, parseInt(value)));
+                      const mins = Math.floor((timerSettings.interimIntervalSeconds % 3600) / 60);
+                      const secs = timerSettings.interimIntervalSeconds % 60;
+                      setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + mins * 60 + secs });
+                    }
+                  }}
+                  onFocus={(e) => {
+                    if (e.target.value === '0') {
+                      setInterimHoursInput('');
+                    }
                   }}
                   onBlur={(e) => {
                     if (e.target.value === '') {
-                      const mins = Math.floor((timerSettings.interimIntervalSeconds % 3600) / 60);
-                      const secs = timerSettings.interimIntervalSeconds % 60;
-                      setTimerSettings({ ...timerSettings, interimIntervalSeconds: mins * 60 + secs });
+                      setInterimHoursInput('0');
                     }
                   }}
                   className="w-24 text-center text-2xl"
-                  min="0"
-                  max="23"
                 />
                 <span className="text-sm text-muted-foreground mt-2">hours</span>
               </div>
 
               <div className="flex flex-col items-center">
                 <Input
-                  type="number"
-                  value={Math.floor((timerSettings.interimIntervalSeconds % 3600) / 60)}
+                  type="text"
+                  inputMode="numeric"
+                  value={interimMinsInput}
                   onChange={(e) => {
-                    const hours = Math.floor(timerSettings.interimIntervalSeconds / 3600);
-                    const mins = e.target.value === '' ? 0 : Math.max(0, Math.min(59, parseInt(e.target.value)));
-                    const secs = timerSettings.interimIntervalSeconds % 60;
-                    setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + mins * 60 + secs });
+                    const value = e.target.value;
+                    if (value === '' || /^\d+$/.test(value)) {
+                      setInterimMinsInput(value);
+                      const hours = Math.floor(timerSettings.interimIntervalSeconds / 3600);
+                      const mins = value === '' ? 0 : Math.max(0, Math.min(59, parseInt(value)));
+                      const secs = timerSettings.interimIntervalSeconds % 60;
+                      setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + mins * 60 + secs });
+                    }
+                  }}
+                  onFocus={(e) => {
+                    if (e.target.value === '0') {
+                      setInterimMinsInput('');
+                    }
                   }}
                   onBlur={(e) => {
                     if (e.target.value === '') {
-                      const hours = Math.floor(timerSettings.interimIntervalSeconds / 3600);
-                      const secs = timerSettings.interimIntervalSeconds % 60;
-                      setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + secs });
+                      setInterimMinsInput('0');
                     }
                   }}
                   className="w-24 text-center text-2xl"
-                  min="0"
-                  max="59"
                 />
                 <span className="text-sm text-muted-foreground mt-2">min</span>
               </div>
 
               <div className="flex flex-col items-center">
                 <Input
-                  type="number"
-                  value={timerSettings.interimIntervalSeconds % 60}
+                  type="text"
+                  inputMode="numeric"
+                  value={interimSecsInput}
                   onChange={(e) => {
-                    const hours = Math.floor(timerSettings.interimIntervalSeconds / 3600);
-                    const mins = Math.floor((timerSettings.interimIntervalSeconds % 3600) / 60);
-                    const secs = e.target.value === '' ? 0 : Math.max(0, Math.min(59, parseInt(e.target.value)));
-                    setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + mins * 60 + secs });
+                    const value = e.target.value;
+                    if (value === '' || /^\d+$/.test(value)) {
+                      setInterimSecsInput(value);
+                      const hours = Math.floor(timerSettings.interimIntervalSeconds / 3600);
+                      const mins = Math.floor((timerSettings.interimIntervalSeconds % 3600) / 60);
+                      const secs = value === '' ? 0 : Math.max(0, Math.min(59, parseInt(value)));
+                      setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + mins * 60 + secs });
+                    }
+                  }}
+                  onFocus={(e) => {
+                    if (e.target.value === '0') {
+                      setInterimSecsInput('');
+                    }
                   }}
                   onBlur={(e) => {
                     if (e.target.value === '') {
-                      const hours = Math.floor(timerSettings.interimIntervalSeconds / 3600);
-                      const mins = Math.floor((timerSettings.interimIntervalSeconds % 3600) / 60);
-                      setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + mins * 60 });
+                      setInterimSecsInput('0');
                     }
                   }}
                   className="w-24 text-center text-2xl"
-                  min="0"
-                  max="59"
                 />
                 <span className="text-sm text-muted-foreground mt-2">sec</span>
               </div>
@@ -1109,6 +1135,18 @@ const IntervalTimer = () => {
                 type="number"
                 value={timerSettings.interimRepetitions}
                 onChange={(e) => setTimerSettings({ ...timerSettings, interimRepetitions: parseInt(e.target.value) || 1 })}
+                className="w-24 text-center"
+                min="1"
+              />
+            </div>
+
+            {/* Sets */}
+            <div className="flex items-center justify-between py-3 border-t border-border">
+              <Label className="text-lg text-foreground font-normal">Sets</Label>
+              <Input
+                type="number"
+                value={timerSettings.interimSets}
+                onChange={(e) => setTimerSettings({ ...timerSettings, interimSets: parseInt(e.target.value) || 1 })}
                 className="w-24 text-center"
                 min="1"
               />
