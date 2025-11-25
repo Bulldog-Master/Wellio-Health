@@ -283,46 +283,6 @@ const IntervalTimer = () => {
               </div>
             </div>
 
-            {/* SOUND */}
-            <div className="space-y-4">
-              <h3 className="text-sm font-semibold text-muted-foreground">SOUND</h3>
-              
-              <div className="flex items-center justify-between py-3">
-                <Label className="text-lg text-muted-foreground font-normal">Interval complete</Label>
-                <ChevronRight className="h-5 w-5 text-muted-foreground" />
-              </div>
-
-              <div className="flex items-center justify-between py-3">
-                <Label className="text-lg text-muted-foreground font-normal">Timer complete</Label>
-                <ChevronRight className="h-5 w-5 text-muted-foreground" />
-              </div>
-
-              <div className="flex items-center justify-between py-3">
-                <Label className="text-lg text-muted-foreground font-normal">Double beep (repeat)</Label>
-                <Switch
-                  checked={timerSettings.doubleBeepRepeat}
-                  onCheckedChange={(checked) =>
-                    setTimerSettings({ ...timerSettings, doubleBeepRepeat: checked })
-                  }
-                />
-              </div>
-
-              <div className="flex items-center justify-between py-3">
-                <Label className="text-lg text-foreground font-normal">Sound</Label>
-                <Switch
-                  checked={timerSettings.soundEnabled}
-                  onCheckedChange={(checked) =>
-                    setTimerSettings({ ...timerSettings, soundEnabled: checked })
-                  }
-                />
-              </div>
-
-              <div className="flex items-center justify-between py-3">
-                <Label className="text-lg text-muted-foreground font-normal">Volume</Label>
-                <ChevronRight className="h-5 w-5 text-muted-foreground" />
-              </div>
-            </div>
-
             {/* COUNTDOWN */}
             <div className="space-y-4">
               <h3 className="text-sm font-semibold text-muted-foreground">COUNTDOWN</h3>
