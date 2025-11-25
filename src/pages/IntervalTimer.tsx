@@ -158,6 +158,32 @@ const IntervalTimer = () => {
     },
   });
 
+  const deleteTimerMutation = useMutation({
+    mutationFn: async (timerId: string) => {
+      const { error } = await supabase
+        .from("interval_timers")
+        .delete()
+        .eq("id", timerId);
+
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["interval-timers"] });
+      toast({
+        title: "Timer deleted",
+        description: "Timer has been removed from your library.",
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: "Failed to delete timer. Please try again.",
+        variant: "destructive",
+      });
+      console.error("Error deleting timer:", error);
+    },
+  });
+
   const soundOptions = [
     { id: 'none', name: 'No sound' },
     { id: 'beep', name: 'Beep' },
@@ -550,13 +576,9 @@ const IntervalTimer = () => {
                 )}
                 {isEditMode && (
                   <button
-                    onClick={() => {
-                      toast({
-                        title: "Delete timer",
-                        description: "Delete functionality will be implemented soon",
-                      });
-                    }}
+                    onClick={() => deleteTimerMutation.mutate(timer.id)}
                     className="mr-4"
+                    disabled={deleteTimerMutation.isPending}
                   >
                     <div className="w-7 h-7 rounded-full bg-destructive flex items-center justify-center">
                       <div className="w-3 h-0.5 bg-background" />
