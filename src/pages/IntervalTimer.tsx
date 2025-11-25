@@ -565,7 +565,7 @@ const IntervalTimer = () => {
                   }
                 }}
               >
-                Move to
+                Move
               </button>
             </>
           ) : (
@@ -654,24 +654,6 @@ const IntervalTimer = () => {
                   <span className="text-lg text-muted-foreground">
                     {formatDuration(timer.intervals)}
                   </span>
-                  {!isSelectMoveMode && !isEditMode && (
-                    <button 
-                      className="p-2 hover:bg-accent rounded-full transition-colors"
-                      onClick={() => {
-                        setSelectedTimerId(timer.id);
-                        setIsTimerMenuOpen(true);
-                      }}
-                    >
-                      <MoreHorizontal className="h-5 w-5 text-muted-foreground" />
-                    </button>
-                  )}
-                  {isEditMode && (
-                    <div className="flex flex-col gap-0.5 p-2">
-                      <div className="w-5 h-0.5 bg-muted-foreground rounded" />
-                      <div className="w-5 h-0.5 bg-muted-foreground rounded" />
-                      <div className="w-5 h-0.5 bg-muted-foreground rounded" />
-                    </div>
-                  )}
                 </div>
               </div>
             ))
