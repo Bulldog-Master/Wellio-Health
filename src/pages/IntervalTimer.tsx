@@ -1024,10 +1024,17 @@ const IntervalTimer = () => {
                   type="number"
                   value={Math.floor(timerSettings.interimIntervalSeconds / 3600)}
                   onChange={(e) => {
-                    const hours = parseInt(e.target.value) || 0;
+                    const hours = e.target.value === '' ? 0 : Math.max(0, Math.min(23, parseInt(e.target.value)));
                     const mins = Math.floor((timerSettings.interimIntervalSeconds % 3600) / 60);
                     const secs = timerSettings.interimIntervalSeconds % 60;
                     setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + mins * 60 + secs });
+                  }}
+                  onBlur={(e) => {
+                    if (e.target.value === '') {
+                      const mins = Math.floor((timerSettings.interimIntervalSeconds % 3600) / 60);
+                      const secs = timerSettings.interimIntervalSeconds % 60;
+                      setTimerSettings({ ...timerSettings, interimIntervalSeconds: mins * 60 + secs });
+                    }
                   }}
                   className="w-24 text-center text-2xl"
                   min="0"
@@ -1042,9 +1049,16 @@ const IntervalTimer = () => {
                   value={Math.floor((timerSettings.interimIntervalSeconds % 3600) / 60)}
                   onChange={(e) => {
                     const hours = Math.floor(timerSettings.interimIntervalSeconds / 3600);
-                    const mins = parseInt(e.target.value) || 0;
+                    const mins = e.target.value === '' ? 0 : Math.max(0, Math.min(59, parseInt(e.target.value)));
                     const secs = timerSettings.interimIntervalSeconds % 60;
                     setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + mins * 60 + secs });
+                  }}
+                  onBlur={(e) => {
+                    if (e.target.value === '') {
+                      const hours = Math.floor(timerSettings.interimIntervalSeconds / 3600);
+                      const secs = timerSettings.interimIntervalSeconds % 60;
+                      setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + secs });
+                    }
                   }}
                   className="w-24 text-center text-2xl"
                   min="0"
@@ -1060,8 +1074,15 @@ const IntervalTimer = () => {
                   onChange={(e) => {
                     const hours = Math.floor(timerSettings.interimIntervalSeconds / 3600);
                     const mins = Math.floor((timerSettings.interimIntervalSeconds % 3600) / 60);
-                    const secs = parseInt(e.target.value) || 0;
+                    const secs = e.target.value === '' ? 0 : Math.max(0, Math.min(59, parseInt(e.target.value)));
                     setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + mins * 60 + secs });
+                  }}
+                  onBlur={(e) => {
+                    if (e.target.value === '') {
+                      const hours = Math.floor(timerSettings.interimIntervalSeconds / 3600);
+                      const mins = Math.floor((timerSettings.interimIntervalSeconds % 3600) / 60);
+                      setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + mins * 60 });
+                    }
                   }}
                   className="w-24 text-center text-2xl"
                   min="0"
