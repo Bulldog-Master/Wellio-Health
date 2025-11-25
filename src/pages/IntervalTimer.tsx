@@ -60,6 +60,7 @@ const IntervalTimer = () => {
     endWithInterval: false,
     showLineNumbers: false,
     showElapsedTime: false,
+    isRepBased: false,
   });
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -875,8 +876,10 @@ const IntervalTimer = () => {
               <div className="flex items-center justify-between py-3">
                 <Label className="text-lg text-foreground font-normal">Rep-based interval</Label>
                 <Switch
-                  checked={false}
-                  onCheckedChange={() => {}}
+                  checked={timerSettings.isRepBased}
+                  onCheckedChange={(checked) =>
+                    setTimerSettings({ ...timerSettings, isRepBased: checked })
+                  }
                 />
               </div>
               <p className="text-sm text-muted-foreground mt-2">
