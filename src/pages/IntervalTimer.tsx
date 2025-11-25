@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Timer, FolderPlus, MoreHorizontal, ArrowLeft, X, ChevronRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +27,6 @@ interface IntervalTimer {
 }
 
 const IntervalTimer = () => {
-  const [timers, setTimers] = useState<IntervalTimer[]>([]);
   const [isFolderDialogOpen, setIsFolderDialogOpen] = useState(false);
   const [isNewTimerOpen, setIsNewTimerOpen] = useState(false);
   const [isSoundPickerOpen, setIsSoundPickerOpen] = useState(false);
@@ -41,7 +41,8 @@ const IntervalTimer = () => {
   const [selectedTimerIds, setSelectedTimerIds] = useState<string[]>([]);
   const [isEditMode, setIsEditMode] = useState(false);
   const [folderName, setFolderName] = useState("");
-  const [timerName, setTimerName] = useState("");
+  const [timerName, setTimerName] = useState("New Timer");
+  const [intervals, setIntervals] = useState<any[]>([]);
   const [timerSettings, setTimerSettings] = useState({
     intervalCompleteSound: "beep",
     timerCompleteSound: "beep",
@@ -64,6 +65,93 @@ const IntervalTimer = () => {
   });
   const { toast } = useToast();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const { data: timers = [] } = useQuery({
+    queryKey: ["interval-timers"],
+    queryFn: async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Not authenticated");
+
+      const { data, error } = await supabase
+        .from("interval_timers")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+      return data || [];
+    },
+  });
+
+  const saveTimerMutation = useMutation({
+    mutationFn: async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Not authenticated");
+
+      const { data, error } = await supabase
+        .from("interval_timers")
+        .insert({
+          name: timerName,
+          user_id: user.id,
+          text_to_speech: timerSettings.textToSpeech,
+          countdown_beeps: timerSettings.countdownBeeps,
+          use_for_notifications: timerSettings.useForNotifications,
+          use_interim_interval: timerSettings.useInterimInterval,
+          interim_interval_seconds: timerSettings.interimIntervalSeconds,
+          end_with_interim: timerSettings.endWithInterval,
+          show_line_numbers: timerSettings.showLineNumbers,
+          show_elapsed_time: timerSettings.showElapsedTime,
+          include_reps: timerSettings.isRepBased,
+          include_sets: false,
+          intervals: intervals,
+        })
+        .select()
+        .single();
+
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["interval-timers"] });
+      toast({
+        title: "Timer saved",
+        description: `"${timerName}" has been saved to your library.`,
+      });
+      setIsNewTimerOpen(false);
+      // Reset form
+      setTimerName("New Timer");
+      setIntervals([]);
+      setTimerSettings({
+        intervalCompleteSound: "beep",
+        timerCompleteSound: "beep",
+        timerCompleteRepeat: false,
+        doubleBeepSound: "doublebeep",
+        textToSpeech: false,
+        includeSets: false,
+        includeReps: false,
+        useForNotifications: false,
+        countdownBeeps: false,
+        useInterimInterval: false,
+        interimIntervalSeconds: 10,
+        interimRepetitions: 1,
+        interimColor: "none",
+        interimSound: "beep",
+        endWithInterval: false,
+        showLineNumbers: false,
+        showElapsedTime: false,
+        isRepBased: false,
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: "Failed to save timer. Please try again.",
+        variant: "destructive",
+      });
+      console.error("Error saving timer:", error);
+    },
+  });
 
   const soundOptions = [
     { id: 'none', name: 'No sound' },
@@ -207,32 +295,6 @@ const IntervalTimer = () => {
     return timerSettings.doubleBeepSound;
   };
 
-  useEffect(() => {
-    fetchTimers();
-  }, []);
-
-  const fetchTimers = async () => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-
-      const { data, error } = await supabase
-        .from("interval_timers")
-        .select("*")
-        .eq("user_id", user.id)
-        .order("created_at", { ascending: false });
-
-      if (error) throw error;
-      setTimers(data || []);
-    } catch (error) {
-      console.error("Error fetching timers:", error);
-      toast({
-        title: "Error",
-        description: "Failed to load timers",
-        variant: "destructive",
-      });
-    }
-  };
 
   const handleCreateFolder = async () => {
     if (!folderName.trim()) return;
@@ -478,8 +540,12 @@ const IntervalTimer = () => {
                 <X className="h-6 w-6" />
               </button>
               <h2 className="text-xl font-semibold text-foreground">New Timer</h2>
-              <button className="text-muted-foreground font-semibold">
-                Save
+              <button 
+                className={`font-semibold ${!timerName.trim() || saveTimerMutation.isPending ? 'text-muted-foreground' : 'text-primary'}`}
+                onClick={() => saveTimerMutation.mutate()}
+                disabled={!timerName.trim() || saveTimerMutation.isPending}
+              >
+                {saveTimerMutation.isPending ? "Saving..." : "Save"}
               </button>
             </div>
           </div>
