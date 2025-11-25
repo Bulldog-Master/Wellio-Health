@@ -39,6 +39,7 @@ const IntervalTimer = () => {
   const [isLibraryMenuOpen, setIsLibraryMenuOpen] = useState(false);
   const [isSelectMoveMode, setIsSelectMoveMode] = useState(false);
   const [selectedTimerIds, setSelectedTimerIds] = useState<string[]>([]);
+  const [isEditMode, setIsEditMode] = useState(false);
   const [folderName, setFolderName] = useState("");
   const [timerName, setTimerName] = useState("");
   const [timerSettings, setTimerSettings] = useState({
@@ -290,31 +291,89 @@ const IntervalTimer = () => {
       {/* Header */}
       <div className="bg-card border-b border-border">
         <div className="flex items-center justify-between p-4">
-          {/* Left icons */}
-          <div className="flex items-center gap-4">
-            <button onClick={() => setIsNewTimerOpen(true)}>
-              <Timer className="h-6 w-6 text-muted-foreground" />
-            </button>
-            <button
-              onClick={() => setIsFolderDialogOpen(true)}
-              className="relative"
-            >
-              <FolderPlus className="h-6 w-6 text-muted-foreground" />
-            </button>
-          </div>
+          {!isSelectMoveMode && !isEditMode ? (
+            <>
+              {/* Left icons */}
+              <div className="flex items-center gap-4">
+                <button onClick={() => setIsNewTimerOpen(true)}>
+                  <Timer className="h-6 w-6 text-muted-foreground" />
+                </button>
+                <button
+                  onClick={() => setIsFolderDialogOpen(true)}
+                  className="relative"
+                >
+                  <FolderPlus className="h-6 w-6 text-muted-foreground" />
+                </button>
+              </div>
 
-          {/* Center title */}
-          <h1 className="text-xl font-semibold text-foreground absolute left-1/2 transform -translate-x-1/2">
-            Your library
-          </h1>
+              {/* Center title */}
+              <h1 className="text-xl font-semibold text-foreground absolute left-1/2 transform -translate-x-1/2">
+                Your library
+              </h1>
 
-          {/* Right icon */}
-          <button 
-            onClick={() => setIsLibraryMenuOpen(true)}
-            className="w-10 h-10 rounded-full border-2 border-muted-foreground flex items-center justify-center hover:bg-accent transition-colors"
-          >
-            <MoreHorizontal className="h-5 w-5 text-muted-foreground" />
-          </button>
+              {/* Right icon */}
+              <button 
+                onClick={() => setIsLibraryMenuOpen(true)}
+                className="w-10 h-10 rounded-full border-2 border-muted-foreground flex items-center justify-center hover:bg-accent transition-colors"
+              >
+                <MoreHorizontal className="h-5 w-5 text-muted-foreground" />
+              </button>
+            </>
+          ) : isSelectMoveMode ? (
+            <>
+              {/* Select Move Mode Header */}
+              <button
+                onClick={() => {
+                  setIsSelectMoveMode(false);
+                  setSelectedTimerIds([]);
+                }}
+                className="text-primary text-lg"
+              >
+                Done
+              </button>
+
+              <div className="flex items-center gap-3 absolute left-1/2 transform -translate-x-1/2">
+                <FolderPlus className="h-6 w-6 text-muted-foreground" />
+                <h1 className="text-xl font-semibold text-foreground">
+                  Your library
+                </h1>
+              </div>
+
+              <button
+                disabled={selectedTimerIds.length === 0}
+                className={`text-lg ${selectedTimerIds.length === 0 ? 'text-muted-foreground' : 'text-primary'}`}
+                onClick={() => {
+                  if (selectedTimerIds.length > 0) {
+                    toast({
+                      title: "Move timers",
+                      description: "Folder selection will be implemented soon",
+                    });
+                  }
+                }}
+              >
+                Move to
+              </button>
+            </>
+          ) : (
+            <>
+              {/* Edit Mode Header */}
+              <div className="flex items-center gap-4 text-muted-foreground">
+                <Timer className="h-6 w-6" />
+                <FolderPlus className="h-6 w-6" />
+              </div>
+
+              <h1 className="text-xl font-semibold text-foreground absolute left-1/2 transform -translate-x-1/2">
+                Your library
+              </h1>
+
+              <button
+                onClick={() => setIsEditMode(false)}
+                className="text-primary text-lg"
+              >
+                Done
+              </button>
+            </>
+          )}
         </div>
       </div>
 
@@ -357,6 +416,21 @@ const IntervalTimer = () => {
                     </div>
                   </button>
                 )}
+                {isEditMode && (
+                  <button
+                    onClick={() => {
+                      toast({
+                        title: "Delete timer",
+                        description: "Delete functionality will be implemented soon",
+                      });
+                    }}
+                    className="mr-4"
+                  >
+                    <div className="w-7 h-7 rounded-full bg-destructive flex items-center justify-center">
+                      <div className="w-3 h-0.5 bg-background" />
+                    </div>
+                  </button>
+                )}
                 <div className="flex-1">
                   <span className="text-lg font-medium text-foreground">
                     {timer.name}
@@ -366,7 +440,7 @@ const IntervalTimer = () => {
                   <span className="text-lg text-muted-foreground">
                     {formatDuration(timer.intervals)}
                   </span>
-                  {!isSelectMoveMode && (
+                  {!isSelectMoveMode && !isEditMode && (
                     <button 
                       className="p-2 hover:bg-accent rounded-full transition-colors"
                       onClick={() => {
@@ -376,6 +450,13 @@ const IntervalTimer = () => {
                     >
                       <MoreHorizontal className="h-5 w-5 text-muted-foreground" />
                     </button>
+                  )}
+                  {isEditMode && (
+                    <div className="flex flex-col gap-0.5 p-2">
+                      <div className="w-5 h-0.5 bg-muted-foreground rounded" />
+                      <div className="w-5 h-0.5 bg-muted-foreground rounded" />
+                      <div className="w-5 h-0.5 bg-muted-foreground rounded" />
+                    </div>
                   )}
                 </div>
               </div>
@@ -940,10 +1021,7 @@ const IntervalTimer = () => {
               className="py-4 px-6 text-center text-primary hover:bg-accent transition-colors text-base"
               onClick={() => {
                 setIsLibraryMenuOpen(false);
-                toast({
-                  title: "Edit",
-                  description: "This feature will be implemented soon",
-                });
+                setIsEditMode(true);
               }}
             >
               Edit
