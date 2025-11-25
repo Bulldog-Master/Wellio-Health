@@ -33,7 +33,8 @@ const IntervalTimer = () => {
   const [timerName, setTimerName] = useState("");
   const [timerSettings, setTimerSettings] = useState({
     intervalCompleteSound: "beep",
-    timerCompleteSound: "beep", 
+    timerCompleteSound: "beep",
+    timerCompleteRepeat: false,
     doubleBeepSound: "doublebeep",
     textToSpeech: false,
     includeSets: false,
@@ -359,7 +360,12 @@ const IntervalTimer = () => {
               </div>
 
               <div className="flex items-center justify-between py-3">
-                <Label className="text-lg text-foreground font-normal">Timer complete</Label>
+                <button 
+                  onClick={() => openSoundPicker('timer')}
+                  className="flex-1 text-left"
+                >
+                  <Label className="text-lg text-foreground font-normal cursor-pointer">Timer complete</Label>
+                </button>
                 <div className="flex items-center gap-2">
                   <Label className="text-sm text-muted-foreground font-normal">Double beep (repeat)</Label>
                   <button onClick={() => openSoundPicker('doublebeep')}>
@@ -533,6 +539,24 @@ const IntervalTimer = () => {
                 <span className="text-primary text-2xl">✓</span>
               )}
             </button>
+
+            {/* Repeat toggle - only show for timer complete */}
+            {soundPickerType === 'timer' && (
+              <div className="border-b border-border">
+                <div className="flex items-center justify-between p-4">
+                  <Label className="text-lg text-foreground font-normal">Repeat</Label>
+                  <Switch
+                    checked={timerSettings.timerCompleteRepeat}
+                    onCheckedChange={(checked) =>
+                      setTimerSettings({ ...timerSettings, timerCompleteRepeat: checked })
+                    }
+                  />
+                </div>
+                <p className="px-4 pb-4 text-sm text-muted-foreground">
+                  Play sound on repeat when timer ends. If app is running in background, sound will play for 30 seconds.
+                </p>
+              </div>
+            )}
 
             {/* Select a sound section */}
             <div className="p-4 bg-muted/30">
