@@ -35,14 +35,14 @@ const IntervalTimer = () => {
   const [isInterimSoundPickerOpen, setIsInterimSoundPickerOpen] = useState(false);
   const [soundPickerType, setSoundPickerType] = useState<'interval' | 'timer' | 'doublebeep'>('interval');
   const [selectedTimerId, setSelectedTimerId] = useState<string | null>(null);
-  const [isTimerMenuOpen, setIsTimerMenuOpen] = useState(false);
   const [isLibraryMenuOpen, setIsLibraryMenuOpen] = useState(false);
+  const [isMoveMode, setIsMoveMode] = useState(false);
+  const [selectedMoveTimerId, setSelectedMoveTimerId] = useState<string | null>(null);
   const [isSelectMoveMode, setIsSelectMoveMode] = useState(false);
   const [selectedTimerIds, setSelectedTimerIds] = useState<string[]>([]);
   const [isEditMode, setIsEditMode] = useState(false);
   const [draggedTimerIndex, setDraggedTimerIndex] = useState<number | null>(null);
   const [isFolderSelectionOpen, setIsFolderSelectionOpen] = useState(false);
-  const [movingTimerId, setMovingTimerId] = useState<string | null>(null);
   const [folderName, setFolderName] = useState("");
   const [timerName, setTimerName] = useState("New Timer");
   const [intervals, setIntervals] = useState<any[]>([]);
@@ -507,30 +507,23 @@ const IntervalTimer = () => {
         </Button>
       </div>
 
-      {/* Header */}
       <div className="bg-card border-b border-border">
         <div className="flex items-center justify-between p-4">
-          {!isSelectMoveMode && !isEditMode ? (
+          {!isMoveMode && !isEditMode ? (
             <>
-              {/* Left icons */}
               <div className="flex items-center gap-4">
                 <button onClick={() => setIsNewTimerOpen(true)}>
                   <Timer className="h-6 w-6 text-muted-foreground" />
                 </button>
-                <button
-                  onClick={() => setIsFolderDialogOpen(true)}
-                  className="relative"
-                >
+                <button onClick={() => setIsFolderDialogOpen(true)} className="relative">
                   <FolderPlus className="h-6 w-6 text-muted-foreground" />
                 </button>
               </div>
 
-              {/* Center title */}
               <h1 className="text-xl font-semibold text-foreground absolute left-1/2 transform -translate-x-1/2">
                 Your library
               </h1>
 
-              {/* Right icon */}
               <button 
                 onClick={() => setIsLibraryMenuOpen(true)}
                 className="w-10 h-10 rounded-full border-2 border-muted-foreground flex items-center justify-center hover:bg-accent transition-colors"
@@ -538,41 +531,26 @@ const IntervalTimer = () => {
                 <MoreHorizontal className="h-5 w-5 text-muted-foreground" />
               </button>
             </>
-          ) : isSelectMoveMode ? (
+          ) : isMoveMode ? (
             <>
-              {/* Select Move Mode Header */}
               <button
                 onClick={() => {
-                  setIsSelectMoveMode(false);
-                  setSelectedTimerIds([]);
+                  setIsMoveMode(false);
+                  setSelectedMoveTimerId(null);
                 }}
                 className="text-primary text-lg"
               >
                 Done
               </button>
 
-              <div className="flex items-center gap-3 absolute left-1/2 transform -translate-x-1/2">
-                <FolderPlus className="h-6 w-6 text-muted-foreground" />
-                <h1 className="text-xl font-semibold text-foreground">
-                  Your library
-                </h1>
-              </div>
+              <h1 className="text-xl font-semibold text-foreground absolute left-1/2 transform -translate-x-1/2">
+                {selectedMoveTimerId ? 'Drag to reorder' : 'Select a timer'}
+              </h1>
 
-              <button
-                disabled={selectedTimerIds.length === 0}
-                className={`text-lg ${selectedTimerIds.length === 0 ? 'text-muted-foreground' : 'text-primary'}`}
-                onClick={() => {
-                  if (selectedTimerIds.length > 0) {
-                    setIsFolderSelectionOpen(true);
-                  }
-                }}
-              >
-                Move
-              </button>
+              <div className="w-16"></div>
             </>
           ) : (
             <>
-              {/* Edit Mode Header */}
               <div className="flex items-center gap-4 text-muted-foreground">
                 <Timer className="h-6 w-6" />
                 <FolderPlus className="h-6 w-6" />
@@ -608,70 +586,47 @@ const IntervalTimer = () => {
             timers.map((timer, index) => (
               <div
                 key={timer.id}
-                onClick={(e) => {
-                  console.log('Row clicked', { isSelectMoveMode, selectedCount: selectedTimerIds.length, clickedId: timer.id });
-                  if (isSelectMoveMode && selectedTimerIds.length > 0 && !selectedTimerIds.includes(timer.id)) {
-                    e.stopPropagation();
-                    console.log('Moving timers to position after', timer.name);
-                    // Move selected timers to this position
+                draggable={selectedMoveTimerId === timer.id}
+                onDragStart={(e) => {
+                  if (selectedMoveTimerId === timer.id) {
+                    setDraggedTimerIndex(index);
+                    e.dataTransfer.effectAllowed = "move";
+                  }
+                }}
+                onDragOver={(e) => {
+                  if (selectedMoveTimerId && draggedTimerIndex !== null && draggedTimerIndex !== index) {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = "move";
+                  }
+                }}
+                onDrop={(e) => {
+                  if (selectedMoveTimerId && draggedTimerIndex !== null && draggedTimerIndex !== index) {
+                    e.preventDefault();
                     const newTimers = [...timers];
-                    const selectedTimers = newTimers.filter(t => selectedTimerIds.includes(t.id));
-                    const remainingTimers = newTimers.filter(t => !selectedTimerIds.includes(t.id));
-                    const targetIndex = remainingTimers.findIndex(t => t.id === timer.id);
-                    remainingTimers.splice(targetIndex + 1, 0, ...selectedTimers);
-                    queryClient.setQueryData(["interval-timers"], remainingTimers);
-                    setSelectedTimerIds([]);
-                    setIsSelectMoveMode(false);
+                    const [draggedTimer] = newTimers.splice(draggedTimerIndex, 1);
+                    newTimers.splice(index, 0, draggedTimer);
+                    queryClient.setQueryData(["interval-timers"], newTimers);
+                    setDraggedTimerIndex(null);
                     toast({
-                      title: "Moved",
-                      description: `Moved ${selectedTimers.length} timer(s)`,
+                      title: "Reordered",
+                      description: "Timer position updated",
                     });
                   }
                 }}
+                onDragEnd={() => {
+                  setDraggedTimerIndex(null);
+                }}
+                onClick={() => {
+                  if (isMoveMode && !selectedMoveTimerId) {
+                    setSelectedMoveTimerId(timer.id);
+                  }
+                }}
                 className={`flex items-center gap-3 py-4 transition-all ${
-                  isSelectMoveMode && selectedTimerIds.length > 0 && !selectedTimerIds.includes(timer.id)
-                    ? 'cursor-pointer hover:bg-accent/50'
-                    : ''
-                } ${selectedTimerIds.includes(timer.id) ? 'bg-accent/30' : ''} ${
-                  movingTimerId === timer.id ? 'bg-accent/50' : ''
+                  draggedTimerIndex === index ? 'opacity-50' : ''
+                } ${selectedMoveTimerId === timer.id ? 'bg-accent/50 cursor-move' : ''} ${
+                  isMoveMode && !selectedMoveTimerId ? 'cursor-pointer hover:bg-accent/30' : ''
                 }`}
               >
-                {movingTimerId === timer.id && (
-                  <div className="flex flex-col gap-1 mr-2">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        const currentIndex = timers.findIndex(t => t.id === timer.id);
-                        if (currentIndex > 0) {
-                          const newTimers = [...timers];
-                          [newTimers[currentIndex - 1], newTimers[currentIndex]] = 
-                            [newTimers[currentIndex], newTimers[currentIndex - 1]];
-                          queryClient.setQueryData(["interval-timers"], newTimers);
-                        }
-                      }}
-                      disabled={index === 0}
-                      className="p-1 hover:bg-accent rounded disabled:opacity-30"
-                    >
-                      <ChevronUp className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        const currentIndex = timers.findIndex(t => t.id === timer.id);
-                        if (currentIndex < timers.length - 1) {
-                          const newTimers = [...timers];
-                          [newTimers[currentIndex], newTimers[currentIndex + 1]] = 
-                            [newTimers[currentIndex + 1], newTimers[currentIndex]];
-                          queryClient.setQueryData(["interval-timers"], newTimers);
-                        }
-                      }}
-                      disabled={index === timers.length - 1}
-                      className="p-1 hover:bg-accent rounded disabled:opacity-30"
-                    >
-                      <ChevronDown className="h-4 w-4" />
-                    </button>
-                  </div>
-                )}
                 {isSelectMoveMode && (
                   <button
                     onClick={(e) => {
@@ -695,6 +650,11 @@ const IntervalTimer = () => {
                     </div>
                   </button>
                 )}
+                {isMoveMode && selectedMoveTimerId === timer.id && (
+                  <div className="mr-2">
+                    <GripVertical className="h-5 w-5 text-primary" />
+                  </div>
+                )}
                 {isEditMode && (
                   <button
                     onClick={() => deleteTimerMutation.mutate(timer.id)}
@@ -709,7 +669,7 @@ const IntervalTimer = () => {
                 <div 
                   className="flex-1 text-left cursor-pointer"
                   onClick={(e) => {
-                    if (!isSelectMoveMode && !isEditMode && movingTimerId !== timer.id) {
+                    if (!isSelectMoveMode && !isEditMode && !isMoveMode) {
                       e.stopPropagation();
                       handleTimerSelect(timer);
                     }
@@ -720,35 +680,12 @@ const IntervalTimer = () => {
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
-                  {movingTimerId === timer.id && (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setMovingTimerId(null);
-                      }}
-                      className="text-primary font-medium"
-                    >
-                      Done
-                    </button>
+                  {!isMoveMode && !isSelectMoveMode && !isEditMode && (
+                    <span className="text-lg text-muted-foreground">
+                      {formatDuration(timer.intervals)}
+                    </span>
                   )}
-                  {movingTimerId !== timer.id && !isSelectMoveMode && !isEditMode && (
-                    <>
-                      <span className="text-lg text-muted-foreground">
-                        {formatDuration(timer.intervals)}
-                      </span>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedTimerId(timer.id);
-                          setIsTimerMenuOpen(true);
-                        }}
-                        className="p-2 hover:bg-accent rounded-full transition-colors"
-                      >
-                        <MoreHorizontal className="h-5 w-5 text-muted-foreground" />
-                      </button>
-                    </>
-                  )}
-                  {movingTimerId !== timer.id && (isSelectMoveMode || isEditMode) && (
+                  {(isSelectMoveMode || isEditMode) && (
                     <span className="text-lg text-muted-foreground">
                       {formatDuration(timer.intervals)}
                     </span>
@@ -1521,10 +1458,20 @@ const IntervalTimer = () => {
               className="py-4 px-6 text-center text-primary hover:bg-accent transition-colors text-base"
               onClick={() => {
                 setIsLibraryMenuOpen(false);
+                setIsMoveMode(true);
+              }}
+            >
+              Move
+            </button>
+            <Separator />
+            <button
+              className="py-4 px-6 text-center text-primary hover:bg-accent transition-colors text-base"
+              onClick={() => {
+                setIsLibraryMenuOpen(false);
                 setIsSelectMoveMode(true);
               }}
             >
-              Select to move
+              Move to folder
             </button>
             <Separator />
             <button
@@ -1540,47 +1487,6 @@ const IntervalTimer = () => {
             <button
               className="py-4 px-6 text-center text-primary hover:bg-accent transition-colors text-base"
               onClick={() => setIsLibraryMenuOpen(false)}
-            >
-              Cancel
-            </button>
-          </div>
-        </SheetContent>
-      </Sheet>
-
-      {/* Timer Menu Sheet - No Overlay */}
-      <Sheet open={isTimerMenuOpen} onOpenChange={setIsTimerMenuOpen}>
-        <SheetContent 
-          side="bottom" 
-          className="p-0 border-t border-border rounded-t-xl"
-          overlayClassName="bg-transparent pointer-events-none"
-        >
-          <div className="flex flex-col">
-            <button
-              className="py-4 px-6 text-center text-primary hover:bg-accent transition-colors text-base"
-              onClick={() => {
-                setIsTimerMenuOpen(false);
-                setMovingTimerId(selectedTimerId);
-              }}
-            >
-              Move
-            </button>
-            <Separator />
-            <button
-              className="py-4 px-6 text-center text-primary hover:bg-accent transition-colors text-base"
-              onClick={() => {
-                setIsTimerMenuOpen(false);
-                toast({
-                  title: "Edit timer",
-                  description: "This feature will be implemented soon",
-                });
-              }}
-            >
-              Edit
-            </button>
-            <Separator />
-            <button
-              className="py-4 px-6 text-center text-primary hover:bg-accent transition-colors text-base"
-              onClick={() => setIsTimerMenuOpen(false)}
             >
               Cancel
             </button>
