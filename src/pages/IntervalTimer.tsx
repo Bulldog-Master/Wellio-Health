@@ -14,6 +14,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { Separator } from "@/components/ui/separator";
 
 interface IntervalTimer {
   id: string;
@@ -32,6 +34,8 @@ const IntervalTimer = () => {
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
   const [isInterimSoundPickerOpen, setIsInterimSoundPickerOpen] = useState(false);
   const [soundPickerType, setSoundPickerType] = useState<'interval' | 'timer' | 'doublebeep'>('interval');
+  const [selectedTimerId, setSelectedTimerId] = useState<string | null>(null);
+  const [isTimerMenuOpen, setIsTimerMenuOpen] = useState(false);
   const [folderName, setFolderName] = useState("");
   const [timerName, setTimerName] = useState("");
   const [timerSettings, setTimerSettings] = useState({
@@ -325,12 +329,25 @@ const IntervalTimer = () => {
                 key={timer.id}
                 className="flex items-center justify-between py-4"
               >
-                <span className="text-lg font-medium text-foreground">
-                  {timer.name}
-                </span>
-                <span className="text-lg text-muted-foreground">
-                  {formatDuration(timer.intervals)}
-                </span>
+                <div className="flex-1">
+                  <span className="text-lg font-medium text-foreground">
+                    {timer.name}
+                  </span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-lg text-muted-foreground">
+                    {formatDuration(timer.intervals)}
+                  </span>
+                  <button 
+                    className="p-2 hover:bg-accent rounded-full transition-colors"
+                    onClick={() => {
+                      setSelectedTimerId(timer.id);
+                      setIsTimerMenuOpen(true);
+                    }}
+                  >
+                    <MoreHorizontal className="h-5 w-5 text-muted-foreground" />
+                  </button>
+                </div>
               </div>
             ))
           )}
@@ -870,6 +887,50 @@ const IntervalTimer = () => {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Timer Menu Sheet - No Overlay */}
+      <Sheet open={isTimerMenuOpen} onOpenChange={setIsTimerMenuOpen}>
+        <SheetContent 
+          side="bottom" 
+          className="p-0 border-t border-border rounded-t-xl"
+          overlayClassName="bg-transparent pointer-events-none"
+        >
+          <div className="flex flex-col">
+            <button
+              className="py-4 px-6 text-center text-primary hover:bg-accent transition-colors text-base"
+              onClick={() => {
+                setIsTimerMenuOpen(false);
+                toast({
+                  title: "Move timer",
+                  description: "This feature will be implemented soon",
+                });
+              }}
+            >
+              Select to move
+            </button>
+            <Separator />
+            <button
+              className="py-4 px-6 text-center text-primary hover:bg-accent transition-colors text-base"
+              onClick={() => {
+                setIsTimerMenuOpen(false);
+                toast({
+                  title: "Edit timer",
+                  description: "This feature will be implemented soon",
+                });
+              }}
+            >
+              Edit
+            </button>
+            <Separator />
+            <button
+              className="py-4 px-6 text-center text-primary hover:bg-accent transition-colors text-base"
+              onClick={() => setIsTimerMenuOpen(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </SheetContent>
+      </Sheet>
 
       {/* Create Folder Dialog */}
       <Dialog open={isFolderDialogOpen} onOpenChange={setIsFolderDialogOpen}>
