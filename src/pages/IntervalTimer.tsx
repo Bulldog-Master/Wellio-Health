@@ -44,6 +44,7 @@ const IntervalTimer = () => {
     countdownBeeps: false,
     useInterimInterval: false,
     interimIntervalSeconds: 10,
+    interimRepetitions: 1,
     endWithInterval: false,
     showLineNumbers: false,
     showElapsedTime: false,
@@ -685,7 +686,13 @@ const IntervalTimer = () => {
             {/* Repetitions */}
             <div className="flex items-center justify-between py-3">
               <Label className="text-lg text-foreground font-normal">Repetitions</Label>
-              <span className="text-lg text-foreground">1</span>
+              <Input
+                type="number"
+                value={timerSettings.interimRepetitions}
+                onChange={(e) => setTimerSettings({ ...timerSettings, interimRepetitions: parseInt(e.target.value) || 1 })}
+                className="w-24 text-center"
+                min="1"
+              />
             </div>
 
             {/* Color */}
