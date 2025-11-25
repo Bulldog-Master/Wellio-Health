@@ -523,7 +523,7 @@ const IntervalTimer = () => {
 
       <div className="bg-card border-b border-border">
         <div className="flex items-center justify-between p-4">
-          {!isMoveMode && !isEditMode ? (
+          {!isMoveMode && !isEditMode && !isSelectMoveMode ? (
             <>
               <div className="flex items-center gap-4">
                 <button onClick={() => setIsNewTimerOpen(true)}>
@@ -563,7 +563,36 @@ const IntervalTimer = () => {
 
               <div className="w-16"></div>
             </>
-          ) : (
+          ) : isSelectMoveMode ? (
+            <>
+              <button 
+                onClick={() => {
+                  setIsSelectMoveMode(false);
+                  setSelectedTimerIds([]);
+                }}
+                className="text-primary text-lg"
+              >
+                Cancel
+              </button>
+
+              <h1 className="text-xl font-semibold text-foreground absolute left-1/2 transform -translate-x-1/2">
+                Select timers
+              </h1>
+
+              <button
+                onClick={() => {
+                  console.log("Next clicked, selectedTimerIds:", selectedTimerIds);
+                  if (selectedTimerIds.length > 0) {
+                    setIsFolderSelectionOpen(true);
+                  }
+                }}
+                className={`text-lg ${selectedTimerIds.length > 0 ? 'text-primary' : 'text-muted-foreground'}`}
+                disabled={selectedTimerIds.length === 0}
+              >
+                Next
+              </button>
+            </>
+          ) : isEditMode ? (
             <>
               <div className="flex items-center gap-4 text-muted-foreground">
                 {currentFolderId ? (
@@ -591,7 +620,7 @@ const IntervalTimer = () => {
                 Done
               </button>
             </>
-          )}
+          ) : null}
         </div>
       </div>
 
