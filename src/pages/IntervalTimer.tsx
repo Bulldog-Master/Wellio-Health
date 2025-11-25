@@ -573,6 +573,37 @@ const IntervalTimer = () => {
 
       {/* Content */}
       <div className="p-4">
+        {folders.length > 0 && (
+          <>
+            <h2 className="text-sm font-semibold text-muted-foreground mb-3">
+              FOLDERS
+            </h2>
+            <div className="space-y-0 divide-y divide-border mb-6">
+              {folders.map((folder: any) => (
+                <div
+                  key={folder.id}
+                  className="flex items-center justify-between py-4 cursor-pointer hover:bg-accent/30"
+                  onClick={() => {
+                    // TODO: Navigate to folder view
+                    toast({
+                      title: "Folder",
+                      description: `Opening "${folder.name}"`,
+                    });
+                  }}
+                >
+                  <div className="flex items-center gap-3">
+                    <FolderPlus className="h-5 w-5 text-muted-foreground" />
+                    <span className="text-lg font-medium text-foreground">
+                      {folder.name}
+                    </span>
+                  </div>
+                  <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
         <h2 className="text-sm font-semibold text-muted-foreground mb-3">
           TIMERS
         </h2>
