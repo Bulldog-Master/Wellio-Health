@@ -36,6 +36,7 @@ const IntervalTimer = () => {
   const [soundPickerType, setSoundPickerType] = useState<'interval' | 'timer' | 'doublebeep'>('interval');
   const [selectedTimerId, setSelectedTimerId] = useState<string | null>(null);
   const [isTimerMenuOpen, setIsTimerMenuOpen] = useState(false);
+  const [isLibraryMenuOpen, setIsLibraryMenuOpen] = useState(false);
   const [folderName, setFolderName] = useState("");
   const [timerName, setTimerName] = useState("");
   const [timerSettings, setTimerSettings] = useState({
@@ -306,7 +307,10 @@ const IntervalTimer = () => {
           </h1>
 
           {/* Right icon */}
-          <button className="w-10 h-10 rounded-full border-2 border-muted-foreground flex items-center justify-center">
+          <button 
+            onClick={() => setIsLibraryMenuOpen(true)}
+            className="w-10 h-10 rounded-full border-2 border-muted-foreground flex items-center justify-center hover:bg-accent transition-colors"
+          >
             <MoreHorizontal className="h-5 w-5 text-muted-foreground" />
           </button>
         </div>
@@ -887,6 +891,50 @@ const IntervalTimer = () => {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Library Menu Sheet - No Overlay */}
+      <Sheet open={isLibraryMenuOpen} onOpenChange={setIsLibraryMenuOpen}>
+        <SheetContent 
+          side="bottom" 
+          className="p-0 border-t border-border rounded-t-xl"
+          overlayClassName="bg-transparent pointer-events-none"
+        >
+          <div className="flex flex-col">
+            <button
+              className="py-4 px-6 text-center text-primary hover:bg-accent transition-colors text-base"
+              onClick={() => {
+                setIsLibraryMenuOpen(false);
+                toast({
+                  title: "Select to move",
+                  description: "This feature will be implemented soon",
+                });
+              }}
+            >
+              Select to move
+            </button>
+            <Separator />
+            <button
+              className="py-4 px-6 text-center text-primary hover:bg-accent transition-colors text-base"
+              onClick={() => {
+                setIsLibraryMenuOpen(false);
+                toast({
+                  title: "Edit",
+                  description: "This feature will be implemented soon",
+                });
+              }}
+            >
+              Edit
+            </button>
+            <Separator />
+            <button
+              className="py-4 px-6 text-center text-primary hover:bg-accent transition-colors text-base"
+              onClick={() => setIsLibraryMenuOpen(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </SheetContent>
+      </Sheet>
 
       {/* Timer Menu Sheet - No Overlay */}
       <Sheet open={isTimerMenuOpen} onOpenChange={setIsTimerMenuOpen}>
