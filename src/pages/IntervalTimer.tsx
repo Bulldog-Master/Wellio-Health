@@ -170,6 +170,7 @@ const IntervalTimer = () => {
   };
 
   const openSoundPicker = (type: 'interval' | 'timer' | 'doublebeep') => {
+    console.log('Opening sound picker with type:', type);
     setSoundPickerType(type);
     setIsSoundPickerOpen(true);
   };
@@ -542,8 +543,8 @@ const IntervalTimer = () => {
 
             {/* Repeat toggle - only show for timer complete */}
             {soundPickerType === 'timer' && (
-              <div className="border-b border-border">
-                <div className="flex items-center justify-between p-4">
+              <>
+                <div className="flex items-center justify-between p-4 border-b border-border">
                   <Label className="text-lg text-foreground font-normal">Repeat</Label>
                   <Switch
                     checked={timerSettings.timerCompleteRepeat}
@@ -552,10 +553,12 @@ const IntervalTimer = () => {
                     }
                   />
                 </div>
-                <p className="px-4 pb-4 text-sm text-muted-foreground">
-                  Play sound on repeat when timer ends. If app is running in background, sound will play for 30 seconds.
-                </p>
-              </div>
+                <div className="px-4 pb-4 border-b border-border">
+                  <p className="text-sm text-muted-foreground">
+                    Play sound on repeat when timer ends. If app is running in background, sound will play for 30 seconds.
+                  </p>
+                </div>
+              </>
             )}
 
             {/* Select a sound section */}
