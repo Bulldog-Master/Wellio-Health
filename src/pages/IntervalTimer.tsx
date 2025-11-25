@@ -37,6 +37,8 @@ const IntervalTimer = () => {
   const [selectedTimerId, setSelectedTimerId] = useState<string | null>(null);
   const [isTimerMenuOpen, setIsTimerMenuOpen] = useState(false);
   const [isLibraryMenuOpen, setIsLibraryMenuOpen] = useState(false);
+  const [isSelectMoveMode, setIsSelectMoveMode] = useState(false);
+  const [selectedTimerIds, setSelectedTimerIds] = useState<string[]>([]);
   const [folderName, setFolderName] = useState("");
   const [timerName, setTimerName] = useState("");
   const [timerSettings, setTimerSettings] = useState({
@@ -333,6 +335,28 @@ const IntervalTimer = () => {
                 key={timer.id}
                 className="flex items-center justify-between py-4"
               >
+                {isSelectMoveMode && (
+                  <button
+                    onClick={() => {
+                      setSelectedTimerIds(prev => 
+                        prev.includes(timer.id)
+                          ? prev.filter(id => id !== timer.id)
+                          : [...prev, timer.id]
+                      );
+                    }}
+                    className="mr-4"
+                  >
+                    <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center ${
+                      selectedTimerIds.includes(timer.id)
+                        ? 'border-primary bg-primary'
+                        : 'border-muted-foreground'
+                    }`}>
+                      {selectedTimerIds.includes(timer.id) && (
+                        <div className="w-2 h-2 bg-background rounded-full" />
+                      )}
+                    </div>
+                  </button>
+                )}
                 <div className="flex-1">
                   <span className="text-lg font-medium text-foreground">
                     {timer.name}
@@ -342,15 +366,17 @@ const IntervalTimer = () => {
                   <span className="text-lg text-muted-foreground">
                     {formatDuration(timer.intervals)}
                   </span>
-                  <button 
-                    className="p-2 hover:bg-accent rounded-full transition-colors"
-                    onClick={() => {
-                      setSelectedTimerId(timer.id);
-                      setIsTimerMenuOpen(true);
-                    }}
-                  >
-                    <MoreHorizontal className="h-5 w-5 text-muted-foreground" />
-                  </button>
+                  {!isSelectMoveMode && (
+                    <button 
+                      className="p-2 hover:bg-accent rounded-full transition-colors"
+                      onClick={() => {
+                        setSelectedTimerId(timer.id);
+                        setIsTimerMenuOpen(true);
+                      }}
+                    >
+                      <MoreHorizontal className="h-5 w-5 text-muted-foreground" />
+                    </button>
+                  )}
                 </div>
               </div>
             ))
@@ -904,10 +930,7 @@ const IntervalTimer = () => {
               className="py-4 px-6 text-center text-primary hover:bg-accent transition-colors text-base"
               onClick={() => {
                 setIsLibraryMenuOpen(false);
-                toast({
-                  title: "Select to move",
-                  description: "This feature will be implemented soon",
-                });
+                setIsSelectMoveMode(true);
               }}
             >
               Select to move
