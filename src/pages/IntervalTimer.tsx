@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Timer, FolderPlus, MoreVertical } from "lucide-react";
+import { Timer, FolderPlus, MoreHorizontal } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import {
   Dialog,
@@ -116,7 +116,7 @@ const IntervalTimer = () => {
 
           {/* Right icon */}
           <button className="w-10 h-10 rounded-full border-2 border-muted-foreground flex items-center justify-center">
-            <MoreVertical className="h-5 w-5 text-muted-foreground" />
+            <MoreHorizontal className="h-5 w-5 text-muted-foreground" />
           </button>
         </div>
       </div>
