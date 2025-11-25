@@ -464,12 +464,16 @@ const IntervalTimer = () => {
               </div>
 
               <div className="flex items-center justify-between py-3">
-                <Label className="text-lg text-muted-foreground font-normal">Interim interval</Label>
+                <Label className={`text-lg font-normal ${timerSettings.useInterimInterval ? 'text-foreground' : 'text-muted-foreground'}`}>
+                  Interim interval
+                </Label>
                 <ChevronRight className="h-5 w-5 text-muted-foreground" />
               </div>
 
               <div className="flex items-center justify-between py-3">
-                <Label className="text-lg text-muted-foreground font-normal">End with this interval</Label>
+                <Label className={`text-lg font-normal ${timerSettings.useInterimInterval ? 'text-foreground' : 'text-muted-foreground'}`}>
+                  End with this interval
+                </Label>
                 <Switch
                   checked={timerSettings.endWithInterval}
                   onCheckedChange={(checked) =>
