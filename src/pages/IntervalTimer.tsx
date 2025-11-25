@@ -607,45 +607,29 @@ const IntervalTimer = () => {
             timers.map((timer, index) => (
               <div
                 key={timer.id}
-                draggable={!isEditMode && !isSelectMoveMode}
-                onDragStart={(e) => {
-                  if (!isEditMode && !isSelectMoveMode) {
-                    console.log('Drag started for timer:', timer.name, 'at index:', index);
-                    setDraggedTimerIndex(index);
-                    e.dataTransfer.effectAllowed = "move";
-                  }
-                }}
-                onDragOver={(e) => {
-                  if (!isEditMode && !isSelectMoveMode && draggedTimerIndex !== null && draggedTimerIndex !== index) {
-                    e.preventDefault();
-                    e.dataTransfer.dropEffect = "move";
-                    console.log('Dragging over timer at index:', index);
-                  }
-                }}
-                onDrop={(e) => {
-                  if (!isEditMode && !isSelectMoveMode && draggedTimerIndex !== null && draggedTimerIndex !== index) {
-                    e.preventDefault();
-                    console.log('Dropped at index:', index, 'from index:', draggedTimerIndex);
+                onClick={() => {
+                  if (isSelectMoveMode && selectedTimerIds.length > 0 && !selectedTimerIds.includes(timer.id)) {
+                    // Move selected timers to this position
                     const newTimers = [...timers];
-                    const [draggedTimer] = newTimers.splice(draggedTimerIndex, 1);
-                    newTimers.splice(index, 0, draggedTimer);
-                    queryClient.setQueryData(["interval-timers"], newTimers);
-                    setDraggedTimerIndex(null);
+                    const selectedTimers = newTimers.filter(t => selectedTimerIds.includes(t.id));
+                    const remainingTimers = newTimers.filter(t => !selectedTimerIds.includes(t.id));
+                    const targetIndex = remainingTimers.findIndex(t => t.id === timer.id);
+                    remainingTimers.splice(targetIndex + 1, 0, ...selectedTimers);
+                    queryClient.setQueryData(["interval-timers"], remainingTimers);
+                    setSelectedTimerIds([]);
+                    setIsSelectMoveMode(false);
+                    toast({
+                      title: "Moved",
+                      description: `Moved ${selectedTimers.length} timer(s)`,
+                    });
                   }
                 }}
-                onDragEnd={() => {
-                  console.log('Drag ended');
-                  setDraggedTimerIndex(null);
-                }}
-                className={`flex items-center gap-3 py-4 transition-opacity ${
-                  draggedTimerIndex === index ? 'opacity-50' : ''
-                } ${!isEditMode && !isSelectMoveMode ? 'cursor-move' : ''}`}
+                className={`flex items-center gap-3 py-4 transition-all ${
+                  isSelectMoveMode && selectedTimerIds.length > 0 && !selectedTimerIds.includes(timer.id)
+                    ? 'cursor-pointer hover:bg-accent/50'
+                    : ''
+                } ${selectedTimerIds.includes(timer.id) ? 'bg-accent/30' : ''}`}
               >
-                {!isEditMode && !isSelectMoveMode && (
-                  <div className="p-1 -ml-2 select-none cursor-grab active:cursor-grabbing">
-                    <GripVertical className="h-5 w-5 text-muted-foreground" />
-                  </div>
-                )}
                 {isSelectMoveMode && (
                   <button
                     onClick={() => {
@@ -682,7 +666,12 @@ const IntervalTimer = () => {
                 <button 
                   draggable={false}
                   className="flex-1 text-left"
-                  onClick={() => handleTimerSelect(timer)}
+                  onClick={(e) => {
+                    if (!isSelectMoveMode && !isEditMode) {
+                      e.stopPropagation();
+                      handleTimerSelect(timer);
+                    }
+                  }}
                   disabled={isSelectMoveMode || isEditMode}
                 >
                   <span className="text-lg font-medium text-foreground">
