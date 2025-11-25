@@ -642,7 +642,7 @@ const IntervalTimer = () => {
                 } ${!isEditMode ? 'cursor-move' : ''}`}
               >
                 {!isEditMode && (
-                  <div className="p-1 -ml-2 select-none pointer-events-none">
+                  <div className="p-1 -ml-2 select-none cursor-grab active:cursor-grabbing">
                     <GripVertical className="h-5 w-5 text-muted-foreground" />
                   </div>
                 )}
