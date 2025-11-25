@@ -233,11 +233,6 @@ const IntervalTimer = () => {
                   <ChevronRight className="h-5 w-5 text-muted-foreground" />
                 </div>
               </div>
-
-              <div className="flex items-center justify-between py-3">
-                <Label className="text-lg text-muted-foreground font-normal">Volume</Label>
-                <ChevronRight className="h-5 w-5 text-muted-foreground" />
-              </div>
             </div>
 
             {/* TEXT TO SPEECH */}
