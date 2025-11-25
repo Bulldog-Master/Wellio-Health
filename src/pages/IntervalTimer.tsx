@@ -28,14 +28,17 @@ const IntervalTimer = () => {
   const [isFolderDialogOpen, setIsFolderDialogOpen] = useState(false);
   const [isNewTimerOpen, setIsNewTimerOpen] = useState(false);
   const [folderName, setFolderName] = useState("");
+  const [timerName, setTimerName] = useState("");
   const [timerSettings, setTimerSettings] = useState({
+    intervalCompleteSound: "bell",
+    timerCompleteSound: "bell", 
+    doubleBeepRepeat: false,
+    soundEnabled: true,
+    soundVolume: 100,
     textToSpeech: false,
     includeSets: false,
     includeReps: false,
     useForNotifications: false,
-    soundEnabled: true,
-    soundVolume: 100,
-    doubleBeepRepeat: false,
     countdownBeeps: false,
     useInterimInterval: false,
     interimIntervalSeconds: 10,
@@ -204,6 +207,56 @@ const IntervalTimer = () => {
           </div>
 
           <div className="p-6 space-y-6">
+            {/* Timer Name Input */}
+            <div>
+              <Input
+                value={timerName}
+                onChange={(e) => setTimerName(e.target.value)}
+                placeholder="Timer name"
+                className="text-lg"
+              />
+            </div>
+
+            {/* SOUND */}
+            <div className="space-y-4">
+              <h3 className="text-sm font-semibold text-muted-foreground">SOUND</h3>
+              
+              <div className="flex items-center justify-between py-3">
+                <Label className="text-lg text-foreground font-normal">Interval complete</Label>
+                <ChevronRight className="h-5 w-5 text-muted-foreground" />
+              </div>
+
+              <div className="flex items-center justify-between py-3">
+                <Label className="text-lg text-foreground font-normal">Timer complete</Label>
+                <ChevronRight className="h-5 w-5 text-muted-foreground" />
+              </div>
+
+              <div className="flex items-center justify-between py-3">
+                <Label className="text-lg text-foreground font-normal">Double beep (repeat)</Label>
+                <Switch
+                  checked={timerSettings.doubleBeepRepeat}
+                  onCheckedChange={(checked) =>
+                    setTimerSettings({ ...timerSettings, doubleBeepRepeat: checked })
+                  }
+                />
+              </div>
+
+              <div className="flex items-center justify-between py-3">
+                <Label className="text-lg text-foreground font-normal">Sound</Label>
+                <Switch
+                  checked={timerSettings.soundEnabled}
+                  onCheckedChange={(checked) =>
+                    setTimerSettings({ ...timerSettings, soundEnabled: checked })
+                  }
+                />
+              </div>
+
+              <div className="flex items-center justify-between py-3">
+                <Label className="text-lg text-muted-foreground font-normal">Volume</Label>
+                <ChevronRight className="h-5 w-5 text-muted-foreground" />
+              </div>
+            </div>
+
             {/* TEXT TO SPEECH */}
             <div className="space-y-4">
               <h3 className="text-sm font-semibold text-muted-foreground">TEXT TO SPEECH</h3>
