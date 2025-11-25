@@ -42,6 +42,7 @@ const IntervalTimer = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [draggedTimerIndex, setDraggedTimerIndex] = useState<number | null>(null);
   const [isFolderSelectionOpen, setIsFolderSelectionOpen] = useState(false);
+  const [movingTimerId, setMovingTimerId] = useState<string | null>(null);
   const [folderName, setFolderName] = useState("");
   const [timerName, setTimerName] = useState("New Timer");
   const [intervals, setIntervals] = useState<any[]>([]);
@@ -631,8 +632,46 @@ const IntervalTimer = () => {
                   isSelectMoveMode && selectedTimerIds.length > 0 && !selectedTimerIds.includes(timer.id)
                     ? 'cursor-pointer hover:bg-accent/50'
                     : ''
-                } ${selectedTimerIds.includes(timer.id) ? 'bg-accent/30' : ''}`}
+                } ${selectedTimerIds.includes(timer.id) ? 'bg-accent/30' : ''} ${
+                  movingTimerId === timer.id ? 'bg-accent/50' : ''
+                }`}
               >
+                {movingTimerId === timer.id && (
+                  <div className="flex flex-col gap-1 mr-2">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const currentIndex = timers.findIndex(t => t.id === timer.id);
+                        if (currentIndex > 0) {
+                          const newTimers = [...timers];
+                          [newTimers[currentIndex - 1], newTimers[currentIndex]] = 
+                            [newTimers[currentIndex], newTimers[currentIndex - 1]];
+                          queryClient.setQueryData(["interval-timers"], newTimers);
+                        }
+                      }}
+                      disabled={index === 0}
+                      className="p-1 hover:bg-accent rounded disabled:opacity-30"
+                    >
+                      <ChevronUp className="h-4 w-4" />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const currentIndex = timers.findIndex(t => t.id === timer.id);
+                        if (currentIndex < timers.length - 1) {
+                          const newTimers = [...timers];
+                          [newTimers[currentIndex], newTimers[currentIndex + 1]] = 
+                            [newTimers[currentIndex + 1], newTimers[currentIndex]];
+                          queryClient.setQueryData(["interval-timers"], newTimers);
+                        }
+                      }}
+                      disabled={index === timers.length - 1}
+                      className="p-1 hover:bg-accent rounded disabled:opacity-30"
+                    >
+                      <ChevronDown className="h-4 w-4" />
+                    </button>
+                  </div>
+                )}
                 {isSelectMoveMode && (
                   <button
                     onClick={(e) => {
@@ -670,7 +709,7 @@ const IntervalTimer = () => {
                 <div 
                   className="flex-1 text-left cursor-pointer"
                   onClick={(e) => {
-                    if (!isSelectMoveMode && !isEditMode) {
+                    if (!isSelectMoveMode && !isEditMode && movingTimerId !== timer.id) {
                       e.stopPropagation();
                       handleTimerSelect(timer);
                     }
@@ -681,9 +720,39 @@ const IntervalTimer = () => {
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-lg text-muted-foreground">
-                    {formatDuration(timer.intervals)}
-                  </span>
+                  {movingTimerId === timer.id && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setMovingTimerId(null);
+                      }}
+                      className="text-primary font-medium"
+                    >
+                      Done
+                    </button>
+                  )}
+                  {movingTimerId !== timer.id && !isSelectMoveMode && !isEditMode && (
+                    <>
+                      <span className="text-lg text-muted-foreground">
+                        {formatDuration(timer.intervals)}
+                      </span>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedTimerId(timer.id);
+                          setIsTimerMenuOpen(true);
+                        }}
+                        className="p-2 hover:bg-accent rounded-full transition-colors"
+                      >
+                        <MoreHorizontal className="h-5 w-5 text-muted-foreground" />
+                      </button>
+                    </>
+                  )}
+                  {movingTimerId !== timer.id && (isSelectMoveMode || isEditMode) && (
+                    <span className="text-lg text-muted-foreground">
+                      {formatDuration(timer.intervals)}
+                    </span>
+                  )}
                 </div>
               </div>
             ))
@@ -1490,13 +1559,10 @@ const IntervalTimer = () => {
               className="py-4 px-6 text-center text-primary hover:bg-accent transition-colors text-base"
               onClick={() => {
                 setIsTimerMenuOpen(false);
-                toast({
-                  title: "Move timer",
-                  description: "This feature will be implemented soon",
-                });
+                setMovingTimerId(selectedTimerId);
               }}
             >
-              Select to move
+              Move
             </button>
             <Separator />
             <button
