@@ -607,8 +607,11 @@ const IntervalTimer = () => {
             timers.map((timer, index) => (
               <div
                 key={timer.id}
-                onClick={() => {
+                onClick={(e) => {
+                  console.log('Row clicked', { isSelectMoveMode, selectedCount: selectedTimerIds.length, clickedId: timer.id });
                   if (isSelectMoveMode && selectedTimerIds.length > 0 && !selectedTimerIds.includes(timer.id)) {
+                    e.stopPropagation();
+                    console.log('Moving timers to position after', timer.name);
                     // Move selected timers to this position
                     const newTimers = [...timers];
                     const selectedTimers = newTimers.filter(t => selectedTimerIds.includes(t.id));
@@ -632,7 +635,8 @@ const IntervalTimer = () => {
               >
                 {isSelectMoveMode && (
                   <button
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setSelectedTimerIds(prev => 
                         prev.includes(timer.id)
                           ? prev.filter(id => id !== timer.id)
@@ -663,21 +667,19 @@ const IntervalTimer = () => {
                     </div>
                   </button>
                 )}
-                <button 
-                  draggable={false}
-                  className="flex-1 text-left"
+                <div 
+                  className="flex-1 text-left cursor-pointer"
                   onClick={(e) => {
                     if (!isSelectMoveMode && !isEditMode) {
                       e.stopPropagation();
                       handleTimerSelect(timer);
                     }
                   }}
-                  disabled={isSelectMoveMode || isEditMode}
                 >
                   <span className="text-lg font-medium text-foreground">
                     {timer.name}
                   </span>
-                </button>
+                </div>
                 <div className="flex items-center gap-3">
                   <span className="text-lg text-muted-foreground">
                     {formatDuration(timer.intervals)}
