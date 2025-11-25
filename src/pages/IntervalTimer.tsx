@@ -607,23 +607,23 @@ const IntervalTimer = () => {
             timers.map((timer, index) => (
               <div
                 key={timer.id}
-                draggable={!isEditMode}
+                draggable={!isEditMode && !isSelectMoveMode}
                 onDragStart={(e) => {
-                  if (!isEditMode) {
+                  if (!isEditMode && !isSelectMoveMode) {
                     console.log('Drag started for timer:', timer.name, 'at index:', index);
                     setDraggedTimerIndex(index);
                     e.dataTransfer.effectAllowed = "move";
                   }
                 }}
                 onDragOver={(e) => {
-                  if (!isEditMode && draggedTimerIndex !== null && draggedTimerIndex !== index) {
+                  if (!isEditMode && !isSelectMoveMode && draggedTimerIndex !== null && draggedTimerIndex !== index) {
                     e.preventDefault();
                     e.dataTransfer.dropEffect = "move";
                     console.log('Dragging over timer at index:', index);
                   }
                 }}
                 onDrop={(e) => {
-                  if (!isEditMode && draggedTimerIndex !== null && draggedTimerIndex !== index) {
+                  if (!isEditMode && !isSelectMoveMode && draggedTimerIndex !== null && draggedTimerIndex !== index) {
                     e.preventDefault();
                     console.log('Dropped at index:', index, 'from index:', draggedTimerIndex);
                     const newTimers = [...timers];
@@ -639,9 +639,9 @@ const IntervalTimer = () => {
                 }}
                 className={`flex items-center gap-3 py-4 transition-opacity ${
                   draggedTimerIndex === index ? 'opacity-50' : ''
-                } ${!isEditMode ? 'cursor-move' : ''}`}
+                } ${!isEditMode && !isSelectMoveMode ? 'cursor-move' : ''}`}
               >
-                {!isEditMode && (
+                {!isEditMode && !isSelectMoveMode && (
                   <div className="p-1 -ml-2 select-none cursor-grab active:cursor-grabbing">
                     <GripVertical className="h-5 w-5 text-muted-foreground" />
                   </div>
