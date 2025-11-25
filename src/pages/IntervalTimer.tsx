@@ -28,6 +28,7 @@ const IntervalTimer = () => {
   const [isFolderDialogOpen, setIsFolderDialogOpen] = useState(false);
   const [isNewTimerOpen, setIsNewTimerOpen] = useState(false);
   const [isSoundPickerOpen, setIsSoundPickerOpen] = useState(false);
+  const [isInterimIntervalOpen, setIsInterimIntervalOpen] = useState(false);
   const [soundPickerType, setSoundPickerType] = useState<'interval' | 'timer' | 'doublebeep'>('interval');
   const [folderName, setFolderName] = useState("");
   const [timerName, setTimerName] = useState("");
@@ -464,9 +465,15 @@ const IntervalTimer = () => {
               </div>
 
               <div className="flex items-center justify-between py-3">
-                <Label className={`text-lg font-normal ${timerSettings.useInterimInterval ? 'text-foreground' : 'text-muted-foreground'}`}>
-                  Interim interval
-                </Label>
+                <button
+                  onClick={() => timerSettings.useInterimInterval && setIsInterimIntervalOpen(true)}
+                  className="flex-1 text-left"
+                  disabled={!timerSettings.useInterimInterval}
+                >
+                  <Label className={`text-lg font-normal cursor-pointer ${timerSettings.useInterimInterval ? 'text-foreground' : 'text-muted-foreground'}`}>
+                    Interim interval
+                  </Label>
+                </button>
                 <ChevronRight className="h-5 w-5 text-muted-foreground" />
               </div>
 
@@ -587,6 +594,131 @@ const IntervalTimer = () => {
                 )}
               </button>
             ))}
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Interim Interval Dialog */}
+      <Dialog open={isInterimIntervalOpen} onOpenChange={setIsInterimIntervalOpen}>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-background p-0">
+          <div className="sticky top-0 bg-background border-b border-border z-10">
+            <div className="flex items-center justify-between p-4">
+              <button
+                onClick={() => setIsInterimIntervalOpen(false)}
+                className="text-primary flex items-center gap-2"
+              >
+                <ArrowLeft className="h-6 w-6" />
+                <span className="text-lg">Back</span>
+              </button>
+              <h2 className="text-xl font-semibold text-foreground absolute left-1/2 transform -translate-x-1/2">
+                Interim Interval
+              </h2>
+              <div className="w-20"></div>
+            </div>
+          </div>
+
+          <div className="p-6 space-y-6">
+            {/* Time Pickers */}
+            <div className="flex items-center justify-center gap-4">
+              <div className="flex flex-col items-center">
+                <Input
+                  type="number"
+                  value={Math.floor(timerSettings.interimIntervalSeconds / 3600)}
+                  onChange={(e) => {
+                    const hours = parseInt(e.target.value) || 0;
+                    const mins = Math.floor((timerSettings.interimIntervalSeconds % 3600) / 60);
+                    const secs = timerSettings.interimIntervalSeconds % 60;
+                    setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + mins * 60 + secs });
+                  }}
+                  className="w-24 text-center text-2xl"
+                  min="0"
+                  max="23"
+                />
+                <span className="text-sm text-muted-foreground mt-2">hours</span>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <Input
+                  type="number"
+                  value={Math.floor((timerSettings.interimIntervalSeconds % 3600) / 60)}
+                  onChange={(e) => {
+                    const hours = Math.floor(timerSettings.interimIntervalSeconds / 3600);
+                    const mins = parseInt(e.target.value) || 0;
+                    const secs = timerSettings.interimIntervalSeconds % 60;
+                    setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + mins * 60 + secs });
+                  }}
+                  className="w-24 text-center text-2xl"
+                  min="0"
+                  max="59"
+                />
+                <span className="text-sm text-muted-foreground mt-2">min</span>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <Input
+                  type="number"
+                  value={timerSettings.interimIntervalSeconds % 60}
+                  onChange={(e) => {
+                    const hours = Math.floor(timerSettings.interimIntervalSeconds / 3600);
+                    const mins = Math.floor((timerSettings.interimIntervalSeconds % 3600) / 60);
+                    const secs = parseInt(e.target.value) || 0;
+                    setTimerSettings({ ...timerSettings, interimIntervalSeconds: hours * 3600 + mins * 60 + secs });
+                  }}
+                  className="w-24 text-center text-2xl"
+                  min="0"
+                  max="59"
+                />
+                <span className="text-sm text-muted-foreground mt-2">sec</span>
+              </div>
+            </div>
+
+            {/* Description */}
+            <button className="w-full p-4 text-center text-muted-foreground border-y border-border">
+              Description
+            </button>
+
+            {/* Add an image */}
+            <button className="w-full p-4 text-center text-muted-foreground border-b border-border">
+              Add an image
+            </button>
+
+            {/* Repetitions */}
+            <div className="flex items-center justify-between py-3">
+              <Label className="text-lg text-foreground font-normal">Repetitions</Label>
+              <span className="text-lg text-foreground">1</span>
+            </div>
+
+            {/* Color */}
+            <div className="flex items-center justify-between py-3 border-t border-border">
+              <Label className="text-lg text-foreground font-normal">Color</Label>
+              <div className="flex items-center gap-2">
+                <span className="text-lg text-muted-foreground">None</span>
+                <ChevronRight className="h-5 w-5 text-muted-foreground" />
+              </div>
+            </div>
+
+            {/* Sound */}
+            <div className="flex items-center justify-between py-3 border-t border-border">
+              <Label className="text-lg text-foreground font-normal">Sound</Label>
+              <div className="flex items-center gap-2">
+                <span className="text-lg text-muted-foreground">Beep</span>
+                <ChevronRight className="h-5 w-5 text-muted-foreground" />
+              </div>
+            </div>
+
+            {/* Rep-based interval */}
+            <div className="border-t border-border pt-4">
+              <div className="flex items-center justify-between py-3">
+                <Label className="text-lg text-foreground font-normal">Rep-based interval</Label>
+                <Switch
+                  checked={false}
+                  onCheckedChange={() => {}}
+                />
+              </div>
+              <p className="text-sm text-muted-foreground mt-2">
+                Rep-based intervals will not have a time set. The navigation buttons can be used to move between reps, or the Skip button can be used to move to the next interval.
+              </p>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
