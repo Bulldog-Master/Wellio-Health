@@ -11,6 +11,16 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -46,6 +56,9 @@ const IntervalTimer = () => {
   const [currentFolderId, setCurrentFolderId] = useState<string | null>(null);
   const [folderName, setFolderName] = useState("");
   const [timerName, setTimerName] = useState("New Timer");
+  const [deleteFolderId, setDeleteFolderId] = useState<string | null>(null);
+  const [isFolderMenuOpen, setIsFolderMenuOpen] = useState(false);
+  const [selectedFolderId, setSelectedFolderId] = useState<string | null>(null);
   const [intervals, setIntervals] = useState<any[]>([]);
   const [repeatCount, setRepeatCount] = useState(1);
   const [newIntervalName, setNewIntervalName] = useState("");
@@ -256,6 +269,44 @@ const IntervalTimer = () => {
         variant: "destructive",
       });
       console.error("Error deleting timer:", error);
+    },
+  });
+
+  const deleteFolderMutation = useMutation({
+    mutationFn: async (folderId: string) => {
+      // First delete all timers in the folder
+      const { error: timersError } = await supabase
+        .from("interval_timers")
+        .delete()
+        .eq("folder_id", folderId);
+
+      if (timersError) throw timersError;
+
+      // Then delete the folder
+      const { error: folderError } = await supabase
+        .from("timer_folders")
+        .delete()
+        .eq("id", folderId);
+
+      if (folderError) throw folderError;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["interval-timers"] });
+      queryClient.invalidateQueries({ queryKey: ["timer-folders"] });
+      toast({
+        title: "Folder deleted",
+        description: "Folder and all its contents have been removed.",
+      });
+      setDeleteFolderId(null);
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: "Failed to delete folder. Please try again.",
+        variant: "destructive",
+      });
+      console.error("Error deleting folder:", error);
+      setDeleteFolderId(null);
     },
   });
 
@@ -635,16 +686,27 @@ const IntervalTimer = () => {
               {folders.map((folder: any) => (
                 <div
                   key={folder.id}
-                  className="flex items-center justify-between py-4 cursor-pointer hover:bg-accent/30"
-                  onClick={() => setCurrentFolderId(folder.id)}
+                  className="flex items-center justify-between py-4"
                 >
-                  <div className="flex items-center gap-3">
+                  <div 
+                    className="flex items-center gap-3 flex-1 cursor-pointer hover:bg-accent/30 -m-4 p-4"
+                    onClick={() => setCurrentFolderId(folder.id)}
+                  >
                     <FolderPlus className="h-5 w-5 text-muted-foreground" />
                     <span className="text-lg font-medium text-foreground">
                       {folder.name}
                     </span>
                   </div>
-                  <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedFolderId(folder.id);
+                      setIsFolderMenuOpen(true);
+                    }}
+                    className="p-2 hover:bg-accent rounded-full transition-colors"
+                  >
+                    <MoreHorizontal className="h-5 w-5 text-muted-foreground" />
+                  </button>
                 </div>
               ))}
             </div>
@@ -1645,6 +1707,64 @@ const IntervalTimer = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Folder Menu Sheet */}
+      <Sheet open={isFolderMenuOpen} onOpenChange={setIsFolderMenuOpen}>
+        <SheetContent 
+          side="bottom" 
+          className="p-0 border-t border-border rounded-t-xl"
+          overlayClassName="bg-transparent pointer-events-none"
+        >
+          <div className="flex flex-col">
+            <button
+              className="py-4 px-6 text-center text-destructive hover:bg-accent transition-colors text-base"
+              onClick={() => {
+                setIsFolderMenuOpen(false);
+                if (selectedFolderId) {
+                  setDeleteFolderId(selectedFolderId);
+                }
+              }}
+            >
+              Delete Folder
+            </button>
+            <Separator />
+            <button
+              className="py-4 px-6 text-center text-primary hover:bg-accent transition-colors text-base"
+              onClick={() => {
+                setIsFolderMenuOpen(false);
+                setSelectedFolderId(null);
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        </SheetContent>
+      </Sheet>
+
+      {/* Delete Folder Confirmation Dialog */}
+      <AlertDialog open={deleteFolderId !== null} onOpenChange={(open) => !open && setDeleteFolderId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete folder?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will permanently delete this folder and all timers within it. This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                if (deleteFolderId) {
+                  deleteFolderMutation.mutate(deleteFolderId);
+                }
+              }}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
