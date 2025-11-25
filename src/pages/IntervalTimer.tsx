@@ -1142,7 +1142,11 @@ const IntervalTimer = () => {
                     setTimerSettings({ ...timerSettings, interimRepetitions: num });
                   }
                 }}
-                onFocus={(e) => e.target.select()}
+                onFocus={() => {
+                  if (interimRepsInput === '1') {
+                    setInterimRepsInput('');
+                  }
+                }}
                 onBlur={(e) => {
                   if (e.target.value === '') {
                     setInterimRepsInput('1');
@@ -1168,7 +1172,11 @@ const IntervalTimer = () => {
                     setTimerSettings({ ...timerSettings, interimSets: num });
                   }
                 }}
-                onFocus={(e) => e.target.select()}
+                onFocus={() => {
+                  if (interimSetsInput === '1') {
+                    setInterimSetsInput('');
+                  }
+                }}
                 onBlur={(e) => {
                   if (e.target.value === '') {
                     setInterimSetsInput('1');
