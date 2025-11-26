@@ -554,9 +554,12 @@ const IntervalTimer = () => {
     }
   };
 
-  const formatDuration = (intervals: any) => {
-    // Placeholder - will calculate total duration from intervals later
-    return "20:00";
+  const formatDuration = (intervals: any, repeatCount: number = 1) => {
+    if (!intervals || intervals.length === 0) return "00:00";
+    const totalSeconds = intervals.reduce((sum: number, interval: any) => sum + (interval.duration || 0), 0) * repeatCount;
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
   return (
@@ -825,12 +828,12 @@ const IntervalTimer = () => {
                 <div className="flex items-center gap-3">
                   {!isMoveMode && !isSelectMoveMode && !isEditMode && (
                     <span className="text-lg text-muted-foreground">
-                      {formatDuration(timer.intervals)}
+                      {formatDuration(timer.intervals, timer.repeat_count)}
                     </span>
                   )}
                   {(isSelectMoveMode || isEditMode) && (
                     <span className="text-lg text-muted-foreground">
-                      {formatDuration(timer.intervals)}
+                      {formatDuration(timer.intervals, timer.repeat_count)}
                     </span>
                   )}
                 </div>
