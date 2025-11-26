@@ -1,5 +1,6 @@
 import { Activity, Flame, Target, TrendingUp } from "lucide-react";
 import MetricCard from "@/components/MetricCard";
+import ActivityRings from "@/components/ActivityRings";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -22,6 +23,12 @@ const Dashboard = () => {
         <h1 className="text-3xl font-bold mb-2">Welcome back!</h1>
         <p className="text-muted-foreground">Here's your fitness overview for today</p>
       </div>
+
+      {/* Activity Rings */}
+      <Card className="p-6 bg-gradient-card shadow-md">
+        <h3 className="text-lg font-semibold mb-4">Today's Activity</h3>
+        <ActivityRings />
+      </Card>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <MetricCard
