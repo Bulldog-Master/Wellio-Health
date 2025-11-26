@@ -195,9 +195,14 @@ const Dashboard = () => {
           <Button 
             onClick={() => navigate('/step-count')}
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2 bg-success/10 hover:bg-success/20 border-success/20"
+            className="h-auto py-4 flex-col gap-2 relative"
           >
-            <Activity className="w-5 h-5 text-success" />
+            <div className="relative">
+              <Activity className="w-5 h-5" />
+              <span className="absolute -top-1 -right-2 text-[8px] font-semibold bg-muted text-muted-foreground px-1 rounded">
+                SOON
+              </span>
+            </div>
             <span className="text-sm">Step Count</span>
           </Button>
           <Button 
