@@ -50,7 +50,7 @@ const ActivityRings = () => {
         .select('calories_burned, steps')
         .eq('user_id', user.id)
         .eq('data_date', today)
-        .single();
+        .maybeSingle();
 
       // Calculate totals
       const exerciseMinutes = activities?.reduce((sum, a) => sum + a.duration_minutes, 0) || 0;
@@ -87,116 +87,156 @@ const ActivityRings = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      <div className="flex items-center justify-center h-80">
+        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary"></div>
       </div>
     );
   }
 
   // Calculate ring positions
-  const center = 120;
+  const center = 150;
   const rings = [
-    { type: 'move' as const, radius: 90, color: '#FF006E', gradient: 'moveGradient', data: data.move },
-    { type: 'exercise' as const, radius: 68, color: '#00F5FF', gradient: 'exerciseGradient', data: data.exercise },
-    { type: 'stand' as const, radius: 46, color: '#BFFF00', gradient: 'standGradient', data: data.stand }
+    { type: 'move' as const, radius: 115, color: '#FF006E', gradient: 'moveGradient', data: data.move },
+    { type: 'exercise' as const, radius: 87, color: '#00F5FF', gradient: 'exerciseGradient', data: data.exercise },
+    { type: 'stand' as const, radius: 59, color: '#BFFF00', gradient: 'standGradient', data: data.stand }
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8 py-4">
       {/* Rings visualization */}
       <div className="flex justify-center">
-        <svg width="240" height="240" viewBox="0 0 240 240" className="transform">
-          <defs>
-            <linearGradient id="moveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{ stopColor: '#FF006E' }} />
-              <stop offset="100%" style={{ stopColor: '#FF4081' }} />
-            </linearGradient>
-            <linearGradient id="exerciseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{ stopColor: '#00F5FF' }} />
-              <stop offset="100%" style={{ stopColor: '#00B8D4' }} />
-            </linearGradient>
-            <linearGradient id="standGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{ stopColor: '#BFFF00' }} />
-              <stop offset="100%" style={{ stopColor: '#76FF03' }} />
-            </linearGradient>
-          </defs>
-          
-          {rings.map((ring) => {
-            const circumference = 2 * Math.PI * ring.radius;
-            const offset = circumference - (ring.data.percentage / 100) * circumference;
+        <div className="relative" style={{ 
+          filter: 'drop-shadow(0 8px 24px rgba(0, 0, 0, 0.15))'
+        }}>
+          <svg width="300" height="300" viewBox="0 0 300 300" className="transform">
+            <defs>
+              <linearGradient id="moveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style={{ stopColor: '#FF006E' }} />
+                <stop offset="100%" style={{ stopColor: '#FF4081' }} />
+              </linearGradient>
+              <linearGradient id="exerciseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style={{ stopColor: '#00F5FF' }} />
+                <stop offset="100%" style={{ stopColor: '#00B8D4' }} />
+              </linearGradient>
+              <linearGradient id="standGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style={{ stopColor: '#BFFF00' }} />
+                <stop offset="100%" style={{ stopColor: '#76FF03' }} />
+              </linearGradient>
+              
+              {/* Glow filters */}
+              <filter id="glow-move">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+              <filter id="glow-exercise">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+              <filter id="glow-stand">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
             
-            return (
-              <g key={ring.type}>
-                {/* Background ring */}
-                <circle
-                  cx={center}
-                  cy={center}
-                  r={ring.radius}
-                  fill="none"
-                  stroke={ring.color}
-                  strokeWidth="14"
-                  opacity="0.2"
-                />
-                {/* Progress ring */}
-                {ring.data.percentage > 0 && (
+            {rings.map((ring) => {
+              const circumference = 2 * Math.PI * ring.radius;
+              const offset = circumference - (ring.data.percentage / 100) * circumference;
+              
+              return (
+                <g key={ring.type}>
+                  {/* Background ring */}
                   <circle
                     cx={center}
                     cy={center}
                     r={ring.radius}
                     fill="none"
-                    stroke={`url(#${ring.gradient})`}
-                    strokeWidth="14"
-                    strokeLinecap="round"
-                    strokeDasharray={circumference}
-                    strokeDashoffset={offset}
-                    transform={`rotate(-90 ${center} ${center})`}
-                    style={{ transition: 'stroke-dashoffset 1s ease-out' }}
+                    stroke={ring.color}
+                    strokeWidth="18"
+                    opacity="0.15"
                   />
-                )}
-              </g>
-            );
-          })}
-        </svg>
+                  {/* Progress ring */}
+                  {ring.data.percentage > 0 && (
+                    <circle
+                      cx={center}
+                      cy={center}
+                      r={ring.radius}
+                      fill="none"
+                      stroke={`url(#${ring.gradient})`}
+                      strokeWidth="18"
+                      strokeLinecap="round"
+                      strokeDasharray={circumference}
+                      strokeDashoffset={offset}
+                      transform={`rotate(-90 ${center} ${center})`}
+                      filter={`url(#glow-${ring.type})`}
+                      style={{ 
+                        transition: 'stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                        transitionDelay: `${rings.indexOf(ring) * 0.15}s`
+                      }}
+                    />
+                  )}
+                </g>
+              );
+            })}
+          </svg>
+        </div>
       </div>
 
       {/* Ring details */}
-      <div className="grid grid-cols-3 gap-4">
-        <div className="text-center space-y-2">
+      <div className="grid grid-cols-3 gap-6">
+        <div className="text-center space-y-3">
           <div className="flex justify-center">
-            <div className="p-3 rounded-full" style={{ backgroundColor: 'rgba(255, 0, 110, 0.1)' }}>
-              <Flame className="w-6 h-6" style={{ color: '#FF006E' }} />
+            <div className="p-4 rounded-full" style={{ 
+              backgroundColor: 'rgba(255, 0, 110, 0.1)',
+              boxShadow: '0 4px 12px rgba(255, 0, 110, 0.15)'
+            }}>
+              <Flame className="w-7 h-7" style={{ color: '#FF006E' }} />
             </div>
           </div>
           <div>
-            <p className="text-2xl font-bold">{data.move.current}</p>
+            <p className="text-3xl font-bold">{data.move.current}</p>
             <p className="text-xs text-muted-foreground">/ {data.move.goal} CAL</p>
-            <p className="text-sm font-medium mt-1">Move</p>
+            <p className="text-sm font-semibold mt-2">Move</p>
           </div>
         </div>
 
-        <div className="text-center space-y-2">
+        <div className="text-center space-y-3">
           <div className="flex justify-center">
-            <div className="p-3 rounded-full" style={{ backgroundColor: 'rgba(0, 245, 255, 0.1)' }}>
-              <Zap className="w-6 h-6" style={{ color: '#00F5FF' }} />
+            <div className="p-4 rounded-full" style={{ 
+              backgroundColor: 'rgba(0, 245, 255, 0.1)',
+              boxShadow: '0 4px 12px rgba(0, 245, 255, 0.15)'
+            }}>
+              <Zap className="w-7 h-7" style={{ color: '#00F5FF' }} />
             </div>
           </div>
           <div>
-            <p className="text-2xl font-bold">{data.exercise.current}</p>
+            <p className="text-3xl font-bold">{data.exercise.current}</p>
             <p className="text-xs text-muted-foreground">/ {data.exercise.goal} MIN</p>
-            <p className="text-sm font-medium mt-1">Exercise</p>
+            <p className="text-sm font-semibold mt-2">Exercise</p>
           </div>
         </div>
 
-        <div className="text-center space-y-2">
+        <div className="text-center space-y-3">
           <div className="flex justify-center">
-            <div className="p-3 rounded-full" style={{ backgroundColor: 'rgba(191, 255, 0, 0.1)' }}>
-              <Clock className="w-6 h-6" style={{ color: '#BFFF00' }} />
+            <div className="p-4 rounded-full" style={{ 
+              backgroundColor: 'rgba(191, 255, 0, 0.1)',
+              boxShadow: '0 4px 12px rgba(191, 255, 0, 0.15)'
+            }}>
+              <Clock className="w-7 h-7" style={{ color: '#BFFF00' }} />
             </div>
           </div>
           <div>
-            <p className="text-2xl font-bold">{data.stand.current}</p>
+            <p className="text-3xl font-bold">{data.stand.current}</p>
             <p className="text-xs text-muted-foreground">/ {data.stand.goal} HR</p>
-            <p className="text-sm font-medium mt-1">Stand</p>
+            <p className="text-sm font-semibold mt-2">Stand</p>
           </div>
         </div>
       </div>
