@@ -588,7 +588,11 @@ const Auth = () => {
           <div className="mt-6 text-center">
             <button
               type="button"
-              onClick={() => setIsLogin(!isLogin)}
+              onClick={() => {
+                setIsLogin(!isLogin);
+                setPassword("");
+                setConfirmPassword("");
+              }}
               className="text-sm text-primary hover:underline"
             >
               {isLogin
@@ -602,7 +606,11 @@ const Auth = () => {
           <div className="mt-6 text-center">
             <button
               type="button"
-              onClick={() => setIsLogin(!isLogin)}
+              onClick={() => {
+                setIsLogin(!isLogin);
+                setPassword("");
+                setConfirmPassword("");
+              }}
               className="text-sm text-primary hover:underline"
             >
               {isLogin
