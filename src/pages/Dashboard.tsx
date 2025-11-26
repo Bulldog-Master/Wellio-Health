@@ -5,16 +5,71 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  
-  // Mock data - will be replaced with real data later
-  const currentWeight = 165;
-  const targetWeight = 155;
-  const weightProgress = ((currentWeight - targetWeight) / currentWeight) * 100;
-  const caloriesConsumed = 1450;
+  const [currentWeight, setCurrentWeight] = useState(0);
+  const [targetWeight, setTargetWeight] = useState(0);
+  const [caloriesConsumed, setCaloriesConsumed] = useState(1450);
   const caloriesTarget = 2000;
+  
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  const fetchUserData = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      // Fetch profile data for target weight
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('weight, target_weight')
+        .eq('id', user.id)
+        .single();
+
+      if (profile) {
+        setCurrentWeight(profile.weight || 0);
+        setTargetWeight(profile.target_weight || 0);
+      }
+
+      // Fetch latest weight log
+      const { data: weightLog } = await supabase
+        .from('weight_logs')
+        .select('weight_lbs')
+        .eq('user_id', user.id)
+        .order('logged_at', { ascending: false })
+        .limit(1)
+        .single();
+
+      if (weightLog) {
+        setCurrentWeight(weightLog.weight_lbs);
+      }
+
+      // Fetch today's calories
+      const today = new Date().toISOString().split('T')[0];
+      const { data: meals } = await supabase
+        .from('nutrition_logs')
+        .select('calories')
+        .eq('user_id', user.id)
+        .gte('logged_at', `${today}T00:00:00`)
+        .lte('logged_at', `${today}T23:59:59`);
+
+      if (meals) {
+        const totalCalories = meals.reduce((sum, meal) => sum + (meal.calories || 0), 0);
+        setCaloriesConsumed(totalCalories);
+      }
+    } catch (error) {
+      console.error('Error fetching dashboard data:', error);
+    }
+  };
+
+  const weightProgress = currentWeight && targetWeight 
+    ? ((currentWeight - targetWeight) / currentWeight) * 100 
+    : 0;
   const caloriesProgress = (caloriesConsumed / caloriesTarget) * 100;
 
   return (
@@ -41,8 +96,8 @@ const Dashboard = () => {
         />
         <MetricCard
           title="Target Weight"
-          value={`${targetWeight} lbs`}
-          subtitle={`${currentWeight - targetWeight} lbs to go`}
+          value={targetWeight ? `${targetWeight} lbs` : 'Set Goal'}
+          subtitle={targetWeight && currentWeight ? `${Math.abs(currentWeight - targetWeight).toFixed(1)} lbs to go` : 'No target set'}
           icon={Target}
           trend="neutral"
         />
