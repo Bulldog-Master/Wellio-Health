@@ -70,6 +70,7 @@ const IntervalTimer = () => {
   const [editIntervalSound, setEditIntervalSound] = useState("beep");
   const [editIntervalReps, setEditIntervalReps] = useState(1);
   const [editIntervalRepBased, setEditIntervalRepBased] = useState(false);
+  const [isEditIntervalSoundPickerOpen, setIsEditIntervalSoundPickerOpen] = useState(false);
   const [repeatCount, setRepeatCount] = useState(1);
   const [newIntervalName, setNewIntervalName] = useState("");
   const [newIntervalDuration, setNewIntervalDuration] = useState("");
@@ -2245,13 +2246,16 @@ const IntervalTimer = () => {
             </div>
 
             {/* Sound */}
-            <div className="flex items-center justify-between py-4 border-b border-border">
-              <Label className="text-lg text-foreground">Sound</Label>
+            <button
+              onClick={() => setIsEditIntervalSoundPickerOpen(true)}
+              className="flex items-center justify-between py-4 border-b border-border w-full hover:bg-accent/50 transition-colors"
+            >
+              <Label className="text-lg text-foreground cursor-pointer">Sound</Label>
               <div className="flex items-center gap-2">
                 <span className="text-muted-foreground capitalize">{editIntervalSound}</span>
                 <ChevronRight className="h-5 w-5 text-muted-foreground" />
               </div>
-            </div>
+            </button>
 
             {/* Rep-based interval */}
             <div className="space-y-4 py-4">
@@ -2269,6 +2273,65 @@ const IntervalTimer = () => {
           </div>
         </SheetContent>
       </Sheet>
+
+      {/* Edit Interval Sound Picker Dialog */}
+      <Dialog open={isEditIntervalSoundPickerOpen} onOpenChange={setIsEditIntervalSoundPickerOpen}>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-background p-0">
+          <div className="sticky top-0 bg-background border-b border-border z-10">
+            <div className="flex items-center justify-between p-4">
+              <button
+                onClick={() => setIsEditIntervalSoundPickerOpen(false)}
+                className="text-primary flex items-center gap-2"
+              >
+                <ArrowLeft className="h-6 w-6" />
+                <span className="text-lg">Back</span>
+              </button>
+              <h2 className="text-xl font-semibold text-foreground absolute left-1/2 transform -translate-x-1/2">
+                Sounds
+              </h2>
+              <div className="w-20"></div>
+            </div>
+          </div>
+
+          <div className="p-6">
+            {/* No sound option */}
+            <button
+              onClick={() => {
+                setEditIntervalSound('none');
+                setIsEditIntervalSoundPickerOpen(false);
+              }}
+              className="w-full flex items-center justify-between py-4 border-b border-border hover:bg-muted/50 transition-colors"
+            >
+              <span className="text-lg text-foreground">No sound</span>
+              {editIntervalSound === 'none' && (
+                <span className="text-primary text-2xl">✓</span>
+              )}
+            </button>
+
+            <h3 className="text-sm text-muted-foreground mt-6 mb-4 uppercase tracking-wider">
+              SELECT A SOUND
+            </h3>
+            <div className="space-y-1">
+              {soundOptions.filter(s => s.id !== 'none').map((sound) => (
+                <button
+                  key={sound.id}
+                  onClick={() => {
+                    playSound(sound.id);
+                    setEditIntervalSound(sound.id);
+                    setIsEditIntervalSoundPickerOpen(false);
+                  }}
+                  className="w-full flex items-center justify-between py-4 hover:bg-muted/50 transition-colors"
+                >
+                  <span className="text-lg text-foreground">{sound.name}</span>
+                  {editIntervalSound === sound.id && (
+                    <span className="text-primary text-2xl">✓</span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
