@@ -519,42 +519,60 @@ const IntervalTimer = () => {
     if (!isSessionComplete) return;
     
     console.log('Session complete, playing completion sound repeatedly for 15 seconds');
-    let soundCount = 0;
-    const maxSounds = 15;
     
-    // Play immediately
-    playSound(timerSettings.timerCompleteSound);
-    soundCount++;
-    
-    // Then play every second for 15 seconds
-    const completionInterval = setInterval(() => {
-      if (soundCount < maxSounds) {
-        playSound(timerSettings.timerCompleteSound);
-        soundCount++;
-      } else {
-        clearInterval(completionInterval);
-      }
-    }, 1000);
-    
-    return () => clearInterval(completionInterval);
-  }, [isSessionComplete, timerSettings.timerCompleteSound, audioContext]);
-
-  const playSound = (soundId: string) => {
-    console.log('Playing sound:', soundId);
-    
-    // Initialize AudioContext if not already done
+    // Ensure AudioContext is available
     const ctx = audioContext || new (window.AudioContext || (window as any).webkitAudioContext)();
     if (!audioContext) {
       setAudioContext(ctx);
     }
     
-    const oscillator = ctx.createOscillator();
-    const gainNode = ctx.createGain();
+    let soundCount = 0;
+    const maxSounds = 15;
     
-    oscillator.connect(gainNode);
-    gainNode.connect(ctx.destination);
+    // Function to play a single beep
+    const playSingleBeep = () => {
+      console.log('Playing completion beep #', soundCount + 1);
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      
+      osc.frequency.setValueAtTime(800, ctx.currentTime);
+      gain.gain.setValueAtTime(0.3, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+      
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.2);
+    };
     
-    gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
+    // Play immediately
+    playSingleBeep();
+    soundCount++;
+    
+    // Then play every second for 15 seconds
+    const completionInterval = setInterval(() => {
+      if (soundCount < maxSounds) {
+        playSingleBeep();
+        soundCount++;
+      } else {
+        clearInterval(completionInterval);
+        console.log('Completion sound sequence finished');
+      }
+    }, 1000);
+    
+    return () => clearInterval(completionInterval);
+  }, [isSessionComplete]);
+
+  const playSound = (soundId: string) => {
+    console.log('Playing sound:', soundId, 'audioContext:', audioContext);
+    
+    // Initialize AudioContext if not already done
+    const ctx = audioContext || new (window.AudioContext || (window as any).webkitAudioContext)();
+    if (!audioContext) {
+      setAudioContext(ctx);
+      console.log('New AudioContext created');
+    }
     
     const playSingleBeep = (frequency: number, startTime: number, duration: number) => {
       const osc = ctx.createOscillator();
@@ -569,6 +587,7 @@ const IntervalTimer = () => {
       
       osc.start(startTime);
       osc.stop(startTime + duration);
+      console.log('Beep scheduled at', startTime);
     };
     
     const now = ctx.currentTime;
