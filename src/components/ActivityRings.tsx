@@ -87,8 +87,8 @@ const ActivityRings = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-80">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary"></div>
+      <div className="flex items-center justify-center h-48 md:h-80">
+        <div className="animate-spin rounded-full h-12 w-12 md:h-16 md:w-16 border-b-2 border-primary"></div>
       </div>
     );
   }
@@ -102,13 +102,13 @@ const ActivityRings = () => {
   ];
 
   return (
-    <div className="space-y-8 py-4">
+    <div className="space-y-4 md:space-y-8 py-2 md:py-4">
       {/* Rings visualization */}
       <div className="flex justify-center">
-        <div className="relative" style={{ 
-          filter: 'drop-shadow(0 8px 24px rgba(0, 0, 0, 0.15))'
+        <div className="relative w-48 h-48 md:w-72 md:h-72" style={{ 
+          filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1)) md:drop-shadow(0 8px 24px rgba(0, 0, 0, 0.15))'
         }}>
-          <svg width="300" height="300" viewBox="0 0 300 300" className="transform">
+          <svg width="100%" height="100%" viewBox="0 0 300 300" className="transform">
             <defs>
               <linearGradient id="moveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" style={{ stopColor: '#FF006E' }} />
@@ -191,52 +191,52 @@ const ActivityRings = () => {
       </div>
 
       {/* Ring details */}
-      <div className="grid grid-cols-3 gap-6">
-        <div className="text-center space-y-3">
+      <div className="grid grid-cols-3 gap-3 md:gap-6">
+        <div className="text-center space-y-2 md:space-y-3">
           <div className="flex justify-center">
-            <div className="p-4 rounded-full" style={{ 
+            <div className="p-2 md:p-4 rounded-full" style={{ 
               backgroundColor: 'rgba(255, 0, 110, 0.1)',
-              boxShadow: '0 4px 12px rgba(255, 0, 110, 0.15)'
+              boxShadow: '0 2px 8px rgba(255, 0, 110, 0.1) md:0 4px 12px rgba(255, 0, 110, 0.15)'
             }}>
-              <Flame className="w-7 h-7" style={{ color: '#FF006E' }} />
+              <Flame className="w-5 h-5 md:w-7 md:h-7" style={{ color: '#FF006E' }} />
             </div>
           </div>
           <div>
-            <p className="text-3xl font-bold">{data.move.current}</p>
-            <p className="text-xs text-muted-foreground">/ {data.move.goal} CAL</p>
-            <p className="text-sm font-semibold mt-2">Move</p>
+            <p className="text-xl md:text-3xl font-bold">{data.move.current}</p>
+            <p className="text-[10px] md:text-xs text-muted-foreground">/ {data.move.goal} CAL</p>
+            <p className="text-xs md:text-sm font-semibold mt-1 md:mt-2">Move</p>
           </div>
         </div>
 
-        <div className="text-center space-y-3">
+        <div className="text-center space-y-2 md:space-y-3">
           <div className="flex justify-center">
-            <div className="p-4 rounded-full" style={{ 
+            <div className="p-2 md:p-4 rounded-full" style={{ 
               backgroundColor: 'rgba(0, 245, 255, 0.1)',
-              boxShadow: '0 4px 12px rgba(0, 245, 255, 0.15)'
+              boxShadow: '0 2px 8px rgba(0, 245, 255, 0.1) md:0 4px 12px rgba(0, 245, 255, 0.15)'
             }}>
-              <Zap className="w-7 h-7" style={{ color: '#00F5FF' }} />
+              <Zap className="w-5 h-5 md:w-7 md:h-7" style={{ color: '#00F5FF' }} />
             </div>
           </div>
           <div>
-            <p className="text-3xl font-bold">{data.exercise.current}</p>
-            <p className="text-xs text-muted-foreground">/ {data.exercise.goal} MIN</p>
-            <p className="text-sm font-semibold mt-2">Exercise</p>
+            <p className="text-xl md:text-3xl font-bold">{data.exercise.current}</p>
+            <p className="text-[10px] md:text-xs text-muted-foreground">/ {data.exercise.goal} MIN</p>
+            <p className="text-xs md:text-sm font-semibold mt-1 md:mt-2">Exercise</p>
           </div>
         </div>
 
-        <div className="text-center space-y-3">
+        <div className="text-center space-y-2 md:space-y-3">
           <div className="flex justify-center">
-            <div className="p-4 rounded-full" style={{ 
+            <div className="p-2 md:p-4 rounded-full" style={{ 
               backgroundColor: 'rgba(191, 255, 0, 0.1)',
-              boxShadow: '0 4px 12px rgba(191, 255, 0, 0.15)'
+              boxShadow: '0 2px 8px rgba(191, 255, 0, 0.1) md:0 4px 12px rgba(191, 255, 0, 0.15)'
             }}>
-              <Clock className="w-7 h-7" style={{ color: '#BFFF00' }} />
+              <Clock className="w-5 h-5 md:w-7 md:h-7" style={{ color: '#BFFF00' }} />
             </div>
           </div>
           <div>
-            <p className="text-3xl font-bold">{data.stand.current}</p>
-            <p className="text-xs text-muted-foreground">/ {data.stand.goal} HR</p>
-            <p className="text-sm font-semibold mt-2">Stand</p>
+            <p className="text-xl md:text-3xl font-bold">{data.stand.current}</p>
+            <p className="text-[10px] md:text-xs text-muted-foreground">/ {data.stand.goal} HR</p>
+            <p className="text-xs md:text-sm font-semibold mt-1 md:mt-2">Stand</p>
           </div>
         </div>
       </div>

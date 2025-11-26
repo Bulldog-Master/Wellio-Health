@@ -81,15 +81,15 @@ const Dashboard = () => {
   const caloriesProgress = (caloriesConsumed / caloriesTarget) * 100;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6 pb-20 md:pb-0">
       <div>
-        <h1 className="text-3xl font-bold mb-2">Welcome back!</h1>
-        <p className="text-muted-foreground">Here's your fitness overview for today</p>
+        <h1 className="text-2xl md:text-3xl font-bold mb-1 md:mb-2">Welcome back!</h1>
+        <p className="text-sm md:text-base text-muted-foreground">Here's your fitness overview for today</p>
       </div>
 
       {/* Activity Rings */}
-      <Card className="p-6 bg-gradient-card shadow-md">
-        <h3 className="text-lg font-semibold mb-4">Today's Activity</h3>
+      <Card className="p-4 md:p-6 bg-gradient-card shadow-md">
+        <h3 className="text-base md:text-lg font-semibold mb-2 md:mb-4">Today's Activity</h3>
         <ActivityRings />
       </Card>
 
@@ -123,9 +123,9 @@ const Dashboard = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="p-6 bg-gradient-card shadow-md">
-          <h3 className="text-lg font-semibold mb-4">Weight Goal Progress</h3>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+        <Card className="p-4 md:p-6 bg-gradient-card shadow-md">
+          <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4">Weight Goal Progress</h3>
           <div className="space-y-4">
             <div>
               <div className="flex justify-between mb-2">
@@ -145,8 +145,8 @@ const Dashboard = () => {
           </div>
         </Card>
 
-        <Card className="p-6 bg-gradient-card shadow-md">
-          <h3 className="text-lg font-semibold mb-4">Daily Calorie Goal</h3>
+        <Card className="p-4 md:p-6 bg-gradient-card shadow-md">
+          <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4">Daily Calorie Goal</h3>
           <div className="space-y-4">
             <div>
               <div className="flex justify-between mb-2">
@@ -169,11 +169,11 @@ const Dashboard = () => {
         </Card>
       </div>
 
-      <Card className="p-6 bg-gradient-card shadow-md">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold">Quick Actions</h3>
+      <Card className="p-4 md:p-6 bg-gradient-card shadow-md">
+        <div className="flex items-center justify-between mb-3 md:mb-4">
+          <h3 className="text-base md:text-lg font-semibold">Quick Actions</h3>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
           <Button 
             onClick={() => navigate('/weight')}
             className="h-auto py-4 flex-col gap-2 bg-primary hover:bg-primary/90"
