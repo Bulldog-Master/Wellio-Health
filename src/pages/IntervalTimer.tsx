@@ -68,6 +68,7 @@ const IntervalTimer = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [remainingSeconds, setRemainingSeconds] = useState(0);
   const [currentRepeat, setCurrentRepeat] = useState(1);
+  const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
   const [timerSettings, setTimerSettings] = useState({
     intervalCompleteSound: "beep",
     timerCompleteSound: "beep",
@@ -432,20 +433,24 @@ const IntervalTimer = () => {
     const interval = setInterval(() => {
       setRemainingSeconds((prev) => {
         if (prev <= 1) {
-          // Interval complete
+          console.log('Interval complete, playing sound:', timerSettings.intervalCompleteSound);
+          // Interval complete - play sound immediately
           playSound(timerSettings.intervalCompleteSound);
           
           // Check if there's a next interval
           if (currentIntervalIndex < intervals.length - 1) {
-            setCurrentIntervalIndex((prev) => prev + 1);
-            return intervals[currentIntervalIndex + 1].duration;
+            const nextIndex = currentIntervalIndex + 1;
+            setCurrentIntervalIndex(nextIndex);
+            return intervals[nextIndex].duration;
           } else if (currentRepeat < repeatCount) {
             // Start next repeat
+            console.log('Starting next repeat');
             setCurrentRepeat((prev) => prev + 1);
             setCurrentIntervalIndex(0);
             return intervals[0].duration;
           } else {
             // Timer complete
+            console.log('Timer complete, playing sound:', timerSettings.timerCompleteSound);
             playSound(timerSettings.timerCompleteSound);
             setIsRunning(false);
             return 0;
@@ -459,21 +464,28 @@ const IntervalTimer = () => {
   }, [isRunning, remainingSeconds, currentIntervalIndex, intervals, repeatCount, currentRepeat, timerSettings]);
 
   const playSound = (soundId: string) => {
-    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
+    console.log('Playing sound:', soundId);
+    
+    // Initialize AudioContext if not already done
+    const ctx = audioContext || new (window.AudioContext || (window as any).webkitAudioContext)();
+    if (!audioContext) {
+      setAudioContext(ctx);
+    }
+    
+    const oscillator = ctx.createOscillator();
+    const gainNode = ctx.createGain();
     
     oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
+    gainNode.connect(ctx.destination);
     
-    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+    gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
     
     const playSingleBeep = (frequency: number, startTime: number, duration: number) => {
-      const osc = audioContext.createOscillator();
-      const gain = audioContext.createGain();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
       
       osc.connect(gain);
-      gain.connect(audioContext.destination);
+      gain.connect(ctx.destination);
       
       osc.frequency.setValueAtTime(frequency, startTime);
       gain.gain.setValueAtTime(0.3, startTime);
@@ -483,7 +495,7 @@ const IntervalTimer = () => {
       osc.stop(startTime + duration);
     };
     
-    const now = audioContext.currentTime;
+    const now = ctx.currentTime;
     
     switch(soundId) {
       case 'beep':
