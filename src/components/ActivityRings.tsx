@@ -284,9 +284,9 @@ const ActivityRings = () => {
                     cy={center}
                     r={ring.radius}
                     fill="none"
-                    stroke={ring.color}
+                    stroke="hsl(var(--muted))"
                     strokeWidth="18"
-                    opacity="0.25"
+                    opacity="0.5"
                   />
                   {/* Progress ring */}
                   {ring.data.percentage > 0 && (
@@ -317,9 +317,9 @@ const ActivityRings = () => {
       </div>
 
       {/* Interaction hint */}
-      <div className="text-center">
-        <p className="text-sm text-muted-foreground italic">
-          💡 Tap any ring to see your progress and 7-day history
+      <div className="text-center bg-muted/30 rounded-lg p-3 border border-muted">
+        <p className="text-base font-medium">
+          💡 Tap any ring to view detailed progress and 7-day history
         </p>
       </div>
 
