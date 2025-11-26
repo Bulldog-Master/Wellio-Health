@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Scale, Plus, TrendingDown, ArrowLeft, Calendar as CalendarIcon, Pencil, Trash2 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
@@ -12,7 +12,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useNavigate } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { format } from "date-fns";
+import { format, startOfMonth, startOfQuarter, startOfYear, parseISO } from "date-fns";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface WeightLog {
   id: string;
@@ -32,6 +34,7 @@ const Weight = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [editingLog, setEditingLog] = useState<WeightLog | null>(null);
   const [editWeight, setEditWeight] = useState("");
+  const [chartView, setChartView] = useState<"daily" | "monthly" | "quarterly" | "yearly" | "year-by-year">("monthly");
 
   useEffect(() => {
     fetchWeightLogs();
@@ -46,8 +49,7 @@ const Weight = () => {
         .from('weight_logs')
         .select('*')
         .eq('user_id', user.id)
-        .order('logged_at', { ascending: false })
-        .limit(10);
+        .order('logged_at', { ascending: true });
 
       if (error) throw error;
       setWeightLogs(data || []);
@@ -168,7 +170,140 @@ const Weight = () => {
     return acc;
   }, {} as Record<string, Record<string, number>>);
 
-  const latestWeight = weightLogs.length > 0 ? weightLogs[0].weight_lbs : 0;
+  const latestWeight = weightLogs.length > 0 ? weightLogs[weightLogs.length - 1].weight_lbs : 0;
+
+  const chartData = useMemo(() => {
+    if (!weightLogs.length) return [];
+
+    const processData = (logs: WeightLog[]) => {
+      switch (chartView) {
+        case "daily": {
+          const dailyData = logs.reduce((acc, log) => {
+            const date = format(parseISO(log.logged_at), "MMM dd");
+            const existing = acc.find(d => d.date === date);
+            if (existing) {
+              if (log.period === "morning") existing.morning = log.weight_lbs;
+              if (log.period === "evening") existing.evening = log.weight_lbs;
+            } else {
+              acc.push({
+                date,
+                morning: log.period === "morning" ? log.weight_lbs : null,
+                evening: log.period === "evening" ? log.weight_lbs : null,
+              });
+            }
+            return acc;
+          }, [] as any[]);
+          return dailyData;
+        }
+        
+        case "monthly": {
+          const monthlyData = logs.reduce((acc, log) => {
+            const month = format(startOfMonth(parseISO(log.logged_at)), "MMM yyyy");
+            const existing = acc.find(d => d.date === month);
+            if (existing) {
+              existing.totalWeight += log.weight_lbs;
+              existing.count += 1;
+            } else {
+              acc.push({ date: month, totalWeight: log.weight_lbs, count: 1 });
+            }
+            return acc;
+          }, [] as any[]);
+          return monthlyData.map(d => ({ date: d.date, average: d.totalWeight / d.count }));
+        }
+        
+        case "quarterly": {
+          const quarterlyData = logs.reduce((acc, log) => {
+            const quarter = format(startOfQuarter(parseISO(log.logged_at)), "QQQ yyyy");
+            const existing = acc.find(d => d.date === quarter);
+            if (existing) {
+              existing.totalWeight += log.weight_lbs;
+              existing.count += 1;
+            } else {
+              acc.push({ date: quarter, totalWeight: log.weight_lbs, count: 1 });
+            }
+            return acc;
+          }, [] as any[]);
+          return quarterlyData.map(d => ({ date: d.date, average: d.totalWeight / d.count }));
+        }
+        
+        case "yearly": {
+          const yearlyData = logs.reduce((acc, log) => {
+            const year = format(startOfYear(parseISO(log.logged_at)), "yyyy");
+            const existing = acc.find(d => d.date === year);
+            if (existing) {
+              existing.totalWeight += log.weight_lbs;
+              existing.count += 1;
+            } else {
+              acc.push({ date: year, totalWeight: log.weight_lbs, count: 1 });
+            }
+            return acc;
+          }, [] as any[]);
+          return yearlyData.map(d => ({ date: d.date, average: d.totalWeight / d.count }));
+        }
+        
+        case "year-by-year": {
+          const yearlyData = logs.reduce((acc, log) => {
+            const year = format(parseISO(log.logged_at), "yyyy");
+            const month = format(parseISO(log.logged_at), "MMM");
+            if (!acc[year]) acc[year] = {};
+            if (!acc[year][month]) acc[year][month] = { totalWeight: 0, count: 0 };
+            acc[year][month].totalWeight += log.weight_lbs;
+            acc[year][month].count += 1;
+            return acc;
+          }, {} as Record<string, Record<string, { totalWeight: number; count: number }>>);
+          
+          const result = [];
+          for (const [year, months] of Object.entries(yearlyData)) {
+            for (const [month, data] of Object.entries(months)) {
+              result.push({
+                date: month,
+                [year]: data.totalWeight / data.count,
+              });
+            }
+          }
+          
+          const consolidated = result.reduce((acc, item) => {
+            const existing = acc.find(d => d.date === item.date);
+            if (existing) {
+              Object.assign(existing, item);
+            } else {
+              acc.push(item);
+            }
+            return acc;
+          }, [] as any[]);
+          
+          return consolidated;
+        }
+        
+        default:
+          return [];
+      }
+    };
+
+    return processData(weightLogs);
+  }, [weightLogs, chartView]);
+
+  const chartLines = useMemo(() => {
+    if (chartView === "year-by-year" && chartData.length > 0) {
+      const years = Object.keys(chartData[0]).filter(key => key !== "date");
+      return years;
+    }
+    return [];
+  }, [chartData, chartView]);
+
+  const getYAxisDomain = () => {
+    if (!chartData.length) return [0, 100];
+    const values = chartData.flatMap(d => 
+      Object.entries(d)
+        .filter(([key]) => key !== "date")
+        .map(([, value]) => value as number)
+        .filter(v => v != null)
+    );
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const padding = (max - min) * 0.1;
+    return [Math.floor(min - padding), Math.ceil(max + padding)];
+  };
 
   return (
     <div className="space-y-6 max-w-4xl">
@@ -301,6 +436,112 @@ const Weight = () => {
       </Card>
 
       <Card className="p-6 bg-gradient-card shadow-md">
+        <h3 className="text-lg font-semibold mb-6">Weight Trends</h3>
+        <Tabs value={chartView} onValueChange={(v) => setChartView(v as any)} className="mb-6">
+          <TabsList className="grid w-full grid-cols-5">
+            <TabsTrigger value="daily">Daily</TabsTrigger>
+            <TabsTrigger value="monthly">Monthly</TabsTrigger>
+            <TabsTrigger value="quarterly">Quarterly</TabsTrigger>
+            <TabsTrigger value="yearly">Yearly</TabsTrigger>
+            <TabsTrigger value="year-by-year">Year by Year</TabsTrigger>
+          </TabsList>
+        </Tabs>
+
+        {isLoading ? (
+          <p className="text-center text-muted-foreground py-8">Loading...</p>
+        ) : chartData.length === 0 ? (
+          <p className="text-center text-muted-foreground py-8">No data available for chart</p>
+        ) : (
+          <ResponsiveContainer width="100%" height={400}>
+            <LineChart data={chartData}>
+              <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+              <XAxis 
+                dataKey="date" 
+                className="text-xs"
+                tick={{ fill: 'hsl(var(--foreground))' }}
+              />
+              <YAxis 
+                domain={getYAxisDomain()}
+                className="text-xs"
+                tick={{ fill: 'hsl(var(--foreground))' }}
+                label={{ 
+                  value: preferredUnit === 'imperial' ? 'Weight (lbs)' : 'Weight (kg)', 
+                  angle: -90, 
+                  position: 'insideLeft',
+                  style: { fill: 'hsl(var(--foreground))' }
+                }}
+                tickFormatter={(value) => formatWeight(value, preferredUnit).split(' ')[0]}
+              />
+              <Tooltip 
+                contentStyle={{ 
+                  backgroundColor: 'hsl(var(--background))',
+                  border: '1px solid hsl(var(--border))',
+                  borderRadius: '8px'
+                }}
+                formatter={(value: number) => formatWeight(value, preferredUnit)}
+              />
+              <Legend />
+              
+              {chartView === "daily" ? (
+                <>
+                  <Line 
+                    type="monotone" 
+                    dataKey="morning" 
+                    stroke="hsl(var(--primary))" 
+                    strokeWidth={2}
+                    dot={{ fill: 'hsl(var(--primary))' }}
+                    name="Morning"
+                    connectNulls
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="evening" 
+                    stroke="hsl(var(--secondary))" 
+                    strokeWidth={2}
+                    dot={{ fill: 'hsl(var(--secondary))' }}
+                    name="Evening"
+                    connectNulls
+                  />
+                </>
+              ) : chartView === "year-by-year" ? (
+                chartLines.map((year, index) => {
+                  const colors = [
+                    'hsl(var(--primary))',
+                    'hsl(var(--secondary))',
+                    'hsl(var(--accent))',
+                    'hsl(217, 91%, 60%)',
+                    'hsl(142, 71%, 45%)',
+                    'hsl(262, 83%, 58%)',
+                  ];
+                  return (
+                    <Line
+                      key={year}
+                      type="monotone"
+                      dataKey={year}
+                      stroke={colors[index % colors.length]}
+                      strokeWidth={2}
+                      dot={{ fill: colors[index % colors.length] }}
+                      name={year}
+                      connectNulls
+                    />
+                  );
+                })
+              ) : (
+                <Line 
+                  type="monotone" 
+                  dataKey="average" 
+                  stroke="hsl(var(--primary))" 
+                  strokeWidth={2}
+                  dot={{ fill: 'hsl(var(--primary))' }}
+                  name="Average Weight"
+                />
+              )}
+            </LineChart>
+          </ResponsiveContainer>
+        )}
+      </Card>
+
+      <Card className="p-6 bg-gradient-card shadow-md">
         <h3 className="text-lg font-semibold mb-4">Recent Weights</h3>
         {isLoading ? (
           <p className="text-center text-muted-foreground py-8">Loading...</p>
@@ -308,7 +549,7 @@ const Weight = () => {
           <p className="text-center text-muted-foreground py-8">No weight logs yet. Start tracking above!</p>
         ) : (
           <div className="space-y-3">
-            {weightLogs.map((log) => (
+            {[...weightLogs].reverse().slice(0, 10).map((log) => (
               <div key={log.id} className="flex items-center justify-between p-4 bg-secondary rounded-lg">
                 <div className="flex-1">
                   <span className="font-medium">{new Date(log.logged_at).toLocaleDateString()}</span>
