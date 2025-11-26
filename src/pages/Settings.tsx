@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -6,10 +7,11 @@ import { Switch } from "@/components/ui/switch";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Bell, Clock } from "lucide-react";
+import { Bell, Clock, User, ChevronRight } from "lucide-react";
 import { useNotifications } from "@/hooks/useNotifications";
 
 const Settings = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { permission, requestPermission, isSupported } = useNotifications();
   
@@ -88,8 +90,27 @@ const Settings = () => {
     <div className="space-y-6 pb-20 md:pb-0">
       <div>
         <h1 className="text-3xl font-bold mb-2">Settings</h1>
-        <p className="text-muted-foreground">Manage your notifications and reminders</p>
+        <p className="text-muted-foreground">Manage your account and preferences</p>
       </div>
+
+      {/* Profile Link */}
+      <Card 
+        className="p-4 hover:bg-accent/50 transition-colors cursor-pointer"
+        onClick={() => navigate("/profile")}
+      >
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <User className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <h3 className="font-semibold">Profile</h3>
+              <p className="text-sm text-muted-foreground">Manage your profile settings</p>
+            </div>
+          </div>
+          <ChevronRight className="w-5 h-5 text-muted-foreground" />
+        </div>
+      </Card>
 
       {/* Notification Permission */}
       {isSupported && (
