@@ -2252,7 +2252,9 @@ const IntervalTimer = () => {
             >
               <Label className="text-lg text-foreground cursor-pointer">Sound</Label>
               <div className="flex items-center gap-2">
-                <span className="text-muted-foreground capitalize">{editIntervalSound}</span>
+                <span className="text-muted-foreground">
+                  {soundOptions.find(s => s.id === editIntervalSound)?.name || editIntervalSound}
+                </span>
                 <ChevronRight className="h-5 w-5 text-muted-foreground" />
               </div>
             </button>
