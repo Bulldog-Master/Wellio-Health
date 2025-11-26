@@ -498,10 +498,23 @@ const IntervalTimer = () => {
             setCurrentIntervalIndex(0);
             return intervals[0].duration;
           } else {
-            // Timer complete
-            console.log('Timer complete, playing sound:', timerSettings.timerCompleteSound);
-            playSound(timerSettings.timerCompleteSound);
+            // Timer complete - play completion sound repeatedly for 15 seconds
+            console.log('Timer complete, playing sound repeatedly:', timerSettings.timerCompleteSound);
             setIsRunning(false);
+            
+            // Play completion sound repeatedly for 15 seconds
+            let soundCount = 0;
+            const maxSounds = 15; // Play for 15 seconds (one per second)
+            
+            const playCompletionSound = () => {
+              if (soundCount < maxSounds) {
+                playSound(timerSettings.timerCompleteSound);
+                soundCount++;
+                setTimeout(playCompletionSound, 1000);
+              }
+            };
+            
+            playCompletionSound();
             return 0;
           }
         }
