@@ -264,211 +264,210 @@ const Settings = () => {
         <p className="text-muted-foreground">Manage your account and preferences</p>
       </div>
 
-      {/* Profile Link */}
-      <Card 
-        className="p-4 hover:bg-accent/50 transition-colors cursor-pointer"
-        onClick={() => navigate("/profile")}
-      >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="p-2 bg-primary/10 rounded-lg">
-              <User className="w-5 h-5 text-primary" />
+      {/* Settings Sections Grid */}
+      <div className="grid gap-4">
+        {/* Profile */}
+        <Card 
+          className="p-4 hover:bg-accent/50 transition-colors cursor-pointer"
+          onClick={() => navigate("/profile")}
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <User className="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold">Profile</h3>
+                <p className="text-sm text-muted-foreground">Manage your profile settings</p>
+              </div>
             </div>
-            <div>
-              <h3 className="font-semibold">Profile</h3>
-              <p className="text-sm text-muted-foreground">Manage your profile settings</p>
+            <ChevronRight className="w-5 h-5 text-muted-foreground" />
+          </div>
+        </Card>
+
+        {/* Privacy & Security - Expandable */}
+        <Card className="p-6">
+          <div className="flex items-start gap-4 mb-6">
+            <Shield className="w-6 h-6 text-primary mt-1" />
+            <div className="flex-1">
+              <h3 className="font-semibold mb-1">Privacy & Security</h3>
+              <p className="text-sm text-muted-foreground">
+                Control your privacy settings and security options
+              </p>
             </div>
           </div>
-          <ChevronRight className="w-5 h-5 text-muted-foreground" />
-        </div>
-      </Card>
 
-      {/* Notification Permission */}
-      {isSupported && (
-        <Card className="p-6">
-          <div className="flex items-start gap-4">
-            <Bell className="w-6 h-6 text-primary mt-1" />
-            <div className="flex-1">
-              <h3 className="font-semibold mb-2">Browser Notifications</h3>
-              <p className="text-sm text-muted-foreground mb-3">
-                {permission === "granted" 
-                  ? "Notifications are enabled. You'll receive reminders based on your preferences below."
-                  : permission === "denied"
-                  ? "Notifications are blocked. Please enable them in your browser settings."
-                  : "Enable notifications to receive helpful reminders throughout the day."}
-              </p>
-              {permission === "default" && (
-                <Button onClick={requestPermission} variant="outline" size="sm">
-                  Enable Notifications
+          <div className="space-y-6">
+            {/* Passkeys (2FA) */}
+            <div className="pb-4 border-b">
+              <div className="flex items-center justify-between mb-3">
+                <div>
+                  <Label className="text-base">Two-Factor Authentication</Label>
+                  <p className="text-sm text-muted-foreground">Secure your account with passkeys</p>
+                </div>
+                <Button onClick={handleAddPasskey} variant="outline" size="sm">
+                  <Key className="w-4 h-4 mr-2" />
+                  Add Passkey
                 </Button>
+              </div>
+              {passkeys.length > 0 && (
+                <div className="mt-3 space-y-2">
+                  {passkeys.map((passkey) => (
+                    <div key={passkey.id} className="flex items-center justify-between p-2 bg-muted/50 rounded-lg">
+                      <div className="text-sm">
+                        <p className="font-medium">{passkey.device_type || "Unknown Device"}</p>
+                        <p className="text-xs text-muted-foreground">
+                          Added {new Date(passkey.created_at).toLocaleDateString()}
+                        </p>
+                      </div>
+                      <Button
+                        onClick={() => handleDeletePasskey(passkey.id)}
+                        variant="ghost"
+                        size="sm"
+                      >
+                        Remove
+                      </Button>
+                    </div>
+                  ))}
+                </div>
               )}
-              {permission === "granted" && (
-                <p className="text-xs text-green-600 font-medium">✓ Enabled</p>
-              )}
+            </div>
+
+            {/* Change Password */}
+            <div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <Label className="text-base">Password</Label>
+                  <p className="text-sm text-muted-foreground">Change your account password</p>
+                </div>
+                <Button onClick={handleChangePassword} variant="outline" size="sm">
+                  Change Password
+                </Button>
+              </div>
             </div>
           </div>
         </Card>
-      )}
 
-      {/* Reminder Settings */}
-      <Card className="p-6">
-        <div className="flex items-start gap-4 mb-6">
-          <Clock className="w-6 h-6 text-primary mt-1" />
-          <div>
-            <h3 className="font-semibold mb-1">Reminder Preferences</h3>
-            <p className="text-sm text-muted-foreground">
-              Choose when you'd like to receive reminders
-            </p>
-          </div>
-        </div>
-
-        <div className="space-y-6">
-          {/* Meal Logging */}
-          <div className="flex items-center justify-between pb-4 border-b">
+        {/* Notifications - Expandable */}
+        <Card className="p-6">
+          <div className="flex items-start gap-4 mb-6">
+            <Bell className="w-6 h-6 text-primary mt-1" />
             <div className="flex-1">
-              <Label htmlFor="meal-reminder" className="text-base">Meal Logging</Label>
-              <p className="text-sm text-muted-foreground">Remind me to log my meals</p>
-            </div>
-            <div className="flex items-center gap-4">
-              {settings.reminder_meal_logging && (
-                <Input
-                  type="time"
-                  value={settings.reminder_time_meal}
-                  onChange={(e) => updateSetting("reminder_time_meal", e.target.value)}
-                  className="w-32"
-                />
-              )}
-              <Switch
-                id="meal-reminder"
-                checked={settings.reminder_meal_logging}
-                onCheckedChange={(checked) => updateSetting("reminder_meal_logging", checked)}
-              />
+              <h3 className="font-semibold mb-1">Notifications</h3>
+              <p className="text-sm text-muted-foreground">
+                Configure your notification preferences
+              </p>
             </div>
           </div>
 
-          {/* Workout */}
-          <div className="flex items-center justify-between pb-4 border-b">
-            <div className="flex-1">
-              <Label htmlFor="workout-reminder" className="text-base">Workout Time</Label>
-              <p className="text-sm text-muted-foreground">Remind me to exercise</p>
-            </div>
-            <div className="flex items-center gap-4">
-              {settings.reminder_workout && (
-                <Input
-                  type="time"
-                  value={settings.reminder_time_workout}
-                  onChange={(e) => updateSetting("reminder_time_workout", e.target.value)}
-                  className="w-32"
-                />
-              )}
-              <Switch
-                id="workout-reminder"
-                checked={settings.reminder_workout}
-                onCheckedChange={(checked) => updateSetting("reminder_workout", checked)}
-              />
-            </div>
-          </div>
-
-          {/* Weigh-in */}
-          <div className="flex items-center justify-between pb-4 border-b">
-            <div className="flex-1">
-              <Label htmlFor="weighin-reminder" className="text-base">Weigh-in Reminder</Label>
-              <p className="text-sm text-muted-foreground">Remind me to track my weight</p>
-            </div>
-            <div className="flex items-center gap-4">
-              {settings.reminder_weigh_in && (
-                <Input
-                  type="time"
-                  value={settings.reminder_time_weigh_in}
-                  onChange={(e) => updateSetting("reminder_time_weigh_in", e.target.value)}
-                  className="w-32"
-                />
-              )}
-              <Switch
-                id="weighin-reminder"
-                checked={settings.reminder_weigh_in}
-                onCheckedChange={(checked) => updateSetting("reminder_weigh_in", checked)}
-              />
-            </div>
-          </div>
-
-          {/* Habits */}
-          <div className="flex items-center justify-between">
-            <div className="flex-1">
-              <Label htmlFor="habits-reminder" className="text-base">Habit Tracking</Label>
-              <p className="text-sm text-muted-foreground">Remind me to complete my habits</p>
-            </div>
-            <Switch
-              id="habits-reminder"
-              checked={settings.reminder_habits}
-              onCheckedChange={(checked) => updateSetting("reminder_habits", checked)}
-            />
-          </div>
-        </div>
-      </Card>
-
-      {/* Privacy & Security */}
-      <Card className="p-6">
-        <div className="flex items-start gap-4 mb-6">
-          <Shield className="w-6 h-6 text-primary mt-1" />
-          <div>
-            <h3 className="font-semibold mb-1">Privacy & Security</h3>
-            <p className="text-sm text-muted-foreground">
-              Manage your security settings and two-factor authentication
-            </p>
-          </div>
-        </div>
-
-        <div className="space-y-6">
-          {/* Passkeys (2FA) */}
-          <div className="pb-4 border-b">
-            <div className="flex items-center justify-between mb-3">
-              <div>
-                <Label className="text-base">Two-Factor Authentication</Label>
-                <p className="text-sm text-muted-foreground">Secure your account with passkeys</p>
-              </div>
-              <Button onClick={handleAddPasskey} variant="outline" size="sm">
-                <Key className="w-4 h-4 mr-2" />
-                Add Passkey
-              </Button>
-            </div>
-            {passkeys.length > 0 && (
-              <div className="mt-3 space-y-2">
-                {passkeys.map((passkey) => (
-                  <div key={passkey.id} className="flex items-center justify-between p-2 bg-muted/50 rounded-lg">
-                    <div className="text-sm">
-                      <p className="font-medium">{passkey.device_type || "Unknown Device"}</p>
-                      <p className="text-xs text-muted-foreground">
-                        Added {new Date(passkey.created_at).toLocaleDateString()}
-                      </p>
-                    </div>
-                    <Button
-                      onClick={() => handleDeletePasskey(passkey.id)}
-                      variant="ghost"
-                      size="sm"
-                    >
-                      Remove
-                    </Button>
-                  </div>
-                ))}
+          <div className="space-y-6">
+            {/* Browser Notifications */}
+            {isSupported && (
+              <div className="pb-4 border-b">
+                <Label className="text-base mb-2 block">Browser Notifications</Label>
+                <p className="text-sm text-muted-foreground mb-3">
+                  {permission === "granted" 
+                    ? "Notifications are enabled"
+                    : permission === "denied"
+                    ? "Notifications are blocked. Enable them in your browser settings."
+                    : "Enable notifications to receive helpful reminders"}
+                </p>
+                {permission === "default" && (
+                  <Button onClick={requestPermission} variant="outline" size="sm">
+                    Enable Notifications
+                  </Button>
+                )}
+                {permission === "granted" && (
+                  <p className="text-xs text-green-600 font-medium">✓ Enabled</p>
+                )}
               </div>
             )}
-          </div>
 
-          {/* Change Password */}
-          <div>
-            <div className="flex items-center justify-between">
-              <div>
-                <Label className="text-base">Password</Label>
-                <p className="text-sm text-muted-foreground">Change your account password</p>
+            {/* Meal Logging */}
+            <div className="flex items-center justify-between pb-4 border-b">
+              <div className="flex-1">
+                <Label htmlFor="meal-reminder" className="text-base">Meal Logging</Label>
+                <p className="text-sm text-muted-foreground">Remind me to log my meals</p>
               </div>
-              <Button onClick={handleChangePassword} variant="outline" size="sm">
-                Change Password
-              </Button>
+              <div className="flex items-center gap-4">
+                {settings.reminder_meal_logging && (
+                  <Input
+                    type="time"
+                    value={settings.reminder_time_meal}
+                    onChange={(e) => updateSetting("reminder_time_meal", e.target.value)}
+                    className="w-32"
+                  />
+                )}
+                <Switch
+                  id="meal-reminder"
+                  checked={settings.reminder_meal_logging}
+                  onCheckedChange={(checked) => updateSetting("reminder_meal_logging", checked)}
+                />
+              </div>
+            </div>
+
+            {/* Workout */}
+            <div className="flex items-center justify-between pb-4 border-b">
+              <div className="flex-1">
+                <Label htmlFor="workout-reminder" className="text-base">Workout Time</Label>
+                <p className="text-sm text-muted-foreground">Remind me to exercise</p>
+              </div>
+              <div className="flex items-center gap-4">
+                {settings.reminder_workout && (
+                  <Input
+                    type="time"
+                    value={settings.reminder_time_workout}
+                    onChange={(e) => updateSetting("reminder_time_workout", e.target.value)}
+                    className="w-32"
+                  />
+                )}
+                <Switch
+                  id="workout-reminder"
+                  checked={settings.reminder_workout}
+                  onCheckedChange={(checked) => updateSetting("reminder_workout", checked)}
+                />
+              </div>
+            </div>
+
+            {/* Weigh-in */}
+            <div className="flex items-center justify-between pb-4 border-b">
+              <div className="flex-1">
+                <Label htmlFor="weighin-reminder" className="text-base">Weigh-in Reminder</Label>
+                <p className="text-sm text-muted-foreground">Remind me to track my weight</p>
+              </div>
+              <div className="flex items-center gap-4">
+                {settings.reminder_weigh_in && (
+                  <Input
+                    type="time"
+                    value={settings.reminder_time_weigh_in}
+                    onChange={(e) => updateSetting("reminder_time_weigh_in", e.target.value)}
+                    className="w-32"
+                  />
+                )}
+                <Switch
+                  id="weighin-reminder"
+                  checked={settings.reminder_weigh_in}
+                  onCheckedChange={(checked) => updateSetting("reminder_weigh_in", checked)}
+                />
+              </div>
+            </div>
+
+            {/* Habits */}
+            <div className="flex items-center justify-between">
+              <div className="flex-1">
+                <Label htmlFor="habits-reminder" className="text-base">Habit Tracking</Label>
+                <p className="text-sm text-muted-foreground">Remind me to complete my habits</p>
+              </div>
+              <Switch
+                id="habits-reminder"
+                checked={settings.reminder_habits}
+                onCheckedChange={(checked) => updateSetting("reminder_habits", checked)}
+              />
             </div>
           </div>
-        </div>
-      </Card>
+        </Card>
+      </div>
+
 
       {/* Preferences */}
       <Card className="p-6">
