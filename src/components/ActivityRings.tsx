@@ -115,13 +115,7 @@ const ActivityRings = () => {
     const gradient = getRingGradient(type);
 
     return (
-      <>
-        <defs>
-          <linearGradient id={gradient.id} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor={gradient.color1} />
-            <stop offset="100%" stopColor={gradient.color2} />
-          </linearGradient>
-        </defs>
+      <g>
         {/* Background ring */}
         <circle
           cx="120"
@@ -146,7 +140,7 @@ const ActivityRings = () => {
           transform="rotate(-90 120 120)"
           className="transition-all duration-1000 ease-out"
         />
-      </>
+      </g>
     );
   };
 
@@ -163,6 +157,20 @@ const ActivityRings = () => {
       {/* Rings visualization */}
       <div className="flex justify-center">
         <svg width="240" height="240" viewBox="0 0 240 240">
+          <defs>
+            <linearGradient id="moveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FF006E" />
+              <stop offset="100%" stopColor="#FF4081" />
+            </linearGradient>
+            <linearGradient id="exerciseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#00F5FF" />
+              <stop offset="100%" stopColor="#00B8D4" />
+            </linearGradient>
+            <linearGradient id="standGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#BFFF00" />
+              <stop offset="100%" stopColor="#76FF03" />
+            </linearGradient>
+          </defs>
           <Ring type="move" data={data.move} radius={100} strokeWidth={16} />
           <Ring type="exercise" data={data.exercise} radius={75} strokeWidth={16} />
           <Ring type="stand" data={data.stand} radius={50} strokeWidth={16} />
