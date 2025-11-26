@@ -63,7 +63,10 @@ const Achievements = () => {
         return <Activity className="w-6 h-6 text-success" />;
       case "stand":
         return <Footprints className="w-6 h-6 text-primary" />;
-      case "weight":
+      case "weight_25":
+      case "weight_50":
+      case "weight_75":
+      case "weight_100":
         return <Scale className="w-6 h-6 text-accent" />;
       default:
         return <Trophy className="w-6 h-6 text-warning" />;
@@ -78,7 +81,10 @@ const Achievements = () => {
         return "bg-success/10 border-success/20";
       case "stand":
         return "bg-primary/10 border-primary/20";
-      case "weight":
+      case "weight_25":
+      case "weight_50":
+      case "weight_75":
+      case "weight_100":
         return "bg-accent/10 border-accent/20";
       default:
         return "bg-warning/10 border-warning/20";
@@ -93,8 +99,14 @@ const Achievements = () => {
         return "Exercise Goal";
       case "stand":
         return "Stand Goal";
-      case "weight":
-        return "Weight Milestone";
+      case "weight_25":
+        return "Weight Milestone - 25%";
+      case "weight_50":
+        return "Weight Milestone - 50%";
+      case "weight_75":
+        return "Weight Milestone - 75%";
+      case "weight_100":
+        return "Weight Goal Complete";
       default:
         return "Achievement";
     }
@@ -108,7 +120,10 @@ const Achievements = () => {
         return "min";
       case "stand":
         return "hrs";
-      case "weight":
+      case "weight_25":
+      case "weight_50":
+      case "weight_75":
+      case "weight_100":
         return "lbs";
       default:
         return "";
@@ -117,13 +132,23 @@ const Achievements = () => {
 
   const filteredAchievements = useMemo(() => {
     if (filter === "all") return achievements;
+    if (filter === "weight") {
+      return achievements.filter(a => 
+        a.achievement_type === "weight_25" || 
+        a.achievement_type === "weight_50" || 
+        a.achievement_type === "weight_75" || 
+        a.achievement_type === "weight_100"
+      );
+    }
     return achievements.filter(a => a.achievement_type === filter);
   }, [achievements, filter]);
 
   const statistics = useMemo(() => {
     const totalAchievements = achievements.length;
     const achievementsByType = achievements.reduce((acc, a) => {
-      acc[a.achievement_type] = (acc[a.achievement_type] || 0) + 1;
+      // Normalize weight milestone types to "weight" for statistics
+      const type = a.achievement_type.startsWith('weight_') ? 'weight' : a.achievement_type;
+      acc[type] = (acc[type] || 0) + 1;
       return acc;
     }, {} as Record<string, number>);
 
@@ -207,9 +232,12 @@ const Achievements = () => {
           </div>
           <p className="text-2xl font-bold text-foreground">
             {Object.keys(statistics.byType).length > 0
-              ? getAchievementLabel(
-                  Object.entries(statistics.byType).sort((a, b) => b[1] - a[1])[0][0]
-                )
+              ? (() => {
+                  const mostCommonType = Object.entries(statistics.byType).sort((a, b) => b[1] - a[1])[0][0];
+                  // Handle normalized weight type
+                  if (mostCommonType === "weight") return "Weight Milestone";
+                  return getAchievementLabel(mostCommonType);
+                })()
               : "None yet"}
           </p>
           <p className="text-muted-foreground text-sm mt-1">
