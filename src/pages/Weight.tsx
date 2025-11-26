@@ -31,6 +31,7 @@ const Weight = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [editingLog, setEditingLog] = useState<WeightLog | null>(null);
+  const [editWeight, setEditWeight] = useState("");
 
   useEffect(() => {
     fetchWeightLogs();
@@ -104,9 +105,11 @@ const Weight = () => {
     }
   };
 
-  const handleEditLog = async (log: WeightLog, newWeight: string) => {
+  const handleEditLog = async (log: WeightLog) => {
+    if (!editWeight) return;
+    
     try {
-      const weightLbs = parseWeight(newWeight, preferredUnit);
+      const weightLbs = parseWeight(editWeight, preferredUnit);
       
       const { error } = await supabase
         .from('weight_logs')
@@ -121,6 +124,7 @@ const Weight = () => {
       });
       
       setEditingLog(null);
+      setEditWeight("");
       fetchWeightLogs();
     } catch (error) {
       console.error('Error updating weight:', error);
@@ -318,22 +322,23 @@ const Weight = () => {
                     <Input
                       type="number"
                       step="0.1"
-                      defaultValue={formatWeight(log.weight_lbs, preferredUnit).split(' ')[0]}
+                      value={editWeight}
+                      onChange={(e) => setEditWeight(e.target.value)}
                       className="w-24"
                       onKeyDown={(e) => {
                         if (e.key === 'Enter') {
-                          handleEditLog(log, (e.target as HTMLInputElement).value);
+                          handleEditLog(log);
                         }
                       }}
                       autoFocus
                     />
-                    <Button size="sm" onClick={() => {
-                      const input = document.activeElement as HTMLInputElement;
-                      handleEditLog(log, input.value);
-                    }}>
+                    <Button size="sm" onClick={() => handleEditLog(log)}>
                       Save
                     </Button>
-                    <Button size="sm" variant="ghost" onClick={() => setEditingLog(null)}>
+                    <Button size="sm" variant="ghost" onClick={() => {
+                      setEditingLog(null);
+                      setEditWeight("");
+                    }}>
                       Cancel
                     </Button>
                   </div>
@@ -346,7 +351,10 @@ const Weight = () => {
                       <Button
                         size="sm"
                         variant="ghost"
-                        onClick={() => setEditingLog(log)}
+                        onClick={() => {
+                          setEditingLog(log);
+                          setEditWeight(formatWeight(log.weight_lbs, preferredUnit).split(' ')[0]);
+                        }}
                         className="h-8 w-8 p-0"
                       >
                         <Pencil className="w-4 h-4" />
