@@ -1,6 +1,8 @@
 import { Activity, Flame, Target, TrendingUp } from "lucide-react";
 import MetricCard from "@/components/MetricCard";
 import ActivityRings from "@/components/ActivityRings";
+import { StreakTracker } from "@/components/StreakTracker";
+import { NutritionGoals } from "@/components/NutritionGoals";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -122,6 +124,12 @@ const Dashboard = () => {
           variant="accent"
         />
       </div>
+
+      {/* Streak Tracker */}
+      <StreakTracker />
+
+      {/* Nutrition Goals */}
+      <NutritionGoals />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
         <Card className="p-4 md:p-6 bg-gradient-card shadow-md">
