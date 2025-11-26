@@ -184,13 +184,21 @@ const Dashboard = () => {
         <div className="flex items-center justify-between mb-3 md:mb-4">
           <h3 className="text-base md:text-lg font-semibold">Quick Actions</h3>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-2 md:gap-3">
           <Button 
             onClick={() => navigate('/weight')}
             className="h-auto py-4 flex-col gap-2 bg-primary hover:bg-primary/90"
           >
             <Activity className="w-5 h-5" />
             <span className="text-sm">Log Weight</span>
+          </Button>
+          <Button 
+            onClick={() => navigate('/step-count')}
+            variant="secondary" 
+            className="h-auto py-4 flex-col gap-2 bg-success/10 hover:bg-success/20 border-success/20"
+          >
+            <Activity className="w-5 h-5 text-success" />
+            <span className="text-sm">Step Count</span>
           </Button>
           <Button 
             onClick={() => navigate('/food')}
