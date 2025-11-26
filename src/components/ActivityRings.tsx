@@ -29,7 +29,10 @@ const ActivityRings = () => {
   const fetchActivityData = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+      if (!user) {
+        setLoading(false);
+        return;
+      }
 
       const today = new Date().toISOString().split('T')[0];
 
@@ -82,71 +85,6 @@ const ActivityRings = () => {
     }
   };
 
-  const getRingColor = (type: 'move' | 'exercise' | 'stand') => {
-    switch (type) {
-      case 'move':
-        return 'stroke-[#FF006E]';
-      case 'exercise':
-        return 'stroke-[#00F5FF]';
-      case 'stand':
-        return 'stroke-[#BFFF00]';
-    }
-  };
-
-  const getRingGradient = (type: 'move' | 'exercise' | 'stand') => {
-    switch (type) {
-      case 'move':
-        return { id: 'moveGradient', color1: '#FF006E', color2: '#FF4081' };
-      case 'exercise':
-        return { id: 'exerciseGradient', color1: '#00F5FF', color2: '#00B8D4' };
-      case 'stand':
-        return { id: 'standGradient', color1: '#BFFF00', color2: '#76FF03' };
-    }
-  };
-
-  const Ring = ({ type, data: ringData, radius, strokeWidth }: { 
-    type: 'move' | 'exercise' | 'stand'; 
-    data: RingData; 
-    radius: number;
-    strokeWidth: number;
-  }) => {
-    const circumference = 2 * Math.PI * radius;
-    const offset = circumference - (ringData.percentage / 100) * circumference;
-    const gradient = getRingGradient(type);
-
-    // Get background color based on type
-    const bgColor = type === 'move' ? '#FF006E' : type === 'exercise' ? '#00F5FF' : '#BFFF00';
-
-    return (
-      <g>
-        {/* Background ring */}
-        <circle
-          cx="120"
-          cy="120"
-          r={radius}
-          fill="none"
-          stroke={bgColor}
-          strokeWidth={strokeWidth}
-          opacity="0.2"
-        />
-        {/* Progress ring */}
-        <circle
-          cx="120"
-          cy="120"
-          r={radius}
-          fill="none"
-          stroke={`url(#${gradient.id})`}
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-          transform="rotate(-90 120 120)"
-          className="transition-all duration-1000 ease-out"
-        />
-      </g>
-    );
-  };
-
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -155,28 +93,69 @@ const ActivityRings = () => {
     );
   }
 
+  // Calculate ring positions
+  const center = 120;
+  const rings = [
+    { type: 'move' as const, radius: 90, color: '#FF006E', gradient: 'moveGradient', data: data.move },
+    { type: 'exercise' as const, radius: 68, color: '#00F5FF', gradient: 'exerciseGradient', data: data.exercise },
+    { type: 'stand' as const, radius: 46, color: '#BFFF00', gradient: 'standGradient', data: data.stand }
+  ];
+
   return (
     <div className="space-y-6">
       {/* Rings visualization */}
       <div className="flex justify-center">
-        <svg width="240" height="240" viewBox="0 0 240 240">
+        <svg width="240" height="240" viewBox="0 0 240 240" className="transform">
           <defs>
             <linearGradient id="moveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FF006E" />
-              <stop offset="100%" stopColor="#FF4081" />
+              <stop offset="0%" style={{ stopColor: '#FF006E' }} />
+              <stop offset="100%" style={{ stopColor: '#FF4081' }} />
             </linearGradient>
             <linearGradient id="exerciseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#00F5FF" />
-              <stop offset="100%" stopColor="#00B8D4" />
+              <stop offset="0%" style={{ stopColor: '#00F5FF' }} />
+              <stop offset="100%" style={{ stopColor: '#00B8D4' }} />
             </linearGradient>
             <linearGradient id="standGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#BFFF00" />
-              <stop offset="100%" stopColor="#76FF03" />
+              <stop offset="0%" style={{ stopColor: '#BFFF00' }} />
+              <stop offset="100%" style={{ stopColor: '#76FF03' }} />
             </linearGradient>
           </defs>
-          <Ring type="move" data={data.move} radius={100} strokeWidth={16} />
-          <Ring type="exercise" data={data.exercise} radius={75} strokeWidth={16} />
-          <Ring type="stand" data={data.stand} radius={50} strokeWidth={16} />
+          
+          {rings.map((ring) => {
+            const circumference = 2 * Math.PI * ring.radius;
+            const offset = circumference - (ring.data.percentage / 100) * circumference;
+            
+            return (
+              <g key={ring.type}>
+                {/* Background ring */}
+                <circle
+                  cx={center}
+                  cy={center}
+                  r={ring.radius}
+                  fill="none"
+                  stroke={ring.color}
+                  strokeWidth="14"
+                  opacity="0.2"
+                />
+                {/* Progress ring */}
+                {ring.data.percentage > 0 && (
+                  <circle
+                    cx={center}
+                    cy={center}
+                    r={ring.radius}
+                    fill="none"
+                    stroke={`url(#${ring.gradient})`}
+                    strokeWidth="14"
+                    strokeLinecap="round"
+                    strokeDasharray={circumference}
+                    strokeDashoffset={offset}
+                    transform={`rotate(-90 ${center} ${center})`}
+                    style={{ transition: 'stroke-dashoffset 1s ease-out' }}
+                  />
+                )}
+              </g>
+            );
+          })}
         </svg>
       </div>
 
@@ -184,7 +163,7 @@ const ActivityRings = () => {
       <div className="grid grid-cols-3 gap-4">
         <div className="text-center space-y-2">
           <div className="flex justify-center">
-            <div className="p-3 rounded-full bg-[#FF006E]/10">
+            <div className="p-3 rounded-full" style={{ backgroundColor: 'rgba(255, 0, 110, 0.1)' }}>
               <Flame className="w-6 h-6" style={{ color: '#FF006E' }} />
             </div>
           </div>
@@ -197,7 +176,7 @@ const ActivityRings = () => {
 
         <div className="text-center space-y-2">
           <div className="flex justify-center">
-            <div className="p-3 rounded-full bg-[#00F5FF]/10">
+            <div className="p-3 rounded-full" style={{ backgroundColor: 'rgba(0, 245, 255, 0.1)' }}>
               <Zap className="w-6 h-6" style={{ color: '#00F5FF' }} />
             </div>
           </div>
@@ -210,7 +189,7 @@ const ActivityRings = () => {
 
         <div className="text-center space-y-2">
           <div className="flex justify-center">
-            <div className="p-3 rounded-full bg-[#BFFF00]/10">
+            <div className="p-3 rounded-full" style={{ backgroundColor: 'rgba(191, 255, 0, 0.1)' }}>
               <Clock className="w-6 h-6" style={{ color: '#BFFF00' }} />
             </div>
           </div>
