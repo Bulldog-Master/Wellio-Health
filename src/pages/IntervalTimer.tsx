@@ -381,11 +381,21 @@ const IntervalTimer = () => {
   };
 
   const handlePreviousInterval = () => {
-    setCurrentIntervalIndex((prev) => (prev > 0 ? prev - 1 : intervals.length - 1));
+    setCurrentIntervalIndex((prev) => {
+      const newIndex = prev > 0 ? prev - 1 : intervals.length - 1;
+      setRemainingSeconds(intervals[newIndex]?.duration || 0);
+      setIsRunning(false);
+      return newIndex;
+    });
   };
 
   const handleNextInterval = () => {
-    setCurrentIntervalIndex((prev) => (prev < intervals.length - 1 ? prev + 1 : 0));
+    setCurrentIntervalIndex((prev) => {
+      const newIndex = prev < intervals.length - 1 ? prev + 1 : 0;
+      setRemainingSeconds(intervals[newIndex]?.duration || 0);
+      setIsRunning(false);
+      return newIndex;
+    });
   };
 
   const calculateTotalTime = () => {
