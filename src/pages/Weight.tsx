@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format, startOfMonth, startOfQuarter, startOfYear, parseISO } from "date-fns";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface WeightLog {
@@ -453,7 +453,7 @@ const Weight = () => {
           <p className="text-center text-muted-foreground py-8">No data available for chart</p>
         ) : (
           <ResponsiveContainer width="100%" height={400}>
-            <LineChart data={chartData}>
+            <BarChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
               <XAxis 
                 dataKey="date" 
@@ -484,23 +484,17 @@ const Weight = () => {
               
               {chartView === "daily" ? (
                 <>
-                  <Line 
-                    type="monotone" 
+                  <Bar 
                     dataKey="morning" 
-                    stroke="hsl(var(--primary))" 
-                    strokeWidth={2}
-                    dot={{ fill: 'hsl(var(--primary))' }}
+                    fill="hsl(var(--primary))" 
                     name="Morning"
-                    connectNulls
+                    radius={[4, 4, 0, 0]}
                   />
-                  <Line 
-                    type="monotone" 
+                  <Bar 
                     dataKey="evening" 
-                    stroke="hsl(var(--secondary))" 
-                    strokeWidth={2}
-                    dot={{ fill: 'hsl(var(--secondary))' }}
+                    fill="hsl(var(--secondary))" 
                     name="Evening"
-                    connectNulls
+                    radius={[4, 4, 0, 0]}
                   />
                 </>
               ) : chartView === "year-by-year" ? (
@@ -514,29 +508,24 @@ const Weight = () => {
                     'hsl(262, 83%, 58%)',
                   ];
                   return (
-                    <Line
+                    <Bar
                       key={year}
-                      type="monotone"
                       dataKey={year}
-                      stroke={colors[index % colors.length]}
-                      strokeWidth={2}
-                      dot={{ fill: colors[index % colors.length] }}
+                      fill={colors[index % colors.length]}
                       name={year}
-                      connectNulls
+                      radius={[4, 4, 0, 0]}
                     />
                   );
                 })
               ) : (
-                <Line 
-                  type="monotone" 
+                <Bar 
                   dataKey="average" 
-                  stroke="hsl(var(--primary))" 
-                  strokeWidth={2}
-                  dot={{ fill: 'hsl(var(--primary))' }}
+                  fill="hsl(var(--primary))" 
                   name="Average Weight"
+                  radius={[4, 4, 0, 0]}
                 />
               )}
-            </LineChart>
+            </BarChart>
           </ResponsiveContainer>
         )}
       </Card>
