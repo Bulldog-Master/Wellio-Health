@@ -377,13 +377,16 @@ export type Database = {
           age: number | null
           avatar_url: string | null
           created_at: string | null
+          exercise_goal: number | null
           full_name: string | null
           gender: string | null
           goal: string | null
           height: number | null
           height_unit: string | null
           id: string
+          move_goal: number | null
           preferred_unit: string | null
+          stand_goal: number | null
           target_weight: number | null
           target_weight_unit: string | null
           updated_at: string | null
@@ -395,13 +398,16 @@ export type Database = {
           age?: number | null
           avatar_url?: string | null
           created_at?: string | null
+          exercise_goal?: number | null
           full_name?: string | null
           gender?: string | null
           goal?: string | null
           height?: number | null
           height_unit?: string | null
           id: string
+          move_goal?: number | null
           preferred_unit?: string | null
+          stand_goal?: number | null
           target_weight?: number | null
           target_weight_unit?: string | null
           updated_at?: string | null
@@ -413,13 +419,16 @@ export type Database = {
           age?: number | null
           avatar_url?: string | null
           created_at?: string | null
+          exercise_goal?: number | null
           full_name?: string | null
           gender?: string | null
           goal?: string | null
           height?: number | null
           height_unit?: string | null
           id?: string
+          move_goal?: number | null
           preferred_unit?: string | null
+          stand_goal?: number | null
           target_weight?: number | null
           target_weight_unit?: string | null
           updated_at?: string | null

@@ -21,6 +21,7 @@ const ActivityRings = () => {
     stand: { current: 0, goal: 12, percentage: 0 }
   });
   const [loading, setLoading] = useState(true);
+  const [goals, setGoals] = useState({ move: 500, exercise: 30, stand: 12 });
 
   useEffect(() => {
     fetchActivityData();
@@ -33,6 +34,20 @@ const ActivityRings = () => {
         setLoading(false);
         return;
       }
+
+      // Fetch user's custom goals from profile
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('move_goal, exercise_goal, stand_goal')
+        .eq('id', user.id)
+        .single();
+
+      const userGoals = {
+        move: profile?.move_goal || 500,
+        exercise: profile?.exercise_goal || 30,
+        stand: profile?.stand_goal || 12
+      };
+      setGoals(userGoals);
 
       const today = new Date().toISOString().split('T')[0];
 
@@ -64,18 +79,18 @@ const ActivityRings = () => {
       setData({
         move: {
           current: totalCalories,
-          goal: 500,
-          percentage: Math.min((totalCalories / 500) * 100, 100)
+          goal: userGoals.move,
+          percentage: Math.min((totalCalories / userGoals.move) * 100, 100)
         },
         exercise: {
           current: exerciseMinutes,
-          goal: 30,
-          percentage: Math.min((exerciseMinutes / 30) * 100, 100)
+          goal: userGoals.exercise,
+          percentage: Math.min((exerciseMinutes / userGoals.exercise) * 100, 100)
         },
         stand: {
           current: standHours,
-          goal: 12,
-          percentage: Math.min((standHours / 12) * 100, 100)
+          goal: userGoals.stand,
+          percentage: Math.min((standHours / userGoals.stand) * 100, 100)
         }
       });
     } catch (error) {
