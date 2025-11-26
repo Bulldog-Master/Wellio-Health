@@ -70,6 +70,7 @@ const IntervalTimer = () => {
   const [currentRepeat, setCurrentRepeat] = useState(1);
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
   const [totalElapsedSeconds, setTotalElapsedSeconds] = useState(0);
+  const [isSessionComplete, setIsSessionComplete] = useState(false);
   const [timerSettings, setTimerSettings] = useState({
     intervalCompleteSound: "beep",
     timerCompleteSound: "beep",
@@ -449,6 +450,7 @@ const IntervalTimer = () => {
     setIsRunning(false);
     setCurrentRepeat(1);
     setTotalElapsedSeconds(0);
+    setIsSessionComplete(false);
   };
 
   // Calculate total remaining time
@@ -498,23 +500,10 @@ const IntervalTimer = () => {
             setCurrentIntervalIndex(0);
             return intervals[0].duration;
           } else {
-            // Timer complete - play completion sound repeatedly for 15 seconds
-            console.log('Timer complete, playing sound repeatedly:', timerSettings.timerCompleteSound);
+            // Timer complete
+            console.log('Timer complete, triggering completion sound');
             setIsRunning(false);
-            
-            // Play completion sound repeatedly for 15 seconds
-            let soundCount = 0;
-            const maxSounds = 15; // Play for 15 seconds (one per second)
-            
-            const playCompletionSound = () => {
-              if (soundCount < maxSounds) {
-                playSound(timerSettings.timerCompleteSound);
-                soundCount++;
-                setTimeout(playCompletionSound, 1000);
-              }
-            };
-            
-            playCompletionSound();
+            setIsSessionComplete(true);
             return 0;
           }
         }
@@ -524,6 +513,31 @@ const IntervalTimer = () => {
 
     return () => clearInterval(interval);
   }, [isRunning, remainingSeconds, currentIntervalIndex, intervals, repeatCount, currentRepeat, timerSettings]);
+
+  // Handle session completion sound
+  useEffect(() => {
+    if (!isSessionComplete) return;
+    
+    console.log('Session complete, playing completion sound repeatedly for 15 seconds');
+    let soundCount = 0;
+    const maxSounds = 15;
+    
+    // Play immediately
+    playSound(timerSettings.timerCompleteSound);
+    soundCount++;
+    
+    // Then play every second for 15 seconds
+    const completionInterval = setInterval(() => {
+      if (soundCount < maxSounds) {
+        playSound(timerSettings.timerCompleteSound);
+        soundCount++;
+      } else {
+        clearInterval(completionInterval);
+      }
+    }, 1000);
+    
+    return () => clearInterval(completionInterval);
+  }, [isSessionComplete, timerSettings.timerCompleteSound, audioContext]);
 
   const playSound = (soundId: string) => {
     console.log('Playing sound:', soundId);
@@ -1328,6 +1342,7 @@ const IntervalTimer = () => {
                 setSelectedTimerId(null);
                 setTimerName("");
                 setIntervals([]);
+                setIsSessionComplete(false);
               }}
             >
               Cancel
@@ -1346,6 +1361,7 @@ const IntervalTimer = () => {
                     setAudioContext(ctx);
                     console.log('AudioContext initialized');
                   }
+                  setIsSessionComplete(false); // Reset completion flag when starting
                   setIsRunning(true);
                   if (remainingSeconds === 0) {
                     setRemainingSeconds(intervals[currentIntervalIndex]?.duration || 0);
