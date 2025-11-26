@@ -31,14 +31,22 @@ const FitnessGoals = () => {
         .from("profiles")
         .select("goal, target_weight, target_weight_unit")
         .eq("id", user.id)
-        .single();
+        .maybeSingle();
 
       if (error) throw error;
       if (data) {
+        // Convert from lbs (stored) to display unit
+        let displayWeight = data.target_weight || 0;
+        const displayUnit = data.target_weight_unit || "lbs";
+        
+        if (displayWeight && displayUnit === "kg") {
+          displayWeight = displayWeight * 0.453592; // Convert lbs back to kg for display
+        }
+
         setFormData({
           goal: data.goal || "",
-          target_weight: data.target_weight?.toString() || "",
-          target_weight_unit: data.target_weight_unit || "lbs",
+          target_weight: displayWeight ? displayWeight.toFixed(1) : "",
+          target_weight_unit: displayUnit,
         });
       }
     } catch (error) {
@@ -52,11 +60,17 @@ const FitnessGoals = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("No user found");
 
+      // Convert to lbs for storage (database stores everything in lbs)
+      let targetWeightLbs = formData.target_weight ? parseFloat(formData.target_weight) : null;
+      if (targetWeightLbs && formData.target_weight_unit === "kg") {
+        targetWeightLbs = targetWeightLbs * 2.20462; // Convert kg to lbs
+      }
+
       const { error } = await supabase
         .from("profiles")
         .update({
           goal: formData.goal,
-          target_weight: formData.target_weight ? parseFloat(formData.target_weight) : null,
+          target_weight: targetWeightLbs,
           target_weight_unit: formData.target_weight_unit,
         })
         .eq("id", user.id);
