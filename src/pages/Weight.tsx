@@ -451,11 +451,11 @@ const Weight = () => {
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => navigate("/")}
+        onClick={() => navigate(-1)}
         className="gap-2 mb-2"
       >
         <ArrowLeft className="w-4 h-4" />
-        Back to Dashboard
+        Back
       </Button>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
