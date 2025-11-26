@@ -222,7 +222,7 @@ const ActivityRings = () => {
   return (
     <div className="space-y-3 py-2">
       {/* Rings visualization */}
-      <div className="flex justify-center bg-card rounded-xl p-4">
+      <div className="flex justify-center bg-secondary/20 rounded-xl p-4">
         <div className="relative w-40 h-40 md:w-56 md:h-56" style={{ 
           filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1))'
         }}>
@@ -317,59 +317,59 @@ const ActivityRings = () => {
       </div>
 
       {/* Interaction hint */}
-      <div className="text-center bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg p-2.5 border-2 border-primary/30">
+      <div className="text-center">
         <p className="text-sm font-semibold text-primary">
-          👆 Click any ring to view detailed stats & 7-day history
+          👆 Click any ring to view stats & history
         </p>
       </div>
 
       {/* Ring details */}
-      <div className="grid grid-cols-3 gap-2 md:gap-4">
-        <div className="text-center space-y-1 md:space-y-2">
+      <div className="grid grid-cols-3 gap-2">
+        <div className="text-center space-y-1">
           <div className="flex justify-center">
-            <div className="p-1.5 md:p-3 rounded-full" style={{
+            <div className="p-1.5 md:p-2 rounded-full" style={{
               backgroundColor: 'rgba(255, 0, 110, 0.1)',
-              boxShadow: '0 2px 8px rgba(255, 0, 110, 0.1) md:0 4px 12px rgba(255, 0, 110, 0.15)'
+              boxShadow: '0 2px 8px rgba(255, 0, 110, 0.1)'
             }}>
-              <Flame className="w-4 h-4 md:w-6 md:h-6" style={{ color: '#FF006E' }} />
+              <Flame className="w-3 h-3 md:w-5 md:h-5" style={{ color: '#FF006E' }} />
             </div>
           </div>
           <div>
-            <p className="text-lg md:text-2xl font-bold">{data.move.current}</p>
-            <p className="text-[9px] md:text-xs text-muted-foreground">/ {data.move.goal} CAL</p>
-            <p className="text-xs md:text-sm font-semibold mt-0.5 md:mt-1">Move</p>
+            <p className="text-base md:text-xl font-bold">{data.move.current}</p>
+            <p className="text-[8px] md:text-[10px] text-muted-foreground">/ {data.move.goal} CAL</p>
+            <p className="text-[10px] md:text-xs font-semibold">Move</p>
           </div>
         </div>
 
-        <div className="text-center space-y-1 md:space-y-2">
+        <div className="text-center space-y-1">
           <div className="flex justify-center">
-            <div className="p-1.5 md:p-3 rounded-full" style={{
+            <div className="p-1.5 md:p-2 rounded-full" style={{
               backgroundColor: 'rgba(0, 245, 255, 0.1)',
-              boxShadow: '0 2px 8px rgba(0, 245, 255, 0.1) md:0 4px 12px rgba(0, 245, 255, 0.15)'
+              boxShadow: '0 2px 8px rgba(0, 245, 255, 0.1)'
             }}>
-              <Zap className="w-4 h-4 md:w-6 md:h-6" style={{ color: '#00F5FF' }} />
+              <Zap className="w-3 h-3 md:w-5 md:h-5" style={{ color: '#00F5FF' }} />
             </div>
           </div>
           <div>
-            <p className="text-lg md:text-2xl font-bold">{data.exercise.current}</p>
-            <p className="text-[9px] md:text-xs text-muted-foreground">/ {data.exercise.goal} MIN</p>
-            <p className="text-xs md:text-sm font-semibold mt-0.5 md:mt-1">Exercise</p>
+            <p className="text-base md:text-xl font-bold">{data.exercise.current}</p>
+            <p className="text-[8px] md:text-[10px] text-muted-foreground">/ {data.exercise.goal} MIN</p>
+            <p className="text-[10px] md:text-xs font-semibold">Exercise</p>
           </div>
         </div>
 
-        <div className="text-center space-y-1 md:space-y-2">
+        <div className="text-center space-y-1">
           <div className="flex justify-center">
-            <div className="p-1.5 md:p-3 rounded-full" style={{
+            <div className="p-1.5 md:p-2 rounded-full" style={{
               backgroundColor: 'rgba(191, 255, 0, 0.1)',
-              boxShadow: '0 2px 8px rgba(191, 255, 0, 0.1) md:0 4px 12px rgba(191, 255, 0, 0.15)'
+              boxShadow: '0 2px 8px rgba(191, 255, 0, 0.1)'
             }}>
-              <Clock className="w-4 h-4 md:w-6 md:h-6" style={{ color: '#BFFF00' }} />
+              <Clock className="w-3 h-3 md:w-5 md:h-5" style={{ color: '#BFFF00' }} />
             </div>
           </div>
           <div>
-            <p className="text-lg md:text-2xl font-bold">{data.stand.current}</p>
-            <p className="text-[9px] md:text-xs text-muted-foreground">/ {data.stand.goal} HR</p>
-            <p className="text-xs md:text-sm font-semibold mt-0.5 md:mt-1">Stand</p>
+            <p className="text-base md:text-xl font-bold">{data.stand.current}</p>
+            <p className="text-[8px] md:text-[10px] text-muted-foreground">/ {data.stand.goal} HR</p>
+            <p className="text-[10px] md:text-xs font-semibold">Stand</p>
           </div>
         </div>
       </div>
