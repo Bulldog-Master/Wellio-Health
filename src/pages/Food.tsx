@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
-import { Utensils, BookOpen } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Utensils, BookOpen, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Food = () => {
@@ -26,6 +27,15 @@ const Food = () => {
 
   return (
     <div className="space-y-6 max-w-4xl">
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => navigate("/")}
+        className="gap-2 mb-2"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Back to Dashboard
+      </Button>
       <div className="flex items-center gap-3">
         <div className="p-3 bg-primary/10 rounded-xl">
           <Utensils className="w-6 h-6 text-primary" />
