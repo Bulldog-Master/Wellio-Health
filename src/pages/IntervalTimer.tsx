@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Timer, FolderPlus, MoreHorizontal, ArrowLeft, X, ChevronRight, ChevronLeft, ChevronUp, ChevronDown, Clock, GripVertical } from "lucide-react";
@@ -65,6 +65,9 @@ const IntervalTimer = () => {
   const [newIntervalDuration, setNewIntervalDuration] = useState("");
   const [newIntervalColor, setNewIntervalColor] = useState("#3B82F6");
   const [currentIntervalIndex, setCurrentIntervalIndex] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  const [remainingSeconds, setRemainingSeconds] = useState(0);
+  const [currentRepeat, setCurrentRepeat] = useState(1);
   const [timerSettings, setTimerSettings] = useState({
     intervalCompleteSound: "beep",
     timerCompleteSound: "beep",
@@ -406,8 +409,44 @@ const IntervalTimer = () => {
     const timerIntervals = (timer.intervals || []) as Array<{ id: string; name: string; duration: number; color: string }>;
     setIntervals(timerIntervals);
     setCurrentIntervalIndex(0);
-    setRepeatCount(timer.repeat_count || 1); // Load saved repeat count
+    setRepeatCount(timer.repeat_count || 1);
+    setRemainingSeconds(timerIntervals[0]?.duration || 0);
+    setIsRunning(false);
+    setCurrentRepeat(1);
   };
+
+  // Timer countdown effect
+  useEffect(() => {
+    if (!isRunning || remainingSeconds <= 0) return;
+
+    const interval = setInterval(() => {
+      setRemainingSeconds((prev) => {
+        if (prev <= 1) {
+          // Interval complete
+          playSound(timerSettings.intervalCompleteSound);
+          
+          // Check if there's a next interval
+          if (currentIntervalIndex < intervals.length - 1) {
+            setCurrentIntervalIndex((prev) => prev + 1);
+            return intervals[currentIntervalIndex + 1].duration;
+          } else if (currentRepeat < repeatCount) {
+            // Start next repeat
+            setCurrentRepeat((prev) => prev + 1);
+            setCurrentIntervalIndex(0);
+            return intervals[0].duration;
+          } else {
+            // Timer complete
+            playSound(timerSettings.timerCompleteSound);
+            setIsRunning(false);
+            return 0;
+          }
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isRunning, remainingSeconds, currentIntervalIndex, intervals, repeatCount, currentRepeat, timerSettings]);
 
   const playSound = (soundId: string) => {
     const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
@@ -1173,8 +1212,16 @@ const IntervalTimer = () => {
             
             <div className="text-center text-white">
               <p className="text-8xl font-bold tracking-tight">
-                {formatTime(intervals[currentIntervalIndex]?.duration || 0)}
+                {formatTime(isRunning ? remainingSeconds : intervals[currentIntervalIndex]?.duration || 0)}
               </p>
+              <p className="text-xl mt-4 font-medium">
+                {intervals[currentIntervalIndex]?.name}
+              </p>
+              {repeatCount > 1 && (
+                <p className="text-lg mt-2 opacity-80">
+                  Round {currentRepeat} of {repeatCount}
+                </p>
+              )}
             </div>
 
             <Button
@@ -1204,9 +1251,19 @@ const IntervalTimer = () => {
             <Button 
               className="flex-1" 
               size="lg"
-              style={{ backgroundColor: "#22c55e", color: "white" }}
+              style={{ backgroundColor: isRunning ? "#ef4444" : "#22c55e", color: "white" }}
+              onClick={() => {
+                if (isRunning) {
+                  setIsRunning(false);
+                } else {
+                  setIsRunning(true);
+                  if (remainingSeconds === 0) {
+                    setRemainingSeconds(intervals[currentIntervalIndex]?.duration || 0);
+                  }
+                }
+              }}
             >
-              Start
+              {isRunning ? "Pause" : "Start"}
             </Button>
           </div>
 
