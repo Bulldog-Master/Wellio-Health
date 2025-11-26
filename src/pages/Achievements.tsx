@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Trophy, Flame, Activity, Footprints, Clock, Scale, TrendingDown, ArrowLeft, Calendar } from "lucide-react";
+import { Trophy, Flame, Activity, Footprints, Clock, Scale, TrendingDown, ArrowLeft, Calendar, Share2 } from "lucide-react";
 import { useState, useEffect, useMemo } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -8,6 +8,7 @@ import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import confetti from 'canvas-confetti';
 
 interface Achievement {
   id: string;
@@ -25,10 +26,45 @@ const Achievements = () => {
   const [achievements, setAchievements] = useState<Achievement[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState<"all" | "move" | "exercise" | "stand" | "weight">("all");
+  const [celebrationShown, setCelebrationShown] = useState(false);
 
   useEffect(() => {
     fetchAchievements();
   }, []);
+
+  useEffect(() => {
+    // Celebration confetti on page load (only once)
+    if (achievements.length > 0 && !celebrationShown) {
+      setCelebrationShown(true);
+      const duration = 2000;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+      const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
+
+      const interval = setInterval(() => {
+        const timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          return;
+        }
+
+        const particleCount = 30 * (timeLeft / duration);
+        confetti({
+          ...defaults,
+          particleCount,
+          origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+        });
+        confetti({
+          ...defaults,
+          particleCount,
+          origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+        });
+      }, 250);
+
+      return () => clearInterval(interval);
+    }
+  }, [achievements, celebrationShown]);
 
   const fetchAchievements = async () => {
     try {
@@ -52,6 +88,28 @@ const Achievements = () => {
       });
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleShare = async (achievement: Achievement) => {
+    const shareText = `🎉 I just achieved ${getAchievementLabel(achievement.achievement_type)}! ${achievement.actual_value} ${getAchievementUnit(achievement.achievement_type)} completed! #Wellio #FitnessGoals`;
+    
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: 'Achievement Unlocked!',
+          text: shareText,
+        });
+      } else {
+        // Fallback: copy to clipboard
+        await navigator.clipboard.writeText(shareText);
+        toast({
+          title: "Copied to clipboard!",
+          description: "Share your achievement on social media.",
+        });
+      }
+    } catch (error) {
+      console.error('Error sharing:', error);
     }
   };
 
@@ -315,7 +373,18 @@ const Achievements = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="text-6xl">🎉</div>
+                      <div className="flex flex-col items-end gap-2">
+                        <div className="text-6xl">🎉</div>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="gap-2"
+                          onClick={() => handleShare(achievement)}
+                        >
+                          <Share2 className="w-4 h-4" />
+                          Share
+                        </Button>
+                      </div>
                     </div>
                   </Card>
                 ))}
