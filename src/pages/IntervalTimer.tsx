@@ -176,6 +176,9 @@ const IntervalTimer = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Not authenticated");
 
+      console.log("Saving timer with intervals:", intervals);
+      console.log("Repeat count:", repeatCount);
+
       const { data, error } = await supabase
         .from("interval_timers")
         .insert({
@@ -881,6 +884,93 @@ const IntervalTimer = () => {
                 placeholder="Timer name"
                 className="text-lg"
               />
+            </div>
+
+            {/* INTERVALS */}
+            <div className="space-y-4">
+              <h3 className="text-sm font-semibold text-muted-foreground">INTERVALS</h3>
+              
+              {/* Add Interval Form */}
+              <div className="space-y-3 p-4 border border-border rounded-lg">
+                <Input
+                  value={newIntervalName}
+                  onChange={(e) => setNewIntervalName(e.target.value)}
+                  placeholder="Interval name (e.g., J1, T1)"
+                  className="text-base"
+                />
+                <Input
+                  type="number"
+                  value={newIntervalDuration}
+                  onChange={(e) => setNewIntervalDuration(e.target.value)}
+                  placeholder="Duration in seconds"
+                  className="text-base"
+                />
+                <div className="flex items-center gap-2">
+                  <Input
+                    type="color"
+                    value={newIntervalColor}
+                    onChange={(e) => setNewIntervalColor(e.target.value)}
+                    className="w-16 h-10"
+                  />
+                  <Button
+                    onClick={handleAddInterval}
+                    className="flex-1"
+                    type="button"
+                  >
+                    Add Interval
+                  </Button>
+                </div>
+              </div>
+
+              {/* Intervals List */}
+              {intervals.length > 0 && (
+                <div className="space-y-2">
+                  {intervals.map((interval) => (
+                    <div
+                      key={interval.id}
+                      className="flex items-center justify-between p-3 border border-border rounded-lg"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div
+                          className="w-6 h-6 rounded"
+                          style={{ backgroundColor: interval.color }}
+                        />
+                        <span className="font-medium">{interval.name}</span>
+                        <span className="text-muted-foreground">
+                          {formatTime(interval.duration)}
+                        </span>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleDeleteInterval(interval.id)}
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Repeat Count */}
+              <div className="flex items-center justify-between py-3">
+                <Label className="text-lg text-foreground font-normal">Repeat</Label>
+                <Input
+                  type="number"
+                  min="1"
+                  value={repeatCount}
+                  onChange={(e) => setRepeatCount(parseInt(e.target.value) || 1)}
+                  className="w-20 text-center"
+                />
+              </div>
+
+              {/* Total Time */}
+              {intervals.length > 0 && (
+                <div className="flex items-center justify-between py-3">
+                  <Label className="text-lg text-foreground font-medium">Total</Label>
+                  <span className="text-lg font-bold">{calculateTotalTime()}</span>
+                </div>
+              )}
             </div>
 
             {/* SOUND */}
