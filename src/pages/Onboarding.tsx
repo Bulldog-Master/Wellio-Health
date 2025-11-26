@@ -38,7 +38,8 @@ const Onboarding = () => {
 
       const { error } = await supabase
         .from("profiles")
-        .update({
+        .upsert({
+          id: user.id,
           full_name: formData.full_name,
           age: parseInt(formData.age),
           gender: formData.gender,
@@ -51,8 +52,9 @@ const Onboarding = () => {
           height_unit: "inches",
           weight_unit: "lbs",
           target_weight_unit: "lbs",
-        })
-        .eq("id", user.id);
+        }, {
+          onConflict: 'id'
+        });
 
       if (error) throw error;
 
