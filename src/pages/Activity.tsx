@@ -214,6 +214,21 @@ const Activity = () => {
         </Card>
 
         <Card 
+          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer hover-scale"
+          onClick={() => navigate('/step-count')}
+        >
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-success/10 rounded-xl">
+              <Footprints className="w-6 h-6 text-success" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">Step Count</h3>
+              <p className="text-sm text-muted-foreground">Daily steps & distance</p>
+            </div>
+          </div>
+        </Card>
+
+        <Card 
           className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
           onClick={() => navigate('/workout')}
         >

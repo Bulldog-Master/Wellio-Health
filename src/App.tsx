@@ -22,6 +22,7 @@ import Socials from "./pages/Socials";
 import Referral from "./pages/Referral";
 import FitnessGoals from "./pages/FitnessGoals";
 import Achievements from "./pages/Achievements";
+import StepCount from "./pages/StepCount";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -56,6 +57,7 @@ const App = () => {
             <Route path="/referral" element={<ProtectedRoute><Layout><Referral /></Layout></ProtectedRoute>} />
             <Route path="/fitness-goals" element={<ProtectedRoute><Layout><FitnessGoals /></Layout></ProtectedRoute>} />
             <Route path="/achievements" element={<ProtectedRoute><Layout><Achievements /></Layout></ProtectedRoute>} />
+            <Route path="/step-count" element={<ProtectedRoute><Layout><StepCount /></Layout></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

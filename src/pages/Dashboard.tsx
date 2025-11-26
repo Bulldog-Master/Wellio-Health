@@ -89,9 +89,12 @@ const Dashboard = () => {
         <p className="text-sm md:text-base text-muted-foreground">Here's your fitness overview for today</p>
       </div>
 
-      {/* Activity Rings */}
-      <Card className="p-4 md:p-6 bg-gradient-card shadow-md">
-        <h3 className="text-base md:text-lg font-semibold mb-2 md:mb-4">Today's Activity</h3>
+      {/* Activity Rings - Enhanced */}
+      <Card className="p-6 md:p-8 bg-gradient-card shadow-lg animate-fade-in">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg md:text-xl font-bold">Today's Activity</h3>
+          <Activity className="w-5 h-5 text-primary" />
+        </div>
         <ActivityRings />
       </Card>
 

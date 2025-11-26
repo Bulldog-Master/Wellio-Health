@@ -288,13 +288,17 @@ const ActivityRings = () => {
   ];
 
   return (
-    <div className="space-y-3 py-2 bg-secondary/20 rounded-xl p-4">
+    <div className="space-y-4 py-4">
       {/* Rings visualization */}
       <div className="flex justify-center">
-        <div className="relative w-40 h-40 md:w-56 md:h-56" style={{ 
-          filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1))'
+        <div className="relative w-52 h-52 md:w-72 md:h-72 lg:w-80 lg:h-80" style={{ 
+          filter: 'drop-shadow(0 4px 16px rgba(0, 0, 0, 0.15))',
+          animation: 'scale-in 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
         }}>
-          <svg width="100%" height="100%" viewBox="0 0 300 300" className="transform">
+          <svg width="100%" height="100%" viewBox="0 0 300 300" className="transform"
+            style={{
+              filter: 'drop-shadow(0 0 20px rgba(66, 153, 225, 0.2))'
+            }}>
             <defs>
               <linearGradient id="moveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" style={{ stopColor: '#FF006E' }} />
@@ -309,23 +313,26 @@ const ActivityRings = () => {
                 <stop offset="100%" style={{ stopColor: '#76FF03' }} />
               </linearGradient>
               
-              {/* Glow filters */}
-              <filter id="glow-move">
-                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              {/* Enhanced Glow filters */}
+              <filter id="glow-move" height="200%" width="200%" x="-50%" y="-50%">
+                <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                <feColorMatrix in="coloredBlur" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0"/>
                 <feMerge>
                   <feMergeNode in="coloredBlur"/>
                   <feMergeNode in="SourceGraphic"/>
                 </feMerge>
               </filter>
-              <filter id="glow-exercise">
-                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <filter id="glow-exercise" height="200%" width="200%" x="-50%" y="-50%">
+                <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                <feColorMatrix in="coloredBlur" type="matrix" values="0 0 0 0 0  1 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0"/>
                 <feMerge>
                   <feMergeNode in="coloredBlur"/>
                   <feMergeNode in="SourceGraphic"/>
                 </feMerge>
               </filter>
-              <filter id="glow-stand">
-                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <filter id="glow-stand" height="200%" width="200%" x="-50%" y="-50%">
+                <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                <feColorMatrix in="coloredBlur" type="matrix" values="0 0 0 0 0  0 0 0 0 0  1 0 0 0 0  0 0 0 0.6 0"/>
                 <feMerge>
                   <feMergeNode in="coloredBlur"/>
                   <feMergeNode in="SourceGraphic"/>
@@ -353,29 +360,47 @@ const ActivityRings = () => {
                     r={ring.radius}
                     fill="none"
                     stroke={ring.color}
-                    strokeWidth="18"
-                    opacity="0.3"
+                    strokeWidth="20"
+                    opacity="0.2"
                   />
                   {/* Progress ring */}
                   {ring.data.percentage > 0 && (
-                    <circle
-                      cx={center}
-                      cy={center}
-                      r={ring.radius}
-                      fill="none"
-                      stroke={`url(#${ring.gradient})`}
-                      strokeWidth="18"
-                      strokeLinecap="round"
-                      strokeDasharray={circumference}
-                      strokeDashoffset={offset}
-                      transform={`rotate(-90 ${center} ${center})`}
-                      filter={`url(#glow-${ring.type})`}
-                      style={{ 
-                        transition: 'stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1)',
-                        transitionDelay: `${rings.indexOf(ring) * 0.15}s`,
-                        opacity: 0.95
-                      }}
-                    />
+                    <>
+                      <circle
+                        cx={center}
+                        cy={center}
+                        r={ring.radius}
+                        fill="none"
+                        stroke={`url(#${ring.gradient})`}
+                        strokeWidth="20"
+                        strokeLinecap="round"
+                        strokeDasharray={circumference}
+                        strokeDashoffset={offset}
+                        transform={`rotate(-90 ${center} ${center})`}
+                        filter={`url(#glow-${ring.type})`}
+                        style={{ 
+                          transition: 'stroke-dashoffset 1.8s cubic-bezier(0.4, 0, 0.2, 1)',
+                          transitionDelay: `${rings.indexOf(ring) * 0.2}s`,
+                          opacity: 1,
+                          animation: ring.data.percentage >= 100 ? 'pulse 2s ease-in-out infinite' : 'none'
+                        }}
+                      />
+                      {/* Completion pulse effect */}
+                      {ring.data.percentage >= 100 && (
+                        <circle
+                          cx={center}
+                          cy={center}
+                          r={ring.radius}
+                          fill="none"
+                          stroke={ring.color}
+                          strokeWidth="2"
+                          opacity="0"
+                          style={{
+                            animation: 'ring-pulse 2s ease-in-out infinite'
+                          }}
+                        />
+                      )}
+                    </>
                   )}
                 </g>
               );
@@ -384,60 +409,67 @@ const ActivityRings = () => {
         </div>
       </div>
 
-      {/* Interaction hint */}
-      <div className="text-center">
-        <p className="text-sm font-semibold text-primary">
-          👆 Click any ring to view stats & history
+      {/* Interaction hint with animation */}
+      <div className="text-center animate-fade-in" style={{ animationDelay: '1s' }}>
+        <p className="text-sm md:text-base font-semibold text-primary flex items-center justify-center gap-2">
+          <span className="animate-bounce">👆</span>
+          <span>Click any ring to view detailed stats</span>
         </p>
       </div>
 
-      {/* Ring details */}
-      <div className="grid grid-cols-3 gap-2">
-        <div className="text-center space-y-1">
+      {/* Ring details with improved styling */}
+      <div className="grid grid-cols-3 gap-3 md:gap-4 mt-6">
+        <div className="text-center space-y-2 animate-fade-in" style={{ animationDelay: '0.3s' }}>
           <div className="flex justify-center">
-            <div className="p-1.5 md:p-2 rounded-full" style={{
-              backgroundColor: 'rgba(255, 0, 110, 0.1)',
-              boxShadow: '0 2px 8px rgba(255, 0, 110, 0.1)'
+            <div className="p-2 md:p-3 rounded-full hover-scale transition-smooth" style={{
+              backgroundColor: 'rgba(255, 0, 110, 0.15)',
+              boxShadow: data.move.percentage >= 100 
+                ? '0 4px 16px rgba(255, 0, 110, 0.4)' 
+                : '0 2px 8px rgba(255, 0, 110, 0.2)'
             }}>
-              <Flame className="w-3 h-3 md:w-5 md:h-5" style={{ color: '#FF006E' }} />
+              <Flame className="w-5 h-5 md:w-6 md:h-6" style={{ color: '#FF006E' }} />
             </div>
           </div>
           <div>
-            <p className="text-base md:text-xl font-bold">{data.move.current}</p>
-            <p className="text-[8px] md:text-[10px] text-muted-foreground">/ {data.move.goal} CAL</p>
-            <p className="text-[10px] md:text-xs font-semibold">Move</p>
+            <p className="text-xl md:text-2xl font-bold">{data.move.current}</p>
+            <p className="text-xs md:text-sm text-muted-foreground">/ {data.move.goal} CAL</p>
+            <p className="text-sm md:text-base font-semibold mt-1">Move</p>
           </div>
         </div>
 
-        <div className="text-center space-y-1">
+        <div className="text-center space-y-2 animate-fade-in" style={{ animationDelay: '0.4s' }}>
           <div className="flex justify-center">
-            <div className="p-1.5 md:p-2 rounded-full" style={{
-              backgroundColor: 'rgba(0, 245, 255, 0.1)',
-              boxShadow: '0 2px 8px rgba(0, 245, 255, 0.1)'
+            <div className="p-2 md:p-3 rounded-full hover-scale transition-smooth" style={{
+              backgroundColor: 'rgba(0, 245, 255, 0.15)',
+              boxShadow: data.exercise.percentage >= 100 
+                ? '0 4px 16px rgba(0, 245, 255, 0.4)' 
+                : '0 2px 8px rgba(0, 245, 255, 0.2)'
             }}>
-              <Zap className="w-3 h-3 md:w-5 md:h-5" style={{ color: '#00F5FF' }} />
+              <Zap className="w-5 h-5 md:w-6 md:h-6" style={{ color: '#00F5FF' }} />
             </div>
           </div>
           <div>
-            <p className="text-base md:text-xl font-bold">{data.exercise.current}</p>
-            <p className="text-[8px] md:text-[10px] text-muted-foreground">/ {data.exercise.goal} MIN</p>
-            <p className="text-[10px] md:text-xs font-semibold">Exercise</p>
+            <p className="text-xl md:text-2xl font-bold">{data.exercise.current}</p>
+            <p className="text-xs md:text-sm text-muted-foreground">/ {data.exercise.goal} MIN</p>
+            <p className="text-sm md:text-base font-semibold mt-1">Exercise</p>
           </div>
         </div>
 
-        <div className="text-center space-y-1">
+        <div className="text-center space-y-2 animate-fade-in" style={{ animationDelay: '0.5s' }}>
           <div className="flex justify-center">
-            <div className="p-1.5 md:p-2 rounded-full" style={{
-              backgroundColor: 'rgba(191, 255, 0, 0.1)',
-              boxShadow: '0 2px 8px rgba(191, 255, 0, 0.1)'
+            <div className="p-2 md:p-3 rounded-full hover-scale transition-smooth" style={{
+              backgroundColor: 'rgba(191, 255, 0, 0.15)',
+              boxShadow: data.stand.percentage >= 100 
+                ? '0 4px 16px rgba(191, 255, 0, 0.4)' 
+                : '0 2px 8px rgba(191, 255, 0, 0.2)'
             }}>
-              <Clock className="w-3 h-3 md:w-5 md:h-5" style={{ color: '#BFFF00' }} />
+              <Clock className="w-5 h-5 md:w-6 md:h-6" style={{ color: '#BFFF00' }} />
             </div>
           </div>
           <div>
-            <p className="text-base md:text-xl font-bold">{data.stand.current}</p>
-            <p className="text-[8px] md:text-[10px] text-muted-foreground">/ {data.stand.goal} HR</p>
-            <p className="text-[10px] md:text-xs font-semibold">Stand</p>
+            <p className="text-xl md:text-2xl font-bold">{data.stand.current}</p>
+            <p className="text-xs md:text-sm text-muted-foreground">/ {data.stand.goal} HR</p>
+            <p className="text-sm md:text-base font-semibold mt-1">Stand</p>
           </div>
         </div>
       </div>
