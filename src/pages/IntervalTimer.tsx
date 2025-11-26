@@ -2247,7 +2247,10 @@ const IntervalTimer = () => {
 
             {/* Sound */}
             <button
-              onClick={() => setIsEditIntervalSoundPickerOpen(true)}
+              onClick={() => {
+                console.log('Opening sound picker. Current sound:', editIntervalSound);
+                setIsEditIntervalSoundPickerOpen(true);
+              }}
               className="flex items-center justify-between py-4 border-b border-border w-full hover:bg-accent/50 transition-colors"
             >
               <Label className="text-lg text-foreground cursor-pointer">Sound</Label>
@@ -2318,9 +2321,14 @@ const IntervalTimer = () => {
                 <button
                   key={sound.id}
                   onClick={() => {
+                    console.log('Selecting sound:', sound.id, sound.name);
                     playSound(sound.id);
                     setEditIntervalSound(sound.id);
-                    setTimeout(() => setIsEditIntervalSoundPickerOpen(false), 100);
+                    console.log('Sound state updated to:', sound.id);
+                    setTimeout(() => {
+                      console.log('Closing dialog');
+                      setIsEditIntervalSoundPickerOpen(false);
+                    }, 100);
                   }}
                   className="w-full flex items-center justify-between py-4 hover:bg-muted/50 transition-colors"
                 >
