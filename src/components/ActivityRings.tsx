@@ -3,6 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Flame, Zap, Clock, TrendingUp } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { format, subDays } from 'date-fns';
+import { Celebration } from './Celebration';
 
 interface RingData {
   current: number;
@@ -28,9 +29,12 @@ const ActivityRings = () => {
   const [goals, setGoals] = useState({ move: 500, exercise: 30, stand: 12 });
   const [selectedRing, setSelectedRing] = useState<RingType | null>(null);
   const [ringHistory, setRingHistory] = useState<any[]>([]);
+  const [celebratingRing, setCelebratingRing] = useState<RingType | null>(null);
+  const [completedToday, setCompletedToday] = useState<Set<RingType>>(new Set());
 
   useEffect(() => {
     fetchActivityData();
+    checkTodayAchievements();
   }, []);
 
   useEffect(() => {
@@ -38,6 +42,31 @@ const ActivityRings = () => {
       fetchRingHistory(selectedRing);
     }
   }, [selectedRing]);
+
+  useEffect(() => {
+    // Check if any goals were just completed
+    const checkGoalCompletion = async () => {
+      if (data.move.percentage >= 100 && !completedToday.has('move')) {
+        await saveAchievement('move', data.move.current, data.move.goal);
+        setCelebratingRing('move');
+        setCompletedToday(prev => new Set(prev).add('move'));
+      }
+      if (data.exercise.percentage >= 100 && !completedToday.has('exercise')) {
+        await saveAchievement('exercise', data.exercise.current, data.exercise.goal);
+        setCelebratingRing('exercise');
+        setCompletedToday(prev => new Set(prev).add('exercise'));
+      }
+      if (data.stand.percentage >= 100 && !completedToday.has('stand')) {
+        await saveAchievement('stand', data.stand.current, data.stand.goal);
+        setCelebratingRing('stand');
+        setCompletedToday(prev => new Set(prev).add('stand'));
+      }
+    };
+
+    if (!loading) {
+      checkGoalCompletion();
+    }
+  }, [data, loading]);
 
   const fetchActivityData = async () => {
     try {
@@ -109,6 +138,45 @@ const ActivityRings = () => {
       console.error('Error fetching activity data:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const checkTodayAchievements = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const today = new Date().toISOString().split('T')[0];
+      
+      const { data: achievements } = await supabase
+        .from('achievements')
+        .select('achievement_type')
+        .eq('user_id', user.id)
+        .gte('achieved_at', `${today}T00:00:00`)
+        .lt('achieved_at', `${today}T23:59:59`);
+
+      if (achievements) {
+        const completed = new Set(achievements.map(a => a.achievement_type as RingType));
+        setCompletedToday(completed);
+      }
+    } catch (error) {
+      console.error('Error checking achievements:', error);
+    }
+  };
+
+  const saveAchievement = async (type: RingType, actualValue: number, goalValue: number) => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      await supabase.from('achievements').insert({
+        user_id: user.id,
+        achievement_type: type,
+        actual_value: actualValue,
+        goal_value: goalValue,
+      });
+    } catch (error) {
+      console.error('Error saving achievement:', error);
     }
   };
 
@@ -434,6 +502,17 @@ const ActivityRings = () => {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Celebration Modal */}
+      {celebratingRing && (
+        <Celebration
+          isOpen={celebratingRing !== null}
+          onClose={() => setCelebratingRing(null)}
+          ringType={celebratingRing}
+          value={data[celebratingRing].current}
+          goal={data[celebratingRing].goal}
+        />
+      )}
     </div>
   );
 };
