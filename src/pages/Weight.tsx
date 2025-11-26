@@ -69,7 +69,7 @@ const Weight = () => {
 
       const { data: profile } = await supabase
         .from('profiles')
-        .select('target_weight, target_weight_unit')
+        .select('target_weight, target_weight_unit, weight, weight_unit')
         .eq('id', user.id)
         .single();
 
@@ -82,6 +82,71 @@ const Weight = () => {
       }
     } catch (error) {
       console.error('Error fetching target weight:', error);
+    }
+  };
+
+  const checkWeightMilestones = async (currentWeightLbs: number) => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user || !targetWeight) return;
+
+      // Get the profile to find starting weight
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('weight, weight_unit')
+        .eq('id', user.id)
+        .single();
+
+      if (!profile?.weight) return;
+
+      const startingWeightLbs = profile.weight_unit === 'kg' 
+        ? profile.weight * 2.20462 
+        : profile.weight;
+
+      // Calculate progress
+      const totalGoal = Math.abs(targetWeight - startingWeightLbs);
+      const achieved = Math.abs(currentWeightLbs - startingWeightLbs);
+      const progressPercentage = (achieved / totalGoal) * 100;
+
+      // Define milestones
+      const milestones = [
+        { threshold: 25, type: 'weight_25' },
+        { threshold: 50, type: 'weight_50' },
+        { threshold: 75, type: 'weight_75' },
+        { threshold: 100, type: 'weight_100' },
+      ];
+
+      // Get existing achievements
+      const { data: existingAchievements } = await supabase
+        .from('achievements')
+        .select('achievement_type')
+        .eq('user_id', user.id)
+        .in('achievement_type', milestones.map(m => m.type));
+
+      const achievedTypes = new Set(existingAchievements?.map(a => a.achievement_type) || []);
+
+      // Check each milestone
+      for (const milestone of milestones) {
+        if (progressPercentage >= milestone.threshold && !achievedTypes.has(milestone.type)) {
+          // Create new achievement
+          await supabase
+            .from('achievements')
+            .insert({
+              user_id: user.id,
+              achievement_type: milestone.type,
+              actual_value: Math.round(currentWeightLbs),
+              goal_value: Math.round(targetWeight),
+              achieved_at: new Date().toISOString(),
+            });
+
+          toast({
+            title: "🎉 Weight Milestone Achieved!",
+            description: `You've reached ${milestone.threshold}% of your weight goal!`,
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Error checking weight milestones:', error);
     }
   };
 
@@ -117,6 +182,9 @@ const Weight = () => {
         title: "Weight logged",
         description: `${period.charAt(0).toUpperCase() + period.slice(1)} weight has been recorded.`,
       });
+
+      // Check for weight milestones
+      await checkWeightMilestones(weightLbs);
 
       if (period === "morning") setMorning("");
       else setEvening("");
