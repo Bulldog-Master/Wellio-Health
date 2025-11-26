@@ -593,11 +593,12 @@ const Weight = () => {
                   strokeDasharray="5 5"
                   strokeWidth={2}
                   label={{ 
-                    value: `Goal: ${formatWeight(targetWeight, preferredUnit)}`, 
-                    position: 'right',
+                    value: `🎯 Target Goal: ${formatWeight(targetWeight, preferredUnit)}`, 
+                    position: 'insideTopRight',
                     fill: 'hsl(var(--destructive))',
-                    fontSize: 12,
-                    fontWeight: 'bold'
+                    fontSize: 14,
+                    fontWeight: 'bold',
+                    offset: 10
                   }}
                 />
               )}
