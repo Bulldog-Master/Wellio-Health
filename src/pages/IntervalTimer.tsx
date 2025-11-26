@@ -2278,7 +2278,7 @@ const IntervalTimer = () => {
 
       {/* Edit Interval Sound Picker Dialog */}
       <Dialog open={isEditIntervalSoundPickerOpen} onOpenChange={setIsEditIntervalSoundPickerOpen}>
-        <DialogContent key={editIntervalSound} className="max-w-2xl max-h-[90vh] overflow-y-auto bg-background p-0">
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-background p-0">
           <div className="sticky top-0 bg-background border-b border-border z-10">
             <div className="flex items-center justify-between p-4">
               <button
@@ -2299,7 +2299,9 @@ const IntervalTimer = () => {
             {/* No sound option */}
             <button
               onClick={() => {
+                console.log('Clicking none, current sound:', editIntervalSound);
                 setEditIntervalSound('none');
+                console.log('Set to none');
               }}
               className="w-full flex items-center justify-between py-4 border-b border-border hover:bg-muted/50 transition-colors"
             >
@@ -2317,8 +2319,10 @@ const IntervalTimer = () => {
                 <button
                   key={sound.id}
                   onClick={() => {
+                    console.log('Clicking sound:', sound.id, 'current:', editIntervalSound);
                     playSound(sound.id);
                     setEditIntervalSound(sound.id);
+                    console.log('Set to:', sound.id);
                   }}
                   className="w-full flex items-center justify-between py-4 hover:bg-muted/50 transition-colors"
                 >
