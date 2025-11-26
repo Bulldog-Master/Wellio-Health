@@ -57,7 +57,7 @@ const App = () => {
             <Route path="/referral" element={<ProtectedRoute><Layout><Referral /></Layout></ProtectedRoute>} />
             <Route path="/fitness-goals" element={<ProtectedRoute><Layout><FitnessGoals /></Layout></ProtectedRoute>} />
             <Route path="/achievements" element={<ProtectedRoute><Layout><Achievements /></Layout></ProtectedRoute>} />
-            <Route path="/step-count" element={<ProtectedRoute><Layout><StepCount /></Layout></ProtectedRoute>} />
+            <Route path="/step-count" element={<ProtectedRoute><StepCount /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
