@@ -36,7 +36,7 @@ const Settings = () => {
         .from("profiles")
         .select("reminder_meal_logging, reminder_workout, reminder_weigh_in, reminder_habits, reminder_time_meal, reminder_time_workout, reminder_time_weigh_in")
         .eq("id", user.id)
-        .single();
+        .maybeSingle();
 
       if (error) throw error;
       if (data) {
@@ -63,14 +63,18 @@ const Settings = () => {
 
       const { error } = await supabase
         .from("profiles")
-        .update(settings)
-        .eq("id", user.id);
+        .upsert({
+          id: user.id,
+          ...settings
+        }, {
+          onConflict: 'id'
+        });
 
       if (error) throw error;
       toast.success("Settings saved successfully!");
     } catch (error: any) {
       console.error("Error saving settings:", error);
-      toast.error(error.message || "Failed to save settings");
+      toast.error("Failed to save profile.");
     } finally {
       setLoading(false);
     }

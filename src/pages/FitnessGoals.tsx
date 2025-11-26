@@ -68,17 +68,20 @@ const FitnessGoals = () => {
 
       const { error } = await supabase
         .from("profiles")
-        .update({
+        .upsert({
+          id: user.id,
           goal: formData.goal,
           target_weight: targetWeightLbs,
           target_weight_unit: formData.target_weight_unit,
-        })
-        .eq("id", user.id);
+        }, {
+          onConflict: 'id'
+        });
 
       if (error) throw error;
       toast.success("Fitness goals updated successfully!");
     } catch (error: any) {
-      toast.error("Failed to update goals: " + error.message);
+      toast.error("Failed to save profile.");
+      console.error("Profile save error:", error);
     } finally {
       setIsLoading(false);
     }

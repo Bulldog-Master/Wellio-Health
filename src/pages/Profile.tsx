@@ -55,7 +55,7 @@ const Profile = () => {
         .from('profiles')
         .select('*')
         .eq('id', user.id)
-        .single();
+        .maybeSingle();
 
       if (profile) {
         setFormData(prev => ({
@@ -95,10 +95,14 @@ const Profile = () => {
       reader.onloadend = async () => {
         const base64 = reader.result as string;
 
-        const { error } = await supabase
-          .from('profiles')
-          .update({ avatar_url: base64 })
-          .eq('id', user.id);
+      const { error } = await supabase
+        .from('profiles')
+        .upsert({
+          id: user.id,
+          avatar_url: base64
+        }, {
+          onConflict: 'id'
+        });
 
         if (error) throw error;
 
@@ -129,7 +133,8 @@ const Profile = () => {
 
       const { error } = await supabase
         .from('profiles')
-        .update({
+        .upsert({
+          id: user.id,
           full_name: formData.name,
           username: formData.username,
           age: formData.age ? parseInt(formData.age) : null,
@@ -144,8 +149,9 @@ const Profile = () => {
           move_goal: formData.moveGoal ? parseInt(formData.moveGoal) : 500,
           exercise_goal: formData.exerciseGoal ? parseInt(formData.exerciseGoal) : 30,
           stand_goal: formData.standGoal ? parseInt(formData.standGoal) : 12,
-        })
-        .eq('id', user.id);
+        }, {
+          onConflict: 'id'
+        });
 
       if (error) throw error;
 
