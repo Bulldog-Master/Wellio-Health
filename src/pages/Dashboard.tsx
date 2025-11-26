@@ -193,9 +193,9 @@ const Dashboard = () => {
             <span className="text-sm">Log Weight</span>
           </Button>
           <Button 
-            onClick={() => navigate('/step-count')}
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2 relative"
+            className="h-auto py-4 flex-col gap-2 relative cursor-not-allowed opacity-60"
+            disabled
           >
             <Activity className="w-5 h-5" />
             <span className="text-sm">Step Count</span>
