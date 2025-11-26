@@ -144,10 +144,12 @@ const Settings = () => {
 
       const { data: { user } } = await supabase.auth.getUser();
       if (!user?.email) {
-        toast.error("No user found");
+        toast.error("Please log in first");
+        navigate("/auth");
         return;
       }
 
+      toast.info("Follow the prompts to add your passkey...");
       const credential = await registerPasskey(user.email);
       
       const { data, error } = await supabase.functions.invoke('passkey-register', {
@@ -156,25 +158,32 @@ const Settings = () => {
 
       if (error) throw error;
 
-      toast.success("Passkey registered successfully!");
+      toast.success("Passkey added successfully!");
       fetchPasskeys();
     } catch (error: any) {
       console.error("Error registering passkey:", error);
-      toast.error("Failed to register passkey");
+      toast.error(error.message || "Failed to register passkey");
     }
   };
 
   const handleChangePassword = async () => {
+    if (!email) {
+      toast.error("Please log in first");
+      navigate("/auth");
+      return;
+    }
+    
     try {
+      toast.info("Sending password reset email...");
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${window.location.origin}/auth`,
       });
 
       if (error) throw error;
-      toast.success("Password reset email sent!");
+      toast.success("Password reset email sent! Check your inbox.");
     } catch (error: any) {
       console.error("Error sending password reset:", error);
-      toast.error("Failed to send password reset email");
+      toast.error(error.message || "Failed to send password reset email");
     }
   };
 
@@ -196,8 +205,13 @@ const Settings = () => {
 
   const handleExportData = async () => {
     try {
+      toast.info("Exporting your data...");
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+      if (!user) {
+        toast.error("Please log in first");
+        navigate("/auth");
+        return;
+      }
 
       // Export profile data
       const { data: profile } = await supabase
@@ -224,7 +238,7 @@ const Settings = () => {
       toast.success("Data exported successfully!");
     } catch (error: any) {
       console.error("Error exporting data:", error);
-      toast.error("Failed to export data");
+      toast.error(error.message || "Failed to export data");
     }
   };
 
