@@ -198,10 +198,8 @@ const Dashboard = () => {
             className="h-auto py-4 flex-col gap-1"
           >
             <Activity className="w-5 h-5" />
-            <div className="flex flex-col items-center gap-0.5">
-              <span className="text-sm">Step Count</span>
-              <span className="text-[9px] text-muted-foreground/70 font-medium">Coming Soon</span>
-            </div>
+            <span className="text-sm">Step Count</span>
+            <span className="text-[10px] text-muted-foreground/60 font-medium">Coming Soon!</span>
           </Button>
           <Button 
             onClick={() => navigate('/food')}
