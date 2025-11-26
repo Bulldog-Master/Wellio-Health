@@ -408,6 +408,7 @@ export type Database = {
           avatar_url: string | null
           created_at: string | null
           exercise_goal: number | null
+          fitness_level: string | null
           full_name: string | null
           gender: string | null
           goal: string | null
@@ -415,7 +416,15 @@ export type Database = {
           height_unit: string | null
           id: string
           move_goal: number | null
+          onboarding_completed: boolean | null
           preferred_unit: string | null
+          reminder_habits: boolean | null
+          reminder_meal_logging: boolean | null
+          reminder_time_meal: string | null
+          reminder_time_weigh_in: string | null
+          reminder_time_workout: string | null
+          reminder_weigh_in: boolean | null
+          reminder_workout: boolean | null
           stand_goal: number | null
           target_weight: number | null
           target_weight_unit: string | null
@@ -429,6 +438,7 @@ export type Database = {
           avatar_url?: string | null
           created_at?: string | null
           exercise_goal?: number | null
+          fitness_level?: string | null
           full_name?: string | null
           gender?: string | null
           goal?: string | null
@@ -436,7 +446,15 @@ export type Database = {
           height_unit?: string | null
           id: string
           move_goal?: number | null
+          onboarding_completed?: boolean | null
           preferred_unit?: string | null
+          reminder_habits?: boolean | null
+          reminder_meal_logging?: boolean | null
+          reminder_time_meal?: string | null
+          reminder_time_weigh_in?: string | null
+          reminder_time_workout?: string | null
+          reminder_weigh_in?: boolean | null
+          reminder_workout?: boolean | null
           stand_goal?: number | null
           target_weight?: number | null
           target_weight_unit?: string | null
@@ -450,6 +468,7 @@ export type Database = {
           avatar_url?: string | null
           created_at?: string | null
           exercise_goal?: number | null
+          fitness_level?: string | null
           full_name?: string | null
           gender?: string | null
           goal?: string | null
@@ -457,7 +476,15 @@ export type Database = {
           height_unit?: string | null
           id?: string
           move_goal?: number | null
+          onboarding_completed?: boolean | null
           preferred_unit?: string | null
+          reminder_habits?: boolean | null
+          reminder_meal_logging?: boolean | null
+          reminder_time_meal?: string | null
+          reminder_time_weigh_in?: string | null
+          reminder_time_workout?: string | null
+          reminder_weigh_in?: boolean | null
+          reminder_workout?: boolean | null
           stand_goal?: number | null
           target_weight?: number | null
           target_weight_unit?: string | null
