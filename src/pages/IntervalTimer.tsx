@@ -384,18 +384,41 @@ const IntervalTimer = () => {
 
   const handlePreviousInterval = () => {
     setCurrentIntervalIndex((prev) => {
-      const newIndex = prev > 0 ? prev - 1 : intervals.length - 1;
+      let newIndex: number;
+      
+      if (prev > 0) {
+        newIndex = prev - 1;
+      } else {
+        // Going from first interval to last, decrement repeat
+        newIndex = intervals.length - 1;
+        if (currentRepeat > 1) {
+          setCurrentRepeat(currentRepeat - 1);
+        }
+      }
+      
       setRemainingSeconds(intervals[newIndex]?.duration || 0);
-      setIsRunning(false);
       return newIndex;
     });
   };
 
   const handleNextInterval = () => {
     setCurrentIntervalIndex((prev) => {
-      const newIndex = prev < intervals.length - 1 ? prev + 1 : 0;
+      let newIndex: number;
+      
+      if (prev < intervals.length - 1) {
+        newIndex = prev + 1;
+      } else {
+        // Going from last interval to first, increment repeat
+        newIndex = 0;
+        if (currentRepeat < repeatCount) {
+          setCurrentRepeat(currentRepeat + 1);
+        } else {
+          // Reached the end of all repeats, stop timer
+          setIsRunning(false);
+        }
+      }
+      
       setRemainingSeconds(intervals[newIndex]?.duration || 0);
-      setIsRunning(false);
       return newIndex;
     });
   };
