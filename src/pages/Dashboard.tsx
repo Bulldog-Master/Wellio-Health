@@ -195,10 +195,13 @@ const Dashboard = () => {
           <Button 
             onClick={() => navigate('/step-count')}
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2"
+            className="h-auto py-4 flex-col gap-1"
           >
             <Activity className="w-5 h-5" />
-            <span className="text-sm">Step Count</span>
+            <div className="flex flex-col items-center gap-0.5">
+              <span className="text-sm">Step Count</span>
+              <span className="text-[9px] text-muted-foreground/70 font-medium">Coming Soon</span>
+            </div>
           </Button>
           <Button 
             onClick={() => navigate('/food')}
