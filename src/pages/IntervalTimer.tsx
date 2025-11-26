@@ -1278,6 +1278,12 @@ const IntervalTimer = () => {
                 if (isRunning) {
                   setIsRunning(false);
                 } else {
+                  // Initialize AudioContext on user interaction
+                  if (!audioContext) {
+                    const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+                    setAudioContext(ctx);
+                    console.log('AudioContext initialized');
+                  }
                   setIsRunning(true);
                   if (remainingSeconds === 0) {
                     setRemainingSeconds(intervals[currentIntervalIndex]?.duration || 0);
@@ -1306,9 +1312,14 @@ const IntervalTimer = () => {
             {intervals.map((interval, index) => (
               <div
                 key={interval.id}
-                className={`flex items-center gap-3 p-4 rounded-lg transition-colors ${
-                  index === currentIntervalIndex ? "bg-muted" : ""
-                }`}
+                className={`flex items-center gap-3 p-4 rounded-lg transition-colors`}
+                style={
+                  index === currentIntervalIndex && isRunning
+                    ? { backgroundColor: interval.color, color: "white" }
+                    : index === currentIntervalIndex
+                    ? { backgroundColor: "hsl(var(--muted))" }
+                    : {}
+                }
               >
                 <div className="flex flex-col gap-1">
                   <button
@@ -1325,9 +1336,12 @@ const IntervalTimer = () => {
                       }
                     }}
                     disabled={index === 0}
-                    className={`p-1 rounded hover:bg-accent transition-colors ${index === 0 ? 'invisible' : ''}`}
+                    className={`p-1 rounded hover:bg-white/20 transition-colors ${index === 0 ? 'invisible' : ''}`}
                   >
-                    <ChevronUp className="h-5 w-5 text-muted-foreground" />
+                    <ChevronUp 
+                      className="h-5 w-5" 
+                      style={{ color: index === currentIntervalIndex && isRunning ? "white" : "hsl(var(--muted-foreground))" }}
+                    />
                   </button>
                   
                   <button
@@ -1344,14 +1358,27 @@ const IntervalTimer = () => {
                       }
                     }}
                     disabled={index === intervals.length - 1}
-                    className={`p-1 rounded hover:bg-accent transition-colors ${index === intervals.length - 1 ? 'invisible' : ''}`}
+                    className={`p-1 rounded hover:bg-white/20 transition-colors ${index === intervals.length - 1 ? 'invisible' : ''}`}
                   >
-                    <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                    <ChevronDown 
+                      className="h-5 w-5" 
+                      style={{ color: index === currentIntervalIndex && isRunning ? "white" : "hsl(var(--muted-foreground))" }}
+                    />
                   </button>
                 </div>
                 
-                <span className="font-medium flex-1">{interval.name}</span>
-                <span className="font-mono">{formatTime(interval.duration)}</span>
+                <span 
+                  className="font-medium flex-1"
+                  style={{ color: index === currentIntervalIndex && isRunning ? "white" : "inherit" }}
+                >
+                  {interval.name}
+                </span>
+                <span 
+                  className="font-mono"
+                  style={{ color: index === currentIntervalIndex && isRunning ? "white" : "inherit" }}
+                >
+                  {formatTime(interval.duration)}
+                </span>
               </div>
             ))}
           </div>
