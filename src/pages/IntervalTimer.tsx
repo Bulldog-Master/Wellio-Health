@@ -2300,7 +2300,7 @@ const IntervalTimer = () => {
             <button
               onClick={() => {
                 setEditIntervalSound('none');
-                setIsEditIntervalSoundPickerOpen(false);
+                setTimeout(() => setIsEditIntervalSoundPickerOpen(false), 100);
               }}
               className="w-full flex items-center justify-between py-4 border-b border-border hover:bg-muted/50 transition-colors"
             >
@@ -2320,7 +2320,7 @@ const IntervalTimer = () => {
                   onClick={() => {
                     playSound(sound.id);
                     setEditIntervalSound(sound.id);
-                    setIsEditIntervalSoundPickerOpen(false);
+                    setTimeout(() => setIsEditIntervalSoundPickerOpen(false), 100);
                   }}
                   className="w-full flex items-center justify-between py-4 hover:bg-muted/50 transition-colors"
                 >
