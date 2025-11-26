@@ -560,9 +560,12 @@ const IntervalTimer = () => {
     const interval = setInterval(() => {
       setRemainingSeconds((prev) => {
         if (prev <= 1) {
-          console.log('Interval complete, playing sound:', timerSettings.intervalCompleteSound);
-          // Interval complete - play sound immediately
-          playSound(timerSettings.intervalCompleteSound);
+          // Interval complete - play the interval's specific sound (or 'none')
+          const intervalSound = intervals[currentIntervalIndex]?.sound || timerSettings.intervalCompleteSound;
+          console.log('Interval complete, playing sound:', intervalSound);
+          if (intervalSound !== 'none') {
+            playSound(intervalSound);
+          }
           
           // Check if there's a next interval
           if (currentIntervalIndex < intervals.length - 1) {
@@ -2299,9 +2302,7 @@ const IntervalTimer = () => {
             {/* No sound option */}
             <button
               onClick={() => {
-                console.log('Clicking none, current sound:', editIntervalSound);
                 setEditIntervalSound('none');
-                console.log('Set to none');
               }}
               className="w-full flex items-center justify-between py-4 border-b border-border hover:bg-muted/50 transition-colors"
             >
@@ -2319,10 +2320,8 @@ const IntervalTimer = () => {
                 <button
                   key={sound.id}
                   onClick={() => {
-                    console.log('Clicking sound:', sound.id, 'current:', editIntervalSound);
                     playSound(sound.id);
                     setEditIntervalSound(sound.id);
-                    console.log('Set to:', sound.id);
                   }}
                   className="w-full flex items-center justify-between py-4 hover:bg-muted/50 transition-colors"
                 >
