@@ -2278,7 +2278,7 @@ const IntervalTimer = () => {
 
       {/* Edit Interval Sound Picker Dialog */}
       <Dialog open={isEditIntervalSoundPickerOpen} onOpenChange={setIsEditIntervalSoundPickerOpen}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-background p-0">
+        <DialogContent key={editIntervalSound} className="max-w-2xl max-h-[90vh] overflow-y-auto bg-background p-0">
           <div className="sticky top-0 bg-background border-b border-border z-10">
             <div className="flex items-center justify-between p-4">
               <button
