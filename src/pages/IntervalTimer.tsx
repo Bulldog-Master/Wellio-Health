@@ -192,6 +192,7 @@ const IntervalTimer = () => {
           include_reps: timerSettings.isRepBased,
           include_sets: false,
           intervals: intervals,
+          repeat_count: repeatCount,
         })
         .select()
         .single();
@@ -209,6 +210,7 @@ const IntervalTimer = () => {
       // Reset form
       setTimerName("New Timer");
       setIntervals([]);
+      setRepeatCount(1);
       setTimerSettings({
         intervalCompleteSound: "beep",
         timerCompleteSound: "beep",
@@ -401,7 +403,7 @@ const IntervalTimer = () => {
     const timerIntervals = (timer.intervals || []) as Array<{ id: string; name: string; duration: number; color: string }>;
     setIntervals(timerIntervals);
     setCurrentIntervalIndex(0);
-    setRepeatCount(1); // Default repeat count
+    setRepeatCount(timer.repeat_count || 1); // Load saved repeat count
   };
 
   const playSound = (soundId: string) => {

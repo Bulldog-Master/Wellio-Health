@@ -160,6 +160,7 @@ export type Database = {
           interim_interval_seconds: number | null
           intervals: Json | null
           name: string
+          repeat_count: number | null
           show_elapsed_time: boolean | null
           show_line_numbers: boolean | null
           text_to_speech: boolean | null
@@ -179,6 +180,7 @@ export type Database = {
           interim_interval_seconds?: number | null
           intervals?: Json | null
           name: string
+          repeat_count?: number | null
           show_elapsed_time?: boolean | null
           show_line_numbers?: boolean | null
           text_to_speech?: boolean | null
@@ -198,6 +200,7 @@ export type Database = {
           interim_interval_seconds?: number | null
           intervals?: Json | null
           name?: string
+          repeat_count?: number | null
           show_elapsed_time?: boolean | null
           show_line_numbers?: boolean | null
           text_to_speech?: boolean | null
