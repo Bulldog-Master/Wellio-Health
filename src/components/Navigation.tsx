@@ -1,4 +1,4 @@
-import { Home, User, Scale, Utensils, BookOpen, Dumbbell, Gift, Activity, CheckSquare, Stethoscope, FileHeart, Sparkles, Users, Trophy } from "lucide-react";
+import { Home, User, Scale, Utensils, BookOpen, Dumbbell, Gift, Activity, CheckSquare, Stethoscope, FileHeart, Sparkles, Users, Trophy, Settings } from "lucide-react";
 import { NavLink } from "./NavLink";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +12,8 @@ const Navigation = () => {
     { to: "/medical", icon: FileHeart, label: "Health", color: "text-nav-icon-5" },
     { to: "/insights", icon: Sparkles, label: "AI Insights", color: "text-nav-icon-6" },
     { to: "/socials", icon: Users, label: "Socials", color: "text-nav-icon-7" },
-    { to: "/referral", icon: Gift, label: "Referral", color: "text-nav-icon-8" },
+    { to: "/settings", icon: Settings, label: "Settings", color: "text-nav-icon-8" },
+    { to: "/referral", icon: Gift, label: "Referral", color: "text-nav-icon-9" },
   ];
 
   return (

@@ -23,6 +23,8 @@ import Referral from "./pages/Referral";
 import FitnessGoals from "./pages/FitnessGoals";
 import Achievements from "./pages/Achievements";
 import StepCount from "./pages/StepCount";
+import Onboarding from "./pages/Onboarding";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -38,6 +40,7 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/auth" element={<Auth />} />
+            <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
             <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><Layout><Profile /></Layout></ProtectedRoute>} />
             <Route path="/weight" element={<ProtectedRoute><Layout><Weight /></Layout></ProtectedRoute>} />
@@ -58,6 +61,7 @@ const App = () => {
             <Route path="/fitness-goals" element={<ProtectedRoute><Layout><FitnessGoals /></Layout></ProtectedRoute>} />
             <Route path="/achievements" element={<ProtectedRoute><Layout><Achievements /></Layout></ProtectedRoute>} />
             <Route path="/step-count" element={<ProtectedRoute><StepCount /></ProtectedRoute>} />
+            <Route path="/settings" element={<ProtectedRoute><Layout><Settings /></Layout></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
