@@ -60,6 +60,16 @@ const IntervalTimer = () => {
   const [isFolderMenuOpen, setIsFolderMenuOpen] = useState(false);
   const [selectedFolderId, setSelectedFolderId] = useState<string | null>(null);
   const [intervals, setIntervals] = useState<any[]>([]);
+  const [isEditIntervalOpen, setIsEditIntervalOpen] = useState(false);
+  const [editingIntervalId, setEditingIntervalId] = useState<string | null>(null);
+  const [editIntervalName, setEditIntervalName] = useState("");
+  const [editIntervalHours, setEditIntervalHours] = useState("0");
+  const [editIntervalMinutes, setEditIntervalMinutes] = useState("0");
+  const [editIntervalSeconds, setEditIntervalSeconds] = useState("30");
+  const [editIntervalColor, setEditIntervalColor] = useState("#3B82F6");
+  const [editIntervalSound, setEditIntervalSound] = useState("beep");
+  const [editIntervalReps, setEditIntervalReps] = useState(1);
+  const [editIntervalRepBased, setEditIntervalRepBased] = useState(false);
   const [repeatCount, setRepeatCount] = useState(1);
   const [newIntervalName, setNewIntervalName] = useState("");
   const [newIntervalDuration, setNewIntervalDuration] = useState("");
@@ -381,6 +391,71 @@ const IntervalTimer = () => {
 
   const handleDeleteInterval = (id: string) => {
     setIntervals(intervals.filter(interval => interval.id !== id));
+  };
+
+  const handleEditIntervalClick = (interval: any) => {
+    setEditingIntervalId(interval.id);
+    setEditIntervalName(interval.name);
+    
+    // Parse duration into hours, minutes, seconds
+    const totalSeconds = interval.duration;
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    
+    setEditIntervalHours(hours.toString());
+    setEditIntervalMinutes(minutes.toString());
+    setEditIntervalSeconds(seconds.toString());
+    setEditIntervalColor(interval.color || "#3B82F6");
+    setEditIntervalSound(interval.sound || "beep");
+    setEditIntervalReps(interval.reps || 1);
+    setEditIntervalRepBased(interval.repBased || false);
+    setIsEditIntervalOpen(true);
+  };
+
+  const handleSaveEditInterval = () => {
+    if (!editIntervalName.trim()) {
+      toast({
+        title: "Error",
+        description: "Please enter an interval name",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const totalSeconds = 
+      (parseInt(editIntervalHours) || 0) * 3600 +
+      (parseInt(editIntervalMinutes) || 0) * 60 +
+      (parseInt(editIntervalSeconds) || 0);
+
+    if (totalSeconds === 0 && !editIntervalRepBased) {
+      toast({
+        title: "Error",
+        description: "Duration must be greater than 0 or enable rep-based interval",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIntervals(intervals.map(interval => 
+      interval.id === editingIntervalId
+        ? {
+            ...interval,
+            name: editIntervalName,
+            duration: totalSeconds,
+            color: editIntervalColor,
+            sound: editIntervalSound,
+            reps: editIntervalReps,
+            repBased: editIntervalRepBased,
+          }
+        : interval
+    ));
+
+    setIsEditIntervalOpen(false);
+    toast({
+      title: "Interval updated",
+      description: `${editIntervalName} has been updated`,
+    });
   };
 
   const handlePreviousInterval = () => {
@@ -1392,7 +1467,7 @@ const IntervalTimer = () => {
             {intervals.map((interval, index) => (
               <div
                 key={interval.id}
-                className={`flex items-center gap-3 p-4 rounded-lg transition-colors`}
+                className={`flex items-center gap-3 p-4 rounded-lg transition-colors cursor-pointer hover:opacity-80`}
                 style={
                   index === currentIntervalIndex && isRunning
                     ? { backgroundColor: interval.color, color: "white" }
@@ -1447,18 +1522,26 @@ const IntervalTimer = () => {
                   </button>
                 </div>
                 
-                <span 
-                  className="font-medium flex-1"
-                  style={{ color: index === currentIntervalIndex && isRunning ? "white" : "inherit" }}
+                <div 
+                  className="flex items-center gap-3 flex-1 cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleEditIntervalClick(interval);
+                  }}
                 >
-                  {interval.name}
-                </span>
-                <span 
-                  className="font-mono"
-                  style={{ color: index === currentIntervalIndex && isRunning ? "white" : "inherit" }}
-                >
-                  {formatTime(interval.duration)}
-                </span>
+                  <span 
+                    className="font-medium"
+                    style={{ color: index === currentIntervalIndex && isRunning ? "white" : "inherit" }}
+                  >
+                    {interval.name}
+                  </span>
+                  <span 
+                    className="font-mono ml-auto"
+                    style={{ color: index === currentIntervalIndex && isRunning ? "white" : "inherit" }}
+                  >
+                    {formatTime(interval.duration)}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
@@ -2046,6 +2129,146 @@ const IntervalTimer = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Edit Interval Dialog */}
+      <Sheet open={isEditIntervalOpen} onOpenChange={setIsEditIntervalOpen}>
+        <SheetContent side="top" className="h-full overflow-y-auto">
+          <div className="sticky top-0 bg-background border-b border-border pb-4 -mt-6 -mx-6 px-6 pt-6 mb-4">
+            <div className="flex items-center justify-between">
+              <button
+                onClick={() => setIsEditIntervalOpen(false)}
+                className="text-primary"
+              >
+                <X className="h-6 w-6" />
+              </button>
+              <h2 className="text-xl font-semibold text-foreground">Edit interval</h2>
+              <button
+                onClick={handleSaveEditInterval}
+                className="text-primary font-semibold"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+
+          <div className="space-y-6 pb-20">
+            {/* Time Picker */}
+            <div className="flex gap-4 justify-center items-center text-4xl">
+              <div className="flex flex-col items-center">
+                <Input
+                  type="number"
+                  min="0"
+                  value={editIntervalHours}
+                  onChange={(e) => setEditIntervalHours(e.target.value)}
+                  className="text-4xl text-center w-32 h-20 font-bold"
+                />
+                <span className="text-sm text-muted-foreground mt-1">hours</span>
+              </div>
+              <span className="font-bold">:</span>
+              <div className="flex flex-col items-center">
+                <Input
+                  type="number"
+                  min="0"
+                  max="59"
+                  value={editIntervalMinutes}
+                  onChange={(e) => setEditIntervalMinutes(e.target.value)}
+                  className="text-4xl text-center w-32 h-20 font-bold"
+                />
+                <span className="text-sm text-muted-foreground mt-1">min</span>
+              </div>
+              <span className="font-bold">:</span>
+              <div className="flex flex-col items-center">
+                <Input
+                  type="number"
+                  min="0"
+                  max="59"
+                  value={editIntervalSeconds}
+                  onChange={(e) => setEditIntervalSeconds(e.target.value)}
+                  className="text-4xl text-center w-32 h-20 font-bold"
+                />
+                <span className="text-sm text-muted-foreground mt-1">sec</span>
+              </div>
+            </div>
+
+            {/* Interval Name */}
+            <div className="py-4 border-y border-border">
+              <Input
+                value={editIntervalName}
+                onChange={(e) => setEditIntervalName(e.target.value)}
+                placeholder="Interval name"
+                className="text-center text-lg border-0 focus-visible:ring-0"
+              />
+            </div>
+
+            {/* Add an image placeholder */}
+            <button className="w-full py-4 text-center text-muted-foreground hover:bg-accent transition-colors border-y border-border">
+              Add an image
+            </button>
+
+            {/* Repetitions */}
+            <div className="flex items-center justify-between py-4 border-b border-border">
+              <Label className="text-lg text-foreground">Repetitions</Label>
+              <Input
+                type="number"
+                min="1"
+                value={editIntervalReps}
+                onChange={(e) => setEditIntervalReps(parseInt(e.target.value) || 1)}
+                className="w-20 text-center text-lg"
+              />
+            </div>
+
+            {/* Set */}
+            <div className="flex items-center justify-between py-4 border-b border-border">
+              <Label className="text-lg text-foreground">Set</Label>
+              <div className="flex items-center gap-2">
+                <span className="text-muted-foreground">Repeat</span>
+                <ChevronRight className="h-5 w-5 text-muted-foreground" />
+              </div>
+            </div>
+
+            {/* Color */}
+            <div className="flex items-center justify-between py-4 border-b border-border">
+              <Label className="text-lg text-foreground">Color</Label>
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-6 h-6 rounded"
+                  style={{ backgroundColor: editIntervalColor }}
+                />
+                <Input
+                  type="color"
+                  value={editIntervalColor}
+                  onChange={(e) => setEditIntervalColor(e.target.value)}
+                  className="w-16 h-10"
+                />
+                <ChevronRight className="h-5 w-5 text-muted-foreground" />
+              </div>
+            </div>
+
+            {/* Sound */}
+            <div className="flex items-center justify-between py-4 border-b border-border">
+              <Label className="text-lg text-foreground">Sound</Label>
+              <div className="flex items-center gap-2">
+                <span className="text-muted-foreground capitalize">{editIntervalSound}</span>
+                <ChevronRight className="h-5 w-5 text-muted-foreground" />
+              </div>
+            </div>
+
+            {/* Rep-based interval */}
+            <div className="space-y-4 py-4">
+              <div className="flex items-center justify-between">
+                <Label className="text-lg text-foreground">Rep-based interval</Label>
+                <Switch
+                  checked={editIntervalRepBased}
+                  onCheckedChange={setEditIntervalRepBased}
+                />
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Rep-based intervals will not have a time set. The navigation buttons can be used to move between reps, or the Skip button can be used to move to the next interval.
+              </p>
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 };
