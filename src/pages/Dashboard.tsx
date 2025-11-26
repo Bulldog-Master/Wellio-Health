@@ -29,21 +29,21 @@ const Dashboard = () => {
         .from('profiles')
         .select('weight, target_weight')
         .eq('id', user.id)
-        .single();
+        .maybeSingle();
 
       if (profile) {
-        setCurrentWeight(profile.weight || 0);
-        setTargetWeight(profile.target_weight || 0);
+        if (profile.target_weight) setTargetWeight(profile.target_weight);
+        if (profile.weight) setCurrentWeight(profile.weight);
       }
 
-      // Fetch latest weight log
+      // Fetch latest weight log (more recent than profile)
       const { data: weightLog } = await supabase
         .from('weight_logs')
         .select('weight_lbs')
         .eq('user_id', user.id)
         .order('logged_at', { ascending: false })
         .limit(1)
-        .single();
+        .maybeSingle();
 
       if (weightLog) {
         setCurrentWeight(weightLog.weight_lbs);
@@ -67,8 +67,16 @@ const Dashboard = () => {
     }
   };
 
+  // Convert lbs to kg
+  const lbsToKg = (lbs: number) => (lbs * 0.453592).toFixed(1);
+  
+  // Calculate weight difference
+  const weightDifference = currentWeight && targetWeight 
+    ? Math.abs(currentWeight - targetWeight)
+    : 0;
+
   const weightProgress = currentWeight && targetWeight 
-    ? ((currentWeight - targetWeight) / currentWeight) * 100 
+    ? Math.min(((currentWeight - targetWeight) / (currentWeight - targetWeight + targetWeight)) * 100, 100)
     : 0;
   const caloriesProgress = (caloriesConsumed / caloriesTarget) * 100;
 
@@ -96,8 +104,12 @@ const Dashboard = () => {
         />
         <MetricCard
           title="Target Weight"
-          value={targetWeight ? `${targetWeight} lbs` : 'Set Goal'}
-          subtitle={targetWeight && currentWeight ? `${Math.abs(currentWeight - targetWeight).toFixed(1)} lbs to go` : 'No target set'}
+          value={targetWeight ? `${targetWeight} lbs (${lbsToKg(targetWeight)} kg)` : 'Set Goal'}
+          subtitle={
+            targetWeight && currentWeight 
+              ? `${weightDifference.toFixed(1)} lbs (${lbsToKg(weightDifference)} kg) to go`
+              : 'No target set'
+          }
           icon={Target}
           trend="neutral"
         />
@@ -124,10 +136,10 @@ const Dashboard = () => {
             </div>
             <div className="pt-2 border-t">
               <p className="text-sm text-muted-foreground">
-                Target: {targetWeight} lbs
+                Target: {targetWeight} lbs ({lbsToKg(targetWeight)} kg)
               </p>
               <p className="text-sm text-muted-foreground">
-                {currentWeight - targetWeight} lbs remaining to reach your goal
+                {weightDifference.toFixed(1)} lbs ({lbsToKg(weightDifference)} kg) remaining
               </p>
             </div>
           </div>
