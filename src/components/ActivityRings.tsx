@@ -220,9 +220,9 @@ const ActivityRings = () => {
   ];
 
   return (
-    <div className="space-y-3 py-2">
+    <div className="space-y-3 py-2 bg-secondary/20 rounded-xl p-4">
       {/* Rings visualization */}
-      <div className="flex justify-center bg-secondary/20 rounded-xl p-4">
+      <div className="flex justify-center">
         <div className="relative w-40 h-40 md:w-56 md:h-56" style={{ 
           filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1))'
         }}>
