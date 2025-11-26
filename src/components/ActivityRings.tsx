@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { Flame, Zap, Clock } from 'lucide-react';
+import { Flame, Zap, Clock, TrendingUp } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { format, subDays } from 'date-fns';
 
 interface RingData {
   current: number;
@@ -14,6 +16,8 @@ interface ActivityRingsData {
   stand: RingData;
 }
 
+type RingType = 'move' | 'exercise' | 'stand';
+
 const ActivityRings = () => {
   const [data, setData] = useState<ActivityRingsData>({
     move: { current: 0, goal: 500, percentage: 0 },
@@ -22,10 +26,18 @@ const ActivityRings = () => {
   });
   const [loading, setLoading] = useState(true);
   const [goals, setGoals] = useState({ move: 500, exercise: 30, stand: 12 });
+  const [selectedRing, setSelectedRing] = useState<RingType | null>(null);
+  const [ringHistory, setRingHistory] = useState<any[]>([]);
 
   useEffect(() => {
     fetchActivityData();
   }, []);
+
+  useEffect(() => {
+    if (selectedRing) {
+      fetchRingHistory(selectedRing);
+    }
+  }, [selectedRing]);
 
   const fetchActivityData = async () => {
     try {
@@ -100,6 +112,97 @@ const ActivityRings = () => {
     }
   };
 
+  const fetchRingHistory = async (ringType: RingType) => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const last7Days = Array.from({ length: 7 }, (_, i) => {
+        const date = subDays(new Date(), i);
+        return format(date, 'yyyy-MM-dd');
+      }).reverse();
+
+      const history = await Promise.all(
+        last7Days.map(async (date) => {
+          if (ringType === 'move' || ringType === 'exercise') {
+            const { data: activities } = await supabase
+              .from('activity_logs')
+              .select('duration_minutes, calories_burned')
+              .eq('user_id', user.id)
+              .gte('logged_at', `${date}T00:00:00`)
+              .lt('logged_at', `${date}T23:59:59`);
+
+            let value = 0;
+            if (ringType === 'move') {
+              value = activities?.reduce((sum, log) => sum + (log.calories_burned || 0), 0) || 0;
+            } else if (ringType === 'exercise') {
+              value = activities?.reduce((sum, log) => sum + log.duration_minutes, 0) || 0;
+            }
+
+            return {
+              date: format(new Date(date), 'MMM dd'),
+              value,
+              goal: goals[ringType],
+              percentage: Math.min((value / goals[ringType]) * 100, 100),
+            };
+          } else {
+            // Stand hours from wearable data
+            const { data: wearable } = await supabase
+              .from('wearable_data')
+              .select('steps')
+              .eq('user_id', user.id)
+              .eq('data_date', date)
+              .maybeSingle();
+
+            const standHours = Math.min(Math.floor((wearable?.steps || 0) / 1000), 12);
+            return {
+              date: format(new Date(date), 'MMM dd'),
+              value: standHours,
+              goal: goals.stand,
+              percentage: Math.min((standHours / goals.stand) * 100, 100),
+            };
+          }
+        })
+      );
+
+      setRingHistory(history);
+    } catch (error) {
+      console.error('Error fetching ring history:', error);
+    }
+  };
+
+  const getRingColor = (type: RingType) => {
+    switch (type) {
+      case 'move': return '#FF006E';
+      case 'exercise': return '#00F5FF';
+      case 'stand': return '#BFFF00';
+    }
+  };
+
+  const getRingLabel = (type: RingType) => {
+    switch (type) {
+      case 'move': return 'Move';
+      case 'exercise': return 'Exercise';
+      case 'stand': return 'Stand';
+    }
+  };
+
+  const getRingIcon = (type: RingType) => {
+    switch (type) {
+      case 'move': return <Flame className="w-5 h-5" />;
+      case 'exercise': return <Zap className="w-5 h-5" />;
+      case 'stand': return <Clock className="w-5 h-5" />;
+    }
+  };
+
+  const getRingValue = (type: RingType) => {
+    switch (type) {
+      case 'move': return `${data.move.current} / ${data.move.goal} CAL`;
+      case 'exercise': return `${data.exercise.current} / ${data.exercise.goal} MIN`;
+      case 'stand': return `${data.stand.current} / ${data.stand.goal} HR`;
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-48 md:h-80">
@@ -167,7 +270,14 @@ const ActivityRings = () => {
               const offset = circumference - (ring.data.percentage / 100) * circumference;
               
               return (
-                <g key={ring.type}>
+                <g 
+                  key={ring.type} 
+                  className="cursor-pointer"
+                  onClick={() => setSelectedRing(ring.type)}
+                  style={{ transition: 'opacity 0.2s' }}
+                  onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
+                  onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+                >
                   {/* Background ring */}
                   <circle
                     cx={center}
@@ -255,6 +365,67 @@ const ActivityRings = () => {
           </div>
         </div>
       </div>
+
+      {/* Ring Details Dialog */}
+      <Dialog open={selectedRing !== null} onOpenChange={() => setSelectedRing(null)}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <div style={{ color: selectedRing ? getRingColor(selectedRing) : undefined }}>
+                {selectedRing && getRingIcon(selectedRing)}
+              </div>
+              {selectedRing && getRingLabel(selectedRing)} Activity
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="space-y-6">
+            <div className="text-center">
+              <div 
+                className="text-4xl font-bold mb-2" 
+                style={{ color: selectedRing ? getRingColor(selectedRing) : undefined }}
+              >
+                {selectedRing && getRingValue(selectedRing)}
+              </div>
+              <p className="text-muted-foreground">Today's Progress</p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-3 flex items-center gap-2">
+                <TrendingUp className="w-4 h-4" />
+                Last 7 Days
+              </h4>
+              <div className="space-y-2">
+                {ringHistory.map((day, index) => (
+                  <div key={index} className="flex items-center gap-3">
+                    <span className="text-sm text-muted-foreground w-16">{day.date}</span>
+                    <div className="flex-1 bg-secondary rounded-full h-2 overflow-hidden">
+                      <div
+                        className="h-full rounded-full transition-all duration-500"
+                        style={{
+                          width: `${Math.min(day.percentage, 100)}%`,
+                          backgroundColor: selectedRing ? getRingColor(selectedRing) : undefined,
+                        }}
+                      />
+                    </div>
+                    <span className="text-sm font-medium w-12 text-right">
+                      {Math.round(day.percentage)}%
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-muted/50 rounded-lg p-4">
+              <div className="text-sm text-muted-foreground mb-1">7-Day Average</div>
+              <div className="text-2xl font-bold">
+                {ringHistory.length > 0
+                  ? Math.round(ringHistory.reduce((sum, day) => sum + day.percentage, 0) / ringHistory.length)
+                  : 0}%
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
