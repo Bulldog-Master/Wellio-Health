@@ -114,6 +114,9 @@ const ActivityRings = () => {
     const offset = circumference - (ringData.percentage / 100) * circumference;
     const gradient = getRingGradient(type);
 
+    // Get background color based on type
+    const bgColor = type === 'move' ? '#FF006E' : type === 'exercise' ? '#00F5FF' : '#BFFF00';
+
     return (
       <g>
         {/* Background ring */}
@@ -122,9 +125,9 @@ const ActivityRings = () => {
           cy="120"
           r={radius}
           fill="none"
-          stroke="hsl(var(--muted))"
+          stroke={bgColor}
           strokeWidth={strokeWidth}
-          opacity="0.3"
+          opacity="0.2"
         />
         {/* Progress ring */}
         <circle
