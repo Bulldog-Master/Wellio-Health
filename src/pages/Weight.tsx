@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format, startOfMonth, startOfQuarter, startOfYear, parseISO } from "date-fns";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from "recharts";
+import { BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from "recharts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface WeightLog {
@@ -229,6 +229,8 @@ const Weight = () => {
     if (!weightLogs.length) return [];
 
     const processData = (logs: WeightLog[]) => {
+      let result: any[] = [];
+      
       switch (chartView) {
         case "daily": {
           const dailyData = logs.reduce((acc, log) => {
@@ -246,7 +248,8 @@ const Weight = () => {
             }
             return acc;
           }, [] as any[]);
-          return dailyData;
+          result = dailyData;
+          break;
         }
         
         case "monthly": {
@@ -261,7 +264,8 @@ const Weight = () => {
             }
             return acc;
           }, [] as any[]);
-          return monthlyData.map(d => ({ date: d.date, average: d.totalWeight / d.count }));
+          result = monthlyData.map(d => ({ date: d.date, average: d.totalWeight / d.count }));
+          break;
         }
         
         case "quarterly": {
@@ -276,7 +280,8 @@ const Weight = () => {
             }
             return acc;
           }, [] as any[]);
-          return quarterlyData.map(d => ({ date: d.date, average: d.totalWeight / d.count }));
+          result = quarterlyData.map(d => ({ date: d.date, average: d.totalWeight / d.count }));
+          break;
         }
         
         case "yearly": {
@@ -291,7 +296,8 @@ const Weight = () => {
             }
             return acc;
           }, [] as any[]);
-          return yearlyData.map(d => ({ date: d.date, average: d.totalWeight / d.count }));
+          result = yearlyData.map(d => ({ date: d.date, average: d.totalWeight / d.count }));
+          break;
         }
         
         case "year-by-year": {
@@ -305,17 +311,17 @@ const Weight = () => {
             return acc;
           }, {} as Record<string, Record<string, { totalWeight: number; count: number }>>);
           
-          const result = [];
+          const tempResult = [];
           for (const [year, months] of Object.entries(yearlyData)) {
             for (const [month, data] of Object.entries(months)) {
-              result.push({
+              tempResult.push({
                 date: month,
                 [year]: data.totalWeight / data.count,
               });
             }
           }
           
-          const consolidated = result.reduce((acc, item) => {
+          const consolidated = tempResult.reduce((acc, item) => {
             const existing = acc.find(d => d.date === item.date);
             if (existing) {
               Object.assign(existing, item);
@@ -325,16 +331,24 @@ const Weight = () => {
             return acc;
           }, [] as any[]);
           
-          return consolidated;
+          result = consolidated;
+          break;
         }
         
         default:
           return [];
       }
+      
+      // Add target weight to all data points if it exists
+      if (targetWeight) {
+        result = result.map(d => ({ ...d, target: targetWeight }));
+      }
+      
+      return result;
     };
 
     return processData(weightLogs);
-  }, [weightLogs, chartView]);
+  }, [weightLogs, chartView, targetWeight]);
 
   const chartLines = useMemo(() => {
     if (chartView === "year-by-year" && chartData.length > 0) {
@@ -587,20 +601,24 @@ const Weight = () => {
               
               {/* Target Weight Reference Line */}
               {targetWeight && (
-                <ReferenceLine 
-                  y={targetWeight} 
-                  stroke="hsl(var(--destructive))" 
-                  strokeDasharray="5 5"
-                  strokeWidth={2}
-                  label={{ 
-                    value: `🎯 Target Goal: ${formatWeight(targetWeight, preferredUnit)}`, 
-                    position: 'insideTopRight',
-                    fill: 'hsl(var(--destructive))',
-                    fontSize: 14,
-                    fontWeight: 'bold',
-                    offset: 10
-                  }}
-                />
+                <>
+                  <ReferenceLine 
+                    y={targetWeight} 
+                    stroke="hsl(var(--destructive))" 
+                    strokeDasharray="5 5"
+                    strokeWidth={2}
+                  />
+                  <Line 
+                    type="monotone"
+                    dataKey="target"
+                    stroke="hsl(var(--destructive))"
+                    strokeDasharray="5 5"
+                    strokeWidth={2}
+                    name="Target Goal"
+                    dot={false}
+                    legendType="line"
+                  />
+                </>
               )}
               
               {chartView === "daily" ? (
