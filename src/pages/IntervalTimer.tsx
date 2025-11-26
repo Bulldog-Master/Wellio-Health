@@ -69,6 +69,7 @@ const IntervalTimer = () => {
   const [remainingSeconds, setRemainingSeconds] = useState(0);
   const [currentRepeat, setCurrentRepeat] = useState(1);
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
+  const [totalElapsedSeconds, setTotalElapsedSeconds] = useState(0);
   const [timerSettings, setTimerSettings] = useState({
     intervalCompleteSound: "beep",
     timerCompleteSound: "beep",
@@ -424,6 +425,31 @@ const IntervalTimer = () => {
     setRemainingSeconds(timerIntervals[0]?.duration || 0);
     setIsRunning(false);
     setCurrentRepeat(1);
+    setTotalElapsedSeconds(0);
+  };
+
+  // Calculate total remaining time
+  const calculateTotalRemainingTime = () => {
+    if (intervals.length === 0) return 0;
+    
+    // Total duration of all intervals
+    const totalIntervalDuration = intervals.reduce((sum, interval) => sum + interval.duration, 0);
+    
+    // Total time for all repeats
+    const totalTime = totalIntervalDuration * repeatCount;
+    
+    // Calculate elapsed time
+    const completedRepeats = currentRepeat - 1;
+    const completedIntervalsInCurrentRepeat = currentIntervalIndex;
+    
+    let elapsed = completedRepeats * totalIntervalDuration;
+    for (let i = 0; i < completedIntervalsInCurrentRepeat; i++) {
+      elapsed += intervals[i].duration;
+    }
+    // Add time elapsed in current interval
+    elapsed += (intervals[currentIntervalIndex]?.duration || 0) - remainingSeconds;
+    
+    return Math.max(0, totalTime - elapsed);
   };
 
   // Timer countdown effect
@@ -1273,7 +1299,7 @@ const IntervalTimer = () => {
             <Button 
               className="flex-1" 
               size="lg"
-              style={{ backgroundColor: isRunning ? "#ef4444" : "#22c55e", color: "white" }}
+              style={{ backgroundColor: isRunning ? "#f97316" : "#22c55e", color: "white" }}
               onClick={() => {
                 if (isRunning) {
                   setIsRunning(false);
@@ -1295,16 +1321,17 @@ const IntervalTimer = () => {
             </Button>
           </div>
 
-          {/* Total Time */}
-          <div className="flex justify-between items-center text-lg">
-            <span className="font-semibold">Total</span>
-            <span className="font-bold">{calculateTotalTime()}</span>
-          </div>
+          {/* Total Time and Repeat */}
+          <div className="space-y-3">
+            <div className="flex justify-between items-center text-lg">
+              <span className="font-semibold">Total</span>
+              <span className="font-bold text-2xl">{formatTime(calculateTotalRemainingTime())}</span>
+            </div>
 
-          {/* Repeat Count */}
-          <div className="flex justify-between items-center text-lg">
-            <span className="font-semibold">Repeat</span>
-            <span className="font-bold">x{repeatCount}</span>
+            <div className="flex justify-between items-center text-lg">
+              <span className="font-semibold">Repeat</span>
+              <span className="font-bold text-xl">{currentRepeat}/{repeatCount}</span>
+            </div>
           </div>
 
           {/* Intervals List */}
