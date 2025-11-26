@@ -36,7 +36,10 @@ const Profile = () => {
     weightUnit: "lbs",
     targetWeight: "",
     targetWeightUnit: "lbs" as "lbs" | "kg",
-    goal: "leaner"
+    goal: "leaner",
+    moveGoal: "500",
+    exerciseGoal: "30",
+    standGoal: "12"
   });
 
   useEffect(() => {
@@ -68,6 +71,9 @@ const Profile = () => {
           targetWeight: profile.target_weight?.toString() || "",
           targetWeightUnit: (profile.target_weight_unit as "lbs" | "kg") || "lbs",
           goal: profile.goal || "leaner",
+          moveGoal: profile.move_goal?.toString() || "500",
+          exerciseGoal: profile.exercise_goal?.toString() || "30",
+          standGoal: profile.stand_goal?.toString() || "12"
         }));
         setAvatarUrl(profile.avatar_url);
       }
@@ -135,6 +141,9 @@ const Profile = () => {
           target_weight: formData.targetWeight ? parseFloat(formData.targetWeight) : null,
           target_weight_unit: formData.targetWeightUnit,
           goal: formData.goal,
+          move_goal: formData.moveGoal ? parseInt(formData.moveGoal) : 500,
+          exercise_goal: formData.exerciseGoal ? parseInt(formData.exerciseGoal) : 30,
+          stand_goal: formData.standGoal ? parseInt(formData.standGoal) : 12,
         })
         .eq('id', user.id);
 
@@ -419,6 +428,48 @@ const Profile = () => {
                     <SelectItem value="maintain">Maintain Weight</SelectItem>
                   </SelectContent>
                 </Select>
+              </div>
+
+              <div className="pt-4 border-t">
+                <h4 className="text-sm font-semibold mb-3 text-primary">Daily Activity Goals</h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <Label htmlFor="moveGoal" className="text-xs">Move (Calories)</Label>
+                    <Input
+                      id="moveGoal"
+                      type="number"
+                      value={formData.moveGoal}
+                      onChange={(e) => setFormData({ ...formData, moveGoal: e.target.value })}
+                      placeholder="500"
+                      className="mt-1.5"
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">Daily calorie burn goal</p>
+                  </div>
+                  <div>
+                    <Label htmlFor="exerciseGoal" className="text-xs">Exercise (Minutes)</Label>
+                    <Input
+                      id="exerciseGoal"
+                      type="number"
+                      value={formData.exerciseGoal}
+                      onChange={(e) => setFormData({ ...formData, exerciseGoal: e.target.value })}
+                      placeholder="30"
+                      className="mt-1.5"
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">Daily workout minutes</p>
+                  </div>
+                  <div>
+                    <Label htmlFor="standGoal" className="text-xs">Stand (Hours)</Label>
+                    <Input
+                      id="standGoal"
+                      type="number"
+                      value={formData.standGoal}
+                      onChange={(e) => setFormData({ ...formData, standGoal: e.target.value })}
+                      placeholder="12"
+                      className="mt-1.5"
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">Active hours per day</p>
+                  </div>
+                </div>
               </div>
             </div>
           </CollapsibleContent>
