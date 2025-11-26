@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format, startOfMonth, startOfQuarter, startOfYear, parseISO } from "date-fns";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from "recharts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface WeightLog {
@@ -35,9 +35,11 @@ const Weight = () => {
   const [editingLog, setEditingLog] = useState<WeightLog | null>(null);
   const [editWeight, setEditWeight] = useState("");
   const [chartView, setChartView] = useState<"daily" | "monthly" | "quarterly" | "yearly" | "year-by-year">("monthly");
+  const [targetWeight, setTargetWeight] = useState<number | null>(null);
 
   useEffect(() => {
     fetchWeightLogs();
+    fetchTargetWeight();
   }, []);
 
   const fetchWeightLogs = async () => {
@@ -57,6 +59,29 @@ const Weight = () => {
       console.error('Error fetching weight logs:', error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const fetchTargetWeight = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('target_weight, target_weight_unit')
+        .eq('id', user.id)
+        .single();
+
+      if (profile?.target_weight) {
+        // Convert to lbs if stored in kg
+        const targetInLbs = profile.target_weight_unit === 'kg' 
+          ? profile.target_weight * 2.20462 
+          : profile.target_weight;
+        setTargetWeight(targetInLbs);
+      }
+    } catch (error) {
+      console.error('Error fetching target weight:', error);
     }
   };
 
@@ -171,6 +196,34 @@ const Weight = () => {
   }, {} as Record<string, Record<string, number>>);
 
   const latestWeight = weightLogs.length > 0 ? weightLogs[weightLogs.length - 1].weight_lbs : 0;
+
+  const statistics = useMemo(() => {
+    if (weightLogs.length === 0) return null;
+
+    const firstWeight = weightLogs[0].weight_lbs;
+    const lastWeight = weightLogs[weightLogs.length - 1].weight_lbs;
+    const totalChange = lastWeight - firstWeight;
+    
+    // Calculate days between first and last log
+    const firstDate = new Date(weightLogs[0].logged_at);
+    const lastDate = new Date(weightLogs[weightLogs.length - 1].logged_at);
+    const daysDiff = Math.max(1, Math.ceil((lastDate.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24)));
+    const avgRatePerWeek = (totalChange / daysDiff) * 7;
+
+    let progressPercentage = 0;
+    if (targetWeight && firstWeight !== targetWeight) {
+      const totalGoal = targetWeight - firstWeight;
+      const achieved = lastWeight - firstWeight;
+      progressPercentage = (achieved / totalGoal) * 100;
+    }
+
+    return {
+      totalChange,
+      avgRatePerWeek,
+      progressPercentage,
+      daysTracked: daysDiff,
+    };
+  }, [weightLogs, targetWeight]);
 
   const chartData = useMemo(() => {
     if (!weightLogs.length) return [];
@@ -299,6 +352,12 @@ const Weight = () => {
         .map(([, value]) => value as number)
         .filter(v => v != null)
     );
+    
+    // Include target weight in domain calculation if it exists
+    if (targetWeight) {
+      values.push(targetWeight);
+    }
+    
     const min = Math.min(...values);
     const max = Math.max(...values);
     const padding = (max - min) * 0.1;
@@ -435,6 +494,50 @@ const Weight = () => {
         </div>
       </Card>
 
+      {/* Statistics Card */}
+      {statistics && (
+        <Card className="p-6 bg-gradient-card shadow-md">
+          <h3 className="text-lg font-semibold mb-4">Progress Statistics</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <p className="text-sm text-muted-foreground mb-1">Total Change</p>
+              <p className="text-2xl font-bold" style={{ 
+                color: statistics.totalChange < 0 ? 'hsl(142, 71%, 45%)' : 'hsl(var(--primary))' 
+              }}>
+                {statistics.totalChange > 0 ? '+' : ''}
+                {formatWeight(Math.abs(statistics.totalChange), preferredUnit)}
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">
+                Over {statistics.daysTracked} days
+              </p>
+            </div>
+            
+            <div>
+              <p className="text-sm text-muted-foreground mb-1">Avg Change/Week</p>
+              <p className="text-2xl font-bold">
+                {statistics.avgRatePerWeek > 0 ? '+' : ''}
+                {formatWeight(Math.abs(statistics.avgRatePerWeek), preferredUnit)}
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">
+                Weekly average
+              </p>
+            </div>
+            
+            {targetWeight && (
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Goal Progress</p>
+                <p className="text-2xl font-bold text-primary">
+                  {Math.abs(Math.round(statistics.progressPercentage))}%
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  Target: {formatWeight(targetWeight, preferredUnit)}
+                </p>
+              </div>
+            )}
+          </div>
+        </Card>
+      )}
+
       <Card className="p-6 bg-gradient-card shadow-md">
         <h3 className="text-lg font-semibold mb-6">Weight Trends</h3>
         <Tabs value={chartView} onValueChange={(v) => setChartView(v as any)} className="mb-6">
@@ -481,6 +584,23 @@ const Weight = () => {
                 formatter={(value: number) => formatWeight(value, preferredUnit)}
               />
               <Legend />
+              
+              {/* Target Weight Reference Line */}
+              {targetWeight && (
+                <ReferenceLine 
+                  y={targetWeight} 
+                  stroke="hsl(var(--destructive))" 
+                  strokeDasharray="5 5"
+                  strokeWidth={2}
+                  label={{ 
+                    value: `Goal: ${formatWeight(targetWeight, preferredUnit)}`, 
+                    position: 'right',
+                    fill: 'hsl(var(--destructive))',
+                    fontSize: 12,
+                    fontWeight: 'bold'
+                  }}
+                />
+              )}
               
               {chartView === "daily" ? (
                 <>
