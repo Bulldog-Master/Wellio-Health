@@ -7,13 +7,38 @@ import { Switch } from "@/components/ui/switch";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Bell, Clock, User, ChevronRight } from "lucide-react";
+import { Bell, Clock, User, ChevronRight, Shield, Palette, Trash2, Key, Download } from "lucide-react";
 import { useNotifications } from "@/hooks/useNotifications";
+import { useUserPreferences } from "@/hooks/useUserPreferences";
+import { useTheme } from "next-themes";
+import { isWebAuthnSupported, registerPasskey } from "@/lib/webauthn";
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 const Settings = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { permission, requestPermission, isSupported } = useNotifications();
+  const { preferredUnit, updatePreferredUnit } = useUserPreferences();
+  const { theme, setTheme } = useTheme();
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [passkeys, setPasskeys] = useState<any[]>([]);
+  const [email, setEmail] = useState("");
   
   const [settings, setSettings] = useState({
     reminder_meal_logging: true,
@@ -27,7 +52,31 @@ const Settings = () => {
 
   useEffect(() => {
     fetchSettings();
+    fetchPasskeys();
+    fetchUserEmail();
   }, []);
+
+  const fetchUserEmail = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user?.email) setEmail(user.email);
+  };
+
+  const fetchPasskeys = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from("webauthn_credentials")
+        .select("*")
+        .eq("user_id", user.id);
+
+      if (error) throw error;
+      setPasskeys(data || []);
+    } catch (error) {
+      console.error("Error fetching passkeys:", error);
+    }
+  };
 
   const fetchSettings = async () => {
     try {
@@ -84,6 +133,114 @@ const Settings = () => {
 
   const updateSetting = (key: string, value: any) => {
     setSettings(prev => ({ ...prev, [key]: value }));
+  };
+
+  const handleAddPasskey = async () => {
+    try {
+      if (!isWebAuthnSupported()) {
+        toast.error("Your browser doesn't support passkeys");
+        return;
+      }
+
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user?.email) {
+        toast.error("No user found");
+        return;
+      }
+
+      const credential = await registerPasskey(user.email);
+      
+      const { data, error } = await supabase.functions.invoke('passkey-register', {
+        body: credential
+      });
+
+      if (error) throw error;
+
+      toast.success("Passkey registered successfully!");
+      fetchPasskeys();
+    } catch (error: any) {
+      console.error("Error registering passkey:", error);
+      toast.error("Failed to register passkey");
+    }
+  };
+
+  const handleChangePassword = async () => {
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth`,
+      });
+
+      if (error) throw error;
+      toast.success("Password reset email sent!");
+    } catch (error: any) {
+      console.error("Error sending password reset:", error);
+      toast.error("Failed to send password reset email");
+    }
+  };
+
+  const handleDeletePasskey = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from("webauthn_credentials")
+        .delete()
+        .eq("id", id);
+
+      if (error) throw error;
+      toast.success("Passkey removed");
+      fetchPasskeys();
+    } catch (error: any) {
+      console.error("Error deleting passkey:", error);
+      toast.error("Failed to remove passkey");
+    }
+  };
+
+  const handleExportData = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      // Export profile data
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+
+      const exportData = {
+        profile,
+        exportedAt: new Date().toISOString(),
+      };
+
+      const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+        type: "application/json",
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `vitality-data-${new Date().toISOString().split("T")[0]}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+
+      toast.success("Data exported successfully!");
+    } catch (error: any) {
+      console.error("Error exporting data:", error);
+      toast.error("Failed to export data");
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      // Note: Account deletion would need to be implemented via an edge function
+      // This is a placeholder for the UI flow
+      toast.error("Account deletion must be requested through support");
+      setShowDeleteDialog(false);
+    } catch (error: any) {
+      console.error("Error deleting account:", error);
+      toast.error("Failed to delete account");
+    }
   };
 
   return (
@@ -236,9 +393,172 @@ const Settings = () => {
         </div>
       </Card>
 
+      {/* Privacy & Security */}
+      <Card className="p-6">
+        <div className="flex items-start gap-4 mb-6">
+          <Shield className="w-6 h-6 text-primary mt-1" />
+          <div>
+            <h3 className="font-semibold mb-1">Privacy & Security</h3>
+            <p className="text-sm text-muted-foreground">
+              Manage your security settings and two-factor authentication
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-6">
+          {/* Passkeys (2FA) */}
+          <div className="pb-4 border-b">
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <Label className="text-base">Two-Factor Authentication</Label>
+                <p className="text-sm text-muted-foreground">Secure your account with passkeys</p>
+              </div>
+              <Button onClick={handleAddPasskey} variant="outline" size="sm">
+                <Key className="w-4 h-4 mr-2" />
+                Add Passkey
+              </Button>
+            </div>
+            {passkeys.length > 0 && (
+              <div className="mt-3 space-y-2">
+                {passkeys.map((passkey) => (
+                  <div key={passkey.id} className="flex items-center justify-between p-2 bg-muted/50 rounded-lg">
+                    <div className="text-sm">
+                      <p className="font-medium">{passkey.device_type || "Unknown Device"}</p>
+                      <p className="text-xs text-muted-foreground">
+                        Added {new Date(passkey.created_at).toLocaleDateString()}
+                      </p>
+                    </div>
+                    <Button
+                      onClick={() => handleDeletePasskey(passkey.id)}
+                      variant="ghost"
+                      size="sm"
+                    >
+                      Remove
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Change Password */}
+          <div>
+            <div className="flex items-center justify-between">
+              <div>
+                <Label className="text-base">Password</Label>
+                <p className="text-sm text-muted-foreground">Change your account password</p>
+              </div>
+              <Button onClick={handleChangePassword} variant="outline" size="sm">
+                Change Password
+              </Button>
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      {/* Preferences */}
+      <Card className="p-6">
+        <div className="flex items-start gap-4 mb-6">
+          <Palette className="w-6 h-6 text-primary mt-1" />
+          <div>
+            <h3 className="font-semibold mb-1">Preferences</h3>
+            <p className="text-sm text-muted-foreground">
+              Customize your app experience
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-6">
+          {/* Theme */}
+          <div className="flex items-center justify-between pb-4 border-b">
+            <div>
+              <Label className="text-base">Theme</Label>
+              <p className="text-sm text-muted-foreground">Choose your preferred theme</p>
+            </div>
+            <Select value={theme} onValueChange={setTheme}>
+              <SelectTrigger className="w-32">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="light">Light</SelectItem>
+                <SelectItem value="dark">Dark</SelectItem>
+                <SelectItem value="system">System</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Units */}
+          <div className="flex items-center justify-between">
+            <div>
+              <Label className="text-base">Measurement Units</Label>
+              <p className="text-sm text-muted-foreground">Choose your preferred unit system</p>
+            </div>
+            <Select value={preferredUnit} onValueChange={(value: any) => updatePreferredUnit(value)}>
+              <SelectTrigger className="w-32">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="imperial">Imperial</SelectItem>
+                <SelectItem value="metric">Metric</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+      </Card>
+
+      {/* Account Management */}
+      <Card className="p-6">
+        <div className="flex items-start gap-4 mb-6">
+          <User className="w-6 h-6 text-primary mt-1" />
+          <div>
+            <h3 className="font-semibold mb-1">Account Management</h3>
+            <p className="text-sm text-muted-foreground">
+              Manage your account data
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          {/* Export Data */}
+          <Button onClick={handleExportData} variant="outline" className="w-full justify-start">
+            <Download className="w-4 h-4 mr-2" />
+            Export My Data
+          </Button>
+
+          {/* Delete Account */}
+          <Button 
+            onClick={() => setShowDeleteDialog(true)} 
+            variant="outline" 
+            className="w-full justify-start text-destructive hover:text-destructive"
+          >
+            <Trash2 className="w-4 h-4 mr-2" />
+            Delete Account
+          </Button>
+        </div>
+      </Card>
+
       <Button onClick={saveSettings} disabled={loading} className="w-full">
         {loading ? "Saving..." : "Save Settings"}
       </Button>
+
+      {/* Delete Account Confirmation Dialog */}
+      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your account
+              and remove all your data from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDeleteAccount} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+              Delete Account
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
