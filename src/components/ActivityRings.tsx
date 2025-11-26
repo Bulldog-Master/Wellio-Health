@@ -286,7 +286,7 @@ const ActivityRings = () => {
                     fill="none"
                     stroke={ring.color}
                     strokeWidth="18"
-                    opacity="0.15"
+                    opacity="0.25"
                   />
                   {/* Progress ring */}
                   {ring.data.percentage > 0 && (
@@ -304,7 +304,8 @@ const ActivityRings = () => {
                       filter={`url(#glow-${ring.type})`}
                       style={{ 
                         transition: 'stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1)',
-                        transitionDelay: `${rings.indexOf(ring) * 0.15}s`
+                        transitionDelay: `${rings.indexOf(ring) * 0.15}s`,
+                        opacity: 0.95
                       }}
                     />
                   )}
@@ -313,6 +314,13 @@ const ActivityRings = () => {
             })}
           </svg>
         </div>
+      </div>
+
+      {/* Interaction hint */}
+      <div className="text-center">
+        <p className="text-sm text-muted-foreground italic">
+          💡 Tap any ring to see your progress and 7-day history
+        </p>
       </div>
 
       {/* Ring details */}
