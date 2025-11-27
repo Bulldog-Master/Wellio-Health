@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-import { Shield, Key, Download, Trash2, ArrowLeft, Smartphone, Pencil } from "lucide-react";
+import { Shield, Key, Download, Trash2, ArrowLeft, Smartphone, Pencil, Lock, Eye, UserCheck } from "lucide-react";
 import { isWebAuthnSupported, registerPasskey } from "@/lib/webauthn";
 import {
   AlertDialog,
@@ -33,6 +33,9 @@ const PrivacySecurity = () => {
   const [newPasskeyName, setNewPasskeyName] = useState("");
   const [backupCodes, setBackupCodes] = useState<string[]>([]);
   const [showBackupCodes, setShowBackupCodes] = useState(false);
+  const [isPrivate, setIsPrivate] = useState(false);
+  const [allowMentions, setAllowMentions] = useState(true);
+  const [showActivity, setShowActivity] = useState(true);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -51,12 +54,40 @@ const PrivacySecurity = () => {
         if (authSecret) {
           setIs2FAEnabled(authSecret.two_factor_enabled || false);
         }
+
+        // Fetch privacy settings
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('is_private, allow_mentions, show_activity')
+          .eq('id', user.id)
+          .single();
+        
+        if (profile) {
+          setIsPrivate(profile.is_private || false);
+          setAllowMentions(profile.allow_mentions !== false);
+          setShowActivity(profile.show_activity !== false);
+        }
       }
     };
     fetchUserData();
   }, []);
 
-  const fetchPasskeys = async () => {
+  const handleRegisterPasskey = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user || !user.email) {
+        toast.error("User email not found");
+        return;
+      }
+
+      await registerPasskey(user.email);
+      toast.success("Passkey registered successfully!");
+      await fetchPasskeys();
+    } catch (error: any) {
+      console.error("Error registering passkey:", error);
+      toast.error(error.message || "Failed to register passkey");
+    }
+  };
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
@@ -225,6 +256,41 @@ const PrivacySecurity = () => {
     } catch (error: any) {
       console.error("Error deleting passkey:", error);
       toast.error("Failed to remove passkey");
+    }
+  };
+
+  const handleRegisterPasskey = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user || !user.email) {
+        toast.error("User email not found");
+        return;
+      }
+
+      await registerPasskey(user.email);
+      toast.success("Passkey registered successfully!");
+      await fetchPasskeys();
+    } catch (error: any) {
+      console.error("Error registering passkey:", error);
+      toast.error(error.message || "Failed to register passkey");
+    }
+  };
+
+  const updatePrivacySettings = async (setting: string, value: boolean) => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { error } = await supabase
+        .from('profiles')
+        .update({ [setting]: value })
+        .eq('id', user.id);
+
+      if (error) throw error;
+      toast.success("Privacy settings updated");
+    } catch (error) {
+      console.error("Error updating privacy settings:", error);
+      toast.error("Failed to update settings");
     }
   };
 
@@ -402,19 +468,18 @@ const PrivacySecurity = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="space-y-0.5">
-                <Label>Manage Passkeys</Label>
-                <p className="text-sm text-muted-foreground">
-                  Add or remove passkeys for your account
-                </p>
-              </div>
-              <Button onClick={handleAddPasskey} size="sm">
-                Add Passkey
-              </Button>
-            </div>
-          </div>
+          {!isWebAuthnSupported() && (
+            <p className="text-sm text-destructive">
+              Your browser doesn't support passkeys. Please use a modern browser like Chrome, Safari, or Edge.
+            </p>
+          )}
+
+          {isWebAuthnSupported() && (
+            <Button onClick={handleRegisterPasskey} variant="outline">
+              <Key className="w-4 h-4 mr-2" />
+              Register New Passkey
+            </Button>
+          )}
 
           {passkeys.length > 0 && (
             <div className="space-y-2 pt-4 border-t">
@@ -472,6 +537,75 @@ const PrivacySecurity = () => {
           <Button onClick={handleChangePassword} variant="outline">
             Change Password
           </Button>
+        </CardContent>
+      </Card>
+
+      {/* Privacy Settings */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Lock className="w-5 h-5" />
+            Privacy Settings
+          </CardTitle>
+          <CardDescription>Control who can see your content and interact with you</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label className="flex items-center gap-2">
+                <Lock className="w-4 h-4" />
+                Private Account
+              </Label>
+              <p className="text-sm text-muted-foreground">
+                Require approval for new followers
+              </p>
+            </div>
+            <Switch
+              checked={isPrivate}
+              onCheckedChange={(checked) => {
+                setIsPrivate(checked);
+                updatePrivacySettings('is_private', checked);
+              }}
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label className="flex items-center gap-2">
+                <UserCheck className="w-4 h-4" />
+                Allow Mentions
+              </Label>
+              <p className="text-sm text-muted-foreground">
+                Let others @mention you in posts and comments
+              </p>
+            </div>
+            <Switch
+              checked={allowMentions}
+              onCheckedChange={(checked) => {
+                setAllowMentions(checked);
+                updatePrivacySettings('allow_mentions', checked);
+              }}
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label className="flex items-center gap-2">
+                <Eye className="w-4 h-4" />
+                Show Activity Status
+              </Label>
+              <p className="text-sm text-muted-foreground">
+                Display when you're active on the platform
+              </p>
+            </div>
+            <Switch
+              checked={showActivity}
+              onCheckedChange={(checked) => {
+                setShowActivity(checked);
+                updatePrivacySettings('show_activity', checked);
+              }}
+            />
+          </div>
         </CardContent>
       </Card>
 

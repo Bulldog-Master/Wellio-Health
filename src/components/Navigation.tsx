@@ -10,6 +10,7 @@ const Navigation = () => {
   const navItems = [
     { to: "/", icon: Home, label: "Dashboard", color: "text-nav-icon-1" },
     { to: "/feed", icon: MessageSquare, label: "Feed", color: "text-secondary" },
+    { to: "/groups", icon: Users, label: "Groups", color: "text-primary" },
     { to: "/bookmarks", icon: Bookmark, label: "Bookmarks", color: "text-primary" },
     { to: "/messages", icon: Mail, label: "Messages", color: "text-blue-500" },
     { to: "/search", icon: Search, label: "Search", color: "text-primary" },
