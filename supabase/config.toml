@@ -20,3 +20,9 @@ verify_jwt = true
 
 [functions.search-food]
 verify_jwt = true
+
+[functions.ai-workout-recommendations]
+verify_jwt = true
+
+[functions.ai-meal-suggestions]
+verify_jwt = true
