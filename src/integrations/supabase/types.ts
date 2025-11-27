@@ -330,6 +330,41 @@ export type Database = {
         }
         Relationships: []
       }
+      comments: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          post_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          post_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          post_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comments_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       content_likes: {
         Row: {
           content_id: string
@@ -428,6 +463,27 @@ export type Database = {
           creator_id?: string
           id?: string
           subscriber_id?: string
+        }
+        Relationships: []
+      }
+      follows: {
+        Row: {
+          created_at: string
+          follower_id: string
+          following_id: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          follower_id: string
+          following_id: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          follower_id?: string
+          following_id?: string
+          id?: string
         }
         Relationships: []
       }
@@ -804,6 +860,77 @@ export type Database = {
         }
         Relationships: []
       }
+      post_likes: {
+        Row: {
+          created_at: string
+          id: string
+          post_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          post_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          post_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_likes_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      posts: {
+        Row: {
+          comments_count: number
+          content: string
+          created_at: string
+          id: string
+          is_public: boolean
+          likes_count: number
+          media_url: string | null
+          metadata: Json | null
+          post_type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          comments_count?: number
+          content: string
+          created_at?: string
+          id?: string
+          is_public?: boolean
+          likes_count?: number
+          media_url?: string | null
+          metadata?: Json | null
+          post_type: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          comments_count?: number
+          content?: string
+          created_at?: string
+          id?: string
+          is_public?: boolean
+          likes_count?: number
+          media_url?: string | null
+          metadata?: Json | null
+          post_type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           age: number | null
@@ -812,6 +939,8 @@ export type Database = {
           current_streak: number
           exercise_goal: number | null
           fitness_level: string | null
+          followers_count: number
+          following_count: number
           full_name: string | null
           gender: string | null
           goal: string | null
@@ -849,6 +978,8 @@ export type Database = {
           current_streak?: number
           exercise_goal?: number | null
           fitness_level?: string | null
+          followers_count?: number
+          following_count?: number
           full_name?: string | null
           gender?: string | null
           goal?: string | null
@@ -886,6 +1017,8 @@ export type Database = {
           current_streak?: number
           exercise_goal?: number | null
           fitness_level?: string | null
+          followers_count?: number
+          following_count?: number
           full_name?: string | null
           gender?: string | null
           goal?: string | null
