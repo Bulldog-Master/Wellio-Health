@@ -281,34 +281,23 @@ const Auth = () => {
       return;
     }
 
-    try {
-      emailSchema.parse(email);
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        toast({
-          title: "Validation Error",
-          description: error.issues[0].message,
-          variant: "destructive",
-        });
-      }
-      return;
-    }
-
     setLoading(true);
 
     try {
       if (isLogin) {
-        // Sign in with existing passkey
-        console.log('[Passkey] Starting authentication for:', email);
+        // Sign in with existing passkey - no email needed
+        console.log('[Passkey] Starting authentication...');
         
         try {
-          const authData = await authenticatePasskey(email);
+          const authData = await authenticatePasskey();
           console.log('[Passkey] Biometric auth successful, verifying with backend');
           
           const { data, error } = await supabase.functions.invoke('passkey-authenticate', {
             body: {
               credentialId: authData.credentialId,
-              email: email,
+              signature: authData.signature,
+              authenticatorData: authData.authenticatorData,
+              clientDataJSON: authData.clientDataJSON
             }
           });
 
@@ -317,37 +306,54 @@ const Auth = () => {
             throw error;
           }
           
-          if (!data?.success) {
-            throw new Error('Authentication failed - no matching passkey found');
+          if (!data?.actionLink) {
+            throw new Error('Authentication failed - no action link returned');
           }
 
-          toast({
-            title: "Welcome back!",
-            description: "Authenticated successfully with passkey.",
-          });
+          // Navigate to the action link which will automatically sign the user in
+          console.log('[Passkey] Redirecting to action link...');
+          window.location.href = data.actionLink;
         } catch (authError: any) {
-          // If passkey auth fails, offer to add a passkey to existing account
-          console.log('[Passkey] No passkey found, offering to add one');
+          console.log('[Passkey] Authentication failed:', authError);
           
-          if (authError.message?.includes('no matching passkey') || authError.name === 'NotAllowedError') {
+          if (authError.name === 'NotAllowedError') {
+            toast({
+              title: "Authentication cancelled",
+              description: "Please approve the biometric prompt to sign in with passkey.",
+              variant: "destructive",
+            });
+          } else {
             toast({
               title: "No passkey found",
-              description: "Would you like to add a passkey to your account? Please log in with password first.",
+              description: "No passkey found on this device. Please log in with password and add a passkey in settings.",
               variant: "destructive",
             });
           }
           throw authError;
         }
       } else {
-        // Register new passkey
-        console.log('[Passkey] Starting registration for:', email);
-        
+        // Register requires email and name
+        try {
+          emailSchema.parse(email);
+        } catch (error) {
+          if (error instanceof z.ZodError) {
+            toast({
+              title: "Validation Error",
+              description: error.issues[0].message,
+              variant: "destructive",
+            });
+          }
+          throw error;
+        }
+
         if (!name) {
           throw new Error('Please enter your name');
         }
+
+        // Register new passkey
+        console.log('[Passkey] Starting registration for:', email);
         
         // First, trigger the biometric prompt to create the passkey
-        // This way if the user cancels, we don't create an account
         console.log('[Passkey] Requesting biometric authentication...');
         const passkeyData = await registerPasskey(email);
         console.log('[Passkey] Biometric registration successful, creating account...');
@@ -407,22 +413,16 @@ const Auth = () => {
     } catch (error: any) {
       console.error('[Passkey] Error:', error);
       
-      let errorMessage = error.message || "Passkey authentication failed.";
-      
-      // Provide helpful error messages
-      if (error.message?.includes('cancelled') || error.message?.includes('blocked')) {
-        errorMessage = "Please allow the biometric prompt when it appears to use passkey authentication.";
-      } else if (error.name === 'NotAllowedError') {
-        errorMessage = "Passkey authentication was cancelled. Please try again and approve the prompt.";
-      } else if (error.message?.includes('no matching passkey')) {
-        errorMessage = "No passkey found for this email. Please register first or use another sign-in method.";
+      // Don't show error toast if we already showed a specific one
+      if (error.name !== 'NotAllowedError' && !error.message?.includes('already registered')) {
+        let errorMessage = error.message || "Passkey authentication failed.";
+        
+        toast({
+          title: "Passkey Error",
+          description: errorMessage,
+          variant: "destructive",
+        });
       }
-      
-      toast({
-        title: "Passkey Error",
-        description: errorMessage,
-        variant: "destructive",
-      });
     } finally {
       setLoading(false);
     }
@@ -663,38 +663,40 @@ const Auth = () => {
               
               <form onSubmit={handlePasskey} className="space-y-4">
                 {!isLogin && (
-                  <div className="space-y-2">
-                    <Label htmlFor="passkey-name">Name</Label>
-                    <div className="relative">
-                      <UserIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                      <Input
-                        id="passkey-name"
-                        type="text"
-                        placeholder="John Doe"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="pl-10"
-                        required={!isLogin}
-                      />
+                  <>
+                    <div className="space-y-2">
+                      <Label htmlFor="passkey-name">Name</Label>
+                      <div className="relative">
+                        <UserIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          id="passkey-name"
+                          type="text"
+                          placeholder="John Doe"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          className="pl-10"
+                          required
+                        />
+                      </div>
                     </div>
-                  </div>
-                )}
 
-                <div className="space-y-2">
-                  <Label htmlFor="passkey-email">Email</Label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      id="passkey-email"
-                      type="email"
-                      placeholder="you@example.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="pl-10"
-                      required
-                    />
-                  </div>
-                </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="passkey-email">Email</Label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          id="passkey-email"
+                          type="email"
+                          placeholder="you@example.com"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="pl-10"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
 
                 <Button
                   type="submit"

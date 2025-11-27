@@ -95,7 +95,7 @@ export const registerPasskey = async (email: string): Promise<{
   }
 };
 
-export const authenticatePasskey = async (email: string): Promise<{
+export const authenticatePasskey = async (): Promise<{
   credentialId: string;
   signature: string;
   authenticatorData: string;
