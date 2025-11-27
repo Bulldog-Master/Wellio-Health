@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-import { Shield, Key, Download, Trash2, ArrowLeft, Smartphone } from "lucide-react";
+import { Shield, Key, Download, Trash2, ArrowLeft, Smartphone, Pencil } from "lucide-react";
 import { isWebAuthnSupported, registerPasskey } from "@/lib/webauthn";
 import {
   AlertDialog,
@@ -29,6 +29,8 @@ const PrivacySecurity = () => {
   const [show2FASetup, setShow2FASetup] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [totpToken, setTotpToken] = useState("");
+  const [renamingPasskey, setRenamingPasskey] = useState<{ id: string; currentName: string } | null>(null);
+  const [newPasskeyName, setNewPasskeyName] = useState("");
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -214,6 +216,27 @@ const PrivacySecurity = () => {
     } catch (error: any) {
       console.error("Error deleting passkey:", error);
       toast.error("Failed to remove passkey");
+    }
+  };
+
+  const handleRenamePasskey = async () => {
+    if (!renamingPasskey || !newPasskeyName.trim()) return;
+
+    try {
+      const { error } = await supabase
+        .from('webauthn_credentials')
+        .update({ device_type: newPasskeyName.trim() })
+        .eq('id', renamingPasskey.id);
+
+      if (error) throw error;
+
+      toast.success("Passkey renamed successfully");
+      setRenamingPasskey(null);
+      setNewPasskeyName("");
+      fetchPasskeys();
+    } catch (error) {
+      console.error('Error renaming passkey:', error);
+      toast.error("Failed to rename passkey");
     }
   };
 
@@ -404,13 +427,25 @@ const PrivacySecurity = () => {
                       </p>
                     </div>
                   </div>
-                  <Button
-                    onClick={() => handleDeletePasskey(passkey.id)}
-                    variant="ghost"
-                    size="sm"
-                  >
-                    Remove
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      onClick={() => {
+                        setRenamingPasskey({ id: passkey.id, currentName: passkey.device_type || "Unknown Device" });
+                        setNewPasskeyName(passkey.device_type || "");
+                      }}
+                      variant="ghost"
+                      size="icon"
+                    >
+                      <Pencil className="w-4 h-4" />
+                    </Button>
+                    <Button
+                      onClick={() => handleDeletePasskey(passkey.id)}
+                      variant="ghost"
+                      size="icon"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -467,6 +502,33 @@ const PrivacySecurity = () => {
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction onClick={handleDeleteAccount} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
               Delete Account
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Rename Passkey Dialog */}
+      <AlertDialog open={!!renamingPasskey} onOpenChange={(open) => !open && setRenamingPasskey(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Rename Passkey</AlertDialogTitle>
+            <AlertDialogDescription>
+              Give this passkey a custom name to easily identify it.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <div className="py-4">
+            <Input
+              value={newPasskeyName}
+              onChange={(e) => setNewPasskeyName(e.target.value)}
+              placeholder="e.g., My iPad, Work iPhone"
+              onKeyDown={(e) => e.key === 'Enter' && handleRenamePasskey()}
+              autoFocus
+            />
+          </div>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleRenamePasskey} disabled={!newPasskeyName.trim()}>
+              Rename
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
