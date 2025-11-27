@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-import { Shield, Key, Download, Trash2, ArrowLeft } from "lucide-react";
+import { Shield, Key, Download, Trash2, ArrowLeft, Smartphone } from "lucide-react";
 import { isWebAuthnSupported, registerPasskey } from "@/lib/webauthn";
 import {
   AlertDialog,
@@ -388,11 +388,21 @@ const PrivacySecurity = () => {
             <div className="space-y-2 pt-4 border-t">
               {passkeys.map((passkey) => (
                 <div key={passkey.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                  <div className="text-sm">
-                    <p className="font-medium">{passkey.device_type || "Unknown Device"}</p>
-                    <p className="text-xs text-muted-foreground">
-                      Added {new Date(passkey.created_at).toLocaleDateString()}
-                    </p>
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10">
+                      <Smartphone className="w-5 h-5 text-primary" />
+                    </div>
+                    <div className="text-sm">
+                      <div className="flex items-center gap-2">
+                        <p className="font-medium">{passkey.device_type || "Unknown Device"}</p>
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-500/10 text-green-600 dark:text-green-400">
+                          Active
+                        </span>
+                      </div>
+                      <p className="text-xs text-muted-foreground">
+                        Added {new Date(passkey.created_at).toLocaleDateString()}
+                      </p>
+                    </div>
                   </div>
                   <Button
                     onClick={() => handleDeletePasskey(passkey.id)}
