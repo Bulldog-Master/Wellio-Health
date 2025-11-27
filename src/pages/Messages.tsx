@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { User, MessageSquare } from "lucide-react";
+import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 import { formatDistanceToNow } from "date-fns";
 
 interface ConversationWithDetails {
@@ -108,6 +109,9 @@ const Messages = () => {
     enabled: !!currentUserId,
   });
 
+  const otherUserIds = conversations?.map((c) => c.other_user.id) || [];
+  const { isOnline } = useOnlineStatus(otherUserIds);
+
   // Real-time subscription
   useEffect(() => {
     if (!currentUserId) return;
@@ -176,15 +180,20 @@ const Messages = () => {
             >
               <CardContent className="p-4">
                 <div className="flex items-center gap-4">
-                  <Avatar className="h-12 w-12">
-                    <AvatarImage src={conversation.other_user.avatar_url || ""} />
-                    <AvatarFallback>
-                      {conversation.other_user.full_name?.[0] ||
-                        conversation.other_user.username?.[0] || (
-                          <User className="h-5 w-5" />
-                        )}
-                    </AvatarFallback>
-                  </Avatar>
+                  <div className="relative">
+                    <Avatar className="h-12 w-12">
+                      <AvatarImage src={conversation.other_user.avatar_url || ""} />
+                      <AvatarFallback>
+                        {conversation.other_user.full_name?.[0] ||
+                          conversation.other_user.username?.[0] || (
+                            <User className="h-5 w-5" />
+                          )}
+                      </AvatarFallback>
+                    </Avatar>
+                    {isOnline(conversation.other_user.id) && (
+                      <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-background" />
+                    )}
+                  </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
                       <p className="font-semibold truncate">
