@@ -22,10 +22,10 @@ serve(async (req) => {
     const { credentialId, signature, authenticatorData, clientDataJSON } = await req.json();
     console.log('[Passkey Auth] Credential ID received:', credentialId?.substring(0, 10) + '...');
 
-    // Find the credential and associated user
+    // Find the credential
     const { data: credential, error: credError } = await supabaseAdmin
       .from('webauthn_credentials')
-      .select('*, profiles!inner(id)')
+      .select('*')
       .eq('credential_id', credentialId)
       .single();
 
