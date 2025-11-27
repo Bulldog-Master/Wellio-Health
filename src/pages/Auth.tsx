@@ -325,11 +325,11 @@ const Auth = () => {
           } else {
             toast({
               title: "No passkey found",
-              description: "No passkey found on this device. Please log in with password and add a passkey in settings.",
+              description: "No passkey registered for this account. Please click 'Don't have an account? Register passkey' below to create one.",
               variant: "destructive",
             });
           }
-          throw authError;
+          return; // Don't re-throw, we've already shown a friendly error
         }
       } else {
         // Register requires email and name
