@@ -57,6 +57,8 @@ import GroupDetail from "./pages/GroupDetail";
 import CloseFriends from "./pages/CloseFriends";
 import LiveWorkoutSessions from "./pages/LiveWorkoutSessions";
 import LiveSessionRoom from "./pages/LiveSessionRoom";
+import ProgressChallenges from "./pages/ProgressChallenges";
+import ProgressChallengeDetail from "./pages/ProgressChallengeDetail";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -123,6 +125,8 @@ const App = () => {
             <Route path="/messages/:conversationId" element={<ProtectedRoute><Layout><Conversation /></Layout></ProtectedRoute>} />
             <Route path="/live-workout-sessions" element={<ProtectedRoute><LiveWorkoutSessions /></ProtectedRoute>} />
             <Route path="/live-session/:sessionId" element={<ProtectedRoute><LiveSessionRoom /></ProtectedRoute>} />
+            <Route path="/progress-challenges" element={<ProtectedRoute><ProgressChallenges /></ProtectedRoute>} />
+            <Route path="/progress-challenge/:challengeId" element={<ProtectedRoute><ProgressChallengeDetail /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
