@@ -241,6 +241,95 @@ export type Database = {
           },
         ]
       }
+      challenge_completions: {
+        Row: {
+          challenge_id: string
+          completed_at: string
+          created_at: string
+          id: string
+          notes: string | null
+          progress_value: number
+          user_id: string
+        }
+        Insert: {
+          challenge_id: string
+          completed_at?: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          progress_value: number
+          user_id: string
+        }
+        Update: {
+          challenge_id?: string
+          completed_at?: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          progress_value?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "challenge_completions_challenge_id_fkey"
+            columns: ["challenge_id"]
+            isOneToOne: false
+            referencedRelation: "challenges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      challenges: {
+        Row: {
+          badge_reward: string | null
+          category: string
+          challenge_type: string
+          created_at: string
+          description: string
+          end_date: string
+          id: string
+          is_active: boolean
+          points_reward: number
+          start_date: string
+          target_unit: string
+          target_value: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          badge_reward?: string | null
+          category: string
+          challenge_type: string
+          created_at?: string
+          description: string
+          end_date: string
+          id?: string
+          is_active?: boolean
+          points_reward?: number
+          start_date: string
+          target_unit: string
+          target_value: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          badge_reward?: string | null
+          category?: string
+          challenge_type?: string
+          created_at?: string
+          description?: string
+          end_date?: string
+          id?: string
+          is_active?: boolean
+          points_reward?: number
+          start_date?: string
+          target_unit?: string
+          target_value?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       content_likes: {
         Row: {
           content_id: string
@@ -484,6 +573,42 @@ export type Database = {
           },
         ]
       }
+      leaderboard_entries: {
+        Row: {
+          created_at: string
+          id: string
+          leaderboard_type: string
+          period_end: string
+          period_start: string
+          rank: number | null
+          score: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          leaderboard_type: string
+          period_end: string
+          period_start: string
+          rank?: number | null
+          score?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          leaderboard_type?: string
+          period_end?: string
+          period_start?: string
+          rank?: number | null
+          score?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       meal_plans: {
         Row: {
           created_at: string
@@ -684,6 +809,7 @@ export type Database = {
           age: number | null
           avatar_url: string | null
           created_at: string | null
+          current_streak: number
           exercise_goal: number | null
           fitness_level: string | null
           full_name: string | null
@@ -692,6 +818,8 @@ export type Database = {
           height: number | null
           height_unit: string | null
           id: string
+          last_activity_date: string | null
+          longest_streak: number
           move_goal: number | null
           onboarding_completed: boolean | null
           preferred_unit: string | null
@@ -708,6 +836,7 @@ export type Database = {
           stand_goal: number | null
           target_weight: number | null
           target_weight_unit: string | null
+          total_points: number
           updated_at: string | null
           username: string | null
           weight: number | null
@@ -717,6 +846,7 @@ export type Database = {
           age?: number | null
           avatar_url?: string | null
           created_at?: string | null
+          current_streak?: number
           exercise_goal?: number | null
           fitness_level?: string | null
           full_name?: string | null
@@ -725,6 +855,8 @@ export type Database = {
           height?: number | null
           height_unit?: string | null
           id: string
+          last_activity_date?: string | null
+          longest_streak?: number
           move_goal?: number | null
           onboarding_completed?: boolean | null
           preferred_unit?: string | null
@@ -741,6 +873,7 @@ export type Database = {
           stand_goal?: number | null
           target_weight?: number | null
           target_weight_unit?: string | null
+          total_points?: number
           updated_at?: string | null
           username?: string | null
           weight?: number | null
@@ -750,6 +883,7 @@ export type Database = {
           age?: number | null
           avatar_url?: string | null
           created_at?: string | null
+          current_streak?: number
           exercise_goal?: number | null
           fitness_level?: string | null
           full_name?: string | null
@@ -758,6 +892,8 @@ export type Database = {
           height?: number | null
           height_unit?: string | null
           id?: string
+          last_activity_date?: string | null
+          longest_streak?: number
           move_goal?: number | null
           onboarding_completed?: boolean | null
           preferred_unit?: string | null
@@ -774,6 +910,7 @@ export type Database = {
           stand_goal?: number | null
           target_weight?: number | null
           target_weight_unit?: string | null
+          total_points?: number
           updated_at?: string | null
           username?: string | null
           weight?: number | null
@@ -1304,6 +1441,39 @@ export type Database = {
         }
         Relationships: []
       }
+      user_badges: {
+        Row: {
+          badge_code: string
+          badge_description: string | null
+          badge_icon: string | null
+          badge_name: string
+          created_at: string
+          earned_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          badge_code: string
+          badge_description?: string | null
+          badge_icon?: string | null
+          badge_name: string
+          created_at?: string
+          earned_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          badge_code?: string
+          badge_description?: string | null
+          badge_icon?: string | null
+          badge_name?: string
+          created_at?: string
+          earned_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string | null
@@ -1554,6 +1724,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      award_points_and_streak: {
+        Args: { _points: number; _user_id: string }
+        Returns: undefined
+      }
       generate_referral_code: { Args: never; Returns: string }
       get_user_role: {
         Args: { _user_id: string }
