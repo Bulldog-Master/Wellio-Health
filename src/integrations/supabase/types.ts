@@ -188,6 +188,59 @@ export type Database = {
         }
         Relationships: []
       }
+      bookings: {
+        Row: {
+          booking_type: string
+          client_id: string
+          created_at: string | null
+          end_time: string | null
+          id: string
+          notes: string | null
+          price: number | null
+          program_id: string | null
+          start_time: string
+          status: string | null
+          trainer_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          booking_type: string
+          client_id: string
+          created_at?: string | null
+          end_time?: string | null
+          id?: string
+          notes?: string | null
+          price?: number | null
+          program_id?: string | null
+          start_time: string
+          status?: string | null
+          trainer_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          booking_type?: string
+          client_id?: string
+          created_at?: string | null
+          end_time?: string | null
+          id?: string
+          notes?: string | null
+          price?: number | null
+          program_id?: string | null
+          start_time?: string
+          status?: string | null
+          trainer_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_program_id_fkey"
+            columns: ["program_id"]
+            isOneToOne: false
+            referencedRelation: "trainer_programs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       habit_completions: {
         Row: {
           completed_at: string | null
@@ -976,6 +1029,152 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      trainer_profiles: {
+        Row: {
+          availability_calendar: Json | null
+          bio: string | null
+          certifications: string[] | null
+          created_at: string | null
+          experience_years: number | null
+          hourly_rate: number | null
+          id: string
+          is_verified: boolean | null
+          location: string | null
+          profile_image_url: string | null
+          rating: number | null
+          specialties: string[] | null
+          total_reviews: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          availability_calendar?: Json | null
+          bio?: string | null
+          certifications?: string[] | null
+          created_at?: string | null
+          experience_years?: number | null
+          hourly_rate?: number | null
+          id?: string
+          is_verified?: boolean | null
+          location?: string | null
+          profile_image_url?: string | null
+          rating?: number | null
+          specialties?: string[] | null
+          total_reviews?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          availability_calendar?: Json | null
+          bio?: string | null
+          certifications?: string[] | null
+          created_at?: string | null
+          experience_years?: number | null
+          hourly_rate?: number | null
+          id?: string
+          is_verified?: boolean | null
+          location?: string | null
+          profile_image_url?: string | null
+          rating?: number | null
+          specialties?: string[] | null
+          total_reviews?: number | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      trainer_programs: {
+        Row: {
+          category: string
+          created_at: string | null
+          description: string | null
+          difficulty_level: string | null
+          duration_weeks: number
+          id: string
+          is_active: boolean | null
+          max_participants: number | null
+          price: number | null
+          program_content: Json | null
+          program_type: string | null
+          thumbnail_url: string | null
+          title: string
+          trainer_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          category: string
+          created_at?: string | null
+          description?: string | null
+          difficulty_level?: string | null
+          duration_weeks: number
+          id?: string
+          is_active?: boolean | null
+          max_participants?: number | null
+          price?: number | null
+          program_content?: Json | null
+          program_type?: string | null
+          thumbnail_url?: string | null
+          title: string
+          trainer_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          description?: string | null
+          difficulty_level?: string | null
+          duration_weeks?: number
+          id?: string
+          is_active?: boolean | null
+          max_participants?: number | null
+          price?: number | null
+          program_content?: Json | null
+          program_type?: string | null
+          thumbnail_url?: string | null
+          title?: string
+          trainer_id?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      trainer_reviews: {
+        Row: {
+          booking_id: string | null
+          created_at: string | null
+          id: string
+          rating: number
+          review_text: string | null
+          reviewer_id: string
+          trainer_id: string
+        }
+        Insert: {
+          booking_id?: string | null
+          created_at?: string | null
+          id?: string
+          rating: number
+          review_text?: string | null
+          reviewer_id: string
+          trainer_id: string
+        }
+        Update: {
+          booking_id?: string | null
+          created_at?: string | null
+          id?: string
+          rating?: number
+          review_text?: string | null
+          reviewer_id?: string
+          trainer_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "trainer_reviews_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "bookings"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       trusted_devices: {
         Row: {

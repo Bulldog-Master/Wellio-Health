@@ -38,6 +38,8 @@ import BodyMeasurements from "./pages/BodyMeasurements";
 import MealPlanner from "./pages/MealPlanner";
 import MacrosDashboard from "./pages/MacrosDashboard";
 import WorkoutPrograms from "./pages/WorkoutPrograms";
+import TrainerMarketplace from "./pages/TrainerMarketplace";
+import TrainerSetup from "./pages/TrainerSetup";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -86,6 +88,8 @@ const App = () => {
             <Route path="/meal-planner" element={<ProtectedRoute><Layout><MealPlanner /></Layout></ProtectedRoute>} />
             <Route path="/macros" element={<ProtectedRoute><Layout><MacrosDashboard /></Layout></ProtectedRoute>} />
             <Route path="/workout-programs" element={<ProtectedRoute><Layout><WorkoutPrograms /></Layout></ProtectedRoute>} />
+            <Route path="/trainer/marketplace" element={<ProtectedRoute><Layout><TrainerMarketplace /></Layout></ProtectedRoute>} />
+            <Route path="/trainer/setup" element={<ProtectedRoute><Layout><TrainerSetup /></Layout></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
