@@ -76,13 +76,17 @@ const PrivacySecurity = () => {
       const { data: { session } } = await supabase.auth.getSession();
       console.log('[2FA Setup] Session check:', session ? 'Authenticated' : 'Not authenticated');
       
-      if (!session) {
+      if (!session?.access_token) {
         toast.error("You must be logged in to set up 2FA");
         return;
       }
 
       console.log('[2FA Setup] Calling totp-setup function...');
-      const { data, error } = await supabase.functions.invoke('totp-setup');
+      const { data, error } = await supabase.functions.invoke('totp-setup', {
+        headers: {
+          Authorization: `Bearer ${session.access_token}`
+        }
+      });
       
       console.log('[2FA Setup] Response:', { data, error });
       
