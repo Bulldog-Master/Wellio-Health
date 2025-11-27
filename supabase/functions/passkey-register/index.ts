@@ -14,35 +14,78 @@ serve(async (req) => {
   }
 
   try {
-    const { credentialId, publicKey, counter, deviceType, userId } = await req.json();
+    const body = await req.json();
+    console.log('[Passkey Register] Request body received:', {
+      hasCredentialId: !!body.credentialId,
+      hasPublicKey: !!body.publicKey,
+      hasUserId: !!body.userId,
+      counter: body.counter,
+      deviceType: body.deviceType
+    });
+
+    const { credentialId, publicKey, counter, deviceType, userId } = body;
+
+    if (!credentialId || !publicKey || !userId) {
+      console.error('[Passkey Register] Missing required fields');
+      return new Response(
+        JSON.stringify({ 
+          error: 'Missing required fields',
+          received: { hasCredentialId: !!credentialId, hasPublicKey: !!publicKey, hasUserId: !!userId }
+        }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     console.log('[Passkey Register] Storing credential for user:', userId);
 
+    const supabaseUrl = Deno.env.get('SUPABASE_URL');
+    const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+
+    if (!supabaseUrl || !supabaseKey) {
+      console.error('[Passkey Register] Missing environment variables');
+      return new Response(
+        JSON.stringify({ error: 'Server configuration error' }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     // Use service role key to bypass RLS
-    const supabaseAdmin = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
-    );
+    const supabaseAdmin = createClient(supabaseUrl, supabaseKey);
 
     // Store the credential
-    const { error } = await supabaseAdmin
+    const { data, error } = await supabaseAdmin
       .from('webauthn_credentials')
       .insert({
         user_id: userId,
         credential_id: credentialId,
         public_key: publicKey,
-        counter: counter,
+        counter: counter || 0,
         device_type: deviceType || 'unknown',
-      });
+      })
+      .select()
+      .single();
 
     if (error) {
-      console.error('[Passkey Register] Error storing credential:', error);
-      throw error;
+      console.error('[Passkey Register] Database error:', {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+        hint: error.hint
+      });
+      return new Response(
+        JSON.stringify({ 
+          error: 'Failed to store credential',
+          message: error.message,
+          code: error.code
+        }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
     }
 
-    console.log('[Passkey Register] Credential stored successfully!');
+    console.log('[Passkey Register] Credential stored successfully!', data?.id);
 
     return new Response(
-      JSON.stringify({ success: true }),
+      JSON.stringify({ success: true, id: data?.id }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {
