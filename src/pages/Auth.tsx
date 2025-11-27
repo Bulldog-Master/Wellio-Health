@@ -188,7 +188,7 @@ const Auth = () => {
         body: { token: totpCode }
       });
 
-      if (error || !data?.valid) {
+      if (error || !data?.verified) {
         // Sign out if verification fails
         await supabase.auth.signOut();
         throw new Error('Invalid authentication code. Please try again.');
