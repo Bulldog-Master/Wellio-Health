@@ -1839,8 +1839,222 @@ export type Database = {
           },
         ]
       }
+      recipe_collaborations: {
+        Row: {
+          accepted: boolean | null
+          accepted_at: string | null
+          collaborator_id: string
+          id: string
+          invited_at: string
+          invited_by: string
+          recipe_id: string
+          role: string
+        }
+        Insert: {
+          accepted?: boolean | null
+          accepted_at?: string | null
+          collaborator_id: string
+          id?: string
+          invited_at?: string
+          invited_by: string
+          recipe_id: string
+          role?: string
+        }
+        Update: {
+          accepted?: boolean | null
+          accepted_at?: string | null
+          collaborator_id?: string
+          id?: string
+          invited_at?: string
+          invited_by?: string
+          recipe_id?: string
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recipe_collaborations_recipe_id_fkey"
+            columns: ["recipe_id"]
+            isOneToOne: false
+            referencedRelation: "recipes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recipe_comments: {
+        Row: {
+          comment: string
+          created_at: string
+          id: string
+          parent_comment_id: string | null
+          recipe_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          comment: string
+          created_at?: string
+          id?: string
+          parent_comment_id?: string | null
+          recipe_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          comment?: string
+          created_at?: string
+          id?: string
+          parent_comment_id?: string | null
+          recipe_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recipe_comments_parent_comment_id_fkey"
+            columns: ["parent_comment_id"]
+            isOneToOne: false
+            referencedRelation: "recipe_comments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recipe_comments_recipe_id_fkey"
+            columns: ["recipe_id"]
+            isOneToOne: false
+            referencedRelation: "recipes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recipe_remixes: {
+        Row: {
+          created_at: string
+          id: string
+          original_recipe_id: string
+          remix_notes: string | null
+          remixed_recipe_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          original_recipe_id: string
+          remix_notes?: string | null
+          remixed_recipe_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          original_recipe_id?: string
+          remix_notes?: string | null
+          remixed_recipe_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recipe_remixes_original_recipe_id_fkey"
+            columns: ["original_recipe_id"]
+            isOneToOne: false
+            referencedRelation: "recipes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recipe_remixes_remixed_recipe_id_fkey"
+            columns: ["remixed_recipe_id"]
+            isOneToOne: false
+            referencedRelation: "recipes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recipe_shares: {
+        Row: {
+          created_at: string
+          id: string
+          recipe_id: string
+          share_type: string
+          shared_by: string
+          shared_with: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          recipe_id: string
+          share_type?: string
+          shared_by: string
+          shared_with?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          recipe_id?: string
+          share_type?: string
+          shared_by?: string
+          shared_with?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recipe_shares_recipe_id_fkey"
+            columns: ["recipe_id"]
+            isOneToOne: false
+            referencedRelation: "recipes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recipe_versions: {
+        Row: {
+          change_notes: string | null
+          cook_time: number | null
+          created_at: string
+          created_by: string
+          id: string
+          ingredients: Json
+          instructions: string
+          prep_time: number | null
+          recipe_id: string
+          servings: number | null
+          title: string
+          version_number: number
+        }
+        Insert: {
+          change_notes?: string | null
+          cook_time?: number | null
+          created_at?: string
+          created_by: string
+          id?: string
+          ingredients?: Json
+          instructions: string
+          prep_time?: number | null
+          recipe_id: string
+          servings?: number | null
+          title: string
+          version_number: number
+        }
+        Update: {
+          change_notes?: string | null
+          cook_time?: number | null
+          created_at?: string
+          created_by?: string
+          id?: string
+          ingredients?: Json
+          instructions?: string
+          prep_time?: number | null
+          recipe_id?: string
+          servings?: number | null
+          title?: string
+          version_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recipe_versions_recipe_id_fkey"
+            columns: ["recipe_id"]
+            isOneToOne: false
+            referencedRelation: "recipes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       recipes: {
         Row: {
+          allow_remixing: boolean | null
           category: string
           created_at: string
           description: string | null
@@ -1848,11 +2062,15 @@ export type Database = {
           image_url: string | null
           ingredients: string | null
           instructions: string | null
+          is_collaborative: boolean | null
+          is_public: boolean | null
           name: string
           updated_at: string
           user_id: string
+          version_number: number | null
         }
         Insert: {
+          allow_remixing?: boolean | null
           category: string
           created_at?: string
           description?: string | null
@@ -1860,11 +2078,15 @@ export type Database = {
           image_url?: string | null
           ingredients?: string | null
           instructions?: string | null
+          is_collaborative?: boolean | null
+          is_public?: boolean | null
           name: string
           updated_at?: string
           user_id: string
+          version_number?: number | null
         }
         Update: {
+          allow_remixing?: boolean | null
           category?: string
           created_at?: string
           description?: string | null
@@ -1872,9 +2094,12 @@ export type Database = {
           image_url?: string | null
           ingredients?: string | null
           instructions?: string | null
+          is_collaborative?: boolean | null
+          is_public?: boolean | null
           name?: string
           updated_at?: string
           user_id?: string
+          version_number?: number | null
         }
         Relationships: []
       }

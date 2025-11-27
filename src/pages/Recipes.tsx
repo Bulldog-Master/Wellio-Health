@@ -435,7 +435,11 @@ const Recipes = () => {
                         </div>
                       ) : (
                         categoryRecipes.map((recipe) => (
-                          <Card key={recipe.id} className="p-4 bg-accent/5">
+                          <Card 
+                            key={recipe.id} 
+                            className="p-4 bg-accent/5 cursor-pointer hover:bg-accent/10 transition-colors"
+                            onClick={() => navigate(`/recipe/${recipe.id}`)}
+                          >
                             <div className="flex gap-4">
                               {recipe.image_url && (
                                 <img 
@@ -450,13 +454,13 @@ const Recipes = () => {
                                   <p className="text-sm text-muted-foreground mb-2">{recipe.description}</p>
                                 )}
                                 {recipe.ingredients && (
-                                  <details className="text-sm">
+                                  <details className="text-sm" onClick={(e) => e.stopPropagation()}>
                                     <summary className="cursor-pointer text-primary">View Ingredients</summary>
                                     <pre className="mt-2 whitespace-pre-wrap">{recipe.ingredients}</pre>
                                   </details>
                                 )}
                                 {recipe.instructions && (
-                                  <details className="text-sm mt-2">
+                                  <details className="text-sm mt-2" onClick={(e) => e.stopPropagation()}>
                                     <summary className="cursor-pointer text-primary">View Instructions</summary>
                                     <pre className="mt-2 whitespace-pre-wrap">{recipe.instructions}</pre>
                                   </details>
@@ -466,14 +470,20 @@ const Recipes = () => {
                                 <Button
                                   variant="ghost"
                                   size="icon"
-                                  onClick={() => handleEditRecipe(recipe)}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleEditRecipe(recipe);
+                                  }}
                                 >
                                   <Pencil className="w-4 h-4" />
                                 </Button>
                                 <Button
                                   variant="ghost"
                                   size="icon"
-                                  onClick={() => handleDeleteRecipe(recipe.id)}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleDeleteRecipe(recipe.id);
+                                  }}
                                 >
                                   <Trash2 className="w-4 h-4" />
                                 </Button>

@@ -59,6 +59,7 @@ import LiveWorkoutSessions from "./pages/LiveWorkoutSessions";
 import LiveSessionRoom from "./pages/LiveSessionRoom";
 import ProgressChallenges from "./pages/ProgressChallenges";
 import ProgressChallengeDetail from "./pages/ProgressChallengeDetail";
+import RecipeDetail from "./pages/RecipeDetail";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -127,6 +128,7 @@ const App = () => {
             <Route path="/live-session/:sessionId" element={<ProtectedRoute><LiveSessionRoom /></ProtectedRoute>} />
             <Route path="/progress-challenges" element={<ProtectedRoute><ProgressChallenges /></ProtectedRoute>} />
             <Route path="/progress-challenge/:challengeId" element={<ProtectedRoute><ProgressChallengeDetail /></ProtectedRoute>} />
+            <Route path="/recipe/:recipeId" element={<ProtectedRoute><RecipeDetail /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
