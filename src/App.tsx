@@ -30,6 +30,9 @@ import OrdersPayments from "./pages/OrdersPayments";
 import Support from "./pages/Support";
 import SettingsMenu from "./pages/SettingsMenu";
 import TrustedDevices from "./pages/TrustedDevices";
+import WaterIntake from "./pages/WaterIntake";
+import SleepTracking from "./pages/SleepTracking";
+import ProgressPhotos from "./pages/ProgressPhotos";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -72,6 +75,9 @@ const App = () => {
             <Route path="/settings/notifications" element={<ProtectedRoute><Layout><NotificationSettings /></Layout></ProtectedRoute>} />
             <Route path="/settings/orders-payments" element={<ProtectedRoute><Layout><OrdersPayments /></Layout></ProtectedRoute>} />
             <Route path="/settings/support" element={<ProtectedRoute><Layout><Support /></Layout></ProtectedRoute>} />
+            <Route path="/water-intake" element={<ProtectedRoute><Layout><WaterIntake /></Layout></ProtectedRoute>} />
+            <Route path="/sleep-tracking" element={<ProtectedRoute><Layout><SleepTracking /></Layout></ProtectedRoute>} />
+            <Route path="/progress-photos" element={<ProtectedRoute><Layout><ProgressPhotos /></Layout></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
