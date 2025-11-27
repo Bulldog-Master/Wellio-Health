@@ -388,47 +388,33 @@ const Auth = () => {
 
         console.log('[Passkey] Account created, storing passkey credential...');
         console.log('[Passkey] User ID:', authData.user.id);
-        console.log('[Passkey] Credential data:', {
-          credentialId: passkeyData.credentialId?.substring(0, 20) + '...',
-          publicKey: passkeyData.publicKey?.substring(0, 20) + '...',
-          counter: passkeyData.counter,
-        });
+        console.log('[Passkey] Full credential data:', passkeyData);
 
-        // Store the passkey in the database using direct fetch
-        const functionUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/passkey-register`;
-        console.log('[Passkey] Calling function at:', functionUrl);
+        // Try using supabase.functions.invoke instead
+        console.log('[Passkey] Attempting to store credential using Supabase client...');
         
         try {
-          const response = await fetch(functionUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'apikey': import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-            },
-            body: JSON.stringify({
+          const { data: functionData, error: functionError } = await supabase.functions.invoke('passkey-register', {
+            body: {
               credentialId: passkeyData.credentialId,
               publicKey: passkeyData.publicKey,
               counter: passkeyData.counter,
               deviceType: 'platform',
               userId: authData.user.id,
-            }),
+            },
           });
 
-          console.log('[Passkey] Response status:', response.status);
-          console.log('[Passkey] Response headers:', Object.fromEntries(response.headers.entries()));
+          console.log('[Passkey] Function response:', { data: functionData, error: functionError });
 
-          const responseText = await response.text();
-          console.log('[Passkey] Response body:', responseText);
-
-          if (!response.ok) {
-            console.error('[Passkey] Registration failed with status:', response.status);
-            throw new Error(`Failed to store passkey: ${response.status} - ${responseText}`);
+          if (functionError) {
+            console.error('[Passkey] Function error:', functionError);
+            throw new Error(`Failed to store passkey: ${functionError.message}`);
           }
 
-          console.log('[Passkey] Registration successful!');
-        } catch (fetchError) {
-          console.error('[Passkey] Fetch error details:', fetchError);
-          throw fetchError;
+          console.log('[Passkey] Registration successful!', functionData);
+        } catch (invokeError) {
+          console.error('[Passkey] Invoke error details:', invokeError);
+          throw invokeError;
         }
 
         console.log('[Passkey] Registration complete!');
