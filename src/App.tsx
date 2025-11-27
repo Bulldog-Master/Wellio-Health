@@ -79,7 +79,7 @@ const PersonalRecords = lazy(() => import("./pages/PersonalRecords"));
 const AdvancedAnalytics = lazy(() => import("./pages/AdvancedAnalytics"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Install = lazy(() => import("./pages/Install"));
-const Stories = lazy(() => import("./pages/Stories"));
+const PWAFeatures = lazy(() => import("./pages/PWAFeatures"));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -174,7 +174,7 @@ const AppContent = () => {
             <Route path="/personal-records" element={<ProtectedRoute><Layout><PersonalRecords /></Layout></ProtectedRoute>} />
             <Route path="/analytics" element={<ProtectedRoute><Layout><AdvancedAnalytics /></Layout></ProtectedRoute>} />
             <Route path="/dashboard" element={<ProtectedRoute><Layout><Dashboard /></Layout></ProtectedRoute>} />
-            <Route path="/stories" element={<ProtectedRoute><Layout><Stories /></Layout></ProtectedRoute>} />
+            <Route path="/pwa-features" element={<ProtectedRoute><Layout><PWAFeatures /></Layout></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

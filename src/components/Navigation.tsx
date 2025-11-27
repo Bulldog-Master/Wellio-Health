@@ -34,7 +34,11 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border md:relative md:border-0 md:bg-transparent">
+    <nav 
+      className="fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border md:relative md:border-0 md:bg-transparent"
+      aria-label="Main navigation"
+      role="navigation"
+    >
       <div className="flex justify-around md:flex-col md:gap-2 md:p-4">
         {navItems.map(({ to, icon: Icon, label, color }) => {
           const isNotifications = to === "/notifications";
@@ -48,10 +52,15 @@ const Navigation = () => {
                 "md:rounded-lg md:hover:bg-sidebar-accent"
               )}
               activeClassName="text-sidebar-foreground font-medium md:bg-sidebar-accent"
+              aria-label={`Navigate to ${label}`}
             >
-              <Icon className={cn("w-5 h-5", color)} />
+              <Icon className={cn("w-5 h-5", color)} aria-hidden="true" />
               {isNotifications && unreadCount && unreadCount > 0 && (
-                <Badge variant="destructive" className="absolute top-1 right-1 h-5 w-5 flex items-center justify-center p-0 text-xs md:top-2 md:right-2">
+                <Badge 
+                  variant="destructive" 
+                  className="absolute top-1 right-1 h-5 w-5 flex items-center justify-center p-0 text-xs md:top-2 md:right-2"
+                  aria-label={`${unreadCount} unread notifications`}
+                >
                   {unreadCount > 9 ? "9+" : unreadCount}
                 </Badge>
               )}
