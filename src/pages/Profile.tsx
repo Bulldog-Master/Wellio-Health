@@ -515,7 +515,7 @@ const Profile = () => {
 
               {/* Privacy & Security */}
               <button 
-                onClick={() => navigate("/settings")}
+                onClick={() => navigate("/settings/privacy-security")}
                 className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left border-b"
               >
                 <div className="p-2 bg-destructive/20 rounded-lg">
@@ -529,7 +529,7 @@ const Profile = () => {
 
               {/* Orders & Payments */}
               <button 
-                onClick={() => navigate("/settings")}
+                onClick={() => navigate("/settings/orders-payments")}
                 className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left border-b"
               >
                 <div className="p-2 bg-warning/20 rounded-lg">
@@ -543,7 +543,7 @@ const Profile = () => {
 
               {/* Notifications */}
               <button 
-                onClick={() => navigate("/settings")}
+                onClick={() => navigate("/settings/notifications")}
                 className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left border-b"
               >
                 <div className="p-2 bg-secondary/20 rounded-lg">
@@ -557,7 +557,7 @@ const Profile = () => {
 
               {/* Support */}
               <button 
-                onClick={() => navigate("/settings")}
+                onClick={() => navigate("/settings/support")}
                 className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left"
               >
                 <div className="p-2 bg-primary/20 rounded-lg">
