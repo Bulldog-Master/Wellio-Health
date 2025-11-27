@@ -159,11 +159,11 @@ const Profile = () => {
         title: "Profile updated",
         description: "Your profile information has been saved successfully.",
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error saving profile:', error);
       toast({
         title: "Error",
-        description: "Failed to save profile.",
+        description: error?.message || "Failed to save profile.",
         variant: "destructive",
       });
     } finally {
