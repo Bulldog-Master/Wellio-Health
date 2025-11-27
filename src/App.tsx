@@ -8,6 +8,7 @@ import { ThemeProvider } from "next-themes";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
 import { useAppKeyboardShortcuts } from "@/hooks/useKeyboardNavigation";
 import { SkipToContent } from "@/components/SkipToContent";
+import { KeyboardShortcutsHelp } from "@/components/KeyboardShortcutsHelp";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -108,6 +109,7 @@ const AppContent = () => {
   return (
     <>
       <SkipToContent />
+      <KeyboardShortcutsHelp />
       <Suspense fallback={<PageLoader />}>
         <Routes>
         <Route path="/auth" element={<Auth />} />
