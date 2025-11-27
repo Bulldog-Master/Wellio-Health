@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { Shield, Key, Download, Trash2, ArrowLeft } from "lucide-react";
 import { isWebAuthnSupported, registerPasskey } from "@/lib/webauthn";
@@ -23,6 +24,8 @@ const PrivacySecurity = () => {
   const [passkeys, setPasskeys] = useState<any[]>([]);
   const [email, setEmail] = useState("");
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [twoFAEnabled, setTwoFAEnabled] = useState(false);
+  const [passkeyEnabled, setPasskeyEnabled] = useState(false);
 
   useEffect(() => {
     fetchPasskeys();
@@ -46,6 +49,8 @@ const PrivacySecurity = () => {
 
       if (error) throw error;
       setPasskeys(data || []);
+      setTwoFAEnabled(data && data.length > 0);
+      setPasskeyEnabled(data && data.length > 0);
     } catch (error) {
       console.error("Error fetching passkeys:", error);
     }
@@ -188,43 +193,79 @@ const PrivacySecurity = () => {
 
       {/* Two-Factor Authentication */}
       <Card className="p-6">
-        <div className="flex items-start gap-4 mb-6">
-          <Shield className="w-6 h-6 text-primary mt-1" />
-          <div className="flex-1">
-            <h3 className="font-semibold mb-1">Two-Factor Authentication</h3>
-            <p className="text-sm text-muted-foreground">
-              Secure your account with passkeys
-            </p>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-start gap-4">
+            <Shield className="w-6 h-6 text-primary mt-1" />
+            <div className="flex-1">
+              <h3 className="font-semibold mb-1">Activate 2FA</h3>
+              <p className="text-sm text-muted-foreground">
+                Enable two-factor authentication for extra security
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium">{twoFAEnabled ? "ON" : "OFF"}</span>
+            <Switch
+              checked={twoFAEnabled}
+              onCheckedChange={(checked) => {
+                if (checked) {
+                  handleAddPasskey();
+                } else {
+                  setTwoFAEnabled(false);
+                }
+              }}
+            />
           </div>
         </div>
-
-        <div className="space-y-4">
-          <Button onClick={handleAddPasskey} variant="outline" size="sm">
-            <Key className="w-4 h-4 mr-2" />
-            Add Passkey
-          </Button>
           
-          {passkeys.length > 0 && (
-            <div className="space-y-2">
-              {passkeys.map((passkey) => (
-                <div key={passkey.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                  <div className="text-sm">
-                    <p className="font-medium">{passkey.device_type || "Unknown Device"}</p>
-                    <p className="text-xs text-muted-foreground">
-                      Added {new Date(passkey.created_at).toLocaleDateString()}
-                    </p>
-                  </div>
-                  <Button
-                    onClick={() => handleDeletePasskey(passkey.id)}
-                    variant="ghost"
-                    size="sm"
-                  >
-                    Remove
-                  </Button>
+        {passkeys.length > 0 && (
+          <div className="space-y-2 pt-4 border-t">
+            {passkeys.map((passkey) => (
+              <div key={passkey.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                <div className="text-sm">
+                  <p className="font-medium">{passkey.device_type || "Unknown Device"}</p>
+                  <p className="text-xs text-muted-foreground">
+                    Added {new Date(passkey.created_at).toLocaleDateString()}
+                  </p>
                 </div>
-              ))}
+                <Button
+                  onClick={() => handleDeletePasskey(passkey.id)}
+                  variant="ghost"
+                  size="sm"
+                >
+                  Remove
+                </Button>
+              </div>
+            ))}
+          </div>
+        )}
+      </Card>
+
+      {/* Passkey */}
+      <Card className="p-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-start gap-4">
+            <Key className="w-6 h-6 text-primary mt-1" />
+            <div className="flex-1">
+              <h3 className="font-semibold mb-1">Activate Passkey</h3>
+              <p className="text-sm text-muted-foreground">
+                Use biometric authentication to sign in
+              </p>
             </div>
-          )}
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium">{passkeyEnabled ? "ON" : "OFF"}</span>
+            <Switch
+              checked={passkeyEnabled}
+              onCheckedChange={(checked) => {
+                if (checked) {
+                  handleAddPasskey();
+                } else {
+                  setPasskeyEnabled(false);
+                }
+              }}
+            />
+          </div>
         </div>
       </Card>
 

@@ -499,20 +499,6 @@ const Profile = () => {
           </CollapsibleTrigger>
           <CollapsibleContent>
             <div className="border-t">
-              {/* Profile Settings */}
-              <button 
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left border-b"
-              >
-                <div className="p-2 bg-accent/20 rounded-lg">
-                  <UserCircle className="w-5 h-5 text-accent" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-medium">Profile</h4>
-                  <p className="text-sm text-muted-foreground">Manage your profile settings</p>
-                </div>
-              </button>
-
               {/* Privacy & Security */}
               <button 
                 onClick={() => navigate("/settings/privacy-security")}
