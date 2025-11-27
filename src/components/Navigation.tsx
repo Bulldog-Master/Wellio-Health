@@ -1,11 +1,13 @@
-import { Home, User, Scale, Utensils, BookOpen, Dumbbell, Gift, Activity, CheckSquare, Stethoscope, FileHeart, Sparkles, Users, Trophy, Ruler, Calendar, PieChart, CalendarRange } from "lucide-react";
+import { Home, User, Scale, Utensils, BookOpen, Dumbbell, Gift, Activity, CheckSquare, Stethoscope, FileHeart, Sparkles, Users, Trophy, Ruler, Calendar, PieChart, CalendarRange, Compass, Video } from "lucide-react";
 import { NavLink } from "./NavLink";
 import { cn } from "@/lib/utils";
 
 const Navigation = () => {
   const navItems = [
     { to: "/", icon: Home, label: "Dashboard", color: "text-nav-icon-1" },
+    { to: "/discover", icon: Compass, label: "Discover", color: "text-nav-icon-15" },
     { to: "/trainer/marketplace", icon: Users, label: "Trainers", color: "text-nav-icon-14" },
+    { to: "/creator/hub", icon: Video, label: "Creator Hub", color: "text-nav-icon-16" },
     { to: "/food", icon: Utensils, label: "Food", color: "text-nav-icon-2" },
     { to: "/recipes", icon: BookOpen, label: "Recipes", color: "text-nav-icon-3" },
     { to: "/activity", icon: Activity, label: "Activity", color: "text-nav-icon-4" },
