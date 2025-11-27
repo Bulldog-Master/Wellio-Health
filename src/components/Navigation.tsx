@@ -1,4 +1,4 @@
-import { Home, Utensils, Gift, Activity, FileHeart, Sparkles, Users, Trophy, Ruler, PieChart, CalendarRange, Compass, Video, Target, TrendingUp, MessageSquare, Bell, Search, Mail } from "lucide-react";
+import { Home, Utensils, Gift, Activity, FileHeart, Sparkles, Users, Trophy, Ruler, PieChart, CalendarRange, Compass, Video, Target, TrendingUp, MessageSquare, Bell, Search, Mail, Bookmark } from "lucide-react";
 import { NavLink } from "./NavLink";
 import { cn } from "@/lib/utils";
 import { Badge } from "./ui/badge";
@@ -10,6 +10,7 @@ const Navigation = () => {
   const navItems = [
     { to: "/", icon: Home, label: "Dashboard", color: "text-nav-icon-1" },
     { to: "/feed", icon: MessageSquare, label: "Feed", color: "text-secondary" },
+    { to: "/bookmarks", icon: Bookmark, label: "Bookmarks", color: "text-primary" },
     { to: "/messages", icon: Mail, label: "Messages", color: "text-blue-500" },
     { to: "/search", icon: Search, label: "Search", color: "text-primary" },
     { to: "/notifications", icon: Bell, label: "Notifications", color: "text-warning" },
