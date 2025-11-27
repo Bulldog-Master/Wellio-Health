@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -13,6 +14,7 @@ import { formatDistanceToNow } from "date-fns";
 
 const Feed = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [postContent, setPostContent] = useState("");
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
@@ -206,7 +208,10 @@ const Feed = () => {
           <Card key={post.id}>
             <CardHeader>
               <div className="flex items-center gap-3">
-                <Avatar>
+                <Avatar 
+                  className="cursor-pointer"
+                  onClick={() => navigate(`/user/${post.user_id}`)}
+                >
                   {post.profile?.avatar_url ? (
                     <AvatarImage src={post.profile.avatar_url} alt={post.profile.full_name || "User"} />
                   ) : (
@@ -216,7 +221,12 @@ const Feed = () => {
                   )}
                 </Avatar>
                 <div className="flex-1">
-                  <p className="font-semibold">{post.profile?.full_name || "Anonymous"}</p>
+                  <p 
+                    className="font-semibold cursor-pointer hover:underline"
+                    onClick={() => navigate(`/user/${post.user_id}`)}
+                  >
+                    {post.profile?.full_name || "Anonymous"}
+                  </p>
                   <p className="text-sm text-muted-foreground">
                     {formatDistanceToNow(new Date(post.created_at), { addSuffix: true })}
                   </p>
