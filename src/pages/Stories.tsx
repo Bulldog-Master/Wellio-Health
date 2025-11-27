@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { useRealtimeStories } from "@/hooks/useRealtimeStories";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -20,11 +21,12 @@ const Stories = () => {
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const [viewDialogOpen, setViewDialogOpen] = useState(false);
   const [selectedStory, setSelectedStory] = useState<any>(null);
-  const [storyContent, setStoryContent] = useState("");
+  const [caption, setCaption] = useState("");
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [closeFriendsOnly, setCloseFriendsOnly] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  
+  useRealtimeStories();
 
   // Fetch active stories
   const { data: stories } = useQuery({
@@ -70,35 +72,32 @@ const Stories = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Not authenticated");
 
-      let mediaUrl = null;
-      let mediaType = null;
-
-      if (uploadedImage) {
-        const fileExt = uploadedImage.name.split(".").pop();
-        const fileName = `${user.id}/${Date.now()}.${fileExt}`;
-
-        const { error: uploadError } = await supabase.storage
-          .from("post-images")
-          .upload(fileName, uploadedImage);
-
-        if (uploadError) throw uploadError;
-
-        const { data } = supabase.storage
-          .from("post-images")
-          .getPublicUrl(fileName);
-
-        mediaUrl = data.publicUrl;
-        mediaType = "image";
+      if (!uploadedImage) {
+        throw new Error("Please add an image to your story");
       }
+
+      const fileExt = uploadedImage.name.split(".").pop();
+      const fileName = `${user.id}/${Date.now()}.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("post-images")
+        .upload(fileName, uploadedImage);
+
+      if (uploadError) throw uploadError;
+
+      const { data } = supabase.storage
+        .from("post-images")
+        .getPublicUrl(fileName);
+
+      const mediaUrl = data.publicUrl;
 
       const { error } = await supabase
         .from("stories")
         .insert({
           user_id: user.id,
-          content: storyContent,
+          caption: caption || null,
           media_url: mediaUrl,
-          media_type: mediaType,
-          close_friends_only: closeFriendsOnly,
+          media_type: "image",
         });
 
       if (error) throw error;
@@ -106,11 +105,10 @@ const Stories = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["stories"] });
       setCreateDialogOpen(false);
-      setStoryContent("");
+      setCaption("");
       setUploadedImage(null);
       setImagePreview(null);
-      setCloseFriendsOnly(false);
-      toast({ title: "Story created!" });
+      toast({ title: "Story shared! Expires in 24 hours" });
     },
   });
 
@@ -211,10 +209,10 @@ const Stories = () => {
           </DialogHeader>
           <div className="space-y-4">
             <Textarea
-              placeholder="Share something... (expires in 24 hours)"
-              value={storyContent}
-              onChange={(e) => setStoryContent(e.target.value)}
-              rows={3}
+              placeholder="Add a caption... (optional)"
+              value={caption}
+              onChange={(e) => setCaption(e.target.value)}
+              rows={2}
             />
 
             {imagePreview && (
@@ -238,25 +236,6 @@ const Stories = () => {
               </div>
             )}
 
-            <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
-              <div className="flex items-center gap-3">
-                <Heart className="w-5 h-5 text-pink-500 fill-pink-500" />
-                <div>
-                  <Label htmlFor="close-friends" className="font-medium">
-                    Share with Close Friends Only
-                  </Label>
-                  <p className="text-xs text-muted-foreground">
-                    Only people on your close friends list will see this
-                  </p>
-                </div>
-              </div>
-              <Switch
-                id="close-friends"
-                checked={closeFriendsOnly}
-                onCheckedChange={setCloseFriendsOnly}
-              />
-            </div>
-
             <div className="flex justify-between">
               <input
                 ref={fileInputRef}
@@ -274,9 +253,9 @@ const Stories = () => {
               </Button>
               <Button
                 onClick={() => createStory.mutate()}
-                disabled={(!storyContent.trim() && !uploadedImage) || createStory.isPending}
+                disabled={!uploadedImage || createStory.isPending}
               >
-                {createStory.isPending ? "Creating..." : "Share Story"}
+                {createStory.isPending ? "Sharing..." : "Share Story"}
               </Button>
             </div>
           </div>
@@ -320,8 +299,8 @@ const Stories = () => {
                 />
               )}
 
-              {selectedStory.stories[0].content && (
-                <p className="text-lg">{selectedStory.stories[0].content}</p>
+              {selectedStory.stories[0].caption && (
+                <p className="text-lg">{selectedStory.stories[0].caption}</p>
               )}
             </div>
           )}
