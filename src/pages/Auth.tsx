@@ -388,6 +388,13 @@ const Auth = () => {
 
         console.log('[Passkey] Account created, storing passkey credential...');
 
+        // Get the session token to authenticate with the edge function
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (!session?.access_token) {
+          throw new Error('Failed to get authentication session');
+        }
+
         // Store the passkey in the database
         const { error: registerError } = await supabase.functions.invoke('passkey-register', {
           body: {
