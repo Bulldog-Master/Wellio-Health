@@ -24,7 +24,10 @@ import FitnessGoals from "./pages/FitnessGoals";
 import Achievements from "./pages/Achievements";
 import StepCount from "./pages/StepCount";
 import Onboarding from "./pages/Onboarding";
-import Settings from "./pages/Settings";
+import PrivacySecurity from "./pages/PrivacySecurity";
+import NotificationSettings from "./pages/NotificationSettings";
+import OrdersPayments from "./pages/OrdersPayments";
+import Support from "./pages/Support";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -61,7 +64,11 @@ const App = () => {
             <Route path="/fitness-goals" element={<ProtectedRoute><Layout><FitnessGoals /></Layout></ProtectedRoute>} />
             <Route path="/achievements" element={<ProtectedRoute><Layout><Achievements /></Layout></ProtectedRoute>} />
             <Route path="/step-count" element={<ProtectedRoute><StepCount /></ProtectedRoute>} />
-            <Route path="/settings" element={<ProtectedRoute><Layout><Settings /></Layout></ProtectedRoute>} />
+            <Route path="/settings" element={<ProtectedRoute><Layout><PrivacySecurity /></Layout></ProtectedRoute>} />
+            <Route path="/settings/privacy-security" element={<ProtectedRoute><Layout><PrivacySecurity /></Layout></ProtectedRoute>} />
+            <Route path="/settings/notifications" element={<ProtectedRoute><Layout><NotificationSettings /></Layout></ProtectedRoute>} />
+            <Route path="/settings/orders-payments" element={<ProtectedRoute><Layout><OrdersPayments /></Layout></ProtectedRoute>} />
+            <Route path="/settings/support" element={<ProtectedRoute><Layout><Support /></Layout></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
