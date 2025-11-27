@@ -1777,6 +1777,100 @@ export type Database = {
           },
         ]
       }
+      program_enrollments: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          current_day: number | null
+          current_week: number | null
+          id: string
+          program_id: string
+          started_at: string
+          status: string | null
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          current_day?: number | null
+          current_week?: number | null
+          id?: string
+          program_id: string
+          started_at?: string
+          status?: string | null
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          current_day?: number | null
+          current_week?: number | null
+          id?: string
+          program_id?: string
+          started_at?: string
+          status?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "program_enrollments_program_id_fkey"
+            columns: ["program_id"]
+            isOneToOne: false
+            referencedRelation: "workout_programs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      program_exercises: {
+        Row: {
+          created_at: string
+          day_number: number
+          duration_minutes: number | null
+          exercise_name: string
+          id: string
+          notes: string | null
+          program_id: string
+          reps: string | null
+          sets: number | null
+          sort_order: number | null
+          week_number: number
+        }
+        Insert: {
+          created_at?: string
+          day_number: number
+          duration_minutes?: number | null
+          exercise_name: string
+          id?: string
+          notes?: string | null
+          program_id: string
+          reps?: string | null
+          sets?: number | null
+          sort_order?: number | null
+          week_number: number
+        }
+        Update: {
+          created_at?: string
+          day_number?: number
+          duration_minutes?: number | null
+          exercise_name?: string
+          id?: string
+          notes?: string | null
+          program_id?: string
+          reps?: string | null
+          sets?: number | null
+          sort_order?: number | null
+          week_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "program_exercises_program_id_fkey"
+            columns: ["program_id"]
+            isOneToOne: false
+            referencedRelation: "workout_programs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       progress_photos: {
         Row: {
           created_at: string
@@ -2864,6 +2958,7 @@ export type Database = {
           duration_weeks: number
           id: string
           is_active: boolean | null
+          is_public: boolean | null
           name: string
           start_date: string | null
           updated_at: string
@@ -2876,6 +2971,7 @@ export type Database = {
           duration_weeks: number
           id?: string
           is_active?: boolean | null
+          is_public?: boolean | null
           name: string
           start_date?: string | null
           updated_at?: string
@@ -2888,6 +2984,7 @@ export type Database = {
           duration_weeks?: number
           id?: string
           is_active?: boolean | null
+          is_public?: boolean | null
           name?: string
           start_date?: string | null
           updated_at?: string
