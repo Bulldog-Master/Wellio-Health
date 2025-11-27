@@ -37,16 +37,23 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
         return;
       }
 
-      // Check if 2FA is enabled and needs verification
+      // Check onboarding status
       const { data: profile } = await supabase
         .from("profiles")
-        .select("onboarding_completed, two_factor_enabled")
+        .select("onboarding_completed")
         .eq("id", session.user.id)
+        .single();
+
+      // Check if 2FA is enabled
+      const { data: authSecret } = await supabase
+        .from("auth_secrets")
+        .select("two_factor_enabled")
+        .eq("user_id", session.user.id)
         .single();
 
       // Check if 2FA is enabled and not yet verified in this session
       const twoFactorVerified = sessionStorage.getItem(`2fa_verified_${session.user.id}`);
-      if (profile?.two_factor_enabled && !twoFactorVerified) {
+      if (authSecret?.two_factor_enabled && !twoFactorVerified) {
         setNeeds2FA(true);
         setLoading(false);
         return;

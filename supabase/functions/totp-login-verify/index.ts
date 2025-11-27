@@ -50,18 +50,18 @@ serve(async (req) => {
     console.log('[TOTP Login Verify] TOTP token received, length:', totpToken?.length);
 
     // Fetch the user's 2FA secret
-    console.log('[TOTP Login Verify] Fetching user profile...');
-    const { data: profile, error: profileError } = await supabaseAdmin
-      .from('profiles')
+    console.log('[TOTP Login Verify] Fetching user auth secrets...');
+    const { data: authSecret, error: secretError } = await supabaseAdmin
+      .from('auth_secrets')
       .select('two_factor_secret, two_factor_enabled')
-      .eq('id', user.id)
+      .eq('user_id', user.id)
       .single();
 
-    if (profileError) {
-      console.error('[TOTP Login Verify] Error fetching profile:', profileError);
+    if (secretError) {
+      console.error('[TOTP Login Verify] Error fetching auth secret:', secretError);
     }
 
-    if (!profile?.two_factor_enabled || !profile?.two_factor_secret) {
+    if (!authSecret?.two_factor_enabled || !authSecret?.two_factor_secret) {
       console.error('[TOTP Login Verify] 2FA not enabled for user');
       return new Response(
         JSON.stringify({ error: '2FA not enabled' }),
@@ -71,7 +71,7 @@ serve(async (req) => {
 
     console.log('[TOTP Login Verify] Verifying TOTP token...');
     // Verify the TOTP token
-    const isValid = await verifyTOTP(profile.two_factor_secret, totpToken);
+    const isValid = await verifyTOTP(authSecret.two_factor_secret, totpToken);
     console.log('[TOTP Login Verify] Token valid:', isValid);
 
     if (isValid) {
