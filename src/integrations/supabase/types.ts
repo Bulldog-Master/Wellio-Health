@@ -137,6 +137,57 @@ export type Database = {
         }
         Relationships: []
       }
+      body_measurements: {
+        Row: {
+          chest_inches: number | null
+          created_at: string
+          hips_inches: number | null
+          id: string
+          left_arm_inches: number | null
+          left_calf_inches: number | null
+          left_thigh_inches: number | null
+          measured_at: string
+          notes: string | null
+          right_arm_inches: number | null
+          right_calf_inches: number | null
+          right_thigh_inches: number | null
+          user_id: string
+          waist_inches: number | null
+        }
+        Insert: {
+          chest_inches?: number | null
+          created_at?: string
+          hips_inches?: number | null
+          id?: string
+          left_arm_inches?: number | null
+          left_calf_inches?: number | null
+          left_thigh_inches?: number | null
+          measured_at?: string
+          notes?: string | null
+          right_arm_inches?: number | null
+          right_calf_inches?: number | null
+          right_thigh_inches?: number | null
+          user_id: string
+          waist_inches?: number | null
+        }
+        Update: {
+          chest_inches?: number | null
+          created_at?: string
+          hips_inches?: number | null
+          id?: string
+          left_arm_inches?: number | null
+          left_calf_inches?: number | null
+          left_thigh_inches?: number | null
+          measured_at?: string
+          notes?: string | null
+          right_arm_inches?: number | null
+          right_calf_inches?: number | null
+          right_thigh_inches?: number | null
+          user_id?: string
+          waist_inches?: number | null
+        }
+        Relationships: []
+      }
       habit_completions: {
         Row: {
           completed_at: string | null
@@ -278,6 +329,42 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      meal_plans: {
+        Row: {
+          created_at: string
+          day_of_week: number
+          food_name: string
+          id: string
+          meal_type: string
+          notes: string | null
+          updated_at: string
+          user_id: string
+          week_start_date: string
+        }
+        Insert: {
+          created_at?: string
+          day_of_week: number
+          food_name: string
+          id?: string
+          meal_type: string
+          notes?: string | null
+          updated_at?: string
+          user_id: string
+          week_start_date: string
+        }
+        Update: {
+          created_at?: string
+          day_of_week?: number
+          food_name?: string
+          id?: string
+          meal_type?: string
+          notes?: string | null
+          updated_at?: string
+          user_id?: string
+          week_start_date?: string
+        }
+        Relationships: []
       }
       medical_records: {
         Row: {
@@ -530,6 +617,47 @@ export type Database = {
           weight_unit?: string | null
         }
         Relationships: []
+      }
+      program_completions: {
+        Row: {
+          completed_at: string
+          created_at: string
+          day_number: number
+          id: string
+          notes: string | null
+          program_id: string
+          user_id: string
+          week_number: number
+        }
+        Insert: {
+          completed_at?: string
+          created_at?: string
+          day_number: number
+          id?: string
+          notes?: string | null
+          program_id: string
+          user_id: string
+          week_number: number
+        }
+        Update: {
+          completed_at?: string
+          created_at?: string
+          day_number?: number
+          id?: string
+          notes?: string | null
+          program_id?: string
+          user_id?: string
+          week_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "program_completions_program_id_fkey"
+            columns: ["program_id"]
+            isOneToOne: false
+            referencedRelation: "workout_programs"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       progress_photos: {
         Row: {
@@ -985,6 +1113,45 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      workout_programs: {
+        Row: {
+          created_at: string
+          description: string | null
+          duration_weeks: number
+          id: string
+          is_active: boolean | null
+          name: string
+          start_date: string | null
+          updated_at: string
+          user_id: string
+          workouts: Json
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          duration_weeks: number
+          id?: string
+          is_active?: boolean | null
+          name: string
+          start_date?: string | null
+          updated_at?: string
+          user_id: string
+          workouts?: Json
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          duration_weeks?: number
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          start_date?: string | null
+          updated_at?: string
+          user_id?: string
+          workouts?: Json
+        }
+        Relationships: []
       }
       workout_routines: {
         Row: {

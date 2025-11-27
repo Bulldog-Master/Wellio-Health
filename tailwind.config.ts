@@ -74,6 +74,11 @@ export default {
           "6": "hsl(var(--nav-icon-6))",
           "7": "hsl(var(--nav-icon-7))",
           "8": "hsl(var(--nav-icon-8))",
+          "9": "hsl(var(--nav-icon-9))",
+          "10": "hsl(var(--nav-icon-10))",
+          "11": "hsl(var(--nav-icon-11))",
+          "12": "hsl(var(--nav-icon-12))",
+          "13": "hsl(var(--nav-icon-13))",
         },
       },
       backgroundImage: {

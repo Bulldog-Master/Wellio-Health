@@ -3,6 +3,7 @@ import MetricCard from "@/components/MetricCard";
 import ActivityRings from "@/components/ActivityRings";
 import { StreakTracker } from "@/components/StreakTracker";
 import { NutritionGoals } from "@/components/NutritionGoals";
+import { DashboardCharts } from "@/components/DashboardCharts";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -88,6 +89,9 @@ const Dashboard = () => {
         <h1 className="text-2xl md:text-3xl font-bold mb-1 md:mb-2">Welcome back!</h1>
         <p className="text-sm md:text-base text-muted-foreground">Here's your fitness overview for today</p>
       </div>
+
+      {/* Dashboard Mini-Charts */}
+      <DashboardCharts />
 
       {/* Activity Rings - Compact */}
       <Card className="p-3 md:p-4 bg-white dark:bg-gray-800 border">
