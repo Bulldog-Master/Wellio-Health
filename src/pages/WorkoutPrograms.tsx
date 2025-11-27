@@ -196,24 +196,22 @@ const WorkoutPrograms = () => {
         Back to Dashboard
       </Button>
 
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="p-3 bg-primary/10 rounded-xl">
-            <CalendarIcon className="w-6 h-6 text-primary" />
-          </div>
-          <div>
-            <h1 className="text-3xl font-bold">Workout Programs</h1>
-            <p className="text-muted-foreground">Multi-week training programs</p>
-          </div>
+      <div className="flex justify-between items-center mb-6">
+        <div>
+          <h1 className="text-3xl font-bold">My Workout Programs</h1>
+          <p className="text-muted-foreground">Create and manage your custom workout programs</p>
         </div>
-
-        <Dialog open={showCreate} onOpenChange={setShowCreate}>
-          <DialogTrigger asChild>
-            <Button className="gap-2">
-              <Plus className="w-4 h-4" />
-              New Program
-            </Button>
-          </DialogTrigger>
+        <div className="flex gap-2">
+          <Button variant="outline" onClick={() => navigate("/workout-templates")}>
+            Browse Templates
+          </Button>
+          <Dialog open={showCreate} onOpenChange={setShowCreate}>
+            <DialogTrigger asChild>
+              <Button className="gap-2">
+                <Plus className="w-4 h-4" />
+                New Program
+              </Button>
+            </DialogTrigger>
           <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>Create Workout Program</DialogTitle>
@@ -320,6 +318,7 @@ const WorkoutPrograms = () => {
             </div>
           </DialogContent>
         </Dialog>
+        </div>
       </div>
 
       {programs.length === 0 ? (
