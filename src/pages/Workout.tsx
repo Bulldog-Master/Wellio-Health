@@ -854,11 +854,11 @@ const Workout = () => {
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => navigate("/activity")}
+        onClick={() => navigate("/")}
         className="gap-2 mb-2"
       >
         <ArrowLeft className="w-4 h-4" />
-        Back to Activity
+        Back to Dashboard
       </Button>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
