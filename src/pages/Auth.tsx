@@ -388,23 +388,14 @@ const Auth = () => {
 
         console.log('[Passkey] Account created, storing passkey credential...');
 
-        // Get the session token to authenticate with the edge function
-        const { data: { session } } = await supabase.auth.getSession();
-        
-        if (!session?.access_token) {
-          throw new Error('Failed to get authentication session');
-        }
-
-        // Store the passkey in the database
+        // Store the passkey in the database (no auth needed since verify_jwt = false)
         const { data: registerData, error: registerError } = await supabase.functions.invoke('passkey-register', {
           body: {
             credentialId: passkeyData.credentialId,
             publicKey: passkeyData.publicKey,
             counter: passkeyData.counter,
             deviceType: 'platform',
-          },
-          headers: {
-            Authorization: `Bearer ${session.access_token}`,
+            userId: authData.user.id, // Pass user ID directly in body
           },
         });
         
