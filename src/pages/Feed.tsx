@@ -35,6 +35,7 @@ const Feed = () => {
   const [reportPostId, setReportPostId] = useState<string | null>(null);
   const [reportReason, setReportReason] = useState("");
   const [reportDetails, setReportDetails] = useState("");
+  const [animatingReaction, setAnimatingReaction] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Fetch posts with user profiles
@@ -400,6 +401,10 @@ const Feed = () => {
       if (!user) throw new Error("Not authenticated");
 
       const currentReaction = userReactions?.[postId];
+
+      // Trigger animation
+      setAnimatingReaction(`${postId}-${reactionType}`);
+      setTimeout(() => setAnimatingReaction(null), 600);
 
       if (currentReaction === reactionType) {
         // Remove reaction
@@ -811,6 +816,7 @@ const Feed = () => {
                 {Object.entries(reactionEmojis).map(([type, emoji]) => {
                   const count = reactionsCounts?.[post.id]?.[type] || 0;
                   const isSelected = userReactions?.[post.id] === type;
+                  const isAnimating = animatingReaction === `${post.id}-${type}`;
                   
                   return (
                     <Button
@@ -818,9 +824,13 @@ const Feed = () => {
                       variant={isSelected ? "default" : "outline"}
                       size="sm"
                       onClick={() => toggleReaction.mutate({ postId: post.id, reactionType: type })}
-                      className="h-8"
+                      className={`h-8 transition-all duration-300 ${
+                        isAnimating ? "animate-[bounce_0.6s_ease-in-out]" : ""
+                      } ${isSelected ? "scale-110" : "hover:scale-105"}`}
                     >
-                      <span className="mr-1">{emoji}</span>
+                      <span className={`mr-1 inline-block ${isAnimating ? "animate-[spin_0.6s_ease-in-out]" : ""}`}>
+                        {emoji}
+                      </span>
                       {count > 0 && <span className="text-xs">{count}</span>}
                     </Button>
                   );
