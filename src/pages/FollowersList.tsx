@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { User, UserPlus, UserCheck, Trophy, TrendingUp, ArrowLeft } from "lucide-react";
+import { User, UserPlus, UserCheck, Trophy, TrendingUp, ArrowLeft, Check, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const FollowersList = () => {
@@ -16,7 +16,7 @@ const FollowersList = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<"followers" | "following">("followers");
+  const [activeTab, setActiveTab] = useState<"followers" | "following" | "requests">("followers");
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -107,6 +107,38 @@ const FollowersList = () => {
     enabled: !!currentUserId,
   });
 
+  // Fetch follow requests (only if viewing own profile)
+  const { data: followRequests } = useQuery({
+    queryKey: ["follow-requests", userId],
+    queryFn: async () => {
+      if (userId !== currentUserId) return [];
+
+      const { data: requestsData, error } = await supabase
+        .from("follow_requests")
+        .select("id, requester_id, created_at")
+        .eq("requested_id", userId)
+        .eq("status", "pending");
+
+      if (error) throw error;
+
+      if (!requestsData || requestsData.length === 0) return [];
+
+      const requesterIds = requestsData.map((r) => r.requester_id);
+      const { data: profiles, error: profilesError } = await supabase
+        .from("profiles")
+        .select("id, username, full_name, avatar_url, total_points, current_streak, followers_count")
+        .in("id", requesterIds);
+
+      if (profilesError) throw profilesError;
+
+      return requestsData.map((req) => ({
+        ...req,
+        profile: profiles?.find((p) => p.id === req.requester_id),
+      }));
+    },
+    enabled: !!userId && !!currentUserId,
+  });
+
   const toggleFollow = useMutation({
     mutationFn: async (targetUserId: string) => {
       if (!currentUserId) throw new Error("Not authenticated");
@@ -136,6 +168,45 @@ const FollowersList = () => {
   });
 
   const isFollowing = (targetUserId: string) => userFollows?.includes(targetUserId);
+
+  const handleAcceptRequest = useMutation({
+    mutationFn: async ({ requestId, requesterId }: { requestId: string; requesterId: string }) => {
+      if (!currentUserId) throw new Error("Not authenticated");
+
+      // Update request status
+      await supabase
+        .from("follow_requests")
+        .update({ status: "accepted" })
+        .eq("id", requestId);
+
+      // Create follow relationship
+      await supabase
+        .from("follows")
+        .insert({
+          follower_id: requesterId,
+          following_id: currentUserId,
+        });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["follow-requests"] });
+      queryClient.invalidateQueries({ queryKey: ["followers"] });
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
+      toast({ title: "Follow request accepted" });
+    },
+  });
+
+  const handleRejectRequest = useMutation({
+    mutationFn: async (requestId: string) => {
+      await supabase
+        .from("follow_requests")
+        .update({ status: "rejected" })
+        .eq("id", requestId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["follow-requests"] });
+      toast({ title: "Follow request rejected" });
+    },
+  });
 
   const renderUserCard = (user: any) => (
     <Card key={user.id} className="hover:bg-accent/50 transition-colors">
@@ -215,14 +286,19 @@ const FollowersList = () => {
         </div>
       </div>
 
-      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "followers" | "following")}>
-        <TabsList className="grid w-full grid-cols-2">
+      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "followers" | "following" | "requests")}>
+        <TabsList className={`grid w-full ${userId === currentUserId ? 'grid-cols-3' : 'grid-cols-2'}`}>
           <TabsTrigger value="followers">
             Followers ({followers?.length || 0})
           </TabsTrigger>
           <TabsTrigger value="following">
             Following ({following?.length || 0})
           </TabsTrigger>
+          {userId === currentUserId && (
+            <TabsTrigger value="requests">
+              Requests ({followRequests?.length || 0})
+            </TabsTrigger>
+          )}
         </TabsList>
 
         <TabsContent value="followers" className="space-y-3 mt-6">
@@ -248,6 +324,64 @@ const FollowersList = () => {
             </Card>
           )}
         </TabsContent>
+
+        {userId === currentUserId && (
+          <TabsContent value="requests" className="space-y-3 mt-6">
+            {followRequests && followRequests.length > 0 ? (
+              followRequests.map((request) => (
+                <Card key={request.id}>
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div
+                        className="flex items-center gap-4 flex-1 cursor-pointer"
+                        onClick={() => navigate(`/user/${request.profile.id}`)}
+                      >
+                        <Avatar className="h-12 w-12">
+                          <AvatarImage src={request.profile.avatar_url || ""} />
+                          <AvatarFallback>
+                            {request.profile.full_name?.[0] || request.profile.username?.[0] || <User className="h-5 w-5" />}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1">
+                          <p className="font-semibold">{request.profile.full_name || "Anonymous"}</p>
+                          {request.profile.username && (
+                            <p className="text-sm text-muted-foreground">@{request.profile.username}</p>
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <Button
+                          variant="default"
+                          size="sm"
+                          onClick={() => handleAcceptRequest.mutate({ requestId: request.id, requesterId: request.requester_id })}
+                          disabled={handleAcceptRequest.isPending}
+                        >
+                          <Check className="h-4 w-4 mr-2" />
+                          Accept
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleRejectRequest.mutate(request.id)}
+                          disabled={handleRejectRequest.isPending}
+                        >
+                          <X className="h-4 w-4 mr-2" />
+                          Reject
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              <Card>
+                <CardContent className="p-8 text-center text-muted-foreground">
+                  No pending follow requests
+                </CardContent>
+              </Card>
+            )}
+          </TabsContent>
+        )}
       </Tabs>
     </div>
   );
