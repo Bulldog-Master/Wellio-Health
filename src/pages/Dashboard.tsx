@@ -90,10 +90,10 @@ const Dashboard = () => {
       </div>
 
       {/* Activity Rings - Compact */}
-      <Card className="p-4 md:p-6 bg-card border shadow-sm">
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-base md:text-lg font-semibold">Today's Activity</h3>
-          <Activity className="w-4 h-4 text-muted-foreground" />
+      <Card className="p-3 md:p-4 bg-muted/30 border">
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-sm md:text-base font-semibold">Today's Activity</h3>
+          <Activity className="w-3.5 h-3.5 text-muted-foreground" />
         </div>
         <ActivityRings />
       </Card>
