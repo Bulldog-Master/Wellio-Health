@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Activity, Mail, Lock, User as UserIcon, Sparkles, Fingerprint, Eye, EyeOff, Shield, Key } from "lucide-react";
 import { z } from "zod";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { isWebAuthnSupported, registerPasskey, authenticatePasskey } from "@/lib/webauthn";
 import { generateDeviceFingerprint, getDeviceName, getStoredFingerprint, storeFingerprint } from "@/lib/deviceFingerprint";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -22,6 +23,7 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
+  const [userRole, setUserRole] = useState<'user' | 'trainer' | 'creator'>('user');
   const [loading, setLoading] = useState(false);
   const [authMethod, setAuthMethod] = useState<"password" | "magiclink" | "passkey">("password");
   const [showPassword, setShowPassword] = useState(false);
@@ -42,6 +44,17 @@ const Auth = () => {
     setPasskeySupported(isWebAuthnSupported());
     setIsInIframe(window.self !== window.top);
     
+    // Check for referral code in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const refCode = urlParams.get('ref');
+    if (refCode) {
+      sessionStorage.setItem('referral_code', refCode);
+      toast({
+        title: "Welcome!",
+        description: "You've been referred by a friend. Sign up to get started!",
+      });
+    }
+    
     // Generate device fingerprint on mount
     const initFingerprint = async () => {
       let fingerprint = getStoredFingerprint();
@@ -52,7 +65,7 @@ const Auth = () => {
       setDeviceFingerprint(fingerprint);
     };
     initFingerprint();
-  }, []);
+  }, [toast]);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
@@ -165,18 +178,40 @@ const Auth = () => {
       } else {
         const redirectUrl = `${window.location.origin}/`;
         
+        // Get referral code from session storage if exists
+        const refCode = sessionStorage.getItem('referral_code');
+        let referredBy = null;
+        
+        if (refCode) {
+          const { data: referrerProfile } = await supabase
+            .from('profiles')
+            .select('id')
+            .eq('referral_code', refCode)
+            .maybeSingle();
+          
+          if (referrerProfile) {
+            referredBy = referrerProfile.id;
+          }
+        }
+        
         const { error } = await supabase.auth.signUp({
           email,
           password,
           options: {
             emailRedirectTo: redirectUrl,
             data: {
-              name: name,
+              full_name: name,
+              username: email.split('@')[0],
+              role: userRole,
+              referred_by: referredBy,
             },
           },
         });
 
         if (error) throw error;
+        
+        // Clear referral code from session
+        sessionStorage.removeItem('referral_code');
 
         toast({
           title: "Account created!",
@@ -537,14 +572,14 @@ const Auth = () => {
             Wellio
           </h1>
           <p className="text-sm text-muted-foreground/80 mb-3">
-            Welcome to your Health and Wellness APP
+            Your Complete Fitness & Wellness Platform
           </p>
           <p className="text-muted-foreground">
             {requires2FA 
               ? "Enter your authentication code"
               : isLogin 
-                ? "Welcome back! Sign in to continue" 
-                : "Create your account to get started"
+                ? "Welcome back! Continue your journey" 
+                : "Join trainers, creators, and fitness enthusiasts"
             }
           </p>
         </div>
@@ -674,6 +709,37 @@ const Auth = () => {
                         required={!isLogin}
                       />
                     </div>
+                  </div>
+                )}
+
+                {!isLogin && (
+                  <div className="space-y-2">
+                    <Label htmlFor="role">I am a...</Label>
+                    <Select value={userRole} onValueChange={(value: 'user' | 'trainer' | 'creator') => setUserRole(value)}>
+                      <SelectTrigger id="role">
+                        <SelectValue placeholder="Select your role" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="user">
+                          <div className="flex flex-col items-start">
+                            <span className="font-medium">Fitness Enthusiast</span>
+                            <span className="text-xs text-muted-foreground">Track my own health & fitness journey</span>
+                          </div>
+                        </SelectItem>
+                        <SelectItem value="trainer">
+                          <div className="flex flex-col items-start">
+                            <span className="font-medium">Trainer / Coach</span>
+                            <span className="text-xs text-muted-foreground">Offer programs & train clients</span>
+                          </div>
+                        </SelectItem>
+                        <SelectItem value="creator">
+                          <div className="flex flex-col items-start">
+                            <span className="font-medium">Content Creator / KOL</span>
+                            <span className="text-xs text-muted-foreground">Share content & build community</span>
+                          </div>
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 )}
 
