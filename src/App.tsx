@@ -54,6 +54,7 @@ import Messages from "./pages/Messages";
 import Conversation from "./pages/Conversation";
 import Groups from "./pages/Groups";
 import GroupDetail from "./pages/GroupDetail";
+import CloseFriends from "./pages/CloseFriends";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -90,6 +91,7 @@ const App = () => {
             <Route path="/step-count" element={<ProtectedRoute><StepCount /></ProtectedRoute>} />
             <Route path="/settings" element={<ProtectedRoute><Layout><SettingsMenu /></Layout></ProtectedRoute>} />
             <Route path="/settings/privacy-security" element={<ProtectedRoute><Layout><PrivacySecurity /></Layout></ProtectedRoute>} />
+            <Route path="/settings/close-friends" element={<ProtectedRoute><Layout><CloseFriends /></Layout></ProtectedRoute>} />
             <Route path="/settings/trusted-devices" element={<ProtectedRoute><Layout><TrustedDevices /></Layout></ProtectedRoute>} />
             <Route path="/settings/notifications" element={<ProtectedRoute><Layout><NotificationSettings /></Layout></ProtectedRoute>} />
             <Route path="/settings/orders-payments" element={<ProtectedRoute><Layout><OrdersPayments /></Layout></ProtectedRoute>} />
