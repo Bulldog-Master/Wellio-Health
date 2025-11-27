@@ -17,3 +17,6 @@ verify_jwt = true
 
 [functions.device-trust]
 verify_jwt = true
+
+[functions.search-food]
+verify_jwt = true

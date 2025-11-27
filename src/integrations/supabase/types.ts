@@ -531,6 +531,36 @@ export type Database = {
         }
         Relationships: []
       }
+      progress_photos: {
+        Row: {
+          created_at: string
+          id: string
+          notes: string | null
+          photo_url: string
+          taken_at: string
+          user_id: string
+          weight_lbs: number | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          photo_url: string
+          taken_at?: string
+          user_id: string
+          weight_lbs?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          photo_url?: string
+          taken_at?: string
+          user_id?: string
+          weight_lbs?: number | null
+        }
+        Relationships: []
+      }
       recipes: {
         Row: {
           category: string
@@ -797,6 +827,30 @@ export type Database = {
           device_name?: string | null
           id?: string
           last_used_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      water_logs: {
+        Row: {
+          amount_ml: number
+          created_at: string
+          id: string
+          logged_at: string
+          user_id: string
+        }
+        Insert: {
+          amount_ml: number
+          created_at?: string
+          id?: string
+          logged_at?: string
+          user_id: string
+        }
+        Update: {
+          amount_ml?: number
+          created_at?: string
+          id?: string
+          logged_at?: string
           user_id?: string
         }
         Relationships: []

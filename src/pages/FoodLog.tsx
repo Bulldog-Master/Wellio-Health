@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Utensils, Plus, Clock, Camera, Sparkles, Loader2, Pencil, Trash2, ArrowLeft } from "lucide-react";
+import { Utensils, Plus, Clock, Camera, Sparkles, Loader2, Pencil, Trash2, ArrowLeft, Search } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -41,6 +41,9 @@ const FoodLog = () => {
   const [saveImage, setSaveImage] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [editingMeal, setEditingMeal] = useState<MealLog | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
 
   const mealTypes = [
     { value: "breakfast", label: "Breakfast" },
@@ -78,6 +81,41 @@ const FoodLog = () => {
   };
 
   const totalCalories = mealLogs.reduce((sum, meal) => sum + (meal.calories || 0), 0);
+
+  const handleSearchFood = async () => {
+    if (!searchQuery.trim()) return;
+
+    setIsSearching(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('search-food', {
+        body: { query: searchQuery },
+      });
+
+      if (error) throw error;
+      setSearchResults(data.foods || []);
+    } catch (error) {
+      console.error('Error searching foods:', error);
+      toast({
+        title: "Search failed",
+        description: "Could not search food database. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
+  const handleSelectFood = (food: any) => {
+    setMealDescription(food.description);
+    setNutritionData({
+      calories: food.calories,
+      protein: food.protein,
+      carbs: food.carbs,
+      fat: food.fat,
+    });
+    setSearchQuery("");
+    setSearchResults([]);
+  };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -377,6 +415,65 @@ const FoodLog = () => {
                 ))}
               </SelectContent>
             </Select>
+          </div>
+
+          <div className="space-y-3">
+            <Label htmlFor="search">Search Food Database</Label>
+            <div className="flex gap-2">
+              <Input
+                id="search"
+                placeholder="Search for foods (e.g., chicken breast, apple)..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSearchFood()}
+              />
+              <Button
+                onClick={handleSearchFood}
+                disabled={isSearching || !searchQuery.trim()}
+                variant="secondary"
+              >
+                {isSearching ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Search className="w-4 h-4" />
+                )}
+              </Button>
+            </div>
+            {searchResults.length > 0 && (
+              <div className="border rounded-lg max-h-60 overflow-y-auto">
+                {searchResults.map((food) => (
+                  <button
+                    key={food.fdcId}
+                    onClick={() => handleSelectFood(food)}
+                    className="w-full p-3 hover:bg-accent text-left border-b last:border-b-0 transition-colors"
+                  >
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <p className="font-medium">{food.description}</p>
+                        <p className="text-xs text-muted-foreground">{food.brandOwner}</p>
+                      </div>
+                      <div className="text-right text-sm">
+                        <p className="font-semibold">{food.calories} cal</p>
+                        <p className="text-xs text-muted-foreground">
+                          P: {food.protein}g | C: {food.carbs}g | F: {food.fat}g
+                        </p>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">
+                Or describe manually
+              </span>
+            </div>
           </div>
 
           <div>

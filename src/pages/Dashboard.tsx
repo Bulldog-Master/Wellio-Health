@@ -1,4 +1,4 @@
-import { Activity, Flame, Target, TrendingUp } from "lucide-react";
+import { Activity, Flame, Target, TrendingUp, Droplets, Moon, Camera } from "lucide-react";
 import MetricCard from "@/components/MetricCard";
 import ActivityRings from "@/components/ActivityRings";
 import { StreakTracker } from "@/components/StreakTracker";
@@ -184,22 +184,13 @@ const Dashboard = () => {
         <div className="flex items-center justify-between mb-3 md:mb-4">
           <h3 className="text-base md:text-lg font-semibold">Quick Actions</h3>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-2 md:gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-2 md:gap-3">
           <Button 
             onClick={() => navigate('/weight')}
             className="h-auto py-4 flex-col gap-2 bg-primary hover:bg-primary/90"
           >
             <Activity className="w-5 h-5" />
             <span className="text-sm">Log Weight</span>
-          </Button>
-          <Button 
-            variant="secondary" 
-            className="h-auto py-4 flex-col gap-2 relative cursor-not-allowed opacity-60"
-            disabled
-          >
-            <Activity className="w-5 h-5" />
-            <span className="text-sm">Step Count</span>
-            <span className="absolute bottom-1 text-[9px] text-muted-foreground/50 font-medium">Coming Soon!</span>
           </Button>
           <Button 
             onClick={() => navigate('/food')}
@@ -218,12 +209,45 @@ const Dashboard = () => {
             <span className="text-sm">Log Workout</span>
           </Button>
           <Button 
+            onClick={() => navigate('/water-intake')}
+            variant="secondary" 
+            className="h-auto py-4 flex-col gap-2"
+          >
+            <Droplets className="w-5 h-5" />
+            <span className="text-sm">Water Intake</span>
+          </Button>
+          <Button 
+            onClick={() => navigate('/sleep-tracking')}
+            variant="secondary" 
+            className="h-auto py-4 flex-col gap-2"
+          >
+            <Moon className="w-5 h-5" />
+            <span className="text-sm">Sleep</span>
+          </Button>
+          <Button 
+            onClick={() => navigate('/progress-photos')}
+            variant="secondary" 
+            className="h-auto py-4 flex-col gap-2"
+          >
+            <Camera className="w-5 h-5" />
+            <span className="text-sm">Progress Pics</span>
+          </Button>
+          <Button 
             onClick={() => navigate('/fitness-goals')}
             variant="secondary" 
             className="h-auto py-4 flex-col gap-2"
           >
             <Target className="w-5 h-5" />
-            <span className="text-sm">Fitness Goals</span>
+            <span className="text-sm">Goals</span>
+          </Button>
+          <Button 
+            variant="secondary" 
+            className="h-auto py-4 flex-col gap-2 relative cursor-not-allowed opacity-60"
+            disabled
+          >
+            <Activity className="w-5 h-5" />
+            <span className="text-sm">Step Count</span>
+            <span className="absolute bottom-1 text-[9px] text-muted-foreground/50 font-medium">Coming Soon!</span>
           </Button>
         </div>
       </Card>
