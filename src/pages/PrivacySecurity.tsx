@@ -88,6 +88,8 @@ const PrivacySecurity = () => {
       toast.error(error.message || "Failed to register passkey");
     }
   };
+
+  const fetchPasskeys = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
@@ -256,23 +258,6 @@ const PrivacySecurity = () => {
     } catch (error: any) {
       console.error("Error deleting passkey:", error);
       toast.error("Failed to remove passkey");
-    }
-  };
-
-  const handleRegisterPasskey = async () => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user || !user.email) {
-        toast.error("User email not found");
-        return;
-      }
-
-      await registerPasskey(user.email);
-      toast.success("Passkey registered successfully!");
-      await fetchPasskeys();
-    } catch (error: any) {
-      console.error("Error registering passkey:", error);
-      toast.error(error.message || "Failed to register passkey");
     }
   };
 
