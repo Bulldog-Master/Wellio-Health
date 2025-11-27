@@ -11,3 +11,9 @@ verify_jwt = false
 
 [functions.passkey-authenticate]
 verify_jwt = false
+
+[functions.totp-verify-backup]
+verify_jwt = true
+
+[functions.device-trust]
+verify_jwt = true

@@ -109,6 +109,7 @@ export type Database = {
       }
       auth_secrets: {
         Row: {
+          backup_codes: Json | null
           created_at: string | null
           id: string
           two_factor_enabled: boolean | null
@@ -117,6 +118,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          backup_codes?: Json | null
           created_at?: string | null
           id?: string
           two_factor_enabled?: boolean | null
@@ -125,6 +127,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          backup_codes?: Json | null
           created_at?: string | null
           id?: string
           two_factor_enabled?: boolean | null
@@ -767,6 +770,33 @@ export type Database = {
           id?: string
           name?: string
           updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      trusted_devices: {
+        Row: {
+          created_at: string | null
+          device_fingerprint: string
+          device_name: string | null
+          id: string
+          last_used_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          device_fingerprint: string
+          device_name?: string | null
+          id?: string
+          last_used_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          device_fingerprint?: string
+          device_name?: string | null
+          id?: string
+          last_used_at?: string | null
           user_id?: string
         }
         Relationships: []

@@ -16,6 +16,14 @@ const SettingsMenu = () => {
       path: "/settings/privacy-security",
     },
     {
+      title: "Trusted Devices",
+      description: "Manage devices that can skip 2FA verification",
+      icon: Shield,
+      iconBg: "bg-primary/20",
+      iconColor: "text-primary",
+      path: "/settings/trusted-devices",
+    },
+    {
       title: "Orders & Payments",
       description: "View your orders and manage payment methods",
       icon: CreditCard,

@@ -31,6 +31,8 @@ const PrivacySecurity = () => {
   const [totpToken, setTotpToken] = useState("");
   const [renamingPasskey, setRenamingPasskey] = useState<{ id: string; currentName: string } | null>(null);
   const [newPasskeyName, setNewPasskeyName] = useState("");
+  const [backupCodes, setBackupCodes] = useState<string[]>([]);
+  const [showBackupCodes, setShowBackupCodes] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -124,6 +126,13 @@ const PrivacySecurity = () => {
         setIs2FAEnabled(true);
         setShow2FASetup(false);
         setTotpToken("");
+        
+        // Show backup codes if generated
+        if (data.backupCodes && data.backupCodes.length > 0) {
+          setBackupCodes(data.backupCodes);
+          setShowBackupCodes(true);
+        }
+        
         toast.success("2FA has been enabled successfully");
       } else {
         toast.error("Invalid code. Please try again.");
@@ -529,6 +538,66 @@ const PrivacySecurity = () => {
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction onClick={handleRenamePasskey} disabled={!newPasskeyName.trim()}>
               Rename
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Backup Codes Dialog */}
+      <AlertDialog open={showBackupCodes} onOpenChange={setShowBackupCodes}>
+        <AlertDialogContent className="max-w-2xl">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2">
+              <Key className="w-5 h-5" />
+              Save Your Backup Codes
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              Store these backup codes in a safe place. Each code can only be used once if you lose access to your authenticator app.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <div className="py-4">
+            <div className="grid grid-cols-2 gap-2 mb-4 p-4 bg-muted rounded-lg font-mono text-sm">
+              {backupCodes.map((code, index) => (
+                <div key={index} className="p-2 bg-background rounded border">
+                  {code}
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-2">
+              <Button 
+                onClick={() => {
+                  const blob = new Blob(
+                    [backupCodes.join('\n')], 
+                    { type: 'text/plain' }
+                  );
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = `wellio-backup-codes-${new Date().toISOString().split('T')[0]}.txt`;
+                  a.click();
+                  URL.revokeObjectURL(url);
+                }}
+                variant="outline"
+                className="flex-1"
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Download Codes
+              </Button>
+              <Button
+                onClick={() => {
+                  navigator.clipboard.writeText(backupCodes.join('\n'));
+                  toast.success("Backup codes copied to clipboard");
+                }}
+                variant="outline"
+                className="flex-1"
+              >
+                Copy All
+              </Button>
+            </div>
+          </div>
+          <AlertDialogFooter>
+            <AlertDialogAction onClick={() => setShowBackupCodes(false)}>
+              I've Saved My Codes
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
