@@ -73,7 +73,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
     setVerifying(true);
     try {
-      const { data, error } = await supabase.functions.invoke('totp-verify', {
+      const { data, error } = await supabase.functions.invoke('totp-login-verify', {
         body: { token: totpToken }
       });
       
