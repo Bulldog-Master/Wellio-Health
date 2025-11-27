@@ -100,13 +100,13 @@ const Auth = () => {
 
         // Check if user has 2FA enabled
         if (data.user) {
-          const { data: profile } = await supabase
-            .from('profiles')
+          const { data: authSecret } = await supabase
+            .from('auth_secrets')
             .select('two_factor_enabled')
-            .eq('id', data.user.id)
-            .single();
+            .eq('user_id', data.user.id)
+            .maybeSingle();
 
-          if (profile?.two_factor_enabled) {
+          if (authSecret?.two_factor_enabled) {
             // Store user ID and show 2FA prompt
             setPendingUserId(data.user.id);
             setRequires2FA(true);
