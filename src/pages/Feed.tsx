@@ -15,6 +15,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { formatDistanceToNow } from "date-fns";
 import { MentionInput } from "@/components/MentionInput";
+import { useRealtimePosts } from "@/hooks/useRealtimePosts";
 import Stories from "./Stories";
 
 const Feed = () => {
@@ -37,6 +38,9 @@ const Feed = () => {
   const [reportDetails, setReportDetails] = useState("");
   const [animatingReaction, setAnimatingReaction] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Enable real-time updates for posts
+  useRealtimePosts(["feed-posts", selectedHashtag]);
 
   // Fetch posts with user profiles
   const { data: posts } = useQuery({
