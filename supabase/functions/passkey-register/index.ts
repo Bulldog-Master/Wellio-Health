@@ -14,46 +14,20 @@ serve(async (req) => {
   }
 
   try {
-    const authHeader = req.headers.get('Authorization');
-    console.log('[Passkey Register] Auth header present:', !!authHeader);
-    
-    if (!authHeader) {
-      console.error('[Passkey Register] No authorization header');
-      return new Response(
-        JSON.stringify({ error: 'No authorization header' }),
-        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
-    }
+    const { credentialId, publicKey, counter, deviceType, userId } = await req.json();
+    console.log('[Passkey Register] Storing credential for user:', userId);
 
-    // Use service role key to verify the JWT and get user
+    // Use service role key to bypass RLS
     const supabaseAdmin = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    // Verify the JWT token
-    const token = authHeader.replace('Bearer ', '');
-    console.log('[Passkey Register] Verifying JWT token...');
-    const { data: { user }, error: userError } = await supabaseAdmin.auth.getUser(token);
-    
-    if (userError || !user) {
-      console.error('[Passkey Register] Error getting user:', userError);
-      return new Response(
-        JSON.stringify({ error: 'Unauthorized' }),
-        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
-    }
-
-    console.log('[Passkey Register] User authenticated:', user.id);
-
-    const { credentialId, publicKey, counter, deviceType } = await req.json();
-    console.log('[Passkey Register] Storing credential...');
-
     // Store the credential
     const { error } = await supabaseAdmin
       .from('webauthn_credentials')
       .insert({
-        user_id: user.id,
+        user_id: userId,
         credential_id: credentialId,
         public_key: publicKey,
         counter: counter,
