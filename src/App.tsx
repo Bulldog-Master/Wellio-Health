@@ -29,6 +29,7 @@ import NotificationSettings from "./pages/NotificationSettings";
 import OrdersPayments from "./pages/OrdersPayments";
 import Support from "./pages/Support";
 import SettingsMenu from "./pages/SettingsMenu";
+import TrustedDevices from "./pages/TrustedDevices";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -67,6 +68,7 @@ const App = () => {
             <Route path="/step-count" element={<ProtectedRoute><StepCount /></ProtectedRoute>} />
             <Route path="/settings" element={<ProtectedRoute><Layout><SettingsMenu /></Layout></ProtectedRoute>} />
             <Route path="/settings/privacy-security" element={<ProtectedRoute><Layout><PrivacySecurity /></Layout></ProtectedRoute>} />
+            <Route path="/settings/trusted-devices" element={<ProtectedRoute><Layout><TrustedDevices /></Layout></ProtectedRoute>} />
             <Route path="/settings/notifications" element={<ProtectedRoute><Layout><NotificationSettings /></Layout></ProtectedRoute>} />
             <Route path="/settings/orders-payments" element={<ProtectedRoute><Layout><OrdersPayments /></Layout></ProtectedRoute>} />
             <Route path="/settings/support" element={<ProtectedRoute><Layout><Support /></Layout></ProtectedRoute>} />

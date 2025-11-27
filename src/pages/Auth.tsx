@@ -6,10 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Activity, Mail, Lock, User as UserIcon, Sparkles, Fingerprint, Eye, EyeOff, Shield } from "lucide-react";
+import { Activity, Mail, Lock, User as UserIcon, Sparkles, Fingerprint, Eye, EyeOff, Shield, Key } from "lucide-react";
 import { z } from "zod";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { isWebAuthnSupported, registerPasskey, authenticatePasskey } from "@/lib/webauthn";
+import { generateDeviceFingerprint, getDeviceName, getStoredFingerprint, storeFingerprint } from "@/lib/deviceFingerprint";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const emailSchema = z.string().email("Invalid email address");
 const passwordSchema = z.string().min(6, "Password must be at least 6 characters");
@@ -27,6 +29,10 @@ const Auth = () => {
   const [requires2FA, setRequires2FA] = useState(false);
   const [totpCode, setTotpCode] = useState("");
   const [pendingUserId, setPendingUserId] = useState<string | null>(null);
+  const [useBackupCode, setUseBackupCode] = useState(false);
+  const [backupCode, setBackupCode] = useState("");
+  const [rememberDevice, setRememberDevice] = useState(false);
+  const [deviceFingerprint, setDeviceFingerprint] = useState<string>("");
   const { toast } = useToast();
   const navigate = useNavigate();
   const [passkeySupported, setPasskeySupported] = useState(false);
@@ -35,6 +41,17 @@ const Auth = () => {
   useEffect(() => {
     setPasskeySupported(isWebAuthnSupported());
     setIsInIframe(window.self !== window.top);
+    
+    // Generate device fingerprint on mount
+    const initFingerprint = async () => {
+      let fingerprint = getStoredFingerprint();
+      if (!fingerprint) {
+        fingerprint = await generateDeviceFingerprint();
+        storeFingerprint(fingerprint);
+      }
+      setDeviceFingerprint(fingerprint);
+    };
+    initFingerprint();
   }, []);
 
   useEffect(() => {
@@ -107,6 +124,24 @@ const Auth = () => {
             .maybeSingle();
 
           if (authSecret?.two_factor_enabled) {
+            // Check if device is trusted
+            const { data: trustData } = await supabase.functions.invoke('device-trust', {
+              body: { 
+                action: 'check', 
+                deviceFingerprint 
+              }
+            });
+
+            if (trustData?.trusted) {
+              // Device is trusted, skip 2FA
+              toast({
+                title: "Welcome back!",
+                description: "You've successfully signed in from a trusted device.",
+              });
+              setLoading(false);
+              return;
+            }
+
             // Store user ID and show 2FA prompt
             setPendingUserId(data.user.id);
             setRequires2FA(true);
@@ -163,13 +198,24 @@ const Auth = () => {
   const handleVerify2FA = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (totpCode.length !== 6) {
-      toast({
-        title: "Invalid Code",
-        description: "Please enter a 6-digit code.",
-        variant: "destructive",
-      });
-      return;
+    if (useBackupCode) {
+      if (!backupCode.trim()) {
+        toast({
+          title: "Invalid Backup Code",
+          description: "Please enter a backup code.",
+          variant: "destructive",
+        });
+        return;
+      }
+    } else {
+      if (totpCode.length !== 6) {
+        toast({
+          title: "Invalid Code",
+          description: "Please enter a 6-digit code.",
+          variant: "destructive",
+        });
+        return;
+      }
     }
 
     setLoading(true);
@@ -183,25 +229,52 @@ const Auth = () => {
 
       if (authError) throw authError;
 
-      // Verify TOTP code
-      const { data, error } = await supabase.functions.invoke('totp-verify', {
-        body: { token: totpCode }
-      });
+      // Verify TOTP code or backup code
+      const endpoint = useBackupCode ? 'totp-verify-backup' : 'totp-verify';
+      const body = useBackupCode 
+        ? { backupCode } 
+        : { token: totpCode };
+
+      const { data, error } = await supabase.functions.invoke(endpoint, { body });
 
       if (error || !data?.verified) {
         // Sign out if verification fails
         await supabase.auth.signOut();
-        throw new Error('Invalid authentication code. Please try again.');
+        throw new Error(useBackupCode 
+          ? 'Invalid backup code. Please try again.' 
+          : 'Invalid authentication code. Please try again.'
+        );
       }
 
-      toast({
-        title: "Welcome back!",
-        description: "Two-factor authentication successful.",
-      });
+      // If user chose to remember device, trust it
+      if (rememberDevice && deviceFingerprint) {
+        await supabase.functions.invoke('device-trust', {
+          body: { 
+            action: 'trust', 
+            deviceFingerprint,
+            deviceName: getDeviceName()
+          }
+        });
+      }
+
+      if (useBackupCode && data.remainingCodes !== undefined) {
+        toast({
+          title: "Welcome back!",
+          description: `Backup code verified. You have ${data.remainingCodes} backup codes remaining.`,
+        });
+      } else {
+        toast({
+          title: "Welcome back!",
+          description: "Two-factor authentication successful.",
+        });
+      }
 
       // Reset 2FA state
       setRequires2FA(false);
       setTotpCode("");
+      setBackupCode("");
+      setUseBackupCode(false);
+      setRememberDevice(false);
       setPendingUserId(null);
       
       // Navigation will happen automatically via the auth state change listener
@@ -479,31 +552,63 @@ const Auth = () => {
         {requires2FA ? (
           <form onSubmit={handleVerify2FA} className="space-y-4">
             <div className="text-center mb-4">
-              <Shield className="w-12 h-12 mx-auto mb-2 text-primary" />
+              {useBackupCode ? <Key className="w-12 h-12 mx-auto mb-2 text-primary" /> : <Shield className="w-12 h-12 mx-auto mb-2 text-primary" />}
               <h3 className="text-lg font-semibold">Two-Factor Authentication</h3>
               <p className="text-sm text-muted-foreground mt-1">
-                Enter the 6-digit code from your authenticator app
+                {useBackupCode 
+                  ? "Enter one of your backup recovery codes"
+                  : "Enter the 6-digit code from your authenticator app"
+                }
               </p>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="totp">Authentication Code</Label>
-              <Input
-                id="totp"
-                type="text"
-                placeholder="000000"
-                value={totpCode}
-                onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                className="text-center text-2xl tracking-widest"
-                maxLength={6}
-                required
+            {useBackupCode ? (
+              <div className="space-y-2">
+                <Label htmlFor="backup">Backup Code</Label>
+                <Input
+                  id="backup"
+                  type="text"
+                  placeholder="XXXX-XXXX-XXXX"
+                  value={backupCode}
+                  onChange={(e) => setBackupCode(e.target.value.toUpperCase())}
+                  className="text-center tracking-wider"
+                  required
+                />
+              </div>
+            ) : (
+              <div className="space-y-2">
+                <Label htmlFor="totp">Authentication Code</Label>
+                <Input
+                  id="totp"
+                  type="text"
+                  placeholder="000000"
+                  value={totpCode}
+                  onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                  className="text-center text-2xl tracking-widest"
+                  maxLength={6}
+                  required
+                />
+              </div>
+            )}
+
+            <div className="flex items-center space-x-2">
+              <Checkbox 
+                id="remember" 
+                checked={rememberDevice}
+                onCheckedChange={(checked) => setRememberDevice(checked as boolean)}
               />
+              <Label 
+                htmlFor="remember" 
+                className="text-sm font-normal cursor-pointer"
+              >
+                Remember this device for 30 days
+              </Label>
             </div>
 
             <Button
               type="submit"
               className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
-              disabled={loading || totpCode.length !== 6}
+              disabled={loading || (!useBackupCode && totpCode.length !== 6) || (useBackupCode && !backupCode.trim())}
             >
               {loading ? "Verifying..." : "Verify Code"}
             </Button>
@@ -513,8 +618,24 @@ const Auth = () => {
               variant="ghost"
               className="w-full"
               onClick={() => {
+                setUseBackupCode(!useBackupCode);
+                setTotpCode("");
+                setBackupCode("");
+              }}
+            >
+              {useBackupCode ? "Use Authenticator App" : "Use Backup Code"}
+            </Button>
+
+            <Button
+              type="button"
+              variant="ghost"
+              className="w-full"
+              onClick={() => {
                 setRequires2FA(false);
                 setTotpCode("");
+                setBackupCode("");
+                setUseBackupCode(false);
+                setRememberDevice(false);
                 setPendingUserId(null);
                 setPassword("");
               }}

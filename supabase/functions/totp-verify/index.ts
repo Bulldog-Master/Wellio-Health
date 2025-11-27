@@ -75,11 +75,18 @@ serve(async (req) => {
     console.log('[TOTP Verify] Token valid:', isValid);
 
     if (isValid) {
-      // Enable 2FA for the user
+      // Generate backup codes for first-time setup
+      console.log('[TOTP Verify] Generating backup codes...');
+      const backupCodes = generateBackupCodes(8);
+      
+      // Enable 2FA for the user and store backup codes
       console.log('[TOTP Verify] Enabling 2FA for user...');
       const { error } = await supabaseAdmin
         .from('auth_secrets')
-        .update({ two_factor_enabled: true })
+        .update({ 
+          two_factor_enabled: true,
+          backup_codes: backupCodes
+        })
         .eq('user_id', user.id);
 
       if (error) {
@@ -89,7 +96,11 @@ serve(async (req) => {
 
       console.log('[TOTP Verify] 2FA enabled successfully!');
       return new Response(
-        JSON.stringify({ success: true, verified: true }),
+        JSON.stringify({ 
+          success: true, 
+          verified: true,
+          backupCodes 
+        }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     } else {
@@ -179,4 +190,25 @@ async function hmacSHA1(key: Uint8Array, message: Uint8Array): Promise<Uint8Arra
 
   const signature = await crypto.subtle.sign('HMAC', cryptoKey, messageBuffer);
   return new Uint8Array(signature);
+}
+
+function generateBackupCodes(count: number): string[] {
+  const codes: string[] = [];
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  
+  for (let i = 0; i < count; i++) {
+    const randomBytes = crypto.getRandomValues(new Uint8Array(12));
+    let code = '';
+    
+    for (let j = 0; j < 12; j++) {
+      code += chars[randomBytes[j] % chars.length];
+      if ((j + 1) % 4 === 0 && j < 11) {
+        code += '-';
+      }
+    }
+    
+    codes.push(code);
+  }
+  
+  return codes;
 }
