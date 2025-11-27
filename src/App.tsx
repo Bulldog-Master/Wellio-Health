@@ -40,6 +40,8 @@ import MacrosDashboard from "./pages/MacrosDashboard";
 import WorkoutPrograms from "./pages/WorkoutPrograms";
 import TrainerMarketplace from "./pages/TrainerMarketplace";
 import TrainerSetup from "./pages/TrainerSetup";
+import CreatorHub from "./pages/CreatorHub";
+import Discover from "./pages/Discover";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -90,6 +92,8 @@ const App = () => {
             <Route path="/workout-programs" element={<ProtectedRoute><Layout><WorkoutPrograms /></Layout></ProtectedRoute>} />
             <Route path="/trainer/marketplace" element={<ProtectedRoute><Layout><TrainerMarketplace /></Layout></ProtectedRoute>} />
             <Route path="/trainer/setup" element={<ProtectedRoute><Layout><TrainerSetup /></Layout></ProtectedRoute>} />
+            <Route path="/creator/hub" element={<ProtectedRoute><Layout><CreatorHub /></Layout></ProtectedRoute>} />
+            <Route path="/discover" element={<ProtectedRoute><Layout><Discover /></Layout></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

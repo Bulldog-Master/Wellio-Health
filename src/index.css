@@ -81,6 +81,8 @@ All colors MUST be HSL.
     --nav-icon-12: 270 55% 58%;
     --nav-icon-13: 145 60% 50%;
     --nav-icon-14: 280 65% 60%;
+    --nav-icon-15: 120 60% 52%;
+    --nav-icon-16: 25 75% 58%;
   }
 
   .dark {
@@ -153,6 +155,8 @@ All colors MUST be HSL.
     --nav-icon-12: 270 60% 66%;
     --nav-icon-13: 145 65% 60%;
     --nav-icon-14: 280 70% 70%;
+    --nav-icon-15: 120 65% 62%;
+    --nav-icon-16: 25 80% 68%;
   }
 }
 

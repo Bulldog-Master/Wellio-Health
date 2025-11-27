@@ -241,6 +241,107 @@ export type Database = {
           },
         ]
       }
+      content_likes: {
+        Row: {
+          content_id: string
+          created_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          content_id: string
+          created_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          content_id?: string
+          created_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "content_likes_content_id_fkey"
+            columns: ["content_id"]
+            isOneToOne: false
+            referencedRelation: "creator_content"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      creator_content: {
+        Row: {
+          content_data: Json
+          content_type: string
+          created_at: string
+          creator_id: string
+          description: string | null
+          id: string
+          is_premium: boolean
+          is_published: boolean
+          likes_count: number
+          price: number | null
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+          views_count: number
+        }
+        Insert: {
+          content_data?: Json
+          content_type: string
+          created_at?: string
+          creator_id: string
+          description?: string | null
+          id?: string
+          is_premium?: boolean
+          is_published?: boolean
+          likes_count?: number
+          price?: number | null
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+          views_count?: number
+        }
+        Update: {
+          content_data?: Json
+          content_type?: string
+          created_at?: string
+          creator_id?: string
+          description?: string | null
+          id?: string
+          is_premium?: boolean
+          is_published?: boolean
+          likes_count?: number
+          price?: number | null
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+          views_count?: number
+        }
+        Relationships: []
+      }
+      creator_subscriptions: {
+        Row: {
+          created_at: string
+          creator_id: string
+          id: string
+          subscriber_id: string
+        }
+        Insert: {
+          created_at?: string
+          creator_id: string
+          id?: string
+          subscriber_id: string
+        }
+        Update: {
+          created_at?: string
+          creator_id?: string
+          id?: string
+          subscriber_id?: string
+        }
+        Relationships: []
+      }
       habit_completions: {
         Row: {
           completed_at: string | null
