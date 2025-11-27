@@ -662,7 +662,27 @@ const Auth = () => {
               )}
               
               <form onSubmit={handlePasskey} className="space-y-4">
-                {!isLogin && (
+                {isLogin ? (
+                  <div className="text-center py-8">
+                    <Fingerprint className="w-16 h-16 mx-auto mb-4 text-primary" />
+                    <h3 className="text-lg font-semibold mb-2">Sign In with Passkey</h3>
+                    <p className="text-sm text-muted-foreground mb-6">
+                      Click the button below to sign in using your device's biometric authentication
+                    </p>
+                    <Button
+                      type="submit"
+                      className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
+                      disabled={loading || !passkeySupported}
+                    >
+                      {loading ? "Processing..." : (
+                        <>
+                          <Fingerprint className="mr-2 h-4 w-4" />
+                          Sign In with Passkey
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                ) : (
                   <>
                     <div className="space-y-2">
                       <Label htmlFor="passkey-name">Name</Label>
@@ -695,28 +715,25 @@ const Auth = () => {
                         />
                       </div>
                     </div>
+
+                    <Button
+                      type="submit"
+                      className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
+                      disabled={loading || !passkeySupported}
+                    >
+                      {loading ? "Processing..." : (
+                        <>
+                          <Fingerprint className="mr-2 h-4 w-4" />
+                          Register Passkey
+                        </>
+                      )}
+                    </Button>
+
+                    <p className="text-xs text-center text-muted-foreground">
+                      Set up biometric authentication for quick and secure access to your account.
+                    </p>
                   </>
                 )}
-
-                <Button
-                  type="submit"
-                  className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
-                  disabled={loading || !passkeySupported}
-                >
-                  {loading ? "Processing..." : (
-                    <>
-                      <Fingerprint className="mr-2 h-4 w-4" />
-                      {isLogin ? "Sign In with Passkey" : "Register Passkey"}
-                    </>
-                  )}
-                </Button>
-
-                <p className="text-xs text-center text-muted-foreground">
-                  {isLogin 
-                    ? "Use your device's biometric authentication (Face ID, Touch ID, or fingerprint) to sign in securely."
-                    : "Set up biometric authentication for quick and secure access to your account."
-                  }
-                </p>
               </form>
             </TabsContent>
 
