@@ -6,13 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, Target, Flame, Award, CheckCircle2 } from "lucide-react";
+import { Trophy, Target, Flame, Award, CheckCircle2, Plus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 const Challenges = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("daily");
 
   // Fetch user profile with stats
@@ -106,9 +108,15 @@ const Challenges = () => {
 
   return (
     <div className="container mx-auto p-6 space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Challenges</h1>
-        <p className="text-muted-foreground">Complete challenges to earn points and badges</p>
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-bold">Challenges</h1>
+          <p className="text-muted-foreground">Complete challenges to earn points and badges</p>
+        </div>
+        <Button onClick={() => navigate('/progress-challenges')}>
+          <Plus className="mr-2 h-4 w-4" />
+          Custom Challenges
+        </Button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
