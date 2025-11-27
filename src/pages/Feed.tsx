@@ -1,14 +1,14 @@
 import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { useNavigate } from "react-router-dom";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Heart, MessageCircle, Send, Image as ImageIcon, User, X } from "lucide-react";
+import { Heart, MessageCircle, Send, Image as ImageIcon, User, X, Hash, TrendingUp } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatDistanceToNow } from "date-fns";
 
@@ -16,6 +16,8 @@ const Feed = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedHashtag = searchParams.get("hashtag");
   const [postContent, setPostContent] = useState("");
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
   const [commentContent, setCommentContent] = useState("");
@@ -25,12 +27,27 @@ const Feed = () => {
 
   // Fetch posts with user profiles
   const { data: posts } = useQuery({
-    queryKey: ["feed-posts"],
+    queryKey: ["feed-posts", selectedHashtag],
     queryFn: async () => {
-      const { data: postsData, error } = await supabase
+      let query = supabase
         .from("posts")
         .select("*")
-        .eq("is_public", true)
+        .eq("is_public", true);
+
+      // Filter by hashtag if selected
+      if (selectedHashtag) {
+        const { data: hashtagPosts } = await supabase
+          .from("post_hashtags")
+          .select("post_id")
+          .eq("hashtag", selectedHashtag);
+
+        const postIds = hashtagPosts?.map(h => h.post_id) || [];
+        if (postIds.length === 0) return [];
+        
+        query = query.in("id", postIds);
+      }
+
+      const { data: postsData, error } = await query
         .order("created_at", { ascending: false })
         .limit(50);
 
@@ -49,6 +66,31 @@ const Feed = () => {
         ...post,
         profile: profiles?.find(p => p.id === post.user_id)
       }));
+    },
+  });
+
+  // Fetch trending hashtags
+  const { data: trendingHashtags } = useQuery({
+    queryKey: ["trending-hashtags"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("post_hashtags")
+        .select("hashtag")
+        .gte("created_at", new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString());
+
+      if (error) throw error;
+
+      // Count hashtag occurrences
+      const hashtagCounts = data.reduce((acc: Record<string, number>, { hashtag }) => {
+        acc[hashtag] = (acc[hashtag] || 0) + 1;
+        return acc;
+      }, {});
+
+      // Sort by count and take top 10
+      return Object.entries(hashtagCounts)
+        .sort(([, a], [, b]) => b - a)
+        .slice(0, 10)
+        .map(([hashtag, count]) => ({ hashtag, count }));
     },
   });
 
@@ -224,22 +266,64 @@ const Feed = () => {
     }
   };
 
-  return (
-    <div className="container mx-auto p-6 max-w-2xl space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Community Feed</h1>
-        <p className="text-muted-foreground">Share your fitness journey with the community</p>
-      </div>
+  const handleHashtagClick = (hashtag: string) => {
+    setSearchParams({ hashtag });
+  };
 
-      {/* Create Post */}
-      <Card>
-        <CardContent className="pt-6 space-y-4">
-          <Textarea
-            placeholder="Share your progress, achievements, or motivation..."
-            value={postContent}
-            onChange={(e) => setPostContent(e.target.value)}
-            rows={3}
-          />
+  const clearHashtagFilter = () => {
+    setSearchParams({});
+  };
+
+  const renderContentWithHashtags = (content: string) => {
+    const parts = content.split(/(#\w+)/g);
+    return parts.map((part, index) => {
+      if (part.startsWith("#")) {
+        const hashtag = part.slice(1).toLowerCase();
+        return (
+          <span
+            key={index}
+            className="text-primary font-semibold cursor-pointer hover:underline"
+            onClick={() => handleHashtagClick(hashtag)}
+          >
+            {part}
+          </span>
+        );
+      }
+      return part;
+    });
+  };
+
+  return (
+    <div className="container mx-auto p-6 max-w-6xl">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Main Feed */}
+        <div className="lg:col-span-2 space-y-6">
+          <div>
+            <h1 className="text-3xl font-bold">Community Feed</h1>
+            <p className="text-muted-foreground">Share your fitness journey with the community</p>
+            {selectedHashtag && (
+              <div className="flex items-center gap-2 mt-2">
+                <Badge variant="secondary" className="text-sm">
+                  <Hash className="w-3 h-3 mr-1" />
+                  {selectedHashtag}
+                </Badge>
+                <Button variant="ghost" size="sm" onClick={clearHashtagFilter}>
+                  <X className="w-4 h-4" />
+                  Clear filter
+                </Button>
+              </div>
+            )}
+          </div>
+
+          {/* Create Post */}
+          <Card>
+            <CardContent className="pt-6 space-y-4">
+              <Textarea
+                placeholder="Share your progress, achievements, or motivation... Use #hashtags to categorize your post!"
+                value={postContent}
+                onChange={(e) => setPostContent(e.target.value)}
+                rows={3}
+              />
           
           {imagePreview && (
             <div className="relative">
@@ -283,46 +367,46 @@ const Feed = () => {
               <Send className="w-4 h-4 mr-2" />
               {createPost.isPending ? "Posting..." : "Post"}
             </Button>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Posts Feed */}
-      <div className="space-y-4">
-        {posts?.map((post) => (
-          <Card key={post.id}>
-            <CardHeader>
-              <div className="flex items-center gap-3">
-                <Avatar 
-                  className="cursor-pointer"
-                  onClick={() => navigate(`/user/${post.user_id}`)}
-                >
-                  {post.profile?.avatar_url ? (
-                    <AvatarImage src={post.profile.avatar_url} alt={post.profile.full_name || "User"} />
-                  ) : (
-                    <AvatarFallback>
-                      <User className="w-4 h-4" />
-                    </AvatarFallback>
-                  )}
-                </Avatar>
-                <div className="flex-1">
-                  <p 
-                    className="font-semibold cursor-pointer hover:underline"
-                    onClick={() => navigate(`/user/${post.user_id}`)}
-                  >
-                    {post.profile?.full_name || "Anonymous"}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {formatDistanceToNow(new Date(post.created_at), { addSuffix: true })}
-                  </p>
-                </div>
-                <Badge variant="secondary" className="capitalize">
-                  {post.post_type}
-                </Badge>
               </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="whitespace-pre-wrap">{post.content}</p>
+            </CardContent>
+          </Card>
+
+          {/* Posts Feed */}
+          <div className="space-y-4">
+            {posts?.map((post) => (
+              <Card key={post.id}>
+                <CardHeader>
+                  <div className="flex items-center gap-3">
+                    <Avatar 
+                      className="cursor-pointer"
+                      onClick={() => navigate(`/user/${post.user_id}`)}
+                    >
+                      {post.profile?.avatar_url ? (
+                        <AvatarImage src={post.profile.avatar_url} alt={post.profile.full_name || "User"} />
+                      ) : (
+                        <AvatarFallback>
+                          <User className="w-4 h-4" />
+                        </AvatarFallback>
+                      )}
+                    </Avatar>
+                    <div className="flex-1">
+                      <p 
+                        className="font-semibold cursor-pointer hover:underline"
+                        onClick={() => navigate(`/user/${post.user_id}`)}
+                      >
+                        {post.profile?.full_name || "Anonymous"}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {formatDistanceToNow(new Date(post.created_at), { addSuffix: true })}
+                      </p>
+                    </div>
+                    <Badge variant="secondary" className="capitalize">
+                      {post.post_type}
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="whitespace-pre-wrap">{renderContentWithHashtags(post.content)}</p>
 
               {post.media_url && (
                 <img
@@ -404,15 +488,76 @@ const Feed = () => {
                   </div>
                 </div>
               )}
+                </CardContent>
+              </Card>
+            ))}
+
+            {posts?.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">
+                  {selectedHashtag 
+                    ? `No posts found with #${selectedHashtag}` 
+                    : "No posts yet. Be the first to share!"}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Sidebar - Trending Hashtags */}
+        <div className="hidden lg:block space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="w-5 h-5" />
+                Trending Hashtags
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              {trendingHashtags && trendingHashtags.length > 0 ? (
+                trendingHashtags.map(({ hashtag, count }) => (
+                  <button
+                    key={hashtag}
+                    className={`w-full flex items-center justify-between p-3 rounded-lg transition-colors hover:bg-accent ${
+                      selectedHashtag === hashtag ? "bg-accent" : ""
+                    }`}
+                    onClick={() => handleHashtagClick(hashtag)}
+                  >
+                    <span className="font-semibold text-primary">#{hashtag}</span>
+                    <Badge variant="secondary">{count}</Badge>
+                  </button>
+                ))
+              ) : (
+                <p className="text-sm text-muted-foreground text-center py-4">
+                  No trending hashtags yet
+                </p>
+              )}
             </CardContent>
           </Card>
-        ))}
 
-        {posts?.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">No posts yet. Be the first to share!</p>
-          </div>
-        )}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-sm">Popular Hashtags</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <p className="text-xs text-muted-foreground">
+                Use hashtags to categorize your posts and make them easier to discover:
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {["fitness", "nutrition", "workout", "weightloss", "gains", "health", "motivation"].map((tag) => (
+                  <Badge
+                    key={tag}
+                    variant="outline"
+                    className="cursor-pointer hover:bg-accent"
+                    onClick={() => handleHashtagClick(tag)}
+                  >
+                    #{tag}
+                  </Badge>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
