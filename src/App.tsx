@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { ThemeProvider } from "next-themes";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
+import { useAppKeyboardShortcuts } from "@/hooks/useKeyboardNavigation";
+import { SkipToContent } from "@/components/SkipToContent";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -101,10 +103,13 @@ const queryClient = new QueryClient({
 
 const AppContent = () => {
   usePushNotifications();
+  useAppKeyboardShortcuts();
   
   return (
-    <Suspense fallback={<PageLoader />}>
-      <Routes>
+    <>
+      <SkipToContent />
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
         <Route path="/auth" element={<Auth />} />
         <Route path="/install" element={<Install />} />
         <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
@@ -171,8 +176,9 @@ const AppContent = () => {
             <Route path="/dashboard" element={<ProtectedRoute><Layout><Dashboard /></Layout></ProtectedRoute>} />
             <Route path="/stories" element={<ProtectedRoute><Layout><Stories /></Layout></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Suspense>
+        </Routes>
+      </Suspense>
+    </>
   );
 };
 
