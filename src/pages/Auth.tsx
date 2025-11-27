@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Activity, Mail, Lock, User as UserIcon, Sparkles, Fingerprint, Eye, EyeOff } from "lucide-react";
+import { Activity, Mail, Lock, User as UserIcon, Sparkles, Fingerprint, Eye, EyeOff, Shield } from "lucide-react";
 import { z } from "zod";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { isWebAuthnSupported, registerPasskey, authenticatePasskey } from "@/lib/webauthn";
@@ -24,6 +24,9 @@ const Auth = () => {
   const [authMethod, setAuthMethod] = useState<"password" | "magiclink" | "passkey">("password");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [requires2FA, setRequires2FA] = useState(false);
+  const [totpCode, setTotpCode] = useState("");
+  const [pendingUserId, setPendingUserId] = useState<string | null>(null);
   const { toast } = useToast();
   const navigate = useNavigate();
   const [passkeySupported, setPasskeySupported] = useState(false);
@@ -88,12 +91,37 @@ const Auth = () => {
 
     try {
       if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword({
+        const { data, error } = await supabase.auth.signInWithPassword({
           email,
           password,
         });
 
         if (error) throw error;
+
+        // Check if user has 2FA enabled
+        if (data.user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('two_factor_enabled')
+            .eq('id', data.user.id)
+            .single();
+
+          if (profile?.two_factor_enabled) {
+            // Store user ID and show 2FA prompt
+            setPendingUserId(data.user.id);
+            setRequires2FA(true);
+            
+            // Sign out temporarily until 2FA is verified
+            await supabase.auth.signOut();
+            
+            toast({
+              title: "2FA Required",
+              description: "Please enter your 6-digit authentication code.",
+            });
+            setLoading(false);
+            return;
+          }
+        }
 
         toast({
           title: "Welcome back!",
@@ -125,6 +153,62 @@ const Auth = () => {
       toast({
         title: "Error",
         description: error.message || "An error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleVerify2FA = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (totpCode.length !== 6) {
+      toast({
+        title: "Invalid Code",
+        description: "Please enter a 6-digit code.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // Re-authenticate with password to get a valid session
+      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (authError) throw authError;
+
+      // Verify TOTP code
+      const { data, error } = await supabase.functions.invoke('totp-verify', {
+        body: { token: totpCode }
+      });
+
+      if (error || !data?.valid) {
+        // Sign out if verification fails
+        await supabase.auth.signOut();
+        throw new Error('Invalid authentication code. Please try again.');
+      }
+
+      toast({
+        title: "Welcome back!",
+        description: "Two-factor authentication successful.",
+      });
+
+      // Reset 2FA state
+      setRequires2FA(false);
+      setTotpCode("");
+      setPendingUserId(null);
+      
+      // Navigation will happen automatically via the auth state change listener
+    } catch (error: any) {
+      toast({
+        title: "Verification Failed",
+        description: error.message || "Invalid authentication code.",
         variant: "destructive",
       });
     } finally {
@@ -361,230 +445,283 @@ const Auth = () => {
             Welcome to your Health and Wellness APP
           </p>
           <p className="text-muted-foreground">
-            {isLogin ? "Welcome back! Sign in to continue" : "Create your account to get started"}
+            {requires2FA 
+              ? "Enter your authentication code"
+              : isLogin 
+                ? "Welcome back! Sign in to continue" 
+                : "Create your account to get started"
+            }
           </p>
         </div>
 
-        <Tabs value={authMethod} onValueChange={(v) => setAuthMethod(v as "password" | "magiclink" | "passkey")} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-6">
-            <TabsTrigger value="password">Password</TabsTrigger>
-            <TabsTrigger value="magiclink" className="gap-2">
-              <Sparkles className="h-4 w-4" />
-              Magic Link
-            </TabsTrigger>
-            <TabsTrigger value="passkey" className="gap-2" disabled={!passkeySupported}>
-              <Fingerprint className="h-4 w-4" />
-              Passkey
-            </TabsTrigger>
-          </TabsList>
+        {requires2FA ? (
+          <form onSubmit={handleVerify2FA} className="space-y-4">
+            <div className="text-center mb-4">
+              <Shield className="w-12 h-12 mx-auto mb-2 text-primary" />
+              <h3 className="text-lg font-semibold">Two-Factor Authentication</h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                Enter the 6-digit code from your authenticator app
+              </p>
+            </div>
 
-          <TabsContent value="password">
-            <form onSubmit={handlePasswordAuth} className="space-y-4">
-              {!isLogin && (
+            <div className="space-y-2">
+              <Label htmlFor="totp">Authentication Code</Label>
+              <Input
+                id="totp"
+                type="text"
+                placeholder="000000"
+                value={totpCode}
+                onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                className="text-center text-2xl tracking-widest"
+                maxLength={6}
+                required
+              />
+            </div>
+
+            <Button
+              type="submit"
+              className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
+              disabled={loading || totpCode.length !== 6}
+            >
+              {loading ? "Verifying..." : "Verify Code"}
+            </Button>
+
+            <Button
+              type="button"
+              variant="ghost"
+              className="w-full"
+              onClick={() => {
+                setRequires2FA(false);
+                setTotpCode("");
+                setPendingUserId(null);
+                setPassword("");
+              }}
+            >
+              Cancel
+            </Button>
+          </form>
+        ) : (
+          <Tabs value={authMethod} onValueChange={(v) => setAuthMethod(v as "password" | "magiclink" | "passkey")} className="w-full">
+            <TabsList className="grid w-full grid-cols-3 mb-6">
+              <TabsTrigger value="password">Password</TabsTrigger>
+              <TabsTrigger value="magiclink" className="gap-2">
+                <Sparkles className="h-4 w-4" />
+                Magic Link
+              </TabsTrigger>
+              <TabsTrigger value="passkey" className="gap-2" disabled={!passkeySupported}>
+                <Fingerprint className="h-4 w-4" />
+                Passkey
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="password">
+              <form onSubmit={handlePasswordAuth} className="space-y-4">
+                {!isLogin && (
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Name</Label>
+                    <div className="relative">
+                      <UserIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                      <Input
+                        id="name"
+                        type="text"
+                        placeholder="John Doe"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="pl-10"
+                        required={!isLogin}
+                      />
+                    </div>
+                  </div>
+                )}
+
                 <div className="space-y-2">
-                  <Label htmlFor="name">Name</Label>
+                  <Label htmlFor="email">Email</Label>
                   <div className="relative">
-                    <UserIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
-                      id="name"
-                      type="text"
-                      placeholder="John Doe"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
+                      id="email"
+                      type="email"
+                      placeholder="you@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="pl-10"
-                      required={!isLogin}
+                      required
                     />
                   </div>
                 </div>
-              )}
 
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="you@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="pl-10"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10 pr-10"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-3 text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </button>
-                </div>
-              </div>
-
-              {!isLogin && (
                 <div className="space-y-2">
-                  <Label htmlFor="confirmPassword">Confirm Password</Label>
+                  <Label htmlFor="password">Password</Label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
-                      id="confirmPassword"
-                      type={showConfirmPassword ? "text" : "password"}
+                      id="password"
+                      type={showPassword ? "text" : "password"}
                       placeholder="••••••••"
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       className="pl-10 pr-10"
                       required
                     />
                     <button
                       type="button"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      onClick={() => setShowPassword(!showPassword)}
                       className="absolute right-3 top-3 text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
                   </div>
                 </div>
-              )}
 
-              <Button
-                type="submit"
-                className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
-                disabled={loading}
-              >
-                {loading ? "Loading..." : isLogin ? "Sign In" : "Sign Up"}
-              </Button>
-            </form>
-          </TabsContent>
+                {!isLogin && (
+                  <div className="space-y-2">
+                    <Label htmlFor="confirmPassword">Confirm Password</Label>
+                    <div className="relative">
+                      <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                      <Input
+                        id="confirmPassword"
+                        type={showConfirmPassword ? "text" : "password"}
+                        placeholder="••••••••"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        className="pl-10 pr-10"
+                        required
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        className="absolute right-3 top-3 text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    </div>
+                  </div>
+                )}
 
-          <TabsContent value="magiclink">
-            <form onSubmit={handleMagicLink} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="magic-email">Email</Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="magic-email"
-                    type="email"
-                    placeholder="you@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="pl-10"
-                    required
-                  />
-                </div>
-              </div>
-
-              <Button
-                type="submit"
-                className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
-                disabled={loading}
-              >
-                {loading ? "Sending..." : "Send Magic Link"}
-              </Button>
-
-              <p className="text-xs text-center text-muted-foreground">
-                We'll send a one-time login link to your email. Click it to sign in instantly without a password.
-              </p>
-            </form>
-          </TabsContent>
-
-          <TabsContent value="passkey">
-            {isInIframe && (
-              <div className="mb-4 p-4 bg-accent/20 border border-accent rounded-lg">
-                <p className="text-sm text-accent font-semibold mb-2">Preview Mode Limitation</p>
-                <p className="text-xs text-muted-foreground mb-3">
-                  Passkey authentication doesn't work in the Lovable preview due to iframe security restrictions.
-                </p>
                 <Button
-                  type="button"
-                  variant="outline"
-                  className="w-full"
-                  onClick={() => window.open(window.location.href, '_blank')}
+                  type="submit"
+                  className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
+                  disabled={loading}
                 >
-                  Open in New Tab to Test
+                  {loading ? "Loading..." : isLogin ? "Sign In" : "Sign Up"}
                 </Button>
-                <p className="text-xs text-muted-foreground mt-2 text-center">
-                  Passkeys will work normally when your app is published.
-                </p>
-              </div>
-            )}
-            
-            <form onSubmit={handlePasskey} className="space-y-4">
-              {!isLogin && (
+              </form>
+            </TabsContent>
+
+            <TabsContent value="magiclink">
+              <form onSubmit={handleMagicLink} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="passkey-name">Name</Label>
+                  <Label htmlFor="magic-email">Email</Label>
                   <div className="relative">
-                    <UserIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
-                      id="passkey-name"
-                      type="text"
-                      placeholder="John Doe"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
+                      id="magic-email"
+                      type="email"
+                      placeholder="you@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="pl-10"
-                      required={!isLogin}
+                      required
                     />
                   </div>
                 </div>
-              )}
 
-              <div className="space-y-2">
-                <Label htmlFor="passkey-email">Email</Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="passkey-email"
-                    type="email"
-                    placeholder="you@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="pl-10"
-                    required
-                  />
+                <Button
+                  type="submit"
+                  className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
+                  disabled={loading}
+                >
+                  {loading ? "Sending..." : "Send Magic Link"}
+                </Button>
+
+                <p className="text-xs text-center text-muted-foreground">
+                  We'll send a one-time login link to your email. Click it to sign in instantly without a password.
+                </p>
+              </form>
+            </TabsContent>
+
+            <TabsContent value="passkey">
+              {isInIframe && (
+                <div className="mb-4 p-4 bg-accent/20 border border-accent rounded-lg">
+                  <p className="text-sm text-accent font-semibold mb-2">Preview Mode Limitation</p>
+                  <p className="text-xs text-muted-foreground mb-3">
+                    Passkey authentication doesn't work in the Lovable preview due to iframe security restrictions.
+                  </p>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => window.open(window.location.href, '_blank')}
+                  >
+                    Open in New Tab to Test
+                  </Button>
+                  <p className="text-xs text-muted-foreground mt-2 text-center">
+                    Passkeys will work normally when your app is published.
+                  </p>
                 </div>
-              </div>
-
-              <Button
-                type="submit"
-                className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
-                disabled={loading || !passkeySupported}
-              >
-                {loading ? "Processing..." : (
-                  <>
-                    <Fingerprint className="mr-2 h-4 w-4" />
-                    {isLogin ? "Sign In with Passkey" : "Register Passkey"}
-                  </>
+              )}
+              
+              <form onSubmit={handlePasskey} className="space-y-4">
+                {!isLogin && (
+                  <div className="space-y-2">
+                    <Label htmlFor="passkey-name">Name</Label>
+                    <div className="relative">
+                      <UserIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                      <Input
+                        id="passkey-name"
+                        type="text"
+                        placeholder="John Doe"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="pl-10"
+                        required={!isLogin}
+                      />
+                    </div>
+                  </div>
                 )}
-              </Button>
 
-              <p className="text-xs text-center text-muted-foreground">
-                {isLogin 
-                  ? "Use your device's biometric authentication (Face ID, Touch ID, or fingerprint) to sign in securely."
-                  : "Set up biometric authentication for quick and secure access to your account."
-                }
-              </p>
-            </form>
-          </TabsContent>
+                <div className="space-y-2">
+                  <Label htmlFor="passkey-email">Email</Label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="passkey-email"
+                      type="email"
+                      placeholder="you@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="pl-10"
+                      required
+                    />
+                  </div>
+                </div>
 
-        </Tabs>
+                <Button
+                  type="submit"
+                  className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
+                  disabled={loading || !passkeySupported}
+                >
+                  {loading ? "Processing..." : (
+                    <>
+                      <Fingerprint className="mr-2 h-4 w-4" />
+                      {isLogin ? "Sign In with Passkey" : "Register Passkey"}
+                    </>
+                  )}
+                </Button>
 
-        {authMethod === "password" && (
+                <p className="text-xs text-center text-muted-foreground">
+                  {isLogin 
+                    ? "Use your device's biometric authentication (Face ID, Touch ID, or fingerprint) to sign in securely."
+                    : "Set up biometric authentication for quick and secure access to your account."
+                  }
+                </p>
+              </form>
+            </TabsContent>
+
+          </Tabs>
+        )}
+
+        {!requires2FA && authMethod === "password" && (
           <div className="mt-6 text-center">
             <button
               type="button"
@@ -602,7 +739,7 @@ const Auth = () => {
           </div>
         )}
 
-        {authMethod === "passkey" && (
+        {!requires2FA && authMethod === "passkey" && (
           <div className="mt-6 text-center">
             <button
               type="button"
