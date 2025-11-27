@@ -410,7 +410,7 @@ const ActivityRings = () => {
 
       {/* Interaction hint with animation */}
       <div className="text-center">
-        <p className="text-[10px] md:text-xs text-muted-foreground">
+        <p className="text-[10px] md:text-xs text-foreground/60">
           Click rings for details
         </p>
       </div>
@@ -426,9 +426,9 @@ const ActivityRings = () => {
             </div>
           </div>
           <div>
-            <p className="text-sm md:text-base font-bold">{data.move.current}</p>
-            <p className="text-[9px] md:text-[10px] text-muted-foreground">/ {data.move.goal} CAL</p>
-            <p className="text-[10px] md:text-xs font-medium">Move</p>
+            <p className="text-sm md:text-base font-bold text-foreground">{data.move.current}</p>
+            <p className="text-[9px] md:text-[10px] text-foreground/60">/ {data.move.goal} CAL</p>
+            <p className="text-[10px] md:text-xs font-medium text-foreground/80">Move</p>
           </div>
         </div>
 
@@ -441,9 +441,9 @@ const ActivityRings = () => {
             </div>
           </div>
           <div>
-            <p className="text-sm md:text-base font-bold">{data.exercise.current}</p>
-            <p className="text-[9px] md:text-[10px] text-muted-foreground">/ {data.exercise.goal} MIN</p>
-            <p className="text-[10px] md:text-xs font-medium">Exercise</p>
+            <p className="text-sm md:text-base font-bold text-foreground">{data.exercise.current}</p>
+            <p className="text-[9px] md:text-[10px] text-foreground/60">/ {data.exercise.goal} MIN</p>
+            <p className="text-[10px] md:text-xs font-medium text-foreground/80">Exercise</p>
           </div>
         </div>
 
@@ -456,9 +456,9 @@ const ActivityRings = () => {
             </div>
           </div>
           <div>
-            <p className="text-sm md:text-base font-bold">{data.stand.current}</p>
-            <p className="text-[9px] md:text-[10px] text-muted-foreground">/ {data.stand.goal} HR</p>
-            <p className="text-[10px] md:text-xs font-medium">Stand</p>
+            <p className="text-sm md:text-base font-bold text-foreground">{data.stand.current}</p>
+            <p className="text-[9px] md:text-[10px] text-foreground/60">/ {data.stand.goal} HR</p>
+            <p className="text-[10px] md:text-xs font-medium text-foreground/80">Stand</p>
           </div>
         </div>
       </div>
