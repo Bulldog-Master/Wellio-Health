@@ -26,10 +26,24 @@ export const base64ToBuffer = (base64: string): ArrayBuffer => {
   return bytes.buffer;
 };
 
+const getDeviceType = (): string => {
+  const ua = navigator.userAgent;
+  
+  if (/iPhone/i.test(ua)) return 'iPhone';
+  if (/iPad/i.test(ua)) return 'iPad';
+  if (/Macintosh|MacIntel|MacPPC|Mac68K/i.test(ua)) return 'Mac';
+  if (/Android/i.test(ua)) return 'Android';
+  if (/Windows/i.test(ua)) return 'Windows PC';
+  if (/Linux/i.test(ua)) return 'Linux';
+  
+  return 'Device';
+};
+
 export const registerPasskey = async (email: string): Promise<{
   credentialId: string;
   publicKey: string;
   counter: number;
+  deviceType: string;
 }> => {
   if (!isWebAuthnSupported()) {
     throw new Error('WebAuthn is not supported on this device');
@@ -82,6 +96,7 @@ export const registerPasskey = async (email: string): Promise<{
       credentialId: bufferToBase64(credential.rawId),
       publicKey: bufferToBase64(response.getPublicKey()!),
       counter: 0,
+      deviceType: getDeviceType(),
     };
   } catch (error) {
     console.error('Passkey registration error:', error);
