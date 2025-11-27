@@ -71,17 +71,37 @@ const PrivacySecurity = () => {
 
   const handleSetup2FA = async () => {
     try {
+      console.log('[2FA Setup] Starting 2FA setup...');
+      
+      const { data: { session } } = await supabase.auth.getSession();
+      console.log('[2FA Setup] Session check:', session ? 'Authenticated' : 'Not authenticated');
+      
+      if (!session) {
+        toast.error("You must be logged in to set up 2FA");
+        return;
+      }
+
+      console.log('[2FA Setup] Calling totp-setup function...');
       const { data, error } = await supabase.functions.invoke('totp-setup');
       
-      if (error) throw error;
+      console.log('[2FA Setup] Response:', { data, error });
       
-      if (data.qrCodeUrl) {
+      if (error) {
+        console.error('[2FA Setup] Error from function:', error);
+        throw error;
+      }
+      
+      if (data?.qrCodeUrl) {
+        console.log('[2FA Setup] QR code URL received, opening setup dialog');
         setQrCodeUrl(data.qrCodeUrl);
         setShow2FASetup(true);
+      } else {
+        console.error('[2FA Setup] No QR code URL in response:', data);
+        throw new Error('No QR code URL received');
       }
     } catch (error) {
-      console.error('Error setting up 2FA:', error);
-      toast.error("Failed to set up 2FA. Please try again.");
+      console.error('[2FA Setup] Error setting up 2FA:', error);
+      toast.error(`Failed to set up 2FA: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   };
 
