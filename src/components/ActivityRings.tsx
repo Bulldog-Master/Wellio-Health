@@ -241,9 +241,9 @@ const ActivityRings = () => {
 
   const getRingColor = (type: RingType) => {
     switch (type) {
-      case 'move': return '#FF006E';
-      case 'exercise': return '#00F5FF';
-      case 'stand': return '#BFFF00';
+      case 'move': return '#FF1493';
+      case 'exercise': return '#00FFFF';
+      case 'stand': return '#CCFF00';
     }
   };
 
@@ -282,9 +282,9 @@ const ActivityRings = () => {
   // Calculate ring positions
   const center = 150;
   const rings = [
-    { type: 'move' as const, radius: 115, color: '#FF006E', gradient: 'moveGradient', data: data.move },
-    { type: 'exercise' as const, radius: 87, color: '#00F5FF', gradient: 'exerciseGradient', data: data.exercise },
-    { type: 'stand' as const, radius: 59, color: '#BFFF00', gradient: 'standGradient', data: data.stand }
+    { type: 'move' as const, radius: 115, color: '#FF1493', gradient: 'moveGradient', data: data.move },
+    { type: 'exercise' as const, radius: 87, color: '#00FFFF', gradient: 'exerciseGradient', data: data.exercise },
+    { type: 'stand' as const, radius: 59, color: '#CCFF00', gradient: 'standGradient', data: data.stand }
   ];
 
   return (
@@ -300,16 +300,16 @@ const ActivityRings = () => {
             }}>
             <defs>
               <linearGradient id="moveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{ stopColor: '#FF006E' }} />
-                <stop offset="100%" style={{ stopColor: '#FF4081' }} />
+                <stop offset="0%" style={{ stopColor: '#FF1493' }} />
+                <stop offset="100%" style={{ stopColor: '#FF69B4' }} />
               </linearGradient>
               <linearGradient id="exerciseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{ stopColor: '#00F5FF' }} />
-                <stop offset="100%" style={{ stopColor: '#00B8D4' }} />
+                <stop offset="0%" style={{ stopColor: '#00FFFF' }} />
+                <stop offset="100%" style={{ stopColor: '#00CED1' }} />
               </linearGradient>
               <linearGradient id="standGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{ stopColor: '#BFFF00' }} />
-                <stop offset="100%" style={{ stopColor: '#76FF03' }} />
+                <stop offset="0%" style={{ stopColor: '#CCFF00' }} />
+                <stop offset="100%" style={{ stopColor: '#9ACD32' }} />
               </linearGradient>
               
               {/* Enhanced Glow filters */}
@@ -360,7 +360,7 @@ const ActivityRings = () => {
                     fill="none"
                     stroke={ring.color}
                     strokeWidth="20"
-                    opacity="0.2"
+                    opacity="0.4"
                   />
                   {/* Progress ring */}
                   {ring.data.percentage > 0 && (
@@ -420,9 +420,9 @@ const ActivityRings = () => {
         <div className="text-center space-y-0.5">
           <div className="flex justify-center">
             <div className="p-1.5 rounded-full" style={{
-              backgroundColor: 'rgba(255, 0, 110, 0.1)'
+              backgroundColor: 'rgba(255, 20, 147, 0.15)'
             }}>
-              <Flame className="w-3 h-3 md:w-4 md:h-4" style={{ color: '#FF006E' }} />
+              <Flame className="w-3 h-3 md:w-4 md:h-4" style={{ color: '#FF1493' }} />
             </div>
           </div>
           <div>
@@ -435,9 +435,9 @@ const ActivityRings = () => {
         <div className="text-center space-y-0.5">
           <div className="flex justify-center">
             <div className="p-1.5 rounded-full" style={{
-              backgroundColor: 'rgba(0, 245, 255, 0.1)'
+              backgroundColor: 'rgba(0, 255, 255, 0.15)'
             }}>
-              <Zap className="w-3 h-3 md:w-4 md:h-4" style={{ color: '#00F5FF' }} />
+              <Zap className="w-3 h-3 md:w-4 md:h-4" style={{ color: '#00FFFF' }} />
             </div>
           </div>
           <div>
@@ -450,9 +450,9 @@ const ActivityRings = () => {
         <div className="text-center space-y-0.5">
           <div className="flex justify-center">
             <div className="p-1.5 rounded-full" style={{
-              backgroundColor: 'rgba(191, 255, 0, 0.1)'
+              backgroundColor: 'rgba(204, 255, 0, 0.15)'
             }}>
-              <Clock className="w-3 h-3 md:w-4 md:h-4" style={{ color: '#BFFF00' }} />
+              <Clock className="w-3 h-3 md:w-4 md:h-4" style={{ color: '#CCFF00' }} />
             </div>
           </div>
           <div>
