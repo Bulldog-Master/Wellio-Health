@@ -7,65 +7,93 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
+  console.log('[TOTP Verify] Request received:', req.method);
+  
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const supabaseClient = createClient(
+    const authHeader = req.headers.get('Authorization');
+    console.log('[TOTP Verify] Auth header present:', !!authHeader);
+    
+    if (!authHeader) {
+      console.error('[TOTP Verify] No authorization header');
+      return new Response(
+        JSON.stringify({ error: 'No authorization header' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Use service role key to verify the JWT and get user
+    const supabaseAdmin = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
-      {
-        global: {
-          headers: { Authorization: req.headers.get('Authorization')! },
-        },
-      }
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    const { data: { user } } = await supabaseClient.auth.getUser();
-    if (!user) {
+    // Verify the JWT token
+    const token = authHeader.replace('Bearer ', '');
+    console.log('[TOTP Verify] Verifying JWT token...');
+    const { data: { user }, error: userError } = await supabaseAdmin.auth.getUser(token);
+    
+    if (userError || !user) {
+      console.error('[TOTP Verify] Error getting user:', userError);
       return new Response(
         JSON.stringify({ error: 'Unauthorized' }),
         { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    const { token } = await req.json();
+    console.log('[TOTP Verify] User authenticated:', user.id);
+    const body = await req.json();
+    const totpToken = body.token;
+    console.log('[TOTP Verify] TOTP token received, length:', totpToken?.length);
 
     // Fetch the user's 2FA secret
-    const { data: profile } = await supabaseClient
+    console.log('[TOTP Verify] Fetching user profile...');
+    const { data: profile, error: profileError } = await supabaseAdmin
       .from('profiles')
       .select('two_factor_secret')
       .eq('id', user.id)
       .single();
 
+    if (profileError) {
+      console.error('[TOTP Verify] Error fetching profile:', profileError);
+    }
+
     if (!profile?.two_factor_secret) {
+      console.error('[TOTP Verify] 2FA not set up for user');
       return new Response(
         JSON.stringify({ error: '2FA not set up' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
+    console.log('[TOTP Verify] Verifying TOTP token...');
     // Verify the TOTP token
-    const isValid = await verifyTOTP(profile.two_factor_secret, token);
+    const isValid = await verifyTOTP(profile.two_factor_secret, totpToken);
+    console.log('[TOTP Verify] Token valid:', isValid);
 
     if (isValid) {
       // Enable 2FA for the user
-      const { error } = await supabaseClient
+      console.log('[TOTP Verify] Enabling 2FA for user...');
+      const { error } = await supabaseAdmin
         .from('profiles')
         .update({ two_factor_enabled: true })
         .eq('id', user.id);
 
       if (error) {
-        console.error('Error enabling 2FA:', error);
+        console.error('[TOTP Verify] Error enabling 2FA:', error);
         throw error;
       }
 
+      console.log('[TOTP Verify] 2FA enabled successfully!');
       return new Response(
         JSON.stringify({ success: true, verified: true }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     } else {
+      console.log('[TOTP Verify] Invalid token');
       return new Response(
         JSON.stringify({ success: false, verified: false, error: 'Invalid token' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
