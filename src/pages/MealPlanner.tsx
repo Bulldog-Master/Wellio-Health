@@ -123,11 +123,11 @@ const MealPlanner = () => {
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/food")}
         className="gap-2 mb-2"
       >
         <ArrowLeft className="w-4 h-4" />
-        Back to Dashboard
+        Back to Food
       </Button>
 
       <div className="flex items-center justify-between">
