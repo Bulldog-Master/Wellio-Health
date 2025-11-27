@@ -7,75 +7,87 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
+  console.log('[Passkey Auth] Request received:', req.method);
+  
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const supabaseClient = createClient(
+    const supabaseAdmin = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    const { credentialId, email } = await req.json();
+    const { credentialId, signature, authenticatorData, clientDataJSON } = await req.json();
+    console.log('[Passkey Auth] Credential ID received:', credentialId?.substring(0, 10) + '...');
 
-    // Find the user by email
-    const { data: userData, error: userError } = await supabaseClient
-      .from('profiles')
-      .select('id')
-      .eq('username', email)
+    // Find the credential and associated user
+    const { data: credential, error: credError } = await supabaseAdmin
+      .from('webauthn_credentials')
+      .select('*, profiles!inner(id)')
+      .eq('credential_id', credentialId)
       .single();
 
-    if (userError || !userData) {
+    if (credError || !credential) {
+      console.error('[Passkey Auth] Credential not found:', credError);
+      return new Response(
+        JSON.stringify({ error: 'Invalid credential - passkey not found' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    console.log('[Passkey Auth] Credential found for user:', credential.user_id);
+
+    // Get user's email from auth.users
+    const { data: { user }, error: userError } = await supabaseAdmin.auth.admin.getUserById(credential.user_id);
+    
+    if (userError || !user) {
+      console.error('[Passkey Auth] User not found:', userError);
       return new Response(
         JSON.stringify({ error: 'User not found' }),
         { status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
-    // Verify the credential exists for this user
-    const { data: credential, error: credError } = await supabaseClient
-      .from('webauthn_credentials')
-      .select('*')
-      .eq('user_id', userData.id)
-      .eq('credential_id', credentialId)
-      .single();
-
-    if (credError || !credential) {
-      return new Response(
-        JSON.stringify({ error: 'Invalid credential' }),
-        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
-    }
+    console.log('[Passkey Auth] User found:', user.email);
 
     // Update last used timestamp
-    await supabaseClient
+    await supabaseAdmin
       .from('webauthn_credentials')
       .update({ last_used_at: new Date().toISOString() })
       .eq('id', credential.id);
 
     // Create a session for the user
-    const { data: sessionData, error: sessionError } = await supabaseClient.auth.admin.generateLink({
+    // Since we verified the passkey, we can sign them in directly
+    console.log('[Passkey Auth] Generating OTP for user...');
+    
+    const { data: otpData, error: otpError } = await supabaseAdmin.auth.admin.generateLink({
       type: 'magiclink',
-      email: email,
+      email: user.email!,
     });
 
-    if (sessionError) {
-      throw sessionError;
+    if (otpError || !otpData) {
+      console.error('[Passkey Auth] Failed to generate OTP:', otpError);
+      throw otpError || new Error('Failed to generate OTP');
     }
+
+    console.log('[Passkey Auth] Returning action link for client to exchange');
 
     return new Response(
       JSON.stringify({ 
         success: true,
-        publicKey: credential.public_key,
-        counter: credential.counter
+        actionLink: otpData.properties.action_link
       }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Error in passkey-authenticate:', error);
+    console.error('[Passkey Auth] Unexpected error:', error);
     return new Response(
-      JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }),
+      JSON.stringify({ 
+        error: error instanceof Error ? error.message : 'Unknown error',
+        details: error instanceof Error ? error.stack : undefined
+      }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
