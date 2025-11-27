@@ -396,14 +396,19 @@ const Auth = () => {
         }
 
         // Store the passkey in the database
-        const { error: registerError } = await supabase.functions.invoke('passkey-register', {
+        const { data: registerData, error: registerError } = await supabase.functions.invoke('passkey-register', {
           body: {
             credentialId: passkeyData.credentialId,
             publicKey: passkeyData.publicKey,
             counter: passkeyData.counter,
             deviceType: 'platform',
-          }
+          },
+          headers: {
+            Authorization: `Bearer ${session.access_token}`,
+          },
         });
+        
+        console.log('[Passkey] Register response:', { registerData, registerError });
 
         if (registerError) {
           console.error('[Passkey] Failed to store credential:', registerError);
