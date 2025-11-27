@@ -164,7 +164,10 @@ const PrivacySecurity = () => {
       const credential = await registerPasskey(user.email);
       
       const { data, error } = await supabase.functions.invoke('passkey-register', {
-        body: credential
+        body: {
+          ...credential,
+          userId: user.id
+        }
       });
 
       if (error) throw error;
