@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Heart, MessageCircle, Users, Trophy, Flame, ArrowLeft, Settings } from "lucide-react";
+import { Heart, MessageCircle, Users, Trophy, Flame, ArrowLeft, Settings, Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatDistanceToNow } from "date-fns";
 
@@ -184,14 +184,57 @@ const UserProfile = () => {
                     Edit Profile
                   </Button>
                 ) : (
-                  <Button
-                    onClick={() => toggleFollow.mutate()}
-                    variant={isFollowing ? "outline" : "default"}
-                    disabled={toggleFollow.isPending}
-                  >
-                    <Users className="w-4 h-4 mr-2" />
-                    {isFollowing ? "Unfollow" : "Follow"}
-                  </Button>
+                  <>
+                    <Button
+                      onClick={() => toggleFollow.mutate()}
+                      variant={isFollowing ? "outline" : "default"}
+                      disabled={toggleFollow.isPending}
+                    >
+                      <Users className="w-4 h-4 mr-2" />
+                      {isFollowing ? "Unfollow" : "Follow"}
+                    </Button>
+                    <Button
+                      onClick={async () => {
+                        // Get or create conversation
+                        const user1 = currentUser!.id < userId! ? currentUser!.id : userId!;
+                        const user2 = currentUser!.id < userId! ? userId! : currentUser!.id;
+
+                        const { data: existing } = await supabase
+                          .from("conversations")
+                          .select("id")
+                          .eq("participant1_id", user1)
+                          .eq("participant2_id", user2)
+                          .maybeSingle();
+
+                        if (existing) {
+                          navigate(`/messages/${existing.id}`);
+                        } else {
+                          const { data: newConv, error } = await supabase
+                            .from("conversations")
+                            .insert({
+                              participant1_id: user1,
+                              participant2_id: user2,
+                            })
+                            .select()
+                            .single();
+
+                          if (error) {
+                            toast({
+                              title: "Error",
+                              description: "Failed to create conversation",
+                              variant: "destructive",
+                            });
+                          } else {
+                            navigate(`/messages/${newConv.id}`);
+                          }
+                        }
+                      }}
+                      variant="outline"
+                    >
+                      <Mail className="w-4 h-4 mr-2" />
+                      Message
+                    </Button>
+                  </>
                 )}
               </div>
             </div>
