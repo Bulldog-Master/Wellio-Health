@@ -161,14 +161,20 @@ const UserProfile = () => {
                   <p className="text-2xl font-bold">{posts?.length || 0}</p>
                   <p className="text-sm text-muted-foreground">Posts</p>
                 </div>
-                <div className="text-center">
+                <button
+                  className="text-center hover:opacity-70 transition-opacity"
+                  onClick={() => navigate(`/user/${userId}/followers`)}
+                >
                   <p className="text-2xl font-bold">{profile?.followers_count || 0}</p>
                   <p className="text-sm text-muted-foreground">Followers</p>
-                </div>
-                <div className="text-center">
+                </button>
+                <button
+                  className="text-center hover:opacity-70 transition-opacity"
+                  onClick={() => navigate(`/user/${userId}/followers`)}
+                >
                   <p className="text-2xl font-bold">{profile?.following_count || 0}</p>
                   <p className="text-sm text-muted-foreground">Following</p>
-                </div>
+                </button>
               </div>
 
               <div className="flex gap-2 justify-center md:justify-start">
