@@ -1549,6 +1549,51 @@ export type Database = {
         }
         Relationships: []
       }
+      personal_records: {
+        Row: {
+          achieved_at: string
+          created_at: string
+          exercise_category: string
+          exercise_name: string
+          id: string
+          notes: string | null
+          record_type: string
+          record_unit: string
+          record_value: number
+          updated_at: string
+          user_id: string
+          video_url: string | null
+        }
+        Insert: {
+          achieved_at?: string
+          created_at?: string
+          exercise_category: string
+          exercise_name: string
+          id?: string
+          notes?: string | null
+          record_type: string
+          record_unit: string
+          record_value: number
+          updated_at?: string
+          user_id: string
+          video_url?: string | null
+        }
+        Update: {
+          achieved_at?: string
+          created_at?: string
+          exercise_category?: string
+          exercise_name?: string
+          id?: string
+          notes?: string | null
+          record_type?: string
+          record_unit?: string
+          record_value?: number
+          updated_at?: string
+          user_id?: string
+          video_url?: string | null
+        }
+        Relationships: []
+      }
       post_hashtags: {
         Row: {
           created_at: string
@@ -1698,6 +1743,47 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      pr_history: {
+        Row: {
+          achieved_at: string
+          created_at: string
+          id: string
+          improvement_percentage: number | null
+          new_value: number
+          pr_id: string
+          previous_value: number
+          user_id: string
+        }
+        Insert: {
+          achieved_at?: string
+          created_at?: string
+          id?: string
+          improvement_percentage?: number | null
+          new_value: number
+          pr_id: string
+          previous_value: number
+          user_id: string
+        }
+        Update: {
+          achieved_at?: string
+          created_at?: string
+          id?: string
+          improvement_percentage?: number | null
+          new_value?: number
+          pr_id?: string
+          previous_value?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pr_history_pr_id_fkey"
+            columns: ["pr_id"]
+            isOneToOne: false
+            referencedRelation: "personal_records"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
