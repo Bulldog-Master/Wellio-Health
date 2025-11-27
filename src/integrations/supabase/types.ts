@@ -282,6 +282,7 @@ export type Database = {
           created_at: string
           file_url: string | null
           id: string
+          last_accessed_at: string | null
           notes: string | null
           record_date: string
           record_name: string
@@ -292,6 +293,7 @@ export type Database = {
           created_at?: string
           file_url?: string | null
           id?: string
+          last_accessed_at?: string | null
           notes?: string | null
           record_date: string
           record_name: string
@@ -302,6 +304,7 @@ export type Database = {
           created_at?: string
           file_url?: string | null
           id?: string
+          last_accessed_at?: string | null
           notes?: string | null
           record_date?: string
           record_name?: string
@@ -314,6 +317,7 @@ export type Database = {
           created_at: string | null
           file_url: string | null
           id: string
+          last_accessed_at: string | null
           notes: string | null
           result_unit: string | null
           result_value: string | null
@@ -325,6 +329,7 @@ export type Database = {
           created_at?: string | null
           file_url?: string | null
           id?: string
+          last_accessed_at?: string | null
           notes?: string | null
           result_unit?: string | null
           result_value?: string | null
@@ -336,6 +341,7 @@ export type Database = {
           created_at?: string | null
           file_url?: string | null
           id?: string
+          last_accessed_at?: string | null
           notes?: string | null
           result_unit?: string | null
           result_value?: string | null
@@ -455,8 +461,6 @@ export type Database = {
           stand_goal: number | null
           target_weight: number | null
           target_weight_unit: string | null
-          two_factor_enabled: boolean | null
-          two_factor_secret: string | null
           updated_at: string | null
           username: string | null
           weight: number | null
@@ -487,8 +491,6 @@ export type Database = {
           stand_goal?: number | null
           target_weight?: number | null
           target_weight_unit?: string | null
-          two_factor_enabled?: boolean | null
-          two_factor_secret?: string | null
           updated_at?: string | null
           username?: string | null
           weight?: number | null
@@ -519,8 +521,6 @@ export type Database = {
           stand_goal?: number | null
           target_weight?: number | null
           target_weight_unit?: string | null
-          two_factor_enabled?: boolean | null
-          two_factor_secret?: string | null
           updated_at?: string | null
           username?: string | null
           weight?: number | null
