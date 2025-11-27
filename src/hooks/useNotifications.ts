@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 export const useNotifications = () => {
   const [permission, setPermission] = useState<NotificationPermission>("default");
@@ -26,15 +27,31 @@ export const useNotifications = () => {
     }
   };
 
-  const showNotification = (title: string, options?: NotificationOptions) => {
+  const showNotification = (
+    title: string, 
+    options?: NotificationOptions & { data?: { postId?: string; userId?: string; path?: string } }
+  ) => {
     if (permission !== "granted") return;
 
     try {
-      new Notification(title, {
+      const notification = new Notification(title, {
         icon: "/favicon.ico",
         badge: "/favicon.ico",
+        requireInteraction: false,
         ...options,
       });
+
+      notification.onclick = () => {
+        window.focus();
+        if (options?.data?.path) {
+          window.location.href = options.data.path;
+        } else if (options?.data?.postId) {
+          window.location.href = `/feed?post=${options.data.postId}`;
+        } else if (options?.data?.userId) {
+          window.location.href = `/profile/${options.data.userId}`;
+        }
+        notification.close();
+      };
     } catch (error) {
       console.error("Error showing notification:", error);
     }
