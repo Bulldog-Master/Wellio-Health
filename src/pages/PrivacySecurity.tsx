@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { Card } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
@@ -22,20 +23,34 @@ import {
 const PrivacySecurity = () => {
   const navigate = useNavigate();
   const [passkeys, setPasskeys] = useState<any[]>([]);
-  const [email, setEmail] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const [twoFAEnabled, setTwoFAEnabled] = useState(false);
-  const [passkeyEnabled, setPasskeyEnabled] = useState(false);
+  const [is2FAEnabled, setIs2FAEnabled] = useState(false);
+  const [show2FASetup, setShow2FASetup] = useState(false);
+  const [qrCodeUrl, setQrCodeUrl] = useState("");
+  const [totpToken, setTotpToken] = useState("");
 
   useEffect(() => {
-    fetchPasskeys();
-    fetchUserEmail();
+    const fetchUserData = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        setUserEmail(user.email || "");
+        await fetchPasskeys();
+        
+        // Check if 2FA is enabled
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('two_factor_enabled')
+          .eq('id', user.id)
+          .single();
+        
+        if (profile) {
+          setIs2FAEnabled(profile.two_factor_enabled || false);
+        }
+      }
+    };
+    fetchUserData();
   }, []);
-
-  const fetchUserEmail = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (user?.email) setEmail(user.email);
-  };
 
   const fetchPasskeys = async () => {
     try {
@@ -49,10 +64,65 @@ const PrivacySecurity = () => {
 
       if (error) throw error;
       setPasskeys(data || []);
-      setTwoFAEnabled(data && data.length > 0);
-      setPasskeyEnabled(data && data.length > 0);
     } catch (error) {
       console.error("Error fetching passkeys:", error);
+    }
+  };
+
+  const handleSetup2FA = async () => {
+    try {
+      const { data, error } = await supabase.functions.invoke('totp-setup');
+      
+      if (error) throw error;
+      
+      if (data.qrCodeUrl) {
+        setQrCodeUrl(data.qrCodeUrl);
+        setShow2FASetup(true);
+      }
+    } catch (error) {
+      console.error('Error setting up 2FA:', error);
+      toast.error("Failed to set up 2FA. Please try again.");
+    }
+  };
+
+  const handleVerify2FA = async () => {
+    if (!totpToken || totpToken.length !== 6) {
+      toast.error("Please enter a valid 6-digit code");
+      return;
+    }
+
+    try {
+      const { data, error } = await supabase.functions.invoke('totp-verify', {
+        body: { token: totpToken }
+      });
+      
+      if (error) throw error;
+      
+      if (data.verified) {
+        setIs2FAEnabled(true);
+        setShow2FASetup(false);
+        setTotpToken("");
+        toast.success("2FA has been enabled successfully");
+      } else {
+        toast.error("Invalid code. Please try again.");
+      }
+    } catch (error) {
+      console.error('Error verifying 2FA:', error);
+      toast.error("Failed to verify 2FA code. Please try again.");
+    }
+  };
+
+  const handleDisable2FA = async () => {
+    try {
+      const { error } = await supabase.functions.invoke('totp-disable');
+      
+      if (error) throw error;
+      
+      setIs2FAEnabled(false);
+      toast.success("2FA has been disabled");
+    } catch (error) {
+      console.error('Error disabling 2FA:', error);
+      toast.error("Failed to disable 2FA. Please try again.");
     }
   };
 
@@ -88,7 +158,7 @@ const PrivacySecurity = () => {
   };
 
   const handleChangePassword = async () => {
-    if (!email) {
+    if (!userEmail) {
       toast.error("Please log in first");
       navigate("/auth");
       return;
@@ -96,7 +166,7 @@ const PrivacySecurity = () => {
     
     try {
       toast.info("Sending password reset email...");
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      const { error } = await supabase.auth.resetPasswordForEmail(userEmail, {
         redirectTo: `${window.location.origin}/auth`,
       });
 
@@ -191,101 +261,149 @@ const PrivacySecurity = () => {
         </div>
       </div>
 
-      {/* Two-Factor Authentication */}
-      <Card className="p-6">
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-start gap-4">
-            <Shield className="w-6 h-6 text-primary mt-1" />
-            <div className="flex-1">
-              <h3 className="font-semibold mb-1">Activate 2FA</h3>
+      {/* Two-Factor Authentication (TOTP) */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Two-Factor Authentication (TOTP)</CardTitle>
+          <CardDescription>
+            Use an authenticator app like Google Authenticator or Authy
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label>2FA Status</Label>
               <p className="text-sm text-muted-foreground">
-                Enable two-factor authentication for extra security
+                {is2FAEnabled ? "2FA is active" : "2FA is not set up"}
               </p>
             </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-medium">{twoFAEnabled ? "ON" : "OFF"}</span>
             <Switch
-              checked={twoFAEnabled}
+              checked={is2FAEnabled}
               onCheckedChange={(checked) => {
                 if (checked) {
-                  handleAddPasskey();
+                  handleSetup2FA();
                 } else {
-                  setTwoFAEnabled(false);
+                  handleDisable2FA();
                 }
               }}
             />
           </div>
-        </div>
-          
-        {passkeys.length > 0 && (
-          <div className="space-y-2 pt-4 border-t">
-            {passkeys.map((passkey) => (
-              <div key={passkey.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                <div className="text-sm">
-                  <p className="font-medium">{passkey.device_type || "Unknown Device"}</p>
-                  <p className="text-xs text-muted-foreground">
-                    Added {new Date(passkey.created_at).toLocaleDateString()}
-                  </p>
-                </div>
-                <Button
-                  onClick={() => handleDeletePasskey(passkey.id)}
-                  variant="ghost"
-                  size="sm"
+
+          {show2FASetup && (
+            <div className="space-y-4 pt-4 border-t">
+              <div className="space-y-2">
+                <Label>Scan QR Code</Label>
+                <p className="text-sm text-muted-foreground">
+                  Scan this QR code with your authenticator app
+                </p>
+                {qrCodeUrl && (
+                  <div className="flex justify-center p-4 bg-white rounded-lg">
+                    <img 
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrCodeUrl)}`}
+                      alt="2FA QR Code"
+                      className="w-48 h-48"
+                    />
+                  </div>
+                )}
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="totp-token">Enter Verification Code</Label>
+                <Input
+                  id="totp-token"
+                  type="text"
+                  placeholder="Enter 6-digit code"
+                  maxLength={6}
+                  value={totpToken}
+                  onChange={(e) => setTotpToken(e.target.value.replace(/\D/g, ''))}
+                />
+              </div>
+
+              <div className="flex gap-2">
+                <Button onClick={handleVerify2FA} disabled={totpToken.length !== 6}>
+                  Verify & Enable
+                </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={() => {
+                    setShow2FASetup(false);
+                    setTotpToken("");
+                  }}
                 >
-                  Remove
+                  Cancel
                 </Button>
               </div>
-            ))}
-          </div>
-        )}
+            </div>
+          )}
+        </CardContent>
       </Card>
 
-      {/* Passkey */}
-      <Card className="p-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-start gap-4">
-            <Key className="w-6 h-6 text-primary mt-1" />
-            <div className="flex-1">
-              <h3 className="font-semibold mb-1">Activate Passkey</h3>
-              <p className="text-sm text-muted-foreground">
-                Use biometric authentication to sign in
-              </p>
+      {/* Passkey (WebAuthn) */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Passkey (WebAuthn)</CardTitle>
+          <CardDescription>
+            Use biometric authentication or security keys for passwordless login
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <Label>Manage Passkeys</Label>
+                <p className="text-sm text-muted-foreground">
+                  Add or remove passkeys for your account
+                </p>
+              </div>
+              <Button onClick={handleAddPasskey} size="sm">
+                Add Passkey
+              </Button>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-medium">{passkeyEnabled ? "ON" : "OFF"}</span>
-            <Switch
-              checked={passkeyEnabled}
-              onCheckedChange={(checked) => {
-                if (checked) {
-                  handleAddPasskey();
-                } else {
-                  setPasskeyEnabled(false);
-                }
-              }}
-            />
-          </div>
-        </div>
+
+          {passkeys.length > 0 && (
+            <div className="space-y-2 pt-4 border-t">
+              {passkeys.map((passkey) => (
+                <div key={passkey.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                  <div className="text-sm">
+                    <p className="font-medium">{passkey.device_type || "Unknown Device"}</p>
+                    <p className="text-xs text-muted-foreground">
+                      Added {new Date(passkey.created_at).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <Button
+                    onClick={() => handleDeletePasskey(passkey.id)}
+                    variant="ghost"
+                    size="sm"
+                  >
+                    Remove
+                  </Button>
+                </div>
+              ))}
+            </div>
+          )}
+        </CardContent>
       </Card>
 
       {/* Password */}
-      <Card className="p-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h3 className="font-semibold mb-1">Password</h3>
-            <p className="text-sm text-muted-foreground">Change your account password</p>
-          </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Password</CardTitle>
+          <CardDescription>Change your account password</CardDescription>
+        </CardHeader>
+        <CardContent>
           <Button onClick={handleChangePassword} variant="outline">
             Change Password
           </Button>
-        </div>
+        </CardContent>
       </Card>
 
       {/* Data Management */}
-      <Card className="p-6">
-        <h3 className="font-semibold mb-4">Data Management</h3>
-        <div className="space-y-3">
+      <Card>
+        <CardHeader>
+          <CardTitle>Data Management</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-3">
           <Button onClick={handleExportData} variant="outline" className="w-full justify-start">
             <Download className="w-4 h-4 mr-2" />
             Export My Data
@@ -299,7 +417,7 @@ const PrivacySecurity = () => {
             <Trash2 className="w-4 h-4 mr-2" />
             Delete Account
           </Button>
-        </div>
+        </CardContent>
       </Card>
 
       {/* Delete Account Confirmation Dialog */}

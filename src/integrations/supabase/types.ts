@@ -428,6 +428,8 @@ export type Database = {
           stand_goal: number | null
           target_weight: number | null
           target_weight_unit: string | null
+          two_factor_enabled: boolean | null
+          two_factor_secret: string | null
           updated_at: string | null
           username: string | null
           weight: number | null
@@ -458,6 +460,8 @@ export type Database = {
           stand_goal?: number | null
           target_weight?: number | null
           target_weight_unit?: string | null
+          two_factor_enabled?: boolean | null
+          two_factor_secret?: string | null
           updated_at?: string | null
           username?: string | null
           weight?: number | null
@@ -488,6 +492,8 @@ export type Database = {
           stand_goal?: number | null
           target_weight?: number | null
           target_weight_unit?: string | null
+          two_factor_enabled?: boolean | null
+          two_factor_secret?: string | null
           updated_at?: string | null
           username?: string | null
           weight?: number | null
