@@ -288,12 +288,11 @@ const ActivityRings = () => {
   ];
 
   return (
-    <div className="space-y-3 py-2">
+    <div className="space-y-2 py-1">
       {/* Rings visualization */}
       <div className="flex justify-center">
-        <div className="relative w-48 h-48 md:w-56 md:h-56" style={{ 
-          filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1))',
-          animation: 'scale-in 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
+        <div className="relative w-32 h-32 md:w-40 md:h-40" style={{ 
+          filter: 'drop-shadow(0 1px 4px rgba(0, 0, 0, 0.08))'
         }}>
           <svg width="100%" height="100%" viewBox="0 0 300 300" className="transform"
             style={{
@@ -410,66 +409,56 @@ const ActivityRings = () => {
       </div>
 
       {/* Interaction hint with animation */}
-      <div className="text-center animate-fade-in" style={{ animationDelay: '1s' }}>
-        <p className="text-xs md:text-sm text-muted-foreground flex items-center justify-center gap-2">
-          <span className="text-sm">👆</span>
-          <span>Click any ring for details</span>
+      <div className="text-center">
+        <p className="text-[10px] md:text-xs text-muted-foreground">
+          Click rings for details
         </p>
       </div>
 
       {/* Ring details with improved styling */}
-      <div className="grid grid-cols-3 gap-2 md:gap-3 mt-4">
-        <div className="text-center space-y-1 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+      <div className="grid grid-cols-3 gap-1.5 md:gap-2 mt-2">
+        <div className="text-center space-y-0.5">
           <div className="flex justify-center">
-            <div className="p-2 rounded-full hover:scale-110 transition-transform" style={{
-              backgroundColor: 'rgba(255, 0, 110, 0.1)',
-              boxShadow: data.move.percentage >= 100 
-                ? '0 2px 8px rgba(255, 0, 110, 0.3)' 
-                : 'none'
+            <div className="p-1.5 rounded-full" style={{
+              backgroundColor: 'rgba(255, 0, 110, 0.1)'
             }}>
-              <Flame className="w-4 h-4 md:w-5 md:h-5" style={{ color: '#FF006E' }} />
+              <Flame className="w-3 h-3 md:w-4 md:h-4" style={{ color: '#FF006E' }} />
             </div>
           </div>
           <div>
-            <p className="text-lg md:text-xl font-bold">{data.move.current}</p>
-            <p className="text-[10px] md:text-xs text-muted-foreground">/ {data.move.goal} CAL</p>
-            <p className="text-xs md:text-sm font-medium mt-0.5">Move</p>
+            <p className="text-sm md:text-base font-bold">{data.move.current}</p>
+            <p className="text-[9px] md:text-[10px] text-muted-foreground">/ {data.move.goal} CAL</p>
+            <p className="text-[10px] md:text-xs font-medium">Move</p>
           </div>
         </div>
 
-        <div className="text-center space-y-1 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+        <div className="text-center space-y-0.5">
           <div className="flex justify-center">
-            <div className="p-2 rounded-full hover:scale-110 transition-transform" style={{
-              backgroundColor: 'rgba(0, 245, 255, 0.1)',
-              boxShadow: data.exercise.percentage >= 100 
-                ? '0 2px 8px rgba(0, 245, 255, 0.3)' 
-                : 'none'
+            <div className="p-1.5 rounded-full" style={{
+              backgroundColor: 'rgba(0, 245, 255, 0.1)'
             }}>
-              <Zap className="w-4 h-4 md:w-5 md:h-5" style={{ color: '#00F5FF' }} />
+              <Zap className="w-3 h-3 md:w-4 md:h-4" style={{ color: '#00F5FF' }} />
             </div>
           </div>
           <div>
-            <p className="text-lg md:text-xl font-bold">{data.exercise.current}</p>
-            <p className="text-[10px] md:text-xs text-muted-foreground">/ {data.exercise.goal} MIN</p>
-            <p className="text-xs md:text-sm font-medium mt-0.5">Exercise</p>
+            <p className="text-sm md:text-base font-bold">{data.exercise.current}</p>
+            <p className="text-[9px] md:text-[10px] text-muted-foreground">/ {data.exercise.goal} MIN</p>
+            <p className="text-[10px] md:text-xs font-medium">Exercise</p>
           </div>
         </div>
 
-        <div className="text-center space-y-1 animate-fade-in" style={{ animationDelay: '0.5s' }}>
+        <div className="text-center space-y-0.5">
           <div className="flex justify-center">
-            <div className="p-2 rounded-full hover:scale-110 transition-transform" style={{
-              backgroundColor: 'rgba(191, 255, 0, 0.1)',
-              boxShadow: data.stand.percentage >= 100 
-                ? '0 2px 8px rgba(191, 255, 0, 0.3)' 
-                : 'none'
+            <div className="p-1.5 rounded-full" style={{
+              backgroundColor: 'rgba(191, 255, 0, 0.1)'
             }}>
-              <Clock className="w-4 h-4 md:w-5 md:h-5" style={{ color: '#BFFF00' }} />
+              <Clock className="w-3 h-3 md:w-4 md:h-4" style={{ color: '#BFFF00' }} />
             </div>
           </div>
           <div>
-            <p className="text-lg md:text-xl font-bold">{data.stand.current}</p>
-            <p className="text-[10px] md:text-xs text-muted-foreground">/ {data.stand.goal} HR</p>
-            <p className="text-xs md:text-sm font-medium mt-0.5">Stand</p>
+            <p className="text-sm md:text-base font-bold">{data.stand.current}</p>
+            <p className="text-[9px] md:text-[10px] text-muted-foreground">/ {data.stand.goal} HR</p>
+            <p className="text-[10px] md:text-xs font-medium">Stand</p>
           </div>
         </div>
       </div>
