@@ -3,72 +3,95 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import Auth from "./pages/Auth";
-import Profile from "./pages/Profile";
-import Weight from "./pages/Weight";
-import Food from "./pages/Food";
-import FoodLog from "./pages/FoodLog";
-import Recipes from "./pages/Recipes";
-import Workout from "./pages/Workout";
-import Activity from "./pages/Activity";
-import Habits from "./pages/Habits";
-import Supplements from "./pages/Supplements";
-import IntervalTimer from "./pages/IntervalTimer";
-import Symptoms from "./pages/Symptoms";
-import MedicalHistory from "./pages/MedicalHistory";
-import AIInsights from "./pages/AIInsights";
-import Socials from "./pages/Socials";
-import Referral from "./pages/Referral";
-import FitnessGoals from "./pages/FitnessGoals";
-import Achievements from "./pages/Achievements";
-import StepCount from "./pages/StepCount";
-import Onboarding from "./pages/Onboarding";
-import PrivacySecurity from "./pages/PrivacySecurity";
-import NotificationSettings from "./pages/NotificationSettings";
-import OrdersPayments from "./pages/OrdersPayments";
-import Support from "./pages/Support";
-import SettingsMenu from "./pages/SettingsMenu";
-import TrustedDevices from "./pages/TrustedDevices";
-import WaterIntake from "./pages/WaterIntake";
-import SleepTracking from "./pages/SleepTracking";
-import ProgressPhotos from "./pages/ProgressPhotos";
-import NotFound from "./pages/NotFound";
-import BodyMeasurements from "./pages/BodyMeasurements";
-import MealPlanner from "./pages/MealPlanner";
-import MacrosDashboard from "./pages/MacrosDashboard";
-import WorkoutPrograms from "./pages/WorkoutPrograms";
-import TrainerMarketplace from "./pages/TrainerMarketplace";
-import TrainerSetup from "./pages/TrainerSetup";
-import CreatorHub from "./pages/CreatorHub";
-import Discover from "./pages/Discover";
-import Challenges from "./pages/Challenges";
-import Leaderboard from "./pages/Leaderboard";
-import Feed from "./pages/Feed";
-import Bookmarks from "./pages/Bookmarks";
-import UserProfile from "./pages/UserProfile";
-import Notifications from "./pages/Notifications";
-import Search from "./pages/Search";
-import FollowersList from "./pages/FollowersList";
-import Messages from "./pages/Messages";
-import Conversation from "./pages/Conversation";
-import Groups from "./pages/Groups";
-import GroupDetail from "./pages/GroupDetail";
-import CloseFriends from "./pages/CloseFriends";
-import LiveWorkoutSessions from "./pages/LiveWorkoutSessions";
-import LiveSessionRoom from "./pages/LiveSessionRoom";
-import ProgressChallenges from "./pages/ProgressChallenges";
-import ProgressChallengeDetail from "./pages/ProgressChallengeDetail";
-import RecipeDetail from "./pages/RecipeDetail";
-import WorkoutTemplates from "./pages/WorkoutTemplates";
-import WorkoutTemplateDetail from "./pages/WorkoutTemplateDetail";
-import EventCalendar from "./pages/EventCalendar";
-import VoiceNotes from "./pages/VoiceNotes";
-import PersonalRecords from "./pages/PersonalRecords";
+import { lazy, Suspense } from "react";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-const queryClient = new QueryClient();
+// Eagerly load critical routes
+import Auth from "./pages/Auth";
+import Index from "./pages/Index";
+import Onboarding from "./pages/Onboarding";
+
+// Lazy load all other routes for better performance
+const Profile = lazy(() => import("./pages/Profile"));
+const Weight = lazy(() => import("./pages/Weight"));
+const Food = lazy(() => import("./pages/Food"));
+const FoodLog = lazy(() => import("./pages/FoodLog"));
+const Recipes = lazy(() => import("./pages/Recipes"));
+const Workout = lazy(() => import("./pages/Workout"));
+const Activity = lazy(() => import("./pages/Activity"));
+const Habits = lazy(() => import("./pages/Habits"));
+const Supplements = lazy(() => import("./pages/Supplements"));
+const IntervalTimer = lazy(() => import("./pages/IntervalTimer"));
+const Symptoms = lazy(() => import("./pages/Symptoms"));
+const MedicalHistory = lazy(() => import("./pages/MedicalHistory"));
+const AIInsights = lazy(() => import("./pages/AIInsights"));
+const Socials = lazy(() => import("./pages/Socials"));
+const Referral = lazy(() => import("./pages/Referral"));
+const FitnessGoals = lazy(() => import("./pages/FitnessGoals"));
+const Achievements = lazy(() => import("./pages/Achievements"));
+const StepCount = lazy(() => import("./pages/StepCount"));
+const PrivacySecurity = lazy(() => import("./pages/PrivacySecurity"));
+const NotificationSettings = lazy(() => import("./pages/NotificationSettings"));
+const OrdersPayments = lazy(() => import("./pages/OrdersPayments"));
+const Support = lazy(() => import("./pages/Support"));
+const SettingsMenu = lazy(() => import("./pages/SettingsMenu"));
+const TrustedDevices = lazy(() => import("./pages/TrustedDevices"));
+const WaterIntake = lazy(() => import("./pages/WaterIntake"));
+const SleepTracking = lazy(() => import("./pages/SleepTracking"));
+const ProgressPhotos = lazy(() => import("./pages/ProgressPhotos"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const BodyMeasurements = lazy(() => import("./pages/BodyMeasurements"));
+const MealPlanner = lazy(() => import("./pages/MealPlanner"));
+const MacrosDashboard = lazy(() => import("./pages/MacrosDashboard"));
+const WorkoutPrograms = lazy(() => import("./pages/WorkoutPrograms"));
+const TrainerMarketplace = lazy(() => import("./pages/TrainerMarketplace"));
+const TrainerSetup = lazy(() => import("./pages/TrainerSetup"));
+const CreatorHub = lazy(() => import("./pages/CreatorHub"));
+const Discover = lazy(() => import("./pages/Discover"));
+const Challenges = lazy(() => import("./pages/Challenges"));
+const Leaderboard = lazy(() => import("./pages/Leaderboard"));
+const Feed = lazy(() => import("./pages/Feed"));
+const Bookmarks = lazy(() => import("./pages/Bookmarks"));
+const UserProfile = lazy(() => import("./pages/UserProfile"));
+const Notifications = lazy(() => import("./pages/Notifications"));
+const Search = lazy(() => import("./pages/Search"));
+const FollowersList = lazy(() => import("./pages/FollowersList"));
+const Messages = lazy(() => import("./pages/Messages"));
+const Conversation = lazy(() => import("./pages/Conversation"));
+const Groups = lazy(() => import("./pages/Groups"));
+const GroupDetail = lazy(() => import("./pages/GroupDetail"));
+const CloseFriends = lazy(() => import("./pages/CloseFriends"));
+const LiveWorkoutSessions = lazy(() => import("./pages/LiveWorkoutSessions"));
+const LiveSessionRoom = lazy(() => import("./pages/LiveSessionRoom"));
+const ProgressChallenges = lazy(() => import("./pages/ProgressChallenges"));
+const ProgressChallengeDetail = lazy(() => import("./pages/ProgressChallengeDetail"));
+const RecipeDetail = lazy(() => import("./pages/RecipeDetail"));
+const WorkoutTemplates = lazy(() => import("./pages/WorkoutTemplates"));
+const WorkoutTemplateDetail = lazy(() => import("./pages/WorkoutTemplateDetail"));
+const EventCalendar = lazy(() => import("./pages/EventCalendar"));
+const VoiceNotes = lazy(() => import("./pages/VoiceNotes"));
+const PersonalRecords = lazy(() => import("./pages/PersonalRecords"));
+
+// Loading fallback component
+const PageLoader = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+  </div>
+);
+
+// Optimized QueryClient configuration
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      gcTime: 10 * 60 * 1000, // 10 minutes (formerly cacheTime)
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: true,
+      retry: 1,
+    },
+  },
+});
 
 const App = () => {
   return (
@@ -77,11 +100,12 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
-            <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
-            <Route path="/profile" element={<ProtectedRoute><Layout><Profile /></Layout></ProtectedRoute>} />
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
+              <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
+              <Route path="/profile" element={<ProtectedRoute><Layout><Profile /></Layout></ProtectedRoute>} />
             <Route path="/weight" element={<ProtectedRoute><Layout><Weight /></Layout></ProtectedRoute>} />
             <Route path="/food" element={<ProtectedRoute><Layout><Food /></Layout></ProtectedRoute>} />
             <Route path="/food/log" element={<ProtectedRoute><Layout><FoodLog /></Layout></ProtectedRoute>} />
@@ -141,6 +165,7 @@ const App = () => {
             <Route path="/personal-records" element={<ProtectedRoute><Layout><PersonalRecords /></Layout></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          </Suspense>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
