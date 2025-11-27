@@ -377,7 +377,15 @@ const Auth = () => {
         if (signUpError) {
           console.error('[Passkey] Account creation failed:', signUpError);
           if (signUpError.message?.includes('already registered')) {
-            throw new Error('Email already registered. Please use "Sign in" mode instead.');
+            toast({
+              title: "Account Already Exists",
+              description: "This email is already registered. Please sign in with Password or Magic Link, then add a passkey from your Profile settings.",
+              variant: "destructive",
+            });
+            // Switch to password tab to help user sign in
+            setAuthMethod('password');
+            setIsLogin(true);
+            throw new Error('Email already registered');
           }
           throw signUpError;
         }
