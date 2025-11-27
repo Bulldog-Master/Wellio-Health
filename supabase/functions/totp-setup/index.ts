@@ -19,18 +19,24 @@ serve(async (req) => {
     const authHeader = req.headers.get('Authorization');
     console.log('[TOTP Setup] Auth header present:', !!authHeader);
     
-    const supabaseClient = createClient(
+    if (!authHeader) {
+      console.error('[TOTP Setup] No authorization header');
+      return new Response(
+        JSON.stringify({ error: 'No authorization header' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Use service role key to verify the JWT and get user
+    const supabaseAdmin = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
-      {
-        global: {
-          headers: { Authorization: authHeader! },
-        },
-      }
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    console.log('[TOTP Setup] Getting user...');
-    const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
+    // Verify the JWT token
+    const token = authHeader.replace('Bearer ', '');
+    console.log('[TOTP Setup] Verifying JWT token...');
+    const { data: { user }, error: userError } = await supabaseAdmin.auth.getUser(token);
     
     if (userError) {
       console.error('[TOTP Setup] Error getting user:', userError);
@@ -57,7 +63,7 @@ serve(async (req) => {
     
     // Get user profile for account name
     console.log('[TOTP Setup] Fetching user profile...');
-    const { data: profile, error: profileError } = await supabaseClient
+    const { data: profile, error: profileError } = await supabaseAdmin
       .from('profiles')
       .select('username, full_name')
       .eq('id', user.id)
@@ -75,7 +81,7 @@ serve(async (req) => {
 
     // Store the secret temporarily (not enabled yet)
     console.log('[TOTP Setup] Storing secret in database...');
-    const { error: updateError } = await supabaseClient
+    const { error: updateError } = await supabaseAdmin
       .from('profiles')
       .update({ two_factor_secret: secret })
       .eq('id', user.id);

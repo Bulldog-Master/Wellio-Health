@@ -82,11 +82,7 @@ const PrivacySecurity = () => {
       }
 
       console.log('[2FA Setup] Calling totp-setup function...');
-      const { data, error } = await supabase.functions.invoke('totp-setup', {
-        headers: {
-          Authorization: `Bearer ${session.access_token}`
-        }
-      });
+      const { data, error } = await supabase.functions.invoke('totp-setup');
       
       console.log('[2FA Setup] Response:', { data, error });
       
