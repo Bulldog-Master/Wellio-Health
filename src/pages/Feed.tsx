@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Heart, MessageCircle, Send, Image as ImageIcon, User } from "lucide-react";
+import { Heart, MessageCircle, Send, Image as ImageIcon, User, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatDistanceToNow } from "date-fns";
 
@@ -19,6 +19,9 @@ const Feed = () => {
   const [postContent, setPostContent] = useState("");
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
   const [commentContent, setCommentContent] = useState("");
+  const [uploadedImage, setUploadedImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Fetch posts with user profiles
   const { data: posts } = useQuery({
@@ -102,12 +105,33 @@ const Feed = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Not authenticated");
 
+      let mediaUrl = null;
+
+      // Upload image if present
+      if (uploadedImage) {
+        const fileExt = uploadedImage.name.split(".").pop();
+        const fileName = `${user.id}/${Date.now()}.${fileExt}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from("post-images")
+          .upload(fileName, uploadedImage);
+
+        if (uploadError) throw uploadError;
+
+        const { data } = supabase.storage
+          .from("post-images")
+          .getPublicUrl(fileName);
+
+        mediaUrl = data.publicUrl;
+      }
+
       const { error } = await supabase
         .from("posts")
         .insert({
           user_id: user.id,
           content: postContent,
-          post_type: "text",
+          post_type: mediaUrl ? "image" : "text",
+          media_url: mediaUrl,
         });
 
       if (error) throw error;
@@ -115,6 +139,8 @@ const Feed = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["feed-posts"] });
       setPostContent("");
+      setUploadedImage(null);
+      setImagePreview(null);
       toast({ title: "Post created!" });
     },
   });
@@ -170,6 +196,34 @@ const Feed = () => {
     },
   });
 
+  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        toast({
+          title: "File too large",
+          description: "Please select an image under 5MB",
+          variant: "destructive",
+        });
+        return;
+      }
+      setUploadedImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setUploadedImage(null);
+    setImagePreview(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
   return (
     <div className="container mx-auto p-6 max-w-2xl space-y-6">
       <div>
@@ -186,17 +240,48 @@ const Feed = () => {
             onChange={(e) => setPostContent(e.target.value)}
             rows={3}
           />
+          
+          {imagePreview && (
+            <div className="relative">
+              <img
+                src={imagePreview}
+                alt="Upload preview"
+                className="w-full max-h-64 object-cover rounded-lg"
+              />
+              <Button
+                variant="destructive"
+                size="icon"
+                className="absolute top-2 right-2"
+                onClick={handleRemoveImage}
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+          )}
+
           <div className="flex justify-between items-center">
-            <Button variant="ghost" size="sm">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleImageSelect}
+              className="hidden"
+            />
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={createPost.isPending}
+            >
               <ImageIcon className="w-4 h-4 mr-2" />
               Add Photo
             </Button>
             <Button
               onClick={() => createPost.mutate()}
-              disabled={!postContent.trim() || createPost.isPending}
+              disabled={(!postContent.trim() && !uploadedImage) || createPost.isPending}
             >
               <Send className="w-4 h-4 mr-2" />
-              Post
+              {createPost.isPending ? "Posting..." : "Post"}
             </Button>
           </div>
         </CardContent>
