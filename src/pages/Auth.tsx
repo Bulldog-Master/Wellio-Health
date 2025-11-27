@@ -388,22 +388,38 @@ const Auth = () => {
 
         console.log('[Passkey] Account created, storing passkey credential...');
 
-        // Store the passkey in the database (no auth needed since verify_jwt = false)
-        const { data: registerData, error: registerError } = await supabase.functions.invoke('passkey-register', {
-          body: {
-            credentialId: passkeyData.credentialId,
-            publicKey: passkeyData.publicKey,
-            counter: passkeyData.counter,
-            deviceType: 'platform',
-            userId: authData.user.id, // Pass user ID directly in body
-          },
-        });
+        // Store the passkey in the database using direct fetch (bypassing automatic JWT inclusion)
+        const functionUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/passkey-register`;
         
-        console.log('[Passkey] Register response:', { registerData, registerError });
+        try {
+          const response = await fetch(functionUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+            },
+            body: JSON.stringify({
+              credentialId: passkeyData.credentialId,
+              publicKey: passkeyData.publicKey,
+              counter: passkeyData.counter,
+              deviceType: 'platform',
+              userId: authData.user.id,
+            }),
+          });
 
-        if (registerError) {
-          console.error('[Passkey] Failed to store credential:', registerError);
-          throw new Error('Account created but passkey registration failed');
+          console.log('[Passkey] Register response status:', response.status);
+
+          if (!response.ok) {
+            const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+            console.error('[Passkey] Registration failed:', errorData);
+            throw new Error('Failed to store passkey credential');
+          }
+
+          const registerData = await response.json();
+          console.log('[Passkey] Registration successful:', registerData);
+        } catch (fetchError) {
+          console.error('[Passkey] Fetch error:', fetchError);
+          throw new Error('Failed to connect to registration service');
         }
 
         console.log('[Passkey] Registration complete!');
