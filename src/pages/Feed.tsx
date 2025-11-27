@@ -148,6 +148,44 @@ const Feed = () => {
     },
   });
 
+  // Fetch user's reactions
+  const { data: userReactions } = useQuery({
+    queryKey: ["user-reactions"],
+    queryFn: async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return {};
+
+      const { data, error } = await supabase
+        .from("reactions")
+        .select("post_id, reaction_type")
+        .eq("user_id", user.id);
+
+      if (error) throw error;
+      return data.reduce((acc: Record<string, string>, r) => {
+        acc[r.post_id] = r.reaction_type;
+        return acc;
+      }, {});
+    },
+  });
+
+  // Fetch reactions counts for posts
+  const { data: reactionsCounts } = useQuery({
+    queryKey: ["reactions-counts"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("reactions")
+        .select("post_id, reaction_type");
+
+      if (error) throw error;
+
+      return data.reduce((acc: Record<string, Record<string, number>>, r) => {
+        if (!acc[r.post_id]) acc[r.post_id] = {};
+        acc[r.post_id][r.reaction_type] = (acc[r.post_id][r.reaction_type] || 0) + 1;
+        return acc;
+      }, {});
+    },
+  });
+
   // Fetch comments for selected post
   const { data: comments } = useQuery({
     queryKey: ["post-comments", selectedPostId],
@@ -355,6 +393,39 @@ const Feed = () => {
     },
   });
 
+  const toggleReaction = useMutation({
+    mutationFn: async ({ postId, reactionType }: { postId: string; reactionType: string }) => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Not authenticated");
+
+      const currentReaction = userReactions?.[postId];
+
+      if (currentReaction === reactionType) {
+        // Remove reaction
+        const { error } = await supabase
+          .from("reactions")
+          .delete()
+          .eq("post_id", postId)
+          .eq("user_id", user.id);
+        if (error) throw error;
+      } else {
+        // Add or update reaction
+        const { error } = await supabase
+          .from("reactions")
+          .upsert({
+            post_id: postId,
+            user_id: user.id,
+            reaction_type: reactionType,
+          });
+        if (error) throw error;
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user-reactions"] });
+      queryClient.invalidateQueries({ queryKey: ["reactions-counts"] });
+    },
+  });
+
   const updatePost = useMutation({
     mutationFn: async ({ postId, content }: { postId: string; content: string }) => {
       // First get the current edit count
@@ -444,7 +515,7 @@ const Feed = () => {
   };
 
   const renderContentWithHashtags = (content: string) => {
-    const parts = content.split(/(#\w+)/g);
+    const parts = content.split(/(@\w+|#\w+)/g);
     return parts.map((part, index) => {
       if (part.startsWith("#")) {
         const hashtag = part.slice(1).toLowerCase();
@@ -457,9 +528,27 @@ const Feed = () => {
             {part}
           </span>
         );
+      } else if (part.startsWith("@")) {
+        return (
+          <span
+            key={index}
+            className="text-blue-500 font-semibold cursor-pointer hover:underline"
+          >
+            {part}
+          </span>
+        );
       }
       return part;
     });
+  };
+
+  const reactionEmojis = {
+    like: "❤️",
+    fire: "🔥",
+    muscle: "💪",
+    clap: "👏",
+    target: "🎯",
+    heart: "💙",
   };
 
   return (
@@ -714,6 +803,27 @@ const Feed = () => {
                     className={`w-4 h-4 ${userBookmarks?.includes(post.id) ? "fill-current" : ""}`}
                   />
                 </Button>
+              </div>
+
+              {/* Reactions */}
+              <div className="flex items-center gap-2 flex-wrap">
+                {Object.entries(reactionEmojis).map(([type, emoji]) => {
+                  const count = reactionsCounts?.[post.id]?.[type] || 0;
+                  const isSelected = userReactions?.[post.id] === type;
+                  
+                  return (
+                    <Button
+                      key={type}
+                      variant={isSelected ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => toggleReaction.mutate({ postId: post.id, reactionType: type })}
+                      className="h-8"
+                    >
+                      <span className="mr-1">{emoji}</span>
+                      {count > 0 && <span className="text-xs">{count}</span>}
+                    </Button>
+                  );
+                })}
               </div>
 
               {/* Comments Section */}

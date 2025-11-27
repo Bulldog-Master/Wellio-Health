@@ -380,6 +380,27 @@ export type Database = {
         }
         Relationships: []
       }
+      close_friends: {
+        Row: {
+          created_at: string
+          friend_user_id: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          friend_user_id: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          friend_user_id?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       comments: {
         Row: {
           content: string
@@ -543,6 +564,33 @@ export type Database = {
         }
         Relationships: []
       }
+      follow_requests: {
+        Row: {
+          created_at: string
+          id: string
+          requested_id: string
+          requester_id: string
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          requested_id: string
+          requester_id: string
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          requested_id?: string
+          requester_id?: string
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       follows: {
         Row: {
           created_at: string
@@ -561,6 +609,110 @@ export type Database = {
           follower_id?: string
           following_id?: string
           id?: string
+        }
+        Relationships: []
+      }
+      group_members: {
+        Row: {
+          group_id: string
+          id: string
+          joined_at: string
+          role: string | null
+          user_id: string
+        }
+        Insert: {
+          group_id: string
+          id?: string
+          joined_at?: string
+          role?: string | null
+          user_id: string
+        }
+        Update: {
+          group_id?: string
+          id?: string
+          joined_at?: string
+          role?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "group_members_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      group_posts: {
+        Row: {
+          created_at: string
+          group_id: string
+          id: string
+          post_id: string
+        }
+        Insert: {
+          created_at?: string
+          group_id: string
+          id?: string
+          post_id: string
+        }
+        Update: {
+          created_at?: string
+          group_id?: string
+          id?: string
+          post_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "group_posts_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "group_posts_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: true
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      groups: {
+        Row: {
+          cover_image_url: string | null
+          created_at: string
+          creator_id: string
+          description: string | null
+          id: string
+          is_private: boolean
+          members_count: number
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          cover_image_url?: string | null
+          created_at?: string
+          creator_id: string
+          description?: string | null
+          id?: string
+          is_private?: boolean
+          members_count?: number
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          cover_image_url?: string | null
+          created_at?: string
+          creator_id?: string
+          description?: string | null
+          id?: string
+          is_private?: boolean
+          members_count?: number
+          name?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -892,6 +1044,48 @@ export type Database = {
         }
         Relationships: []
       }
+      mentions: {
+        Row: {
+          comment_id: string | null
+          created_at: string
+          id: string
+          mentioned_by_user_id: string
+          mentioned_user_id: string
+          post_id: string | null
+        }
+        Insert: {
+          comment_id?: string | null
+          created_at?: string
+          id?: string
+          mentioned_by_user_id: string
+          mentioned_user_id: string
+          post_id?: string | null
+        }
+        Update: {
+          comment_id?: string | null
+          created_at?: string
+          id?: string
+          mentioned_by_user_id?: string
+          mentioned_user_id?: string
+          post_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "mentions_comment_id_fkey"
+            columns: ["comment_id"]
+            isOneToOne: false
+            referencedRelation: "comments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "mentions_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       messages: {
         Row: {
           content: string
@@ -1158,6 +1352,7 @@ export type Database = {
       profiles: {
         Row: {
           age: number | null
+          allow_mentions: boolean | null
           avatar_url: string | null
           created_at: string | null
           current_streak: number
@@ -1171,6 +1366,7 @@ export type Database = {
           height: number | null
           height_unit: string | null
           id: string
+          is_private: boolean | null
           last_activity_date: string | null
           longest_streak: number
           move_goal: number | null
@@ -1186,6 +1382,7 @@ export type Database = {
           reminder_time_workout: string | null
           reminder_weigh_in: boolean | null
           reminder_workout: boolean | null
+          show_activity: boolean | null
           stand_goal: number | null
           target_weight: number | null
           target_weight_unit: string | null
@@ -1197,6 +1394,7 @@ export type Database = {
         }
         Insert: {
           age?: number | null
+          allow_mentions?: boolean | null
           avatar_url?: string | null
           created_at?: string | null
           current_streak?: number
@@ -1210,6 +1408,7 @@ export type Database = {
           height?: number | null
           height_unit?: string | null
           id: string
+          is_private?: boolean | null
           last_activity_date?: string | null
           longest_streak?: number
           move_goal?: number | null
@@ -1225,6 +1424,7 @@ export type Database = {
           reminder_time_workout?: string | null
           reminder_weigh_in?: boolean | null
           reminder_workout?: boolean | null
+          show_activity?: boolean | null
           stand_goal?: number | null
           target_weight?: number | null
           target_weight_unit?: string | null
@@ -1236,6 +1436,7 @@ export type Database = {
         }
         Update: {
           age?: number | null
+          allow_mentions?: boolean | null
           avatar_url?: string | null
           created_at?: string | null
           current_streak?: number
@@ -1249,6 +1450,7 @@ export type Database = {
           height?: number | null
           height_unit?: string | null
           id?: string
+          is_private?: boolean | null
           last_activity_date?: string | null
           longest_streak?: number
           move_goal?: number | null
@@ -1264,6 +1466,7 @@ export type Database = {
           reminder_time_workout?: string | null
           reminder_weigh_in?: boolean | null
           reminder_workout?: boolean | null
+          show_activity?: boolean | null
           stand_goal?: number | null
           target_weight?: number | null
           target_weight_unit?: string | null
@@ -1345,6 +1548,38 @@ export type Database = {
           weight_lbs?: number | null
         }
         Relationships: []
+      }
+      reactions: {
+        Row: {
+          created_at: string
+          id: string
+          post_id: string
+          reaction_type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          post_id: string
+          reaction_type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          post_id?: string
+          reaction_type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reactions_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       recipes: {
         Row: {
@@ -1528,6 +1763,7 @@ export type Database = {
       }
       stories: {
         Row: {
+          close_friends_only: boolean | null
           content: string | null
           created_at: string
           expires_at: string
@@ -1538,6 +1774,7 @@ export type Database = {
           views_count: number
         }
         Insert: {
+          close_friends_only?: boolean | null
           content?: string | null
           created_at?: string
           expires_at?: string
@@ -1548,6 +1785,7 @@ export type Database = {
           views_count?: number
         }
         Update: {
+          close_friends_only?: boolean | null
           content?: string | null
           created_at?: string
           expires_at?: string
