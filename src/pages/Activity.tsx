@@ -287,6 +287,21 @@ const Activity = () => {
             </div>
           </div>
         </Card>
+
+        <Card 
+          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+          onClick={() => navigate('/live-workout-sessions')}
+        >
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-accent/10 rounded-xl">
+              <ActivityIcon className="w-6 h-6 text-accent" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">Live Workout Sessions</h3>
+              <p className="text-sm text-muted-foreground">Join or host live workouts</p>
+            </div>
+          </div>
+        </Card>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

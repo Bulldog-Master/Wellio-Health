@@ -55,6 +55,8 @@ import Conversation from "./pages/Conversation";
 import Groups from "./pages/Groups";
 import GroupDetail from "./pages/GroupDetail";
 import CloseFriends from "./pages/CloseFriends";
+import LiveWorkoutSessions from "./pages/LiveWorkoutSessions";
+import LiveSessionRoom from "./pages/LiveSessionRoom";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -119,6 +121,8 @@ const App = () => {
             <Route path="/search" element={<ProtectedRoute><Layout><Search /></Layout></ProtectedRoute>} />
             <Route path="/messages" element={<ProtectedRoute><Layout><Messages /></Layout></ProtectedRoute>} />
             <Route path="/messages/:conversationId" element={<ProtectedRoute><Layout><Conversation /></Layout></ProtectedRoute>} />
+            <Route path="/live-workout-sessions" element={<ProtectedRoute><LiveWorkoutSessions /></ProtectedRoute>} />
+            <Route path="/live-session/:sessionId" element={<ProtectedRoute><LiveSessionRoom /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
