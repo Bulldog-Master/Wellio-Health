@@ -32,12 +32,12 @@ serve(async (req) => {
 
     // Disable 2FA and clear the secret
     const { error } = await supabaseClient
-      .from('profiles')
+      .from('auth_secrets')
       .update({ 
         two_factor_enabled: false,
         two_factor_secret: null 
       })
-      .eq('id', user.id);
+      .eq('user_id', user.id);
 
     if (error) {
       console.error('Error disabling 2FA:', error);

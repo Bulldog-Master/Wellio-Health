@@ -107,6 +107,33 @@ export type Database = {
         }
         Relationships: []
       }
+      auth_secrets: {
+        Row: {
+          created_at: string | null
+          id: string
+          two_factor_enabled: boolean | null
+          two_factor_secret: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          two_factor_enabled?: boolean | null
+          two_factor_secret?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          two_factor_enabled?: boolean | null
+          two_factor_secret?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       habit_completions: {
         Row: {
           completed_at: string | null

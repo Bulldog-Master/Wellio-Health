@@ -79,12 +79,15 @@ serve(async (req) => {
     
     console.log('[TOTP Setup] OTP auth URL created');
 
-    // Store the secret temporarily (not enabled yet)
+    // Store the secret in auth_secrets table (not enabled yet)
     console.log('[TOTP Setup] Storing secret in database...');
     const { error: updateError } = await supabaseAdmin
-      .from('profiles')
-      .update({ two_factor_secret: secret })
-      .eq('id', user.id);
+      .from('auth_secrets')
+      .upsert({ 
+        user_id: user.id,
+        two_factor_secret: secret,
+        two_factor_enabled: false
+      });
 
     if (updateError) {
       console.error('[TOTP Setup] Error storing 2FA secret:', updateError);

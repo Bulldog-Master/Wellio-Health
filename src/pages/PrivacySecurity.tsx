@@ -40,14 +40,14 @@ const PrivacySecurity = () => {
         await fetchPasskeys();
         
         // Check if 2FA is enabled
-        const { data: profile } = await supabase
-          .from('profiles')
+        const { data: authSecret } = await supabase
+          .from('auth_secrets')
           .select('two_factor_enabled')
-          .eq('id', user.id)
+          .eq('user_id', user.id)
           .single();
         
-        if (profile) {
-          setIs2FAEnabled(profile.two_factor_enabled || false);
+        if (authSecret) {
+          setIs2FAEnabled(authSecret.two_factor_enabled || false);
         }
       }
     };
