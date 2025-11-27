@@ -77,6 +77,26 @@ const UserProfile = () => {
     enabled: !!currentUser && currentUser.id !== userId,
   });
 
+  // Check if there's a pending follow request
+  const { data: followRequest } = useQuery({
+    queryKey: ["follow-request", userId],
+    queryFn: async () => {
+      if (!currentUser || currentUser.id === userId) return null;
+
+      const { data, error } = await supabase
+        .from("follow_requests")
+        .select("id, status")
+        .eq("requester_id", currentUser.id)
+        .eq("requested_id", userId)
+        .eq("status", "pending")
+        .maybeSingle();
+
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!currentUser && currentUser.id !== userId,
+  });
+
   // Fetch user's badges
   const { data: badges } = useQuery({
     queryKey: ["user-badges", userId],
@@ -97,26 +117,56 @@ const UserProfile = () => {
       if (!currentUser) throw new Error("Not authenticated");
 
       if (isFollowing) {
+        // Unfollow
         const { error } = await supabase
           .from("follows")
           .delete()
           .eq("follower_id", currentUser.id)
           .eq("following_id", userId);
         if (error) throw error;
-      } else {
+      } else if (followRequest) {
+        // Cancel pending request
         const { error } = await supabase
-          .from("follows")
-          .insert({
-            follower_id: currentUser.id,
-            following_id: userId,
-          });
+          .from("follow_requests")
+          .delete()
+          .eq("id", followRequest.id);
         if (error) throw error;
+      } else {
+        // Check if account is private
+        if (profile?.is_private) {
+          // Send follow request
+          const { error } = await supabase
+            .from("follow_requests")
+            .insert({
+              requester_id: currentUser.id,
+              requested_id: userId,
+            });
+          if (error) throw error;
+        } else {
+          // Follow directly
+          const { error } = await supabase
+            .from("follows")
+            .insert({
+              follower_id: currentUser.id,
+              following_id: userId,
+            });
+          if (error) throw error;
+        }
       }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["is-following", userId] });
+      queryClient.invalidateQueries({ queryKey: ["follow-request", userId] });
       queryClient.invalidateQueries({ queryKey: ["user-profile", userId] });
-      toast({ title: isFollowing ? "Unfollowed" : "Following!" });
+      toast({ 
+        title: isFollowing 
+          ? "Unfollowed" 
+          : followRequest 
+            ? "Follow request cancelled" 
+            : profile?.is_private 
+              ? "Follow request sent!" 
+              : "Following!" 
+      });
     },
   });
 
@@ -191,7 +241,13 @@ const UserProfile = () => {
                       disabled={toggleFollow.isPending}
                     >
                       <Users className="w-4 h-4 mr-2" />
-                      {isFollowing ? "Unfollow" : "Follow"}
+                      {isFollowing 
+                        ? "Unfollow" 
+                        : followRequest 
+                          ? "Requested" 
+                          : profile?.is_private 
+                            ? "Request to Follow" 
+                            : "Follow"}
                     </Button>
                     <Button
                       onClick={async () => {
