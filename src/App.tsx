@@ -4,6 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import { ThemeProvider } from "next-themes";
+import { usePushNotifications } from "@/hooks/usePushNotifications";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -93,15 +95,12 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = () => {
+const AppContent = () => {
+  usePushNotifications();
+  
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
+    <Suspense fallback={<PageLoader />}>
+      <Routes>
               <Route path="/auth" element={<Auth />} />
               <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
               <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
@@ -164,10 +163,23 @@ const App = () => {
             <Route path="/voice-notes" element={<ProtectedRoute><Layout><VoiceNotes /></Layout></ProtectedRoute>} />
             <Route path="/personal-records" element={<ProtectedRoute><Layout><PersonalRecords /></Layout></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
-          </Routes>
-          </Suspense>
-        </BrowserRouter>
-      </TooltipProvider>
+      </Routes>
+    </Suspense>
+  );
+};
+
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <AppContent />
+          </BrowserRouter>
+        </TooltipProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 };
