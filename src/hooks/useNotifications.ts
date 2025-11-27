@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 export const useNotifications = () => {
   const [permission, setPermission] = useState<NotificationPermission>("default");
@@ -65,4 +67,56 @@ export const useNotifications = () => {
     showNotification,
     scheduleReminder,
   };
+};
+
+export const useUnreadNotificationCount = () => {
+  const [userId, setUserId] = useState<string | null>(null);
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user) setUserId(user.id);
+    });
+  }, []);
+
+  const query = useQuery({
+    queryKey: ["unread-count"],
+    queryFn: async () => {
+      const { count, error } = await supabase
+        .from("notifications")
+        .select("*", { count: "exact", head: true })
+        .eq("is_read", false);
+
+      if (error) throw error;
+      return count || 0;
+    },
+    enabled: !!userId,
+  });
+
+  // Real-time subscription for notification count
+  useEffect(() => {
+    if (!userId) return;
+
+    const channel = supabase
+      .channel("notifications-count-changes")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "notifications",
+          filter: `user_id=eq.${userId}`,
+        },
+        () => {
+          queryClient.invalidateQueries({ queryKey: ["unread-count"] });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [userId, queryClient]);
+
+  return query;
 };
