@@ -387,9 +387,16 @@ const Auth = () => {
         }
 
         console.log('[Passkey] Account created, storing passkey credential...');
+        console.log('[Passkey] User ID:', authData.user.id);
+        console.log('[Passkey] Credential data:', {
+          credentialId: passkeyData.credentialId?.substring(0, 20) + '...',
+          publicKey: passkeyData.publicKey?.substring(0, 20) + '...',
+          counter: passkeyData.counter,
+        });
 
-        // Store the passkey in the database using direct fetch (bypassing automatic JWT inclusion)
+        // Store the passkey in the database using direct fetch
         const functionUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/passkey-register`;
+        console.log('[Passkey] Calling function at:', functionUrl);
         
         try {
           const response = await fetch(functionUrl, {
@@ -407,19 +414,21 @@ const Auth = () => {
             }),
           });
 
-          console.log('[Passkey] Register response status:', response.status);
+          console.log('[Passkey] Response status:', response.status);
+          console.log('[Passkey] Response headers:', Object.fromEntries(response.headers.entries()));
+
+          const responseText = await response.text();
+          console.log('[Passkey] Response body:', responseText);
 
           if (!response.ok) {
-            const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
-            console.error('[Passkey] Registration failed:', errorData);
-            throw new Error('Failed to store passkey credential');
+            console.error('[Passkey] Registration failed with status:', response.status);
+            throw new Error(`Failed to store passkey: ${response.status} - ${responseText}`);
           }
 
-          const registerData = await response.json();
-          console.log('[Passkey] Registration successful:', registerData);
+          console.log('[Passkey] Registration successful!');
         } catch (fetchError) {
-          console.error('[Passkey] Fetch error:', fetchError);
-          throw new Error('Failed to connect to registration service');
+          console.error('[Passkey] Fetch error details:', fetchError);
+          throw fetchError;
         }
 
         console.log('[Passkey] Registration complete!');
