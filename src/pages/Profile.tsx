@@ -500,7 +500,10 @@ const Profile = () => {
           <CollapsibleContent>
             <div className="border-t">
               {/* Profile Settings */}
-              <button className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left border-b">
+              <button 
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left border-b"
+              >
                 <div className="p-2 bg-accent/20 rounded-lg">
                   <UserCircle className="w-5 h-5 text-accent" />
                 </div>
@@ -511,7 +514,10 @@ const Profile = () => {
               </button>
 
               {/* Privacy & Security */}
-              <button className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left border-b">
+              <button 
+                onClick={() => navigate("/settings")}
+                className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left border-b"
+              >
                 <div className="p-2 bg-destructive/20 rounded-lg">
                   <Shield className="w-5 h-5 text-destructive" />
                 </div>
@@ -522,7 +528,10 @@ const Profile = () => {
               </button>
 
               {/* Orders & Payments */}
-              <button className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left border-b">
+              <button 
+                onClick={() => navigate("/settings")}
+                className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left border-b"
+              >
                 <div className="p-2 bg-warning/20 rounded-lg">
                   <CreditCard className="w-5 h-5 text-warning" />
                 </div>
@@ -533,7 +542,10 @@ const Profile = () => {
               </button>
 
               {/* Notifications */}
-              <button className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left border-b">
+              <button 
+                onClick={() => navigate("/settings")}
+                className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left border-b"
+              >
                 <div className="p-2 bg-secondary/20 rounded-lg">
                   <Bell className="w-5 h-5 text-secondary" />
                 </div>
@@ -544,7 +556,10 @@ const Profile = () => {
               </button>
 
               {/* Support */}
-              <button className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left">
+              <button 
+                onClick={() => navigate("/settings")}
+                className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left"
+              >
                 <div className="p-2 bg-primary/20 rounded-lg">
                   <HelpCircle className="w-5 h-5 text-primary" />
                 </div>
