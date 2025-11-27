@@ -1,6 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.3';
-import { create } from 'https://deno.land/x/djwt@v2.8/mod.ts';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -8,54 +7,88 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
+  console.log('[TOTP Setup] Request received:', req.method);
+  
   if (req.method === 'OPTIONS') {
+    console.log('[TOTP Setup] Handling OPTIONS request');
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
+    console.log('[TOTP Setup] Creating Supabase client...');
+    const authHeader = req.headers.get('Authorization');
+    console.log('[TOTP Setup] Auth header present:', !!authHeader);
+    
     const supabaseClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_ANON_KEY') ?? '',
       {
         global: {
-          headers: { Authorization: req.headers.get('Authorization')! },
+          headers: { Authorization: authHeader! },
         },
       }
     );
 
-    const { data: { user } } = await supabaseClient.auth.getUser();
-    if (!user) {
+    console.log('[TOTP Setup] Getting user...');
+    const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
+    
+    if (userError) {
+      console.error('[TOTP Setup] Error getting user:', userError);
       return new Response(
-        JSON.stringify({ error: 'Unauthorized' }),
+        JSON.stringify({ error: 'Failed to authenticate user', details: userError.message }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+    
+    if (!user) {
+      console.error('[TOTP Setup] No user found');
+      return new Response(
+        JSON.stringify({ error: 'Unauthorized - no user found' }),
         { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
+    console.log('[TOTP Setup] User authenticated:', user.id);
+
     // Generate a random secret for TOTP (base32 encoded)
+    console.log('[TOTP Setup] Generating TOTP secret...');
     const secret = generateTOTPSecret();
+    console.log('[TOTP Setup] Secret generated');
     
-    // Create the otpauth URL for QR code generation
-    const { data: profile } = await supabaseClient
+    // Get user profile for account name
+    console.log('[TOTP Setup] Fetching user profile...');
+    const { data: profile, error: profileError } = await supabaseClient
       .from('profiles')
       .select('username, full_name')
       .eq('id', user.id)
       .single();
 
+    if (profileError) {
+      console.error('[TOTP Setup] Error fetching profile:', profileError);
+    }
+
     const accountName = profile?.username || profile?.full_name || user.email;
-    const issuer = 'HealthTracker';
+    const issuer = 'Wellio';
     const otpauthUrl = `otpauth://totp/${encodeURIComponent(issuer)}:${encodeURIComponent(accountName || '')}?secret=${secret}&issuer=${encodeURIComponent(issuer)}`;
+    
+    console.log('[TOTP Setup] OTP auth URL created');
 
     // Store the secret temporarily (not enabled yet)
-    const { error } = await supabaseClient
+    console.log('[TOTP Setup] Storing secret in database...');
+    const { error: updateError } = await supabaseClient
       .from('profiles')
       .update({ two_factor_secret: secret })
       .eq('id', user.id);
 
-    if (error) {
-      console.error('Error storing 2FA secret:', error);
-      throw error;
+    if (updateError) {
+      console.error('[TOTP Setup] Error storing 2FA secret:', updateError);
+      return new Response(
+        JSON.stringify({ error: 'Failed to store 2FA secret', details: updateError.message }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
     }
 
+    console.log('[TOTP Setup] Success! Returning QR code URL');
     return new Response(
       JSON.stringify({ 
         secret,
@@ -64,9 +97,13 @@ serve(async (req) => {
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Error in totp-setup:', error);
+    console.error('[TOTP Setup] Unexpected error:', error);
     return new Response(
-      JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }),
+      JSON.stringify({ 
+        error: 'Internal server error',
+        details: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : undefined
+      }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
