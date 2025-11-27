@@ -48,6 +48,7 @@ import Feed from "./pages/Feed";
 import UserProfile from "./pages/UserProfile";
 import Notifications from "./pages/Notifications";
 import Search from "./pages/Search";
+import FollowersList from "./pages/FollowersList";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -103,6 +104,7 @@ const App = () => {
             <Route path="/leaderboard" element={<ProtectedRoute><Layout><Leaderboard /></Layout></ProtectedRoute>} />
             <Route path="/feed" element={<ProtectedRoute><Layout><Feed /></Layout></ProtectedRoute>} />
             <Route path="/user/:userId" element={<ProtectedRoute><Layout><UserProfile /></Layout></ProtectedRoute>} />
+            <Route path="/user/:userId/followers" element={<ProtectedRoute><Layout><FollowersList /></Layout></ProtectedRoute>} />
             <Route path="/notifications" element={<ProtectedRoute><Layout><Notifications /></Layout></ProtectedRoute>} />
             <Route path="/search" element={<ProtectedRoute><Layout><Search /></Layout></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
