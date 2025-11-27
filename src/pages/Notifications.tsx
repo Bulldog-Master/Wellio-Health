@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from "react-router-dom";
-import { Heart, MessageCircle, UserPlus, Check } from "lucide-react";
+import { Heart, MessageCircle, UserPlus, Check, AtSign, UserCheck } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { useToast } from "@/hooks/use-toast";
 
@@ -131,6 +131,10 @@ const Notifications = () => {
         return <MessageCircle className="h-5 w-5 text-blue-500" />;
       case "follow":
         return <UserPlus className="h-5 w-5 text-green-500" />;
+      case "mention":
+        return <AtSign className="h-5 w-5 text-purple-500" />;
+      case "follow_request":
+        return <UserCheck className="h-5 w-5 text-orange-500" />;
       default:
         return null;
     }
@@ -145,6 +149,10 @@ const Notifications = () => {
         return `${actorName} commented on your post`;
       case "follow":
         return `${actorName} started following you`;
+      case "mention":
+        return `${actorName} mentioned you in a post`;
+      case "follow_request":
+        return `${actorName} wants to follow you`;
       default:
         return "New notification";
     }
@@ -153,7 +161,7 @@ const Notifications = () => {
   const handleNotificationClick = (notification: Notification) => {
     markAsRead.mutate(notification.id);
     
-    if (notification.type === "follow") {
+    if (notification.type === "follow" || notification.type === "follow_request") {
       navigate(`/user/${notification.actor.id}`);
     } else if (notification.post_id) {
       navigate("/feed");
