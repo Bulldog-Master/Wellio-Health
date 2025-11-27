@@ -45,6 +45,7 @@ import Discover from "./pages/Discover";
 import Challenges from "./pages/Challenges";
 import Leaderboard from "./pages/Leaderboard";
 import Feed from "./pages/Feed";
+import Bookmarks from "./pages/Bookmarks";
 import UserProfile from "./pages/UserProfile";
 import Notifications from "./pages/Notifications";
 import Search from "./pages/Search";
@@ -105,6 +106,7 @@ const App = () => {
             <Route path="/challenges" element={<ProtectedRoute><Layout><Challenges /></Layout></ProtectedRoute>} />
             <Route path="/leaderboard" element={<ProtectedRoute><Layout><Leaderboard /></Layout></ProtectedRoute>} />
             <Route path="/feed" element={<ProtectedRoute><Layout><Feed /></Layout></ProtectedRoute>} />
+            <Route path="/bookmarks" element={<ProtectedRoute><Layout><Bookmarks /></Layout></ProtectedRoute>} />
             <Route path="/user/:userId" element={<ProtectedRoute><Layout><UserProfile /></Layout></ProtectedRoute>} />
             <Route path="/user/:userId/followers" element={<ProtectedRoute><Layout><FollowersList /></Layout></ProtectedRoute>} />
             <Route path="/notifications" element={<ProtectedRoute><Layout><Notifications /></Layout></ProtectedRoute>} />
