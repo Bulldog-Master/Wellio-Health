@@ -738,6 +738,98 @@ export type Database = {
         }
         Relationships: []
       }
+      event_reminders: {
+        Row: {
+          created_at: string
+          event_id: string
+          id: string
+          remind_at: string
+          sent: boolean | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          event_id: string
+          id?: string
+          remind_at: string
+          sent?: boolean | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          event_id?: string
+          id?: string
+          remind_at?: string
+          sent?: boolean | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_reminders_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "fitness_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fitness_events: {
+        Row: {
+          color: string | null
+          completed: boolean | null
+          created_at: string
+          description: string | null
+          end_time: string | null
+          event_type: string
+          id: string
+          is_recurring: boolean | null
+          location: string | null
+          metadata: Json | null
+          recurrence_pattern: string | null
+          reminder_minutes: number | null
+          start_time: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          color?: string | null
+          completed?: boolean | null
+          created_at?: string
+          description?: string | null
+          end_time?: string | null
+          event_type: string
+          id?: string
+          is_recurring?: boolean | null
+          location?: string | null
+          metadata?: Json | null
+          recurrence_pattern?: string | null
+          reminder_minutes?: number | null
+          start_time: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          color?: string | null
+          completed?: boolean | null
+          created_at?: string
+          description?: string | null
+          end_time?: string | null
+          event_type?: string
+          id?: string
+          is_recurring?: boolean | null
+          location?: string | null
+          metadata?: Json | null
+          recurrence_pattern?: string | null
+          reminder_minutes?: number | null
+          start_time?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       follow_requests: {
         Row: {
           created_at: string
