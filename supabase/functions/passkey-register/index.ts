@@ -7,33 +7,50 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
+  console.log('[Passkey Register] Request received:', req.method);
+  
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const supabaseClient = createClient(
+    const authHeader = req.headers.get('Authorization');
+    console.log('[Passkey Register] Auth header present:', !!authHeader);
+    
+    if (!authHeader) {
+      console.error('[Passkey Register] No authorization header');
+      return new Response(
+        JSON.stringify({ error: 'No authorization header' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Use service role key to verify the JWT and get user
+    const supabaseAdmin = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
-      {
-        global: {
-          headers: { Authorization: req.headers.get('Authorization')! },
-        },
-      }
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    const { data: { user } } = await supabaseClient.auth.getUser();
-    if (!user) {
+    // Verify the JWT token
+    const token = authHeader.replace('Bearer ', '');
+    console.log('[Passkey Register] Verifying JWT token...');
+    const { data: { user }, error: userError } = await supabaseAdmin.auth.getUser(token);
+    
+    if (userError || !user) {
+      console.error('[Passkey Register] Error getting user:', userError);
       return new Response(
         JSON.stringify({ error: 'Unauthorized' }),
         { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
+    console.log('[Passkey Register] User authenticated:', user.id);
+
     const { credentialId, publicKey, counter, deviceType } = await req.json();
+    console.log('[Passkey Register] Storing credential...');
 
     // Store the credential
-    const { error } = await supabaseClient
+    const { error } = await supabaseAdmin
       .from('webauthn_credentials')
       .insert({
         user_id: user.id,
@@ -44,18 +61,23 @@ serve(async (req) => {
       });
 
     if (error) {
-      console.error('Error storing credential:', error);
+      console.error('[Passkey Register] Error storing credential:', error);
       throw error;
     }
+
+    console.log('[Passkey Register] Credential stored successfully!');
 
     return new Response(
       JSON.stringify({ success: true }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Error in passkey-register:', error);
+    console.error('[Passkey Register] Unexpected error:', error);
     return new Response(
-      JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }),
+      JSON.stringify({ 
+        error: error instanceof Error ? error.message : 'Unknown error',
+        details: error instanceof Error ? error.stack : undefined
+      }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
