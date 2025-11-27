@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Utensils, BookOpen, ArrowLeft } from "lucide-react";
+import { Utensils, BookOpen, Calendar, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Food = () => {
@@ -22,6 +22,14 @@ const Food = () => {
       path: "/food/recipes",
       color: "text-accent",
       bgColor: "bg-accent/10",
+    },
+    {
+      title: "Meal Planner",
+      description: "Plan your weekly meals in advance",
+      icon: Calendar,
+      path: "/meal-planner",
+      color: "text-secondary",
+      bgColor: "bg-secondary/10",
     },
   ];
 
@@ -46,7 +54,7 @@ const Food = () => {
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-3">
         {menuItems.map((item) => (
           <Card
             key={item.path}
