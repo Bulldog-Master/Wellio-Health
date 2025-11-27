@@ -28,6 +28,7 @@ import PrivacySecurity from "./pages/PrivacySecurity";
 import NotificationSettings from "./pages/NotificationSettings";
 import OrdersPayments from "./pages/OrdersPayments";
 import Support from "./pages/Support";
+import SettingsMenu from "./pages/SettingsMenu";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -64,7 +65,7 @@ const App = () => {
             <Route path="/fitness-goals" element={<ProtectedRoute><Layout><FitnessGoals /></Layout></ProtectedRoute>} />
             <Route path="/achievements" element={<ProtectedRoute><Layout><Achievements /></Layout></ProtectedRoute>} />
             <Route path="/step-count" element={<ProtectedRoute><StepCount /></ProtectedRoute>} />
-            <Route path="/settings" element={<ProtectedRoute><Layout><PrivacySecurity /></Layout></ProtectedRoute>} />
+            <Route path="/settings" element={<ProtectedRoute><Layout><SettingsMenu /></Layout></ProtectedRoute>} />
             <Route path="/settings/privacy-security" element={<ProtectedRoute><Layout><PrivacySecurity /></Layout></ProtectedRoute>} />
             <Route path="/settings/notifications" element={<ProtectedRoute><Layout><NotificationSettings /></Layout></ProtectedRoute>} />
             <Route path="/settings/orders-payments" element={<ProtectedRoute><Layout><OrdersPayments /></Layout></ProtectedRoute>} />
