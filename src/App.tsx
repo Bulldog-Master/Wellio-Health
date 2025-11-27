@@ -74,6 +74,10 @@ const WorkoutTemplateDetail = lazy(() => import("./pages/WorkoutTemplateDetail")
 const EventCalendar = lazy(() => import("./pages/EventCalendar"));
 const VoiceNotes = lazy(() => import("./pages/VoiceNotes"));
 const PersonalRecords = lazy(() => import("./pages/PersonalRecords"));
+const AdvancedAnalytics = lazy(() => import("./pages/AdvancedAnalytics"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Install = lazy(() => import("./pages/Install"));
+const Stories = lazy(() => import("./pages/Stories"));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -101,8 +105,9 @@ const AppContent = () => {
   return (
     <Suspense fallback={<PageLoader />}>
       <Routes>
-              <Route path="/auth" element={<Auth />} />
-              <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/install" element={<Install />} />
+        <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
               <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
               <Route path="/profile" element={<ProtectedRoute><Layout><Profile /></Layout></ProtectedRoute>} />
             <Route path="/weight" element={<ProtectedRoute><Layout><Weight /></Layout></ProtectedRoute>} />
@@ -162,6 +167,9 @@ const AppContent = () => {
             <Route path="/calendar" element={<ProtectedRoute><Layout><EventCalendar /></Layout></ProtectedRoute>} />
             <Route path="/voice-notes" element={<ProtectedRoute><Layout><VoiceNotes /></Layout></ProtectedRoute>} />
             <Route path="/personal-records" element={<ProtectedRoute><Layout><PersonalRecords /></Layout></ProtectedRoute>} />
+            <Route path="/analytics" element={<ProtectedRoute><Layout><AdvancedAnalytics /></Layout></ProtectedRoute>} />
+            <Route path="/dashboard" element={<ProtectedRoute><Layout><Dashboard /></Layout></ProtectedRoute>} />
+            <Route path="/stories" element={<ProtectedRoute><Layout><Stories /></Layout></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

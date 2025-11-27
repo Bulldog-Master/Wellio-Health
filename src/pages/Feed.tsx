@@ -17,6 +17,8 @@ import { formatDistanceToNow } from "date-fns";
 import { MentionInput } from "@/components/MentionInput";
 import { useRealtimePosts } from "@/hooks/useRealtimePosts";
 import Stories from "./Stories";
+import { SuggestedUsers } from "@/components/SuggestedUsers";
+import { LazyImage } from "@/components/LazyImage";
 
 const Feed = () => {
   const { toast } = useToast();
@@ -735,10 +737,11 @@ const Feed = () => {
                   )}
 
               {post.media_url && (
-                <img
+                <LazyImage
                   src={post.media_url}
                   alt="Post media"
                   className="rounded-lg w-full object-cover max-h-96"
+                  skeletonClassName="w-full h-96 rounded-lg"
                 />
               )}
 
@@ -906,6 +909,8 @@ const Feed = () => {
 
         {/* Sidebar - Trending Hashtags */}
         <div className="hidden lg:block space-y-6">
+          <SuggestedUsers />
+          
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -913,49 +918,7 @@ const Feed = () => {
                 Trending Hashtags
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2">
-              {trendingHashtags && trendingHashtags.length > 0 ? (
-                trendingHashtags.map(({ hashtag, count }) => (
-                  <button
-                    key={hashtag}
-                    className={`w-full flex items-center justify-between p-3 rounded-lg transition-colors hover:bg-accent ${
-                      selectedHashtag === hashtag ? "bg-accent" : ""
-                    }`}
-                    onClick={() => handleHashtagClick(hashtag)}
-                  >
-                    <span className="font-semibold text-primary">#{hashtag}</span>
-                    <Badge variant="secondary">{count}</Badge>
-                  </button>
-                ))
-              ) : (
-                <p className="text-sm text-muted-foreground text-center py-4">
-                  No trending hashtags yet
-                </p>
-              )}
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-sm">Popular Hashtags</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <p className="text-xs text-muted-foreground">
-                Use hashtags to categorize your posts and make them easier to discover:
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {["fitness", "nutrition", "workout", "weightloss", "gains", "health", "motivation"].map((tag) => (
-                  <Badge
-                    key={tag}
-                    variant="outline"
-                    className="cursor-pointer hover:bg-accent"
-                    onClick={() => handleHashtagClick(tag)}
-                  >
-                    #{tag}
-                  </Badge>
-                ))}
-              </div>
-            </CardContent>
+...
           </Card>
         </div>
       </div>
