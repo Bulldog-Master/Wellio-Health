@@ -6,8 +6,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ArrowLeft, Send, User } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ArrowLeft, Send, User, Check, CheckCheck } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useTypingIndicator } from "@/hooks/useTypingIndicator";
+import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 import { formatDistanceToNow } from "date-fns";
 
 interface Message {
@@ -26,6 +29,9 @@ const Conversation = () => {
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const typingTimeoutRef = useRef<NodeJS.Timeout>();
+
+  const { typingUsers, setTyping } = useTypingIndicator(conversationId, currentUserId);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -60,6 +66,10 @@ const Conversation = () => {
     },
     enabled: !!conversationId && !!currentUserId,
   });
+
+  const { isOnline } = useOnlineStatus(
+    conversation?.other_user?.id ? [conversation.other_user.id] : []
+  );
 
   // Fetch messages
   const { data: messages } = useQuery({
@@ -153,7 +163,28 @@ const Conversation = () => {
   const handleSend = () => {
     if (newMessage.trim()) {
       sendMessage.mutate(newMessage);
+      setTyping(false);
+      if (typingTimeoutRef.current) {
+        clearTimeout(typingTimeoutRef.current);
+      }
     }
+  };
+
+  const handleTyping = (value: string) => {
+    setNewMessage(value);
+
+    // Set typing indicator
+    setTyping(true);
+
+    // Clear existing timeout
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+
+    // Set new timeout to clear typing after 2 seconds
+    typingTimeoutRef.current = setTimeout(() => {
+      setTyping(false);
+    }, 2000);
   };
 
   return (
@@ -178,11 +209,17 @@ const Conversation = () => {
               </AvatarFallback>
             </Avatar>
             <div>
-              <p
-                className="font-semibold cursor-pointer hover:underline"
-                onClick={() => navigate(`/user/${conversation.other_user.id}`)}
-              >
-                {conversation.other_user.full_name || conversation.other_user.username || "Anonymous"}
+              <div className="flex items-center gap-2">
+                <p
+                  className="font-semibold cursor-pointer hover:underline"
+                  onClick={() => navigate(`/user/${conversation.other_user.id}`)}
+                >
+                  {conversation.other_user.full_name || conversation.other_user.username || "Anonymous"}
+                </p>
+                <div className={`w-2 h-2 rounded-full ${isOnline(conversation.other_user.id) ? "bg-green-500" : "bg-gray-400"}`} />
+              </div>
+              <p className="text-xs text-muted-foreground">
+                {isOnline(conversation.other_user.id) ? "Online" : "Offline"}
               </p>
             </div>
           </>
@@ -208,9 +245,18 @@ const Conversation = () => {
                     }`}
                   >
                     <p className="break-words">{message.content}</p>
-                    <p className={`text-xs mt-1 ${isOwn ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
-                      {formatDistanceToNow(new Date(message.created_at), { addSuffix: true })}
-                    </p>
+                    <div className="flex items-center justify-end gap-1 mt-1">
+                      <p className={`text-xs ${isOwn ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+                        {formatDistanceToNow(new Date(message.created_at), { addSuffix: true })}
+                      </p>
+                      {isOwn && (
+                        message.is_read ? (
+                          <CheckCheck className="w-3 h-3 text-primary-foreground/70" />
+                        ) : (
+                          <Check className="w-3 h-3 text-primary-foreground/70" />
+                        )
+                      )}
+                    </div>
                   </div>
                 </div>
               );
@@ -218,6 +264,13 @@ const Conversation = () => {
           ) : (
             <div className="flex items-center justify-center h-full text-muted-foreground">
               <p>No messages yet. Start the conversation!</p>
+            </div>
+          )}
+          {typingUsers.length > 0 && (
+            <div className="flex justify-start">
+              <Badge variant="secondary" className="animate-pulse">
+                Typing...
+              </Badge>
             </div>
           )}
           <div ref={messagesEndRef} />
@@ -229,7 +282,7 @@ const Conversation = () => {
         <Input
           placeholder="Type a message..."
           value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
+          onChange={(e) => handleTyping(e.target.value)}
           onKeyPress={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
