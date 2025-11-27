@@ -14,6 +14,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { formatDistanceToNow } from "date-fns";
+import { MentionInput } from "@/components/MentionInput";
 import Stories from "./Stories";
 
 const Feed = () => {
@@ -583,10 +584,10 @@ const Feed = () => {
           {/* Create Post */}
           <Card>
             <CardContent className="pt-6 space-y-4">
-              <Textarea
-                placeholder="Share your progress, achievements, or motivation... Use #hashtags to categorize your post!"
+              <MentionInput
+                placeholder="Share your progress, achievements, or motivation... Use #hashtags and @mentions!"
                 value={postContent}
-                onChange={(e) => setPostContent(e.target.value)}
+                onChange={setPostContent}
                 rows={3}
               />
           
@@ -706,9 +707,9 @@ const Feed = () => {
                 <CardContent className="space-y-4">
                   {editingPostId === post.id ? (
                     <div className="space-y-2">
-                      <Textarea
+                      <MentionInput
                         value={editContent}
-                        onChange={(e) => setEditContent(e.target.value)}
+                        onChange={setEditContent}
                         rows={3}
                       />
                       <div className="flex gap-2">
@@ -853,25 +854,23 @@ const Feed = () => {
                     </div>
                   ))}
 
-                  <div className="flex gap-2">
-                    <Input
+                  <div className="space-y-2">
+                    <MentionInput
                       placeholder="Write a comment..."
                       value={commentContent}
-                      onChange={(e) => setCommentContent(e.target.value)}
-                      onKeyPress={(e) => {
-                        if (e.key === "Enter" && !e.shiftKey) {
-                          e.preventDefault();
-                          addComment.mutate();
-                        }
-                      }}
+                      onChange={setCommentContent}
+                      rows={2}
                     />
-                    <Button
-                      size="sm"
-                      onClick={() => addComment.mutate()}
-                      disabled={!commentContent.trim() || addComment.isPending}
-                    >
-                      <Send className="w-4 h-4" />
-                    </Button>
+                    <div className="flex justify-end">
+                      <Button
+                        size="sm"
+                        onClick={() => addComment.mutate()}
+                        disabled={!commentContent.trim() || addComment.isPending}
+                      >
+                        <Send className="w-4 h-4 mr-2" />
+                        Comment
+                      </Button>
+                    </div>
                   </div>
                 </div>
               )}
