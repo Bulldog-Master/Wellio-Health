@@ -2888,6 +2888,51 @@ export type Database = {
         }
         Relationships: []
       }
+      voice_notes: {
+        Row: {
+          audio_url: string
+          category: string
+          created_at: string
+          duration_seconds: number | null
+          id: string
+          is_favorite: boolean | null
+          recorded_at: string
+          tags: string[] | null
+          title: string
+          transcription: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          audio_url: string
+          category: string
+          created_at?: string
+          duration_seconds?: number | null
+          id?: string
+          is_favorite?: boolean | null
+          recorded_at?: string
+          tags?: string[] | null
+          title: string
+          transcription?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          audio_url?: string
+          category?: string
+          created_at?: string
+          duration_seconds?: number | null
+          id?: string
+          is_favorite?: boolean | null
+          recorded_at?: string
+          tags?: string[] | null
+          title?: string
+          transcription?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       water_logs: {
         Row: {
           amount_ml: number

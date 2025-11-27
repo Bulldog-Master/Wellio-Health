@@ -63,6 +63,7 @@ import RecipeDetail from "./pages/RecipeDetail";
 import WorkoutTemplates from "./pages/WorkoutTemplates";
 import WorkoutTemplateDetail from "./pages/WorkoutTemplateDetail";
 import EventCalendar from "./pages/EventCalendar";
+import VoiceNotes from "./pages/VoiceNotes";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -135,6 +136,7 @@ const App = () => {
             <Route path="/workout-templates" element={<ProtectedRoute><Layout><WorkoutTemplates /></Layout></ProtectedRoute>} />
             <Route path="/workout-template/:programId" element={<ProtectedRoute><Layout><WorkoutTemplateDetail /></Layout></ProtectedRoute>} />
             <Route path="/calendar" element={<ProtectedRoute><Layout><EventCalendar /></Layout></ProtectedRoute>} />
+            <Route path="/voice-notes" element={<ProtectedRoute><Layout><VoiceNotes /></Layout></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
