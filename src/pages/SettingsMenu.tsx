@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight } from "lucide-react";
+import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight, Heart } from "lucide-react";
 
 const SettingsMenu = () => {
   const navigate = useNavigate();
@@ -14,6 +14,14 @@ const SettingsMenu = () => {
       iconBg: "bg-destructive/20",
       iconColor: "text-destructive",
       path: "/settings/privacy-security",
+    },
+    {
+      title: "Close Friends",
+      description: "Manage who can see your close friends stories",
+      icon: Heart,
+      iconBg: "bg-pink-500/20",
+      iconColor: "text-pink-500",
+      path: "/settings/close-friends",
     },
     {
       title: "Trusted Devices",

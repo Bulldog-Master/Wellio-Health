@@ -7,7 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
-import { Plus, X, User, Eye, Image as ImageIcon } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { Plus, X, User, Eye, Image as ImageIcon, Heart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatDistanceToNow } from "date-fns";
 
@@ -21,6 +23,7 @@ const Stories = () => {
   const [storyContent, setStoryContent] = useState("");
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [closeFriendsOnly, setCloseFriendsOnly] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Fetch active stories
@@ -95,6 +98,7 @@ const Stories = () => {
           content: storyContent,
           media_url: mediaUrl,
           media_type: mediaType,
+          close_friends_only: closeFriendsOnly,
         });
 
       if (error) throw error;
@@ -105,6 +109,7 @@ const Stories = () => {
       setStoryContent("");
       setUploadedImage(null);
       setImagePreview(null);
+      setCloseFriendsOnly(false);
       toast({ title: "Story created!" });
     },
   });
@@ -232,6 +237,25 @@ const Stories = () => {
                 </Button>
               </div>
             )}
+
+            <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
+              <div className="flex items-center gap-3">
+                <Heart className="w-5 h-5 text-pink-500 fill-pink-500" />
+                <div>
+                  <Label htmlFor="close-friends" className="font-medium">
+                    Share with Close Friends Only
+                  </Label>
+                  <p className="text-xs text-muted-foreground">
+                    Only people on your close friends list will see this
+                  </p>
+                </div>
+              </div>
+              <Switch
+                id="close-friends"
+                checked={closeFriendsOnly}
+                onCheckedChange={setCloseFriendsOnly}
+              />
+            </div>
 
             <div className="flex justify-between">
               <input
