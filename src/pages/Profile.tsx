@@ -5,15 +5,18 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { User, Save, Share2, Copy, Check, Upload, Settings, ChevronDown, Shield, CreditCard, Bell, HelpCircle, UserCircle, Target, LogOut } from "lucide-react";
+import { User, Save, Share2, Copy, Check, Upload, Settings, ChevronDown, Shield, CreditCard, Bell, HelpCircle, UserCircle, Target, LogOut, Crown } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { useSubscription } from "@/hooks/useSubscription";
+import { Badge } from "@/components/ui/badge";
 
 const Profile = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { tier, isLoading: subscriptionLoading } = useSubscription();
   const [copied, setCopied] = useState(false);
   const [referralCode] = useState("WELLIO-" + Math.random().toString(36).substr(2, 6).toUpperCase());
   const referralLink = `${window.location.origin}/auth?ref=${referralCode}`;
@@ -220,14 +223,43 @@ const Profile = () => {
 
   return (
     <div className="space-y-6 max-w-4xl pb-20">
-      <div className="flex items-center gap-3">
-        <div className="p-3 bg-primary/10 rounded-xl">
-          <User className="w-6 h-6 text-primary" />
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="p-3 bg-primary/10 rounded-xl">
+            <User className="w-6 h-6 text-primary" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h1 className="text-3xl font-bold">Profile</h1>
+              {!subscriptionLoading && (
+                <Badge 
+                  variant={tier === 'free' ? 'secondary' : 'default'}
+                  className={tier !== 'free' ? 'bg-gradient-primary text-white' : ''}
+                >
+                  {tier === 'free' ? (
+                    'Free'
+                  ) : (
+                    <>
+                      <Crown className="w-3 h-3 mr-1" />
+                      {tier.toUpperCase()}
+                    </>
+                  )}
+                </Badge>
+              )}
+            </div>
+            <p className="text-muted-foreground">Manage your account</p>
+          </div>
         </div>
-        <div>
-          <h1 className="text-3xl font-bold">Profile</h1>
-          <p className="text-muted-foreground">Manage your account</p>
-        </div>
+        {tier === 'free' && (
+          <Button 
+            variant="default"
+            className="bg-gradient-primary hover:opacity-90 gap-2"
+            onClick={() => navigate('/subscription')}
+          >
+            <Crown className="w-4 h-4" />
+            Upgrade
+          </Button>
+        )}
       </div>
 
       {/* Personal Information Section */}
