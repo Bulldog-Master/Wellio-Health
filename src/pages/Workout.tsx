@@ -611,6 +611,35 @@ const Workout = () => {
     setShowCreateRoutine(true);
   };
 
+  const handleLoadRoutine = (routine: WorkoutRoutine) => {
+    // Convert routine to workout form data
+    const totalDuration = routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0);
+    const routineNameForActivity = routine.name || "Custom Workout";
+    
+    // Set the activity type to the routine name or first exercise
+    setExercise(routineNameForActivity);
+    
+    // Set duration if available
+    if (totalDuration > 0) {
+      setDuration(totalDuration.toString());
+    }
+    
+    // Set notes to include all exercises
+    const exerciseList = routine.exercises.map((ex, idx) => {
+      let line = `${idx + 1}. ${ex.name}`;
+      if (ex.sets && ex.reps) line += ` - ${ex.sets}x${ex.reps}`;
+      else if (ex.duration) line += ` - ${ex.duration}min`;
+      return line;
+    }).join('\n');
+    
+    setNotes(`Routine: ${routine.name}\n\n${exerciseList}`);
+    
+    toast({
+      title: "Routine loaded",
+      description: `${routine.name} has been loaded into the workout form.`,
+    });
+  };
+
   const handleDeleteRoutine = async (id: string) => {
     try {
       const { error } = await supabase
@@ -1265,6 +1294,16 @@ const Workout = () => {
                             </div>
                           ))}
                         </div>
+                        <Button
+                          className="w-full mt-4"
+                          onClick={() => {
+                            handleLoadRoutine(routine);
+                            setShowLibrary(false);
+                          }}
+                        >
+                          <Check className="w-4 h-4 mr-2" />
+                          Use This Routine
+                        </Button>
                       </AccordionContent>
                     </AccordionItem>
                   ))}
@@ -1409,7 +1448,6 @@ const Workout = () => {
                                       <video
                                         src={exercise.media_url}
                                         className="w-full h-full object-cover"
-                                        controls
                                       />
                                     ) : (
                                       <img
@@ -1424,6 +1462,16 @@ const Workout = () => {
                             </div>
                           ))}
                         </div>
+                        <Button
+                          className="w-full mt-4"
+                          onClick={() => {
+                            handleLoadRoutine({ ...routine, id: routine.id });
+                            setShowSampleLibrary(false);
+                          }}
+                        >
+                          <Check className="w-4 h-4 mr-2" />
+                          Use This Routine
+                        </Button>
                       </AccordionContent>
                     </AccordionItem>
                   ))}
