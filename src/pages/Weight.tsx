@@ -671,11 +671,40 @@ const Weight = () => {
                 wrapperStyle={{
                   paddingTop: '20px'
                 }}
-                payload={chartView === "daily" && targetWeight ? [
-                  { value: 'Morning', type: 'rect', color: 'hsl(195, 100%, 50%)' },
-                  { value: 'Evening', type: 'rect', color: 'hsl(270, 95%, 65%)' },
-                  { value: 'Target Weight', type: 'line', color: 'hsl(0, 85%, 60%)', payload: { strokeDasharray: '5 5' } }
-                ] : undefined}
+                content={(props) => {
+                  const { payload } = props;
+                  return (
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', paddingTop: '20px' }}>
+                      {payload?.map((entry: any, index: number) => (
+                        <div key={`item-${index}`} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <div style={{ 
+                            width: '16px', 
+                            height: '16px', 
+                            backgroundColor: entry.color,
+                            borderRadius: '2px'
+                          }} />
+                          <span style={{ color: 'hsl(var(--foreground))', fontSize: '14px' }}>{entry.value}</span>
+                        </div>
+                      ))}
+                      {chartView === "daily" && targetWeight && (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <svg width="20" height="2" style={{ overflow: 'visible' }}>
+                            <line 
+                              x1="0" 
+                              y1="1" 
+                              x2="20" 
+                              y2="1" 
+                              stroke="hsl(0, 85%, 60%)" 
+                              strokeWidth="2"
+                              strokeDasharray="3 3"
+                            />
+                          </svg>
+                          <span style={{ color: 'hsl(var(--foreground))', fontSize: '14px' }}>Target Weight</span>
+                        </div>
+                      )}
+                    </div>
+                  );
+                }}
               />
               
               {/* Target Weight Reference Line */}
