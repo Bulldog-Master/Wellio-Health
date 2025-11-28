@@ -1,7 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import workoutBg from "@/assets/workout-bg.jpg";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -859,17 +858,15 @@ const Workout = () => {
 
   return (
     <div className="space-y-6 max-w-4xl pb-20 md:pb-0 relative">
-      {/* Workout background image */}
+      {/* Workout-themed background with dumbbell pattern */}
       <div 
-        className="fixed inset-0 -z-10 pointer-events-none opacity-10 dark:opacity-5"
+        className="fixed inset-0 -z-10 pointer-events-none opacity-[0.03] dark:opacity-[0.02]"
         style={{
-          backgroundImage: `url(${workoutBg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23000000' stroke-width='2'%3E%3Crect x='35' y='55' width='10' height='10'/%3E%3Crect x='75' y='55' width='10' height='10'/%3E%3Cline x1='45' y1='60' x2='75' y2='60'/%3E%3Crect x='30' y='50' width='5' height='20'/%3E%3Crect x='85' y='50' width='5' height='20'/%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundSize: '120px 120px'
         }}
       />
-      <div className="fixed inset-0 -z-10 bg-gradient-to-br from-background/80 via-background/90 to-background pointer-events-none" />
+      <div className="fixed inset-0 -z-10 bg-gradient-to-br from-primary/5 via-background to-secondary/5 pointer-events-none" />
       <div className="flex items-center gap-4 mb-2">
         <Button
           variant="ghost"
