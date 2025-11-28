@@ -1691,7 +1691,7 @@ const Workout = () => {
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-full p-0 z-50">
+              <PopoverContent className="w-full p-0 z-50" onInteractOutside={() => setActivityTypeOpen(false)}>
                 <Command>
                   <CommandInput 
                     placeholder="Search or type custom activity..." 
@@ -1707,9 +1707,9 @@ const Workout = () => {
                         <CommandItem
                           key={activity}
                           value={activity}
-                          onSelect={() => {
-                            setExercise(activity);
-                            setActivityTypeOpen(false);
+                          onSelect={(value) => {
+                            setExercise(value);
+                            setTimeout(() => setActivityTypeOpen(false), 0);
                           }}
                         >
                           <Check
