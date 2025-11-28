@@ -353,27 +353,35 @@ const PrivacySecurity = () => {
 
   return (
     <div className="space-y-6 pb-20 md:pb-0">
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 mb-2">
         <Button
           variant="ghost"
           size="icon"
           onClick={() => navigate("/settings")}
+          className="hover:bg-primary/10"
         >
           <ArrowLeft className="w-5 h-5" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold mb-2">Privacy & Security</h1>
-          <p className="text-muted-foreground">Control your privacy settings and security options</p>
+          <h1 className="text-3xl font-bold">Privacy & Security</h1>
+          <p className="text-muted-foreground mt-1">Control your privacy settings and security options</p>
         </div>
       </div>
 
       {/* Two-Factor Authentication (TOTP) */}
-      <Card>
+      <Card className="hover:shadow-xl transition-all duration-300">
         <CardHeader>
-          <CardTitle>Two-Factor Authentication (TOTP)</CardTitle>
-          <CardDescription>
-            Use an authenticator app like Google Authenticator or Authy
-          </CardDescription>
+          <div className="flex items-center gap-3">
+            <div className="p-3 bg-primary/10 rounded-xl">
+              <Shield className="w-6 h-6 text-primary" />
+            </div>
+            <div>
+              <CardTitle>Two-Factor Authentication (TOTP)</CardTitle>
+              <CardDescription>
+                Use an authenticator app like Google Authenticator or Authy
+              </CardDescription>
+            </div>
+          </div>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
@@ -445,12 +453,19 @@ const PrivacySecurity = () => {
       </Card>
 
       {/* Passkey (WebAuthn) */}
-      <Card>
+      <Card className="hover:shadow-xl transition-all duration-300">
         <CardHeader>
-          <CardTitle>Passkey (WebAuthn)</CardTitle>
-          <CardDescription>
-            Use biometric authentication or security keys for passwordless login
-          </CardDescription>
+          <div className="flex items-center gap-3">
+            <div className="p-3 bg-secondary/10 rounded-xl">
+              <Key className="w-6 h-6 text-secondary" />
+            </div>
+            <div>
+              <CardTitle>Passkey (WebAuthn)</CardTitle>
+              <CardDescription>
+                Use biometric authentication or security keys for passwordless login
+              </CardDescription>
+            </div>
+          </div>
         </CardHeader>
         <CardContent className="space-y-4">
           {!isWebAuthnSupported() && (
@@ -513,10 +528,17 @@ const PrivacySecurity = () => {
       </Card>
 
       {/* Password */}
-      <Card>
+      <Card className="hover:shadow-xl transition-all duration-300">
         <CardHeader>
-          <CardTitle>Password</CardTitle>
-          <CardDescription>Change your account password</CardDescription>
+          <div className="flex items-center gap-3">
+            <div className="p-3 bg-destructive/10 rounded-xl">
+              <Lock className="w-6 h-6 text-destructive" />
+            </div>
+            <div>
+              <CardTitle>Password</CardTitle>
+              <CardDescription>Change your account password</CardDescription>
+            </div>
+          </div>
         </CardHeader>
         <CardContent>
           <Button onClick={handleChangePassword} variant="outline">

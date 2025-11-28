@@ -139,10 +139,12 @@ const Dashboard = () => {
       <DashboardCharts />
 
       {/* Activity Rings - Compact with glassmorphism */}
-      <Card className="p-4 md:p-6 glass card-hover shadow-lg">
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-base md:text-lg font-semibold">Today's Activity</h3>
-          <Activity className="w-5 h-5 text-primary" />
+      <Card className="p-6 hover:shadow-xl transition-all duration-300">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-semibold">Today's Activity</h3>
+          <div className="p-2 bg-primary/10 rounded-xl">
+            <Activity className="w-5 h-5 text-primary" />
+          </div>
         </div>
         <ActivityRings />
       </Card>
@@ -190,8 +192,13 @@ const Dashboard = () => {
       <NutritionGoals />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
-        <Card className="p-4 md:p-6 bg-gradient-card shadow-md">
-          <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4">Weight Goal Progress</h3>
+        <Card className="p-6 hover:shadow-xl transition-all duration-300">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold">Weight Goal Progress</h3>
+            <div className="p-2 bg-primary/10 rounded-xl">
+              <Target className="w-5 h-5 text-primary" />
+            </div>
+          </div>
           <div className="space-y-4">
             <div>
               <div className="flex justify-between mb-2">
@@ -211,8 +218,13 @@ const Dashboard = () => {
           </div>
         </Card>
 
-        <Card className="p-4 md:p-6 bg-gradient-card shadow-md">
-          <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4">Daily Calorie Goal</h3>
+        <Card className="p-6 hover:shadow-xl transition-all duration-300">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold">Daily Calorie Goal</h3>
+            <div className="p-2 bg-primary/10 rounded-xl">
+              <Flame className="w-5 h-5 text-primary" />
+            </div>
+          </div>
           <div className="space-y-4">
             <div>
               <div className="flex justify-between mb-2">
@@ -235,11 +247,14 @@ const Dashboard = () => {
         </Card>
       </div>
 
-      <Card className="p-4 md:p-6 bg-gradient-card shadow-md">
-        <div className="flex items-center justify-between mb-3 md:mb-4">
-          <h3 className="text-base md:text-lg font-semibold">Quick Actions</h3>
+      <Card className="p-6 hover:shadow-xl transition-all duration-300">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-semibold">Quick Actions</h3>
+          <div className="p-2 bg-primary/10 rounded-xl">
+            <Zap className="w-5 h-5 text-primary" />
+          </div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-2 md:gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-3">
           <Button 
             onClick={() => navigate('/weight')}
             className="h-auto py-4 flex-col gap-2 bg-primary hover:bg-primary/90"
