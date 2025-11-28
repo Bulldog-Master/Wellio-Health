@@ -304,6 +304,7 @@ const Recipes = () => {
           </DialogContent>
         </Dialog>
       </div>
+      </div>
 
       <Card className="p-6 hover:shadow-xl transition-all duration-300">
         <div className="flex items-center justify-between mb-6">
