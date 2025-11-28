@@ -400,9 +400,6 @@ const Workout = () => {
       }
 
       if (editingWorkout) {
-        // Create ISO string at noon local time to avoid timezone shifts
-        const localDate = new Date(workoutDate.getFullYear(), workoutDate.getMonth(), workoutDate.getDate(), 12, 0, 0);
-        
         const { error } = await supabase
           .from('activity_logs')
           .update({
@@ -411,7 +408,7 @@ const Workout = () => {
             calories_burned: calculatedCalories,
             distance_miles: distanceMiles,
             notes: finalNotes || null,
-            logged_at: localDate.toISOString(),
+            logged_at: format(workoutDate, "yyyy-MM-dd"),
           })
           .eq('id', editingWorkout);
 
@@ -423,9 +420,6 @@ const Workout = () => {
         });
         setEditingWorkout(null);
       } else {
-        // Create ISO string at noon local time to avoid timezone shifts
-        const localDate = new Date(workoutDate.getFullYear(), workoutDate.getMonth(), workoutDate.getDate(), 12, 0, 0);
-        
         const { error } = await supabase
           .from('activity_logs')
           .insert({
@@ -435,7 +429,7 @@ const Workout = () => {
             calories_burned: calculatedCalories,
             distance_miles: distanceMiles,
             notes: finalNotes || null,
-            logged_at: localDate.toISOString(),
+            logged_at: format(workoutDate, "yyyy-MM-dd"),
           });
 
         if (error) throw error;
@@ -471,9 +465,9 @@ const Workout = () => {
     setIntensity("moderate");
     setDistance(log.distance_miles ? formatDistance(log.distance_miles, preferredUnit).split(' ')[0] : "");
     setNotes(log.notes || "");
-    // Parse the date to local timezone
-    const logDate = new Date(log.logged_at);
-    setWorkoutDate(new Date(logDate.getFullYear(), logDate.getMonth(), logDate.getDate()));
+    const dateStr = log.logged_at.split('T')[0];
+    const [year, month, day] = dateStr.split('-').map(Number);
+    setWorkoutDate(new Date(year, month - 1, day));
     setEditingWorkout(log.id);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -1834,17 +1828,29 @@ const Workout = () => {
 
           <div>
             <Label htmlFor="workout-date">Date</Label>
-            <Input
-              id="workout-date"
-              type="date"
-              value={format(workoutDate, "yyyy-MM-dd")}
-              onChange={(e) => {
-                // Parse date in local timezone to avoid day-shifting
-                const [year, month, day] = e.target.value.split('-').map(Number);
-                setWorkoutDate(new Date(year, month - 1, day));
-              }}
-              className="w-full mt-1.5"
-            />
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className={cn(
+                    "w-full mt-1.5 justify-start text-left font-normal",
+                    !workoutDate && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {workoutDate ? format(workoutDate, "PPP") : <span>Pick a date</span>}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={workoutDate}
+                  onSelect={(date) => date && setWorkoutDate(date)}
+                  initialFocus
+                  className="p-3 pointer-events-auto"
+                />
+              </PopoverContent>
+            </Popover>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
