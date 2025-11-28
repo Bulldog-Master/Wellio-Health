@@ -98,15 +98,20 @@ const Dashboard = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-secondary/70 to-accent/60" />
         <div className="relative h-full flex flex-col justify-center items-start p-6 md:p-10 text-white">
-          <div className="flex items-center gap-2 mb-4 animate-float">
-            <Zap className="w-8 h-8 text-white drop-shadow-glow" />
-            <span className="text-sm font-semibold uppercase tracking-wider bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
-              Your Journey
-            </span>
+          <div className="mb-6">
+            <h1 className="text-5xl md:text-7xl font-black mb-2 drop-shadow-[0_0_30px_rgba(255,255,255,0.5)] tracking-tight">
+              Wellio
+            </h1>
+            <div className="flex items-center gap-2 animate-float">
+              <Zap className="w-6 h-6 text-white drop-shadow-glow" />
+              <span className="text-sm font-semibold uppercase tracking-wider bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+                Your Journey
+              </span>
+            </div>
           </div>
-          <h1 className="text-3xl md:text-5xl font-bold mb-3 drop-shadow-lg">
+          <h2 className="text-3xl md:text-5xl font-bold mb-3 drop-shadow-lg">
             Welcome back!
-          </h1>
+          </h2>
           <p className="text-lg md:text-xl text-white/95 mb-6 max-w-2xl drop-shadow-md">
             Your fitness stats are looking great today. Keep pushing forward!
           </p>
