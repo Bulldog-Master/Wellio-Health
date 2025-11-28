@@ -671,6 +671,11 @@ const Weight = () => {
                 wrapperStyle={{
                   paddingTop: '20px'
                 }}
+                payload={chartView === "daily" && targetWeight ? [
+                  { value: 'Morning', type: 'rect', color: 'hsl(195, 100%, 50%)' },
+                  { value: 'Evening', type: 'rect', color: 'hsl(270, 95%, 65%)' },
+                  { value: 'Target Weight', type: 'line', color: 'hsl(0, 85%, 60%)', payload: { strokeDasharray: '5 5' } }
+                ] : undefined}
               />
               
               {/* Target Weight Reference Line */}
