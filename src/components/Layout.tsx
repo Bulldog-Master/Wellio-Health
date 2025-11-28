@@ -1,9 +1,11 @@
 import { ReactNode } from "react";
 import Navigation from "./Navigation";
 import ThemeToggle from "./ThemeToggle";
-import { User } from "lucide-react";
+import { User, Bell } from "lucide-react";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
+import { Badge } from "./ui/badge";
+import { useUnreadNotificationCount } from "@/hooks/useNotifications";
 
 interface LayoutProps {
   children: ReactNode;
@@ -11,6 +13,7 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const navigate = useNavigate();
+  const { data: unreadCount } = useUnreadNotificationCount();
 
   return (
     <div className="min-h-screen bg-background">
@@ -22,6 +25,22 @@ const Layout = ({ children }: LayoutProps) => {
                 Wellio
               </h1>
               <div className="flex items-center gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => navigate("/notifications")}
+                  className="hover:bg-sidebar-accent text-sidebar-foreground relative"
+                >
+                  <Bell className="w-5 h-5" />
+                  {unreadCount && unreadCount > 0 && (
+                    <Badge 
+                      variant="destructive" 
+                      className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                    >
+                      {unreadCount > 9 ? "9+" : unreadCount}
+                    </Badge>
+                  )}
+                </Button>
                 <Button
                   variant="ghost"
                   size="icon"
@@ -40,6 +59,22 @@ const Layout = ({ children }: LayoutProps) => {
         <main className="flex-1 pb-20 md:pb-0">
           <div className="p-4 md:p-8">
             <div className="flex justify-end gap-2 mb-4 md:hidden">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate("/notifications")}
+                className="relative"
+              >
+                <Bell className="w-5 h-5" />
+                {unreadCount && unreadCount > 0 && (
+                  <Badge 
+                    variant="destructive" 
+                    className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                  >
+                    {unreadCount > 9 ? "9+" : unreadCount}
+                  </Badge>
+                )}
+              </Button>
               <Button
                 variant="ghost"
                 size="icon"
