@@ -1836,39 +1836,13 @@ const Workout = () => {
 
           <div>
             <Label htmlFor="workout-date">Date</Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    "w-full mt-1.5 justify-start text-left font-normal",
-                    !workoutDate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {workoutDate || "Pick a date"}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={workoutDate ? (() => {
-                    const [y, m, d] = workoutDate.split('-').map(Number);
-                    return new Date(y, m - 1, d);
-                  })() : undefined}
-                  onSelect={(date) => {
-                    if (date) {
-                      const y = date.getFullYear();
-                      const m = String(date.getMonth() + 1).padStart(2, '0');
-                      const d = String(date.getDate()).padStart(2, '0');
-                      setWorkoutDate(`${y}-${m}-${d}`);
-                    }
-                  }}
-                  initialFocus
-                  className="p-3 pointer-events-auto"
-                />
-              </PopoverContent>
-            </Popover>
+            <Input
+              id="workout-date"
+              type="date"
+              value={workoutDate}
+              onChange={(e) => setWorkoutDate(e.target.value)}
+              className="w-full mt-1.5"
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
