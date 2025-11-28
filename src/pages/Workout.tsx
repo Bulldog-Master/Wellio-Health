@@ -119,40 +119,6 @@ const Workout = () => {
   const [appPlatform, setAppPlatform] = useState("");
   const [appIconUrl, setAppIconUrl] = useState("");
   const [workoutDate, setWorkoutDate] = useState<Date>(new Date());
-  
-  // Global scroll unlock - runs on every render to ensure scroll is never locked
-  useEffect(() => {
-    const unlockScroll = () => {
-      document.body.style.overflow = '';
-      document.body.style.pointerEvents = '';
-      document.body.style.position = '';
-      // Remove any radix overlays that might be stuck
-      const overlays = document.querySelectorAll('[data-radix-portal]');
-      overlays.forEach(overlay => {
-        const parent = overlay.parentElement;
-        if (parent && !parent.querySelector('[data-state="open"]')) {
-          overlay.remove();
-        }
-      });
-    };
-    
-    unlockScroll();
-    
-    // Add click listener to unlock scroll on any click
-    const handleClick = () => {
-      setTimeout(unlockScroll, 50);
-    };
-    
-    document.addEventListener('click', handleClick);
-    
-    // Also unlock after a short delay to catch any async scroll locks
-    const timer = setTimeout(unlockScroll, 100);
-    
-    return () => {
-      clearTimeout(timer);
-      document.removeEventListener('click', handleClick);
-    };
-  });
   const handleBrowseApps = () => {
     const userAgent = navigator.userAgent || navigator.vendor;
     const isIOS = /iPad|iPhone|iPod/.test(userAgent);
@@ -1736,29 +1702,13 @@ const Workout = () => {
 
           <div>
             <Label htmlFor="workout-date">Date</Label>
-            <Popover modal={false}>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    "w-full justify-start text-left font-normal mt-1.5",
-                    !workoutDate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {workoutDate ? format(workoutDate, "PPP") : <span>Pick a date</span>}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0 z-50" align="start">
-                <Calendar
-                  mode="single"
-                  selected={workoutDate}
-                  onSelect={(date) => date && setWorkoutDate(date)}
-                  initialFocus
-                  className={cn("p-3 pointer-events-auto")}
-                />
-              </PopoverContent>
-            </Popover>
+            <Input
+              id="workout-date"
+              type="date"
+              value={format(workoutDate, "yyyy-MM-dd")}
+              onChange={(e) => setWorkoutDate(new Date(e.target.value))}
+              className="w-full mt-1.5"
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
@@ -1775,43 +1725,16 @@ const Workout = () => {
             </div>
             <div>
               <Label htmlFor="intensity">Intensity Level</Label>
-              <Select value={intensity} onValueChange={setIntensity} {...({ modal: false } as any)}>
-                <SelectTrigger className="mt-1.5">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="light">
-                    <div className="flex items-center gap-2">
-                      <Zap className="w-3 h-3 text-muted-foreground" />
-                      Light
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="moderate">
-                    <div className="flex items-center gap-2">
-                      <Zap className="w-3 h-3 text-primary" />
-                      Moderate
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="intense">
-                    <div className="flex items-center gap-2">
-                      <Zap className="w-3 h-3 text-accent" />
-                      Intense
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="HIT">
-                    <div className="flex items-center gap-2">
-                      <Zap className="w-3 h-3 text-accent" />
-                      HIT
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="HIIT">
-                    <div className="flex items-center gap-2">
-                      <Zap className="w-3 h-3 text-accent" />
-                      HIIT
-                    </div>
-                  </SelectItem>
-                </SelectContent>
-              </Select>
+              <select
+                id="intensity"
+                value={intensity}
+                onChange={(e) => setIntensity(e.target.value)}
+                className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 mt-1.5"
+              >
+                <option value="light">Light</option>
+                <option value="moderate">Moderate</option>
+                <option value="vigorous">Vigorous</option>
+              </select>
             </div>
           </div>
           
