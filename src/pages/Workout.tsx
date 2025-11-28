@@ -119,6 +119,30 @@ const Workout = () => {
   const [appPlatform, setAppPlatform] = useState("");
   const [appIconUrl, setAppIconUrl] = useState("");
   const [workoutDate, setWorkoutDate] = useState<Date>(new Date());
+  
+  // Global scroll unlock - runs on every render to ensure scroll is never locked
+  useEffect(() => {
+    const unlockScroll = () => {
+      document.body.style.overflow = '';
+      document.body.style.pointerEvents = '';
+      document.body.style.position = '';
+      // Remove any radix overlays that might be stuck
+      const overlays = document.querySelectorAll('[data-radix-portal]');
+      overlays.forEach(overlay => {
+        const parent = overlay.parentElement;
+        if (parent && !parent.querySelector('[data-state="open"]')) {
+          overlay.remove();
+        }
+      });
+    };
+    
+    unlockScroll();
+    
+    // Also unlock after a short delay to catch any async scroll locks
+    const timer = setTimeout(unlockScroll, 100);
+    
+    return () => clearTimeout(timer);
+  });
   const handleBrowseApps = () => {
     const userAgent = navigator.userAgent || navigator.vendor;
     const isIOS = /iPad|iPhone|iPod/.test(userAgent);
