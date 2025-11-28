@@ -1,5 +1,4 @@
 import { Card } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -788,9 +787,8 @@ const Weight = () => {
         ) : Object.keys(groupedLogs).length === 0 ? (
           <p className="text-center text-muted-foreground py-8">No weight logs yet. Start tracking above!</p>
         ) : (
-          <ScrollArea className="h-[600px] pr-4">
-            <div className="space-y-3">
-              {[...weightLogs].reverse().map((log) => (
+          <div className="h-[600px] overflow-y-auto pr-2 space-y-3" style={{ overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
+            {[...weightLogs].reverse().map((log) => (
               <div key={log.id} className="flex items-center justify-between p-4 bg-secondary rounded-lg">
                 <div className="flex-1">
                   <span className="font-medium">{new Date(log.logged_at).toLocaleDateString()}</span>
@@ -854,8 +852,7 @@ const Weight = () => {
                 )}
               </div>
             ))}
-            </div>
-          </ScrollArea>
+          </div>
         )}
       </Card>
     </div>
