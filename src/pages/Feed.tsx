@@ -16,7 +16,6 @@ import { useToast } from "@/hooks/use-toast";
 import { formatDistanceToNow } from "date-fns";
 import { MentionInput } from "@/components/MentionInput";
 import { useRealtimePosts } from "@/hooks/useRealtimePosts";
-import Stories from "./Stories";
 import { SuggestedUsers } from "@/components/SuggestedUsers";
 import { LazyImage } from "@/components/LazyImage";
 
@@ -594,13 +593,6 @@ const Feed = () => {
               </div>
             )}
           </div>
-
-          {/* Stories */}
-          <Card>
-            <CardContent className="pt-6">
-              <Stories />
-            </CardContent>
-          </Card>
 
           {/* Create Post */}
           <Card>
