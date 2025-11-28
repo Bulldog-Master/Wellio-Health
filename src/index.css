@@ -8,98 +8,98 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Modern warm neutral background - soft cream */
-    --background: 30 20% 97%;
-    --foreground: 215 25% 20%;
+    /* Modern vibrant background with slight gradient feel */
+    --background: 240 25% 98%;
+    --foreground: 240 10% 15%;
 
-    /* Card with subtle warmth and depth */
+    /* Pure white cards for contrast */
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 20%;
+    --card-foreground: 240 10% 15%;
 
     /* Popover styling */
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 20%;
+    --popover-foreground: 240 10% 15%;
 
-    /* Primary - Professional sage green */
-    --primary: 155 42% 48%;
+    /* Primary - Electric cyan blue */
+    --primary: 195 100% 50%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Soft sky blue */
-    --secondary: 205 65% 58%;
+    /* Secondary - Vibrant purple */
+    --secondary: 270 95% 65%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Muted elements - warm gray */
-    --muted: 30 15% 94%;
-    --muted-foreground: 215 15% 50%;
+    /* Muted elements - light with slight color */
+    --muted: 240 20% 96%;
+    --muted-foreground: 240 10% 45%;
 
-    /* Accent - Warm coral */
-    --accent: 15 78% 62%;
+    /* Accent - Electric pink */
+    --accent: 330 100% 60%;
     --accent-foreground: 0 0% 100%;
 
     /* Destructive remains strong */
-    --destructive: 0 70% 50%;
+    --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Borders and inputs - subtle warm gray */
-    --border: 30 12% 88%;
-    --input: 30 12% 90%;
-    --ring: 155 42% 48%;
+    /* Borders and inputs - modern subtle */
+    --border: 240 15% 92%;
+    --input: 240 15% 94%;
+    --ring: 195 100% 50%;
 
-    --radius: 0.875rem;
+    --radius: 1rem;
 
-    /* Success - fresh green */
-    --success: 150 55% 50%;
+    /* Success - bright green */
+    --success: 145 80% 50%;
     --success-foreground: 0 0% 100%;
     
-    /* Warning - warm amber */
-    --warning: 38 85% 60%;
+    /* Warning - vibrant orange */
+    --warning: 35 100% 58%;
     --warning-foreground: 0 0% 100%;
 
-    /* Modern gradients with depth */
-    --gradient-primary: linear-gradient(135deg, hsl(155 42% 48%) 0%, hsl(155 48% 58%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(205 65% 58%) 0%, hsl(205 70% 68%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(15 78% 62%) 0%, hsl(15 82% 72%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(155 42% 48%) 0%, hsl(205 65% 58%) 50%, hsl(15 78% 62%) 100%);
-    --gradient-card: linear-gradient(to bottom right, hsl(0 0% 100%) 0%, hsl(30 20% 98%) 100%);
-    --gradient-auth-bg: linear-gradient(135deg, hsl(155 25% 96%) 0%, hsl(205 30% 97%) 50%, hsl(30 25% 96%) 100%);
+    /* Bold modern gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(195 100% 50%) 0%, hsl(270 95% 65%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(270 95% 65%) 0%, hsl(330 100% 60%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(330 100% 60%) 0%, hsl(15 100% 60%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(195 100% 50%) 0%, hsl(270 95% 65%) 50%, hsl(330 100% 60%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100% / 0.8) 0%, hsl(240 100% 99% / 0.9) 100%);
+    --gradient-auth-bg: linear-gradient(135deg, hsl(195 80% 95%) 0%, hsl(270 70% 96%) 50%, hsl(330 80% 96%) 100%);
     
-    /* Refined shadows for depth */
-    --shadow-sm: 0 1px 2px hsl(215 25% 20% / 0.05), 0 1px 3px hsl(215 25% 20% / 0.08);
-    --shadow-md: 0 4px 6px hsl(215 25% 20% / 0.07), 0 2px 4px hsl(215 25% 20% / 0.06);
-    --shadow-lg: 0 10px 15px hsl(215 25% 20% / 0.1), 0 4px 6px hsl(215 25% 20% / 0.08);
-    --shadow-glow: 0 0 32px hsl(155 42% 48% / 0.2);
-    --shadow-glow-secondary: 0 0 32px hsl(205 65% 58% / 0.2);
-    --shadow-auth-card: 0 20px 40px -15px hsl(155 42% 48% / 0.15), 0 8px 20px -8px hsl(215 25% 20% / 0.08);
+    /* Modern elevated shadows */
+    --shadow-sm: 0 2px 4px hsl(240 10% 15% / 0.06), 0 1px 2px hsl(240 10% 15% / 0.04);
+    --shadow-md: 0 8px 16px hsl(240 10% 15% / 0.08), 0 4px 8px hsl(240 10% 15% / 0.06);
+    --shadow-lg: 0 20px 40px hsl(240 10% 15% / 0.12), 0 8px 16px hsl(240 10% 15% / 0.08);
+    --shadow-glow: 0 0 40px hsl(195 100% 50% / 0.4), 0 0 20px hsl(195 100% 50% / 0.2);
+    --shadow-glow-secondary: 0 0 40px hsl(270 95% 65% / 0.4), 0 0 20px hsl(270 95% 65% / 0.2);
+    --shadow-auth-card: 0 30px 60px -15px hsl(195 100% 50% / 0.25), 0 12px 30px -10px hsl(270 95% 65% / 0.15);
     
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* Sidebar with warm tone */
+    /* Glassmorphism sidebar */
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 215 25% 20%;
-    --sidebar-primary: 155 42% 48%;
+    --sidebar-foreground: 240 10% 15%;
+    --sidebar-primary: 195 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 30 20% 96%;
-    --sidebar-accent-foreground: 155 42% 48%;
-    --sidebar-border: 30 12% 90%;
-    --sidebar-ring: 155 42% 48%;
+    --sidebar-accent: 240 100% 98%;
+    --sidebar-accent-foreground: 195 100% 50%;
+    --sidebar-border: 240 15% 94%;
+    --sidebar-ring: 195 100% 50%;
     
-    /* Navigation icons - harmonious color palette */
-    --nav-icon-1: 155 42% 48%;  /* Sage green */
-    --nav-icon-2: 205 65% 58%;  /* Sky blue */
-    --nav-icon-3: 15 78% 62%;   /* Coral */
-    --nav-icon-4: 150 55% 50%;  /* Fresh green */
-    --nav-icon-5: 280 55% 60%;  /* Soft purple */
-    --nav-icon-6: 38 85% 60%;   /* Amber */
-    --nav-icon-7: 195 70% 55%;  /* Teal */
-    --nav-icon-8: 25 75% 58%;   /* Orange */
-    --nav-icon-9: 170 50% 52%;  /* Mint */
-    --nav-icon-10: 320 60% 58%; /* Rose */
-    --nav-icon-11: 185 62% 55%; /* Aqua */
-    --nav-icon-12: 265 58% 62%; /* Lavender */
-    --nav-icon-13: 145 58% 52%; /* Emerald */
-    --nav-icon-14: 275 60% 65%; /* Violet */
-    --nav-icon-15: 120 55% 50%; /* Lime */
-    --nav-icon-16: 30 72% 60%;  /* Peach */
+    /* Navigation icons - vibrant modern palette */
+    --nav-icon-1: 195 100% 50%;  /* Electric cyan */
+    --nav-icon-2: 270 95% 65%;   /* Vibrant purple */
+    --nav-icon-3: 330 100% 60%;  /* Electric pink */
+    --nav-icon-4: 145 80% 50%;   /* Bright green */
+    --nav-icon-5: 35 100% 58%;   /* Vibrant orange */
+    --nav-icon-6: 180 95% 50%;   /* Bright teal */
+    --nav-icon-7: 290 90% 65%;   /* Neon purple */
+    --nav-icon-8: 15 100% 60%;   /* Hot coral */
+    --nav-icon-9: 165 85% 48%;   /* Emerald */
+    --nav-icon-10: 340 100% 62%; /* Magenta */
+    --nav-icon-11: 200 100% 55%; /* Sky cyan */
+    --nav-icon-12: 280 95% 68%;  /* Bright violet */
+    --nav-icon-13: 130 75% 52%;  /* Lime green */
+    --nav-icon-14: 310 100% 65%; /* Hot pink */
+    --nav-icon-15: 160 80% 48%;  /* Fresh mint */
+    --nav-icon-16: 25 100% 62%;  /* Bright orange */
   }
 
   .dark {
@@ -187,6 +187,25 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Glassmorphism utility classes */
+  .glass {
+    @apply backdrop-blur-xl bg-white/80 border border-white/20;
+  }
+  
+  .glass-dark {
+    @apply backdrop-blur-xl bg-black/40 border border-white/10;
+  }
+  
+  /* Modern card hover effects */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-hero bg-clip-text text-transparent;
+  }
 
   @keyframes ring-pulse {
     0% {
@@ -201,5 +220,18 @@ All colors MUST be HSL.
       r: calc(attr(r) + 20);
       opacity: 0;
     }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
   }
 }
