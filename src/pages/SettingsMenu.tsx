@@ -1,12 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight, Heart } from "lucide-react";
+import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight, Heart, Crown } from "lucide-react";
+import { useSubscription } from "@/hooks/useSubscription";
+import { Badge } from "@/components/ui/badge";
 
 const SettingsMenu = () => {
   const navigate = useNavigate();
+  const { tier } = useSubscription();
 
   const settingsItems = [
+    {
+      title: "Subscription",
+      description: `Current plan: ${tier.toUpperCase()} - Manage your subscription`,
+      icon: Crown,
+      iconBg: "bg-primary/20",
+      iconColor: "text-primary",
+      path: "/subscription",
+      badge: tier !== 'free' ? tier : undefined,
+    },
     {
       title: "Privacy & Security",
       description: "Control your privacy settings and security options",
@@ -85,8 +97,15 @@ const SettingsMenu = () => {
                 <div className={`p-2 ${item.iconBg} rounded-lg`}>
                   <item.icon className={`w-5 h-5 ${item.iconColor}`} />
                 </div>
-                <div>
-                  <h3 className="font-semibold">{item.title}</h3>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-semibold">{item.title}</h3>
+                    {item.badge && (
+                      <Badge variant="secondary" className="text-xs uppercase">
+                        {item.badge}
+                      </Badge>
+                    )}
+                  </div>
                   <p className="text-sm text-muted-foreground">{item.description}</p>
                 </div>
               </div>

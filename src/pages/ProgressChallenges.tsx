@@ -12,6 +12,8 @@ import { Trophy, Plus, Users, Calendar, Target, Award } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
+import { useSubscription } from "@/hooks/useSubscription";
+import { UpgradePrompt } from "@/components/UpgradePrompt";
 
 interface Challenge {
   id: string;
@@ -34,6 +36,7 @@ const ProgressChallenges = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { hasFeature } = useSubscription();
 
   const [formData, setFormData] = useState({
     title: "",
@@ -169,13 +172,25 @@ const ProgressChallenges = () => {
             <h1 className="text-3xl font-bold">Progress Challenges</h1>
             <p className="text-muted-foreground">Create and join custom fitness challenges with milestones</p>
           </div>
-          <Button onClick={() => setShowCreateForm(!showCreateForm)}>
+          <Button 
+            onClick={() => {
+              if (!hasFeature('custom_challenges')) {
+                navigate('/subscription');
+                return;
+              }
+              setShowCreateForm(!showCreateForm);
+            }}
+          >
             <Plus className="mr-2 h-4 w-4" />
             {showCreateForm ? "Cancel" : "Create Challenge"}
           </Button>
         </div>
 
-        {showCreateForm && (
+        {showCreateForm && !hasFeature('custom_challenges') && (
+          <UpgradePrompt feature="Custom Challenges" />
+        )}
+
+        {showCreateForm && hasFeature('custom_challenges') && (
           <Card>
             <CardHeader>
               <CardTitle>Create New Challenge</CardTitle>
