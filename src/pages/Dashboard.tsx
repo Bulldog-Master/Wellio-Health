@@ -90,7 +90,7 @@ const Dashboard = () => {
   return (
     <div className="space-y-6 pb-20 md:pb-0">
       {/* Modern 3D Hero Section */}
-      <div className="relative overflow-hidden rounded-2xl h-64 md:h-80">
+      <div className="relative overflow-hidden rounded-2xl h-80 md:h-96">{" "}
         <img 
           src={hero3d} 
           alt="3D Abstract Background" 
