@@ -859,20 +859,16 @@ const Workout = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto pb-20 md:pb-0 relative">
-      {/* Hero Section with Background Image */}
-      <div className="relative -mx-4 sm:-mx-6 lg:-mx-8 mb-8 rounded-b-3xl overflow-hidden">
-        <div 
-          className="absolute inset-0 -z-10"
-          style={{
-            backgroundImage: `url(${workoutHero})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
-          }}
+    <div className="space-y-6 pb-20 md:pb-0">
+      {/* Workout Hero Card */}
+      <div className="relative overflow-hidden rounded-2xl h-64 md:h-80">
+        <img 
+          src={workoutHero} 
+          alt="Workout Background" 
+          className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
-        <div className="relative px-6 py-16 sm:py-20 text-white">
+        <div className="absolute inset-0 bg-gradient-to-br from-green-600/80 via-emerald-600/70 to-teal-600/60" />
+        <div className="relative h-full flex flex-col justify-center items-start p-6 md:p-10 text-white">
           <Button
             variant="ghost"
             size="icon"
@@ -881,42 +877,41 @@ const Workout = () => {
           >
             <ArrowLeft className="w-5 h-5" />
           </Button>
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="p-4 bg-white/10 backdrop-blur-sm rounded-2xl">
-                <Dumbbell className="w-8 h-8 text-white" />
-              </div>
-              <div>
-                <h1 className="text-4xl sm:text-5xl font-bold mb-2">Workout Log</h1>
-                <p className="text-lg text-white/90">Track your exercises and build your routine library</p>
-              </div>
-            </div>
+          <div className="flex items-center gap-2 mb-4">
+            <Dumbbell className="w-8 h-8 text-white drop-shadow-glow" />
+            <span className="text-sm font-semibold uppercase tracking-wider bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+              Your Training
+            </span>
+          </div>
+          <h1 className="text-3xl md:text-5xl font-bold mb-3 drop-shadow-lg">
+            Workout Log
+          </h1>
+          <p className="text-lg md:text-xl text-white/95 mb-6 max-w-2xl drop-shadow-md">
+            Track your exercises and build your routine library
+          </p>
+          <div className="flex gap-3 flex-wrap">
+            <Button 
+              size="lg" 
+              onClick={() => setShowLibrary(true)}
+              className="bg-white text-green-600 hover:bg-white/90 shadow-lg"
+            >
+              <Library className="w-4 h-4 mr-2" />
+              Personal Library
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline"
+              onClick={() => setShowSampleLibrary(true)}
+              className="border-2 border-white text-white hover:bg-white/20 backdrop-blur-sm"
+            >
+              <BookOpen className="w-4 h-4 mr-2" />
+              Sample Library
+            </Button>
           </div>
         </div>
       </div>
 
-      {/* Subtle gym background for rest of page */}
-      <div 
-        className="fixed inset-0 -z-10 pointer-events-none opacity-[0.08] dark:opacity-[0.05]"
-        style={{
-          backgroundImage: `url(${gymBackground})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      />
-      <div className="fixed inset-0 -z-10 bg-gradient-to-br from-primary/5 via-background to-secondary/5 pointer-events-none" />
-      
-      <div className="max-w-4xl mx-auto px-4">
-      <div className="flex gap-2 flex-wrap justify-end mb-6">
-        <Button variant="outline" className="gap-2" onClick={() => setShowLibrary(true)}>
-          <Library className="w-4 h-4" />
-          Personal Library
-        </Button>
-        <Button variant="outline" className="gap-2" onClick={() => setShowSampleLibrary(true)}>
-          <BookOpen className="w-4 h-4" />
-          Sample Library
-        </Button>
+      <div className="flex gap-2 flex-wrap justify-end">
         <Button variant="outline" className="gap-2" onClick={() => setShowAppsLibrary(true)}>
           <Smartphone className="w-4 h-4" />
           Apps
@@ -2167,7 +2162,6 @@ const Workout = () => {
         </DialogContent>
       </Dialog>
 
-    </div>
     </div>
   );
 };
