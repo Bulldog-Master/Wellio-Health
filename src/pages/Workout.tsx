@@ -127,6 +127,7 @@ const Workout = () => {
     const day = String(now.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   });
+  const [viewFilter, setViewFilter] = useState<'today' | 'week' | 'month' | 'all'>('today');
   const handleBrowseApps = () => {
     const userAgent = navigator.userAgent || navigator.vendor;
     const isIOS = /iPad|iPhone|iPod/.test(userAgent);
@@ -250,22 +251,37 @@ const Workout = () => {
     fetchWorkoutRoutines();
     fetchSampleRoutines();
     fetchSavedApps();
-  }, []);
+  }, [viewFilter]);
 
   const fetchActivityLogs = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-
-      const { data, error } = await supabase
+      let query = supabase
         .from('activity_logs')
         .select('*')
-        .eq('user_id', user.id)
-        .gte('logged_at', today.toISOString())
-        .order('logged_at', { ascending: false });
+        .eq('user_id', user.id);
+
+      // Apply date filter
+      if (viewFilter === 'today') {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        query = query.gte('logged_at', today.toISOString());
+      } else if (viewFilter === 'week') {
+        const weekAgo = new Date();
+        weekAgo.setDate(weekAgo.getDate() - 7);
+        weekAgo.setHours(0, 0, 0, 0);
+        query = query.gte('logged_at', weekAgo.toISOString());
+      } else if (viewFilter === 'month') {
+        const monthAgo = new Date();
+        monthAgo.setMonth(monthAgo.getMonth() - 1);
+        monthAgo.setHours(0, 0, 0, 0);
+        query = query.gte('logged_at', monthAgo.toISOString());
+      }
+      // 'all' filter doesn't add any date restriction
+
+      const { data, error } = await query.order('logged_at', { ascending: false });
 
       if (error) throw error;
       setActivityLogs(data || []);
@@ -2007,17 +2023,48 @@ const Workout = () => {
         </div>
       </Card>
 
-      <Card className="p-6 hover:shadow-xl transition-all duration-300">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 bg-primary/10 rounded-xl">
-            <ListOrdered className="w-5 h-5 text-primary" />
+      <Card className="p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-semibold">Workout History</h3>
+          <div className="flex gap-2">
+            <Button
+              variant={viewFilter === 'today' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setViewFilter('today')}
+            >
+              Today
+            </Button>
+            <Button
+              variant={viewFilter === 'week' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setViewFilter('week')}
+            >
+              Week
+            </Button>
+            <Button
+              variant={viewFilter === 'month' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setViewFilter('month')}
+            >
+              Month
+            </Button>
+            <Button
+              variant={viewFilter === 'all' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setViewFilter('all')}
+            >
+              All
+            </Button>
           </div>
-          <h3 className="text-lg font-semibold">Today's Workouts</h3>
         </div>
         <div className="space-y-3">
           {isLoading ? (
             <p className="text-center text-muted-foreground py-8">Loading...</p>
-          ) : activityLogs.length > 0 ? (
+          ) : activityLogs.length === 0 ? (
+            <p className="text-center text-muted-foreground py-8">
+              No workouts logged {viewFilter === 'today' ? 'today' : `in the selected period`}. Start by adding one above!
+            </p>
+          ) : (
             activityLogs.map((log) => (
               <div key={log.id} className="p-4 bg-secondary rounded-lg">
                 <div className="flex items-start justify-between mb-2">
@@ -2095,10 +2142,6 @@ const Workout = () => {
                 </div>
               </div>
             ))
-          ) : (
-            <p className="text-center text-muted-foreground py-8">
-              No workouts logged today. Start by adding one above!
-            </p>
           )}
         </div>
       </Card>
