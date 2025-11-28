@@ -667,41 +667,39 @@ const Weight = () => {
                 }}
                 formatter={(value: number) => formatWeight(value, preferredUnit)}
               />
-              <Legend />
+              <Legend 
+                wrapperStyle={{
+                  paddingTop: '20px'
+                }}
+              />
               
               {/* Target Weight Reference Line */}
               {targetWeight && (
-                <>
-                  <ReferenceLine 
-                    y={targetWeight} 
-                    stroke="hsl(var(--destructive))" 
-                    strokeDasharray="5 5"
-                    strokeWidth={2}
-                  />
-                  <Line 
-                    type="monotone"
-                    dataKey="target"
-                    stroke="hsl(var(--destructive))"
-                    strokeDasharray="5 5"
-                    strokeWidth={2}
-                    name="Target Goal"
-                    dot={false}
-                    legendType="line"
-                  />
-                </>
+                <ReferenceLine 
+                  y={targetWeight} 
+                  stroke="hsl(0, 85%, 60%)" 
+                  strokeDasharray="5 5"
+                  strokeWidth={2}
+                  label={{ 
+                    value: `Target: ${formatWeight(targetWeight, preferredUnit)}`, 
+                    position: 'right',
+                    fill: 'hsl(0, 85%, 60%)',
+                    fontSize: 12
+                  }}
+                />
               )}
               
               {chartView === "daily" ? (
                 <>
                   <Bar 
                     dataKey="morning" 
-                    fill="hsl(var(--primary))" 
+                    fill="hsl(195, 100%, 50%)" 
                     name="Morning"
                     radius={[4, 4, 0, 0]}
                   />
                   <Bar 
                     dataKey="evening" 
-                    fill="hsl(var(--secondary))" 
+                    fill="hsl(270, 95%, 65%)" 
                     name="Evening"
                     radius={[4, 4, 0, 0]}
                   />
