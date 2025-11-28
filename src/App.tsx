@@ -45,9 +45,7 @@ const AppContent = () => {
       <SkipToContent />
       <KeyboardShortcutsHelp />
       <Suspense fallback={<PageLoader />}>
-        <Routes>
-          <AppRoutes />
-        </Routes>
+        <AppRoutes />
       </Suspense>
     </>
   );
