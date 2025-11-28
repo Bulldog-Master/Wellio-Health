@@ -1587,21 +1587,54 @@ const Workout = () => {
         <div className="space-y-4">
           <div>
             <Label htmlFor="exercise">Activity Type</Label>
-            <Select value={exercise} onValueChange={setExercise}>
-              <SelectTrigger className="mt-1.5">
-                <SelectValue placeholder="Select activity" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Running">Running</SelectItem>
-                <SelectItem value="Cycling">Cycling</SelectItem>
-                <SelectItem value="Swimming">Swimming</SelectItem>
-                <SelectItem value="Walking">Walking</SelectItem>
-                <SelectItem value="Weightlifting">Weightlifting</SelectItem>
-                <SelectItem value="Yoga">Yoga</SelectItem>
-                <SelectItem value="HIIT">HIIT</SelectItem>
-                <SelectItem value="Other">Other</SelectItem>
-              </SelectContent>
-            </Select>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  role="combobox"
+                  className={cn(
+                    "w-full justify-between mt-1.5",
+                    !exercise && "text-muted-foreground"
+                  )}
+                >
+                  {exercise || "Select or type activity"}
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-full p-0">
+                <Command>
+                  <CommandInput 
+                    placeholder="Search or type custom activity..." 
+                    value={exercise}
+                    onValueChange={setExercise}
+                  />
+                  <CommandList>
+                    <CommandEmpty>
+                      Press Enter to add "{exercise}" as custom activity
+                    </CommandEmpty>
+                    <CommandGroup>
+                      {["Running", "Cycling", "Swimming", "Walking", "Weightlifting", "Yoga", "HIIT", "Other"].map((activity) => (
+                        <CommandItem
+                          key={activity}
+                          value={activity}
+                          onSelect={() => {
+                            setExercise(activity);
+                          }}
+                        >
+                          <Check
+                            className={cn(
+                              "mr-2 h-4 w-4",
+                              exercise === activity ? "opacity-100" : "opacity-0"
+                            )}
+                          />
+                          {activity}
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </CommandList>
+                </Command>
+              </PopoverContent>
+            </Popover>
           </div>
 
           <div>
