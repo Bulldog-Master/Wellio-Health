@@ -883,13 +883,14 @@ const Workout = () => {
           <Smartphone className="w-4 h-4" />
           Apps
         </Button>
-        <Dialog open={showRoutineDialog} onOpenChange={setShowRoutineDialog}>
-          <DialogTrigger asChild>
-            <Button variant="outline" className="gap-2">
-              <Plus className="w-4 h-4" />
-              Create Routine
-            </Button>
-          </DialogTrigger>
+        <Button variant="outline" className="gap-2" onClick={() => setShowRoutineDialog(true)}>
+          <Plus className="w-4 h-4" />
+          Create Routine
+        </Button>
+      </div>
+
+      {/* Create Routine Dialog */}
+      <Dialog open={showRoutineDialog} onOpenChange={setShowRoutineDialog}>
           <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-2 border-blue-200 dark:border-blue-800 shadow-2xl">
             <DialogHeader>
               <DialogTitle className="text-2xl text-blue-900 dark:text-blue-100">{editingRoutineId ? "Edit Routine" : "Create New Routine"}</DialogTitle>
@@ -1098,9 +1099,10 @@ const Workout = () => {
               </div>
             </div>
           </DialogContent>
-        </Dialog>
+      </Dialog>
 
-        <Dialog open={showLibrary} onOpenChange={setShowLibrary}>
+      {/* Personal Library Dialog */}
+      <Dialog open={showLibrary} onOpenChange={setShowLibrary}>
           <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30 border-2 border-purple-200 dark:border-purple-800 shadow-2xl">
             <DialogHeader>
               <DialogTitle className="text-2xl text-purple-900 dark:text-purple-100">Personal Library</DialogTitle>
@@ -1203,9 +1205,10 @@ const Workout = () => {
               )}
             </div>
           </DialogContent>
-        </Dialog>
+      </Dialog>
 
-        <Dialog open={showSampleLibrary} onOpenChange={setShowSampleLibrary}>
+      {/* Sample Library Dialog */}
+      <Dialog open={showSampleLibrary} onOpenChange={setShowSampleLibrary}>
           <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/30 border-2 border-orange-200 dark:border-orange-800 shadow-2xl">
             <DialogHeader>
               <DialogTitle className="text-2xl text-orange-900 dark:text-orange-100 flex items-center justify-between">
@@ -1336,9 +1339,10 @@ const Workout = () => {
               )}
             </div>
           </DialogContent>
-        </Dialog>
+      </Dialog>
 
-        <Dialog open={showAddSample} onOpenChange={setShowAddSample}>
+      {/* Add Sample Dialog */}
+      <Dialog open={showAddSample} onOpenChange={setShowAddSample}>
           <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/30 border-2 border-teal-200 dark:border-teal-800 shadow-2xl">
             <DialogHeader>
               <DialogTitle className="text-2xl text-teal-900 dark:text-teal-100">Upload from Social Media</DialogTitle>
@@ -1539,9 +1543,7 @@ const Workout = () => {
               </div>
             </div>
           </DialogContent>
-        </Dialog>
-        </div>
-      </div>
+      </Dialog>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card className="p-6 hover:shadow-xl transition-all duration-300">
