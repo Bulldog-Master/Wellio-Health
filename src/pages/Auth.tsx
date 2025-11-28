@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Activity, Mail, Lock, User as UserIcon, Sparkles, Fingerprint, Eye, EyeOff, Shield, Key } from "lucide-react";
+import authHero from "@/assets/auth-hero.jpg";
 import { z } from "zod";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -560,149 +561,159 @@ const Auth = () => {
 
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden" style={{ background: 'var(--gradient-auth-bg)' }}>
-      {/* Animated background particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute w-96 h-96 -top-48 -left-48 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute w-96 h-96 -bottom-48 -right-48 bg-secondary/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLW9wYWNpdHk9IjAuMDUiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-40" />
-      </div>
-      
-      <Card className="w-full max-w-md p-8 backdrop-blur-xl bg-card/95 relative z-10 border-2" style={{ boxShadow: 'var(--shadow-auth-card)' }}>
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-4 relative group">
-            <div className="absolute inset-0 rounded-full bg-gradient-primary opacity-100 group-hover:opacity-80 transition-opacity" style={{ boxShadow: 'var(--shadow-glow)' }} />
-            <Activity className="w-10 h-10 text-white relative z-10" />
-          </div>
-          <h1 className="text-4xl font-bold mb-2" style={{ background: 'var(--gradient-hero)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-            Wellio
-          </h1>
-          <p className="text-sm font-medium text-muted-foreground mb-4">
-            Your Complete Fitness & Wellness Platform
-          </p>
-          <p className="text-base text-foreground/80">
-            {requires2FA 
-              ? "🔐 Enter your authentication code"
-              : isLogin 
-                ? "👋 Welcome back! Continue your journey" 
-                : "✨ Join trainers, creators, and fitness enthusiasts"
-            }
+    <div className="min-h-screen grid lg:grid-cols-2 overflow-hidden">
+      {/* Left side - Hero Image */}
+      <div className="hidden lg:block relative">
+        <img 
+          src={authHero} 
+          alt="Fitness inspiration" 
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 p-12 text-white">
+          <h2 className="text-5xl font-bold mb-4 leading-tight">
+            Transform Your<br />Fitness Journey
+          </h2>
+          <p className="text-lg text-white/90 max-w-md">
+            Join thousands achieving their goals with personalized training, nutrition tracking, and community support.
           </p>
         </div>
+      </div>
 
-        {requires2FA ? (
-          <form onSubmit={handleVerify2FA} className="space-y-4">
-            <div className="text-center mb-4">
-              {useBackupCode ? <Key className="w-12 h-12 mx-auto mb-2 text-primary" /> : <Shield className="w-12 h-12 mx-auto mb-2 text-primary" />}
-              <h3 className="text-lg font-semibold">Two-Factor Authentication</h3>
-              <p className="text-sm text-muted-foreground mt-1">
-                {useBackupCode 
-                  ? "Enter one of your backup recovery codes"
-                  : "Enter the 6-digit code from your authenticator app"
-                }
-              </p>
+      {/* Right side - Auth Form */}
+      <div className="flex items-center justify-center p-8 bg-background">
+        <div className="w-full max-w-md">
+          <div className="mb-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center">
+                <Activity className="w-6 h-6 text-primary-foreground" />
+              </div>
+              <h1 className="text-2xl font-bold text-foreground">Wellio</h1>
             </div>
+            <h2 className="text-3xl font-bold text-foreground mb-2">
+              {requires2FA 
+                ? "Verify Your Identity"
+                : isLogin 
+                  ? "Welcome back" 
+                  : "Get started today"
+              }
+            </h2>
+            <p className="text-muted-foreground">
+              {requires2FA 
+                ? "Enter your authentication code to continue"
+                : isLogin 
+                  ? "Sign in to continue your fitness journey" 
+                  : "Create your account and start achieving your goals"
+              }
+            </p>
+          </div>
 
-            {useBackupCode ? (
-              <div className="space-y-2">
-                <Label htmlFor="backup">Backup Code</Label>
-                <Input
-                  id="backup"
-                  type="text"
-                  placeholder="XXXX-XXXX-XXXX"
-                  value={backupCode}
-                  onChange={(e) => setBackupCode(e.target.value.toUpperCase())}
-                  className="text-center tracking-wider"
-                  required
-                />
+          {requires2FA ? (
+            <form onSubmit={handleVerify2FA} className="space-y-6">
+              <div className="flex items-center justify-center mb-6">
+                {useBackupCode ? <Key className="w-10 h-10 text-primary" /> : <Shield className="w-10 h-10 text-primary" />}
               </div>
-            ) : (
-              <div className="space-y-2">
-                <Label htmlFor="totp">Authentication Code</Label>
-                <Input
-                  id="totp"
-                  type="text"
-                  placeholder="000000"
-                  value={totpCode}
-                  onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                  className="text-center text-2xl tracking-widest"
-                  maxLength={6}
-                  required
-                />
-              </div>
-            )}
 
-            <div className="flex items-center space-x-2">
-              <Checkbox 
-                id="remember" 
-                checked={rememberDevice}
-                onCheckedChange={(checked) => setRememberDevice(checked as boolean)}
-              />
-              <Label 
-                htmlFor="remember" 
-                className="text-sm font-normal cursor-pointer"
+              {useBackupCode ? (
+                <div className="space-y-2">
+                  <Label htmlFor="backup">Backup Code</Label>
+                  <Input
+                    id="backup"
+                    type="text"
+                    placeholder="XXXX-XXXX-XXXX"
+                    value={backupCode}
+                    onChange={(e) => setBackupCode(e.target.value.toUpperCase())}
+                    className="text-center tracking-wider"
+                    required
+                  />
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <Label htmlFor="totp">Authentication Code</Label>
+                  <Input
+                    id="totp"
+                    type="text"
+                    placeholder="000000"
+                    value={totpCode}
+                    onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    className="text-center text-2xl tracking-widest"
+                    maxLength={6}
+                    required
+                  />
+                </div>
+              )}
+
+              <div className="flex items-center space-x-2">
+                <Checkbox 
+                  id="remember" 
+                  checked={rememberDevice}
+                  onCheckedChange={(checked) => setRememberDevice(checked as boolean)}
+                />
+                <Label 
+                  htmlFor="remember" 
+                  className="text-sm font-normal cursor-pointer"
+                >
+                  Remember this device for 30 days
+                </Label>
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                disabled={loading || (!useBackupCode && totpCode.length !== 6) || (useBackupCode && !backupCode.trim())}
               >
-                Remember this device for 30 days
-              </Label>
-            </div>
+                {loading ? "Verifying..." : "Verify and Continue"}
+              </Button>
 
-            <Button
-              type="submit"
-              className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
-              disabled={loading || (!useBackupCode && totpCode.length !== 6) || (useBackupCode && !backupCode.trim())}
-            >
-              {loading ? "Verifying..." : "Verify Code"}
-            </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                className="w-full"
+                onClick={() => {
+                  setUseBackupCode(!useBackupCode);
+                  setTotpCode("");
+                  setBackupCode("");
+                }}
+              >
+                {useBackupCode ? "Use Authenticator App" : "Use Backup Code"}
+              </Button>
 
-            <Button
-              type="button"
-              variant="ghost"
-              className="w-full"
-              onClick={() => {
-                setUseBackupCode(!useBackupCode);
-                setTotpCode("");
-                setBackupCode("");
-              }}
-            >
-              {useBackupCode ? "Use Authenticator App" : "Use Backup Code"}
-            </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                className="w-full"
+                onClick={() => {
+                  setRequires2FA(false);
+                  setTotpCode("");
+                  setBackupCode("");
+                  setUseBackupCode(false);
+                  setRememberDevice(false);
+                  setPendingUserId(null);
+                  setPassword("");
+                }}
+              >
+                Cancel
+              </Button>
+            </form>
+          ) : (
+            <Tabs value={authMethod} onValueChange={(v) => setAuthMethod(v as "password" | "magiclink" | "passkey")} className="w-full">
+              <TabsList className="grid w-full grid-cols-3 mb-6 bg-muted">
+                <TabsTrigger value="password" className="data-[state=active]:bg-background data-[state=active]:text-foreground">
+                  <Lock className="h-4 w-4 mr-2" />
+                  Password
+                </TabsTrigger>
+                <TabsTrigger value="magiclink" className="gap-2 data-[state=active]:bg-background data-[state=active]:text-foreground">
+                  <Sparkles className="h-4 w-4" />
+                  Magic
+                </TabsTrigger>
+                <TabsTrigger value="passkey" className="gap-2 data-[state=active]:bg-background data-[state=active]:text-foreground" disabled={!passkeySupported}>
+                  <Fingerprint className="h-4 w-4" />
+                  Passkey
+                </TabsTrigger>
+              </TabsList>
 
-            <Button
-              type="button"
-              variant="ghost"
-              className="w-full"
-              onClick={() => {
-                setRequires2FA(false);
-                setTotpCode("");
-                setBackupCode("");
-                setUseBackupCode(false);
-                setRememberDevice(false);
-                setPendingUserId(null);
-                setPassword("");
-              }}
-            >
-              Cancel
-            </Button>
-          </form>
-        ) : (
-          <Tabs value={authMethod} onValueChange={(v) => setAuthMethod(v as "password" | "magiclink" | "passkey")} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-6 p-1 bg-muted/50 backdrop-blur-sm">
-              <TabsTrigger value="password" className="data-[state=active]:bg-gradient-primary data-[state=active]:text-white data-[state=active]:shadow-sm transition-all">
-                <Lock className="h-4 w-4 mr-2" />
-                Password
-              </TabsTrigger>
-              <TabsTrigger value="magiclink" className="gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-white data-[state=active]:shadow-sm transition-all">
-                <Sparkles className="h-4 w-4" />
-                Magic
-              </TabsTrigger>
-              <TabsTrigger value="passkey" className="gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-white data-[state=active]:shadow-sm transition-all" disabled={!passkeySupported}>
-                <Fingerprint className="h-4 w-4" />
-                Passkey
-              </TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="password">
-              <form onSubmit={handlePasswordAuth} className="space-y-4">
+              <TabsContent value="password">
+                <form onSubmit={handlePasswordAuth} className="space-y-4">
                 {!isLogin && (
                   <div className="space-y-2">
                     <Label htmlFor="name">Name</Label>
@@ -818,16 +829,10 @@ const Auth = () => {
 
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-primary hover:opacity-90 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
-                  style={{ boxShadow: 'var(--shadow-glow)' }}
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                   disabled={loading}
                 >
-                  {loading ? (
-                    <span className="flex items-center gap-2">
-                      <span className="animate-spin">⏳</span>
-                      Loading...
-                    </span>
-                  ) : isLogin ? "Sign In" : "Create Account"}
+                  {loading ? "Loading..." : isLogin ? "Sign In" : "Create Account"}
                 </Button>
               </form>
             </TabsContent>
@@ -852,7 +857,7 @@ const Auth = () => {
 
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                   disabled={loading}
                 >
                   {loading ? "Sending..." : "Send Magic Link"}
@@ -895,7 +900,7 @@ const Auth = () => {
                     </p>
                     <Button
                       type="submit"
-                      className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
+                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                       disabled={loading || !passkeySupported}
                     >
                       {loading ? "Processing..." : (
@@ -942,7 +947,7 @@ const Auth = () => {
 
                     <Button
                       type="submit"
-                      className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
+                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                       disabled={loading || !passkeySupported}
                     >
                       {loading ? "Processing..." : (
@@ -959,53 +964,30 @@ const Auth = () => {
                   </>
                 )}
               </form>
-            </TabsContent>
+              </TabsContent>
+            </Tabs>
+          )}
 
-          </Tabs>
-        )}
-
-        {!requires2FA && authMethod === "password" && (
           <div className="mt-6 text-center">
-            <button
-              type="button"
-              onClick={() => {
-                setIsLogin(!isLogin);
-                setPassword("");
-                setConfirmPassword("");
-              }}
-              className="text-sm text-primary hover:underline"
-            >
-              {isLogin
-                ? "Don't have an account? Sign up"
-                : "Already have an account? Sign in"}
-            </button>
+            {!requires2FA && (
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  setIsLogin(!isLogin);
+                  setPassword("");
+                  setConfirmPassword("");
+                }}
+                className="text-sm"
+              >
+                {isLogin ? "Don't have an account? " : "Already have an account? "}
+                <span className="font-semibold text-primary ml-1">
+                  {isLogin ? "Sign up" : "Sign in"}
+                </span>
+              </Button>
+            )}
           </div>
-        )}
-
-        {!requires2FA && authMethod === "passkey" && (
-          <div className="mt-6 text-center">
-            <button
-              type="button"
-              onClick={() => {
-                setIsLogin(!isLogin);
-                setPassword("");
-                setConfirmPassword("");
-              }}
-              className="text-sm text-primary hover:underline"
-            >
-              {isLogin
-                ? "Don't have an account? Register passkey"
-                : "Already have an account? Sign in"}
-            </button>
-          </div>
-        )}
-
-        <div className="mt-6 pt-6 border-t border-border">
-          <p className="text-xs text-center text-muted-foreground">
-            By continuing, you agree to our Terms of Service and Privacy Policy
-          </p>
         </div>
-      </Card>
+      </div>
     </div>
   );
 };
