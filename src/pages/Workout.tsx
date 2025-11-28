@@ -923,7 +923,7 @@ const Workout = () => {
       </div>
 
       {/* Create Routine Dialog */}
-      <Dialog open={showRoutineDialog} onOpenChange={setShowRoutineDialog}>
+      <Dialog open={showRoutineDialog} onOpenChange={setShowRoutineDialog} modal={false}>
           <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-2 border-blue-200 dark:border-blue-800 shadow-2xl">
             <DialogHeader>
               <DialogTitle className="text-2xl text-blue-900 dark:text-blue-100">{editingRoutineId ? "Edit Routine" : "Create New Routine"}</DialogTitle>
@@ -1149,7 +1149,7 @@ const Workout = () => {
       </Dialog>
 
       {/* Personal Library Dialog */}
-      <Dialog open={showLibrary} onOpenChange={setShowLibrary}>
+      <Dialog open={showLibrary} onOpenChange={setShowLibrary} modal={false}>
           <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30 border-2 border-purple-200 dark:border-purple-800 shadow-2xl">
             <DialogHeader>
               <DialogTitle className="text-2xl text-purple-900 dark:text-purple-100">Personal Library</DialogTitle>
@@ -1279,7 +1279,7 @@ const Workout = () => {
       </Dialog>
 
       {/* Sample Library Dialog */}
-      <Dialog open={showSampleLibrary} onOpenChange={setShowSampleLibrary}>
+      <Dialog open={showSampleLibrary} onOpenChange={setShowSampleLibrary} modal={false}>
           <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/30 border-2 border-orange-200 dark:border-orange-800 shadow-2xl">
             <DialogHeader>
               <DialogTitle className="text-2xl text-orange-900 dark:text-orange-100 flex items-center justify-between">
@@ -1438,7 +1438,7 @@ const Workout = () => {
       </Dialog>
 
       {/* Add Sample Dialog */}
-      <Dialog open={showAddSample} onOpenChange={setShowAddSample}>
+      <Dialog open={showAddSample} onOpenChange={setShowAddSample} modal={false}>
           <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-950/30 dark:to-cyan-950/30 border-2 border-teal-200 dark:border-teal-800 shadow-2xl">
             <DialogHeader>
               <DialogTitle className="text-2xl text-teal-900 dark:text-teal-100">Upload from Social Media</DialogTitle>
@@ -1907,7 +1907,7 @@ const Workout = () => {
       </Card>
 
       {/* Apps Library Dialog */}
-      <Dialog open={showAppsLibrary} onOpenChange={setShowAppsLibrary}>
+      <Dialog open={showAppsLibrary} onOpenChange={setShowAppsLibrary} modal={false}>
         <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30 border-2 border-emerald-200 dark:border-emerald-800 shadow-2xl">
           <DialogHeader>
             <DialogTitle className="text-2xl text-emerald-900 dark:text-emerald-100 flex items-center justify-between">
@@ -1988,7 +1988,7 @@ const Workout = () => {
       </Dialog>
 
       {/* Add App Dialog */}
-      <Dialog open={showAddApp} onOpenChange={setShowAddApp}>
+      <Dialog open={showAddApp} onOpenChange={setShowAddApp} modal={false}>
         <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-lime-50 to-green-50 dark:from-lime-950/30 dark:to-green-950/30 border-2 border-lime-200 dark:border-lime-800 shadow-2xl">
           <DialogHeader>
             <DialogTitle className="text-2xl text-lime-900 dark:text-lime-100">Add Fitness App</DialogTitle>
