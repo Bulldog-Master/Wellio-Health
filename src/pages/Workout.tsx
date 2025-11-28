@@ -1830,7 +1830,11 @@ const Workout = () => {
               id="workout-date"
               type="date"
               value={format(workoutDate, "yyyy-MM-dd")}
-              onChange={(e) => setWorkoutDate(new Date(e.target.value))}
+              onChange={(e) => {
+                // Parse date in local timezone to avoid day-shifting
+                const [year, month, day] = e.target.value.split('-').map(Number);
+                setWorkoutDate(new Date(year, month - 1, day));
+              }}
               className="w-full mt-1.5"
             />
           </div>
