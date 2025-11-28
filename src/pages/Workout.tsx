@@ -1213,6 +1213,19 @@ const Workout = () => {
                         </AccordionTrigger>
                         <div className="flex gap-1 ml-2">
                           <Button
+                            variant="default"
+                            size="sm"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleLoadRoutine(routine);
+                              setShowLibrary(false);
+                            }}
+                            className="bg-primary hover:bg-primary/90"
+                          >
+                            <Check className="w-4 h-4 mr-1" />
+                            Use
+                          </Button>
+                          <Button
                             variant="ghost"
                             size="icon"
                             onClick={(e) => {
@@ -1379,6 +1392,19 @@ const Workout = () => {
                           </div>
                         </AccordionTrigger>
                         <div className="flex gap-1 ml-2">
+                          <Button
+                            variant="default"
+                            size="sm"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleLoadRoutine({ ...routine, id: routine.id });
+                              setShowSampleLibrary(false);
+                            }}
+                            className="bg-primary hover:bg-primary/90"
+                          >
+                            <Check className="w-4 h-4 mr-1" />
+                            Use
+                          </Button>
                           <Button
                             variant="ghost"
                             size="icon"
