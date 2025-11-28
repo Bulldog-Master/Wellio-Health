@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useSubscription } from "@/hooks/useSubscription";
 import { UpgradePrompt } from "@/components/UpgradePrompt";
-import hero3d from "@/assets/hero-3d.jpg";
+import hero3d from "@/assets/hero-diverse.jpg";
 
 const Dashboard = () => {
   const navigate = useNavigate();
