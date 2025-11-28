@@ -8,8 +8,11 @@ import { ThemeProvider } from "next-themes";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
 import { useAppKeyboardShortcuts } from "@/hooks/useKeyboardNavigation";
 import { useOfflineStatus } from "@/hooks/useOfflineStatus";
+import { useBackgroundSync } from "@/hooks/useBackgroundSync";
 import { SkipToContent } from "@/components/SkipToContent";
 import { KeyboardShortcutsHelp } from "@/components/KeyboardShortcutsHelp";
+import { InstallPrompt } from "@/components/InstallPrompt";
+import { NetworkStatus } from "@/components/NetworkStatus";
 import { AppRoutes } from "@/routes";
 
 // Loading fallback component
@@ -39,11 +42,14 @@ const AppContent = () => {
   usePushNotifications();
   useAppKeyboardShortcuts();
   useOfflineStatus();
+  useBackgroundSync();
   
   return (
     <>
       <SkipToContent />
       <KeyboardShortcutsHelp />
+      <InstallPrompt />
+      <NetworkStatus />
       <Suspense fallback={<PageLoader />}>
         <AppRoutes />
       </Suspense>
