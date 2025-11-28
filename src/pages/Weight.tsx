@@ -457,14 +457,14 @@ const Weight = () => {
         <ArrowLeft className="w-4 h-4" />
         Back to Dashboard
       </Button>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-3">
           <div className="p-3 bg-primary/10 rounded-xl">
             <Scale className="w-6 h-6 text-primary" />
           </div>
           <div>
             <h1 className="text-3xl font-bold">Weight Tracking</h1>
-            <p className="text-muted-foreground">Monitor your daily weight changes</p>
+            <p className="text-muted-foreground mt-1">Monitor your daily weight changes</p>
           </div>
         </div>
         
@@ -486,9 +486,11 @@ const Weight = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card className="p-6 bg-gradient-primary text-primary-foreground shadow-glow">
+        <Card className="p-6 bg-gradient-primary text-primary-foreground hover:shadow-glow transition-all duration-300">
           <div className="flex items-center gap-2 mb-2">
-            <TrendingDown className="w-5 h-5" />
+            <div className="p-2 bg-white/20 rounded-xl">
+              <TrendingDown className="w-5 h-5" />
+            </div>
             <h3 className="text-lg font-semibold">Current Weight</h3>
           </div>
           <p className="text-4xl font-bold mb-2">
@@ -497,7 +499,7 @@ const Weight = () => {
           <p className="opacity-90">Latest recorded weight</p>
         </Card>
 
-        <Card className="p-6 bg-gradient-card shadow-md">
+        <Card className="p-6 hover:shadow-xl transition-all duration-300">
           <h3 className="text-lg font-semibold mb-2">Total Logs</h3>
           <p className="text-4xl font-bold text-primary mb-2">{weightLogs.length}</p>
           <p className="text-muted-foreground">Weight entries tracked</p>

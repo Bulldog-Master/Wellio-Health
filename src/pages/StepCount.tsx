@@ -34,7 +34,7 @@ const StepCount = () => {
         </Card>
 
         {/* Step Count Card - Coming Soon */}
-        <Card className="bg-card/50 backdrop-blur border-border/50 overflow-hidden">
+        <Card className="hover:shadow-xl transition-all duration-300 bg-card/50 backdrop-blur border-border/50 overflow-hidden">
           <div className="p-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold">Step Count</h2>
@@ -56,7 +56,7 @@ const StepCount = () => {
         </Card>
 
         {/* Step Distance Card - Coming Soon */}
-        <Card className="bg-card/50 backdrop-blur border-border/50 overflow-hidden">
+        <Card className="hover:shadow-xl transition-all duration-300 bg-card/50 backdrop-blur border-border/50 overflow-hidden">
           <div className="p-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold">Step Distance</h2>
@@ -78,7 +78,7 @@ const StepCount = () => {
         </Card>
 
         {/* Sessions Card - Coming Soon */}
-        <Card className="bg-card/50 backdrop-blur border-border/50 overflow-hidden">
+        <Card className="hover:shadow-xl transition-all duration-300 bg-card/50 backdrop-blur border-border/50 overflow-hidden">
           <div className="p-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-bold">Sessions</h2>

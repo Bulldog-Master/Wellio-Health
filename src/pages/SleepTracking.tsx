@@ -91,19 +91,19 @@ const SleepTracking = () => {
         Back to Dashboard
       </Button>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 mb-2">
         <div className="p-3 bg-primary/10 rounded-xl">
           <Moon className="w-6 h-6 text-primary" />
         </div>
         <div>
           <h1 className="text-3xl font-bold">Sleep Tracking</h1>
-          <p className="text-muted-foreground">Monitor your sleep patterns</p>
+          <p className="text-muted-foreground mt-1">Monitor your sleep patterns</p>
         </div>
       </div>
 
       {/* Summary Cards */}
       <div className="grid gap-4 md:grid-cols-3">
-        <Card className="p-6">
+        <Card className="p-6 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center gap-3 mb-2">
             <Moon className="w-5 h-5 text-primary" />
             <h3 className="font-semibold">Last Night</h3>
@@ -120,18 +120,22 @@ const SleepTracking = () => {
           )}
         </Card>
 
-        <Card className="p-6">
+        <Card className="p-6 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center gap-3 mb-2">
-            <Calendar className="w-5 h-5 text-primary" />
+            <div className="p-2 bg-primary/10 rounded-xl">
+              <Calendar className="w-5 h-5 text-primary" />
+            </div>
             <h3 className="font-semibold">Weekly Average</h3>
           </div>
           <p className="text-3xl font-bold">{getWeeklyAverage()}h</p>
           <p className="text-sm text-muted-foreground">Last 7 days</p>
         </Card>
 
-        <Card className="p-6">
+        <Card className="p-6 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center gap-3 mb-2">
-            <TrendingUp className="w-5 h-5 text-primary" />
+            <div className="p-2 bg-primary/10 rounded-xl">
+              <TrendingUp className="w-5 h-5 text-primary" />
+            </div>
             <h3 className="font-semibold">Monthly Average</h3>
           </div>
           <p className="text-3xl font-bold">{getMonthlyAverage()}h</p>
@@ -140,8 +144,13 @@ const SleepTracking = () => {
       </div>
 
       {/* Sleep History */}
-      <Card className="p-6">
-        <h3 className="text-lg font-semibold mb-4">Sleep History</h3>
+      <Card className="p-6 hover:shadow-xl transition-all duration-300">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-xl">
+            <Moon className="w-5 h-5 text-primary" />
+          </div>
+          <h3 className="text-lg font-semibold">Sleep History</h3>
+        </div>
         {sleepData.length === 0 ? (
           <div className="text-center py-8 space-y-4">
             <p className="text-muted-foreground">
@@ -159,7 +168,7 @@ const SleepTracking = () => {
             {sleepData.map((sleep) => (
               <div
                 key={sleep.id}
-                className="flex items-center justify-between p-4 border rounded-lg"
+                className="flex items-center justify-between p-4 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors"
               >
                 <div className="flex items-center gap-4">
                   <Moon className="w-5 h-5 text-primary" />

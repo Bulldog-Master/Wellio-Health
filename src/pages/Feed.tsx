@@ -573,13 +573,21 @@ const Feed = () => {
                 variant="ghost"
                 size="icon"
                 onClick={() => navigate("/")}
+                className="hover:bg-primary/10"
                 aria-label="Back to Dashboard"
               >
                 <ArrowLeft className="w-5 h-5" />
               </Button>
-              <h1 className="text-3xl font-bold">Community Feed</h1>
+              <div className="flex items-center gap-3">
+                <div className="p-3 bg-primary/10 rounded-xl">
+                  <User className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h1 className="text-3xl font-bold">Community Feed</h1>
+                  <p className="text-muted-foreground mt-1">Share your fitness journey with the community</p>
+                </div>
+              </div>
             </div>
-            <p className="text-muted-foreground">Share your fitness journey with the community</p>
             {selectedHashtag && (
               <div className="flex items-center gap-2 mt-2">
                 <Badge variant="secondary" className="text-sm">
@@ -595,7 +603,7 @@ const Feed = () => {
           </div>
 
           {/* Create Post */}
-          <Card>
+          <Card className="hover:shadow-xl transition-all duration-300">
             <CardContent className="pt-6 space-y-4">
               <MentionInput
                 placeholder="Share your progress, achievements, or motivation... Use #hashtags and @mentions!"
@@ -653,7 +661,7 @@ const Feed = () => {
           {/* Posts Feed */}
           <div className="space-y-4">
             {posts?.map((post) => (
-              <Card key={post.id}>
+              <Card key={post.id} className="hover:shadow-xl transition-all duration-300">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
