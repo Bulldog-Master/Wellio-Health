@@ -1846,19 +1846,22 @@ const Workout = () => {
                   )}
                 >
                   <CalendarIcon className="mr-2 h-4 w-4" />
-                  {workoutDate ? format(new Date(workoutDate + 'T12:00:00'), "PPP") : <span>Pick a date</span>}
+                  {workoutDate || "Pick a date"}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0" align="start">
                 <Calendar
                   mode="single"
-                  selected={workoutDate ? new Date(workoutDate + 'T12:00:00') : undefined}
+                  selected={workoutDate ? (() => {
+                    const [y, m, d] = workoutDate.split('-').map(Number);
+                    return new Date(y, m - 1, d);
+                  })() : undefined}
                   onSelect={(date) => {
                     if (date) {
-                      const year = date.getFullYear();
-                      const month = String(date.getMonth() + 1).padStart(2, '0');
-                      const day = String(date.getDate()).padStart(2, '0');
-                      setWorkoutDate(`${year}-${month}-${day}`);
+                      const y = date.getFullYear();
+                      const m = String(date.getMonth() + 1).padStart(2, '0');
+                      const d = String(date.getDate()).padStart(2, '0');
+                      setWorkoutDate(`${y}-${m}-${d}`);
                     }
                   }}
                   initialFocus
