@@ -7,9 +7,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown, ChevronDown, Library, BookOpen, Smartphone, ArrowLeft } from "lucide-react";
+import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown, ChevronDown, Library, BookOpen, Smartphone, ArrowLeft, Calendar as CalendarIcon } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -114,6 +116,7 @@ const Workout = () => {
   const [appCategory, setAppCategory] = useState("");
   const [appPlatform, setAppPlatform] = useState("");
   const [appIconUrl, setAppIconUrl] = useState("");
+  const [workoutDate, setWorkoutDate] = useState<Date>(new Date());
   const handleBrowseApps = () => {
     const userAgent = navigator.userAgent || navigator.vendor;
     const isIOS = /iPad|iPhone|iPod/.test(userAgent);
@@ -389,6 +392,7 @@ const Workout = () => {
             calories_burned: calculatedCalories,
             distance_miles: distanceMiles,
             notes: notes || null,
+            logged_at: workoutDate.toISOString(),
           })
           .eq('id', editingWorkout);
 
@@ -409,6 +413,7 @@ const Workout = () => {
             calories_burned: calculatedCalories,
             distance_miles: distanceMiles,
             notes: notes || null,
+            logged_at: workoutDate.toISOString(),
           });
 
         if (error) throw error;
@@ -424,6 +429,7 @@ const Workout = () => {
       setIntensity("moderate");
       setDistance("");
       setNotes("");
+      setWorkoutDate(new Date());
       
       fetchActivityLogs();
     } catch (error) {
@@ -442,6 +448,7 @@ const Workout = () => {
     setIntensity("moderate");
     setDistance(log.distance_miles ? formatDistance(log.distance_miles, preferredUnit).split(' ')[0] : "");
     setNotes(log.notes || "");
+    setWorkoutDate(new Date(log.logged_at));
     setEditingWorkout(log.id);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -1595,6 +1602,33 @@ const Workout = () => {
                 <SelectItem value="Other">Other</SelectItem>
               </SelectContent>
             </Select>
+          </div>
+
+          <div>
+            <Label htmlFor="workout-date">Date</Label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className={cn(
+                    "w-full justify-start text-left font-normal mt-1.5",
+                    !workoutDate && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {workoutDate ? format(workoutDate, "PPP") : <span>Pick a date</span>}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={workoutDate}
+                  onSelect={(date) => date && setWorkoutDate(date)}
+                  initialFocus
+                  className={cn("p-3 pointer-events-auto")}
+                />
+              </PopoverContent>
+            </Popover>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
