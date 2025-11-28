@@ -1153,6 +1153,11 @@ const Workout = () => {
                               <h4 className="font-semibold text-base">{routine.name}</h4>
                               <p className="text-xs text-muted-foreground">
                                 {routine.exercises.length} exercise{routine.exercises.length !== 1 ? 's' : ''}
+                                {routine.exercises.some(ex => ex.duration) && (
+                                  <span className="ml-2">
+                                    • {routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0)} min
+                                  </span>
+                                )}
                               </p>
                             </div>
                           </div>
@@ -1279,6 +1284,12 @@ const Workout = () => {
                               <h4 className="font-semibold text-base">{routine.name}</h4>
                               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                                 <span>{routine.exercises.length} exercise{routine.exercises.length !== 1 ? 's' : ''}</span>
+                                {routine.exercises.some(ex => ex.duration) && (
+                                  <>
+                                    <span>•</span>
+                                    <span>{routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0)} min</span>
+                                  </>
+                                )}
                                 {routine.source_platform && (
                                   <>
                                     <span>•</span>
