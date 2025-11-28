@@ -1670,44 +1670,46 @@ const Workout = () => {
       </div>
 
       <Card className="p-6 hover:shadow-xl transition-all duration-300">
-        <h3 className="text-lg font-semibold mb-6">
-          {editingWorkout ? "Edit Workout" : "Log Workout"}
-        </h3>
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-lg font-semibold">
+            {editingWorkout ? "Edit Workout" : "Log Workout"}
+          </h3>
+          {!editingWorkout && (
+            <Popover modal={false}>
+              <PopoverTrigger asChild>
+                <Button variant="outline" size="default" className="gap-2">
+                  <Library className="w-4 h-4" />
+                  Load Routine
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-56 p-3" align="end">
+                <div className="flex flex-col gap-2">
+                  <Button
+                    variant="ghost"
+                    size="default"
+                    className="justify-start"
+                    onClick={() => setShowLibrary(true)}
+                  >
+                    <Library className="w-4 h-4 mr-2" />
+                    Personal Library
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="default"
+                    className="justify-start"
+                    onClick={() => setShowSampleLibrary(true)}
+                  >
+                    <BookOpen className="w-4 h-4 mr-2" />
+                    Sample Library
+                  </Button>
+                </div>
+              </PopoverContent>
+            </Popover>
+          )}
+        </div>
         <div className="space-y-4">
           <div>
-            <div className="flex items-center justify-between mb-1.5">
-              <Label htmlFor="exercise">Activity Type</Label>
-              <Popover modal={false}>
-                <PopoverTrigger asChild>
-                  <Button variant="outline" size="sm" className="gap-1.5">
-                    <Library className="w-4 h-4" />
-                    <span className="text-xs">Load from Library</span>
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-56 p-3" align="end">
-                  <div className="flex flex-col gap-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="justify-start h-10"
-                      onClick={() => setShowLibrary(true)}
-                    >
-                      <Library className="w-4 h-4 mr-2" />
-                      Personal Library
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="justify-start h-10"
-                      onClick={() => setShowSampleLibrary(true)}
-                    >
-                      <BookOpen className="w-4 h-4 mr-2" />
-                      Sample Library
-                    </Button>
-                  </div>
-                </PopoverContent>
-              </Popover>
-            </div>
+            <Label htmlFor="exercise">Activity Type</Label>
             <select
               id="exercise"
               value={exercise}
