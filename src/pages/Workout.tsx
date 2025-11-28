@@ -120,7 +120,10 @@ const Workout = () => {
   const [appCategory, setAppCategory] = useState("");
   const [appPlatform, setAppPlatform] = useState("");
   const [appIconUrl, setAppIconUrl] = useState("");
-  const [workoutDate, setWorkoutDate] = useState<Date>(new Date());
+  const [workoutDate, setWorkoutDate] = useState<Date>(() => {
+    const now = new Date();
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0);
+  });
   const handleBrowseApps = () => {
     const userAgent = navigator.userAgent || navigator.vendor;
     const isIOS = /iPad|iPhone|iPod/.test(userAgent);
@@ -445,7 +448,7 @@ const Workout = () => {
       setIntensity("moderate");
       setDistance("");
       setNotes("");
-      setWorkoutDate(new Date());
+      setWorkoutDate(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 12, 0, 0));
       setLoadedRoutine(null);
       
       fetchActivityLogs();
@@ -465,9 +468,10 @@ const Workout = () => {
     setIntensity("moderate");
     setDistance(log.distance_miles ? formatDistance(log.distance_miles, preferredUnit).split(' ')[0] : "");
     setNotes(log.notes || "");
+    // Parse date-only string and set at noon to avoid timezone issues
     const dateStr = log.logged_at.split('T')[0];
     const [year, month, day] = dateStr.split('-').map(Number);
-    setWorkoutDate(new Date(year, month - 1, day));
+    setWorkoutDate(new Date(year, month - 1, day, 12, 0, 0));
     setEditingWorkout(log.id);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -1845,7 +1849,13 @@ const Workout = () => {
                 <Calendar
                   mode="single"
                   selected={workoutDate}
-                  onSelect={(date) => date && setWorkoutDate(date)}
+                  onSelect={(date) => {
+                    if (date) {
+                      // Set time to noon to avoid timezone shifts
+                      const noonDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0, 0);
+                      setWorkoutDate(noonDate);
+                    }
+                  }}
                   initialFocus
                   className="p-3 pointer-events-auto"
                 />
