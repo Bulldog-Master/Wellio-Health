@@ -5,6 +5,7 @@ import { AdvancedMetrics } from "@/components/AdvancedMetrics";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Activity, TrendingUp, Target, Zap } from "lucide-react";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ScatterChart, Scatter } from "recharts";
+import { SubscriptionGate } from "@/components/SubscriptionGate";
 
 const AdvancedAnalytics = () => {
   const { data: weightData } = useQuery({
@@ -102,7 +103,8 @@ const AdvancedAnalytics = () => {
   });
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
+    <SubscriptionGate feature="advanced_analytics">
+      <div className="container mx-auto p-6 space-y-6">
       <div>
         <h1 className="text-3xl font-bold mb-2">Advanced Analytics</h1>
         <p className="text-muted-foreground">
@@ -259,6 +261,7 @@ const AdvancedAnalytics = () => {
         </TabsContent>
       </Tabs>
     </div>
+    </SubscriptionGate>
   );
 };
 
