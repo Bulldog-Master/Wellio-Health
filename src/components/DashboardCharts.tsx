@@ -95,9 +95,9 @@ export const DashboardCharts = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       {/* Weight Trend */}
-      <Card className="p-4">
+      <Card className="p-5 overflow-visible">
         <div className="flex items-center gap-2 mb-3">
-          <TrendingDown className="w-4 h-4 text-primary" />
+          <TrendingDown className="w-5 h-5 text-primary flex-shrink-0" />
           <h3 className="font-semibold text-sm">Weight (7 days)</h3>
         </div>
         {weightData.length > 0 ? (
@@ -126,9 +126,9 @@ export const DashboardCharts = () => {
       </Card>
 
       {/* Calorie Trend */}
-      <Card className="p-4">
+      <Card className="p-5 overflow-visible">
         <div className="flex items-center gap-2 mb-3">
-          <Flame className="w-4 h-4 text-orange-500" />
+          <Flame className="w-5 h-5 text-orange-500 flex-shrink-0" />
           <h3 className="font-semibold text-sm">Calories (7 days)</h3>
         </div>
         {calorieData.length > 0 ? (
@@ -155,9 +155,9 @@ export const DashboardCharts = () => {
       </Card>
 
       {/* Workout Trend */}
-      <Card className="p-4">
+      <Card className="p-5 overflow-visible">
         <div className="flex items-center gap-2 mb-3">
-          <Dumbbell className="w-4 h-4 text-purple-500" />
+          <Dumbbell className="w-5 h-5 text-purple-500 flex-shrink-0" />
           <h3 className="font-semibold text-sm">Workouts (7 days)</h3>
         </div>
         {workoutData.length > 0 ? (
