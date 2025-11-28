@@ -138,10 +138,20 @@ const Workout = () => {
     
     unlockScroll();
     
+    // Add click listener to unlock scroll on any click
+    const handleClick = () => {
+      setTimeout(unlockScroll, 50);
+    };
+    
+    document.addEventListener('click', handleClick);
+    
     // Also unlock after a short delay to catch any async scroll locks
     const timer = setTimeout(unlockScroll, 100);
     
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('click', handleClick);
+    };
   });
   const handleBrowseApps = () => {
     const userAgent = navigator.userAgent || navigator.vendor;
