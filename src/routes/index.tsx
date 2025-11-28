@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Layout from "@/components/Layout";
 import ProtectedRoute from "@/components/ProtectedRoute";
 
@@ -78,7 +78,7 @@ const PWAFeatures = lazy(() => import("@/pages/PWAFeatures"));
  * Organized by feature area for better maintainability
  */
 export const AppRoutes = () => (
-  <>
+  <Routes>
     {/* Public Routes */}
     <Route path="/auth" element={<Auth />} />
     <Route path="/install" element={<Install />} />
@@ -170,5 +170,5 @@ export const AppRoutes = () => (
     
     {/* 404 */}
     <Route path="*" element={<NotFound />} />
-  </>
+  </Routes>
 );
