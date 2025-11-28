@@ -787,7 +787,7 @@ const Weight = () => {
         ) : Object.keys(groupedLogs).length === 0 ? (
           <p className="text-center text-muted-foreground py-8">No weight logs yet. Start tracking above!</p>
         ) : (
-          <div className="space-y-3 max-h-[500px] overflow-y-auto pr-2">
+          <div className="space-y-3 max-h-[600px] overflow-y-scroll pr-2 scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary">
             {[...weightLogs].reverse().map((log) => (
               <div key={log.id} className="flex items-center justify-between p-4 bg-secondary rounded-lg">
                 <div className="flex-1">
