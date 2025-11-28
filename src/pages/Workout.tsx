@@ -119,6 +119,7 @@ const Workout = () => {
   const [appPlatform, setAppPlatform] = useState("");
   const [appIconUrl, setAppIconUrl] = useState("");
   const [workoutDate, setWorkoutDate] = useState<Date>(new Date());
+  const [activityTypeOpen, setActivityTypeOpen] = useState(false);
   const handleBrowseApps = () => {
     const userAgent = navigator.userAgent || navigator.vendor;
     const isIOS = /iPad|iPhone|iPod/.test(userAgent);
@@ -1676,7 +1677,7 @@ const Workout = () => {
         <div className="space-y-4">
           <div>
             <Label htmlFor="exercise">Activity Type</Label>
-            <Popover modal={false}>
+            <Popover modal={false} open={activityTypeOpen} onOpenChange={setActivityTypeOpen}>
               <PopoverTrigger asChild>
                 <Button
                   variant="outline"
@@ -1708,6 +1709,7 @@ const Workout = () => {
                           value={activity}
                           onSelect={() => {
                             setExercise(activity);
+                            setActivityTypeOpen(false);
                           }}
                         >
                           <Check
