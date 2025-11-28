@@ -878,6 +878,92 @@ export type Database = {
         }
         Relationships: []
       }
+      fundraiser_donations: {
+        Row: {
+          amount: number
+          created_at: string | null
+          donor_id: string | null
+          fundraiser_id: string
+          id: string
+          is_anonymous: boolean | null
+          message: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          donor_id?: string | null
+          fundraiser_id: string
+          id?: string
+          is_anonymous?: boolean | null
+          message?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          donor_id?: string | null
+          fundraiser_id?: string
+          id?: string
+          is_anonymous?: boolean | null
+          message?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fundraiser_donations_fundraiser_id_fkey"
+            columns: ["fundraiser_id"]
+            isOneToOne: false
+            referencedRelation: "fundraisers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fundraisers: {
+        Row: {
+          category: string
+          created_at: string | null
+          current_amount: number | null
+          description: string
+          end_date: string
+          goal_amount: number
+          id: string
+          image_url: string | null
+          location: string | null
+          status: string | null
+          title: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          category: string
+          created_at?: string | null
+          current_amount?: number | null
+          description: string
+          end_date: string
+          goal_amount: number
+          id?: string
+          image_url?: string | null
+          location?: string | null
+          status?: string | null
+          title: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          current_amount?: number | null
+          description?: string
+          end_date?: string
+          goal_amount?: number
+          id?: string
+          image_url?: string | null
+          location?: string | null
+          status?: string | null
+          title?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       group_members: {
         Row: {
           group_id: string
