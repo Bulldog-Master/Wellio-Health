@@ -1193,6 +1193,19 @@ const Workout = () => {
                         {routine.description && (
                           <p className="text-sm text-muted-foreground mb-3">{routine.description}</p>
                         )}
+                        {routine.exercises.some(ex => ex.duration) && (
+                          <Card className="p-3 mb-3 bg-purple-500/10 border-purple-300 dark:border-purple-700">
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <Clock className="w-4 h-4 text-purple-600" />
+                                <span className="font-semibold text-sm">Total Workout Time:</span>
+                              </div>
+                              <span className="text-lg font-bold text-purple-600">
+                                {routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0)} min
+                              </span>
+                            </div>
+                          </Card>
+                        )}
                         <div className="space-y-3">
                           {routine.exercises.map((exercise, idx) => (
                             <div key={idx} className="p-3 bg-secondary/50 rounded-lg">
@@ -1332,6 +1345,19 @@ const Workout = () => {
                               </a>
                             </div>
                           </div>
+                        )}
+                        {routine.exercises.some(ex => ex.duration) && (
+                          <Card className="p-3 mb-3 bg-orange-500/10 border-orange-300 dark:border-orange-700">
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <Clock className="w-4 h-4 text-orange-600" />
+                                <span className="font-semibold text-sm">Total Workout Time:</span>
+                              </div>
+                              <span className="text-lg font-bold text-orange-600">
+                                {routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0)} min
+                              </span>
+                            </div>
+                          </Card>
                         )}
                         <div className="space-y-3">
                           {routine.exercises.map((exercise, idx) => (
