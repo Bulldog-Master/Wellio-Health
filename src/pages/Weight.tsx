@@ -787,8 +787,8 @@ const Weight = () => {
         ) : Object.keys(groupedLogs).length === 0 ? (
           <p className="text-center text-muted-foreground py-8">No weight logs yet. Start tracking above!</p>
         ) : (
-          <div className="space-y-3">
-            {[...weightLogs].reverse().slice(0, 10).map((log) => (
+          <div className="space-y-3 max-h-[500px] overflow-y-auto pr-2">
+            {[...weightLogs].reverse().map((log) => (
               <div key={log.id} className="flex items-center justify-between p-4 bg-secondary rounded-lg">
                 <div className="flex-1">
                   <span className="font-medium">{new Date(log.logged_at).toLocaleDateString()}</span>
