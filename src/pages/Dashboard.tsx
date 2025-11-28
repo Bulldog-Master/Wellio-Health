@@ -106,7 +106,7 @@ const Dashboard = () => {
             </span>
           </div>
           
-          {/* Creative shared W design */}
+          {/* Shared W Design */}
           <div className="mb-4">
             <div className="flex items-start">
               <span className="text-8xl md:text-9xl font-black drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] leading-none">W</span>
