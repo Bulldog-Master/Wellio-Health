@@ -565,23 +565,21 @@ const Feed = () => {
 
   return (
     <div className="container mx-auto p-6 max-w-6xl">
-      <div className="flex items-center gap-3 mb-6">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => navigate("/")}
-          aria-label="Back to Dashboard"
-        >
-          <ArrowLeft className="w-5 h-5" />
-        </Button>
-        <h1 className="text-2xl font-bold">Feed</h1>
-      </div>
-      
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Feed */}
         <div className="lg:col-span-2 space-y-6">
           <div>
-            <h1 className="text-3xl font-bold">Community Feed</h1>
+            <div className="flex items-center gap-3 mb-2">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate("/")}
+                aria-label="Back to Dashboard"
+              >
+                <ArrowLeft className="w-5 h-5" />
+              </Button>
+              <h1 className="text-3xl font-bold">Community Feed</h1>
+            </div>
             <p className="text-muted-foreground">Share your fitness journey with the community</p>
             {selectedHashtag && (
               <div className="flex items-center gap-2 mt-2">
