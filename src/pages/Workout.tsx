@@ -1679,17 +1679,17 @@ const Workout = () => {
               <Label htmlFor="exercise">Activity Type</Label>
               <Popover modal={false}>
                 <PopoverTrigger asChild>
-                  <Button variant="ghost" size="sm" className="h-6 px-2">
-                    <Library className="w-4 h-4 mr-1" />
-                    Load Routine
+                  <Button variant="outline" size="sm" className="gap-1.5">
+                    <Library className="w-4 h-4" />
+                    <span className="text-xs">Load from Library</span>
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-48 p-2" align="end">
-                  <div className="flex flex-col gap-1">
+                <PopoverContent className="w-56 p-3" align="end">
+                  <div className="flex flex-col gap-2">
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="justify-start"
+                      className="justify-start h-10"
                       onClick={() => setShowLibrary(true)}
                     >
                       <Library className="w-4 h-4 mr-2" />
@@ -1698,7 +1698,7 @@ const Workout = () => {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="justify-start"
+                      className="justify-start h-10"
                       onClick={() => setShowSampleLibrary(true)}
                     >
                       <BookOpen className="w-4 h-4 mr-2" />
