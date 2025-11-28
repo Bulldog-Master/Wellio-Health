@@ -118,20 +118,22 @@ const Dashboard = () => {
           <p className="text-lg md:text-xl text-white/95 mb-6 max-w-2xl drop-shadow-md">
             Your fitness stats are looking great today. Keep pushing forward!
           </p>
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-wrap">
             <Button 
               size="lg" 
               onClick={() => navigate('/workout')}
-              className="bg-white text-primary hover:bg-white/90 shadow-lg"
+              className="bg-white text-primary hover:bg-white/90 shadow-lg flex items-center gap-2"
             >
+              <Zap className="w-5 h-5" />
               Start Workout
             </Button>
             <Button 
               size="lg" 
               variant="outline"
               onClick={() => navigate('/food/log')}
-              className="border-2 border-white text-white hover:bg-white/20 backdrop-blur-sm"
+              className="border-2 border-white text-white hover:bg-white/20 backdrop-blur-sm flex items-center gap-2"
             >
+              <Flame className="w-5 h-5" />
               Log Meal
             </Button>
           </div>
