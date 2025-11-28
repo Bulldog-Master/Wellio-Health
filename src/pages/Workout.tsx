@@ -100,6 +100,7 @@ const Workout = () => {
     const saved = localStorage.getItem('customExercises');
     return saved ? JSON.parse(saved) : [];
   });
+  const [loadedRoutine, setLoadedRoutine] = useState<WorkoutRoutine | null>(null);
   const [showSampleLibrary, setShowSampleLibrary] = useState(false);
   const [sampleRoutines, setSampleRoutines] = useState<SampleRoutine[]>([]);
   const [sortOrder, setSortOrder] = useState<'name' | 'date' | 'custom'>('date');
@@ -385,6 +386,18 @@ const Workout = () => {
       const distanceMiles = distance ? parseDistance(distance, preferredUnit) : null;
       const calculatedCalories = calculateCalories(exercise, parseInt(duration), intensity);
 
+      // If there's a loaded routine, include exercises in notes
+      let finalNotes = notes;
+      if (loadedRoutine && !notes.includes(loadedRoutine.name)) {
+        const exerciseList = loadedRoutine.exercises.map((ex, idx) => {
+          let line = `${idx + 1}. ${ex.name}`;
+          if (ex.sets && ex.reps) line += ` - ${ex.sets}x${ex.reps}`;
+          else if (ex.duration) line += ` - ${ex.duration}min`;
+          return line;
+        }).join('\n');
+        finalNotes = `Routine: ${loadedRoutine.name}\n\n${exerciseList}${notes ? '\n\n' + notes : ''}`;
+      }
+
       if (editingWorkout) {
         const { error } = await supabase
           .from('activity_logs')
@@ -393,7 +406,7 @@ const Workout = () => {
             duration_minutes: parseInt(duration),
             calories_burned: calculatedCalories,
             distance_miles: distanceMiles,
-            notes: notes || null,
+            notes: finalNotes || null,
             logged_at: workoutDate.toISOString(),
           })
           .eq('id', editingWorkout);
@@ -414,7 +427,7 @@ const Workout = () => {
             duration_minutes: parseInt(duration),
             calories_burned: calculatedCalories,
             distance_miles: distanceMiles,
-            notes: notes || null,
+            notes: finalNotes || null,
             logged_at: workoutDate.toISOString(),
           });
 
@@ -432,6 +445,7 @@ const Workout = () => {
       setDistance("");
       setNotes("");
       setWorkoutDate(new Date());
+      setLoadedRoutine(null);
       
       fetchActivityLogs();
     } catch (error) {
@@ -612,31 +626,22 @@ const Workout = () => {
   };
 
   const handleLoadRoutine = (routine: WorkoutRoutine) => {
-    // Convert routine to workout form data
+    // Load the routine into state to display all exercises
+    setLoadedRoutine(routine);
+    
+    // Set basic form data
     const totalDuration = routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0);
-    const routineNameForActivity = routine.name || "Custom Workout";
-    
-    // Set the activity type to the routine name or first exercise
-    setExercise(routineNameForActivity);
-    
-    // Set duration if available
+    setExercise(routine.name || "Routine Workout");
     if (totalDuration > 0) {
       setDuration(totalDuration.toString());
     }
     
-    // Set notes to include all exercises
-    const exerciseList = routine.exercises.map((ex, idx) => {
-      let line = `${idx + 1}. ${ex.name}`;
-      if (ex.sets && ex.reps) line += ` - ${ex.sets}x${ex.reps}`;
-      else if (ex.duration) line += ` - ${ex.duration}min`;
-      return line;
-    }).join('\n');
-    
-    setNotes(`Routine: ${routine.name}\n\n${exerciseList}`);
+    // Clear notes since we'll show exercises separately
+    setNotes("");
     
     toast({
       title: "Routine loaded",
-      description: `${routine.name} has been loaded into the workout form.`,
+      description: `${routine.name} is ready to log. Review the exercises below.`,
     });
   };
 
@@ -1872,6 +1877,68 @@ const Workout = () => {
             />
           </div>
 
+          {loadedRoutine && (
+            <div className="border-2 border-primary/20 rounded-lg p-4 bg-primary/5">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="font-semibold text-base flex items-center gap-2">
+                  <Dumbbell className="w-4 h-4 text-primary" />
+                  Loaded Routine: {loadedRoutine.name}
+                </h4>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setLoadedRoutine(null)}
+                >
+                  Clear
+                </Button>
+              </div>
+              {loadedRoutine.description && (
+                <p className="text-sm text-muted-foreground mb-3">{loadedRoutine.description}</p>
+              )}
+              <div className="space-y-2">
+                {loadedRoutine.exercises.map((ex, idx) => (
+                  <div key={idx} className="flex items-start gap-3 p-3 bg-background rounded-lg border">
+                    <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/20 text-primary text-xs font-semibold">
+                      {idx + 1}
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-medium">{ex.name}</p>
+                      <div className="flex gap-3 text-sm text-muted-foreground mt-1">
+                        {ex.sets && ex.reps && (
+                          <span className="flex items-center gap-1">
+                            <span className="font-semibold">{ex.sets}</span> sets × <span className="font-semibold">{ex.reps}</span> reps
+                          </span>
+                        )}
+                        {ex.duration && (
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            <span className="font-semibold">{ex.duration}</span> min
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    {ex.media_url && (
+                      <div className="w-16 h-16 rounded overflow-hidden bg-muted border">
+                        {ex.media_url.match(/\.(mp4|mov|avi|webm)$/i) ? (
+                          <video
+                            src={ex.media_url}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <img
+                            src={ex.media_url}
+                            alt={ex.name}
+                            className="w-full h-full object-cover"
+                          />
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="flex gap-2">
             {editingWorkout && (
               <Button
@@ -1883,6 +1950,7 @@ const Workout = () => {
                   setIntensity("moderate");
                   setDistance("");
                   setNotes("");
+                  setLoadedRoutine(null);
                 }}
                 className="flex-1"
               >
