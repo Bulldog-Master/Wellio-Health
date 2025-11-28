@@ -90,14 +90,14 @@ const Dashboard = () => {
   return (
     <div className="space-y-6 pb-20 md:pb-0">
       {/* Modern 3D Hero Section */}
-      <div className="relative overflow-hidden rounded-2xl h-80 md:h-96">{" "}
+      <div className="relative rounded-2xl h-80 md:h-96 overflow-visible">{" "}
         <img 
           src={hero3d} 
           alt="3D Abstract Background" 
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover rounded-2xl"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-secondary/70 to-accent/60" />
-        <div className="relative h-full flex flex-col justify-center items-start p-6 md:p-10 text-white">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-secondary/70 to-accent/60 rounded-2xl" />
+        <div className="relative h-full flex flex-col justify-center items-start p-6 md:p-10 pb-10 md:pb-14 text-white">
           <div className="mb-4">
             <div className="flex items-center gap-2 mb-3 animate-float">
               <Zap className="w-6 h-6 text-white drop-shadow-glow" />
