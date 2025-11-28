@@ -30,7 +30,7 @@ serve(async (req) => {
       );
     }
 
-    const { action, deviceFingerprint, deviceName } = await req.json();
+    const { action, deviceFingerprint, deviceName, deviceId } = await req.json();
 
     if (action === 'check') {
       // Check if device is trusted
@@ -110,8 +110,6 @@ serve(async (req) => {
     }
 
     if (action === 'remove') {
-      const { deviceId } = await req.json();
-      
       const { error } = await supabaseClient
         .from('trusted_devices')
         .delete()
