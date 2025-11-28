@@ -1156,11 +1156,14 @@ const Workout = () => {
                               <h4 className="font-semibold text-base">{routine.name}</h4>
                               <p className="text-xs text-muted-foreground">
                                 {routine.exercises.length} exercise{routine.exercises.length !== 1 ? 's' : ''}
-                                {routine.exercises.some(ex => ex.duration) && (
-                                  <span className="ml-2">
-                                    • {routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0)} min
-                                  </span>
-                                )}
+                                {(() => {
+                                  const totalMinutes = routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0);
+                                  return totalMinutes > 0 ? (
+                                    <span className="ml-2">
+                                      • {totalMinutes} min
+                                    </span>
+                                  ) : null;
+                                })()}
                               </p>
                             </div>
                           </div>
@@ -1196,19 +1199,22 @@ const Workout = () => {
                         {routine.description && (
                           <p className="text-sm text-muted-foreground mb-3">{routine.description}</p>
                         )}
-                        {routine.exercises.some(ex => ex.duration) && (
-                          <Card className="p-3 mb-3 bg-purple-500/10 border-purple-300 dark:border-purple-700">
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-2">
-                                <Clock className="w-4 h-4 text-purple-600" />
-                                <span className="font-semibold text-sm">Total Workout Time:</span>
+                        {(() => {
+                          const totalMinutes = routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0);
+                          return totalMinutes > 0 ? (
+                            <Card className="p-3 mb-3 bg-purple-500/10 border-purple-300 dark:border-purple-700">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-2">
+                                  <Clock className="w-4 h-4 text-purple-600" />
+                                  <span className="font-semibold text-sm">Total Workout Time:</span>
+                                </div>
+                                <span className="text-lg font-bold text-purple-600">
+                                  {totalMinutes} min
+                                </span>
                               </div>
-                              <span className="text-lg font-bold text-purple-600">
-                                {routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0)} min
-                              </span>
-                            </div>
-                          </Card>
-                        )}
+                            </Card>
+                          ) : null;
+                        })()}
                         <div className="space-y-3">
                           {routine.exercises.map((exercise, idx) => (
                             <div key={idx} className="p-3 bg-secondary/50 rounded-lg">
@@ -1300,12 +1306,15 @@ const Workout = () => {
                               <h4 className="font-semibold text-base">{routine.name}</h4>
                               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                                 <span>{routine.exercises.length} exercise{routine.exercises.length !== 1 ? 's' : ''}</span>
-                                {routine.exercises.some(ex => ex.duration) && (
-                                  <>
-                                    <span>•</span>
-                                    <span>{routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0)} min</span>
-                                  </>
-                                )}
+                                {(() => {
+                                  const totalMinutes = routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0);
+                                  return totalMinutes > 0 ? (
+                                    <>
+                                      <span>•</span>
+                                      <span>{totalMinutes} min</span>
+                                    </>
+                                  ) : null;
+                                })()}
                                 {routine.source_platform && (
                                   <>
                                     <span>•</span>
@@ -1349,19 +1358,22 @@ const Workout = () => {
                             </div>
                           </div>
                         )}
-                        {routine.exercises.some(ex => ex.duration) && (
-                          <Card className="p-3 mb-3 bg-orange-500/10 border-orange-300 dark:border-orange-700">
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-2">
-                                <Clock className="w-4 h-4 text-orange-600" />
-                                <span className="font-semibold text-sm">Total Workout Time:</span>
+                        {(() => {
+                          const totalMinutes = routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0);
+                          return totalMinutes > 0 ? (
+                            <Card className="p-3 mb-3 bg-orange-500/10 border-orange-300 dark:border-orange-700">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-2">
+                                  <Clock className="w-4 h-4 text-orange-600" />
+                                  <span className="font-semibold text-sm">Total Workout Time:</span>
+                                </div>
+                                <span className="text-lg font-bold text-orange-600">
+                                  {totalMinutes} min
+                                </span>
                               </div>
-                              <span className="text-lg font-bold text-orange-600">
-                                {routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0)} min
-                              </span>
-                            </div>
-                          </Card>
-                        )}
+                            </Card>
+                          ) : null;
+                        })()}
                         <div className="space-y-3">
                           {routine.exercises.map((exercise, idx) => (
                             <div key={idx} className="p-3 bg-secondary/50 rounded-lg">
