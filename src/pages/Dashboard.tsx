@@ -1,4 +1,4 @@
-import { Activity, Flame, Target, TrendingUp, Droplets, Moon, Camera } from "lucide-react";
+import { Activity, Flame, Target, TrendingUp, Droplets, Moon, Camera, Zap } from "lucide-react";
 import MetricCard from "@/components/MetricCard";
 import ActivityRings from "@/components/ActivityRings";
 import { StreakTracker } from "@/components/StreakTracker";
@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useSubscription } from "@/hooks/useSubscription";
 import { UpgradePrompt } from "@/components/UpgradePrompt";
+import hero3d from "@/assets/hero-3d.jpg";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -87,10 +88,46 @@ const Dashboard = () => {
   const caloriesProgress = (caloriesConsumed / caloriesTarget) * 100;
 
   return (
-    <div className="space-y-4 md:space-y-6 pb-20 md:pb-0">
-      <div>
-        <h1 className="text-2xl md:text-3xl font-bold mb-1 md:mb-2">Welcome back!</h1>
-        <p className="text-sm md:text-base text-muted-foreground">Here's your fitness overview for today</p>
+    <div className="space-y-6 pb-20 md:pb-0">
+      {/* Modern 3D Hero Section */}
+      <div className="relative overflow-hidden rounded-2xl h-64 md:h-80">
+        <img 
+          src={hero3d} 
+          alt="3D Abstract Background" 
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-secondary/70 to-accent/60" />
+        <div className="relative h-full flex flex-col justify-center items-start p-6 md:p-10 text-white">
+          <div className="flex items-center gap-2 mb-4 animate-float">
+            <Zap className="w-8 h-8 text-white drop-shadow-glow" />
+            <span className="text-sm font-semibold uppercase tracking-wider bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+              Your Journey
+            </span>
+          </div>
+          <h1 className="text-3xl md:text-5xl font-bold mb-3 drop-shadow-lg">
+            Welcome back!
+          </h1>
+          <p className="text-lg md:text-xl text-white/95 mb-6 max-w-2xl drop-shadow-md">
+            Your fitness stats are looking great today. Keep pushing forward!
+          </p>
+          <div className="flex gap-3">
+            <Button 
+              size="lg" 
+              onClick={() => navigate('/workout')}
+              className="bg-white text-primary hover:bg-white/90 shadow-lg"
+            >
+              Start Workout
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline"
+              onClick={() => navigate('/food/log')}
+              className="border-2 border-white text-white hover:bg-white/20 backdrop-blur-sm"
+            >
+              Log Meal
+            </Button>
+          </div>
+        </div>
       </div>
 
       {/* Upgrade Prompt for Free Users */}
@@ -101,43 +138,49 @@ const Dashboard = () => {
       {/* Dashboard Mini-Charts */}
       <DashboardCharts />
 
-      {/* Activity Rings - Compact */}
-      <Card className="p-3 md:p-4 bg-white dark:bg-gray-800 border">
-        <div className="flex items-center justify-between mb-2">
-          <h3 className="text-sm md:text-base font-semibold text-gray-900 dark:text-gray-100">Today's Activity</h3>
-          <Activity className="w-3.5 h-3.5 text-gray-600 dark:text-gray-400" />
+      {/* Activity Rings - Compact with glassmorphism */}
+      <Card className="p-4 md:p-6 glass card-hover shadow-lg">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-base md:text-lg font-semibold">Today's Activity</h3>
+          <Activity className="w-5 h-5 text-primary" />
         </div>
         <ActivityRings />
       </Card>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <MetricCard
-          title="Calories Today"
-          value={caloriesConsumed}
-          subtitle={`${caloriesTarget - caloriesConsumed} left`}
-          icon={Flame}
-          trend="neutral"
-          variant="primary"
-        />
-        <MetricCard
-          title="Target Weight"
-          value={targetWeight ? `${targetWeight} lbs (${lbsToKg(targetWeight)} kg)` : 'Set Goal'}
-          subtitle={
-            targetWeight && currentWeight 
-              ? `${weightDifference.toFixed(1)} lbs (${lbsToKg(weightDifference)} kg) to go`
-              : 'No target set'
-          }
-          icon={Target}
-          trend="neutral"
-        />
-        <MetricCard
-          title="Weekly Progress"
-          value="+5%"
-          subtitle="On track"
-          icon={TrendingUp}
-          trend="up"
-          variant="accent"
-        />
+        <div className="card-hover">
+          <MetricCard
+            title="Calories Today"
+            value={caloriesConsumed}
+            subtitle={`${caloriesTarget - caloriesConsumed} left`}
+            icon={Flame}
+            trend="neutral"
+            variant="primary"
+          />
+        </div>
+        <div className="card-hover">
+          <MetricCard
+            title="Target Weight"
+            value={targetWeight ? `${targetWeight} lbs (${lbsToKg(targetWeight)} kg)` : 'Set Goal'}
+            subtitle={
+              targetWeight && currentWeight 
+                ? `${weightDifference.toFixed(1)} lbs (${lbsToKg(weightDifference)} kg) to go`
+                : 'No target set'
+            }
+            icon={Target}
+            trend="neutral"
+          />
+        </div>
+        <div className="card-hover">
+          <MetricCard
+            title="Weekly Progress"
+            value="+5%"
+            subtitle="On track"
+            icon={TrendingUp}
+            trend="up"
+            variant="accent"
+          />
+        </div>
       </div>
 
       {/* Streak Tracker */}
