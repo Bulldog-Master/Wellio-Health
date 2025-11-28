@@ -120,6 +120,14 @@ const Workout = () => {
   const [appIconUrl, setAppIconUrl] = useState("");
   const [workoutDate, setWorkoutDate] = useState<Date>(new Date());
   const [activityTypeOpen, setActivityTypeOpen] = useState(false);
+  
+  // Ensure scroll is unlocked when popover closes
+  useEffect(() => {
+    if (!activityTypeOpen) {
+      document.body.style.overflow = 'unset';
+      document.body.style.pointerEvents = 'auto';
+    }
+  }, [activityTypeOpen]);
   const handleBrowseApps = () => {
     const userAgent = navigator.userAgent || navigator.vendor;
     const isIOS = /iPad|iPhone|iPod/.test(userAgent);
