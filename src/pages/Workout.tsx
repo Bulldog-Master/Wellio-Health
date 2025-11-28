@@ -120,9 +120,12 @@ const Workout = () => {
   const [appCategory, setAppCategory] = useState("");
   const [appPlatform, setAppPlatform] = useState("");
   const [appIconUrl, setAppIconUrl] = useState("");
-  const [workoutDate, setWorkoutDate] = useState<Date>(() => {
+  const [workoutDate, setWorkoutDate] = useState<string>(() => {
     const now = new Date();
-    return new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0);
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   });
   const handleBrowseApps = () => {
     const userAgent = navigator.userAgent || navigator.vendor;
@@ -411,7 +414,7 @@ const Workout = () => {
             calories_burned: calculatedCalories,
             distance_miles: distanceMiles,
             notes: finalNotes || null,
-            logged_at: format(workoutDate, "yyyy-MM-dd"),
+            logged_at: workoutDate,
           })
           .eq('id', editingWorkout);
 
@@ -432,7 +435,7 @@ const Workout = () => {
             calories_burned: calculatedCalories,
             distance_miles: distanceMiles,
             notes: finalNotes || null,
-            logged_at: format(workoutDate, "yyyy-MM-dd"),
+            logged_at: workoutDate,
           });
 
         if (error) throw error;
@@ -448,7 +451,11 @@ const Workout = () => {
       setIntensity("moderate");
       setDistance("");
       setNotes("");
-      setWorkoutDate(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 12, 0, 0));
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      setWorkoutDate(`${year}-${month}-${day}`);
       setLoadedRoutine(null);
       
       fetchActivityLogs();
@@ -468,10 +475,7 @@ const Workout = () => {
     setIntensity("moderate");
     setDistance(log.distance_miles ? formatDistance(log.distance_miles, preferredUnit).split(' ')[0] : "");
     setNotes(log.notes || "");
-    // Parse date-only string and set at noon to avoid timezone issues
-    const dateStr = log.logged_at.split('T')[0];
-    const [year, month, day] = dateStr.split('-').map(Number);
-    setWorkoutDate(new Date(year, month - 1, day, 12, 0, 0));
+    setWorkoutDate(log.logged_at.split('T')[0]);
     setEditingWorkout(log.id);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -1842,18 +1846,19 @@ const Workout = () => {
                   )}
                 >
                   <CalendarIcon className="mr-2 h-4 w-4" />
-                  {workoutDate ? format(workoutDate, "PPP") : <span>Pick a date</span>}
+                  {workoutDate ? format(new Date(workoutDate + 'T12:00:00'), "PPP") : <span>Pick a date</span>}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0" align="start">
                 <Calendar
                   mode="single"
-                  selected={workoutDate}
+                  selected={workoutDate ? new Date(workoutDate + 'T12:00:00') : undefined}
                   onSelect={(date) => {
                     if (date) {
-                      // Set time to noon to avoid timezone shifts
-                      const noonDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0, 0);
-                      setWorkoutDate(noonDate);
+                      const year = date.getFullYear();
+                      const month = String(date.getMonth() + 1).padStart(2, '0');
+                      const day = String(date.getDate()).padStart(2, '0');
+                      setWorkoutDate(`${year}-${month}-${day}`);
                     }
                   }}
                   initialFocus
