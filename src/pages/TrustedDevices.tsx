@@ -52,21 +52,27 @@ const TrustedDevices = () => {
 
   const fetchDevices = async () => {
     try {
-      const { data, error } = await supabase.functions.invoke('device-trust', {
-        body: { action: 'list' }
-      });
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        setLoading(false);
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from('trusted_devices')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('last_used_at', { ascending: false });
 
       if (error) {
-        console.error('Edge function error:', error);
-        // Don't show error toast for this - it's expected if user hasn't set up 2FA
+        console.error('Database error:', error);
         setDevices([]);
         return;
       }
 
-      setDevices(data?.devices || []);
+      setDevices(data || []);
     } catch (error: any) {
       console.error('Fetch devices error:', error);
-      // Don't show error toast - silently handle
       setDevices([]);
     } finally {
       setLoading(false);
@@ -77,15 +83,24 @@ const TrustedDevices = () => {
     if (!deleteDeviceId) return;
 
     try {
-      const { data, error } = await supabase.functions.invoke('device-trust', {
-        body: { 
-          action: 'remove',
-          deviceId: deleteDeviceId 
-        }
-      });
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        toast({
+          title: "Error",
+          description: "You must be logged in to remove devices",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const { error } = await supabase
+        .from('trusted_devices')
+        .delete()
+        .eq('id', deleteDeviceId)
+        .eq('user_id', user.id);
 
       if (error) {
-        console.error('Edge function error:', error);
+        console.error('Database error:', error);
         throw new Error('Failed to remove device');
       }
 
