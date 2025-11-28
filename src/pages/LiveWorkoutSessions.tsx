@@ -11,6 +11,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { Video, Calendar, Users, Clock, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
+import { SubscriptionGate } from "@/components/SubscriptionGate";
 
 interface Session {
   id: string;
@@ -179,7 +180,8 @@ const LiveWorkoutSessions = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto p-6 space-y-6">
+      <SubscriptionGate feature="live_sessions">
+        <div className="container mx-auto p-6 space-y-6">
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-bold">Live Workout Sessions</h1>
@@ -340,6 +342,7 @@ const LiveWorkoutSessions = () => {
           )}
         </div>
       </div>
+      </SubscriptionGate>
     </Layout>
   );
 };

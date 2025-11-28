@@ -10,9 +10,12 @@ import { Progress } from "@/components/ui/progress";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useSubscription } from "@/hooks/useSubscription";
+import { UpgradePrompt } from "@/components/UpgradePrompt";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { tier } = useSubscription();
   const [currentWeight, setCurrentWeight] = useState(0);
   const [targetWeight, setTargetWeight] = useState(0);
   const [caloriesConsumed, setCaloriesConsumed] = useState(1450);
@@ -89,6 +92,11 @@ const Dashboard = () => {
         <h1 className="text-2xl md:text-3xl font-bold mb-1 md:mb-2">Welcome back!</h1>
         <p className="text-sm md:text-base text-muted-foreground">Here's your fitness overview for today</p>
       </div>
+
+      {/* Upgrade Prompt for Free Users */}
+      {tier === 'free' && (
+        <UpgradePrompt compact feature="advanced features" />
+      )}
 
       {/* Dashboard Mini-Charts */}
       <DashboardCharts />
