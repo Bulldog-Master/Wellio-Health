@@ -353,7 +353,7 @@ const PrivacySecurity = () => {
 
   return (
     <div className="space-y-6 pb-20 md:pb-0">
-      <div className="flex items-center gap-4 mb-2">
+      <div className="flex items-center gap-4 mb-6">
         <Button
           variant="ghost"
           size="icon"
@@ -362,9 +362,14 @@ const PrivacySecurity = () => {
         >
           <ArrowLeft className="w-5 h-5" />
         </Button>
-        <div>
-          <h1 className="text-3xl font-bold">Privacy & Security</h1>
-          <p className="text-muted-foreground mt-1">Control your privacy settings and security options</p>
+        <div className="flex items-center gap-3">
+          <div className="p-3 bg-primary/10 rounded-xl">
+            <Shield className="w-6 h-6 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold">Privacy & Security</h1>
+            <p className="text-muted-foreground mt-1">Control your privacy settings and security options</p>
+          </div>
         </div>
       </div>
 
@@ -548,12 +553,14 @@ const PrivacySecurity = () => {
       </Card>
 
       {/* Privacy Settings */}
-      <Card>
+      <Card className="hover:shadow-xl transition-all duration-300">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Lock className="w-5 h-5" />
-            Privacy Settings
-          </CardTitle>
+          <div className="flex items-center gap-3">
+            <div className="p-3 bg-primary/10 rounded-xl">
+              <Lock className="w-6 h-6 text-primary" />
+            </div>
+            <CardTitle>Privacy Settings</CardTitle>
+          </div>
           <CardDescription>Control who can see your content and interact with you</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -617,9 +624,14 @@ const PrivacySecurity = () => {
       </Card>
 
       {/* Data Management */}
-      <Card>
+      <Card className="hover:shadow-xl transition-all duration-300">
         <CardHeader>
-          <CardTitle>Data Management</CardTitle>
+          <div className="flex items-center gap-3">
+            <div className="p-3 bg-primary/10 rounded-xl">
+              <Download className="w-6 h-6 text-primary" />
+            </div>
+            <CardTitle>Data Management</CardTitle>
+          </div>
         </CardHeader>
         <CardContent className="space-y-3">
           <Button onClick={handleExportData} variant="outline" className="w-full justify-start">
