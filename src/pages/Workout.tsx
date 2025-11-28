@@ -103,6 +103,7 @@ const Workout = () => {
   const [loadedRoutine, setLoadedRoutine] = useState<WorkoutRoutine | null>(null);
   const [showSampleLibrary, setShowSampleLibrary] = useState(false);
   const [sampleRoutines, setSampleRoutines] = useState<SampleRoutine[]>([]);
+  const [selectedRoutineId, setSelectedRoutineId] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<'name' | 'date' | 'custom'>('date');
   const [sampleName, setSampleName] = useState("");
   const [sampleDescription, setSampleDescription] = useState("");
@@ -1183,143 +1184,157 @@ const Workout = () => {
       </Dialog>
 
       {/* Personal Library Dialog */}
-      <Dialog open={showLibrary} onOpenChange={setShowLibrary} modal={false}>
-          <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30 border-2 border-purple-200 dark:border-purple-800 shadow-2xl">
+      <Dialog open={showLibrary} onOpenChange={(open) => { setShowLibrary(open); if (!open) setSelectedRoutineId(null); }} modal={false}>
+          <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 border-2 border-purple-200 dark:border-purple-800 shadow-2xl">
             <DialogHeader>
-              <DialogTitle className="text-2xl text-purple-900 dark:text-purple-100">Personal Library</DialogTitle>
+              <DialogTitle className="text-2xl text-purple-900 dark:text-purple-100 flex items-center justify-between">
+                <span>Personal Library</span>
+                <Button variant="outline" size="sm" onClick={() => setShowCreateRoutine(true)} className="bg-purple-100 dark:bg-purple-900/50 border-purple-300 dark:border-purple-700 hover:bg-purple-200 dark:hover:bg-purple-900">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Create New
+                </Button>
+              </DialogTitle>
             </DialogHeader>
             
-            <div className="mt-2">
+            <div className="space-y-4">
               {workoutRoutines.length > 0 ? (
-                <Accordion type="single" collapsible className="space-y-2">
-                  {workoutRoutines.map((routine) => (
-                    <AccordionItem key={routine.id} value={routine.id} className="border rounded-lg px-4 bg-card">
-                      <div className="flex items-center justify-between">
-                        <div 
-                          className="flex-1 py-4 cursor-pointer hover:opacity-80 transition-opacity"
-                          onClick={() => {
-                            handleLoadRoutine(routine);
-                            setShowLibrary(false);
-                          }}
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
-                              <Dumbbell className="w-5 h-5 text-purple-600" />
-                            </div>
-                            <div className="text-left">
-                              <h4 className="font-semibold text-base">{routine.name}</h4>
-                              <p className="text-xs text-muted-foreground">
-                                {routine.exercises.length} exercise{routine.exercises.length !== 1 ? 's' : ''}
-                                {(() => {
-                                  const totalMinutes = routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0);
-                                  return totalMinutes > 0 ? (
-                                    <span className="ml-2">
-                                      • {totalMinutes} min
-                                    </span>
-                                  ) : null;
-                                })()}
-                              </p>
+                <>
+                  <Accordion type="single" collapsible className="space-y-2">
+                    {workoutRoutines.map((routine) => (
+                      <AccordionItem key={routine.id} value={routine.id} className={cn("border rounded-lg px-4 transition-all", selectedRoutineId === routine.id ? "bg-purple-100 dark:bg-purple-900/50 border-purple-400 dark:border-purple-600 ring-2 ring-purple-500" : "bg-card")}>
+                        <div className="flex items-center justify-between">
+                          <div 
+                            className="flex-1 py-4 cursor-pointer hover:bg-purple-50/50 dark:hover:bg-purple-900/20 rounded transition-colors"
+                            onClick={() => setSelectedRoutineId(routine.id)}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+                                <Dumbbell className="w-5 h-5 text-purple-600" />
+                              </div>
+                              <div className="text-left">
+                                <h4 className="font-semibold text-base">{routine.name}</h4>
+                                <p className="text-xs text-muted-foreground">
+                                  {routine.exercises.length} exercise{routine.exercises.length !== 1 ? 's' : ''}
+                                  {(() => {
+                                    const totalMinutes = routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0);
+                                    return totalMinutes > 0 ? (
+                                      <span className="ml-2">
+                                        • {totalMinutes} min
+                                      </span>
+                                    ) : null;
+                                  })()}
+                                </p>
+                              </div>
                             </div>
                           </div>
+                          <div className="flex gap-1 ml-2">
+                            <AccordionTrigger className="p-2 hover:bg-accent/50 rounded" />
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleEditRoutine(routine);
+                                setShowLibrary(false);
+                                setShowRoutineDialog(true);
+                              }}
+                              className="hover:bg-blue-500/10"
+                            >
+                              <Pencil className="w-4 h-4 text-blue-500" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeleteRoutine(routine.id);
+                              }}
+                              className="hover:bg-red-500/10"
+                            >
+                              <Trash2 className="w-4 h-4 text-red-500" />
+                            </Button>
+                          </div>
                         </div>
-                        <div className="flex gap-1 ml-2">
-                          <AccordionTrigger className="p-2 hover:bg-accent/50 rounded" />
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleEditRoutine(routine);
-                              setShowLibrary(false);
-                              setShowRoutineDialog(true);
-                            }}
-                            className="hover:bg-blue-500/10"
-                          >
-                            <Pencil className="w-4 h-4 text-blue-500" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDeleteRoutine(routine.id);
-                            }}
-                            className="hover:bg-red-500/10"
-                          >
-                            <Trash2 className="w-4 h-4 text-red-500" />
-                          </Button>
-                        </div>
-                      </div>
-                      <AccordionContent className="pt-2 pb-4">
-                        {routine.description && (
-                          <p className="text-sm text-muted-foreground mb-3">{routine.description}</p>
-                        )}
-                        {(() => {
-                          const totalMinutes = routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0);
-                          return totalMinutes > 0 ? (
-                            <Card className="p-3 mb-3 bg-purple-500/10 border-purple-300 dark:border-purple-700">
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                  <Clock className="w-4 h-4 text-purple-600" />
-                                  <span className="font-semibold text-sm">Total Workout Time:</span>
-                                </div>
-                                <span className="text-lg font-bold text-purple-600">
-                                  {totalMinutes} min
-                                </span>
-                              </div>
-                            </Card>
-                          ) : null;
-                        })()}
-                        <div className="space-y-3">
-                          {routine.exercises.map((exercise, idx) => (
-                            <div key={idx} className="p-3 bg-secondary/50 rounded-lg">
-                              <div className="flex items-start gap-3">
-                                <div className="flex-1">
-                                  <p className="font-medium">{exercise.name}</p>
-                                  <div className="flex gap-3 text-sm text-muted-foreground mt-1">
-                                    {exercise.sets && exercise.reps && (
-                                      <span>{exercise.sets} sets × {exercise.reps} reps</span>
-                                    )}
-                                    {exercise.duration && (
-                                      <span>{exercise.duration} min</span>
-                                    )}
+                        <AccordionContent className="pt-2 pb-4">
+                          {routine.description && (
+                            <p className="text-sm text-muted-foreground mb-3">{routine.description}</p>
+                          )}
+                          {(() => {
+                            const totalMinutes = routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0);
+                            return totalMinutes > 0 ? (
+                              <Card className="p-3 mb-3 bg-purple-500/10 border-purple-300 dark:border-purple-700">
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center gap-2">
+                                    <Clock className="w-4 h-4 text-purple-600" />
+                                    <span className="font-semibold text-sm">Total Workout Time:</span>
                                   </div>
+                                  <span className="text-lg font-bold text-purple-600">
+                                    {totalMinutes} min
+                                  </span>
                                 </div>
-                                {exercise.media_url && (
-                                  <div className="w-20 h-20 rounded overflow-hidden bg-muted border-2 border-primary">
-                                    {exercise.media_url.match(/\.(mp4|mov|avi|webm)$/i) ? (
-                                      <video
-                                        src={exercise.media_url}
-                                        className="w-full h-full object-cover"
-                                        controls
-                                      />
-                                    ) : (
-                                      <img
-                                        src={exercise.media_url}
-                                        alt={exercise.name}
-                                        className="w-full h-full object-cover"
-                                      />
-                                    )}
+                              </Card>
+                            ) : null;
+                          })()}
+                          <div className="space-y-3">
+                            {routine.exercises.map((exercise, idx) => (
+                              <div key={idx} className="p-3 bg-secondary/50 rounded-lg">
+                                <div className="flex items-start gap-3">
+                                  <div className="flex-1">
+                                    <p className="font-medium">{exercise.name}</p>
+                                    <div className="flex gap-3 text-sm text-muted-foreground mt-1">
+                                      {exercise.sets && exercise.reps && (
+                                        <span>{exercise.sets} sets × {exercise.reps} reps</span>
+                                      )}
+                                      {exercise.duration && (
+                                        <span>{exercise.duration} min</span>
+                                      )}
+                                    </div>
                                   </div>
-                                )}
+                                  {exercise.media_url && (
+                                    <div className="w-20 h-20 rounded overflow-hidden bg-muted border-2 border-primary">
+                                      {exercise.media_url.match(/\.(mp4|mov|avi|webm)$/i) ? (
+                                        <video
+                                          src={exercise.media_url}
+                                          className="w-full h-full object-cover"
+                                          controls
+                                        />
+                                      ) : (
+                                        <img
+                                          src={exercise.media_url}
+                                          alt={exercise.name}
+                                          className="w-full h-full object-cover"
+                                        />
+                                      )}
+                                    </div>
+                                  )}
+                                </div>
                               </div>
-                            </div>
-                          ))}
-                        </div>
-                        <Button
-                          className="w-full mt-4"
-                          onClick={() => {
+                            ))}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                  {selectedRoutineId && (
+                    <div className="sticky bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-purple-100 to-transparent dark:from-purple-950/50 border-t-2 border-purple-300 dark:border-purple-700">
+                      <Button
+                        size="lg"
+                        className="w-full bg-purple-600 hover:bg-purple-700 text-white shadow-lg"
+                        onClick={() => {
+                          const routine = workoutRoutines.find(r => r.id === selectedRoutineId);
+                          if (routine) {
                             handleLoadRoutine(routine);
                             setShowLibrary(false);
-                          }}
-                        >
-                          <Check className="w-4 h-4 mr-2" />
-                          Use This Routine
-                        </Button>
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
+                            setSelectedRoutineId(null);
+                          }
+                        }}
+                      >
+                        <Check className="w-5 h-5 mr-2" />
+                        Load Selected Routine
+                      </Button>
+                    </div>
+                  )}
+                </>
               ) : (
                 <p className="text-center text-muted-foreground py-8">
                   No routines saved yet. Create your first routine!
@@ -1330,7 +1345,7 @@ const Workout = () => {
       </Dialog>
 
       {/* Sample Library Dialog */}
-      <Dialog open={showSampleLibrary} onOpenChange={setShowSampleLibrary} modal={false}>
+      <Dialog open={showSampleLibrary} onOpenChange={(open) => { setShowSampleLibrary(open); if (!open) setSelectedRoutineId(null); }} modal={false}>
           <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/30 border-2 border-orange-200 dark:border-orange-800 shadow-2xl">
             <DialogHeader>
               <DialogTitle className="text-2xl text-orange-900 dark:text-orange-100 flex items-center justify-between">
@@ -1358,17 +1373,15 @@ const Workout = () => {
               </div>
 
               {getSortedSampleRoutines().length > 0 ? (
-                <Accordion type="single" collapsible className="space-y-2">
-                  {getSortedSampleRoutines().map((routine) => (
-                    <AccordionItem key={routine.id} value={routine.id} className="border rounded-lg px-4 bg-card">
-                      <div className="flex items-center justify-between">
-                        <div 
-                          className="flex-1 py-4 cursor-pointer hover:opacity-80 transition-opacity"
-                          onClick={() => {
-                            handleLoadRoutine({ ...routine, id: routine.id });
-                            setShowSampleLibrary(false);
-                          }}
-                        >
+                <>
+                  <Accordion type="single" collapsible className="space-y-2">
+                    {getSortedSampleRoutines().map((routine) => (
+                      <AccordionItem key={routine.id} value={routine.id} className={cn("border rounded-lg px-4 transition-all", selectedRoutineId === routine.id ? "bg-orange-100 dark:bg-orange-900/50 border-orange-400 dark:border-orange-600 ring-2 ring-orange-500" : "bg-card")}>
+                        <div className="flex items-center justify-between">
+                          <div 
+                            className="flex-1 py-4 cursor-pointer hover:bg-orange-50/50 dark:hover:bg-orange-900/20 rounded transition-colors"
+                            onClick={() => setSelectedRoutineId(routine.id)}
+                          >
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
                               <BookOpen className="w-5 h-5 text-orange-600" />
@@ -1410,91 +1423,101 @@ const Workout = () => {
                             <Trash2 className="w-4 h-4 text-red-500" />
                           </Button>
                         </div>
-                      </div>
-                      <AccordionContent className="pt-2 pb-4">
-                        {routine.description && (
-                          <p className="text-sm text-muted-foreground mb-3">{routine.description}</p>
-                        )}
-                        {routine.source_url && (
-                          <div className="mb-3 p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg border border-orange-300 dark:border-orange-700">
-                            <div className="flex items-center gap-2">
-                              <Video className="w-4 h-4 text-orange-600" />
-                              <a 
-                                href={routine.source_url} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="text-sm font-semibold text-orange-700 dark:text-orange-300 hover:underline"
-                              >
-                                Watch Original Video →
-                              </a>
-                            </div>
-                          </div>
-                        )}
-                        {(() => {
-                          const totalMinutes = routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0);
-                          return totalMinutes > 0 ? (
-                            <Card className="p-3 mb-3 bg-orange-500/10 border-orange-300 dark:border-orange-700">
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                  <Clock className="w-4 h-4 text-orange-600" />
-                                  <span className="font-semibold text-sm">Total Workout Time:</span>
-                                </div>
-                                <span className="text-lg font-bold text-orange-600">
-                                  {totalMinutes} min
-                                </span>
-                              </div>
-                            </Card>
-                          ) : null;
-                        })()}
-                        <div className="space-y-3">
-                          {routine.exercises.map((exercise, idx) => (
-                            <div key={idx} className="p-3 bg-secondary/50 rounded-lg">
-                              <div className="flex items-start gap-3">
-                                <div className="flex-1">
-                                  <p className="font-medium">{exercise.name}</p>
-                                  <div className="flex gap-3 text-sm text-muted-foreground mt-1">
-                                    {exercise.sets && exercise.reps && (
-                                      <span>{exercise.sets} sets × {exercise.reps} reps</span>
-                                    )}
-                                    {exercise.duration && (
-                                      <span>{exercise.duration} min</span>
-                                    )}
-                                  </div>
-                                </div>
-                                {exercise.media_url && (
-                                  <div className="w-20 h-20 rounded overflow-hidden bg-muted border-2 border-primary">
-                                    {exercise.media_url.match(/\.(mp4|mov|avi|webm)$/i) ? (
-                                      <video
-                                        src={exercise.media_url}
-                                        className="w-full h-full object-cover"
-                                      />
-                                    ) : (
-                                      <img
-                                        src={exercise.media_url}
-                                        alt={exercise.name}
-                                        className="w-full h-full object-cover"
-                                      />
-                                    )}
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          ))}
                         </div>
-                        <Button
-                          className="w-full mt-4"
-                          onClick={() => {
+                        <AccordionContent className="pt-2 pb-4">
+                          {routine.description && (
+                            <p className="text-sm text-muted-foreground mb-3">{routine.description}</p>
+                          )}
+                          {routine.source_url && (
+                            <div className="mb-3 p-3 bg-orange-100 dark:bg-orange-900/30 rounded-lg border border-orange-300 dark:border-orange-700">
+                              <div className="flex items-center gap-2">
+                                <Video className="w-4 h-4 text-orange-600" />
+                                <a 
+                                  href={routine.source_url} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="text-sm font-semibold text-orange-700 dark:text-orange-300 hover:underline"
+                                >
+                                  Watch Original Video →
+                                </a>
+                              </div>
+                            </div>
+                          )}
+                          {(() => {
+                            const totalMinutes = routine.exercises.reduce((total, ex) => total + (ex.duration || 0), 0);
+                            return totalMinutes > 0 ? (
+                              <Card className="p-3 mb-3 bg-orange-500/10 border-orange-300 dark:border-orange-700">
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center gap-2">
+                                    <Clock className="w-4 h-4 text-orange-600" />
+                                    <span className="font-semibold text-sm">Total Workout Time:</span>
+                                  </div>
+                                  <span className="text-lg font-bold text-orange-600">
+                                    {totalMinutes} min
+                                  </span>
+                                </div>
+                              </Card>
+                            ) : null;
+                          })()}
+                          <div className="space-y-3">
+                            {routine.exercises.map((exercise, idx) => (
+                              <div key={idx} className="p-3 bg-secondary/50 rounded-lg">
+                                <div className="flex items-start gap-3">
+                                  <div className="flex-1">
+                                    <p className="font-medium">{exercise.name}</p>
+                                    <div className="flex gap-3 text-sm text-muted-foreground mt-1">
+                                      {exercise.sets && exercise.reps && (
+                                        <span>{exercise.sets} sets × {exercise.reps} reps</span>
+                                      )}
+                                      {exercise.duration && (
+                                        <span>{exercise.duration} min</span>
+                                      )}
+                                    </div>
+                                  </div>
+                                  {exercise.media_url && (
+                                    <div className="w-20 h-20 rounded overflow-hidden bg-muted border-2 border-primary">
+                                      {exercise.media_url.match(/\.(mp4|mov|avi|webm)$/i) ? (
+                                        <video
+                                          src={exercise.media_url}
+                                          className="w-full h-full object-cover"
+                                        />
+                                      ) : (
+                                        <img
+                                          src={exercise.media_url}
+                                          alt={exercise.name}
+                                          className="w-full h-full object-cover"
+                                        />
+                                      )}
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                  {selectedRoutineId && (
+                    <div className="sticky bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-orange-100 to-transparent dark:from-orange-950/50 border-t-2 border-orange-300 dark:border-orange-700">
+                      <Button
+                        size="lg"
+                        className="w-full bg-orange-600 hover:bg-orange-700 text-white shadow-lg"
+                        onClick={() => {
+                          const routine = sampleRoutines.find(r => r.id === selectedRoutineId);
+                          if (routine) {
                             handleLoadRoutine({ ...routine, id: routine.id });
                             setShowSampleLibrary(false);
-                          }}
-                        >
-                          <Check className="w-4 h-4 mr-2" />
-                          Use This Routine
-                        </Button>
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
+                            setSelectedRoutineId(null);
+                          }
+                        }}
+                      >
+                        <Check className="w-5 h-5 mr-2" />
+                        Load Selected Routine
+                      </Button>
+                    </div>
+                  )}
+                </>
               ) : (
                 <p className="text-center text-muted-foreground py-8">
                   No sample routines saved yet. Add your first sample routine!
