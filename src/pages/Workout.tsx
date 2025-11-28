@@ -18,6 +18,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import { formatDistance, parseDistance } from "@/lib/unitConversion";
 import { useNavigate } from "react-router-dom";
+import gymBackground from "@/assets/gym-background.jpg";
 
 interface ActivityLog {
   id: string;
@@ -858,12 +859,14 @@ const Workout = () => {
 
   return (
     <div className="space-y-6 max-w-4xl pb-20 md:pb-0 relative">
-      {/* Workout-themed background with dumbbell pattern */}
+      {/* Gym background image */}
       <div 
-        className="fixed inset-0 -z-10 pointer-events-none opacity-[0.03] dark:opacity-[0.02]"
+        className="fixed inset-0 -z-10 pointer-events-none opacity-[0.08] dark:opacity-[0.05]"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23000000' stroke-width='2'%3E%3Crect x='35' y='55' width='10' height='10'/%3E%3Crect x='75' y='55' width='10' height='10'/%3E%3Cline x1='45' y1='60' x2='75' y2='60'/%3E%3Crect x='30' y='50' width='5' height='20'/%3E%3Crect x='85' y='50' width='5' height='20'/%3E%3C/g%3E%3C/svg%3E")`,
-          backgroundSize: '120px 120px'
+          backgroundImage: `url(${gymBackground})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
         }}
       />
       <div className="fixed inset-0 -z-10 bg-gradient-to-br from-primary/5 via-background to-secondary/5 pointer-events-none" />
