@@ -98,6 +98,7 @@ const Dashboard = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-secondary/70 to-accent/60" />
         <div className="relative flex flex-col justify-center items-start p-6 md:p-10 py-8 md:py-10 text-white">
+          {/* Your Journey Badge */}
           <div className="flex items-center gap-2 mb-4 animate-float">
             <Zap className="w-5 h-5 text-white drop-shadow-glow" />
             <span className="text-xs md:text-sm font-semibold uppercase tracking-wider bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
@@ -105,7 +106,7 @@ const Dashboard = () => {
             </span>
           </div>
           
-          {/* Creative W shared between Wellio and Welcome */}
+          {/* Creative shared W design */}
           <div className="mb-4">
             <div className="flex items-start">
               <span className="text-8xl md:text-9xl font-black drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] leading-none -mr-2">W</span>
