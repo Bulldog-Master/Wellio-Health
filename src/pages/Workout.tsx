@@ -19,6 +19,7 @@ import { useUserPreferences } from "@/hooks/useUserPreferences";
 import { formatDistance, parseDistance } from "@/lib/unitConversion";
 import { useNavigate } from "react-router-dom";
 import gymBackground from "@/assets/gym-background.jpg";
+import workoutHero from "@/assets/workout-hero.jpg";
 
 interface ActivityLog {
   id: string;
@@ -858,8 +859,43 @@ const Workout = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-4xl pb-20 md:pb-0 relative">
-      {/* Gym background image */}
+    <div className="space-y-6 max-w-6xl mx-auto pb-20 md:pb-0 relative">
+      {/* Hero Section with Background Image */}
+      <div className="relative -mx-4 sm:-mx-6 lg:-mx-8 mb-8 rounded-b-3xl overflow-hidden">
+        <div 
+          className="absolute inset-0 -z-10"
+          style={{
+            backgroundImage: `url(${workoutHero})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
+        <div className="relative px-6 py-16 sm:py-20 text-white">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate("/")}
+            className="absolute top-4 left-4 hover:bg-white/10 text-white"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </Button>
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="p-4 bg-white/10 backdrop-blur-sm rounded-2xl">
+                <Dumbbell className="w-8 h-8 text-white" />
+              </div>
+              <div>
+                <h1 className="text-4xl sm:text-5xl font-bold mb-2">Workout Log</h1>
+                <p className="text-lg text-white/90">Track your exercises and build your routine library</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Subtle gym background for rest of page */}
       <div 
         className="fixed inset-0 -z-10 pointer-events-none opacity-[0.08] dark:opacity-[0.05]"
         style={{
@@ -870,26 +906,9 @@ const Workout = () => {
         }}
       />
       <div className="fixed inset-0 -z-10 bg-gradient-to-br from-primary/5 via-background to-secondary/5 pointer-events-none" />
-      <div className="flex items-center gap-4 mb-2">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => navigate("/")}
-          className="hover:bg-primary/10"
-        >
-          <ArrowLeft className="w-5 h-5" />
-        </Button>
-        <div className="flex items-center gap-3">
-          <div className="p-3 bg-primary/10 rounded-xl">
-            <Dumbbell className="w-6 h-6 text-primary" />
-          </div>
-          <div>
-            <h1 className="text-3xl font-bold">Workout Log</h1>
-            <p className="text-muted-foreground mt-1">Track your daily exercises</p>
-          </div>
-        </div>
-      </div>
-      <div className="flex gap-2 flex-wrap justify-end">
+      
+      <div className="max-w-4xl mx-auto px-4">
+      <div className="flex gap-2 flex-wrap justify-end mb-6">
         <Button variant="outline" className="gap-2" onClick={() => setShowLibrary(true)}>
           <Library className="w-4 h-4" />
           Personal Library
@@ -2148,6 +2167,7 @@ const Workout = () => {
         </DialogContent>
       </Dialog>
 
+    </div>
     </div>
   );
 };
