@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Calendar as CalendarIcon, ArrowLeft, Plus, Trash2, CheckCircle, Circle, GripVertical } from "lucide-react";
+import { Calendar as CalendarIcon, ArrowLeft, Plus, Trash2, CheckCircle, Circle, GripVertical, Edit } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { format } from "date-fns";
@@ -129,6 +129,7 @@ const WorkoutPrograms = () => {
   const [completions, setCompletions] = useState<Record<string, Completion[]>>({});
   const [loading, setLoading] = useState(true);
   const [showCreate, setShowCreate] = useState(false);
+  const [editingProgramId, setEditingProgramId] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -217,26 +218,44 @@ const WorkoutPrograms = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
-      const { error } = await supabase
-        .from('workout_programs')
-        .insert({
-          user_id: user.id,
-          name: formData.name,
-          description: formData.description || null,
-          duration_weeks: formData.duration_weeks,
-          start_date: format(new Date(), 'yyyy-MM-dd'),
-          workouts: formData.workouts
-        });
+      if (editingProgramId) {
+        // Update existing program
+        const { error } = await supabase
+          .from('workout_programs')
+          .update({
+            name: formData.name,
+            description: formData.description || null,
+            duration_weeks: formData.duration_weeks,
+            workouts: formData.workouts
+          })
+          .eq('id', editingProgramId);
 
-      if (error) throw error;
+        if (error) throw error;
+        toast.success('Program updated!');
+      } else {
+        // Create new program
+        const { error } = await supabase
+          .from('workout_programs')
+          .insert({
+            user_id: user.id,
+            name: formData.name,
+            description: formData.description || null,
+            duration_weeks: formData.duration_weeks,
+            start_date: format(new Date(), 'yyyy-MM-dd'),
+            workouts: formData.workouts
+          });
 
-      toast.success('Program created!');
+        if (error) throw error;
+        toast.success('Program created!');
+      }
+
       setShowCreate(false);
+      setEditingProgramId(null);
       setFormData({ name: "", description: "", duration_weeks: 4, workouts: [] });
       fetchPrograms();
     } catch (error) {
-      console.error('Error creating program:', error);
-      toast.error('Failed to create program');
+      console.error('Error saving program:', error);
+      toast.error('Failed to save program');
     }
   };
 
@@ -276,6 +295,17 @@ const WorkoutPrograms = () => {
       console.error('Error toggling completion:', error);
       toast.error('Failed to update completion');
     }
+  };
+
+  const handleEditProgram = (program: WorkoutProgram) => {
+    setFormData({
+      name: program.name,
+      description: program.description || "",
+      duration_weeks: program.duration_weeks,
+      workouts: program.workouts || []
+    });
+    setEditingProgramId(program.id);
+    setShowCreate(true);
   };
 
   const handleDeleteProgram = async (id: string) => {
@@ -333,7 +363,13 @@ const WorkoutPrograms = () => {
           <Button variant="outline" onClick={() => navigate("/workout-templates")}>
             Browse Templates
           </Button>
-          <Dialog open={showCreate} onOpenChange={setShowCreate}>
+          <Dialog open={showCreate} onOpenChange={(open) => {
+            setShowCreate(open);
+            if (!open) {
+              setEditingProgramId(null);
+              setFormData({ name: "", description: "", duration_weeks: 4, workouts: [] });
+            }
+          }}>
             <DialogTrigger asChild>
               <Button className="gap-2">
                 <Plus className="w-4 h-4" />
@@ -342,7 +378,7 @@ const WorkoutPrograms = () => {
             </DialogTrigger>
           <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle>Create Workout Program</DialogTitle>
+              <DialogTitle>{editingProgramId ? 'Edit' : 'Create'} Workout Program</DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
               <div>
@@ -405,7 +441,7 @@ const WorkoutPrograms = () => {
               </div>
 
               <Button onClick={handleCreateProgram} className="w-full">
-                Create Program
+                {editingProgramId ? 'Update' : 'Create'} Program
               </Button>
             </div>
           </DialogContent>
@@ -435,13 +471,22 @@ const WorkoutPrograms = () => {
                       {program.duration_weeks} weeks • Started {program.start_date ? format(new Date(program.start_date), 'MMM dd, yyyy') : 'Not started'}
                     </p>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => handleDeleteProgram(program.id)}
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleEditProgram(program)}
+                    >
+                      <Edit className="w-4 h-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleDeleteProgram(program.id)}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
 
                 <div className="mb-4">
