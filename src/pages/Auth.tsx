@@ -139,14 +139,19 @@ const Auth = () => {
 
           if (authSecret?.two_factor_enabled) {
             // Check if device is trusted
-            const { data: trustData } = await supabase.functions.invoke('device-trust', {
-              body: { 
-                action: 'check', 
-                deviceFingerprint 
-              }
-            });
+            const { data: trustedDevice } = await supabase
+              .from('trusted_devices')
+              .select('id')
+              .eq('user_id', data.user.id)
+              .eq('device_fingerprint', deviceFingerprint)
+              .maybeSingle();
 
-            if (trustData?.trusted) {
+            if (trustedDevice) {
+              // Update last_used_at
+              await supabase
+                .from('trusted_devices')
+                .update({ last_used_at: new Date().toISOString() })
+                .eq('id', trustedDevice.id);
               // Device is trusted, skip 2FA
               toast({
                 title: "Welcome back!",
@@ -284,13 +289,13 @@ const Auth = () => {
 
       // If user chose to remember device, trust it
       if (rememberDevice && deviceFingerprint) {
-        await supabase.functions.invoke('device-trust', {
-          body: { 
-            action: 'trust', 
-            deviceFingerprint,
-            deviceName: getDeviceName()
-          }
-        });
+        await supabase
+          .from('trusted_devices')
+          .insert({
+            user_id: pendingUserId,
+            device_fingerprint: deviceFingerprint,
+            device_name: getDeviceName()
+          });
       }
 
       if (useBackupCode && data.remainingCodes !== undefined) {
