@@ -123,6 +123,63 @@ const SortableWorkoutItem = ({ workout, idx, onUpdate, onDelete }: SortableWorko
   );
 };
 
+interface SortableProgramWorkoutProps {
+  id: string;
+  workout: any;
+  isCompleted: boolean;
+  onToggle: () => void;
+}
+
+const SortableProgramWorkout = ({ id, workout, isCompleted, onToggle }: SortableProgramWorkoutProps) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      className="flex items-center gap-2 p-2 border rounded-lg hover:bg-accent/50"
+    >
+      <button
+        {...attributes}
+        {...listeners}
+        className="cursor-grab active:cursor-grabbing p-1 hover:bg-accent rounded"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <GripVertical className="w-4 h-4 text-muted-foreground" />
+      </button>
+      <div
+        className="flex items-center gap-2 flex-1 cursor-pointer"
+        onClick={onToggle}
+      >
+        {isCompleted ? (
+          <CheckCircle className="w-5 h-5 text-green-500" />
+        ) : (
+          <Circle className="w-5 h-5 text-muted-foreground" />
+        )}
+        <div className="flex-1">
+          <p className="text-sm font-medium">{workout.name}</p>
+          <p className="text-xs text-muted-foreground">
+            Week {workout.week}, Day {workout.day}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const WorkoutPrograms = () => {
   const navigate = useNavigate();
   const [programs, setPrograms] = useState<WorkoutProgram[]>([]);
@@ -294,6 +351,40 @@ const WorkoutPrograms = () => {
     } catch (error) {
       console.error('Error toggling completion:', error);
       toast.error('Failed to update completion');
+    }
+  };
+
+  const handleProgramWorkoutReorder = async (event: DragEndEvent, programId: string) => {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+      const program = programs.find(p => p.id === programId);
+      if (!program) return;
+
+      const oldIndex = parseInt(active.id.toString().split('-workout-')[1]);
+      const newIndex = parseInt(over.id.toString().split('-workout-')[1]);
+
+      const reorderedWorkouts = arrayMove(program.workouts, oldIndex, newIndex);
+
+      // Update in database
+      try {
+        const { error } = await supabase
+          .from('workout_programs')
+          .update({ workouts: reorderedWorkouts })
+          .eq('id', programId);
+
+        if (error) throw error;
+
+        // Update local state
+        setPrograms(programs.map(p => 
+          p.id === programId ? { ...p, workouts: reorderedWorkouts } : p
+        ));
+
+        toast.success('Workout order updated');
+      } catch (error) {
+        console.error('Error reordering workouts:', error);
+        toast.error('Failed to reorder workouts');
+      }
     }
   };
 
@@ -499,34 +590,38 @@ const WorkoutPrograms = () => {
 
                 {program.workouts && program.workouts.length > 0 && (
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-sm">Workouts</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      {program.workouts.map((workout: any, idx: number) => {
-                        const isCompleted = completions[program.id]?.some(
-                          c => c.week_number === workout.week && c.day_number === workout.day
-                        );
+                    <h4 className="font-semibold text-sm flex items-center justify-between">
+                      <span>Workouts</span>
+                      <span className="text-xs text-muted-foreground font-normal">Drag to reorder</span>
+                    </h4>
+                    <DndContext
+                      sensors={sensors}
+                      collisionDetection={closestCenter}
+                      onDragEnd={(event) => handleProgramWorkoutReorder(event, program.id)}
+                    >
+                      <SortableContext
+                        items={program.workouts.map((_: any, idx: number) => `program-${program.id}-workout-${idx}`)}
+                        strategy={verticalListSortingStrategy}
+                      >
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                          {program.workouts.map((workout: any, idx: number) => {
+                            const isCompleted = completions[program.id]?.some(
+                              c => c.week_number === workout.week && c.day_number === workout.day
+                            );
 
-                        return (
-                          <div
-                            key={idx}
-                            className="flex items-center gap-2 p-2 border rounded-lg cursor-pointer hover:bg-accent/50"
-                            onClick={() => handleToggleCompletion(program.id, workout.week, workout.day)}
-                          >
-                            {isCompleted ? (
-                              <CheckCircle className="w-5 h-5 text-green-500" />
-                            ) : (
-                              <Circle className="w-5 h-5 text-muted-foreground" />
-                            )}
-                            <div className="flex-1">
-                              <p className="text-sm font-medium">{workout.name}</p>
-                              <p className="text-xs text-muted-foreground">
-                                Week {workout.week}, Day {workout.day}
-                              </p>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
+                            return (
+                              <SortableProgramWorkout
+                                key={`program-${program.id}-workout-${idx}`}
+                                id={`program-${program.id}-workout-${idx}`}
+                                workout={workout}
+                                isCompleted={isCompleted}
+                                onToggle={() => handleToggleCompletion(program.id, workout.week, workout.day)}
+                              />
+                            );
+                          })}
+                        </div>
+                      </SortableContext>
+                    </DndContext>
                   </div>
                 )}
               </Card>
