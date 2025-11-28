@@ -1,4 +1,4 @@
-import { Activity, Flame, Target, TrendingUp, Droplets, Moon, Camera, Zap } from "lucide-react";
+import { Activity, Flame, Target, TrendingUp, Droplets, Moon, Camera, Zap, HeartPulse } from "lucide-react";
 import MetricCard from "@/components/MetricCard";
 import ActivityRings from "@/components/ActivityRings";
 import { StreakTracker } from "@/components/StreakTracker";
@@ -98,20 +98,23 @@ const Dashboard = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-secondary/70 to-accent/60" />
         <div className="relative h-full flex flex-col justify-center items-start p-6 md:p-10 text-white">
-          <div className="mb-6">
-            <h1 className="text-5xl md:text-7xl font-black mb-2 drop-shadow-[0_0_30px_rgba(255,255,255,0.5)] tracking-tight">
-              Wellio
-            </h1>
-            <div className="flex items-center gap-2 animate-float">
+          <div className="mb-4">
+            <div className="flex items-center gap-2 mb-3 animate-float">
               <Zap className="w-6 h-6 text-white drop-shadow-glow" />
               <span className="text-sm font-semibold uppercase tracking-wider bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
                 Your Journey
               </span>
             </div>
+            <h1 className="text-7xl md:text-8xl lg:text-9xl font-black mb-4 drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] tracking-tighter leading-none">
+              Wellio
+            </h1>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-3 drop-shadow-lg">
-            Welcome back!
-          </h2>
+          <div className="flex items-center gap-3 mb-3">
+            <HeartPulse className="w-8 h-8 md:w-10 md:h-10 text-white drop-shadow-glow animate-pulse" />
+            <h2 className="text-3xl md:text-5xl font-bold drop-shadow-lg">
+              Welcome back!
+            </h2>
+          </div>
           <p className="text-lg md:text-xl text-white/95 mb-6 max-w-2xl drop-shadow-md">
             Your fitness stats are looking great today. Keep pushing forward!
           </p>
