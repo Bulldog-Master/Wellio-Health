@@ -1190,7 +1190,13 @@ const Workout = () => {
                   {workoutRoutines.map((routine) => (
                     <AccordionItem key={routine.id} value={routine.id} className="border rounded-lg px-4 bg-card">
                       <div className="flex items-center justify-between">
-                        <AccordionTrigger className="flex-1 hover:no-underline py-4">
+                        <div 
+                          className="flex-1 py-4 cursor-pointer hover:opacity-80 transition-opacity"
+                          onClick={() => {
+                            handleLoadRoutine(routine);
+                            setShowLibrary(false);
+                          }}
+                        >
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
                               <Dumbbell className="w-5 h-5 text-purple-600" />
@@ -1210,21 +1216,9 @@ const Workout = () => {
                               </p>
                             </div>
                           </div>
-                        </AccordionTrigger>
+                        </div>
                         <div className="flex gap-1 ml-2">
-                          <Button
-                            variant="default"
-                            size="sm"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleLoadRoutine(routine);
-                              setShowLibrary(false);
-                            }}
-                            className="bg-primary hover:bg-primary/90"
-                          >
-                            <Check className="w-4 h-4 mr-1" />
-                            Use
-                          </Button>
+                          <AccordionTrigger className="p-2 hover:bg-accent/50 rounded" />
                           <Button
                             variant="ghost"
                             size="icon"
@@ -1363,7 +1357,13 @@ const Workout = () => {
                   {getSortedSampleRoutines().map((routine) => (
                     <AccordionItem key={routine.id} value={routine.id} className="border rounded-lg px-4 bg-card">
                       <div className="flex items-center justify-between">
-                        <AccordionTrigger className="flex-1 hover:no-underline py-4">
+                        <div 
+                          className="flex-1 py-4 cursor-pointer hover:opacity-80 transition-opacity"
+                          onClick={() => {
+                            handleLoadRoutine({ ...routine, id: routine.id });
+                            setShowSampleLibrary(false);
+                          }}
+                        >
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
                               <BookOpen className="w-5 h-5 text-orange-600" />
@@ -1390,21 +1390,9 @@ const Workout = () => {
                               </div>
                             </div>
                           </div>
-                        </AccordionTrigger>
+                        </div>
                         <div className="flex gap-1 ml-2">
-                          <Button
-                            variant="default"
-                            size="sm"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleLoadRoutine({ ...routine, id: routine.id });
-                              setShowSampleLibrary(false);
-                            }}
-                            className="bg-primary hover:bg-primary/90"
-                          >
-                            <Check className="w-4 h-4 mr-1" />
-                            Use
-                          </Button>
+                          <AccordionTrigger className="p-2 hover:bg-accent/50 rounded" />
                           <Button
                             variant="ghost"
                             size="icon"
