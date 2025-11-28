@@ -1676,25 +1676,26 @@ const Workout = () => {
         <div className="space-y-4">
           <div>
             <Label htmlFor="exercise">Activity Type</Label>
-            <Select value={exercise} onValueChange={setExercise}>
-              <SelectTrigger className="w-full mt-1.5">
-                <SelectValue placeholder="Select activity type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Running">Running</SelectItem>
-                <SelectItem value="Cycling">Cycling</SelectItem>
-                <SelectItem value="Swimming">Swimming</SelectItem>
-                <SelectItem value="Walking">Walking</SelectItem>
-                <SelectItem value="Weightlifting">Weightlifting</SelectItem>
-                <SelectItem value="Yoga">Yoga</SelectItem>
-                <SelectItem value="HIIT">HIIT</SelectItem>
-                <SelectItem value="Other">Other</SelectItem>
-              </SelectContent>
-            </Select>
+            <select
+              id="exercise"
+              value={exercise}
+              onChange={(e) => setExercise(e.target.value)}
+              className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 mt-1.5"
+            >
+              <option value="">Select activity type</option>
+              <option value="Running">Running</option>
+              <option value="Cycling">Cycling</option>
+              <option value="Swimming">Swimming</option>
+              <option value="Walking">Walking</option>
+              <option value="Weightlifting">Weightlifting</option>
+              <option value="Yoga">Yoga</option>
+              <option value="HIIT">HIIT</option>
+              <option value="Other">Other</option>
+            </select>
             <Input
               className="mt-2"
               placeholder="Or type custom activity..."
-              value={exercise && !["Running", "Cycling", "Swimming", "Walking", "Weightlifting", "Yoga", "HIIT", "Other"].includes(exercise) ? exercise : ""}
+              value={exercise && !["Running", "Cycling", "Swimming", "Walking", "Weightlifting", "Yoga", "HIIT", "Other", ""].includes(exercise) ? exercise : ""}
               onChange={(e) => setExercise(e.target.value)}
             />
           </div>
