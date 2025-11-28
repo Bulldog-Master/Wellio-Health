@@ -38,14 +38,28 @@ const TrustedDevices = () => {
 
   const fetchDevices = async () => {
     try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast({
+          title: "Error",
+          description: "You must be logged in to view trusted devices",
+          variant: "destructive",
+        });
+        return;
+      }
+
       const { data, error } = await supabase.functions.invoke('device-trust', {
         body: { action: 'list' }
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Edge function error:', error);
+        throw error;
+      }
 
       setDevices(data?.devices || []);
     } catch (error: any) {
+      console.error('Fetch devices error:', error);
       toast({
         title: "Error",
         description: error.message || "Failed to fetch trusted devices",
@@ -60,14 +74,27 @@ const TrustedDevices = () => {
     if (!deleteDeviceId) return;
 
     try {
-      const { error } = await supabase.functions.invoke('device-trust', {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast({
+          title: "Error",
+          description: "You must be logged in to remove devices",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const { data, error } = await supabase.functions.invoke('device-trust', {
         body: { 
           action: 'remove',
           deviceId: deleteDeviceId 
         }
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Edge function error:', error);
+        throw error;
+      }
 
       setDevices(devices.filter(d => d.id !== deleteDeviceId));
       
@@ -78,6 +105,7 @@ const TrustedDevices = () => {
       
       setDeleteDeviceId(null);
     } catch (error: any) {
+      console.error('Remove device error:', error);
       toast({
         title: "Error",
         description: error.message || "Failed to remove device",

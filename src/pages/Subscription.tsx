@@ -75,27 +75,28 @@ const Subscription = () => {
   return (
     <div className="container mx-auto px-4 py-8 pb-20 md:pb-8">
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-center gap-4 mb-8">
+        <div className="mb-8">
           <Button
             variant="ghost"
             size="icon"
             onClick={() => navigate("/settings")}
+            className="mb-4"
           >
             <ArrowLeft className="w-5 h-5" />
           </Button>
-        </div>
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Choose Your Plan</h1>
-          <p className="text-muted-foreground text-lg">
-            Unlock your full potential with premium features
-          </p>
-          {subscription && (
-            <div className="mt-4">
-              <Badge variant="secondary" className="text-lg px-4 py-2">
-                Current Plan: {tier.toUpperCase()}
-              </Badge>
-            </div>
-          )}
+          <div className="text-center">
+            <h1 className="text-4xl font-bold mb-4">Choose Your Plan</h1>
+            <p className="text-muted-foreground text-lg">
+              Unlock your full potential with premium features
+            </p>
+            {subscription && (
+              <div className="mt-4">
+                <Badge variant="secondary" className="text-lg px-4 py-2">
+                  Current Plan: {tier.toUpperCase()}
+                </Badge>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
