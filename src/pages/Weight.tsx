@@ -673,37 +673,44 @@ const Weight = () => {
                 }}
                 content={(props) => {
                   const { payload } = props;
+                  const items = [];
+                  
+                  payload?.forEach((entry: any, index: number) => {
+                    items.push(
+                      <div key={`legend-${index}`} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <div style={{ 
+                          width: '14px', 
+                          height: '14px', 
+                          backgroundColor: entry.color,
+                          borderRadius: '2px'
+                        }} />
+                        <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{entry.value}</span>
+                      </div>
+                    );
+                    
+                    if (entry.value === "Evening" && chartView === "daily" && targetWeight) {
+                      items.push(
+                        <div key="target-weight" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <svg width="20" height="14" style={{ display: 'block' }}>
+                            <line 
+                              x1="0" 
+                              y1="7" 
+                              x2="20" 
+                              y2="7" 
+                              stroke="hsl(0, 85%, 60%)" 
+                              strokeWidth="2"
+                              strokeDasharray="4 2"
+                            />
+                          </svg>
+                          <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>Target Weight</span>
+                        </div>
+                      );
+                    }
+                  });
+                  
                   return (
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', paddingTop: '20px', flexWrap: 'wrap' }}>
-                      {payload?.map((entry: any, index: number) => (
-                        <>
-                          <div key={`item-${index}`} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <div style={{ 
-                              width: '14px', 
-                              height: '14px', 
-                              backgroundColor: entry.color,
-                              borderRadius: '2px'
-                            }} />
-                            <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{entry.value}</span>
-                          </div>
-                          {entry.value === "Evening" && chartView === "daily" && targetWeight && (
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                              <svg width="20" height="14" style={{ display: 'block' }}>
-                                <line 
-                                  x1="0" 
-                                  y1="7" 
-                                  x2="20" 
-                                  y2="7" 
-                                  stroke="hsl(0, 85%, 60%)" 
-                                  strokeWidth="2"
-                                  strokeDasharray="4 2"
-                                />
-                              </svg>
-                              <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>Target Weight</span>
-                            </div>
-                          )}
-                        </>
-                      ))}
+                      {items}
                     </div>
                   );
                 }}
