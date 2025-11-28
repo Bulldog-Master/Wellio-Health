@@ -2074,14 +2074,15 @@ const Workout = () => {
               No workouts logged {viewFilter === 'today' ? 'today' : `in the selected period`}. Start by adding one above!
             </p>
           ) : (
-            activityLogs.map((log) => (
+            activityLogs.map((log) => {
+              console.log('Workout log:', { id: log.id, activity_type: log.activity_type, logged_at: log.logged_at });
+              return (
               <div key={log.id} className="p-4 bg-secondary rounded-lg">
                 <div className="flex items-start justify-between mb-2">
                   <div className="flex-1">
-                    <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-3 flex-wrap mb-2">
                       <h4 className="font-semibold text-lg">{log.activity_type}</h4>
-                      <span className="text-sm text-muted-foreground">•</span>
-                      <span className="text-sm font-medium text-foreground">
+                      <span className="px-2 py-1 bg-primary/10 text-primary rounded text-sm font-medium">
                         {log.logged_at ? format(new Date(log.logged_at), 'MMM d, yyyy') : 'No date'}
                       </span>
                     </div>
@@ -2156,7 +2157,8 @@ const Workout = () => {
                   </div>
                 </div>
               </div>
-            ))
+            );
+            })
           )}
         </div>
       </Card>
