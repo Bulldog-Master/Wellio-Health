@@ -567,33 +567,33 @@ const Auth = () => {
 
   return (
     <div className="min-h-screen grid lg:grid-cols-2 overflow-hidden">
-      {/* Left side - Hero Image */}
-      <div className="hidden lg:block relative">
+      {/* Left side - Hero Image - NOW VISIBLE ON ALL SCREENS */}
+      <div className="relative lg:block">
         <img 
           src={authHero} 
           alt="Fitness inspiration" 
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-secondary/70 to-accent/60" />
-        <div className="absolute bottom-0 left-0 right-0 p-12 text-white">
-          <div className="mb-6">
-            <div className="flex items-center gap-2 mb-4 animate-float">
-              <Zap className="w-6 h-6 text-white drop-shadow-glow" />
-              <span className="text-sm font-semibold uppercase tracking-wider bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 text-white">
+          <div className="mb-4 md:mb-6">
+            <div className="flex items-center gap-2 mb-3 md:mb-4 animate-float">
+              <Zap className="w-5 h-5 md:w-6 md:h-6 text-white drop-shadow-glow" />
+              <span className="text-xs md:text-sm font-semibold uppercase tracking-wider bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
                 Your Journey
               </span>
             </div>
-            <h1 className="text-6xl md:text-7xl font-black mb-3 drop-shadow-[0_0_30px_rgba(255,255,255,0.5)] tracking-tight">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-2 md:mb-3 drop-shadow-[0_0_30px_rgba(255,255,255,0.5)] tracking-tight">
               Wellio
             </h1>
           </div>
-          <div className="flex items-center gap-3 mb-4">
-            <HeartPulse className="w-8 h-8 text-white drop-shadow-glow" />
-            <h2 className="text-4xl md:text-5xl font-bold drop-shadow-lg">
+          <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
+            <HeartPulse className="w-6 h-6 md:w-8 md:h-8 text-white drop-shadow-glow" />
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold drop-shadow-lg">
               Welcome back!
             </h2>
           </div>
-          <p className="text-lg text-white/95 max-w-md drop-shadow-md">
+          <p className="text-base md:text-lg text-white/95 max-w-md drop-shadow-md">
             Your fitness stats are looking great today. Keep pushing forward!
           </p>
         </div>
