@@ -35,39 +35,40 @@ const Food = () => {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => navigate("/")}
-        className="gap-2 mb-2"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Back to Dashboard
-      </Button>
-      <div className="flex items-center gap-3">
-        <div className="p-3 bg-primary/10 rounded-xl">
-          <Utensils className="w-6 h-6 text-primary" />
-        </div>
-        <div>
-          <h1 className="text-3xl font-bold">Food</h1>
-          <p className="text-muted-foreground">Manage your nutrition and recipes</p>
+      <div className="flex items-center gap-4 mb-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate("/")}
+          className="hover:bg-primary/10"
+        >
+          <ArrowLeft className="w-5 h-5" />
+        </Button>
+        <div className="flex items-center gap-3">
+          <div className="p-3 bg-primary/10 rounded-xl">
+            <Utensils className="w-6 h-6 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold">Food</h1>
+            <p className="text-muted-foreground mt-1">Manage your nutrition and recipes</p>
+          </div>
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-3">
         {menuItems.map((item) => (
           <Card
             key={item.path}
-            className="p-6 cursor-pointer transition-all hover:shadow-lg hover:scale-105 bg-gradient-card"
+            className="p-6 cursor-pointer hover:shadow-xl hover:border-primary/20 transition-all duration-300 group"
             onClick={() => navigate(item.path)}
           >
-            <div className="flex items-start gap-4">
-              <div className={`p-3 ${item.bgColor} rounded-xl`}>
-                <item.icon className={`w-6 h-6 ${item.color}`} />
+            <div className="flex flex-col items-center text-center gap-4">
+              <div className={`p-4 ${item.bgColor} rounded-2xl transition-all duration-300 group-hover:scale-110`}>
+                <item.icon className={`w-8 h-8 ${item.color}`} />
               </div>
-              <div className="flex-1">
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-muted-foreground">{item.description}</p>
+              <div>
+                <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">{item.title}</h3>
+                <p className="text-sm text-muted-foreground">{item.description}</p>
               </div>
             </div>
           </Card>

@@ -71,17 +71,18 @@ const SettingsMenu = () => {
 
   return (
     <div className="space-y-6 pb-20 md:pb-0">
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 mb-2">
         <Button
           variant="ghost"
           size="icon"
           onClick={() => navigate("/profile")}
+          className="hover:bg-primary/10"
         >
           <ArrowLeft className="w-5 h-5" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold mb-2">Settings</h1>
-          <p className="text-muted-foreground">Account preferences and configuration</p>
+          <h1 className="text-3xl font-bold">Settings</h1>
+          <p className="text-muted-foreground mt-1">Account preferences and configuration</p>
         </div>
       </div>
 
@@ -89,27 +90,25 @@ const SettingsMenu = () => {
         {settingsItems.map((item) => (
           <Card
             key={item.path}
-            className="p-4 hover:bg-accent/50 transition-colors cursor-pointer"
+            className="p-6 hover:shadow-xl hover:border-primary/20 transition-all duration-300 cursor-pointer group"
             onClick={() => navigate(item.path)}
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className={`p-2 ${item.iconBg} rounded-lg`}>
-                  <item.icon className={`w-5 h-5 ${item.iconColor}`} />
+                <div className={`p-3 ${item.iconBg} rounded-xl transition-all duration-300 group-hover:scale-110`}>
+                  <item.icon className={`w-6 h-6 ${item.iconColor}`} />
                 </div>
                 <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-semibold">{item.title}</h3>
-                    {item.badge && (
-                      <Badge variant="secondary" className="text-xs uppercase">
-                        {item.badge}
-                      </Badge>
-                    )}
-                  </div>
+                  <h3 className="font-semibold text-lg mb-1 group-hover:text-primary transition-colors">{item.title}</h3>
                   <p className="text-sm text-muted-foreground">{item.description}</p>
+                  {item.badge && (
+                    <Badge variant="outline" className="mt-2 inline-block capitalize border-primary/30 bg-primary/5 text-primary">
+                      {item.badge}
+                    </Badge>
+                  )}
                 </div>
               </div>
-              <ChevronRight className="w-5 h-5 text-muted-foreground" />
+              <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
             </div>
           </Card>
         ))}

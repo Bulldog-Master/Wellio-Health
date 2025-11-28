@@ -850,46 +850,46 @@ const Workout = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-4xl">
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => navigate("/")}
-        className="gap-2 mb-2"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Back to Dashboard
-      </Button>
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 max-w-4xl pb-20 md:pb-0">
+      <div className="flex items-center gap-4 mb-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate("/")}
+          className="hover:bg-primary/10"
+        >
+          <ArrowLeft className="w-5 h-5" />
+        </Button>
         <div className="flex items-center gap-3">
           <div className="p-3 bg-primary/10 rounded-xl">
             <Dumbbell className="w-6 h-6 text-primary" />
           </div>
           <div>
             <h1 className="text-3xl font-bold">Workout Log</h1>
-            <p className="text-muted-foreground">Track your daily exercises</p>
+            <p className="text-muted-foreground mt-1">Track your daily exercises</p>
           </div>
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline" className="gap-2" onClick={() => setShowLibrary(true)}>
-            <Library className="w-4 h-4" />
-            Personal Library
-          </Button>
-          <Button variant="outline" className="gap-2" onClick={() => setShowSampleLibrary(true)}>
-            <BookOpen className="w-4 h-4" />
-            Sample Library
-          </Button>
-          <Button variant="outline" className="gap-2" onClick={() => setShowAppsLibrary(true)}>
-            <Smartphone className="w-4 h-4" />
-            Apps
-          </Button>
-          <Dialog open={showRoutineDialog} onOpenChange={setShowRoutineDialog}>
-            <DialogTrigger asChild>
-              <Button variant="outline" className="gap-2">
-                <Plus className="w-4 h-4" />
-                Create Routine
-              </Button>
-            </DialogTrigger>
+      </div>
+      <div className="flex gap-2 flex-wrap justify-end">
+        <Button variant="outline" className="gap-2" onClick={() => setShowLibrary(true)}>
+          <Library className="w-4 h-4" />
+          Personal Library
+        </Button>
+        <Button variant="outline" className="gap-2" onClick={() => setShowSampleLibrary(true)}>
+          <BookOpen className="w-4 h-4" />
+          Sample Library
+        </Button>
+        <Button variant="outline" className="gap-2" onClick={() => setShowAppsLibrary(true)}>
+          <Smartphone className="w-4 h-4" />
+          Apps
+        </Button>
+        <Dialog open={showRoutineDialog} onOpenChange={setShowRoutineDialog}>
+          <DialogTrigger asChild>
+            <Button variant="outline" className="gap-2">
+              <Plus className="w-4 h-4" />
+              Create Routine
+            </Button>
+          </DialogTrigger>
           <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-2 border-blue-200 dark:border-blue-800 shadow-2xl">
             <DialogHeader>
               <DialogTitle className="text-2xl text-blue-900 dark:text-blue-100">{editingRoutineId ? "Edit Routine" : "Create New Routine"}</DialogTitle>
@@ -1544,26 +1544,34 @@ const Workout = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card className="p-6 bg-gradient-card shadow-md">
-          <div className="flex items-center gap-2 mb-2">
-            <Clock className="w-5 h-5 text-primary" />
-            <h3 className="text-lg font-semibold">Total Duration</h3>
+        <Card className="p-6 hover:shadow-xl transition-all duration-300">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2">
+              <div className="p-2 bg-primary/10 rounded-xl">
+                <Clock className="w-5 h-5 text-primary" />
+              </div>
+              <h3 className="text-lg font-semibold">Total Duration</h3>
+            </div>
           </div>
           <p className="text-4xl font-bold text-primary mb-2">{totalDuration} min</p>
           <p className="text-muted-foreground">Active time today</p>
         </Card>
 
-        <Card className="p-6 bg-gradient-primary text-primary-foreground shadow-glow">
-          <div className="flex items-center gap-2 mb-2">
-            <Flame className="w-5 h-5" />
-            <h3 className="text-lg font-semibold">Calories Burned</h3>
+        <Card className="p-6 bg-gradient-primary text-primary-foreground hover:shadow-glow transition-all duration-300">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2">
+              <div className="p-2 bg-white/20 rounded-xl">
+                <Flame className="w-5 h-5" />
+              </div>
+              <h3 className="text-lg font-semibold">Calories Burned</h3>
+            </div>
           </div>
           <p className="text-4xl font-bold mb-2">{totalCalories}</p>
           <p className="opacity-90">Through exercise</p>
         </Card>
       </div>
 
-      <Card className="p-6 bg-gradient-card shadow-md">
+      <Card className="p-6 hover:shadow-xl transition-all duration-300">
         <h3 className="text-lg font-semibold mb-6">
           {editingWorkout ? "Edit Workout" : "Log Workout"}
         </h3>
@@ -1713,8 +1721,13 @@ const Workout = () => {
         </div>
       </Card>
 
-      <Card className="p-6 bg-gradient-card shadow-md">
-        <h3 className="text-lg font-semibold mb-4">Today's Workouts</h3>
+      <Card className="p-6 hover:shadow-xl transition-all duration-300">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-xl">
+            <ListOrdered className="w-5 h-5 text-primary" />
+          </div>
+          <h3 className="text-lg font-semibold">Today's Workouts</h3>
+        </div>
         <div className="space-y-3">
           {isLoading ? (
             <p className="text-center text-muted-foreground py-8">Loading...</p>
