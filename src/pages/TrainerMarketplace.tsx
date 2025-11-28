@@ -10,6 +10,7 @@ import { Star, MapPin, Search, Award, DollarSign, Users, Calendar } from "lucide
 import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNavigate } from "react-router-dom";
+import { SubscriptionGate } from "@/components/SubscriptionGate";
 
 interface TrainerProfile {
   id: string;
@@ -125,7 +126,8 @@ const TrainerMarketplace = () => {
   }
 
   return (
-    <div className="space-y-6 max-w-7xl">
+    <SubscriptionGate feature="trainer_search">
+      <div className="space-y-6 max-w-7xl">
       <div className="flex items-center gap-3">
         <div className="p-3 bg-primary/10 rounded-xl">
           <Users className="w-6 h-6 text-primary" />
@@ -282,6 +284,7 @@ const TrainerMarketplace = () => {
         </Card>
       )}
     </div>
+    </SubscriptionGate>
   );
 };
 

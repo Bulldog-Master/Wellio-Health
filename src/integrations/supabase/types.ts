@@ -2764,6 +2764,72 @@ export type Database = {
           },
         ]
       }
+      subscription_features: {
+        Row: {
+          created_at: string | null
+          feature_key: string
+          feature_value: string
+          id: string
+          tier: Database["public"]["Enums"]["subscription_tier"]
+        }
+        Insert: {
+          created_at?: string | null
+          feature_key: string
+          feature_value: string
+          id?: string
+          tier: Database["public"]["Enums"]["subscription_tier"]
+        }
+        Update: {
+          created_at?: string | null
+          feature_key?: string
+          feature_value?: string
+          id?: string
+          tier?: Database["public"]["Enums"]["subscription_tier"]
+        }
+        Relationships: []
+      }
+      subscriptions: {
+        Row: {
+          cancel_at_period_end: boolean | null
+          created_at: string | null
+          current_period_end: string | null
+          current_period_start: string | null
+          id: string
+          status: string
+          stripe_customer_id: string | null
+          stripe_subscription_id: string | null
+          tier: Database["public"]["Enums"]["subscription_tier"]
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          cancel_at_period_end?: boolean | null
+          created_at?: string | null
+          current_period_end?: string | null
+          current_period_start?: string | null
+          id?: string
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          tier?: Database["public"]["Enums"]["subscription_tier"]
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          cancel_at_period_end?: boolean | null
+          created_at?: string | null
+          current_period_end?: string | null
+          current_period_start?: string | null
+          id?: string
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          tier?: Database["public"]["Enums"]["subscription_tier"]
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       supplements: {
         Row: {
           category: string | null
@@ -3390,6 +3456,7 @@ export type Database = {
     }
     Enums: {
       app_role: "user" | "trainer" | "creator" | "admin"
+      subscription_tier: "free" | "pro" | "enterprise"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -3518,6 +3585,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["user", "trainer", "creator", "admin"],
+      subscription_tier: ["free", "pro", "enterprise"],
     },
   },
 } as const

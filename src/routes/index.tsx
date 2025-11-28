@@ -74,6 +74,7 @@ const Install = lazy(() => import("@/pages/Install"));
 const PWAFeatures = lazy(() => import("@/pages/PWAFeatures"));
 const Fundraisers = lazy(() => import("@/pages/Fundraisers"));
 const FundraiserDetail = lazy(() => import("@/pages/FundraiserDetail"));
+const Subscription = lazy(() => import("@/pages/Subscription"));
 
 /**
  * Application route configuration
@@ -171,6 +172,7 @@ export const AppRoutes = () => (
     <Route path="/calendar" element={<ProtectedRoute><Layout><EventCalendar /></Layout></ProtectedRoute>} />
     <Route path="/voice-notes" element={<ProtectedRoute><Layout><VoiceNotes /></Layout></ProtectedRoute>} />
     <Route path="/pwa-features" element={<ProtectedRoute><Layout><PWAFeatures /></Layout></ProtectedRoute>} />
+    <Route path="/subscription" element={<ProtectedRoute><Layout><Subscription /></Layout></ProtectedRoute>} />
     
     {/* 404 */}
     <Route path="*" element={<NotFound />} />

@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { SubscriptionGate } from "@/components/SubscriptionGate";
 
 interface AIInsight {
   id: string;
@@ -165,7 +166,8 @@ const AIInsights = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-4xl">
+    <SubscriptionGate feature="ai_insights">
+      <div className="space-y-6 max-w-4xl">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="p-3 bg-primary/10 rounded-xl">
@@ -314,6 +316,7 @@ const AIInsights = () => {
         </TabsContent>
       </Tabs>
     </div>
+    </SubscriptionGate>
   );
 };
 
