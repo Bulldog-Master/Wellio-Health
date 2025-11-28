@@ -97,7 +97,7 @@ const Dashboard = () => {
           className="absolute inset-0 w-full h-full object-cover rounded-2xl"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-secondary/70 to-accent/60 rounded-2xl" />
-        <div className="relative h-full flex flex-col justify-center items-start p-6 md:p-10 pb-10 md:pb-14 text-white">
+        <div className="relative min-h-[28rem] md:min-h-[32rem] flex flex-col justify-center items-start p-6 md:p-10 text-white">{" "}
           <div className="mb-4">
             <div className="flex items-center gap-2 mb-3 animate-float">
               <Zap className="w-6 h-6 text-white drop-shadow-glow" />
