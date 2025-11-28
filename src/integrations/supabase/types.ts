@@ -931,6 +931,7 @@ export type Database = {
           title: string
           updated_at: string | null
           user_id: string
+          verified: boolean | null
         }
         Insert: {
           category: string
@@ -946,6 +947,7 @@ export type Database = {
           title: string
           updated_at?: string | null
           user_id: string
+          verified?: boolean | null
         }
         Update: {
           category?: string
@@ -961,6 +963,7 @@ export type Database = {
           title?: string
           updated_at?: string | null
           user_id?: string
+          verified?: boolean | null
         }
         Relationships: []
       }

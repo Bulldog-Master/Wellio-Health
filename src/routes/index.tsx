@@ -73,6 +73,7 @@ const Dashboard = lazy(() => import("@/pages/Dashboard"));
 const Install = lazy(() => import("@/pages/Install"));
 const PWAFeatures = lazy(() => import("@/pages/PWAFeatures"));
 const Fundraisers = lazy(() => import("@/pages/Fundraisers"));
+const FundraiserDetail = lazy(() => import("@/pages/FundraiserDetail"));
 
 /**
  * Application route configuration
@@ -158,6 +159,7 @@ export const AppRoutes = () => (
     <Route path="/progress-challenges" element={<ProtectedRoute><ProgressChallenges /></ProtectedRoute>} />
     <Route path="/progress-challenge/:challengeId" element={<ProtectedRoute><ProgressChallengeDetail /></ProtectedRoute>} />
     <Route path="/fundraisers" element={<ProtectedRoute><Layout><Fundraisers /></Layout></ProtectedRoute>} />
+    <Route path="/fundraiser/:id" element={<ProtectedRoute><Layout><FundraiserDetail /></Layout></ProtectedRoute>} />
     
     {/* Trainer & Creator */}
     <Route path="/trainer/marketplace" element={<ProtectedRoute><Layout><TrainerMarketplace /></Layout></ProtectedRoute>} />
