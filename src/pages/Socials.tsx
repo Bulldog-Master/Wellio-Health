@@ -3,10 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Users, Plus, Trash2, Instagram, Youtube, Twitter, ExternalLink } from "lucide-react";
+import { Users, Plus, Trash2, Instagram, Youtube, Twitter, ExternalLink, ArrowLeft } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 interface SocialConnection {
   id: string;
@@ -18,6 +19,7 @@ interface SocialConnection {
 
 const Socials = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [connections, setConnections] = useState<SocialConnection[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -144,6 +146,17 @@ const Socials = () => {
 
   return (
     <div className="space-y-6 max-w-4xl">
+      <div className="flex items-center gap-3 mb-4">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate("/")}
+          aria-label="Back to Dashboard"
+        >
+          <ArrowLeft className="w-5 h-5" />
+        </Button>
+      </div>
+      
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="p-3 bg-primary/10 rounded-xl">
