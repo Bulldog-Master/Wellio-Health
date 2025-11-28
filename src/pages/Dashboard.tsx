@@ -97,23 +97,26 @@ const Dashboard = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-secondary/70 to-accent/60" />
-        <div className="relative flex flex-col justify-center items-start p-6 md:p-10 py-12 md:py-16 text-white">{" "}
-          <div className="mb-4">
-            <div className="flex items-center gap-2 mb-3 animate-float">
-              <Zap className="w-6 h-6 text-white drop-shadow-glow" />
-              <span className="text-sm font-semibold uppercase tracking-wider bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
-                Your Journey
-              </span>
-            </div>
-            <h1 className="text-7xl md:text-8xl lg:text-9xl font-black mb-4 drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] tracking-tighter leading-none">
-              Wellio
-            </h1>
+        <div className="relative flex flex-col justify-center items-start p-6 md:p-10 py-8 md:py-10 text-white">
+          <div className="flex items-center gap-2 mb-4 animate-float">
+            <Zap className="w-5 h-5 text-white drop-shadow-glow" />
+            <span className="text-xs md:text-sm font-semibold uppercase tracking-wider bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+              Your Journey
+            </span>
           </div>
-          <div className="flex items-center gap-3 mb-3">
-            <HeartPulse className="w-8 h-8 md:w-10 md:h-10 text-white drop-shadow-glow animate-pulse" />
-            <h2 className="text-3xl md:text-5xl font-bold drop-shadow-lg">
-              Welcome back!
-            </h2>
+          
+          {/* Creative W shared between Wellio and Welcome */}
+          <div className="mb-4">
+            <div className="flex items-start">
+              <span className="text-8xl md:text-9xl font-black drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] leading-none -mr-2">W</span>
+              <div className="flex flex-col">
+                <span className="text-4xl md:text-5xl font-black drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] leading-none">ellio</span>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="text-4xl md:text-5xl font-black drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] leading-none">elcome back!</span>
+                  <HeartPulse className="w-7 h-7 md:w-8 md:h-8 text-white drop-shadow-glow animate-pulse flex-shrink-0" />
+                </div>
+              </div>
+            </div>
           </div>
           <p className="text-lg md:text-xl text-white/95 mb-6 max-w-2xl drop-shadow-md">
             Your fitness stats are looking great today. Keep pushing forward!
