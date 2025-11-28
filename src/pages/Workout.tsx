@@ -124,8 +124,16 @@ const Workout = () => {
   // Ensure scroll is unlocked when popover closes
   useEffect(() => {
     if (!activityTypeOpen) {
+      // Force cleanup of any scroll locks
       document.body.style.overflow = 'unset';
       document.body.style.pointerEvents = 'auto';
+      // Remove any lingering overlays
+      const overlays = document.querySelectorAll('[data-radix-popper-content-wrapper]');
+      overlays.forEach(overlay => overlay.remove());
+      // Blur any focused elements that might be holding focus
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
     }
   }, [activityTypeOpen]);
   const handleBrowseApps = () => {
@@ -1715,7 +1723,10 @@ const Workout = () => {
                           value={activity}
                           onSelect={(value) => {
                             setExercise(value);
-                            setTimeout(() => setActivityTypeOpen(false), 0);
+                            setActivityTypeOpen(false);
+                            // Force scroll unlock immediately
+                            document.body.style.overflow = 'unset';
+                            document.body.style.pointerEvents = 'auto';
                           }}
                         >
                           <Check
