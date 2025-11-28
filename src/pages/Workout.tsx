@@ -400,6 +400,9 @@ const Workout = () => {
       }
 
       if (editingWorkout) {
+        // Create ISO string at noon local time to avoid timezone shifts
+        const localDate = new Date(workoutDate.getFullYear(), workoutDate.getMonth(), workoutDate.getDate(), 12, 0, 0);
+        
         const { error } = await supabase
           .from('activity_logs')
           .update({
@@ -408,7 +411,7 @@ const Workout = () => {
             calories_burned: calculatedCalories,
             distance_miles: distanceMiles,
             notes: finalNotes || null,
-            logged_at: workoutDate.toISOString(),
+            logged_at: localDate.toISOString(),
           })
           .eq('id', editingWorkout);
 
@@ -420,6 +423,9 @@ const Workout = () => {
         });
         setEditingWorkout(null);
       } else {
+        // Create ISO string at noon local time to avoid timezone shifts
+        const localDate = new Date(workoutDate.getFullYear(), workoutDate.getMonth(), workoutDate.getDate(), 12, 0, 0);
+        
         const { error } = await supabase
           .from('activity_logs')
           .insert({
@@ -429,7 +435,7 @@ const Workout = () => {
             calories_burned: calculatedCalories,
             distance_miles: distanceMiles,
             notes: finalNotes || null,
-            logged_at: workoutDate.toISOString(),
+            logged_at: localDate.toISOString(),
           });
 
         if (error) throw error;
@@ -465,7 +471,9 @@ const Workout = () => {
     setIntensity("moderate");
     setDistance(log.distance_miles ? formatDistance(log.distance_miles, preferredUnit).split(' ')[0] : "");
     setNotes(log.notes || "");
-    setWorkoutDate(new Date(log.logged_at));
+    // Parse the date to local timezone
+    const logDate = new Date(log.logged_at);
+    setWorkoutDate(new Date(logDate.getFullYear(), logDate.getMonth(), logDate.getDate()));
     setEditingWorkout(log.id);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
