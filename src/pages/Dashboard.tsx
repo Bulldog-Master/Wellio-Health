@@ -109,8 +109,8 @@ const Dashboard = () => {
           {/* Creative shared W design */}
           <div className="mb-4">
             <div className="flex items-start">
-              <span className="text-8xl md:text-9xl font-black drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] leading-none -mr-2">W</span>
-              <div className="flex flex-col">
+              <span className="text-8xl md:text-9xl font-black drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] leading-none">W</span>
+              <div className="flex flex-col ml-2">
                 <span className="text-4xl md:text-5xl font-black drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] leading-none">ellio</span>
                 <div className="flex items-center gap-2 mt-1">
                   <span className="text-4xl md:text-5xl font-black drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] leading-none">elcome back!</span>
