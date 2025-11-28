@@ -98,22 +98,22 @@ const Dashboard = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-secondary/70 to-accent/60" />
         <div className="relative flex flex-col justify-center items-start p-6 md:p-10 py-8 md:py-10 text-white">
-          {/* Your Journey Badge */}
-          <div className="flex items-center gap-2 mb-4 animate-float">
+          {/* Badge */}
+          <div className="flex items-center gap-2 mb-6 animate-float">
             <Zap className="w-5 h-5 text-white drop-shadow-glow" />
             <span className="text-xs md:text-sm font-semibold uppercase tracking-wider bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
               Your Journey
             </span>
           </div>
           
-          {/* Shared W Design */}
-          <div className="mb-4">
-            <div className="flex items-start">
+          {/* Title with shared W */}
+          <div className="mb-6">
+            <div className="flex items-start gap-3">
               <span className="text-8xl md:text-9xl font-black drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] leading-none">W</span>
-              <div className="flex flex-col ml-2">
-                <span className="text-4xl md:text-5xl font-black drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] leading-none">ellio</span>
-                <div className="flex items-center gap-2 mt-1">
-                  <span className="text-4xl md:text-5xl font-black drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] leading-none">elcome back!</span>
+              <div className="flex flex-col pt-1">
+                <span className="text-4xl md:text-5xl font-black drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] leading-tight">ellio</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-4xl md:text-5xl font-black drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] leading-tight">elcome back!</span>
                   <HeartPulse className="w-7 h-7 md:w-8 md:h-8 text-white drop-shadow-glow animate-pulse flex-shrink-0" />
                 </div>
               </div>
