@@ -1767,7 +1767,7 @@ const Workout = () => {
             </div>
             <div>
               <Label htmlFor="intensity">Intensity Level</Label>
-              <Select value={intensity} onValueChange={setIntensity}>
+              <Select value={intensity} onValueChange={setIntensity} {...({ modal: false } as any)}>
                 <SelectTrigger className="mt-1.5">
                   <SelectValue />
                 </SelectTrigger>
