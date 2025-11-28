@@ -1095,6 +1095,20 @@ const Workout = () => {
                 </div>
               </div>
 
+              {routineExercises.length > 0 && (
+                <Card className="p-3 bg-primary/5 border-primary/20">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-primary" />
+                      <span className="font-semibold">Total Workout Time:</span>
+                    </div>
+                    <span className="text-lg font-bold text-primary">
+                      {routineExercises.reduce((total, ex) => total + (ex.duration || 0), 0)} min
+                    </span>
+                  </div>
+                </Card>
+              )}
+
               <div className="flex gap-2">
                 <Button
                   variant="outline"
