@@ -187,19 +187,19 @@ const Activity = () => {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 mb-2">
         <div className="p-3 bg-primary/10 rounded-xl">
           <ActivityIcon className="w-6 h-6 text-primary" />
         </div>
         <div>
           <h1 className="text-3xl font-bold">Activity</h1>
-          <p className="text-muted-foreground">Track fitness, weight, workouts, and habits</p>
+          <p className="text-muted-foreground mt-1">Track fitness, weight, workouts, and habits</p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card 
-          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+          className="p-6 hover:shadow-xl transition-all duration-300 cursor-pointer"
           onClick={() => navigate('/weight')}
         >
           <div className="flex items-center gap-4">
@@ -214,7 +214,7 @@ const Activity = () => {
         </Card>
 
         <Card 
-          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer hover-scale"
+          className="p-6 hover:shadow-xl transition-all duration-300 cursor-pointer hover-scale"
           onClick={() => navigate('/step-count')}
         >
           <div className="flex items-center gap-4">
@@ -229,7 +229,7 @@ const Activity = () => {
         </Card>
 
         <Card 
-          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+          className="p-6 hover:shadow-xl transition-all duration-300 cursor-pointer"
           onClick={() => navigate('/workout')}
         >
           <div className="flex items-center gap-4">
@@ -244,7 +244,7 @@ const Activity = () => {
         </Card>
 
         <Card 
-          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+          className="p-6 hover:shadow-xl transition-all duration-300 cursor-pointer"
           onClick={() => navigate('/habits')}
         >
           <div className="flex items-center gap-4">
@@ -259,7 +259,7 @@ const Activity = () => {
         </Card>
 
         <Card 
-          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+          className="p-6 hover:shadow-xl transition-all duration-300 cursor-pointer"
           onClick={() => navigate('/supplements')}
         >
           <div className="flex items-center gap-4">
@@ -274,7 +274,7 @@ const Activity = () => {
         </Card>
 
         <Card 
-          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+          className="p-6 hover:shadow-xl transition-all duration-300 cursor-pointer"
           onClick={() => navigate('/interval-timer')}
         >
           <div className="flex items-center gap-4">
@@ -289,7 +289,7 @@ const Activity = () => {
         </Card>
 
         <Card 
-          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+          className="p-6 hover:shadow-xl transition-all duration-300 cursor-pointer"
           onClick={() => navigate('/live-workout-sessions')}
         >
           <div className="flex items-center gap-4">
@@ -305,34 +305,40 @@ const Activity = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="p-6 bg-gradient-card shadow-md">
+        <Card className="p-6 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center gap-2 mb-2">
-            <Calendar className="w-5 h-5 text-primary" />
+            <div className="p-2 bg-primary/10 rounded-xl">
+              <Calendar className="w-5 h-5 text-primary" />
+            </div>
             <h3 className="font-semibold">Workouts</h3>
           </div>
           <p className="text-3xl font-bold text-primary">{weeklyStats.workoutCount}</p>
           <p className="text-sm text-muted-foreground">This week</p>
         </Card>
 
-        <Card className="p-6 bg-gradient-primary text-primary-foreground shadow-glow">
+        <Card className="p-6 bg-gradient-primary text-primary-foreground hover:shadow-glow transition-all duration-300">
           <div className="flex items-center gap-2 mb-2">
-            <Flame className="w-5 h-5" />
+            <div className="p-2 bg-white/20 rounded-xl">
+              <Flame className="w-5 h-5" />
+            </div>
             <h3 className="font-semibold">Calories</h3>
           </div>
           <p className="text-3xl font-bold">{weeklyStats.totalCalories}</p>
           <p className="text-sm opacity-90">Burned this week</p>
         </Card>
 
-        <Card className="p-6 bg-gradient-card shadow-md">
+        <Card className="p-6 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center gap-2 mb-2">
-            <ActivityIcon className="w-5 h-5 text-secondary" />
+            <div className="p-2 bg-secondary/10 rounded-xl">
+              <ActivityIcon className="w-5 h-5 text-secondary" />
+            </div>
             <h3 className="font-semibold">Duration</h3>
           </div>
           <p className="text-3xl font-bold text-secondary">{weeklyStats.totalDuration}</p>
           <p className="text-sm text-muted-foreground">Minutes</p>
         </Card>
 
-        <Card className="p-6 bg-gradient-card shadow-md">
+        <Card className="p-6 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center gap-2 mb-2">
             <TrendingUp className="w-5 h-5 text-accent" />
             <h3 className="font-semibold">Distance</h3>
@@ -346,9 +352,11 @@ const Activity = () => {
         </Card>
       </div>
 
-      <Card className="p-6 bg-gradient-card shadow-md">
+      <Card className="p-6 hover:shadow-xl transition-all duration-300">
         <div className="flex items-center gap-2 mb-6">
-          <Plus className="w-5 h-5 text-primary" />
+          <div className="p-2 bg-primary/10 rounded-xl">
+            <Plus className="w-5 h-5 text-primary" />
+          </div>
           <h3 className="text-lg font-semibold">Log Wearable Data</h3>
         </div>
         <div className="space-y-4">
@@ -457,9 +465,11 @@ const Activity = () => {
         </div>
       </Card>
 
-      <Card className="p-6 bg-gradient-card shadow-md">
+      <Card className="p-6 hover:shadow-xl transition-all duration-300">
         <div className="flex items-center gap-2 mb-4">
-          <Watch className="w-5 h-5 text-primary" />
+          <div className="p-2 bg-primary/10 rounded-xl">
+            <Watch className="w-5 h-5 text-primary" />
+          </div>
           <h3 className="text-lg font-semibold">Wearable Device Data</h3>
         </div>
         <div className="space-y-3">

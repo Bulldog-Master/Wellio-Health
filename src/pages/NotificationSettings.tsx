@@ -88,23 +88,29 @@ const NotificationSettings = () => {
 
   return (
     <div className="space-y-6 pb-20 md:pb-0">
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 mb-2">
         <Button
           variant="ghost"
           size="icon"
           onClick={() => navigate("/settings")}
+          className="hover:bg-primary/10"
         >
           <ArrowLeft className="w-5 h-5" />
         </Button>
-        <div>
-          <h1 className="text-3xl font-bold mb-2">Notifications</h1>
-          <p className="text-muted-foreground">Configure your notification preferences</p>
+        <div className="flex items-center gap-3">
+          <div className="p-3 bg-primary/10 rounded-xl">
+            <Bell className="w-6 h-6 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold">Notifications</h1>
+            <p className="text-muted-foreground mt-1">Configure your notification preferences</p>
+          </div>
         </div>
       </div>
 
       {/* Browser Notifications */}
       {isSupported && (
-        <Card className="p-6">
+        <Card className="p-6 hover:shadow-xl transition-all duration-300">
           <div className="flex items-start gap-4 mb-4">
             <Bell className="w-6 h-6 text-primary mt-1" />
             <div className="flex-1">
@@ -130,8 +136,13 @@ const NotificationSettings = () => {
       )}
 
       {/* Reminder Settings */}
-      <Card className="p-6">
-        <h3 className="font-semibold mb-6">Reminder Settings</h3>
+      <Card className="p-6 hover:shadow-xl transition-all duration-300">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="p-2 bg-primary/10 rounded-xl">
+            <Bell className="w-5 h-5 text-primary" />
+          </div>
+          <h3 className="font-semibold">Reminder Settings</h3>
+        </div>
         
         <div className="space-y-6">
           {/* Meal Logging */}

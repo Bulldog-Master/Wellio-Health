@@ -367,33 +367,40 @@ const FoodLog = () => {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-4 mb-2">
         <Button
           variant="ghost"
           size="icon"
           onClick={() => navigate('/food')}
-          className="shrink-0"
+          className="shrink-0 hover:bg-primary/10"
         >
           <ArrowLeft className="w-5 h-5" />
         </Button>
-        <div className="p-3 bg-primary/10 rounded-xl">
-          <Utensils className="w-6 h-6 text-primary" />
-        </div>
-        <div>
-          <h1 className="text-3xl font-bold">Food Log</h1>
-          <p className="text-muted-foreground">Track your daily nutrition with AI</p>
+        <div className="flex items-center gap-3">
+          <div className="p-3 bg-primary/10 rounded-xl">
+            <Utensils className="w-6 h-6 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold">Food Log</h1>
+            <p className="text-muted-foreground mt-1">Track your daily nutrition with AI</p>
+          </div>
         </div>
       </div>
 
-      <Card className="p-6 bg-gradient-accent text-accent-foreground shadow-glow">
+      <Card className="p-6 bg-gradient-primary text-primary-foreground hover:shadow-glow transition-all duration-300">
         <h3 className="text-lg font-semibold mb-2">Today's Calories</h3>
         <p className="text-4xl font-bold mb-2">{totalCalories}</p>
         <p className="opacity-90">{Math.max(0, 2000 - totalCalories)} cal remaining (goal: 2000)</p>
       </Card>
 
-      <Card className="p-6 bg-gradient-card shadow-md">
+      <Card className="p-6 hover:shadow-xl transition-all duration-300">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold">{editingMeal ? 'Edit Meal' : 'Log New Meal'}</h3>
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-primary/10 rounded-xl">
+              <Plus className="w-5 h-5 text-primary" />
+            </div>
+            <h3 className="text-lg font-semibold">{editingMeal ? 'Edit Meal' : 'Log New Meal'}</h3>
+          </div>
           {editingMeal && (
             <Button variant="ghost" size="sm" onClick={handleCancelEdit}>
               Cancel

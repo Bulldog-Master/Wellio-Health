@@ -258,29 +258,30 @@ const Recipes = () => {
   
   return (
     <div className="space-y-6 max-w-4xl">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-4 mb-2">
         <Button
           variant="ghost"
           size="icon"
           onClick={() => navigate('/food')}
-          className="shrink-0"
+          className="shrink-0 hover:bg-primary/10"
         >
           <ArrowLeft className="w-5 h-5" />
         </Button>
-        <div className="p-3 bg-primary/10 rounded-xl">
-          <BookOpen className="w-6 h-6 text-primary" />
-        </div>
-        <div className="flex-1">
-          <h1 className="text-3xl font-bold">Recipes</h1>
-          <p className="text-muted-foreground">Browse and manage your recipes</p>
-        </div>
-        <Dialog open={categoryDialogOpen} onOpenChange={setCategoryDialogOpen}>
-          <DialogTrigger asChild>
-            <Button variant="outline" size="sm">
-              <Plus className="w-4 h-4 mr-2" />
-              New Category
-            </Button>
-          </DialogTrigger>
+        <div className="flex items-center gap-3 flex-1">
+          <div className="p-3 bg-primary/10 rounded-xl">
+            <BookOpen className="w-6 h-6 text-primary" />
+          </div>
+          <div className="flex-1">
+            <h1 className="text-3xl font-bold">Recipes</h1>
+            <p className="text-muted-foreground mt-1">Browse and manage your recipes</p>
+          </div>
+          <Dialog open={categoryDialogOpen} onOpenChange={setCategoryDialogOpen}>
+            <DialogTrigger asChild>
+              <Button variant="outline" size="sm">
+                <Plus className="w-4 h-4 mr-2" />
+                New Category
+              </Button>
+            </DialogTrigger>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Add New Category</DialogTitle>
@@ -304,9 +305,14 @@ const Recipes = () => {
         </Dialog>
       </div>
 
-      <Card className="p-6 bg-gradient-card shadow-md">
+      <Card className="p-6 hover:shadow-xl transition-all duration-300">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold">Recipe Categories</h3>
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-primary/10 rounded-xl">
+              <BookOpen className="w-5 h-5 text-primary" />
+            </div>
+            <h3 className="text-lg font-semibold">Recipe Categories</h3>
+          </div>
           <Dialog open={dialogOpen} onOpenChange={(open) => {
             setDialogOpen(open);
             if (!open) resetForm();
@@ -417,7 +423,7 @@ const Recipes = () => {
                 <div key={category} className="space-y-2">
                   <button
                     onClick={() => toggleCategory(category)}
-                    className="w-full flex items-center justify-between p-4 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors"
+                    className="w-full flex items-center justify-between p-4 bg-secondary rounded-lg hover:bg-secondary/80 transition-all"
                   >
                     <span className="font-medium">{category}</span>
                     <div className="flex items-center gap-2">
@@ -435,9 +441,9 @@ const Recipes = () => {
                         </div>
                       ) : (
                         categoryRecipes.map((recipe) => (
-                          <Card 
+                        <Card 
                             key={recipe.id} 
-                            className="p-4 bg-accent/5 cursor-pointer hover:bg-accent/10 transition-colors"
+                            className="p-4 hover:shadow-lg transition-all duration-300 cursor-pointer bg-card"
                             onClick={() => navigate(`/recipe/${recipe.id}`)}
                           >
                             <div className="flex gap-4">
