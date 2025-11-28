@@ -971,7 +971,7 @@ const Workout = () => {
                     <Card key={idx} className="p-3">
                       <div className="space-y-2">
                         <div className="flex gap-2">
-                          <Popover open={openExercisePopover === idx} onOpenChange={(open) => setOpenExercisePopover(open ? idx : null)}>
+                          <Popover modal={false} open={openExercisePopover === idx} onOpenChange={(open) => setOpenExercisePopover(open ? idx : null)}>
                             <PopoverTrigger asChild>
                               <Button
                                 variant="outline"
@@ -983,7 +983,7 @@ const Workout = () => {
                                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                               </Button>
                             </PopoverTrigger>
-                            <PopoverContent className="w-[300px] p-0">
+                            <PopoverContent className="w-[300px] p-0 z-50">
                               <Command>
                                   <CommandInput 
                                     placeholder="Search or type exercise..." 
@@ -1676,7 +1676,7 @@ const Workout = () => {
         <div className="space-y-4">
           <div>
             <Label htmlFor="exercise">Activity Type</Label>
-            <Popover>
+            <Popover modal={false}>
               <PopoverTrigger asChild>
                 <Button
                   variant="outline"
@@ -1690,7 +1690,7 @@ const Workout = () => {
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-full p-0">
+              <PopoverContent className="w-full p-0 z-50">
                 <Command>
                   <CommandInput 
                     placeholder="Search or type custom activity..." 
@@ -1728,7 +1728,7 @@ const Workout = () => {
 
           <div>
             <Label htmlFor="workout-date">Date</Label>
-            <Popover>
+            <Popover modal={false}>
               <PopoverTrigger asChild>
                 <Button
                   variant="outline"
@@ -1741,7 +1741,7 @@ const Workout = () => {
                   {workoutDate ? format(workoutDate, "PPP") : <span>Pick a date</span>}
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
+              <PopoverContent className="w-auto p-0 z-50" align="start">
                 <Calendar
                   mode="single"
                   selected={workoutDate}
