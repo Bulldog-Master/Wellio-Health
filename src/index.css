@@ -8,83 +8,98 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 220 15% 96%;
-    --foreground: 220 20% 18%;
+    /* Modern warm neutral background - soft cream */
+    --background: 30 20% 97%;
+    --foreground: 215 25% 20%;
 
+    /* Card with subtle warmth and depth */
     --card: 0 0% 100%;
-    --card-foreground: 220 20% 18%;
+    --card-foreground: 215 25% 20%;
 
+    /* Popover styling */
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 18%;
+    --popover-foreground: 215 25% 20%;
 
-    --primary: 215 65% 50%;
+    /* Primary - Professional sage green */
+    --primary: 155 42% 48%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 195 45% 52%;
+    /* Secondary - Soft sky blue */
+    --secondary: 205 65% 58%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 12% 92%;
-    --muted-foreground: 220 12% 45%;
+    /* Muted elements - warm gray */
+    --muted: 30 15% 94%;
+    --muted-foreground: 215 15% 50%;
 
-    --accent: 30 80% 58%;
+    /* Accent - Warm coral */
+    --accent: 15 78% 62%;
     --accent-foreground: 0 0% 100%;
 
+    /* Destructive remains strong */
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 12% 87%;
-    --input: 220 12% 87%;
-    --ring: 215 65% 50%;
+    /* Borders and inputs - subtle warm gray */
+    --border: 30 12% 88%;
+    --input: 30 12% 90%;
+    --ring: 155 42% 48%;
 
-    --radius: 0.75rem;
+    --radius: 0.875rem;
 
-    --success: 150 60% 48%;
+    /* Success - fresh green */
+    --success: 150 55% 50%;
     --success-foreground: 0 0% 100%;
     
-    --warning: 42 88% 58%;
+    /* Warning - warm amber */
+    --warning: 38 85% 60%;
     --warning-foreground: 0 0% 100%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(215 65% 50%) 0%, hsl(215 70% 60%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(195 45% 52%) 0%, hsl(195 50% 62%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(30 80% 58%) 0%, hsl(30 85% 68%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(215 65% 50%) 0%, hsl(195 45% 52%) 50%, hsl(30 80% 58%) 100%);
-    --gradient-card: linear-gradient(to bottom right, hsl(0 0% 100%) 0%, hsl(220 15% 98%) 100%);
-    --gradient-auth-bg: linear-gradient(135deg, hsl(220 65% 92%) 0%, hsl(195 40% 94%) 50%, hsl(215 50% 96%) 100%);
+    /* Modern gradients with depth */
+    --gradient-primary: linear-gradient(135deg, hsl(155 42% 48%) 0%, hsl(155 48% 58%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(205 65% 58%) 0%, hsl(205 70% 68%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(15 78% 62%) 0%, hsl(15 82% 72%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(155 42% 48%) 0%, hsl(205 65% 58%) 50%, hsl(15 78% 62%) 100%);
+    --gradient-card: linear-gradient(to bottom right, hsl(0 0% 100%) 0%, hsl(30 20% 98%) 100%);
+    --gradient-auth-bg: linear-gradient(135deg, hsl(155 25% 96%) 0%, hsl(205 30% 97%) 50%, hsl(30 25% 96%) 100%);
     
-    --shadow-sm: 0 1px 3px hsl(220 20% 18% / 0.08);
-    --shadow-md: 0 4px 12px hsl(220 20% 18% / 0.1);
-    --shadow-lg: 0 10px 24px hsl(220 20% 18% / 0.12);
-    --shadow-glow: 0 0 32px hsl(215 65% 50% / 0.25);
-    --shadow-glow-secondary: 0 0 32px hsl(195 45% 52% / 0.25);
-    --shadow-auth-card: 0 20px 60px -15px hsl(215 65% 50% / 0.3), 0 8px 24px -8px hsl(220 20% 18% / 0.1);
+    /* Refined shadows for depth */
+    --shadow-sm: 0 1px 2px hsl(215 25% 20% / 0.05), 0 1px 3px hsl(215 25% 20% / 0.08);
+    --shadow-md: 0 4px 6px hsl(215 25% 20% / 0.07), 0 2px 4px hsl(215 25% 20% / 0.06);
+    --shadow-lg: 0 10px 15px hsl(215 25% 20% / 0.1), 0 4px 6px hsl(215 25% 20% / 0.08);
+    --shadow-glow: 0 0 32px hsl(155 42% 48% / 0.2);
+    --shadow-glow-secondary: 0 0 32px hsl(205 65% 58% / 0.2);
+    --shadow-auth-card: 0 20px 40px -15px hsl(155 42% 48% / 0.15), 0 8px 20px -8px hsl(215 25% 20% / 0.08);
     
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    --sidebar-background: 220 18% 94%;
-    --sidebar-foreground: 220 20% 22%;
-    --sidebar-primary: 215 65% 50%;
+    /* Sidebar with warm tone */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 215 25% 20%;
+    --sidebar-primary: 155 42% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 15% 90%;
-    --sidebar-accent-foreground: 215 65% 50%;
-    --sidebar-border: 220 15% 85%;
-    --sidebar-ring: 215 65% 50%;
+    --sidebar-accent: 30 20% 96%;
+    --sidebar-accent-foreground: 155 42% 48%;
+    --sidebar-border: 30 12% 90%;
+    --sidebar-ring: 155 42% 48%;
     
-    --nav-icon-1: 215 70% 55%;
-    --nav-icon-2: 195 55% 50%;
-    --nav-icon-3: 35 75% 55%;
-    --nav-icon-4: 160 58% 50%;
-    --nav-icon-5: 340 65% 55%;
-    --nav-icon-6: 275 60% 58%;
-    --nav-icon-7: 205 60% 55%;
-    --nav-icon-8: 45 80% 52%;
-    --nav-icon-9: 15 75% 60%;
-    --nav-icon-10: 320 60% 55%;
-    --nav-icon-11: 180 55% 52%;
-    --nav-icon-12: 270 55% 58%;
-    --nav-icon-13: 145 60% 50%;
-    --nav-icon-14: 280 65% 60%;
-    --nav-icon-15: 120 60% 52%;
-    --nav-icon-16: 25 75% 58%;
+    /* Navigation icons - harmonious color palette */
+    --nav-icon-1: 155 42% 48%;  /* Sage green */
+    --nav-icon-2: 205 65% 58%;  /* Sky blue */
+    --nav-icon-3: 15 78% 62%;   /* Coral */
+    --nav-icon-4: 150 55% 50%;  /* Fresh green */
+    --nav-icon-5: 280 55% 60%;  /* Soft purple */
+    --nav-icon-6: 38 85% 60%;   /* Amber */
+    --nav-icon-7: 195 70% 55%;  /* Teal */
+    --nav-icon-8: 25 75% 58%;   /* Orange */
+    --nav-icon-9: 170 50% 52%;  /* Mint */
+    --nav-icon-10: 320 60% 58%; /* Rose */
+    --nav-icon-11: 185 62% 55%; /* Aqua */
+    --nav-icon-12: 265 58% 62%; /* Lavender */
+    --nav-icon-13: 145 58% 52%; /* Emerald */
+    --nav-icon-14: 275 60% 65%; /* Violet */
+    --nav-icon-15: 120 55% 50%; /* Lime */
+    --nav-icon-16: 30 72% 60%;  /* Peach */
   }
 
   .dark {
