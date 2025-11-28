@@ -108,18 +108,18 @@ const WaterIntake = () => {
         Back to Dashboard
       </Button>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 mb-2">
         <div className="p-3 bg-primary/10 rounded-xl">
           <Droplets className="w-6 h-6 text-primary" />
         </div>
         <div>
           <h1 className="text-3xl font-bold">Water Intake</h1>
-          <p className="text-muted-foreground">Track your daily hydration</p>
+          <p className="text-muted-foreground mt-1">Track your daily hydration</p>
         </div>
       </div>
 
       {/* Daily Progress */}
-      <Card className="p-6">
+      <Card className="p-6 hover:shadow-xl transition-all duration-300">
         <div className="space-y-4">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-semibold">Today's Progress</h3>
@@ -135,8 +135,13 @@ const WaterIntake = () => {
       </Card>
 
       {/* Quick Add Buttons */}
-      <Card className="p-6">
-        <h3 className="text-lg font-semibold mb-4">Quick Add</h3>
+      <Card className="p-6 hover:shadow-xl transition-all duration-300">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-xl">
+            <Plus className="w-5 h-5 text-primary" />
+          </div>
+          <h3 className="text-lg font-semibold">Quick Add</h3>
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {quickAmounts.map((amount) => (
             <Button
@@ -152,8 +157,13 @@ const WaterIntake = () => {
       </Card>
 
       {/* Today's Logs */}
-      <Card className="p-6">
-        <h3 className="text-lg font-semibold mb-4">Today's Log</h3>
+      <Card className="p-6 hover:shadow-xl transition-all duration-300">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-xl">
+            <Droplets className="w-5 h-5 text-primary" />
+          </div>
+          <h3 className="text-lg font-semibold">Today's Log</h3>
+        </div>
         {waterLogs.length === 0 ? (
           <p className="text-muted-foreground text-center py-8">
             No water logged today. Start tracking your hydration!
@@ -163,7 +173,7 @@ const WaterIntake = () => {
             {waterLogs.map((log) => (
               <div
                 key={log.id}
-                className="flex items-center justify-between p-3 border rounded-lg"
+                className="flex items-center justify-between p-4 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors"
               >
                 <div className="flex items-center gap-3">
                   <Droplets className="w-5 h-5 text-primary" />

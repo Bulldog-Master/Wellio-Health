@@ -201,14 +201,14 @@ const Habits = () => {
         <ArrowLeft className="w-4 h-4" />
         Back to Activity
       </Button>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-3">
           <div className="p-3 bg-primary/10 rounded-xl">
             <Target className="w-6 h-6 text-primary" />
           </div>
           <div>
             <h1 className="text-3xl font-bold">Habit Tracker</h1>
-            <p className="text-muted-foreground">Build consistent healthy habits</p>
+            <p className="text-muted-foreground mt-1">Build consistent healthy habits</p>
           </div>
         </div>
         <Button onClick={() => setShowAddForm(!showAddForm)} className="gap-2">
@@ -218,8 +218,13 @@ const Habits = () => {
       </div>
 
       {showAddForm && (
-        <Card className="p-6 bg-gradient-card shadow-md">
-          <h3 className="text-lg font-semibold mb-6">New Habit</h3>
+        <Card className="p-6 hover:shadow-xl transition-all duration-300">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 bg-primary/10 rounded-xl">
+              <Plus className="w-5 h-5 text-primary" />
+            </div>
+            <h3 className="text-lg font-semibold">New Habit</h3>
+          </div>
           <div className="space-y-4">
             <div>
               <Label htmlFor="habit-name">Habit Name</Label>
@@ -249,8 +254,13 @@ const Habits = () => {
         </Card>
       )}
 
-      <Card className="p-6 bg-gradient-card shadow-md">
-        <h3 className="text-lg font-semibold mb-4">Today's Habits</h3>
+      <Card className="p-6 hover:shadow-xl transition-all duration-300">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-primary/10 rounded-xl">
+            <Target className="w-5 h-5 text-primary" />
+          </div>
+          <h3 className="text-lg font-semibold">Today's Habits</h3>
+        </div>
         <div className="space-y-3">
           {isLoading ? (
             <p className="text-center text-muted-foreground py-8">Loading...</p>
@@ -258,7 +268,7 @@ const Habits = () => {
             habits.map((habit) => {
               const completed = isHabitCompleted(habit.id);
               return (
-                <div key={habit.id} className="p-4 bg-secondary rounded-lg flex items-center justify-between">
+                <div key={habit.id} className="p-4 bg-secondary rounded-lg flex items-center justify-between hover:bg-secondary/80 transition-colors">
                   <div className="flex items-center gap-3 flex-1">
                     <Button
                       size="icon"
