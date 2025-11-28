@@ -119,23 +119,6 @@ const Workout = () => {
   const [appPlatform, setAppPlatform] = useState("");
   const [appIconUrl, setAppIconUrl] = useState("");
   const [workoutDate, setWorkoutDate] = useState<Date>(new Date());
-  const [activityTypeOpen, setActivityTypeOpen] = useState(false);
-  
-  // Ensure scroll is unlocked when popover closes
-  useEffect(() => {
-    if (!activityTypeOpen) {
-      // Force cleanup of any scroll locks
-      document.body.style.overflow = 'unset';
-      document.body.style.pointerEvents = 'auto';
-      // Remove any lingering overlays
-      const overlays = document.querySelectorAll('[data-radix-popper-content-wrapper]');
-      overlays.forEach(overlay => overlay.remove());
-      // Blur any focused elements that might be holding focus
-      if (document.activeElement instanceof HTMLElement) {
-        document.activeElement.blur();
-      }
-    }
-  }, [activityTypeOpen]);
   const handleBrowseApps = () => {
     const userAgent = navigator.userAgent || navigator.vendor;
     const isIOS = /iPad|iPhone|iPod/.test(userAgent);
@@ -1693,56 +1676,27 @@ const Workout = () => {
         <div className="space-y-4">
           <div>
             <Label htmlFor="exercise">Activity Type</Label>
-            <Popover modal={false} open={activityTypeOpen} onOpenChange={setActivityTypeOpen}>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  role="combobox"
-                  className={cn(
-                    "w-full justify-between mt-1.5",
-                    !exercise && "text-muted-foreground"
-                  )}
-                >
-                  {exercise || "Select or type activity"}
-                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-full p-0 z-50" onInteractOutside={() => setActivityTypeOpen(false)}>
-                <Command key={activityTypeOpen ? 'open' : 'closed'} shouldFilter={false}>
-                  <CommandInput 
-                    placeholder="Search or type custom activity..."
-                  />
-                  <CommandList>
-                    <CommandEmpty>
-                      Press Enter to add "{exercise}" as custom activity
-                    </CommandEmpty>
-                    <CommandGroup>
-                      {["Running", "Cycling", "Swimming", "Walking", "Weightlifting", "Yoga", "HIIT", "Other"].map((activity) => (
-                        <CommandItem
-                          key={activity}
-                          value={activity}
-                          onSelect={(value) => {
-                            setExercise(value);
-                            setActivityTypeOpen(false);
-                            // Force scroll unlock immediately
-                            document.body.style.overflow = 'unset';
-                            document.body.style.pointerEvents = 'auto';
-                          }}
-                        >
-                          <Check
-                            className={cn(
-                              "mr-2 h-4 w-4",
-                              exercise === activity ? "opacity-100" : "opacity-0"
-                            )}
-                          />
-                          {activity}
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  </CommandList>
-                </Command>
-              </PopoverContent>
-            </Popover>
+            <Select value={exercise} onValueChange={setExercise}>
+              <SelectTrigger className="w-full mt-1.5">
+                <SelectValue placeholder="Select activity type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Running">Running</SelectItem>
+                <SelectItem value="Cycling">Cycling</SelectItem>
+                <SelectItem value="Swimming">Swimming</SelectItem>
+                <SelectItem value="Walking">Walking</SelectItem>
+                <SelectItem value="Weightlifting">Weightlifting</SelectItem>
+                <SelectItem value="Yoga">Yoga</SelectItem>
+                <SelectItem value="HIIT">HIIT</SelectItem>
+                <SelectItem value="Other">Other</SelectItem>
+              </SelectContent>
+            </Select>
+            <Input
+              className="mt-2"
+              placeholder="Or type custom activity..."
+              value={exercise && !["Running", "Cycling", "Swimming", "Walking", "Weightlifting", "Yoga", "HIIT", "Other"].includes(exercise) ? exercise : ""}
+              onChange={(e) => setExercise(e.target.value)}
+            />
           </div>
 
           <div>
