@@ -263,21 +263,30 @@ const Workout = () => {
         .select('*')
         .eq('user_id', user.id);
 
-      // Apply date filter
+      // Apply date filter using YYYY-MM-DD format to match saved data
       if (viewFilter === 'today') {
         const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        query = query.gte('logged_at', today.toISOString());
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        const todayStr = `${year}-${month}-${day}`;
+        query = query.gte('logged_at', todayStr);
       } else if (viewFilter === 'week') {
         const weekAgo = new Date();
         weekAgo.setDate(weekAgo.getDate() - 7);
-        weekAgo.setHours(0, 0, 0, 0);
-        query = query.gte('logged_at', weekAgo.toISOString());
+        const year = weekAgo.getFullYear();
+        const month = String(weekAgo.getMonth() + 1).padStart(2, '0');
+        const day = String(weekAgo.getDate()).padStart(2, '0');
+        const weekAgoStr = `${year}-${month}-${day}`;
+        query = query.gte('logged_at', weekAgoStr);
       } else if (viewFilter === 'month') {
         const monthAgo = new Date();
         monthAgo.setMonth(monthAgo.getMonth() - 1);
-        monthAgo.setHours(0, 0, 0, 0);
-        query = query.gte('logged_at', monthAgo.toISOString());
+        const year = monthAgo.getFullYear();
+        const month = String(monthAgo.getMonth() + 1).padStart(2, '0');
+        const day = String(monthAgo.getDate()).padStart(2, '0');
+        const monthAgoStr = `${year}-${month}-${day}`;
+        query = query.gte('logged_at', monthAgoStr);
       }
       // 'all' filter doesn't add any date restriction
 
