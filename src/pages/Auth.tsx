@@ -560,26 +560,32 @@ const Auth = () => {
 
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-hero relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLW9wYWNpdHk9IjAuMSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-30" />
+    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden" style={{ background: 'var(--gradient-auth-bg)' }}>
+      {/* Animated background particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute w-96 h-96 -top-48 -left-48 bg-primary/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute w-96 h-96 -bottom-48 -right-48 bg-secondary/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLW9wYWNpdHk9IjAuMDUiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-40" />
+      </div>
       
-      <Card className="w-full max-w-md p-8 shadow-glow backdrop-blur-sm bg-card/95 relative z-10">
+      <Card className="w-full max-w-md p-8 backdrop-blur-xl bg-card/95 relative z-10 border-2" style={{ boxShadow: 'var(--shadow-auth-card)' }}>
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-primary mb-4 shadow-glow">
-            <Activity className="w-8 h-8 text-white" />
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-4 relative group">
+            <div className="absolute inset-0 rounded-full bg-gradient-primary opacity-100 group-hover:opacity-80 transition-opacity" style={{ boxShadow: 'var(--shadow-glow)' }} />
+            <Activity className="w-10 h-10 text-white relative z-10" />
           </div>
-          <h1 className="text-3xl font-bold bg-gradient-hero bg-clip-text text-transparent mb-1">
+          <h1 className="text-4xl font-bold mb-2" style={{ background: 'var(--gradient-hero)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
             Wellio
           </h1>
-          <p className="text-sm text-muted-foreground/80 mb-3">
+          <p className="text-sm font-medium text-muted-foreground mb-4">
             Your Complete Fitness & Wellness Platform
           </p>
-          <p className="text-muted-foreground">
+          <p className="text-base text-foreground/80">
             {requires2FA 
-              ? "Enter your authentication code"
+              ? "🔐 Enter your authentication code"
               : isLogin 
-                ? "Welcome back! Continue your journey" 
-                : "Join trainers, creators, and fitness enthusiasts"
+                ? "👋 Welcome back! Continue your journey" 
+                : "✨ Join trainers, creators, and fitness enthusiasts"
             }
           </p>
         </div>
@@ -680,13 +686,16 @@ const Auth = () => {
           </form>
         ) : (
           <Tabs value={authMethod} onValueChange={(v) => setAuthMethod(v as "password" | "magiclink" | "passkey")} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-6">
-              <TabsTrigger value="password">Password</TabsTrigger>
-              <TabsTrigger value="magiclink" className="gap-2">
-                <Sparkles className="h-4 w-4" />
-                Magic Link
+            <TabsList className="grid w-full grid-cols-3 mb-6 p-1 bg-muted/50 backdrop-blur-sm">
+              <TabsTrigger value="password" className="data-[state=active]:bg-gradient-primary data-[state=active]:text-white data-[state=active]:shadow-sm transition-all">
+                <Lock className="h-4 w-4 mr-2" />
+                Password
               </TabsTrigger>
-              <TabsTrigger value="passkey" className="gap-2" disabled={!passkeySupported}>
+              <TabsTrigger value="magiclink" className="gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-white data-[state=active]:shadow-sm transition-all">
+                <Sparkles className="h-4 w-4" />
+                Magic
+              </TabsTrigger>
+              <TabsTrigger value="passkey" className="gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-white data-[state=active]:shadow-sm transition-all" disabled={!passkeySupported}>
                 <Fingerprint className="h-4 w-4" />
                 Passkey
               </TabsTrigger>
@@ -809,10 +818,16 @@ const Auth = () => {
 
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-primary hover:opacity-90 shadow-glow"
+                  className="w-full bg-gradient-primary hover:opacity-90 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+                  style={{ boxShadow: 'var(--shadow-glow)' }}
                   disabled={loading}
                 >
-                  {loading ? "Loading..." : isLogin ? "Sign In" : "Sign Up"}
+                  {loading ? (
+                    <span className="flex items-center gap-2">
+                      <span className="animate-spin">⏳</span>
+                      Loading...
+                    </span>
+                  ) : isLogin ? "Sign In" : "Create Account"}
                 </Button>
               </form>
             </TabsContent>
