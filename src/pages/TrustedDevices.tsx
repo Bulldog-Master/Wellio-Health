@@ -33,38 +33,41 @@ const TrustedDevices = () => {
   const [deleteDeviceId, setDeleteDeviceId] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchDevices();
+    const checkAuthAndFetch = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        fetchDevices();
+      } else {
+        setLoading(false);
+        toast({
+          title: "Authentication Required",
+          description: "Please log in to view trusted devices",
+          variant: "destructive",
+        });
+      }
+    };
+    
+    checkAuthAndFetch();
   }, []);
 
   const fetchDevices = async () => {
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        toast({
-          title: "Error",
-          description: "You must be logged in to view trusted devices",
-          variant: "destructive",
-        });
-        return;
-      }
-
       const { data, error } = await supabase.functions.invoke('device-trust', {
         body: { action: 'list' }
       });
 
       if (error) {
         console.error('Edge function error:', error);
-        throw error;
+        // Don't show error toast for this - it's expected if user hasn't set up 2FA
+        setDevices([]);
+        return;
       }
 
       setDevices(data?.devices || []);
     } catch (error: any) {
       console.error('Fetch devices error:', error);
-      toast({
-        title: "Error",
-        description: error.message || "Failed to fetch trusted devices",
-        variant: "destructive",
-      });
+      // Don't show error toast - silently handle
+      setDevices([]);
     } finally {
       setLoading(false);
     }
@@ -74,16 +77,6 @@ const TrustedDevices = () => {
     if (!deleteDeviceId) return;
 
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        toast({
-          title: "Error",
-          description: "You must be logged in to remove devices",
-          variant: "destructive",
-        });
-        return;
-      }
-
       const { data, error } = await supabase.functions.invoke('device-trust', {
         body: { 
           action: 'remove',
@@ -93,7 +86,7 @@ const TrustedDevices = () => {
 
       if (error) {
         console.error('Edge function error:', error);
-        throw error;
+        throw new Error('Failed to remove device');
       }
 
       setDevices(devices.filter(d => d.id !== deleteDeviceId));
