@@ -1675,7 +1675,39 @@ const Workout = () => {
         </h3>
         <div className="space-y-4">
           <div>
-            <Label htmlFor="exercise">Activity Type</Label>
+            <div className="flex items-center justify-between mb-1.5">
+              <Label htmlFor="exercise">Activity Type</Label>
+              <Popover modal={false}>
+                <PopoverTrigger asChild>
+                  <Button variant="ghost" size="sm" className="h-6 px-2">
+                    <Library className="w-4 h-4 mr-1" />
+                    Load Routine
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-48 p-2" align="end">
+                  <div className="flex flex-col gap-1">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="justify-start"
+                      onClick={() => setShowLibrary(true)}
+                    >
+                      <Library className="w-4 h-4 mr-2" />
+                      Personal Library
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="justify-start"
+                      onClick={() => setShowSampleLibrary(true)}
+                    >
+                      <BookOpen className="w-4 h-4 mr-2" />
+                      Sample Library
+                    </Button>
+                  </div>
+                </PopoverContent>
+              </Popover>
+            </div>
             <select
               id="exercise"
               value={exercise}
