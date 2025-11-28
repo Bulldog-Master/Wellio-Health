@@ -1700,11 +1700,9 @@ const Workout = () => {
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-full p-0 z-50" onInteractOutside={() => setActivityTypeOpen(false)}>
-                <Command>
+                <Command shouldFilter={false}>
                   <CommandInput 
-                    placeholder="Search or type custom activity..." 
-                    value={exercise}
-                    onValueChange={setExercise}
+                    placeholder="Search or type custom activity..."
                   />
                   <CommandList>
                     <CommandEmpty>
