@@ -146,19 +146,16 @@ const Socials = () => {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      <div className="flex items-center gap-3 mb-4">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => navigate("/")}
-          aria-label="Back to Dashboard"
-        >
-          <ArrowLeft className="w-5 h-5" />
-        </Button>
-      </div>
-      
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate("/")}
+            aria-label="Back to Dashboard"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </Button>
           <div className="p-3 bg-primary/10 rounded-xl">
             <Users className="w-6 h-6 text-primary" />
           </div>
