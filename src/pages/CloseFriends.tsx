@@ -28,11 +28,10 @@ const CloseFriends = () => {
         navigate("/auth");
         return;
       }
-      console.log('Current user ID:', user.id);
       setCurrentUser(user);
 
       // Fetch close friends
-      const { data: closeFriendsData, error: cfError } = await supabase
+      const { data: closeFriendsData } = await supabase
         .from('close_friends')
         .select(`
           id,
@@ -45,18 +44,12 @@ const CloseFriends = () => {
           )
         `)
         .eq('user_id', user.id);
-      
-      console.log('Close friends data:', closeFriendsData);
-      console.log('Close friends error:', cfError);
 
       // Fetch followers with their profiles
       const { data: followsData, error: followsError } = await supabase
         .from('follows')
         .select('follower_id')
         .eq('following_id', user.id);
-
-      console.log('Follows data:', followsData);
-      console.log('Follows error:', followsError);
 
       if (followsError) {
         console.error('Error fetching follows:', followsError);
@@ -66,15 +59,11 @@ const CloseFriends = () => {
       let followersWithProfiles: any[] = [];
       if (followsData && followsData.length > 0) {
         const followerIds = followsData.map(f => f.follower_id);
-        console.log('Follower IDs:', followerIds);
         
         const { data: profilesData, error: profilesError } = await supabase
           .from('profiles')
           .select('id, username, full_name, avatar_url')
           .in('id', followerIds);
-
-        console.log('Profiles data:', profilesData);
-        console.log('Profiles error:', profilesError);
 
         if (profilesError) {
           console.error('Error fetching profiles:', profilesError);
@@ -85,8 +74,6 @@ const CloseFriends = () => {
           profiles: profilesData?.find(p => p.id === follow.follower_id) || null
         })).filter(f => f.profiles !== null);
       }
-
-      console.log('Final followers with profiles:', followersWithProfiles);
 
       setCloseFriends(closeFriendsData || []);
       setFollowers(followersWithProfiles);
