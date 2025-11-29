@@ -1038,7 +1038,7 @@ const Auth = () => {
                     {isLogin && !isForgotPassword && (
                       <span
                         onClick={() => setIsForgotPassword(true)}
-                        className="text-xs text-primary hover:underline cursor-pointer shrink-0 font-medium"
+                        className="text-sm font-semibold underline cursor-pointer shrink-0"
                         role="button"
                         tabIndex={0}
                         onKeyDown={(e) => {
@@ -1050,7 +1050,10 @@ const Auth = () => {
                         style={{ 
                           minWidth: 'fit-content',
                           whiteSpace: 'nowrap',
-                          color: 'hsl(var(--primary))'
+                          color: '#00D4FF',
+                          display: 'inline-block',
+                          visibility: 'visible',
+                          opacity: 1
                         }}
                       >
                         Forgot Password?
