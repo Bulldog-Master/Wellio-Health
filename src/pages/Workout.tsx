@@ -1,4 +1,4 @@
-// Header icons with vibrant colors using Lucide color prop - v4.0
+// Icons wrapped in colored spans for proper inheritance - v5.0
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -1003,15 +1003,21 @@ const Workout = () => {
 
       <div className="flex gap-2 flex-wrap justify-end">
         <Button variant="outline" className="gap-2 group" onClick={() => navigate('/workout-schedule')}>
-          <CalendarDays className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(270_95%_65%)]" style={{ color: 'hsl(270, 95%, 65%)' }} />
+          <span style={{ color: 'hsl(270, 95%, 65%)' }} className="flex">
+            <CalendarDays className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(270_95%_65%)]" />
+          </span>
           Schedule
         </Button>
         <Button variant="outline" className="gap-2 group" onClick={() => setShowAppsLibrary(true)}>
-          <Smartphone className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(180_95%_50%)]" style={{ color: 'hsl(180, 95%, 50%)' }} />
+          <span style={{ color: 'hsl(180, 95%, 50%)' }} className="flex">
+            <Smartphone className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(180_95%_50%)]" />
+          </span>
           Apps
         </Button>
         <Button variant="outline" className="gap-2 group" onClick={() => setShowRoutineDialog(true)}>
-          <Plus className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(145_80%_50%)]" style={{ color: 'hsl(145, 80%, 50%)' }} />
+          <span style={{ color: 'hsl(145, 80%, 50%)' }} className="flex">
+            <Plus className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(145_80%_50%)]" />
+          </span>
           Create Routine
         </Button>
       </div>
@@ -1937,7 +1943,9 @@ const Workout = () => {
             <Popover modal={false}>
               <PopoverTrigger asChild>
                 <Button variant="outline" size="default" className="gap-2 group">
-                  <Library className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(35_100%_58%)]" style={{ color: 'hsl(35, 100%, 58%)' }} />
+                  <span style={{ color: 'hsl(35, 100%, 58%)' }} className="flex">
+                    <Library className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(35_100%_58%)]" />
+                  </span>
                   Load Routine
                 </Button>
               </PopoverTrigger>
