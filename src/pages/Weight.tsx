@@ -792,7 +792,7 @@ const Weight = () => {
               <div key={log.id} className="flex items-center justify-between p-4 bg-secondary rounded-lg">
                 <div className="flex-1">
                   <span className="font-medium">{new Date(log.logged_at).toLocaleDateString()}</span>
-                  <span className="text-sm text-black dark:text-white ml-3 font-semibold">
+                  <span className="text-sm ml-3 font-semibold" style={{ color: 'black' }}>
                     {log.period.charAt(0).toUpperCase() + log.period.slice(1)}
                   </span>
                 </div>
@@ -835,7 +835,8 @@ const Weight = () => {
                           setEditingLog(log);
                           setEditWeight(formatWeight(log.weight_lbs, preferredUnit).split(' ')[0]);
                         }}
-                        className="h-8 w-8 p-0 text-black dark:text-white hover:bg-accent"
+                        className="h-8 w-8 p-0 hover:bg-accent"
+                        style={{ color: 'black' }}
                       >
                         <Pencil className="w-4 h-4" />
                       </Button>
@@ -843,7 +844,8 @@ const Weight = () => {
                         size="sm"
                         variant="ghost"
                         onClick={() => handleDeleteLog(log.id)}
-                        className="h-8 w-8 p-0 text-black dark:text-white hover:text-destructive hover:bg-destructive/10"
+                        className="h-8 w-8 p-0 hover:bg-destructive/10"
+                        style={{ color: 'black' }}
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
