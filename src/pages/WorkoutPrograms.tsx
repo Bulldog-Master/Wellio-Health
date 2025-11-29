@@ -6,8 +6,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Calendar as CalendarIcon, ArrowLeft, Plus, Trash2, CheckCircle, Circle, GripVertical, Edit } from "lucide-react";
+import { Calendar as CalendarIcon, ArrowLeft, Plus, Trash2, CheckCircle, Circle, GripVertical, Edit, ArrowUpDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { format } from "date-fns";
 import { Progress } from "@/components/ui/progress";
@@ -187,6 +188,7 @@ const WorkoutPrograms = () => {
   const [loading, setLoading] = useState(true);
   const [showCreate, setShowCreate] = useState(false);
   const [editingProgramId, setEditingProgramId] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<string>("date-newest");
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -431,6 +433,21 @@ const WorkoutPrograms = () => {
     return (completedDays / totalDays) * 100;
   };
 
+  const sortedPrograms = [...programs].sort((a, b) => {
+    switch (sortBy) {
+      case "name-asc":
+        return a.name.localeCompare(b.name);
+      case "name-desc":
+        return b.name.localeCompare(a.name);
+      case "date-newest":
+        return new Date(b.start_date || 0).getTime() - new Date(a.start_date || 0).getTime();
+      case "date-oldest":
+        return new Date(a.start_date || 0).getTime() - new Date(b.start_date || 0).getTime();
+      default:
+        return 0;
+    }
+  });
+
   if (loading) return <div className="p-6">Loading...</div>;
 
   return (
@@ -450,7 +467,19 @@ const WorkoutPrograms = () => {
           <h1 className="text-3xl font-bold">My Workout Programs</h1>
           <p className="text-muted-foreground">Create and manage your custom workout programs</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
+          <Select value={sortBy} onValueChange={setSortBy}>
+            <SelectTrigger className="w-[180px]">
+              <ArrowUpDown className="w-4 h-4 mr-2" />
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="date-newest">Newest First</SelectItem>
+              <SelectItem value="date-oldest">Oldest First</SelectItem>
+              <SelectItem value="name-asc">Name A-Z</SelectItem>
+              <SelectItem value="name-desc">Name Z-A</SelectItem>
+            </SelectContent>
+          </Select>
           <Button variant="outline" onClick={() => navigate("/workout-templates")}>
             Browse Templates
           </Button>
@@ -547,7 +576,7 @@ const WorkoutPrograms = () => {
         </Card>
       ) : (
         <div className="space-y-4">
-          {programs.map((program) => {
+          {sortedPrograms.map((program) => {
             const progress = calculateProgress(program);
             
             return (
