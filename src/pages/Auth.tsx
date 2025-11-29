@@ -1033,20 +1033,7 @@ const Auth = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <div>
-                    <Label htmlFor="password">Password</Label>
-                  </div>
-                  {isLogin && !isForgotPassword && (
-                    <div className="flex justify-end -mt-1 mb-1">
-                      <button
-                        type="button"
-                        onClick={() => setIsForgotPassword(true)}
-                        className="text-sm font-semibold underline text-[#00D4FF] hover:text-[#00E4FF]"
-                      >
-                        Forgot Password?
-                      </button>
-                    </div>
-                  )}
+                  <Label htmlFor="password">Password</Label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
@@ -1066,6 +1053,17 @@ const Auth = () => {
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
                   </div>
+                  {isLogin && !isForgotPassword && (
+                    <div className="text-right">
+                      <button
+                        type="button"
+                        onClick={() => setIsForgotPassword(true)}
+                        className="text-sm font-semibold underline text-[#00D4FF] hover:text-[#00E4FF]"
+                      >
+                        Forgot Password?
+                      </button>
+                    </div>
+                  )}
                 </div>
 
                 {!isLogin && (
