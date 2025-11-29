@@ -101,6 +101,25 @@ const WaterIntake = () => {
   const totalToday = todayLogs.reduce((sum, log) => sum + log.amount_ml, 0);
   const progress = Math.min((totalToday / dailyGoal) * 100, 100);
 
+  // Calculate period totals
+  const weekStart = new Date(today);
+  weekStart.setDate(today.getDate() - today.getDay());
+  
+  const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+  const yearStart = new Date(today.getFullYear(), 0, 1);
+
+  const totalThisWeek = waterLogs
+    .filter(log => new Date(log.logged_at) >= weekStart)
+    .reduce((sum, log) => sum + log.amount_ml, 0);
+
+  const totalThisMonth = waterLogs
+    .filter(log => new Date(log.logged_at) >= monthStart)
+    .reduce((sum, log) => sum + log.amount_ml, 0);
+
+  const totalThisYear = waterLogs
+    .filter(log => new Date(log.logged_at) >= yearStart)
+    .reduce((sum, log) => sum + log.amount_ml, 0);
+
   // Group logs by date
   const groupedLogs = waterLogs.reduce((groups, log) => {
     const date = new Date(log.logged_at).toLocaleDateString();
@@ -110,6 +129,13 @@ const WaterIntake = () => {
     groups[date].push(log);
     return groups;
   }, {} as Record<string, WaterLog[]>);
+
+  // Group by year for annual view
+  const yearlyTotals = waterLogs.reduce((totals, log) => {
+    const year = new Date(log.logged_at).getFullYear();
+    totals[year] = (totals[year] || 0) + log.amount_ml;
+    return totals;
+  }, {} as Record<number, number>);
 
   if (loading) {
     return <div className="p-6">Loading...</div>;
@@ -152,6 +178,65 @@ const WaterIntake = () => {
           </p>
         </div>
       </Card>
+
+      {/* Period Statistics */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <Card className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-900">
+          <div className="flex items-center gap-3">
+            <Droplets className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+            <div>
+              <p className="text-sm text-muted-foreground">This Week</p>
+              <p className="text-2xl font-bold">{(totalThisWeek / 1000).toFixed(1)}L</p>
+              <p className="text-xs text-muted-foreground">{totalThisWeek.toLocaleString()}ml</p>
+            </div>
+          </div>
+        </Card>
+
+        <Card className="p-4 bg-gradient-to-br from-cyan-50 to-cyan-100 dark:from-cyan-950 dark:to-cyan-900">
+          <div className="flex items-center gap-3">
+            <Droplets className="w-8 h-8 text-cyan-600 dark:text-cyan-400" />
+            <div>
+              <p className="text-sm text-muted-foreground">This Month</p>
+              <p className="text-2xl font-bold">{(totalThisMonth / 1000).toFixed(1)}L</p>
+              <p className="text-xs text-muted-foreground">{totalThisMonth.toLocaleString()}ml</p>
+            </div>
+          </div>
+        </Card>
+
+        <Card className="p-4 bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-950 dark:to-teal-900">
+          <div className="flex items-center gap-3">
+            <Droplets className="w-8 h-8 text-teal-600 dark:text-teal-400" />
+            <div>
+              <p className="text-sm text-muted-foreground">This Year</p>
+              <p className="text-2xl font-bold">{(totalThisYear / 1000).toFixed(1)}L</p>
+              <p className="text-xs text-muted-foreground">{totalThisYear.toLocaleString()}ml</p>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      {/* Annual Totals */}
+      {Object.keys(yearlyTotals).length > 0 && (
+        <Card className="p-6 hover:shadow-xl transition-all duration-300">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 bg-primary/10 rounded-xl">
+              <Droplets className="w-5 h-5 text-primary" />
+            </div>
+            <h3 className="text-lg font-semibold">Annual Summary</h3>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {Object.entries(yearlyTotals)
+              .sort(([a], [b]) => Number(b) - Number(a))
+              .map(([year, total]) => (
+                <div key={year} className="p-4 bg-secondary rounded-lg">
+                  <p className="text-sm text-muted-foreground">{year}</p>
+                  <p className="text-xl font-bold text-primary">{(total / 1000).toFixed(1)}L</p>
+                  <p className="text-xs text-muted-foreground">{total.toLocaleString()}ml</p>
+                </div>
+              ))}
+          </div>
+        </Card>
+      )}
 
       {/* Quick Add Buttons */}
       <Card className="p-6 hover:shadow-xl transition-all duration-300">
