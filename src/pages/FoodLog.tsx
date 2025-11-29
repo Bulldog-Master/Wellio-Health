@@ -1,3 +1,4 @@
+// Date and time picker added - Food Log v2.0
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,6 +29,8 @@ const FoodLog = () => {
   const navigate = useNavigate();
   const [selectedMeal, setSelectedMeal] = useState("breakfast");
   const [mealDescription, setMealDescription] = useState("");
+  const [logDate, setLogDate] = useState(new Date().toISOString().split('T')[0]);
+  const [timeOfDay, setTimeOfDay] = useState("morning");
   const [nutritionData, setNutritionData] = useState<{
     calories: number;
     protein: number;
@@ -275,6 +278,7 @@ const FoodLog = () => {
         });
       } else {
         // Insert new meal
+        const loggedAtTimestamp = new Date(logDate).toISOString();
         const { error } = await supabase
           .from('nutrition_logs')
           .insert({
@@ -286,6 +290,7 @@ const FoodLog = () => {
             carbs_grams: nutritionData.carbs,
             fat_grams: nutritionData.fat,
             image_url: uploadedImageUrl,
+            logged_at: loggedAtTimestamp,
           });
 
         if (error) throw error;
@@ -297,6 +302,8 @@ const FoodLog = () => {
       }
 
       setMealDescription("");
+      setLogDate(new Date().toISOString().split('T')[0]);
+      setTimeOfDay("morning");
       setNutritionData(null);
       setImagePreview(null);
       setSaveImage(false);
@@ -320,6 +327,7 @@ const FoodLog = () => {
     setEditingMeal(meal);
     setSelectedMeal(meal.meal_type);
     setMealDescription(meal.food_name);
+    setLogDate(new Date(meal.logged_at).toISOString().split('T')[0]);
     setNutritionData({
       calories: meal.calories,
       protein: meal.protein_grams || 0,
@@ -332,6 +340,8 @@ const FoodLog = () => {
   const handleCancelEdit = () => {
     setEditingMeal(null);
     setMealDescription("");
+    setLogDate(new Date().toISOString().split('T')[0]);
+    setTimeOfDay("morning");
     setNutritionData(null);
     setImagePreview(null);
     setSaveImage(false);
@@ -415,6 +425,32 @@ const FoodLog = () => {
                 ))}
               </SelectContent>
             </Select>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="log-date">Date</Label>
+              <Input
+                id="log-date"
+                type="date"
+                value={logDate}
+                onChange={(e) => setLogDate(e.target.value)}
+                className="w-full mt-1.5"
+              />
+            </div>
+            <div>
+              <Label htmlFor="meal-time">Time of Day</Label>
+              <Select value={timeOfDay} onValueChange={setTimeOfDay}>
+                <SelectTrigger id="meal-time" className="mt-1.5">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="morning">☀️ Morning (6AM - 12PM)</SelectItem>
+                  <SelectItem value="afternoon">🌤️ Afternoon (12PM - 6PM)</SelectItem>
+                  <SelectItem value="evening">🌙 Evening (6PM - 12AM)</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
           <div className="space-y-3">
