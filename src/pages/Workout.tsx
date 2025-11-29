@@ -2226,7 +2226,12 @@ const Workout = () => {
                     <h4 className="font-semibold text-lg mb-1">{log.activity_type}</h4>
                     <div className="flex items-center gap-2 mb-3">
                       <p className="text-sm font-medium text-primary">
-                        📅 {log.logged_at ? format(new Date(log.logged_at), 'MMMM d, yyyy') : 'No date'}
+                        📅 {log.logged_at ? (() => {
+                          const dateStr = log.logged_at.split('T')[0];
+                          const [year, month, day] = dateStr.split('-');
+                          const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+                          return format(date, 'MMMM d, yyyy');
+                        })() : 'No date'}
                       </p>
                       {log.time_of_day && (
                         <span className="text-sm font-medium text-muted-foreground capitalize">
