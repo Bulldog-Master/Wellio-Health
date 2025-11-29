@@ -110,17 +110,13 @@ const FoodLog = () => {
   // Calculate today's calories only - use date strings from DB to avoid timezone issues
   const today = new Date();
   const todayDateString = today.toISOString().split('T')[0]; // YYYY-MM-DD format
-  console.log('Today date (YYYY-MM-DD):', todayDateString);
   
   const todayMeals = mealLogs.filter(meal => {
     const mealDateString = meal.logged_at.split('T')[0]; // Extract YYYY-MM-DD from timestamp
-    console.log('Meal:', meal.food_name, 'Date:', mealDateString, 'Matches?', mealDateString === todayDateString);
     return mealDateString === todayDateString;
   });
   
-  console.log('Today meals count:', todayMeals.length);
   const totalCalories = todayMeals.reduce((sum, meal) => sum + (meal.calories || 0), 0);
-  console.log('Total calories for today:', totalCalories);
 
   // Group meals by date - use date strings to avoid timezone issues
   const mealsByDate = mealLogs.reduce((acc, meal) => {
