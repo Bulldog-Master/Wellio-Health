@@ -49,13 +49,15 @@ const Auth = () => {
     setPasskeySupported(isWebAuthnSupported());
     setIsInIframe(window.self !== window.top);
     
-    // Check for password reset
+    // Check for password reset FIRST
     const hashParams = new URLSearchParams(window.location.hash.substring(1));
     const accessToken = hashParams.get('access_token');
     const type = hashParams.get('type');
     
     if (accessToken && type === 'recovery') {
       setIsResettingPassword(true);
+      setIsLogin(true);
+      setAuthMethod('password');
       toast({
         title: "Reset Your Password",
         description: "Please enter your new password below.",
@@ -86,20 +88,23 @@ const Auth = () => {
   }, [toast]);
 
   useEffect(() => {
+    // Don't redirect if user is resetting password
+    if (isResettingPassword) return;
+    
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session) {
+      if (session && !isResettingPassword) {
         navigate("/");
       }
     });
 
     supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) {
+      if (session && !isResettingPassword) {
         navigate("/");
       }
     });
 
     return () => subscription.unsubscribe();
-  }, [navigate]);
+  }, [navigate, isResettingPassword]);
 
   const validateInputs = () => {
     try {
@@ -729,17 +734,21 @@ const Auth = () => {
             <h2 className="text-3xl font-bold text-foreground mb-2">
               {requires2FA 
                 ? "Verify Your Identity"
-                : isLogin 
-                  ? "Welcome back" 
-                  : "Get started today"
+                : isResettingPassword
+                  ? "Reset Your Password"
+                  : isLogin 
+                    ? "Welcome back" 
+                    : "Get started today"
               }
             </h2>
             <p className="text-muted-foreground">
               {requires2FA 
                 ? "Enter your authentication code to continue"
-                : isLogin 
-                  ? "Sign in to continue your fitness journey" 
-                  : "Create your account and start achieving your goals"
+                : isResettingPassword
+                  ? "Enter your new password below"
+                  : isLogin 
+                    ? "Sign in to continue your fitness journey" 
+                    : "Create your account and start achieving your goals"
               }
             </p>
           </div>
