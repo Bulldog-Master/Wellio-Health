@@ -1,3 +1,4 @@
+// Quick Actions with vibrant icon colors - Updated
 import { Activity, Flame, Target, TrendingUp, Droplets, Moon, Camera, Zap, HeartPulse } from "lucide-react";
 import MetricCard from "@/components/MetricCard";
 import ActivityRings from "@/components/ActivityRings";
@@ -271,7 +272,8 @@ const Dashboard = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-3">
           <Button 
             onClick={() => navigate('/weight')}
-            className="h-auto py-4 flex-col gap-2 bg-primary hover:bg-primary/90"
+            variant="secondary"
+            className="h-auto py-4 flex-col gap-2 [&_svg]:!text-[hsl(195_100%_50%)]"
           >
             <Activity className="w-5 h-5" />
             <span className="text-sm">Log Weight</span>
@@ -279,7 +281,7 @@ const Dashboard = () => {
           <Button 
             onClick={() => navigate('/food')}
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2"
+            className="h-auto py-4 flex-col gap-2 [&_svg]:!text-[hsl(15_100%_60%)]"
           >
             <Flame className="w-5 h-5" />
             <span className="text-sm">Add Meal</span>
@@ -287,7 +289,7 @@ const Dashboard = () => {
           <Button 
             onClick={() => navigate('/workout')}
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2"
+            className="h-auto py-4 flex-col gap-2 [&_svg]:!text-[hsl(145_80%_50%)]"
           >
             <TrendingUp className="w-5 h-5" />
             <span className="text-sm">Log Workout</span>
@@ -295,7 +297,7 @@ const Dashboard = () => {
           <Button 
             onClick={() => navigate('/water-intake')}
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2"
+            className="h-auto py-4 flex-col gap-2 [&_svg]:!text-[hsl(200_100%_55%)]"
           >
             <Droplets className="w-5 h-5" />
             <span className="text-sm">Water Intake</span>
@@ -303,7 +305,7 @@ const Dashboard = () => {
           <Button 
             onClick={() => navigate('/sleep-tracking')}
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2"
+            className="h-auto py-4 flex-col gap-2 [&_svg]:!text-[hsl(280_95%_68%)]"
           >
             <Moon className="w-5 h-5" />
             <span className="text-sm">Sleep</span>
@@ -311,7 +313,7 @@ const Dashboard = () => {
           <Button 
             onClick={() => navigate('/progress-photos')}
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2"
+            className="h-auto py-4 flex-col gap-2 [&_svg]:!text-[hsl(340_100%_62%)]"
           >
             <Camera className="w-5 h-5" />
             <span className="text-sm">Progress Pics</span>
@@ -319,14 +321,14 @@ const Dashboard = () => {
           <Button 
             onClick={() => navigate('/fitness-goals')}
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2"
+            className="h-auto py-4 flex-col gap-2 [&_svg]:!text-[hsl(35_100%_58%)]"
           >
             <Target className="w-5 h-5" />
             <span className="text-sm">Goals</span>
           </Button>
           <Button 
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2 relative cursor-not-allowed opacity-60"
+            className="h-auto py-4 flex-col gap-2 relative cursor-not-allowed opacity-60 [&_svg]:!text-[hsl(165_85%_48%)]"
             disabled
           >
             <Activity className="w-5 h-5" />
