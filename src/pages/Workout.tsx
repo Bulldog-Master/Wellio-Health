@@ -1056,8 +1056,9 @@ const Workout = () => {
                               placeholder="60"
                               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:text-sm"
                               onBlur={(e) => {
-                                const val = parseInt(e.target.value) || 60;
-                                setDefaultRestTime(val);
+                                const val = parseInt(e.target.value);
+                                setDefaultRestTime(isNaN(val) ? 60 : val);
+                                setShowRestTimeInput(false);
                               }}
                             />
                           </div>
