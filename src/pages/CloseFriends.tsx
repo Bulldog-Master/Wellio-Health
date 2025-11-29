@@ -45,22 +45,37 @@ const CloseFriends = () => {
         `)
         .eq('user_id', user.id);
 
-      // Fetch followers
-      const { data: followsData } = await supabase
+      // Fetch followers with their profiles
+      const { data: followsData, error: followsError } = await supabase
         .from('follows')
-        .select(`
-          follower_id,
-          profiles!follows_follower_id_fkey (
-            id,
-            username,
-            full_name,
-            avatar_url
-          )
-        `)
+        .select('follower_id')
         .eq('following_id', user.id);
 
+      if (followsError) {
+        console.error('Error fetching follows:', followsError);
+      }
+
+      // Fetch profile data for each follower
+      let followersWithProfiles: any[] = [];
+      if (followsData && followsData.length > 0) {
+        const followerIds = followsData.map(f => f.follower_id);
+        const { data: profilesData, error: profilesError } = await supabase
+          .from('profiles')
+          .select('id, username, full_name, avatar_url')
+          .in('id', followerIds);
+
+        if (profilesError) {
+          console.error('Error fetching profiles:', profilesError);
+        }
+
+        followersWithProfiles = followsData.map(follow => ({
+          follower_id: follow.follower_id,
+          profiles: profilesData?.find(p => p.id === follow.follower_id) || null
+        })).filter(f => f.profiles !== null);
+      }
+
       setCloseFriends(closeFriendsData || []);
-      setFollowers(followsData || []);
+      setFollowers(followersWithProfiles);
     } catch (error) {
       console.error('Error fetching data:', error);
       toast.error("Failed to load friends");
