@@ -1,10 +1,10 @@
-// Date and time picker FULLY IMPLEMENTED - Food Log v3.0 - Matches Workout Implementation
+// REBUILT - Date/Time Picker v4.0 - Force Render
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Utensils, Plus, Clock, Camera, Sparkles, Loader2, Pencil, Trash2, ArrowLeft, Search } from "lucide-react";
+import { Utensils, Plus, Clock, Camera, Sparkles, Loader2, Pencil, Trash2, ArrowLeft, Search, Calendar } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -415,9 +415,12 @@ const FoodLog = () => {
         <p className="opacity-90">{Math.max(0, 2000 - totalCalories)} cal remaining (goal: 2000)</p>
       </Card>
 
-      <Card className="p-6 bg-gradient-card shadow-md">
+      <Card key="meal-log-form" className="p-6 bg-gradient-card shadow-md">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold">{editingMeal ? 'Edit Meal' : 'Log New Meal'}</h3>
+          <h3 className="text-lg font-semibold flex items-center gap-2">
+            <Calendar className="w-5 h-5" />
+            {editingMeal ? 'Edit Meal' : 'Log New Meal'}
+          </h3>
           {editingMeal && (
             <Button variant="ghost" size="sm" onClick={handleCancelEdit}>
               Cancel
