@@ -1051,11 +1051,15 @@ const Workout = () => {
                             <Label htmlFor="rest-time" className="text-xs">Seconds between sets</Label>
                             <Input
                               id="rest-time"
-                              type="number"
-                              min="0"
-                              max="600"
+                              type="text"
+                              inputMode="numeric"
                               value={defaultRestTimeInput}
-                              onChange={(e) => setDefaultRestTimeInput(e.target.value)}
+                              onChange={(e) => {
+                                const value = e.target.value;
+                                if (value === '' || /^\d+$/.test(value)) {
+                                  setDefaultRestTimeInput(value);
+                                }
+                              }}
                               onBlur={(e) => {
                                 const val = parseInt(e.target.value);
                                 if (isNaN(val) || val < 0) {
