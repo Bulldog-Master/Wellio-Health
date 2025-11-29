@@ -2605,6 +2605,48 @@ export type Database = {
         }
         Relationships: []
       }
+      saved_meals: {
+        Row: {
+          calories: number
+          carbs_grams: number | null
+          created_at: string | null
+          fat_grams: number | null
+          id: string
+          meal_name: string
+          meal_type: string
+          notes: string | null
+          protein_grams: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          calories: number
+          carbs_grams?: number | null
+          created_at?: string | null
+          fat_grams?: number | null
+          id?: string
+          meal_name: string
+          meal_type: string
+          notes?: string | null
+          protein_grams?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          calories?: number
+          carbs_grams?: number | null
+          created_at?: string | null
+          fat_grams?: number | null
+          id?: string
+          meal_name?: string
+          meal_type?: string
+          notes?: string | null
+          protein_grams?: number | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       session_messages: {
         Row: {
           created_at: string
