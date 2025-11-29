@@ -1062,14 +1062,9 @@ const Workout = () => {
                               type="number"
                               min="0"
                               value={tempRestTime}
-                              onChange={(e) => {
-                                console.log('Input onChange:', e.target.value);
-                                setTempRestTime(e.target.value);
-                              }}
+                              onChange={(e) => setTempRestTime(e.target.value)}
                               onBlur={() => {
-                                console.log('Input onBlur, tempRestTime:', tempRestTime);
                                 const numVal = tempRestTime === '' || tempRestTime === undefined ? 60 : Number(tempRestTime);
-                                console.log('Parsed value:', numVal);
                                 setDefaultRestTime(numVal);
                               }}
                               onKeyDown={(e) => {
@@ -1203,8 +1198,11 @@ const Workout = () => {
                               min="0"
                               max="600"
                               placeholder="60"
-                              value={exercise.rest_seconds || ''}
-                              onChange={(e) => handleUpdateRoutineExercise(idx, 'rest_seconds', parseInt(e.target.value) || 0)}
+                              value={exercise.rest_seconds ?? ''}
+                              onChange={(e) => {
+                                const val = e.target.value === '' ? 0 : parseInt(e.target.value);
+                                handleUpdateRoutineExercise(idx, 'rest_seconds', isNaN(val) ? 0 : val);
+                              }}
                               className="mt-1"
                             />
                           </div>
