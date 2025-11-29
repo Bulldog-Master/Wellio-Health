@@ -2219,9 +2219,16 @@ const Workout = () => {
                 <div className="flex items-start justify-between mb-2">
                   <div className="flex-1">
                     <h4 className="font-semibold text-lg mb-1">{log.activity_type}</h4>
-                    <p className="text-sm font-medium text-primary mb-3">
-                      📅 {log.logged_at ? format(new Date(log.logged_at), 'MMMM d, yyyy') : 'No date'}
-                    </p>
+                    <div className="flex items-center gap-2 mb-3">
+                      <p className="text-sm font-medium text-primary">
+                        📅 {log.logged_at ? format(new Date(log.logged_at), 'MMMM d, yyyy') : 'No date'}
+                      </p>
+                      {log.time_of_day && (
+                        <span className="text-sm font-medium text-muted-foreground capitalize">
+                          • {log.time_of_day}
+                        </span>
+                      )}
+                    </div>
                     <div className="flex items-center gap-4 text-sm text-muted-foreground">
                       <div className="flex items-center gap-1">
                         <Clock className="w-3 h-3" />
