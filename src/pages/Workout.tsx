@@ -1,4 +1,4 @@
-// Intensity levels: Low, Medium, High, Intense - Updated v2.0
+// Header icons with vibrant colors - Updated v3.0
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
