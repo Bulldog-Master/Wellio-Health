@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { User, MessageSquare } from "lucide-react";
@@ -155,96 +155,99 @@ export const MessagesSidebar = () => {
 
   if (isLoading) {
     return (
-      <div className="space-y-4">
-        <div className="flex items-center gap-2">
-          <MessageSquare className="h-5 w-5" />
-          <h3 className="font-semibold">Active Conversations</h3>
-        </div>
-        <p className="text-sm text-muted-foreground">Loading...</p>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <MessageSquare className="w-5 h-5" />
+            Active Conversations
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-muted-foreground">Loading...</p>
+        </CardContent>
+      </Card>
     );
   }
 
   if (!conversations || conversations.length === 0) {
     return (
-      <div className="space-y-4">
-        <div className="flex items-center gap-2">
-          <MessageSquare className="h-5 w-5" />
-          <h3 className="font-semibold">Active Conversations</h3>
-        </div>
-        <Card>
-          <CardContent className="p-4 text-center text-sm text-muted-foreground">
-            <MessageSquare className="h-8 w-8 mx-auto mb-2 opacity-50" />
-            <p>No active conversations</p>
-          </CardContent>
-        </Card>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <MessageSquare className="w-5 h-5" />
+            Active Conversations
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="text-center">
+          <MessageSquare className="h-8 w-8 mx-auto mb-2 opacity-50 text-muted-foreground" />
+          <p className="text-sm text-muted-foreground">No active conversations</p>
+        </CardContent>
+      </Card>
     );
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <MessageSquare className="h-5 w-5" />
-          <h3 className="font-semibold">Active Conversations</h3>
+    <Card>
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <CardTitle className="flex items-center gap-2">
+            <MessageSquare className="w-5 h-5" />
+            Active Conversations
+          </CardTitle>
+          <button
+            onClick={() => navigate("/messages")}
+            className="text-sm text-primary hover:underline"
+          >
+            View all
+          </button>
         </div>
-        <button
-          onClick={() => navigate("/messages")}
-          className="text-sm text-primary hover:underline"
-        >
-          View all
-        </button>
-      </div>
-
-      <div className="space-y-2">
+      </CardHeader>
+      <CardContent className="space-y-2">
         {conversations.map((conversation) => (
-          <Card
+          <div
             key={conversation.id}
-            className="cursor-pointer transition-colors hover:bg-accent/50"
+            className="p-3 rounded-lg border bg-card cursor-pointer transition-colors hover:bg-accent/50"
             onClick={() => navigate(`/messages/${conversation.id}`)}
           >
-            <CardContent className="p-3">
-              <div className="flex items-center gap-3">
-                <Avatar className="h-10 w-10">
-                  <AvatarImage src={conversation.other_user.avatar_url || ""} />
-                  <AvatarFallback>
-                    {conversation.other_user.full_name?.[0] ||
-                      conversation.other_user.username?.[0] || (
-                        <User className="h-4 w-4" />
-                      )}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between">
-                    <p className="font-semibold text-sm truncate">
-                      {conversation.other_user.full_name || conversation.other_user.username || "Anonymous"}
-                    </p>
-                    {conversation.last_message_at && (
-                      <span className="text-xs text-muted-foreground">
-                        {formatDistanceToNow(new Date(conversation.last_message_at), { addSuffix: true })}
-                      </span>
+            <div className="flex items-center gap-3">
+              <Avatar className="h-10 w-10">
+                <AvatarImage src={conversation.other_user.avatar_url || ""} />
+                <AvatarFallback>
+                  {conversation.other_user.full_name?.[0] ||
+                    conversation.other_user.username?.[0] || (
+                      <User className="h-4 w-4" />
                     )}
-                  </div>
-                  {conversation.last_message && (
-                    <div className="flex items-center justify-between gap-2">
-                      <p className={`text-xs truncate ${conversation.unread_count > 0 ? "font-semibold" : "text-muted-foreground"}`}>
-                        {conversation.last_message.sender_id === currentUserId && "You: "}
-                        {conversation.last_message.content}
-                      </p>
-                      {conversation.unread_count > 0 && (
-                        <Badge variant="default" className="text-xs h-5 px-1.5">
-                          {conversation.unread_count}
-                        </Badge>
-                      )}
-                    </div>
+                </AvatarFallback>
+              </Avatar>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between">
+                  <p className="font-semibold text-sm truncate">
+                    {conversation.other_user.full_name || conversation.other_user.username || "Anonymous"}
+                  </p>
+                  {conversation.last_message_at && (
+                    <span className="text-xs text-muted-foreground">
+                      {formatDistanceToNow(new Date(conversation.last_message_at), { addSuffix: true })}
+                    </span>
                   )}
                 </div>
+                {conversation.last_message && (
+                  <div className="flex items-center justify-between gap-2">
+                    <p className={`text-xs truncate ${conversation.unread_count > 0 ? "font-semibold" : "text-muted-foreground"}`}>
+                      {conversation.last_message.sender_id === currentUserId && "You: "}
+                      {conversation.last_message.content}
+                    </p>
+                    {conversation.unread_count > 0 && (
+                      <Badge variant="default" className="text-xs h-5 px-1.5">
+                        {conversation.unread_count}
+                      </Badge>
+                    )}
+                  </div>
+                )}
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         ))}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
