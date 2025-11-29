@@ -15,6 +15,7 @@ const Food = lazy(() => import("@/pages/Food"));
 const FoodLog = lazy(() => import("@/pages/FoodLog"));
 const Recipes = lazy(() => import("@/pages/Recipes"));
 const Workout = lazy(() => import("@/pages/Workout"));
+const WorkoutSchedule = lazy(() => import("@/pages/WorkoutSchedule"));
 const Activity = lazy(() => import("@/pages/Activity"));
 const Habits = lazy(() => import("@/pages/Habits"));
 const Supplements = lazy(() => import("@/pages/Supplements"));
@@ -120,6 +121,7 @@ export const AppRoutes = () => (
     
     {/* Workouts & Training */}
     <Route path="/workout" element={<ProtectedRoute><Layout><Workout /></Layout></ProtectedRoute>} />
+    <Route path="/workout-schedule" element={<ProtectedRoute><Layout><WorkoutSchedule /></Layout></ProtectedRoute>} />
     <Route path="/activity" element={<ProtectedRoute><Layout><Activity /></Layout></ProtectedRoute>} />
     <Route path="/interval-timer" element={<ProtectedRoute><Layout><IntervalTimer /></Layout></ProtectedRoute>} />
     <Route path="/workout-programs" element={<ProtectedRoute><Layout><WorkoutPrograms /></Layout></ProtectedRoute>} />

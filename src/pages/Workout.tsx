@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown, ChevronDown, Library, BookOpen, Smartphone, ArrowLeft, Calendar as CalendarIcon, ArrowUpDown, Timer } from "lucide-react";
+import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown, ChevronDown, Library, BookOpen, Smartphone, ArrowLeft, Calendar as CalendarIcon, ArrowUpDown, Timer, CalendarDays } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
@@ -1000,6 +1000,10 @@ const Workout = () => {
       </div>
 
       <div className="flex gap-2 flex-wrap justify-end">
+        <Button variant="outline" className="gap-2" onClick={() => navigate('/workout-schedule')}>
+          <CalendarDays className="w-4 h-4" />
+          Schedule
+        </Button>
         <Button variant="outline" className="gap-2" onClick={() => setShowAppsLibrary(true)}>
           <Smartphone className="w-4 h-4" />
           Apps
