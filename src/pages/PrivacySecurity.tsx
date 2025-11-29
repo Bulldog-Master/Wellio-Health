@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-import { Shield, Key, Download, Trash2, ArrowLeft, Smartphone, Pencil, Lock, Eye, UserCheck, EyeOff } from "lucide-react";
+import { Shield, Key, Download, Trash2, ArrowLeft, Smartphone, Pencil, Lock, Eye, UserCheck, EyeOff, Mail } from "lucide-react";
 import { isWebAuthnSupported, registerPasskey } from "@/lib/webauthn";
 import {
   AlertDialog,
@@ -52,6 +52,11 @@ const PrivacySecurity = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
+  const [showEmailDialog, setShowEmailDialog] = useState(false);
+  const [newEmail, setNewEmail] = useState("");
+  const [emailPassword, setEmailPassword] = useState("");
+  const [showEmailPassword, setShowEmailPassword] = useState(false);
+  const [isChangingEmail, setIsChangingEmail] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -349,6 +354,59 @@ const PrivacySecurity = () => {
     }
   };
 
+  const handleChangeEmail = async () => {
+    // Validate inputs
+    if (!newEmail || !emailPassword) {
+      toast.error("All fields are required");
+      return;
+    }
+
+    if (!newEmail.includes("@") || !newEmail.includes(".")) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    if (newEmail === userEmail) {
+      toast.error("New email must be different from current email");
+      return;
+    }
+
+    setIsChangingEmail(true);
+
+    try {
+      // First, verify the password by re-authenticating
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: userEmail,
+        password: emailPassword,
+      });
+
+      if (signInError) {
+        toast.error("Password is incorrect");
+        setIsChangingEmail(false);
+        return;
+      }
+
+      // Update the email
+      const { error: updateError } = await supabase.auth.updateUser({
+        email: newEmail,
+      });
+
+      if (updateError) throw updateError;
+
+      toast.success("Verification email sent! Please check your new email address to confirm the change.");
+      
+      // Reset form and close dialog
+      setShowEmailDialog(false);
+      setNewEmail("");
+      setEmailPassword("");
+    } catch (error: any) {
+      console.error("Error changing email:", error);
+      toast.error(error.message || "Failed to change email");
+    } finally {
+      setIsChangingEmail(false);
+    }
+  };
+
   const handleExportData = async () => {
     try {
       toast.info("Exporting your data...");
@@ -581,6 +639,32 @@ const PrivacySecurity = () => {
         </CardContent>
       </Card>
 
+      {/* Email Address */}
+      <Card className="hover:shadow-xl transition-all duration-300">
+        <CardHeader>
+          <div className="flex items-center gap-3">
+            <div className="p-3 bg-primary/10 rounded-xl">
+              <Mail className="w-6 h-6 text-primary" />
+            </div>
+            <div>
+              <CardTitle>Email Address</CardTitle>
+              <CardDescription>Update your email address</CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+            <div className="space-y-0.5">
+              <Label className="text-sm">Current Email</Label>
+              <p className="text-sm text-muted-foreground">{userEmail}</p>
+            </div>
+          </div>
+          <Button onClick={() => setShowEmailDialog(true)} variant="outline">
+            Change Email
+          </Button>
+        </CardContent>
+      </Card>
+
       {/* Password */}
       <Card className="hover:shadow-xl transition-all duration-300">
         <CardHeader>
@@ -804,6 +888,72 @@ const PrivacySecurity = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Email Change Dialog */}
+      <Dialog open={showEmailDialog} onOpenChange={setShowEmailDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Change Email Address</DialogTitle>
+            <DialogDescription>
+              Enter your new email and password to confirm the change. You'll receive a verification email at your new address.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="new-email">New Email Address</Label>
+              <Input
+                id="new-email"
+                type="email"
+                placeholder="Enter new email address"
+                value={newEmail}
+                onChange={(e) => setNewEmail(e.target.value)}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="email-password">Confirm Password</Label>
+              <div className="relative">
+                <Input
+                  id="email-password"
+                  type={showEmailPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={emailPassword}
+                  onChange={(e) => setEmailPassword(e.target.value)}
+                  className="pr-10"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowEmailPassword(!showEmailPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                >
+                  {showEmailPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button 
+              variant="outline" 
+              onClick={() => {
+                setShowEmailDialog(false);
+                setNewEmail("");
+                setEmailPassword("");
+              }}
+              disabled={isChangingEmail}
+            >
+              Cancel
+            </Button>
+            <Button 
+              onClick={handleChangeEmail}
+              disabled={isChangingEmail || !newEmail || !emailPassword}
+            >
+              {isChangingEmail ? "Updating..." : "Update Email"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Password Change Dialog */}
       <Dialog open={showPasswordDialog} onOpenChange={setShowPasswordDialog}>
