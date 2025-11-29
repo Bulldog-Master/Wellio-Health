@@ -70,15 +70,11 @@ const FoodLog = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-
       const { data, error } = await supabase
         .from('nutrition_logs')
         .select('*')
         .eq('user_id', user.id)
-        .gte('logged_at', today.toISOString())
-        .order('logged_at', { ascending: true });
+        .order('logged_at', { ascending: false });
 
       if (error) throw error;
       setMealLogs(data || []);
@@ -89,7 +85,19 @@ const FoodLog = () => {
     }
   };
 
-  const totalCalories = mealLogs.reduce((sum, meal) => sum + (meal.calories || 0), 0);
+  // Calculate today's calories only
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+  const todayMeals = mealLogs.filter(meal => new Date(meal.logged_at) >= todayStart);
+  const totalCalories = todayMeals.reduce((sum, meal) => sum + (meal.calories || 0), 0);
+
+  // Group meals by date
+  const mealsByDate = mealLogs.reduce((acc, meal) => {
+    const date = new Date(meal.logged_at).toLocaleDateString();
+    if (!acc[date]) acc[date] = [];
+    acc[date].push(meal);
+    return acc;
+  }, {} as Record<string, MealLog[]>);
 
   const handleSearchFood = async () => {
     if (!searchQuery.trim()) return;
@@ -644,64 +652,81 @@ const FoodLog = () => {
       </Card>
 
       <Card className="p-6 bg-gradient-card shadow-md">
-        <h3 className="text-lg font-semibold mb-4">Today's Meals</h3>
+        <h3 className="text-lg font-semibold mb-4">Meal History</h3>
         {isLoading ? (
           <p className="text-center text-muted-foreground py-8">Loading...</p>
         ) : mealLogs.length === 0 ? (
-          <p className="text-center text-muted-foreground py-8">No meals logged yet today. Start tracking above!</p>
+          <p className="text-center text-muted-foreground py-8">No meals logged yet. Start tracking above!</p>
         ) : (
-          <div className="space-y-4">
-            {mealTypes.map((mealType) => {
-              const meals = mealLogs.filter(log => log.meal_type === mealType.value);
-              if (meals.length === 0) return null;
-
+          <div className="space-y-6">
+            {Object.entries(mealsByDate).map(([date, meals]) => {
+              const isToday = date === new Date().toLocaleDateString();
+              const dayCalories = meals.reduce((sum, meal) => sum + (meal.calories || 0), 0);
+              
               return (
-                <div key={mealType.value} className="space-y-2">
-                  <h4 className="font-medium text-primary">{mealType.label}</h4>
-                  {meals.map((meal) => (
-                    <Card key={meal.id} className="p-4 bg-accent/5">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-1">
-                            <Clock className="w-4 h-4 text-muted-foreground" />
-                            <span className="text-sm text-muted-foreground">
-                              {new Date(meal.logged_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                            </span>
-                          </div>
-                          <h5 className="font-medium mb-2">{meal.food_name}</h5>
-                          {meal.image_url && (
-                            <img 
-                              src={meal.image_url} 
-                              alt={meal.food_name} 
-                              className="w-full h-32 object-cover rounded-md mb-2"
-                            />
-                          )}
-                          <div className="flex gap-4 text-sm">
-                            <span className="text-accent font-medium">{meal.calories} cal</span>
-                            {meal.protein_grams && <span className="text-muted-foreground">P: {meal.protein_grams}g</span>}
-                            {meal.carbs_grams && <span className="text-muted-foreground">C: {meal.carbs_grams}g</span>}
-                            {meal.fat_grams && <span className="text-muted-foreground">F: {meal.fat_grams}g</span>}
-                          </div>
+                <div key={date} className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-semibold text-primary">
+                      {isToday ? 'Today' : date}
+                    </h4>
+                    <span className="text-sm text-muted-foreground">{dayCalories} cal</span>
+                  </div>
+                  <div className="space-y-3">
+                    {mealTypes.map((mealType) => {
+                      const typeMeals = meals.filter(log => log.meal_type === mealType.value);
+                      if (typeMeals.length === 0) return null;
+
+                      return (
+                        <div key={mealType.value} className="space-y-2">
+                          <h5 className="text-sm font-medium text-muted-foreground">{mealType.label}</h5>
+                          {typeMeals.map((meal) => (
+                            <Card key={meal.id} className="p-4 bg-accent/5">
+                              <div className="flex items-start justify-between gap-4">
+                                <div className="flex-1">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <Clock className="w-4 h-4 text-muted-foreground" />
+                                    <span className="text-sm text-muted-foreground">
+                                      {new Date(meal.logged_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                    </span>
+                                  </div>
+                                  <h6 className="font-medium mb-2">{meal.food_name}</h6>
+                                  {meal.image_url && (
+                                    <img 
+                                      src={meal.image_url} 
+                                      alt={meal.food_name} 
+                                      className="w-full h-32 object-cover rounded-md mb-2"
+                                    />
+                                  )}
+                                  <div className="flex gap-4 text-sm">
+                                    <span className="text-accent font-medium">{meal.calories} cal</span>
+                                    {meal.protein_grams && <span className="text-muted-foreground">P: {meal.protein_grams}g</span>}
+                                    {meal.carbs_grams && <span className="text-muted-foreground">C: {meal.carbs_grams}g</span>}
+                                    {meal.fat_grams && <span className="text-muted-foreground">F: {meal.fat_grams}g</span>}
+                                  </div>
+                                </div>
+                                <div className="flex gap-2">
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    onClick={() => handleEditMeal(meal)}
+                                  >
+                                    <Pencil className="w-4 h-4" />
+                                  </Button>
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    onClick={() => handleDeleteMeal(meal.id)}
+                                  >
+                                    <Trash2 className="w-4 h-4" />
+                                  </Button>
+                                </div>
+                              </div>
+                            </Card>
+                          ))}
                         </div>
-                        <div className="flex gap-2">
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => handleEditMeal(meal)}
-                          >
-                            <Pencil className="w-4 h-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => handleDeleteMeal(meal.id)}
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
-                        </div>
-                      </div>
-                    </Card>
-                  ))}
+                      );
+                    })}
+                  </div>
                 </div>
               );
             })}
