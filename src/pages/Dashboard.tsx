@@ -275,7 +275,9 @@ const Dashboard = () => {
             variant="secondary"
             className="h-auto py-4 flex-col gap-2"
           >
-            <Activity className="w-5 h-5" style={{ color: 'hsl(195, 100%, 50%)' }} />
+            <span style={{ color: 'hsl(195, 100%, 50%)' }}>
+              <Activity className="w-5 h-5" />
+            </span>
             <span className="text-sm">Log Weight</span>
           </Button>
           <Button 
@@ -283,7 +285,9 @@ const Dashboard = () => {
             variant="secondary" 
             className="h-auto py-4 flex-col gap-2"
           >
-            <Flame className="w-5 h-5" style={{ color: 'hsl(15, 100%, 60%)' }} />
+            <span style={{ color: 'hsl(15, 100%, 60%)' }}>
+              <Flame className="w-5 h-5" />
+            </span>
             <span className="text-sm">Add Meal</span>
           </Button>
           <Button 
@@ -291,7 +295,9 @@ const Dashboard = () => {
             variant="secondary" 
             className="h-auto py-4 flex-col gap-2"
           >
-            <TrendingUp className="w-5 h-5" style={{ color: 'hsl(145, 80%, 50%)' }} />
+            <span style={{ color: 'hsl(145, 80%, 50%)' }}>
+              <TrendingUp className="w-5 h-5" />
+            </span>
             <span className="text-sm">Log Workout</span>
           </Button>
           <Button 
@@ -299,7 +305,9 @@ const Dashboard = () => {
             variant="secondary" 
             className="h-auto py-4 flex-col gap-2"
           >
-            <Droplets className="w-5 h-5" style={{ color: 'hsl(200, 100%, 55%)' }} />
+            <span style={{ color: 'hsl(200, 100%, 55%)' }}>
+              <Droplets className="w-5 h-5" />
+            </span>
             <span className="text-sm">Water Intake</span>
           </Button>
           <Button 
@@ -307,7 +315,9 @@ const Dashboard = () => {
             variant="secondary" 
             className="h-auto py-4 flex-col gap-2"
           >
-            <Moon className="w-5 h-5" style={{ color: 'hsl(280, 95%, 68%)' }} />
+            <span style={{ color: 'hsl(280, 95%, 68%)' }}>
+              <Moon className="w-5 h-5" />
+            </span>
             <span className="text-sm">Sleep</span>
           </Button>
           <Button 
@@ -315,7 +325,9 @@ const Dashboard = () => {
             variant="secondary" 
             className="h-auto py-4 flex-col gap-2"
           >
-            <Camera className="w-5 h-5" style={{ color: 'hsl(340, 100%, 62%)' }} />
+            <span style={{ color: 'hsl(340, 100%, 62%)' }}>
+              <Camera className="w-5 h-5" />
+            </span>
             <span className="text-sm">Progress Pics</span>
           </Button>
           <Button 
@@ -323,7 +335,9 @@ const Dashboard = () => {
             variant="secondary" 
             className="h-auto py-4 flex-col gap-2"
           >
-            <Target className="w-5 h-5" style={{ color: 'hsl(35, 100%, 58%)' }} />
+            <span style={{ color: 'hsl(35, 100%, 58%)' }}>
+              <Target className="w-5 h-5" />
+            </span>
             <span className="text-sm">Goals</span>
           </Button>
           <Button 
@@ -331,7 +345,9 @@ const Dashboard = () => {
             className="h-auto py-4 flex-col gap-2 relative cursor-not-allowed opacity-60"
             disabled
           >
-            <Activity className="w-5 h-5" style={{ color: 'hsl(165, 85%, 48%)' }} />
+            <span style={{ color: 'hsl(165, 85%, 48%)' }}>
+              <Activity className="w-5 h-5" />
+            </span>
             <span className="text-sm">Step Count</span>
             <span className="absolute bottom-1 text-[9px] text-muted-foreground/50 font-medium">Coming Soon!</span>
           </Button>
