@@ -59,7 +59,7 @@ const WorkoutSchedule = () => {
     timeOfDay: "morning",
     exerciseType: "",
     duration: "",
-    intensity: "moderate",
+    intensity: "medium",
     templateId: "",
   });
 
@@ -241,7 +241,7 @@ const WorkoutSchedule = () => {
       timeOfDay: metadata.timeOfDay || "morning",
       exerciseType: metadata.exerciseType || "",
       duration: metadata.duration?.toString() || "",
-      intensity: metadata.intensity || "moderate",
+      intensity: metadata.intensity || "medium",
       templateId: metadata.templateId || "",
     });
     setEditingWorkout(workout.id);
@@ -268,7 +268,7 @@ const WorkoutSchedule = () => {
       timeOfDay: "morning",
       exerciseType: "",
       duration: "",
-      intensity: "moderate",
+      intensity: "medium",
       templateId: "",
     });
   };
@@ -554,8 +554,9 @@ const WorkoutSchedule = () => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="moderate">Moderate</SelectItem>
+                    <SelectItem value="low">Low</SelectItem>
+                    <SelectItem value="medium">Medium</SelectItem>
+                    <SelectItem value="high">High</SelectItem>
                     <SelectItem value="intense">Intense</SelectItem>
                   </SelectContent>
                 </Select>

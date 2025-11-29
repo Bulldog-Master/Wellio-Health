@@ -85,7 +85,7 @@ const Workout = () => {
   const { preferredUnit } = useUserPreferences();
   const [exercise, setExercise] = useState("");
   const [duration, setDuration] = useState("");
-  const [intensity, setIntensity] = useState("moderate");
+  const [intensity, setIntensity] = useState("medium");
   const [distance, setDistance] = useState("");
   const [notes, setNotes] = useState("");
   const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
@@ -242,8 +242,9 @@ const Workout = () => {
     };
     
     const intensityMultiplier: { [key: string]: number } = {
-      'light': 0.7,
-      'moderate': 1.0,
+      'low': 0.7,
+      'medium': 1.0,
+      'high': 1.2,
       'intense': 1.4
     };
     
@@ -489,7 +490,7 @@ const Workout = () => {
 
       setExercise("");
       setDuration("");
-      setIntensity("moderate");
+      setIntensity("medium");
       setDistance("");
       setNotes("");
       const now = new Date();
@@ -514,7 +515,7 @@ const Workout = () => {
   const handleEditWorkout = (log: ActivityLog) => {
     setExercise(log.activity_type);
     setDuration(log.duration_minutes.toString());
-    setIntensity("moderate");
+    setIntensity("medium");
     setDistance(log.distance_miles ? formatDistance(log.distance_miles, preferredUnit).split(' ')[0] : "");
     setNotes(log.notes || "");
     setWorkoutDate(log.logged_at.split('T')[0]);
@@ -2037,9 +2038,10 @@ const Workout = () => {
                 onChange={(e) => setIntensity(e.target.value)}
                 className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 mt-1.5"
               >
-                <option value="light">Light</option>
-                <option value="moderate">Moderate</option>
-                <option value="vigorous">Vigorous</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+                <option value="intense">Intense</option>
               </select>
             </div>
           </div>
@@ -2152,7 +2154,7 @@ const Workout = () => {
                   setEditingWorkout(null);
                   setExercise("");
                   setDuration("");
-                  setIntensity("moderate");
+                  setIntensity("medium");
                   setDistance("");
                   setNotes("");
                   setLoadedRoutine(null);
