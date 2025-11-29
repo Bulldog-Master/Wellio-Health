@@ -29,6 +29,7 @@ interface ActivityLog {
   distance_miles: number | null;
   notes: string | null;
   logged_at: string;
+  time_of_day: string | null;
 }
 
 interface WorkoutRoutine {
@@ -131,6 +132,7 @@ const Workout = () => {
     const day = String(now.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   });
+  const [timeOfDay, setTimeOfDay] = useState<string>('morning');
   const [viewFilter, setViewFilter] = useState<'today' | 'week' | 'month' | 'all'>('today');
   const handleBrowseApps = () => {
     const userAgent = navigator.userAgent || navigator.vendor;
@@ -447,6 +449,7 @@ const Workout = () => {
             distance_miles: distanceMiles,
             notes: finalNotes || null,
             logged_at: workoutDate,
+            time_of_day: timeOfDay,
           })
           .eq('id', editingWorkout);
 
@@ -468,6 +471,7 @@ const Workout = () => {
             distance_miles: distanceMiles,
             notes: finalNotes || null,
             logged_at: workoutDate,
+            time_of_day: timeOfDay,
           });
 
         if (error) throw error;
@@ -488,6 +492,7 @@ const Workout = () => {
       const month = String(now.getMonth() + 1).padStart(2, '0');
       const day = String(now.getDate()).padStart(2, '0');
       setWorkoutDate(`${year}-${month}-${day}`);
+      setTimeOfDay('morning');
       setLoadedRoutine(null);
       
       fetchActivityLogs();
@@ -508,6 +513,7 @@ const Workout = () => {
     setDistance(log.distance_miles ? formatDistance(log.distance_miles, preferredUnit).split(' ')[0] : "");
     setNotes(log.notes || "");
     setWorkoutDate(log.logged_at.split('T')[0]);
+    setTimeOfDay(log.time_of_day || 'morning');
     setEditingWorkout(log.id);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -1976,15 +1982,30 @@ const Workout = () => {
             />
           </div>
 
-          <div>
-            <Label htmlFor="workout-date">Date</Label>
-            <Input
-              id="workout-date"
-              type="date"
-              value={workoutDate}
-              onChange={(e) => setWorkoutDate(e.target.value)}
-              className="w-full mt-1.5"
-            />
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="workout-date">Date</Label>
+              <Input
+                id="workout-date"
+                type="date"
+                value={workoutDate}
+                onChange={(e) => setWorkoutDate(e.target.value)}
+                className="w-full mt-1.5"
+              />
+            </div>
+            <div>
+              <Label htmlFor="time-of-day">Time of Day</Label>
+              <Select value={timeOfDay} onValueChange={setTimeOfDay}>
+                <SelectTrigger id="time-of-day" className="mt-1.5">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="morning">Morning</SelectItem>
+                  <SelectItem value="afternoon">Afternoon</SelectItem>
+                  <SelectItem value="evening">Evening</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
