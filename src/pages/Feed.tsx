@@ -16,6 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 import { formatDistanceToNow } from "date-fns";
 import { MentionInput } from "@/components/MentionInput";
 import { useRealtimePosts } from "@/hooks/useRealtimePosts";
+import { SuggestedUsers } from "@/components/SuggestedUsers";
 import { MessagesSidebar } from "@/components/MessagesSidebar";
 import { LazyImage } from "@/components/LazyImage";
 
@@ -917,9 +918,11 @@ const Feed = () => {
           </div>
         </div>
 
-        {/* Sidebar - Active Conversations & Trending Hashtags */}
+        {/* Sidebar - Messages, Suggested Users & Trending Hashtags */}
         <div className="hidden lg:block space-y-6">
           <MessagesSidebar />
+          
+          <SuggestedUsers />
           
           <Card>
             <CardHeader>
@@ -928,7 +931,26 @@ const Feed = () => {
                 Trending Hashtags
               </CardTitle>
             </CardHeader>
-...
+            <CardContent className="space-y-2">
+              {trendingHashtags && trendingHashtags.length > 0 ? (
+                trendingHashtags.map(({ hashtag, count }) => (
+                  <button
+                    key={hashtag}
+                    onClick={() => handleHashtagClick(hashtag)}
+                    className="w-full text-left p-2 rounded-lg hover:bg-accent transition-colors"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium">#{hashtag}</span>
+                      <Badge variant="secondary" className="text-xs">
+                        {count} posts
+                      </Badge>
+                    </div>
+                  </button>
+                ))
+              ) : (
+                <p className="text-sm text-muted-foreground">No trending hashtags yet</p>
+              )}
+            </CardContent>
           </Card>
         </div>
       </div>
