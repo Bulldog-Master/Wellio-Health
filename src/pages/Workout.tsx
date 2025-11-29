@@ -1179,7 +1179,7 @@ const Workout = () => {
                               min="0"
                               max="600"
                               placeholder="60"
-                              value={exercise.rest_seconds || defaultRestTime}
+                              value={exercise.rest_seconds ?? defaultRestTime}
                               onChange={(e) => handleUpdateRoutineExercise(idx, 'rest_seconds', parseInt(e.target.value) || 0)}
                               className="mt-1"
                             />
