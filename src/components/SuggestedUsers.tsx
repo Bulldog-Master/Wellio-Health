@@ -19,24 +19,26 @@ export const SuggestedUsers = () => {
     },
   });
 
+  const { data: followingIds = [] } = useQuery({
+    queryKey: ["user-following", currentUser?.id],
+    queryFn: async () => {
+      if (!currentUser) return [];
+      
+      const { data } = await supabase
+        .from("follows")
+        .select("following_id")
+        .eq("follower_id", currentUser.id);
+
+      return data?.map(f => f.following_id) || [];
+    },
+    enabled: !!currentUser,
+  });
+
   const { data: suggestedUsers } = useQuery({
     queryKey: ["suggested-users", currentUser?.id],
     queryFn: async () => {
       if (!currentUser) return [];
 
-      // Get users you're already following
-      const { data: following } = await supabase
-        .from("follows")
-        .select("following_id")
-        .eq("follower_id", currentUser.id);
-
-      const followingIds = following?.map(f => f.following_id) || [];
-
-      // Get suggested users based on:
-      // 1. Similar fitness goals
-      // 2. Similar fitness level
-      // 3. Active users
-      // 4. Not already following
       const { data: userProfile } = await supabase
         .from("profiles")
         .select("goal, fitness_level")
@@ -47,7 +49,6 @@ export const SuggestedUsers = () => {
         .from("profiles")
         .select("id, full_name, username, avatar_url, goal, fitness_level, followers_count")
         .neq("id", currentUser.id)
-        .not("id", "in", `(${followingIds.join(",")})`)
         .limit(5);
 
       // Prioritize users with similar goals or fitness level
@@ -63,42 +64,56 @@ export const SuggestedUsers = () => {
     enabled: !!currentUser,
   });
 
-  const handleFollow = async (userId: string) => {
+  const handleToggleFollow = async (userId: string) => {
     if (!currentUser) return;
 
+    const isFollowing = followingIds.includes(userId);
+
     try {
-      // Check if profile is private - create follow request instead
-      const { data: targetProfile } = await supabase
-        .from("profiles")
-        .select("is_private")
-        .eq("id", userId)
-        .single();
-
-      if (targetProfile?.is_private) {
-        const { error } = await supabase
-          .from("follow_requests")
-          .insert({
-            requester_id: currentUser.id,
-            requested_id: userId
-          });
-
-        if (error) throw error;
-        toast({ title: "Follow request sent!" });
-      } else {
+      if (isFollowing) {
+        // Unfollow
         const { error } = await supabase
           .from("follows")
-          .insert({
-            follower_id: currentUser.id,
-            following_id: userId
-          });
+          .delete()
+          .eq("follower_id", currentUser.id)
+          .eq("following_id", userId);
 
         if (error) throw error;
-        toast({ title: "Now following!" });
+        toast({ title: "Unfollowed" });
+      } else {
+        // Check if profile is private - create follow request instead
+        const { data: targetProfile } = await supabase
+          .from("profiles")
+          .select("is_private")
+          .eq("id", userId)
+          .single();
+
+        if (targetProfile?.is_private) {
+          const { error } = await supabase
+            .from("follow_requests")
+            .insert({
+              requester_id: currentUser.id,
+              requested_id: userId
+            });
+
+          if (error) throw error;
+          toast({ title: "Follow request sent!" });
+        } else {
+          const { error } = await supabase
+            .from("follows")
+            .insert({
+              follower_id: currentUser.id,
+              following_id: userId
+            });
+
+          if (error) throw error;
+          toast({ title: "Now following!" });
+        }
       }
     } catch (error) {
       toast({ 
         title: "Error", 
-        description: "Could not follow user", 
+        description: isFollowing ? "Could not unfollow user" : "Could not follow user", 
         variant: "destructive" 
       });
     }
@@ -112,41 +127,45 @@ export const SuggestedUsers = () => {
         <CardTitle className="text-lg">Suggested For You</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        {suggestedUsers.map((user) => (
-          <div key={user.id} className="flex items-center gap-3">
-            <Avatar 
-              className="cursor-pointer"
-              onClick={() => navigate(`/user/${user.id}`)}
-            >
-              {user.avatar_url ? (
-                <AvatarImage src={user.avatar_url} alt={user.full_name || "User"} />
-              ) : (
-                <AvatarFallback>
-                  <User className="w-4 h-4" />
-                </AvatarFallback>
-              )}
-            </Avatar>
-            <div 
-              className="flex-1 cursor-pointer"
-              onClick={() => navigate(`/user/${user.id}`)}
-            >
-              <p className="font-semibold text-sm hover:underline">
-                {user.full_name || user.username}
-              </p>
-              <p className="text-xs text-muted-foreground">
-                {user.goal || user.fitness_level || `${user.followers_count} followers`}
-              </p>
+        {suggestedUsers.map((user) => {
+          const isFollowing = followingIds.includes(user.id);
+          
+          return (
+            <div key={user.id} className="flex items-center gap-3">
+              <Avatar 
+                className="cursor-pointer"
+                onClick={() => navigate(`/user/${user.id}`)}
+              >
+                {user.avatar_url ? (
+                  <AvatarImage src={user.avatar_url} alt={user.full_name || "User"} />
+                ) : (
+                  <AvatarFallback>
+                    <User className="w-4 h-4" />
+                  </AvatarFallback>
+                )}
+              </Avatar>
+              <div 
+                className="flex-1 cursor-pointer"
+                onClick={() => navigate(`/user/${user.id}`)}
+              >
+                <p className="font-semibold text-sm hover:underline">
+                  {user.full_name || user.username}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {user.goal || user.fitness_level || `${user.followers_count} followers`}
+                </p>
+              </div>
+              <Button
+                size="sm"
+                variant={isFollowing ? "secondary" : "outline"}
+                onClick={() => handleToggleFollow(user.id)}
+              >
+                <UserPlus className="w-4 h-4 mr-1" />
+                {isFollowing ? "Following" : "Follow"}
+              </Button>
             </div>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => handleFollow(user.id)}
-            >
-              <UserPlus className="w-4 h-4 mr-1" />
-              Follow
-            </Button>
-          </div>
-        ))}
+          );
+        })}
       </CardContent>
     </Card>
   );
