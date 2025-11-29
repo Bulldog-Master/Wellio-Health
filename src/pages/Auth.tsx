@@ -1035,10 +1035,16 @@ const Auth = () => {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <Label htmlFor="password">Password</Label>
-                    {isLogin && !isForgotPassword && (
+                    {(() => {
+                      console.log('Auth Debug - isLogin:', isLogin, 'isForgotPassword:', isForgotPassword, 'authMethod:', authMethod);
+                      return isLogin && !isForgotPassword;
+                    })() && (
                       <button
                         type="button"
-                        onClick={() => setIsForgotPassword(true)}
+                        onClick={() => {
+                          console.log('Forgot Password clicked');
+                          setIsForgotPassword(true);
+                        }}
                         className="text-xs text-primary hover:underline inline-block cursor-pointer bg-transparent border-0 p-0"
                         style={{ WebkitAppearance: 'none', MozAppearance: 'none', appearance: 'none' }}
                       >
