@@ -1,4 +1,4 @@
-// Date and time picker added - Food Log v2.0
+// Date and time picker FULLY IMPLEMENTED - Food Log v3.0 - Matches Workout Implementation
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,8 +29,14 @@ const FoodLog = () => {
   const navigate = useNavigate();
   const [selectedMeal, setSelectedMeal] = useState("breakfast");
   const [mealDescription, setMealDescription] = useState("");
-  const [logDate, setLogDate] = useState(new Date().toISOString().split('T')[0]);
-  const [timeOfDay, setTimeOfDay] = useState("morning");
+  const [logDate, setLogDate] = useState<string>(() => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  });
+  const [timeOfDay, setTimeOfDay] = useState<string>("morning");
   const [nutritionData, setNutritionData] = useState<{
     calories: number;
     protein: number;
@@ -302,7 +308,11 @@ const FoodLog = () => {
       }
 
       setMealDescription("");
-      setLogDate(new Date().toISOString().split('T')[0]);
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      setLogDate(`${year}-${month}-${day}`);
       setTimeOfDay("morning");
       setNutritionData(null);
       setImagePreview(null);
@@ -340,7 +350,11 @@ const FoodLog = () => {
   const handleCancelEdit = () => {
     setEditingMeal(null);
     setMealDescription("");
-    setLogDate(new Date().toISOString().split('T')[0]);
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    setLogDate(`${year}-${month}-${day}`);
     setTimeOfDay("morning");
     setNutritionData(null);
     setImagePreview(null);
