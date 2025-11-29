@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 export const SuggestedUsers = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
   const { data: currentUser } = useQuery({
     queryKey: ["current-user"],
@@ -34,7 +35,7 @@ export const SuggestedUsers = () => {
     enabled: !!currentUser,
   });
 
-  const { data: suggestedUsers, refetch } = useQuery({
+  const { data: suggestedUsers } = useQuery({
     queryKey: ["suggested-users", currentUser?.id],
     queryFn: async () => {
       if (!currentUser) return [];
@@ -54,7 +55,8 @@ export const SuggestedUsers = () => {
       return data || [];
     },
     enabled: !!currentUser,
-    staleTime: 0,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
   });
 
   const handleToggleFollow = async (userId: string) => {
@@ -72,8 +74,13 @@ export const SuggestedUsers = () => {
           .eq("following_id", userId);
 
         if (error) throw error;
+        
+        // Invalidate all follow-related queries
+        await queryClient.invalidateQueries({ queryKey: ["user-following", currentUser.id] });
+        await queryClient.invalidateQueries({ queryKey: ["suggested-users"] });
+        await queryClient.invalidateQueries({ queryKey: ["user-follows"] });
+        
         toast({ title: "Unfollowed" });
-        refetch();
       } else {
         // Check if profile is private - create follow request instead
         const { data: targetProfile } = await supabase
@@ -103,7 +110,11 @@ export const SuggestedUsers = () => {
           if (error) throw error;
           toast({ title: "Now following!" });
         }
-        refetch();
+        
+        // Invalidate all follow-related queries
+        await queryClient.invalidateQueries({ queryKey: ["user-following", currentUser.id] });
+        await queryClient.invalidateQueries({ queryKey: ["suggested-users"] });
+        await queryClient.invalidateQueries({ queryKey: ["user-follows"] });
       }
     } catch (error) {
       console.error("Toggle follow error:", error);
