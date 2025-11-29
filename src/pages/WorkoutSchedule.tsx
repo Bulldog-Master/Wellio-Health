@@ -251,10 +251,31 @@ const WorkoutSchedule = () => {
   const handleLoadTemplate = (templateId: string) => {
     const template = templates.find(t => t.id === templateId);
     if (template) {
+      // Calculate total duration from exercises
+      let totalDuration = 0;
+      let exerciseTypes: string[] = [];
+      
+      if (template.exercises && Array.isArray(template.exercises)) {
+        template.exercises.forEach((exercise: any) => {
+          if (exercise.sets && exercise.reps) {
+            // Estimate 2 minutes per set for strength exercises
+            totalDuration += (exercise.sets * 2);
+          }
+          if (exercise.name) {
+            exerciseTypes.push(exercise.name);
+          }
+        });
+      }
+      
+      // If no duration calculated, default to 30
+      if (totalDuration === 0) totalDuration = 30;
+      
       setFormData(prev => ({
         ...prev,
         title: template.name,
         description: template.description || "",
+        duration: totalDuration.toString(),
+        exerciseType: exerciseTypes.slice(0, 3).join(", ") + (exerciseTypes.length > 3 ? "..." : ""),
         templateId: templateId,
       }));
     }
