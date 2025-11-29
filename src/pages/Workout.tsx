@@ -1060,16 +1060,17 @@ const Workout = () => {
                             <Input
                               id="rest-time"
                               type="number"
+                              min="0"
                               value={tempRestTime}
                               onChange={(e) => setTempRestTime(e.target.value)}
                               onBlur={() => {
-                                const val = parseInt(tempRestTime);
-                                setDefaultRestTime(isNaN(val) ? 0 : Math.max(0, val));
+                                const val = tempRestTime.trim() === '' ? 60 : parseInt(tempRestTime);
+                                setDefaultRestTime(isNaN(val) ? 60 : val);
                               }}
                               onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
-                                  const val = parseInt(tempRestTime);
-                                  setDefaultRestTime(isNaN(val) ? 0 : Math.max(0, val));
+                                  const val = tempRestTime.trim() === '' ? 60 : parseInt(tempRestTime);
+                                  setDefaultRestTime(isNaN(val) ? 60 : val);
                                   setShowRestTimeInput(false);
                                 }
                               }}
