@@ -1033,33 +1033,20 @@ const Auth = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between gap-2">
+                  <div>
                     <Label htmlFor="password">Password</Label>
-                    {isLogin && !isForgotPassword && (
-                      <span
+                  </div>
+                  {isLogin && !isForgotPassword && (
+                    <div className="flex justify-end -mt-1 mb-1">
+                      <button
+                        type="button"
                         onClick={() => setIsForgotPassword(true)}
-                        className="text-sm font-semibold underline cursor-pointer shrink-0"
-                        role="button"
-                        tabIndex={0}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            setIsForgotPassword(true);
-                          }
-                        }}
-                        style={{ 
-                          minWidth: 'fit-content',
-                          whiteSpace: 'nowrap',
-                          color: '#00D4FF',
-                          display: 'inline-block',
-                          visibility: 'visible',
-                          opacity: 1
-                        }}
+                        className="text-sm font-semibold underline text-[#00D4FF] hover:text-[#00E4FF]"
                       >
                         Forgot Password?
-                      </span>
-                    )}
-                  </div>
+                      </button>
+                    </div>
+                  )}
                   <div className="relative">
                     <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
