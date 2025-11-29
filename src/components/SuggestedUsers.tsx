@@ -20,7 +20,7 @@ export const SuggestedUsers = () => {
     },
   });
 
-  const { data: followingIds = [] } = useQuery({
+  const { data: followingIds = [], refetch: refetchFollowing } = useQuery({
     queryKey: ["user-following", currentUser?.id],
     queryFn: async () => {
       if (!currentUser) return [];
@@ -33,6 +33,7 @@ export const SuggestedUsers = () => {
       return data?.map(f => f.following_id) || [];
     },
     enabled: !!currentUser,
+    staleTime: 0,
   });
 
   const { data: suggestedUsers } = useQuery({
@@ -75,11 +76,6 @@ export const SuggestedUsers = () => {
 
         if (error) throw error;
         
-        // Invalidate all follow-related queries
-        await queryClient.invalidateQueries({ queryKey: ["user-following", currentUser.id] });
-        await queryClient.invalidateQueries({ queryKey: ["suggested-users"] });
-        await queryClient.invalidateQueries({ queryKey: ["user-follows"] });
-        
         toast({ title: "Unfollowed" });
       } else {
         // Check if profile is private - create follow request instead
@@ -110,12 +106,18 @@ export const SuggestedUsers = () => {
           if (error) throw error;
           toast({ title: "Now following!" });
         }
-        
-        // Invalidate all follow-related queries
-        await queryClient.invalidateQueries({ queryKey: ["user-following", currentUser.id] });
-        await queryClient.invalidateQueries({ queryKey: ["suggested-users"] });
-        await queryClient.invalidateQueries({ queryKey: ["user-follows"] });
       }
+      
+      // Force refetch immediately
+      await refetchFollowing();
+      await queryClient.invalidateQueries({ 
+        queryKey: ["user-following"], 
+        refetchType: 'active' 
+      });
+      await queryClient.invalidateQueries({ 
+        queryKey: ["suggested-users"],
+        refetchType: 'active'
+      });
     } catch (error) {
       console.error("Toggle follow error:", error);
       toast({ 
