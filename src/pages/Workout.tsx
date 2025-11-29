@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown, ChevronDown, Library, BookOpen, Smartphone, ArrowLeft, Calendar as CalendarIcon } from "lucide-react";
+import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown, ChevronDown, Library, BookOpen, Smartphone, ArrowLeft, Calendar as CalendarIcon, ArrowUpDown } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
@@ -105,6 +105,7 @@ const Workout = () => {
   const [sampleRoutines, setSampleRoutines] = useState<SampleRoutine[]>([]);
   const [selectedRoutineId, setSelectedRoutineId] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<'name' | 'date' | 'custom'>('date');
+  const [librarySort, setLibrarySort] = useState<string>("date-newest");
   const [sampleName, setSampleName] = useState("");
   const [sampleDescription, setSampleDescription] = useState("");
   const [samplePlatform, setSamplePlatform] = useState("");
@@ -1224,10 +1225,24 @@ const Workout = () => {
             <DialogHeader>
               <DialogTitle className="text-2xl text-purple-900 dark:text-purple-100 flex items-center justify-between">
                 <span>Personal Library</span>
-                <Button variant="outline" size="sm" onClick={() => setShowCreateRoutine(true)} className="bg-purple-100 dark:bg-purple-900/50 border-purple-300 dark:border-purple-700 hover:bg-purple-200 dark:hover:bg-purple-900">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Create New
-                </Button>
+                <div className="flex gap-2 items-center">
+                  <Select value={librarySort} onValueChange={setLibrarySort}>
+                    <SelectTrigger className="w-[180px] bg-purple-100 dark:bg-purple-900/50 border-purple-300 dark:border-purple-700">
+                      <ArrowUpDown className="w-4 h-4 mr-2" />
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="date-newest">Newest First</SelectItem>
+                      <SelectItem value="date-oldest">Oldest First</SelectItem>
+                      <SelectItem value="name-asc">Name A-Z</SelectItem>
+                      <SelectItem value="name-desc">Name Z-A</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Button variant="outline" size="sm" onClick={() => setShowCreateRoutine(true)} className="bg-purple-100 dark:bg-purple-900/50 border-purple-300 dark:border-purple-700 hover:bg-purple-200 dark:hover:bg-purple-900">
+                    <Plus className="w-4 h-4 mr-2" />
+                    Create New
+                  </Button>
+                </div>
               </DialogTitle>
             </DialogHeader>
             
@@ -1235,7 +1250,22 @@ const Workout = () => {
               {workoutRoutines.length > 0 ? (
                 <>
                   <Accordion type="single" collapsible className="space-y-2">
-                    {workoutRoutines.map((routine) => (
+                    {(() => {
+                      const sortedRoutines = [...workoutRoutines].sort((a, b) => {
+                        switch (librarySort) {
+                          case "name-asc":
+                            return a.name.localeCompare(b.name);
+                          case "name-desc":
+                            return b.name.localeCompare(a.name);
+                          case "date-newest":
+                            return new Date((b as any).created_at || 0).getTime() - new Date((a as any).created_at || 0).getTime();
+                          case "date-oldest":
+                            return new Date((a as any).created_at || 0).getTime() - new Date((b as any).created_at || 0).getTime();
+                          default:
+                            return 0;
+                        }
+                      });
+                      return sortedRoutines.map((routine) => (
                       <AccordionItem key={routine.id} value={routine.id} className={cn("border rounded-lg px-4 transition-all", selectedRoutineId === routine.id ? "bg-purple-100 dark:bg-purple-900/50 border-purple-400 dark:border-purple-600 ring-2 ring-purple-500" : "bg-card")}>
                         <div className="flex items-center justify-between">
                           <div 
@@ -1348,7 +1378,8 @@ const Workout = () => {
                           </div>
                         </AccordionContent>
                       </AccordionItem>
-                    ))}
+                      ));
+                    })()}
                   </Accordion>
                   {selectedRoutineId && (
                     <div className="sticky bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-purple-100 to-transparent dark:from-purple-950/50 border-t-2 border-purple-300 dark:border-purple-700">
