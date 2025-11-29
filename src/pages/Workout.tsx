@@ -223,6 +223,7 @@ const Workout = () => {
   const [routineDescription, setRoutineDescription] = useState("");
   const [routineExercises, setRoutineExercises] = useState<Array<{ name: string; sets?: number; reps?: number; duration?: number; media_url?: string; rest_seconds?: number }>>([]);
   const [defaultRestTime, setDefaultRestTime] = useState(60); // Default 60 seconds
+  const [defaultRestTimeInput, setDefaultRestTimeInput] = useState("60"); // String value for input
   const [showRestTimeInput, setShowRestTimeInput] = useState(false);
 
   // Calorie calculation based on activity, duration, and intensity
@@ -1053,8 +1054,18 @@ const Workout = () => {
                               type="number"
                               min="0"
                               max="600"
-                              value={defaultRestTime}
-                              onChange={(e) => setDefaultRestTime(parseInt(e.target.value) || 60)}
+                              value={defaultRestTimeInput}
+                              onChange={(e) => setDefaultRestTimeInput(e.target.value)}
+                              onBlur={(e) => {
+                                const val = parseInt(e.target.value);
+                                if (isNaN(val) || val < 0) {
+                                  setDefaultRestTime(60);
+                                  setDefaultRestTimeInput("60");
+                                } else {
+                                  setDefaultRestTime(val);
+                                  setDefaultRestTimeInput(val.toString());
+                                }
+                              }}
                               placeholder="60"
                             />
                           </div>
