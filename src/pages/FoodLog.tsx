@@ -68,15 +68,22 @@ const FoodLog = () => {
   const fetchMealLogs = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+      console.log('Current user ID:', user?.id);
+      if (!user) {
+        console.log('No user found');
+        return;
+      }
 
+      console.log('Fetching nutrition logs for user:', user.id);
       const { data, error } = await supabase
         .from('nutrition_logs')
         .select('*')
         .eq('user_id', user.id)
         .order('logged_at', { ascending: false });
 
+      console.log('Query result - data:', data, 'error:', error);
       if (error) throw error;
+      console.log('Setting meal logs, count:', data?.length || 0);
       setMealLogs(data || []);
     } catch (error) {
       console.error('Error fetching meal logs:', error);
