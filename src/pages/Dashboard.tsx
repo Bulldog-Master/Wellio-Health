@@ -3,6 +3,7 @@ import { Activity, Flame, Target, TrendingUp, Droplets, Moon, Camera, Zap, Heart
 import MetricCard from "@/components/MetricCard";
 import ActivityRings from "@/components/ActivityRings";
 import { StreakTracker } from "@/components/StreakTracker";
+import { ActivityTimeline } from "@/components/ActivityTimeline";
 import { NutritionGoals } from "@/components/NutritionGoals";
 import { DashboardCharts } from "@/components/DashboardCharts";
 import { Card } from "@/components/ui/card";
@@ -363,6 +364,9 @@ const Dashboard = () => {
           </Button>
         </div>
       </Card>
+
+      {/* Activity Timeline */}
+      <ActivityTimeline />
     </div>
   );
 };

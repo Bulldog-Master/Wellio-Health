@@ -17,6 +17,7 @@ const Onboarding = () => {
   // Form data
   const [formData, setFormData] = useState({
     full_name: "",
+    username: "",
     age: "",
     gender: "",
     height: "",
@@ -41,6 +42,7 @@ const Onboarding = () => {
         .upsert({
           id: user.id,
           full_name: formData.full_name,
+          username: formData.username,
           age: parseInt(formData.age),
           gender: formData.gender,
           height: parseFloat(formData.height),
@@ -74,7 +76,7 @@ const Onboarding = () => {
   };
 
   const nextStep = () => {
-    if (step === 1 && (!formData.full_name || !formData.age || !formData.gender)) {
+    if (step === 1 && (!formData.full_name || !formData.username || !formData.age || !formData.gender)) {
       toast.error("Please fill in all fields");
       return;
     }
@@ -127,6 +129,19 @@ const Onboarding = () => {
                   onChange={(e) => updateField("full_name", e.target.value)}
                   placeholder="John Doe"
                 />
+              </div>
+
+              <div>
+                <Label htmlFor="username">Username</Label>
+                <Input
+                  id="username"
+                  value={formData.username}
+                  onChange={(e) => updateField("username", e.target.value)}
+                  placeholder="johndoe"
+                />
+                <p className="text-xs text-muted-foreground mt-1">
+                  This is how others will find you
+                </p>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
