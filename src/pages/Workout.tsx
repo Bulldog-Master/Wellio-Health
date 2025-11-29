@@ -1062,15 +1062,20 @@ const Workout = () => {
                               type="number"
                               min="0"
                               value={tempRestTime}
-                              onChange={(e) => setTempRestTime(e.target.value)}
+                              onChange={(e) => {
+                                console.log('Input onChange:', e.target.value);
+                                setTempRestTime(e.target.value);
+                              }}
                               onBlur={() => {
-                                const val = tempRestTime.trim() === '' ? 60 : parseInt(tempRestTime);
-                                setDefaultRestTime(isNaN(val) ? 60 : val);
+                                console.log('Input onBlur, tempRestTime:', tempRestTime);
+                                const numVal = tempRestTime === '' || tempRestTime === undefined ? 60 : Number(tempRestTime);
+                                console.log('Parsed value:', numVal);
+                                setDefaultRestTime(numVal);
                               }}
                               onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
-                                  const val = tempRestTime.trim() === '' ? 60 : parseInt(tempRestTime);
-                                  setDefaultRestTime(isNaN(val) ? 60 : val);
+                                  const numVal = tempRestTime === '' || tempRestTime === undefined ? 60 : Number(tempRestTime);
+                                  setDefaultRestTime(numVal);
                                   setShowRestTimeInput(false);
                                 }
                               }}
