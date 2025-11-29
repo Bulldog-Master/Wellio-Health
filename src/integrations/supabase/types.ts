@@ -54,6 +54,7 @@ export type Database = {
           id: string
           logged_at: string | null
           notes: string | null
+          time_of_day: string | null
           user_id: string
         }
         Insert: {
@@ -65,6 +66,7 @@ export type Database = {
           id?: string
           logged_at?: string | null
           notes?: string | null
+          time_of_day?: string | null
           user_id: string
         }
         Update: {
@@ -76,6 +78,7 @@ export type Database = {
           id?: string
           logged_at?: string | null
           notes?: string | null
+          time_of_day?: string | null
           user_id?: string
         }
         Relationships: []
