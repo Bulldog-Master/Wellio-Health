@@ -35,31 +35,19 @@ export const SuggestedUsers = () => {
   });
 
   const { data: suggestedUsers } = useQuery({
-    queryKey: ["suggested-users", currentUser?.id],
+    queryKey: ["suggested-users", currentUser?.id, followingIds],
     queryFn: async () => {
       if (!currentUser) return [];
 
-      const { data: userProfile } = await supabase
-        .from("profiles")
-        .select("goal, fitness_level")
-        .eq("id", currentUser.id)
-        .single();
-
-      let query = supabase
+      const { data, error } = await supabase
         .from("profiles")
         .select("id, full_name, username, avatar_url, goal, fitness_level, followers_count")
         .neq("id", currentUser.id)
-        .limit(5);
-
-      // Prioritize users with similar goals or fitness level
-      if (userProfile?.goal) {
-        query = query.or(`goal.eq.${userProfile.goal},fitness_level.eq.${userProfile.fitness_level}`);
-      }
-
-      const { data, error } = await query;
+        .order("total_points", { ascending: false })
+        .limit(10);
 
       if (error) throw error;
-      return data;
+      return data || [];
     },
     enabled: !!currentUser,
   });
