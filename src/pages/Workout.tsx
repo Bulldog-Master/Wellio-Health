@@ -1051,10 +1051,17 @@ const Workout = () => {
                             <Input
                               id="rest-time"
                               type="number"
-                              value={defaultRestTime}
-                              onChange={(e) => {
-                                const val = parseInt(e.target.value);
-                                setDefaultRestTime(isNaN(val) ? 60 : val);
+                              defaultValue={defaultRestTime}
+                              onBlur={(e) => {
+                                const val = e.target.value === '' ? 0 : parseInt(e.target.value);
+                                setDefaultRestTime(isNaN(val) ? 0 : Math.max(0, val));
+                              }}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  const val = e.currentTarget.value === '' ? 0 : parseInt(e.currentTarget.value);
+                                  setDefaultRestTime(isNaN(val) ? 0 : Math.max(0, val));
+                                  e.currentTarget.blur();
+                                }
                               }}
                             />
                           </div>
