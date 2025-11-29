@@ -1,3 +1,4 @@
+// Intensity levels: Low, Medium, High, Intense - Updated v2.0
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -569,14 +570,13 @@ const WorkoutSchedule = () => {
               </div>
 
               <div>
-                <Label>Intensity</Label>
+                <Label htmlFor="workout-intensity">Intensity</Label>
                 <Select 
-                  key="intensity-select-v2"
                   value={formData.intensity} 
-                  onValueChange={(v) => setFormData(prev => ({ ...prev, intensity: v }))}
+                  onValueChange={(value) => setFormData(prev => ({ ...prev, intensity: value }))}
                 >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select intensity" />
+                  <SelectTrigger id="workout-intensity">
+                    <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="low">Low</SelectItem>

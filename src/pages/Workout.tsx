@@ -1,3 +1,4 @@
+// Intensity levels: Low, Medium, High, Intense - Updated v2.0
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
