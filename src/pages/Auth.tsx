@@ -319,13 +319,16 @@ const Auth = () => {
 
       // If user chose to remember device, trust it
       if (rememberDevice && deviceFingerprint) {
-        await supabase
-          .from('trusted_devices')
-          .insert({
-            user_id: pendingUserId,
-            device_fingerprint: deviceFingerprint,
-            device_name: getDeviceName()
-          });
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          await supabase
+            .from('trusted_devices')
+            .insert({
+              user_id: user.id,
+              device_fingerprint: deviceFingerprint,
+              device_name: getDeviceName()
+            });
+        }
       }
 
       if (useBackupCode && data.remainingCodes !== undefined) {
