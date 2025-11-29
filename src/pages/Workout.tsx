@@ -2213,7 +2213,12 @@ const Workout = () => {
             </p>
           ) : (
             activityLogs.map((log) => {
-              console.log('Workout log:', { id: log.id, activity_type: log.activity_type, logged_at: log.logged_at });
+              console.log('Workout log:', { 
+                id: log.id, 
+                activity_type: log.activity_type, 
+                logged_at: log.logged_at,
+                time_of_day: log.time_of_day 
+              });
               return (
               <div key={log.id} className="p-4 bg-secondary rounded-lg border-l-4 border-primary">
                 <div className="flex items-start justify-between mb-2">
