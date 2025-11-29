@@ -34,8 +34,8 @@ export const SuggestedUsers = () => {
     enabled: !!currentUser,
   });
 
-  const { data: suggestedUsers } = useQuery({
-    queryKey: ["suggested-users", currentUser?.id, followingIds],
+  const { data: suggestedUsers, refetch } = useQuery({
+    queryKey: ["suggested-users", currentUser?.id],
     queryFn: async () => {
       if (!currentUser) return [];
 
@@ -43,13 +43,18 @@ export const SuggestedUsers = () => {
         .from("profiles")
         .select("id, full_name, username, avatar_url, goal, fitness_level, followers_count")
         .neq("id", currentUser.id)
+        .not("id", "is", null)
         .order("total_points", { ascending: false })
         .limit(10);
 
-      if (error) throw error;
+      if (error) {
+        console.error("Error fetching suggested users:", error);
+        throw error;
+      }
       return data || [];
     },
     enabled: !!currentUser,
+    staleTime: 0,
   });
 
   const handleToggleFollow = async (userId: string) => {
@@ -68,6 +73,7 @@ export const SuggestedUsers = () => {
 
         if (error) throw error;
         toast({ title: "Unfollowed" });
+        refetch();
       } else {
         // Check if profile is private - create follow request instead
         const { data: targetProfile } = await supabase
@@ -97,8 +103,10 @@ export const SuggestedUsers = () => {
           if (error) throw error;
           toast({ title: "Now following!" });
         }
+        refetch();
       }
     } catch (error) {
+      console.error("Toggle follow error:", error);
       toast({ 
         title: "Error", 
         description: isFollowing ? "Could not unfollow user" : "Could not follow user", 
