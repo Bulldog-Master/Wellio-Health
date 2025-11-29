@@ -36,6 +36,10 @@ const Auth = () => {
   const [backupCode, setBackupCode] = useState("");
   const [rememberDevice, setRememberDevice] = useState(false);
   const [deviceFingerprint, setDeviceFingerprint] = useState<string>("");
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
+  const [isResettingPassword, setIsResettingPassword] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [showNewPassword, setShowNewPassword] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
   const [passkeySupported, setPasskeySupported] = useState(false);
@@ -44,6 +48,19 @@ const Auth = () => {
   useEffect(() => {
     setPasskeySupported(isWebAuthnSupported());
     setIsInIframe(window.self !== window.top);
+    
+    // Check for password reset
+    const hashParams = new URLSearchParams(window.location.hash.substring(1));
+    const accessToken = hashParams.get('access_token');
+    const type = hashParams.get('type');
+    
+    if (accessToken && type === 'recovery') {
+      setIsResettingPassword(true);
+      toast({
+        title: "Reset Your Password",
+        description: "Please enter your new password below.",
+      });
+    }
     
     // Check for referral code in URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -323,6 +340,106 @@ const Auth = () => {
       toast({
         title: "Verification Failed",
         description: error.message || "Invalid authentication code.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      emailSchema.parse(email);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast({
+          title: "Validation Error",
+          description: error.issues[0].message,
+          variant: "destructive",
+        });
+      }
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const redirectUrl = `${window.location.origin}/auth`;
+      
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: redirectUrl,
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Reset Link Sent!",
+        description: "Check your email for the password reset link.",
+      });
+      
+      setIsForgotPassword(false);
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "An error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      passwordSchema.parse(newPassword);
+      if (newPassword !== confirmPassword) {
+        throw new Error("Passwords do not match");
+      }
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast({
+          title: "Validation Error",
+          description: error.issues[0].message,
+          variant: "destructive",
+        });
+      } else if (error instanceof Error) {
+        toast({
+          title: "Validation Error",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const { error } = await supabase.auth.updateUser({
+        password: newPassword,
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Password Updated!",
+        description: "Your password has been successfully reset.",
+      });
+      
+      // Clear the hash and redirect
+      window.history.replaceState({}, document.title, "/auth");
+      setIsResettingPassword(false);
+      setNewPassword("");
+      setConfirmPassword("");
+      setIsLogin(true);
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "An error occurred. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -732,7 +849,107 @@ const Auth = () => {
               </TabsList>
 
               <TabsContent value="password">
-                <form onSubmit={handlePasswordAuth} className="space-y-4">
+                {isForgotPassword ? (
+                  <form onSubmit={handleForgotPassword} className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="reset-email">Email</Label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          id="reset-email"
+                          type="email"
+                          placeholder="you@example.com"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="pl-10"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <Button
+                      type="submit"
+                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                      disabled={loading}
+                    >
+                      {loading ? "Sending..." : "Send Reset Link"}
+                    </Button>
+
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      className="w-full"
+                      onClick={() => setIsForgotPassword(false)}
+                    >
+                      Back to Sign In
+                    </Button>
+
+                    <p className="text-xs text-center text-muted-foreground">
+                      We'll send a secure password reset link to your email address.
+                    </p>
+                  </form>
+                ) : isResettingPassword ? (
+                  <form onSubmit={handleResetPassword} className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="new-password">New Password</Label>
+                      <div className="relative">
+                        <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          id="new-password"
+                          type={showNewPassword ? "text" : "password"}
+                          placeholder="••••••••"
+                          value={newPassword}
+                          onChange={(e) => setNewPassword(e.target.value)}
+                          className="pl-10 pr-10"
+                          required
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowNewPassword(!showNewPassword)}
+                          className="absolute right-3 top-3 text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          {showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="confirm-new-password">Confirm New Password</Label>
+                      <div className="relative">
+                        <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                        <Input
+                          id="confirm-new-password"
+                          type={showConfirmPassword ? "text" : "password"}
+                          placeholder="••••••••"
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          className="pl-10 pr-10"
+                          required
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                          className="absolute right-3 top-3 text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                          {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                        </button>
+                      </div>
+                    </div>
+
+                    <Button
+                      type="submit"
+                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                      disabled={loading}
+                    >
+                      {loading ? "Updating..." : "Update Password"}
+                    </Button>
+
+                    <p className="text-xs text-center text-muted-foreground">
+                      Password must be at least 6 characters long.
+                    </p>
+                  </form>
+                ) : (
+                  <form onSubmit={handlePasswordAuth} className="space-y-4">
                 {!isLogin && (
                   <div className="space-y-2">
                     <Label htmlFor="name">Name</Label>
@@ -799,7 +1016,18 @@ const Auth = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+                  <div className="flex items-center justify-between">
+                    <Label htmlFor="password">Password</Label>
+                    {isLogin && !isForgotPassword && (
+                      <button
+                        type="button"
+                        onClick={() => setIsForgotPassword(true)}
+                        className="text-xs text-primary hover:underline"
+                      >
+                        Forgot Password?
+                      </button>
+                    )}
+                  </div>
                   <div className="relative">
                     <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
@@ -854,6 +1082,7 @@ const Auth = () => {
                   {loading ? "Loading..." : isLogin ? "Sign In" : "Create Account"}
                 </Button>
               </form>
+                )}
             </TabsContent>
 
             <TabsContent value="magiclink">
@@ -988,13 +1217,14 @@ const Auth = () => {
           )}
 
           <div className="mt-6 text-center">
-            {!requires2FA && (
+            {!requires2FA && !isForgotPassword && !isResettingPassword && (
               <Button
                 variant="ghost"
                 onClick={() => {
                   setIsLogin(!isLogin);
                   setPassword("");
                   setConfirmPassword("");
+                  setIsForgotPassword(false);
                 }}
                 className="text-sm"
               >
