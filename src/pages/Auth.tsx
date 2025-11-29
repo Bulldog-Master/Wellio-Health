@@ -1033,12 +1033,12 @@ const Auth = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-2">
                     <Label htmlFor="password">Password</Label>
                     {isLogin && !isForgotPassword && (
                       <span
                         onClick={() => setIsForgotPassword(true)}
-                        className="text-xs text-primary hover:underline cursor-pointer"
+                        className="text-xs text-primary hover:underline cursor-pointer shrink-0 font-medium"
                         role="button"
                         tabIndex={0}
                         onKeyDown={(e) => {
@@ -1046,6 +1046,11 @@ const Auth = () => {
                             e.preventDefault();
                             setIsForgotPassword(true);
                           }
+                        }}
+                        style={{ 
+                          minWidth: 'fit-content',
+                          whiteSpace: 'nowrap',
+                          color: 'hsl(var(--primary))'
                         }}
                       >
                         Forgot Password?
