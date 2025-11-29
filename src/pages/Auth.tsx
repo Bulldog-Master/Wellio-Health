@@ -45,11 +45,14 @@ const Auth = () => {
   const [passkeySupported, setPasskeySupported] = useState(false);
   const [isInIframe, setIsInIframe] = useState(false);
 
+  // Check for password reset FIRST (synchronously, before any other effects)
+  const [initialCheckDone, setInitialCheckDone] = useState(false);
+  
   useEffect(() => {
     setPasskeySupported(isWebAuthnSupported());
     setIsInIframe(window.self !== window.top);
     
-    // Check for password reset FIRST
+    // Check for password reset token in URL hash
     const hashParams = new URLSearchParams(window.location.hash.substring(1));
     const accessToken = hashParams.get('access_token');
     const type = hashParams.get('type');
@@ -85,26 +88,31 @@ const Auth = () => {
       setDeviceFingerprint(fingerprint);
     };
     initFingerprint();
+    
+    setInitialCheckDone(true);
   }, [toast]);
 
   useEffect(() => {
-    // Don't redirect if user is resetting password
+    // Wait for initial check to complete
+    if (!initialCheckDone) return;
+    
+    // Don't set up auth listener if user is resetting password
     if (isResettingPassword) return;
     
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session && !isResettingPassword) {
+      if (session) {
         navigate("/");
       }
     });
 
     supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session && !isResettingPassword) {
+      if (session) {
         navigate("/");
       }
     });
 
     return () => subscription.unsubscribe();
-  }, [navigate, isResettingPassword]);
+  }, [navigate, isResettingPassword, initialCheckDone]);
 
   const validateInputs = () => {
     try {
