@@ -30,14 +30,14 @@ const WaterIntake = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
       const { data, error } = await supabase
         .from('water_logs')
         .select('*')
         .eq('user_id', user.id)
-        .gte('logged_at', today.toISOString())
+        .gte('logged_at', thirtyDaysAgo.toISOString())
         .order('logged_at', { ascending: false });
 
       if (error) throw error;
@@ -89,8 +89,27 @@ const WaterIntake = () => {
     }
   };
 
-  const totalToday = waterLogs.reduce((sum, log) => sum + log.amount_ml, 0);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  
+  const todayLogs = waterLogs.filter(log => {
+    const logDate = new Date(log.logged_at);
+    logDate.setHours(0, 0, 0, 0);
+    return logDate.getTime() === today.getTime();
+  });
+
+  const totalToday = todayLogs.reduce((sum, log) => sum + log.amount_ml, 0);
   const progress = Math.min((totalToday / dailyGoal) * 100, 100);
+
+  // Group logs by date
+  const groupedLogs = waterLogs.reduce((groups, log) => {
+    const date = new Date(log.logged_at).toLocaleDateString();
+    if (!groups[date]) {
+      groups[date] = [];
+    }
+    groups[date].push(log);
+    return groups;
+  }, {} as Record<string, WaterLog[]>);
 
   if (loading) {
     return <div className="p-6">Loading...</div>;
@@ -156,46 +175,65 @@ const WaterIntake = () => {
         </div>
       </Card>
 
-      {/* Today's Logs */}
+      {/* History by Date */}
       <Card className="p-6 hover:shadow-xl transition-all duration-300">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 bg-primary/10 rounded-xl">
             <Droplets className="w-5 h-5 text-primary" />
           </div>
-          <h3 className="text-lg font-semibold">Today's Log</h3>
+          <h3 className="text-lg font-semibold">History</h3>
         </div>
         {waterLogs.length === 0 ? (
           <p className="text-muted-foreground text-center py-8">
-            No water logged today. Start tracking your hydration!
+            No water logged yet. Start tracking your hydration!
           </p>
         ) : (
-          <div className="space-y-2">
-            {waterLogs.map((log) => (
-              <div
-                key={log.id}
-                className="flex items-center justify-between p-4 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <Droplets className="w-5 h-5 text-primary" />
-                  <div>
-                    <p className="font-medium">{log.amount_ml}ml</p>
-                    <p className="text-sm text-muted-foreground">
-                      {new Date(log.logged_at).toLocaleTimeString([], {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })}
-                    </p>
+          <div className="space-y-6">
+            {Object.entries(groupedLogs).map(([date, logs]) => {
+              const dateTotal = logs.reduce((sum, log) => sum + log.amount_ml, 0);
+              const isToday = date === today.toLocaleDateString();
+              
+              return (
+                <div key={date} className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-semibold text-sm">
+                      {isToday ? 'Today' : date}
+                    </h4>
+                    <span className="text-sm text-muted-foreground">
+                      Total: {dateTotal}ml
+                    </span>
+                  </div>
+                  <div className="space-y-2">
+                    {logs.map((log) => (
+                      <div
+                        key={log.id}
+                        className="flex items-center justify-between p-4 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors"
+                      >
+                        <div className="flex items-center gap-3">
+                          <Droplets className="w-5 h-5 text-primary" />
+                          <div>
+                            <p className="font-medium">{log.amount_ml}ml</p>
+                            <p className="text-sm text-muted-foreground">
+                              {new Date(log.logged_at).toLocaleTimeString([], {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                              })}
+                            </p>
+                          </div>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleDeleteLog(log.id)}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => handleDeleteLog(log.id)}
-                >
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </Card>
