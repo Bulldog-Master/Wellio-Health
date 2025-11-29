@@ -1336,6 +1336,39 @@ export type Database = {
         }
         Relationships: []
       }
+      medical_audit_log: {
+        Row: {
+          accessed_at: string
+          action: string
+          id: string
+          ip_address: string | null
+          record_id: string
+          table_name: string
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          accessed_at?: string
+          action: string
+          id?: string
+          ip_address?: string | null
+          record_id: string
+          table_name: string
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          accessed_at?: string
+          action?: string
+          id?: string
+          ip_address?: string | null
+          record_id?: string
+          table_name?: string
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       medical_records: {
         Row: {
           category: string
@@ -3481,6 +3514,26 @@ export type Database = {
       award_points_and_streak: {
         Args: { _points: number; _user_id: string }
         Returns: undefined
+      }
+      create_booking: {
+        Args: {
+          _booking_type: string
+          _end_time: string
+          _notes?: string
+          _program_id?: string
+          _start_time: string
+          _trainer_id: string
+        }
+        Returns: string
+      }
+      create_donation: {
+        Args: {
+          _amount: number
+          _fundraiser_id: string
+          _is_anonymous?: boolean
+          _message?: string
+        }
+        Returns: string
       }
       generate_referral_code: { Args: never; Returns: string }
       get_user_role: {
