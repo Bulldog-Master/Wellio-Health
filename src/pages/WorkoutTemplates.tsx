@@ -5,8 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, Dumbbell, Clock, TrendingUp, Search } from "lucide-react";
+import { Plus, Dumbbell, Clock, TrendingUp, Search, ArrowUpDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface WorkoutProgram {
   id: string;
@@ -30,6 +31,7 @@ const WorkoutTemplates = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterDifficulty, setFilterDifficulty] = useState<string>("all");
+  const [sortBy, setSortBy] = useState<string>("date-newest");
 
   useEffect(() => {
     fetchPrograms();
@@ -79,6 +81,21 @@ const WorkoutTemplates = () => {
     return matchesSearch && matchesDifficulty;
   });
 
+  const sortedPrograms = [...filteredPrograms].sort((a, b) => {
+    switch (sortBy) {
+      case "name-asc":
+        return a.name.localeCompare(b.name);
+      case "name-desc":
+        return b.name.localeCompare(a.name);
+      case "date-newest":
+        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+      case "date-oldest":
+        return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+      default:
+        return 0;
+    }
+  });
+
   const getDifficultyColor = (level: string | null) => {
     switch (level?.toLowerCase()) {
       case "beginner": return "bg-green-500/10 text-green-500";
@@ -122,6 +139,18 @@ const WorkoutTemplates = () => {
             />
           </div>
         </div>
+        <Select value={sortBy} onValueChange={setSortBy}>
+          <SelectTrigger className="w-[180px]">
+            <ArrowUpDown className="w-4 h-4 mr-2" />
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="date-newest">Newest First</SelectItem>
+            <SelectItem value="date-oldest">Oldest First</SelectItem>
+            <SelectItem value="name-asc">Name A-Z</SelectItem>
+            <SelectItem value="name-desc">Name Z-A</SelectItem>
+          </SelectContent>
+        </Select>
         <div className="flex gap-2">
           {["all", "beginner", "intermediate", "advanced"].map((level) => (
             <Button
@@ -136,7 +165,7 @@ const WorkoutTemplates = () => {
         </div>
       </div>
 
-      {filteredPrograms.length === 0 ? (
+      {sortedPrograms.length === 0 ? (
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-12">
             <Dumbbell className="h-12 w-12 text-muted-foreground mb-4" />
@@ -145,7 +174,7 @@ const WorkoutTemplates = () => {
         </Card>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredPrograms.map((program) => (
+          {sortedPrograms.map((program) => (
             <Card
               key={program.id}
               className="hover:shadow-lg transition-shadow cursor-pointer"
