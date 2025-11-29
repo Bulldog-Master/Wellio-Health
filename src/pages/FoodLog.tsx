@@ -108,9 +108,11 @@ const FoodLog = () => {
   };
 
   // Calculate today's calories only
-  const todayStart = new Date();
-  todayStart.setHours(0, 0, 0, 0);
-  const todayMeals = mealLogs.filter(meal => new Date(meal.logged_at) >= todayStart);
+  const today = new Date().toLocaleDateString();
+  const todayMeals = mealLogs.filter(meal => {
+    const mealDate = new Date(meal.logged_at).toLocaleDateString();
+    return mealDate === today;
+  });
   const totalCalories = todayMeals.reduce((sum, meal) => sum + (meal.calories || 0), 0);
 
   // Group meals by date
