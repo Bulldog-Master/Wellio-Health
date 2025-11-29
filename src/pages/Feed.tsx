@@ -16,7 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 import { formatDistanceToNow } from "date-fns";
 import { MentionInput } from "@/components/MentionInput";
 import { useRealtimePosts } from "@/hooks/useRealtimePosts";
-import { SuggestedUsers } from "@/components/SuggestedUsers";
+import { MessagesSidebar } from "@/components/MessagesSidebar";
 import { LazyImage } from "@/components/LazyImage";
 
 const Feed = () => {
@@ -917,9 +917,9 @@ const Feed = () => {
           </div>
         </div>
 
-        {/* Sidebar - Trending Hashtags */}
+        {/* Sidebar - Active Conversations & Trending Hashtags */}
         <div className="hidden lg:block space-y-6">
-          <SuggestedUsers />
+          <MessagesSidebar />
           
           <Card>
             <CardHeader>
