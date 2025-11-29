@@ -1,4 +1,4 @@
-// Header icons with vibrant colors - Updated v3.0
+// Header icons with vibrant colors using Lucide color prop - v4.0
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -1004,22 +1004,22 @@ const Workout = () => {
       <div className="flex gap-2 flex-wrap justify-end">
         <Button variant="outline" className="gap-2 group" onClick={() => navigate('/workout-schedule')}>
           <CalendarDays 
-            className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(270_95%_65%)]" 
-            style={{ color: 'hsl(270, 95%, 65%)', stroke: 'hsl(270, 95%, 65%)' }}
+            color="hsl(270, 95%, 65%)" 
+            className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(270_95%_65%)]"
           />
           Schedule
         </Button>
         <Button variant="outline" className="gap-2 group" onClick={() => setShowAppsLibrary(true)}>
           <Smartphone 
-            className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(180_95%_50%)]" 
-            style={{ color: 'hsl(180, 95%, 50%)', stroke: 'hsl(180, 95%, 50%)' }}
+            color="hsl(180, 95%, 50%)" 
+            className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(180_95%_50%)]"
           />
           Apps
         </Button>
         <Button variant="outline" className="gap-2 group" onClick={() => setShowRoutineDialog(true)}>
           <Plus 
-            className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(145_80%_50%)]" 
-            style={{ color: 'hsl(145, 80%, 50%)', stroke: 'hsl(145, 80%, 50%)' }}
+            color="hsl(145, 80%, 50%)" 
+            className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(145_80%_50%)]"
           />
           Create Routine
         </Button>
@@ -1947,8 +1947,8 @@ const Workout = () => {
               <PopoverTrigger asChild>
                 <Button variant="outline" size="default" className="gap-2 group">
                   <Library 
-                    className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(35_100%_58%)]" 
-                    style={{ color: 'hsl(35, 100%, 58%)', stroke: 'hsl(35, 100%, 58%)' }}
+                    color="hsl(35, 100%, 58%)" 
+                    className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(35_100%_58%)]"
                   />
                   Load Routine
                 </Button>
