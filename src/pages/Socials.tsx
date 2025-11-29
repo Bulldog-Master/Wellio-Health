@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { EmptyState } from "@/components/EmptyState";
 
 interface SocialConnection {
   id: string;
@@ -33,6 +34,13 @@ const Socials = () => {
   useEffect(() => {
     fetchConnections();
   }, []);
+
+  // Auto-show form if no connections exist
+  useEffect(() => {
+    if (!isLoading && connections.length === 0) {
+      setShowAddForm(true);
+    }
+  }, [isLoading, connections.length]);
 
   const fetchConnections = async () => {
     try {
@@ -240,6 +248,25 @@ const Socials = () => {
         </Card>
       )}
 
+      {/* In-App Following */}
+      <Card className="p-6 bg-gradient-secondary text-foreground">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-3 bg-primary/10 rounded-xl">
+            <Users className="w-6 h-6 text-primary" />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-xl font-semibold">Follow Wellio Users</h3>
+            <p className="text-muted-foreground text-sm">Connect with other fitness enthusiasts in the app</p>
+          </div>
+        </div>
+        <Button 
+          onClick={() => navigate('/search')} 
+          className="w-full"
+        >
+          Find People to Follow
+        </Button>
+      </Card>
+
       {/* Fitness Groups Quick Access */}
       <Card className="p-6 bg-gradient-primary text-white">
         <div className="flex items-center gap-3 mb-4">
@@ -299,9 +326,15 @@ const Socials = () => {
                 </div>
               ))
             ) : (
-              <p className="text-center text-muted-foreground py-8">
-                No personal accounts yet. Add one above!
-              </p>
+              <EmptyState
+                icon={Instagram}
+                title="No Personal Accounts"
+                description="Add your social media accounts to connect with friends across platforms"
+                action={{
+                  label: "Add Your First Account",
+                  onClick: () => setShowAddForm(true)
+                }}
+              />
             )}
           </div>
         </Card>
@@ -345,9 +378,15 @@ const Socials = () => {
                 </div>
               ))
             ) : (
-              <p className="text-center text-muted-foreground py-8">
-                Not following any creators yet. Add one above!
-              </p>
+              <EmptyState
+                icon={Youtube}
+                title="No Creators Following"
+                description="Follow fitness creators and influencers to stay motivated and inspired"
+                action={{
+                  label: "Add First Creator",
+                  onClick: () => setShowAddForm(true)
+                }}
+              />
             )}
           </div>
         </Card>
