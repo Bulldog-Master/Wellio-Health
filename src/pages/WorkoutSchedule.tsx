@@ -570,9 +570,13 @@ const WorkoutSchedule = () => {
 
               <div>
                 <Label>Intensity</Label>
-                <Select value={formData.intensity} onValueChange={(v) => setFormData(prev => ({ ...prev, intensity: v }))}>
+                <Select 
+                  key="intensity-select-v2"
+                  value={formData.intensity} 
+                  onValueChange={(v) => setFormData(prev => ({ ...prev, intensity: v }))}
+                >
                   <SelectTrigger>
-                    <SelectValue />
+                    <SelectValue placeholder="Select intensity" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="low">Low</SelectItem>
