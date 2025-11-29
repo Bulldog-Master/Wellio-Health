@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { User, Save, Share2, Copy, Check, Upload, Settings, ChevronDown, Shield, CreditCard, Bell, HelpCircle, UserCircle, Target, LogOut, Crown } from "lucide-react";
+import { User, Save, Share2, Copy, Check, Upload, Settings, ChevronDown, Shield, CreditCard, Bell, HelpCircle, UserCircle, Target, LogOut, Crown, Gift } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -531,6 +531,20 @@ const Profile = () => {
           </CollapsibleTrigger>
           <CollapsibleContent>
             <div className="border-t">
+              {/* Referral Program */}
+              <button 
+                onClick={() => navigate("/referral")}
+                className="w-full p-4 flex items-center gap-3 hover:bg-muted/50 transition-colors text-left border-b"
+              >
+                <div className="p-2 bg-purple-500/20 rounded-lg">
+                  <Gift className="w-5 h-5 text-purple-500" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-medium">Referral Program</h4>
+                  <p className="text-sm text-muted-foreground">Share Wellio and earn rewards for referrals</p>
+                </div>
+              </button>
+
               {/* Privacy & Security */}
               <button 
                 onClick={() => navigate("/settings")}
