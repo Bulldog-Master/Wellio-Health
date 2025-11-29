@@ -1198,10 +1198,17 @@ const Workout = () => {
                               min="0"
                               max="600"
                               placeholder="60"
-                              value={exercise.rest_seconds ?? ''}
+                              defaultValue={exercise.rest_seconds ?? ''}
+                              onBlur={(e) => {
+                                const val = e.target.value === '' ? 60 : Number(e.target.value);
+                                handleUpdateRoutineExercise(idx, 'rest_seconds', isNaN(val) ? 60 : val);
+                              }}
                               onChange={(e) => {
-                                const val = e.target.value === '' ? 0 : parseInt(e.target.value);
-                                handleUpdateRoutineExercise(idx, 'rest_seconds', isNaN(val) ? 0 : val);
+                                // Allow immediate updates for better UX
+                                const val = e.target.value === '' ? 0 : Number(e.target.value);
+                                if (!isNaN(val)) {
+                                  handleUpdateRoutineExercise(idx, 'rest_seconds', val);
+                                }
                               }}
                               className="mt-1"
                             />
