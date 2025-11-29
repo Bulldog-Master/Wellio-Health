@@ -1002,25 +1002,16 @@ const Workout = () => {
       </div>
 
       <div className="flex gap-2 flex-wrap justify-end">
-        <Button variant="outline" className="gap-2 group" onClick={() => navigate('/workout-schedule')}>
-          <CalendarDays 
-            color="hsl(270, 95%, 65%)" 
-            className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(270_95%_65%)]"
-          />
+        <Button variant="outline" className="gap-2 group [&_svg]:!text-[hsl(270_95%_65%)]" onClick={() => navigate('/workout-schedule')}>
+          <CalendarDays className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(270_95%_65%)]" />
           Schedule
         </Button>
-        <Button variant="outline" className="gap-2 group" onClick={() => setShowAppsLibrary(true)}>
-          <Smartphone 
-            color="hsl(180, 95%, 50%)" 
-            className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(180_95%_50%)]"
-          />
+        <Button variant="outline" className="gap-2 group [&_svg]:!text-[hsl(180_95%_50%)]" onClick={() => setShowAppsLibrary(true)}>
+          <Smartphone className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(180_95%_50%)]" />
           Apps
         </Button>
-        <Button variant="outline" className="gap-2 group" onClick={() => setShowRoutineDialog(true)}>
-          <Plus 
-            color="hsl(145, 80%, 50%)" 
-            className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(145_80%_50%)]"
-          />
+        <Button variant="outline" className="gap-2 group [&_svg]:!text-[hsl(145_80%_50%)]" onClick={() => setShowRoutineDialog(true)}>
+          <Plus className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(145_80%_50%)]" />
           Create Routine
         </Button>
       </div>
@@ -1945,11 +1936,8 @@ const Workout = () => {
           {!editingWorkout && (
             <Popover modal={false}>
               <PopoverTrigger asChild>
-                <Button variant="outline" size="default" className="gap-2 group">
-                  <Library 
-                    color="hsl(35, 100%, 58%)" 
-                    className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(35_100%_58%)]"
-                  />
+                <Button variant="outline" size="default" className="gap-2 group [&_svg]:!text-[hsl(35_100%_58%)]">
+                  <Library className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(35_100%_58%)]" />
                   Load Routine
                 </Button>
               </PopoverTrigger>
