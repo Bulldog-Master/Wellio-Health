@@ -107,22 +107,28 @@ const FoodLog = () => {
     }
   };
 
-  // Calculate today's calories only
-  const today = new Date().toLocaleDateString();
-  console.log('Today date string:', today);
+  // Calculate today's calories only - use date strings from DB to avoid timezone issues
+  const today = new Date();
+  const todayDateString = today.toISOString().split('T')[0]; // YYYY-MM-DD format
+  console.log('Today date (YYYY-MM-DD):', todayDateString);
+  
   const todayMeals = mealLogs.filter(meal => {
-    const mealDate = new Date(meal.logged_at).toLocaleDateString();
-    console.log('Meal logged_at:', meal.logged_at, '-> date string:', mealDate, 'matches today?', mealDate === today);
-    return mealDate === today;
+    const mealDateString = meal.logged_at.split('T')[0]; // Extract YYYY-MM-DD from timestamp
+    console.log('Meal:', meal.food_name, 'Date:', mealDateString, 'Matches?', mealDateString === todayDateString);
+    return mealDateString === todayDateString;
   });
-  console.log('Today meals filtered:', todayMeals.length, 'Total calories:', todayMeals.reduce((sum, meal) => sum + (meal.calories || 0), 0));
+  
+  console.log('Today meals count:', todayMeals.length);
   const totalCalories = todayMeals.reduce((sum, meal) => sum + (meal.calories || 0), 0);
+  console.log('Total calories for today:', totalCalories);
 
-  // Group meals by date
+  // Group meals by date - use date strings to avoid timezone issues
   const mealsByDate = mealLogs.reduce((acc, meal) => {
-    const date = new Date(meal.logged_at).toLocaleDateString();
-    if (!acc[date]) acc[date] = [];
-    acc[date].push(meal);
+    const dateString = meal.logged_at.split('T')[0]; // YYYY-MM-DD
+    const date = new Date(dateString + 'T12:00:00'); // Noon to avoid timezone issues
+    const displayDate = date.toLocaleDateString();
+    if (!acc[displayDate]) acc[displayDate] = [];
+    acc[displayDate].push(meal);
     return acc;
   }, {} as Record<string, MealLog[]>);
 
