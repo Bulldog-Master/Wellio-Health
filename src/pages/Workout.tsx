@@ -1178,12 +1178,9 @@ const Workout = () => {
                               type="number"
                               min="0"
                               max="600"
-                              placeholder={defaultRestTime.toString()}
-                              value={exercise.rest_seconds ?? ''}
-                              onChange={(e) => {
-                                const value = e.target.value;
-                                handleUpdateRoutineExercise(idx, 'rest_seconds', value === '' ? undefined : Number(value));
-                              }}
+                              placeholder="60"
+                              value={exercise.rest_seconds || ''}
+                              onChange={(e) => handleUpdateRoutineExercise(idx, 'rest_seconds', parseInt(e.target.value) || 0)}
                               className="mt-1"
                             />
                           </div>
