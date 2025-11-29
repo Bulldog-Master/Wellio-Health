@@ -426,6 +426,11 @@ const Workout = () => {
 
       const distanceMiles = distance ? parseDistance(distance, preferredUnit) : null;
       const calculatedCalories = calculateCalories(exercise, parseInt(duration), intensity);
+      
+      // Create a timestamp at noon local time to avoid timezone shifting the date
+      const [dateYear, dateMonth, dateDay] = workoutDate.split('-');
+      const localDate = new Date(parseInt(dateYear), parseInt(dateMonth) - 1, parseInt(dateDay), 12, 0, 0);
+      const loggedAtTimestamp = localDate.toISOString();
 
       // If there's a loaded routine, include exercises in notes
       let finalNotes = notes;
@@ -448,7 +453,7 @@ const Workout = () => {
             calories_burned: calculatedCalories,
             distance_miles: distanceMiles,
             notes: finalNotes || null,
-            logged_at: workoutDate,
+            logged_at: loggedAtTimestamp,
             time_of_day: timeOfDay,
           })
           .eq('id', editingWorkout);
@@ -470,7 +475,7 @@ const Workout = () => {
             calories_burned: calculatedCalories,
             distance_miles: distanceMiles,
             notes: finalNotes || null,
-            logged_at: workoutDate,
+            logged_at: loggedAtTimestamp,
             time_of_day: timeOfDay,
           });
 
