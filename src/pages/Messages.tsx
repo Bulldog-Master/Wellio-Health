@@ -38,7 +38,7 @@ const Messages = () => {
     });
   }, []);
 
-  const { data: conversations, isLoading } = useQuery({
+  const { data: conversations, isLoading, refetch: refetchConversations } = useQuery({
     queryKey: ["conversations"],
     queryFn: async () => {
       if (!currentUserId) return [];
@@ -107,6 +107,7 @@ const Messages = () => {
       }) as ConversationWithDetails[];
     },
     enabled: !!currentUserId,
+    staleTime: 0,
   });
 
   const otherUserIds = conversations?.map((c) => c.other_user.id) || [];
@@ -125,8 +126,12 @@ const Messages = () => {
           schema: "public",
           table: "conversations",
         },
-        () => {
-          queryClient.invalidateQueries({ queryKey: ["conversations"] });
+        async () => {
+          await refetchConversations();
+          await queryClient.invalidateQueries({ 
+            queryKey: ["conversations"],
+            refetchType: 'active'
+          });
         }
       )
       .on(
@@ -136,8 +141,12 @@ const Messages = () => {
           schema: "public",
           table: "messages",
         },
-        () => {
-          queryClient.invalidateQueries({ queryKey: ["conversations"] });
+        async () => {
+          await refetchConversations();
+          await queryClient.invalidateQueries({ 
+            queryKey: ["conversations"],
+            refetchType: 'active'
+          });
         }
       )
       .subscribe();
@@ -145,7 +154,7 @@ const Messages = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [currentUserId, queryClient]);
+  }, [currentUserId, queryClient, refetchConversations]);
 
   if (isLoading) {
     return (

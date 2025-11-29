@@ -72,7 +72,7 @@ const Conversation = () => {
   );
 
   // Fetch messages
-  const { data: messages } = useQuery({
+  const { data: messages, refetch: refetchMessages } = useQuery({
     queryKey: ["messages", conversationId],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -85,6 +85,7 @@ const Conversation = () => {
       return data as Message[];
     },
     enabled: !!conversationId,
+    staleTime: 0,
   });
 
   // Mark messages as read
@@ -123,8 +124,12 @@ const Conversation = () => {
           table: "messages",
           filter: `conversation_id=eq.${conversationId}`,
         },
-        () => {
-          queryClient.invalidateQueries({ queryKey: ["messages", conversationId] });
+        async () => {
+          await refetchMessages();
+          await queryClient.invalidateQueries({ 
+            queryKey: ["messages", conversationId],
+            refetchType: 'active'
+          });
         }
       )
       .subscribe();
@@ -132,7 +137,7 @@ const Conversation = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [conversationId, queryClient]);
+  }, [conversationId, queryClient, refetchMessages]);
 
   const sendMessage = useMutation({
     mutationFn: async (content: string) => {
@@ -146,9 +151,16 @@ const Conversation = () => {
 
       if (error) throw error;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["messages", conversationId] });
-      queryClient.invalidateQueries({ queryKey: ["conversations"] });
+    onSuccess: async () => {
+      await refetchMessages();
+      await queryClient.invalidateQueries({ 
+        queryKey: ["messages", conversationId],
+        refetchType: 'active'
+      });
+      await queryClient.invalidateQueries({ 
+        queryKey: ["conversations"],
+        refetchType: 'active'
+      });
       setNewMessage("");
     },
     onError: (error) => {
