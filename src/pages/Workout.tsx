@@ -223,6 +223,7 @@ const Workout = () => {
   const [routineDescription, setRoutineDescription] = useState("");
   const [routineExercises, setRoutineExercises] = useState<Array<{ name: string; sets?: number; reps?: number; duration?: number; media_url?: string; rest_seconds?: number }>>([]);
   const [defaultRestTime, setDefaultRestTime] = useState(60); // Default 60 seconds
+  const [tempRestTime, setTempRestTime] = useState<string>('60');
   const [showRestTimeInput, setShowRestTimeInput] = useState(false);
 
   // Calorie calculation based on activity, duration, and intensity
@@ -1032,7 +1033,15 @@ const Workout = () => {
                 <div className="flex items-center justify-between mb-2">
                   <Label>Exercises</Label>
                   <div className="flex gap-2">
-                    <Popover open={showRestTimeInput} onOpenChange={setShowRestTimeInput}>
+                    <Popover 
+                      open={showRestTimeInput} 
+                      onOpenChange={(open) => {
+                        setShowRestTimeInput(open);
+                        if (open) {
+                          setTempRestTime(defaultRestTime.toString());
+                        }
+                      }}
+                    >
                       <PopoverTrigger asChild>
                         <Button
                           variant="outline"
@@ -1051,18 +1060,20 @@ const Workout = () => {
                             <Input
                               id="rest-time"
                               type="number"
-                              defaultValue={defaultRestTime}
-                              onBlur={(e) => {
-                                const val = e.target.value === '' ? 0 : parseInt(e.target.value);
+                              value={tempRestTime}
+                              onChange={(e) => setTempRestTime(e.target.value)}
+                              onBlur={() => {
+                                const val = parseInt(tempRestTime);
                                 setDefaultRestTime(isNaN(val) ? 0 : Math.max(0, val));
                               }}
                               onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
-                                  const val = e.currentTarget.value === '' ? 0 : parseInt(e.currentTarget.value);
+                                  const val = parseInt(tempRestTime);
                                   setDefaultRestTime(isNaN(val) ? 0 : Math.max(0, val));
-                                  e.currentTarget.blur();
+                                  setShowRestTimeInput(false);
                                 }
                               }}
+                              autoFocus
                             />
                           </div>
                           <p className="text-xs text-muted-foreground">
