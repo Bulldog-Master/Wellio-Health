@@ -1035,21 +1035,21 @@ const Auth = () => {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <Label htmlFor="password">Password</Label>
-                    {(() => {
-                      console.log('Auth Debug - isLogin:', isLogin, 'isForgotPassword:', isForgotPassword, 'authMethod:', authMethod);
-                      return isLogin && !isForgotPassword;
-                    })() && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          console.log('Forgot Password clicked');
-                          setIsForgotPassword(true);
+                    {isLogin && !isForgotPassword && (
+                      <span
+                        onClick={() => setIsForgotPassword(true)}
+                        className="text-xs text-primary hover:underline cursor-pointer"
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            setIsForgotPassword(true);
+                          }
                         }}
-                        className="text-xs text-primary hover:underline inline-block cursor-pointer bg-transparent border-0 p-0"
-                        style={{ WebkitAppearance: 'none', MozAppearance: 'none', appearance: 'none' }}
                       >
                         Forgot Password?
-                      </button>
+                      </span>
                     )}
                   </div>
                   <div className="relative">
