@@ -1,4 +1,4 @@
-import { Home, Utensils, Activity, Users, Settings, MessageSquare, Dumbbell } from "lucide-react";
+import { Home, Utensils, Activity, Users, Settings, MessageSquare, Dumbbell, CalendarDays } from "lucide-react";
 import { NavLink } from "./NavLink";
 import { cn } from "@/lib/utils";
 
@@ -7,6 +7,7 @@ const Navigation = () => {
     { to: "/", icon: Home, label: "Dashboard", color: "text-nav-icon-1" },
     { to: "/feed", icon: MessageSquare, label: "Feed", color: "text-secondary" },
     { to: "/workout", icon: Dumbbell, label: "Workout", color: "text-nav-icon-4" },
+    { to: "/workout-schedule", icon: CalendarDays, label: "Schedule", color: "text-nav-icon-3" },
     { to: "/food", icon: Utensils, label: "Nutrition", color: "text-nav-icon-2" },
     { to: "/socials", icon: Users, label: "Social", color: "text-nav-icon-7" },
     { to: "/settings", icon: Settings, label: "Settings", color: "text-muted-foreground" },
