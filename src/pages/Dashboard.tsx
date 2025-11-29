@@ -1,5 +1,5 @@
 // Quick Actions with vibrant icon colors - Updated
-import { Activity, Flame, Target, TrendingUp, Droplets, Moon, Camera, Zap, HeartPulse } from "lucide-react";
+import { Activity, Flame, Target, TrendingUp, Droplets, Moon, Camera, Zap, HeartPulse, Users } from "lucide-react";
 import MetricCard from "@/components/MetricCard";
 import ActivityRings from "@/components/ActivityRings";
 import { StreakTracker } from "@/components/StreakTracker";
@@ -341,6 +341,16 @@ const Dashboard = () => {
             <span className="text-sm">Goals</span>
           </Button>
           <Button 
+            onClick={() => navigate('/groups')}
+            variant="secondary" 
+            className="h-auto py-4 flex-col gap-2"
+          >
+            <span style={{ color: 'hsl(270, 100%, 65%)' }}>
+              <Users className="w-5 h-5" />
+            </span>
+            <span className="text-sm">Groups</span>
+          </Button>
+          <Button
             variant="secondary" 
             className="h-auto py-4 flex-col gap-2 relative cursor-not-allowed opacity-60"
             disabled

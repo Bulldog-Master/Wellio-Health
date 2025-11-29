@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Heart, MessageCircle, Send, Image as ImageIcon, User, X, Hash, TrendingUp, Share2, Copy, Check, Bookmark, Edit, MoreVertical, Flag, UserX, ArrowLeft } from "lucide-react";
+import { Heart, MessageCircle, Send, Image as ImageIcon, User, X, Hash, TrendingUp, Share2, Copy, Check, Bookmark, Edit, MoreVertical, Flag, UserX, ArrowLeft, Users } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -923,6 +923,28 @@ const Feed = () => {
           <MessagesSidebar />
           
           <SuggestedUsers />
+          
+          {/* Groups Quick Access */}
+          <Card className="bg-gradient-card hover:shadow-xl transition-all duration-300">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="w-5 h-5 text-primary" />
+                Fitness Groups
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-4">
+                Join groups to connect with like-minded fitness enthusiasts
+              </p>
+              <Button 
+                onClick={() => navigate('/groups')} 
+                className="w-full"
+                variant="secondary"
+              >
+                Browse Groups
+              </Button>
+            </CardContent>
+          </Card>
           
           <Card>
             <CardHeader>
