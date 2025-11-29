@@ -1135,43 +1135,51 @@ const Workout = () => {
                           </Button>
                         </div>
                         
-                        <div className="grid grid-cols-4 gap-2">
-                          <div>
-                            <Label className="text-xs">Sets</Label>
-                            <Input
-                              type="number"
-                              placeholder="3"
-                              value={exercise.sets || ''}
-                              onChange={(e) => handleUpdateRoutineExercise(idx, 'sets', parseInt(e.target.value) || 0)}
-                              className="mt-1"
-                            />
+                        <div className="space-y-2">
+                          <div className="grid grid-cols-3 gap-2">
+                            <div>
+                              <Label className="text-xs">Sets</Label>
+                              <Input
+                                type="number"
+                                placeholder="3"
+                                value={exercise.sets || ''}
+                                onChange={(e) => handleUpdateRoutineExercise(idx, 'sets', parseInt(e.target.value) || 0)}
+                                className="mt-1"
+                              />
+                            </div>
+                            <div>
+                              <Label className="text-xs">Reps</Label>
+                              <Input
+                                type="number"
+                                placeholder="10"
+                                value={exercise.reps || ''}
+                                onChange={(e) => handleUpdateRoutineExercise(idx, 'reps', parseInt(e.target.value) || 0)}
+                                className="mt-1"
+                              />
+                            </div>
+                            <div>
+                              <Label className="text-xs">Duration (min)</Label>
+                              <Input
+                                type="number"
+                                placeholder="5"
+                                value={exercise.duration || ''}
+                                onChange={(e) => handleUpdateRoutineExercise(idx, 'duration', parseInt(e.target.value) || 0)}
+                                className="mt-1"
+                              />
+                            </div>
                           </div>
+                          
                           <div>
-                            <Label className="text-xs">Reps</Label>
+                            <Label className="text-xs flex items-center gap-1">
+                              <Timer className="w-3 h-3" />
+                              Rest Time (seconds)
+                            </Label>
                             <Input
                               type="number"
-                              placeholder="10"
-                              value={exercise.reps || ''}
-                              onChange={(e) => handleUpdateRoutineExercise(idx, 'reps', parseInt(e.target.value) || 0)}
-                              className="mt-1"
-                            />
-                          </div>
-                          <div>
-                            <Label className="text-xs">Duration (min)</Label>
-                            <Input
-                              type="number"
-                              placeholder="5"
-                              value={exercise.duration || ''}
-                              onChange={(e) => handleUpdateRoutineExercise(idx, 'duration', parseInt(e.target.value) || 0)}
-                              className="mt-1"
-                            />
-                          </div>
-                          <div>
-                            <Label className="text-xs">Rest (sec)</Label>
-                            <Input
-                              type="number"
+                              min="0"
+                              max="600"
                               placeholder="60"
-                              value={exercise.rest_seconds || ''}
+                              value={exercise.rest_seconds || defaultRestTime}
                               onChange={(e) => handleUpdateRoutineExercise(idx, 'rest_seconds', parseInt(e.target.value) || 0)}
                               className="mt-1"
                             />
