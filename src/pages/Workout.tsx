@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown, ChevronDown, Library, BookOpen, Smartphone, ArrowLeft, Calendar as CalendarIcon, ArrowUpDown } from "lucide-react";
+import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown, ChevronDown, Library, BookOpen, Smartphone, ArrowLeft, Calendar as CalendarIcon, ArrowUpDown, Timer } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
@@ -42,6 +42,7 @@ interface WorkoutRoutine {
     reps?: number;
     duration?: number;
     media_url?: string;
+    rest_seconds?: number;
   }>;
 }
 
@@ -57,6 +58,7 @@ interface SampleRoutine {
     reps?: number;
     duration?: number;
     media_url?: string;
+    rest_seconds?: number;
   }>;
 }
 
@@ -111,7 +113,7 @@ const Workout = () => {
   const [sampleDescription, setSampleDescription] = useState("");
   const [samplePlatform, setSamplePlatform] = useState("");
   const [sampleUrl, setSampleUrl] = useState("");
-  const [sampleExercises, setSampleExercises] = useState<Array<{ name: string; sets?: number; reps?: number; duration?: number; media_url?: string }>>([]);
+  const [sampleExercises, setSampleExercises] = useState<Array<{ name: string; sets?: number; reps?: number; duration?: number; media_url?: string; rest_seconds?: number }>>([]);
   const [showAddSample, setShowAddSample] = useState(false);
   const [showAppsLibrary, setShowAppsLibrary] = useState(false);
   const [showAddApp, setShowAddApp] = useState(false);
@@ -219,7 +221,9 @@ const Workout = () => {
   const allExercises = [...new Set([...baseExercises, ...customExercises])].sort();
   const [routineName, setRoutineName] = useState("");
   const [routineDescription, setRoutineDescription] = useState("");
-  const [routineExercises, setRoutineExercises] = useState<Array<{ name: string; sets?: number; reps?: number; duration?: number; media_url?: string }>>([]);
+  const [routineExercises, setRoutineExercises] = useState<Array<{ name: string; sets?: number; reps?: number; duration?: number; media_url?: string; rest_seconds?: number }>>([]);
+  const [defaultRestTime, setDefaultRestTime] = useState(60); // Default 60 seconds
+  const [showRestTimeInput, setShowRestTimeInput] = useState(false);
 
   // Calorie calculation based on activity, duration, and intensity
   const calculateCalories = (activityType: string, durationMin: number, intensityLevel: string): number => {
@@ -587,7 +591,7 @@ const Workout = () => {
   };
 
   const handleAddExerciseToRoutine = () => {
-    setRoutineExercises([...routineExercises, { name: "", sets: 3, reps: 10, media_url: "" }]);
+    setRoutineExercises([...routineExercises, { name: "", sets: 3, reps: 10, media_url: "", rest_seconds: defaultRestTime }]);
   };
 
   const handleExerciseMediaUpload = async (event: React.ChangeEvent<HTMLInputElement>, exerciseIndex: number) => {
@@ -1027,15 +1031,49 @@ const Workout = () => {
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <Label>Exercises</Label>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={handleAddExerciseToRoutine}
-                    className="gap-2"
-                  >
-                    <Plus className="w-3 h-3" />
-                    Add Exercise
-                  </Button>
+                  <div className="flex gap-2">
+                    <Popover open={showRestTimeInput} onOpenChange={setShowRestTimeInput}>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="gap-2"
+                        >
+                          <Timer className="w-3 h-3" />
+                          Rest: {defaultRestTime}s
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-64">
+                        <div className="space-y-3">
+                          <h4 className="font-semibold text-sm">Default Rest Time</h4>
+                          <div className="space-y-2">
+                            <Label htmlFor="rest-time" className="text-xs">Seconds between sets</Label>
+                            <Input
+                              id="rest-time"
+                              type="number"
+                              min="0"
+                              max="600"
+                              value={defaultRestTime}
+                              onChange={(e) => setDefaultRestTime(parseInt(e.target.value) || 60)}
+                              placeholder="60"
+                            />
+                          </div>
+                          <p className="text-xs text-muted-foreground">
+                            This will be applied to new exercises
+                          </p>
+                        </div>
+                      </PopoverContent>
+                    </Popover>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleAddExerciseToRoutine}
+                      className="gap-2"
+                    >
+                      <Plus className="w-3 h-3" />
+                      Add Exercise
+                    </Button>
+                  </div>
                 </div>
                 
                 <div className="space-y-3">
@@ -1097,7 +1135,7 @@ const Workout = () => {
                           </Button>
                         </div>
                         
-                        <div className="grid grid-cols-3 gap-2">
+                        <div className="grid grid-cols-4 gap-2">
                           <div>
                             <Label className="text-xs">Sets</Label>
                             <Input
@@ -1125,6 +1163,16 @@ const Workout = () => {
                               placeholder="5"
                               value={exercise.duration || ''}
                               onChange={(e) => handleUpdateRoutineExercise(idx, 'duration', parseInt(e.target.value) || 0)}
+                              className="mt-1"
+                            />
+                          </div>
+                          <div>
+                            <Label className="text-xs">Rest (sec)</Label>
+                            <Input
+                              type="number"
+                              placeholder="60"
+                              value={exercise.rest_seconds || ''}
+                              onChange={(e) => handleUpdateRoutineExercise(idx, 'rest_seconds', parseInt(e.target.value) || 0)}
                               className="mt-1"
                             />
                           </div>
