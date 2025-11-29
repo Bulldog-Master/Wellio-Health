@@ -1039,7 +1039,8 @@ const Auth = () => {
                       <button
                         type="button"
                         onClick={() => setIsForgotPassword(true)}
-                        className="text-xs text-primary hover:underline"
+                        className="text-xs text-primary hover:underline inline-block cursor-pointer bg-transparent border-0 p-0"
+                        style={{ WebkitAppearance: 'none', MozAppearance: 'none', appearance: 'none' }}
                       >
                         Forgot Password?
                       </button>
