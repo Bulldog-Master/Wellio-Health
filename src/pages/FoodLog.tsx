@@ -118,13 +118,11 @@ const FoodLog = () => {
   
   const totalCalories = todayMeals.reduce((sum, meal) => sum + (meal.calories || 0), 0);
 
-  // Group meals by date - use date strings to avoid timezone issues
+  // Group meals by date - use ISO date strings (YYYY-MM-DD) as keys to ensure consistency across browsers
   const mealsByDate = mealLogs.reduce((acc, meal) => {
-    const dateString = meal.logged_at.split('T')[0]; // YYYY-MM-DD
-    const date = new Date(dateString + 'T12:00:00'); // Noon to avoid timezone issues
-    const displayDate = date.toLocaleDateString();
-    if (!acc[displayDate]) acc[displayDate] = [];
-    acc[displayDate].push(meal);
+    const dateString = meal.logged_at.split('T')[0]; // YYYY-MM-DD format
+    if (!acc[dateString]) acc[dateString] = [];
+    acc[dateString].push(meal);
     return acc;
   }, {} as Record<string, MealLog[]>);
 
@@ -856,15 +854,19 @@ const FoodLog = () => {
           <p className="text-center text-muted-foreground py-8">No meals logged yet. Start tracking above!</p>
         ) : (
           <div className="space-y-6">
-            {Object.entries(mealsByDate).map(([date, meals]) => {
-              const isToday = date === new Date().toLocaleDateString();
+            {Object.entries(mealsByDate).map(([dateString, meals]) => {
+              // Compare ISO date strings (YYYY-MM-DD) to determine if it's today
+              const isToday = dateString === todayDateString;
               const dayCalories = meals.reduce((sum, meal) => sum + (meal.calories || 0), 0);
               
+              // Format the date for display (avoid toLocaleDateString for consistency)
+              const displayDate = isToday ? 'Today' : dateString;
+              
               return (
-                <div key={date} className="space-y-3">
+                <div key={dateString} className="space-y-3">
                   <div className="flex items-center justify-between">
                     <h4 className="font-semibold text-primary">
-                      {isToday ? 'Today' : date}
+                      {displayDate}
                     </h4>
                     <span className="text-sm text-muted-foreground">{dayCalories} cal</span>
                   </div>
