@@ -792,7 +792,7 @@ const Weight = () => {
               <div key={log.id} className="flex items-center justify-between p-4 bg-secondary rounded-lg">
                 <div className="flex-1">
                   <span className="font-medium">{new Date(log.logged_at).toLocaleDateString()}</span>
-                  <span className="text-sm text-muted-foreground ml-3">
+                  <span className="text-sm text-secondary-foreground ml-3 font-medium">
                     {log.period.charAt(0).toUpperCase() + log.period.slice(1)}
                   </span>
                 </div>
@@ -843,7 +843,7 @@ const Weight = () => {
                         size="sm"
                         variant="ghost"
                         onClick={() => handleDeleteLog(log.id)}
-                        className="h-8 w-8 p-0 text-destructive hover:text-destructive"
+                        className="h-8 w-8 p-0 text-destructive hover:text-destructive hover:bg-destructive/10"
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
