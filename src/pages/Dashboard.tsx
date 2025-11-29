@@ -273,65 +273,65 @@ const Dashboard = () => {
           <Button 
             onClick={() => navigate('/weight')}
             variant="secondary"
-            className="h-auto py-4 flex-col gap-2 [&_svg]:!text-[hsl(195_100%_50%)]"
+            className="h-auto py-4 flex-col gap-2"
           >
-            <Activity className="w-5 h-5" />
+            <Activity className="w-5 h-5" style={{ color: 'hsl(195, 100%, 50%)' }} />
             <span className="text-sm">Log Weight</span>
           </Button>
           <Button 
             onClick={() => navigate('/food')}
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2 [&_svg]:!text-[hsl(15_100%_60%)]"
+            className="h-auto py-4 flex-col gap-2"
           >
-            <Flame className="w-5 h-5" />
+            <Flame className="w-5 h-5" style={{ color: 'hsl(15, 100%, 60%)' }} />
             <span className="text-sm">Add Meal</span>
           </Button>
           <Button 
             onClick={() => navigate('/workout')}
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2 [&_svg]:!text-[hsl(145_80%_50%)]"
+            className="h-auto py-4 flex-col gap-2"
           >
-            <TrendingUp className="w-5 h-5" />
+            <TrendingUp className="w-5 h-5" style={{ color: 'hsl(145, 80%, 50%)' }} />
             <span className="text-sm">Log Workout</span>
           </Button>
           <Button 
             onClick={() => navigate('/water-intake')}
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2 [&_svg]:!text-[hsl(200_100%_55%)]"
+            className="h-auto py-4 flex-col gap-2"
           >
-            <Droplets className="w-5 h-5" />
+            <Droplets className="w-5 h-5" style={{ color: 'hsl(200, 100%, 55%)' }} />
             <span className="text-sm">Water Intake</span>
           </Button>
           <Button 
             onClick={() => navigate('/sleep-tracking')}
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2 [&_svg]:!text-[hsl(280_95%_68%)]"
+            className="h-auto py-4 flex-col gap-2"
           >
-            <Moon className="w-5 h-5" />
+            <Moon className="w-5 h-5" style={{ color: 'hsl(280, 95%, 68%)' }} />
             <span className="text-sm">Sleep</span>
           </Button>
           <Button 
             onClick={() => navigate('/progress-photos')}
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2 [&_svg]:!text-[hsl(340_100%_62%)]"
+            className="h-auto py-4 flex-col gap-2"
           >
-            <Camera className="w-5 h-5" />
+            <Camera className="w-5 h-5" style={{ color: 'hsl(340, 100%, 62%)' }} />
             <span className="text-sm">Progress Pics</span>
           </Button>
           <Button 
             onClick={() => navigate('/fitness-goals')}
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2 [&_svg]:!text-[hsl(35_100%_58%)]"
+            className="h-auto py-4 flex-col gap-2"
           >
-            <Target className="w-5 h-5" />
+            <Target className="w-5 h-5" style={{ color: 'hsl(35, 100%, 58%)' }} />
             <span className="text-sm">Goals</span>
           </Button>
           <Button 
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2 relative cursor-not-allowed opacity-60 [&_svg]:!text-[hsl(165_85%_48%)]"
+            className="h-auto py-4 flex-col gap-2 relative cursor-not-allowed opacity-60"
             disabled
           >
-            <Activity className="w-5 h-5" />
+            <Activity className="w-5 h-5" style={{ color: 'hsl(165, 85%, 48%)' }} />
             <span className="text-sm">Step Count</span>
             <span className="absolute bottom-1 text-[9px] text-muted-foreground/50 font-medium">Coming Soon!</span>
           </Button>
