@@ -1003,15 +1003,15 @@ const Workout = () => {
 
       <div className="flex gap-2 flex-wrap justify-end">
         <Button variant="outline" className="gap-2 group" onClick={() => navigate('/workout-schedule')}>
-          <CalendarDays className="w-4 h-4 text-[hsl(var(--nav-icon-2))] group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-2))] transition-all" />
+          <CalendarDays className="w-4 h-4 !text-[hsl(270_95%_65%)] group-hover:drop-shadow-[0_0_8px_hsl(270_95%_65%)] transition-all" />
           Schedule
         </Button>
         <Button variant="outline" className="gap-2 group" onClick={() => setShowAppsLibrary(true)}>
-          <Smartphone className="w-4 h-4 text-[hsl(var(--nav-icon-6))] group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-6))] transition-all" />
+          <Smartphone className="w-4 h-4 !text-[hsl(180_95%_50%)] group-hover:drop-shadow-[0_0_8px_hsl(180_95%_50%)] transition-all" />
           Apps
         </Button>
         <Button variant="outline" className="gap-2 group" onClick={() => setShowRoutineDialog(true)}>
-          <Plus className="w-4 h-4 text-[hsl(var(--nav-icon-4))] group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-4))] transition-all" />
+          <Plus className="w-4 h-4 !text-[hsl(145_80%_50%)] group-hover:drop-shadow-[0_0_8px_hsl(145_80%_50%)] transition-all" />
           Create Routine
         </Button>
       </div>
@@ -1937,7 +1937,7 @@ const Workout = () => {
             <Popover modal={false}>
               <PopoverTrigger asChild>
                 <Button variant="outline" size="default" className="gap-2 group">
-                  <Library className="w-4 h-4 text-[hsl(var(--nav-icon-5))] group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-5))] transition-all" />
+                  <Library className="w-4 h-4 !text-[hsl(35_100%_58%)] group-hover:drop-shadow-[0_0_8px_hsl(35_100%_58%)] transition-all" />
                   Load Routine
                 </Button>
               </PopoverTrigger>
