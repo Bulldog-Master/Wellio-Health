@@ -1182,11 +1182,7 @@ const Workout = () => {
                               value={exercise.rest_seconds ?? ''}
                               onChange={(e) => {
                                 const value = e.target.value;
-                                if (value === '') {
-                                  handleUpdateRoutineExercise(idx, 'rest_seconds', defaultRestTime);
-                                } else {
-                                  handleUpdateRoutineExercise(idx, 'rest_seconds', Number(value));
-                                }
+                                handleUpdateRoutineExercise(idx, 'rest_seconds', value === '' ? undefined : Number(value));
                               }}
                               className="mt-1"
                             />
