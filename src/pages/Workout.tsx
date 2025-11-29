@@ -223,7 +223,6 @@ const Workout = () => {
   const [routineDescription, setRoutineDescription] = useState("");
   const [routineExercises, setRoutineExercises] = useState<Array<{ name: string; sets?: number; reps?: number; duration?: number; media_url?: string; rest_seconds?: number }>>([]);
   const [defaultRestTime, setDefaultRestTime] = useState(60); // Default 60 seconds
-  const [defaultRestTimeInput, setDefaultRestTimeInput] = useState("60"); // String value for input
   const [showRestTimeInput, setShowRestTimeInput] = useState(false);
 
   // Calorie calculation based on activity, duration, and intensity
@@ -1053,21 +1052,15 @@ const Workout = () => {
                               id="rest-time"
                               type="text"
                               inputMode="numeric"
-                              value={defaultRestTimeInput}
-                              onChange={(e) => {
-                                const value = e.target.value;
-                                if (value === '' || /^\d+$/.test(value)) {
-                                  setDefaultRestTimeInput(value);
-                                }
-                              }}
+                              defaultValue={defaultRestTime}
+                              key={defaultRestTime}
                               onBlur={(e) => {
-                                const val = parseInt(e.target.value);
-                                if (isNaN(val) || val < 0) {
+                                const val = parseInt(e.target.value) || 0;
+                                if (val < 0) {
                                   setDefaultRestTime(60);
-                                  setDefaultRestTimeInput("60");
+                                  e.target.value = "60";
                                 } else {
                                   setDefaultRestTime(val);
-                                  setDefaultRestTimeInput(val.toString());
                                 }
                               }}
                               placeholder="60"
