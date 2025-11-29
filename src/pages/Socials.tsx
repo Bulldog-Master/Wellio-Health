@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Users, Plus, Trash2, Instagram, Youtube, Twitter, ExternalLink, ArrowLeft } from "lucide-react";
+import { Users, Plus, Trash2, Instagram, Youtube, Twitter, ExternalLink, ArrowLeft, UserPlus } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -239,6 +239,25 @@ const Socials = () => {
           </div>
         </Card>
       )}
+
+      {/* Fitness Groups Quick Access */}
+      <Card className="p-6 bg-gradient-primary text-white">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-3 bg-white/20 rounded-xl">
+            <UserPlus className="w-6 h-6" />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-xl font-semibold">Join Fitness Groups</h3>
+            <p className="text-white/90 text-sm">Connect with communities that share your goals</p>
+          </div>
+        </div>
+        <Button 
+          onClick={() => navigate('/groups')} 
+          className="w-full bg-white text-primary hover:bg-white/90"
+        >
+          Browse Groups
+        </Button>
+      </Card>
 
       {/* Personal Accounts Section */}
       <div>
