@@ -35,6 +35,7 @@ interface WorkoutRoutine {
   id: string;
   name: string;
   description: string | null;
+  created_at: string;
   exercises: Array<{
     name: string;
     sets?: number;
@@ -1258,9 +1259,9 @@ const Workout = () => {
                           case "name-desc":
                             return b.name.localeCompare(a.name);
                           case "date-newest":
-                            return new Date((b as any).created_at || 0).getTime() - new Date((a as any).created_at || 0).getTime();
+                            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
                           case "date-oldest":
-                            return new Date((a as any).created_at || 0).getTime() - new Date((b as any).created_at || 0).getTime();
+                            return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
                           default:
                             return 0;
                         }
@@ -1572,7 +1573,7 @@ const Workout = () => {
                         onClick={() => {
                           const routine = sampleRoutines.find(r => r.id === selectedRoutineId);
                           if (routine) {
-                            handleLoadRoutine({ ...routine, id: routine.id });
+                            handleLoadRoutine({ ...routine, id: routine.id, created_at: new Date().toISOString() });
                             setShowSampleLibrary(false);
                             setSelectedRoutineId(null);
                           }
