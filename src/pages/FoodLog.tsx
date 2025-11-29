@@ -4,13 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Utensils, Plus, Clock, Camera, Sparkles, Loader2, Pencil, Trash2, ArrowLeft, Search, Calendar } from "lucide-react";
+import { Utensils, Plus, Clock, Camera, Sparkles, Loader2, Pencil, Trash2, ArrowLeft, Search, Calendar, Bookmark, BookmarkCheck } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 interface MealLog {
   id: string;
@@ -22,6 +23,17 @@ interface MealLog {
   fat_grams: number | null;
   logged_at: string;
   image_url: string | null;
+}
+
+interface SavedMeal {
+  id: string;
+  meal_name: string;
+  meal_type: string;
+  calories: number;
+  protein_grams: number | null;
+  carbs_grams: number | null;
+  fat_grams: number | null;
+  notes: string | null;
 }
 
 const FoodLog = () => {
@@ -53,6 +65,8 @@ const FoodLog = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [isSearching, setIsSearching] = useState(false);
+  const [savedMeals, setSavedMeals] = useState<SavedMeal[]>([]);
+  const [showSavedMeals, setShowSavedMeals] = useState(false);
 
   const mealTypes = [
     { value: "breakfast", label: "Breakfast" },
@@ -63,6 +77,7 @@ const FoodLog = () => {
 
   useEffect(() => {
     fetchMealLogs();
+    fetchSavedMeals();
   }, []);
 
   const fetchMealLogs = async () => {
@@ -105,6 +120,24 @@ const FoodLog = () => {
     acc[date].push(meal);
     return acc;
   }, {} as Record<string, MealLog[]>);
+
+  const fetchSavedMeals = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from('saved_meals')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('meal_name');
+
+      if (error) throw error;
+      setSavedMeals(data || []);
+    } catch (error) {
+      console.error('Error fetching saved meals:', error);
+    }
+  };
 
   const handleSearchFood = async () => {
     if (!searchQuery.trim()) return;
@@ -404,6 +437,91 @@ const FoodLog = () => {
     }
   };
 
+  const handleSaveAsMeal = async () => {
+    if (!nutritionData || !mealDescription.trim()) {
+      toast({
+        title: "Cannot save",
+        description: "Please analyze a meal first.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { error } = await supabase
+        .from('saved_meals')
+        .insert({
+          user_id: user.id,
+          meal_name: mealDescription.trim(),
+          meal_type: selectedMeal,
+          calories: nutritionData.calories,
+          protein_grams: nutritionData.protein,
+          carbs_grams: nutritionData.carbs,
+          fat_grams: nutritionData.fat,
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: "Meal saved!",
+        description: "You can now quickly log this meal in the future.",
+      });
+
+      fetchSavedMeals();
+    } catch (error) {
+      console.error('Error saving meal:', error);
+      toast({
+        title: "Error",
+        description: "Failed to save meal template.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleLoadSavedMeal = (meal: SavedMeal) => {
+    setMealDescription(meal.meal_name);
+    setSelectedMeal(meal.meal_type);
+    setNutritionData({
+      calories: meal.calories,
+      protein: meal.protein_grams || 0,
+      carbs: meal.carbs_grams || 0,
+      fat: meal.fat_grams || 0,
+    });
+    setShowSavedMeals(false);
+    toast({
+      title: "Meal loaded",
+      description: "Ready to log this saved meal.",
+    });
+  };
+
+  const handleDeleteSavedMeal = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from('saved_meals')
+        .delete()
+        .eq('id', id);
+
+      if (error) throw error;
+
+      toast({
+        title: "Saved meal deleted",
+        description: "The meal template has been removed.",
+      });
+
+      fetchSavedMeals();
+    } catch (error) {
+      console.error('Error deleting saved meal:', error);
+      toast({
+        title: "Error",
+        description: "Failed to delete saved meal.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="space-y-6 max-w-4xl">
       <div className="flex items-center gap-3">
@@ -623,9 +741,74 @@ const FoodLog = () => {
             )}
           </Button>
 
+          <div className="flex gap-2">
+            <Dialog open={showSavedMeals} onOpenChange={setShowSavedMeals}>
+              <DialogTrigger asChild>
+                <Button variant="outline" className="flex-1 gap-2">
+                  <Bookmark className="w-4 h-4" />
+                  Load Saved Meal ({savedMeals.length})
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle>Your Saved Meals</DialogTitle>
+                </DialogHeader>
+                {savedMeals.length === 0 ? (
+                  <p className="text-center text-muted-foreground py-8">
+                    No saved meals yet. Analyze a meal and click "Save as Template" to create one.
+                  </p>
+                ) : (
+                  <div className="space-y-2">
+                    {savedMeals.map((meal) => (
+                      <Card key={meal.id} className="p-4 hover:bg-accent/5 cursor-pointer" onClick={() => handleLoadSavedMeal(meal)}>
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <h5 className="font-medium">{meal.meal_name}</h5>
+                              <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">
+                                {mealTypes.find(m => m.value === meal.meal_type)?.label}
+                              </span>
+                            </div>
+                            <div className="flex gap-4 text-sm">
+                              <span className="text-accent font-medium">{meal.calories} cal</span>
+                              {meal.protein_grams && <span className="text-muted-foreground">P: {meal.protein_grams}g</span>}
+                              {meal.carbs_grams && <span className="text-muted-foreground">C: {meal.carbs_grams}g</span>}
+                              {meal.fat_grams && <span className="text-muted-foreground">F: {meal.fat_grams}g</span>}
+                            </div>
+                          </div>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDeleteSavedMeal(meal.id);
+                            }}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                )}
+              </DialogContent>
+            </Dialog>
+          </div>
+
           {nutritionData && (
             <Card className="p-4 bg-accent/10 border-accent">
-              <h4 className="font-semibold mb-3 text-accent">Estimated Nutrition</h4>
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="font-semibold text-accent">Estimated Nutrition</h4>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleSaveAsMeal}
+                  className="gap-2"
+                >
+                  <BookmarkCheck className="w-4 h-4" />
+                  Save as Template
+                </Button>
+              </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="text-center p-3 bg-background rounded-lg">
                   <p className="text-xs text-muted-foreground">Calories</p>
