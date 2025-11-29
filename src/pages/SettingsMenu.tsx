@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight, Heart, Crown } from "lucide-react";
+import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight, Heart, Crown, Gift } from "lucide-react";
 import { useSubscription } from "@/hooks/useSubscription";
 import { Badge } from "@/components/ui/badge";
 
@@ -18,6 +18,14 @@ const SettingsMenu = () => {
       iconColor: "text-primary",
       path: "/subscription",
       badge: tier !== 'free' ? tier : undefined,
+    },
+    {
+      title: "Referral Program",
+      description: "Share Wellio and earn rewards for referrals",
+      icon: Gift,
+      iconBg: "bg-purple-500/20",
+      iconColor: "text-purple-500",
+      path: "/referral",
     },
     {
       title: "Privacy & Security",
