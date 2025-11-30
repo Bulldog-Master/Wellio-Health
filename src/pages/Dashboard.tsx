@@ -1,4 +1,3 @@
-// Quick Actions with vibrant icon colors - Updated
 import { Activity, Flame, Target, TrendingUp, Droplets, Moon, Camera, Zap, HeartPulse, Users } from "lucide-react";
 import MetricCard from "@/components/MetricCard";
 import ActivityRings from "@/components/ActivityRings";
@@ -15,8 +14,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { useSubscription } from "@/hooks/useSubscription";
 import { UpgradePrompt } from "@/components/UpgradePrompt";
 import hero3d from "@/assets/hero-diverse.jpg";
+import { useTranslation } from "react-i18next";
 
 const Dashboard = () => {
+  const { t } = useTranslation(['common', 'fitness']);
   const navigate = useNavigate();
   const { tier } = useSubscription();
   const [currentWeight, setCurrentWeight] = useState(0);
@@ -104,7 +105,7 @@ const Dashboard = () => {
           <div className="flex items-center gap-2 mb-6 animate-float">
             <Zap className="w-5 h-5 text-white drop-shadow-glow" />
             <span className="text-xs md:text-sm font-semibold uppercase tracking-wider bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
-              Your Journey
+              {t('your_journey')}
             </span>
           </div>
           
@@ -115,14 +116,14 @@ const Dashboard = () => {
               <div className="flex flex-col pt-1">
                 <span className="text-4xl md:text-5xl font-black drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] leading-tight">ellio</span>
                 <div className="flex items-center gap-2">
-                  <span className="text-4xl md:text-5xl font-black drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] leading-tight">elcome back!</span>
+                  <span className="text-4xl md:text-5xl font-black drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] leading-tight">{t('welcome_back').replace('!', '')}</span>
                   <HeartPulse className="w-7 h-7 md:w-8 md:h-8 text-white drop-shadow-glow animate-pulse flex-shrink-0" />
                 </div>
               </div>
             </div>
           </div>
           <p className="text-lg md:text-xl text-white/95 mb-6 max-w-2xl drop-shadow-md">
-            Your fitness stats are looking great today. Keep pushing forward!
+            {t('stats_looking_great')}
           </p>
           <div className="flex gap-3 flex-wrap">
             <Button 
@@ -131,7 +132,7 @@ const Dashboard = () => {
               className="bg-white text-primary hover:bg-white/90 shadow-lg flex items-center gap-2"
             >
               <Zap className="w-5 h-5" />
-              Start Workout
+              {t('start_workout')}
             </Button>
             <Button 
               size="lg" 
@@ -140,7 +141,7 @@ const Dashboard = () => {
               className="border-2 border-white text-white hover:bg-white/20 backdrop-blur-sm flex items-center gap-2"
             >
               <Flame className="w-5 h-5" />
-              Log Meal
+              {t('log_meal')}
             </Button>
           </div>
         </div>
@@ -148,7 +149,7 @@ const Dashboard = () => {
 
       {/* Upgrade Prompt for Free Users */}
       {tier === 'free' && (
-        <UpgradePrompt compact feature="advanced features" />
+        <UpgradePrompt compact feature={t('unlock_advanced_features')} />
       )}
 
       {/* Dashboard Mini-Charts */}
@@ -157,7 +158,7 @@ const Dashboard = () => {
       {/* Activity Rings - Compact with glassmorphism */}
       <Card className="p-6 hover:shadow-xl transition-all duration-300">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold">Today's Activity</h3>
+          <h3 className="text-lg font-semibold">{t('todays_activity')}</h3>
           <div className="p-2 bg-primary/10 rounded-xl">
             <Activity className="w-5 h-5 text-primary" />
           </div>
@@ -168,9 +169,9 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <div className="card-hover">
           <MetricCard
-            title="Calories Today"
+            title={t('calories_today')}
             value={caloriesConsumed}
-            subtitle={`${caloriesTarget - caloriesConsumed} left`}
+            subtitle={`${caloriesTarget - caloriesConsumed} ${t('left')}`}
             icon={Flame}
             trend="neutral"
             variant="primary"
@@ -178,12 +179,12 @@ const Dashboard = () => {
         </div>
         <div className="card-hover">
           <MetricCard
-            title="Target Weight"
-            value={targetWeight ? `${targetWeight} lbs (${lbsToKg(targetWeight)} kg)` : 'Set Goal'}
+            title={t('fitness:target_weight')}
+            value={targetWeight ? `${targetWeight} lbs (${lbsToKg(targetWeight)} kg)` : t('set_goal')}
             subtitle={
               targetWeight && currentWeight 
-                ? `${weightDifference.toFixed(1)} lbs (${lbsToKg(weightDifference)} kg) to go`
-                : 'No target set'
+                ? `${weightDifference.toFixed(1)} lbs (${lbsToKg(weightDifference)} kg) ${t('to_go')}`
+                : t('no_target_set')
             }
             icon={Target}
             trend="neutral"
@@ -191,9 +192,9 @@ const Dashboard = () => {
         </div>
         <div className="card-hover">
           <MetricCard
-            title="Weekly Progress"
+            title={t('weekly_progress')}
             value="+5%"
-            subtitle="On track"
+            subtitle={t('on_track')}
             icon={TrendingUp}
             trend="up"
             variant="accent"

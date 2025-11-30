@@ -38,5 +38,21 @@
   "copy": "Copiar",
   "copied": "Copiado!",
   "language": "Idioma",
-  "select_language": "Selecionar Idioma"
+  "select_language": "Selecionar Idioma",
+  "your_journey": "Sua Jornada",
+  "welcome_back": "Bem-vindo de volta!",
+  "stats_looking_great": "Suas estatísticas fitness estão ótimas hoje. Continue avançando!",
+  "start_workout": "Começar Treino",
+  "log_meal": "Registrar Refeição",
+  "todays_activity": "Atividade de Hoje",
+  "calories_today": "Calorias Hoje",
+  "left": "restantes",
+  "to_go": "faltam",
+  "weekly_progress": "Progresso Semanal",
+  "on_track": "No caminho certo",
+  "set_goal": "Definir Meta",
+  "no_target_set": "Nenhuma meta definida",
+  "upgrade_to_pro": "Atualizar para Pro",
+  "unlock_advanced_features": "Desbloquear recursos avançados",
+  "upgrade": "Atualizar"
 }

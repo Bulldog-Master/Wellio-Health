@@ -38,5 +38,21 @@
   "copy": "复制",
   "copied": "已复制!",
   "language": "语言",
-  "select_language": "选择语言"
+  "select_language": "选择语言",
+  "your_journey": "您的旅程",
+  "welcome_back": "欢迎回来！",
+  "stats_looking_great": "您的健身数据今天看起来很棒。继续前进！",
+  "start_workout": "开始锻炼",
+  "log_meal": "记录饮食",
+  "todays_activity": "今日活动",
+  "calories_today": "今日卡路里",
+  "left": "剩余",
+  "to_go": "还需",
+  "weekly_progress": "每周进度",
+  "on_track": "正常进行中",
+  "set_goal": "设置目标",
+  "no_target_set": "未设置目标",
+  "upgrade_to_pro": "升级到专业版",
+  "unlock_advanced_features": "解锁高级功能",
+  "upgrade": "升级"
 }
