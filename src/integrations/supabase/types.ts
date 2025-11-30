@@ -2686,6 +2686,36 @@ export type Database = {
         }
         Relationships: []
       }
+      security_logs: {
+        Row: {
+          created_at: string
+          event_data: Json | null
+          event_type: string
+          id: string
+          ip_address: string | null
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          event_data?: Json | null
+          event_type: string
+          id?: string
+          ip_address?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          event_data?: Json | null
+          event_type?: string
+          id?: string
+          ip_address?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       session_messages: {
         Row: {
           created_at: string
@@ -3521,6 +3551,7 @@ export type Database = {
         Args: { _points: number; _user_id: string }
         Returns: undefined
       }
+      cleanup_old_security_logs: { Args: never; Returns: undefined }
       create_booking: {
         Args: {
           _booking_type: string

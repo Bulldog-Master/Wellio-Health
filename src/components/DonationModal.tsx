@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { Heart } from 'lucide-react';
+import { rateLimiter, RATE_LIMITS } from '@/lib/rateLimit';
 
 interface DonationModalProps {
   fundraiserId: string;
@@ -39,10 +40,18 @@ export const DonationModal = ({
       return;
     }
 
+    // Rate limiting for donations
+    const { data: { user } } = await supabase.auth.getUser();
+    const rateLimitKey = `donation:${user?.id || 'anonymous'}`;
+    const rateLimit = await rateLimiter.check(rateLimitKey, RATE_LIMITS.DONATION);
+
+    if (!rateLimit.allowed) {
+      toast.error(`Please wait ${Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 60000)} minutes before making another donation`);
+      return;
+    }
+
     setIsSubmitting(true);
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      
       const { error } = await supabase
         .from('fundraiser_donations')
         .insert({
@@ -54,6 +63,9 @@ export const DonationModal = ({
         });
 
       if (error) throw error;
+
+      // Success - reset rate limit
+      rateLimiter.reset(rateLimitKey);
 
       toast.success('Thank you for your generous donation!');
       onSuccess();
