@@ -708,22 +708,21 @@ const FoodLog = () => {
 
           <div>
             <Label>{t('food:or_upload_photo')}</Label>
-            <div className="flex gap-2 mt-1.5">
-              <Input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="flex-1"
-              />
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => fileInputRef.current?.click()}
-              >
-                <Camera className="w-4 h-4" />
-              </Button>
-            </div>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="hidden"
+            />
+            <Button
+              variant="outline"
+              onClick={() => fileInputRef.current?.click()}
+              className="w-full mt-1.5 gap-2"
+            >
+              <Camera className="w-4 h-4" />
+              {imagePreview ? t('food:choose_file') : t('food:choose_file')}
+            </Button>
             {imagePreview && (
               <div className="space-y-2 mt-2">
                 <div className="relative">
