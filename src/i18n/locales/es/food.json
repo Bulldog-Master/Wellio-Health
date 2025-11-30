@@ -183,5 +183,24 @@
   "category_keto": "🥑 Keto",
   "category_high_protein": "💪 Alta Proteína",
   "category_mediterranean": "🐟 Mediterráneo",
-  "category_dairy": "🧀 Lácteos"
+  "category_dairy": "🧀 Lácteos",
+  
+  "back_to_dashboard": "Volver al Panel",
+  "track_daily_hydration": "Rastrea tu hidratación diaria",
+  "todays_progress": "Progreso de Hoy",
+  "daily_goal_achieved": "🎉 ¡Objetivo diario alcanzado!",
+  "ml_remaining": "ml restantes",
+  "this_week": "Esta Semana",
+  "this_month": "Este Mes",
+  "this_year": "Este Año",
+  "annual_summary": "Resumen Anual",
+  "quick_add": "Agregar Rápido",
+  "history": "Historial",
+  "no_water_logged": "Aún no hay agua registrada. ¡Comienza a rastrear tu hidratación!",
+  "total": "Total",
+  "added_water": "Agregado {{amount}}ml de agua",
+  "failed_load_water": "Error al cargar datos de consumo de agua",
+  "failed_log_water": "Error al registrar consumo de agua",
+  "water_log_deleted": "Registro de agua eliminado",
+  "failed_delete_water": "Error al eliminar registro de agua"
 }
