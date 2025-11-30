@@ -21,8 +21,10 @@ const Layout = ({ children }: LayoutProps) => {
       <div className="flex flex-col md:flex-row max-w-7xl mx-auto">
         <aside className="hidden md:block md:w-64 md:border-r-2 md:border-sidebar-border md:min-h-screen bg-sidebar/95 backdrop-blur-sm shadow-lg">
           <div className="sticky top-0 p-6">
-            <div className="flex justify-end mb-6">
-              <LanguageSwitcher />
+            <div className="block mb-6">
+              <div className="flex justify-end">
+                <LanguageSwitcher />
+              </div>
             </div>
             
             <div className="flex items-center justify-between pb-4 border-b-2 border-sidebar-border">
