@@ -16,11 +16,13 @@ import { generateDeviceFingerprint, getDeviceName, getStoredFingerprint, storeFi
 import { Checkbox } from "@/components/ui/checkbox";
 import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
 import { Badge } from "@/components/ui/badge";
+import { useTranslation } from "react-i18next";
 
 const emailSchema = z.string().email("Invalid email address");
 const passwordSchema = z.string().min(6, "Password must be at least 6 characters");
 
 const Auth = () => {
+  const { t } = useTranslation('auth');
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -65,8 +67,8 @@ const Auth = () => {
       setIsLogin(true);
       setAuthMethod('password');
       toast({
-        title: "Reset Your Password",
-        description: "Please enter your new password below.",
+        title: t('reset_password_title'),
+        description: t('enter_new_password'),
       });
     }
     
@@ -78,8 +80,8 @@ const Auth = () => {
       setHasReferralCode(true);
       setIsLogin(false); // Switch to signup
       toast({
-        title: "🎉 Welcome!",
-        description: "You've been referred by a friend. Sign up to get bonus points!",
+        title: t('referral_welcome'),
+        description: t('referral_bonus'),
       });
     }
     
@@ -744,7 +746,7 @@ const Auth = () => {
       <div className="relative lg:block">
         <img 
           src={authHero} 
-          alt="Fitness inspiration" 
+          alt={t('fitness_inspiration')}
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/80 via-secondary/70 to-accent/60" />
@@ -753,21 +755,21 @@ const Auth = () => {
             <div className="flex items-center gap-2 mb-3 md:mb-4 animate-float">
               <Zap className="w-5 h-5 md:w-6 md:h-6 text-white drop-shadow-glow" />
               <span className="text-xs md:text-sm font-semibold uppercase tracking-wider bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
-                Your Journey
+                {t('your_journey')}
               </span>
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-2 md:mb-3 drop-shadow-[0_0_30px_rgba(255,255,255,0.5)] tracking-tight">
-              Wellio
+              {t('app_name')}
             </h1>
           </div>
           <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
             <HeartPulse className="w-6 h-6 md:w-8 md:h-8 text-white drop-shadow-glow" />
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold drop-shadow-lg">
-              Welcome back!
+              {t('welcome_back')}
             </h2>
           </div>
           <p className="text-base md:text-lg text-white/95 max-w-md drop-shadow-md">
-            Your fitness stats are looking great today. Keep pushing forward!
+            {t('hero_message')}
           </p>
         </div>
       </div>
@@ -780,26 +782,26 @@ const Auth = () => {
               <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center">
                 <Activity className="w-6 h-6 text-primary-foreground" />
               </div>
-              <h1 className="text-2xl font-bold text-foreground">Wellio</h1>
+              <h1 className="text-2xl font-bold text-foreground">{t('app_name')}</h1>
             </div>
             <h2 className="text-3xl font-bold text-foreground mb-2">
               {requires2FA 
-                ? "Verify Your Identity"
+                ? t('verify_identity')
                 : isResettingPassword
-                  ? "Reset Your Password"
+                  ? t('reset_password_title')
                   : isLogin 
-                    ? "Welcome back" 
-                    : "Get started today"
+                    ? t('welcome_back')
+                    : t('get_started')
               }
             </h2>
             <p className="text-muted-foreground">
               {requires2FA 
-                ? "Enter your authentication code to continue"
+                ? t('enter_auth_code')
                 : isResettingPassword
-                  ? "Enter your new password below"
+                  ? t('enter_new_password')
                   : isLogin 
-                    ? "Sign in to continue your fitness journey" 
-                    : "Create your account and start achieving your goals"
+                    ? t('sign_in_message')
+                    : t('sign_up_message')
               }
             </p>
           </div>
@@ -814,15 +816,15 @@ const Auth = () => {
                   </div>
                   <div className="flex-1">
                     <h3 className="font-semibold text-sm flex items-center gap-2">
-                      {hasReferralCode ? "🎉 Bonus Points!" : "Welcome Rewards"}
+                      {hasReferralCode ? t('bonus_points') : t('signup_rewards')}
                       <Badge variant="secondary" className="text-xs">
                         {hasReferralCode ? "75 pts" : "25 pts"}
                       </Badge>
                     </h3>
                     <p className="text-xs text-muted-foreground mt-0.5">
                       {hasReferralCode 
-                        ? "You'll get 25 welcome points + 50 bonus points from your friend!"
-                        : "Start earning rewards - Get 25 points just for signing up"
+                        ? t('signup_points_desc')
+                        : t('signup_base_desc')
                       }
                     </p>
                   </div>
@@ -832,13 +834,13 @@ const Auth = () => {
                   <div className="p-2 rounded bg-background/50 text-center">
                     <div className="font-semibold flex items-center justify-center gap-1">
                       <Users className="w-3 h-3" />
-                      Share & Earn
+                      {t('share_earn')}
                     </div>
-                    <div className="text-muted-foreground mt-1">150 pts per friend</div>
+                    <div className="text-muted-foreground mt-1">150 pts {t('per_friend')}</div>
                   </div>
                   <div className="p-2 rounded bg-background/50 text-center">
-                    <div className="font-semibold">Redeem Rewards</div>
-                    <div className="text-muted-foreground mt-1">500 pts = 1 Month Pro</div>
+                    <div className="font-semibold">{t('redeem_rewards')}</div>
+                    <div className="text-muted-foreground mt-1">500 pts = 1 {t('month_pro')}</div>
                   </div>
                 </div>
               </div>
