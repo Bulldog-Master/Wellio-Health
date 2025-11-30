@@ -24,6 +24,19 @@ export const ActivityTimeline = () => {
   const [events, setEvents] = useState<TimelineEvent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const getTypeTranslation = (type: string) => {
+    const translations: Record<string, string> = {
+      'weight': t('weight'),
+      'nutrition': t('nutrition'),
+      'workout': t('workout'),
+      'steps': t('steps'),
+      'habit': t('habit'),
+      'achievement': t('achievement'),
+      'challenge': t('challenge')
+    };
+    return translations[type] || type;
+  };
+
   useEffect(() => {
     fetchTimelineEvents();
   }, []);
@@ -250,7 +263,7 @@ export const ActivityTimeline = () => {
                     <p className="text-sm text-muted-foreground">{event.description}</p>
                   </div>
                   <Badge variant="secondary" className="shrink-0">
-                    {t(event.type)}
+                    {getTypeTranslation(event.type)}
                   </Badge>
                 </div>
                 <p className="text-xs text-muted-foreground">
