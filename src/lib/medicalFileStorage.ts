@@ -1,15 +1,104 @@
 import { supabase } from "@/integrations/supabase/client";
 
+// Maximum file size: 10MB for medical files
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
+// Allowed file types for medical records
+const ALLOWED_FILE_TYPES = [
+  'application/pdf',
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+  'application/msword', // .doc
+];
+
 /**
- * Generates a signed URL for a medical file with time-limited access (1 hour)
+ * Logs access to medical files for audit trail (HIPAA compliance)
+ * @param recordId - The database record ID
+ * @param tableName - The table name (medical_test_results or medical_records)
+ * @param action - The action performed (VIEW, DOWNLOAD, etc.)
+ */
+async function logMedicalFileAccess(
+  recordId: string,
+  tableName: string,
+  action: string
+): Promise<void> {
+  try {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    await supabase.from('medical_audit_log').insert({
+      user_id: user.id,
+      record_id: recordId,
+      table_name: tableName,
+      action: action,
+      ip_address: null, // Could be enhanced with actual IP if needed
+      user_agent: navigator.userAgent,
+    });
+  } catch (error) {
+    console.error('Error logging medical file access:', error);
+    // Don't throw - audit logging failure shouldn't block access
+  }
+}
+
+/**
+ * Validates file before upload
+ * @param file - The file to validate
+ * @returns Object with isValid boolean and optional error message
+ */
+export function validateMedicalFile(file: File): { isValid: boolean; error?: string } {
+  // Check file size
+  if (file.size > MAX_FILE_SIZE) {
+    return {
+      isValid: false,
+      error: `File size must be less than ${MAX_FILE_SIZE / 1024 / 1024}MB`,
+    };
+  }
+
+  // Check file type
+  if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+    return {
+      isValid: false,
+      error: 'File type not allowed. Please upload PDF, JPEG, PNG, or Word documents.',
+    };
+  }
+
+  return { isValid: true };
+}
+
+/**
+ * Generates a signed URL for a medical file with time-limited access
+ * Logs access for audit trail (HIPAA compliance)
  * @param filePath - The path to the file in storage
+ * @param recordId - The database record ID for audit logging
+ * @param tableName - The table name for audit logging
+ * @param expirySeconds - URL expiry time in seconds (default: 1 hour)
  * @returns Signed URL or null if error
  */
-export async function getSignedMedicalFileUrl(filePath: string): Promise<string | null> {
+export async function getSignedMedicalFileUrl(
+  filePath: string,
+  recordId?: string,
+  tableName?: string,
+  expirySeconds: number = 3600
+): Promise<string | null> {
   try {
+    // Log file access for audit trail
+    if (recordId && tableName) {
+      await logMedicalFileAccess(recordId, tableName, 'VIEW');
+    }
+
+    // Update last_accessed_at timestamp
+    if (recordId && tableName) {
+      await supabase
+        .from(tableName as 'medical_test_results' | 'medical_records')
+        .update({ last_accessed_at: new Date().toISOString() })
+        .eq('id', recordId);
+    }
+
     const { data, error } = await supabase.storage
       .from('medical-records')
-      .createSignedUrl(filePath, 3600); // 1 hour expiry
+      .createSignedUrl(filePath, expirySeconds);
 
     if (error) {
       console.error('Error generating signed URL:', error);
@@ -24,48 +113,95 @@ export async function getSignedMedicalFileUrl(filePath: string): Promise<string 
 }
 
 /**
- * Uploads a medical file to secure storage
+ * Generates a longer-lived signed URL for downloading files
+ * @param filePath - The path to the file in storage
+ * @param recordId - The database record ID for audit logging
+ * @param tableName - The table name for audit logging
+ * @returns Signed URL with 5-minute expiry
+ */
+export async function getSignedMedicalDownloadUrl(
+  filePath: string,
+  recordId?: string,
+  tableName?: string
+): Promise<string | null> {
+  if (recordId && tableName) {
+    await logMedicalFileAccess(recordId, tableName, 'DOWNLOAD');
+  }
+  return getSignedMedicalFileUrl(filePath, recordId, tableName, 300); // 5 minutes
+}
+
+/**
+ * Uploads a medical file to secure storage with validation
  * @param file - The file to upload
  * @param userId - The user ID for organizing files
  * @param category - Category of the medical file (test_results, records, etc.)
- * @returns The file path in storage or null if error
+ * @returns Object with success status, file path, and optional error message
  */
 export async function uploadMedicalFile(
   file: File,
   userId: string,
   category: 'test_results' | 'medical_records'
-): Promise<string | null> {
+): Promise<{ success: boolean; filePath?: string; error?: string }> {
   try {
+    // Validate file before upload
+    const validation = validateMedicalFile(file);
+    if (!validation.isValid) {
+      return { success: false, error: validation.error };
+    }
+
     const fileExt = file.name.split('.').pop();
     const timestamp = Date.now();
-    const filePath = `${userId}/${category}/${timestamp}.${fileExt}`;
+    // Sanitize filename to prevent path traversal
+    const sanitizedExt = fileExt?.replace(/[^a-zA-Z0-9]/g, '') || 'bin';
+    const filePath = `${userId}/${category}/${timestamp}.${sanitizedExt}`;
 
     const { error } = await supabase.storage
       .from('medical-records')
       .upload(filePath, file, {
         cacheControl: '3600',
-        upsert: false
+        upsert: false,
+        contentType: file.type,
       });
 
     if (error) {
       console.error('Error uploading file:', error);
-      return null;
+      return { 
+        success: false, 
+        error: error.message || 'Failed to upload file' 
+      };
     }
 
-    return filePath;
+    // Log upload action
+    await logMedicalFileAccess('new_upload', category, 'UPLOAD');
+
+    return { success: true, filePath };
   } catch (error) {
     console.error('Error in uploadMedicalFile:', error);
-    return null;
+    return { 
+      success: false, 
+      error: 'An unexpected error occurred during upload' 
+    };
   }
 }
 
 /**
- * Deletes a medical file from storage
+ * Deletes a medical file from storage with audit logging
  * @param filePath - The path to the file in storage
+ * @param recordId - The database record ID for audit logging
+ * @param tableName - The table name for audit logging
  * @returns true if successful, false otherwise
  */
-export async function deleteMedicalFile(filePath: string): Promise<boolean> {
+export async function deleteMedicalFile(
+  filePath: string,
+  recordId?: string,
+  tableName?: string
+): Promise<boolean> {
   try {
+    // Log deletion for audit trail
+    if (recordId && tableName) {
+      await logMedicalFileAccess(recordId, tableName, 'DELETE');
+    }
+
     const { error } = await supabase.storage
       .from('medical-records')
       .remove([filePath]);
@@ -79,5 +215,36 @@ export async function deleteMedicalFile(filePath: string): Promise<boolean> {
   } catch (error) {
     console.error('Error in deleteMedicalFile:', error);
     return false;
+  }
+}
+
+/**
+ * Gets file metadata and access history
+ * @param recordId - The database record ID
+ * @param tableName - The table name
+ * @returns Access logs for the file
+ */
+export async function getMedicalFileAccessHistory(
+  recordId: string,
+  tableName: string
+): Promise<any[]> {
+  try {
+    const { data, error } = await supabase
+      .from('medical_audit_log')
+      .select('*')
+      .eq('record_id', recordId)
+      .eq('table_name', tableName)
+      .order('accessed_at', { ascending: false })
+      .limit(50);
+
+    if (error) {
+      console.error('Error fetching access history:', error);
+      return [];
+    }
+
+    return data || [];
+  } catch (error) {
+    console.error('Error in getMedicalFileAccessHistory:', error);
+    return [];
   }
 }

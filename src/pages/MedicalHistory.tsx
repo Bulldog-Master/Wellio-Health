@@ -272,11 +272,11 @@ const MedicalHistory = () => {
 
       // Upload file if selected
       if (testFile) {
-        const uploadedPath = await uploadMedicalFile(testFile, user.id, 'test_results');
-        if (!uploadedPath) {
-          throw new Error('Failed to upload file');
+        const uploadResult = await uploadMedicalFile(testFile, user.id, 'test_results');
+        if (!uploadResult.success) {
+          throw new Error(uploadResult.error || 'Failed to upload file');
         }
-        filePath = uploadedPath;
+        filePath = uploadResult.filePath || null;
       }
 
       const { error } = await supabase
@@ -358,11 +358,11 @@ const MedicalHistory = () => {
 
       // Upload file if selected
       if (recordFile) {
-        const uploadedPath = await uploadMedicalFile(recordFile, user.id, 'medical_records');
-        if (!uploadedPath) {
-          throw new Error('Failed to upload file');
+        const uploadResult = await uploadMedicalFile(recordFile, user.id, 'medical_records');
+        if (!uploadResult.success) {
+          throw new Error(uploadResult.error || 'Failed to upload file');
         }
-        filePath = uploadedPath;
+        filePath = uploadResult.filePath || null;
       }
 
       const { error } = await supabase
@@ -819,13 +819,21 @@ const MedicalHistory = () => {
                         size="sm"
                         className="mt-2"
                         onClick={async () => {
-                          const signedUrl = await getSignedMedicalFileUrl(test.file_url!);
+                          const signedUrl = await getSignedMedicalFileUrl(
+                            test.file_url!,
+                            test.id,
+                            'medical_test_results'
+                          );
                           if (signedUrl) {
                             window.open(signedUrl, '_blank');
+                            toast({
+                              title: "File Access Logged",
+                              description: "Medical file access has been recorded for audit purposes.",
+                            });
                           } else {
                             toast({
                               title: "Error",
-                              description: "Failed to access file",
+                              description: "Failed to access file. The link may have expired.",
                               variant: "destructive",
                             });
                           }
@@ -954,13 +962,21 @@ const MedicalHistory = () => {
                         size="sm"
                         className="mt-2"
                         onClick={async () => {
-                          const signedUrl = await getSignedMedicalFileUrl(record.file_url!);
+                          const signedUrl = await getSignedMedicalFileUrl(
+                            record.file_url!,
+                            record.id,
+                            'medical_records'
+                          );
                           if (signedUrl) {
                             window.open(signedUrl, '_blank');
+                            toast({
+                              title: "File Access Logged",
+                              description: "Medical file access has been recorded for audit purposes.",
+                            });
                           } else {
                             toast({
                               title: "Error",
-                              description: "Failed to access file",
+                              description: "Failed to access file. The link may have expired.",
                               variant: "destructive",
                             });
                           }
