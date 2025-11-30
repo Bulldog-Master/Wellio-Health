@@ -26,7 +26,25 @@ interface Recipe {
 const Recipes = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { t } = useTranslation('food');
+  const { t, i18n } = useTranslation('food');
+  
+  // Direct translation map that doesn't rely on i18n loading
+  const getCategoryDisplay = (category: string): string => {
+    const isSpanish = i18n.language === 'es' || i18n.language.startsWith('es');
+    
+    if (!isSpanish) return category;
+    
+    // Direct Spanish translations
+    const spanishMap: Record<string, string> = {
+      "🌱 Vegan": "🌱 Vegano",
+      "🥑 Keto": "🥑 Keto",
+      "💪 High Protein": "💪 Alta Proteína",
+      "🐟 Mediterranean": "🐟 Mediterráneo",
+      "🧀 Dairy": "🧀 Lácteos"
+    };
+    
+    return spanishMap[category] || category;
+  };
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -346,12 +364,7 @@ const Recipes = () => {
                     <SelectContent>
                       {categories.map((cat) => (
                         <SelectItem key={cat} value={cat}>
-                          {cat === "🌱 Vegan" ? t('category_vegan') :
-                           cat === "🥑 Keto" ? t('category_keto') :
-                           cat === "💪 High Protein" ? t('category_high_protein') :
-                           cat === "🐟 Mediterranean" ? t('category_mediterranean') :
-                           cat === "🧀 Dairy" ? t('category_dairy') :
-                           cat}
+                          {getCategoryDisplay(cat)}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -448,14 +461,7 @@ const Recipes = () => {
                     onClick={() => toggleCategory(category)}
                     className="w-full flex items-center justify-between p-4 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors"
                   >
-                    <span className="font-medium">
-                      {category === "🌱 Vegan" ? t('category_vegan') :
-                       category === "🥑 Keto" ? t('category_keto') :
-                       category === "💪 High Protein" ? t('category_high_protein') :
-                       category === "🐟 Mediterranean" ? t('category_mediterranean') :
-                       category === "🧀 Dairy" ? t('category_dairy') :
-                       category}
-                    </span>
+                    <span className="font-medium">{getCategoryDisplay(category)}</span>
                     <div className="flex items-center gap-2">
                       <span className="text-sm text-muted-foreground">
                         {categoryRecipes.length} {categoryRecipes.length === 1 ? t('recipe_count_single') : t('recipe_count_plural')}
