@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useSubscription } from "@/hooks/useSubscription";
 import { Badge } from "@/components/ui/badge";
 import { profileUpdateSchema, validateAndSanitize } from "@/lib/validationSchemas";
+import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
 
 const Profile = () => {
   const { toast } = useToast();
@@ -134,6 +135,20 @@ const Profile = () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
+
+      // Rate limiting for profile updates
+      const rateLimitKey = `profile:${user.id}`;
+      const rateLimit = await rateLimiter.check(rateLimitKey, RATE_LIMITS.PROFILE_UPDATE);
+
+      if (!rateLimit.allowed) {
+        toast({
+          title: "Too Many Updates",
+          description: `Please wait ${Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 60000)} minutes before updating again.`,
+          variant: "destructive",
+        });
+        setIsLoading(false);
+        return;
+      }
 
       // Validate profile data
       const validation = validateAndSanitize(profileUpdateSchema, {
