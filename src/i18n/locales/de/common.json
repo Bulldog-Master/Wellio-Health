@@ -54,5 +54,11 @@
   "no_target_set": "Kein Ziel festgelegt",
   "upgrade_to_pro": "Auf Pro Upgraden",
   "unlock_advanced_features": "Erweiterte Funktionen freischalten",
-  "upgrade": "Upgraden"
+  "upgrade": "Upgraden",
+  "nav": {
+    "feed": "Feed",
+    "workout": "Training",
+    "nutrition": "Ernährung",
+    "social": "Sozial"
+  }
 }

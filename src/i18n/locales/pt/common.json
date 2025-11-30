@@ -54,5 +54,11 @@
   "no_target_set": "Nenhuma meta definida",
   "upgrade_to_pro": "Atualizar para Pro",
   "unlock_advanced_features": "Desbloquear recursos avançados",
-  "upgrade": "Atualizar"
+  "upgrade": "Atualizar",
+  "nav": {
+    "feed": "Feed",
+    "workout": "Treino",
+    "nutrition": "Nutrição",
+    "social": "Social"
+  }
 }

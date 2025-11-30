@@ -54,5 +54,11 @@
   "no_target_set": "No target set",
   "upgrade_to_pro": "Upgrade to Pro",
   "unlock_advanced_features": "Unlock advanced features",
-  "upgrade": "Upgrade"
+  "upgrade": "Upgrade",
+  "nav": {
+    "feed": "Feed",
+    "workout": "Workout",
+    "nutrition": "Nutrition",
+    "social": "Social"
+  }
 }

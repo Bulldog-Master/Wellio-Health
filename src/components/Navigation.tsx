@@ -3,8 +3,10 @@ import { NavLink } from "./NavLink";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useTranslation } from "react-i18next";
 
 const Navigation = () => {
+  const { t } = useTranslation('common');
   const [showRewardsBadge, setShowRewardsBadge] = useState(false);
 
   useEffect(() => {
@@ -34,12 +36,12 @@ const Navigation = () => {
   };
 
   const navItems = [
-    { to: "/", icon: Home, label: "Dashboard", color: "text-[hsl(var(--nav-icon-1))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-1))]" },
-    { to: "/feed", icon: MessageSquare, label: "Feed", color: "text-[hsl(var(--nav-icon-2))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-2))]" },
-    { to: "/workout", icon: Dumbbell, label: "Workout", color: "text-[hsl(var(--nav-icon-4))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-4))]" },
-    { to: "/food", icon: Utensils, label: "Nutrition", color: "text-[hsl(var(--nav-icon-5))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-5))]" },
-    { to: "/socials", icon: Users, label: "Social", color: "text-[hsl(var(--nav-icon-7))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-7))]" },
-    { to: "/settings", icon: Settings, label: "Settings", color: "text-[hsl(var(--nav-icon-6))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-6))]", showBadge: showRewardsBadge },
+    { to: "/", icon: Home, label: t('dashboard'), color: "text-[hsl(var(--nav-icon-1))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-1))]" },
+    { to: "/feed", icon: MessageSquare, label: t('nav.feed'), color: "text-[hsl(var(--nav-icon-2))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-2))]" },
+    { to: "/workout", icon: Dumbbell, label: t('nav.workout'), color: "text-[hsl(var(--nav-icon-4))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-4))]" },
+    { to: "/food", icon: Utensils, label: t('nav.nutrition'), color: "text-[hsl(var(--nav-icon-5))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-5))]" },
+    { to: "/socials", icon: Users, label: t('nav.social'), color: "text-[hsl(var(--nav-icon-7))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-7))]" },
+    { to: "/settings", icon: Settings, label: t('settings'), color: "text-[hsl(var(--nav-icon-6))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-6))]", showBadge: showRewardsBadge },
   ];
 
   return (

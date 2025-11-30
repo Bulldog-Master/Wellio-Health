@@ -54,5 +54,11 @@
   "no_target_set": "Aucun objectif défini",
   "upgrade_to_pro": "Passer à Pro",
   "unlock_advanced_features": "Débloquer les fonctionnalités avancées",
-  "upgrade": "Mettre à Niveau"
+  "upgrade": "Mettre à Niveau",
+  "nav": {
+    "feed": "Fil",
+    "workout": "Entraînement",
+    "nutrition": "Nutrition",
+    "social": "Social"
+  }
 }
