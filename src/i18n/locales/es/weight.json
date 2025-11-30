@@ -3,6 +3,7 @@
   "weight_tracking": "Seguimiento de Peso",
   "monitor_changes": "Monitorea tus cambios de peso diarios",
   "current_weight": "Peso Actual",
+  "latest_reading": "Última lectura",
   "latest_recorded": "Último peso registrado",
   "no_data": "Sin datos",
   "total_logs": "Registros Totales",
