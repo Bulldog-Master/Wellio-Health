@@ -667,6 +667,10 @@ const Weight = () => {
                 dataKey="date" 
                 className="text-xs"
                 tick={{ fill: 'hsl(var(--foreground))' }}
+                tickFormatter={(value) => {
+                  const date = new Date(value);
+                  return format(date, "MMM d", { locale: i18n.language === 'es' ? es : undefined });
+                }}
               />
               <YAxis 
                 domain={getYAxisDomain()}
