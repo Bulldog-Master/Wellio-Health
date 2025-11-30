@@ -10,7 +10,7 @@ Object.keys(localStorage).forEach(key => {
 });
 
 // Clear i18n cache to force fresh translations load (increment version when translations update)
-const I18N_VERSION = '2.0.0-water-intake';
+const I18N_VERSION = '2.0.1-sleep-tracking';
 const cachedVersion = localStorage.getItem('i18n_version');
 if (cachedVersion !== I18N_VERSION) {
   // Clear all i18n related localStorage

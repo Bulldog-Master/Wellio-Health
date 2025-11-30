@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Moon, ArrowLeft, TrendingUp, Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { format, subDays, startOfWeek, endOfWeek } from "date-fns";
+import { useTranslation } from "react-i18next";
 
 interface SleepData {
   id: string;
@@ -16,6 +17,7 @@ interface SleepData {
 
 const SleepTracking = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation('common');
   const [sleepData, setSleepData] = useState<SleepData[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -76,7 +78,7 @@ const SleepTracking = () => {
   const lastNight = getLastNight();
 
   if (loading) {
-    return <div className="p-6">Loading...</div>;
+    return <div className="p-6">{t('sleep.loading')}</div>;
   }
 
   return (
@@ -88,7 +90,7 @@ const SleepTracking = () => {
         className="gap-2 mb-2"
       >
         <ArrowLeft className="w-4 h-4" />
-        Back to Dashboard
+        {t('backToDashboard')}
       </Button>
 
       <div className="flex items-center gap-3 mb-2">
@@ -96,8 +98,8 @@ const SleepTracking = () => {
           <Moon className="w-6 h-6 text-primary" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold">Sleep Tracking</h1>
-          <p className="text-muted-foreground mt-1">Monitor your sleep patterns</p>
+          <h1 className="text-3xl font-bold">{t('sleep.title')}</h1>
+          <p className="text-muted-foreground mt-1">{t('sleep.subtitle')}</p>
         </div>
       </div>
 
@@ -106,7 +108,7 @@ const SleepTracking = () => {
         <Card className="p-6 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center gap-3 mb-2">
             <Moon className="w-5 h-5 text-primary" />
-            <h3 className="font-semibold">Last Night</h3>
+            <h3 className="font-semibold">{t('sleep.lastNight')}</h3>
           </div>
           {lastNight ? (
             <>
@@ -116,7 +118,7 @@ const SleepTracking = () => {
               </p>
             </>
           ) : (
-            <p className="text-muted-foreground">No data</p>
+            <p className="text-muted-foreground">{t('sleep.noData')}</p>
           )}
         </Card>
 
@@ -125,10 +127,10 @@ const SleepTracking = () => {
             <div className="p-2 bg-primary/10 rounded-xl">
               <Calendar className="w-5 h-5 text-primary" />
             </div>
-            <h3 className="font-semibold">Weekly Average</h3>
+            <h3 className="font-semibold">{t('sleep.weeklyAverage')}</h3>
           </div>
           <p className="text-3xl font-bold">{getWeeklyAverage()}h</p>
-          <p className="text-sm text-muted-foreground">Last 7 days</p>
+          <p className="text-sm text-muted-foreground">{t('sleep.last7Days')}</p>
         </Card>
 
         <Card className="p-6 hover:shadow-xl transition-all duration-300">
@@ -136,10 +138,10 @@ const SleepTracking = () => {
             <div className="p-2 bg-primary/10 rounded-xl">
               <TrendingUp className="w-5 h-5 text-primary" />
             </div>
-            <h3 className="font-semibold">Monthly Average</h3>
+            <h3 className="font-semibold">{t('sleep.monthlyAverage')}</h3>
           </div>
           <p className="text-3xl font-bold">{getMonthlyAverage()}h</p>
-          <p className="text-sm text-muted-foreground">Last 30 days</p>
+          <p className="text-sm text-muted-foreground">{t('sleep.last30Days')}</p>
         </Card>
       </div>
 
@@ -149,18 +151,18 @@ const SleepTracking = () => {
           <div className="p-2 bg-primary/10 rounded-xl">
             <Moon className="w-5 h-5 text-primary" />
           </div>
-          <h3 className="text-lg font-semibold">Sleep History</h3>
+          <h3 className="text-lg font-semibold">{t('sleep.sleepHistory')}</h3>
         </div>
         {sleepData.length === 0 ? (
           <div className="text-center py-8 space-y-4">
             <p className="text-muted-foreground">
-              No sleep data available yet.
+              {t('sleep.noDataAvailable')}
             </p>
             <p className="text-sm text-muted-foreground">
-              Connect a wearable device in the Activity section to track your sleep.
+              {t('sleep.connectWearable')}
             </p>
             <Button onClick={() => navigate("/activity")}>
-              Go to Activity
+              {t('sleep.goToActivity')}
             </Button>
           </div>
         ) : (
@@ -185,10 +187,10 @@ const SleepTracking = () => {
                   <p className="text-2xl font-bold">{sleep.sleep_hours}h</p>
                   <p className="text-sm text-muted-foreground">
                     {sleep.sleep_hours >= 7 && sleep.sleep_hours <= 9
-                      ? '✅ Optimal'
+                      ? `✅ ${t('sleep.optimal')}`
                       : sleep.sleep_hours < 7
-                      ? '⚠️ Below target'
-                      : '⚠️ Above target'}
+                      ? `⚠️ ${t('sleep.belowTarget')}`
+                      : `⚠️ ${t('sleep.aboveTarget')}`}
                   </p>
                 </div>
               </div>
