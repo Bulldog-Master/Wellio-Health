@@ -30,7 +30,11 @@ const Recipes = () => {
   
   // Direct translation map that doesn't rely on i18n loading
   const getCategoryDisplay = (category: string): string => {
+    console.log('getCategoryDisplay called with:', category);
+    console.log('Current i18n.language:', i18n.language);
+    
     const isSpanish = i18n.language === 'es' || i18n.language.startsWith('es');
+    console.log('isSpanish:', isSpanish);
     
     if (!isSpanish) return category;
     
@@ -43,7 +47,9 @@ const Recipes = () => {
       "🧀 Dairy": "🧀 Lácteos"
     };
     
-    return spanishMap[category] || category;
+    const result = spanishMap[category] || category;
+    console.log('Returning:', result);
+    return result;
   };
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
