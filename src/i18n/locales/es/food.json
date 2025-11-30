@@ -83,6 +83,8 @@
   "what_did_you_eat": "¿Qué comiste?",
   "meal_placeholder": "ej., 3 huevos fritos, 6 tiras de tocino, 1/2 aguacate, 2 tazas de café",
   "or_upload_photo": "O sube una foto",
+  "choose_file": "Elegir Archivo",
+  "no_file_selected": "Ningún archivo seleccionado",
   "remove": "Eliminar",
   "save_photo_with_meal": "Guardar esta foto con el registro de comida",
   "analyzing_with_ai": "Analizando con IA...",
