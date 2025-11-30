@@ -13,6 +13,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { foodLogSchema, mealSearchSchema, validateAndSanitize } from "@/lib/validationSchemas";
+import { useTranslation } from "react-i18next";
 
 interface MealLog {
   id: string;
@@ -40,6 +41,7 @@ interface SavedMeal {
 const FoodLog = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { t } = useTranslation(['food', 'common']);
   const [selectedMeal, setSelectedMeal] = useState("breakfast");
   const [mealDescription, setMealDescription] = useState("");
   const [logDate, setLogDate] = useState<string>(() => {
@@ -70,10 +72,10 @@ const FoodLog = () => {
   const [showSavedMeals, setShowSavedMeals] = useState(false);
 
   const mealTypes = [
-    { value: "breakfast", label: "Breakfast" },
-    { value: "lunch", label: "Lunch" },
-    { value: "dinner", label: "Dinner" },
-    { value: "snack", label: "Snack" },
+    { value: "breakfast", label: t('food:breakfast') },
+    { value: "lunch", label: t('food:lunch') },
+    { value: "dinner", label: t('food:dinner') },
+    { value: "snack", label: t('food:snack') },
   ];
 
   useEffect(() => {
@@ -150,7 +152,7 @@ const FoodLog = () => {
     const validation = validateAndSanitize(mealSearchSchema, { query: searchQuery });
     if (validation.success === false) {
       toast({
-        title: "Validation Error",
+        title: t('food:validation_error'),
         description: validation.error,
         variant: "destructive",
       });
@@ -168,8 +170,8 @@ const FoodLog = () => {
     } catch (error) {
       console.error('Error searching foods:', error);
       toast({
-        title: "Search failed",
-        description: "Could not search food database. Please try again.",
+        title: t('food:search_failed'),
+        description: t('food:search_failed_desc'),
         variant: "destructive",
       });
     } finally {
@@ -203,8 +205,8 @@ const FoodLog = () => {
   const handleAnalyzeMeal = async () => {
     if (!mealDescription.trim() && !imagePreview) {
       toast({
-        title: "Input required",
-        description: "Please describe your meal or upload a photo.",
+        title: t('food:input_required'),
+        description: t('food:input_required_desc'),
         variant: "destructive",
       });
       return;
@@ -241,14 +243,14 @@ const FoodLog = () => {
       });
 
       toast({
-        title: "Analysis complete!",
-        description: "Nutrition data has been estimated. Review and save.",
+        title: t('food:analysis_complete'),
+        description: t('food:analysis_complete_desc'),
       });
     } catch (error) {
       console.error("Error analyzing meal:", error);
       toast({
-        title: "Analysis failed",
-        description: "Could not analyze the meal. Please try again.",
+        title: t('food:analysis_failed'),
+        description: t('food:analysis_failed_desc'),
         variant: "destructive",
       });
     } finally {
@@ -259,8 +261,8 @@ const FoodLog = () => {
   const handleAddMeal = async () => {
     if (!nutritionData) {
       toast({
-        title: "Analysis required",
-        description: "Please analyze your meal first to get nutrition data.",
+        title: t('food:analysis_required'),
+        description: t('food:analysis_required_desc'),
         variant: "destructive",
       });
       return;
@@ -279,7 +281,7 @@ const FoodLog = () => {
 
     if (validation.success === false) {
       toast({
-        title: "Validation Error",
+        title: t('food:validation_error'),
         description: validation.error,
         variant: "destructive",
       });
@@ -290,8 +292,8 @@ const FoodLog = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         toast({
-          title: "Authentication required",
-          description: "Please log in to track your meals.",
+          title: t('food:auth_required'),
+          description: t('food:auth_required_desc'),
           variant: "destructive",
         });
         return;
@@ -318,8 +320,8 @@ const FoodLog = () => {
         if (uploadError) {
           console.error('Error uploading image:', uploadError);
           toast({
-            title: "Image upload failed",
-            description: "Meal will be saved without the image.",
+            title: t('food:image_upload_failed'),
+            description: t('food:image_upload_failed_desc'),
             variant: "destructive",
           });
         } else {
@@ -353,8 +355,8 @@ const FoodLog = () => {
         if (error) throw error;
 
         toast({
-          title: "Meal updated",
-          description: "Your meal has been updated successfully.",
+          title: t('food:meal_updated'),
+          description: t('food:meal_updated_desc'),
         });
       } else {
         // Insert new meal
@@ -376,8 +378,12 @@ const FoodLog = () => {
         if (error) throw error;
 
         toast({
-          title: "Meal logged",
-          description: `${mealDescription} (${nutritionData.calories} cal) added to ${mealTypes.find(m => m.value === selectedMeal)?.label}`,
+          title: t('food:food_logged'),
+          description: t('food:meal_logged_desc', {
+            name: mealDescription,
+            calories: nutritionData.calories,
+            mealType: mealTypes.find(m => m.value === selectedMeal)?.label
+          }),
         });
       }
 
@@ -400,8 +406,8 @@ const FoodLog = () => {
     } catch (error) {
       console.error('Error logging meal:', error);
       toast({
-        title: "Error",
-        description: "Failed to log meal. Please try again.",
+        title: t('food:error'),
+        description: t('food:failed_to_log_meal'),
         variant: "destructive",
       });
     }
@@ -448,16 +454,16 @@ const FoodLog = () => {
       if (error) throw error;
 
       toast({
-        title: "Meal deleted",
-        description: "The meal entry has been removed.",
+        title: t('food:meal_deleted'),
+        description: t('food:meal_deleted_desc'),
       });
 
       fetchMealLogs();
     } catch (error) {
       console.error('Error deleting meal:', error);
       toast({
-        title: "Error",
-        description: "Failed to delete meal.",
+        title: t('food:error'),
+        description: t('food:failed_to_delete_meal'),
         variant: "destructive",
       });
     }
@@ -466,8 +472,8 @@ const FoodLog = () => {
   const handleSaveAsMeal = async () => {
     if (!nutritionData || !mealDescription.trim()) {
       toast({
-        title: "Cannot save",
-        description: "Please analyze a meal first.",
+        title: t('food:cannot_save'),
+        description: t('food:cannot_save_desc'),
         variant: "destructive",
       });
       return;
@@ -492,16 +498,16 @@ const FoodLog = () => {
       if (error) throw error;
 
       toast({
-        title: "Meal saved!",
-        description: "You can now quickly log this meal in the future.",
+        title: t('food:meal_saved'),
+        description: t('food:meal_saved_desc'),
       });
 
       fetchSavedMeals();
     } catch (error) {
       console.error('Error saving meal:', error);
       toast({
-        title: "Error",
-        description: "Failed to save meal template.",
+        title: t('food:error'),
+        description: t('food:failed_to_save_meal'),
         variant: "destructive",
       });
     }
@@ -518,8 +524,8 @@ const FoodLog = () => {
     });
     setShowSavedMeals(false);
     toast({
-      title: "Meal loaded",
-      description: "Ready to log this saved meal.",
+      title: t('food:meal_loaded'),
+      description: t('food:meal_loaded_desc'),
     });
   };
 
@@ -533,16 +539,16 @@ const FoodLog = () => {
       if (error) throw error;
 
       toast({
-        title: "Saved meal deleted",
-        description: "The meal template has been removed.",
+        title: t('food:saved_meal_deleted'),
+        description: t('food:saved_meal_deleted_desc'),
       });
 
       fetchSavedMeals();
     } catch (error) {
       console.error('Error deleting saved meal:', error);
       toast({
-        title: "Error",
-        description: "Failed to delete saved meal.",
+        title: t('food:error'),
+        description: t('food:failed_to_delete_saved_meal'),
         variant: "destructive",
       });
     }
@@ -563,32 +569,32 @@ const FoodLog = () => {
           <Utensils className="w-6 h-6 text-primary" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold">Food Log</h1>
-          <p className="text-muted-foreground">Track your daily nutrition with AI</p>
+          <h1 className="text-3xl font-bold">{t('food:food_log')}</h1>
+          <p className="text-muted-foreground">{t('food:track_daily_nutrition')}</p>
         </div>
       </div>
 
       <Card className="p-6 bg-gradient-accent text-accent-foreground shadow-glow">
-        <h3 className="text-lg font-semibold mb-2">Today's Calories</h3>
+        <h3 className="text-lg font-semibold mb-2">{t('food:todays_calories')}</h3>
         <p className="text-4xl font-bold mb-2">{totalCalories}</p>
-        <p className="opacity-90">{Math.max(0, 2000 - totalCalories)} cal remaining (goal: 2000)</p>
+        <p className="opacity-90">{Math.max(0, 2000 - totalCalories)} {t('food:cal_remaining')} ({t('food:goal')}: 2000)</p>
       </Card>
 
       <Card key="meal-log-form" className="p-6 bg-gradient-card shadow-md">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-semibold flex items-center gap-2">
             <Calendar className="w-5 h-5" />
-            {editingMeal ? 'Edit Meal' : 'Log New Meal'}
+            {editingMeal ? t('food:edit_meal') : t('food:log_new_meal')}
           </h3>
           {editingMeal && (
             <Button variant="ghost" size="sm" onClick={handleCancelEdit}>
-              Cancel
+              {t('food:cancel')}
             </Button>
           )}
         </div>
         <div className="space-y-4">
           <div>
-            <Label htmlFor="mealType">Meal Type</Label>
+            <Label htmlFor="mealType">{t('food:meal_type')}</Label>
             <Select value={selectedMeal} onValueChange={setSelectedMeal}>
               <SelectTrigger className="mt-1.5">
                 <SelectValue />
@@ -605,7 +611,7 @@ const FoodLog = () => {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="log-date">Date</Label>
+              <Label htmlFor="log-date">{t('food:date')}</Label>
               <Input
                 id="log-date"
                 type="date"
@@ -615,26 +621,26 @@ const FoodLog = () => {
               />
             </div>
             <div>
-              <Label htmlFor="meal-time">Time of Day</Label>
+              <Label htmlFor="meal-time">{t('food:time_of_day')}</Label>
               <Select value={timeOfDay} onValueChange={setTimeOfDay}>
                 <SelectTrigger id="meal-time" className="mt-1.5">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="morning">☀️ Morning (6AM - 12PM)</SelectItem>
-                  <SelectItem value="afternoon">🌤️ Afternoon (12PM - 6PM)</SelectItem>
-                  <SelectItem value="evening">🌙 Evening (6PM - 12AM)</SelectItem>
+                  <SelectItem value="morning">{t('food:morning')}</SelectItem>
+                  <SelectItem value="afternoon">{t('food:afternoon')}</SelectItem>
+                  <SelectItem value="evening">{t('food:evening')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </div>
 
           <div className="space-y-3">
-            <Label htmlFor="search">Search Food Database</Label>
+            <Label htmlFor="search">{t('food:search_food_database')}</Label>
             <div className="flex gap-2">
               <Input
                 id="search"
-                placeholder="Search for foods (e.g., chicken breast, apple)..."
+                placeholder={t('food:search_placeholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSearchFood()}
@@ -683,16 +689,16 @@ const FoodLog = () => {
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-background px-2 text-muted-foreground">
-                Or describe manually
+                {t('food:or_describe_manually')}
               </span>
             </div>
           </div>
 
           <div>
-            <Label htmlFor="meal">What did you eat?</Label>
+            <Label htmlFor="meal">{t('food:what_did_you_eat')}</Label>
             <Textarea
               id="meal"
-              placeholder="e.g., 3 eggs sunny side up, 6 pieces of bacon, 1/2 avocado, 2 cups of coffee"
+              placeholder={t('food:meal_placeholder')}
               value={mealDescription}
               onChange={(e) => setMealDescription(e.target.value)}
               className="mt-1.5"
@@ -701,7 +707,7 @@ const FoodLog = () => {
           </div>
 
           <div>
-            <Label>Or upload a photo</Label>
+            <Label>{t('food:or_upload_photo')}</Label>
             <div className="flex gap-2 mt-1.5">
               <Input
                 ref={fileInputRef}
@@ -732,7 +738,7 @@ const FoodLog = () => {
                       if (fileInputRef.current) fileInputRef.current.value = '';
                     }}
                   >
-                    Remove
+                    {t('food:remove')}
                   </Button>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -742,7 +748,7 @@ const FoodLog = () => {
                     onCheckedChange={(checked) => setSaveImage(checked as boolean)}
                   />
                   <Label htmlFor="saveImage" className="text-sm cursor-pointer">
-                    Save this photo with meal log
+                    {t('food:save_photo_with_meal')}
                   </Label>
                 </div>
               </div>
@@ -757,12 +763,12 @@ const FoodLog = () => {
             {isAnalyzing ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                Analyzing with AI...
+                {t('food:analyzing_with_ai')}
               </>
             ) : (
               <>
                 <Sparkles className="w-4 h-4" />
-                Analyze with AI
+                {t('food:analyze_with_ai')}
               </>
             )}
           </Button>
@@ -772,16 +778,16 @@ const FoodLog = () => {
               <DialogTrigger asChild>
                 <Button variant="outline" className="flex-1 gap-2">
                   <Bookmark className="w-4 h-4" />
-                  Load Saved Meal ({savedMeals.length})
+                  {t('food:load_saved_meal')} ({savedMeals.length})
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
                 <DialogHeader>
-                  <DialogTitle>Your Saved Meals</DialogTitle>
+                  <DialogTitle>{t('food:your_saved_meals')}</DialogTitle>
                 </DialogHeader>
                 {savedMeals.length === 0 ? (
                   <p className="text-center text-muted-foreground py-8">
-                    No saved meals yet. Analyze a meal and click "Save as Template" to create one.
+                    {t('food:no_saved_meals_yet')}
                   </p>
                 ) : (
                   <div className="space-y-2">
@@ -824,7 +830,7 @@ const FoodLog = () => {
           {nutritionData && (
             <Card className="p-4 bg-accent/10 border-accent">
               <div className="flex items-center justify-between mb-3">
-                <h4 className="font-semibold text-accent">Estimated Nutrition</h4>
+                <h4 className="font-semibold text-accent">{t('food:estimated_nutrition')}</h4>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -832,24 +838,24 @@ const FoodLog = () => {
                   className="gap-2"
                 >
                   <BookmarkCheck className="w-4 h-4" />
-                  Save as Template
+                  {t('food:save_as_template')}
                 </Button>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="text-center p-3 bg-background rounded-lg">
-                  <p className="text-xs text-muted-foreground">Calories</p>
+                  <p className="text-xs text-muted-foreground">{t('food:calories')}</p>
                   <p className="text-2xl font-bold text-accent">{nutritionData.calories}</p>
                 </div>
                 <div className="text-center p-3 bg-background rounded-lg">
-                  <p className="text-xs text-muted-foreground">Protein</p>
+                  <p className="text-xs text-muted-foreground">{t('food:protein')}</p>
                   <p className="text-2xl font-bold text-accent">{nutritionData.protein}g</p>
                 </div>
                 <div className="text-center p-3 bg-background rounded-lg">
-                  <p className="text-xs text-muted-foreground">Carbs</p>
+                  <p className="text-xs text-muted-foreground">{t('food:carbs')}</p>
                   <p className="text-2xl font-bold text-accent">{nutritionData.carbs}g</p>
                 </div>
                 <div className="text-center p-3 bg-background rounded-lg">
-                  <p className="text-xs text-muted-foreground">Fat</p>
+                  <p className="text-xs text-muted-foreground">{t('food:fats')}</p>
                   <p className="text-2xl font-bold text-accent">{nutritionData.fat}g</p>
                 </div>
               </div>
@@ -862,17 +868,17 @@ const FoodLog = () => {
             disabled={!nutritionData}
           >
             <Plus className="w-4 h-4" />
-            {editingMeal ? 'Update Meal' : 'Save Meal'}
+            {editingMeal ? t('food:update_meal') : t('food:save_meal')}
           </Button>
         </div>
       </Card>
 
       <Card className="p-6 bg-gradient-card shadow-md">
-        <h3 className="text-lg font-semibold mb-4">Meal History</h3>
+        <h3 className="text-lg font-semibold mb-4">{t('food:meal_history')}</h3>
         {isLoading ? (
-          <p className="text-center text-muted-foreground py-8">Loading...</p>
+          <p className="text-center text-muted-foreground py-8">{t('food:loading')}</p>
         ) : mealLogs.length === 0 ? (
-          <p className="text-center text-muted-foreground py-8">No meals logged yet. Start tracking above!</p>
+          <p className="text-center text-muted-foreground py-8">{t('food:no_meals_logged_yet')}</p>
         ) : (
           <div className="space-y-6">
             {Object.entries(mealsByDate).map(([dateString, meals]) => {
@@ -881,7 +887,7 @@ const FoodLog = () => {
               const dayCalories = meals.reduce((sum, meal) => sum + (meal.calories || 0), 0);
               
               // Format the date for display (avoid toLocaleDateString for consistency)
-              const displayDate = isToday ? 'Today' : dateString;
+              const displayDate = isToday ? t('food:today') : dateString;
               
               return (
                 <div key={dateString} className="space-y-3">
@@ -925,20 +931,22 @@ const FoodLog = () => {
                                   </div>
                                 </div>
                                 <div className="flex gap-2">
-                                  <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    onClick={() => handleEditMeal(meal)}
-                                  >
-                                    <Pencil className="w-4 h-4" />
-                                  </Button>
-                                  <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    onClick={() => handleDeleteMeal(meal.id)}
-                                  >
-                                    <Trash2 className="w-4 h-4" />
-                                  </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  onClick={() => handleEditMeal(meal)}
+                                  title={t('food:edit')}
+                                >
+                                  <Pencil className="w-4 h-4" />
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  onClick={() => handleDeleteMeal(meal.id)}
+                                  title={t('food:delete')}
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </Button>
                                 </div>
                               </div>
                             </Card>
