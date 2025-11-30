@@ -20,8 +20,8 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/5">
       <div className="flex flex-col md:flex-row max-w-7xl mx-auto">
         <aside className="hidden md:block md:w-64 md:border-r-2 md:border-sidebar-border md:min-h-screen bg-sidebar/95 backdrop-blur-sm shadow-lg">
-          <div className="sticky top-0 p-6 space-y-6">
-            <div className="flex justify-end pb-2">
+          <div className="sticky top-0 p-6 space-y-4">
+            <div className="w-full flex justify-end mb-4">
               <LanguageSwitcher />
             </div>
             
