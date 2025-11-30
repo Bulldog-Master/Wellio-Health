@@ -1,9 +1,10 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSubscription } from '@/hooks/useSubscription';
+import { supabase } from '@/integrations/supabase/client';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Lock } from 'lucide-react';
+import { Lock, Sparkles } from 'lucide-react';
 
 interface SubscriptionGateProps {
   feature: string;
@@ -14,8 +15,33 @@ interface SubscriptionGateProps {
 export const SubscriptionGate = ({ feature, children, fallback }: SubscriptionGateProps) => {
   const { hasFeature, isLoading, tier } = useSubscription();
   const navigate = useNavigate();
+  const [hasRewardAccess, setHasRewardAccess] = useState(false);
+  const [checkingRewards, setCheckingRewards] = useState(true);
 
-  if (isLoading) {
+  useEffect(() => {
+    checkRewardAccess();
+  }, []);
+
+  const checkRewardAccess = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      // Check for active pro subscription reward
+      const { data } = await supabase.rpc('has_active_reward', {
+        _user_id: user.id,
+        _feature_type: 'pro_subscription'
+      });
+
+      setHasRewardAccess(data || false);
+    } catch (error) {
+      console.error('Error checking reward access:', error);
+    } finally {
+      setCheckingRewards(false);
+    }
+  };
+
+  if (isLoading || checkingRewards) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
@@ -23,7 +49,8 @@ export const SubscriptionGate = ({ feature, children, fallback }: SubscriptionGa
     );
   }
 
-  if (!hasFeature(feature)) {
+  // Allow access if user has the feature OR has an active reward
+  if (!hasFeature(feature) && !hasRewardAccess) {
     if (fallback) {
       return <>{fallback}</>;
     }
@@ -35,9 +62,15 @@ export const SubscriptionGate = ({ feature, children, fallback }: SubscriptionGa
         <p className="text-muted-foreground mb-6">
           This feature is available on Pro and Enterprise plans. Your current plan: <strong>{tier.toUpperCase()}</strong>
         </p>
-        <Button onClick={() => navigate('/subscription')}>
-          Upgrade Now
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Button onClick={() => navigate('/subscription')}>
+            Upgrade Now
+          </Button>
+          <Button variant="outline" onClick={() => navigate('/rewards')} className="gap-2">
+            <Sparkles className="w-4 h-4" />
+            Use Points
+          </Button>
+        </div>
       </Card>
     );
   }

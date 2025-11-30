@@ -26,6 +26,8 @@ const MedicalHistory = lazy(() => import("@/pages/MedicalHistory"));
 const AIInsights = lazy(() => import("@/pages/AIInsights"));
 const Socials = lazy(() => import("@/pages/Socials"));
 const Referral = lazy(() => import("@/pages/Referral"));
+const RewardsStore = lazy(() => import("@/pages/RewardsStore"));
+const PointsHistory = lazy(() => import("@/pages/PointsHistory"));
 const FitnessGoals = lazy(() => import("@/pages/FitnessGoals"));
 const Achievements = lazy(() => import("@/pages/Achievements"));
 const StepCount = lazy(() => import("@/pages/StepCount"));
@@ -173,6 +175,8 @@ export const AppRoutes = () => (
     
     {/* Misc */}
     <Route path="/referral" element={<ProtectedRoute><Layout><Referral /></Layout></ProtectedRoute>} />
+    <Route path="/rewards" element={<ProtectedRoute><Layout><RewardsStore /></Layout></ProtectedRoute>} />
+    <Route path="/points-history" element={<ProtectedRoute><Layout><PointsHistory /></Layout></ProtectedRoute>} />
     <Route path="/calendar" element={<ProtectedRoute><Layout><EventCalendar /></Layout></ProtectedRoute>} />
     <Route path="/voice-notes" element={<ProtectedRoute><Layout><VoiceNotes /></Layout></ProtectedRoute>} />
     <Route path="/pwa-features" element={<ProtectedRoute><Layout><PWAFeatures /></Layout></ProtectedRoute>} />

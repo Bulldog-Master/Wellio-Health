@@ -1,11 +1,12 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Share2, Copy, Check, Users, Gift, TrendingUp } from "lucide-react";
+import { Share2, Copy, Check, Users, Gift, TrendingUp, Award, History } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useNavigate } from "react-router-dom";
 
 interface ReferralStats {
   totalReferrals: number;
@@ -25,6 +26,7 @@ interface Referral {
 
 const Referral = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState<ReferralStats>({
@@ -135,13 +137,34 @@ const Referral = () => {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      <div className="flex items-center gap-3">
-        <div className="p-3 bg-primary/10 rounded-xl">
-          <Gift className="w-6 h-6 text-primary" />
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="p-3 bg-primary/10 rounded-xl">
+            <Gift className="w-6 h-6 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold">Referral Program</h1>
+            <p className="text-muted-foreground">Invite friends and earn rewards together</p>
+          </div>
         </div>
-        <div>
-          <h1 className="text-3xl font-bold">Referral Program</h1>
-          <p className="text-muted-foreground">Invite friends and earn rewards together</p>
+        
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            onClick={() => navigate('/rewards')}
+            className="gap-2"
+          >
+            <Award className="w-4 h-4" />
+            Rewards Store
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => navigate('/points-history')}
+            className="gap-2"
+          >
+            <History className="w-4 h-4" />
+            History
+          </Button>
         </div>
       </div>
 
@@ -276,6 +299,7 @@ const Referral = () => {
               <h4 className="font-semibold mb-1">They Sign Up & Join</h4>
               <p className="text-sm text-muted-foreground">
                 When someone uses your link to create an account, they'll be connected to your referral network automatically.
+                <strong className="block mt-1 text-success">You get 50 points, they get 25 points!</strong>
               </p>
             </div>
           </div>
@@ -286,11 +310,61 @@ const Referral = () => {
             <div>
               <h4 className="font-semibold mb-1">Earn Rewards Together</h4>
               <p className="text-sm text-muted-foreground">
-                Get exclusive benefits and reward points for every active user you refer. Perfect for trainers building their client base or creators growing their community!
+                When they complete onboarding, you get 100 more points and they get 50 points!
+                <strong className="block mt-1 text-primary">Total: 150 points per active referral</strong>
               </p>
             </div>
           </div>
         </div>
+      </Card>
+
+      <Card className="p-6 bg-gradient-card shadow-md">
+        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+          <Award className="w-5 h-5 text-primary" />
+          What Can You Get With Points?
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="p-4 bg-background/50 rounded-lg">
+            <h5 className="font-semibold text-primary mb-2">💎 Subscriptions</h5>
+            <ul className="text-sm space-y-1 text-muted-foreground">
+              <li>• 1 Month Pro: <strong>500 pts</strong></li>
+              <li>• 3 Months Pro: <strong>1,000 pts</strong></li>
+              <li>• 1 Year Pro: <strong>5,000 pts</strong></li>
+            </ul>
+          </div>
+          <div className="p-4 bg-background/50 rounded-lg">
+            <h5 className="font-semibold text-accent mb-2">🏆 Badges</h5>
+            <ul className="text-sm space-y-1 text-muted-foreground">
+              <li>• Verified Badge: <strong>100 pts</strong></li>
+              <li>• Elite Trainer: <strong>1,000 pts</strong></li>
+              <li>• Community Leader: <strong>2,000 pts</strong></li>
+            </ul>
+          </div>
+          <div className="p-4 bg-background/50 rounded-lg">
+            <h5 className="font-semibold text-secondary mb-2">⚡ Features</h5>
+            <ul className="text-sm space-y-1 text-muted-foreground">
+              <li>• Profile Boost: <strong>200 pts</strong></li>
+              <li>• Premium Templates: <strong>500 pts</strong></li>
+              <li>• Advanced Analytics: <strong>1,000 pts</strong></li>
+            </ul>
+          </div>
+          <div className="p-4 bg-background/50 rounded-lg">
+            <h5 className="font-semibold text-success mb-2">📈 Marketplace</h5>
+            <ul className="text-sm space-y-1 text-muted-foreground">
+              <li>• Featured Trainer: <strong>300 pts</strong></li>
+              <li>• Priority Listing: <strong>500 pts</strong></li>
+              <li>• Premium Status: <strong>1,000 pts</strong></li>
+            </ul>
+          </div>
+        </div>
+        <Button
+          onClick={() => navigate('/rewards')}
+          className="w-full mt-4 gap-2"
+          variant="outline"
+        >
+          <Award className="w-4 h-4" />
+          Browse All Rewards
+        </Button>
       </Card>
 
       <Card className="p-6 bg-accent/5 border-accent/20">
