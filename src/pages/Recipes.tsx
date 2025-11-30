@@ -51,6 +51,18 @@ const Recipes = () => {
     t('category_dairy')
   ];
 
+  // Map stored English categories to translated versions
+  const translateCategory = (category: string): string => {
+    const categoryMap: Record<string, string> = {
+      "🌱 Vegan": t('category_vegan'),
+      "🥑 Keto": t('category_keto'),
+      "💪 High Protein": t('category_high_protein'),
+      "🐟 Mediterranean": t('category_mediterranean'),
+      "🧀 Dairy": t('category_dairy'),
+    };
+    return categoryMap[category] || category;
+  };
+
   useEffect(() => {
     fetchRecipes();
   }, []);
@@ -339,7 +351,7 @@ const Recipes = () => {
                     <SelectContent>
                       {categories.map((cat) => (
                         <SelectItem key={cat} value={cat}>
-                          {cat}
+                          {translateCategory(cat)}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -436,7 +448,7 @@ const Recipes = () => {
                     onClick={() => toggleCategory(category)}
                     className="w-full flex items-center justify-between p-4 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors"
                   >
-                    <span className="font-medium">{category}</span>
+                    <span className="font-medium">{translateCategory(category)}</span>
                     <div className="flex items-center gap-2">
                       <span className="text-sm text-muted-foreground">
                         {categoryRecipes.length} {categoryRecipes.length === 1 ? t('recipe_count_single') : t('recipe_count_plural')}
