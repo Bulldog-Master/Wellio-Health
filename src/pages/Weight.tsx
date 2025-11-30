@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format, startOfMonth, startOfQuarter, startOfYear, parseISO } from "date-fns";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from "recharts";
+import { ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { weightLogSchema, validateAndSanitize } from "@/lib/validationSchemas";
 import { useTranslation } from "react-i18next";
@@ -565,7 +565,7 @@ const Weight = () => {
             <p className="text-center text-muted-foreground py-8">{t('weight:no_chart_data')}</p>
           ) : (
             <ResponsiveContainer width="100%" height={400}>
-              <BarChart data={chartData}>
+              <ComposedChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
                 <XAxis 
                   dataKey="date" 
@@ -597,21 +597,6 @@ const Weight = () => {
                     paddingTop: '20px'
                   }}
                 />
-              
-                {targetWeight && (
-                  <ReferenceLine 
-                    y={targetWeight} 
-                    stroke="hsl(0, 85%, 60%)" 
-                    strokeDasharray="5 5"
-                    strokeWidth={2}
-                    label={{ 
-                      value: `Target: ${formatWeight(targetWeight, preferredUnit)}`, 
-                      position: 'right',
-                      fill: 'hsl(0, 85%, 60%)',
-                      fontSize: 12
-                    }}
-                  />
-                )}
                 
                 {chartView === "daily" ? (
                   <>
@@ -656,7 +641,19 @@ const Weight = () => {
                     radius={[4, 4, 0, 0]}
                   />
                 )}
-              </BarChart>
+                
+                {targetWeight && (
+                  <Line
+                    type="monotone"
+                    dataKey="target"
+                    stroke="hsl(0, 85%, 60%)"
+                    strokeWidth={2}
+                    strokeDasharray="5 5"
+                    dot={false}
+                    name="Target"
+                  />
+                )}
+              </ComposedChart>
             </ResponsiveContainer>
           )}
         </Card>
