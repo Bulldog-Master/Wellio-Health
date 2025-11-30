@@ -64,6 +64,9 @@ const Weight = () => {
     fetchTargetWeight();
   }, []);
 
+  // Safety check: don't render chart until translations are loaded
+  const translationsReady = chartLabels.weightUnit !== '' && chartLabels.morning !== '';
+
   const fetchWeightLogs = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -675,6 +678,8 @@ const Weight = () => {
 
         {isLoading ? (
           <p className="text-center text-muted-foreground py-8">{t('weight:loading')}</p>
+        ) : !translationsReady ? (
+          <p className="text-center text-muted-foreground py-8">Loading...</p>
         ) : !chartData || chartData.length === 0 ? (
           <p className="text-center text-muted-foreground py-8">{t('weight:no_chart_data')}</p>
         ) : (
