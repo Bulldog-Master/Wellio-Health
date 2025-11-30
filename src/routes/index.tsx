@@ -106,7 +106,7 @@ export const AppRoutes = () => (
     <Route path="/settings/support" element={<RouteErrorBoundary><ProtectedRoute><Layout><Support /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     
     {/* Health & Fitness Tracking */}
-    <Route path="/weight" element={<ProtectedRoute><Layout><Weight /></Layout></ProtectedRoute>} />
+    <Route path="/weight" element={<ProtectedRoute><Weight /></ProtectedRoute>} />
     <Route path="/water-intake" element={<ProtectedRoute><Layout><WaterIntake /></Layout></ProtectedRoute>} />
     <Route path="/sleep-tracking" element={<ProtectedRoute><Layout><SleepTracking /></Layout></ProtectedRoute>} />
     <Route path="/progress-photos" element={<ProtectedRoute><Layout><ProgressPhotos /></Layout></ProtectedRoute>} />
