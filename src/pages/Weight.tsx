@@ -40,6 +40,9 @@ const Weight = () => {
   const [editWeight, setEditWeight] = useState("");
   const [chartView, setChartView] = useState<"daily" | "monthly" | "quarterly" | "yearly" | "year-by-year">("monthly");
   const [targetWeight, setTargetWeight] = useState<number | null>(null);
+  
+  // Translate target weight label outside render functions for Safari compatibility
+  const targetWeightLabel = t('weight:target_weight');
 
   useEffect(() => {
     fetchWeightLogs();
@@ -729,7 +732,7 @@ const Weight = () => {
                             strokeDasharray="4 2"
                           />
                         </svg>
-                        <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{t('weight:target_weight')}</span>
+                        <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{targetWeightLabel}</span>
                       </div>
                     );
                   }
