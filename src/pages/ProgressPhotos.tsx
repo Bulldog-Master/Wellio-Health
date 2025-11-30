@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import { formatWeight } from "@/lib/unitConversion";
+import { useTranslation } from "react-i18next";
 
 interface ProgressPhoto {
   id: string;
@@ -22,6 +23,7 @@ interface ProgressPhoto {
 
 const ProgressPhotos = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation('common');
   const { preferredUnit } = useUserPreferences();
   const [photos, setPhotos] = useState<ProgressPhoto[]>([]);
   const [loading, setLoading] = useState(true);
@@ -49,7 +51,7 @@ const ProgressPhotos = () => {
       setPhotos(data || []);
     } catch (error) {
       console.error('Error fetching photos:', error);
-      toast.error('Failed to load progress photos');
+      toast.error(t('failedToLoadProgressPhotos'));
     } finally {
       setLoading(false);
     }
@@ -63,7 +65,7 @@ const ProgressPhotos = () => {
 
   const handleUpload = async () => {
     if (!selectedFile) {
-      toast.error('Please select a photo');
+      toast.error(t('pleaseSelectPhoto'));
       return;
     }
 
@@ -101,14 +103,14 @@ const ProgressPhotos = () => {
 
       if (dbError) throw dbError;
 
-      toast.success('Progress photo added!');
+      toast.success(t('progressPhotoAdded'));
       setSelectedFile(null);
       setWeight("");
       setNotes("");
       fetchPhotos();
     } catch (error) {
       console.error('Error uploading photo:', error);
-      toast.error('Failed to upload photo');
+      toast.error(t('failedToUploadPhoto'));
     } finally {
       setUploading(false);
     }
@@ -135,16 +137,16 @@ const ProgressPhotos = () => {
 
       if (error) throw error;
 
-      toast.success('Photo deleted');
+      toast.success(t('photoDeleted'));
       fetchPhotos();
     } catch (error) {
       console.error('Error deleting photo:', error);
-      toast.error('Failed to delete photo');
+      toast.error(t('failedToDeletePhoto'));
     }
   };
 
   if (loading) {
-    return <div className="p-6">Loading...</div>;
+    return <div className="p-6">{t('loading')}</div>;
   }
 
   return (
@@ -156,7 +158,7 @@ const ProgressPhotos = () => {
         className="gap-2 mb-2"
       >
         <ArrowLeft className="w-4 h-4" />
-        Back to Dashboard
+        {t('backToDashboard')}
       </Button>
 
       <div className="flex items-center gap-3">
@@ -164,17 +166,17 @@ const ProgressPhotos = () => {
           <Camera className="w-6 h-6 text-primary" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold">Progress Photos</h1>
-          <p className="text-muted-foreground">Track your transformation visually</p>
+          <h1 className="text-3xl font-bold">{t('progressPhotos')}</h1>
+          <p className="text-muted-foreground">{t('trackTransformationVisually')}</p>
         </div>
       </div>
 
       {/* Upload Form */}
       <Card className="p-6">
-        <h3 className="text-lg font-semibold mb-4">Add New Photo</h3>
+        <h3 className="text-lg font-semibold mb-4">{t('addNewPhoto')}</h3>
         <div className="space-y-4">
           <div>
-            <Label htmlFor="photo">Photo</Label>
+            <Label htmlFor="photo">{t('photo')}</Label>
             <Input
               id="photo"
               type="file"
@@ -183,26 +185,26 @@ const ProgressPhotos = () => {
             />
             {selectedFile && (
               <p className="text-sm text-muted-foreground mt-1">
-                Selected: {selectedFile.name}
+                {t('selected')}: {selectedFile.name}
               </p>
             )}
           </div>
           <div>
-            <Label htmlFor="weight">Weight (optional)</Label>
+            <Label htmlFor="weight">{t('weightOptional')}</Label>
             <Input
               id="weight"
               type="number"
               step="0.1"
-              placeholder={`Enter weight in ${preferredUnit === 'metric' ? 'kg' : 'lbs'}`}
+              placeholder={`${t('enterWeightIn')} ${preferredUnit === 'metric' ? 'kg' : 'lbs'}`}
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
             />
           </div>
           <div>
-            <Label htmlFor="notes">Notes (optional)</Label>
+            <Label htmlFor="notes">{t('notesOptional')}</Label>
             <Textarea
               id="notes"
-              placeholder="How are you feeling? Any milestones?"
+              placeholder={t('howFeelingMilestones')}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
             />
@@ -213,20 +215,20 @@ const ProgressPhotos = () => {
             className="w-full"
           >
             <Upload className="w-4 h-4 mr-2" />
-            {uploading ? 'Uploading...' : 'Upload Photo'}
+            {uploading ? t('uploading') : t('uploadPhoto')}
           </Button>
         </div>
       </Card>
 
       {/* Photos Timeline */}
       <div>
-        <h3 className="text-lg font-semibold mb-4">Your Journey</h3>
+        <h3 className="text-lg font-semibold mb-4">{t('yourJourney')}</h3>
         {photos.length === 0 ? (
           <Card className="p-12">
             <div className="text-center space-y-4">
               <Camera className="w-16 h-16 mx-auto text-muted-foreground" />
               <p className="text-muted-foreground">
-                No progress photos yet. Start documenting your journey!
+                {t('noProgressPhotosYet')}
               </p>
             </div>
           </Card>
@@ -236,7 +238,7 @@ const ProgressPhotos = () => {
               <Card key={photo.id} className="overflow-hidden">
                 <img
                   src={photo.photo_url}
-                  alt="Progress photo"
+                  alt={t('progressPhoto')}
                   className="w-full h-64 object-cover"
                 />
                 <div className="p-4 space-y-2">
