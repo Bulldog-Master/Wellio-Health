@@ -30,26 +30,25 @@ const Recipes = () => {
   
   // Direct translation map that doesn't rely on i18n loading
   const getCategoryDisplay = (category: string): string => {
-    console.log('getCategoryDisplay called with:', category);
-    console.log('Current i18n.language:', i18n.language);
-    
-    const isSpanish = i18n.language === 'es' || i18n.language.startsWith('es');
-    console.log('isSpanish:', isSpanish);
+    const isSpanish = i18n.language === 'es' || i18n.language.startsWith('es-');
     
     if (!isSpanish) return category;
     
-    // Direct Spanish translations
+    // Direct Spanish translations for all recipe categories
     const spanishMap: Record<string, string> = {
       "🌱 Vegan": "🌱 Vegano",
       "🥑 Keto": "🥑 Keto",
-      "💪 High Protein": "💪 Alta Proteína",
+      "🍖 High Protein": "🍖 Alto en Proteínas",
+      "🍝 Low Carb": "🍝 Bajo en Carbohidratos",
+      "💪 Muscle Building": "💪 Construcción Muscular",
       "🐟 Mediterranean": "🐟 Mediterráneo",
-      "🧀 Dairy": "🧀 Lácteos"
+      "🧀 Dairy": "🧀 Lácteos",
+      "💪 High Protein": "💪 Alta Proteína",
+      "🌾 Gluten-Free": "🌾 Sin Gluten",
+      "🥗 Low Fat": "🥗 Bajo en Grasas"
     };
     
-    const result = spanishMap[category] || category;
-    console.log('Returning:', result);
-    return result;
+    return spanishMap[category] || category;
   };
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
