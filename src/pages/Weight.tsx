@@ -16,6 +16,7 @@ import { format, startOfMonth, startOfQuarter, startOfYear, parseISO } from "dat
 import { BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from "recharts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { weightLogSchema, validateAndSanitize } from "@/lib/validationSchemas";
+import { useTranslation } from "react-i18next";
 
 interface WeightLog {
   id: string;
@@ -25,6 +26,7 @@ interface WeightLog {
 }
 
 const Weight = () => {
+  const { t } = useTranslation(['weight', 'common']);
   const { toast } = useToast();
   const navigate = useNavigate();
   const { preferredUnit, updatePreferredUnit, isLoading: prefsLoading } = useUserPreferences();
@@ -141,8 +143,8 @@ const Weight = () => {
             });
 
           toast({
-            title: "🎉 Weight Milestone Achieved!",
-            description: `You've reached ${milestone.threshold}% of your weight goal!`,
+            title: t('weight:milestone_achieved'),
+            description: t('weight:milestone_desc', { percent: milestone.threshold }),
           });
         }
       }
@@ -159,8 +161,8 @@ const Weight = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         toast({
-          title: "Authentication required",
-          description: "Please log in to track your weight.",
+          title: t('weight:auth_required'),
+          description: t('weight:auth_required_desc'),
           variant: "destructive",
         });
         return;
@@ -176,7 +178,7 @@ const Weight = () => {
 
       if (validation.success === false) {
         toast({
-          title: "Validation Error",
+          title: t('weight:validation_error'),
           description: validation.error,
           variant: "destructive",
         });
@@ -194,9 +196,10 @@ const Weight = () => {
 
       if (error) throw error;
 
+      const periodTranslated = period === 'morning' ? t('weight:morning').toLowerCase() : t('weight:evening').toLowerCase();
       toast({
-        title: "Weight logged",
-        description: `${period.charAt(0).toUpperCase() + period.slice(1)} weight has been recorded.`,
+        title: t('weight:weight_logged'),
+        description: t('weight:weight_logged_desc', { period: periodTranslated }),
       });
 
       // Check for weight milestones
@@ -209,8 +212,8 @@ const Weight = () => {
     } catch (error) {
       console.error('Error logging weight:', error);
       toast({
-        title: "Error",
-        description: "Failed to log weight. Please try again.",
+        title: t('weight:error'),
+        description: t('weight:error_log'),
         variant: "destructive",
       });
     }
@@ -230,8 +233,8 @@ const Weight = () => {
       if (error) throw error;
 
       toast({
-        title: "Weight updated",
-        description: "Weight log has been updated successfully.",
+        title: t('weight:weight_updated'),
+        description: t('weight:weight_updated_desc'),
       });
       
       setEditingLog(null);
@@ -240,8 +243,8 @@ const Weight = () => {
     } catch (error) {
       console.error('Error updating weight:', error);
       toast({
-        title: "Error",
-        description: "Failed to update weight. Please try again.",
+        title: t('weight:error'),
+        description: t('weight:error_update'),
         variant: "destructive",
       });
     }
@@ -257,16 +260,16 @@ const Weight = () => {
       if (error) throw error;
 
       toast({
-        title: "Weight deleted",
-        description: "Weight log has been removed.",
+        title: t('weight:weight_deleted'),
+        description: t('weight:weight_deleted_desc'),
       });
       
       fetchWeightLogs();
     } catch (error) {
       console.error('Error deleting weight:', error);
       toast({
-        title: "Error",
-        description: "Failed to delete weight. Please try again.",
+        title: t('weight:error'),
+        description: t('weight:error_delete'),
         variant: "destructive",
       });
     }
@@ -471,7 +474,7 @@ const Weight = () => {
         className="gap-2 mb-2"
       >
         <ArrowLeft className="w-4 h-4" />
-        Back to Dashboard
+        {t('weight:back_to_dashboard')}
       </Button>
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-3">
@@ -479,8 +482,8 @@ const Weight = () => {
             <Scale className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold">Weight Tracking</h1>
-            <p className="text-muted-foreground mt-1">Monitor your daily weight changes</p>
+            <h1 className="text-3xl font-bold">{t('weight:weight_tracking')}</h1>
+            <p className="text-muted-foreground mt-1">{t('weight:monitor_changes')}</p>
           </div>
         </div>
         
@@ -507,24 +510,24 @@ const Weight = () => {
             <div className="p-2 bg-white/20 rounded-xl">
               <TrendingDown className="w-5 h-5" />
             </div>
-            <h3 className="text-lg font-semibold">Current Weight</h3>
+            <h3 className="text-lg font-semibold">{t('weight:current_weight')}</h3>
           </div>
           <p className="text-4xl font-bold mb-2">
-            {latestWeight > 0 ? formatWeight(latestWeight, preferredUnit) : 'No data'}
+            {latestWeight > 0 ? formatWeight(latestWeight, preferredUnit) : t('weight:no_data')}
           </p>
-          <p className="opacity-90">Latest recorded weight</p>
+          <p className="opacity-90">{t('weight:latest_recorded')}</p>
         </Card>
 
         <Card className="p-6 hover:shadow-xl transition-all duration-300">
-          <h3 className="text-lg font-semibold mb-2">Total Logs</h3>
+          <h3 className="text-lg font-semibold mb-2">{t('weight:total_logs')}</h3>
           <p className="text-4xl font-bold text-primary mb-2">{weightLogs.length}</p>
-          <p className="text-muted-foreground">Weight entries tracked</p>
+          <p className="text-muted-foreground">{t('weight:entries_tracked')}</p>
         </Card>
       </div>
 
       <Card className="p-6 bg-gradient-card shadow-md">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold">Log Weight</h3>
+          <h3 className="text-lg font-semibold">{t('weight:log_weight')}</h3>
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="outline" className="gap-2">
@@ -545,13 +548,13 @@ const Weight = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div>
-              <Label htmlFor="morning">Morning Weight ({preferredUnit === 'imperial' ? 'lbs' : 'kg'})</Label>
+              <Label htmlFor="morning">{t('weight:morning_weight')} ({preferredUnit === 'imperial' ? 'lbs' : 'kg'})</Label>
               <div className="flex gap-2 mt-1.5">
                 <Input
                   id="morning"
                   type="number"
                   step="0.1"
-                  placeholder="Enter weight"
+                  placeholder={t('weight:enter_weight')}
                   value={morning}
                   onChange={(e) => setMorning(e.target.value)}
                 />
@@ -561,7 +564,7 @@ const Weight = () => {
                   className="gap-2"
                 >
                   <Plus className="w-4 h-4" />
-                  Log
+                  {t('weight:log')}
                 </Button>
               </div>
             </div>
@@ -569,13 +572,13 @@ const Weight = () => {
 
           <div className="space-y-4">
             <div>
-              <Label htmlFor="evening">Evening Weight ({preferredUnit === 'imperial' ? 'lbs' : 'kg'})</Label>
+              <Label htmlFor="evening">{t('weight:evening_weight')} ({preferredUnit === 'imperial' ? 'lbs' : 'kg'})</Label>
               <div className="flex gap-2 mt-1.5">
                 <Input
                   id="evening"
                   type="number"
                   step="0.1"
-                  placeholder="Enter weight"
+                  placeholder={t('weight:enter_weight')}
                   value={evening}
                   onChange={(e) => setEvening(e.target.value)}
                 />
@@ -586,7 +589,7 @@ const Weight = () => {
                   className="gap-2"
                 >
                   <Plus className="w-4 h-4" />
-                  Log
+                  {t('weight:log')}
                 </Button>
               </div>
             </div>
@@ -597,10 +600,10 @@ const Weight = () => {
       {/* Statistics Card */}
       {statistics && (
         <Card className="p-6 bg-gradient-card shadow-md">
-          <h3 className="text-lg font-semibold mb-4">Progress Statistics</h3>
+          <h3 className="text-lg font-semibold mb-4">{t('weight:progress_statistics')}</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
-              <p className="text-sm text-muted-foreground mb-1">Total Change</p>
+              <p className="text-sm text-muted-foreground mb-1">{t('weight:total_change')}</p>
               <p className="text-2xl font-bold" style={{ 
                 color: statistics.totalChange < 0 ? 'hsl(142, 71%, 45%)' : 'hsl(var(--primary))' 
               }}>
@@ -608,29 +611,29 @@ const Weight = () => {
                 {formatWeight(Math.abs(statistics.totalChange), preferredUnit)}
               </p>
               <p className="text-xs text-muted-foreground mt-1">
-                Over {statistics.daysTracked} days
+                {t('weight:over_days', { days: statistics.daysTracked })}
               </p>
             </div>
             
             <div>
-              <p className="text-sm text-muted-foreground mb-1">Avg Change/Week</p>
+              <p className="text-sm text-muted-foreground mb-1">{t('weight:avg_change_week')}</p>
               <p className="text-2xl font-bold">
                 {statistics.avgRatePerWeek > 0 ? '+' : ''}
                 {formatWeight(Math.abs(statistics.avgRatePerWeek), preferredUnit)}
               </p>
               <p className="text-xs text-muted-foreground mt-1">
-                Weekly average
+                {t('weight:weekly_average')}
               </p>
             </div>
             
             {targetWeight && (
               <div>
-                <p className="text-sm text-muted-foreground mb-1">Goal Progress</p>
+                <p className="text-sm text-muted-foreground mb-1">{t('weight:goal_progress')}</p>
                 <p className="text-2xl font-bold text-primary">
                   {Math.abs(Math.round(statistics.progressPercentage))}%
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Target: {formatWeight(targetWeight, preferredUnit)}
+                  {t('weight:target', { weight: formatWeight(targetWeight, preferredUnit) })}
                 </p>
               </div>
             )}
@@ -639,21 +642,21 @@ const Weight = () => {
       )}
 
       <Card className="p-6 bg-gradient-card shadow-md">
-        <h3 className="text-lg font-semibold mb-6">Weight Trends</h3>
+        <h3 className="text-lg font-semibold mb-6">{t('weight:weight_trends')}</h3>
         <Tabs value={chartView} onValueChange={(v) => setChartView(v as any)} className="mb-6">
           <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="daily">Daily</TabsTrigger>
-            <TabsTrigger value="monthly">Monthly</TabsTrigger>
-            <TabsTrigger value="quarterly">Quarterly</TabsTrigger>
-            <TabsTrigger value="yearly">Yearly</TabsTrigger>
-            <TabsTrigger value="year-by-year">Year by Year</TabsTrigger>
+            <TabsTrigger value="daily">{t('weight:daily')}</TabsTrigger>
+            <TabsTrigger value="monthly">{t('weight:monthly')}</TabsTrigger>
+            <TabsTrigger value="quarterly">{t('weight:quarterly')}</TabsTrigger>
+            <TabsTrigger value="yearly">{t('weight:yearly')}</TabsTrigger>
+            <TabsTrigger value="year-by-year">{t('weight:year_by_year')}</TabsTrigger>
           </TabsList>
         </Tabs>
 
         {isLoading ? (
-          <p className="text-center text-muted-foreground py-8">Loading...</p>
+          <p className="text-center text-muted-foreground py-8">{t('weight:loading')}</p>
         ) : chartData.length === 0 ? (
-          <p className="text-center text-muted-foreground py-8">No data available for chart</p>
+          <p className="text-center text-muted-foreground py-8">{t('weight:no_chart_data')}</p>
         ) : (
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={chartData}>
@@ -668,7 +671,7 @@ const Weight = () => {
                 className="text-xs"
                 tick={{ fill: 'hsl(var(--foreground))' }}
                 label={{ 
-                  value: preferredUnit === 'imperial' ? 'Weight (lbs)' : 'Weight (kg)', 
+                  value: preferredUnit === 'imperial' ? t('weight:weight_unit_lbs') : t('weight:weight_unit_kg'), 
                   angle: -90, 
                   position: 'insideLeft',
                   style: { fill: 'hsl(var(--foreground))' }
@@ -718,7 +721,7 @@ const Weight = () => {
                               strokeDasharray="4 2"
                             />
                           </svg>
-                          <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>Target Weight</span>
+                          <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{t('weight:target_weight')}</span>
                         </div>
                       );
                     }
@@ -753,13 +756,13 @@ const Weight = () => {
                   <Bar 
                     dataKey="morning" 
                     fill="hsl(195, 100%, 50%)" 
-                    name="Morning"
+                    name={t('weight:morning')}
                     radius={[4, 4, 0, 0]}
                   />
                   <Bar 
                     dataKey="evening" 
                     fill="hsl(270, 95%, 65%)" 
-                    name="Evening"
+                    name={t('weight:evening')}
                     radius={[4, 4, 0, 0]}
                   />
                 </>
@@ -787,7 +790,7 @@ const Weight = () => {
                 <Bar 
                   dataKey="average" 
                   fill="hsl(var(--primary))" 
-                  name="Average Weight"
+                  name={t('weight:average_weight')}
                   radius={[4, 4, 0, 0]}
                 />
               )}
@@ -797,11 +800,11 @@ const Weight = () => {
       </Card>
 
       <Card className="p-6 bg-gradient-card shadow-md">
-        <h3 className="text-lg font-semibold mb-4">Recent Weights</h3>
+        <h3 className="text-lg font-semibold mb-4">{t('weight:recent_weights')}</h3>
         {isLoading ? (
-          <p className="text-center text-muted-foreground py-8">Loading...</p>
+          <p className="text-center text-muted-foreground py-8">{t('weight:loading')}</p>
         ) : Object.keys(groupedLogs).length === 0 ? (
-          <p className="text-center text-muted-foreground py-8">No weight logs yet. Start tracking above!</p>
+          <p className="text-center text-muted-foreground py-8">{t('weight:no_logs_yet')}</p>
         ) : (
           <div className="h-[600px] overflow-y-auto pr-2 space-y-3" style={{ overflowY: 'auto', WebkitOverflowScrolling: 'touch' }}>
             {[...weightLogs].reverse().map((log) => (
@@ -829,13 +832,13 @@ const Weight = () => {
                       autoFocus
                     />
                     <Button size="sm" onClick={() => handleEditLog(log)}>
-                      Save
+                      {t('weight:save')}
                     </Button>
                     <Button size="sm" variant="ghost" onClick={() => {
                       setEditingLog(null);
                       setEditWeight("");
                     }}>
-                      Cancel
+                      {t('weight:cancel')}
                     </Button>
                   </div>
                 ) : (
