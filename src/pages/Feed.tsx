@@ -19,6 +19,7 @@ import { useRealtimePosts } from "@/hooks/useRealtimePosts";
 import { SuggestedUsers } from "@/components/SuggestedUsers";
 import { MessagesSidebar } from "@/components/MessagesSidebar";
 import { LazyImage } from "@/components/LazyImage";
+import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
 
 const Feed = () => {
   const { toast } = useToast();
@@ -230,10 +231,24 @@ const Feed = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Not authenticated");
 
+      // Rate limiting for post creation
+      const rateLimitKey = `post:${user.id}`;
+      const rateLimit = await rateLimiter.check(rateLimitKey, RATE_LIMITS.POST_CREATE);
+
+      if (!rateLimit.allowed) {
+        throw new Error(`Creating posts too quickly. Please wait ${Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 1000)} seconds.`);
+      }
+
       let mediaUrl = null;
 
       // Upload image if present
       if (uploadedImage) {
+        // Rate limit file uploads separately
+        const fileRateLimit = await rateLimiter.check(`upload:${user.id}`, RATE_LIMITS.FILE_UPLOAD);
+        if (!fileRateLimit.allowed) {
+          throw new Error(`Uploading files too quickly. Please wait ${Math.ceil((fileRateLimit.resetAt.getTime() - Date.now()) / 60000)} minutes.`);
+        }
+
         const fileExt = uploadedImage.name.split(".").pop();
         const fileName = `${user.id}/${Date.now()}.${fileExt}`;
 
@@ -275,6 +290,14 @@ const Feed = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Not authenticated");
 
+      // Rate limiting for like actions
+      const rateLimitKey = `like:${user.id}`;
+      const rateLimit = await rateLimiter.check(rateLimitKey, RATE_LIMITS.LIKE_ACTION);
+
+      if (!rateLimit.allowed) {
+        throw new Error(`Too many like actions. Please slow down.`);
+      }
+
       const isLiked = userLikes?.includes(postId);
 
       if (isLiked) {
@@ -291,6 +314,53 @@ const Feed = () => {
         if (error) throw error;
       }
     },
+    onMutate: async (postId: string) => {
+      // Cancel outgoing refetches
+      await queryClient.cancelQueries({ queryKey: ["feed-posts"] });
+      await queryClient.cancelQueries({ queryKey: ["user-post-likes"] });
+
+      // Snapshot previous values
+      const previousPosts = queryClient.getQueryData(["feed-posts"]);
+      const previousLikes = queryClient.getQueryData(["user-post-likes"]);
+
+      // Optimistically update likes
+      queryClient.setQueryData(["user-post-likes"], (old: string[] | undefined) => {
+        if (!old) return old;
+        const isLiked = old.includes(postId);
+        return isLiked ? old.filter(id => id !== postId) : [...old, postId];
+      });
+
+      // Optimistically update post likes count
+      queryClient.setQueryData(["feed-posts"], (old: any[] | undefined) => {
+        if (!old) return old;
+        return old.map(post => {
+          if (post.id === postId) {
+            const isLiked = userLikes?.includes(postId);
+            return {
+              ...post,
+              likes_count: post.likes_count + (isLiked ? -1 : 1)
+            };
+          }
+          return post;
+        });
+      });
+
+      return { previousPosts, previousLikes };
+    },
+    onError: (err, postId, context) => {
+      // Rollback on error
+      if (context?.previousPosts) {
+        queryClient.setQueryData(["feed-posts"], context.previousPosts);
+      }
+      if (context?.previousLikes) {
+        queryClient.setQueryData(["user-post-likes"], context.previousLikes);
+      }
+      toast({
+        title: "Error",
+        description: err.message,
+        variant: "destructive",
+      });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user-post-likes"] });
       queryClient.invalidateQueries({ queryKey: ["feed-posts"] });
@@ -303,6 +373,14 @@ const Feed = () => {
 
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Not authenticated");
+
+      // Rate limiting for comment creation
+      const rateLimitKey = `comment:${user.id}`;
+      const rateLimit = await rateLimiter.check(rateLimitKey, RATE_LIMITS.COMMENT_CREATE);
+
+      if (!rateLimit.allowed) {
+        throw new Error(`Creating comments too quickly. Please wait ${Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 1000)} seconds.`);
+      }
 
       const { error } = await supabase
         .from("comments")
@@ -318,6 +396,13 @@ const Feed = () => {
       queryClient.invalidateQueries({ queryKey: ["post-comments", selectedPostId] });
       queryClient.invalidateQueries({ queryKey: ["feed-posts"] });
       setCommentContent("");
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
     },
   });
 

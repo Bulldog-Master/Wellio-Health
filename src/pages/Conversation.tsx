@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useTypingIndicator } from "@/hooks/useTypingIndicator";
 import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 import { formatDistanceToNow } from "date-fns";
+import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
 
 interface Message {
   id: string;
@@ -142,6 +143,14 @@ const Conversation = () => {
   const sendMessage = useMutation({
     mutationFn: async (content: string) => {
       if (!currentUserId || !conversationId) throw new Error("Not authenticated");
+
+      // Rate limiting for message sending
+      const rateLimitKey = `message:${currentUserId}`;
+      const rateLimit = await rateLimiter.check(rateLimitKey, RATE_LIMITS.MESSAGE_SEND);
+
+      if (!rateLimit.allowed) {
+        throw new Error(`Sending messages too quickly. Please wait ${Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 1000)} seconds.`);
+      }
 
       const { error } = await supabase.from("messages").insert({
         conversation_id: conversationId,

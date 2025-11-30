@@ -139,4 +139,30 @@ export const RATE_LIMITS = {
     maxAttempts: 5,
     windowMs: 10 * 60 * 1000, // 10 minutes
   },
+  FOLLOW_ACTION: {
+    maxAttempts: 30,
+    windowMs: 5 * 60 * 1000, // 5 minutes
+    blockDurationMs: 15 * 60 * 1000, // 15 minutes
+  },
+  MESSAGE_SEND: {
+    maxAttempts: 60,
+    windowMs: 1 * 60 * 1000, // 1 minute
+    blockDurationMs: 5 * 60 * 1000, // 5 minutes
+  },
+  PROFILE_UPDATE: {
+    maxAttempts: 5,
+    windowMs: 10 * 60 * 1000, // 10 minutes
+  },
+  COMMENT_CREATE: {
+    maxAttempts: 30,
+    windowMs: 5 * 60 * 1000, // 5 minutes
+  },
+  LIKE_ACTION: {
+    maxAttempts: 100,
+    windowMs: 1 * 60 * 1000, // 1 minute
+  },
+  SEARCH_QUERY: {
+    maxAttempts: 50,
+    windowMs: 1 * 60 * 1000, // 1 minute
+  },
 } as const;

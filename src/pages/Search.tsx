@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Search as SearchIcon, User, UserPlus, UserCheck, Trophy, TrendingUp, Hash, FileText, Heart, MessageCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
+import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -67,6 +68,14 @@ const Search = () => {
     mutationFn: async (userId: string) => {
       if (!currentUserId) throw new Error("Not authenticated");
 
+      // Rate limiting for follow actions
+      const rateLimitKey = `follow:${currentUserId}`;
+      const rateLimit = await rateLimiter.check(rateLimitKey, RATE_LIMITS.FOLLOW_ACTION);
+
+      if (!rateLimit.allowed) {
+        throw new Error(`Too many follow actions. Please wait ${Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 60000)} minutes.`);
+      }
+
       const isFollowing = userFollows?.includes(userId);
 
       if (isFollowing) {
@@ -82,6 +91,30 @@ const Search = () => {
           .insert({ follower_id: currentUserId, following_id: userId });
         if (error) throw error;
       }
+    },
+    onMutate: async (userId: string) => {
+      await queryClient.cancelQueries({ queryKey: ["user-follows"] });
+      const previousFollows = queryClient.getQueryData(["user-follows"]);
+
+      // Optimistically update follows
+      queryClient.setQueryData(["user-follows"], (old: string[] | undefined) => {
+        if (!old) return old;
+        const isFollowing = old.includes(userId);
+        return isFollowing ? old.filter(id => id !== userId) : [...old, userId];
+      });
+
+      return { previousFollows };
+    },
+    onError: (err, userId, context) => {
+      // Rollback on error
+      if (context?.previousFollows) {
+        queryClient.setQueryData(["user-follows"], context.previousFollows);
+      }
+      toast({
+        title: "Error",
+        description: err.message,
+        variant: "destructive",
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user-follows"] });
