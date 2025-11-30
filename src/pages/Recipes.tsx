@@ -52,20 +52,6 @@ const Recipes = () => {
     "🧀 Dairy"
   ];
 
-  // Map stored English categories to translated versions for display
-  const translateCategory = (category: string): string => {
-    const categoryMap: Record<string, string> = {
-      "🌱 Vegan": t('category_vegan'),
-      "🥑 Keto": t('category_keto'),
-      "💪 High Protein": t('category_high_protein'),
-      "🐟 Mediterranean": t('category_mediterranean'),
-      "🧀 Dairy": t('category_dairy'),
-    };
-    console.log('Translating category:', category, 'to:', categoryMap[category] || category);
-    console.log('Translation for category_vegan:', t('category_vegan'));
-    return categoryMap[category] || category;
-  };
-
   useEffect(() => {
     fetchRecipes();
   }, []);
@@ -354,7 +340,12 @@ const Recipes = () => {
                     <SelectContent>
                       {categories.map((cat) => (
                         <SelectItem key={cat} value={cat}>
-                          {translateCategory(cat)}
+                          {cat === "🌱 Vegan" ? t('category_vegan') :
+                           cat === "🥑 Keto" ? t('category_keto') :
+                           cat === "💪 High Protein" ? t('category_high_protein') :
+                           cat === "🐟 Mediterranean" ? t('category_mediterranean') :
+                           cat === "🧀 Dairy" ? t('category_dairy') :
+                           cat}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -451,7 +442,14 @@ const Recipes = () => {
                     onClick={() => toggleCategory(category)}
                     className="w-full flex items-center justify-between p-4 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors"
                   >
-                    <span className="font-medium">{translateCategory(category)}</span>
+                    <span className="font-medium">
+                      {category === "🌱 Vegan" ? t('category_vegan') :
+                       category === "🥑 Keto" ? t('category_keto') :
+                       category === "💪 High Protein" ? t('category_high_protein') :
+                       category === "🐟 Mediterranean" ? t('category_mediterranean') :
+                       category === "🧀 Dairy" ? t('category_dairy') :
+                       category}
+                    </span>
                     <div className="flex items-center gap-2">
                       <span className="text-sm text-muted-foreground">
                         {categoryRecipes.length} {categoryRecipes.length === 1 ? t('recipe_count_single') : t('recipe_count_plural')}
