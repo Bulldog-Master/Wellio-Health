@@ -3,7 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 // Clear i18n cache to force fresh translations load (increment version when translations update)
-const I18N_VERSION = '1.0.3';
+const I18N_VERSION = '1.0.4';
 const cachedVersion = localStorage.getItem('i18n_version');
 if (cachedVersion !== I18N_VERSION) {
   // Clear all i18n related localStorage
@@ -22,6 +22,7 @@ import fitnessEN from './locales/en/fitness.json';
 import socialEN from './locales/en/social.json';
 import nutritionEN from './locales/en/nutrition.json';
 import weightEN from './locales/en/weight.json';
+import foodEN from './locales/en/food.json';
 
 import commonES from './locales/es/common.json';
 import authES from './locales/es/auth.json';
@@ -71,6 +72,7 @@ const resources = {
     social: socialEN,
     nutrition: nutritionEN,
     weight: weightEN,
+    food: foodEN,
   },
   es: {
     common: commonES,
