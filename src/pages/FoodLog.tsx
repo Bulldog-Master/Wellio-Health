@@ -12,6 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { foodLogSchema, mealSearchSchema, validateAndSanitize } from "@/lib/validationSchemas";
 
 interface MealLog {
   id: string;
@@ -145,7 +146,16 @@ const FoodLog = () => {
   };
 
   const handleSearchFood = async () => {
-    if (!searchQuery.trim()) return;
+    // Validate search query
+    const validation = validateAndSanitize(mealSearchSchema, { query: searchQuery });
+    if (!validation.success) {
+      toast({
+        title: "Validation Error",
+        description: validation.error,
+        variant: "destructive",
+      });
+      return;
+    }
 
     setIsSearching(true);
     try {
@@ -247,19 +257,30 @@ const FoodLog = () => {
   };
 
   const handleAddMeal = async () => {
-    if (!mealDescription.trim()) {
+    if (!nutritionData) {
       toast({
-        title: "Missing information",
-        description: "Please describe what you ate.",
+        title: "Analysis required",
+        description: "Please analyze your meal first to get nutrition data.",
         variant: "destructive",
       });
       return;
     }
 
-    if (!nutritionData) {
+    // Validate meal data using Zod
+    const validation = validateAndSanitize(foodLogSchema, {
+      meal_type: selectedMeal as 'breakfast' | 'lunch' | 'dinner' | 'snack',
+      food_name: mealDescription.trim(),
+      calories: nutritionData.calories,
+      protein_grams: nutritionData.protein,
+      carbs_grams: nutritionData.carbs,
+      fat_grams: nutritionData.fat,
+      logged_at: logDate,
+    });
+
+    if (!validation.success) {
       toast({
-        title: "Analysis required",
-        description: "Please analyze your meal first to get nutrition data.",
+        title: "Validation Error",
+        description: validation.error,
         variant: "destructive",
       });
       return;

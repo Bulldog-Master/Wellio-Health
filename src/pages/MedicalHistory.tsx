@@ -11,6 +11,13 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
+import { 
+  medicationSchema, 
+  testResultSchema, 
+  medicalRecordSchema, 
+  symptomSchema, 
+  validateAndSanitize 
+} from "@/lib/validationSchemas";
 
 interface Medication {
   id: string;
@@ -171,10 +178,12 @@ const MedicalHistory = () => {
   };
 
   const handleAddMedication = async () => {
-    if (!medFormData.medication_name || !medFormData.dosage || !medFormData.frequency) {
+    // Validate using Zod schema
+    const validation = validateAndSanitize(medicationSchema, medFormData);
+    if (!validation.success) {
       toast({
-        title: "Missing information",
-        description: "Please fill in all required fields.",
+        title: "Validation Error",
+        description: validation.error,
         variant: "destructive",
       });
       return;
@@ -221,10 +230,12 @@ const MedicalHistory = () => {
   };
 
   const handleAddTestResult = async () => {
-    if (!testFormData.test_name || !testFormData.test_date) {
+    // Validate using Zod schema
+    const validation = validateAndSanitize(testResultSchema, testFormData);
+    if (!validation.success) {
       toast({
-        title: "Missing information",
-        description: "Please fill in test name and date.",
+        title: "Validation Error",
+        description: validation.error,
         variant: "destructive",
       });
       return;
@@ -273,10 +284,12 @@ const MedicalHistory = () => {
   };
 
   const handleAddMedicalRecord = async () => {
-    if (!recordFormData.record_name || !recordFormData.record_date || !recordFormData.category) {
+    // Validate using Zod schema
+    const validation = validateAndSanitize(medicalRecordSchema, recordFormData);
+    if (!validation.success) {
       toast({
-        title: "Missing information",
-        description: "Please fill in record name, date, and category.",
+        title: "Validation Error",
+        description: validation.error,
         variant: "destructive",
       });
       return;
@@ -323,10 +336,16 @@ const MedicalHistory = () => {
   };
 
   const handleAddSymptom = async () => {
-    if (!symptomName) {
+    // Validate using Zod schema
+    const validation = validateAndSanitize(symptomSchema, {
+      symptom_name: symptomName,
+      severity: severity[0],
+      description: symptomDescription || undefined,
+    });
+    if (!validation.success) {
       toast({
-        title: "Missing information",
-        description: "Please enter a symptom name.",
+        title: "Validation Error",
+        description: validation.error,
         variant: "destructive",
       });
       return;
