@@ -1,4 +1,3 @@
-// Icons wrapped in colored spans for proper inheritance - v5.0
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown, ChevronDown, Library, BookOpen, Smartphone, ArrowLeft, Calendar as CalendarIcon, ArrowUpDown, Timer, CalendarDays } from "lucide-react";
+import { Dumbbell, Plus, Clock, Flame, Zap, MapPin, Trash2, Pencil, ListOrdered, Upload, Image as ImageIcon, Video, Check, ChevronsUpDown, ChevronDown, Library, BookOpen, Smartphone, ArrowLeft, Calendar as CalendarIcon, ArrowUpDown, Timer, CalendarDays, Gift, Users, Share2 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
@@ -135,6 +134,7 @@ const Workout = () => {
   });
   const [timeOfDay, setTimeOfDay] = useState<string>('morning');
   const [viewFilter, setViewFilter] = useState<'today' | 'week' | 'month' | 'all'>('today');
+  const [showReferralPrompt, setShowReferralPrompt] = useState(false);
   const handleBrowseApps = () => {
     const userAgent = navigator.userAgent || navigator.vendor;
     const isIOS = /iPad|iPhone|iPod/.test(userAgent);

@@ -7,6 +7,8 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNavigate } from "react-router-dom";
+import { ProgressToReward } from "@/components/ProgressToReward";
+import { Badge } from "@/components/ui/badge";
 
 interface ReferralStats {
   totalReferrals: number;
@@ -181,67 +183,84 @@ const Referral = () => {
       </Card>
 
       {stats.referralCode && (
-        <Card className="p-6 bg-gradient-card shadow-md">
-          <h3 className="text-lg font-semibold mb-4">Your Referral Link</h3>
-          <div className="space-y-4">
-            <div className="flex gap-2">
-              <Input
-                value={referralLink}
-                readOnly
-                className="font-mono text-sm"
-              />
-              <Button
-                onClick={copyToClipboard}
-                variant="outline"
-                className="gap-2 min-w-[100px]"
-              >
-                {copied ? (
-                  <>
-                    <Check className="w-4 h-4" />
-                    Copied
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-4 h-4" />
-                    Copy
-                  </>
-                )}
-              </Button>
-            </div>
-            <Button
-              onClick={shareReferral}
-              className="w-full gap-2 bg-gradient-primary hover:opacity-90 shadow-glow"
-            >
-              <Share2 className="w-4 h-4" />
-              Share Referral Link
-            </Button>
-          </div>
-        </Card>
+      <Card className="p-6 hover:shadow-xl transition-all">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold">Share Your Link</h2>
+          <Badge variant="secondary" className="text-sm">150 pts per referral</Badge>
+        </div>
+        
+        <div className="flex gap-2 mb-4">
+          <Input
+            value={referralLink}
+            readOnly
+            className="font-mono text-sm"
+          />
+          <Button
+            onClick={copyToClipboard}
+            variant="outline"
+            className="gap-2 min-w-[100px] shrink-0"
+          >
+            {copied ? (
+              <>
+                <Check className="w-4 h-4" />
+                Copied
+              </>
+            ) : (
+              <>
+                <Copy className="w-4 h-4" />
+                Copy
+              </>
+            )}
+          </Button>
+          <Button
+            onClick={shareReferral}
+            className="gap-2 shrink-0"
+          >
+            <Share2 className="w-4 h-4" />
+            Share
+          </Button>
+        </div>
+        
+        <p className="text-sm text-muted-foreground">
+          💡 Earn points: 50 pts for signup + 100 pts when they complete onboarding = 150 pts total!
+        </p>
+      </Card>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card className="p-6 bg-gradient-card shadow-md text-center">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-3">
-            <Users className="w-6 h-6 text-primary" />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Card className="p-6 hover:shadow-xl transition-all">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-3 bg-primary/10 rounded-xl">
+              <Users className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="font-semibold">Total Referrals</h3>
           </div>
-          <h3 className="font-semibold mb-2">Total Referrals</h3>
-          <p className="text-3xl font-bold text-primary">{stats.totalReferrals}</p>
+          <p className="text-4xl font-bold mb-2">{stats.totalReferrals}</p>
+          <p className="text-sm text-muted-foreground">Friends invited</p>
         </Card>
 
-        <Card className="p-6 bg-gradient-card shadow-md text-center">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-secondary/10 mb-3">
-            <Gift className="w-6 h-6 text-secondary" />
+        <Card className="p-6 hover:shadow-xl transition-all bg-gradient-to-br from-primary/10 to-accent/10 border-primary/20">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-3 bg-gradient-to-br from-primary to-accent rounded-xl">
+              <Gift className="w-6 h-6 text-primary-foreground" />
+            </div>
+            <h3 className="font-semibold">Reward Points</h3>
           </div>
-          <h3 className="font-semibold mb-2">Reward Points</h3>
-          <p className="text-3xl font-bold text-secondary">{stats.rewardPoints}</p>
+          <p className="text-4xl font-bold mb-3 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            {stats.rewardPoints}
+          </p>
+          <ProgressToReward currentPoints={stats.rewardPoints} size="sm" showLabel={false} />
         </Card>
 
-        <Card className="p-6 bg-gradient-card shadow-md text-center">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent/10 mb-3">
-            <TrendingUp className="w-6 h-6 text-accent" />
+        <Card className="p-6 hover:shadow-xl transition-all">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-3 bg-success/10 rounded-xl">
+              <TrendingUp className="w-6 h-6 text-success" />
+            </div>
+            <h3 className="font-semibold">Active Users</h3>
           </div>
-          <h3 className="font-semibold mb-2">Active Users</h3>
-          <p className="text-3xl font-bold text-accent">{stats.activeUsers}</p>
+          <p className="text-4xl font-bold mb-2">{stats.activeUsers}</p>
+          <p className="text-sm text-muted-foreground">Completed onboarding</p>
         </Card>
       </div>
 
