@@ -61,6 +61,8 @@ const Recipes = () => {
       "🐟 Mediterranean": t('category_mediterranean'),
       "🧀 Dairy": t('category_dairy'),
     };
+    console.log('Translating category:', category, 'to:', categoryMap[category] || category);
+    console.log('Translation for category_vegan:', t('category_vegan'));
     return categoryMap[category] || category;
   };
 
