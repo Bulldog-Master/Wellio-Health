@@ -12,6 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useSubscription } from "@/hooks/useSubscription";
 import { Badge } from "@/components/ui/badge";
+import { profileUpdateSchema, validateAndSanitize } from "@/lib/validationSchemas";
 
 const Profile = () => {
   const { toast } = useToast();
@@ -134,17 +135,36 @@ const Profile = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
+      // Validate profile data
+      const validation = validateAndSanitize(profileUpdateSchema, {
+        full_name: formData.name || undefined,
+        username: formData.username || undefined,
+        age: formData.age ? parseInt(formData.age) : undefined,
+        weight: formData.weight ? parseFloat(formData.weight) : undefined,
+        height: formData.height ? parseFloat(formData.height) : undefined,
+      });
+
+      if (validation.success === false) {
+        toast({
+          title: "Validation Error",
+          description: validation.error,
+          variant: "destructive",
+        });
+        setIsLoading(false);
+        return;
+      }
+
       const { error } = await supabase
         .from('profiles')
         .upsert({
           id: user.id,
-          full_name: formData.name,
-          username: formData.username,
-          age: formData.age ? parseInt(formData.age) : null,
+          full_name: validation.data.full_name,
+          username: validation.data.username,
+          age: validation.data.age,
           gender: formData.gender,
-          height: formData.height ? parseFloat(formData.height) : null,
+          height: validation.data.height,
           height_unit: formData.heightUnit,
-          weight: formData.weight ? parseFloat(formData.weight) : null,
+          weight: validation.data.weight,
           weight_unit: formData.weightUnit,
           target_weight: formData.targetWeight ? parseFloat(formData.targetWeight) : null,
           target_weight_unit: formData.targetWeightUnit,

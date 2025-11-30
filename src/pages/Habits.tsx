@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { habitSchema, validateAndSanitize } from "@/lib/validationSchemas";
 
 interface Habit {
   id: string;
@@ -88,27 +89,32 @@ const Habits = () => {
   };
 
   const handleAddHabit = async () => {
-    if (!formData.name) {
-      toast({
-        title: "Missing information",
-        description: "Please enter a habit name.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
+
+      // Validate habit data
+      const validation = validateAndSanitize(habitSchema, {
+        name: formData.name,
+        description: formData.description || undefined,
+        target_frequency: formData.target_frequency,
+        target_count: parseInt(formData.target_count),
+      });
+
+      if (validation.success === false) {
+        toast({
+          title: "Validation Error",
+          description: validation.error,
+          variant: "destructive",
+        });
+        return;
+      }
 
       const { error } = await supabase
         .from('habits')
         .insert({
           user_id: user.id,
-          name: formData.name,
-          description: formData.description || null,
-          target_frequency: formData.target_frequency,
-          target_count: parseInt(formData.target_count),
+          ...validation.data,
         });
 
       if (error) throw error;
