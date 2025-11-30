@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Heart, MessageCircle, Send, Image as ImageIcon, User, X, Hash, TrendingUp, Share2, Copy, Check, Bookmark, Edit, MoreVertical, Flag, UserX, ArrowLeft, Users } from "lucide-react";
+import { Heart, MessageCircle, Send, Image as ImageIcon, User, X, Hash, TrendingUp, Share2, Copy, Check, Bookmark, Edit, MoreVertical, Flag, UserX, ArrowLeft, Users, Gift, Sparkles } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -41,6 +41,9 @@ const Feed = () => {
   const [reportDetails, setReportDetails] = useState("");
   const [animatingReaction, setAnimatingReaction] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [showReferralBanner, setShowReferralBanner] = useState(() => {
+    return localStorage.getItem('hideReferralBanner') !== 'true';
+  });
 
   // Enable real-time updates for posts
   useRealtimePosts(["feed-posts", selectedHashtag]);
@@ -687,6 +690,52 @@ const Feed = () => {
               </div>
             )}
           </div>
+
+          {/* Referral Banner */}
+          {showReferralBanner && (
+            <Card className="mb-6 overflow-hidden bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border-primary/20 animate-fade-in">
+              <div className="p-4 flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3 flex-1">
+                  <div className="p-2 bg-gradient-to-br from-primary to-accent rounded-lg animate-pulse">
+                    <Gift className="w-5 h-5 text-primary-foreground" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-sm flex items-center gap-2">
+                      Get 1 Month Pro FREE! 
+                      <Sparkles className="w-4 h-4 text-primary" />
+                    </h3>
+                    <p className="text-xs text-muted-foreground">
+                      Invite 4 friends = 1 Month Pro • Share your link to earn 150 pts per referral
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button
+                    size="sm"
+                    onClick={() => navigate("/referral")}
+                    className="shrink-0"
+                  >
+                    <Users className="w-4 h-4 mr-2" />
+                    Share Link
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => {
+                      setShowReferralBanner(false);
+                      localStorage.setItem('hideReferralBanner', 'true');
+                      setTimeout(() => {
+                        localStorage.removeItem('hideReferralBanner');
+                      }, 24 * 60 * 60 * 1000); // Show again after 24 hours
+                    }}
+                    className="shrink-0"
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          )}
 
           {/* Create Post */}
           <Card className="hover:shadow-xl transition-all duration-300">

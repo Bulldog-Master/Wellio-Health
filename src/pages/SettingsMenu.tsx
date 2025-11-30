@@ -6,6 +6,7 @@ import { useSubscription } from "@/hooks/useSubscription";
 import { Badge } from "@/components/ui/badge";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { ProgressToReward } from "@/components/ProgressToReward";
 
 const SettingsMenu = () => {
   const navigate = useNavigate();
@@ -70,6 +71,8 @@ const SettingsMenu = () => {
       path: "/referral",
       badge: referralStats.points > 0 ? `${referralStats.points} pts` : undefined,
       badgeVariant: "secondary" as const,
+      showProgress: !loading && referralStats.points > 0,
+      progressPoints: referralStats.points,
     },
     {
       title: "Rewards Store",
@@ -172,6 +175,11 @@ const SettingsMenu = () => {
                     >
                       {item.badge}
                     </Badge>
+                  )}
+                  {item.showProgress && item.progressPoints !== undefined && (
+                    <div className="mt-3">
+                      <ProgressToReward currentPoints={item.progressPoints} size="sm" />
+                    </div>
                   )}
                 </div>
               </div>

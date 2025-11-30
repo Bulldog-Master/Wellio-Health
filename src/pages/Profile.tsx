@@ -14,6 +14,7 @@ import { useSubscription } from "@/hooks/useSubscription";
 import { Badge } from "@/components/ui/badge";
 import { profileUpdateSchema, validateAndSanitize } from "@/lib/validationSchemas";
 import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
+import { ProgressToReward } from "@/components/ProgressToReward";
 
 const Profile = () => {
   const { toast } = useToast();
