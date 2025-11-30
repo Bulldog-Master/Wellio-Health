@@ -389,13 +389,22 @@ const Recipes = () => {
 
                 <div>
                   <Label htmlFor="image">{t('recipe_image')}</Label>
-                  <Input
+                  <input
                     id="image"
                     type="file"
                     accept="image/*"
                     onChange={handleImageChange}
-                    className="mt-1.5"
+                    className="hidden"
                   />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => document.getElementById('image')?.click()}
+                    className="w-full mt-1.5 gap-2"
+                  >
+                    <Upload className="w-4 h-4" />
+                    {t('choose_file')}
+                  </Button>
                   {imagePreview && (
                     <img src={imagePreview} alt="Preview" className="mt-2 w-full h-40 object-cover rounded-md" />
                   )}
