@@ -8,10 +8,10 @@ import { RouteErrorBoundary } from "@/components/RouteErrorBoundary";
 import Auth from "@/pages/Auth";
 import Index from "@/pages/Index";
 import Onboarding from "@/pages/Onboarding";
+import Weight from "@/pages/Weight";
 
 // Lazy loaded routes
 const Profile = lazy(() => import("@/pages/Profile"));
-const Weight = lazy(() => import("@/pages/Weight"));
 const Food = lazy(() => import("@/pages/Food"));
 const FoodLog = lazy(() => import("@/pages/FoodLog"));
 const Recipes = lazy(() => import("@/pages/Recipes"));
