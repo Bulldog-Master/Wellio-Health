@@ -1,0 +1,32 @@
+{
+  "rewards": "Recompensas",
+  "rewards_store": "Tienda de Recompensas",
+  "referral_program": "Programa de Referidos",
+  "your_points": "Tus Puntos",
+  "total_points": "Puntos Totales",
+  "points_balance": "Saldo de Puntos",
+  
+  "earn_points": "Ganar Puntos",
+  "spend_points": "Gastar Puntos",
+  "redeem_reward": "Canjear Recompensa",
+  "redeem": "Canjear",
+  
+  "referral_link": "Enlace de Referido",
+  "share_link": "Compartir Enlace",
+  "copy_link": "Copiar Enlace",
+  "link_copied": "Enlace copiado",
+  
+  "invite_friends": "Invita Amigos",
+  "earn_per_friend": "Gana por Amigo",
+  "total_referrals": "Total de Referidos",
+  "active_users": "Usuarios Activos",
+  
+  "reward_redeemed": "Recompensa Canjeada",
+  "insufficient_points": "Puntos Insuficientes",
+  "need_more_points": "Necesitas {{points}} puntos más",
+  
+  "points_history": "Historial de Puntos",
+  "earned": "Ganado",
+  "spent": "Gastado",
+  "transaction_type": "Tipo de Transacción"
+}

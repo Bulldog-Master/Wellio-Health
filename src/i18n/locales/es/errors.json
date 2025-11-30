@@ -1,0 +1,35 @@
+{
+  "error": "Error",
+  "success": "Éxito",
+  "warning": "Advertencia",
+  "info": "Información",
+  
+  "missing_information": "Información faltante",
+  "please_enter_required": "Por favor ingresa la información requerida",
+  "file_too_large": "Archivo demasiado grande",
+  "file_size_limit": "Por favor selecciona una imagen menor a {{size}}MB",
+  "authentication_required": "Autenticación requerida",
+  "please_login": "Por favor inicia sesión para continuar",
+  "not_authenticated": "No autenticado",
+  
+  "rate_limited": "Demasiadas acciones",
+  "too_many_actions": "Demasiadas acciones. Por favor espera",
+  "creating_posts_too_quickly": "Creando publicaciones muy rápido. Por favor espera {{seconds}} segundos",
+  "uploading_files_too_quickly": "Subiendo archivos muy rápido. Por favor espera {{minutes}} minutos",
+  "too_many_like_actions": "Demasiadas acciones de me gusta. Por favor reduce la velocidad",
+  "creating_comments_too_quickly": "Creando comentarios muy rápido. Por favor espera {{seconds}} segundos",
+  
+  "validation_error": "Error de Validación",
+  "invalid_format": "Formato inválido",
+  "required_field": "Este campo es requerido",
+  "invalid_email": "Correo electrónico inválido",
+  "invalid_password": "Contraseña inválida",
+  "passwords_dont_match": "Las contraseñas no coinciden",
+  
+  "failed_to_save": "Error al guardar",
+  "failed_to_load": "Error al cargar",
+  "failed_to_delete": "Error al eliminar",
+  "failed_to_update": "Error al actualizar",
+  "something_went_wrong": "Algo salió mal",
+  "try_again": "Por favor intenta de nuevo"
+}

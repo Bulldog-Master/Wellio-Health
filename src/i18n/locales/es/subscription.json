@@ -1,0 +1,30 @@
+{
+  "subscription": "Suscripción",
+  "current_plan": "Plan Actual",
+  "upgrade_plan": "Mejorar Plan",
+  "manage_subscription": "Administrar Suscripción",
+  
+  "free_plan": "Plan Gratuito",
+  "pro_plan": "Plan Pro",
+  "premium_plan": "Plan Premium",
+  
+  "monthly": "Mensual",
+  "yearly": "Anual",
+  "per_month": "por mes",
+  "per_year": "por año",
+  
+  "features": "Características",
+  "included_features": "Características Incluidas",
+  "upgrade_to_unlock": "Mejora para desbloquear",
+  "unlock_features": "Desbloquear Características",
+  
+  "billing": "Facturación",
+  "payment_method": "Método de Pago",
+  "billing_history": "Historial de Facturación",
+  "next_billing_date": "Próxima Fecha de Facturación",
+  
+  "cancel_subscription": "Cancelar Suscripción",
+  "confirm_cancellation": "Confirmar Cancelación",
+  "subscription_cancelled": "Suscripción Cancelada",
+  "subscription_updated": "Suscripción Actualizada"
+}
