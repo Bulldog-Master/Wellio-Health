@@ -14,6 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { isWebAuthnSupported, registerPasskey, authenticatePasskey } from "@/lib/webauthn";
 import { generateDeviceFingerprint, getDeviceName, getStoredFingerprint, storeFingerprint } from "@/lib/deviceFingerprint";
 import { Checkbox } from "@/components/ui/checkbox";
+import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
 
 const emailSchema = z.string().email("Invalid email address");
 const passwordSchema = z.string().min(6, "Password must be at least 6 characters");
@@ -148,6 +149,22 @@ const Auth = () => {
     
     if (!validateInputs()) return;
 
+    // Rate limiting
+    const rateLimitKey = isLogin ? `login:${email}` : `signup:${email}`;
+    const rateLimit = await rateLimiter.check(
+      rateLimitKey,
+      isLogin ? RATE_LIMITS.LOGIN : RATE_LIMITS.SIGNUP
+    );
+
+    if (!rateLimit.allowed) {
+      toast({
+        title: "Too Many Attempts",
+        description: `Please try again after ${Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 60000)} minutes.`,
+        variant: "destructive",
+      });
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -158,6 +175,9 @@ const Auth = () => {
         });
 
         if (error) throw error;
+
+        // Success - reset rate limit
+        rateLimiter.reset(rateLimitKey);
 
         // Check if user has 2FA enabled
         if (data.user) {
@@ -245,6 +265,9 @@ const Auth = () => {
         });
 
         if (error) throw error;
+        
+        // Success - reset rate limit
+        rateLimiter.reset(rateLimitKey);
         
         // Clear referral code from session
         sessionStorage.removeItem('referral_code');
@@ -376,6 +399,19 @@ const Auth = () => {
           variant: "destructive",
         });
       }
+      return;
+    }
+
+    // Rate limiting for password reset
+    const rateLimitKey = `password_reset:${email}`;
+    const rateLimit = await rateLimiter.check(rateLimitKey, RATE_LIMITS.PASSWORD_RESET);
+
+    if (!rateLimit.allowed) {
+      toast({
+        title: "Too Many Requests",
+        description: `Please try again after ${Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 60000)} minutes.`,
+        variant: "destructive",
+      });
       return;
     }
 
