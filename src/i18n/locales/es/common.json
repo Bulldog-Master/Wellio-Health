@@ -53,7 +53,7 @@
   "set_goal": "Establecer Objetivo",
   "no_target_set": "Sin objetivo establecido",
   "upgrade_to_pro": "Actualizar a Pro",
-  "unlock_advanced_features": "Desbloquear funciones avanzadas",
+  "unlock_advanced_features": "funciones avanzadas",
   "upgrade": "Actualizar",
   "weight_7_days": "Peso (7 días)",
   "calories_7_days": "Calorías (7 días)",
@@ -156,5 +156,12 @@
   "upgrade_to_premium": "Actualizar a Premium",
   "upgrade_description": "{{feature}} es una función premium. Actualiza para desbloquear esta y muchas más funciones exclusivas.",
   "upgrade_description_default": "Obtén acceso a análisis avanzados, información de IA, mercado de entrenadores y más.",
-  "view_plans": "Ver Planes"
+  "view_plans": "Ver Planes",
+  "weight": "Peso",
+  "nutrition": "Nutrición",
+  "workout": "Entrenamiento",
+  "steps": "Pasos",
+  "habit": "Hábito",
+  "achievement": "Logro",
+  "challenge": "Desafío"
 }

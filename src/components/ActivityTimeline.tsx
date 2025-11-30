@@ -250,7 +250,7 @@ export const ActivityTimeline = () => {
                     <p className="text-sm text-muted-foreground">{event.description}</p>
                   </div>
                   <Badge variant="secondary" className="shrink-0">
-                    {event.type}
+                    {t(event.type)}
                   </Badge>
                 </div>
                 <p className="text-xs text-muted-foreground">
