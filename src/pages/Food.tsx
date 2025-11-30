@@ -2,30 +2,32 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Utensils, BookOpen, Calendar, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Food = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation(['food', 'common']);
 
   const menuItems = [
     {
-      title: "Food Log",
-      description: "Track your daily nutrition with AI",
+      title: t('food:food_log'),
+      description: t('food:track_daily_nutrition'),
       icon: Utensils,
       path: "/food/log",
       color: "text-primary",
       bgColor: "bg-primary/10",
     },
     {
-      title: "Recipes",
-      description: "Browse and save your favorite recipes",
+      title: t('food:recipes'),
+      description: t('food:browse_save_recipes'),
       icon: BookOpen,
       path: "/food/recipes",
       color: "text-accent",
       bgColor: "bg-accent/10",
     },
     {
-      title: "Meal Planner",
-      description: "Plan your weekly meals in advance",
+      title: t('food:meal_planner'),
+      description: t('food:plan_weekly_meals'),
       icon: Calendar,
       path: "/meal-planner",
       color: "text-secondary",
@@ -49,8 +51,8 @@ const Food = () => {
             <Utensils className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold">Food</h1>
-            <p className="text-muted-foreground mt-1">Manage your nutrition and recipes</p>
+            <h1 className="text-3xl font-bold">{t('food:food')}</h1>
+            <p className="text-muted-foreground mt-1">{t('food:manage_nutrition_recipes')}</p>
           </div>
         </div>
       </div>

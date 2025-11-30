@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { User, MessageSquare } from "lucide-react";
 import { useUserPresence } from "@/hooks/useUserPresence";
 import { formatDistanceToNow } from "date-fns";
+import { useTranslation } from "react-i18next";
 
 interface ConversationWithDetails {
   id: string;
@@ -29,6 +30,7 @@ interface ConversationWithDetails {
 
 const Messages = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation(['messages', 'common']);
   const queryClient = useQueryClient();
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
 
@@ -159,8 +161,8 @@ const Messages = () => {
   if (isLoading) {
     return (
       <div className="container max-w-2xl mx-auto p-4">
-        <h1 className="text-2xl font-bold mb-6">Messages</h1>
-        <p className="text-muted-foreground">Loading conversations...</p>
+        <h1 className="text-2xl font-bold mb-6">{t('messages:messages')}</h1>
+        <p className="text-muted-foreground">{t('messages:loading_conversations')}</p>
       </div>
     );
   }
@@ -168,15 +170,15 @@ const Messages = () => {
   return (
     <div className="container max-w-2xl mx-auto p-4">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">Messages</h1>
+        <h1 className="text-2xl font-bold">{t('messages:messages')}</h1>
       </div>
 
       {!conversations || conversations.length === 0 ? (
         <Card>
           <CardContent className="p-8 text-center text-muted-foreground">
             <MessageSquare className="h-12 w-12 mx-auto mb-4 opacity-50" />
-            <p>No conversations yet</p>
-            <p className="text-sm mt-2">Start a conversation by visiting a user's profile</p>
+            <p>{t('messages:no_conversations_yet')}</p>
+            <p className="text-sm mt-2">{t('messages:start_conversation_hint')}</p>
           </CardContent>
         </Card>
       ) : (
@@ -206,7 +208,7 @@ const Messages = () => {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
                       <p className="font-semibold truncate">
-                        {conversation.other_user.full_name || conversation.other_user.username || "Anonymous"}
+                        {conversation.other_user.full_name || conversation.other_user.username || t('messages:anonymous')}
                       </p>
                       {conversation.last_message_at && (
                         <span className="text-xs text-muted-foreground">
@@ -217,7 +219,7 @@ const Messages = () => {
                     {conversation.last_message && (
                       <div className="flex items-center justify-between gap-2">
                         <p className={`text-sm truncate ${conversation.unread_count > 0 ? "font-semibold" : "text-muted-foreground"}`}>
-                          {conversation.last_message.sender_id === currentUserId && "You: "}
+                          {conversation.last_message.sender_id === currentUserId && `${t('messages:you')}: `}
                           {conversation.last_message.content}
                         </p>
                         {conversation.unread_count > 0 && (

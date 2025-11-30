@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Heart, MessageCircle, UserPlus, Check, AtSign, UserCheck } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 
 interface Notification {
   id: string;
@@ -26,6 +27,7 @@ interface Notification {
 const Notifications = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation(['notifications', 'common']);
   const queryClient = useQueryClient();
   const [userId, setUserId] = useState<string | null>(null);
 
@@ -119,7 +121,7 @@ const Notifications = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
       queryClient.invalidateQueries({ queryKey: ["unread-count"] });
-      toast({ title: "All notifications marked as read" });
+      toast({ title: t('notifications:all_notifications_read') });
     },
   });
 
@@ -141,20 +143,20 @@ const Notifications = () => {
   };
 
   const getNotificationText = (notification: Notification) => {
-    const actorName = notification.actor.full_name || notification.actor.username || "Someone";
+    const actorName = notification.actor.full_name || notification.actor.username || t('notifications:someone');
     switch (notification.type) {
       case "like":
-        return `${actorName} liked your post`;
+        return t('notifications:liked_your_post', { name: actorName });
       case "comment":
-        return `${actorName} commented on your post`;
+        return t('notifications:commented_on_post', { name: actorName });
       case "follow":
-        return `${actorName} started following you`;
+        return t('notifications:started_following', { name: actorName });
       case "mention":
-        return `${actorName} mentioned you in a post`;
+        return t('notifications:mentioned_you', { name: actorName });
       case "follow_request":
-        return `${actorName} wants to follow you`;
+        return t('notifications:wants_to_follow', { name: actorName });
       default:
-        return "New notification";
+        return t('notifications:new_notification');
     }
   };
 
@@ -171,8 +173,8 @@ const Notifications = () => {
   if (isLoading) {
     return (
       <div className="container max-w-2xl mx-auto p-4">
-        <h1 className="text-2xl font-bold mb-6">Notifications</h1>
-        <p className="text-muted-foreground">Loading notifications...</p>
+        <h1 className="text-2xl font-bold mb-6">{t('notifications:notifications')}</h1>
+        <p className="text-muted-foreground">{t('notifications:loading_notifications')}</p>
       </div>
     );
   }
@@ -182,11 +184,11 @@ const Notifications = () => {
   return (
     <div className="container max-w-2xl mx-auto p-4">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">Notifications</h1>
+        <h1 className="text-2xl font-bold">{t('notifications:notifications')}</h1>
         {unreadCount > 0 && (
           <Button variant="outline" size="sm" onClick={() => markAllAsRead.mutate()}>
             <Check className="h-4 w-4 mr-2" />
-            Mark all as read
+            {t('notifications:mark_all_as_read')}
           </Button>
         )}
       </div>
@@ -194,7 +196,7 @@ const Notifications = () => {
       {!notifications || notifications.length === 0 ? (
         <Card>
           <CardContent className="p-8 text-center text-muted-foreground">
-            No notifications yet
+            {t('notifications:no_notifications_yet')}
           </CardContent>
         </Card>
       ) : (
