@@ -60,5 +60,9 @@
     "workout": "Workout",
     "nutrition": "Nutrition",
     "social": "Social"
-  }
+  },
+  "youre_back_online": "You're back online!",
+  "youre_offline_sync": "You're offline. Changes will sync when reconnected.",
+  "youre_offline_restore": "You're offline. Changes will sync when connection is restored.",
+  "youre_offline_limited": "You're offline. Some features may be limited."
 }
