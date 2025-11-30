@@ -154,6 +154,34 @@ const UserProfile = () => {
         }
       }
     },
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: ["is-following", userId] });
+      await queryClient.cancelQueries({ queryKey: ["follow-request", userId] });
+      
+      const previousFollowing = queryClient.getQueryData(["is-following", userId]);
+      const previousRequest = queryClient.getQueryData(["follow-request", userId]);
+      
+      if (isFollowing) {
+        queryClient.setQueryData(["is-following", userId], false);
+      } else if (followRequest) {
+        queryClient.setQueryData(["follow-request", userId], null);
+      } else if (profile?.is_private) {
+        queryClient.setQueryData(["follow-request", userId], { id: "temp", status: "pending" });
+      } else {
+        queryClient.setQueryData(["is-following", userId], true);
+      }
+      
+      return { previousFollowing, previousRequest };
+    },
+    onError: (_err, _variables, context) => {
+      queryClient.setQueryData(["is-following", userId], context?.previousFollowing);
+      queryClient.setQueryData(["follow-request", userId], context?.previousRequest);
+      toast({ 
+        title: "Action failed", 
+        description: "Please try again.",
+        variant: "destructive" 
+      });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["is-following", userId] });
       queryClient.invalidateQueries({ queryKey: ["follow-request", userId] });
