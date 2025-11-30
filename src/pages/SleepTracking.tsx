@@ -17,9 +17,16 @@ interface SleepData {
 
 const SleepTracking = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
   const [sleepData, setSleepData] = useState<SleepData[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Debug: Log current language and translation test
+  useEffect(() => {
+    console.log('🌐 Current language:', i18n.language);
+    console.log('🔍 Translation test - sleep.title:', t('sleep.title'));
+    console.log('🔍 Translation test - backToDashboard:', t('backToDashboard'));
+  }, [i18n.language, t]);
 
   useEffect(() => {
     fetchSleepData();
