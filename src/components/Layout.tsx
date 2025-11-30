@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Navigation from "./Navigation";
 import ThemeToggle from "./ThemeToggle";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { User, Bell } from "lucide-react";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +25,8 @@ const Layout = ({ children }: LayoutProps) => {
               <h1 className="text-2xl font-bold gradient-text">
                 Wellio
               </h1>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
+                <LanguageSwitcher />
                 <Button
                   variant="ghost"
                   size="icon"
@@ -59,6 +61,7 @@ const Layout = ({ children }: LayoutProps) => {
         <main className="flex-1 pb-20 md:pb-0">
           <div className="p-4 md:p-8">
             <div className="flex justify-end gap-2 mb-4 md:hidden">
+              <LanguageSwitcher />
               <Button
                 variant="ghost"
                 size="icon"
