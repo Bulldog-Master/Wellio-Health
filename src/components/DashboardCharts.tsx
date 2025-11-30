@@ -4,8 +4,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { format, subDays } from "date-fns";
 import { TrendingDown, Flame, Dumbbell } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const DashboardCharts = () => {
+  const { t } = useTranslation('common');
   const [weightData, setWeightData] = useState<any[]>([]);
   const [calorieData, setCalorieData] = useState<any[]>([]);
   const [workoutData, setWorkoutData] = useState<any[]>([]);
@@ -98,7 +100,7 @@ export const DashboardCharts = () => {
       <Card className="p-5 overflow-visible">
         <div className="flex items-center gap-2 mb-3">
           <TrendingDown className="w-5 h-5 text-primary flex-shrink-0" />
-          <h3 className="font-semibold text-sm">Weight (7 days)</h3>
+          <h3 className="font-semibold text-sm">{t('weight_7_days')}</h3>
         </div>
         {weightData.length > 0 ? (
           <ResponsiveContainer width="100%" height={100}>
@@ -121,7 +123,7 @@ export const DashboardCharts = () => {
             </LineChart>
           </ResponsiveContainer>
         ) : (
-          <p className="text-xs text-muted-foreground text-center py-8">No data</p>
+          <p className="text-xs text-muted-foreground text-center py-8">{t('no_data')}</p>
         )}
       </Card>
 
@@ -129,7 +131,7 @@ export const DashboardCharts = () => {
       <Card className="p-5 overflow-visible">
         <div className="flex items-center gap-2 mb-3">
           <Flame className="w-5 h-5 text-orange-500 flex-shrink-0" />
-          <h3 className="font-semibold text-sm">Calories (7 days)</h3>
+          <h3 className="font-semibold text-sm">{t('calories_7_days')}</h3>
         </div>
         {calorieData.length > 0 ? (
           <ResponsiveContainer width="100%" height={100}>
@@ -150,7 +152,7 @@ export const DashboardCharts = () => {
             </BarChart>
           </ResponsiveContainer>
         ) : (
-          <p className="text-xs text-muted-foreground text-center py-8">No data</p>
+          <p className="text-xs text-muted-foreground text-center py-8">{t('no_data')}</p>
         )}
       </Card>
 
@@ -158,7 +160,7 @@ export const DashboardCharts = () => {
       <Card className="p-5 overflow-visible">
         <div className="flex items-center gap-2 mb-3">
           <Dumbbell className="w-5 h-5 text-purple-500 flex-shrink-0" />
-          <h3 className="font-semibold text-sm">Workouts (7 days)</h3>
+          <h3 className="font-semibold text-sm">{t('workouts_7_days')}</h3>
         </div>
         {workoutData.length > 0 ? (
           <ResponsiveContainer width="100%" height={100}>
@@ -170,7 +172,7 @@ export const DashboardCharts = () => {
                   borderRadius: '6px',
                   fontSize: '12px'
                 }}
-                formatter={(value: number) => [`${value} min`, 'Duration']}
+                formatter={(value: number) => [`${value} min`, t('duration')]}
               />
               <Bar 
                 dataKey="duration" 
@@ -180,7 +182,7 @@ export const DashboardCharts = () => {
             </BarChart>
           </ResponsiveContainer>
         ) : (
-          <p className="text-xs text-muted-foreground text-center py-8">No data</p>
+          <p className="text-xs text-muted-foreground text-center py-8">{t('no_data')}</p>
         )}
       </Card>
     </div>
