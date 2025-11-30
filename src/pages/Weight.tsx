@@ -49,6 +49,7 @@ const Weight = () => {
   });
   const [isReady, setIsReady] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [chartReady, setChartReady] = useState(false);
 
   // Update labels when translations or preferences change
   useEffect(() => {
@@ -497,6 +498,16 @@ const Weight = () => {
     }
     return [];
   }, [chartData, chartView]);
+  
+  // Delay chart rendering specifically for Safari compatibility
+  useEffect(() => {
+    if (isReady && !isLoading && chartData.length > 0) {
+      const timer = setTimeout(() => {
+        setChartReady(true);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isReady, isLoading, chartData]);
 
   const getYAxisDomain = () => {
     if (!chartData.length) return [0, 100];
@@ -709,8 +720,8 @@ const Weight = () => {
 
         {isLoading ? (
           <p className="text-center text-muted-foreground py-8">{t('weight:loading')}</p>
-        ) : !translationsReady ? (
-          <p className="text-center text-muted-foreground py-8">Loading...</p>
+        ) : !translationsReady || !chartReady ? (
+          <p className="text-center text-muted-foreground py-8">Loading chart...</p>
         ) : !chartData || chartData.length === 0 ? (
           <p className="text-center text-muted-foreground py-8">{t('weight:no_chart_data')}</p>
         ) : (
