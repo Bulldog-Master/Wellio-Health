@@ -3599,6 +3599,10 @@ export type Database = {
         Args: { _points: number; _user_id: string }
         Returns: undefined
       }
+      can_view_full_profile: {
+        Args: { _profile_id: string; _viewer_id: string }
+        Returns: boolean
+      }
       cleanup_old_error_logs: { Args: never; Returns: undefined }
       cleanup_old_security_logs: { Args: never; Returns: undefined }
       create_booking: {
@@ -3622,6 +3626,18 @@ export type Database = {
         Returns: string
       }
       generate_referral_code: { Args: never; Returns: string }
+      get_fundraiser_donations: {
+        Args: { _fundraiser_id: string }
+        Returns: {
+          amount: number
+          created_at: string
+          donor_id: string
+          id: string
+          is_anonymous: boolean
+          message: string
+        }[]
+      }
+      get_story_view_count: { Args: { _story_id: string }; Returns: number }
       get_user_role: {
         Args: { _user_id: string }
         Returns: Database["public"]["Enums"]["app_role"]
