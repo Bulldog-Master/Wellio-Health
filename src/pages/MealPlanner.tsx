@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { Calendar as CalendarIcon, ArrowLeft, Plus, Trash2, ChevronLeft, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { format, startOfWeek, addDays, addWeeks, subWeeks } from "date-fns";
+import { useTranslation } from "react-i18next";
 
 interface MealPlan {
   id: string;
@@ -19,13 +20,17 @@ interface MealPlan {
 
 const MealPlanner = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation('food');
   const [currentWeekStart, setCurrentWeekStart] = useState(startOfWeek(new Date()));
   const [mealPlans, setMealPlans] = useState<MealPlan[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingMeal, setEditingMeal] = useState<{ day: number; type: string } | null>(null);
   const [mealInput, setMealInput] = useState("");
 
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const days = [
+    t('sunday'), t('monday'), t('tuesday'), t('wednesday'), 
+    t('thursday'), t('friday'), t('saturday')
+  ];
   const mealTypes = ['breakfast', 'lunch', 'dinner', 'snack'];
 
   useEffect(() => {
@@ -143,7 +148,7 @@ const MealPlanner = () => {
         className="gap-2 mb-2"
       >
         <ArrowLeft className="w-4 h-4" />
-        Back to Food
+        {t('back_to_food')}
       </Button>
 
       <div className="flex items-center justify-between">
@@ -152,8 +157,8 @@ const MealPlanner = () => {
             <CalendarIcon className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold">Meal Planner</h1>
-            <p className="text-muted-foreground">Plan your meals for the week</p>
+            <h1 className="text-3xl font-bold">{t('meal_planner')}</h1>
+            <p className="text-muted-foreground">{t('plan_meals_week')}</p>
           </div>
         </div>
         
@@ -166,7 +171,7 @@ const MealPlanner = () => {
             <ChevronLeft className="w-4 h-4" />
           </Button>
           <span className="text-sm font-medium px-4">
-            Week of {format(currentWeekStart, 'MMM dd, yyyy')}
+            {t('week_of')} {format(currentWeekStart, 'MMM dd, yyyy')}
           </span>
           <Button
             variant="outline"
@@ -190,7 +195,7 @@ const MealPlanner = () => {
                 return (
                   <div key={type} className="border rounded-lg p-3">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium capitalize">{type}</span>
+                      <span className="text-sm font-medium capitalize">{t(type)}</span>
                       {meal && !isEditing && (
                         <Button
                           variant="ghost"
@@ -205,7 +210,7 @@ const MealPlanner = () => {
                     {isEditing ? (
                       <div className="space-y-2">
                         <Input
-                          placeholder="Enter meal..."
+                          placeholder={t('enter_meal')}
                           value={mealInput}
                           onChange={(e) => setMealInput(e.target.value)}
                           onKeyDown={(e) => e.key === 'Enter' && handleSaveMeal()}
@@ -213,7 +218,7 @@ const MealPlanner = () => {
                         />
                         <div className="flex gap-1">
                           <Button size="sm" onClick={handleSaveMeal} className="flex-1">
-                            Save
+                            {t('save')}
                           </Button>
                           <Button
                             size="sm"
@@ -224,7 +229,7 @@ const MealPlanner = () => {
                             }}
                             className="flex-1"
                           >
-                            Cancel
+                            {t('cancel')}
                           </Button>
                         </div>
                       </div>
@@ -246,7 +251,7 @@ const MealPlanner = () => {
                         onClick={() => setEditingMeal({ day: dayIndex, type })}
                       >
                         <Plus className="w-3 h-3 mr-1" />
-                        Add meal
+                        {t('add_meal')}
                       </Button>
                     )}
                   </div>

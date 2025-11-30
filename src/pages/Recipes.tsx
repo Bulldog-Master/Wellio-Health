@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useTranslation } from "react-i18next";
 
 interface Recipe {
   id: string;
@@ -24,6 +25,7 @@ interface Recipe {
 const Recipes = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation('food');
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -271,33 +273,33 @@ const Recipes = () => {
           <BookOpen className="w-6 h-6 text-primary" />
         </div>
         <div className="flex-1">
-          <h1 className="text-3xl font-bold">Recipes</h1>
-          <p className="text-muted-foreground">Browse and manage your recipes</p>
+          <h1 className="text-3xl font-bold">{t('recipes')}</h1>
+          <p className="text-muted-foreground">{t('browse_recipes')}</p>
         </div>
         <Dialog open={categoryDialogOpen} onOpenChange={setCategoryDialogOpen}>
           <DialogTrigger asChild>
             <Button variant="outline" size="sm">
               <Plus className="w-4 h-4 mr-2" />
-              New Category
+              {t('new_category')}
             </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Add New Category</DialogTitle>
+              <DialogTitle>{t('add_new_category')}</DialogTitle>
             </DialogHeader>
             <div className="space-y-4 pt-4">
               <div>
-                <Label htmlFor="categoryName">Category Name</Label>
+                <Label htmlFor="categoryName">{t('category_name')}</Label>
                 <Input
                   id="categoryName"
                   value={newCategoryName}
                   onChange={(e) => setNewCategoryName(e.target.value)}
-                  placeholder="e.g., 🍝 Italian, 🌮 Mexican"
+                  placeholder={t('category_placeholder')}
                   className="mt-1.5"
                 />
               </div>
               <Button onClick={handleAddCategory} className="w-full">
-                Add Category
+                {t('add_category')}
               </Button>
             </div>
           </DialogContent>
@@ -306,7 +308,7 @@ const Recipes = () => {
 
       <Card className="p-6 bg-gradient-card shadow-md">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold">Recipe Categories</h3>
+          <h3 className="text-lg font-semibold">{t('recipe_categories')}</h3>
           <Dialog open={dialogOpen} onOpenChange={(open) => {
             setDialogOpen(open);
             if (!open) resetForm();
@@ -314,19 +316,19 @@ const Recipes = () => {
             <DialogTrigger asChild>
               <Button>
                 <Plus className="w-4 h-4 mr-2" />
-                Add Recipe
+                {t('add_recipe')}
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
-                <DialogTitle>{editingRecipe ? 'Edit Recipe' : 'Add New Recipe'}</DialogTitle>
+                <DialogTitle>{editingRecipe ? t('edit_recipe') : t('add_new_recipe')}</DialogTitle>
               </DialogHeader>
               <div className="space-y-4 pt-4">
                 <div>
-                  <Label htmlFor="category">Category</Label>
+                  <Label htmlFor="category">{t('category')}</Label>
                   <Select value={selectedCategory} onValueChange={setSelectedCategory}>
                     <SelectTrigger className="mt-1.5">
-                      <SelectValue placeholder="Select a category" />
+                      <SelectValue placeholder={t('select_category')} />
                     </SelectTrigger>
                     <SelectContent>
                       {categories.map((cat) => (
@@ -339,54 +341,54 @@ const Recipes = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="recipeName">Recipe Name</Label>
+                  <Label htmlFor="recipeName">{t('recipe_name')}</Label>
                   <Input
                     id="recipeName"
                     value={recipeName}
                     onChange={(e) => setRecipeName(e.target.value)}
-                    placeholder="e.g., Chocolate Chip Cookies"
+                    placeholder={t('recipe_name_placeholder')}
                     className="mt-1.5"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="description">Description</Label>
+                  <Label htmlFor="description">{t('description')}</Label>
                   <Textarea
                     id="description"
                     value={recipeDescription}
                     onChange={(e) => setRecipeDescription(e.target.value)}
-                    placeholder="Brief description of the recipe"
+                    placeholder={t('recipe_description_placeholder')}
                     className="mt-1.5"
                     rows={2}
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="ingredients">Ingredients</Label>
+                  <Label htmlFor="ingredients">{t('ingredients')}</Label>
                   <Textarea
                     id="ingredients"
                     value={recipeIngredients}
                     onChange={(e) => setRecipeIngredients(e.target.value)}
-                    placeholder="List ingredients (one per line)"
+                    placeholder={t('ingredients_placeholder')}
                     className="mt-1.5"
                     rows={4}
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="instructions">Instructions</Label>
+                  <Label htmlFor="instructions">{t('instructions')}</Label>
                   <Textarea
                     id="instructions"
                     value={recipeInstructions}
                     onChange={(e) => setRecipeInstructions(e.target.value)}
-                    placeholder="Step-by-step instructions"
+                    placeholder={t('instructions_placeholder')}
                     className="mt-1.5"
                     rows={4}
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="image">Recipe Image</Label>
+                  <Label htmlFor="image">{t('recipe_image')}</Label>
                   <Input
                     id="image"
                     type="file"
@@ -400,7 +402,7 @@ const Recipes = () => {
                 </div>
 
                 <Button onClick={handleSaveRecipe} className="w-full">
-                  {editingRecipe ? 'Update Recipe' : 'Save Recipe'}
+                  {editingRecipe ? t('update_recipe') : t('save_recipe')}
                 </Button>
               </div>
             </DialogContent>
@@ -422,7 +424,7 @@ const Recipes = () => {
                     <span className="font-medium">{category}</span>
                     <div className="flex items-center gap-2">
                       <span className="text-sm text-muted-foreground">
-                        {categoryRecipes.length} {categoryRecipes.length === 1 ? 'recipe' : 'recipes'}
+                        {categoryRecipes.length} {categoryRecipes.length === 1 ? t('recipe_count_single') : t('recipe_count_plural')}
                       </span>
                     </div>
                   </button>
@@ -431,7 +433,7 @@ const Recipes = () => {
                     <div className="ml-4 space-y-2">
                       {categoryRecipes.length === 0 ? (
                         <div className="p-4 bg-accent/10 rounded-lg text-sm text-muted-foreground text-center">
-                          No recipes in this category yet. Click "Add Recipe" above to add one!
+                          {t('no_recipes_category')}
                         </div>
                       ) : (
                         categoryRecipes.map((recipe) => (
@@ -455,13 +457,13 @@ const Recipes = () => {
                                 )}
                                 {recipe.ingredients && (
                                   <details className="text-sm" onClick={(e) => e.stopPropagation()}>
-                                    <summary className="cursor-pointer text-primary">View Ingredients</summary>
+                                    <summary className="cursor-pointer text-primary">{t('view_ingredients')}</summary>
                                     <pre className="mt-2 whitespace-pre-wrap">{recipe.ingredients}</pre>
                                   </details>
                                 )}
                                 {recipe.instructions && (
                                   <details className="text-sm mt-2" onClick={(e) => e.stopPropagation()}>
-                                    <summary className="cursor-pointer text-primary">View Instructions</summary>
+                                    <summary className="cursor-pointer text-primary">{t('view_instructions')}</summary>
                                     <pre className="mt-2 whitespace-pre-wrap">{recipe.instructions}</pre>
                                   </details>
                                 )}
