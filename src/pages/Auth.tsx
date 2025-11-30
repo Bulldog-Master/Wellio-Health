@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Activity, Mail, Lock, User as UserIcon, Sparkles, Fingerprint, Eye, EyeOff, Shield, Key, HeartPulse, Zap } from "lucide-react";
+import { Activity, Mail, Lock, User as UserIcon, Sparkles, Fingerprint, Eye, EyeOff, Shield, Key, HeartPulse, Zap, Gift, Users } from "lucide-react";
 import authHero from "@/assets/auth-hero-new.jpg";
 import { z } from "zod";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -15,6 +15,7 @@ import { isWebAuthnSupported, registerPasskey, authenticatePasskey } from "@/lib
 import { generateDeviceFingerprint, getDeviceName, getStoredFingerprint, storeFingerprint } from "@/lib/deviceFingerprint";
 import { Checkbox } from "@/components/ui/checkbox";
 import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
+import { Badge } from "@/components/ui/badge";
 
 const emailSchema = z.string().email("Invalid email address");
 const passwordSchema = z.string().min(6, "Password must be at least 6 characters");
@@ -45,6 +46,7 @@ const Auth = () => {
   const navigate = useNavigate();
   const [passkeySupported, setPasskeySupported] = useState(false);
   const [isInIframe, setIsInIframe] = useState(false);
+  const [hasReferralCode, setHasReferralCode] = useState(false);
 
   // Check for password reset FIRST (synchronously, before any other effects)
   const [initialCheckDone, setInitialCheckDone] = useState(false);
@@ -73,9 +75,11 @@ const Auth = () => {
     const refCode = urlParams.get('ref');
     if (refCode) {
       sessionStorage.setItem('referral_code', refCode);
+      setHasReferralCode(true);
+      setIsLogin(false); // Switch to signup
       toast({
-        title: "Welcome!",
-        description: "You've been referred by a friend. Sign up to get started!",
+        title: "🎉 Welcome!",
+        description: "You've been referred by a friend. Sign up to get bonus points!",
       });
     }
     
@@ -799,6 +803,47 @@ const Auth = () => {
               }
             </p>
           </div>
+
+          {/* Referral Promotion Banner */}
+          {!requires2FA && !isResettingPassword && !isLogin && (
+            <Card className="mb-6 overflow-hidden bg-gradient-to-br from-primary/10 via-accent/10 to-primary/10 border-primary/20 animate-fade-in">
+              <div className="p-4">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="p-2 bg-gradient-to-br from-primary to-accent rounded-lg">
+                    <Gift className="w-5 h-5 text-primary-foreground" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-sm flex items-center gap-2">
+                      {hasReferralCode ? "🎉 Bonus Points!" : "Welcome Rewards"}
+                      <Badge variant="secondary" className="text-xs">
+                        {hasReferralCode ? "75 pts" : "25 pts"}
+                      </Badge>
+                    </h3>
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      {hasReferralCode 
+                        ? "You'll get 25 welcome points + 50 bonus points from your friend!"
+                        : "Start earning rewards - Get 25 points just for signing up"
+                      }
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div className="p-2 rounded bg-background/50 text-center">
+                    <div className="font-semibold flex items-center justify-center gap-1">
+                      <Users className="w-3 h-3" />
+                      Share & Earn
+                    </div>
+                    <div className="text-muted-foreground mt-1">150 pts per friend</div>
+                  </div>
+                  <div className="p-2 rounded bg-background/50 text-center">
+                    <div className="font-semibold">Redeem Rewards</div>
+                    <div className="text-muted-foreground mt-1">500 pts = 1 Month Pro</div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          )}
 
           {requires2FA ? (
             <form onSubmit={handleVerify2FA} className="space-y-6">
