@@ -698,7 +698,7 @@ const Weight = () => {
                 }}
                 content={(props) => {
                   const { payload } = props;
-                  const items: JSX.Element[] = [];
+                  const items: any[] = [];
                   
                   payload?.forEach((entry: any, index: number) => {
                     items.push(
