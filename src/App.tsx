@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 import { Suspense } from "react";
 import { ThemeProvider } from "next-themes";
+import { I18nextProvider } from "react-i18next";
+import i18n from "@/i18n/config";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
 import { useAppKeyboardShortcuts } from "@/hooks/useKeyboardNavigation";
 import { useOfflineStatus } from "@/hooks/useOfflineStatus";
@@ -61,17 +63,21 @@ const AppContent = () => {
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <AppContent />
-          </BrowserRouter>
-        </TooltipProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <Suspense fallback={<PageLoader />}>
+      <I18nextProvider i18n={i18n}>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <AppContent />
+              </BrowserRouter>
+            </TooltipProvider>
+          </ThemeProvider>
+        </QueryClientProvider>
+      </I18nextProvider>
+    </Suspense>
   );
 };
 
