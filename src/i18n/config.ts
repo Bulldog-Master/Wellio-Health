@@ -10,7 +10,7 @@ Object.keys(localStorage).forEach(key => {
 });
 
 // Clear i18n cache to force fresh translations load (increment version when translations update)
-const I18N_VERSION = '3.0.0-flat-structure';
+const I18N_VERSION = '4.0.0-duplicates-fixed';
 const cachedVersion = localStorage.getItem('i18n_version');
 if (cachedVersion !== I18N_VERSION) {
   // Clear all i18n related localStorage
