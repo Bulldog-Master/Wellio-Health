@@ -148,7 +148,7 @@ const FoodLog = () => {
   const handleSearchFood = async () => {
     // Validate search query
     const validation = validateAndSanitize(mealSearchSchema, { query: searchQuery });
-    if (!validation.success) {
+    if (validation.success === false) {
       toast({
         title: "Validation Error",
         description: validation.error,
@@ -277,7 +277,7 @@ const FoodLog = () => {
       logged_at: logDate,
     });
 
-    if (!validation.success) {
+    if (validation.success === false) {
       toast({
         title: "Validation Error",
         description: validation.error,
