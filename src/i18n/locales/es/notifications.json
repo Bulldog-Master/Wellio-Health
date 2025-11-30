@@ -12,9 +12,21 @@
   "wants_to_follow": "quiere seguirte",
   "someone": "Alguien",
   "new_notification": "Nueva notificación",
-  "liked_your_post": "{{name}} le gustó tu publicación",
-  "commented_on_post": "{{name}} comentó en tu publicación",
-  "started_following": "{{name}} comenzó a seguirte",
-  "mentioned_you": "{{name}} te mencionó en una publicación",
-  "wants_to_follow": "{{name}} quiere seguirte"
+  
+  "time": {
+    "just_now": "justo ahora",
+    "seconds_ago": "hace {{count}} segundos",
+    "minute_ago": "hace 1 minuto",
+    "minutes_ago": "hace {{count}} minutos",
+    "hour_ago": "hace 1 hora",
+    "hours_ago": "hace {{count}} horas",
+    "day_ago": "hace 1 día",
+    "days_ago": "hace {{count}} días",
+    "week_ago": "hace 1 semana",
+    "weeks_ago": "hace {{count}} semanas",
+    "month_ago": "hace 1 mes",
+    "months_ago": "hace {{count}} meses",
+    "year_ago": "hace 1 año",
+    "years_ago": "hace {{count}} años"
+  }
 }

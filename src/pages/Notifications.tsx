@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useNavigate } from "react-router-dom";
 import { Heart, MessageCircle, UserPlus, Check, AtSign, UserCheck } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
+import { es } from "date-fns/locale";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 
@@ -27,7 +28,7 @@ interface Notification {
 const Notifications = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { t } = useTranslation(['notifications', 'common']);
+  const { t, i18n } = useTranslation(['notifications', 'common']);
   const queryClient = useQueryClient();
   const [userId, setUserId] = useState<string | null>(null);
 
@@ -223,7 +224,10 @@ const Notifications = () => {
                       <p className="text-sm">{getNotificationText(notification)}</p>
                     </div>
                     <p className="text-xs text-muted-foreground mt-1">
-                      {formatDistanceToNow(new Date(notification.created_at), { addSuffix: true })}
+                      {formatDistanceToNow(new Date(notification.created_at), { 
+                        addSuffix: true,
+                        locale: i18n.language === 'es' ? es : undefined
+                      })}
                     </p>
                   </div>
                   {!notification.is_read && (
