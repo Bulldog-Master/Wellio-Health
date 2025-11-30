@@ -17,6 +17,7 @@ import { ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { weightLogSchema, validateAndSanitize } from "@/lib/validationSchemas";
 import { useTranslation } from "react-i18next";
+import Navigation from "@/components/Navigation";
 
 interface WeightLog {
   id: string;
@@ -394,7 +395,13 @@ const Weight = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/5">
-      <div className="container mx-auto p-6 space-y-6 max-w-4xl">
+      <div className="flex min-h-screen">
+        <aside className="hidden md:block w-64 border-r border-border bg-sidebar sticky top-0 h-screen">
+          <Navigation />
+        </aside>
+        
+        <div className="flex-1">
+          <div className="container mx-auto p-6 space-y-6 max-w-4xl pb-20 md:pb-6">
         <Button
           variant="ghost"
           size="sm"
@@ -725,6 +732,12 @@ const Weight = () => {
             </div>
           )}
         </Card>
+          </div>
+        </div>
+        
+        <div className="md:hidden">
+          <Navigation />
+        </div>
       </div>
     </div>
   );
