@@ -21,17 +21,17 @@ const Layout = ({ children }: LayoutProps) => {
       <div className="flex flex-col md:flex-row max-w-7xl mx-auto">
         <aside className="hidden md:block md:w-64 md:border-r-2 md:border-sidebar-border md:min-h-screen bg-sidebar/95 backdrop-blur-sm shadow-lg">
           <div className="sticky top-0 p-6 space-y-4">
-            <div className="flex justify-end pb-2">
+            <div className="flex justify-center pb-3 border-b border-sidebar-border/30">
               <LanguageSwitcher />
             </div>
             
-            <div className="pb-3">
+            <div className="text-center pb-3">
               <h1 className="text-2xl font-bold gradient-text">
                 Wellio
               </h1>
             </div>
             
-            <div className="flex items-center justify-end gap-1 pb-4 border-b-2 border-sidebar-border">
+            <div className="grid grid-cols-3 gap-1 pb-4 border-b-2 border-sidebar-border">
               <Button
                 variant="ghost"
                 size="icon"
