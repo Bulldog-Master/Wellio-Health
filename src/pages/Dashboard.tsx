@@ -18,6 +18,14 @@ import { useTranslation } from "react-i18next";
 
 const Dashboard = () => {
   const { t } = useTranslation(['common', 'fitness']);
+  
+  // Debug: Log if translations are loaded
+  console.log('Dashboard translation test:', {
+    weight_goal_progress: t('weight_goal_progress'),
+    quick_actions: t('quick_actions'),
+    log_weight: t('log_weight')
+  });
+  
   const navigate = useNavigate();
   const { tier } = useSubscription();
   const [currentWeight, setCurrentWeight] = useState(0);
@@ -148,7 +156,7 @@ const Dashboard = () => {
 
       {/* Upgrade Prompt for Free Users */}
       {tier === 'free' && (
-        <UpgradePrompt compact feature={t('unlock_advanced_features')} />
+        <UpgradePrompt compact feature={t('advanced_features')} />
       )}
 
       {/* Dashboard Mini-Charts */}
