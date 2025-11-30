@@ -41,6 +41,14 @@ const Weight = () => {
   const [chartView, setChartView] = useState<"daily" | "monthly" | "quarterly" | "yearly" | "year-by-year">("monthly");
   const [targetWeight, setTargetWeight] = useState<number | null>(null);
 
+  // Pre-compute translated labels to avoid calling t() inside render callbacks
+  const weightUnitLabel = useMemo(() => 
+    preferredUnit === 'imperial' ? t('weight:weight_unit_lbs') : t('weight:weight_unit_kg'),
+    [preferredUnit, t]
+  );
+  
+  const targetWeightLabel = useMemo(() => t('weight:target_weight'), [t]);
+
   useEffect(() => {
     fetchWeightLogs();
     fetchTargetWeight();
@@ -667,17 +675,13 @@ const Weight = () => {
                 dataKey="date" 
                 className="text-xs"
                 tick={{ fill: 'hsl(var(--foreground))' }}
-                tickFormatter={(value) => {
-                  const date = new Date(value);
-                  return format(date, "MMM d", { locale: i18n.language === 'es' ? es : undefined });
-                }}
               />
               <YAxis 
                 domain={getYAxisDomain()}
                 className="text-xs"
                 tick={{ fill: 'hsl(var(--foreground))' }}
                 label={{ 
-                  value: preferredUnit === 'imperial' ? t('weight:weight_unit_lbs') : t('weight:weight_unit_kg'), 
+                  value: weightUnitLabel, 
                   angle: -90, 
                   position: 'insideLeft',
                   style: { fill: 'hsl(var(--foreground))' }
@@ -729,7 +733,7 @@ const Weight = () => {
                             strokeDasharray="4 2"
                           />
                         </svg>
-                        <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{t('weight:target_weight')}</span>
+                        <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{targetWeightLabel}</span>
                       </div>
                     );
                   }
