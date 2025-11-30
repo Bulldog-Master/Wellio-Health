@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useTranslation } from "react-i18next";
+import i18n from "@/i18n/config";
 
 interface Recipe {
   id: string;
@@ -54,6 +55,11 @@ const Recipes = () => {
 
   useEffect(() => {
     fetchRecipes();
+    // Log translation test on mount
+    console.log('=== RECIPE TRANSLATIONS TEST ===');
+    console.log('category_vegan:', t('category_vegan'));
+    console.log('category_keto:', t('category_keto'));
+    console.log('Current language:', i18n.language);
   }, []);
 
   const fetchRecipes = async () => {
