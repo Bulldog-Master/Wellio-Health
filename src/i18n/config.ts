@@ -3,7 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 // Clear i18n cache to force fresh translations load (increment version when translations update)
-const I18N_VERSION = '1.0.5';
+const I18N_VERSION = '1.0.6';
 const cachedVersion = localStorage.getItem('i18n_version');
 if (cachedVersion !== I18N_VERSION) {
   // Clear all i18n related localStorage
@@ -13,8 +13,6 @@ if (cachedVersion !== I18N_VERSION) {
     }
   });
   localStorage.setItem('i18n_version', I18N_VERSION);
-  // Force a hard reload to clear all caches
-  window.location.reload();
 }
 
 // Import translation files
