@@ -263,6 +263,58 @@ const { data } = await supabase
 - Review medical_audit_log for unauthorized access attempts
 - Audit fundraiser_donations for anonymity breaches
 
+## Additional Security Enhancements Applied
+
+### Database-Level Protections Added
+
+1. **Auth Secrets Hardening**
+   - Explicit service role-only policies
+   - Blocked all authenticated user access
+   - Separate policies for SELECT, INSERT, UPDATE, DELETE
+
+2. **Trainer Profile Validation**
+   - Bio cannot contain email addresses (regex validation)
+   - Bio cannot contain phone numbers (regex validation)
+   - Location validation prevents street addresses
+   - Trigger enforces rules on insert/update
+
+3. **Post Metadata Protection**
+   - Trigger blocks sensitive keys: ip_address, device_id, location, coordinates, lat, lon, tracking_id
+   - Prevents tracking data from being stored in post metadata
+   - Raises exception if sensitive data detected
+
+4. **Comprehensive Security Documentation**
+   - Added COMMENT ON TABLE for all sensitive tables
+   - Documents which fields are safe to query
+   - Provides security warnings and best practices
+   - Marks health data tables as SENSITIVE/CRITICAL
+
+### Tables with Enhanced Documentation
+
+- **medications**: SENSITIVE HEALTH DATA - prescription info
+- **symptoms**: SENSITIVE HEALTH DATA - condition tracking
+- **nutrition_logs**: HEALTH DATA - may reveal eating disorders
+- **wearable_data**: CRITICAL HEALTH DATA - steps, heart rate, sleep
+- **progress_photos**: SENSITIVE DATA - body image, health conditions
+- **voice_notes**: PRIVACY - voice patterns, personal information
+- **bookings**: PRIVACY - patterns reveal health information
+- **medical_records**: CRITICAL - requires signed URLs
+- **subscriptions**: CRITICAL - never expose Stripe IDs
+- **profiles**: SECURITY CRITICAL - limited field querying required
+
+### Validation Triggers Implemented
+
+1. **validate_trainer_location**: Prevents street addresses in trainer locations
+2. **validate_trainer_profile**: Blocks email/phone in public bio
+3. **validate_post_metadata**: Prevents sensitive tracking data storage
+
+### Policy Cleanup
+
+- Removed duplicate leaderboard policies
+- Simplified challenge leaderboard access
+- Fixed auth_secrets service role policies
+- Enhanced notification creation restrictions
+
 ## Future Enhancements
 
 1. Consider adding `private_followers` option to profiles
@@ -270,3 +322,5 @@ const { data } = await supabase
 3. Add `hide_members` flag for sensitive group types
 4. Implement rate limiting on error log creation
 5. Consider aggregating story views for analytics
+6. Add encryption at rest for medical files
+7. Implement field-level encryption for highly sensitive data
