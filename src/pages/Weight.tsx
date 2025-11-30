@@ -47,16 +47,23 @@ const Weight = () => {
     evening: '',
     average: ''
   });
+  const [isReady, setIsReady] = useState(false);
 
   // Update labels when translations or preferences change
   useEffect(() => {
-    setChartLabels({
-      weightUnit: preferredUnit === 'imperial' ? t('weight:weight_unit_lbs') : t('weight:weight_unit_kg'),
-      targetLabel: t('weight:target_weight'),
-      morning: t('weight:morning'),
-      evening: t('weight:evening'),
-      average: t('weight:average_weight')
-    });
+    try {
+      setChartLabels({
+        weightUnit: preferredUnit === 'imperial' ? t('weight:weight_unit_lbs') : t('weight:weight_unit_kg'),
+        targetLabel: t('weight:target_weight'),
+        morning: t('weight:morning'),
+        evening: t('weight:evening'),
+        average: t('weight:average_weight')
+      });
+      // Mark as ready after a small delay to ensure everything is settled
+      setTimeout(() => setIsReady(true), 100);
+    } catch (error) {
+      console.error('Error setting chart labels:', error);
+    }
   }, [preferredUnit, t, i18n.language]);
 
   useEffect(() => {
@@ -65,7 +72,7 @@ const Weight = () => {
   }, []);
 
   // Safety check: don't render chart until translations are loaded
-  const translationsReady = chartLabels.weightUnit !== '' && chartLabels.morning !== '';
+  const translationsReady = isReady && chartLabels.weightUnit !== '' && chartLabels.morning !== '';
 
   const fetchWeightLogs = async () => {
     try {
