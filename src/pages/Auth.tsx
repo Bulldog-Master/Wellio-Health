@@ -855,7 +855,7 @@ const Auth = () => {
 
               {useBackupCode ? (
                 <div className="space-y-2">
-                  <Label htmlFor="backup">Backup Code</Label>
+                  <Label htmlFor="backup">{t('backup_code')}</Label>
                   <Input
                     id="backup"
                     type="text"
@@ -868,7 +868,7 @@ const Auth = () => {
                 </div>
               ) : (
                 <div className="space-y-2">
-                  <Label htmlFor="totp">Authentication Code</Label>
+                  <Label htmlFor="totp">{t('authentication_code')}</Label>
                   <Input
                     id="totp"
                     type="text"
@@ -892,7 +892,7 @@ const Auth = () => {
                   htmlFor="remember" 
                   className="text-sm font-normal cursor-pointer"
                 >
-                  Remember this device for 30 days
+                  {t('remember_device')}
                 </Label>
               </div>
 
@@ -901,7 +901,7 @@ const Auth = () => {
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                 disabled={loading || (!useBackupCode && totpCode.length !== 6) || (useBackupCode && !backupCode.trim())}
               >
-                {loading ? "Verifying..." : "Verify and Continue"}
+                {loading ? t('verifying') : t('verify_continue')}
               </Button>
 
               <Button
@@ -914,7 +914,7 @@ const Auth = () => {
                   setBackupCode("");
                 }}
               >
-                {useBackupCode ? "Use Authenticator App" : "Use Backup Code"}
+                {useBackupCode ? t('use_authenticator') : t('use_backup_code')}
               </Button>
 
               <Button
@@ -931,7 +931,7 @@ const Auth = () => {
                   setPassword("");
                 }}
               >
-                Cancel
+                {t('cancel')}
               </Button>
             </form>
           ) : (
@@ -939,15 +939,15 @@ const Auth = () => {
               <TabsList className="grid w-full grid-cols-3 mb-6 bg-muted">
                 <TabsTrigger value="password" className="data-[state=active]:bg-background data-[state=active]:text-foreground">
                   <Lock className="h-4 w-4 mr-2" />
-                  Password
+                  {t('password_tab')}
                 </TabsTrigger>
                 <TabsTrigger value="magiclink" className="gap-2 data-[state=active]:bg-background data-[state=active]:text-foreground">
                   <Sparkles className="h-4 w-4" />
-                  Magic
+                  {t('magic_tab')}
                 </TabsTrigger>
                 <TabsTrigger value="passkey" className="gap-2 data-[state=active]:bg-background data-[state=active]:text-foreground" disabled={!passkeySupported}>
                   <Fingerprint className="h-4 w-4" />
-                  Passkey
+                  {t('passkey_tab')}
                 </TabsTrigger>
               </TabsList>
 
@@ -955,13 +955,13 @@ const Auth = () => {
                 {isForgotPassword ? (
                   <form onSubmit={handleForgotPassword} className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="reset-email">Email</Label>
+                      <Label htmlFor="reset-email">{t('email')}</Label>
                       <div className="relative">
                         <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                         <Input
                           id="reset-email"
                           type="email"
-                          placeholder="you@example.com"
+                          placeholder={t('email_placeholder')}
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           className="pl-10"
@@ -975,7 +975,7 @@ const Auth = () => {
                       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                       disabled={loading}
                     >
-                      {loading ? "Sending..." : "Send Reset Link"}
+                      {loading ? t('sending') : t('send_reset_link')}
                     </Button>
 
                     <Button
@@ -984,23 +984,23 @@ const Auth = () => {
                       className="w-full"
                       onClick={() => setIsForgotPassword(false)}
                     >
-                      Back to Sign In
+                      {t('back_to_signin')}
                     </Button>
 
                     <p className="text-xs text-center text-muted-foreground">
-                      We'll send a secure password reset link to your email address.
+                      {t('reset_link_desc')}
                     </p>
                   </form>
                 ) : isResettingPassword ? (
                   <form onSubmit={handleResetPassword} className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="new-password">New Password</Label>
+                      <Label htmlFor="new-password">{t('new_password')}</Label>
                       <div className="relative">
                         <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                         <Input
                           id="new-password"
                           type={showNewPassword ? "text" : "password"}
-                          placeholder="••••••••"
+                          placeholder={t('password_placeholder')}
                           value={newPassword}
                           onChange={(e) => setNewPassword(e.target.value)}
                           className="pl-10 pr-10"
@@ -1017,13 +1017,13 @@ const Auth = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="confirm-new-password">Confirm New Password</Label>
+                      <Label htmlFor="confirm-new-password">{t('confirm_new_password')}</Label>
                       <div className="relative">
                         <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                         <Input
                           id="confirm-new-password"
                           type={showConfirmPassword ? "text" : "password"}
-                          placeholder="••••••••"
+                          placeholder={t('password_placeholder')}
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
                           className="pl-10 pr-10"
@@ -1044,24 +1044,24 @@ const Auth = () => {
                       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                       disabled={loading}
                     >
-                      {loading ? "Updating..." : "Update Password"}
+                      {loading ? t('updating') : t('update_password')}
                     </Button>
 
                     <p className="text-xs text-center text-muted-foreground">
-                      Password must be at least 6 characters long.
+                      {t('password_length_desc')}
                     </p>
                   </form>
                 ) : (
                   <form onSubmit={handlePasswordAuth} className="space-y-4">
                 {!isLogin && (
                   <div className="space-y-2">
-                    <Label htmlFor="name">Name</Label>
+                    <Label htmlFor="name">{t('name')}</Label>
                     <div className="relative">
                       <UserIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="name"
                         type="text"
-                        placeholder="John Doe"
+                        placeholder={t('full_name')}
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         className="pl-10"
@@ -1073,28 +1073,28 @@ const Auth = () => {
 
                 {!isLogin && (
                   <div className="space-y-2">
-                    <Label htmlFor="role">I am a...</Label>
+                    <Label htmlFor="role">{t('i_am_a')}</Label>
                     <Select value={userRole} onValueChange={(value: 'user' | 'trainer' | 'creator') => setUserRole(value)}>
                       <SelectTrigger id="role">
-                        <SelectValue placeholder="Select your role" />
+                        <SelectValue placeholder={t('select_role')} />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="user">
                           <div className="flex flex-col items-start">
-                            <span className="font-medium">Fitness Enthusiast</span>
-                            <span className="text-xs text-muted-foreground">Track my own health & fitness journey</span>
+                            <span className="font-medium">{t('fitness_enthusiast')}</span>
+                            <span className="text-xs text-muted-foreground">{t('fitness_enthusiast_desc')}</span>
                           </div>
                         </SelectItem>
                         <SelectItem value="trainer">
                           <div className="flex flex-col items-start">
-                            <span className="font-medium">Trainer / Coach</span>
-                            <span className="text-xs text-muted-foreground">Offer programs & train clients</span>
+                            <span className="font-medium">{t('trainer_coach')}</span>
+                            <span className="text-xs text-muted-foreground">{t('trainer_coach_desc')}</span>
                           </div>
                         </SelectItem>
                         <SelectItem value="creator">
                           <div className="flex flex-col items-start">
-                            <span className="font-medium">Content Creator / KOL</span>
-                            <span className="text-xs text-muted-foreground">Share content & build community</span>
+                            <span className="font-medium">{t('content_creator')}</span>
+                            <span className="text-xs text-muted-foreground">{t('content_creator_desc')}</span>
                           </div>
                         </SelectItem>
                       </SelectContent>
@@ -1103,13 +1103,13 @@ const Auth = () => {
                 )}
 
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">{t('email')}</Label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="email"
                       type="email"
-                      placeholder="you@example.com"
+                      placeholder={t('email_placeholder')}
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="pl-10"
@@ -1119,13 +1119,13 @@ const Auth = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">{t('password')}</Label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="password"
                       type={showPassword ? "text" : "password"}
-                      placeholder="••••••••"
+                      placeholder={t('password_placeholder')}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="pl-10 pr-10"
@@ -1146,7 +1146,7 @@ const Auth = () => {
                         onClick={() => setIsForgotPassword(true)}
                         className="text-sm font-semibold underline text-[#00D4FF] hover:text-[#00E4FF]"
                       >
-                        Forgot Password?
+                        {t('forgot_password_q')}
                       </button>
                     </div>
                   )}
@@ -1154,13 +1154,13 @@ const Auth = () => {
 
                 {!isLogin && (
                   <div className="space-y-2">
-                    <Label htmlFor="confirmPassword">Confirm Password</Label>
+                    <Label htmlFor="confirmPassword">{t('confirm_password')}</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="confirmPassword"
                         type={showConfirmPassword ? "text" : "password"}
-                        placeholder="••••••••"
+                        placeholder={t('password_placeholder')}
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         className="pl-10 pr-10"
@@ -1182,7 +1182,7 @@ const Auth = () => {
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                   disabled={loading}
                 >
-                  {loading ? "Loading..." : isLogin ? "Sign In" : "Create Account"}
+                  {loading ? t('loading_ellipsis') : isLogin ? t('sign_in_btn') : t('create_account_btn')}
                 </Button>
               </form>
                 )}
@@ -1191,13 +1191,13 @@ const Auth = () => {
             <TabsContent value="magiclink">
               <form onSubmit={handleMagicLink} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="magic-email">Email</Label>
+                  <Label htmlFor="magic-email">{t('email')}</Label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="magic-email"
                       type="email"
-                      placeholder="you@example.com"
+                      placeholder={t('email_placeholder')}
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="pl-10"
@@ -1211,11 +1211,11 @@ const Auth = () => {
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                   disabled={loading}
                 >
-                  {loading ? "Sending..." : "Send Magic Link"}
+                  {loading ? t('sending') : t('send_magic_link')}
                 </Button>
 
                 <p className="text-xs text-center text-muted-foreground">
-                  We'll send a one-time login link to your email. Click it to sign in instantly without a password.
+                  {t('magic_link_desc')}
                 </p>
               </form>
             </TabsContent>
@@ -1223,9 +1223,9 @@ const Auth = () => {
             <TabsContent value="passkey">
               {isInIframe && (
                 <div className="mb-4 p-4 bg-accent/20 border border-accent rounded-lg">
-                  <p className="text-sm text-accent font-semibold mb-2">Preview Mode Limitation</p>
+                  <p className="text-sm text-accent font-semibold mb-2">{t('preview_limitation')}</p>
                   <p className="text-xs text-muted-foreground mb-3">
-                    Passkey authentication doesn't work in the Lovable preview due to iframe security restrictions.
+                    {t('passkey_preview_desc')}
                   </p>
                   <Button
                     type="button"
@@ -1233,10 +1233,10 @@ const Auth = () => {
                     className="w-full"
                     onClick={() => window.open(window.location.href, '_blank')}
                   >
-                    Open in New Tab to Test
+                    {t('open_new_tab')}
                   </Button>
                   <p className="text-xs text-muted-foreground mt-2 text-center">
-                    Passkeys will work normally when your app is published.
+                    {t('passkey_published_desc')}
                   </p>
                 </div>
               )}
@@ -1245,9 +1245,9 @@ const Auth = () => {
                 {isLogin ? (
                   <div className="text-center py-8">
                     <Fingerprint className="w-16 h-16 mx-auto mb-4 text-primary" />
-                    <h3 className="text-lg font-semibold mb-2">Sign In with Passkey</h3>
+                    <h3 className="text-lg font-semibold mb-2">{t('sign_in_passkey')}</h3>
                     <p className="text-sm text-muted-foreground mb-6">
-                      Click the button below to sign in using your device's biometric authentication
+                      {t('passkey_biometric_desc')}
                     </p>
                     <Button
                       type="submit"
@@ -1331,9 +1331,9 @@ const Auth = () => {
                 }}
                 className="text-sm"
               >
-                {isLogin ? "Don't have an account? " : "Already have an account? "}
+                {isLogin ? t('dont_have_account_q') : t('already_have_account_q')}
                 <span className="font-semibold text-primary ml-1">
-                  {isLogin ? "Sign up" : "Sign in"}
+                  {isLogin ? t('sign_up_link') : t('sign_in_link')}
                 </span>
               </Button>
             )}
