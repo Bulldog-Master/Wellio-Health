@@ -85,11 +85,11 @@ const SleepTracking = () => {
   const lastNight = getLastNight();
 
   if (loading) {
-    return <div className="p-6">{t('sleep.loading')}</div>;
+    return <div className="p-6">{t('loading')}</div>;
   }
 
   return (
-    <div className="space-y-6 max-w-4xl">
+    <div className="space-y-6 max-w-4xl" key="sleep-tracking-v2">
       <Button
         variant="ghost"
         size="sm"
@@ -105,8 +105,8 @@ const SleepTracking = () => {
           <Moon className="w-6 h-6 text-primary" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold">{t('sleep.title')}</h1>
-          <p className="text-muted-foreground mt-1">{t('sleep.subtitle')}</p>
+          <h1 className="text-3xl font-bold">{t('sleepTracking')}</h1>
+          <p className="text-muted-foreground mt-1">{t('monitorSleepPatterns')}</p>
         </div>
       </div>
 
@@ -115,7 +115,7 @@ const SleepTracking = () => {
         <Card className="p-6 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center gap-3 mb-2">
             <Moon className="w-5 h-5 text-primary" />
-            <h3 className="font-semibold">{t('sleep.lastNight')}</h3>
+            <h3 className="font-semibold">{t('lastNight')}</h3>
           </div>
           {lastNight ? (
             <>
@@ -125,7 +125,7 @@ const SleepTracking = () => {
               </p>
             </>
           ) : (
-            <p className="text-muted-foreground">{t('sleep.noData')}</p>
+            <p className="text-muted-foreground">{t('no_data')}</p>
           )}
         </Card>
 
@@ -134,10 +134,10 @@ const SleepTracking = () => {
             <div className="p-2 bg-primary/10 rounded-xl">
               <Calendar className="w-5 h-5 text-primary" />
             </div>
-            <h3 className="font-semibold">{t('sleep.weeklyAverage')}</h3>
+            <h3 className="font-semibold">{t('weeklyAverage')}</h3>
           </div>
           <p className="text-3xl font-bold">{getWeeklyAverage()}h</p>
-          <p className="text-sm text-muted-foreground">{t('sleep.last7Days')}</p>
+          <p className="text-sm text-muted-foreground">{t('last7Days')}</p>
         </Card>
 
         <Card className="p-6 hover:shadow-xl transition-all duration-300">
@@ -145,10 +145,10 @@ const SleepTracking = () => {
             <div className="p-2 bg-primary/10 rounded-xl">
               <TrendingUp className="w-5 h-5 text-primary" />
             </div>
-            <h3 className="font-semibold">{t('sleep.monthlyAverage')}</h3>
+            <h3 className="font-semibold">{t('monthlyAverage')}</h3>
           </div>
           <p className="text-3xl font-bold">{getMonthlyAverage()}h</p>
-          <p className="text-sm text-muted-foreground">{t('sleep.last30Days')}</p>
+          <p className="text-sm text-muted-foreground">{t('last30Days')}</p>
         </Card>
       </div>
 
@@ -158,18 +158,18 @@ const SleepTracking = () => {
           <div className="p-2 bg-primary/10 rounded-xl">
             <Moon className="w-5 h-5 text-primary" />
           </div>
-          <h3 className="text-lg font-semibold">{t('sleep.sleepHistory')}</h3>
+          <h3 className="text-lg font-semibold">{t('sleepHistory')}</h3>
         </div>
         {sleepData.length === 0 ? (
           <div className="text-center py-8 space-y-4">
             <p className="text-muted-foreground">
-              {t('sleep.noDataAvailable')}
+              {t('noDataAvailable')}
             </p>
             <p className="text-sm text-muted-foreground">
-              {t('sleep.connectWearable')}
+              {t('connectWearable')}
             </p>
             <Button onClick={() => navigate("/activity")}>
-              {t('sleep.goToActivity')}
+              {t('goToActivity')}
             </Button>
           </div>
         ) : (
@@ -194,10 +194,10 @@ const SleepTracking = () => {
                   <p className="text-2xl font-bold">{sleep.sleep_hours}h</p>
                   <p className="text-sm text-muted-foreground">
                     {sleep.sleep_hours >= 7 && sleep.sleep_hours <= 9
-                      ? `✅ ${t('sleep.optimal')}`
+                      ? `✅ ${t('optimal')}`
                       : sleep.sleep_hours < 7
-                      ? `⚠️ ${t('sleep.belowTarget')}`
-                      : `⚠️ ${t('sleep.aboveTarget')}`}
+                      ? `⚠️ ${t('belowTarget')}`
+                      : `⚠️ ${t('aboveTarget')}`}
                   </p>
                 </div>
               </div>
