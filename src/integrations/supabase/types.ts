@@ -417,6 +417,7 @@ export type Database = {
           completed_at: string | null
           current_progress: number | null
           id: string
+          is_public: boolean | null
           joined_at: string
           status: string | null
           user_id: string
@@ -426,6 +427,7 @@ export type Database = {
           completed_at?: string | null
           current_progress?: number | null
           id?: string
+          is_public?: boolean | null
           joined_at?: string
           status?: string | null
           user_id: string
@@ -435,6 +437,7 @@ export type Database = {
           completed_at?: string | null
           current_progress?: number | null
           id?: string
+          is_public?: boolean | null
           joined_at?: string
           status?: string | null
           user_id?: string
@@ -1220,6 +1223,7 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          is_public: boolean | null
           leaderboard_type: string
           period_end: string
           period_start: string
@@ -1231,6 +1235,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
+          is_public?: boolean | null
           leaderboard_type: string
           period_end: string
           period_start: string
@@ -1242,6 +1247,7 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
+          is_public?: boolean | null
           leaderboard_type?: string
           period_end?: string
           period_start?: string
@@ -3551,6 +3557,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      log_medical_read: { Args: never; Returns: undefined }
     }
     Enums: {
       app_role: "user" | "trainer" | "creator" | "admin"
