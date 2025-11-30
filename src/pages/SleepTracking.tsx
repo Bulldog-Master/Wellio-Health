@@ -17,15 +17,9 @@ interface SleepData {
 
 const SleepTracking = () => {
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation('common');
+  const { t } = useTranslation('common');
   const [sleepData, setSleepData] = useState<SleepData[]>([]);
   const [loading, setLoading] = useState(true);
-
-  // Debug: Log to verify language and translations
-  console.log('🌍 Sleep Tracking - Current language:', i18n.language);
-  console.log('🔤 localStorage i18nextLng:', localStorage.getItem('i18nextLng'));
-  console.log('📝 Translation test - sleepTracking:', t('sleepTracking'));
-  console.log('📝 Translation test - backToDashboard:', t('backToDashboard'));
 
   useEffect(() => {
     fetchSleepData();
@@ -88,7 +82,7 @@ const SleepTracking = () => {
   }
 
   return (
-    <div className="space-y-6 max-w-4xl" key="sleep-tracking-v2">
+    <div className="space-y-6 max-w-4xl">
       <Button
         variant="ghost"
         size="sm"
