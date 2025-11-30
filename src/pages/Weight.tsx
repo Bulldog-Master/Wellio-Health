@@ -718,23 +718,10 @@ const Weight = () => {
           </TabsList>
         </Tabs>
 
-        {isLoading ? (
-          <p className="text-center text-muted-foreground py-8">{t('weight:loading')}</p>
-        ) : !translationsReady || !chartReady ? (
-          <p className="text-center text-muted-foreground py-8">Loading chart...</p>
-        ) : !chartData || chartData.length === 0 ? (
-          <p className="text-center text-muted-foreground py-8">{t('weight:no_chart_data')}</p>
-        ) : (
-          <WeightChart
-            chartData={chartData}
-            chartView={chartView}
-            chartLines={chartLines}
-            targetWeight={targetWeight}
-            preferredUnit={preferredUnit}
-            getYAxisDomain={getYAxisDomain}
-            chartLabels={chartLabels}
-          />
-        )}
+        <div className="text-center py-8">
+          <p className="text-muted-foreground">Chart temporarily disabled for testing</p>
+          <p className="text-sm text-muted-foreground mt-2">Chart data points: {chartData.length}</p>
+        </div>
       </Card>
 
       <Card className="p-6 bg-gradient-card shadow-md">
