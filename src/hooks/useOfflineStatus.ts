@@ -1,17 +1,20 @@
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 /**
  * Hook to monitor and handle offline/online status
  */
 export const useOfflineStatus = () => {
+  const { t } = useTranslation();
+  
   useEffect(() => {
     const handleOnline = () => {
-      toast.success("You're back online!");
+      toast.success(t('youre_back_online'));
     };
 
     const handleOffline = () => {
-      toast.error("You're offline. Some features may be limited.", {
+      toast.error(t('youre_offline_limited'), {
         duration: Infinity,
         id: "offline-status",
       });

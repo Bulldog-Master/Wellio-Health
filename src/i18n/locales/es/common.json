@@ -163,5 +163,9 @@
   "steps": "Pasos",
   "habit": "Hábito",
   "achievement": "Logro",
-  "challenge": "Desafío"
+  "challenge": "Desafío",
+  "youre_back_online": "¡Estás de vuelta en línea!",
+  "youre_offline_sync": "Estás sin conexión. Los cambios se sincronizarán cuando te reconectes.",
+  "youre_offline_restore": "Estás sin conexión. Los cambios se sincronizarán cuando se restaure la conexión.",
+  "youre_offline_limited": "Estás sin conexión. Algunas funciones pueden estar limitadas."
 }
