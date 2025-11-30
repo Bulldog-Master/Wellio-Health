@@ -192,5 +192,24 @@
   "calories_7_days": "Calorías (7 Días)",
   "workouts_7_days": "Entrenamientos (7 Días)",
   "duration": "Duración",
-  "no_data": "Sin datos"
+  "no_data": "Sin datos",
+  "backToDashboard": "Volver al Panel",
+  "sleep": {
+    "title": "Seguimiento del Sueño",
+    "subtitle": "Monitorea tus patrones de sueño",
+    "lastNight": "Última Noche",
+    "weeklyAverage": "Promedio Semanal",
+    "monthlyAverage": "Promedio Mensual",
+    "last7Days": "Últimos 7 días",
+    "last30Days": "Últimos 30 días",
+    "sleepHistory": "Historial de Sueño",
+    "noData": "Sin datos",
+    "noDataAvailable": "Aún no hay datos de sueño disponibles.",
+    "connectWearable": "Conecta un dispositivo portátil en la sección de Actividad para rastrear tu sueño.",
+    "goToActivity": "Ir a Actividad",
+    "optimal": "Óptimo",
+    "belowTarget": "Por debajo del objetivo",
+    "aboveTarget": "Por encima del objetivo",
+    "loading": "Cargando..."
+  }
 }
