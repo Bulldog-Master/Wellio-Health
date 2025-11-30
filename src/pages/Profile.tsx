@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { User, Save, Share2, Copy, Check, Upload, Settings, ChevronDown, Shield, CreditCard, Bell, HelpCircle, UserCircle, Target, LogOut, Crown, Gift } from "lucide-react";
+import { User, Save, Share2, Copy, Check, Upload, Settings, ChevronDown, Shield, CreditCard, Bell, HelpCircle, UserCircle, Target, LogOut, Crown, Gift, Sparkles, Users } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -25,6 +25,7 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [referralPoints, setReferralPoints] = useState(0);
   
   const [openPersonalInfo, setOpenPersonalInfo] = useState(false);
   const [openFitnessGoals, setOpenFitnessGoals] = useState(false);
@@ -49,7 +50,25 @@ const Profile = () => {
 
   useEffect(() => {
     fetchProfile();
+    fetchReferralPoints();
   }, []);
+
+  const fetchReferralPoints = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('referral_points')
+        .eq('id', user.id)
+        .single();
+
+      setReferralPoints(profile?.referral_points || 0);
+    } catch (error) {
+      console.error('Error fetching referral points:', error);
+    }
+  };
 
   const fetchProfile = async () => {
     try {
@@ -296,6 +315,49 @@ const Profile = () => {
           </Button>
         )}
       </div>
+
+      {/* Referral Points Card */}
+      {referralPoints > 0 && (
+        <Card className="p-6 bg-gradient-hero text-white shadow-glow-secondary cursor-pointer hover:shadow-glow-primary transition-all" onClick={() => navigate('/rewards')}>
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <Sparkles className="w-5 h-5" />
+                <p className="text-white/90 font-medium">Your Reward Points</p>
+              </div>
+              <h2 className="text-4xl font-bold">{referralPoints} Points</h2>
+              <p className="text-white/80 text-sm mt-2">
+                {referralPoints >= 500 ? '🎉 You can redeem rewards!' : `Earn ${500 - referralPoints} more for your first reward`}
+              </p>
+            </div>
+            <div className="text-right">
+              <Button 
+                variant="secondary"
+                className="gap-2 bg-white/20 hover:bg-white/30 text-white border-white/30"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate('/rewards');
+                }}
+              >
+                <Gift className="w-4 h-4" />
+                Rewards Store
+              </Button>
+              <Button 
+                variant="ghost"
+                size="sm"
+                className="mt-2 gap-2 text-white/80 hover:text-white hover:bg-white/10"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate('/referral');
+                }}
+              >
+                <Users className="w-4 h-4" />
+                Earn More
+              </Button>
+            </div>
+          </div>
+        </Card>
+      )}
 
       {/* Personal Information Section */}
       <Card className="bg-gradient-card shadow-md overflow-hidden">

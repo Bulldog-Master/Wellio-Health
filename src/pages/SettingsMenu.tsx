@@ -1,13 +1,53 @@
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight, Heart, Crown, Gift } from "lucide-react";
+import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight, Heart, Crown, Gift, Award, Sparkles, Users } from "lucide-react";
 import { useSubscription } from "@/hooks/useSubscription";
 import { Badge } from "@/components/ui/badge";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 const SettingsMenu = () => {
   const navigate = useNavigate();
   const { tier } = useSubscription();
+  const [referralStats, setReferralStats] = useState({
+    points: 0,
+    totalReferrals: 0,
+    activeUsers: 0
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchReferralStats();
+  }, []);
+
+  const fetchReferralStats = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('referral_points')
+        .eq('id', user.id)
+        .single();
+
+      const { data: referralsData } = await supabase
+        .from('referrals')
+        .select('status')
+        .eq('referrer_id', user.id);
+
+      setReferralStats({
+        points: profile?.referral_points || 0,
+        totalReferrals: referralsData?.length || 0,
+        activeUsers: referralsData?.filter(r => r.status === 'completed').length || 0
+      });
+    } catch (error) {
+      console.error('Error fetching referral stats:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const settingsItems = [
     {
@@ -21,11 +61,27 @@ const SettingsMenu = () => {
     },
     {
       title: "Referral Program",
-      description: "Share Wellio and earn rewards for referrals",
-      icon: Gift,
+      description: loading 
+        ? "Loading your referral stats..." 
+        : `${referralStats.points} points • ${referralStats.totalReferrals} referrals • ${referralStats.activeUsers} active`,
+      icon: Users,
       iconBg: "bg-purple-500/20",
       iconColor: "text-purple-500",
       path: "/referral",
+      badge: referralStats.points > 0 ? `${referralStats.points} pts` : undefined,
+      badgeVariant: "secondary" as const,
+    },
+    {
+      title: "Rewards Store",
+      description: loading
+        ? "Browse rewards..."
+        : `Spend your ${referralStats.points} points on premium rewards`,
+      icon: Gift,
+      iconBg: "bg-accent/20",
+      iconColor: "text-accent",
+      path: "/rewards",
+      badge: referralStats.points >= 500 ? "Can Redeem!" : undefined,
+      badgeVariant: "default" as const,
     },
     {
       title: "Privacy & Security",
@@ -110,7 +166,10 @@ const SettingsMenu = () => {
                   <h3 className="font-semibold text-lg mb-1 group-hover:text-primary transition-colors">{item.title}</h3>
                   <p className="text-sm text-muted-foreground">{item.description}</p>
                   {item.badge && (
-                    <Badge variant="outline" className="mt-2 inline-block capitalize border-primary/30 bg-primary/5 text-primary">
+                    <Badge 
+                      variant={item.badgeVariant || "outline"} 
+                      className="mt-2 inline-block capitalize"
+                    >
                       {item.badge}
                     </Badge>
                   )}
