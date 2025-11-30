@@ -33,5 +33,5 @@ export const useOfflineStatus = () => {
       window.removeEventListener("offline", handleOffline);
       toast.dismiss("offline-status");
     };
-  }, []);
+  }, [t]);
 };
