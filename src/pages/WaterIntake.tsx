@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Droplets, Plus, Trash2, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Progress } from "@/components/ui/progress";
+import { useTranslation } from "react-i18next";
 
 interface WaterLog {
   id: string;
@@ -15,6 +16,7 @@ interface WaterLog {
 
 const WaterIntake = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation('food');
   const [waterLogs, setWaterLogs] = useState<WaterLog[]>([]);
   const [dailyGoal] = useState(2000); // 2L default goal
   const [loading, setLoading] = useState(true);
@@ -44,7 +46,7 @@ const WaterIntake = () => {
       setWaterLogs(data || []);
     } catch (error) {
       console.error('Error fetching water logs:', error);
-      toast.error('Failed to load water intake data');
+      toast.error(t('failed_load_water'));
     } finally {
       setLoading(false);
     }
@@ -64,11 +66,11 @@ const WaterIntake = () => {
 
       if (error) throw error;
       
-      toast.success(`Added ${amount}ml of water`);
+      toast.success(t('added_water', { amount }));
       fetchTodayWater();
     } catch (error) {
       console.error('Error adding water:', error);
-      toast.error('Failed to log water intake');
+      toast.error(t('failed_log_water'));
     }
   };
 
@@ -81,11 +83,11 @@ const WaterIntake = () => {
 
       if (error) throw error;
       
-      toast.success('Water log deleted');
+      toast.success(t('water_log_deleted'));
       fetchTodayWater();
     } catch (error) {
       console.error('Error deleting water log:', error);
-      toast.error('Failed to delete water log');
+      toast.error(t('failed_delete_water'));
     }
   };
 
@@ -138,7 +140,7 @@ const WaterIntake = () => {
   }, {} as Record<number, number>);
 
   if (loading) {
-    return <div className="p-6">Loading...</div>;
+    return <div className="p-6">{t('loading')}</div>;
   }
 
   return (
@@ -150,7 +152,7 @@ const WaterIntake = () => {
         className="gap-2 mb-2"
       >
         <ArrowLeft className="w-4 h-4" />
-        Back to Dashboard
+        {t('back_to_dashboard')}
       </Button>
 
       <div className="flex items-center gap-3 mb-2">
@@ -158,8 +160,8 @@ const WaterIntake = () => {
           <Droplets className="w-6 h-6 text-primary" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold">Water Intake</h1>
-          <p className="text-muted-foreground mt-1">Track your daily hydration</p>
+          <h1 className="text-3xl font-bold">{t('water_intake')}</h1>
+          <p className="text-muted-foreground mt-1">{t('track_daily_hydration')}</p>
         </div>
       </div>
 
@@ -167,14 +169,14 @@ const WaterIntake = () => {
       <Card className="p-6 hover:shadow-xl transition-all duration-300">
         <div className="space-y-4">
           <div className="flex justify-between items-center">
-            <h3 className="text-lg font-semibold">Today's Progress</h3>
+            <h3 className="text-lg font-semibold">{t('todays_progress')}</h3>
             <span className="text-2xl font-bold text-primary">
               {totalToday}ml / {dailyGoal}ml
             </span>
           </div>
           <Progress value={progress} className="h-3" />
           <p className="text-sm text-muted-foreground text-center">
-            {progress >= 100 ? '🎉 Daily goal achieved!' : `${dailyGoal - totalToday}ml remaining`}
+            {progress >= 100 ? t('daily_goal_achieved') : `${dailyGoal - totalToday}${t('ml_remaining')}`}
           </p>
         </div>
       </Card>
@@ -185,7 +187,7 @@ const WaterIntake = () => {
           <div className="flex items-center gap-3">
             <Droplets className="w-8 h-8 text-blue-600 dark:text-blue-400" />
             <div>
-              <p className="text-sm text-muted-foreground">This Week</p>
+              <p className="text-sm text-muted-foreground">{t('this_week')}</p>
               <p className="text-2xl font-bold">{(totalThisWeek / 1000).toFixed(1)}L</p>
               <p className="text-xs text-muted-foreground">{totalThisWeek.toLocaleString()}ml</p>
             </div>
@@ -196,7 +198,7 @@ const WaterIntake = () => {
           <div className="flex items-center gap-3">
             <Droplets className="w-8 h-8 text-cyan-600 dark:text-cyan-400" />
             <div>
-              <p className="text-sm text-muted-foreground">This Month</p>
+              <p className="text-sm text-muted-foreground">{t('this_month')}</p>
               <p className="text-2xl font-bold">{(totalThisMonth / 1000).toFixed(1)}L</p>
               <p className="text-xs text-muted-foreground">{totalThisMonth.toLocaleString()}ml</p>
             </div>
@@ -207,7 +209,7 @@ const WaterIntake = () => {
           <div className="flex items-center gap-3">
             <Droplets className="w-8 h-8 text-teal-600 dark:text-teal-400" />
             <div>
-              <p className="text-sm text-muted-foreground">This Year</p>
+              <p className="text-sm text-muted-foreground">{t('this_year')}</p>
               <p className="text-2xl font-bold">{(totalThisYear / 1000).toFixed(1)}L</p>
               <p className="text-xs text-muted-foreground">{totalThisYear.toLocaleString()}ml</p>
             </div>
@@ -222,7 +224,7 @@ const WaterIntake = () => {
             <div className="p-2 bg-primary/10 rounded-xl">
               <Droplets className="w-5 h-5 text-primary" />
             </div>
-            <h3 className="text-lg font-semibold">Annual Summary</h3>
+            <h3 className="text-lg font-semibold">{t('annual_summary')}</h3>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {Object.entries(yearlyTotals)
@@ -244,7 +246,7 @@ const WaterIntake = () => {
           <div className="p-2 bg-primary/10 rounded-xl">
             <Plus className="w-5 h-5 text-primary" />
           </div>
-          <h3 className="text-lg font-semibold">Quick Add</h3>
+          <h3 className="text-lg font-semibold">{t('quick_add')}</h3>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {quickAmounts.map((amount) => (
@@ -266,11 +268,11 @@ const WaterIntake = () => {
           <div className="p-2 bg-primary/10 rounded-xl">
             <Droplets className="w-5 h-5 text-primary" />
           </div>
-          <h3 className="text-lg font-semibold">History</h3>
+          <h3 className="text-lg font-semibold">{t('history')}</h3>
         </div>
         {waterLogs.length === 0 ? (
           <p className="text-muted-foreground text-center py-8">
-            No water logged yet. Start tracking your hydration!
+            {t('no_water_logged')}
           </p>
         ) : (
           <div className="space-y-6">
@@ -282,10 +284,10 @@ const WaterIntake = () => {
                 <div key={date} className="space-y-2">
                   <div className="flex items-center justify-between">
                     <h4 className="font-semibold text-sm">
-                      {isToday ? 'Today' : date}
+                      {isToday ? t('today') : date}
                     </h4>
                     <span className="text-sm text-muted-foreground">
-                      Total: {dateTotal}ml
+                      {t('total')}: {dateTotal}ml
                     </span>
                   </div>
                   <div className="space-y-2">
