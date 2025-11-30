@@ -2,6 +2,19 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
+// Clear i18n cache to force fresh translations load (increment version when translations update)
+const I18N_VERSION = '1.0.1';
+const cachedVersion = localStorage.getItem('i18n_version');
+if (cachedVersion !== I18N_VERSION) {
+  // Clear all i18n related localStorage
+  Object.keys(localStorage).forEach(key => {
+    if (key.startsWith('i18next')) {
+      localStorage.removeItem(key);
+    }
+  });
+  localStorage.setItem('i18n_version', I18N_VERSION);
+}
+
 // Import translation files
 import commonEN from './locales/en/common.json';
 import authEN from './locales/en/auth.json';
@@ -134,12 +147,18 @@ i18n
     load: 'languageOnly', // Load 'en' instead of 'en-US'
     cleanCode: true, // Clean language codes
     
-    // Force cache invalidation
+    // Force cache invalidation with version
     initImmediate: false,
     
-    // Add version to bust Safari cache
+    // Add version to bust cache - increment this number when translations change
     appendNamespaceToCIMode: true,
+    
+    // Force fresh load
+    partialBundledLanguages: false,
   }).then(() => {
+    // Force reload translations from server
+    i18n.reloadResources();
+    
     // Force a re-render by changing language briefly
     const currentLang = i18n.language;
     if (currentLang === 'es') {
