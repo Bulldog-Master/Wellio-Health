@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format, startOfMonth, startOfQuarter, startOfYear, parseISO } from "date-fns";
+import { es } from "date-fns/locale";
 import { ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { weightLogSchema, validateAndSanitize } from "@/lib/validationSchemas";
@@ -32,7 +33,7 @@ interface WeightLog {
 }
 
 const Weight = () => {
-  const { t } = useTranslation(['weight', 'common']);
+  const { t, i18n } = useTranslation(['weight', 'common']);
   const { toast } = useToast();
   const navigate = useNavigate();
   const { preferredUnit, updatePreferredUnit, isLoading: prefsLoading } = useUserPreferences();
@@ -46,6 +47,9 @@ const Weight = () => {
   const [editWeight, setEditWeight] = useState("");
   const [chartView, setChartView] = useState<"daily" | "monthly" | "quarterly" | "yearly" | "year-by-year">("monthly");
   const [targetWeight, setTargetWeight] = useState<number | null>(null);
+  
+  // Get current locale for date formatting
+  const dateLocale = i18n.language === 'es' ? es : undefined;
 
   useEffect(() => {
     fetchWeightLogs();
@@ -257,7 +261,7 @@ const Weight = () => {
       switch (chartView) {
         case "daily": {
           const dailyData = logs.reduce((acc, log) => {
-            const date = format(parseISO(log.logged_at), "MMM dd");
+            const date = format(parseISO(log.logged_at), "MMM dd", { locale: dateLocale });
             const existing = acc.find(d => d.date === date);
             if (existing) {
               if (log.period === "morning") existing.morning = log.weight_lbs;
@@ -277,7 +281,7 @@ const Weight = () => {
         
         case "monthly": {
           const monthlyData = logs.reduce((acc, log) => {
-            const month = format(startOfMonth(parseISO(log.logged_at)), "MMM yyyy");
+            const month = format(startOfMonth(parseISO(log.logged_at)), "MMM yyyy", { locale: dateLocale });
             const existing = acc.find(d => d.date === month);
             if (existing) {
               existing.totalWeight += log.weight_lbs;
@@ -293,7 +297,7 @@ const Weight = () => {
         
         case "quarterly": {
           const quarterlyData = logs.reduce((acc, log) => {
-            const quarter = format(startOfQuarter(parseISO(log.logged_at)), "QQQ yyyy");
+            const quarter = format(startOfQuarter(parseISO(log.logged_at)), "QQQ yyyy", { locale: dateLocale });
             const existing = acc.find(d => d.date === quarter);
             if (existing) {
               existing.totalWeight += log.weight_lbs;
@@ -309,7 +313,7 @@ const Weight = () => {
         
         case "yearly": {
           const yearlyData = logs.reduce((acc, log) => {
-            const year = format(startOfYear(parseISO(log.logged_at)), "yyyy");
+            const year = format(startOfYear(parseISO(log.logged_at)), "yyyy", { locale: dateLocale });
             const existing = acc.find(d => d.date === year);
             if (existing) {
               existing.totalWeight += log.weight_lbs;
@@ -325,8 +329,8 @@ const Weight = () => {
         
         case "year-by-year": {
           const yearlyData = logs.reduce((acc, log) => {
-            const year = format(parseISO(log.logged_at), "yyyy");
-            const month = format(parseISO(log.logged_at), "MMM");
+            const year = format(parseISO(log.logged_at), "yyyy", { locale: dateLocale });
+            const month = format(parseISO(log.logged_at), "MMM", { locale: dateLocale });
             if (!acc[year]) acc[year] = {};
             if (!acc[year][month]) acc[year][month] = { totalWeight: 0, count: 0 };
             acc[year][month].totalWeight += log.weight_lbs;
@@ -525,7 +529,7 @@ const Weight = () => {
                     <PopoverTrigger asChild>
                       <Button variant="outline" className="w-full justify-start mt-1">
                         <CalendarIcon className="mr-2 h-4 w-4" />
-                        {format(selectedDate, "PPP")}
+                        {format(selectedDate, "PPP", { locale: dateLocale })}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0">
@@ -685,13 +689,13 @@ const Weight = () => {
                     <Bar 
                       dataKey="morning" 
                       fill="hsl(195, 100%, 50%)" 
-                      name="Morning"
+                      name={t('weight:morning')}
                       radius={[4, 4, 0, 0]}
                     />
                     <Bar 
                       dataKey="evening" 
                       fill="hsl(270, 95%, 65%)" 
-                      name="Evening"
+                      name={t('weight:evening')}
                       radius={[4, 4, 0, 0]}
                     />
                   </>
@@ -719,7 +723,7 @@ const Weight = () => {
                   <Bar 
                     dataKey="average" 
                     fill="hsl(var(--primary))" 
-                    name="Average"
+                    name={t('weight:average')}
                     radius={[4, 4, 0, 0]}
                   />
                 )}
@@ -732,7 +736,7 @@ const Weight = () => {
                     strokeWidth={2}
                     strokeDasharray="5 5"
                     dot={false}
-                    name="Target"
+                    name={t('weight:target_weight')}
                   />
                 )}
               </ComposedChart>
@@ -753,7 +757,7 @@ const Weight = () => {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="font-semibold">
-                        {format(new Date(log.logged_at), "MMM dd, yyyy")}
+                        {format(new Date(log.logged_at), "MMM dd, yyyy", { locale: dateLocale })}
                       </span>
                       <span className="text-sm text-muted-foreground">
                         ({log.period === 'morning' ? t('weight:morning') : t('weight:evening')})
