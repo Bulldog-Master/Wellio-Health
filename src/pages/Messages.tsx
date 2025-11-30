@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { User, MessageSquare } from "lucide-react";
-import { useOnlineStatus } from "@/hooks/useOnlineStatus";
+import { useUserPresence } from "@/hooks/useUserPresence";
 import { formatDistanceToNow } from "date-fns";
 
 interface ConversationWithDetails {
@@ -111,7 +111,7 @@ const Messages = () => {
   });
 
   const otherUserIds = conversations?.map((c) => c.other_user.id) || [];
-  const { isOnline } = useOnlineStatus(otherUserIds);
+  const { isOnline } = useUserPresence(otherUserIds);
 
   // Real-time subscription
   useEffect(() => {

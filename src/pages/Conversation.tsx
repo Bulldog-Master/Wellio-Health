@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Send, User, Check, CheckCheck } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useTypingIndicator } from "@/hooks/useTypingIndicator";
-import { useOnlineStatus } from "@/hooks/useOnlineStatus";
+import { useUserPresence } from "@/hooks/useUserPresence";
 import { formatDistanceToNow } from "date-fns";
 import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
 
@@ -68,7 +68,7 @@ const Conversation = () => {
     enabled: !!conversationId && !!currentUserId,
   });
 
-  const { isOnline } = useOnlineStatus(
+  const { isOnline } = useUserPresence(
     conversation?.other_user?.id ? [conversation.other_user.id] : []
   );
 

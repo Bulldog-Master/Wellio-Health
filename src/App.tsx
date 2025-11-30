@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { Suspense } from "react";
 import { ThemeProvider } from "next-themes";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
@@ -13,6 +13,7 @@ import { SkipToContent } from "@/components/SkipToContent";
 import { KeyboardShortcutsHelp } from "@/components/KeyboardShortcutsHelp";
 import { InstallPrompt } from "@/components/InstallPrompt";
 import { NetworkStatus } from "@/components/NetworkStatus";
+import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { AppRoutes } from "@/routes";
 
 // Loading fallback component
@@ -50,6 +51,7 @@ const AppContent = () => {
       <KeyboardShortcutsHelp />
       <InstallPrompt />
       <NetworkStatus />
+      <OfflineIndicator />
       <Suspense fallback={<PageLoader />}>
         <AppRoutes />
       </Suspense>

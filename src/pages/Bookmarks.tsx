@@ -55,6 +55,24 @@ const Bookmarks = () => {
         .eq("id", bookmarkId);
       if (error) throw error;
     },
+    onMutate: async (bookmarkId: string) => {
+      await queryClient.cancelQueries({ queryKey: ["bookmarks"] });
+      const previousBookmarks = queryClient.getQueryData(["bookmarks"]);
+      
+      queryClient.setQueryData(["bookmarks"], (old: any) => 
+        old ? old.filter((b: any) => b.id !== bookmarkId) : []
+      );
+      
+      return { previousBookmarks };
+    },
+    onError: (_err, _bookmarkId, context) => {
+      queryClient.setQueryData(["bookmarks"], context?.previousBookmarks);
+      toast({ 
+        title: "Failed to remove bookmark", 
+        description: "Please try again.",
+        variant: "destructive" 
+      });
+    },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["bookmarks"] });
       toast({ title: "Bookmark removed" });

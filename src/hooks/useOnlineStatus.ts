@@ -1,49 +1,23 @@
-import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useState, useEffect } from "react";
 
-interface OnlineUser {
-  user_id: string;
-  online_at: string;
-}
-
-export const useOnlineStatus = (userIds: string[]) => {
-  const [onlineUsers, setOnlineUsers] = useState<Set<string>>(new Set());
+/**
+ * Hook to detect online/offline status
+ */
+export const useOnlineStatus = (): boolean => {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   useEffect(() => {
-    if (userIds.length === 0) return;
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
 
-    const channel = supabase.channel("online-users", {
-      config: { presence: { key: "" } },
-    });
-
-    channel
-      .on("presence", { event: "sync" }, () => {
-        const state = channel.presenceState<OnlineUser>();
-        const online = new Set(
-          Object.values(state)
-            .flat()
-            .map((u) => u.user_id)
-        );
-        setOnlineUsers(online);
-      })
-      .subscribe();
-
-    // Track current user's online status
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      if (user) {
-        channel.track({
-          user_id: user.id,
-          online_at: new Date().toISOString(),
-        });
-      }
-    });
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
 
     return () => {
-      supabase.removeChannel(channel);
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
     };
-  }, [userIds.join(",")]);
+  }, []);
 
-  const isOnline = (userId: string) => onlineUsers.has(userId);
-
-  return { onlineUsers, isOnline };
+  return isOnline;
 };
