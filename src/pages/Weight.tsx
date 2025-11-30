@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format, startOfMonth, startOfQuarter, startOfYear, parseISO } from "date-fns";
+import { es } from "date-fns/locale";
 import { BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from "recharts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { weightLogSchema, validateAndSanitize } from "@/lib/validationSchemas";
@@ -26,7 +27,7 @@ interface WeightLog {
 }
 
 const Weight = () => {
-  const { t } = useTranslation(['weight', 'common']);
+  const { t, i18n } = useTranslation(['weight', 'common']);
   const { toast } = useToast();
   const navigate = useNavigate();
   const { preferredUnit, updatePreferredUnit, isLoading: prefsLoading } = useUserPreferences();
@@ -532,7 +533,7 @@ const Weight = () => {
             <PopoverTrigger asChild>
               <Button variant="outline" className="gap-2">
                 <CalendarIcon className="w-4 h-4" />
-                {format(selectedDate, "PPP")}
+                {format(selectedDate, "PPP", { locale: i18n.language === 'es' ? es : undefined })}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="end">
@@ -540,6 +541,7 @@ const Weight = () => {
                 mode="single"
                 selected={selectedDate}
                 onSelect={(date) => date && setSelectedDate(date)}
+                locale={i18n.language === 'es' ? es : undefined}
                 initialFocus
               />
             </PopoverContent>
@@ -812,7 +814,7 @@ const Weight = () => {
                 <div className="flex-1">
                   <span className="font-medium">{new Date(log.logged_at).toLocaleDateString()}</span>
                   <span className="text-sm ml-3 font-semibold" style={{ color: 'black' }}>
-                    {log.period.charAt(0).toUpperCase() + log.period.slice(1)}
+                    {log.period === 'morning' ? t('weight:morning') : t('weight:evening')}
                   </span>
                 </div>
                 
