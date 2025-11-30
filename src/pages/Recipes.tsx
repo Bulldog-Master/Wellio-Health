@@ -43,7 +43,13 @@ const Recipes = () => {
   const [recipeImage, setRecipeImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
-  const defaultCategories = ["🌱 Vegan", "🥑 Keto", "💪 High Protein", "🐟 Mediterranean", "🧀 Dairy"];
+  const defaultCategories = [
+    t('category_vegan'),
+    t('category_keto'),
+    t('category_high_protein'),
+    t('category_mediterranean'),
+    t('category_dairy')
+  ];
 
   useEffect(() => {
     fetchRecipes();

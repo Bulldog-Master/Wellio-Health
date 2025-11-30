@@ -177,5 +177,11 @@
   "friday": "Viernes",
   "saturday": "Sábado",
   "add_meal": "Agregar comida",
-  "enter_meal": "Ingresa comida..."
+  "enter_meal": "Ingresa comida...",
+  
+  "category_vegan": "🌱 Vegano",
+  "category_keto": "🥑 Keto",
+  "category_high_protein": "💪 Alta Proteína",
+  "category_mediterranean": "🐟 Mediterráneo",
+  "category_dairy": "🧀 Lácteos"
 }
