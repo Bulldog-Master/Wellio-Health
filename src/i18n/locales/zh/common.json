@@ -54,5 +54,11 @@
   "no_target_set": "未设置目标",
   "upgrade_to_pro": "升级到专业版",
   "unlock_advanced_features": "解锁高级功能",
-  "upgrade": "升级"
+  "upgrade": "升级",
+  "nav": {
+    "feed": "动态",
+    "workout": "锻炼",
+    "nutrition": "营养",
+    "social": "社交"
+  }
 }
