@@ -138,7 +138,7 @@ const Dashboard = () => {
               size="lg" 
               variant="outline"
               onClick={() => navigate('/food/log')}
-              className="border-2 border-white text-white hover:bg-white/20 backdrop-blur-sm flex items-center gap-2"
+              className="border-2 border-white/90 text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center gap-2 shadow-lg"
             >
               <Flame className="w-5 h-5" />
               {t('log_meal')}
