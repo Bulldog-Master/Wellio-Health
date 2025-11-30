@@ -712,26 +712,27 @@ const Weight = () => {
                         <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{entry.value}</span>
                       </div>
                     );
-                    
-                    if (entry.value === "Evening" && chartView === "daily" && targetWeight) {
-                      items.push(
-                        <div key="target-weight" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                          <svg width="20" height="14" style={{ display: 'block' }}>
-                            <line 
-                              x1="0" 
-                              y1="7" 
-                              x2="20" 
-                              y2="7" 
-                              stroke="hsl(0, 85%, 60%)" 
-                              strokeWidth="2"
-                              strokeDasharray="4 2"
-                            />
-                          </svg>
-                          <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{t('weight:target_weight')}</span>
-                        </div>
-                      );
-                    }
                   });
+                  
+                  // Add target weight indicator if it exists
+                  if (targetWeight) {
+                    items.push(
+                      <div key="target-weight" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <svg width="20" height="14" style={{ display: 'block' }}>
+                          <line 
+                            x1="0" 
+                            y1="7" 
+                            x2="20" 
+                            y2="7" 
+                            stroke="hsl(0, 85%, 60%)" 
+                            strokeWidth="2"
+                            strokeDasharray="4 2"
+                          />
+                        </svg>
+                        <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{t('weight:target_weight')}</span>
+                      </div>
+                    );
+                  }
                   
                   return (
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', paddingTop: '20px', flexWrap: 'wrap' }}>
