@@ -3,6 +3,10 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import { setupGlobalErrorHandlers } from "./lib/errorTracking";
+
+// Setup global error handlers for unhandled errors
+setupGlobalErrorHandlers();
 
 // Register service worker for PWA
 if ('serviceWorker' in navigator) {

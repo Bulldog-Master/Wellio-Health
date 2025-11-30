@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "@/components/Layout";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import { RouteErrorBoundary } from "@/components/RouteErrorBoundary";
 
 // Eagerly loaded routes
 import Auth from "@/pages/Auth";
@@ -80,36 +81,37 @@ const Subscription = lazy(() => import("@/pages/Subscription"));
 /**
  * Application route configuration
  * Organized by feature area for better maintainability
+ * Each route is wrapped with RouteErrorBoundary for isolated error handling
  */
 export const AppRoutes = () => (
   <Routes>
     {/* Public Routes */}
-    <Route path="/auth" element={<Auth />} />
-    <Route path="/install" element={<Install />} />
+    <Route path="/auth" element={<RouteErrorBoundary><Auth /></RouteErrorBoundary>} />
+    <Route path="/install" element={<RouteErrorBoundary><Install /></RouteErrorBoundary>} />
     
     {/* Protected Routes */}
-    <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
-    <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
+    <Route path="/onboarding" element={<RouteErrorBoundary><ProtectedRoute><Onboarding /></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/" element={<RouteErrorBoundary><ProtectedRoute><Index /></ProtectedRoute></RouteErrorBoundary>} />
     
     {/* Profile & Settings */}
-    <Route path="/profile" element={<ProtectedRoute><Layout><Profile /></Layout></ProtectedRoute>} />
-    <Route path="/settings" element={<ProtectedRoute><Layout><SettingsMenu /></Layout></ProtectedRoute>} />
-    <Route path="/settings/privacy-security" element={<ProtectedRoute><Layout><PrivacySecurity /></Layout></ProtectedRoute>} />
-    <Route path="/settings/close-friends" element={<ProtectedRoute><Layout><CloseFriends /></Layout></ProtectedRoute>} />
-    <Route path="/settings/trusted-devices" element={<ProtectedRoute><Layout><TrustedDevices /></Layout></ProtectedRoute>} />
-    <Route path="/settings/notifications" element={<ProtectedRoute><Layout><NotificationSettings /></Layout></ProtectedRoute>} />
-    <Route path="/settings/orders-payments" element={<ProtectedRoute><Layout><OrdersPayments /></Layout></ProtectedRoute>} />
-    <Route path="/settings/support" element={<ProtectedRoute><Layout><Support /></Layout></ProtectedRoute>} />
+    <Route path="/profile" element={<RouteErrorBoundary><ProtectedRoute><Layout><Profile /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/settings" element={<RouteErrorBoundary><ProtectedRoute><Layout><SettingsMenu /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/settings/privacy-security" element={<RouteErrorBoundary><ProtectedRoute><Layout><PrivacySecurity /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/settings/close-friends" element={<RouteErrorBoundary><ProtectedRoute><Layout><CloseFriends /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/settings/trusted-devices" element={<RouteErrorBoundary><ProtectedRoute><Layout><TrustedDevices /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/settings/notifications" element={<RouteErrorBoundary><ProtectedRoute><Layout><NotificationSettings /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/settings/orders-payments" element={<RouteErrorBoundary><ProtectedRoute><Layout><OrdersPayments /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/settings/support" element={<RouteErrorBoundary><ProtectedRoute><Layout><Support /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     
     {/* Health & Fitness Tracking */}
-    <Route path="/weight" element={<ProtectedRoute><Layout><Weight /></Layout></ProtectedRoute>} />
+    <Route path="/weight" element={<RouteErrorBoundary><ProtectedRoute><Layout><Weight /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/water-intake" element={<ProtectedRoute><Layout><WaterIntake /></Layout></ProtectedRoute>} />
     <Route path="/sleep-tracking" element={<ProtectedRoute><Layout><SleepTracking /></Layout></ProtectedRoute>} />
     <Route path="/progress-photos" element={<ProtectedRoute><Layout><ProgressPhotos /></Layout></ProtectedRoute>} />
     <Route path="/body-measurements" element={<ProtectedRoute><Layout><BodyMeasurements /></Layout></ProtectedRoute>} />
     <Route path="/step-count" element={<ProtectedRoute><StepCount /></ProtectedRoute>} />
     <Route path="/symptoms" element={<ProtectedRoute><Layout><Symptoms /></Layout></ProtectedRoute>} />
-    <Route path="/medical" element={<ProtectedRoute><Layout><MedicalHistory /></Layout></ProtectedRoute>} />
+    <Route path="/medical" element={<RouteErrorBoundary><ProtectedRoute><Layout><MedicalHistory /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     
     {/* Nutrition */}
     <Route path="/food" element={<ProtectedRoute><Layout><Food /></Layout></ProtectedRoute>} />
