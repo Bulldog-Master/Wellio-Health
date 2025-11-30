@@ -129,6 +129,9 @@ i18n
     // Safari-specific fixes
     load: 'languageOnly', // Load 'en' instead of 'en-US'
     cleanCode: true, // Clean language codes
+    
+    // Force cache invalidation
+    initImmediate: false,
   });
 
 export default i18n;
