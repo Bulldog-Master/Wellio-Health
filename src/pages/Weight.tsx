@@ -18,6 +18,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { weightLogSchema, validateAndSanitize } from "@/lib/validationSchemas";
 import { useTranslation } from "react-i18next";
 import Navigation from "@/components/Navigation";
+import ThemeToggle from "@/components/ThemeToggle";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { User, Bell } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { useUnreadNotificationCount } from "@/hooks/useNotifications";
 
 interface WeightLog {
   id: string;
@@ -31,6 +36,7 @@ const Weight = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const { preferredUnit, updatePreferredUnit, isLoading: prefsLoading } = useUserPreferences();
+  const { data: unreadCount } = useUnreadNotificationCount();
   const [morning, setMorning] = useState("");
   const [evening, setEvening] = useState("");
   const [weightLogs, setWeightLogs] = useState<WeightLog[]>([]);
@@ -397,11 +403,79 @@ const Weight = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/5">
       <div className="flex min-h-screen">
         <aside className="hidden md:block w-64 border-r border-border bg-sidebar sticky top-0 h-screen">
-          <Navigation />
+          <div className="sticky top-0 p-6">
+            <div className="block mb-6">
+              <div className="flex justify-end">
+                <LanguageSwitcher />
+              </div>
+            </div>
+            
+            <div className="flex items-center justify-between pb-4 border-b-2 border-sidebar-border">
+              <h1 className="text-2xl font-bold gradient-text">
+                Wellio
+              </h1>
+              <div className="flex items-center gap-1">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => navigate("/notifications")}
+                  className="hover:bg-sidebar-accent text-sidebar-foreground relative"
+                >
+                  <Bell className="w-5 h-5" />
+                  {unreadCount && unreadCount > 0 && (
+                    <Badge 
+                      variant="destructive" 
+                      className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                    >
+                      {unreadCount > 9 ? "9+" : unreadCount}
+                    </Badge>
+                  )}
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => navigate("/profile")}
+                  className="hover:bg-sidebar-accent text-sidebar-foreground"
+                >
+                  <User className="w-5 h-5" />
+                </Button>
+                <ThemeToggle />
+              </div>
+            </div>
+            
+            <Navigation />
+          </div>
         </aside>
         
         <div className="flex-1">
           <div className="container mx-auto p-6 space-y-6 max-w-4xl pb-20 md:pb-6">
+            <div className="flex justify-end gap-2 mb-4 md:hidden">
+              <LanguageSwitcher />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate("/notifications")}
+                className="relative"
+              >
+                <Bell className="w-5 h-5" />
+                {unreadCount && unreadCount > 0 && (
+                  <Badge 
+                    variant="destructive" 
+                    className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                  >
+                    {unreadCount > 9 ? "9+" : unreadCount}
+                  </Badge>
+                )}
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate("/profile")}
+              >
+                <User className="w-5 h-5" />
+              </Button>
+              <ThemeToggle />
+            </div>
         <Button
           variant="ghost"
           size="sm"
