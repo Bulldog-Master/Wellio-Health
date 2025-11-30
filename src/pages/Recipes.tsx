@@ -43,15 +43,16 @@ const Recipes = () => {
   const [recipeImage, setRecipeImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
+  // Store categories in English for database consistency
   const defaultCategories = [
-    t('category_vegan'),
-    t('category_keto'),
-    t('category_high_protein'),
-    t('category_mediterranean'),
-    t('category_dairy')
+    "🌱 Vegan",
+    "🥑 Keto", 
+    "💪 High Protein",
+    "🐟 Mediterranean",
+    "🧀 Dairy"
   ];
 
-  // Map stored English categories to translated versions
+  // Map stored English categories to translated versions for display
   const translateCategory = (category: string): string => {
     const categoryMap: Record<string, string> = {
       "🌱 Vegan": t('category_vegan'),
