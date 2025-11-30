@@ -3,6 +3,7 @@ import { Flame, Calendar } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { differenceInDays, format, subDays } from "date-fns";
+import { useTranslation } from "react-i18next";
 
 interface StreakData {
   currentStreak: number;
@@ -11,6 +12,7 @@ interface StreakData {
 }
 
 export const StreakTracker = () => {
+  const { t } = useTranslation('common');
   const [streak, setStreak] = useState<StreakData>({
     currentStreak: 0,
     longestStreak: 0,
@@ -112,7 +114,7 @@ export const StreakTracker = () => {
       <div className="space-y-4">
         <div className="flex items-center gap-2">
           <Flame className="w-5 h-5 text-destructive" />
-          <h3 className="text-lg font-semibold">Streak Tracker</h3>
+          <h3 className="text-lg font-semibold">{t('streak_tracker')}</h3>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
@@ -121,7 +123,7 @@ export const StreakTracker = () => {
               <Flame className="w-8 h-8 text-destructive" />
             </div>
             <p className="text-3xl font-bold text-destructive">{streak.currentStreak}</p>
-            <p className="text-sm text-muted-foreground">Day Streak</p>
+            <p className="text-sm text-muted-foreground">{t('day_streak')}</p>
           </div>
 
           <div className="text-center p-4 bg-primary/10 rounded-lg">
@@ -129,25 +131,25 @@ export const StreakTracker = () => {
               <Calendar className="w-8 h-8 text-primary" />
             </div>
             <p className="text-3xl font-bold text-primary">{streak.longestStreak}</p>
-            <p className="text-sm text-muted-foreground">Best Streak</p>
+            <p className="text-sm text-muted-foreground">{t('best_streak')}</p>
           </div>
         </div>
 
         {streak.lastLoggedDate && (
           <p className="text-xs text-center text-muted-foreground">
-            Last logged: {format(new Date(streak.lastLoggedDate), "MMM d, yyyy")}
+            {t('last_logged')}: {format(new Date(streak.lastLoggedDate), "MMM d, yyyy")}
           </p>
         )}
 
         {streak.currentStreak === 0 && (
           <p className="text-sm text-center text-muted-foreground italic">
-            Log your weight today to start a streak! 🔥
+            {t('log_weight_start_streak')}
           </p>
         )}
 
         {streak.currentStreak >= 7 && (
           <p className="text-sm text-center font-semibold text-primary animate-pulse">
-            🎉 Amazing! You're on a {streak.currentStreak}-day streak!
+            🎉 {t('amazing_streak', { days: streak.currentStreak })}
           </p>
         )}
       </div>
