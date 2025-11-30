@@ -1773,6 +1773,36 @@ export type Database = {
         }
         Relationships: []
       }
+      points_transactions: {
+        Row: {
+          amount: number
+          created_at: string | null
+          description: string
+          id: string
+          related_id: string | null
+          transaction_type: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          description: string
+          id?: string
+          related_id?: string | null
+          transaction_type: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          description?: string
+          id?: string
+          related_id?: string | null
+          transaction_type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       post_hashtags: {
         Row: {
           created_at: string
@@ -2614,6 +2644,86 @@ export type Database = {
           referrer_id?: string
           reward_points?: number | null
           status?: string
+        }
+        Relationships: []
+      }
+      reward_redemptions: {
+        Row: {
+          expires_at: string | null
+          id: string
+          is_active: boolean | null
+          metadata: Json | null
+          points_spent: number
+          redeemed_at: string | null
+          reward_id: string
+          user_id: string
+        }
+        Insert: {
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          metadata?: Json | null
+          points_spent: number
+          redeemed_at?: string | null
+          reward_id: string
+          user_id: string
+        }
+        Update: {
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          metadata?: Json | null
+          points_spent?: number
+          redeemed_at?: string | null
+          reward_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reward_redemptions_reward_id_fkey"
+            columns: ["reward_id"]
+            isOneToOne: false
+            referencedRelation: "rewards"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rewards: {
+        Row: {
+          category: string
+          created_at: string | null
+          description: string
+          duration_days: number | null
+          id: string
+          is_active: boolean | null
+          metadata: Json | null
+          name: string
+          points_cost: number
+          updated_at: string | null
+        }
+        Insert: {
+          category: string
+          created_at?: string | null
+          description: string
+          duration_days?: number | null
+          id?: string
+          is_active?: boolean | null
+          metadata?: Json | null
+          name: string
+          points_cost: number
+          updated_at?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          description?: string
+          duration_days?: number | null
+          id?: string
+          is_active?: boolean | null
+          metadata?: Json | null
+          name?: string
+          points_cost?: number
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -3599,6 +3709,15 @@ export type Database = {
         Args: { _points: number; _user_id: string }
         Returns: undefined
       }
+      award_referral_points: {
+        Args: {
+          _amount: number
+          _description: string
+          _related_id?: string
+          _user_id: string
+        }
+        Returns: undefined
+      }
       can_view_full_profile: {
         Args: { _profile_id: string; _viewer_id: string }
         Returns: boolean
@@ -3646,6 +3765,10 @@ export type Database = {
         Args: { _user_id: string }
         Returns: Database["public"]["Enums"]["app_role"][]
       }
+      has_active_reward: {
+        Args: { _feature_type: string; _user_id: string }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -3654,6 +3777,7 @@ export type Database = {
         Returns: boolean
       }
       log_medical_read: { Args: never; Returns: undefined }
+      redeem_reward: { Args: { _reward_id: string }; Returns: string }
     }
     Enums: {
       app_role: "user" | "trainer" | "creator" | "admin"
