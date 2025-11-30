@@ -180,7 +180,7 @@ const MedicalHistory = () => {
   const handleAddMedication = async () => {
     // Validate using Zod schema
     const validation = validateAndSanitize(medicationSchema, medFormData);
-    if (!validation.success) {
+    if (validation.success === false) {
       toast({
         title: "Validation Error",
         description: validation.error,
@@ -232,7 +232,7 @@ const MedicalHistory = () => {
   const handleAddTestResult = async () => {
     // Validate using Zod schema
     const validation = validateAndSanitize(testResultSchema, testFormData);
-    if (!validation.success) {
+    if (validation.success === false) {
       toast({
         title: "Validation Error",
         description: validation.error,
@@ -286,7 +286,7 @@ const MedicalHistory = () => {
   const handleAddMedicalRecord = async () => {
     // Validate using Zod schema
     const validation = validateAndSanitize(medicalRecordSchema, recordFormData);
-    if (!validation.success) {
+    if (validation.success === false) {
       toast({
         title: "Validation Error",
         description: validation.error,
@@ -342,7 +342,7 @@ const MedicalHistory = () => {
       severity: severity[0],
       description: symptomDescription || undefined,
     });
-    if (!validation.success) {
+    if (validation.success === false) {
       toast({
         title: "Validation Error",
         description: validation.error,
