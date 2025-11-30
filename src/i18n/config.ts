@@ -23,6 +23,7 @@ import subscriptionES from './locales/es/subscription.json';
 import foodES from './locales/es/food.json';
 import workoutES from './locales/es/workout.json';
 import settingsES from './locales/es/settings.json';
+import weightES from './locales/es/weight.json';
 
 import commonPT from './locales/pt/common.json';
 import authPT from './locales/pt/auth.json';
@@ -71,6 +72,7 @@ const resources = {
     food: foodES,
     workout: workoutES,
     settings: settingsES,
+    weight: weightES,
   },
   pt: {
     common: commonPT,
@@ -109,7 +111,7 @@ i18n
     resources,
     fallbackLng: 'en',
     defaultNS: 'common',
-    ns: ['common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 'notifications', 'errors', 'rewards', 'subscription', 'food', 'workout', 'settings'],
+    ns: ['common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 'notifications', 'errors', 'rewards', 'subscription', 'food', 'workout', 'settings', 'weight'],
     
     interpolation: {
       escapeValue: false,
