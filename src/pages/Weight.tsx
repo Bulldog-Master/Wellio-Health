@@ -48,31 +48,55 @@ const Weight = () => {
     average: ''
   });
   const [isReady, setIsReady] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   // Update labels when translations or preferences change
   useEffect(() => {
     try {
-      setChartLabels({
+      const labels = {
         weightUnit: preferredUnit === 'imperial' ? t('weight:weight_unit_lbs') : t('weight:weight_unit_kg'),
         targetLabel: t('weight:target_weight'),
         morning: t('weight:morning'),
         evening: t('weight:evening'),
         average: t('weight:average_weight')
-      });
-      // Mark as ready after a small delay to ensure everything is settled
-      setTimeout(() => setIsReady(true), 100);
+      };
+      
+      // Validate all labels are loaded
+      if (labels.weightUnit && labels.morning && labels.evening && labels.average && labels.targetLabel) {
+        setChartLabels(labels);
+        // Mark as ready after a small delay to ensure everything is settled
+        setTimeout(() => setIsReady(true), 150);
+      }
     } catch (error) {
       console.error('Error setting chart labels:', error);
+      setHasError(true);
     }
   }, [preferredUnit, t, i18n.language]);
 
   useEffect(() => {
-    fetchWeightLogs();
-    fetchTargetWeight();
+    try {
+      fetchWeightLogs();
+      fetchTargetWeight();
+    } catch (error) {
+      console.error('Error initializing Weight page:', error);
+      setHasError(true);
+    }
   }, []);
 
   // Safety check: don't render chart until translations are loaded
   const translationsReady = isReady && chartLabels.weightUnit !== '' && chartLabels.morning !== '';
+  
+  // Show error state if something went wrong
+  if (hasError) {
+    return (
+      <div className="container mx-auto p-4 max-w-2xl">
+        <Card className="p-6">
+          <p className="text-center text-muted-foreground">Unable to load weight tracking. Please try refreshing the page.</p>
+          <Button onClick={() => navigate('/')} className="mt-4 mx-auto block">Go Home</Button>
+        </Card>
+      </div>
+    );
+  }
 
   const fetchWeightLogs = async () => {
     try {
@@ -690,145 +714,156 @@ const Weight = () => {
         ) : !chartData || chartData.length === 0 ? (
           <p className="text-center text-muted-foreground py-8">{t('weight:no_chart_data')}</p>
         ) : (
-          <ResponsiveContainer width="100%" height={400}>
-            <BarChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-              <XAxis 
-                dataKey="date" 
-                className="text-xs"
-                tick={{ fill: 'hsl(var(--foreground))' }}
-              />
-              <YAxis 
-                domain={getYAxisDomain()}
-                className="text-xs"
-                tick={{ fill: 'hsl(var(--foreground))' }}
-                label={{ 
-                  value: chartLabels.weightUnit, 
-                  angle: -90, 
-                  position: 'insideLeft',
-                  style: { fill: 'hsl(var(--foreground))' }
-                }}
-                tickFormatter={(value) => formatWeight(value, preferredUnit).split(' ')[0]}
-              />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: 'hsl(var(--background))',
-                  border: '1px solid hsl(var(--border))',
-                  borderRadius: '8px'
-                }}
-                formatter={(value: number) => formatWeight(value, preferredUnit)}
-              />
-              <Legend 
-                wrapperStyle={{
-                  paddingTop: '20px'
-                }}
-                content={(props) => {
-                  const { payload } = props;
-                  const items = [];
-                  
-                  payload?.forEach((entry: any, index: number) => {
-                    items.push(
-                      <div key={`legend-${index}`} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <div style={{ 
-                          width: '14px', 
-                          height: '14px', 
-                          backgroundColor: entry.color,
-                          borderRadius: '2px'
-                        }} />
-                        <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{entry.value}</span>
-                      </div>
-                    );
-                  });
-                  
-                  // Add target weight indicator if it exists and we're in daily view
-                  if (chartView === 'daily' && targetWeight) {
-                    items.push(
-                      <div key="target-weight" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <svg width="20" height="14" style={{ display: 'block' }}>
-                          <line 
-                            x1="0" 
-                            y1="7" 
-                            x2="20" 
-                            y2="7" 
-                            stroke="hsl(0, 85%, 60%)" 
-                            strokeWidth="2"
-                            strokeDasharray="4 2"
+          <div style={{ width: '100%', height: 400 }}>
+            {(() => {
+              try {
+                return (
+                  <ResponsiveContainer width="100%" height={400}>
+                    <BarChart data={chartData}>
+                      <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                      <XAxis 
+                        dataKey="date" 
+                        className="text-xs"
+                        tick={{ fill: 'hsl(var(--foreground))' }}
+                      />
+                      <YAxis 
+                        domain={getYAxisDomain()}
+                        className="text-xs"
+                        tick={{ fill: 'hsl(var(--foreground))' }}
+                        label={{ 
+                          value: chartLabels.weightUnit, 
+                          angle: -90, 
+                          position: 'insideLeft',
+                          style: { fill: 'hsl(var(--foreground))' }
+                        }}
+                        tickFormatter={(value) => formatWeight(value, preferredUnit).split(' ')[0]}
+                      />
+                      <Tooltip 
+                        contentStyle={{ 
+                          backgroundColor: 'hsl(var(--background))',
+                          border: '1px solid hsl(var(--border))',
+                          borderRadius: '8px'
+                        }}
+                        formatter={(value: number) => formatWeight(value, preferredUnit)}
+                      />
+                      <Legend 
+                        wrapperStyle={{
+                          paddingTop: '20px'
+                        }}
+                        content={(props) => {
+                          const { payload } = props;
+                          const items = [];
+                          
+                          payload?.forEach((entry: any, index: number) => {
+                            items.push(
+                              <div key={`legend-${index}`} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                <div style={{ 
+                                  width: '14px', 
+                                  height: '14px', 
+                                  backgroundColor: entry.color,
+                                  borderRadius: '2px'
+                                }} />
+                                <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{entry.value}</span>
+                              </div>
+                            );
+                          });
+                          
+                          // Add target weight indicator if it exists and we're in daily view
+                          if (chartView === 'daily' && targetWeight) {
+                            items.push(
+                              <div key="target-weight" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                <svg width="20" height="14" style={{ display: 'block' }}>
+                                  <line 
+                                    x1="0" 
+                                    y1="7" 
+                                    x2="20" 
+                                    y2="7" 
+                                    stroke="hsl(0, 85%, 60%)" 
+                                    strokeWidth="2"
+                                    strokeDasharray="4 2"
+                                  />
+                                </svg>
+                                <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{chartLabels.targetLabel}</span>
+                              </div>
+                            );
+                          }
+                          
+                          return (
+                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', paddingTop: '20px', flexWrap: 'wrap' }}>
+                              {items}
+                            </div>
+                          );
+                        }}
+                      />
+                    
+                      {/* Target Weight Reference Line */}
+                      {targetWeight && (
+                        <ReferenceLine 
+                          y={targetWeight} 
+                          stroke="hsl(0, 85%, 60%)" 
+                          strokeDasharray="5 5"
+                          strokeWidth={2}
+                          label={{ 
+                            value: `Target: ${formatWeight(targetWeight, preferredUnit)}`, 
+                            position: 'right',
+                            fill: 'hsl(0, 85%, 60%)',
+                            fontSize: 12
+                          }}
+                        />
+                      )}
+                      
+                      {chartView === "daily" ? (
+                        <>
+                          <Bar 
+                            dataKey="morning" 
+                            fill="hsl(195, 100%, 50%)" 
+                            name={chartLabels.morning}
+                            radius={[4, 4, 0, 0]}
                           />
-                        </svg>
-                        <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{chartLabels.targetLabel}</span>
-                      </div>
-                    );
-                  }
-                  
-                  return (
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', paddingTop: '20px', flexWrap: 'wrap' }}>
-                      {items}
-                    </div>
-                  );
-                }}
-              />
-              
-              {/* Target Weight Reference Line */}
-              {targetWeight && (
-                <ReferenceLine 
-                  y={targetWeight} 
-                  stroke="hsl(0, 85%, 60%)" 
-                  strokeDasharray="5 5"
-                  strokeWidth={2}
-                  label={{ 
-                    value: `Target: ${formatWeight(targetWeight, preferredUnit)}`, 
-                    position: 'right',
-                    fill: 'hsl(0, 85%, 60%)',
-                    fontSize: 12
-                  }}
-                />
-              )}
-              
-              {chartView === "daily" ? (
-                <>
-                  <Bar 
-                    dataKey="morning" 
-                    fill="hsl(195, 100%, 50%)" 
-                    name={chartLabels.morning}
-                    radius={[4, 4, 0, 0]}
-                  />
-                  <Bar 
-                    dataKey="evening" 
-                    fill="hsl(270, 95%, 65%)" 
-                    name={chartLabels.evening}
-                    radius={[4, 4, 0, 0]}
-                  />
-                </>
-              ) : chartView === "year-by-year" ? (
-                chartLines.map((year, index) => {
-                  const colors = [
-                    'hsl(var(--primary))',
-                    'hsl(var(--secondary))',
-                    'hsl(var(--accent))',
-                    'hsl(217, 91%, 60%)',
-                    'hsl(142, 71%, 45%)',
-                    'hsl(262, 83%, 58%)',
-                  ];
-                  return (
-                    <Bar
-                      key={year}
-                      dataKey={year}
-                      fill={colors[index % colors.length]}
-                      name={year}
-                      radius={[4, 4, 0, 0]}
-                    />
-                  );
-                })
-              ) : (
-                <Bar 
-                  dataKey="average" 
-                  fill="hsl(var(--primary))" 
-                  name={chartLabels.average}
-                  radius={[4, 4, 0, 0]}
-                />
-              )}
-            </BarChart>
-          </ResponsiveContainer>
+                          <Bar 
+                            dataKey="evening" 
+                            fill="hsl(270, 95%, 65%)" 
+                            name={chartLabels.evening}
+                            radius={[4, 4, 0, 0]}
+                          />
+                        </>
+                      ) : chartView === "year-by-year" ? (
+                        chartLines.map((year, index) => {
+                          const colors = [
+                            'hsl(var(--primary))',
+                            'hsl(var(--secondary))',
+                            'hsl(var(--accent))',
+                            'hsl(217, 91%, 60%)',
+                            'hsl(142, 71%, 45%)',
+                            'hsl(262, 83%, 58%)',
+                          ];
+                          return (
+                            <Bar
+                              key={year}
+                              dataKey={year}
+                              fill={colors[index % colors.length]}
+                              name={year}
+                              radius={[4, 4, 0, 0]}
+                            />
+                          );
+                        })
+                      ) : (
+                        <Bar 
+                          dataKey="average" 
+                          fill="hsl(var(--primary))" 
+                          name={chartLabels.average}
+                          radius={[4, 4, 0, 0]}
+                        />
+                      )}
+                    </BarChart>
+                  </ResponsiveContainer>
+                );
+              } catch (error) {
+                console.error('Chart render error:', error);
+                return <p className="text-center text-muted-foreground py-8">Unable to render chart</p>;
+              }
+            })()}
+          </div>
         )}
       </Card>
 
