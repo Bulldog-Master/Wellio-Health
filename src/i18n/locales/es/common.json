@@ -149,5 +149,12 @@
   "steps_tracked": "Pasos Registrados",
   "habit_completed": "Hábito Completado",
   "achievement_unlocked": "Logro Desbloqueado",
-  "challenge_completed": "Desafío Completado"
+  "challenge_completed": "Desafío Completado",
+  "upgrade_to_pro": "Actualizar a Pro",
+  "unlock_feature": "Desbloquear {{feature}}",
+  "get_unlimited_access": "Obtén acceso ilimitado",
+  "upgrade_to_premium": "Actualizar a Premium",
+  "upgrade_description": "{{feature}} es una función premium. Actualiza para desbloquear esta y muchas más funciones exclusivas.",
+  "upgrade_description_default": "Obtén acceso a análisis avanzados, información de IA, mercado de entrenadores y más.",
+  "view_plans": "Ver Planes"
 }
