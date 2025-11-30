@@ -132,6 +132,15 @@ i18n
     
     // Force cache invalidation
     initImmediate: false,
+    
+    // Add version to bust Safari cache
+    appendNamespaceToCIMode: true,
+  }).then(() => {
+    // Force a re-render by changing language briefly
+    const currentLang = i18n.language;
+    if (currentLang === 'es') {
+      i18n.changeLanguage('es');
+    }
   });
 
 export default i18n;
