@@ -3,16 +3,17 @@ import { supabase } from '@/integrations/supabase/client';
 
 export type SubscriptionTier = 'free' | 'pro' | 'enterprise';
 
+// SECURITY: Never expose Stripe IDs to client code
 export interface Subscription {
   id: string;
   user_id: string;
   tier: SubscriptionTier;
   status: string;
-  stripe_customer_id?: string;
-  stripe_subscription_id?: string;
   current_period_start?: string;
   current_period_end?: string;
   cancel_at_period_end: boolean;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface SubscriptionFeature {
@@ -37,9 +38,10 @@ export const useSubscription = () => {
         return;
       }
 
+      // SECURITY: Only select safe fields, never expose Stripe IDs
       const { data: subData, error: subError } = await supabase
         .from('subscriptions')
-        .select('*')
+        .select('id, user_id, tier, status, current_period_start, current_period_end, cancel_at_period_end, created_at, updated_at')
         .eq('user_id', user.id)
         .single();
 
