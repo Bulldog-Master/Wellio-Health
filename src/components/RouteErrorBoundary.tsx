@@ -28,6 +28,9 @@ export class RouteErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('RouteErrorBoundary caught error:', error);
+    console.error('Error info:', errorInfo);
+    console.error('Current path:', window.location.pathname);
     logError(error, errorInfo, {
       componentName: 'RouteErrorBoundary',
       path: window.location.pathname,
