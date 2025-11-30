@@ -1254,10 +1254,10 @@ const Auth = () => {
                       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                       disabled={loading || !passkeySupported}
                     >
-                      {loading ? "Processing..." : (
+                      {loading ? t('processing') : (
                         <>
                           <Fingerprint className="mr-2 h-4 w-4" />
-                          Sign In with Passkey
+                          {t('sign_in_with_passkey')}
                         </>
                       )}
                     </Button>
@@ -1265,13 +1265,13 @@ const Auth = () => {
                 ) : (
                   <>
                     <div className="space-y-2">
-                      <Label htmlFor="passkey-name">Name</Label>
+                      <Label htmlFor="passkey-name">{t('name')}</Label>
                       <div className="relative">
                         <UserIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                         <Input
                           id="passkey-name"
                           type="text"
-                          placeholder="John Doe"
+                          placeholder={t('passkey_name_placeholder')}
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           className="pl-10"
@@ -1281,13 +1281,13 @@ const Auth = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="passkey-email">Email</Label>
+                      <Label htmlFor="passkey-email">{t('email')}</Label>
                       <div className="relative">
                         <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                         <Input
                           id="passkey-email"
                           type="email"
-                          placeholder="you@example.com"
+                          placeholder={t('email_placeholder')}
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           className="pl-10"
@@ -1301,16 +1301,16 @@ const Auth = () => {
                       className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                       disabled={loading || !passkeySupported}
                     >
-                      {loading ? "Processing..." : (
+                      {loading ? t('processing') : (
                         <>
                           <Fingerprint className="mr-2 h-4 w-4" />
-                          Register Passkey
+                          {t('register_passkey')}
                         </>
                       )}
                     </Button>
 
                     <p className="text-xs text-center text-muted-foreground">
-                      Set up biometric authentication for quick and secure access to your account.
+                      {t('passkey_setup_desc')}
                     </p>
                   </>
                 )}
