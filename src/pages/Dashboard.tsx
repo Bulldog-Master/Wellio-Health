@@ -210,7 +210,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
         <Card className="p-6 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold">Weight Goal Progress</h3>
+            <h3 className="text-lg font-semibold">{t('weight_goal_progress')}</h3>
             <div className="p-2 bg-primary/10 rounded-xl">
               <Target className="w-5 h-5 text-primary" />
             </div>
@@ -218,17 +218,17 @@ const Dashboard = () => {
           <div className="space-y-4">
             <div>
               <div className="flex justify-between mb-2">
-                <span className="text-sm font-medium">Progress to Target</span>
+                <span className="text-sm font-medium">{t('progress_to_target')}</span>
                 <span className="text-sm font-medium text-primary">{Math.round(100 - weightProgress)}%</span>
               </div>
               <Progress value={100 - weightProgress} className="h-3" />
             </div>
             <div className="pt-2 border-t">
               <p className="text-sm text-muted-foreground">
-                Target: {targetWeight} lbs ({lbsToKg(targetWeight)} kg)
+                {t('target')}: {targetWeight} lbs ({lbsToKg(targetWeight)} kg)
               </p>
               <p className="text-sm text-muted-foreground">
-                {weightDifference.toFixed(1)} lbs ({lbsToKg(weightDifference)} kg) remaining
+                {weightDifference.toFixed(1)} lbs ({lbsToKg(weightDifference)} kg) {t('remaining_weight')}
               </p>
             </div>
           </div>
@@ -236,7 +236,7 @@ const Dashboard = () => {
 
         <Card className="p-6 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold">Daily Calorie Goal</h3>
+            <h3 className="text-lg font-semibold">{t('daily_calorie_goal')}</h3>
             <div className="p-2 bg-primary/10 rounded-xl">
               <Flame className="w-5 h-5 text-primary" />
             </div>
@@ -244,7 +244,7 @@ const Dashboard = () => {
           <div className="space-y-4">
             <div>
               <div className="flex justify-between mb-2">
-                <span className="text-sm font-medium">Today's Progress</span>
+                <span className="text-sm font-medium">{t('todays_progress')}</span>
                 <span className="text-sm font-medium text-primary">
                   {Math.round(caloriesProgress)}%
                 </span>
@@ -253,10 +253,10 @@ const Dashboard = () => {
             </div>
             <div className="pt-2 border-t">
               <p className="text-sm text-muted-foreground">
-                Daily Goal: {caloriesTarget} calories
+                {t('daily_goal_text')}: {caloriesTarget} {t('food:calories').toLowerCase()}
               </p>
               <p className="text-sm text-muted-foreground">
-                {caloriesTarget - caloriesConsumed} calories remaining
+                {caloriesTarget - caloriesConsumed} {t('calories_remaining')}
               </p>
             </div>
           </div>
@@ -265,7 +265,7 @@ const Dashboard = () => {
 
       <Card className="p-6 hover:shadow-xl transition-all duration-300">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold">Quick Actions</h3>
+          <h3 className="text-lg font-semibold">{t('quick_actions')}</h3>
           <div className="p-2 bg-primary/10 rounded-xl">
             <Zap className="w-5 h-5 text-primary" />
           </div>
@@ -279,7 +279,7 @@ const Dashboard = () => {
             <span style={{ color: 'hsl(195, 100%, 50%)' }}>
               <Activity className="w-5 h-5" />
             </span>
-            <span className="text-sm">Log Weight</span>
+            <span className="text-sm">{t('log_weight')}</span>
           </Button>
           <Button 
             onClick={() => navigate('/food')}
@@ -289,7 +289,7 @@ const Dashboard = () => {
             <span style={{ color: 'hsl(15, 100%, 60%)' }}>
               <Flame className="w-5 h-5" />
             </span>
-            <span className="text-sm">Add Meal</span>
+            <span className="text-sm">{t('add_meal')}</span>
           </Button>
           <Button 
             onClick={() => navigate('/workout')}
@@ -299,7 +299,7 @@ const Dashboard = () => {
             <span style={{ color: 'hsl(145, 80%, 50%)' }}>
               <TrendingUp className="w-5 h-5" />
             </span>
-            <span className="text-sm">Log Workout</span>
+            <span className="text-sm">{t('log_workout')}</span>
           </Button>
           <Button 
             onClick={() => navigate('/water-intake')}
@@ -309,7 +309,7 @@ const Dashboard = () => {
             <span style={{ color: 'hsl(200, 100%, 55%)' }}>
               <Droplets className="w-5 h-5" />
             </span>
-            <span className="text-sm">Water Intake</span>
+            <span className="text-sm">{t('water_intake')}</span>
           </Button>
           <Button 
             onClick={() => navigate('/sleep-tracking')}
@@ -319,7 +319,7 @@ const Dashboard = () => {
             <span style={{ color: 'hsl(280, 95%, 68%)' }}>
               <Moon className="w-5 h-5" />
             </span>
-            <span className="text-sm">Sleep</span>
+            <span className="text-sm">{t('sleep')}</span>
           </Button>
           <Button 
             onClick={() => navigate('/progress-photos')}
@@ -329,7 +329,7 @@ const Dashboard = () => {
             <span style={{ color: 'hsl(340, 100%, 62%)' }}>
               <Camera className="w-5 h-5" />
             </span>
-            <span className="text-sm">Progress Pics</span>
+            <span className="text-sm">{t('progress_pics')}</span>
           </Button>
           <Button 
             onClick={() => navigate('/fitness-goals')}
@@ -339,7 +339,7 @@ const Dashboard = () => {
             <span style={{ color: 'hsl(35, 100%, 58%)' }}>
               <Target className="w-5 h-5" />
             </span>
-            <span className="text-sm">Goals</span>
+            <span className="text-sm">{t('goals')}</span>
           </Button>
           <Button 
             onClick={() => navigate('/groups')}
@@ -349,7 +349,7 @@ const Dashboard = () => {
             <span style={{ color: 'hsl(270, 100%, 65%)' }}>
               <Users className="w-5 h-5" />
             </span>
-            <span className="text-sm">Groups</span>
+            <span className="text-sm">{t('groups')}</span>
           </Button>
           <Button
             variant="secondary" 
@@ -359,8 +359,8 @@ const Dashboard = () => {
             <span style={{ color: 'hsl(165, 85%, 48%)' }}>
               <Activity className="w-5 h-5" />
             </span>
-            <span className="text-sm">Step Count</span>
-            <span className="absolute bottom-1 text-[9px] text-muted-foreground/50 font-medium">Coming Soon!</span>
+            <span className="text-sm">{t('step_count')}</span>
+            <span className="absolute bottom-1 text-[9px] text-muted-foreground/50 font-medium">{t('coming_soon')}</span>
           </Button>
         </div>
       </Card>
