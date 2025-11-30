@@ -15,6 +15,7 @@ import { DonationModal } from '@/components/DonationModal';
 import { Heart, Plus, Calendar, MapPin, BadgeCheck, Search } from 'lucide-react';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
+import { fundraiserSchema, validateAndSanitize } from '@/lib/validationSchemas';
 
 const categories = ['Medical', 'Community Event', 'Charity', 'Equipment', 'Other'];
 
@@ -116,6 +117,21 @@ export default function Fundraisers() {
     }
 
     try {
+      // Validate fundraiser data
+      const validation = validateAndSanitize(fundraiserSchema, {
+        title: formData.title,
+        description: formData.description,
+        goal_amount: parseFloat(formData.goal_amount),
+        category: formData.category,
+        location: formData.location || undefined,
+        end_date: formData.end_date,
+      });
+
+      if (validation.success === false) {
+        toast.error(validation.error);
+        return;
+      }
+
       let imageUrl = null;
 
       if (formData.image) {
@@ -139,12 +155,7 @@ export default function Fundraisers() {
         .from('fundraisers')
         .insert({
           user_id: user.id,
-          title: formData.title,
-          description: formData.description,
-          goal_amount: parseFloat(formData.goal_amount),
-          category: formData.category,
-          location: formData.location,
-          end_date: formData.end_date,
+          ...validation.data,
           image_url: imageUrl
         });
 

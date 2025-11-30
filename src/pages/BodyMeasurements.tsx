@@ -11,6 +11,7 @@ import { Ruler, ArrowLeft, Plus, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { format } from "date-fns";
+import { bodyMeasurementSchema, validateAndSanitize } from "@/lib/validationSchemas";
 
 interface Measurement {
   id: string;
@@ -74,20 +75,30 @@ const BodyMeasurements = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
+      // Validate measurements
+      const validation = validateAndSanitize(bodyMeasurementSchema, {
+        chest_inches: formData.chest ? parseFloat(formData.chest) : null,
+        waist_inches: formData.waist ? parseFloat(formData.waist) : null,
+        hips_inches: formData.hips ? parseFloat(formData.hips) : null,
+        left_arm_inches: formData.left_arm ? parseFloat(formData.left_arm) : null,
+        right_arm_inches: formData.right_arm ? parseFloat(formData.right_arm) : null,
+        left_thigh_inches: formData.left_thigh ? parseFloat(formData.left_thigh) : null,
+        right_thigh_inches: formData.right_thigh ? parseFloat(formData.right_thigh) : null,
+        left_calf_inches: formData.left_calf ? parseFloat(formData.left_calf) : null,
+        right_calf_inches: formData.right_calf ? parseFloat(formData.right_calf) : null,
+        notes: formData.notes || undefined,
+      });
+
+      if (validation.success === false) {
+        toast.error(validation.error);
+        return;
+      }
+
       const { error } = await supabase
         .from('body_measurements')
         .insert({
           user_id: user.id,
-          chest_inches: formData.chest ? parseFloat(formData.chest) : null,
-          waist_inches: formData.waist ? parseFloat(formData.waist) : null,
-          hips_inches: formData.hips ? parseFloat(formData.hips) : null,
-          left_arm_inches: formData.left_arm ? parseFloat(formData.left_arm) : null,
-          right_arm_inches: formData.right_arm ? parseFloat(formData.right_arm) : null,
-          left_thigh_inches: formData.left_thigh ? parseFloat(formData.left_thigh) : null,
-          right_thigh_inches: formData.right_thigh ? parseFloat(formData.right_thigh) : null,
-          left_calf_inches: formData.left_calf ? parseFloat(formData.left_calf) : null,
-          right_calf_inches: formData.right_calf ? parseFloat(formData.right_calf) : null,
-          notes: formData.notes || null
+          ...validation.data,
         });
 
       if (error) throw error;

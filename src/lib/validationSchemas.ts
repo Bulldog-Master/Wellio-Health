@@ -273,6 +273,171 @@ export const urlSchema = z
   .url("Invalid URL format")
   .max(500, "URL must be less than 500 characters");
 
+// ============= TRAINER SCHEMAS =============
+export const trainerProfileSchema = z.object({
+  bio: z
+    .string()
+    .trim()
+    .min(50, "Bio must be at least 50 characters")
+    .max(2000, "Bio must be less than 2000 characters"),
+  hourly_rate: z
+    .number()
+    .min(10, "Hourly rate must be at least $10")
+    .max(1000, "Hourly rate must be less than $1000"),
+  experience_years: z
+    .number()
+    .int("Experience years must be a whole number")
+    .min(0, "Experience cannot be negative")
+    .max(50, "Experience seems too high"),
+  location: z
+    .string()
+    .trim()
+    .max(200, "Location must be less than 200 characters")
+    .optional(),
+  specialties: z
+    .array(z.string().trim().max(100, "Specialty name too long"))
+    .max(10, "Maximum 10 specialties allowed")
+    .optional(),
+  certifications: z
+    .array(z.string().trim().max(150, "Certification name too long"))
+    .max(15, "Maximum 15 certifications allowed")
+    .optional(),
+});
+
+// ============= BODY MEASUREMENT SCHEMAS =============
+export const bodyMeasurementSchema = z.object({
+  chest_inches: z
+    .number()
+    .min(10, "Measurement seems too small")
+    .max(100, "Measurement seems too large")
+    .optional()
+    .nullable(),
+  waist_inches: z
+    .number()
+    .min(10, "Measurement seems too small")
+    .max(100, "Measurement seems too large")
+    .optional()
+    .nullable(),
+  hips_inches: z
+    .number()
+    .min(10, "Measurement seems too small")
+    .max(100, "Measurement seems too large")
+    .optional()
+    .nullable(),
+  left_arm_inches: z
+    .number()
+    .min(5, "Measurement seems too small")
+    .max(50, "Measurement seems too large")
+    .optional()
+    .nullable(),
+  right_arm_inches: z
+    .number()
+    .min(5, "Measurement seems too small")
+    .max(50, "Measurement seems too large")
+    .optional()
+    .nullable(),
+  left_thigh_inches: z
+    .number()
+    .min(5, "Measurement seems too small")
+    .max(50, "Measurement seems too large")
+    .optional()
+    .nullable(),
+  right_thigh_inches: z
+    .number()
+    .min(5, "Measurement seems too small")
+    .max(50, "Measurement seems too large")
+    .optional()
+    .nullable(),
+  left_calf_inches: z
+    .number()
+    .min(5, "Measurement seems too small")
+    .max(50, "Measurement seems too large")
+    .optional()
+    .nullable(),
+  right_calf_inches: z
+    .number()
+    .min(5, "Measurement seems too small")
+    .max(50, "Measurement seems too large")
+    .optional()
+    .nullable(),
+  notes: z
+    .string()
+    .max(1000, "Notes must be less than 1000 characters")
+    .optional(),
+}).refine((data) => {
+  // At least one measurement must be provided
+  const measurements = [
+    data.chest_inches, data.waist_inches, data.hips_inches,
+    data.left_arm_inches, data.right_arm_inches,
+    data.left_thigh_inches, data.right_thigh_inches,
+    data.left_calf_inches, data.right_calf_inches
+  ];
+  return measurements.some(m => m !== null && m !== undefined);
+}, {
+  message: "At least one measurement is required",
+});
+
+// ============= WEIGHT TRACKING SCHEMAS =============
+export const weightLogSchema = z.object({
+  weight_lbs: z
+    .number()
+    .min(50, "Weight seems too low")
+    .max(1000, "Weight seems too high"),
+  period: z.enum(['morning', 'evening']),
+});
+
+// ============= HABIT SCHEMAS =============
+export const habitSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(2, "Habit name must be at least 2 characters")
+    .max(100, "Habit name must be less than 100 characters"),
+  description: z
+    .string()
+    .max(500, "Description must be less than 500 characters")
+    .optional(),
+  target_frequency: z.enum(['daily', 'weekly', 'monthly']),
+  target_count: z
+    .number()
+    .int("Count must be a whole number")
+    .min(1, "Count must be at least 1")
+    .max(100, "Count seems too high"),
+});
+
+// ============= FUNDRAISER SCHEMAS =============
+export const fundraiserSchema = z.object({
+  title: z
+    .string()
+    .trim()
+    .min(10, "Title must be at least 10 characters")
+    .max(200, "Title must be less than 200 characters"),
+  description: z
+    .string()
+    .trim()
+    .min(50, "Description must be at least 50 characters")
+    .max(5000, "Description must be less than 5000 characters"),
+  goal_amount: z
+    .number()
+    .min(10, "Goal amount must be at least $10")
+    .max(1000000, "Goal amount must be less than $1,000,000"),
+  category: z
+    .string()
+    .min(1, "Category is required")
+    .max(50, "Category must be less than 50 characters"),
+  location: z
+    .string()
+    .trim()
+    .max(200, "Location must be less than 200 characters")
+    .optional(),
+  end_date: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid date format")
+    .refine((date) => new Date(date) > new Date(), {
+      message: "End date must be in the future",
+    }),
+});
+
 // ============= HELPER FUNCTIONS =============
 export const validateAndSanitize = <T>(
   schema: z.ZodSchema<T>,

@@ -15,6 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { format, startOfMonth, startOfQuarter, startOfYear, parseISO } from "date-fns";
 import { BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from "recharts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { weightLogSchema, validateAndSanitize } from "@/lib/validationSchemas";
 
 interface WeightLog {
   id: string;
@@ -167,12 +168,27 @@ const Weight = () => {
 
       const weightLbs = parseWeight(weight, preferredUnit);
 
+      // Validate weight data
+      const validation = validateAndSanitize(weightLogSchema, {
+        weight_lbs: weightLbs,
+        period: period,
+      });
+
+      if (validation.success === false) {
+        toast({
+          title: "Validation Error",
+          description: validation.error,
+          variant: "destructive",
+        });
+        return;
+      }
+
       const { error } = await supabase
         .from('weight_logs')
         .insert({
           user_id: user.id,
-          weight_lbs: weightLbs,
-          period: period,
+          weight_lbs: validation.data.weight_lbs,
+          period: validation.data.period,
           logged_at: selectedDate.toISOString(),
         });
 

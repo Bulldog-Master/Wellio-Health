@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { Award, Plus, X, DollarSign, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { trainerProfileSchema, validateAndSanitize } from "@/lib/validationSchemas";
 
 const TrainerSetup = () => {
   const [loading, setLoading] = useState(false);
@@ -83,14 +84,29 @@ const TrainerSetup = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error('Not authenticated');
 
-      const profileData = {
-        user_id: user.id,
+      // Validate form data
+      const validation = validateAndSanitize(trainerProfileSchema, {
         bio,
         hourly_rate: parseFloat(hourlyRate),
         experience_years: parseInt(experienceYears),
-        location,
-        specialties,
-        certifications,
+        location: location || undefined,
+        specialties: specialties.length > 0 ? specialties : undefined,
+        certifications: certifications.length > 0 ? certifications : undefined,
+      });
+
+      if (validation.success === false) {
+        toast({
+          title: "Validation Error",
+          description: validation.error,
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
+      const profileData = {
+        user_id: user.id,
+        ...validation.data,
       };
 
       if (hasProfile) {
