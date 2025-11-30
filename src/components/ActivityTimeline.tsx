@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import { Scale, Utensils, Dumbbell, Footprints, Heart, Trophy, Target, TrendingUp, Calendar, Activity as ActivityIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface TimelineEvent {
   id: string;
@@ -18,6 +19,7 @@ interface TimelineEvent {
 }
 
 export const ActivityTimeline = () => {
+  const { t } = useTranslation('common');
   const navigate = useNavigate();
   const [events, setEvents] = useState<TimelineEvent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -45,7 +47,7 @@ export const ActivityTimeline = () => {
         allEvents.push({
           id: w.id,
           type: 'weight',
-          title: 'Weight Logged',
+          title: t('weight_logged'),
           description: `${w.weight_lbs} lbs`,
           timestamp: w.logged_at,
           icon: Scale,
@@ -66,7 +68,7 @@ export const ActivityTimeline = () => {
         allEvents.push({
           id: n.id,
           type: 'nutrition',
-          title: 'Meal Logged',
+          title: t('meal_logged'),
           description: `${n.food_name} - ${n.calories || 0} cal`,
           timestamp: n.logged_at || n.created_at,
           icon: Utensils,
@@ -87,7 +89,7 @@ export const ActivityTimeline = () => {
         allEvents.push({
           id: a.id,
           type: 'workout',
-          title: 'Activity Logged',
+          title: t('activity_logged'),
           description: `${a.activity_type} - ${a.duration_minutes} min`,
           timestamp: a.logged_at || a.created_at || new Date().toISOString(),
           icon: Dumbbell,
@@ -109,7 +111,7 @@ export const ActivityTimeline = () => {
           allEvents.push({
             id: w.id,
             type: 'steps',
-            title: 'Steps Tracked',
+            title: t('steps_tracked'),
             description: `${w.steps.toLocaleString()} steps`,
             timestamp: w.data_date,
             icon: Footprints,
@@ -131,7 +133,7 @@ export const ActivityTimeline = () => {
         allEvents.push({
           id: h.id,
           type: 'habit',
-          title: 'Habit Completed',
+          title: t('habit_completed'),
           description: (h.habits as any)?.name || 'Habit',
           timestamp: h.completed_at || new Date().toISOString(),
           icon: Target,
@@ -152,7 +154,7 @@ export const ActivityTimeline = () => {
         allEvents.push({
           id: a.id,
           type: 'achievement',
-          title: 'Achievement Unlocked',
+          title: t('achievement_unlocked'),
           description: a.achievement_type,
           timestamp: a.achieved_at,
           icon: Trophy,
@@ -173,7 +175,7 @@ export const ActivityTimeline = () => {
         allEvents.push({
           id: c.id,
           type: 'challenge',
-          title: 'Challenge Completed',
+          title: t('challenge_completed'),
           description: (c.challenges as any)?.title || 'Challenge',
           timestamp: c.completed_at,
           icon: TrendingUp,
@@ -207,9 +209,9 @@ export const ActivityTimeline = () => {
     return (
       <Card className="p-8 text-center">
         <ActivityIcon className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-        <h3 className="text-lg font-semibold mb-2">No Activity Yet</h3>
+        <h3 className="text-lg font-semibold mb-2">{t('no_activity_yet')}</h3>
         <p className="text-muted-foreground">
-          Start logging your fitness journey to see your activity timeline here!
+          {t('start_logging_journey')}
         </p>
       </Card>
     );
@@ -221,7 +223,7 @@ export const ActivityTimeline = () => {
         <div className="p-2 bg-primary/10 rounded-lg">
           <Calendar className="w-5 h-5 text-primary" />
         </div>
-        <h3 className="text-xl font-semibold">Recent Activity</h3>
+        <h3 className="text-xl font-semibold">{t('recent_activity')}</h3>
       </div>
       
       <div className="space-y-4">

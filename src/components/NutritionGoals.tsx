@@ -3,6 +3,7 @@ import { Apple, Beef, Droplets } from "lucide-react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Progress } from "@/components/ui/progress";
+import { useTranslation } from "react-i18next";
 
 interface NutritionData {
   calories: number;
@@ -19,6 +20,7 @@ interface NutritionGoalsType {
 }
 
 export const NutritionGoals = () => {
+  const { t } = useTranslation('common');
   const [data, setData] = useState<NutritionData>({
     calories: 0,
     protein: 0,
@@ -85,7 +87,7 @@ export const NutritionGoals = () => {
 
   const macros = [
     {
-      label: "Protein",
+      label: t('protein'),
       current: Math.round(data.protein),
       goal: goals.protein,
       color: "text-destructive",
@@ -93,7 +95,7 @@ export const NutritionGoals = () => {
       icon: <Beef className="w-4 h-4" />,
     },
     {
-      label: "Carbs",
+      label: t('carbs'),
       current: Math.round(data.carbs),
       goal: goals.carbs,
       color: "text-primary",
@@ -101,7 +103,7 @@ export const NutritionGoals = () => {
       icon: <Apple className="w-4 h-4" />,
     },
     {
-      label: "Fat",
+      label: t('fat'),
       current: Math.round(data.fat),
       goal: goals.fat,
       color: "text-warning",
@@ -114,20 +116,20 @@ export const NutritionGoals = () => {
 
   return (
     <Card className="p-6 bg-gradient-card shadow-md">
-      <h3 className="text-lg font-semibold mb-4">Today's Nutrition</h3>
+      <h3 className="text-lg font-semibold mb-4">{t('todays_nutrition')}</h3>
       
       <div className="space-y-6">
         {/* Calories */}
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-sm font-medium">Calories</span>
+            <span className="text-sm font-medium">{t('calories')}</span>
             <span className="text-sm font-bold">
               {Math.round(data.calories)} / {goals.calories}
             </span>
           </div>
           <Progress value={calorieProgress} className="h-3" />
           <p className="text-xs text-muted-foreground text-right">
-            {goals.calories - Math.round(data.calories)} remaining
+            {goals.calories - Math.round(data.calories)} {t('remaining')}
           </p>
         </div>
 

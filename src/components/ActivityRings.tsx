@@ -4,6 +4,7 @@ import { Flame, Zap, Clock, TrendingUp } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { format, subDays } from 'date-fns';
 import { Celebration } from './Celebration';
+import { useTranslation } from 'react-i18next';
 
 interface RingData {
   current: number;
@@ -20,6 +21,7 @@ interface ActivityRingsData {
 type RingType = 'move' | 'exercise' | 'stand';
 
 const ActivityRings = () => {
+  const { t } = useTranslation('common');
   const [data, setData] = useState<ActivityRingsData>({
     move: { current: 0, goal: 500, percentage: 0 },
     exercise: { current: 0, goal: 30, percentage: 0 },
@@ -249,9 +251,9 @@ const ActivityRings = () => {
 
   const getRingLabel = (type: RingType) => {
     switch (type) {
-      case 'move': return 'Move';
-      case 'exercise': return 'Exercise';
-      case 'stand': return 'Stand';
+      case 'move': return t('move');
+      case 'exercise': return t('exercise');
+      case 'stand': return t('stand');
     }
   };
 
@@ -411,7 +413,7 @@ const ActivityRings = () => {
       {/* Interaction hint with animation */}
       <div className="text-center">
         <p className="text-[10px] md:text-xs text-gray-600 dark:text-gray-400">
-          Click rings for details
+          {t('click_rings_for_details')}
         </p>
       </div>
 
@@ -428,7 +430,7 @@ const ActivityRings = () => {
           <div>
             <p className="text-sm md:text-base font-bold text-gray-900 dark:text-gray-100">{data.move.current}</p>
             <p className="text-[9px] md:text-[10px] text-gray-600 dark:text-gray-400">/ {data.move.goal} CAL</p>
-            <p className="text-[10px] md:text-xs font-medium text-gray-700 dark:text-gray-300">Move</p>
+            <p className="text-[10px] md:text-xs font-medium text-gray-700 dark:text-gray-300">{t('move')}</p>
           </div>
         </div>
 
@@ -443,7 +445,7 @@ const ActivityRings = () => {
           <div>
             <p className="text-sm md:text-base font-bold text-gray-900 dark:text-gray-100">{data.exercise.current}</p>
             <p className="text-[9px] md:text-[10px] text-gray-600 dark:text-gray-400">/ {data.exercise.goal} MIN</p>
-            <p className="text-[10px] md:text-xs font-medium text-gray-700 dark:text-gray-300">Exercise</p>
+            <p className="text-[10px] md:text-xs font-medium text-gray-700 dark:text-gray-300">{t('exercise')}</p>
           </div>
         </div>
 
@@ -458,7 +460,7 @@ const ActivityRings = () => {
           <div>
             <p className="text-sm md:text-base font-bold text-gray-900 dark:text-gray-100">{data.stand.current}</p>
             <p className="text-[9px] md:text-[10px] text-gray-600 dark:text-gray-400">/ {data.stand.goal} HR</p>
-            <p className="text-[10px] md:text-xs font-medium text-gray-700 dark:text-gray-300">Stand</p>
+            <p className="text-[10px] md:text-xs font-medium text-gray-700 dark:text-gray-300">{t('stand')}</p>
           </div>
         </div>
       </div>
