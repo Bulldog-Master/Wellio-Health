@@ -75,6 +75,11 @@
   "groups": "Grupos",
   "step_count": "Contador de Passos",
   "coming_soon": "Em Breve",
+  "weight_7_days": "Peso (7 Dias)",
+  "calories_7_days": "Calorias (7 Dias)",
+  "workouts_7_days": "Treinos (7 Dias)",
+  "duration": "Duração",
+  "no_data": "Sem dados",
   "nav": {
     "feed": "Feed",
     "workout": "Treino",

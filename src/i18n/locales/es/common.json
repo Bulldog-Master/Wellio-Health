@@ -187,5 +187,10 @@
   "groups": "Grupos",
   "step_count": "Contador de Pasos",
   "coming_soon": "Próximamente",
-  "advanced_features": "funciones avanzadas"
+  "advanced_features": "funciones avanzadas",
+  "weight_7_days": "Peso (7 Días)",
+  "calories_7_days": "Calorías (7 Días)",
+  "workouts_7_days": "Entrenamientos (7 Días)",
+  "duration": "Duración",
+  "no_data": "Sin datos"
 }

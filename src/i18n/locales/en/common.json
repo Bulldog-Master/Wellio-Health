@@ -163,5 +163,10 @@
   "goals": "Goals",
   "groups": "Groups",
   "step_count": "Step Count",
-  "coming_soon": "Coming Soon"
+  "coming_soon": "Coming Soon",
+  "weight_7_days": "Weight (7 Days)",
+  "calories_7_days": "Calories (7 Days)",
+  "workouts_7_days": "Workouts (7 Days)",
+  "duration": "Duration",
+  "no_data": "No data"
 }
