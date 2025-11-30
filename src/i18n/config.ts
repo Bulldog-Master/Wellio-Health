@@ -103,17 +103,26 @@ i18n
     resources,
     fallbackLng: 'en',
     defaultNS: 'common',
-    ns: ['common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 'notifications', 'errors', 'rewards', 'subscription'],
+    ns: ['common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 'notifications', 'errors', 'rewards', 'subscription', 'food', 'workout', 'settings'],
+    
     interpolation: {
       escapeValue: false,
     },
+
     detection: {
-      order: ['localStorage', 'navigator'],
+      order: ['localStorage', 'navigator', 'htmlTag'],
+      lookupLocalStorage: 'i18nextLng',
       caches: ['localStorage'],
+      excludeCacheFor: ['cimode'],
     },
+
     react: {
       useSuspense: true,
     },
+
+    // Safari-specific fixes
+    load: 'languageOnly', // Load 'en' instead of 'en-US'
+    cleanCode: true, // Clean language codes
   });
 
 export default i18n;
