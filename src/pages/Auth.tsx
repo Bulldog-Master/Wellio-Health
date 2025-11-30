@@ -210,8 +210,8 @@ const Auth = () => {
                 .eq('id', trustedDevice.id);
               // Device is trusted, skip 2FA
               toast({
-                title: "Welcome back!",
-                description: "You've successfully signed in from a trusted device.",
+                title: t('welcome_back'),
+                description: t('signin_trusted_device'),
               });
               setLoading(false);
               return;
@@ -225,8 +225,8 @@ const Auth = () => {
             await supabase.auth.signOut();
             
             toast({
-              title: "2FA Required",
-              description: "Please enter your 6-digit authentication code.",
+              title: t('2fa_required'),
+              description: t('2fa_required_desc'),
             });
             setLoading(false);
             return;
@@ -234,8 +234,8 @@ const Auth = () => {
         }
 
         toast({
-          title: "Welcome back!",
-          description: "You've successfully signed in.",
+          title: t('welcome_back'),
+          description: t('signin_success'),
         });
       } else {
         const redirectUrl = `${window.location.origin}/`;
@@ -362,13 +362,13 @@ const Auth = () => {
 
       if (useBackupCode && data.remainingCodes !== undefined) {
         toast({
-          title: "Welcome back!",
-          description: `Backup code verified. You have ${data.remainingCodes} backup codes remaining.`,
+          title: t('welcome_back'),
+          description: t('backup_code_verified', { count: data.remainingCodes }),
         });
       } else {
         toast({
-          title: "Welcome back!",
-          description: "Two-factor authentication successful.",
+          title: t('welcome_back'),
+          description: t('2fa_success'),
         });
       }
 
