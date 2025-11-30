@@ -41,14 +41,6 @@ const Weight = () => {
   const [chartView, setChartView] = useState<"daily" | "monthly" | "quarterly" | "yearly" | "year-by-year">("monthly");
   const [targetWeight, setTargetWeight] = useState<number | null>(null);
 
-  // Pre-compute translated labels to avoid calling t() inside render callbacks
-  const weightUnitLabel = useMemo(() => 
-    preferredUnit === 'imperial' ? t('weight:weight_unit_lbs') : t('weight:weight_unit_kg'),
-    [preferredUnit, t]
-  );
-  
-  const targetWeightLabel = useMemo(() => t('weight:target_weight'), [t]);
-
   useEffect(() => {
     fetchWeightLogs();
     fetchTargetWeight();
@@ -665,86 +657,91 @@ const Weight = () => {
 
         {isLoading ? (
           <p className="text-center text-muted-foreground py-8">{t('weight:loading')}</p>
-        ) : chartData.length === 0 ? (
+        ) : !chartData || chartData.length === 0 ? (
           <p className="text-center text-muted-foreground py-8">{t('weight:no_chart_data')}</p>
-        ) : (
-          <ResponsiveContainer width="100%" height={400}>
-            <BarChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-              <XAxis 
-                dataKey="date" 
-                className="text-xs"
-                tick={{ fill: 'hsl(var(--foreground))' }}
-              />
-              <YAxis 
-                domain={getYAxisDomain()}
-                className="text-xs"
-                tick={{ fill: 'hsl(var(--foreground))' }}
-                label={{ 
-                  value: weightUnitLabel, 
-                  angle: -90, 
-                  position: 'insideLeft',
-                  style: { fill: 'hsl(var(--foreground))' }
-                }}
-                tickFormatter={(value) => formatWeight(value, preferredUnit).split(' ')[0]}
-              />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: 'hsl(var(--background))',
-                  border: '1px solid hsl(var(--border))',
-                  borderRadius: '8px'
-                }}
-                formatter={(value: number) => formatWeight(value, preferredUnit)}
-              />
-              <Legend 
-                wrapperStyle={{
-                  paddingTop: '20px'
-                }}
-                content={(props) => {
-                  const { payload } = props;
-                  const items = [];
-                  
-                  payload?.forEach((entry: any, index: number) => {
-                    items.push(
-                      <div key={`legend-${index}`} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <div style={{ 
-                          width: '14px', 
-                          height: '14px', 
-                          backgroundColor: entry.color,
-                          borderRadius: '2px'
-                        }} />
-                        <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{entry.value}</span>
+        ) : (() => {
+          // Pre-compute labels outside of chart render to avoid translation function calls in callbacks
+          const weightUnit = preferredUnit === 'imperial' ? t('weight:weight_unit_lbs') : t('weight:weight_unit_kg');
+          const targetLabel = t('weight:target_weight');
+          
+          return (
+            <ResponsiveContainer width="100%" height={400}>
+              <BarChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                <XAxis 
+                  dataKey="date" 
+                  className="text-xs"
+                  tick={{ fill: 'hsl(var(--foreground))' }}
+                />
+                <YAxis 
+                  domain={getYAxisDomain()}
+                  className="text-xs"
+                  tick={{ fill: 'hsl(var(--foreground))' }}
+                  label={{ 
+                    value: weightUnit, 
+                    angle: -90, 
+                    position: 'insideLeft',
+                    style: { fill: 'hsl(var(--foreground))' }
+                  }}
+                  tickFormatter={(value) => formatWeight(value, preferredUnit).split(' ')[0]}
+                />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: 'hsl(var(--background))',
+                    border: '1px solid hsl(var(--border))',
+                    borderRadius: '8px'
+                  }}
+                  formatter={(value: number) => formatWeight(value, preferredUnit)}
+                />
+                <Legend 
+                  wrapperStyle={{
+                    paddingTop: '20px'
+                  }}
+                  content={(props) => {
+                    const { payload } = props;
+                    const items = [];
+                    
+                    payload?.forEach((entry: any, index: number) => {
+                      items.push(
+                        <div key={`legend-${index}`} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <div style={{ 
+                            width: '14px', 
+                            height: '14px', 
+                            backgroundColor: entry.color,
+                            borderRadius: '2px'
+                          }} />
+                          <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{entry.value}</span>
+                        </div>
+                      );
+                    });
+                    
+                    // Add target weight indicator if it exists and we're in daily view
+                    if (chartView === 'daily' && targetWeight) {
+                      items.push(
+                        <div key="target-weight" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <svg width="20" height="14" style={{ display: 'block' }}>
+                            <line 
+                              x1="0" 
+                              y1="7" 
+                              x2="20" 
+                              y2="7" 
+                              stroke="hsl(0, 85%, 60%)" 
+                              strokeWidth="2"
+                              strokeDasharray="4 2"
+                            />
+                          </svg>
+                          <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{targetLabel}</span>
+                        </div>
+                      );
+                    }
+                    
+                    return (
+                      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', paddingTop: '20px', flexWrap: 'wrap' }}>
+                        {items}
                       </div>
                     );
-                  });
-                  
-                  // Add target weight indicator if it exists and we're in daily view
-                  if (chartView === 'daily' && targetWeight) {
-                    items.push(
-                      <div key="target-weight" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <svg width="20" height="14" style={{ display: 'block' }}>
-                          <line 
-                            x1="0" 
-                            y1="7" 
-                            x2="20" 
-                            y2="7" 
-                            stroke="hsl(0, 85%, 60%)" 
-                            strokeWidth="2"
-                            strokeDasharray="4 2"
-                          />
-                        </svg>
-                        <span style={{ color: 'hsl(var(--foreground))', fontSize: '13px' }}>{targetWeightLabel}</span>
-                      </div>
-                    );
-                  }
-                  
-                  return (
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', paddingTop: '20px', flexWrap: 'wrap' }}>
-                      {items}
-                    </div>
-                  );
-                }}
-              />
+                  }}
+                />
               
               {/* Target Weight Reference Line */}
               {targetWeight && (
@@ -807,7 +804,8 @@ const Weight = () => {
               )}
             </BarChart>
           </ResponsiveContainer>
-        )}
+          );
+        })()}
       </Card>
 
       <Card className="p-6 bg-gradient-card shadow-md">
