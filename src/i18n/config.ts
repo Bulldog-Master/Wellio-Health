@@ -14,6 +14,12 @@ import authES from './locales/es/auth.json';
 import fitnessES from './locales/es/fitness.json';
 import socialES from './locales/es/social.json';
 import nutritionES from './locales/es/nutrition.json';
+import profileES from './locales/es/profile.json';
+import messagesES from './locales/es/messages.json';
+import notificationsES from './locales/es/notifications.json';
+import errorsES from './locales/es/errors.json';
+import rewardsES from './locales/es/rewards.json';
+import subscriptionES from './locales/es/subscription.json';
 
 import commonPT from './locales/pt/common.json';
 import authPT from './locales/pt/auth.json';
@@ -53,6 +59,12 @@ const resources = {
     fitness: fitnessES,
     social: socialES,
     nutrition: nutritionES,
+    profile: profileES,
+    messages: messagesES,
+    notifications: notificationsES,
+    errors: errorsES,
+    rewards: rewardsES,
+    subscription: subscriptionES,
   },
   pt: {
     common: commonPT,
@@ -91,7 +103,7 @@ i18n
     resources,
     fallbackLng: 'en',
     defaultNS: 'common',
-    ns: ['common', 'auth', 'fitness', 'social', 'nutrition'],
+    ns: ['common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 'notifications', 'errors', 'rewards', 'subscription'],
     interpolation: {
       escapeValue: false,
     },

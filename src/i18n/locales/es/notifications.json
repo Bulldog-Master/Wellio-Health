@@ -1,0 +1,15 @@
+{
+  "notifications": "Notificaciones",
+  "mark_all_as_read": "Marcar todo como leído",
+  "all_notifications_read": "Todas las notificaciones marcadas como leídas",
+  "no_notifications_yet": "Sin notificaciones aún",
+  "loading_notifications": "Cargando notificaciones...",
+  
+  "liked_your_post": "le gustó tu publicación",
+  "commented_on_post": "comentó en tu publicación",
+  "started_following": "comenzó a seguirte",
+  "mentioned_you": "te mencionó en una publicación",
+  "wants_to_follow": "quiere seguirte",
+  "someone": "Alguien",
+  "new_notification": "Nueva notificación"
+}

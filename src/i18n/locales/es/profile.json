@@ -1,0 +1,60 @@
+{
+  "profile": "Perfil",
+  "manage_account": "Administrar tu cuenta",
+  "personal_information": "Información Personal",
+  "your_profile_details": "Tus detalles de perfil e información de cuenta",
+  "fitness_goals": "Objetivos de Fitness",
+  "set_your_targets": "Establece tus objetivos y metas",
+  "settings": "Configuración",
+  "preferences_config": "Preferencias y configuración de cuenta",
+  
+  "full_name": "Nombre Completo",
+  "username": "Nombre de Usuario",
+  "age": "Edad",
+  "gender": "Género",
+  "male": "Masculino",
+  "female": "Femenino",
+  "height": "Altura",
+  "weight": "Peso Actual",
+  "current_weight": "Peso Actual",
+  "target_weight": "Peso Objetivo",
+  "goal": "Objetivo",
+  
+  "upload_photo": "Subir Foto",
+  "avatar_updated": "Avatar actualizado",
+  "profile_picture_updated": "Tu foto de perfil ha sido actualizada",
+  "profile_updated": "Perfil actualizado",
+  "profile_saved": "Tu información de perfil se ha guardado exitosamente",
+  
+  "leaner": "Más Delgado",
+  "bigger": "Más Grande",
+  "maintain": "Mantener",
+  
+  "move_goal": "Objetivo de Movimiento",
+  "exercise_goal": "Objetivo de Ejercicio",
+  "stand_goal": "Objetivo de Estar de Pie",
+  
+  "referral_link": "Enlace de Referido",
+  "your_reward_points": "Tus Puntos de Recompensa",
+  "points": "Puntos",
+  "can_redeem": "¡Puedes canjear recompensas!",
+  "earn_more_for_reward": "Gana {{remaining}} más para tu primera recompensa",
+  "rewards_store": "Tienda de Recompensas",
+  "earn_more": "Ganar Más",
+  
+  "copied": "¡Copiado!",
+  "referral_link_copied": "Enlace de referido copiado al portapapeles",
+  "share_referral": "Compartir Referido",
+  
+  "too_many_updates": "Demasiadas Actualizaciones",
+  "wait_before_updating": "Por favor espera {{minutes}} minutos antes de actualizar de nuevo",
+  "validation_error": "Error de Validación",
+  "error": "Error",
+  "failed_to_save": "No se pudo guardar el perfil",
+  "failed_to_upload": "No se pudo subir el avatar",
+  
+  "upgrade": "Mejorar",
+  "free": "Gratis",
+  "pro": "PRO",
+  "premium": "PREMIUM"
+}
