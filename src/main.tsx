@@ -11,7 +11,15 @@ setupGlobalErrorHandlers();
 // Register service worker for PWA
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch(() => {
+    navigator.serviceWorker.register('/sw.js').then((registration) => {
+      // Check for updates immediately
+      registration.update();
+      
+      // Check for updates every hour
+      setInterval(() => {
+        registration.update();
+      }, 60 * 60 * 1000);
+    }).catch(() => {
       // Service worker registration failed, PWA features won't be available
     });
   });
