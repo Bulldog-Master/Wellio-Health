@@ -23,7 +23,7 @@ interface ProgressPhoto {
 
 const ProgressPhotos = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
   const { preferredUnit } = useUserPreferences();
   const [photos, setPhotos] = useState<ProgressPhoto[]>([]);
   const [loading, setLoading] = useState(true);
@@ -31,6 +31,10 @@ const ProgressPhotos = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [weight, setWeight] = useState("");
   const [notes, setNotes] = useState("");
+
+  // Debug
+  console.log('Progress Photos - Language:', i18n.language);
+  console.log('Progress Photos - progressPhotos translation:', t('progressPhotos'));
 
   useEffect(() => {
     fetchPhotos();
