@@ -75,6 +75,11 @@
   "groups": "群组",
   "step_count": "步数统计",
   "coming_soon": "即将推出",
+  "weight_7_days": "体重（7天）",
+  "calories_7_days": "卡路里（7天）",
+  "workouts_7_days": "锻炼（7天）",
+  "duration": "时长",
+  "no_data": "无数据",
   "nav": {
     "feed": "动态",
     "workout": "锻炼",
