@@ -20,6 +20,9 @@ import notificationsES from './locales/es/notifications.json';
 import errorsES from './locales/es/errors.json';
 import rewardsES from './locales/es/rewards.json';
 import subscriptionES from './locales/es/subscription.json';
+import foodES from './locales/es/food.json';
+import workoutES from './locales/es/workout.json';
+import settingsES from './locales/es/settings.json';
 
 import commonPT from './locales/pt/common.json';
 import authPT from './locales/pt/auth.json';
@@ -65,6 +68,9 @@ const resources = {
     errors: errorsES,
     rewards: rewardsES,
     subscription: subscriptionES,
+    food: foodES,
+    workout: workoutES,
+    settings: settingsES,
   },
   pt: {
     common: commonPT,
