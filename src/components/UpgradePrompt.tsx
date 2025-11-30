@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Crown, Sparkles } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface UpgradePromptProps {
   feature?: string;
@@ -10,6 +11,7 @@ interface UpgradePromptProps {
 
 export const UpgradePrompt = ({ feature, compact = false }: UpgradePromptProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation('common');
 
   if (compact) {
     return (
@@ -18,9 +20,9 @@ export const UpgradePrompt = ({ feature, compact = false }: UpgradePromptProps) 
           <div className="flex items-center gap-3">
             <Crown className="w-5 h-5" />
             <div>
-              <p className="font-semibold">Upgrade to Pro</p>
+              <p className="font-semibold">{t('upgrade_to_pro')}</p>
               <p className="text-xs text-white/90">
-                {feature ? `Unlock ${feature}` : 'Get unlimited access'}
+                {feature ? t('unlock_feature', { feature }) : t('get_unlimited_access')}
               </p>
             </div>
           </div>
@@ -29,7 +31,7 @@ export const UpgradePrompt = ({ feature, compact = false }: UpgradePromptProps) 
             variant="secondary"
             onClick={() => navigate('/subscription')}
           >
-            Upgrade
+            {t('upgrade')}
           </Button>
         </div>
       </Card>
@@ -41,11 +43,11 @@ export const UpgradePrompt = ({ feature, compact = false }: UpgradePromptProps) 
       <div className="inline-flex p-3 bg-white/20 rounded-full mb-4">
         <Sparkles className="w-8 h-8" />
       </div>
-      <h3 className="text-2xl font-bold mb-2">Upgrade to Premium</h3>
+      <h3 className="text-2xl font-bold mb-2">{t('upgrade_to_premium')}</h3>
       <p className="text-white/90 mb-6 max-w-md mx-auto">
         {feature 
-          ? `${feature} is a premium feature. Upgrade to unlock this and many more exclusive features.`
-          : 'Get access to advanced analytics, AI insights, trainer marketplace, and more.'
+          ? t('upgrade_description', { feature })
+          : t('upgrade_description_default')
         }
       </p>
       <Button 
@@ -55,7 +57,7 @@ export const UpgradePrompt = ({ feature, compact = false }: UpgradePromptProps) 
         className="gap-2"
       >
         <Crown className="w-5 h-5" />
-        View Plans
+        {t('view_plans')}
       </Button>
     </Card>
   );
