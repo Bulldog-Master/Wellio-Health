@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format, startOfMonth, startOfQuarter, startOfYear, parseISO } from "date-fns";
-import { es as esLocale } from "date-fns/locale";
+import { es } from "date-fns/locale";
 import { BarChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from "recharts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { weightLogSchema, validateAndSanitize } from "@/lib/validationSchemas";
@@ -41,8 +41,8 @@ const Weight = () => {
   const [chartView, setChartView] = useState<"daily" | "monthly" | "quarterly" | "yearly" | "year-by-year">("monthly");
   const [targetWeight, setTargetWeight] = useState<number | null>(null);
   
-  // Translate target weight label outside render functions for Safari compatibility
-  const targetWeightLabel = t('weight:target_weight');
+  // Memoize translated label for use in callbacks
+  const targetWeightLabel = useMemo(() => t('weight:target_weight'), [t]);
 
   useEffect(() => {
     fetchWeightLogs();
@@ -536,7 +536,7 @@ const Weight = () => {
             <PopoverTrigger asChild>
               <Button variant="outline" className="gap-2">
                 <CalendarIcon className="w-4 h-4" />
-                {format(selectedDate, "PPP", i18n.language === 'es' ? { locale: esLocale } : {})}
+                {format(selectedDate, "PPP", { locale: i18n.language === 'es' ? es : undefined })}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="end">
@@ -544,7 +544,7 @@ const Weight = () => {
                 mode="single"
                 selected={selectedDate}
                 onSelect={(date) => date && setSelectedDate(date)}
-                locale={i18n.language === 'es' ? esLocale : undefined}
+                locale={i18n.language === 'es' ? es : undefined}
                 initialFocus
               />
             </PopoverContent>
@@ -672,7 +672,7 @@ const Weight = () => {
                 tick={{ fill: 'hsl(var(--foreground))' }}
                 tickFormatter={(value) => {
                   const date = new Date(value);
-                  return format(date, "MMM d", i18n.language === 'es' ? { locale: esLocale } : {});
+                  return format(date, "MMM d", { locale: i18n.language === 'es' ? es : undefined });
                 }}
               />
               <YAxis 
