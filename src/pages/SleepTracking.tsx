@@ -21,12 +21,11 @@ const SleepTracking = () => {
   const [sleepData, setSleepData] = useState<SleepData[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Debug: Log current language and translation test
-  useEffect(() => {
-    console.log('🌐 Current language:', i18n.language);
-    console.log('🔍 Translation test - sleep.title:', t('sleep.title'));
-    console.log('🔍 Translation test - backToDashboard:', t('backToDashboard'));
-  }, [i18n.language, t]);
+  // Debug: Log to verify language and translations
+  console.log('🌍 Sleep Tracking - Current language:', i18n.language);
+  console.log('🔤 localStorage i18nextLng:', localStorage.getItem('i18nextLng'));
+  console.log('📝 Translation test - sleepTracking:', t('sleepTracking'));
+  console.log('📝 Translation test - backToDashboard:', t('backToDashboard'));
 
   useEffect(() => {
     fetchSleepData();
