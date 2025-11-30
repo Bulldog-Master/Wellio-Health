@@ -18,6 +18,7 @@ import {
   symptomSchema, 
   validateAndSanitize 
 } from "@/lib/validationSchemas";
+import { uploadMedicalFile, getSignedMedicalFileUrl } from "@/lib/medicalFileStorage";
 
 interface Medication {
   id: string;
@@ -82,6 +83,8 @@ const MedicalHistory = () => {
     notes: "",
     file_url: "",
   });
+  const [testFile, setTestFile] = useState<File | null>(null);
+  const [isUploadingTest, setIsUploadingTest] = useState(false);
 
   const [recordFormData, setRecordFormData] = useState({
     record_name: "",
@@ -90,6 +93,8 @@ const MedicalHistory = () => {
     notes: "",
     file_url: "",
   });
+  const [recordFile, setRecordFile] = useState<File | null>(null);
+  const [isUploadingRecord, setIsUploadingRecord] = useState(false);
 
   const [symptomName, setSymptomName] = useState("");
   const [severity, setSeverity] = useState([5]);
@@ -229,6 +234,23 @@ const MedicalHistory = () => {
     }
   };
 
+  const handleTestFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file size (50MB max)
+    if (file.size > 52428800) {
+      toast({
+        title: "File too large",
+        description: "File must be less than 50MB",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setTestFile(file);
+  };
+
   const handleAddTestResult = async () => {
     // Validate using Zod schema
     const validation = validateAndSanitize(testResultSchema, testFormData);
@@ -242,8 +264,20 @@ const MedicalHistory = () => {
     }
 
     try {
+      setIsUploadingTest(true);
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
+
+      let filePath = testFormData.file_url || null;
+
+      // Upload file if selected
+      if (testFile) {
+        const uploadedPath = await uploadMedicalFile(testFile, user.id, 'test_results');
+        if (!uploadedPath) {
+          throw new Error('Failed to upload file');
+        }
+        filePath = uploadedPath;
+      }
 
       const { error } = await supabase
         .from('medical_test_results')
@@ -254,7 +288,7 @@ const MedicalHistory = () => {
           result_value: testFormData.result_value || null,
           result_unit: testFormData.result_unit || null,
           notes: testFormData.notes || null,
-          file_url: testFormData.file_url || null,
+          file_url: filePath,
         });
 
       if (error) throw error;
@@ -272,6 +306,7 @@ const MedicalHistory = () => {
         notes: "",
         file_url: "",
       });
+      setTestFile(null);
       fetchTestResults();
     } catch (error) {
       console.error('Error adding test result:', error);
@@ -280,7 +315,26 @@ const MedicalHistory = () => {
         description: "Failed to add test result.",
         variant: "destructive",
       });
+    } finally {
+      setIsUploadingTest(false);
     }
+  };
+
+  const handleRecordFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file size (50MB max)
+    if (file.size > 52428800) {
+      toast({
+        title: "File too large",
+        description: "File must be less than 50MB",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setRecordFile(file);
   };
 
   const handleAddMedicalRecord = async () => {
@@ -296,8 +350,20 @@ const MedicalHistory = () => {
     }
 
     try {
+      setIsUploadingRecord(true);
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
+
+      let filePath = recordFormData.file_url || null;
+
+      // Upload file if selected
+      if (recordFile) {
+        const uploadedPath = await uploadMedicalFile(recordFile, user.id, 'medical_records');
+        if (!uploadedPath) {
+          throw new Error('Failed to upload file');
+        }
+        filePath = uploadedPath;
+      }
 
       const { error } = await supabase
         .from('medical_records')
@@ -307,7 +373,7 @@ const MedicalHistory = () => {
           record_date: recordFormData.record_date,
           category: recordFormData.category,
           notes: recordFormData.notes || null,
-          file_url: recordFormData.file_url || null,
+          file_url: filePath,
         });
 
       if (error) throw error;
@@ -324,6 +390,7 @@ const MedicalHistory = () => {
         notes: "",
         file_url: "",
       });
+      setRecordFile(null);
       fetchMedicalRecords();
     } catch (error) {
       console.error('Error adding medical record:', error);
@@ -332,6 +399,8 @@ const MedicalHistory = () => {
         description: "Failed to add medical record.",
         variant: "destructive",
       });
+    } finally {
+      setIsUploadingRecord(false);
     }
   };
 
@@ -693,27 +762,29 @@ const MedicalHistory = () => {
               </div>
 
               <div>
-                <Label htmlFor="file-url">File URL (optional)</Label>
+                <Label htmlFor="test-file">Upload File (optional)</Label>
                 <div className="flex gap-2 mt-1.5">
                   <Input
-                    id="file-url"
-                    placeholder="https://example.com/test-result.pdf"
-                    value={testFormData.file_url}
-                    onChange={(e) => setTestFormData({ ...testFormData, file_url: e.target.value })}
+                    id="test-file"
+                    type="file"
+                    accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+                    onChange={handleTestFileChange}
                     className="flex-1"
                   />
-                  <Button variant="outline" size="icon" type="button">
-                    <Upload className="w-4 h-4" />
-                  </Button>
                 </div>
+                {testFile && (
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Selected: {testFile.name} ({(testFile.size / 1024 / 1024).toFixed(2)} MB)
+                  </p>
+                )}
                 <p className="text-xs text-muted-foreground mt-1">
-                  Upload your test result to cloud storage and paste the URL here
+                  Max file size: 50MB. Accepted formats: PDF, JPG, PNG, DOC, DOCX
                 </p>
               </div>
 
-              <Button onClick={handleAddTestResult} className="w-full gap-2">
+              <Button onClick={handleAddTestResult} className="w-full gap-2" disabled={isUploadingTest}>
                 <Plus className="w-4 h-4" />
-                Add Test Result
+                {isUploadingTest ? "Uploading..." : "Add Test Result"}
               </Button>
             </div>
           </Card>
@@ -741,6 +812,28 @@ const MedicalHistory = () => {
                     </div>
                     {test.notes && (
                       <p className="text-sm text-muted-foreground mt-2">{test.notes}</p>
+                    )}
+                    {test.file_url && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="mt-2"
+                        onClick={async () => {
+                          const signedUrl = await getSignedMedicalFileUrl(test.file_url!);
+                          if (signedUrl) {
+                            window.open(signedUrl, '_blank');
+                          } else {
+                            toast({
+                              title: "Error",
+                              description: "Failed to access file",
+                              variant: "destructive",
+                            });
+                          }
+                        }}
+                      >
+                        <FileText className="w-4 h-4 mr-2" />
+                        View File
+                      </Button>
                     )}
                   </div>
                 ))
@@ -803,27 +896,29 @@ const MedicalHistory = () => {
               </div>
 
               <div>
-                <Label htmlFor="record-file-url">File URL (optional)</Label>
+                <Label htmlFor="record-file">Upload File (optional)</Label>
                 <div className="flex gap-2 mt-1.5">
                   <Input
-                    id="record-file-url"
-                    placeholder="https://example.com/medical-record.pdf"
-                    value={recordFormData.file_url}
-                    onChange={(e) => setRecordFormData({ ...recordFormData, file_url: e.target.value })}
+                    id="record-file"
+                    type="file"
+                    accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+                    onChange={handleRecordFileChange}
                     className="flex-1"
                   />
-                  <Button variant="outline" size="icon" type="button">
-                    <Upload className="w-4 h-4" />
-                  </Button>
                 </div>
+                {recordFile && (
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Selected: {recordFile.name} ({(recordFile.size / 1024 / 1024).toFixed(2)} MB)
+                  </p>
+                )}
                 <p className="text-xs text-muted-foreground mt-1">
-                  Upload your medical record to cloud storage and paste the URL here
+                  Max file size: 50MB. Accepted formats: PDF, JPG, PNG, DOC, DOCX
                 </p>
               </div>
 
-              <Button onClick={handleAddMedicalRecord} className="w-full gap-2">
+              <Button onClick={handleAddMedicalRecord} className="w-full gap-2" disabled={isUploadingRecord}>
                 <Plus className="w-4 h-4" />
-                Add Medical Record
+                {isUploadingRecord ? "Uploading..." : "Add Medical Record"}
               </Button>
             </div>
           </Card>
@@ -854,14 +949,26 @@ const MedicalHistory = () => {
                       <p className="text-sm text-muted-foreground mt-2">{record.notes}</p>
                     )}
                     {record.file_url && (
-                      <a
-                        href={record.file_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-primary hover:underline mt-2 inline-block"
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="mt-2"
+                        onClick={async () => {
+                          const signedUrl = await getSignedMedicalFileUrl(record.file_url!);
+                          if (signedUrl) {
+                            window.open(signedUrl, '_blank');
+                          } else {
+                            toast({
+                              title: "Error",
+                              description: "Failed to access file",
+                              variant: "destructive",
+                            });
+                          }
+                        }}
                       >
+                        <FileText className="w-4 h-4 mr-2" />
                         View File
-                      </a>
+                      </Button>
                     )}
                   </div>
                 ))
