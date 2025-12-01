@@ -60,7 +60,8 @@
     "food": "Food",
     "workout": "Workout",
     "nutrition": "Nutrition",
-    "social": "Social"
+    "social": "Social",
+    "activity": "Activity"
   },
   "post_created": "Post created!",
   "link_copied_clipboard": "Link copied to clipboard!",
