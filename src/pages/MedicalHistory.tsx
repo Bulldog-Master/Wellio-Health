@@ -19,6 +19,7 @@ import {
   validateAndSanitize 
 } from "@/lib/validationSchemas";
 import { uploadMedicalFile, getSignedMedicalFileUrl } from "@/lib/medicalFileStorage";
+import { useTranslation } from "react-i18next";
 
 interface Medication {
   id: string;
@@ -61,6 +62,7 @@ interface Symptom {
 const MedicalHistory = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { t } = useTranslation(['medical', 'errors']);
   const [medications, setMedications] = useState<Medication[]>([]);
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [medicalRecords, setMedicalRecords] = useState<MedicalRecord[]>([]);
@@ -187,7 +189,7 @@ const MedicalHistory = () => {
     const validation = validateAndSanitize(medicationSchema, medFormData);
     if (validation.success === false) {
       toast({
-        title: "Validation Error",
+        title: t('medical:validation_error'),
         description: validation.error,
         variant: "destructive",
       });
@@ -212,8 +214,8 @@ const MedicalHistory = () => {
       if (error) throw error;
 
       toast({
-        title: "Medication added",
-        description: `${medFormData.medication_name} has been added to your records.`,
+        title: t('medical:medication_added'),
+        description: t('medical:medication_added_desc', { name: medFormData.medication_name }),
       });
 
       setMedFormData({
@@ -227,8 +229,8 @@ const MedicalHistory = () => {
     } catch (error) {
       console.error('Error adding medication:', error);
       toast({
-        title: "Error",
-        description: "Failed to add medication.",
+        title: t('medical:error'),
+        description: t('medical:failed_add_medication'),
         variant: "destructive",
       });
     }
@@ -241,8 +243,8 @@ const MedicalHistory = () => {
     // Validate file size (50MB max)
     if (file.size > 52428800) {
       toast({
-        title: "File too large",
-        description: "File must be less than 50MB",
+        title: t('medical:file_too_large'),
+        description: t('medical:file_size_limit'),
         variant: "destructive",
       });
       return;
@@ -256,7 +258,7 @@ const MedicalHistory = () => {
     const validation = validateAndSanitize(testResultSchema, testFormData);
     if (validation.success === false) {
       toast({
-        title: "Validation Error",
+        title: t('medical:validation_error'),
         description: validation.error,
         variant: "destructive",
       });
@@ -294,8 +296,8 @@ const MedicalHistory = () => {
       if (error) throw error;
 
       toast({
-        title: "Test result added",
-        description: `${testFormData.test_name} has been recorded.`,
+        title: t('medical:test_result_added'),
+        description: t('medical:test_result_added_desc', { name: testFormData.test_name }),
       });
 
       setTestFormData({
@@ -311,8 +313,8 @@ const MedicalHistory = () => {
     } catch (error) {
       console.error('Error adding test result:', error);
       toast({
-        title: "Error",
-        description: "Failed to add test result.",
+        title: t('medical:error'),
+        description: t('medical:failed_add_test'),
         variant: "destructive",
       });
     } finally {
@@ -327,8 +329,8 @@ const MedicalHistory = () => {
     // Validate file size (50MB max)
     if (file.size > 52428800) {
       toast({
-        title: "File too large",
-        description: "File must be less than 50MB",
+        title: t('medical:file_too_large'),
+        description: t('medical:file_size_limit'),
         variant: "destructive",
       });
       return;
@@ -342,7 +344,7 @@ const MedicalHistory = () => {
     const validation = validateAndSanitize(medicalRecordSchema, recordFormData);
     if (validation.success === false) {
       toast({
-        title: "Validation Error",
+        title: t('medical:validation_error'),
         description: validation.error,
         variant: "destructive",
       });
@@ -379,8 +381,8 @@ const MedicalHistory = () => {
       if (error) throw error;
 
       toast({
-        title: "Medical record added",
-        description: `${recordFormData.record_name} has been recorded.`,
+        title: t('medical:medical_record_added'),
+        description: t('medical:medical_record_added_desc', { name: recordFormData.record_name }),
       });
 
       setRecordFormData({
@@ -395,8 +397,8 @@ const MedicalHistory = () => {
     } catch (error) {
       console.error('Error adding medical record:', error);
       toast({
-        title: "Error",
-        description: "Failed to add medical record.",
+        title: t('medical:error'),
+        description: t('medical:failed_add_record'),
         variant: "destructive",
       });
     } finally {
@@ -413,7 +415,7 @@ const MedicalHistory = () => {
     });
     if (validation.success === false) {
       toast({
-        title: "Validation Error",
+        title: t('medical:validation_error'),
         description: validation.error,
         variant: "destructive",
       });
@@ -436,8 +438,8 @@ const MedicalHistory = () => {
       if (error) throw error;
 
       toast({
-        title: "Symptom logged",
-        description: `${symptomName} has been recorded.`,
+        title: t('medical:symptom_logged'),
+        description: t('medical:symptom_logged_desc', { name: symptomName }),
       });
 
       setSymptomName("");
@@ -447,8 +449,8 @@ const MedicalHistory = () => {
     } catch (error) {
       console.error('Error logging symptom:', error);
       toast({
-        title: "Error",
-        description: "Failed to log symptom. Please try again.",
+        title: t('medical:error'),
+        description: t('medical:failed_log_symptom'),
         variant: "destructive",
       });
     }
@@ -464,16 +466,16 @@ const MedicalHistory = () => {
       if (error) throw error;
 
       toast({
-        title: "Symptom deleted",
-        description: "The symptom entry has been removed.",
+        title: t('medical:symptom_deleted'),
+        description: t('medical:symptom_deleted_desc'),
       });
 
       fetchSymptoms();
     } catch (error) {
       console.error('Error deleting symptom:', error);
       toast({
-        title: "Error",
-        description: "Failed to delete symptom.",
+        title: t('medical:error'),
+        description: t('medical:failed_delete_symptom'),
         variant: "destructive",
       });
     }
@@ -492,39 +494,39 @@ const MedicalHistory = () => {
           <FileText className="w-6 h-6 text-primary" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold">Health</h1>
-          <p className="text-muted-foreground">Track medications, tests, and symptoms</p>
+          <h1 className="text-3xl font-bold">{t('medical:health')}</h1>
+          <p className="text-muted-foreground">{t('medical:track_medications_tests')}</p>
         </div>
       </div>
 
       <Tabs defaultValue="medications" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="medications">Medications</TabsTrigger>
-          <TabsTrigger value="symptoms">Symptoms</TabsTrigger>
-          <TabsTrigger value="tests">Test Results</TabsTrigger>
-          <TabsTrigger value="records">Medical Records</TabsTrigger>
+          <TabsTrigger value="medications">{t('medical:medications')}</TabsTrigger>
+          <TabsTrigger value="symptoms">{t('medical:symptoms')}</TabsTrigger>
+          <TabsTrigger value="tests">{t('medical:test_results')}</TabsTrigger>
+          <TabsTrigger value="records">{t('medical:medical_records')}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="medications" className="space-y-6">
           <Card className="p-6 bg-gradient-card shadow-md">
-            <h3 className="text-lg font-semibold mb-6">Add Medication</h3>
+            <h3 className="text-lg font-semibold mb-6">{t('medical:add_medication')}</h3>
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="med-name">Medication Name</Label>
+                  <Label htmlFor="med-name">{t('medical:medication_name')}</Label>
                   <Input
                     id="med-name"
-                    placeholder="e.g., Aspirin"
+                    placeholder={t('medical:placeholder_medication')}
                     value={medFormData.medication_name}
                     onChange={(e) => setMedFormData({ ...medFormData, medication_name: e.target.value })}
                     className="mt-1.5"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="dosage">Dosage</Label>
+                  <Label htmlFor="dosage">{t('medical:dosage')}</Label>
                   <Input
                     id="dosage"
-                    placeholder="e.g., 100mg"
+                    placeholder={t('medical:placeholder_dosage')}
                     value={medFormData.dosage}
                     onChange={(e) => setMedFormData({ ...medFormData, dosage: e.target.value })}
                     className="mt-1.5"
@@ -534,17 +536,17 @@ const MedicalHistory = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="frequency">Frequency</Label>
+                  <Label htmlFor="frequency">{t('medical:frequency')}</Label>
                   <Input
                     id="frequency"
-                    placeholder="e.g., Twice daily"
+                    placeholder={t('medical:placeholder_frequency')}
                     value={medFormData.frequency}
                     onChange={(e) => setMedFormData({ ...medFormData, frequency: e.target.value })}
                     className="mt-1.5"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="start-date">Start Date</Label>
+                  <Label htmlFor="start-date">{t('medical:start_date')}</Label>
                   <Input
                     id="start-date"
                     type="date"
@@ -556,10 +558,10 @@ const MedicalHistory = () => {
               </div>
 
               <div>
-                <Label htmlFor="med-notes">Notes (optional)</Label>
+                <Label htmlFor="med-notes">{t('medical:notes')}</Label>
                 <Textarea
                   id="med-notes"
-                  placeholder="Add any details..."
+                  placeholder={t('medical:placeholder_notes')}
                   value={medFormData.notes}
                   onChange={(e) => setMedFormData({ ...medFormData, notes: e.target.value })}
                   className="mt-1.5 min-h-20"
@@ -568,13 +570,13 @@ const MedicalHistory = () => {
 
               <Button onClick={handleAddMedication} className="w-full gap-2">
                 <Plus className="w-4 h-4" />
-                Add Medication
+                {t('medical:add_medication')}
               </Button>
             </div>
           </Card>
 
           <Card className="p-6 bg-gradient-card shadow-md">
-            <h3 className="text-lg font-semibold mb-4">Active Medications</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('medical:active')}</h3>
             <div className="space-y-3">
               {isLoading ? (
                 <p className="text-center text-muted-foreground py-8">Loading...</p>
@@ -600,7 +602,7 @@ const MedicalHistory = () => {
                 ))
               ) : (
                 <p className="text-center text-muted-foreground py-8">
-                  No active medications.
+                  {t('medical:no_medications')}
                 </p>
               )}
             </div>
@@ -609,13 +611,13 @@ const MedicalHistory = () => {
 
         <TabsContent value="symptoms" className="space-y-6">
           <Card className="p-6 bg-gradient-card shadow-md">
-            <h3 className="text-lg font-semibold mb-6">Log Symptom</h3>
+            <h3 className="text-lg font-semibold mb-6">{t('medical:log_symptom')}</h3>
             <div className="space-y-4">
               <div>
-                <Label htmlFor="symptom-name">Symptom Name</Label>
+                <Label htmlFor="symptom-name">{t('medical:symptom_name')}</Label>
                 <Input
                   id="symptom-name"
-                  placeholder="e.g., Headache, Fatigue"
+                  placeholder={t('medical:placeholder_symptom')}
                   value={symptomName}
                   onChange={(e) => setSymptomName(e.target.value)}
                   className="mt-1.5"
@@ -623,7 +625,7 @@ const MedicalHistory = () => {
               </div>
 
               <div>
-                <Label htmlFor="severity">Severity (1-10)</Label>
+                <Label htmlFor="severity">{t('medical:severity')}</Label>
                 <div className="flex items-center gap-4 mt-1.5">
                   <Slider
                     id="severity"
@@ -639,10 +641,10 @@ const MedicalHistory = () => {
               </div>
 
               <div>
-                <Label htmlFor="symptom-description">Description (optional)</Label>
+                <Label htmlFor="symptom-description">{t('medical:description')}</Label>
                 <Textarea
                   id="symptom-description"
-                  placeholder="Describe the symptom..."
+                  placeholder={t('medical:placeholder_symptom_description')}
                   value={symptomDescription}
                   onChange={(e) => setSymptomDescription(e.target.value)}
                   className="mt-1.5 min-h-20"
@@ -651,7 +653,7 @@ const MedicalHistory = () => {
 
               <Button onClick={handleAddSymptom} className="w-full gap-2">
                 <Plus className="w-4 h-4" />
-                Log Symptom
+                {t('medical:log_symptom')}
               </Button>
             </div>
           </Card>
@@ -672,7 +674,7 @@ const MedicalHistory = () => {
                         </div>
                         {symptom.severity && (
                           <p className={`text-sm font-medium ${getSeverityColor(symptom.severity)}`}>
-                            Severity: {symptom.severity}/10
+                            {t('medical:severity_level', { level: symptom.severity })}
                           </p>
                         )}
                         {symptom.description && (
@@ -694,7 +696,7 @@ const MedicalHistory = () => {
                 ))
               ) : (
                 <p className="text-center text-muted-foreground py-8">
-                  No symptoms logged yet.
+                  {t('medical:no_symptoms')}
                 </p>
               )}
             </div>
@@ -703,13 +705,13 @@ const MedicalHistory = () => {
 
         <TabsContent value="tests" className="space-y-6">
           <Card className="p-6 bg-gradient-card shadow-md">
-            <h3 className="text-lg font-semibold mb-6">Add Test Result</h3>
+            <h3 className="text-lg font-semibold mb-6">{t('medical:add_test_result')}</h3>
             <div className="space-y-4">
               <div>
-                <Label htmlFor="test-name">Test Name</Label>
+                <Label htmlFor="test-name">{t('medical:test_name')}</Label>
                 <Input
                   id="test-name"
-                  placeholder="e.g., Blood Pressure, Cholesterol"
+                  placeholder={t('medical:placeholder_test_name')}
                   value={testFormData.test_name}
                   onChange={(e) => setTestFormData({ ...testFormData, test_name: e.target.value })}
                   className="mt-1.5"
@@ -717,7 +719,7 @@ const MedicalHistory = () => {
               </div>
 
               <div>
-                <Label htmlFor="test-date">Test Date</Label>
+                <Label htmlFor="test-date">{t('medical:test_date')}</Label>
                 <Input
                   id="test-date"
                   type="date"
@@ -729,10 +731,10 @@ const MedicalHistory = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="result-value">Result Value (optional)</Label>
+                  <Label htmlFor="result-value">{t('medical:result')}</Label>
                   <Input
                     id="result-value"
-                    placeholder="e.g., 120"
+                    placeholder={t('medical:placeholder_result')}
                     value={testFormData.result_value}
                     onChange={(e) => setTestFormData({ ...testFormData, result_value: e.target.value })}
                     className="mt-1.5"
@@ -784,7 +786,7 @@ const MedicalHistory = () => {
 
               <Button onClick={handleAddTestResult} className="w-full gap-2" disabled={isUploadingTest}>
                 <Plus className="w-4 h-4" />
-                {isUploadingTest ? "Uploading..." : "Add Test Result"}
+                {isUploadingTest ? t('common:uploading') : t('medical:add_test_result')}
               </Button>
             </div>
           </Card>
@@ -832,7 +834,7 @@ const MedicalHistory = () => {
                             });
                           } else {
                             toast({
-                              title: "Error",
+                              title: t('medical:error'),
                               description: "Failed to access file. The link may have expired.",
                               variant: "destructive",
                             });
@@ -840,14 +842,14 @@ const MedicalHistory = () => {
                         }}
                       >
                         <FileText className="w-4 h-4 mr-2" />
-                        View File
+                        {t('medical:view_file')}
                       </Button>
                     )}
                   </div>
                 ))
               ) : (
                 <p className="text-center text-muted-foreground py-8">
-                  No test results yet.
+                  {t('medical:no_test_results')}
                 </p>
               )}
             </div>
@@ -856,13 +858,13 @@ const MedicalHistory = () => {
 
         <TabsContent value="records" className="space-y-6">
           <Card className="p-6 bg-gradient-card shadow-md">
-            <h3 className="text-lg font-semibold mb-6">Add Medical Record</h3>
+            <h3 className="text-lg font-semibold mb-6">{t('medical:add_record')}</h3>
             <div className="space-y-4">
               <div>
-                <Label htmlFor="record-name">Record Name</Label>
+                <Label htmlFor="record-name">{t('medical:record_name')}</Label>
                 <Input
                   id="record-name"
-                  placeholder="e.g., Annual Checkup, X-Ray Results"
+                  placeholder={t('medical:placeholder_record_name')}
                   value={recordFormData.record_name}
                   onChange={(e) => setRecordFormData({ ...recordFormData, record_name: e.target.value })}
                   className="mt-1.5"
@@ -881,10 +883,10 @@ const MedicalHistory = () => {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="category">Category</Label>
+                  <Label htmlFor="category">{t('medical:category')}</Label>
                   <Input
                     id="category"
-                    placeholder="e.g., Imaging, Lab Report, Visit"
+                    placeholder={t('medical:placeholder_category')}
                     value={recordFormData.category}
                     onChange={(e) => setRecordFormData({ ...recordFormData, category: e.target.value })}
                     className="mt-1.5"
@@ -926,7 +928,7 @@ const MedicalHistory = () => {
 
               <Button onClick={handleAddMedicalRecord} className="w-full gap-2" disabled={isUploadingRecord}>
                 <Plus className="w-4 h-4" />
-                {isUploadingRecord ? "Uploading..." : "Add Medical Record"}
+                {isUploadingRecord ? t('common:uploading') : t('medical:add_record')}
               </Button>
             </div>
           </Card>
@@ -990,7 +992,7 @@ const MedicalHistory = () => {
                 ))
               ) : (
                 <p className="text-center text-muted-foreground py-8">
-                  No medical records yet.
+                  {t('medical:no_medical_records')}
                 </p>
               )}
             </div>
