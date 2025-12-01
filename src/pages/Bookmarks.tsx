@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -13,6 +14,7 @@ const Bookmarks = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { t } = useTranslation('bookmarks');
 
   const { data: bookmarks, isLoading } = useQuery({
     queryKey: ["bookmarks"],
@@ -68,19 +70,19 @@ const Bookmarks = () => {
     onError: (_err, _bookmarkId, context) => {
       queryClient.setQueryData(["bookmarks"], context?.previousBookmarks);
       toast({ 
-        title: "Failed to remove bookmark", 
-        description: "Please try again.",
+        title: t('failed_to_remove'), 
+        description: t('please_try_again'),
         variant: "destructive" 
       });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["bookmarks"] });
-      toast({ title: "Bookmark removed" });
+      toast({ title: t('bookmark_removed') });
     },
   });
 
   if (isLoading) {
-    return <div className="container mx-auto p-6">Loading...</div>;
+    return <div className="container mx-auto p-6">{t('loading')}</div>;
   }
 
   return (
@@ -88,22 +90,22 @@ const Bookmarks = () => {
       <div className="mb-6">
         <h1 className="text-3xl font-bold flex items-center gap-2">
           <Bookmark className="w-8 h-8" />
-          Saved Posts
+          {t('saved_posts')}
         </h1>
-        <p className="text-muted-foreground">Your bookmarked posts</p>
+        <p className="text-muted-foreground">{t('your_bookmarks')}</p>
       </div>
 
       {bookmarks?.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center">
             <Bookmark className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-            <p className="text-muted-foreground">No bookmarks yet</p>
+            <p className="text-muted-foreground">{t('no_bookmarks_yet')}</p>
             <Button 
               variant="link" 
               onClick={() => navigate("/feed")}
               className="mt-2"
             >
-              Explore posts
+              {t('explore_posts')}
             </Button>
           </CardContent>
         </Card>
@@ -121,7 +123,7 @@ const Bookmarks = () => {
                       {bookmark.posts.profile?.avatar_url ? (
                         <AvatarImage 
                           src={bookmark.posts.profile.avatar_url} 
-                          alt={bookmark.posts.profile.full_name || "User"} 
+                          alt={bookmark.posts.profile.full_name || t('user')} 
                         />
                       ) : (
                         <AvatarFallback>
@@ -134,7 +136,7 @@ const Bookmarks = () => {
                         className="font-semibold cursor-pointer hover:underline"
                         onClick={() => navigate(`/user/${bookmark.posts.user_id}`)}
                       >
-                        {bookmark.posts.profile?.full_name || "Anonymous"}
+                        {bookmark.posts.profile?.full_name || t('anonymous')}
                       </p>
                       <p className="text-sm text-muted-foreground">
                         {formatDistanceToNow(new Date(bookmark.posts.created_at), { addSuffix: true })}

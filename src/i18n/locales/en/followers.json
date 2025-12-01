@@ -1,0 +1,21 @@
+{
+  "connections": "{{name}}'s Connections",
+  "followers": "followers",
+  "following": "following",
+  "followers_tab": "Followers",
+  "following_tab": "Following",
+  "requests": "Requests",
+  "follow_status_updated": "Follow status updated",
+  "follow_request_accepted": "Follow request accepted",
+  "follow_request_rejected": "Follow request rejected",
+  "no_followers_yet": "No followers yet",
+  "not_following_anyone": "Not following anyone yet",
+  "no_pending_requests": "No pending follow requests",
+  "anonymous": "Anonymous",
+  "pts": "pts",
+  "day_streak": "day streak",
+  "follow": "Follow",
+  "accept": "Accept",
+  "reject": "Reject",
+  "error": "Error"
+}

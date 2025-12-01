@@ -35,6 +35,12 @@ import aiEN from './locales/en/ai.json';
 import measurementsEN from './locales/en/measurements.json';
 import trainerEN from './locales/en/trainer.json';
 import sessionEN from './locales/en/session.json';
+import bookmarksEN from './locales/en/bookmarks.json';
+import challengesPageEN from './locales/en/challenges_page.json';
+import feedEN from './locales/en/feed.json';
+import groupsEN from './locales/en/groups.json';
+import followersEN from './locales/en/followers.json';
+import scheduleEN from './locales/en/schedule.json';
 
 import commonES from './locales/es/common.json';
 import authES from './locales/es/auth.json';
@@ -71,6 +77,12 @@ import aiES from './locales/es/ai.json';
 import measurementsES from './locales/es/measurements.json';
 import trainerES from './locales/es/trainer.json';
 import sessionES from './locales/es/session.json';
+import bookmarksES from './locales/es/bookmarks.json';
+import challengesPageES from './locales/es/challenges_page.json';
+import feedES from './locales/es/feed.json';
+import groupsES from './locales/es/groups.json';
+import followersES from './locales/es/followers.json';
+import scheduleES from './locales/es/schedule.json';
 
 import commonPT from './locales/pt/common.json';
 import authPT from './locales/pt/auth.json';
@@ -130,6 +142,12 @@ const resources = {
     measurements: measurementsEN,
     trainer: trainerEN,
     session: sessionEN,
+    bookmarks: bookmarksEN,
+    challenges_page: challengesPageEN,
+    feed: feedEN,
+    groups: groupsEN,
+    followers: followersEN,
+    schedule: scheduleEN,
   },
   es: {
     common: commonES,
@@ -167,6 +185,12 @@ const resources = {
     measurements: measurementsES,
     trainer: trainerES,
     session: sessionES,
+    bookmarks: bookmarksES,
+    challenges_page: challengesPageES,
+    feed: feedES,
+    groups: groupsES,
+    followers: followersES,
+    schedule: scheduleES,
   },
   pt: {
     common: commonPT,
@@ -206,7 +230,7 @@ i18n
     resources,
     fallbackLng: 'en',
     defaultNS: 'common',
-    ns: ['common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 'notifications', 'errors', 'rewards', 'subscription', 'food', 'workout', 'settings', 'weight', 'referral', 'privacy', 'points', 'achievements', 'calendar', 'records', 'voice', 'medical', 'timer', 'live', 'challenges', 'fundraisers', 'macros', 'install', 'search', 'creator', 'ai', 'measurements', 'trainer', 'session'],
+    ns: ['common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 'notifications', 'errors', 'rewards', 'subscription', 'food', 'workout', 'settings', 'weight', 'referral', 'privacy', 'points', 'achievements', 'calendar', 'records', 'voice', 'medical', 'timer', 'live', 'challenges', 'fundraisers', 'macros', 'install', 'search', 'creator', 'ai', 'measurements', 'trainer', 'session', 'bookmarks', 'challenges_page', 'feed', 'groups', 'followers', 'schedule'],
     
     interpolation: {
       escapeValue: false,
