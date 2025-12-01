@@ -1,0 +1,66 @@
+{
+  "title": "Recaudaciones",
+  "subtitle": "Apoya causas que importan",
+  "back_to_dashboard": "Volver al Panel",
+  "create_fundraiser": "Crear Recaudación",
+  "create_new_fundraiser": "Crear Nueva Recaudación",
+  "search_placeholder": "Buscar recaudaciones...",
+  "all_categories": "Todas las Categorías",
+  "no_fundraisers_yet": "Aún no hay recaudaciones",
+  "no_fundraisers_found": "No se encontraron recaudaciones",
+  "be_first_to_create": "¡Sé el primero en crear una!",
+  "try_adjusting_filters": "Intenta ajustar tus filtros",
+  "donate_now": "Donar Ahora",
+  "funded": "recaudado",
+  "days_left": "días restantes",
+  "ended": "Finalizada",
+  "of": "de",
+  
+  "form": {
+    "cover_image": "Imagen de Portada",
+    "title": "Título",
+    "title_placeholder": "Dale a tu recaudación un título claro",
+    "description": "Descripción",
+    "description_placeholder": "Cuenta tu historia y explica por qué necesitas apoyo",
+    "goal_amount": "Monto Objetivo ($)",
+    "goal_amount_placeholder": "ej. 5000",
+    "category": "Categoría",
+    "select_category": "Seleccionar categoría",
+    "location": "Ubicación",
+    "location_placeholder": "Ciudad, Estado/País",
+    "end_date": "Fecha de Finalización"
+  },
+  
+  "categories": {
+    "medical": "Médico",
+    "community_event": "Evento Comunitario",
+    "charity": "Caridad",
+    "equipment": "Equipamiento",
+    "other": "Otro"
+  },
+  
+  "donation": {
+    "support_cause": "Apoya Esta Causa",
+    "donate_to": "Donar a",
+    "quick_amount": "Monto Rápido",
+    "custom_amount": "Monto Personalizado ($)",
+    "enter_amount": "Ingresa el monto",
+    "message_optional": "Mensaje (Opcional)",
+    "message_placeholder": "Deja un mensaje de apoyo...",
+    "donate_anonymously": "Donar Anónimamente",
+    "cancel": "Cancelar",
+    "donate": "Donar",
+    "processing": "Procesando..."
+  },
+  
+  "messages": {
+    "sign_in_required": "Por favor inicia sesión para crear una recaudación",
+    "created_successfully": "¡Recaudación creada exitosamente!",
+    "failed_to_create": "Error al crear la recaudación",
+    "failed_to_load": "Error al cargar las recaudaciones",
+    "invalid_amount": "Por favor ingresa un monto de donación válido",
+    "rate_limit": "Por favor espera {{minutes}} minutos antes de hacer otra donación",
+    "donation_success": "¡Gracias por tu generosa donación!",
+    "donation_failed": "Error al procesar la donación"
+  }
+}
