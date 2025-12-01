@@ -2,9 +2,6 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-// Version for cache management
-const I18N_VERSION = '7.1.0-safe-load';
-
 // Import translation files
 import commonEN from './locales/en/common.json';
 import authEN from './locales/en/auth.json';
@@ -128,46 +125,14 @@ i18n
       order: ['localStorage', 'navigator', 'htmlTag'],
       lookupLocalStorage: 'i18nextLng',
       caches: ['localStorage'],
-      excludeCacheFor: ['cimode'],
     },
 
     react: {
       useSuspense: true,
     },
 
-    // Safari-specific fixes
-    load: 'languageOnly', // Load 'en' instead of 'en-US'
-    cleanCode: true, // Clean language codes
-    
-    // Force cache invalidation with version
-    initImmediate: false,
-    
-    // Add version to bust cache - increment this number when translations change
-    appendNamespaceToCIMode: true,
-    
-    // Force fresh load
-    partialBundledLanguages: false,
-  }).then(() => {
-    // Safe cache clearing AFTER successful initialization
-    try {
-      if (typeof window !== 'undefined' && window.localStorage) {
-        const cachedVersion = localStorage.getItem('i18n_version');
-        if (cachedVersion !== I18N_VERSION) {
-          Object.keys(localStorage).forEach(key => {
-            if (key.startsWith('i18next')) {
-              localStorage.removeItem(key);
-            }
-          });
-          localStorage.setItem('i18n_version', I18N_VERSION);
-          // Only reload if we cleared cache
-          i18n.reloadResources();
-          const currentLang = i18n.language;
-          i18n.changeLanguage(currentLang);
-        }
-      }
-    } catch (e) {
-      // Fail silently - app should still work
-    }
+    load: 'languageOnly',
+    cleanCode: true,
   });
 
 export default i18n;
