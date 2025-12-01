@@ -20,11 +20,13 @@ import { SuggestedUsers } from "@/components/SuggestedUsers";
 import { MessagesSidebar } from "@/components/MessagesSidebar";
 import { LazyImage } from "@/components/LazyImage";
 import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
+import { useTranslation } from "react-i18next";
 
 const Feed = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { t } = useTranslation('social');
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedHashtag = searchParams.get("hashtag");
   const [postContent, setPostContent] = useState("");
@@ -661,9 +663,9 @@ const Feed = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/connect")}
                 className="hover:bg-primary/10"
-                aria-label="Back to Dashboard"
+                aria-label={t('back_to_connect')}
               >
                 <ArrowLeft className="w-5 h-5" />
               </Button>
@@ -672,8 +674,8 @@ const Feed = () => {
                   <User className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-bold">Community Feed</h1>
-                  <p className="text-muted-foreground mt-1">Share your fitness journey with the community</p>
+                  <h1 className="text-3xl font-bold">{t('community_feed')}</h1>
+                  <p className="text-muted-foreground mt-1">{t('share_fitness_journey')}</p>
                 </div>
               </div>
             </div>
@@ -685,7 +687,7 @@ const Feed = () => {
                 </Badge>
                 <Button variant="ghost" size="sm" onClick={clearHashtagFilter}>
                   <X className="w-4 h-4" />
-                  Clear filter
+                  {t('clear_filter')}
                 </Button>
               </div>
             )}
@@ -701,11 +703,11 @@ const Feed = () => {
                   </div>
                   <div className="flex-1">
                     <h3 className="font-semibold text-sm flex items-center gap-2">
-                      Get 1 Month Pro FREE! 
+                      {t('get_1_month_pro_free')}
                       <Sparkles className="w-4 h-4 text-primary" />
                     </h3>
                     <p className="text-xs text-muted-foreground">
-                      Invite 4 friends = 1 Month Pro • Share your link to earn 150 pts per referral
+                      {t('invite_4_friends')}
                     </p>
                   </div>
                 </div>
@@ -716,7 +718,7 @@ const Feed = () => {
                     className="shrink-0"
                   >
                     <Users className="w-4 h-4 mr-2" />
-                    Share Link
+                    {t('share_link')}
                   </Button>
                   <Button
                     variant="ghost"
@@ -741,7 +743,7 @@ const Feed = () => {
           <Card className="hover:shadow-xl transition-all duration-300">
             <CardContent className="pt-6 space-y-4">
               <MentionInput
-                placeholder="Share your progress, achievements, or motivation... Use #hashtags and @mentions!"
+                placeholder={t('share_progress')}
                 value={postContent}
                 onChange={setPostContent}
                 rows={3}
@@ -751,7 +753,7 @@ const Feed = () => {
             <div className="relative">
               <img
                 src={imagePreview}
-                alt="Upload preview"
+                alt={t('upload_preview')}
                 className="w-full max-h-64 object-cover rounded-lg"
               />
               <Button
@@ -780,14 +782,14 @@ const Feed = () => {
               disabled={createPost.isPending}
             >
               <ImageIcon className="w-4 h-4 mr-2" />
-              Add Photo
+              {t('add_photo')}
             </Button>
             <Button
               onClick={() => createPost.mutate()}
               disabled={(!postContent.trim() && !uploadedImage) || createPost.isPending}
             >
               <Send className="w-4 h-4 mr-2" />
-              {createPost.isPending ? "Posting..." : "Post"}
+              {createPost.isPending ? t('posting') : t('post')}
             </Button>
               </div>
             </CardContent>
@@ -817,11 +819,11 @@ const Feed = () => {
                           className="font-semibold cursor-pointer hover:underline"
                           onClick={() => navigate(`/user/${post.user_id}`)}
                         >
-                          {post.profile?.full_name || "Anonymous"}
+                          {post.profile?.full_name || t('anonymous')}
                         </p>
                         <p className="text-sm text-muted-foreground">
                           {formatDistanceToNow(new Date(post.created_at), { addSuffix: true })}
-                          {post.edited_at && " (edited)"}
+                          {post.edited_at && ` (${t('edited')})`}
                         </p>
                       </div>
                       <Badge variant="secondary" className="capitalize">
@@ -838,13 +840,13 @@ const Feed = () => {
                         {currentUser?.id === post.user_id ? (
                           <DropdownMenuItem onClick={() => handleEditPost(post)}>
                             <Edit className="w-4 h-4 mr-2" />
-                            Edit Post
+                            {t('edit_post')}
                           </DropdownMenuItem>
                         ) : (
                           <>
                             <DropdownMenuItem onClick={() => handleReportPost(post.id)}>
                               <Flag className="w-4 h-4 mr-2" />
-                              Report Post
+                              {t('report_post')}
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem 
@@ -852,7 +854,7 @@ const Feed = () => {
                               className="text-destructive"
                             >
                               <UserX className="w-4 h-4 mr-2" />
-                              Block User
+                              {t('block_user')}
                             </DropdownMenuItem>
                           </>
                         )}
@@ -870,10 +872,10 @@ const Feed = () => {
                       />
                       <div className="flex gap-2">
                         <Button size="sm" onClick={handleSaveEdit}>
-                          Save
+                          {t('save')}
                         </Button>
                         <Button size="sm" variant="outline" onClick={handleCancelEdit}>
-                          Cancel
+                          {t('cancel')}
                         </Button>
                       </div>
                     </div>
@@ -917,7 +919,7 @@ const Feed = () => {
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" size="sm">
                         <Share2 className="h-4 w-4 mr-1" />
-                        Share
+                        {t('share')}
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
@@ -927,25 +929,25 @@ const Feed = () => {
                         ) : (
                           <Copy className="h-4 w-4 mr-2" />
                         )}
-                        Copy Link
+                        {t('copy_link')}
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => handleSharePost(post.id, 'twitter')}>
                         <svg className="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                         </svg>
-                        Share on X
+                        {t('share_on_x')}
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => handleSharePost(post.id, 'facebook')}>
                         <svg className="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                         </svg>
-                        Share on Facebook
+                        {t('share_on_facebook')}
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => handleSharePost(post.id, 'linkedin')}>
                         <svg className="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                         </svg>
-                        Share on LinkedIn
+                        {t('share_on_linkedin')}
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -1007,7 +1009,7 @@ const Feed = () => {
                         )}
                       </Avatar>
                       <div className="flex-1 bg-muted rounded-lg p-3">
-                        <p className="font-semibold text-sm">{comment.profile?.full_name || "Anonymous"}</p>
+                        <p className="font-semibold text-sm">{comment.profile?.full_name || t('anonymous')}</p>
                         <p className="text-sm">{comment.content}</p>
                         <p className="text-xs text-muted-foreground mt-1">
                           {formatDistanceToNow(new Date(comment.created_at), { addSuffix: true })}
@@ -1018,7 +1020,7 @@ const Feed = () => {
 
                   <div className="space-y-2">
                     <MentionInput
-                      placeholder="Write a comment..."
+                      placeholder={t('write_comment')}
                       value={commentContent}
                       onChange={setCommentContent}
                       rows={2}
@@ -1030,7 +1032,7 @@ const Feed = () => {
                         disabled={!commentContent.trim() || addComment.isPending}
                       >
                         <Send className="w-4 h-4 mr-2" />
-                        Comment
+                        {t('comment')}
                       </Button>
                     </div>
                   </div>
@@ -1044,8 +1046,8 @@ const Feed = () => {
               <div className="text-center py-12">
                 <p className="text-muted-foreground">
                   {selectedHashtag 
-                    ? `No posts found with #${selectedHashtag}` 
-                    : "No posts yet. Be the first to share!"}
+                    ? t('no_posts_with_hashtag', { hashtag: selectedHashtag })
+                    : t('no_posts_yet')}
                 </p>
               </div>
             )}
@@ -1063,19 +1065,19 @@ const Feed = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Users className="w-5 h-5 text-primary" />
-                Fitness Groups
+                {t('fitness_groups')}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-4">
-                Join groups to connect with like-minded fitness enthusiasts
+                {t('join_groups_enthusiasts')}
               </p>
               <Button 
                 onClick={() => navigate('/groups')} 
                 className="w-full"
                 variant="secondary"
               >
-                Browse Groups
+                {t('browse_groups')}
               </Button>
             </CardContent>
           </Card>
@@ -1084,7 +1086,7 @@ const Feed = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <TrendingUp className="w-5 h-5" />
-                Trending Hashtags
+                {t('trending_hashtags')}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
@@ -1098,13 +1100,13 @@ const Feed = () => {
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-medium">#{hashtag}</span>
                       <Badge variant="secondary" className="text-xs">
-                        {count} posts
+                        {count} {t('posts').toLowerCase()}
                       </Badge>
                     </div>
                   </button>
                 ))
               ) : (
-                <p className="text-sm text-muted-foreground">No trending hashtags yet</p>
+                <p className="text-sm text-muted-foreground">{t('no_trending_hashtags')}</p>
               )}
             </CardContent>
           </Card>
@@ -1115,32 +1117,32 @@ const Feed = () => {
       <Dialog open={reportDialogOpen} onOpenChange={setReportDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Report Post</DialogTitle>
+            <DialogTitle>{t('report_post')}</DialogTitle>
             <DialogDescription>
-              Help us understand what's wrong with this post
+              {t('help_understand_wrong')}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
             <div>
-              <label className="text-sm font-medium">Reason</label>
+              <label className="text-sm font-medium">{t('reason')}</label>
               <Select value={reportReason} onValueChange={setReportReason}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select a reason" />
+                  <SelectValue placeholder={t('select_reason')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="spam">Spam</SelectItem>
-                  <SelectItem value="harassment">Harassment</SelectItem>
-                  <SelectItem value="hate">Hate Speech</SelectItem>
-                  <SelectItem value="violence">Violence</SelectItem>
-                  <SelectItem value="misinformation">Misinformation</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
+                  <SelectItem value="spam">{t('spam')}</SelectItem>
+                  <SelectItem value="harassment">{t('harassment')}</SelectItem>
+                  <SelectItem value="hate">{t('hate_speech')}</SelectItem>
+                  <SelectItem value="violence">{t('violence')}</SelectItem>
+                  <SelectItem value="misinformation">{t('misinformation')}</SelectItem>
+                  <SelectItem value="other">{t('other')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <div>
-              <label className="text-sm font-medium">Additional Details</label>
+              <label className="text-sm font-medium">{t('additional_details')}</label>
               <Textarea
-                placeholder="Tell us more about the issue..."
+                placeholder={t('tell_us_more')}
                 value={reportDetails}
                 onChange={(e) => setReportDetails(e.target.value)}
                 rows={3}
@@ -1148,13 +1150,13 @@ const Feed = () => {
             </div>
             <div className="flex justify-end gap-2">
               <Button variant="outline" onClick={() => setReportDialogOpen(false)}>
-                Cancel
+                {t('cancel')}
               </Button>
               <Button
                 onClick={() => reportPost.mutate()}
                 disabled={!reportReason || reportPost.isPending}
               >
-                {reportPost.isPending ? "Submitting..." : "Submit Report"}
+                {reportPost.isPending ? t('submitting') : t('submit_report')}
               </Button>
             </div>
           </div>
