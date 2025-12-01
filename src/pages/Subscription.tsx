@@ -4,58 +4,60 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useSubscription } from '@/hooks/useSubscription';
 import { Check, Crown, Sparkles, Zap, ArrowLeft } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Subscription = () => {
   const navigate = useNavigate();
   const { subscription, isLoading, tier } = useSubscription();
+  const { t } = useTranslation('subscription');
 
   const plans = [
     {
-      name: 'Free',
+      name: t('free_plan'),
       tier: 'free' as const,
       price: '$0',
-      period: 'forever',
-      description: 'Perfect for getting started',
+      period: t('forever'),
+      description: t('free_description'),
       features: [
-        'Basic workout logging',
-        'Food tracking',
-        'Progress photos',
-        'Community feed',
-        'Up to 10 workouts/month',
+        t('feature_basic_workout'),
+        t('feature_food_tracking'),
+        t('feature_progress_photos'),
+        t('feature_community_feed'),
+        t('feature_workouts_limit'),
       ],
       icon: Zap,
       popular: false,
     },
     {
-      name: 'Pro',
+      name: t('pro_plan'),
       tier: 'pro' as const,
       price: '$9.99',
-      period: 'per month',
-      description: 'For serious fitness enthusiasts',
+      period: t('per_month'),
+      description: t('pro_description'),
       features: [
-        'Everything in Free',
-        'Unlimited workouts',
-        'Trainer search & booking',
-        'Custom challenges',
-        'Advanced analytics',
-        'AI-powered insights',
+        t('feature_everything_free'),
+        t('feature_unlimited_workouts'),
+        t('feature_trainer_search'),
+        t('feature_custom_challenges'),
+        t('feature_advanced_analytics'),
+        t('feature_ai_insights'),
       ],
       icon: Crown,
       popular: true,
     },
     {
-      name: 'Enterprise',
+      name: t('enterprise_plan'),
       tier: 'enterprise' as const,
       price: '$29.99',
-      period: 'per month',
-      description: 'Complete fitness solution',
+      period: t('per_month'),
+      description: t('enterprise_description'),
       features: [
-        'Everything in Pro',
-        'Live workout sessions',
-        'Priority support',
-        'Custom workout programs',
-        'Team collaboration',
-        'API access',
+        t('feature_everything_pro'),
+        t('feature_live_sessions'),
+        t('feature_priority_support'),
+        t('feature_custom_programs'),
+        t('feature_team_collaboration'),
+        t('feature_api_access'),
       ],
       icon: Sparkles,
       popular: false,
@@ -85,14 +87,14 @@ const Subscription = () => {
             <ArrowLeft className="w-5 h-5" />
           </Button>
           <div className="text-center">
-            <h1 className="text-4xl font-bold mb-4">Choose Your Plan</h1>
+            <h1 className="text-4xl font-bold mb-4">{t('choose_plan')}</h1>
             <p className="text-muted-foreground text-lg">
-              Unlock your full potential with premium features
+              {t('unlock_potential')}
             </p>
             {subscription && (
               <div className="mt-4">
                 <Badge variant="secondary" className="text-lg px-4 py-2">
-                  Current Plan: {tier.toUpperCase()}
+                  {t('current_plan')}: {tier.toUpperCase()}
                 </Badge>
               </div>
             )}
@@ -113,7 +115,7 @@ const Subscription = () => {
               >
                 {plan.popular && (
                   <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    Most Popular
+                    {t('most_popular')}
                   </Badge>
                 )}
 
@@ -143,7 +145,7 @@ const Subscription = () => {
                   variant={isCurrentPlan ? 'secondary' : 'default'}
                   disabled={isCurrentPlan}
                 >
-                  {isCurrentPlan ? 'Current Plan' : 'Coming Soon'}
+                  {isCurrentPlan ? t('current_plan') : t('coming_soon')}
                 </Button>
               </Card>
             );
@@ -152,10 +154,10 @@ const Subscription = () => {
 
         <div className="mt-12 text-center">
           <p className="text-muted-foreground mb-4">
-            Stripe payment integration will be added when you're ready to go live
+            {t('stripe_integration')}
           </p>
           <Button variant="outline" onClick={() => navigate('/dashboard')}>
-            Back to Dashboard
+            {t('back_to_dashboard')}
           </Button>
         </div>
       </div>
