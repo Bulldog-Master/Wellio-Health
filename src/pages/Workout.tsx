@@ -1028,15 +1028,15 @@ const Workout = () => {
       <Dialog open={showRoutineDialog} onOpenChange={setShowRoutineDialog} modal={false}>
           <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-2 border-blue-200 dark:border-blue-800 shadow-2xl">
             <DialogHeader>
-              <DialogTitle className="text-2xl text-blue-900 dark:text-blue-100">{editingRoutineId ? "Edit Routine" : "Create New Routine"}</DialogTitle>
+              <DialogTitle className="text-2xl text-blue-900 dark:text-blue-100">{editingRoutineId ? t('edit_routine') : t('create_new_routine')}</DialogTitle>
             </DialogHeader>
             
             <div className="space-y-4">
               <div>
-                <Label htmlFor="routine-name">Routine Name</Label>
+                <Label htmlFor="routine-name">{t('routine_name')}</Label>
                 <Input
                   id="routine-name"
-                  placeholder="e.g., Upper Body Day"
+                  placeholder={t('upper_body_day')}
                   value={routineName}
                   onChange={(e) => setRoutineName(e.target.value)}
                   className="mt-1.5"
@@ -1044,10 +1044,10 @@ const Workout = () => {
               </div>
 
               <div>
-                <Label htmlFor="routine-description">Description (optional)</Label>
+                <Label htmlFor="routine-description">{t('description')} ({t('optional')})</Label>
                 <Textarea
                   id="routine-description"
-                  placeholder="Brief description of this routine..."
+                  placeholder={t('brief_description')}
                   value={routineDescription}
                   onChange={(e) => setRoutineDescription(e.target.value)}
                   className="mt-1.5"
@@ -1056,7 +1056,7 @@ const Workout = () => {
 
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <Label>Exercises</Label>
+                  <Label>{t('exercises')}</Label>
                   <div className="flex gap-2">
                     <Popover 
                       open={showRestTimeInput} 
@@ -1074,14 +1074,14 @@ const Workout = () => {
                           className="gap-2"
                         >
                           <Timer className="w-3 h-3" />
-                          Rest: {defaultRestTime}s
+                          {t('rest_time')}: {defaultRestTime}s
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent className="w-64">
                         <div className="space-y-3">
-                          <h4 className="font-semibold text-sm">Default Rest Time</h4>
+                          <h4 className="font-semibold text-sm">{t('default_rest_time')}</h4>
                           <div className="space-y-2">
-                            <Label htmlFor="rest-time" className="text-xs">Seconds between sets</Label>
+                            <Label htmlFor="rest-time" className="text-xs">{t('seconds_between_sets')}</Label>
                             <Input
                               id="rest-time"
                               type="number"
@@ -1103,7 +1103,7 @@ const Workout = () => {
                             />
                           </div>
                           <p className="text-xs text-muted-foreground">
-                            This will be applied to new exercises
+                            {t('applied_to_new_exercises')}
                           </p>
                         </div>
                       </PopoverContent>
@@ -1115,7 +1115,7 @@ const Workout = () => {
                       className="gap-2"
                     >
                       <Plus className="w-3 h-3" />
-                      Add Exercise
+                      {t('add_exercise')}
                     </Button>
                   </div>
                 </div>
@@ -1133,19 +1133,19 @@ const Workout = () => {
                                 aria-expanded={openExercisePopover === idx}
                                 className="flex-1 justify-between"
                               >
-                                {exercise.name || "Select or type exercise..."}
+                                {exercise.name || t('select_or_type_exercise')}
                                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                               </Button>
                             </PopoverTrigger>
                             <PopoverContent className="w-[300px] p-0 z-50">
                               <Command>
                                   <CommandInput 
-                                    placeholder="Search or type exercise..." 
+                                    placeholder={t('search_or_type_exercise')} 
                                     value={exercise.name}
                                     onValueChange={(value) => handleUpdateRoutineExercise(idx, 'name', value)}
                                   />
                                   <CommandList>
-                                    <CommandEmpty>Press Enter to use "{exercise.name}"</CommandEmpty>
+                                    <CommandEmpty>{t('press_enter_to_use')} "{exercise.name}"</CommandEmpty>
                                     <CommandGroup>
                                       {allExercises.map((ex) => (
                                       <CommandItem
@@ -1182,7 +1182,7 @@ const Workout = () => {
                         <div className="space-y-2">
                           <div className="grid grid-cols-3 gap-2">
                             <div>
-                              <Label className="text-xs">Sets</Label>
+                              <Label className="text-xs">{t('sets')}</Label>
                               <Input
                                 type="number"
                                 placeholder="3"
@@ -1192,7 +1192,7 @@ const Workout = () => {
                               />
                             </div>
                             <div>
-                              <Label className="text-xs">Reps</Label>
+                              <Label className="text-xs">{t('reps')}</Label>
                               <Input
                                 type="number"
                                 placeholder="10"
@@ -1202,7 +1202,7 @@ const Workout = () => {
                               />
                             </div>
                             <div>
-                              <Label className="text-xs">Duration (min)</Label>
+                              <Label className="text-xs">{t('duration_min')}</Label>
                               <Input
                                 type="number"
                                 placeholder="5"
@@ -1216,7 +1216,7 @@ const Workout = () => {
                           <div>
                             <Label className="text-xs flex items-center gap-1">
                               <Timer className="w-3 h-3" />
-                              Rest Time (seconds)
+                              {t('rest_time_seconds')}
                             </Label>
                             <Input
                               type="number"
@@ -1241,7 +1241,7 @@ const Workout = () => {
                         </div>
 
                         <div className="space-y-2">
-                          <Label className="text-xs">Example Photo/Video (optional)</Label>
+                          <Label className="text-xs">{t('example_photo_video')}</Label>
                           <div className="flex gap-2 items-start">
                             <div className="flex-1">
                               <Input
@@ -1260,7 +1260,7 @@ const Workout = () => {
                                 disabled={uploadingExerciseMedia === idx}
                               >
                                 <Upload className="w-4 h-4" />
-                                {uploadingExerciseMedia === idx ? "Uploading..." : "Upload Media"}
+                                {uploadingExerciseMedia === idx ? t('uploading') : t('upload_media')}
                               </Button>
                             </div>
                             {exercise.media_url && (
@@ -1288,7 +1288,7 @@ const Workout = () => {
                   
                   {routineExercises.length === 0 && (
                     <p className="text-center text-muted-foreground text-sm py-4">
-                      Add exercises to your routine
+                      {t('add_exercises_to_routine')}
                     </p>
                   )}
                 </div>
@@ -1299,7 +1299,7 @@ const Workout = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Clock className="w-4 h-4 text-primary" />
-                      <span className="font-semibold">Total Workout Time:</span>
+                      <span className="font-semibold">{t('total_workout_time')}</span>
                     </div>
                     <span className="text-lg font-bold text-primary">
                       {routineExercises.reduce((total, ex) => total + (ex.duration || 0), 0)} min
@@ -1320,10 +1320,10 @@ const Workout = () => {
                   }}
                   className="flex-1"
                 >
-                  Cancel
+                  {t('cancel')}
                 </Button>
                 <Button onClick={handleSaveRoutine} className="flex-1">
-                  {editingRoutineId ? "Update Routine" : "Save Routine"}
+                  {editingRoutineId ? t('update_routine') : t('save_routine')}
                 </Button>
               </div>
             </div>
@@ -1343,10 +1343,10 @@ const Workout = () => {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="date-newest">Newest First</SelectItem>
-                      <SelectItem value="date-oldest">Oldest First</SelectItem>
-                      <SelectItem value="name-asc">Name A-Z</SelectItem>
-                      <SelectItem value="name-desc">Name Z-A</SelectItem>
+                      <SelectItem value="date-newest">{t('newest_first')}</SelectItem>
+                      <SelectItem value="date-oldest">{t('oldest_first')}</SelectItem>
+                      <SelectItem value="name-asc">{t('name_asc')}</SelectItem>
+                      <SelectItem value="name-desc">{t('name_desc')}</SelectItem>
                     </SelectContent>
                   </Select>
                   <Button variant="outline" size="sm" onClick={() => setShowCreateRoutine(true)} className="bg-purple-100 dark:bg-purple-900/50 border-purple-300 dark:border-purple-700 hover:bg-purple-200 dark:hover:bg-purple-900">
@@ -1968,9 +1968,9 @@ const Workout = () => {
                     className="justify-start"
                     onClick={() => setShowSampleLibrary(true)}
                   >
-                    <BookOpen className="w-4 h-4 mr-2" />
-                    Sample Library
-                  </Button>
+                  <BookOpen className="w-4 h-4 mr-2" />
+                  {t('sample_library')}
+                </Button>
                 </div>
               </PopoverContent>
             </Popover>
@@ -1978,14 +1978,14 @@ const Workout = () => {
         </div>
         <div className="space-y-4">
           <div>
-            <Label htmlFor="exercise">Activity Type</Label>
+            <Label htmlFor="exercise">{t('activity_type')}</Label>
             <select
               id="exercise"
               value={exercise}
               onChange={(e) => setExercise(e.target.value)}
               className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 mt-1.5"
             >
-              <option value="">Select activity type</option>
+              <option value="">{t('select_activity_type')}</option>
               <option value="Running">Running</option>
               <option value="Cycling">Cycling</option>
               <option value="Swimming">Swimming</option>
@@ -2052,7 +2052,7 @@ const Workout = () => {
                 <option value="low">{t('low')}</option>
                 <option value="medium">{t('medium')}</option>
                 <option value="high">{t('high')}</option>
-                <option value="intense">Intense</option>
+                <option value="intense">{t('intense')}</option>
               </select>
             </div>
           </div>
@@ -2061,13 +2061,13 @@ const Workout = () => {
             <div className="p-3 bg-primary/10 rounded-lg">
               <p className="text-sm font-medium flex items-center gap-2">
                 <Flame className="w-4 h-4 text-primary" />
-                Estimated: <span className="text-primary">{estimatedCalories} calories</span>
+                {t('estimated')} <span className="text-primary">{estimatedCalories} {t('calories')}</span>
               </p>
             </div>
           )}
 
           <div>
-            <Label htmlFor="distance">Distance (optional)</Label>
+            <Label htmlFor="distance">{t('distance_optional')}</Label>
             <div className="flex gap-2 mt-1.5">
               <Input
                 id="distance"
@@ -2085,10 +2085,10 @@ const Workout = () => {
           </div>
 
           <div>
-            <Label htmlFor="notes">Notes (optional)</Label>
+            <Label htmlFor="notes">{t('notes_optional')}</Label>
             <Textarea
               id="notes"
-              placeholder="Add details about your workout..."
+              placeholder={t('add_workout_details')}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               className="mt-1.5 min-h-24"
@@ -2100,14 +2100,14 @@ const Workout = () => {
               <div className="flex items-center justify-between mb-3">
                 <h4 className="font-semibold text-base flex items-center gap-2">
                   <Dumbbell className="w-4 h-4 text-primary" />
-                  Loaded Routine: {loadedRoutine.name}
+                  {t('loaded_routine')} {loadedRoutine.name}
                 </h4>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setLoadedRoutine(null)}
                 >
-                  Clear
+                  {t('clear')}
                 </Button>
               </div>
               {loadedRoutine.description && (
@@ -2172,19 +2172,19 @@ const Workout = () => {
                 }}
                 className="flex-1"
               >
-                Cancel
+                {t('cancel')}
               </Button>
             )}
             <Button onClick={handleAddWorkout} className="flex-1 gap-2">
               {editingWorkout ? (
                 <>
                   <Pencil className="w-4 h-4" />
-                  Update Workout
+                  {t('update_workout')}
                 </>
               ) : (
                 <>
                   <Plus className="w-4 h-4" />
-                  Add Workout
+                  {t('add_workout')}
                 </>
               )}
             </Button>
@@ -2194,44 +2194,44 @@ const Workout = () => {
 
       <Card className="p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold">Workout History</h3>
+          <h3 className="text-lg font-semibold">{t('workout_history')}</h3>
           <div className="flex gap-2">
             <Button
               variant={viewFilter === 'today' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setViewFilter('today')}
             >
-              Today
+              {t('today')}
             </Button>
             <Button
               variant={viewFilter === 'week' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setViewFilter('week')}
             >
-              Week
+              {t('week')}
             </Button>
             <Button
               variant={viewFilter === 'month' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setViewFilter('month')}
             >
-              Month
+              {t('month')}
             </Button>
             <Button
               variant={viewFilter === 'all' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setViewFilter('all')}
             >
-              All
+              {t('all')}
             </Button>
           </div>
         </div>
         <div className="space-y-3">
           {isLoading ? (
-            <p className="text-center text-muted-foreground py-8">Loading...</p>
+            <p className="text-center text-muted-foreground py-8">{t('loading')}</p>
           ) : activityLogs.length === 0 ? (
             <p className="text-center text-muted-foreground py-8">
-              No workouts logged {viewFilter === 'today' ? 'today' : `in the selected period`}. Start by adding one above!
+              {t('no_workouts_logged')} {viewFilter === 'today' ? t('today') : t('in_selected_period')}. {t('start_by_adding')}
             </p>
           ) : (
             activityLogs.map((log) => {
