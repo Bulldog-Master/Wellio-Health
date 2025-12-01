@@ -15,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface ScheduledWorkout {
   id: string;
@@ -36,15 +37,16 @@ interface WorkoutTemplate {
   exercises: any;
 }
 
-const timeOfDayOptions = [
-  { value: "morning", label: "Morning (6AM - 12PM)", icon: "🌅" },
-  { value: "afternoon", label: "Afternoon (12PM - 6PM)", icon: "☀️" },
-  { value: "evening", label: "Evening (6PM - 12AM)", icon: "🌙" },
-];
-
 const WorkoutSchedule = () => {
+  const { t } = useTranslation('workout');
   const { toast } = useToast();
   const navigate = useNavigate();
+  
+  const timeOfDayOptions = [
+    { value: "morning", label: `${t('morning')} (6AM - 12PM)`, icon: "🌅" },
+    { value: "afternoon", label: `${t('afternoon')} (12PM - 6PM)`, icon: "☀️" },
+    { value: "evening", label: `${t('evening')} (6PM - 12AM)`, icon: "🌙" },
+  ];
   const [currentDate, setCurrentDate] = useState(new Date());
   const [scheduledWorkouts, setScheduledWorkouts] = useState<ScheduledWorkout[]>([]);
   const [templates, setTemplates] = useState<WorkoutTemplate[]>([]);
@@ -327,21 +329,21 @@ const WorkoutSchedule = () => {
       <div className="container mx-auto p-6 max-w-7xl">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-4xl font-bold text-foreground mb-2">Workout Schedule</h1>
-            <p className="text-muted-foreground">Plan your workouts and track completion</p>
+            <h1 className="text-4xl font-bold text-foreground mb-2">{t('workout_schedule')}</h1>
+            <p className="text-muted-foreground">{t('plan_workouts_track')}</p>
           </div>
           <Button onClick={() => { resetForm(); setIsDialogOpen(true); }}>
-            <Plus className="mr-2 h-4 w-4" /> Schedule Workout
+            <Plus className="mr-2 h-4 w-4" /> {t('schedule_workout')}
           </Button>
         </div>
 
         <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as any)} className="mb-6">
           <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
             <TabsTrigger value="calendar">
-              <CalendarDays className="mr-2 h-4 w-4" /> Calendar
+              <CalendarDays className="mr-2 h-4 w-4" /> {t('calendar')}
             </TabsTrigger>
             <TabsTrigger value="list">
-              <List className="mr-2 h-4 w-4" /> Weekly List
+              <List className="mr-2 h-4 w-4" /> {t('weekly_list')}
             </TabsTrigger>
           </TabsList>
 
@@ -424,7 +426,7 @@ const WorkoutSchedule = () => {
                 <ScrollArea className="h-[600px]">
                   <div className="space-y-4">
                     {getWeekWorkouts().length === 0 ? (
-                      <p className="text-center text-muted-foreground py-8">No workouts scheduled this week</p>
+                      <p className="text-center text-muted-foreground py-8">{t('no_workouts_this_week')}</p>
                     ) : (
                       getWeekWorkouts().map(workout => {
                         const metadata = workout.metadata || {};
@@ -438,7 +440,7 @@ const WorkoutSchedule = () => {
                                     <h3 className="font-semibold text-lg">{workout.title}</h3>
                                     {workout.completed && (
                                       <Badge variant="outline" className="bg-success/20 text-success border-success">
-                                        Completed
+                                        {t('completed')}
                                       </Badge>
                                     )}
                                   </div>
