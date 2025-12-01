@@ -13,8 +13,10 @@ import { Users, Plus, Lock, Globe, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { useTranslation } from "react-i18next";
 
 const Groups = () => {
+  const { t } = useTranslation('common');
   const { toast } = useToast();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -102,7 +104,7 @@ const Groups = () => {
       setGroupName("");
       setGroupDescription("");
       setIsPrivate(false);
-      toast({ title: "Group created!" });
+      toast({ title: t('groupCreated') });
       navigate(`/groups/${group.id}`);
     },
   });
@@ -124,7 +126,7 @@ const Groups = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["groups"] });
       queryClient.invalidateQueries({ queryKey: ["my-groups"] });
-      toast({ title: "Joined group!" });
+      toast({ title: t('joinedGroup') });
     },
   });
 
@@ -134,41 +136,41 @@ const Groups = () => {
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <Users className="w-8 h-8" />
-            Groups
+            {t('groups')}
           </h1>
-          <p className="text-muted-foreground">Connect with communities that share your interests</p>
+          <p className="text-muted-foreground">{t('connectWithCommunities')}</p>
         </div>
         <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
           <DialogTrigger asChild>
             <Button>
               <Plus className="w-4 h-4 mr-2" />
-              Create Group
+              {t('createGroup')}
             </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Create New Group</DialogTitle>
+              <DialogTitle>{t('createNewGroup')}</DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
               <div>
-                <Label>Group Name</Label>
+                <Label>{t('groupName')}</Label>
                 <Input
-                  placeholder="e.g., Morning Runners"
+                  placeholder={t('groupNamePlaceholder')}
                   value={groupName}
                   onChange={(e) => setGroupName(e.target.value)}
                 />
               </div>
               <div>
-                <Label>Description</Label>
+                <Label>{t('description')}</Label>
                 <Textarea
-                  placeholder="What's your group about?"
+                  placeholder={t('groupDescriptionPlaceholder')}
                   value={groupDescription}
                   onChange={(e) => setGroupDescription(e.target.value)}
                   rows={3}
                 />
               </div>
               <div className="flex items-center justify-between">
-                <Label htmlFor="private-group">Private Group</Label>
+                <Label htmlFor="private-group">{t('privateGroup')}</Label>
                 <Switch
                   id="private-group"
                   checked={isPrivate}
@@ -180,7 +182,7 @@ const Groups = () => {
                 disabled={!groupName.trim() || createGroup.isPending}
                 className="w-full"
               >
-                {createGroup.isPending ? "Creating..." : "Create Group"}
+                {createGroup.isPending ? t('creating') : t('createGroup')}
               </Button>
             </div>
           </DialogContent>
@@ -219,18 +221,18 @@ const Groups = () => {
                       )}
                     </Avatar>
                     <span className="text-sm text-muted-foreground">
-                      by {group.creator?.full_name || "Anonymous"}
+                      {t('by')} {group.creator?.full_name || "Anonymous"}
                     </span>
                   </div>
                   
                   <div className="flex items-center justify-between">
                     <Badge variant="secondary" className="flex items-center gap-1">
                       {group.is_private ? <Lock className="w-3 h-3" /> : <Globe className="w-3 h-3" />}
-                      {group.members_count} {group.members_count === 1 ? "member" : "members"}
+                      {group.members_count} {group.members_count === 1 ? t('member') : t('members')}
                     </Badge>
                     
                     {isMember ? (
-                      <Badge>Member</Badge>
+                      <Badge>{t('memberBadge')}</Badge>
                     ) : (
                       <Button
                         size="sm"
@@ -239,7 +241,7 @@ const Groups = () => {
                           joinGroup.mutate(group.id);
                         }}
                       >
-                        Join
+                        {t('join')}
                       </Button>
                     )}
                   </div>
@@ -252,7 +254,7 @@ const Groups = () => {
         {groups?.length === 0 && (
           <div className="col-span-full text-center py-12">
             <Users className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-            <p className="text-muted-foreground">No groups yet. Create the first one!</p>
+            <p className="text-muted-foreground">{t('noGroupsYet')}</p>
           </div>
         )}
       </div>
