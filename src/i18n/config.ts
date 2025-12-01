@@ -11,6 +11,7 @@ import nutritionEN from './locales/en/nutrition.json';
 import weightEN from './locales/en/weight.json';
 import foodEN from './locales/en/food.json';
 import workoutEN from './locales/en/workout.json';
+import settingsEN from './locales/en/settings.json';
 
 import commonES from './locales/es/common.json';
 import authES from './locales/es/auth.json';
@@ -62,6 +63,7 @@ const resources = {
     weight: weightEN,
     food: foodEN,
     workout: workoutEN,
+    settings: settingsEN,
   },
   es: {
     common: commonES,
