@@ -162,9 +162,19 @@ const ProgressPhotos = () => {
       </Button>
 
       <div className="flex items-center gap-3">
-        <div className="p-3 bg-primary/10 rounded-xl">
+        <label
+          htmlFor="photo-upload"
+          className="p-3 bg-primary/10 rounded-xl cursor-pointer hover:bg-primary/20 transition-colors"
+        >
           <Camera className="w-6 h-6 text-primary" />
-        </div>
+        </label>
+        <Input
+          id="photo-upload"
+          type="file"
+          accept="image/*"
+          onChange={handleFileSelect}
+          className="sr-only"
+        />
         <div>
           <h1 className="text-3xl font-bold">{t('progressPhotos')}</h1>
           <p className="text-muted-foreground">{t('trackTransformationVisually')}</p>
@@ -175,30 +185,13 @@ const ProgressPhotos = () => {
       <Card className="p-6">
         <h3 className="text-lg font-semibold mb-4">{t('addNewPhoto')}</h3>
         <div className="space-y-4">
-          <div>
-            <Label htmlFor="photo">{t('photo')}</Label>
-            <div className="mt-2">
-              <label
-                htmlFor="photo"
-                className="flex items-center justify-center w-full px-4 py-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground rounded-md cursor-pointer transition-colors"
-              >
-                <Upload className="w-4 h-4 mr-2" />
-                {selectedFile ? selectedFile.name : t('chooseFile')}
-              </label>
-              <Input
-                id="photo"
-                type="file"
-                accept="image/*"
-                onChange={handleFileSelect}
-                className="sr-only"
-              />
-            </div>
-            {selectedFile && (
-              <p className="text-sm text-muted-foreground mt-1">
+          {selectedFile && (
+            <div className="p-4 bg-muted rounded-lg">
+              <p className="text-sm font-medium">
                 {t('selected')}: {selectedFile.name}
               </p>
-            )}
-          </div>
+            </div>
+          )}
           <div>
             <Label htmlFor="weight">{t('weightOptional')}</Label>
             <Input
