@@ -771,7 +771,7 @@ const PrivacySecurity = () => {
         <CardContent className="space-y-3">
           <Button onClick={handleExportData} variant="outline" className="w-full justify-start">
             <Download className="w-4 h-4 mr-2" />
-            Export My Data
+            {t('export_data')}
           </Button>
 
           <Button 
@@ -780,7 +780,7 @@ const PrivacySecurity = () => {
             className="w-full justify-start text-destructive hover:text-destructive"
           >
             <Trash2 className="w-4 h-4 mr-2" />
-            Delete Account
+            {t('delete_button')}
           </Button>
         </CardContent>
       </Card>
