@@ -20,6 +20,7 @@ import { formatDistance, parseDistance } from "@/lib/unitConversion";
 import { useNavigate } from "react-router-dom";
 import gymBackground from "@/assets/gym-background.jpg";
 import workoutHero from "@/assets/workout-hero.jpg";
+import { useTranslation } from "react-i18next";
 
 interface ActivityLog {
   id: string;
@@ -80,6 +81,7 @@ interface WorkoutMedia {
 }
 
 const Workout = () => {
+  const { t } = useTranslation('workout');
   const { toast } = useToast();
   const navigate = useNavigate();
   const { preferredUnit } = useUserPreferences();
@@ -970,14 +972,14 @@ const Workout = () => {
           <div className="flex items-center gap-2 mb-4">
             <Dumbbell className="w-8 h-8 text-white drop-shadow-glow" />
             <span className="text-sm font-semibold uppercase tracking-wider bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
-              Your Training
+              {t('your_training')}
             </span>
           </div>
           <h1 className="text-3xl md:text-5xl font-bold mb-3 drop-shadow-lg">
-            Workout Log
+            {t('workout_log')}
           </h1>
           <p className="text-lg md:text-xl text-white/95 mb-6 max-w-2xl drop-shadow-md">
-            Track your exercises and build your routine library
+            {t('track_exercises_build_library')}
           </p>
           <div className="flex gap-3 flex-wrap">
             <Button 
@@ -986,7 +988,7 @@ const Workout = () => {
               className="bg-white text-green-600 hover:bg-white/90 shadow-lg"
             >
               <Library className="w-4 h-4 mr-2" />
-              Personal Library
+              {t('personal_library')}
             </Button>
             <Button 
               size="lg" 
@@ -995,7 +997,7 @@ const Workout = () => {
               className="border-2 border-white text-white hover:bg-white/20 backdrop-blur-sm"
             >
               <BookOpen className="w-4 h-4 mr-2" />
-              Sample Library
+              {t('sample_library')}
             </Button>
           </div>
         </div>
@@ -1006,19 +1008,19 @@ const Workout = () => {
           <span style={{ color: 'hsl(270, 95%, 65%)' }} className="flex">
             <CalendarDays className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(270_95%_65%)]" />
           </span>
-          Schedule
+          {t('schedule')}
         </Button>
         <Button variant="outline" className="gap-2 group" onClick={() => setShowAppsLibrary(true)}>
           <span style={{ color: 'hsl(180, 95%, 50%)' }} className="flex">
             <Smartphone className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(180_95%_50%)]" />
           </span>
-          Apps
+          {t('apps')}
         </Button>
         <Button variant="outline" className="gap-2 group" onClick={() => setShowRoutineDialog(true)}>
           <span style={{ color: 'hsl(145, 80%, 50%)' }} className="flex">
             <Plus className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(145_80%_50%)]" />
           </span>
-          Create Routine
+          {t('create_routine')}
         </Button>
       </div>
 
@@ -1333,7 +1335,7 @@ const Workout = () => {
           <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 border-2 border-purple-200 dark:border-purple-800 shadow-2xl">
             <DialogHeader>
               <DialogTitle className="text-2xl text-purple-900 dark:text-purple-100 flex items-center justify-between">
-                <span>Personal Library</span>
+                <span>{t('personal_library')}</span>
                 <div className="flex gap-2 items-center">
                   <Select value={librarySort} onValueChange={setLibrarySort}>
                     <SelectTrigger className="w-[180px] bg-purple-100 dark:bg-purple-900/50 border-purple-300 dark:border-purple-700">
@@ -1913,11 +1915,11 @@ const Workout = () => {
               <div className="p-2 bg-primary/10 rounded-xl">
                 <Clock className="w-5 h-5 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold">Total Duration</h3>
+              <h3 className="text-lg font-semibold">{t('total_duration')}</h3>
             </div>
           </div>
           <p className="text-4xl font-bold text-primary mb-2">{totalDuration} min</p>
-          <p className="text-muted-foreground">Active time today</p>
+          <p className="text-muted-foreground">{t('active_time_today')}</p>
         </Card>
 
         <Card className="p-6 bg-gradient-primary text-primary-foreground hover:shadow-glow transition-all duration-300">
@@ -1926,18 +1928,18 @@ const Workout = () => {
               <div className="p-2 bg-white/20 rounded-xl">
                 <Flame className="w-5 h-5" />
               </div>
-              <h3 className="text-lg font-semibold">Calories Burned</h3>
+              <h3 className="text-lg font-semibold">{t('calories_burned')}</h3>
             </div>
           </div>
           <p className="text-4xl font-bold mb-2">{totalCalories}</p>
-          <p className="opacity-90">Through exercise</p>
+          <p className="opacity-90">{t('through_exercise')}</p>
         </Card>
       </div>
 
       <Card className="p-6 hover:shadow-xl transition-all duration-300">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-semibold">
-            {editingWorkout ? "Edit Workout" : "Log Workout"}
+            {editingWorkout ? t('edit') : t('log_workout')}
           </h3>
           {!editingWorkout && (
             <Popover modal={false}>
@@ -1946,7 +1948,7 @@ const Workout = () => {
                   <span style={{ color: 'hsl(35, 100%, 58%)' }} className="flex">
                     <Library className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(35_100%_58%)]" />
                   </span>
-                  Load Routine
+                  {t('load_routine')}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-56 p-3" align="end">
@@ -1958,7 +1960,7 @@ const Workout = () => {
                     onClick={() => setShowLibrary(true)}
                   >
                     <Library className="w-4 h-4 mr-2" />
-                    Personal Library
+                    {t('personal_library')}
                   </Button>
                   <Button
                     variant="ghost"
@@ -1995,7 +1997,7 @@ const Workout = () => {
             </select>
             <Input
               className="mt-2"
-              placeholder="Or type custom activity..."
+              placeholder={t('or_type_custom_activity')}
               value={exercise && !["Running", "Cycling", "Swimming", "Walking", "Weightlifting", "Yoga", "HIIT", "Other", ""].includes(exercise) ? exercise : ""}
               onChange={(e) => setExercise(e.target.value)}
             />
@@ -2003,7 +2005,7 @@ const Workout = () => {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="workout-date">Date</Label>
+              <Label htmlFor="workout-date">{t('date')}</Label>
               <Input
                 id="workout-date"
                 type="date"
@@ -2013,15 +2015,15 @@ const Workout = () => {
               />
             </div>
             <div>
-              <Label htmlFor="time-of-day">Time of Day</Label>
+              <Label htmlFor="time-of-day">{t('time_of_day')}</Label>
               <Select value={timeOfDay} onValueChange={setTimeOfDay}>
                 <SelectTrigger id="time-of-day" className="mt-1.5">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="morning">Morning</SelectItem>
-                  <SelectItem value="afternoon">Afternoon</SelectItem>
-                  <SelectItem value="evening">Evening</SelectItem>
+                  <SelectItem value="morning">{t('morning')}</SelectItem>
+                  <SelectItem value="afternoon">{t('afternoon')}</SelectItem>
+                  <SelectItem value="evening">{t('evening')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -2029,7 +2031,7 @@ const Workout = () => {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="duration">Duration (minutes)</Label>
+              <Label htmlFor="duration">{t('duration_minutes')}</Label>
               <Input
                 id="duration"
                 type="number"
@@ -2040,16 +2042,16 @@ const Workout = () => {
               />
             </div>
             <div>
-              <Label htmlFor="intensity">Intensity Level</Label>
+              <Label htmlFor="intensity">{t('intensity_level')}</Label>
               <select
                 id="intensity"
                 value={intensity}
                 onChange={(e) => setIntensity(e.target.value)}
                 className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 mt-1.5"
               >
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
+                <option value="low">{t('low')}</option>
+                <option value="medium">{t('medium')}</option>
+                <option value="high">{t('high')}</option>
                 <option value="intense">Intense</option>
               </select>
             </div>
