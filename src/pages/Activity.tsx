@@ -209,7 +209,7 @@ const Activity = () => {
           className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
           onClick={() => navigate('/weight')}
         >
-          <div className="flex items-center gap-4">
+          <div className="flex items-start gap-4">
             <div className="p-3 bg-primary/10 rounded-xl">
               <Scale className="w-6 h-6 text-primary" />
             </div>
@@ -224,7 +224,7 @@ const Activity = () => {
           className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer hover-scale"
           onClick={() => navigate('/step-count')}
         >
-          <div className="flex items-center gap-4">
+          <div className="flex items-start gap-4">
             <div className="p-3 bg-success/10 rounded-xl">
               <Footprints className="w-6 h-6 text-success" />
             </div>
@@ -239,7 +239,7 @@ const Activity = () => {
           className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
           onClick={() => navigate('/workout')}
         >
-          <div className="flex items-center gap-4">
+          <div className="flex items-start gap-4">
             <div className="p-3 bg-secondary/10 rounded-xl">
               <Dumbbell className="w-6 h-6 text-secondary" />
             </div>
@@ -254,7 +254,7 @@ const Activity = () => {
           className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
           onClick={() => navigate('/habits')}
         >
-          <div className="flex items-center gap-4">
+          <div className="flex items-start gap-4">
             <div className="p-3 bg-accent/10 rounded-xl">
               <CheckSquare className="w-6 h-6 text-accent" />
             </div>
@@ -269,7 +269,7 @@ const Activity = () => {
           className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
           onClick={() => navigate('/supplements')}
         >
-          <div className="flex items-center gap-4">
+          <div className="flex items-start gap-4">
             <div className="p-3 bg-gradient-primary/20 rounded-xl">
               <Pill className="w-6 h-6 text-primary" />
             </div>
@@ -284,7 +284,7 @@ const Activity = () => {
           className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
           onClick={() => navigate('/interval-timer')}
         >
-          <div className="flex items-center gap-4">
+          <div className="flex items-start gap-4">
             <div className="p-3 bg-accent/10 rounded-xl">
               <Timer className="w-6 h-6 text-accent" />
             </div>
@@ -299,7 +299,7 @@ const Activity = () => {
           className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
           onClick={() => navigate('/live-workout-sessions')}
         >
-          <div className="flex items-center gap-4">
+          <div className="flex items-start gap-4">
             <div className="p-3 bg-accent/10 rounded-xl">
               <ActivityIcon className="w-6 h-6 text-accent" />
             </div>
