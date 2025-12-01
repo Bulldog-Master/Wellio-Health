@@ -32,7 +32,7 @@ export const LanguageSwitcher = () => {
         <Button 
           variant="ghost" 
           size="sm"
-          className="hover:bg-sidebar-accent text-sidebar-foreground gap-1 px-2"
+          className="hover:bg-sidebar-accent text-sidebar-foreground gap-1 px-2 h-8"
         >
           <Languages className="w-4 h-4" />
           <span className="text-xs font-medium uppercase">{currentLanguage.code}</span>
