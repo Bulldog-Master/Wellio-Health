@@ -1,0 +1,52 @@
+{
+  "home_title": "Wellio - Your Complete Fitness Journey",
+  "home_description": "Track workouts, nutrition, and progress. Connect with a fitness community. Achieve your health goals with Wellio.",
+  
+  "dashboard_title": "Dashboard",
+  "dashboard_description": "View your fitness stats, track progress, and stay motivated with your personalized dashboard.",
+  
+  "auth_title": "Sign In or Create Account",
+  "auth_description": "Join Wellio to track your fitness journey, connect with others, and achieve your health goals.",
+  
+  "workout_title": "Workout Tracker",
+  "workout_description": "Log your exercises, track sets and reps, and monitor your fitness progress over time.",
+  
+  "food_title": "Food & Nutrition",
+  "food_description": "Track your meals, monitor calories, and maintain a balanced diet with our nutrition tools.",
+  
+  "activity_title": "Activity Hub",
+  "activity_description": "Access all your fitness activities including workouts, weight tracking, habits, and more.",
+  
+  "profile_title": "Your Profile",
+  "profile_description": "Manage your fitness profile, view achievements, and customize your Wellio experience.",
+  
+  "settings_title": "Settings",
+  "settings_description": "Customize your Wellio experience with account settings, preferences, and privacy options.",
+  
+  "feed_title": "Community Feed",
+  "feed_description": "Connect with fitness enthusiasts, share your progress, and get inspired by others.",
+  
+  "challenges_title": "Fitness Challenges",
+  "challenges_description": "Join challenges, compete with friends, and push your limits to achieve new goals.",
+  
+  "subscription_title": "Subscription Plans",
+  "subscription_description": "Unlock premium features and take your fitness journey to the next level with Wellio Pro.",
+  
+  "rewards_title": "Rewards Store",
+  "rewards_description": "Redeem your earned points for exclusive rewards, badges, and premium features.",
+  
+  "referral_title": "Referral Program",
+  "referral_description": "Invite friends to Wellio and earn bonus points for every successful referral.",
+  
+  "search_title": "Search & Discover",
+  "search_description": "Find users, posts, and trending topics in the Wellio fitness community.",
+  
+  "messages_title": "Messages",
+  "messages_description": "Chat with friends, trainers, and fellow fitness enthusiasts.",
+  
+  "notifications_title": "Notifications",
+  "notifications_description": "Stay updated on your fitness journey with alerts, reminders, and social updates.",
+
+  "not_found_title": "Page Not Found",
+  "not_found_description": "The page you're looking for doesn't exist. Return to Wellio home."
+}

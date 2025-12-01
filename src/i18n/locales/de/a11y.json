@@ -1,0 +1,32 @@
+{
+  "navigation": {
+    "main_menu": "Hauptnavigationsmenü",
+    "skip_to_content": "Zum Hauptinhalt springen",
+    "go_back": "Zur vorherigen Seite zurück",
+    "go_home": "Zur Startseite",
+    "open_menu": "Menü öffnen",
+    "close_menu": "Menü schließen"
+  },
+  "actions": {
+    "submit_form": "Formular absenden",
+    "cancel_action": "Aktion abbrechen",
+    "save_changes": "Änderungen speichern",
+    "delete_item": "Element löschen",
+    "edit_item": "Element bearbeiten",
+    "close_dialog": "Dialog schließen"
+  },
+  "status": {
+    "loading": "Inhalt wird geladen",
+    "error_occurred": "Ein Fehler ist aufgetreten",
+    "success_message": "Aktion erfolgreich abgeschlossen"
+  },
+  "theme": {
+    "toggle_theme": "Hell/Dunkel-Modus umschalten",
+    "dark_mode": "Zu Dunkelmodus wechseln",
+    "light_mode": "Zu Hellmodus wechseln"
+  },
+  "language": {
+    "change_language": "Sprache ändern",
+    "current_language": "Aktuelle Sprache: {{language}}"
+  }
+}

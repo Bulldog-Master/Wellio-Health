@@ -1,0 +1,22 @@
+{
+  "workout": "Training",
+  "workout_plural": "Trainings",
+  "workout_count": "{{count}} Training",
+  "workout_count_plural": "{{count}} Trainings",
+  "point": "Punkt",
+  "point_plural": "Punkte",
+  "point_count": "{{count}} Punkt",
+  "point_count_plural": "{{count}} Punkte",
+  "follower": "Follower",
+  "follower_plural": "Follower",
+  "follower_count": "{{count}} Follower",
+  "follower_count_plural": "{{count}} Follower",
+  "day": "Tag",
+  "day_plural": "Tage",
+  "day_count": "{{count}} Tag",
+  "day_count_plural": "{{count}} Tage",
+  "message": "Nachricht",
+  "message_plural": "Nachrichten",
+  "message_count": "{{count}} Nachricht",
+  "message_count_plural": "{{count}} Nachrichten"
+}

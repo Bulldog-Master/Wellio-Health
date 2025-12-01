@@ -1,0 +1,47 @@
+{
+  "lbs": "lbs",
+  "kg": "kg",
+  "miles": "millas",
+  "km": "km",
+  "meters": "m",
+  "feet": "pies",
+  "inches": "pulg",
+  "cm": "cm",
+  "calories": "cal",
+  "kcal": "kcal",
+  
+  "hour": "hora",
+  "hour_plural": "horas",
+  "hour_short": "h",
+  "minute": "minuto",
+  "minute_plural": "minutos",
+  "minute_short": "min",
+  "second": "segundo",
+  "second_plural": "segundos",
+  "second_short": "s",
+  
+  "day": "día",
+  "day_plural": "días",
+  "week": "semana",
+  "week_plural": "semanas",
+  "month": "mes",
+  "month_plural": "meses",
+  "year": "año",
+  "year_plural": "años",
+  
+  "rep": "rep",
+  "rep_plural": "reps",
+  "set": "serie",
+  "set_plural": "series",
+  
+  "glass": "vaso",
+  "glass_plural": "vasos",
+  "ml": "ml",
+  "oz": "oz",
+  "liter": "L",
+  
+  "step": "paso",
+  "step_plural": "pasos",
+  "bpm": "lpm",
+  "percent": "%"
+}

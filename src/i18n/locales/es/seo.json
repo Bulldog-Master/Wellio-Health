@@ -1,0 +1,52 @@
+{
+  "home_title": "Wellio - Tu Viaje Fitness Completo",
+  "home_description": "Rastrea entrenamientos, nutrición y progreso. Conéctate con una comunidad fitness. Alcanza tus metas de salud con Wellio.",
+  
+  "dashboard_title": "Panel de Control",
+  "dashboard_description": "Ve tus estadísticas fitness, rastrea tu progreso y mantente motivado con tu panel personalizado.",
+  
+  "auth_title": "Iniciar Sesión o Crear Cuenta",
+  "auth_description": "Únete a Wellio para rastrear tu viaje fitness, conectar con otros y alcanzar tus metas de salud.",
+  
+  "workout_title": "Registro de Entrenamientos",
+  "workout_description": "Registra tus ejercicios, rastrea series y repeticiones, y monitorea tu progreso fitness.",
+  
+  "food_title": "Comida y Nutrición",
+  "food_description": "Rastrea tus comidas, monitorea calorías y mantén una dieta balanceada con nuestras herramientas de nutrición.",
+  
+  "activity_title": "Centro de Actividad",
+  "activity_description": "Accede a todas tus actividades fitness incluyendo entrenamientos, peso, hábitos y más.",
+  
+  "profile_title": "Tu Perfil",
+  "profile_description": "Administra tu perfil fitness, ve logros y personaliza tu experiencia Wellio.",
+  
+  "settings_title": "Configuración",
+  "settings_description": "Personaliza tu experiencia Wellio con ajustes de cuenta, preferencias y opciones de privacidad.",
+  
+  "feed_title": "Feed de la Comunidad",
+  "feed_description": "Conéctate con entusiastas del fitness, comparte tu progreso e inspírate con otros.",
+  
+  "challenges_title": "Desafíos Fitness",
+  "challenges_description": "Únete a desafíos, compite con amigos y supera tus límites para alcanzar nuevas metas.",
+  
+  "subscription_title": "Planes de Suscripción",
+  "subscription_description": "Desbloquea funciones premium y lleva tu viaje fitness al siguiente nivel con Wellio Pro.",
+  
+  "rewards_title": "Tienda de Recompensas",
+  "rewards_description": "Canjea tus puntos ganados por recompensas exclusivas, insignias y funciones premium.",
+  
+  "referral_title": "Programa de Referidos",
+  "referral_description": "Invita amigos a Wellio y gana puntos bonus por cada referido exitoso.",
+  
+  "search_title": "Buscar y Descubrir",
+  "search_description": "Encuentra usuarios, publicaciones y temas tendencia en la comunidad fitness de Wellio.",
+  
+  "messages_title": "Mensajes",
+  "messages_description": "Chatea con amigos, entrenadores y compañeros entusiastas del fitness.",
+  
+  "notifications_title": "Notificaciones",
+  "notifications_description": "Mantente actualizado en tu viaje fitness con alertas, recordatorios y actualizaciones sociales.",
+
+  "not_found_title": "Página No Encontrada",
+  "not_found_description": "La página que buscas no existe. Regresa al inicio de Wellio."
+}

@@ -1,0 +1,109 @@
+{
+  "navigation": {
+    "main_menu": "Menú de navegación principal",
+    "skip_to_content": "Saltar al contenido principal",
+    "go_back": "Volver a la página anterior",
+    "go_home": "Ir a la página de inicio",
+    "open_menu": "Abrir menú",
+    "close_menu": "Cerrar menú",
+    "breadcrumb": "Navegación de migas de pan"
+  },
+  
+  "actions": {
+    "submit_form": "Enviar formulario",
+    "cancel_action": "Cancelar acción",
+    "save_changes": "Guardar cambios",
+    "delete_item": "Eliminar elemento",
+    "edit_item": "Editar elemento",
+    "close_dialog": "Cerrar diálogo",
+    "expand_section": "Expandir sección",
+    "collapse_section": "Contraer sección",
+    "load_more": "Cargar más elementos",
+    "refresh_data": "Actualizar datos"
+  },
+  
+  "forms": {
+    "required_field": "Campo requerido",
+    "optional_field": "Campo opcional",
+    "password_show": "Mostrar contraseña",
+    "password_hide": "Ocultar contraseña",
+    "clear_input": "Limpiar entrada",
+    "search_input": "Campo de búsqueda",
+    "date_picker": "Seleccionar fecha",
+    "time_picker": "Seleccionar hora",
+    "file_upload": "Subir archivo",
+    "dropdown_select": "Seleccionar opción"
+  },
+  
+  "status": {
+    "loading": "Cargando contenido",
+    "error_occurred": "Ocurrió un error",
+    "success_message": "Acción completada exitosamente",
+    "warning_message": "Mensaje de advertencia",
+    "info_message": "Mensaje informativo",
+    "offline_mode": "Actualmente estás sin conexión",
+    "online_mode": "Has vuelto a estar en línea"
+  },
+  
+  "media": {
+    "play_video": "Reproducir video",
+    "pause_video": "Pausar video",
+    "mute_audio": "Silenciar audio",
+    "unmute_audio": "Activar audio",
+    "fullscreen": "Entrar en pantalla completa",
+    "exit_fullscreen": "Salir de pantalla completa",
+    "volume_control": "Ajustar volumen"
+  },
+  
+  "social": {
+    "like_post": "Me gusta esta publicación",
+    "unlike_post": "Ya no me gusta esta publicación",
+    "share_post": "Compartir esta publicación",
+    "comment_on_post": "Comentar en esta publicación",
+    "follow_user": "Seguir a este usuario",
+    "unfollow_user": "Dejar de seguir a este usuario",
+    "send_message": "Enviar un mensaje",
+    "view_profile": "Ver perfil del usuario"
+  },
+  
+  "fitness": {
+    "log_workout": "Registrar un entrenamiento",
+    "track_weight": "Registrar tu peso",
+    "log_meal": "Registrar una comida",
+    "start_timer": "Iniciar temporizador",
+    "stop_timer": "Detener temporizador",
+    "pause_timer": "Pausar temporizador",
+    "resume_timer": "Reanudar temporizador",
+    "view_progress": "Ver tu progreso",
+    "set_goal": "Establecer una nueva meta"
+  },
+  
+  "notifications": {
+    "new_notification": "Nueva notificación",
+    "mark_as_read": "Marcar como leída",
+    "mark_all_read": "Marcar todas como leídas",
+    "delete_notification": "Eliminar notificación",
+    "notification_settings": "Configuración de notificaciones"
+  },
+  
+  "theme": {
+    "toggle_theme": "Cambiar modo oscuro/claro",
+    "dark_mode": "Cambiar a modo oscuro",
+    "light_mode": "Cambiar a modo claro",
+    "system_theme": "Usar tema del sistema"
+  },
+  
+  "language": {
+    "change_language": "Cambiar idioma",
+    "current_language": "Idioma actual: {{language}}"
+  },
+  
+  "images": {
+    "user_avatar": "Foto de perfil del usuario",
+    "post_image": "Imagen de la publicación",
+    "workout_image": "Imagen del entrenamiento",
+    "food_image": "Imagen de comida",
+    "progress_photo": "Foto de progreso",
+    "decorative_image": "Imagen decorativa"
+  }
+}
