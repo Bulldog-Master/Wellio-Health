@@ -2,24 +2,32 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-// AGGRESSIVE CACHE CLEAR - Clear ALL i18n cache on every load (temporary)
-Object.keys(localStorage).forEach(key => {
-  if (key.startsWith('i18next') || key.includes('i18n')) {
-    localStorage.removeItem(key);
-  }
-});
-
 // Clear i18n cache to force fresh translations load (increment version when translations update)
-const I18N_VERSION = '6.1.0-clean-no-debug';
-const cachedVersion = localStorage.getItem('i18n_version');
-if (cachedVersion !== I18N_VERSION) {
-  // Clear all i18n related localStorage
-  Object.keys(localStorage).forEach(key => {
-    if (key.startsWith('i18next')) {
-      localStorage.removeItem(key);
+const I18N_VERSION = '6.2.0-fixed';
+
+// Safe localStorage access
+try {
+  // AGGRESSIVE CACHE CLEAR - Clear ALL i18n cache on every load (temporary)
+  if (typeof localStorage !== 'undefined') {
+    Object.keys(localStorage).forEach(key => {
+      if (key.startsWith('i18next') || key.includes('i18n')) {
+        localStorage.removeItem(key);
+      }
+    });
+    
+    const cachedVersion = localStorage.getItem('i18n_version');
+    if (cachedVersion !== I18N_VERSION) {
+      // Clear all i18n related localStorage
+      Object.keys(localStorage).forEach(key => {
+        if (key.startsWith('i18next')) {
+          localStorage.removeItem(key);
+        }
+      });
+      localStorage.setItem('i18n_version', I18N_VERSION);
     }
-  });
-  localStorage.setItem('i18n_version', I18N_VERSION);
+  }
+} catch (error) {
+  console.error('Error clearing i18n cache:', error);
 }
 
 // Import translation files
