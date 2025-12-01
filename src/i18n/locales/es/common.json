@@ -55,12 +55,6 @@
   "upgrade_to_pro": "Actualizar a Pro",
   "unlock_advanced_features": "funciones avanzadas",
   "upgrade": "Actualizar",
-  "nav": {
-    "food": "Comida",
-    "workout": "Entrenamiento",
-    "nutrition": "Nutrición",
-    "social": "Social"
-  },
   "weight_7_days": "Peso (7 días)",
   "calories_7_days": "Calorías (7 días)",
   "workouts_7_days": "Entrenamientos (7 días)",
@@ -92,6 +86,7 @@
   "duration": "Duración",
   "no_data": "Sin datos",
   "nav": {
+    "food": "Comida",
     "feed": "Publicaciones",
     "workout": "Entrenamiento",
     "nutrition": "Nutrición",
