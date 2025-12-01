@@ -17,6 +17,7 @@ import rewardsEN from './locales/en/rewards.json';
 import referralEN from './locales/en/referral.json';
 import privacyEN from './locales/en/privacy.json';
 import pointsEN from './locales/en/points.json';
+import profileEN from './locales/en/profile.json';
 
 import commonES from './locales/es/common.json';
 import authES from './locales/es/auth.json';
@@ -77,6 +78,7 @@ const resources = {
     referral: referralEN,
     privacy: privacyEN,
     points: pointsEN,
+    profile: profileEN,
   },
   es: {
     common: commonES,

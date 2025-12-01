@@ -15,8 +15,10 @@ import { Badge } from "@/components/ui/badge";
 import { profileUpdateSchema, validateAndSanitize } from "@/lib/validationSchemas";
 import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
 import { ProgressToReward } from "@/components/ProgressToReward";
+import { useTranslation } from "react-i18next";
 
 const Profile = () => {
+  const { t } = useTranslation('profile');
   const { toast } = useToast();
   const navigate = useNavigate();
   const { tier, isLoading: subscriptionLoading } = useSubscription();
@@ -133,16 +135,16 @@ const Profile = () => {
 
         setAvatarUrl(base64);
         toast({
-          title: "Avatar updated",
-          description: "Your profile picture has been updated.",
+          title: t('avatar_updated'),
+          description: t('profile_picture_updated'),
         });
       };
       reader.readAsDataURL(file);
     } catch (error) {
       console.error('Error uploading avatar:', error);
       toast({
-        title: "Error",
-        description: "Failed to upload avatar.",
+        title: t('error'),
+        description: t('failed_to_upload'),
         variant: "destructive",
       });
     } finally {
@@ -162,8 +164,8 @@ const Profile = () => {
 
       if (!rateLimit.allowed) {
         toast({
-          title: "Too Many Updates",
-          description: `Please wait ${Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 60000)} minutes before updating again.`,
+          title: t('too_many_updates'),
+          description: t('wait_before_updating', { minutes: Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 60000) }),
           variant: "destructive",
         });
         setIsLoading(false);
@@ -181,7 +183,7 @@ const Profile = () => {
 
       if (validation.success === false) {
         toast({
-          title: "Validation Error",
+          title: t('validation_error'),
           description: validation.error,
           variant: "destructive",
         });
@@ -214,14 +216,14 @@ const Profile = () => {
       if (error) throw error;
 
       toast({
-        title: "Profile updated",
-        description: "Your profile information has been saved successfully.",
+        title: t('profile_updated'),
+        description: t('profile_saved'),
       });
     } catch (error: any) {
       console.error('Error saving profile:', error);
       toast({
-        title: "Error",
-        description: error?.message || "Failed to save profile.",
+        title: t('error'),
+        description: error?.message || t('failed_to_save'),
         variant: "destructive",
       });
     } finally {
@@ -234,14 +236,14 @@ const Profile = () => {
       await navigator.clipboard.writeText(referralLink);
       setCopied(true);
       toast({
-        title: "Copied!",
-        description: "Referral link copied to clipboard",
+        title: t('copied'),
+        description: t('referral_link_copied'),
       });
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to copy link",
+        title: t('error'),
+        description: t('failed_copy_link'),
         variant: "destructive",
       });
     }
@@ -251,12 +253,12 @@ const Profile = () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "Join Wellio!",
-          text: "Start your fitness journey with me on Wellio!",
+          title: t('join_wellio'),
+          text: t('start_fitness_journey'),
           url: referralLink,
         });
       } catch (error) {
-        console.log("Share cancelled");
+        console.log(t('share_cancelled'));
       }
     } else {
       copyToClipboard();
@@ -267,7 +269,7 @@ const Profile = () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
       toast({
-        title: "Error signing out",
+        title: t('error_signing_out'),
         description: error.message,
         variant: "destructive",
       });
@@ -285,14 +287,14 @@ const Profile = () => {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-3xl font-bold">Profile</h1>
+              <h1 className="text-3xl font-bold">{t('profile')}</h1>
               {!subscriptionLoading && (
                 <Badge 
                   variant={tier === 'free' ? 'secondary' : 'default'}
                   className={tier !== 'free' ? 'bg-gradient-primary text-white' : ''}
                 >
                   {tier === 'free' ? (
-                    'Free'
+                    t('free')
                   ) : (
                     <>
                       <Crown className="w-3 h-3 mr-1" />
@@ -302,7 +304,7 @@ const Profile = () => {
                 </Badge>
               )}
             </div>
-            <p className="text-muted-foreground">Manage your account</p>
+            <p className="text-muted-foreground">{t('manage_account')}</p>
           </div>
         </div>
         {tier === 'free' && (
@@ -312,7 +314,7 @@ const Profile = () => {
             onClick={() => navigate('/subscription')}
           >
             <Crown className="w-4 h-4" />
-            Upgrade
+            {t('upgrade')}
           </Button>
         )}
       </div>
@@ -324,11 +326,11 @@ const Profile = () => {
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <Sparkles className="w-5 h-5" />
-                <p className="text-white/90 font-medium">Your Reward Points</p>
+                <p className="text-white/90 font-medium">{t('your_reward_points')}</p>
               </div>
-              <h2 className="text-4xl font-bold">{referralPoints} Points</h2>
+              <h2 className="text-4xl font-bold">{referralPoints} {t('points')}</h2>
               <p className="text-white/80 text-sm mt-2">
-                {referralPoints >= 500 ? '🎉 You can redeem rewards!' : `Earn ${500 - referralPoints} more for your first reward`}
+                {referralPoints >= 500 ? t('can_redeem_rewards') : t('earn_more_for_first_reward', { count: 500 - referralPoints })}
               </p>
             </div>
             <div className="text-right">
@@ -341,7 +343,7 @@ const Profile = () => {
                 }}
               >
                 <Gift className="w-4 h-4" />
-                Rewards Store
+                {t('rewards_store')}
               </Button>
               <Button 
                 variant="ghost"
@@ -353,7 +355,7 @@ const Profile = () => {
                 }}
               >
                 <Users className="w-4 h-4" />
-                Earn More
+                {t('earn_more')}
               </Button>
             </div>
           </div>
@@ -369,8 +371,8 @@ const Profile = () => {
                 <UserCircle className="w-5 h-5 text-secondary" />
               </div>
               <div className="text-left">
-                <h3 className="text-lg font-semibold">Personal Information</h3>
-                <p className="text-sm text-muted-foreground">Your profile details and account info</p>
+                <h3 className="text-lg font-semibold">{t('personal_information')}</h3>
+                <p className="text-sm text-muted-foreground">{t('profile_details_account')}</p>
               </div>
             </div>
             <ChevronDown className={`w-5 h-5 transition-transform ${openPersonalInfo ? 'rotate-180' : ''}`} />
@@ -399,13 +401,13 @@ const Profile = () => {
                     className="gap-2"
                   >
                     <Upload className="w-4 h-4" />
-                    Upload Photo
+                    {t('upload_photo')}
                   </Button>
                 </div>
               </div>
 
               <div>
-                <Label htmlFor="name">Full Name</Label>
+                <Label htmlFor="name">{t('full_name')}</Label>
                 <Input
                   id="name"
                   value={formData.name}
@@ -416,7 +418,7 @@ const Profile = () => {
               </div>
 
               <div>
-                <Label htmlFor="username">Username</Label>
+                <Label htmlFor="username">{t('username')}</Label>
                 <Input
                   id="username"
                   value={formData.username}
@@ -428,7 +430,7 @@ const Profile = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="age">Age</Label>
+                  <Label htmlFor="age">{t('age')}</Label>
                   <Input
                     id="age"
                     type="number"
@@ -438,14 +440,14 @@ const Profile = () => {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="gender">Gender</Label>
+                  <Label htmlFor="gender">{t('gender')}</Label>
                   <Select value={formData.gender} onValueChange={(value) => setFormData({ ...formData, gender: value })}>
                     <SelectTrigger className="mt-1.5">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="male">Male</SelectItem>
-                      <SelectItem value="female">Female</SelectItem>
+                      <SelectItem value="male">{t('male')}</SelectItem>
+                      <SelectItem value="female">{t('female')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -453,7 +455,7 @@ const Profile = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="height">Height</Label>
+                  <Label htmlFor="height">{t('height')}</Label>
                   <div className="flex gap-2 mt-1.5">
                     <Input
                       id="height"
@@ -467,14 +469,14 @@ const Profile = () => {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="inches">in</SelectItem>
-                        <SelectItem value="cm">cm</SelectItem>
+                        <SelectItem value="inches">{t('in')}</SelectItem>
+                        <SelectItem value="cm">{t('cm')}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                 </div>
                 <div>
-                  <Label htmlFor="weight">Current Weight</Label>
+                  <Label htmlFor="weight">{t('current_weight')}</Label>
                   <div className="flex gap-2 mt-1.5">
                     <Input
                       id="weight"
@@ -488,8 +490,8 @@ const Profile = () => {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="lbs">lbs</SelectItem>
-                        <SelectItem value="kg">kg</SelectItem>
+                        <SelectItem value="lbs">{t('lbs')}</SelectItem>
+                        <SelectItem value="kg">{t('kg')}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -509,8 +511,8 @@ const Profile = () => {
                 <Target className="w-5 h-5 text-accent" />
               </div>
               <div className="text-left">
-                <h3 className="text-lg font-semibold">Fitness Goals</h3>
-                <p className="text-sm text-muted-foreground">Your target weight and fitness objectives</p>
+                <h3 className="text-lg font-semibold">{t('fitness_goals')}</h3>
+                <p className="text-sm text-muted-foreground">{t('your_targets_activity')}</p>
               </div>
             </div>
             <ChevronDown className={`w-5 h-5 transition-transform ${openFitnessGoals ? 'rotate-180' : ''}`} />
@@ -518,7 +520,7 @@ const Profile = () => {
           <CollapsibleContent>
             <div className="p-6 pt-0 space-y-4 border-t">
               <div>
-                <Label htmlFor="targetWeight">Target Weight</Label>
+                <Label htmlFor="targetWeight">{t('target_weight')}</Label>
                 <div className="flex gap-2 mt-1.5">
                   <Input
                     id="targetWeight"
@@ -536,8 +538,8 @@ const Profile = () => {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="lbs">lbs</SelectItem>
-                      <SelectItem value="kg">kg</SelectItem>
+                      <SelectItem value="lbs">{t('lbs')}</SelectItem>
+                      <SelectItem value="kg">{t('kg')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -552,25 +554,25 @@ const Profile = () => {
               </div>
 
               <div>
-                <Label htmlFor="goal">Primary Goal</Label>
+                <Label htmlFor="goal">{t('goal')}</Label>
                 <Select value={formData.goal} onValueChange={(value) => setFormData({ ...formData, goal: value })}>
                   <SelectTrigger className="mt-1.5">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="leaner">Get Leaner</SelectItem>
-                    <SelectItem value="stronger">Build Strength</SelectItem>
-                    <SelectItem value="cardio">Improve Cardio</SelectItem>
-                    <SelectItem value="maintain">Maintain Weight</SelectItem>
+                    <SelectItem value="leaner">{t('get_leaner')}</SelectItem>
+                    <SelectItem value="stronger">{t('build_strength')}</SelectItem>
+                    <SelectItem value="cardio">{t('improve_cardio')}</SelectItem>
+                    <SelectItem value="maintain">{t('maintain_weight')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               <div className="pt-4 border-t">
-                <h4 className="text-sm font-semibold mb-3 text-primary">Daily Activity Goals</h4>
+                <h4 className="text-sm font-semibold mb-3 text-primary">{t('daily_activity_goals')}</h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <Label htmlFor="moveGoal" className="text-xs">Move (Calories)</Label>
+                    <Label htmlFor="moveGoal" className="text-xs">{t('move_calories')}</Label>
                     <Input
                       id="moveGoal"
                       type="number"
@@ -579,10 +581,10 @@ const Profile = () => {
                       placeholder="500"
                       className="mt-1.5"
                     />
-                    <p className="text-xs text-muted-foreground mt-1">Daily calorie burn goal</p>
+                    <p className="text-xs text-muted-foreground mt-1">{t('daily_calorie_burn')}</p>
                   </div>
                   <div>
-                    <Label htmlFor="exerciseGoal" className="text-xs">Exercise (Minutes)</Label>
+                    <Label htmlFor="exerciseGoal" className="text-xs">{t('exercise_minutes')}</Label>
                     <Input
                       id="exerciseGoal"
                       type="number"
@@ -591,10 +593,10 @@ const Profile = () => {
                       placeholder="30"
                       className="mt-1.5"
                     />
-                    <p className="text-xs text-muted-foreground mt-1">Daily workout minutes</p>
+                    <p className="text-xs text-muted-foreground mt-1">{t('daily_workout_minutes')}</p>
                   </div>
                   <div>
-                    <Label htmlFor="standGoal" className="text-xs">Stand (Hours)</Label>
+                    <Label htmlFor="standGoal" className="text-xs">{t('stand_hours')}</Label>
                     <Input
                       id="standGoal"
                       type="number"
@@ -603,7 +605,7 @@ const Profile = () => {
                       placeholder="12"
                       className="mt-1.5"
                     />
-                    <p className="text-xs text-muted-foreground mt-1">Active hours per day</p>
+                    <p className="text-xs text-muted-foreground mt-1">{t('active_hours_per_day')}</p>
                   </div>
                 </div>
               </div>
@@ -621,8 +623,8 @@ const Profile = () => {
                 <Settings className="w-5 h-5 text-primary" />
               </div>
               <div className="text-left">
-                <h3 className="text-lg font-semibold">Settings</h3>
-                <p className="text-sm text-muted-foreground">Account preferences and configuration</p>
+                <h3 className="text-lg font-semibold">{t('settings')}</h3>
+                <p className="text-sm text-muted-foreground">{t('account_preferences')}</p>
               </div>
             </div>
             <ChevronDown className={`w-5 h-5 transition-transform ${openSettings ? 'rotate-180' : ''}`} />
@@ -638,8 +640,8 @@ const Profile = () => {
                   <Gift className="w-5 h-5 text-purple-500" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-medium">Referral Program</h4>
-                  <p className="text-sm text-muted-foreground">Share Wellio and earn rewards for referrals</p>
+                  <h4 className="font-medium">{t('referral_program')}</h4>
+                  <p className="text-sm text-muted-foreground">{t('referral_program_desc')}</p>
                 </div>
               </button>
 
@@ -652,8 +654,8 @@ const Profile = () => {
                   <Shield className="w-5 h-5 text-destructive" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-medium">Privacy & Security</h4>
-                  <p className="text-sm text-muted-foreground">Control your privacy settings and security options</p>
+                  <h4 className="font-medium">{t('privacy_security')}</h4>
+                  <p className="text-sm text-muted-foreground">{t('privacy_security_desc')}</p>
                 </div>
               </button>
 
@@ -666,8 +668,8 @@ const Profile = () => {
                   <CreditCard className="w-5 h-5 text-warning" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-medium">Orders & Payments</h4>
-                  <p className="text-sm text-muted-foreground">View your orders and manage payment methods</p>
+                  <h4 className="font-medium">{t('orders_payments')}</h4>
+                  <p className="text-sm text-muted-foreground">{t('orders_payments_desc')}</p>
                 </div>
               </button>
 
@@ -680,8 +682,8 @@ const Profile = () => {
                   <Bell className="w-5 h-5 text-secondary" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-medium">Notifications</h4>
-                  <p className="text-sm text-muted-foreground">Configure your notification preferences</p>
+                  <h4 className="font-medium">{t('notifications')}</h4>
+                  <p className="text-sm text-muted-foreground">{t('notifications_desc')}</p>
                 </div>
               </button>
 
@@ -694,8 +696,8 @@ const Profile = () => {
                   <HelpCircle className="w-5 h-5 text-primary" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-medium">Support</h4>
-                  <p className="text-sm text-muted-foreground">Get help and contact support</p>
+                  <h4 className="font-medium">{t('support')}</h4>
+                  <p className="text-sm text-muted-foreground">{t('support_desc')}</p>
                 </div>
               </button>
             </div>
@@ -705,8 +707,8 @@ const Profile = () => {
 
       {/* Referral Link Card */}
       <Card className="p-6 bg-gradient-card shadow-md">
-        <h3 className="text-lg font-semibold mb-4">Your Referral Link</h3>
-        <p className="text-sm text-muted-foreground mb-4">Share Wellio with friends and earn rewards</p>
+        <h3 className="text-lg font-semibold mb-4">{t('referral_link')}</h3>
+        <p className="text-sm text-muted-foreground mb-4">{t('share_referral')}</p>
         <div className="space-y-3">
           <div className="flex gap-2">
             <Input
@@ -729,7 +731,7 @@ const Profile = () => {
             className="w-full gap-2"
           >
             <Share2 className="w-4 h-4" />
-            Share Link
+            {t('share_link')}
           </Button>
         </div>
       </Card>
@@ -737,11 +739,11 @@ const Profile = () => {
       <div className="flex justify-between items-center">
         <Button onClick={handleSave} className="gap-2" disabled={isLoading}>
           <Save className="w-4 h-4" />
-          Save Changes
+          {t('save_changes')}
         </Button>
         <Button onClick={handleLogout} variant="destructive" className="gap-2">
           <LogOut className="w-4 h-4" />
-          Sign Out
+          {t('sign_out')}
         </Button>
       </div>
     </div>
