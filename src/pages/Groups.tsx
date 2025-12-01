@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Users, Plus, Lock, Globe, User } from "lucide-react";
+import { Users, Plus, Lock, Globe, User, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -133,12 +133,22 @@ const Groups = () => {
   return (
     <div className="container mx-auto p-6 max-w-6xl">
       <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-3xl font-bold flex items-center gap-2">
-            <Users className="w-8 h-8" />
-            {t('groups')}
-          </h1>
-          <p className="text-muted-foreground">{t('connectWithCommunities')}</p>
+        <div className="flex items-center gap-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate('/dashboard')}
+            className="shrink-0"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </Button>
+          <div>
+            <h1 className="text-3xl font-bold flex items-center gap-2">
+              <Users className="w-8 h-8" />
+              {t('groups')}
+            </h1>
+            <p className="text-muted-foreground">{t('connectWithCommunities')}</p>
+          </div>
         </div>
         <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
           <DialogTrigger asChild>
