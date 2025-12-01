@@ -994,7 +994,7 @@ const Workout = () => {
               size="lg" 
               variant="outline"
               onClick={() => setShowSampleLibrary(true)}
-              className="border-2 border-white text-white hover:bg-white/20 backdrop-blur-sm"
+              className="border-2 border-white bg-white/10 text-white hover:bg-white hover:text-green-600 backdrop-blur-sm transition-all"
             >
               <BookOpen className="w-4 h-4 mr-2" />
               {t('sample_library')}
@@ -1009,6 +1009,12 @@ const Workout = () => {
             <CalendarDays className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(270_95%_65%)]" />
           </span>
           {t('schedule')}
+        </Button>
+        <Button variant="outline" className="gap-2 group" onClick={() => navigate('/interval-timer')}>
+          <span style={{ color: 'hsl(30, 95%, 55%)' }} className="flex">
+            <Timer className="w-4 h-4 transition-all group-hover:drop-shadow-[0_0_8px_hsl(30_95%_55%)]" />
+          </span>
+          {t('interval_timer')}
         </Button>
         <Button variant="outline" className="gap-2 group" onClick={() => setShowAppsLibrary(true)}>
           <span style={{ color: 'hsl(180, 95%, 50%)' }} className="flex">
