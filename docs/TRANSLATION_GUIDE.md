@@ -6,6 +6,33 @@ This guide documents learnings from implementing Spanish translations and establ
 
 ---
 
+## 🚨 IMPORTANT: Automatic Translation Monitoring
+
+The app now has **built-in translation monitoring** that runs automatically in development:
+
+### Missing Key Detection
+When you use a translation key that doesn't exist, you'll see a console warning:
+```
+⚠️ MISSING TRANSLATION: [es] feature:new_key
+```
+
+### Translation Parity Report
+On app startup, the console shows a report comparing EN ↔ ES:
+```
+🌐 Translation Parity Report
+Comparing en → es
+  [common] Missing in es: ["new_key", "another_key"]
+Total keys missing in es: 2
+```
+
+### How to Use During Development
+1. Open browser DevTools → Console
+2. Look for `⚠️` or `🌐` warnings
+3. Add missing keys to the appropriate JSON files
+4. Refresh to verify fixes
+
+---
+
 ## Pre-Translation Checklist
 
 ### 1. Audit All Files First
@@ -448,5 +475,78 @@ grep -rn '"[A-Z][a-z].*"' src/pages/ --include="*.tsx" | grep -v import | grep -
 
 ---
 
+## Ongoing Maintenance
+
+### When Adding New Features
+
+**ALWAYS follow this workflow:**
+
+1. **Before coding the feature:**
+   - Create translation keys in EN JSON first
+   - Create matching keys in ES JSON (and other languages)
+   - Use `t('namespace:key')` in your component from the start
+
+2. **During development:**
+   - Watch browser console for `⚠️ MISSING TRANSLATION` warnings
+   - Fix missing keys immediately, don't defer
+
+3. **Before committing:**
+   - Check console for translation parity report
+   - Ensure no missing keys in any language
+
+### When Modifying Existing Features
+
+1. If you change a string's meaning → Update ALL language files
+2. If you add a new string → Add to ALL language files
+3. If you remove a string → Remove from ALL language files
+
+### Translation Utilities Available
+
+Located in `src/lib/translationUtils.ts`:
+
+```typescript
+import { 
+  getMissingKeys,      // Get all missing keys collected during session
+  clearMissingKeys,    // Clear the collection
+  compareTranslations, // Compare two language objects
+  validateTranslations,// Full parity check (runs automatically in dev)
+  generateTranslationTemplate // Generate template for new language
+} from '@/lib/translationUtils';
+
+// Example: Generate a template for French from English
+import { resources } from '@/i18n/config';
+const frenchTemplate = generateTranslationTemplate(resources.en.common);
+console.log(JSON.stringify(frenchTemplate, null, 2));
+```
+
+### Adding a New Language
+
+1. Copy all files from `en/` to new locale folder
+2. Use `generateTranslationTemplate()` to create placeholders
+3. Translate each file
+4. Add imports to `config.ts`
+5. Add to `resources` object
+6. Run app and check parity report
+
+---
+
+## Troubleshooting
+
+### "Translation key not found" in production
+- Check that the namespace is registered in `config.ts`
+- Verify the key exists in ALL language files
+- Check for typos in key names
+
+### Console shows many missing keys
+- Run parity check: keys may exist in EN but not ES
+- Use the comparison output to identify which files need updates
+
+### Translations not updating after changes
+- Hard refresh the browser (Ctrl+Shift+R)
+- Check that i18n config was rebuilt
+
+---
+
 *Last Updated: December 2024*
 *Based on Spanish translation implementation*
+*Includes automatic translation monitoring utilities*
