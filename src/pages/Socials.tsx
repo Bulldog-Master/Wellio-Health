@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { EmptyState } from "@/components/EmptyState";
+import { useTranslation } from "react-i18next";
 
 interface SocialConnection {
   id: string;
@@ -21,6 +22,7 @@ interface SocialConnection {
 const Socials = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { t } = useTranslation('social');
   const [connections, setConnections] = useState<SocialConnection[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
@@ -65,8 +67,8 @@ const Socials = () => {
   const handleAddConnection = async () => {
     if (!formData.username) {
       toast({
-        title: "Missing information",
-        description: "Please enter a username.",
+        title: t('missing_information'),
+        description: t('please_enter_username'),
         variant: "destructive",
       });
       return;
@@ -89,8 +91,8 @@ const Socials = () => {
       if (error) throw error;
 
       toast({
-        title: "Connection added",
-        description: `${formData.username} has been added to your connections.`,
+        title: t('connection_added'),
+        description: t('connection_added_description', { username: formData.username }),
       });
 
       setFormData({
@@ -104,8 +106,8 @@ const Socials = () => {
     } catch (error) {
       console.error('Error adding connection:', error);
       toast({
-        title: "Error",
-        description: "Failed to add connection.",
+        title: t('error'),
+        description: t('failed_add_connection'),
         variant: "destructive",
       });
     }
@@ -121,16 +123,16 @@ const Socials = () => {
       if (error) throw error;
 
       toast({
-        title: "Connection removed",
-        description: "The connection has been removed.",
+        title: t('connection_removed'),
+        description: t('connection_removed_description'),
       });
 
       fetchConnections();
     } catch (error) {
       console.error('Error deleting connection:', error);
       toast({
-        title: "Error",
-        description: "Failed to remove connection.",
+        title: t('error'),
+        description: t('failed_remove_connection'),
         variant: "destructive",
       });
     }
@@ -160,7 +162,7 @@ const Socials = () => {
             variant="ghost"
             size="icon"
             onClick={() => navigate("/")}
-            aria-label="Back to Dashboard"
+            aria-label={t('back_to_dashboard')}
           >
             <ArrowLeft className="w-5 h-5" />
           </Button>
@@ -168,23 +170,23 @@ const Socials = () => {
             <Users className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold">Social Connections</h1>
-            <p className="text-muted-foreground">Connect with friends and fitness creators</p>
+            <h1 className="text-3xl font-bold">{t('social_connections')}</h1>
+            <p className="text-muted-foreground">{t('connect_with_friends_creators')}</p>
           </div>
         </div>
         <Button onClick={() => setShowAddForm(!showAddForm)} className="gap-2">
           <Plus className="w-4 h-4" />
-          Add Connection
+          {t('add_connection')}
         </Button>
       </div>
 
       {showAddForm && (
         <Card className="p-6 bg-gradient-card shadow-md">
-          <h3 className="text-lg font-semibold mb-6">New Connection</h3>
+          <h3 className="text-lg font-semibold mb-6">{t('new_connection')}</h3>
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="platform">Platform</Label>
+                <Label htmlFor="platform">{t('platform')}</Label>
                 <Select
                   value={formData.platform}
                   onValueChange={(value) => setFormData({ ...formData, platform: value })}
@@ -193,19 +195,19 @@ const Socials = () => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="instagram">Instagram</SelectItem>
-                    <SelectItem value="youtube">YouTube</SelectItem>
-                    <SelectItem value="twitter">Twitter</SelectItem>
-                    <SelectItem value="strava">Strava</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
+                    <SelectItem value="instagram">{t('platform_instagram')}</SelectItem>
+                    <SelectItem value="youtube">{t('platform_youtube')}</SelectItem>
+                    <SelectItem value="twitter">{t('platform_twitter')}</SelectItem>
+                    <SelectItem value="strava">{t('platform_strava')}</SelectItem>
+                    <SelectItem value="other">{t('platform_other')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div>
-                <Label htmlFor="username">Username</Label>
+                <Label htmlFor="username">{t('username')}</Label>
                 <Input
                   id="username"
-                  placeholder="@username"
+                  placeholder={t('username_placeholder')}
                   value={formData.username}
                   onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                   className="mt-1.5"
@@ -214,10 +216,10 @@ const Socials = () => {
             </div>
 
             <div>
-              <Label htmlFor="profile-url">Profile URL (optional)</Label>
+              <Label htmlFor="profile-url">{t('profile_url_optional')}</Label>
               <Input
                 id="profile-url"
-                placeholder="https://..."
+                placeholder={t('profile_url_placeholder')}
                 value={formData.profile_url}
                 onChange={(e) => setFormData({ ...formData, profile_url: e.target.value })}
                 className="mt-1.5"
@@ -225,7 +227,7 @@ const Socials = () => {
             </div>
 
             <div>
-              <Label htmlFor="connection-type">Connection Type</Label>
+              <Label htmlFor="connection-type">{t('connection_type')}</Label>
               <Select
                 value={formData.connection_type}
                 onValueChange={(value) => setFormData({ ...formData, connection_type: value })}
@@ -234,15 +236,15 @@ const Socials = () => {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="personal">Personal Account</SelectItem>
-                  <SelectItem value="creator">Creator / Following</SelectItem>
+                  <SelectItem value="personal">{t('personal_account')}</SelectItem>
+                  <SelectItem value="creator">{t('creator_following')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             <div className="flex gap-2">
-              <Button onClick={handleAddConnection}>Add Connection</Button>
-              <Button variant="outline" onClick={() => setShowAddForm(false)}>Cancel</Button>
+              <Button onClick={handleAddConnection}>{t('add_connection')}</Button>
+              <Button variant="outline" onClick={() => setShowAddForm(false)}>{t('cancel')}</Button>
             </div>
           </div>
         </Card>
@@ -255,15 +257,15 @@ const Socials = () => {
             <Users className="w-6 h-6 text-primary" />
           </div>
           <div className="flex-1">
-            <h3 className="text-xl font-semibold">Follow Wellio Users</h3>
-            <p className="text-muted-foreground text-sm">Connect with other fitness enthusiasts in the app</p>
+            <h3 className="text-xl font-semibold">{t('follow_wellio_users')}</h3>
+            <p className="text-muted-foreground text-sm">{t('connect_fitness_enthusiasts')}</p>
           </div>
         </div>
         <Button 
           onClick={() => navigate('/search')} 
           className="w-full"
         >
-          Find People to Follow
+          {t('find_people_to_follow')}
         </Button>
       </Card>
 
@@ -274,25 +276,25 @@ const Socials = () => {
             <UserPlus className="w-6 h-6" />
           </div>
           <div className="flex-1">
-            <h3 className="text-xl font-semibold">Join Fitness Groups</h3>
-            <p className="text-white/90 text-sm">Connect with communities that share your goals</p>
+            <h3 className="text-xl font-semibold">{t('join_fitness_groups')}</h3>
+            <p className="text-white/90 text-sm">{t('connect_communities_goals')}</p>
           </div>
         </div>
         <Button 
           onClick={() => navigate('/groups')} 
           className="w-full bg-white text-primary hover:bg-white/90"
         >
-          Browse Groups
+          {t('browse_groups')}
         </Button>
       </Card>
 
       {/* Personal Accounts Section */}
       <div>
-        <h2 className="text-2xl font-semibold mb-4">Personal Accounts</h2>
+        <h2 className="text-2xl font-semibold mb-4">{t('personal_accounts')}</h2>
         <Card className="p-6 bg-gradient-card shadow-md">
           <div className="space-y-3">
             {isLoading ? (
-              <p className="text-center text-muted-foreground py-8">Loading...</p>
+              <p className="text-center text-muted-foreground py-8">{t('loading')}</p>
             ) : personalConnections.length > 0 ? (
               personalConnections.map((connection) => (
                 <div key={connection.id} className="p-4 bg-secondary rounded-lg flex items-center justify-between">
@@ -328,10 +330,10 @@ const Socials = () => {
             ) : (
               <EmptyState
                 icon={Instagram}
-                title="No Personal Accounts"
-                description="Add your social media accounts to connect with friends across platforms"
+                title={t('no_personal_accounts')}
+                description={t('add_social_accounts_description')}
                 action={{
-                  label: "Add Your First Account",
+                  label: t('add_first_account'),
                   onClick: () => setShowAddForm(true)
                 }}
               />
@@ -342,7 +344,7 @@ const Socials = () => {
 
       {/* Creators & Following Section */}
       <div>
-        <h2 className="text-2xl font-semibold mb-4">Creators & Following</h2>
+        <h2 className="text-2xl font-semibold mb-4">{t('creators_following')}</h2>
         <Card className="p-6 bg-gradient-card shadow-md">
           <div className="space-y-3">
             {creatorConnections.length > 0 ? (
@@ -380,10 +382,10 @@ const Socials = () => {
             ) : (
               <EmptyState
                 icon={Youtube}
-                title="No Creators Following"
-                description="Follow fitness creators and influencers to stay motivated and inspired"
+                title={t('no_creators_following')}
+                description={t('follow_creators_description')}
                 action={{
-                  label: "Add First Creator",
+                  label: t('add_first_creator'),
                   onClick: () => setShowAddForm(true)
                 }}
               />
