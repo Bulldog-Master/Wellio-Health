@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Trophy, TrendingUp, Plus, Calendar, Target, Trash2, Edit } from "lucide-react";
 import { formatDistanceToNow, format } from "date-fns";
 import confetti from "canvas-confetti";
+import { useTranslation } from "react-i18next";
 
 interface PersonalRecord {
   id: string;
@@ -51,6 +52,7 @@ const commonExercises = {
 
 const PersonalRecords = () => {
   const { toast } = useToast();
+  const { t } = useTranslation(['records', 'errors']);
   const [records, setRecords] = useState<PersonalRecord[]>([]);
   const [history, setHistory] = useState<{ [key: string]: PRHistory[] }>({});
   const [loading, setLoading] = useState(true);
@@ -123,7 +125,7 @@ const PersonalRecords = () => {
       }
     } catch (error: any) {
       toast({
-        title: "Error",
+        title: t('records:error'),
         description: error.message,
         variant: "destructive",
       });
@@ -139,8 +141,8 @@ const PersonalRecords = () => {
 
       if (!formData.exercise_name || !formData.record_value) {
         toast({
-          title: "Error",
-          description: "Exercise name and value are required",
+          title: t('records:error'),
+          description: t('records:name_value_required'),
           variant: "destructive",
         });
         return;
@@ -188,10 +190,10 @@ const PersonalRecords = () => {
         if (error) throw error;
 
         toast({
-          title: recordValue > previousValue ? "New PR! 🎉" : "Record Updated",
+          title: recordValue > previousValue ? t('records:new_pr') : t('records:record_updated'),
           description: recordValue > previousValue 
-            ? `You improved by ${((recordValue - previousValue) / previousValue * 100).toFixed(1)}%!`
-            : "Your record has been updated",
+            ? t('records:improvement_message', { percent: ((recordValue - previousValue) / previousValue * 100).toFixed(1) })
+            : t('records:record_updated_message'),
         });
       } else {
         // Create new record
@@ -218,8 +220,8 @@ const PersonalRecords = () => {
         });
 
         toast({
-          title: "New PR Added! 🏆",
-          description: "Keep crushing those goals!",
+          title: t('records:new_pr'),
+          description: t('records:keep_crushing'),
         });
       }
 
@@ -236,7 +238,7 @@ const PersonalRecords = () => {
       });
     } catch (error: any) {
       toast({
-        title: "Error",
+        title: t('records:error'),
         description: error.message,
         variant: "destructive",
       });
@@ -267,12 +269,12 @@ const PersonalRecords = () => {
       if (error) throw error;
 
       toast({
-        title: "Deleted",
-        description: "Record removed",
+        title: t('records:deleted'),
+        description: t('records:record_removed'),
       });
     } catch (error: any) {
       toast({
-        title: "Error",
+        title: t('records:error'),
         description: error.message,
         variant: "destructive",
       });
@@ -305,9 +307,9 @@ const PersonalRecords = () => {
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <Trophy className="h-8 w-8 text-yellow-500" />
-            Personal Records
+            {t('records:personal_records')}
           </h1>
-          <p className="text-muted-foreground">Track your best performances and celebrate progress</p>
+          <p className="text-muted-foreground">{t('records:track_best_performances')}</p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={(open) => {
           setIsDialogOpen(open);
@@ -327,16 +329,16 @@ const PersonalRecords = () => {
           <DialogTrigger asChild>
             <Button>
               <Plus className="mr-2 h-4 w-4" />
-              Add PR
+              {t('records:add_pr')}
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle>{editingRecord ? "Update" : "Add"} Personal Record</DialogTitle>
+              <DialogTitle>{editingRecord ? t('records:update_record') : t('records:add_record')}</DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
               <div>
-                <Label>Exercise Category</Label>
+                <Label>{t('records:exercise_category')}</Label>
                 <Select
                   value={formData.exercise_category}
                   onValueChange={(value) => {
@@ -353,7 +355,7 @@ const PersonalRecords = () => {
                   <SelectContent>
                     {exerciseCategories.map((cat) => (
                       <SelectItem key={cat.value} value={cat.value}>
-                        {cat.icon} {cat.label}
+                        {cat.icon} {t(`records:${cat.value}`)}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -361,13 +363,13 @@ const PersonalRecords = () => {
               </div>
 
               <div>
-                <Label>Exercise Name</Label>
+                <Label>{t('records:exercise_name')}</Label>
                 <Select
                   value={formData.exercise_name}
                   onValueChange={(value) => setFormData({ ...formData, exercise_name: value })}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select or type custom..." />
+                    <SelectValue placeholder={t('records:select_or_type')} />
                   </SelectTrigger>
                   <SelectContent>
                     {commonExercises[formData.exercise_category as keyof typeof commonExercises]?.map((exercise) => (
@@ -379,7 +381,7 @@ const PersonalRecords = () => {
                 </Select>
                 <Input
                   className="mt-2"
-                  placeholder="Or enter custom exercise"
+                  placeholder={t('records:or_enter_custom')}
                   value={formData.exercise_name}
                   onChange={(e) => setFormData({ ...formData, exercise_name: e.target.value })}
                 />
@@ -387,7 +389,7 @@ const PersonalRecords = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label>Record Type</Label>
+                  <Label>{t('records:record_type')}</Label>
                   <Select
                     value={formData.record_type}
                     onValueChange={(value) => setFormData({ ...formData, record_type: value })}
@@ -396,15 +398,15 @@ const PersonalRecords = () => {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="weight">Weight</SelectItem>
-                      <SelectItem value="reps">Reps</SelectItem>
-                      <SelectItem value="time">Time</SelectItem>
-                      <SelectItem value="distance">Distance</SelectItem>
+                      <SelectItem value="weight">{t('records:weight')}</SelectItem>
+                      <SelectItem value="reps">{t('records:reps')}</SelectItem>
+                      <SelectItem value="time">{t('records:time')}</SelectItem>
+                      <SelectItem value="distance">{t('records:distance')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div>
-                  <Label>Unit</Label>
+                  <Label>{t('records:unit')}</Label>
                   <Select
                     value={formData.record_unit}
                     onValueChange={(value) => setFormData({ ...formData, record_unit: value })}
@@ -415,26 +417,26 @@ const PersonalRecords = () => {
                     <SelectContent>
                       {formData.record_type === "weight" && (
                         <>
-                          <SelectItem value="lbs">lbs</SelectItem>
-                          <SelectItem value="kg">kg</SelectItem>
+                          <SelectItem value="lbs">{t('records:lbs')}</SelectItem>
+                          <SelectItem value="kg">{t('records:kg')}</SelectItem>
                         </>
                       )}
                       {formData.record_type === "time" && (
                         <>
-                          <SelectItem value="seconds">seconds</SelectItem>
-                          <SelectItem value="minutes">minutes</SelectItem>
-                          <SelectItem value="hours">hours</SelectItem>
+                          <SelectItem value="seconds">{t('records:seconds')}</SelectItem>
+                          <SelectItem value="minutes">{t('records:minutes')}</SelectItem>
+                          <SelectItem value="hours">{t('records:hours')}</SelectItem>
                         </>
                       )}
                       {formData.record_type === "distance" && (
                         <>
-                          <SelectItem value="miles">miles</SelectItem>
-                          <SelectItem value="km">km</SelectItem>
-                          <SelectItem value="meters">meters</SelectItem>
+                          <SelectItem value="miles">{t('records:miles')}</SelectItem>
+                          <SelectItem value="km">{t('records:km')}</SelectItem>
+                          <SelectItem value="meters">{t('records:meters')}</SelectItem>
                         </>
                       )}
                       {formData.record_type === "reps" && (
-                        <SelectItem value="reps">reps</SelectItem>
+                        <SelectItem value="reps">{t('records:reps')}</SelectItem>
                       )}
                     </SelectContent>
                   </Select>
@@ -442,18 +444,18 @@ const PersonalRecords = () => {
               </div>
 
               <div>
-                <Label>Value</Label>
+                <Label>{t('records:value')}</Label>
                 <Input
                   type="number"
                   step="0.01"
                   value={formData.record_value}
                   onChange={(e) => setFormData({ ...formData, record_value: e.target.value })}
-                  placeholder="315"
+                  placeholder={t('records:placeholder_value')}
                 />
               </div>
 
               <div>
-                <Label>Date Achieved</Label>
+                <Label>{t('records:date_achieved')}</Label>
                 <Input
                   type="date"
                   value={formData.achieved_at}
@@ -462,17 +464,17 @@ const PersonalRecords = () => {
               </div>
 
               <div>
-                <Label>Notes (Optional)</Label>
+                <Label>{t('records:notes_optional')}</Label>
                 <Textarea
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                  placeholder="Felt strong today..."
+                  placeholder={t('records:placeholder_notes')}
                   rows={3}
                 />
               </div>
 
               <Button onClick={handleSubmit} className="w-full">
-                {editingRecord ? "Update Record" : "Add Record"}
+                {editingRecord ? t('records:update') : t('records:add')}
               </Button>
             </div>
           </DialogContent>
@@ -485,7 +487,7 @@ const PersonalRecords = () => {
           size="sm"
           onClick={() => setFilterCategory("all")}
         >
-          All
+          {t('records:all')}
         </Button>
         {exerciseCategories.map((cat) => (
           <Button
@@ -494,7 +496,7 @@ const PersonalRecords = () => {
             size="sm"
             onClick={() => setFilterCategory(cat.value)}
           >
-            {cat.icon} {cat.label}
+            {cat.icon} {t(`records:${cat.value}`)}
           </Button>
         ))}
       </div>
@@ -503,9 +505,9 @@ const PersonalRecords = () => {
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-12">
             <Trophy className="h-12 w-12 text-muted-foreground mb-4" />
-            <p className="text-muted-foreground mb-4">No personal records yet</p>
+            <p className="text-muted-foreground mb-4">{t('records:no_records_yet')}</p>
             <Button onClick={() => setIsDialogOpen(true)}>
-              Add your first PR
+              {t('records:start_tracking')}
             </Button>
           </CardContent>
         </Card>
@@ -518,7 +520,7 @@ const PersonalRecords = () => {
               <div key={category}>
                 <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
                   <span>{categoryInfo?.icon}</span>
-                  {categoryInfo?.label}
+                  {t(`records:${categoryInfo?.value}`)}
                   <Badge variant="secondary">{categoryRecords.length}</Badge>
                 </h2>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -562,7 +564,7 @@ const PersonalRecords = () => {
                           <div className="flex items-center gap-1 text-sm text-green-600 mb-3">
                             <TrendingUp className="h-4 w-4" />
                             <span>
-                              +{history[record.id][0].improvement_percentage?.toFixed(1)}% from last PR
+                              {t('records:improved_by', { percent: history[record.id][0].improvement_percentage?.toFixed(1) })}
                             </span>
                           </div>
                         )}

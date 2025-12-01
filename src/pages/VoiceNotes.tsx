@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Mic, Square, Play, Pause, Trash2, Star, Search, Download } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { useTranslation } from "react-i18next";
 
 interface VoiceNote {
   id: string;
@@ -34,6 +35,7 @@ const categories = [
 
 const VoiceNotes = () => {
   const { toast } = useToast();
+  const { t } = useTranslation(['voice', 'errors']);
   const [notes, setNotes] = useState<VoiceNote[]>([]);
   const [loading, setLoading] = useState(true);
   const [recording, setRecording] = useState(false);
@@ -91,7 +93,7 @@ const VoiceNotes = () => {
       setNotes(data || []);
     } catch (error: any) {
       toast({
-        title: "Error",
+        title: t('voice:error'),
         description: error.message,
         variant: "destructive",
       });
@@ -128,13 +130,13 @@ const VoiceNotes = () => {
       }, 1000);
 
       toast({
-        title: "Recording started",
-        description: "Speak into your microphone",
+        title: t('voice:recording_started'),
+        description: t('voice:speak_into_microphone'),
       });
     } catch (error: any) {
       toast({
-        title: "Error",
-        description: "Could not access microphone: " + error.message,
+        title: t('voice:error'),
+        description: t('voice:could_not_access_microphone', { error: error.message }),
         variant: "destructive",
       });
     }
@@ -156,7 +158,7 @@ const VoiceNotes = () => {
       if (!user) throw new Error("Please log in");
 
       if (!formData.title) {
-        throw new Error("Please enter a title");
+        throw new Error(t('voice:please_enter_title'));
       }
 
       // Upload audio file
@@ -186,8 +188,8 @@ const VoiceNotes = () => {
       if (dbError) throw dbError;
 
       toast({
-        title: "Success!",
-        description: "Voice note saved",
+        title: t('voice:success'),
+        description: t('voice:voice_note_saved'),
       });
 
       setIsDialogOpen(false);
@@ -195,7 +197,7 @@ const VoiceNotes = () => {
       setRecordingTime(0);
     } catch (error: any) {
       toast({
-        title: "Error",
+        title: t('voice:error'),
         description: error.message,
         variant: "destructive",
       });
@@ -230,11 +232,11 @@ const VoiceNotes = () => {
       if (error) throw error;
 
       toast({
-        title: note.is_favorite ? "Removed from favorites" : "Added to favorites",
+        title: note.is_favorite ? t('voice:removed_from_favorites') : t('voice:added_to_favorites'),
       });
     } catch (error: any) {
       toast({
-        title: "Error",
+        title: t('voice:error'),
         description: error.message,
         variant: "destructive",
       });
@@ -258,12 +260,12 @@ const VoiceNotes = () => {
       if (error) throw error;
 
       toast({
-        title: "Deleted",
-        description: "Voice note removed",
+        title: t('voice:deleted'),
+        description: t('voice:voice_note_removed'),
       });
     } catch (error: any) {
       toast({
-        title: "Error",
+        title: t('voice:error'),
         description: error.message,
         variant: "destructive",
       });
@@ -297,32 +299,32 @@ const VoiceNotes = () => {
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <Mic className="h-8 w-8" />
-            Voice Notes
+            {t('voice:voice_notes')}
           </h1>
-          <p className="text-muted-foreground">Record quick audio notes about your fitness journey</p>
+          <p className="text-muted-foreground">{t('voice:record_audio_notes')}</p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button>
               <Mic className="mr-2 h-4 w-4" />
-              New Recording
+              {t('voice:new_recording')}
             </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Record Voice Note</DialogTitle>
+              <DialogTitle>{t('voice:record_voice_note')}</DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
               <div>
-                <Label>Title</Label>
+                <Label>{t('voice:title')}</Label>
                 <Input
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  placeholder="Morning workout thoughts..."
+                  placeholder={t('voice:placeholder_title')}
                 />
               </div>
               <div>
-                <Label>Category</Label>
+                <Label>{t('voice:category')}</Label>
                 <Select
                   value={formData.category}
                   onValueChange={(value) => setFormData({ ...formData, category: value })}
@@ -333,7 +335,7 @@ const VoiceNotes = () => {
                   <SelectContent>
                     {categories.map((cat) => (
                       <SelectItem key={cat.value} value={cat.value}>
-                        {cat.label}
+                        {t(`voice:${cat.value}`)}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -345,7 +347,7 @@ const VoiceNotes = () => {
                   <div className="text-2xl font-mono mb-2">{formatTime(recordingTime)}</div>
                   <div className="flex items-center justify-center gap-2 mb-2">
                     <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-muted-foreground">Recording...</span>
+                    <span className="text-sm text-muted-foreground">{t('voice:recording')}</span>
                   </div>
                 </div>
               )}
@@ -354,12 +356,12 @@ const VoiceNotes = () => {
                 {!recording ? (
                   <Button onClick={startRecording} className="flex-1">
                     <Mic className="mr-2 h-4 w-4" />
-                    Start Recording
+                    {t('voice:start_recording')}
                   </Button>
                 ) : (
                   <Button onClick={stopRecording} variant="destructive" className="flex-1">
                     <Square className="mr-2 h-4 w-4" />
-                    Stop & Save
+                    {t('voice:stop_save')}
                   </Button>
                 )}
               </div>
@@ -374,7 +376,7 @@ const VoiceNotes = () => {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               type="text"
-              placeholder="Search notes..."
+              placeholder={t('voice:search_notes')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
@@ -389,7 +391,7 @@ const VoiceNotes = () => {
               size="sm"
               onClick={() => setFilterCategory(cat)}
             >
-              {cat === "all" ? "All" : categories.find(c => c.value === cat)?.label}
+              {cat === "all" ? t('voice:all') : t(`voice:${cat}`)}
             </Button>
           ))}
         </div>
@@ -399,9 +401,9 @@ const VoiceNotes = () => {
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-12">
             <Mic className="h-12 w-12 text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">No voice notes yet</p>
+            <p className="text-muted-foreground">{t('voice:no_voice_notes')}</p>
             <Button onClick={() => setIsDialogOpen(true)} className="mt-4">
-              Record your first note
+              {t('voice:record_first_note')}
             </Button>
           </CardContent>
         </Card>
@@ -428,7 +430,7 @@ const VoiceNotes = () => {
                   </div>
                   <div className="flex gap-2 mt-2">
                     <Badge className={category?.color || 'bg-gray-500'}>
-                      {category?.label}
+                      {t(`voice:${category?.value}`)}
                     </Badge>
                     {note.duration_seconds && (
                       <Badge variant="outline">

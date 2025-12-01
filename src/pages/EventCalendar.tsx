@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Calendar, Plus, ChevronLeft, ChevronRight, Clock, MapPin, CheckCircle2, Circle } from "lucide-react";
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, addMonths, subMonths, parseISO } from "date-fns";
 import { Badge } from "@/components/ui/badge";
+import { useTranslation } from "react-i18next";
 
 interface FitnessEvent {
   id: string;
@@ -38,6 +39,7 @@ const eventTypes = [
 
 const EventCalendar = () => {
   const { toast } = useToast();
+  const { t } = useTranslation(['calendar', 'errors']);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [events, setEvents] = useState<FitnessEvent[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -94,7 +96,7 @@ const EventCalendar = () => {
       setEvents(data || []);
     } catch (error: any) {
       toast({
-        title: "Error",
+        title: t('errors:error'),
         description: error.message,
         variant: "destructive",
       });
@@ -110,8 +112,8 @@ const EventCalendar = () => {
 
       if (!formData.title || !formData.start_time) {
         toast({
-          title: "Error",
-          description: "Title and start time are required",
+          title: t('calendar:error'),
+          description: t('calendar:title_start_required'),
           variant: "destructive",
         });
         return;
@@ -135,8 +137,8 @@ const EventCalendar = () => {
       if (error) throw error;
 
       toast({
-        title: "Success!",
-        description: "Event created successfully",
+        title: t('calendar:success'),
+        description: t('calendar:event_created'),
       });
 
       setIsDialogOpen(false);
@@ -167,12 +169,12 @@ const EventCalendar = () => {
       if (error) throw error;
 
       toast({
-        title: event.completed ? "Marked as incomplete" : "Completed!",
-        description: event.completed ? "" : "Great job completing this event!",
+        title: event.completed ? t('calendar:marked_incomplete') : t('calendar:completed'),
+        description: event.completed ? "" : t('calendar:great_job'),
       });
     } catch (error: any) {
       toast({
-        title: "Error",
+        title: t('errors:error'),
         description: error.message,
         variant: "destructive",
       });
@@ -207,32 +209,32 @@ const EventCalendar = () => {
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <Calendar className="h-8 w-8" />
-            Event Calendar
+            {t('calendar:event_calendar')}
           </h1>
-          <p className="text-muted-foreground">Schedule and track your fitness activities</p>
+          <p className="text-muted-foreground">{t('calendar:schedule_track_activities')}</p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button>
               <Plus className="mr-2 h-4 w-4" />
-              Add Event
+              {t('calendar:add_event')}
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-md">
             <DialogHeader>
-              <DialogTitle>Create New Event</DialogTitle>
+              <DialogTitle>{t('calendar:create_new_event')}</DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
               <div>
-                <Label>Title</Label>
+                <Label>{t('calendar:title')}</Label>
                 <Input
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  placeholder="Morning workout"
+                  placeholder={t('calendar:placeholder_title')}
                 />
               </div>
               <div>
-                <Label>Event Type</Label>
+                <Label>{t('calendar:event_type')}</Label>
                 <Select
                   value={formData.event_type}
                   onValueChange={(value) => setFormData({ ...formData, event_type: value })}
@@ -243,22 +245,22 @@ const EventCalendar = () => {
                   <SelectContent>
                     {eventTypes.map((type) => (
                       <SelectItem key={type.value} value={type.value}>
-                        {type.label}
+                        {t(`calendar:${type.value}`)}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
               <div>
-                <Label>Description</Label>
+                <Label>{t('calendar:description')}</Label>
                 <Textarea
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="Event details..."
+                  placeholder={t('calendar:placeholder_description')}
                 />
               </div>
               <div>
-                <Label>Start Time</Label>
+                <Label>{t('calendar:start_time')}</Label>
                 <Input
                   type="datetime-local"
                   value={formData.start_time}
@@ -266,7 +268,7 @@ const EventCalendar = () => {
                 />
               </div>
               <div>
-                <Label>End Time (Optional)</Label>
+                <Label>{t('calendar:end_time')}</Label>
                 <Input
                   type="datetime-local"
                   value={formData.end_time}
@@ -274,15 +276,15 @@ const EventCalendar = () => {
                 />
               </div>
               <div>
-                <Label>Location (Optional)</Label>
+                <Label>{t('calendar:location')}</Label>
                 <Input
                   value={formData.location}
                   onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                  placeholder="Gym, Home, etc."
+                  placeholder={t('calendar:placeholder_location')}
                 />
               </div>
               <Button onClick={handleCreateEvent} className="w-full">
-                Create Event
+                {t('calendar:create_event')}
               </Button>
             </div>
           </DialogContent>
@@ -307,7 +309,7 @@ const EventCalendar = () => {
                 variant="outline"
                 onClick={() => setCurrentDate(new Date())}
               >
-                Today
+                {t('calendar:today')}
               </Button>
               <Button
                 variant="outline"
@@ -321,7 +323,7 @@ const EventCalendar = () => {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-7 gap-2 mb-2">
-            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
+            {[t('calendar:sun'), t('calendar:mon'), t('calendar:tue'), t('calendar:wed'), t('calendar:thu'), t('calendar:fri'), t('calendar:sat')].map((day) => (
               <div key={day} className="text-center font-semibold text-sm text-muted-foreground py-2">
                 {day}
               </div>
@@ -370,7 +372,7 @@ const EventCalendar = () => {
                     })}
                     {dayEvents.length > 2 && (
                       <div className="text-xs text-muted-foreground">
-                        +{dayEvents.length - 2} more
+                        +{dayEvents.length - 2} {t('calendar:more')}
                       </div>
                     )}
                   </div>
@@ -385,12 +387,12 @@ const EventCalendar = () => {
       {selectedDate && (
         <Card className="mt-6">
           <CardHeader>
-            <CardTitle>Events on {format(selectedDate, 'MMMM d, yyyy')}</CardTitle>
+            <CardTitle>{t('calendar:events_on', { date: format(selectedDate, 'MMMM d, yyyy') })}</CardTitle>
           </CardHeader>
           <CardContent>
             {getEventsForDay(selectedDate).length === 0 ? (
               <p className="text-muted-foreground text-center py-8">
-                No events scheduled for this day
+                {t('calendar:no_events_scheduled')}
               </p>
             ) : (
               <div className="space-y-3">
