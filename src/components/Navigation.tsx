@@ -36,12 +36,12 @@ const Navigation = () => {
   };
 
   const navItems = [
-    { to: "/", icon: Home, label: t('dashboard'), color: "text-[hsl(var(--nav-icon-1))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-1))]" },
-    { to: "/feed", icon: MessageSquare, label: t('nav.social'), color: "text-[hsl(var(--nav-icon-2))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-2))]" },
     { to: "/activity", icon: Activity, label: t('nav.activity'), color: "text-[hsl(var(--nav-icon-4))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-4))]" },
+    { to: "/", icon: Home, label: t('dashboard'), color: "text-[hsl(var(--nav-icon-1))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-1))]" },
     { to: "/food", icon: Utensils, label: t('nav.food'), color: "text-[hsl(var(--nav-icon-5))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-5))]" },
-    { to: "/socials", icon: Users, label: t('nav.social'), color: "text-[hsl(var(--nav-icon-7))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-7))]" },
     { to: "/settings", icon: Settings, label: t('settings'), color: "text-[hsl(var(--nav-icon-6))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-6))]", showBadge: showRewardsBadge },
+    { to: "/feed", icon: MessageSquare, label: t('nav.social'), color: "text-[hsl(var(--nav-icon-2))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-2))]" },
+    { to: "/socials", icon: Users, label: t('nav.socials'), color: "text-[hsl(var(--nav-icon-7))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-7))]" },
   ];
 
   return (
