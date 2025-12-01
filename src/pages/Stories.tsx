@@ -13,8 +13,10 @@ import { Label } from "@/components/ui/label";
 import { Plus, X, User, Eye, Image as ImageIcon, Heart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatDistanceToNow } from "date-fns";
+import { useTranslation } from "react-i18next";
 
 const Stories = () => {
+  const { t } = useTranslation('common');
   const { toast } = useToast();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -108,7 +110,7 @@ const Stories = () => {
       setCaption("");
       setUploadedImage(null);
       setImagePreview(null);
-      toast({ title: "Story shared! Expires in 24 hours" });
+      toast({ title: t('story_shared') });
     },
   });
 
