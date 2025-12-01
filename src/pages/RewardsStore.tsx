@@ -163,6 +163,18 @@ const RewardsStore = () => {
     return userPoints.activeRewards.some(r => r.reward_id === rewardId);
   };
 
+  const getTranslatedRewardName = (name: string) => {
+    const key = `reward_${name.toLowerCase().replace(/\s+/g, '_').replace(/[()]/g, '')}`;
+    const translated = t(key);
+    return translated === key ? name : translated;
+  };
+
+  const getTranslatedRewardDescription = (name: string, description: string) => {
+    const key = `reward_${name.toLowerCase().replace(/\s+/g, '_').replace(/[()]/g, '')}_desc`;
+    const translated = t(key);
+    return translated === key ? description : translated;
+  };
+
   const RewardCard = ({ reward }: { reward: Reward }) => {
     const Icon = getCategoryIcon(reward.category);
     const affordable = canAfford(reward.points_cost);
@@ -185,8 +197,8 @@ const RewardsStore = () => {
           </div>
           
           <div className="flex-1">
-            <h3 className="font-semibold text-lg mb-1">{reward.name}</h3>
-            <p className="text-sm text-muted-foreground mb-3">{reward.description}</p>
+            <h3 className="font-semibold text-lg mb-1">{getTranslatedRewardName(reward.name)}</h3>
+            <p className="text-sm text-muted-foreground mb-3">{getTranslatedRewardDescription(reward.name, reward.description)}</p>
             
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
