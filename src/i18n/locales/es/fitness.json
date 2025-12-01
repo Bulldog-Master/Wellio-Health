@@ -29,5 +29,21 @@
   "templates": "Plantillas",
   "schedule": "Horario",
   "challenges": "Desafíos",
-  "leaderboard": "Tabla de Clasificación"
+  "leaderboard": "Tabla de Clasificación",
+  "fitness_goals": "Objetivos de Fitness",
+  "set_track_fitness_targets": "Establece y rastrea tus objetivos de fitness",
+  "your_goals": "Tus Objetivos",
+  "primary_goal": "Objetivo Principal",
+  "select_your_goal": "Selecciona tu objetivo",
+  "lose_weight": "Perder Peso",
+  "maintain_weight": "Mantener Peso",
+  "gain_weight": "Ganar Peso",
+  "build_muscle": "Desarrollar Músculo",
+  "improve_fitness": "Mejorar Fitness",
+  "target_weight": "Peso Objetivo",
+  "enter_target_weight": "Ingresa peso objetivo",
+  "unit": "Unidad",
+  "save_goals": "Guardar Objetivos",
+  "goals_updated": "¡Objetivos de fitness actualizados exitosamente!",
+  "failed_to_save": "Error al guardar objetivos"
 }
