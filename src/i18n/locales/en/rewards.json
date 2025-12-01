@@ -1,0 +1,34 @@
+{
+  "rewards": "Rewards",
+  "rewards_store": "Rewards Store",
+  "referral_program": "Referral Program",
+  "spend_points": "Spend your points on exclusive rewards",
+  "view_referrals": "View Referrals",
+  "your_balance": "Your Balance",
+  "points": "Points",
+  "active_rewards": "Active Rewards",
+  
+  "all_rewards": "All Rewards",
+  "subscriptions": "Subscriptions",
+  "badges": "Badges",
+  "features": "Features",
+  "marketplace": "Marketplace",
+  
+  "redeem": "Redeem",
+  "owned": "Owned",
+  "active": "Active",
+  "permanent": "Permanent",
+  "days": "days",
+  "pts": "pts",
+  
+  "no_rewards": "No {{category}} rewards available yet",
+  "confirm_redemption": "Confirm Redemption",
+  "confirm_message": "Are you sure you want to redeem",
+  "for_points": "for",
+  "reward_active_for": "This reward will be active for",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "redeeming": "Redeeming...",
+  "redemption_success": "You've redeemed",
+  "redemption_failed": "Redemption Failed"
+}

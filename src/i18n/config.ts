@@ -12,6 +12,11 @@ import weightEN from './locales/en/weight.json';
 import foodEN from './locales/en/food.json';
 import workoutEN from './locales/en/workout.json';
 import settingsEN from './locales/en/settings.json';
+import subscriptionEN from './locales/en/subscription.json';
+import rewardsEN from './locales/en/rewards.json';
+import referralEN from './locales/en/referral.json';
+import privacyEN from './locales/en/privacy.json';
+import pointsEN from './locales/en/points.json';
 
 import commonES from './locales/es/common.json';
 import authES from './locales/es/auth.json';
@@ -28,6 +33,9 @@ import foodES from './locales/es/food.json';
 import workoutES from './locales/es/workout.json';
 import settingsES from './locales/es/settings.json';
 import weightES from './locales/es/weight.json';
+import referralES from './locales/es/referral.json';
+import privacyES from './locales/es/privacy.json';
+import pointsES from './locales/es/points.json';
 
 import commonPT from './locales/pt/common.json';
 import authPT from './locales/pt/auth.json';
@@ -64,6 +72,11 @@ const resources = {
     food: foodEN,
     workout: workoutEN,
     settings: settingsEN,
+    subscription: subscriptionEN,
+    rewards: rewardsEN,
+    referral: referralEN,
+    privacy: privacyEN,
+    points: pointsEN,
   },
   es: {
     common: commonES,
@@ -81,6 +94,9 @@ const resources = {
     workout: workoutES,
     settings: settingsES,
     weight: weightES,
+    referral: referralES,
+    privacy: privacyES,
+    points: pointsES,
   },
   pt: {
     common: commonPT,
@@ -120,7 +136,7 @@ i18n
     resources,
     fallbackLng: 'en',
     defaultNS: 'common',
-    ns: ['common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 'notifications', 'errors', 'rewards', 'subscription', 'food', 'workout', 'settings', 'weight'],
+    ns: ['common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 'notifications', 'errors', 'rewards', 'subscription', 'food', 'workout', 'settings', 'weight', 'referral', 'privacy', 'points'],
     
     interpolation: {
       escapeValue: false,

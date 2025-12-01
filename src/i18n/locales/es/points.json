@@ -1,0 +1,13 @@
+{
+  "points_history": "Historial de Puntos",
+  "track_points": "Rastrea tus ganancias y gastos de puntos",
+  "current_balance": "Saldo Actual",
+  "total_earned": "Total Ganado",
+  "total_spent": "Total Gastado",
+  "recent_transactions": "Transacciones Recientes",
+  "no_transactions": "No hay transacciones aún",
+  "earned": "ganado",
+  "spent": "gastado",
+  "bonus": "bonificación",
+  "error_loading": "Error al cargar el historial de transacciones"
+}
