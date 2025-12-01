@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -27,6 +28,7 @@ interface TrustedDevice {
 
 const TrustedDevices = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation('settings');
   const { toast } = useToast();
   const [devices, setDevices] = useState<TrustedDevice[]>([]);
   const [loading, setLoading] = useState(true);
@@ -40,8 +42,8 @@ const TrustedDevices = () => {
       } else {
         setLoading(false);
         toast({
-          title: "Authentication Required",
-          description: "Please log in to view trusted devices",
+          title: t('auth_required'),
+          description: t('login_to_view_devices'),
           variant: "destructive",
         });
       }
@@ -86,8 +88,8 @@ const TrustedDevices = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         toast({
-          title: "Error",
-          description: "You must be logged in to remove devices",
+          title: t('common:error'),
+          description: t('must_be_logged_in'),
           variant: "destructive",
         });
         return;
@@ -107,16 +109,16 @@ const TrustedDevices = () => {
       setDevices(devices.filter(d => d.id !== deleteDeviceId));
       
       toast({
-        title: "Device Removed",
-        description: "You will need to verify 2FA on this device next time you sign in.",
+        title: t('device_removed'),
+        description: t('device_removed_desc'),
       });
       
       setDeleteDeviceId(null);
     } catch (error: any) {
       console.error('Remove device error:', error);
       toast({
-        title: "Error",
-        description: error.message || "Failed to remove device",
+        title: t('common:error'),
+        description: error.message || t('failed_remove_device'),
         variant: "destructive",
       });
     }
@@ -143,24 +145,24 @@ const TrustedDevices = () => {
           <ArrowLeft className="w-5 h-5" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold mb-2">Trusted Devices</h1>
+          <h1 className="text-3xl font-bold mb-2">{t('trusted_devices_title')}</h1>
           <p className="text-muted-foreground">
-            Manage devices that can skip 2FA verification
+            {t('trusted_devices_subtitle')}
           </p>
         </div>
       </div>
 
       {loading ? (
         <Card className="p-8">
-          <div className="text-center text-muted-foreground">Loading devices...</div>
+          <div className="text-center text-muted-foreground">{t('loading_devices')}</div>
         </Card>
       ) : devices.length === 0 ? (
         <Card className="p-8">
           <div className="text-center">
             <Monitor className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-            <h3 className="text-lg font-semibold mb-2">No Trusted Devices</h3>
+            <h3 className="text-lg font-semibold mb-2">{t('no_trusted_devices')}</h3>
             <p className="text-sm text-muted-foreground">
-              When you check "Remember this device" during 2FA login, it will appear here.
+              {t('trusted_devices_login_prompt')}
             </p>
           </div>
         </Card>
@@ -176,10 +178,10 @@ const TrustedDevices = () => {
                   <div>
                     <h3 className="font-semibold">{device.device_name}</h3>
                     <p className="text-sm text-muted-foreground">
-                      Added {formatDistanceToNow(new Date(device.created_at), { addSuffix: true })}
+                      {t('added_time_ago', { time: formatDistanceToNow(new Date(device.created_at), { addSuffix: true }) })}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      Last used {formatDistanceToNow(new Date(device.last_used_at), { addSuffix: true })}
+                      {t('last_used_time_ago', { time: formatDistanceToNow(new Date(device.last_used_at), { addSuffix: true }) })}
                     </p>
                   </div>
                 </div>
@@ -198,27 +200,26 @@ const TrustedDevices = () => {
       )}
 
       <Card className="p-4 bg-muted/50">
-        <h3 className="font-semibold mb-2">About Trusted Devices</h3>
+        <h3 className="font-semibold mb-2">{t('about_trusted_devices')}</h3>
         <ul className="text-sm text-muted-foreground space-y-2">
-          <li>• Trusted devices can skip 2FA verification for 30 days</li>
-          <li>• Each device is identified by a unique fingerprint</li>
-          <li>• Remove devices you no longer use or trust</li>
-          <li>• Clearing browser data will require re-trusting the device</li>
+          <li>• {t('trusted_devices_info_1')}</li>
+          <li>• {t('trusted_devices_info_2')}</li>
+          <li>• {t('trusted_devices_info_3')}</li>
+          <li>• {t('trusted_devices_info_4')}</li>
         </ul>
       </Card>
 
       <AlertDialog open={!!deleteDeviceId} onOpenChange={() => setDeleteDeviceId(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Remove Trusted Device?</AlertDialogTitle>
+            <AlertDialogTitle>{t('remove_trusted_device')}</AlertDialogTitle>
             <AlertDialogDescription>
-              You will need to verify your 2FA code the next time you sign in from this device.
-              This action cannot be undone.
+              {t('remove_device_warning')}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleRemoveDevice}>Remove</AlertDialogAction>
+            <AlertDialogCancel>{t('common:cancel')}</AlertDialogCancel>
+            <AlertDialogAction onClick={handleRemoveDevice}>{t('remove')}</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
