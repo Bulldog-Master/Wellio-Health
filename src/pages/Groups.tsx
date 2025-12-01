@@ -221,7 +221,7 @@ const Groups = () => {
                       )}
                     </Avatar>
                     <span className="text-sm text-muted-foreground">
-                      {t('by')} {group.creator?.full_name || "Anonymous"}
+                      {t('by')} {group.creator?.full_name || t('anonymous')}
                     </span>
                   </div>
                   

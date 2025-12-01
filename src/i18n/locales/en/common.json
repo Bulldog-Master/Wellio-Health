@@ -208,5 +208,6 @@
   "noGroupsYet": "No groups yet. Create the first one!",
   "groupCreated": "Group created!",
   "joinedGroup": "Joined group!",
-  "backToDashboard": "Back to Dashboard"
+  "backToDashboard": "Back to Dashboard",
+  "anonymous": "Anonymous"
 }

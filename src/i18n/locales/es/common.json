@@ -233,5 +233,6 @@
   "join": "Unirse",
   "noGroupsYet": "Aún no hay grupos. ¡Crea el primero!",
   "groupCreated": "¡Grupo creado!",
-  "joinedGroup": "¡Te uniste al grupo!"
+  "joinedGroup": "¡Te uniste al grupo!",
+  "anonymous": "Anónimo"
 }
