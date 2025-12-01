@@ -1,0 +1,66 @@
+{
+  "title": "Fundraisers",
+  "subtitle": "Support causes that matter",
+  "back_to_dashboard": "Back to Dashboard",
+  "create_fundraiser": "Create Fundraiser",
+  "create_new_fundraiser": "Create New Fundraiser",
+  "search_placeholder": "Search fundraisers...",
+  "all_categories": "All Categories",
+  "no_fundraisers_yet": "No fundraisers yet",
+  "no_fundraisers_found": "No fundraisers found",
+  "be_first_to_create": "Be the first to create one!",
+  "try_adjusting_filters": "Try adjusting your filters",
+  "donate_now": "Donate Now",
+  "funded": "funded",
+  "days_left": "days left",
+  "ended": "Ended",
+  "of": "of",
+  
+  "form": {
+    "cover_image": "Cover Image",
+    "title": "Title",
+    "title_placeholder": "Give your fundraiser a clear title",
+    "description": "Description",
+    "description_placeholder": "Tell your story and explain why you need support",
+    "goal_amount": "Goal Amount ($)",
+    "goal_amount_placeholder": "e.g. 5000",
+    "category": "Category",
+    "select_category": "Select category",
+    "location": "Location",
+    "location_placeholder": "City, State/Country",
+    "end_date": "End Date"
+  },
+  
+  "categories": {
+    "medical": "Medical",
+    "community_event": "Community Event",
+    "charity": "Charity",
+    "equipment": "Equipment",
+    "other": "Other"
+  },
+  
+  "donation": {
+    "support_cause": "Support This Cause",
+    "donate_to": "Donate to",
+    "quick_amount": "Quick Amount",
+    "custom_amount": "Custom Amount ($)",
+    "enter_amount": "Enter amount",
+    "message_optional": "Message (Optional)",
+    "message_placeholder": "Leave a supportive message...",
+    "donate_anonymously": "Donate Anonymously",
+    "cancel": "Cancel",
+    "donate": "Donate",
+    "processing": "Processing..."
+  },
+  
+  "messages": {
+    "sign_in_required": "Please sign in to create a fundraiser",
+    "created_successfully": "Fundraiser created successfully!",
+    "failed_to_create": "Failed to create fundraiser",
+    "failed_to_load": "Failed to load fundraisers",
+    "invalid_amount": "Please enter a valid donation amount",
+    "rate_limit": "Please wait {{minutes}} minutes before making another donation",
+    "donation_success": "Thank you for your generous donation!",
+    "donation_failed": "Failed to process donation"
+  }
+}

@@ -26,6 +26,7 @@ import medicalEN from './locales/en/medical.json';
 import timerEN from './locales/en/timer.json';
 import liveEN from './locales/en/live.json';
 import challengesEN from './locales/en/challenges.json';
+import fundraisersEN from './locales/en/fundraisers.json';
 
 import commonES from './locales/es/common.json';
 import authES from './locales/es/auth.json';
@@ -53,6 +54,7 @@ import medicalES from './locales/es/medical.json';
 import timerES from './locales/es/timer.json';
 import liveES from './locales/es/live.json';
 import challengesES from './locales/es/challenges.json';
+import fundraisersES from './locales/es/fundraisers.json';
 
 import commonPT from './locales/pt/common.json';
 import authPT from './locales/pt/auth.json';
@@ -103,6 +105,7 @@ const resources = {
     timer: timerEN,
     live: liveEN,
     challenges: challengesEN,
+    fundraisers: fundraisersEN,
   },
   es: {
     common: commonES,
@@ -131,6 +134,7 @@ const resources = {
     timer: timerES,
     live: liveES,
     challenges: challengesES,
+    fundraisers: fundraisersES,
   },
   pt: {
     common: commonPT,
@@ -170,7 +174,7 @@ i18n
     resources,
     fallbackLng: 'en',
     defaultNS: 'common',
-    ns: ['common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 'notifications', 'errors', 'rewards', 'subscription', 'food', 'workout', 'settings', 'weight', 'referral', 'privacy', 'points', 'achievements', 'calendar', 'records', 'voice', 'medical', 'timer', 'live', 'challenges'],
+    ns: ['common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 'notifications', 'errors', 'rewards', 'subscription', 'food', 'workout', 'settings', 'weight', 'referral', 'privacy', 'points', 'achievements', 'calendar', 'records', 'voice', 'medical', 'timer', 'live', 'challenges', 'fundraisers'],
     
     interpolation: {
       escapeValue: false,

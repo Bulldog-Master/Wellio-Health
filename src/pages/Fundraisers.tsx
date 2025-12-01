@@ -12,12 +12,11 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { DonationModal } from '@/components/DonationModal';
-import { Heart, Plus, Calendar, MapPin, BadgeCheck, Search } from 'lucide-react';
+import { Heart, Plus, Calendar, MapPin, BadgeCheck, Search, ArrowLeft } from 'lucide-react';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
 import { fundraiserSchema, validateAndSanitize } from '@/lib/validationSchemas';
-
-const categories = ['Medical', 'Community Event', 'Charity', 'Equipment', 'Other'];
+import { useTranslation } from 'react-i18next';
 
 interface Fundraiser {
   id: string;
@@ -39,6 +38,7 @@ interface Fundraiser {
 }
 
 export default function Fundraisers() {
+  const { t } = useTranslation('fundraisers');
   const navigate = useNavigate();
   const [fundraisers, setFundraisers] = useState<Fundraiser[]>([]);
   const [filteredFundraisers, setFilteredFundraisers] = useState<Fundraiser[]>([]);
@@ -49,6 +49,14 @@ export default function Fundraisers() {
   const [donationModalOpen, setDonationModalOpen] = useState(false);
   const [selectedFundraiserId, setSelectedFundraiserId] = useState<string>('');
   const [selectedFundraiserTitle, setSelectedFundraiserTitle] = useState<string>('');
+
+  const categories = [
+    { value: 'Medical', label: t('categories.medical') },
+    { value: 'Community Event', label: t('categories.community_event') },
+    { value: 'Charity', label: t('categories.charity') },
+    { value: 'Equipment', label: t('categories.equipment') },
+    { value: 'Other', label: t('categories.other') },
+  ];
 
   const [formData, setFormData] = useState({
     title: '',
@@ -101,7 +109,7 @@ export default function Fundraisers() {
       setFundraisers((data as any) || []);
     } catch (error) {
       console.error('Error fetching fundraisers:', error);
-      toast.error('Failed to load fundraisers');
+      toast.error(t('messages.failed_to_load'));
     } finally {
       setIsLoading(false);
     }
@@ -112,7 +120,7 @@ export default function Fundraisers() {
     
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) {
-      toast.error('Please sign in to create a fundraiser');
+      toast.error(t('messages.sign_in_required'));
       return;
     }
 
@@ -161,7 +169,7 @@ export default function Fundraisers() {
 
       if (error) throw error;
 
-      toast.success('Fundraiser created successfully!');
+      toast.success(t('messages.created_successfully'));
       setIsDialogOpen(false);
       setFormData({
         title: '',
@@ -175,7 +183,7 @@ export default function Fundraisers() {
       fetchFundraisers();
     } catch (error) {
       console.error('Error creating fundraiser:', error);
-      toast.error('Failed to create fundraiser');
+      toast.error(t('messages.failed_to_create'));
     }
   };
 
@@ -185,32 +193,46 @@ export default function Fundraisers() {
     setDonationModalOpen(true);
   };
 
+  const getCategoryLabel = (categoryValue: string) => {
+    const category = categories.find(c => c.value === categoryValue);
+    return category ? category.label : categoryValue;
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto p-6">
         <div className="flex flex-col gap-6 mb-8">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate("/")}
+            className="w-fit"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </Button>
+          
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-4xl font-bold mb-2">Fundraisers</h1>
-              <p className="text-muted-foreground">Support causes that matter</p>
+              <h1 className="text-4xl font-bold mb-2">{t('title')}</h1>
+              <p className="text-muted-foreground">{t('subtitle')}</p>
             </div>
 
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
                 <Button>
                   <Plus className="h-4 w-4 mr-2" />
-                  Create Fundraiser
+                  {t('create_fundraiser')}
                 </Button>
               </DialogTrigger>
 
               <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
-                  <DialogTitle>Create New Fundraiser</DialogTitle>
+                  <DialogTitle>{t('create_new_fundraiser')}</DialogTitle>
                 </DialogHeader>
 
                 <form onSubmit={handleSubmit} className="space-y-4 py-4">
                   <div className="space-y-2">
-                    <Label htmlFor="image">Cover Image</Label>
+                    <Label htmlFor="image">{t('form.cover_image')}</Label>
                     <Input
                       id="image"
                       type="file"
@@ -220,31 +242,31 @@ export default function Fundraisers() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="title">Title *</Label>
+                    <Label htmlFor="title">{t('form.title')} *</Label>
                     <Input
                       id="title"
                       required
                       value={formData.title}
                       onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                      placeholder="Give your fundraiser a clear title"
+                      placeholder={t('form.title_placeholder')}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="description">Description *</Label>
+                    <Label htmlFor="description">{t('form.description')} *</Label>
                     <Textarea
                       id="description"
                       required
                       value={formData.description}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                      placeholder="Tell your story and explain why you need support"
+                      placeholder={t('form.description_placeholder')}
                       rows={5}
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="goal_amount">Goal Amount ($) *</Label>
+                      <Label htmlFor="goal_amount">{t('form.goal_amount')} *</Label>
                       <Input
                         id="goal_amount"
                         type="number"
@@ -252,23 +274,23 @@ export default function Fundraisers() {
                         min="1"
                         value={formData.goal_amount}
                         onChange={(e) => setFormData({ ...formData, goal_amount: e.target.value })}
-                        placeholder="e.g. 5000"
+                        placeholder={t('form.goal_amount_placeholder')}
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="category">Category *</Label>
+                      <Label htmlFor="category">{t('form.category')} *</Label>
                       <Select 
                         required
                         value={formData.category}
                         onValueChange={(value) => setFormData({ ...formData, category: value })}
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder="Select category" />
+                          <SelectValue placeholder={t('form.select_category')} />
                         </SelectTrigger>
                         <SelectContent>
                           {categories.map((cat) => (
-                            <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                            <SelectItem key={cat.value} value={cat.value}>{cat.label}</SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
@@ -276,17 +298,17 @@ export default function Fundraisers() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="location">Location</Label>
+                    <Label htmlFor="location">{t('form.location')}</Label>
                     <Input
                       id="location"
                       value={formData.location}
                       onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                      placeholder="City, State/Country"
+                      placeholder={t('form.location_placeholder')}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="end_date">End Date *</Label>
+                    <Label htmlFor="end_date">{t('form.end_date')} *</Label>
                     <Input
                       id="end_date"
                       type="date"
@@ -298,7 +320,7 @@ export default function Fundraisers() {
                   </div>
 
                   <Button type="submit" className="w-full">
-                    Create Fundraiser
+                    {t('create_fundraiser')}
                   </Button>
                 </form>
               </DialogContent>
@@ -309,7 +331,7 @@ export default function Fundraisers() {
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search fundraisers..."
+                placeholder={t('search_placeholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -317,12 +339,12 @@ export default function Fundraisers() {
             </div>
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
               <SelectTrigger className="w-48">
-                <SelectValue placeholder="All Categories" />
+                <SelectValue placeholder={t('all_categories')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
+                <SelectItem value="all">{t('all_categories')}</SelectItem>
                 {categories.map((cat) => (
-                  <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                  <SelectItem key={cat.value} value={cat.value}>{cat.label}</SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -346,10 +368,10 @@ export default function Fundraisers() {
           <div className="text-center py-12">
             <Heart className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
             <h3 className="text-xl font-semibold mb-2">
-              {searchQuery || selectedCategory !== 'all' ? 'No fundraisers found' : 'No fundraisers yet'}
+              {searchQuery || selectedCategory !== 'all' ? t('no_fundraisers_found') : t('no_fundraisers_yet')}
             </h3>
             <p className="text-muted-foreground">
-              {searchQuery || selectedCategory !== 'all' ? 'Try adjusting your filters' : 'Be the first to create one!'}
+              {searchQuery || selectedCategory !== 'all' ? t('try_adjusting_filters') : t('be_first_to_create')}
             </p>
           </div>
         ) : (
@@ -392,7 +414,7 @@ export default function Fundraisers() {
                         <span className="text-sm text-muted-foreground">{fundraiser.profiles.full_name}</span>
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        <Badge variant="secondary">{fundraiser.category}</Badge>
+                        <Badge variant="secondary">{getCategoryLabel(fundraiser.category)}</Badge>
                         {fundraiser.location && (
                           <div className="flex items-center gap-1 text-xs text-muted-foreground">
                             <MapPin className="h-3 w-3" />
@@ -408,15 +430,15 @@ export default function Fundraisers() {
                           ${fundraiser.current_amount.toLocaleString()}
                         </span>
                         <span className="text-muted-foreground">
-                          of ${fundraiser.goal_amount.toLocaleString()}
+                          {t('of')} ${fundraiser.goal_amount.toLocaleString()}
                         </span>
                       </div>
                       <Progress value={progress} className="h-2" />
                       <div className="flex justify-between text-xs text-muted-foreground">
-                        <span>{Math.round(progress)}% funded</span>
+                        <span>{Math.round(progress)}% {t('funded')}</span>
                         <div className="flex items-center gap-1">
                           <Calendar className="h-3 w-3" />
-                          {daysLeft > 0 ? `${daysLeft} days left` : 'Ended'}
+                          {daysLeft > 0 ? `${daysLeft} ${t('days_left')}` : t('ended')}
                         </div>
                       </div>
                     </div>
@@ -430,7 +452,7 @@ export default function Fundraisers() {
                       }}
                     >
                       <Heart className="h-4 w-4 mr-2" />
-                      Donate Now
+                      {t('donate_now')}
                     </Button>
                   </div>
                 </Card>

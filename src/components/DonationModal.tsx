@@ -9,6 +9,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { Heart } from 'lucide-react';
 import { rateLimiter, RATE_LIMITS } from '@/lib/rateLimit';
+import { useTranslation } from 'react-i18next';
 
 interface DonationModalProps {
   fundraiserId: string;
@@ -25,6 +26,7 @@ export const DonationModal = ({
   onOpenChange,
   onSuccess
 }: DonationModalProps) => {
+  const { t } = useTranslation('fundraisers');
   const [amount, setAmount] = useState('');
   const [message, setMessage] = useState('');
   const [isAnonymous, setIsAnonymous] = useState(false);
@@ -36,7 +38,7 @@ export const DonationModal = ({
     const donationAmount = parseFloat(amount);
     
     if (!donationAmount || donationAmount <= 0) {
-      toast.error('Please enter a valid donation amount');
+      toast.error(t('messages.invalid_amount'));
       return;
     }
 
@@ -46,7 +48,7 @@ export const DonationModal = ({
     const rateLimit = await rateLimiter.check(rateLimitKey, RATE_LIMITS.DONATION);
 
     if (!rateLimit.allowed) {
-      toast.error(`Please wait ${Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 60000)} minutes before making another donation`);
+      toast.error(t('messages.rate_limit', { minutes: Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 60000) }));
       return;
     }
 
@@ -67,7 +69,7 @@ export const DonationModal = ({
       // Success - reset rate limit
       rateLimiter.reset(rateLimitKey);
 
-      toast.success('Thank you for your generous donation!');
+      toast.success(t('messages.donation_success'));
       onSuccess();
       onOpenChange(false);
       setAmount('');
@@ -75,7 +77,7 @@ export const DonationModal = ({
       setIsAnonymous(false);
     } catch (error) {
       console.error('Donation error:', error);
-      toast.error('Failed to process donation');
+      toast.error(t('messages.donation_failed'));
     } finally {
       setIsSubmitting(false);
     }
@@ -87,16 +89,16 @@ export const DonationModal = ({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Heart className="h-5 w-5 text-primary" />
-            Support This Cause
+            {t('donation.support_cause')}
           </DialogTitle>
           <DialogDescription>
-            Donate to "{fundraiserTitle}"
+            {t('donation.donate_to')} "{fundraiserTitle}"
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4 py-4">
           <div className="space-y-2">
-            <Label>Quick Amount</Label>
+            <Label>{t('donation.quick_amount')}</Label>
             <div className="grid grid-cols-4 gap-2">
               {quickAmounts.map((quickAmount) => (
                 <Button
@@ -112,23 +114,23 @@ export const DonationModal = ({
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="amount">Custom Amount ($)</Label>
+            <Label htmlFor="amount">{t('donation.custom_amount')}</Label>
             <Input
               id="amount"
               type="number"
               min="1"
               step="0.01"
-              placeholder="Enter amount"
+              placeholder={t('donation.enter_amount')}
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="message">Message (Optional)</Label>
+            <Label htmlFor="message">{t('donation.message_optional')}</Label>
             <Textarea
               id="message"
-              placeholder="Leave a supportive message..."
+              placeholder={t('donation.message_placeholder')}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               rows={3}
@@ -136,7 +138,7 @@ export const DonationModal = ({
           </div>
 
           <div className="flex items-center justify-between">
-            <Label htmlFor="anonymous">Donate Anonymously</Label>
+            <Label htmlFor="anonymous">{t('donation.donate_anonymously')}</Label>
             <Switch
               id="anonymous"
               checked={isAnonymous}
@@ -151,14 +153,14 @@ export const DonationModal = ({
             onClick={() => onOpenChange(false)}
             className="flex-1"
           >
-            Cancel
+            {t('donation.cancel')}
           </Button>
           <Button
             onClick={handleDonate}
             disabled={isSubmitting || !amount}
             className="flex-1"
           >
-            {isSubmitting ? 'Processing...' : 'Donate'}
+            {isSubmitting ? t('donation.processing') : t('donation.donate')}
           </Button>
         </div>
       </DialogContent>
