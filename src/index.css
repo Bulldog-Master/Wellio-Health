@@ -73,14 +73,14 @@ All colors MUST be HSL.
     
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* Glassmorphism sidebar */
+    /* Clean modern sidebar - matches card styling */
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 240 10% 15%;
+    --sidebar-foreground: 240 10% 25%;
     --sidebar-primary: 195 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 100% 98%;
-    --sidebar-accent-foreground: 195 100% 50%;
-    --sidebar-border: 240 15% 94%;
+    --sidebar-accent: 240 20% 97%;
+    --sidebar-accent-foreground: 195 100% 45%;
+    --sidebar-border: 240 15% 90%;
     --sidebar-ring: 195 100% 50%;
     
     /* Navigation icons - vibrant modern palette */
