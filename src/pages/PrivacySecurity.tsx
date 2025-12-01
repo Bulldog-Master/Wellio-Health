@@ -9,6 +9,7 @@ import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { Shield, Key, Download, Trash2, ArrowLeft, Smartphone, Pencil, Lock, Eye, UserCheck, EyeOff, Mail } from "lucide-react";
 import { isWebAuthnSupported, registerPasskey } from "@/lib/webauthn";
+import { useTranslation } from "react-i18next";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -30,6 +31,7 @@ import {
 
 const PrivacySecurity = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation('privacy');
   const [passkeys, setPasskeys] = useState<any[]>([]);
   const [userEmail, setUserEmail] = useState("");
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
@@ -102,7 +104,7 @@ const PrivacySecurity = () => {
       }
 
       await registerPasskey(user.email);
-      toast.success("Passkey registered successfully!");
+      toast.success(t('toast_passkey_registered'));
       await fetchPasskeys();
     } catch (error: any) {
       console.error("Error registering passkey:", error);
@@ -307,7 +309,7 @@ const PrivacySecurity = () => {
         .eq("id", id);
 
       if (error) throw error;
-      toast.success("Passkey removed");
+      toast.success(t('toast_passkey_removed'));
       fetchPasskeys();
     } catch (error: any) {
       console.error("Error deleting passkey:", error);
@@ -326,7 +328,7 @@ const PrivacySecurity = () => {
         .eq('id', user.id);
 
       if (error) throw error;
-      toast.success("Privacy settings updated");
+      toast.success(t('toast_privacy_updated'));
     } catch (error) {
       console.error("Error updating privacy settings:", error);
       toast.error("Failed to update settings");
@@ -344,7 +346,7 @@ const PrivacySecurity = () => {
 
       if (error) throw error;
 
-      toast.success("Passkey renamed successfully");
+      toast.success(t('toast_passkey_renamed'));
       setRenamingPasskey(null);
       setNewPasskeyName("");
       fetchPasskeys();
@@ -393,7 +395,7 @@ const PrivacySecurity = () => {
 
       if (updateError) throw updateError;
 
-      toast.success("Verification email sent! Please check your new email address to confirm the change.");
+      toast.success(t('verification_sent'));
       
       // Reset form and close dialog
       setShowEmailDialog(false);
@@ -438,7 +440,7 @@ const PrivacySecurity = () => {
       a.click();
       URL.revokeObjectURL(url);
 
-      toast.success("Data exported successfully!");
+      toast.success(t('toast_data_exported'));
     } catch (error: any) {
       console.error("Error exporting data:", error);
       toast.error(error.message || "Failed to export data");
@@ -450,7 +452,7 @@ const PrivacySecurity = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
-      toast.error("Account deletion must be requested through support");
+      toast.error(t('toast_account_deletion'));
       setShowDeleteDialog(false);
     } catch (error: any) {
       console.error("Error deleting account:", error);
@@ -474,8 +476,8 @@ const PrivacySecurity = () => {
             <Shield className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold">Privacy & Security</h1>
-            <p className="text-muted-foreground mt-1">Control your privacy settings and security options</p>
+            <h1 className="text-3xl font-bold">{t('privacy_security')}</h1>
+            <p className="text-muted-foreground mt-1">{t('control_settings')}</p>
           </div>
         </div>
       </div>
@@ -488,9 +490,9 @@ const PrivacySecurity = () => {
               <Shield className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <CardTitle>Two-Factor Authentication (TOTP)</CardTitle>
+              <CardTitle>{t('two_factor_auth')}</CardTitle>
               <CardDescription>
-                Use an authenticator app like Google Authenticator or Authy
+                {t('two_factor_description')}
               </CardDescription>
             </div>
           </div>
@@ -498,9 +500,9 @@ const PrivacySecurity = () => {
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
-              <Label>2FA Status</Label>
+              <Label>{t('2fa_status')}</Label>
               <p className="text-sm text-muted-foreground">
-                {is2FAEnabled ? "2FA is active" : "2FA is not set up"}
+                {is2FAEnabled ? t('2fa_enabled') : t('2fa_not_set')}
               </p>
             </div>
             <Switch
@@ -572,9 +574,9 @@ const PrivacySecurity = () => {
               <Key className="w-6 h-6 text-secondary" />
             </div>
             <div>
-              <CardTitle>Passkey (WebAuthn)</CardTitle>
+              <CardTitle>{t('passkey_webauthn')}</CardTitle>
               <CardDescription>
-                Use biometric authentication or security keys for passwordless login
+                {t('passkey_description')}
               </CardDescription>
             </div>
           </div>
@@ -589,7 +591,7 @@ const PrivacySecurity = () => {
           {isWebAuthnSupported() && (
             <Button onClick={handleRegisterPasskey} variant="outline">
               <Key className="w-4 h-4 mr-2" />
-              Register New Passkey
+              {t('register_passkey')}
             </Button>
           )}
 
@@ -605,11 +607,11 @@ const PrivacySecurity = () => {
                       <div className="flex items-center gap-2">
                         <p className="font-medium">{passkey.device_type || "Unknown Device"}</p>
                         <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-500/10 text-green-600 dark:text-green-400">
-                          Active
+                          {t('active')}
                         </span>
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        Added {new Date(passkey.created_at).toLocaleDateString()}
+                        {t('added')} {new Date(passkey.created_at).toLocaleDateString()}
                       </p>
                     </div>
                   </div>
@@ -647,20 +649,20 @@ const PrivacySecurity = () => {
               <Mail className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <CardTitle>Email Address</CardTitle>
-              <CardDescription>Update your email address</CardDescription>
+              <CardTitle>{t('email_address')}</CardTitle>
+              <CardDescription>{t('email_description')}</CardDescription>
             </div>
           </div>
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
             <div className="space-y-0.5">
-              <Label className="text-sm">Current Email</Label>
+              <Label className="text-sm">{t('current_email')}</Label>
               <p className="text-sm text-muted-foreground">{userEmail}</p>
             </div>
           </div>
           <Button onClick={() => setShowEmailDialog(true)} variant="outline">
-            Change Email
+            {t('change_email')}
           </Button>
         </CardContent>
       </Card>
@@ -673,14 +675,14 @@ const PrivacySecurity = () => {
               <Lock className="w-6 h-6 text-destructive" />
             </div>
             <div>
-              <CardTitle>Password</CardTitle>
-              <CardDescription>Change your account password</CardDescription>
+              <CardTitle>{t('password_section')}</CardTitle>
+              <CardDescription>{t('password_description')}</CardDescription>
             </div>
           </div>
         </CardHeader>
         <CardContent>
           <Button onClick={() => setShowPasswordDialog(true)} variant="outline">
-            Change Password
+            {t('change_password')}
           </Button>
         </CardContent>
       </Card>
@@ -692,19 +694,19 @@ const PrivacySecurity = () => {
             <div className="p-3 bg-primary/10 rounded-xl">
               <Lock className="w-6 h-6 text-primary" />
             </div>
-            <CardTitle>Privacy Settings</CardTitle>
+            <CardTitle>{t('privacy_settings')}</CardTitle>
           </div>
-          <CardDescription>Control who can see your content and interact with you</CardDescription>
+          <CardDescription>{t('private_description')}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
               <Label className="flex items-center gap-2">
                 <Lock className="w-4 h-4" />
-                Private Account
+                {t('private_account')}
               </Label>
               <p className="text-sm text-muted-foreground">
-                Require approval for new followers
+                {t('private_description')}
               </p>
             </div>
             <Switch
@@ -720,10 +722,10 @@ const PrivacySecurity = () => {
             <div className="space-y-0.5">
               <Label className="flex items-center gap-2">
                 <UserCheck className="w-4 h-4" />
-                Allow Mentions
+                {t('allow_mentions')}
               </Label>
               <p className="text-sm text-muted-foreground">
-                Let others @mention you in posts and comments
+                {t('mentions_description')}
               </p>
             </div>
             <Switch
@@ -739,10 +741,10 @@ const PrivacySecurity = () => {
             <div className="space-y-0.5">
               <Label className="flex items-center gap-2">
                 <Eye className="w-4 h-4" />
-                Show Activity Status
+                {t('show_activity')}
               </Label>
               <p className="text-sm text-muted-foreground">
-                Display when you're active on the platform
+                {t('activity_description')}
               </p>
             </div>
             <Switch
@@ -763,7 +765,7 @@ const PrivacySecurity = () => {
             <div className="p-3 bg-primary/10 rounded-xl">
               <Download className="w-6 h-6 text-primary" />
             </div>
-            <CardTitle>Data Management</CardTitle>
+            <CardTitle>{t('data_export')}</CardTitle>
           </div>
         </CardHeader>
         <CardContent className="space-y-3">
@@ -787,16 +789,15 @@ const PrivacySecurity = () => {
       <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>{t('delete_confirm')}</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your account
-              and remove all your data from our servers.
+              {t('delete_warning')}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
             <AlertDialogAction onClick={handleDeleteAccount} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-              Delete Account
+              {t('delete_button')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -806,7 +807,7 @@ const PrivacySecurity = () => {
       <AlertDialog open={!!renamingPasskey} onOpenChange={(open) => !open && setRenamingPasskey(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Rename Passkey</AlertDialogTitle>
+            <AlertDialogTitle>{t('rename_passkey')}</AlertDialogTitle>
             <AlertDialogDescription>
               Give this passkey a custom name to easily identify it.
             </AlertDialogDescription>
@@ -821,9 +822,9 @@ const PrivacySecurity = () => {
             />
           </div>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
             <AlertDialogAction onClick={handleRenamePasskey} disabled={!newPasskeyName.trim()}>
-              Rename
+              {t('rename')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -893,7 +894,7 @@ const PrivacySecurity = () => {
       <Dialog open={showEmailDialog} onOpenChange={setShowEmailDialog}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Change Email Address</DialogTitle>
+            <DialogTitle>{t('update_email')}</DialogTitle>
             <DialogDescription>
               Enter your new email and password to confirm the change. You'll receive a verification email at your new address.
             </DialogDescription>
@@ -901,7 +902,7 @@ const PrivacySecurity = () => {
           
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label htmlFor="new-email">New Email Address</Label>
+              <Label htmlFor="new-email">{t('new_email')}</Label>
               <Input
                 id="new-email"
                 type="email"
@@ -912,12 +913,12 @@ const PrivacySecurity = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email-password">Confirm Password</Label>
+              <Label htmlFor="email-password">{t('password')}</Label>
               <div className="relative">
                 <Input
                   id="email-password"
                   type={showEmailPassword ? "text" : "password"}
-                  placeholder="Enter your password"
+                  placeholder={t('enter_password')}
                   value={emailPassword}
                   onChange={(e) => setEmailPassword(e.target.value)}
                   className="pr-10"
@@ -943,13 +944,13 @@ const PrivacySecurity = () => {
               }}
               disabled={isChangingEmail}
             >
-              Cancel
+              {t('cancel')}
             </Button>
             <Button 
               onClick={handleChangeEmail}
               disabled={isChangingEmail || !newEmail || !emailPassword}
             >
-              {isChangingEmail ? "Updating..." : "Update Email"}
+              {isChangingEmail ? t('updating') : t('change_email')}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -959,7 +960,7 @@ const PrivacySecurity = () => {
       <Dialog open={showPasswordDialog} onOpenChange={setShowPasswordDialog}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Change Password</DialogTitle>
+            <DialogTitle>{t('change_password')}</DialogTitle>
             <DialogDescription>
               Enter your current password and choose a new one
             </DialogDescription>
@@ -967,7 +968,7 @@ const PrivacySecurity = () => {
           
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label htmlFor="current-password">Current Password</Label>
+              <Label htmlFor="current-password">{t('current_password')}</Label>
               <div className="relative">
                 <Input
                   id="current-password"
@@ -988,7 +989,7 @@ const PrivacySecurity = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="new-password">New Password</Label>
+              <Label htmlFor="new-password">{t('new_password')}</Label>
               <div className="relative">
                 <Input
                   id="new-password"
@@ -1009,7 +1010,7 @@ const PrivacySecurity = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="confirm-new-password">Confirm New Password</Label>
+              <Label htmlFor="confirm-new-password">{t('confirm_password')}</Label>
               <div className="relative">
                 <Input
                   id="confirm-new-password"
@@ -1041,13 +1042,13 @@ const PrivacySecurity = () => {
               }}
               disabled={isChangingPassword}
             >
-              Cancel
+              {t('cancel')}
             </Button>
             <Button 
               onClick={handleChangePassword}
               disabled={isChangingPassword || !currentPassword || !newPassword || !confirmNewPassword}
             >
-              {isChangingPassword ? "Updating..." : "Update Password"}
+              {isChangingPassword ? t('updating') : t('update_password')}
             </Button>
           </DialogFooter>
         </DialogContent>
