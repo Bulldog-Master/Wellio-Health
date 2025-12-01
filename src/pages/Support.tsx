@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { HelpCircle, ArrowLeft, Mail, MessageCircle, Book } from "lucide-react";
 
 const Support = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation('settings');
 
   return (
     <div className="space-y-6 pb-20 md:pb-0">
@@ -17,8 +19,8 @@ const Support = () => {
           <ArrowLeft className="w-5 h-5" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold mb-2">Support</h1>
-          <p className="text-muted-foreground">Get help and contact support</p>
+          <h1 className="text-3xl font-bold mb-2">{t('support_title')}</h1>
+          <p className="text-muted-foreground">{t('support_subtitle')}</p>
         </div>
       </div>
 
@@ -29,9 +31,9 @@ const Support = () => {
               <Book className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h3 className="font-semibold mb-1">Help Center</h3>
+              <h3 className="font-semibold mb-1">{t('help_center')}</h3>
               <p className="text-sm text-muted-foreground">
-                Browse our knowledge base and FAQs
+                {t('help_center_desc')}
               </p>
             </div>
           </div>
@@ -43,9 +45,9 @@ const Support = () => {
               <MessageCircle className="w-6 h-6 text-secondary" />
             </div>
             <div>
-              <h3 className="font-semibold mb-1">Live Chat</h3>
+              <h3 className="font-semibold mb-1">{t('live_chat')}</h3>
               <p className="text-sm text-muted-foreground">
-                Chat with our support team in real-time
+                {t('live_chat_desc')}
               </p>
             </div>
           </div>
@@ -57,9 +59,9 @@ const Support = () => {
               <Mail className="w-6 h-6 text-accent" />
             </div>
             <div>
-              <h3 className="font-semibold mb-1">Email Support</h3>
+              <h3 className="font-semibold mb-1">{t('email_support')}</h3>
               <p className="text-sm text-muted-foreground">
-                Send us an email and we'll get back to you within 24 hours
+                {t('email_support_desc')}
               </p>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,6 +12,7 @@ import { toast } from "sonner";
 
 const CloseFriends = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation('settings');
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [closeFriends, setCloseFriends] = useState<any[]>([]);
   const [followers, setFollowers] = useState<any[]>([]);
@@ -79,7 +81,7 @@ const CloseFriends = () => {
       setFollowers(followersWithProfiles);
     } catch (error) {
       console.error('Error fetching data:', error);
-      toast.error("Failed to load friends");
+      toast.error(t('failed_to_add_close_friend'));
     } finally {
       setLoading(false);
     }
@@ -96,11 +98,11 @@ const CloseFriends = () => {
 
       if (error) throw error;
 
-      toast.success("Added to close friends");
+      toast.success(t('added_to_close_friends'));
       fetchData();
     } catch (error) {
       console.error('Error adding to close friends:', error);
-      toast.error("Failed to add to close friends");
+      toast.error(t('failed_to_add_close_friend'));
     }
   };
 
@@ -113,11 +115,11 @@ const CloseFriends = () => {
 
       if (error) throw error;
 
-      toast.success("Removed from close friends");
+      toast.success(t('removed_from_close_friends'));
       fetchData();
     } catch (error) {
       console.error('Error removing from close friends:', error);
-      toast.error("Failed to remove from close friends");
+      toast.error(t('failed_to_remove_close_friend'));
     }
   };
 
@@ -153,10 +155,10 @@ const CloseFriends = () => {
         <div className="flex-1">
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <Heart className="w-8 h-8 text-primary fill-primary" />
-            Close Friends
+            {t('close_friends_title')}
           </h1>
           <p className="text-muted-foreground">
-            Share stories with your closest friends
+            {t('close_friends_subtitle')}
           </p>
         </div>
         <Badge variant="secondary" className="text-lg px-3 py-1">
@@ -166,10 +168,9 @@ const CloseFriends = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle>What are Close Friends?</CardTitle>
+          <CardTitle>{t('what_are_close_friends')}</CardTitle>
           <CardDescription>
-            When you share a story marked as "Close Friends Only", only the people on this list will be able to see it. 
-            Your close friends list is private - nobody else can see who's on it.
+            {t('close_friends_explanation')}
           </CardDescription>
         </CardHeader>
       </Card>
@@ -178,9 +179,12 @@ const CloseFriends = () => {
       {closeFriends.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle>Your Close Friends</CardTitle>
+            <CardTitle>{t('your_close_friends')}</CardTitle>
             <CardDescription>
-              {closeFriends.length} {closeFriends.length === 1 ? 'person' : 'people'} in your close friends list
+              {t('people_in_list', { 
+                count: closeFriends.length, 
+                unit: closeFriends.length === 1 ? t('person') : t('people')
+              })}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -211,7 +215,7 @@ const CloseFriends = () => {
                     onClick={() => removeFromCloseFriends(cf.id)}
                   >
                     <UserMinus className="w-4 h-4 mr-2" />
-                    Remove
+                    {t('remove')}
                   </Button>
                 </div>
               ))}
@@ -223,16 +227,16 @@ const CloseFriends = () => {
       {/* Add from Followers */}
       <Card>
         <CardHeader>
-          <CardTitle>Add from Followers</CardTitle>
+          <CardTitle>{t('add_from_followers')}</CardTitle>
           <CardDescription>
-            Add people who follow you to your close friends list
+            {t('add_followers_to_list')}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
-              placeholder="Search followers..."
+              placeholder={t('search_followers')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
@@ -240,10 +244,10 @@ const CloseFriends = () => {
           </div>
 
           {loading ? (
-            <p className="text-muted-foreground text-center py-8">Loading...</p>
+            <p className="text-muted-foreground text-center py-8">{t('common:loading')}</p>
           ) : filteredFollowers.length === 0 ? (
             <p className="text-muted-foreground text-center py-8">
-              {searchQuery ? "No followers found" : "No followers yet"}
+              {searchQuery ? t('no_followers_found') : t('no_followers_yet')}
             </p>
           ) : (
             <div className="space-y-3">
@@ -277,7 +281,7 @@ const CloseFriends = () => {
                         onClick={() => removeFromCloseFriends(getCloseFriendId(profile.id)!)}
                       >
                         <UserMinus className="w-4 h-4 mr-2" />
-                        Remove
+                        {t('remove')}
                       </Button>
                     ) : (
                       <Button
@@ -286,7 +290,7 @@ const CloseFriends = () => {
                         onClick={() => addToCloseFriends(profile.id)}
                       >
                         <UserPlus className="w-4 h-4 mr-2" />
-                        Add
+                        {t('add')}
                       </Button>
                     )}
                   </div>
