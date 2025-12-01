@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, TrendingDown, Gift, Award } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { TrendingUp, TrendingDown, Gift, Award, ArrowLeft, History } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface Transaction {
   id: string;
@@ -17,6 +20,8 @@ interface Transaction {
 
 const PointsHistory = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const { t } = useTranslation('points');
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(true);
   const [summary, setSummary] = useState({
@@ -63,7 +68,7 @@ const PointsHistory = () => {
       console.error('Error fetching transactions:', error);
       toast({
         title: "Error",
-        description: "Failed to load transaction history",
+        description: t('error_loading'),
         variant: "destructive",
       });
     } finally {
@@ -98,35 +103,44 @@ const PointsHistory = () => {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      <div className="flex items-center gap-3">
-        <div className="p-3 bg-primary/10 rounded-xl">
-          <Award className="w-6 h-6 text-primary" />
-        </div>
-        <div>
-          <h1 className="text-3xl font-bold">Points History</h1>
-          <p className="text-muted-foreground">Track your points earnings and spending</p>
+      <div className="flex items-center gap-4 mb-6">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate("/settings")}
+        >
+          <ArrowLeft className="w-5 h-5" />
+        </Button>
+        <div className="flex items-center gap-3">
+          <div className="p-3 bg-primary/10 rounded-xl">
+            <History className="w-6 h-6 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold">{t('points_history')}</h1>
+            <p className="text-muted-foreground">{t('track_points')}</p>
+          </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card className="p-6 text-center">
-          <p className="text-muted-foreground mb-2">Current Balance</p>
+          <p className="text-muted-foreground mb-2">{t('current_balance')}</p>
           <p className="text-3xl font-bold text-primary">{summary.currentBalance}</p>
         </Card>
         <Card className="p-6 text-center">
-          <p className="text-muted-foreground mb-2">Total Earned</p>
+          <p className="text-muted-foreground mb-2">{t('total_earned')}</p>
           <p className="text-3xl font-bold text-success">+{summary.totalEarned}</p>
         </Card>
         <Card className="p-6 text-center">
-          <p className="text-muted-foreground mb-2">Total Spent</p>
+          <p className="text-muted-foreground mb-2">{t('total_spent')}</p>
           <p className="text-3xl font-bold text-destructive">-{summary.totalSpent}</p>
         </Card>
       </div>
 
       <Card className="p-6">
-        <h3 className="text-lg font-semibold mb-4">Recent Transactions</h3>
+        <h3 className="text-lg font-semibold mb-4">{t('recent_transactions')}</h3>
         {transactions.length === 0 ? (
-          <p className="text-center text-muted-foreground py-8">No transactions yet</p>
+          <p className="text-center text-muted-foreground py-8">{t('no_transactions')}</p>
         ) : (
           <div className="space-y-3">
             {transactions.map((tx) => {
@@ -149,7 +163,7 @@ const PointsHistory = () => {
                       {tx.amount > 0 ? '+' : ''}{tx.amount}
                     </p>
                     <Badge variant="outline" className="mt-1">
-                      {tx.transaction_type}
+                      {tx.transaction_type === 'bonus' ? t('bonus') : tx.amount > 0 ? t('earned') : t('spent')}
                     </Badge>
                   </div>
                 </div>

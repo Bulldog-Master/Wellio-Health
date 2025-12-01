@@ -3,11 +3,12 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Gift, Crown, Zap, Award, TrendingUp, Clock, Check, Sparkles } from "lucide-react";
+import { Gift, Crown, Zap, Award, TrendingUp, Clock, Check, Sparkles, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -38,6 +39,7 @@ interface UserPoints {
 const RewardsStore = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { t } = useTranslation('rewards');
   const [rewards, setRewards] = useState<Reward[]>([]);
   const [userPoints, setUserPoints] = useState<UserPoints>({ points: 0, activeRewards: [] });
   const [loading, setLoading] = useState(true);
@@ -173,7 +175,7 @@ const RewardsStore = () => {
         {active && (
           <Badge className="absolute top-3 right-3 bg-success">
             <Check className="w-3 h-3 mr-1" />
-            Active
+            {t('active')}
           </Badge>
         )}
         
@@ -189,16 +191,16 @@ const RewardsStore = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-primary" />
-                <span className="font-bold text-primary">{reward.points_cost} pts</span>
+                <span className="font-bold text-primary">{reward.points_cost} {t('pts')}</span>
                 {reward.duration_days && (
                   <Badge variant="outline" className="ml-2">
                     <Clock className="w-3 h-3 mr-1" />
-                    {reward.duration_days} days
+                    {reward.duration_days} {t('days')}
                   </Badge>
                 )}
                 {!reward.duration_days && (
                   <Badge variant="outline" className="ml-2">
-                    Permanent
+                    {t('permanent')}
                   </Badge>
                 )}
               </div>
@@ -212,12 +214,12 @@ const RewardsStore = () => {
                 {active ? (
                   <>
                     <Check className="w-4 h-4" />
-                    Owned
+                    {t('owned')}
                   </>
                 ) : (
                   <>
                     <Gift className="w-4 h-4" />
-                    Redeem
+                    {t('redeem')}
                   </>
                 )}
               </Button>
@@ -239,37 +241,46 @@ const RewardsStore = () => {
 
   return (
     <div className="space-y-6 max-w-6xl">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="p-3 bg-primary/10 rounded-xl">
-            <Gift className="w-6 h-6 text-primary" />
-          </div>
-          <div>
-            <h1 className="text-3xl font-bold">Rewards Store</h1>
-            <p className="text-muted-foreground">Spend your points on exclusive rewards</p>
-          </div>
-        </div>
-        
+      <div className="flex items-center gap-4 mb-6">
         <Button
-          variant="outline"
-          onClick={() => navigate('/referral')}
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate("/settings")}
         >
-          View Referrals
+          <ArrowLeft className="w-5 h-5" />
         </Button>
+        <div className="flex items-center justify-between flex-1">
+          <div className="flex items-center gap-3">
+            <div className="p-3 bg-primary/10 rounded-xl">
+              <Gift className="w-6 h-6 text-primary" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold">{t('rewards_store')}</h1>
+              <p className="text-muted-foreground">{t('spend_points')}</p>
+            </div>
+          </div>
+          
+          <Button
+            variant="outline"
+            onClick={() => navigate('/referral')}
+          >
+            {t('view_referrals')}
+          </Button>
+        </div>
       </div>
 
       <Card className="p-6 bg-gradient-hero text-white shadow-glow-secondary">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-white/80 mb-1">Your Balance</p>
+            <p className="text-white/80 mb-1">{t('your_balance')}</p>
             <h2 className="text-4xl font-bold flex items-center gap-2">
               <Sparkles className="w-8 h-8" />
-              {userPoints.points} Points
+              {userPoints.points} {t('points')}
             </h2>
           </div>
           {userPoints.activeRewards.length > 0 && (
             <div className="text-right">
-              <p className="text-white/80 mb-1">Active Rewards</p>
+              <p className="text-white/80 mb-1">{t('active_rewards')}</p>
               <p className="text-2xl font-bold">{userPoints.activeRewards.length}</p>
             </div>
           )}
@@ -278,11 +289,11 @@ const RewardsStore = () => {
 
       <Tabs defaultValue="all" className="space-y-6">
         <TabsList className="grid w-full grid-cols-5">
-          <TabsTrigger value="all">All Rewards</TabsTrigger>
-          <TabsTrigger value="subscription">Subscriptions</TabsTrigger>
-          <TabsTrigger value="badge">Badges</TabsTrigger>
-          <TabsTrigger value="feature">Features</TabsTrigger>
-          <TabsTrigger value="marketplace">Marketplace</TabsTrigger>
+          <TabsTrigger value="all">{t('all_rewards')}</TabsTrigger>
+          <TabsTrigger value="subscription">{t('subscriptions')}</TabsTrigger>
+          <TabsTrigger value="badge">{t('badges')}</TabsTrigger>
+          <TabsTrigger value="feature">{t('features')}</TabsTrigger>
+          <TabsTrigger value="marketplace">{t('marketplace')}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="all" className="space-y-4">
@@ -295,7 +306,7 @@ const RewardsStore = () => {
           <TabsContent key={category} value={category} className="space-y-4">
             {filterRewardsByCategory(category).length === 0 ? (
               <Card className="p-8 text-center text-muted-foreground">
-                <p>No {category} rewards available yet</p>
+                <p>{t('no_rewards', { category })}</p>
               </Card>
             ) : (
               filterRewardsByCategory(category).map(reward => (
@@ -309,21 +320,21 @@ const RewardsStore = () => {
       <AlertDialog open={showConfirm} onOpenChange={setShowConfirm}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Confirm Redemption</AlertDialogTitle>
+            <AlertDialogTitle>{t('confirm_redemption')}</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to redeem <strong>{selectedReward?.name}</strong> for{' '}
-              <strong>{selectedReward?.points_cost} points</strong>?
+              {t('confirm_message')} <strong>{selectedReward?.name}</strong> {t('for_points')}{' '}
+              <strong>{selectedReward?.points_cost} {t('points')}</strong>?
               {selectedReward?.duration_days && (
                 <span className="block mt-2">
-                  This reward will be active for {selectedReward.duration_days} days.
+                  {t('reward_active_for')} {selectedReward.duration_days} {t('days')}.
                 </span>
               )}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
             <AlertDialogAction onClick={handleConfirmRedeem} disabled={redeeming}>
-              {redeeming ? "Redeeming..." : "Confirm"}
+              {redeeming ? t('redeeming') : t('confirm')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
