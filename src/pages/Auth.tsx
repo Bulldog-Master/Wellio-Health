@@ -778,9 +778,11 @@ const Auth = () => {
       {/* Right side - Auth Form */}
       <div className="flex items-center justify-center p-8 bg-background">
         <div className="w-full max-w-md">
-          {/* Language Switcher */}
-          <div className="flex justify-end mb-4">
-            <LanguageSwitcher />
+          {/* Language Switcher - Prominently displayed */}
+          <div className="flex justify-end mb-6">
+            <div className="bg-accent/10 p-2 rounded-lg">
+              <LanguageSwitcher />
+            </div>
           </div>
           
           <div className="mb-8">
