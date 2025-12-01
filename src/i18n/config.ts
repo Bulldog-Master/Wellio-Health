@@ -6,12 +6,11 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 Object.keys(localStorage).forEach(key => {
   if (key.startsWith('i18next') || key.includes('i18n')) {
     localStorage.removeItem(key);
-    console.log('🗑️ Cleared cache key:', key);
   }
 });
 
 // Clear i18n cache to force fresh translations load (increment version when translations update)
-const I18N_VERSION = '6.0.0-aggressive-clear';
+const I18N_VERSION = '6.1.0-clean-no-debug';
 const cachedVersion = localStorage.getItem('i18n_version');
 if (cachedVersion !== I18N_VERSION) {
   // Clear all i18n related localStorage
