@@ -73,14 +73,14 @@ All colors MUST be HSL.
     
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* Clean modern sidebar - matches card styling */
+    /* Clean sidebar - matches card background */
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 240 10% 25%;
     --sidebar-primary: 195 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 20% 97%;
+    --sidebar-accent: 195 100% 97%;
     --sidebar-accent-foreground: 195 100% 45%;
-    --sidebar-border: 240 15% 90%;
+    --sidebar-border: 240 10% 92%;
     --sidebar-ring: 195 100% 50%;
     
     /* Navigation icons - vibrant modern palette */
@@ -160,14 +160,14 @@ All colors MUST be HSL.
     --shadow-glow-secondary: 0 0 40px hsl(270 95% 65% / 0.5), 0 0 20px hsl(270 95% 65% / 0.3);
     --shadow-auth-card: 0 30px 60px -15px hsl(195 100% 50% / 0.4), 0 0 80px hsl(270 95% 65% / 0.2);
 
-    /* Lighter sidebar with gradient feel */
-    --sidebar-background: 222 35% 20%;
+    /* Sidebar matches card background in dark mode */
+    --sidebar-background: 222 32% 18%;
     --sidebar-foreground: 0 0% 96%;
     --sidebar-primary: 195 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 222 32% 28%;
+    --sidebar-accent: 222 32% 24%;
     --sidebar-accent-foreground: 195 100% 55%;
-    --sidebar-border: 222 30% 32%;
+    --sidebar-border: 222 30% 25%;
     --sidebar-ring: 195 100% 50%;
     
     /* Vibrant navigation icons matching light mode */

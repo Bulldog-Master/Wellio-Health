@@ -19,9 +19,9 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/5">
       <div className="flex flex-col md:flex-row max-w-7xl mx-auto">
-        <aside className="hidden md:block md:w-64 md:border-r md:border-sidebar-border md:min-h-screen bg-sidebar">
+        <aside className="hidden md:block md:w-64 md:border-r md:border-border md:min-h-screen bg-card">
           <div className="sticky top-0 p-6">
-            <div className="flex items-center justify-between pb-4 mb-4 border-b border-sidebar-border">
+            <div className="flex items-center justify-between pb-4 mb-4 border-b border-border">
               <h1 className="text-2xl font-bold gradient-text">
                 Wellio
               </h1>
