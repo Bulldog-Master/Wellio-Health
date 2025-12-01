@@ -5,5 +5,16 @@
   "cancel": "Cancel",
   "create_session": "Create Session",
   "create_challenge": "Create Challenge",
-  "new_timer": "New Timer"
+  "new_timer": "New Timer",
+  "back_to_activity": "Back to Activity",
+  "back_to_library": "Back to Library",
+  "your_library": "Your library",
+  "timers": "TIMERS",
+  "folders": "FOLDERS",
+  "no_timers_yet": "No timers yet. Create a folder to get started!",
+  "done": "Done",
+  "drag_to_reorder": "Drag to reorder",
+  "select_timer": "Select a timer",
+  "select_timers": "Select timers",
+  "next": "Next"
 }

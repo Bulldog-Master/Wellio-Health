@@ -33,5 +33,10 @@
   "feature_priority_support": "Priority support",
   "feature_custom_programs": "Custom workout programs",
   "feature_team_collaboration": "Team collaboration",
-  "feature_api_access": "API access"
+  "feature_api_access": "API access",
+
+  "premium_feature": "Premium Feature",
+  "premium_description": "This feature is available on Pro and Enterprise plans. Your current plan:",
+  "upgrade_now": "Upgrade Now",
+  "use_points": "Use Points"
 }

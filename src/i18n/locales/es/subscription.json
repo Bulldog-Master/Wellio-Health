@@ -33,5 +33,10 @@
   "feature_priority_support": "Soporte prioritario",
   "feature_custom_programs": "Programas de entrenamiento personalizados",
   "feature_team_collaboration": "Colaboración en equipo",
-  "feature_api_access": "Acceso a API"
+  "feature_api_access": "Acceso a API",
+
+  "premium_feature": "Función Premium",
+  "premium_description": "Esta función está disponible en los planes Pro y Enterprise. Tu plan actual:",
+  "upgrade_now": "Actualizar Ahora",
+  "use_points": "Usar Puntos"
 }
