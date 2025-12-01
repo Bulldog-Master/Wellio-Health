@@ -95,7 +95,8 @@
     "feed": "Publicaciones",
     "workout": "Entrenamiento",
     "nutrition": "Nutrición",
-    "social": "Sociales"
+    "social": "Sociales",
+    "activity": "Actividad"
   },
   "post_created": "¡Publicación creada!",
   "link_copied_clipboard": "¡Enlace copiado al portapapeles!",
