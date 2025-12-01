@@ -1,0 +1,32 @@
+{
+  "notifications": "Notifications",
+  "mark_all_as_read": "Mark all as read",
+  "all_notifications_read": "All notifications marked as read",
+  "no_notifications_yet": "No notifications yet",
+  "loading_notifications": "Loading notifications...",
+  
+  "liked_your_post": "liked your post",
+  "commented_on_post": "commented on your post",
+  "started_following": "started following you",
+  "mentioned_you": "mentioned you in a post",
+  "wants_to_follow": "wants to follow you",
+  "someone": "Someone",
+  "new_notification": "New notification",
+  
+  "time": {
+    "just_now": "just now",
+    "seconds_ago": "{{count}} seconds ago",
+    "minute_ago": "1 minute ago",
+    "minutes_ago": "{{count}} minutes ago",
+    "hour_ago": "1 hour ago",
+    "hours_ago": "{{count}} hours ago",
+    "day_ago": "1 day ago",
+    "days_ago": "{{count}} days ago",
+    "week_ago": "1 week ago",
+    "weeks_ago": "{{count}} weeks ago",
+    "month_ago": "1 month ago",
+    "months_ago": "{{count}} months ago",
+    "year_ago": "1 year ago",
+    "years_ago": "{{count}} years ago"
+  }
+}

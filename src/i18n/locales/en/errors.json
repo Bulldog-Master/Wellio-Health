@@ -1,0 +1,35 @@
+{
+  "error": "Error",
+  "success": "Success",
+  "warning": "Warning",
+  "info": "Info",
+  
+  "missing_information": "Missing information",
+  "please_enter_required": "Please enter the required information",
+  "file_too_large": "File too large",
+  "file_size_limit": "Please select an image under {{size}}MB",
+  "authentication_required": "Authentication required",
+  "please_login": "Please log in to continue",
+  "not_authenticated": "Not authenticated",
+  
+  "rate_limited": "Too many actions",
+  "too_many_actions": "Too many actions. Please wait",
+  "creating_posts_too_quickly": "Creating posts too quickly. Please wait {{seconds}} seconds",
+  "uploading_files_too_quickly": "Uploading files too quickly. Please wait {{minutes}} minutes",
+  "too_many_like_actions": "Too many like actions. Please slow down",
+  "creating_comments_too_quickly": "Creating comments too quickly. Please wait {{seconds}} seconds",
+  
+  "validation_error": "Validation Error",
+  "invalid_format": "Invalid format",
+  "required_field": "This field is required",
+  "invalid_email": "Invalid email",
+  "invalid_password": "Invalid password",
+  "passwords_dont_match": "Passwords don't match",
+  
+  "failed_to_save": "Failed to save",
+  "failed_to_load": "Failed to load",
+  "failed_to_delete": "Failed to delete",
+  "failed_to_update": "Failed to update",
+  "something_went_wrong": "Something went wrong",
+  "try_again": "Please try again"
+}

@@ -46,6 +46,9 @@ import seoEN from './locales/en/seo.json';
 import unitsEN from './locales/en/units.json';
 import a11yEN from './locales/en/a11y.json';
 import pluralsEN from './locales/en/plurals.json';
+import messagesEN from './locales/en/messages.json';
+import notificationsEN from './locales/en/notifications.json';
+import errorsEN from './locales/en/errors.json';
 
 // Spanish
 import commonES from './locales/es/common.json';
@@ -195,6 +198,9 @@ const resources = {
     units: unitsEN,
     a11y: a11yEN,
     plurals: pluralsEN,
+    messages: messagesEN,
+    notifications: notificationsEN,
+    errors: errorsEN,
   },
   es: {
     common: commonES,
