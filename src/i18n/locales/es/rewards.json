@@ -52,10 +52,16 @@
   "reward_1_year_pro_desc": "Desbloquea características Pro por 1 año",
   "reward_elite_trainer": "Insignia de Entrenador Elite",
   "reward_elite_trainer_desc": "Demuestra que eres un entrenador destacado en la comunidad",
+  "reward_elite_trainer_badge": "Insignia de Entrenador Elite",
+  "reward_elite_trainer_badge_desc": "Demuestra que eres un entrenador destacado en la comunidad",
   "reward_community_leader": "Insignia de Líder Comunitario",
   "reward_community_leader_desc": "Reconoce tu contribución a la comunidad",
+  "reward_community_leader_badge": "Insignia de Líder Comunitario",
+  "reward_community_leader_badge_desc": "Reconoce tu contribución a la comunidad",
   "reward_advanced_analytics": "Análisis Avanzados",
   "reward_advanced_analytics_desc": "Desbloquea análisis avanzados permanentemente",
   "reward_premium_trainer": "Estado de Entrenador Premium",
-  "reward_premium_trainer_desc": "Insignia de entrenador premium y beneficios permanentemente"
+  "reward_premium_trainer_desc": "Insignia de entrenador premium y beneficios permanentemente",
+  "reward_premium_trainer_status": "Estado de Entrenador Premium",
+  "reward_premium_trainer_status_desc": "Insignia de entrenador premium y beneficios permanentemente"
 }
