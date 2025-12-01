@@ -1,0 +1,10 @@
+{
+  "live_workout_sessions": "Live Workout Sessions",
+  "join_or_host": "Join or host live workout sessions",
+  "create_session": "Create Session",
+  "cancel": "Cancel",
+  "create_new_session": "Create New Session",
+  "schedule_live_session": "Schedule a live workout session",
+  "error": "Error",
+  "failed_to_load": "Failed to load workout sessions"
+}

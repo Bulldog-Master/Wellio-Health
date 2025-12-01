@@ -12,6 +12,7 @@ import { Video, Calendar, Users, Clock, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { SubscriptionGate } from "@/components/SubscriptionGate";
+import { useTranslation } from "react-i18next";
 
 interface Session {
   id: string;
@@ -34,6 +35,7 @@ const LiveWorkoutSessions = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { t } = useTranslation(['live', 'common']);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -92,8 +94,8 @@ const LiveWorkoutSessions = () => {
     } catch (error) {
       console.error('Error fetching sessions:', error);
       toast({
-        title: "Error",
-        description: "Failed to load workout sessions",
+        title: t('live:error'),
+        description: t('live:failed_to_load'),
         variant: "destructive",
       });
     } finally {
@@ -184,12 +186,12 @@ const LiveWorkoutSessions = () => {
         <div className="container mx-auto p-6 space-y-6">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold">Live Workout Sessions</h1>
-            <p className="text-muted-foreground">Join or host live workout sessions</p>
+            <h1 className="text-3xl font-bold">{t('live:live_workout_sessions')}</h1>
+            <p className="text-muted-foreground">{t('live:join_or_host')}</p>
           </div>
           <Button onClick={() => setShowCreateForm(!showCreateForm)}>
             <Plus className="mr-2 h-4 w-4" />
-            {showCreateForm ? "Cancel" : "Create Session"}
+            {showCreateForm ? t('live:cancel') : t('live:create_session')}
           </Button>
         </div>
 
