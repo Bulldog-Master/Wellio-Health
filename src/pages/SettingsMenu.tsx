@@ -7,10 +7,12 @@ import { Badge } from "@/components/ui/badge";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { ProgressToReward } from "@/components/ProgressToReward";
+import { useTranslation } from "react-i18next";
 
 const SettingsMenu = () => {
   const navigate = useNavigate();
   const { tier } = useSubscription();
+  const { t } = useTranslation(['settings']);
   const [referralStats, setReferralStats] = useState({
     points: 0,
     totalReferrals: 0,
@@ -52,8 +54,8 @@ const SettingsMenu = () => {
 
   const settingsItems = [
     {
-      title: "Subscription",
-      description: `Current plan: ${tier.toUpperCase()} - Manage your subscription`,
+      title: t('subscription'),
+      description: t('subscription_desc', { tier: tier.toUpperCase() }),
       icon: Crown,
       iconBg: "bg-primary/20",
       iconColor: "text-primary",
@@ -61,10 +63,14 @@ const SettingsMenu = () => {
       badge: tier !== 'free' ? tier : undefined,
     },
     {
-      title: "Referral Program",
+      title: t('referral_program'),
       description: loading 
-        ? "Loading your referral stats..." 
-        : `${referralStats.points} points • ${referralStats.totalReferrals} referrals • ${referralStats.activeUsers} active`,
+        ? t('referral_loading')
+        : t('referral_stats', { 
+            points: referralStats.points, 
+            referrals: referralStats.totalReferrals, 
+            active: referralStats.activeUsers 
+          }),
       icon: Users,
       iconBg: "bg-purple-500/20",
       iconColor: "text-purple-500",
@@ -75,60 +81,60 @@ const SettingsMenu = () => {
       progressPoints: referralStats.points,
     },
     {
-      title: "Rewards Store",
+      title: t('rewards_store'),
       description: loading
-        ? "Browse rewards..."
-        : `Spend your ${referralStats.points} points on premium rewards`,
+        ? t('rewards_loading')
+        : t('rewards_desc', { points: referralStats.points }),
       icon: Gift,
       iconBg: "bg-accent/20",
       iconColor: "text-accent",
       path: "/rewards",
-      badge: referralStats.points >= 500 ? "Can Redeem!" : undefined,
+      badge: referralStats.points >= 500 ? t('can_redeem') : undefined,
       badgeVariant: "default" as const,
     },
     {
-      title: "Privacy & Security",
-      description: "Control your privacy settings and security options",
+      title: t('privacy_security'),
+      description: t('privacy_security_desc'),
       icon: Shield,
       iconBg: "bg-destructive/20",
       iconColor: "text-destructive",
       path: "/settings/privacy-security",
     },
     {
-      title: "Close Friends",
-      description: "Manage who can see your close friends stories",
+      title: t('close_friends'),
+      description: t('close_friends_desc'),
       icon: Heart,
       iconBg: "bg-pink-500/20",
       iconColor: "text-pink-500",
       path: "/settings/close-friends",
     },
     {
-      title: "Trusted Devices",
-      description: "Manage devices that can skip 2FA verification",
+      title: t('trusted_devices'),
+      description: t('trusted_devices_desc'),
       icon: Shield,
       iconBg: "bg-primary/20",
       iconColor: "text-primary",
       path: "/settings/trusted-devices",
     },
     {
-      title: "Orders & Payments",
-      description: "View your orders and manage payment methods",
+      title: t('orders_payments'),
+      description: t('orders_payments_desc'),
       icon: CreditCard,
       iconBg: "bg-warning/20",
       iconColor: "text-warning",
       path: "/settings/orders-payments",
     },
     {
-      title: "Notifications",
-      description: "Configure your notification preferences",
+      title: t('notifications'),
+      description: t('notifications_desc'),
       icon: Bell,
       iconBg: "bg-secondary/20",
       iconColor: "text-secondary",
       path: "/settings/notifications",
     },
     {
-      title: "Support",
-      description: "Get help and contact support",
+      title: t('support'),
+      description: t('support_desc'),
       icon: HelpCircle,
       iconBg: "bg-primary/20",
       iconColor: "text-primary",
@@ -148,8 +154,8 @@ const SettingsMenu = () => {
           <ArrowLeft className="w-5 h-5" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold">Settings</h1>
-          <p className="text-muted-foreground mt-1">Account preferences and configuration</p>
+          <h1 className="text-3xl font-bold">{t('settings')}</h1>
+          <p className="text-muted-foreground mt-1">{t('account_preferences')}</p>
         </div>
       </div>
 

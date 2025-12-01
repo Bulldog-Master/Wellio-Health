@@ -9,11 +9,13 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Bell, ArrowLeft } from "lucide-react";
 import { useNotifications } from "@/hooks/useNotifications";
+import { useTranslation } from "react-i18next";
 
 const NotificationSettings = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { permission, requestPermission, isSupported } = useNotifications();
+  const { t } = useTranslation(['settings']);
   
   const [settings, setSettings] = useState({
     reminder_meal_logging: true,
@@ -73,10 +75,10 @@ const NotificationSettings = () => {
         });
 
       if (error) throw error;
-      toast.success("Settings saved successfully!");
+      toast.success(t('settings_saved'));
     } catch (error: any) {
       console.error("Error saving settings:", error);
-      toast.error("Failed to save settings.");
+      toast.error(t('save_failed'));
     } finally {
       setLoading(false);
     }
@@ -97,8 +99,8 @@ const NotificationSettings = () => {
           <ArrowLeft className="w-5 h-5" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold mb-2">Notifications</h1>
-          <p className="text-muted-foreground">Configure your notification preferences</p>
+          <h1 className="text-3xl font-bold mb-2">{t('notifications')}</h1>
+          <p className="text-muted-foreground">{t('notifications_desc')}</p>
         </div>
       </div>
 
@@ -108,21 +110,21 @@ const NotificationSettings = () => {
           <div className="flex items-start gap-4 mb-4">
             <Bell className="w-6 h-6 text-primary mt-1" />
             <div className="flex-1">
-              <h3 className="font-semibold mb-1">Browser Notifications</h3>
+              <h3 className="font-semibold mb-1">{t('browser_notifications')}</h3>
               <p className="text-sm text-muted-foreground mb-3">
                 {permission === "granted" 
-                  ? "Notifications are enabled"
+                  ? t('notifications_enabled')
                   : permission === "denied"
-                  ? "Notifications are blocked. Enable them in your browser settings."
-                  : "Enable notifications to receive helpful reminders"}
+                  ? t('notifications_blocked')
+                  : t('enable_notifications_prompt')}
               </p>
               {permission === "default" && (
                 <Button onClick={requestPermission} variant="outline" size="sm">
-                  Enable Notifications
+                  {t('enable_notifications')}
                 </Button>
               )}
               {permission === "granted" && (
-                <p className="text-xs text-green-600 font-medium">✓ Enabled</p>
+                <p className="text-xs text-green-600 font-medium">{t('enabled')}</p>
               )}
             </div>
           </div>
@@ -131,14 +133,14 @@ const NotificationSettings = () => {
 
       {/* Reminder Settings */}
       <Card className="p-6">
-        <h3 className="font-semibold mb-6">Reminder Settings</h3>
+        <h3 className="font-semibold mb-6">{t('reminder_settings')}</h3>
         
         <div className="space-y-6">
           {/* Meal Logging */}
           <div className="flex items-center justify-between pb-6 border-b">
             <div className="flex-1">
-              <Label htmlFor="meal-reminder" className="text-base">Meal Logging</Label>
-              <p className="text-sm text-muted-foreground">Remind me to log my meals</p>
+              <Label htmlFor="meal-reminder" className="text-base">{t('meal_logging')}</Label>
+              <p className="text-sm text-muted-foreground">{t('meal_logging_desc')}</p>
             </div>
             <div className="flex items-center gap-4">
               {settings.reminder_meal_logging && (
@@ -160,8 +162,8 @@ const NotificationSettings = () => {
           {/* Workout */}
           <div className="flex items-center justify-between pb-6 border-b">
             <div className="flex-1">
-              <Label htmlFor="workout-reminder" className="text-base">Workout Time</Label>
-              <p className="text-sm text-muted-foreground">Remind me to exercise</p>
+              <Label htmlFor="workout-reminder" className="text-base">{t('workout_time')}</Label>
+              <p className="text-sm text-muted-foreground">{t('workout_time_desc')}</p>
             </div>
             <div className="flex items-center gap-4">
               {settings.reminder_workout && (
@@ -183,8 +185,8 @@ const NotificationSettings = () => {
           {/* Weigh-in */}
           <div className="flex items-center justify-between pb-6 border-b">
             <div className="flex-1">
-              <Label htmlFor="weighin-reminder" className="text-base">Weigh-in Reminder</Label>
-              <p className="text-sm text-muted-foreground">Remind me to track my weight</p>
+              <Label htmlFor="weighin-reminder" className="text-base">{t('weighin_reminder')}</Label>
+              <p className="text-sm text-muted-foreground">{t('weighin_reminder_desc')}</p>
             </div>
             <div className="flex items-center gap-4">
               {settings.reminder_weigh_in && (
@@ -206,8 +208,8 @@ const NotificationSettings = () => {
           {/* Habits */}
           <div className="flex items-center justify-between">
             <div className="flex-1">
-              <Label htmlFor="habits-reminder" className="text-base">Habit Tracking</Label>
-              <p className="text-sm text-muted-foreground">Remind me to complete my habits</p>
+              <Label htmlFor="habits-reminder" className="text-base">{t('habit_tracking')}</Label>
+              <p className="text-sm text-muted-foreground">{t('habit_tracking_desc')}</p>
             </div>
             <Switch
               id="habits-reminder"
@@ -219,7 +221,7 @@ const NotificationSettings = () => {
       </Card>
 
       <Button onClick={saveSettings} disabled={loading} className="w-full">
-        {loading ? "Saving..." : "Save Settings"}
+        {loading ? t('saving') : t('save_settings')}
       </Button>
     </div>
   );
