@@ -964,7 +964,7 @@ const Workout = () => {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/activity")}
             className="absolute top-4 left-4 hover:bg-white/10 text-white"
           >
             <ArrowLeft className="w-5 h-5" />
