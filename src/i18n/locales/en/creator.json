@@ -1,0 +1,22 @@
+{
+  "creator_hub": "Creator Hub",
+  "manage_content": "Manage your content and grow your audience",
+  "create_content": "Create Content",
+  "total_content": "Total Content",
+  "followers": "Followers",
+  "total_views": "Total Views",
+  "total_likes": "Total Likes",
+  "overview": "Overview",
+  "my_content": "My Content",
+  "analytics": "Analytics",
+  "getting_started": "Getting Started",
+  "getting_started_desc": "Start creating and sharing content with your audience",
+  "welcome_message": "Welcome to the Creator Hub! Here you can create workout programs, recipes, meal plans, and articles to share with the community.",
+  "published": "Published",
+  "draft": "Draft",
+  "publish": "Publish",
+  "unpublish": "Unpublish",
+  "content_updated": "Content updated successfully",
+  "track_performance": "Track your content performance",
+  "analytics_coming_soon": "Detailed analytics coming soon!"
+}

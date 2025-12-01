@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Star, MapPin, Search, Award, DollarSign, Users, Calendar } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNavigate } from "react-router-dom";
 import { SubscriptionGate } from "@/components/SubscriptionGate";
@@ -46,6 +47,7 @@ const TrainerMarketplace = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const { toast } = useToast();
+  const { t } = useTranslation('trainer');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -93,7 +95,7 @@ const TrainerMarketplace = () => {
       setPrograms(programsData || []);
     } catch (error: any) {
       toast({
-        title: "Error",
+        title: t('error'),
         description: error.message,
         variant: "destructive",
       });
@@ -133,8 +135,8 @@ const TrainerMarketplace = () => {
           <Users className="w-6 h-6 text-primary" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold">Trainer Marketplace</h1>
-          <p className="text-muted-foreground">Find certified trainers and programs</p>
+          <h1 className="text-3xl font-bold">{t('trainer_marketplace')}</h1>
+          <p className="text-muted-foreground">{t('find_trainers')}</p>
         </div>
       </div>
 
@@ -142,7 +144,7 @@ const TrainerMarketplace = () => {
         <div className="relative">
           <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search trainers, programs, or specialties..."
+            placeholder={t('search_placeholder')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
@@ -152,15 +154,15 @@ const TrainerMarketplace = () => {
 
       <Tabs defaultValue="trainers" className="w-full">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="trainers">Trainers ({filteredTrainers.length})</TabsTrigger>
-          <TabsTrigger value="programs">Programs ({filteredPrograms.length})</TabsTrigger>
+          <TabsTrigger value="trainers">{t('trainers')} ({filteredTrainers.length})</TabsTrigger>
+          <TabsTrigger value="programs">{t('programs')} ({filteredPrograms.length})</TabsTrigger>
         </TabsList>
 
         <TabsContent value="trainers" className="space-y-4 mt-6">
           {filteredTrainers.length === 0 ? (
             <Card className="p-12 text-center">
               <Users className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-              <p className="text-muted-foreground">No trainers found</p>
+              <p className="text-muted-foreground">{t('no_trainers_found')}</p>
             </Card>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -191,7 +193,7 @@ const TrainerMarketplace = () => {
                   )}
 
                   <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-                    {trainer.bio || "No bio available"}
+                    {trainer.bio || t('no_bio')}
                   </p>
 
                   <div className="flex flex-wrap gap-2 mb-4">
@@ -205,10 +207,10 @@ const TrainerMarketplace = () => {
                   <div className="flex items-center justify-between pt-4 border-t">
                     <div className="flex items-center gap-2">
                       <DollarSign className="w-4 h-4 text-primary" />
-                      <span className="font-semibold">${trainer.hourly_rate}/hr</span>
+                      <span className="font-semibold">${trainer.hourly_rate}{t('per_hour')}</span>
                     </div>
                     <Button size="sm" className="bg-gradient-primary hover:opacity-90">
-                      View Profile
+                      {t('view_profile')}
                     </Button>
                   </div>
                 </Card>
@@ -221,7 +223,7 @@ const TrainerMarketplace = () => {
           {filteredPrograms.length === 0 ? (
             <Card className="p-12 text-center">
               <Calendar className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-              <p className="text-muted-foreground">No programs found</p>
+              <p className="text-muted-foreground">{t('no_programs_found')}</p>
             </Card>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -250,7 +252,7 @@ const TrainerMarketplace = () => {
                     <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
                       <div className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
-                        <span>{program.duration_weeks} weeks</span>
+                        <span>{program.duration_weeks} {t('weeks')}</span>
                       </div>
                       <Badge variant="outline" className="text-xs">
                         {program.program_type}
@@ -260,7 +262,7 @@ const TrainerMarketplace = () => {
                     <div className="flex items-center justify-between pt-4 border-t">
                       <span className="font-bold text-lg text-primary">${program.price}</span>
                       <Button size="sm" className="bg-gradient-primary hover:opacity-90">
-                        Enroll Now
+                        {t('enroll_now')}
                       </Button>
                     </div>
                   </div>
@@ -274,12 +276,12 @@ const TrainerMarketplace = () => {
       {trainers.length === 0 && programs.length === 0 && (
         <Card className="p-12 text-center bg-gradient-card">
           <Award className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-          <h3 className="text-xl font-semibold mb-2">Be the First Trainer!</h3>
+          <h3 className="text-xl font-semibold mb-2">{t('be_first_trainer')}</h3>
           <p className="text-muted-foreground mb-6">
-            The marketplace is just getting started. Set up your trainer profile and start offering your services.
+            {t('marketplace_starting')}
           </p>
           <Button onClick={() => navigate('/trainer/setup')} className="bg-gradient-primary hover:opacity-90">
-            Become a Trainer
+            {t('become_trainer')}
           </Button>
         </Card>
       )}

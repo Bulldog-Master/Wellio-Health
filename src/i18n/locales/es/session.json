@@ -1,0 +1,13 @@
+{
+  "loading_session": "Cargando sesión...",
+  "leave": "Salir",
+  "video_coming_soon": "Transmisión de video próximamente",
+  "live_chat": "Chat en Vivo",
+  "type_message": "Escribe un mensaje...",
+  "participants": "Participantes",
+  "host": "Anfitrión",
+  "unknown": "Desconocido",
+  "error": "Error",
+  "failed_to_load": "Error al cargar sesión",
+  "failed_to_send": "Error al enviar mensaje"
+}

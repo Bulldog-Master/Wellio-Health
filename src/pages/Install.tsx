@@ -3,12 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Download, Smartphone, CheckCircle, Chrome, Apple } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Install = () => {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isInstalled, setIsInstalled] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation('install');
 
   useEffect(() => {
     // Check if app is already installed
@@ -55,9 +57,9 @@ const Install = () => {
                 <CheckCircle className="w-12 h-12 text-green-500" />
               </div>
             </div>
-            <CardTitle>App Already Installed!</CardTitle>
+            <CardTitle>{t('app_already_installed')}</CardTitle>
             <CardDescription>
-              Wellio is installed on your device. Open it from your home screen or app drawer.
+              {t('wellio_installed')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -65,7 +67,7 @@ const Install = () => {
               onClick={() => navigate('/')}
               className="w-full bg-gradient-primary"
             >
-              Go to Dashboard
+              {t('go_to_dashboard')}
             </Button>
           </CardContent>
         </Card>
@@ -82,9 +84,9 @@ const Install = () => {
               <Smartphone className="w-12 h-12 text-primary" />
             </div>
           </div>
-          <CardTitle>Install Wellio App</CardTitle>
+          <CardTitle>{t('install_wellio_app')}</CardTitle>
           <CardDescription>
-            Install Wellio on your device for a native app experience with offline access
+            {t('install_description')}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -93,22 +95,22 @@ const Install = () => {
             <div className="flex items-start gap-3">
               <CheckCircle className="w-5 h-5 text-green-500 mt-0.5" />
               <div>
-                <p className="font-medium text-sm">Works Offline</p>
-                <p className="text-xs text-muted-foreground">Access your data even without internet</p>
+                <p className="font-medium text-sm">{t('works_offline')}</p>
+                <p className="text-xs text-muted-foreground">{t('works_offline_desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle className="w-5 h-5 text-green-500 mt-0.5" />
               <div>
-                <p className="font-medium text-sm">Faster Performance</p>
-                <p className="text-xs text-muted-foreground">Loads instantly from your home screen</p>
+                <p className="font-medium text-sm">{t('faster_performance')}</p>
+                <p className="text-xs text-muted-foreground">{t('faster_performance_desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <CheckCircle className="w-5 h-5 text-green-500 mt-0.5" />
               <div>
-                <p className="font-medium text-sm">Push Notifications</p>
-                <p className="text-xs text-muted-foreground">Get reminders and updates</p>
+                <p className="font-medium text-sm">{t('push_notifications')}</p>
+                <p className="text-xs text-muted-foreground">{t('push_notifications_desc')}</p>
               </div>
             </div>
           </div>
@@ -118,12 +120,12 @@ const Install = () => {
             <div className="space-y-3 p-4 bg-muted rounded-lg">
               <div className="flex items-center gap-2 text-sm font-semibold">
                 <Apple className="w-4 h-4" />
-                iOS Installation
+                {t('ios_installation')}
               </div>
               <ol className="space-y-2 text-sm text-muted-foreground">
-                <li>1. Tap the Share button (square with arrow) in Safari</li>
-                <li>2. Scroll down and tap "Add to Home Screen"</li>
-                <li>3. Tap "Add" in the top right corner</li>
+                <li>{t('ios_step_1')}</li>
+                <li>{t('ios_step_2')}</li>
+                <li>{t('ios_step_3')}</li>
               </ol>
             </div>
           ) : deferredPrompt ? (
@@ -133,18 +135,18 @@ const Install = () => {
               size="lg"
             >
               <Download className="w-5 h-5 mr-2" />
-              Install App
+              {t('install_app')}
             </Button>
           ) : (
             <div className="space-y-3 p-4 bg-muted rounded-lg">
               <div className="flex items-center gap-2 text-sm font-semibold">
                 <Chrome className="w-4 h-4" />
-                Android/Chrome Installation
+                {t('android_chrome_installation')}
               </div>
               <ol className="space-y-2 text-sm text-muted-foreground">
-                <li>1. Tap the menu (three dots) in your browser</li>
-                <li>2. Select "Install app" or "Add to Home Screen"</li>
-                <li>3. Follow the prompts to complete installation</li>
+                <li>{t('android_step_1')}</li>
+                <li>{t('android_step_2')}</li>
+                <li>{t('android_step_3')}</li>
               </ol>
             </div>
           )}
@@ -155,7 +157,7 @@ const Install = () => {
               variant="outline"
               className="w-full"
             >
-              Continue in Browser
+              {t('continue_in_browser')}
             </Button>
           </div>
         </CardContent>

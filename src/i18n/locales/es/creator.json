@@ -1,0 +1,22 @@
+{
+  "creator_hub": "Hub de Creador",
+  "manage_content": "Administra tu contenido y haz crecer tu audiencia",
+  "create_content": "Crear Contenido",
+  "total_content": "Contenido Total",
+  "followers": "Seguidores",
+  "total_views": "Vistas Totales",
+  "total_likes": "Me Gusta Totales",
+  "overview": "Resumen",
+  "my_content": "Mi Contenido",
+  "analytics": "Análisis",
+  "getting_started": "Comenzar",
+  "getting_started_desc": "Comienza a crear y compartir contenido con tu audiencia",
+  "welcome_message": "¡Bienvenido al Hub de Creador! Aquí puedes crear programas de entrenamiento, recetas, planes de comidas y artículos para compartir con la comunidad.",
+  "published": "Publicado",
+  "draft": "Borrador",
+  "publish": "Publicar",
+  "unpublish": "Despublicar",
+  "content_updated": "Contenido actualizado exitosamente",
+  "track_performance": "Rastrea el rendimiento de tu contenido",
+  "analytics_coming_soon": "¡Análisis detallados próximamente!"
+}

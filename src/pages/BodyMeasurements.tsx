@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Ruler, ArrowLeft, Plus, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { format } from "date-fns";
 import { bodyMeasurementSchema, validateAndSanitize } from "@/lib/validationSchemas";
@@ -30,6 +31,7 @@ interface Measurement {
 
 const BodyMeasurements = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation('measurements');
   const [measurements, setMeasurements] = useState<Measurement[]>([]);
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
@@ -64,7 +66,7 @@ const BodyMeasurements = () => {
       setMeasurements(data || []);
     } catch (error) {
       console.error('Error fetching measurements:', error);
-      toast.error('Failed to load measurements');
+      toast.error(t('failed_to_load'));
     } finally {
       setLoading(false);
     }
@@ -103,7 +105,7 @@ const BodyMeasurements = () => {
 
       if (error) throw error;
 
-      toast.success('Measurements recorded!');
+      toast.success(t('measurements_recorded'));
       setFormData({
         chest: "", waist: "", hips: "", left_arm: "", right_arm: "",
         left_thigh: "", right_thigh: "", left_calf: "", right_calf: "", notes: ""
@@ -111,7 +113,7 @@ const BodyMeasurements = () => {
       fetchMeasurements();
     } catch (error) {
       console.error('Error saving measurements:', error);
-      toast.error('Failed to save measurements');
+      toast.error(t('failed_to_save'));
     }
   };
 
@@ -123,11 +125,11 @@ const BodyMeasurements = () => {
         .eq('id', id);
 
       if (error) throw error;
-      toast.success('Measurement deleted');
+      toast.success(t('measurement_deleted'));
       fetchMeasurements();
     } catch (error) {
       console.error('Error deleting measurement:', error);
-      toast.error('Failed to delete measurement');
+      toast.error(t('failed_to_delete'));
     }
   };
 
@@ -163,7 +165,7 @@ const BodyMeasurements = () => {
         className="gap-2 mb-2"
       >
         <ArrowLeft className="w-4 h-4" />
-        Back to Dashboard
+        {t('back_to_dashboard')}
       </Button>
 
       <div className="flex items-center gap-3">
@@ -171,17 +173,17 @@ const BodyMeasurements = () => {
           <Ruler className="w-6 h-6 text-primary" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold">Body Measurements</h1>
-          <p className="text-muted-foreground">Track your body measurements over time</p>
+          <h1 className="text-3xl font-bold">{t('body_measurements')}</h1>
+          <p className="text-muted-foreground">{t('track_measurements')}</p>
         </div>
       </div>
 
       {/* Add Measurement Form */}
       <Card className="p-6">
-        <h3 className="text-lg font-semibold mb-4">Log New Measurements</h3>
+        <h3 className="text-lg font-semibold mb-4">{t('log_new_measurements')}</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           <div>
-            <Label>Chest (inches)</Label>
+            <Label>{t('chest')} ({t('inches')})</Label>
             <Input
               type="number"
               step="0.1"
@@ -191,7 +193,7 @@ const BodyMeasurements = () => {
             />
           </div>
           <div>
-            <Label>Waist (inches)</Label>
+            <Label>{t('waist')} ({t('inches')})</Label>
             <Input
               type="number"
               step="0.1"
@@ -201,7 +203,7 @@ const BodyMeasurements = () => {
             />
           </div>
           <div>
-            <Label>Hips (inches)</Label>
+            <Label>{t('hips')} ({t('inches')})</Label>
             <Input
               type="number"
               step="0.1"
@@ -211,7 +213,7 @@ const BodyMeasurements = () => {
             />
           </div>
           <div>
-            <Label>Left Arm (inches)</Label>
+            <Label>{t('left_arm')} ({t('inches')})</Label>
             <Input
               type="number"
               step="0.1"
@@ -221,7 +223,7 @@ const BodyMeasurements = () => {
             />
           </div>
           <div>
-            <Label>Right Arm (inches)</Label>
+            <Label>{t('right_arm')} ({t('inches')})</Label>
             <Input
               type="number"
               step="0.1"
@@ -231,7 +233,7 @@ const BodyMeasurements = () => {
             />
           </div>
           <div>
-            <Label>Left Thigh (inches)</Label>
+            <Label>{t('left_thigh')} ({t('inches')})</Label>
             <Input
               type="number"
               step="0.1"
@@ -241,7 +243,7 @@ const BodyMeasurements = () => {
             />
           </div>
           <div>
-            <Label>Right Thigh (inches)</Label>
+            <Label>{t('right_thigh')} ({t('inches')})</Label>
             <Input
               type="number"
               step="0.1"
@@ -251,7 +253,7 @@ const BodyMeasurements = () => {
             />
           </div>
           <div>
-            <Label>Left Calf (inches)</Label>
+            <Label>{t('left_calf')} ({t('inches')})</Label>
             <Input
               type="number"
               step="0.1"
@@ -261,7 +263,7 @@ const BodyMeasurements = () => {
             />
           </div>
           <div>
-            <Label>Right Calf (inches)</Label>
+            <Label>{t('right_calf')} ({t('inches')})</Label>
             <Input
               type="number"
               step="0.1"
@@ -272,33 +274,33 @@ const BodyMeasurements = () => {
           </div>
         </div>
         <div className="mb-4">
-          <Label>Notes (optional)</Label>
+          <Label>{t('notes_optional')}</Label>
           <Textarea
-            placeholder="Add any notes about your measurements..."
+            placeholder={t('notes_placeholder')}
             value={formData.notes}
             onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
           />
         </div>
         <Button onClick={handleSubmit} className="gap-2">
           <Plus className="w-4 h-4" />
-          Save Measurements
+          {t('save_measurements')}
         </Button>
       </Card>
 
       {/* Charts */}
       {measurements.length > 0 && (
         <Card className="p-6">
-          <h3 className="text-lg font-semibold mb-4">Measurement Trends</h3>
+          <h3 className="text-lg font-semibold mb-4">{t('measurement_trends')}</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
               <XAxis dataKey="date" className="text-xs" />
-              <YAxis className="text-xs" label={{ value: 'Inches', angle: -90, position: 'insideLeft' }} />
+              <YAxis className="text-xs" label={{ value: t('inches'), angle: -90, position: 'insideLeft' }} />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="chest" stroke="#8884d8" name="Chest" />
-              <Line type="monotone" dataKey="waist" stroke="#82ca9d" name="Waist" />
-              <Line type="monotone" dataKey="hips" stroke="#ffc658" name="Hips" />
+              <Line type="monotone" dataKey="chest" stroke="#8884d8" name={t('chest')} />
+              <Line type="monotone" dataKey="waist" stroke="#82ca9d" name={t('waist')} />
+              <Line type="monotone" dataKey="hips" stroke="#ffc658" name={t('hips')} />
             </LineChart>
           </ResponsiveContainer>
         </Card>
@@ -306,9 +308,9 @@ const BodyMeasurements = () => {
 
       {/* History */}
       <Card className="p-6">
-        <h3 className="text-lg font-semibold mb-4">Measurement History</h3>
+        <h3 className="text-lg font-semibold mb-4">{t('measurement_history')}</h3>
         {measurements.length === 0 ? (
-          <p className="text-center text-muted-foreground py-8">No measurements recorded yet</p>
+          <p className="text-center text-muted-foreground py-8">{t('no_measurements')}</p>
         ) : (
           <div className="space-y-2">
             {measurements.slice().reverse().map((m) => (
@@ -316,9 +318,9 @@ const BodyMeasurements = () => {
                 <div className="flex-1">
                   <p className="font-medium">{format(new Date(m.measured_at), 'PPP')}</p>
                   <div className="text-sm text-muted-foreground grid grid-cols-2 md:grid-cols-3 gap-2 mt-1">
-                    {m.chest_inches && <span>Chest: {m.chest_inches}"</span>}
-                    {m.waist_inches && <span>Waist: {m.waist_inches}"</span>}
-                    {m.hips_inches && <span>Hips: {m.hips_inches}"</span>}
+                    {m.chest_inches && <span>{t('chest')}: {m.chest_inches}"</span>}
+                    {m.waist_inches && <span>{t('waist')}: {m.waist_inches}"</span>}
+                    {m.hips_inches && <span>{t('hips')}: {m.hips_inches}"</span>}
                   </div>
                 </div>
                 <Button
