@@ -29,5 +29,21 @@
   "templates": "Templates",
   "schedule": "Schedule",
   "challenges": "Challenges",
-  "leaderboard": "Leaderboard"
+  "leaderboard": "Leaderboard",
+  "fitness_goals": "Fitness Goals",
+  "set_track_fitness_targets": "Set and track your fitness targets",
+  "your_goals": "Your Goals",
+  "primary_goal": "Primary Goal",
+  "select_your_goal": "Select your goal",
+  "lose_weight": "Lose Weight",
+  "maintain_weight": "Maintain Weight",
+  "gain_weight": "Gain Weight",
+  "build_muscle": "Build Muscle",
+  "improve_fitness": "Improve Fitness",
+  "target_weight": "Target Weight",
+  "enter_target_weight": "Enter target weight",
+  "unit": "Unit",
+  "save_goals": "Save Goals",
+  "goals_updated": "Fitness goals updated successfully!",
+  "failed_to_save": "Failed to save goals"
 }

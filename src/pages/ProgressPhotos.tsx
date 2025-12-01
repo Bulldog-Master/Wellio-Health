@@ -177,12 +177,22 @@ const ProgressPhotos = () => {
         <div className="space-y-4">
           <div>
             <Label htmlFor="photo">{t('photo')}</Label>
-            <Input
-              id="photo"
-              type="file"
-              accept="image/*"
-              onChange={handleFileSelect}
-            />
+            <div className="mt-2">
+              <label
+                htmlFor="photo"
+                className="flex items-center justify-center w-full px-4 py-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground rounded-md cursor-pointer transition-colors"
+              >
+                <Upload className="w-4 h-4 mr-2" />
+                {selectedFile ? selectedFile.name : t('chooseFile')}
+              </label>
+              <Input
+                id="photo"
+                type="file"
+                accept="image/*"
+                onChange={handleFileSelect}
+                className="sr-only"
+              />
+            </div>
             {selectedFile && (
               <p className="text-sm text-muted-foreground mt-1">
                 {t('selected')}: {selectedFile.name}

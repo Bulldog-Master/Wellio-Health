@@ -8,9 +8,11 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Target, Save, ArrowLeft } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const FitnessGoals = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation('fitness');
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     goal: "",
@@ -78,9 +80,9 @@ const FitnessGoals = () => {
         });
 
       if (error) throw error;
-      toast.success("Fitness goals updated successfully!");
+      toast.success(t('goals_updated'));
     } catch (error: any) {
-      toast.error("Failed to save profile.");
+      toast.error(t('failed_to_save'));
       console.error("Profile save error:", error);
     } finally {
       setIsLoading(false);
@@ -98,8 +100,8 @@ const FitnessGoals = () => {
           <ArrowLeft className="w-5 h-5" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold">Fitness Goals</h1>
-          <p className="text-muted-foreground">Set and track your fitness targets</p>
+          <h1 className="text-3xl font-bold">{t('fitness_goals')}</h1>
+          <p className="text-muted-foreground">{t('set_track_fitness_targets')}</p>
         </div>
       </div>
 
@@ -108,43 +110,43 @@ const FitnessGoals = () => {
           <div className="p-2 bg-accent/20 rounded-lg">
             <Target className="w-5 h-5 text-accent-foreground" />
           </div>
-          <h2 className="text-xl font-semibold">Your Goals</h2>
+          <h2 className="text-xl font-semibold">{t('your_goals')}</h2>
         </div>
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="goal">Primary Goal</Label>
+            <Label htmlFor="goal">{t('primary_goal')}</Label>
             <Select
               value={formData.goal}
               onValueChange={(value) => setFormData({ ...formData, goal: value })}
             >
               <SelectTrigger id="goal">
-                <SelectValue placeholder="Select your goal" />
+                <SelectValue placeholder={t('select_your_goal')} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="lose_weight">Lose Weight</SelectItem>
-                <SelectItem value="maintain_weight">Maintain Weight</SelectItem>
-                <SelectItem value="gain_weight">Gain Weight</SelectItem>
-                <SelectItem value="build_muscle">Build Muscle</SelectItem>
-                <SelectItem value="improve_fitness">Improve Fitness</SelectItem>
+                <SelectItem value="lose_weight">{t('lose_weight')}</SelectItem>
+                <SelectItem value="maintain_weight">{t('maintain_weight')}</SelectItem>
+                <SelectItem value="gain_weight">{t('gain_weight')}</SelectItem>
+                <SelectItem value="build_muscle">{t('build_muscle')}</SelectItem>
+                <SelectItem value="improve_fitness">{t('improve_fitness')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="target_weight">Target Weight</Label>
+              <Label htmlFor="target_weight">{t('target_weight')}</Label>
               <Input
                 id="target_weight"
                 type="number"
                 step="0.1"
-                placeholder="Enter target weight"
+                placeholder={t('enter_target_weight')}
                 value={formData.target_weight}
                 onChange={(e) => setFormData({ ...formData, target_weight: e.target.value })}
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="target_weight_unit">Unit</Label>
+              <Label htmlFor="target_weight_unit">{t('unit')}</Label>
               <Select
                 value={formData.target_weight_unit}
                 onValueChange={(value) => setFormData({ ...formData, target_weight_unit: value })}
@@ -164,7 +166,7 @@ const FitnessGoals = () => {
         <div className="flex justify-end mt-6">
           <Button onClick={handleSave} className="gap-2" disabled={isLoading}>
             <Save className="w-4 h-4" />
-            Save Goals
+            {t('save_goals')}
           </Button>
         </div>
       </Card>
