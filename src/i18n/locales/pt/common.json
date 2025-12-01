@@ -84,6 +84,8 @@
     "feed": "Feed",
     "workout": "Treino",
     "nutrition": "Nutrição",
-    "social": "Social"
+    "social": "Social",
+    "activity": "Atividade",
+    "connect": "Conectar"
   }
 }

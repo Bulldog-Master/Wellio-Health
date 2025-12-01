@@ -52,6 +52,7 @@ const Discover = lazy(() => import("@/pages/Discover"));
 const Challenges = lazy(() => import("@/pages/Challenges"));
 const Leaderboard = lazy(() => import("@/pages/Leaderboard"));
 const Feed = lazy(() => import("@/pages/Feed"));
+const Connect = lazy(() => import("@/pages/Connect"));
 const Bookmarks = lazy(() => import("@/pages/Bookmarks"));
 const UserProfile = lazy(() => import("@/pages/UserProfile"));
 const Notifications = lazy(() => import("@/pages/Notifications"));
@@ -147,6 +148,7 @@ export const AppRoutes = () => (
     <Route path="/dashboard" element={<ProtectedRoute><Layout><Dashboard /></Layout></ProtectedRoute>} />
     
     {/* Social Features */}
+    <Route path="/connect" element={<ProtectedRoute><Layout><Connect /></Layout></ProtectedRoute>} />
     <Route path="/socials" element={<ProtectedRoute><Layout><Socials /></Layout></ProtectedRoute>} />
     <Route path="/feed" element={<ProtectedRoute><Layout><Feed /></Layout></ProtectedRoute>} />
     <Route path="/discover" element={<ProtectedRoute><Layout><Discover /></Layout></ProtectedRoute>} />
