@@ -1,0 +1,109 @@
+{
+  "navigation": {
+    "main_menu": "Main navigation menu",
+    "skip_to_content": "Skip to main content",
+    "go_back": "Go back to previous page",
+    "go_home": "Go to home page",
+    "open_menu": "Open menu",
+    "close_menu": "Close menu",
+    "breadcrumb": "Breadcrumb navigation"
+  },
+  
+  "actions": {
+    "submit_form": "Submit form",
+    "cancel_action": "Cancel action",
+    "save_changes": "Save changes",
+    "delete_item": "Delete item",
+    "edit_item": "Edit item",
+    "close_dialog": "Close dialog",
+    "expand_section": "Expand section",
+    "collapse_section": "Collapse section",
+    "load_more": "Load more items",
+    "refresh_data": "Refresh data"
+  },
+  
+  "forms": {
+    "required_field": "Required field",
+    "optional_field": "Optional field",
+    "password_show": "Show password",
+    "password_hide": "Hide password",
+    "clear_input": "Clear input",
+    "search_input": "Search input",
+    "date_picker": "Select date",
+    "time_picker": "Select time",
+    "file_upload": "Upload file",
+    "dropdown_select": "Select option"
+  },
+  
+  "status": {
+    "loading": "Loading content",
+    "error_occurred": "An error occurred",
+    "success_message": "Action completed successfully",
+    "warning_message": "Warning message",
+    "info_message": "Information message",
+    "offline_mode": "You are currently offline",
+    "online_mode": "You are back online"
+  },
+  
+  "media": {
+    "play_video": "Play video",
+    "pause_video": "Pause video",
+    "mute_audio": "Mute audio",
+    "unmute_audio": "Unmute audio",
+    "fullscreen": "Enter fullscreen",
+    "exit_fullscreen": "Exit fullscreen",
+    "volume_control": "Adjust volume"
+  },
+  
+  "social": {
+    "like_post": "Like this post",
+    "unlike_post": "Unlike this post",
+    "share_post": "Share this post",
+    "comment_on_post": "Comment on this post",
+    "follow_user": "Follow this user",
+    "unfollow_user": "Unfollow this user",
+    "send_message": "Send a message",
+    "view_profile": "View user profile"
+  },
+  
+  "fitness": {
+    "log_workout": "Log a workout",
+    "track_weight": "Track your weight",
+    "log_meal": "Log a meal",
+    "start_timer": "Start timer",
+    "stop_timer": "Stop timer",
+    "pause_timer": "Pause timer",
+    "resume_timer": "Resume timer",
+    "view_progress": "View your progress",
+    "set_goal": "Set a new goal"
+  },
+  
+  "notifications": {
+    "new_notification": "New notification",
+    "mark_as_read": "Mark as read",
+    "mark_all_read": "Mark all as read",
+    "delete_notification": "Delete notification",
+    "notification_settings": "Notification settings"
+  },
+  
+  "theme": {
+    "toggle_theme": "Toggle dark/light mode",
+    "dark_mode": "Switch to dark mode",
+    "light_mode": "Switch to light mode",
+    "system_theme": "Use system theme"
+  },
+  
+  "language": {
+    "change_language": "Change language",
+    "current_language": "Current language: {{language}}"
+  },
+  
+  "images": {
+    "user_avatar": "User profile picture",
+    "post_image": "Post image",
+    "workout_image": "Workout image",
+    "food_image": "Food image",
+    "progress_photo": "Progress photo",
+    "decorative_image": "Decorative image"
+  }
+}

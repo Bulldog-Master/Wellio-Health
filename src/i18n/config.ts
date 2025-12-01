@@ -3,7 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { logMissingKey, validateTranslations } from '@/lib/translationUtils';
 
-// Import translation files
+// Import translation files - English
 import commonEN from './locales/en/common.json';
 import authEN from './locales/en/auth.json';
 import fitnessEN from './locales/en/fitness.json';
@@ -42,7 +42,12 @@ import feedEN from './locales/en/feed.json';
 import groupsEN from './locales/en/groups.json';
 import followersEN from './locales/en/followers.json';
 import scheduleEN from './locales/en/schedule.json';
+import seoEN from './locales/en/seo.json';
+import unitsEN from './locales/en/units.json';
+import a11yEN from './locales/en/a11y.json';
+import pluralsEN from './locales/en/plurals.json';
 
+// Spanish
 import commonES from './locales/es/common.json';
 import authES from './locales/es/auth.json';
 import fitnessES from './locales/es/fitness.json';
@@ -84,30 +89,67 @@ import feedES from './locales/es/feed.json';
 import groupsES from './locales/es/groups.json';
 import followersES from './locales/es/followers.json';
 import scheduleES from './locales/es/schedule.json';
+import seoES from './locales/es/seo.json';
+import unitsES from './locales/es/units.json';
+import a11yES from './locales/es/a11y.json';
+import pluralsES from './locales/es/plurals.json';
 
+// Portuguese
 import commonPT from './locales/pt/common.json';
 import authPT from './locales/pt/auth.json';
 import fitnessPT from './locales/pt/fitness.json';
 import socialPT from './locales/pt/social.json';
 import nutritionPT from './locales/pt/nutrition.json';
+import seoPT from './locales/pt/seo.json';
+import unitsPT from './locales/pt/units.json';
+import a11yPT from './locales/pt/a11y.json';
+import pluralsPT from './locales/pt/plurals.json';
 
+// French
 import commonFR from './locales/fr/common.json';
 import authFR from './locales/fr/auth.json';
 import fitnessFR from './locales/fr/fitness.json';
 import socialFR from './locales/fr/social.json';
 import nutritionFR from './locales/fr/nutrition.json';
+import seoFR from './locales/fr/seo.json';
+import unitsFR from './locales/fr/units.json';
+import a11yFR from './locales/fr/a11y.json';
+import pluralsFR from './locales/fr/plurals.json';
 
+// German
 import commonDE from './locales/de/common.json';
 import authDE from './locales/de/auth.json';
 import fitnessDE from './locales/de/fitness.json';
 import socialDE from './locales/de/social.json';
 import nutritionDE from './locales/de/nutrition.json';
+import seoDE from './locales/de/seo.json';
+import unitsDE from './locales/de/units.json';
+import a11yDE from './locales/de/a11y.json';
+import pluralsDE from './locales/de/plurals.json';
 
+// Chinese
 import commonZH from './locales/zh/common.json';
 import authZH from './locales/zh/auth.json';
 import fitnessZH from './locales/zh/fitness.json';
 import socialZH from './locales/zh/social.json';
 import nutritionZH from './locales/zh/nutrition.json';
+import seoZH from './locales/zh/seo.json';
+import unitsZH from './locales/zh/units.json';
+import a11yZH from './locales/zh/a11y.json';
+import pluralsZH from './locales/zh/plurals.json';
+
+// All namespaces - used for ns array and type safety
+export const allNamespaces = [
+  'common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 
+  'notifications', 'errors', 'rewards', 'subscription', 'food', 'workout', 
+  'settings', 'weight', 'referral', 'privacy', 'points', 'achievements', 
+  'calendar', 'records', 'voice', 'medical', 'timer', 'live', 'challenges', 
+  'fundraisers', 'macros', 'install', 'search', 'creator', 'ai', 'measurements', 
+  'trainer', 'session', 'bookmarks', 'challenges_page', 'feed', 'groups', 
+  'followers', 'schedule', 'seo', 'units', 'a11y', 'plurals'
+] as const;
+
+export type TranslationNamespace = typeof allNamespaces[number];
 
 const resources = {
   en: {
@@ -149,6 +191,10 @@ const resources = {
     groups: groupsEN,
     followers: followersEN,
     schedule: scheduleEN,
+    seo: seoEN,
+    units: unitsEN,
+    a11y: a11yEN,
+    plurals: pluralsEN,
   },
   es: {
     common: commonES,
@@ -192,6 +238,10 @@ const resources = {
     groups: groupsES,
     followers: followersES,
     schedule: scheduleES,
+    seo: seoES,
+    units: unitsES,
+    a11y: a11yES,
+    plurals: pluralsES,
   },
   pt: {
     common: commonPT,
@@ -199,6 +249,10 @@ const resources = {
     fitness: fitnessPT,
     social: socialPT,
     nutrition: nutritionPT,
+    seo: seoPT,
+    units: unitsPT,
+    a11y: a11yPT,
+    plurals: pluralsPT,
   },
   fr: {
     common: commonFR,
@@ -206,6 +260,10 @@ const resources = {
     fitness: fitnessFR,
     social: socialFR,
     nutrition: nutritionFR,
+    seo: seoFR,
+    units: unitsFR,
+    a11y: a11yFR,
+    plurals: pluralsFR,
   },
   de: {
     common: commonDE,
@@ -213,6 +271,10 @@ const resources = {
     fitness: fitnessDE,
     social: socialDE,
     nutrition: nutritionDE,
+    seo: seoDE,
+    units: unitsDE,
+    a11y: a11yDE,
+    plurals: pluralsDE,
   },
   zh: {
     common: commonZH,
@@ -220,6 +282,10 @@ const resources = {
     fitness: fitnessZH,
     social: socialZH,
     nutrition: nutritionZH,
+    seo: seoZH,
+    units: unitsZH,
+    a11y: a11yZH,
+    plurals: pluralsZH,
   },
 };
 
@@ -231,7 +297,7 @@ i18n
     resources,
     fallbackLng: 'en',
     defaultNS: 'common',
-    ns: ['common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 'notifications', 'errors', 'rewards', 'subscription', 'food', 'workout', 'settings', 'weight', 'referral', 'privacy', 'points', 'achievements', 'calendar', 'records', 'voice', 'medical', 'timer', 'live', 'challenges', 'fundraisers', 'macros', 'install', 'search', 'creator', 'ai', 'measurements', 'trainer', 'session', 'bookmarks', 'challenges_page', 'feed', 'groups', 'followers', 'schedule'],
+    ns: [...allNamespaces],
     
     interpolation: {
       escapeValue: false,

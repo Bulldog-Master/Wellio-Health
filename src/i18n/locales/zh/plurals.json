@@ -1,0 +1,22 @@
+{
+  "workout": "锻炼",
+  "workout_plural": "锻炼",
+  "workout_count": "{{count}}次锻炼",
+  "workout_count_plural": "{{count}}次锻炼",
+  "point": "积分",
+  "point_plural": "积分",
+  "point_count": "{{count}}积分",
+  "point_count_plural": "{{count}}积分",
+  "follower": "粉丝",
+  "follower_plural": "粉丝",
+  "follower_count": "{{count}}位粉丝",
+  "follower_count_plural": "{{count}}位粉丝",
+  "day": "天",
+  "day_plural": "天",
+  "day_count": "{{count}}天",
+  "day_count_plural": "{{count}}天",
+  "message": "消息",
+  "message_plural": "消息",
+  "message_count": "{{count}}条消息",
+  "message_count_plural": "{{count}}条消息"
+}

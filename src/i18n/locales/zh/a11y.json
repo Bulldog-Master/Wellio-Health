@@ -1,0 +1,32 @@
+{
+  "navigation": {
+    "main_menu": "主导航菜单",
+    "skip_to_content": "跳转到主要内容",
+    "go_back": "返回上一页",
+    "go_home": "返回首页",
+    "open_menu": "打开菜单",
+    "close_menu": "关闭菜单"
+  },
+  "actions": {
+    "submit_form": "提交表单",
+    "cancel_action": "取消操作",
+    "save_changes": "保存更改",
+    "delete_item": "删除项目",
+    "edit_item": "编辑项目",
+    "close_dialog": "关闭对话框"
+  },
+  "status": {
+    "loading": "正在加载内容",
+    "error_occurred": "发生错误",
+    "success_message": "操作成功完成"
+  },
+  "theme": {
+    "toggle_theme": "切换深色/浅色模式",
+    "dark_mode": "切换到深色模式",
+    "light_mode": "切换到浅色模式"
+  },
+  "language": {
+    "change_language": "更改语言",
+    "current_language": "当前语言: {{language}}"
+  }
+}

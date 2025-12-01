@@ -1,0 +1,98 @@
+{
+  "workout": "entrenamiento",
+  "workout_plural": "entrenamientos",
+  "workout_count": "{{count}} entrenamiento",
+  "workout_count_plural": "{{count}} entrenamientos",
+  
+  "exercise": "ejercicio",
+  "exercise_plural": "ejercicios",
+  "exercise_count": "{{count}} ejercicio",
+  "exercise_count_plural": "{{count}} ejercicios",
+  
+  "calorie": "caloría",
+  "calorie_plural": "calorías",
+  "calorie_count": "{{count}} caloría",
+  "calorie_count_plural": "{{count}} calorías",
+  
+  "point": "punto",
+  "point_plural": "puntos",
+  "point_count": "{{count}} punto",
+  "point_count_plural": "{{count}} puntos",
+  
+  "follower": "seguidor",
+  "follower_plural": "seguidores",
+  "follower_count": "{{count}} seguidor",
+  "follower_count_plural": "{{count}} seguidores",
+  
+  "following_person": "siguiendo",
+  "following_person_plural": "siguiendo",
+  "following_count": "{{count}} siguiendo",
+  "following_count_plural": "{{count}} siguiendo",
+  
+  "post": "publicación",
+  "post_plural": "publicaciones",
+  "post_count": "{{count}} publicación",
+  "post_count_plural": "{{count}} publicaciones",
+  
+  "comment": "comentario",
+  "comment_plural": "comentarios",
+  "comment_count": "{{count}} comentario",
+  "comment_count_plural": "{{count}} comentarios",
+  
+  "like": "me gusta",
+  "like_plural": "me gusta",
+  "like_count": "{{count}} me gusta",
+  "like_count_plural": "{{count}} me gusta",
+  
+  "member": "miembro",
+  "member_plural": "miembros",
+  "member_count": "{{count}} miembro",
+  "member_count_plural": "{{count}} miembros",
+  
+  "day": "día",
+  "day_plural": "días",
+  "day_count": "{{count}} día",
+  "day_count_plural": "{{count}} días",
+  
+  "week": "semana",
+  "week_plural": "semanas",
+  "week_count": "{{count}} semana",
+  "week_count_plural": "{{count}} semanas",
+  
+  "month": "mes",
+  "month_plural": "meses",
+  "month_count": "{{count}} mes",
+  "month_count_plural": "{{count}} meses",
+  
+  "notification": "notificación",
+  "notification_plural": "notificaciones",
+  "notification_count": "{{count}} notificación",
+  "notification_count_plural": "{{count}} notificaciones",
+  
+  "message": "mensaje",
+  "message_plural": "mensajes",
+  "message_count": "{{count}} mensaje",
+  "message_count_plural": "{{count}} mensajes",
+  
+  "item": "elemento",
+  "item_plural": "elementos",
+  "item_count": "{{count}} elemento",
+  "item_count_plural": "{{count}} elementos",
+  
+  "result": "resultado",
+  "result_plural": "resultados",
+  "result_count": "{{count}} resultado",
+  "result_count_plural": "{{count}} resultados",
+  
+  "minute_remaining": "{{count}} minuto restante",
+  "minute_remaining_plural": "{{count}} minutos restantes",
+  
+  "hour_ago": "hace {{count}} hora",
+  "hour_ago_plural": "hace {{count}} horas",
+  
+  "day_ago": "hace {{count}} día",
+  "day_ago_plural": "hace {{count}} días",
+  
+  "streak_day": "racha de {{count}} día",
+  "streak_day_plural": "racha de {{count}} días"
+}

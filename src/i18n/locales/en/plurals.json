@@ -1,0 +1,98 @@
+{
+  "workout": "workout",
+  "workout_plural": "workouts",
+  "workout_count": "{{count}} workout",
+  "workout_count_plural": "{{count}} workouts",
+  
+  "exercise": "exercise",
+  "exercise_plural": "exercises",
+  "exercise_count": "{{count}} exercise",
+  "exercise_count_plural": "{{count}} exercises",
+  
+  "calorie": "calorie",
+  "calorie_plural": "calories",
+  "calorie_count": "{{count}} calorie",
+  "calorie_count_plural": "{{count}} calories",
+  
+  "point": "point",
+  "point_plural": "points",
+  "point_count": "{{count}} point",
+  "point_count_plural": "{{count}} points",
+  
+  "follower": "follower",
+  "follower_plural": "followers",
+  "follower_count": "{{count}} follower",
+  "follower_count_plural": "{{count}} followers",
+  
+  "following_person": "following",
+  "following_person_plural": "following",
+  "following_count": "{{count}} following",
+  "following_count_plural": "{{count}} following",
+  
+  "post": "post",
+  "post_plural": "posts",
+  "post_count": "{{count}} post",
+  "post_count_plural": "{{count}} posts",
+  
+  "comment": "comment",
+  "comment_plural": "comments",
+  "comment_count": "{{count}} comment",
+  "comment_count_plural": "{{count}} comments",
+  
+  "like": "like",
+  "like_plural": "likes",
+  "like_count": "{{count}} like",
+  "like_count_plural": "{{count}} likes",
+  
+  "member": "member",
+  "member_plural": "members",
+  "member_count": "{{count}} member",
+  "member_count_plural": "{{count}} members",
+  
+  "day": "day",
+  "day_plural": "days",
+  "day_count": "{{count}} day",
+  "day_count_plural": "{{count}} days",
+  
+  "week": "week",
+  "week_plural": "weeks",
+  "week_count": "{{count}} week",
+  "week_count_plural": "{{count}} weeks",
+  
+  "month": "month",
+  "month_plural": "months",
+  "month_count": "{{count}} month",
+  "month_count_plural": "{{count}} months",
+  
+  "notification": "notification",
+  "notification_plural": "notifications",
+  "notification_count": "{{count}} notification",
+  "notification_count_plural": "{{count}} notifications",
+  
+  "message": "message",
+  "message_plural": "messages",
+  "message_count": "{{count}} message",
+  "message_count_plural": "{{count}} messages",
+  
+  "item": "item",
+  "item_plural": "items",
+  "item_count": "{{count}} item",
+  "item_count_plural": "{{count}} items",
+  
+  "result": "result",
+  "result_plural": "results",
+  "result_count": "{{count}} result",
+  "result_count_plural": "{{count}} results",
+  
+  "minute_remaining": "{{count}} minute remaining",
+  "minute_remaining_plural": "{{count}} minutes remaining",
+  
+  "hour_ago": "{{count}} hour ago",
+  "hour_ago_plural": "{{count}} hours ago",
+  
+  "day_ago": "{{count}} day ago",
+  "day_ago_plural": "{{count}} days ago",
+  
+  "streak_day": "{{count}} day streak",
+  "streak_day_plural": "{{count}} day streak"
+}
