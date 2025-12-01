@@ -43,7 +43,8 @@ const WorkoutSchedule = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   
-  const dateLocale = i18n.language === 'es' ? es : undefined;
+  // Use Spanish locale if language starts with 'es' (handles 'es', 'es-ES', 'es-MX', etc.)
+  const dateLocale = i18n.language?.startsWith('es') ? es : undefined;
   
   const timeOfDayOptions = [
     { value: "morning", label: `${t('morning')} (6AM - 12PM)`, icon: "🌅" },
