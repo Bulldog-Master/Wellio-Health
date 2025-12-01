@@ -19,11 +19,11 @@ import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
-const emailSchema = z.string().email("Invalid email address");
-const passwordSchema = z.string().min(6, "Password must be at least 6 characters");
-
 const Auth = () => {
   const { t } = useTranslation('auth');
+  
+  const emailSchema = z.string().email(t('invalid_email'));
+  const passwordSchema = z.string().min(6, t('password_min_length'));
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -127,22 +127,22 @@ const Auth = () => {
       emailSchema.parse(email);
       passwordSchema.parse(password);
       if (!isLogin && !name.trim()) {
-        throw new Error("Name is required");
+        throw new Error(t('name_required'));
       }
       if (!isLogin && password !== confirmPassword) {
-        throw new Error("Passwords do not match");
+        throw new Error(t('passwords_do_not_match'));
       }
       return true;
     } catch (error) {
       if (error instanceof z.ZodError) {
         toast({
-          title: "Validation Error",
+          title: t('validation_error'),
           description: error.issues[0].message,
           variant: "destructive",
         });
       } else if (error instanceof Error) {
         toast({
-          title: "Validation Error",
+          title: t('validation_error'),
           description: error.message,
           variant: "destructive",
         });
@@ -164,9 +164,10 @@ const Auth = () => {
     );
 
     if (!rateLimit.allowed) {
+      const minutes = Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 60000);
       toast({
-        title: "Too Many Attempts",
-        description: `Please try again after ${Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 60000)} minutes.`,
+        title: t('too_many_attempts'),
+        description: t('try_again_after_minutes', { minutes }),
         variant: "destructive",
       });
       return;
@@ -280,15 +281,15 @@ const Auth = () => {
         sessionStorage.removeItem('referral_code');
 
         toast({
-          title: "Account created!",
-          description: "You can now sign in with your credentials.",
+          title: t('account_created'),
+          description: t('can_signin_now'),
         });
         setIsLogin(true);
       }
     } catch (error: any) {
       toast({
-        title: "Error",
-        description: error.message || "An error occurred. Please try again.",
+        title: t('error'),
+        description: error.message || t('error_occurred'),
         variant: "destructive",
       });
     } finally {
@@ -302,8 +303,8 @@ const Auth = () => {
     if (useBackupCode) {
       if (!backupCode.trim()) {
         toast({
-          title: "Invalid Backup Code",
-          description: "Please enter a backup code.",
+          title: t('invalid_backup_code'),
+          description: t('enter_backup_code'),
           variant: "destructive",
         });
         return;
@@ -311,8 +312,8 @@ const Auth = () => {
     } else {
       if (totpCode.length !== 6) {
         toast({
-          title: "Invalid Code",
-          description: "Please enter a 6-digit code.",
+          title: t('invalid_code'),
+          description: t('enter_6digit_code'),
           variant: "destructive",
         });
         return;
@@ -342,8 +343,8 @@ const Auth = () => {
         // Sign out if verification fails
         await supabase.auth.signOut();
         throw new Error(useBackupCode 
-          ? 'Invalid backup code. Please try again.' 
-          : 'Invalid authentication code. Please try again.'
+          ? t('invalid_backup_code') 
+          : t('invalid_auth_code')
         );
       }
 
@@ -384,8 +385,8 @@ const Auth = () => {
       // Navigation will happen automatically via the auth state change listener
     } catch (error: any) {
       toast({
-        title: "Verification Failed",
-        description: error.message || "Invalid authentication code.",
+        title: t('verification_failed'),
+        description: error.message || t('invalid_auth_code'),
         variant: "destructive",
       });
     } finally {
@@ -401,7 +402,7 @@ const Auth = () => {
     } catch (error) {
       if (error instanceof z.ZodError) {
         toast({
-          title: "Validation Error",
+          title: t('validation_error'),
           description: error.issues[0].message,
           variant: "destructive",
         });
@@ -414,9 +415,10 @@ const Auth = () => {
     const rateLimit = await rateLimiter.check(rateLimitKey, RATE_LIMITS.PASSWORD_RESET);
 
     if (!rateLimit.allowed) {
+      const minutes = Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 60000);
       toast({
-        title: "Too Many Requests",
-        description: `Please try again after ${Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 60000)} minutes.`,
+        title: t('too_many_requests'),
+        description: t('try_again_after_minutes', { minutes }),
         variant: "destructive",
       });
       return;
@@ -434,15 +436,15 @@ const Auth = () => {
       if (error) throw error;
 
       toast({
-        title: "Reset Link Sent!",
-        description: "Check your email for the password reset link.",
+        title: t('reset_link_sent'),
+        description: t('check_email_reset'),
       });
       
       setIsForgotPassword(false);
     } catch (error: any) {
       toast({
-        title: "Error",
-        description: error.message || "An error occurred. Please try again.",
+        title: t('error'),
+        description: error.message || t('error_occurred'),
         variant: "destructive",
       });
     } finally {
@@ -456,18 +458,18 @@ const Auth = () => {
     try {
       passwordSchema.parse(newPassword);
       if (newPassword !== confirmPassword) {
-        throw new Error("Passwords do not match");
+        throw new Error(t('passwords_do_not_match'));
       }
     } catch (error) {
       if (error instanceof z.ZodError) {
         toast({
-          title: "Validation Error",
+          title: t('validation_error'),
           description: error.issues[0].message,
           variant: "destructive",
         });
       } else if (error instanceof Error) {
         toast({
-          title: "Validation Error",
+          title: t('validation_error'),
           description: error.message,
           variant: "destructive",
         });
@@ -485,8 +487,8 @@ const Auth = () => {
       if (error) throw error;
 
       toast({
-        title: "Password Updated!",
-        description: "Your password has been successfully reset.",
+        title: t('password_updated'),
+        description: t('password_reset_success'),
       });
       
       // Clear the hash and redirect
@@ -497,8 +499,8 @@ const Auth = () => {
       setIsLogin(true);
     } catch (error: any) {
       toast({
-        title: "Error",
-        description: error.message || "An error occurred. Please try again.",
+        title: t('error'),
+        description: error.message || t('error_occurred'),
         variant: "destructive",
       });
     } finally {
@@ -514,7 +516,7 @@ const Auth = () => {
     } catch (error) {
       if (error instanceof z.ZodError) {
         toast({
-          title: "Validation Error",
+          title: t('validation_error'),
           description: error.issues[0].message,
           variant: "destructive",
         });
@@ -537,13 +539,13 @@ const Auth = () => {
       if (error) throw error;
 
       toast({
-        title: "Magic link sent!",
-        description: "Check your email for the login link.",
+        title: t('magic_link_sent'),
+        description: t('check_email_magic'),
       });
     } catch (error: any) {
       toast({
-        title: "Error",
-        description: error.message || "An error occurred. Please try again.",
+        title: t('error'),
+        description: error.message || t('error_occurred'),
         variant: "destructive",
       });
     } finally {
@@ -555,8 +557,8 @@ const Auth = () => {
 
     if (isInIframe) {
       toast({
-        title: "Open in new tab",
-        description: "Passkey authentication doesn't work in preview mode. Click the 'Open in New Tab' button below.",
+        title: t('open_in_new_tab'),
+        description: t('passkey_preview_limitation'),
         variant: "destructive",
       });
       return;
@@ -564,8 +566,8 @@ const Auth = () => {
 
     if (!passkeySupported) {
       toast({
-        title: "Not supported",
-        description: "Passkey authentication is not supported on this device.",
+        title: t('not_supported'),
+        description: t('passkey_not_supported'),
         variant: "destructive",
       });
       return;
@@ -597,7 +599,7 @@ const Auth = () => {
           }
           
           if (!data?.actionLink) {
-            throw new Error('Authentication failed - no action link returned');
+            throw new Error(t('authentication_failed'));
           }
 
           // Navigate to the action link which will automatically sign the user in
@@ -608,14 +610,14 @@ const Auth = () => {
           
           if (authError.name === 'NotAllowedError') {
             toast({
-              title: "Authentication cancelled",
-              description: "Please approve the biometric prompt to sign in with passkey.",
+              title: t('auth_cancelled'),
+              description: t('approve_biometric'),
               variant: "destructive",
             });
           } else {
             toast({
-              title: "No passkey found",
-              description: "No passkey registered for this account. Please click 'Don't have an account? Register passkey' below to create one.",
+              title: t('no_passkey_found'),
+              description: t('register_passkey_first'),
               variant: "destructive",
             });
           }
@@ -628,7 +630,7 @@ const Auth = () => {
         } catch (error) {
           if (error instanceof z.ZodError) {
             toast({
-              title: "Validation Error",
+              title: t('validation_error'),
               description: error.issues[0].message,
               variant: "destructive",
             });
@@ -637,7 +639,7 @@ const Auth = () => {
         }
 
         if (!name) {
-          throw new Error('Please enter your name');
+          throw new Error(t('enter_name'));
         }
 
         // Register new passkey
@@ -668,8 +670,8 @@ const Auth = () => {
           console.error('[Passkey] Account creation failed:', signUpError);
           if (signUpError.message?.includes('already registered')) {
             toast({
-              title: "Account Already Exists",
-              description: "This email is already registered. Please sign in with Password or Magic Link, then add a passkey from your Profile settings.",
+              title: t('account_already_exists'),
+              description: t('email_already_registered'),
               variant: "destructive",
             });
             // Switch to password tab to help user sign in
@@ -681,7 +683,7 @@ const Auth = () => {
         }
 
         if (!authData.user) {
-          throw new Error('Failed to create account');
+          throw new Error(t('failed_create_account'));
         }
 
         console.log('[Passkey] Account created, storing passkey credential...');
@@ -718,8 +720,8 @@ const Auth = () => {
         console.log('[Passkey] Registration complete!');
         
         toast({
-          title: "Success!",
-          description: "Your account has been created with passkey authentication.",
+          title: t('success'),
+          description: t('account_created_passkey'),
         });
       }
     } catch (error: any) {
@@ -727,10 +729,10 @@ const Auth = () => {
       
       // Don't show error toast if we already showed a specific one
       if (error.name !== 'NotAllowedError' && !error.message?.includes('already registered')) {
-        let errorMessage = error.message || "Passkey authentication failed.";
+        let errorMessage = error.message || t('passkey_auth_failed');
         
         toast({
-          title: "Passkey Error",
+          title: t('passkey_error'),
           description: errorMessage,
           variant: "destructive",
         });
