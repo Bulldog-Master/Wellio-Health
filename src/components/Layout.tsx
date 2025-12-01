@@ -25,19 +25,19 @@ const Layout = ({ children }: LayoutProps) => {
               <h1 className="text-2xl font-bold gradient-text">
                 Wellio
               </h1>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-0.5 shrink-0">
                 <LanguageSwitcher />
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={() => navigate("/notifications")}
-                  className="hover:bg-sidebar-accent text-sidebar-foreground relative"
+                  className="hover:bg-sidebar-accent text-sidebar-foreground relative h-8 w-8"
                 >
-                  <Bell className="w-5 h-5" />
+                  <Bell className="w-4 h-4" />
                   {unreadCount && unreadCount > 0 && (
                     <Badge 
                       variant="destructive" 
-                      className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                      className="absolute -top-1 -right-1 h-4 w-4 flex items-center justify-center p-0 text-[10px]"
                     >
                       {unreadCount > 9 ? "9+" : unreadCount}
                     </Badge>
@@ -47,9 +47,9 @@ const Layout = ({ children }: LayoutProps) => {
                   variant="ghost"
                   size="icon"
                   onClick={() => navigate("/profile")}
-                  className="hover:bg-sidebar-accent text-sidebar-foreground"
+                  className="hover:bg-sidebar-accent text-sidebar-foreground h-8 w-8"
                 >
-                  <User className="w-5 h-5" />
+                  <User className="w-4 h-4" />
                 </Button>
                 <ThemeToggle />
               </div>
