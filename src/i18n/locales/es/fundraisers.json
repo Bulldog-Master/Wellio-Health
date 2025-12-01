@@ -18,6 +18,8 @@
   
   "form": {
     "cover_image": "Imagen de Portada",
+    "choose_file": "Elegir Archivo",
+    "no_file_selected": "ningún archivo seleccionado",
     "title": "Título",
     "title_placeholder": "Dale a tu recaudación un título claro",
     "description": "Descripción",

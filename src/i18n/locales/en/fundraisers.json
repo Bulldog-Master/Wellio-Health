@@ -18,6 +18,8 @@
   
   "form": {
     "cover_image": "Cover Image",
+    "choose_file": "Choose File",
+    "no_file_selected": "no file selected",
     "title": "Title",
     "title_placeholder": "Give your fundraiser a clear title",
     "description": "Description",

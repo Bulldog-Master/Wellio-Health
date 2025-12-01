@@ -233,12 +233,26 @@ export default function Fundraisers() {
                 <form onSubmit={handleSubmit} className="space-y-4 py-4">
                   <div className="space-y-2">
                     <Label htmlFor="image">{t('form.cover_image')}</Label>
-                    <Input
-                      id="image"
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => setFormData({ ...formData, image: e.target.files?.[0] || null })}
-                    />
+                    <div className="flex items-center gap-2">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => document.getElementById('image')?.click()}
+                        className="shrink-0"
+                      >
+                        {t('form.choose_file')}
+                      </Button>
+                      <span className="text-sm text-muted-foreground truncate">
+                        {formData.image?.name || t('form.no_file_selected')}
+                      </span>
+                      <input
+                        id="image"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setFormData({ ...formData, image: e.target.files?.[0] || null })}
+                        className="hidden"
+                      />
+                    </div>
                   </div>
 
                   <div className="space-y-2">
