@@ -6,8 +6,10 @@ import { Button } from "./ui/button";
 import { User, UserPlus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 
 export const SuggestedUsers = () => {
+  const { t } = useTranslation('common');
   const navigate = useNavigate();
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -76,7 +78,7 @@ export const SuggestedUsers = () => {
 
         if (error) throw error;
         
-        toast({ title: "Unfollowed" });
+        toast({ title: t('unfollowed') });
       } else {
         // Check if profile is private - create follow request instead
         const { data: targetProfile } = await supabase
@@ -94,7 +96,7 @@ export const SuggestedUsers = () => {
             });
 
           if (error) throw error;
-          toast({ title: "Follow request sent!" });
+          toast({ title: t('follow_request_sent') });
         } else {
           const { error } = await supabase
             .from("follows")
@@ -104,7 +106,7 @@ export const SuggestedUsers = () => {
             });
 
           if (error) throw error;
-          toast({ title: "Now following!" });
+          toast({ title: t('now_following') });
         }
       }
       
