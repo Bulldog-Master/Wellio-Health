@@ -1,4 +1,4 @@
-import { Home, Utensils, Activity, Users, Settings, Sparkles } from "lucide-react";
+import { Home, Utensils, Activity, Users, Settings, Sparkles, Heart } from "lucide-react";
 import { NavLink } from "./NavLink";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
@@ -40,6 +40,7 @@ const Navigation = () => {
     { to: "/connect", icon: Users, label: t('nav.connect'), color: "text-[hsl(var(--nav-icon-2))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-2))]" },
     { to: "/", icon: Home, label: t('dashboard'), color: "text-[hsl(var(--nav-icon-1))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-1))]" },
     { to: "/food", icon: Utensils, label: t('nav.food'), color: "text-[hsl(var(--nav-icon-5))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-5))]" },
+    { to: "/fundraisers", icon: Heart, label: t('nav.fundraisers'), color: "text-[hsl(var(--nav-icon-3))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-3))]" },
     { to: "/settings", icon: Settings, label: t('settings'), color: "text-[hsl(var(--nav-icon-6))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-6))]", showBadge: showRewardsBadge },
   ];
 
