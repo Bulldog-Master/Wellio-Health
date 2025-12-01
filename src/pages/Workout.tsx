@@ -2343,15 +2343,15 @@ const Workout = () => {
         <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30 border-2 border-emerald-200 dark:border-emerald-800 shadow-2xl">
           <DialogHeader>
             <DialogTitle className="text-2xl text-emerald-900 dark:text-emerald-100 flex items-center justify-between">
-              <span>Apps Library</span>
+              <span>{t('apps')}</span>
               <div className="flex gap-2">
                 <Button variant="outline" size="sm" onClick={handleBrowseApps} className="bg-emerald-100 dark:bg-emerald-900/50 border-emerald-300 dark:border-emerald-700 hover:bg-emerald-200 dark:hover:bg-emerald-900">
                   <Smartphone className="w-4 h-4 mr-2" />
-                  Browse Apps
+                  {t('browse_apps')}
                 </Button>
                 <Button variant="outline" size="sm" onClick={() => setShowAddApp(true)} className="bg-emerald-100 dark:bg-emerald-900/50 border-emerald-300 dark:border-emerald-700 hover:bg-emerald-200 dark:hover:bg-emerald-900">
                   <Plus className="w-4 h-4 mr-2" />
-                  Add Custom
+                  {t('add_custom')}
                 </Button>
               </div>
             </DialogTitle>
@@ -2412,7 +2412,7 @@ const Workout = () => {
               </div>
             ) : (
               <p className="text-center text-muted-foreground py-8">
-                No apps saved yet. Add your first fitness app!
+                {t('no_apps_saved')}
               </p>
             )}
           </div>
