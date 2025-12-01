@@ -19,40 +19,38 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/5">
       <div className="flex flex-col md:flex-row max-w-7xl mx-auto">
-        <aside className="hidden md:block md:w-64 md:border-r-2 md:border-sidebar-border md:min-h-screen bg-sidebar/95 backdrop-blur-sm shadow-lg">
-          <div className="sticky top-0 p-6">
-            <div className="flex items-center justify-between pb-4 border-b-2 border-sidebar-border">
-              <h1 className="text-2xl font-bold gradient-text">
-                Wellio
-              </h1>
-              <div className="flex items-center gap-1">
-                <LanguageSwitcher />
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => navigate("/notifications")}
-                  className="hover:bg-sidebar-accent text-sidebar-foreground relative"
-                >
-                  <Bell className="w-5 h-5" />
-                  {unreadCount && unreadCount > 0 && (
-                    <Badge 
-                      variant="destructive" 
-                      className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
-                    >
-                      {unreadCount > 9 ? "9+" : unreadCount}
-                    </Badge>
-                  )}
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => navigate("/profile")}
-                  className="hover:bg-sidebar-accent text-sidebar-foreground"
-                >
-                  <User className="w-5 h-5" />
-                </Button>
-                <ThemeToggle />
-              </div>
+        <aside className="hidden md:block md:w-72 md:border-r-2 md:border-sidebar-border md:min-h-screen bg-sidebar/95 backdrop-blur-sm shadow-lg">
+          <div className="sticky top-0 p-4">
+            <h1 className="text-2xl font-bold gradient-text pb-3 border-b-2 border-sidebar-border">
+              Wellio
+            </h1>
+            <div className="flex items-center justify-center gap-1 py-3 border-b-2 border-sidebar-border">
+              <LanguageSwitcher />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate("/notifications")}
+                className="hover:bg-sidebar-accent text-sidebar-foreground relative"
+              >
+                <Bell className="w-5 h-5" />
+                {unreadCount && unreadCount > 0 && (
+                  <Badge 
+                    variant="destructive" 
+                    className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                  >
+                    {unreadCount > 9 ? "9+" : unreadCount}
+                  </Badge>
+                )}
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate("/profile")}
+                className="hover:bg-sidebar-accent text-sidebar-foreground"
+              >
+                <User className="w-5 h-5" />
+              </Button>
+              <ThemeToggle />
             </div>
             
             <Navigation />
