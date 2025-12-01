@@ -23,16 +23,16 @@ const ThemeToggle = () => {
 
   return (
     <Button
-      variant="outline"
+      variant="ghost"
       size="icon"
       onClick={toggleTheme}
-      className="rounded-lg border transition-colors hover:bg-accent/10"
+      className="hover:bg-sidebar-accent text-sidebar-foreground"
       aria-label="Toggle theme"
     >
       {theme === "light" ? (
-        <Moon className="h-4 w-4" />
+        <Moon className="w-5 h-5" />
       ) : (
-        <Sun className="h-4 w-4" />
+        <Sun className="w-5 h-5" />
       )}
     </Button>
   );
