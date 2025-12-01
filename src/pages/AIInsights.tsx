@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Brain, RefreshCw, TrendingUp, Activity, Apple, Dumbbell } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -18,6 +19,7 @@ interface AIInsight {
 
 const AIInsights = () => {
   const { toast } = useToast();
+  const { t } = useTranslation('ai');
   const [insights, setInsights] = useState<AIInsight[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -57,25 +59,25 @@ const AIInsights = () => {
 
       if (error) {
         if (error.message?.includes('429')) {
-          throw new Error('AI rate limit exceeded. Please try again later.');
+          throw new Error(t('rate_limit_exceeded'));
         }
         if (error.message?.includes('402')) {
-          throw new Error('AI credits exhausted. Please add credits to continue.');
+          throw new Error(t('credits_exhausted'));
         }
         throw error;
       }
 
       toast({
-        title: "Insights generated",
-        description: "New AI insights have been created based on your health data.",
+        title: t('insights_generated'),
+        description: t('insights_generated_desc'),
       });
 
       fetchInsights();
     } catch (error: any) {
       console.error('Error generating insights:', error);
       toast({
-        title: "Error",
-        description: error.message || "Failed to generate insights. Please try again.",
+        title: t('error'),
+        description: error.message || t('failed_to_generate'),
         variant: "destructive",
       });
     } finally {
@@ -90,25 +92,25 @@ const AIInsights = () => {
 
       if (error) {
         if (error.message?.includes('429')) {
-          throw new Error('AI rate limit exceeded. Please try again later.');
+          throw new Error(t('rate_limit_exceeded'));
         }
         if (error.message?.includes('402')) {
-          throw new Error('AI credits exhausted. Please add credits to continue.');
+          throw new Error(t('credits_exhausted'));
         }
         throw error;
       }
 
       toast({
-        title: "Workout recommendations ready",
-        description: "AI has generated personalized workout recommendations for you.",
+        title: t('workout_recommendations_ready'),
+        description: t('workout_recommendations_desc'),
       });
 
       fetchInsights();
     } catch (error: any) {
       console.error('Error generating workout recommendations:', error);
       toast({
-        title: "Error",
-        description: error.message || "Failed to generate recommendations. Please try again.",
+        title: t('error'),
+        description: error.message || t('failed_to_generate'),
         variant: "destructive",
       });
     } finally {
@@ -123,25 +125,25 @@ const AIInsights = () => {
 
       if (error) {
         if (error.message?.includes('429')) {
-          throw new Error('AI rate limit exceeded. Please try again later.');
+          throw new Error(t('rate_limit_exceeded'));
         }
         if (error.message?.includes('402')) {
-          throw new Error('AI credits exhausted. Please add credits to continue.');
+          throw new Error(t('credits_exhausted'));
         }
         throw error;
       }
 
       toast({
-        title: "Meal suggestions ready",
-        description: "AI has generated personalized meal suggestions for you.",
+        title: t('meal_suggestions_ready'),
+        description: t('meal_suggestions_desc'),
       });
 
       fetchInsights();
     } catch (error: any) {
       console.error('Error generating meal suggestions:', error);
       toast({
-        title: "Error",
-        description: error.message || "Failed to generate suggestions. Please try again.",
+        title: t('error'),
+        description: error.message || t('failed_to_generate'),
         variant: "destructive",
       });
     } finally {
@@ -174,8 +176,8 @@ const AIInsights = () => {
             <Brain className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold">AI Insights</h1>
-            <p className="text-muted-foreground">Personalized health recommendations</p>
+            <h1 className="text-3xl font-bold">{t('ai_insights')}</h1>
+            <p className="text-muted-foreground">{t('personalized_recommendations')}</p>
           </div>
         </div>
         <div className="flex gap-2">
@@ -186,7 +188,7 @@ const AIInsights = () => {
             className="gap-2"
           >
             <Dumbbell className={`w-4 h-4 ${isGeneratingWorkouts ? 'animate-spin' : ''}`} />
-            {isGeneratingWorkouts ? 'Generating...' : 'Workout Tips'}
+            {isGeneratingWorkouts ? t('generating') : t('workout_tips')}
           </Button>
           <Button 
             onClick={handleGenerateMeals} 
@@ -195,7 +197,7 @@ const AIInsights = () => {
             className="gap-2"
           >
             <Apple className={`w-4 h-4 ${isGeneratingMeals ? 'animate-spin' : ''}`} />
-            {isGeneratingMeals ? 'Generating...' : 'Meal Ideas'}
+            {isGeneratingMeals ? t('generating') : t('meal_ideas')}
           </Button>
           <Button 
             onClick={handleGenerateInsights} 
@@ -203,7 +205,7 @@ const AIInsights = () => {
             className="gap-2"
           >
             <RefreshCw className={`w-4 h-4 ${isGenerating ? 'animate-spin' : ''}`} />
-            {isGenerating ? 'Generating...' : 'Generate Insights'}
+            {isGenerating ? t('generating') : t('generate_insights')}
           </Button>
         </div>
       </div>
@@ -214,23 +216,22 @@ const AIInsights = () => {
             <Brain className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="text-xl font-semibold mb-2">AI-Powered Health Analysis</h3>
+            <h3 className="text-xl font-semibold mb-2">{t('ai_powered_analysis')}</h3>
             <p className="text-white/90 mb-4">
-              Get personalized insights, workout recommendations, and meal suggestions based on your data.
-              Our AI analyzes patterns to provide actionable recommendations for your health journey.
+              {t('ai_description')}
             </p>
             <div className="grid grid-cols-3 gap-4 text-sm">
               <div className="flex items-center gap-2">
                 <Brain className="w-4 h-4" />
-                <span>General Insights</span>
+                <span>{t('general_insights')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Dumbbell className="w-4 h-4" />
-                <span>Workout Plans</span>
+                <span>{t('workout_plans')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Apple className="w-4 h-4" />
-                <span>Meal Ideas</span>
+                <span>{t('meal_ideas')}</span>
               </div>
             </div>
           </div>
@@ -239,16 +240,16 @@ const AIInsights = () => {
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="workout_recommendations">Workouts</TabsTrigger>
-          <TabsTrigger value="meal_suggestions">Meals</TabsTrigger>
-          <TabsTrigger value="general">General</TabsTrigger>
+          <TabsTrigger value="all">{t('all')}</TabsTrigger>
+          <TabsTrigger value="workout_recommendations">{t('workouts')}</TabsTrigger>
+          <TabsTrigger value="meal_suggestions">{t('meals')}</TabsTrigger>
+          <TabsTrigger value="general">{t('general')}</TabsTrigger>
         </TabsList>
 
         <TabsContent value={activeTab} className="mt-6">
         {isLoading ? (
           <Card className="p-8 bg-gradient-card shadow-md">
-            <p className="text-center text-muted-foreground">Loading insights...</p>
+            <p className="text-center text-muted-foreground">{t('loading_insights')}</p>
           </Card>
         ) : insights.filter(i => activeTab === 'all' || i.insight_type === activeTab || (activeTab === 'general' && !['workout_recommendations', 'meal_suggestions'].includes(i.insight_type))).length > 0 ? (
           insights
@@ -284,28 +285,28 @@ const AIInsights = () => {
               <Brain className="w-12 h-12 text-muted-foreground mx-auto" />
               <div>
                 <h3 className="text-lg font-semibold mb-2">
-                  {activeTab === 'all' ? 'No insights yet' : `No ${activeTab.replace(/_/g, ' ')} yet`}
+                  {activeTab === 'all' ? t('no_insights_yet') : t('no_type_yet', { type: activeTab.replace(/_/g, ' ') })}
                 </h3>
                 <p className="text-muted-foreground mb-4">
-                  Start tracking your health data, then use the buttons above to generate AI-powered recommendations.
+                  {t('start_tracking')}
                 </p>
                 <div className="flex gap-2 justify-center">
                   {activeTab === 'workout_recommendations' || activeTab === 'all' ? (
                     <Button onClick={handleGenerateWorkouts} disabled={isGeneratingWorkouts} variant="outline" className="gap-2">
                       <Dumbbell className={`w-4 h-4 ${isGeneratingWorkouts ? 'animate-spin' : ''}`} />
-                      Generate Workouts
+                      {t('generate_workouts')}
                     </Button>
                   ) : null}
                   {activeTab === 'meal_suggestions' || activeTab === 'all' ? (
                     <Button onClick={handleGenerateMeals} disabled={isGeneratingMeals} variant="outline" className="gap-2">
                       <Apple className={`w-4 h-4 ${isGeneratingMeals ? 'animate-spin' : ''}`} />
-                      Generate Meals
+                      {t('generate_meals')}
                     </Button>
                   ) : null}
                   {(activeTab === 'general' || activeTab === 'all') && (
                     <Button onClick={handleGenerateInsights} disabled={isGenerating} className="gap-2">
                       <RefreshCw className={`w-4 h-4 ${isGenerating ? 'animate-spin' : ''}`} />
-                      Generate Insights
+                      {t('generate_insights')}
                     </Button>
                   )}
                 </div>

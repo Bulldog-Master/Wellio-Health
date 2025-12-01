@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Bell, Download, Zap, Wifi, WifiOff } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const PWAFeatures = () => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const navigate = useNavigate();
+  const { t } = useTranslation('install');
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isInstalled, setIsInstalled] = useState(false);
   const [notificationPermission, setNotificationPermission] = useState<NotificationPermission>('default');
@@ -69,9 +71,9 @@ const PWAFeatures = () => {
   return (
     <div className="container mx-auto p-6 space-y-6 max-w-4xl">
       <div>
-        <h1 className="text-3xl font-bold mb-2">App Features</h1>
+        <h1 className="text-3xl font-bold mb-2">{t('app_features')}</h1>
         <p className="text-muted-foreground">
-          Enhance your Wellio experience with these powerful features
+          {t('enhance_experience')}
         </p>
       </div>
 
@@ -84,10 +86,10 @@ const PWAFeatures = () => {
             ) : (
               <WifiOff className="w-5 h-5 text-orange-500" />
             )}
-            <CardTitle>Connection Status</CardTitle>
+            <CardTitle>{t('connection_status')}</CardTitle>
           </div>
           <CardDescription>
-            {isOnline ? "You're online and syncing data" : "You're offline - changes will sync when back online"}
+            {isOnline ? t('online_syncing') : t('offline_sync_later')}
           </CardDescription>
         </CardHeader>
       </Card>
@@ -98,16 +100,16 @@ const PWAFeatures = () => {
           <CardHeader>
             <div className="flex items-center gap-2">
               <Download className="w-5 h-5 text-primary" />
-              <CardTitle>Install App</CardTitle>
+              <CardTitle>{t('install_app')}</CardTitle>
             </div>
             <CardDescription>
-              Install Wellio on your device for offline access and a native app experience
+              {t('install_for_offline')}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button onClick={handleInstall} className="w-full">
               <Download className="w-4 h-4 mr-2" />
-              Install Wellio
+              {t('install_wellio')}
             </Button>
           </CardContent>
         </Card>
@@ -119,16 +121,16 @@ const PWAFeatures = () => {
           <CardHeader>
             <div className="flex items-center gap-2">
               <Bell className="w-5 h-5 text-primary" />
-              <CardTitle>Push Notifications</CardTitle>
+              <CardTitle>{t('push_notifications')}</CardTitle>
             </div>
             <CardDescription>
-              Get reminders for workouts, meal logging, and social interactions
+              {t('notifications_description')}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button onClick={requestNotifications} className="w-full">
               <Bell className="w-4 h-4 mr-2" />
-              Enable Notifications
+              {t('enable_notifications')}
             </Button>
           </CardContent>
         </Card>
@@ -139,32 +141,32 @@ const PWAFeatures = () => {
         <CardHeader>
           <div className="flex items-center gap-2">
             <Zap className="w-5 h-5 text-yellow-500" />
-            <CardTitle>Performance Features</CardTitle>
+            <CardTitle>{t('performance_features')}</CardTitle>
           </div>
           <CardDescription>
-            Wellio uses advanced optimization techniques for blazing fast performance
+            {t('performance_description')}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-green-500 mt-2" />
             <div>
-              <p className="font-medium text-sm">Image Lazy Loading</p>
-              <p className="text-xs text-muted-foreground">Images load only when needed to save bandwidth</p>
+              <p className="font-medium text-sm">{t('image_lazy_loading')}</p>
+              <p className="text-xs text-muted-foreground">{t('image_lazy_loading_desc')}</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-green-500 mt-2" />
             <div>
-              <p className="font-medium text-sm">Intelligent Caching</p>
-              <p className="text-xs text-muted-foreground">Your data is cached for instant access</p>
+              <p className="font-medium text-sm">{t('intelligent_caching')}</p>
+              <p className="text-xs text-muted-foreground">{t('intelligent_caching_desc')}</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-green-500 mt-2" />
             <div>
-              <p className="font-medium text-sm">Code Splitting</p>
-              <p className="text-xs text-muted-foreground">Pages load on demand for faster initial load</p>
+              <p className="font-medium text-sm">{t('code_splitting')}</p>
+              <p className="text-xs text-muted-foreground">{t('code_splitting_desc')}</p>
             </div>
           </div>
         </CardContent>
@@ -173,36 +175,36 @@ const PWAFeatures = () => {
       {/* Keyboard Shortcuts */}
       <Card>
         <CardHeader>
-          <CardTitle>Keyboard Shortcuts</CardTitle>
+          <CardTitle>{t('keyboard_shortcuts')}</CardTitle>
           <CardDescription>
-            Navigate faster with these keyboard shortcuts (Alt + Key)
+            {t('keyboard_shortcuts_desc')}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 gap-3 text-sm">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Alt + H</span>
-              <span className="font-medium">Home</span>
+              <span className="font-medium">{t('home')}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Alt + F</span>
-              <span className="font-medium">Feed</span>
+              <span className="font-medium">{t('feed')}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Alt + S</span>
-              <span className="font-medium">Search</span>
+              <span className="font-medium">{t('search')}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Alt + N</span>
-              <span className="font-medium">Notifications</span>
+              <span className="font-medium">{t('notifications')}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Alt + P</span>
-              <span className="font-medium">Profile</span>
+              <span className="font-medium">{t('profile')}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Alt + M</span>
-              <span className="font-medium">Messages</span>
+              <span className="font-medium">{t('messages')}</span>
             </div>
           </div>
         </CardContent>

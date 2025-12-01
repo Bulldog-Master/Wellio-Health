@@ -27,6 +27,14 @@ import timerEN from './locales/en/timer.json';
 import liveEN from './locales/en/live.json';
 import challengesEN from './locales/en/challenges.json';
 import fundraisersEN from './locales/en/fundraisers.json';
+import macrosEN from './locales/en/macros.json';
+import installEN from './locales/en/install.json';
+import searchEN from './locales/en/search.json';
+import creatorEN from './locales/en/creator.json';
+import aiEN from './locales/en/ai.json';
+import measurementsEN from './locales/en/measurements.json';
+import trainerEN from './locales/en/trainer.json';
+import sessionEN from './locales/en/session.json';
 
 import commonES from './locales/es/common.json';
 import authES from './locales/es/auth.json';
@@ -55,6 +63,14 @@ import timerES from './locales/es/timer.json';
 import liveES from './locales/es/live.json';
 import challengesES from './locales/es/challenges.json';
 import fundraisersES from './locales/es/fundraisers.json';
+import macrosES from './locales/es/macros.json';
+import installES from './locales/es/install.json';
+import searchES from './locales/es/search.json';
+import creatorES from './locales/es/creator.json';
+import aiES from './locales/es/ai.json';
+import measurementsES from './locales/es/measurements.json';
+import trainerES from './locales/es/trainer.json';
+import sessionES from './locales/es/session.json';
 
 import commonPT from './locales/pt/common.json';
 import authPT from './locales/pt/auth.json';
@@ -106,6 +122,14 @@ const resources = {
     live: liveEN,
     challenges: challengesEN,
     fundraisers: fundraisersEN,
+    macros: macrosEN,
+    install: installEN,
+    search: searchEN,
+    creator: creatorEN,
+    ai: aiEN,
+    measurements: measurementsEN,
+    trainer: trainerEN,
+    session: sessionEN,
   },
   es: {
     common: commonES,
@@ -135,6 +159,14 @@ const resources = {
     live: liveES,
     challenges: challengesES,
     fundraisers: fundraisersES,
+    macros: macrosES,
+    install: installES,
+    search: searchES,
+    creator: creatorES,
+    ai: aiES,
+    measurements: measurementsES,
+    trainer: trainerES,
+    session: sessionES,
   },
   pt: {
     common: commonPT,
@@ -174,7 +206,7 @@ i18n
     resources,
     fallbackLng: 'en',
     defaultNS: 'common',
-    ns: ['common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 'notifications', 'errors', 'rewards', 'subscription', 'food', 'workout', 'settings', 'weight', 'referral', 'privacy', 'points', 'achievements', 'calendar', 'records', 'voice', 'medical', 'timer', 'live', 'challenges', 'fundraisers'],
+    ns: ['common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 'notifications', 'errors', 'rewards', 'subscription', 'food', 'workout', 'settings', 'weight', 'referral', 'privacy', 'points', 'achievements', 'calendar', 'records', 'voice', 'medical', 'timer', 'live', 'challenges', 'fundraisers', 'macros', 'install', 'search', 'creator', 'ai', 'measurements', 'trainer', 'session'],
     
     interpolation: {
       escapeValue: false,

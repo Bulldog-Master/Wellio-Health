@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 import { Award, Plus, X, DollarSign, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { trainerProfileSchema, validateAndSanitize } from "@/lib/validationSchemas";
@@ -23,6 +24,7 @@ const TrainerSetup = () => {
   const [certifications, setCertifications] = useState<string[]>([]);
   const [newCertification, setNewCertification] = useState("");
   const { toast } = useToast();
+  const { t } = useTranslation('trainer');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -96,7 +98,7 @@ const TrainerSetup = () => {
 
       if (validation.success === false) {
         toast({
-          title: "Validation Error",
+          title: t('validation_error'),
           description: validation.error,
           variant: "destructive",
         });
@@ -118,8 +120,8 @@ const TrainerSetup = () => {
         if (error) throw error;
 
         toast({
-          title: "Success!",
-          description: "Your trainer profile has been updated.",
+          title: t('success'),
+          description: t('profile_updated'),
         });
       } else {
         const { error } = await supabase
@@ -129,15 +131,15 @@ const TrainerSetup = () => {
         if (error) throw error;
 
         toast({
-          title: "Welcome, Trainer!",
-          description: "Your profile has been created successfully.",
+          title: t('welcome_trainer'),
+          description: t('profile_created'),
         });
       }
 
       navigate('/trainer/marketplace');
     } catch (error: any) {
       toast({
-        title: "Error",
+        title: t('error'),
         description: error.message,
         variant: "destructive",
       });
@@ -153,9 +155,9 @@ const TrainerSetup = () => {
           <Award className="w-6 h-6 text-primary" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold">Trainer Profile Setup</h1>
+          <h1 className="text-3xl font-bold">{t('trainer_profile_setup')}</h1>
           <p className="text-muted-foreground">
-            {hasProfile ? 'Update your trainer profile' : 'Create your trainer profile to start offering services'}
+            {hasProfile ? t('update_profile') : t('create_profile_desc')}
           </p>
         </div>
       </div>
@@ -163,10 +165,10 @@ const TrainerSetup = () => {
       <Card className="p-6">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="bio">Bio *</Label>
+            <Label htmlFor="bio">{t('bio')} *</Label>
             <Textarea
               id="bio"
-              placeholder="Tell clients about yourself, your experience, and training philosophy..."
+              placeholder={t('bio_placeholder')}
               value={bio}
               onChange={(e) => setBio(e.target.value)}
               rows={4}
@@ -176,7 +178,7 @@ const TrainerSetup = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="rate">Hourly Rate ($) *</Label>
+              <Label htmlFor="rate">{t('hourly_rate')} *</Label>
               <div className="relative">
                 <DollarSign className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
@@ -194,7 +196,7 @@ const TrainerSetup = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="experience">Years of Experience *</Label>
+              <Label htmlFor="experience">{t('years_experience')} *</Label>
               <Input
                 id="experience"
                 type="number"
@@ -208,12 +210,12 @@ const TrainerSetup = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="location">Location</Label>
+            <Label htmlFor="location">{t('location')}</Label>
             <div className="relative">
               <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
                 id="location"
-                placeholder="New York, NY"
+                placeholder={t('location_placeholder')}
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 className="pl-10"
@@ -222,10 +224,10 @@ const TrainerSetup = () => {
           </div>
 
           <div className="space-y-2">
-            <Label>Specialties</Label>
+            <Label>{t('specialties')}</Label>
             <div className="flex gap-2">
               <Input
-                placeholder="e.g., Weight Loss, Strength Training"
+                placeholder={t('specialties_placeholder')}
                 value={newSpecialty}
                 onChange={(e) => setNewSpecialty(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addSpecialty())}
@@ -251,10 +253,10 @@ const TrainerSetup = () => {
           </div>
 
           <div className="space-y-2">
-            <Label>Certifications</Label>
+            <Label>{t('certifications')}</Label>
             <div className="flex gap-2">
               <Input
-                placeholder="e.g., NASM-CPT, ACE"
+                placeholder={t('certifications_placeholder')}
                 value={newCertification}
                 onChange={(e) => setNewCertification(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addCertification())}
@@ -285,14 +287,14 @@ const TrainerSetup = () => {
               disabled={loading}
               className="flex-1 bg-gradient-primary hover:opacity-90"
             >
-              {loading ? "Saving..." : hasProfile ? "Update Profile" : "Create Profile"}
+              {loading ? t('saving') : hasProfile ? t('update_profile_btn') : t('create_profile_btn')}
             </Button>
             <Button
               type="button"
               variant="outline"
               onClick={() => navigate('/trainer/marketplace')}
             >
-              Cancel
+              {t('cancel')}
             </Button>
           </div>
         </form>

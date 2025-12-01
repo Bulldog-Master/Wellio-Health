@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -44,6 +45,7 @@ const LiveSessionRoom = () => {
   const { sessionId } = useParams<{ sessionId: string }>();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation('session');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const [session, setSession] = useState<Session | null>(null);
@@ -124,8 +126,8 @@ const LiveSessionRoom = () => {
     } catch (error) {
       console.error('Error fetching session:', error);
       toast({
-        title: "Error",
-        description: "Failed to load session",
+        title: t('error'),
+        description: t('failed_to_load'),
         variant: "destructive",
       });
     }
@@ -212,8 +214,8 @@ const LiveSessionRoom = () => {
     } catch (error) {
       console.error('Error sending message:', error);
       toast({
-        title: "Error",
-        description: "Failed to send message",
+        title: t('error'),
+        description: t('failed_to_send'),
         variant: "destructive",
       });
     }
@@ -243,7 +245,7 @@ const LiveSessionRoom = () => {
     return (
       <Layout>
         <div className="container mx-auto p-6">
-          <p>Loading session...</p>
+          <p>{t('loading_session')}</p>
         </div>
       </Layout>
     );
@@ -263,14 +265,14 @@ const LiveSessionRoom = () => {
                 </div>
                 <Button variant="destructive" onClick={handleLeaveSession}>
                   <LogOut className="mr-2 h-4 w-4" />
-                  Leave
+                  {t('leave')}
                 </Button>
               </CardHeader>
               <CardContent>
                 <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
                   <div className="text-center">
                     <Video className="h-12 w-12 mx-auto mb-2 text-muted-foreground" />
-                    <p className="text-muted-foreground">Video streaming coming soon</p>
+                    <p className="text-muted-foreground">{t('video_coming_soon')}</p>
                   </div>
                 </div>
               </CardContent>
@@ -279,7 +281,7 @@ const LiveSessionRoom = () => {
             {/* Chat */}
             <Card className="flex-1">
               <CardHeader>
-                <CardTitle>Live Chat</CardTitle>
+                <CardTitle>{t('live_chat')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <ScrollArea className="h-[300px] pr-4 mb-4">
@@ -294,7 +296,7 @@ const LiveSessionRoom = () => {
                         <div className="flex-1">
                           <div className="flex items-center gap-2">
                             <span className="font-semibold text-sm">
-                              {msg.profiles?.username || 'Unknown'}
+                              {msg.profiles?.username || t('unknown')}
                             </span>
                             <span className="text-xs text-muted-foreground">
                               {new Date(msg.created_at).toLocaleTimeString()}
@@ -312,7 +314,7 @@ const LiveSessionRoom = () => {
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-                    placeholder="Type a message..."
+                    placeholder={t('type_message')}
                   />
                   <Button onClick={sendMessage}>
                     <Send className="h-4 w-4" />
@@ -328,7 +330,7 @@ const LiveSessionRoom = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Users className="h-5 w-5" />
-                  Participants ({participants.length})
+                  {t('participants')} ({participants.length})
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -343,10 +345,10 @@ const LiveSessionRoom = () => {
                         </Avatar>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium truncate">
-                            {participant.profiles?.username || 'Unknown'}
+                            {participant.profiles?.username || t('unknown')}
                           </p>
                           {session.host_id === participant.user_id && (
-                            <span className="text-xs text-muted-foreground">Host</span>
+                            <span className="text-xs text-muted-foreground">{t('host')}</span>
                           )}
                         </div>
                         <div className="h-2 w-2 rounded-full bg-green-500" />

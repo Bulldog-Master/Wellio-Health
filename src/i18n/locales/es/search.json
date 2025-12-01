@@ -1,0 +1,23 @@
+{
+  "search_discover": "Buscar y Descubrir",
+  "find_users_posts": "Encuentra usuarios, publicaciones y temas de tendencia",
+  "search_placeholder": "Buscar usuarios, publicaciones o hashtags...",
+  "users": "Usuarios",
+  "posts": "Publicaciones",
+  "hashtags": "Hashtags",
+  "searching": "Buscando...",
+  "anonymous": "Anónimo",
+  "pts": "pts",
+  "day_streak": "días de racha",
+  "followers": "seguidores",
+  "following": "Siguiendo",
+  "follow": "Seguir",
+  "no_users_found": "No se encontraron usuarios que coincidan con \"{{query}}\"",
+  "no_posts_found": "No se encontraron publicaciones que coincidan con \"{{query}}\"",
+  "no_hashtags_found": "No se encontraron hashtags que coincidan con \"{{query}}\"",
+  "post": "publicación",
+  "view_posts": "Ver Publicaciones",
+  "top_users": "Usuarios Destacados",
+  "follow_status_updated": "Estado de seguimiento actualizado",
+  "error": "Error"
+}

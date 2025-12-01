@@ -5,12 +5,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, LineChart, Line, XAxis, YAxis, CartesianGrid } from "recharts";
 import { format, subDays, startOfDay } from "date-fns";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const MacrosDashboard = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation('macros');
   const [nutritionData, setNutritionData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [timeFrame, setTimeFrame] = useState<'today' | 'week'>('today');
@@ -83,9 +85,9 @@ const MacrosDashboard = () => {
   }, [todayData, nutritionData, timeFrame]);
 
   const pieData = [
-    { name: 'Protein', value: currentMacros.protein * 4, grams: currentMacros.protein },
-    { name: 'Carbs', value: currentMacros.carbs * 4, grams: currentMacros.carbs },
-    { name: 'Fat', value: currentMacros.fat * 9, grams: currentMacros.fat }
+    { name: t('protein'), value: currentMacros.protein * 4, grams: currentMacros.protein },
+    { name: t('carbs'), value: currentMacros.carbs * 4, grams: currentMacros.carbs },
+    { name: t('fat'), value: currentMacros.fat * 9, grams: currentMacros.fat }
   ];
 
   const COLORS = ['#8884d8', '#82ca9d', '#ffc658'];
@@ -125,19 +127,19 @@ const MacrosDashboard = () => {
         className="gap-2 mb-2"
       >
         <ArrowLeft className="w-4 h-4" />
-        Back to Dashboard
+        {t('back_to_dashboard')}
       </Button>
 
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Macros Dashboard</h1>
-          <p className="text-muted-foreground">Track your protein, carbs, and fats</p>
+          <h1 className="text-3xl font-bold">{t('macros_dashboard')}</h1>
+          <p className="text-muted-foreground">{t('track_macros')}</p>
         </div>
         
         <Tabs value={timeFrame} onValueChange={(v) => setTimeFrame(v as 'today' | 'week')}>
           <TabsList>
-            <TabsTrigger value="today">Today</TabsTrigger>
-            <TabsTrigger value="week">7 Days</TabsTrigger>
+            <TabsTrigger value="today">{t('today')}</TabsTrigger>
+            <TabsTrigger value="week">{t('seven_days')}</TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
@@ -145,42 +147,42 @@ const MacrosDashboard = () => {
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card className="p-6">
-          <p className="text-sm text-muted-foreground mb-1">Total Calories</p>
+          <p className="text-sm text-muted-foreground mb-1">{t('total_calories')}</p>
           <p className="text-3xl font-bold text-primary">{Math.round(currentMacros.calories)}</p>
-          <p className="text-xs text-muted-foreground mt-1">kcal</p>
+          <p className="text-xs text-muted-foreground mt-1">{t('kcal')}</p>
         </Card>
         <Card className="p-6">
-          <p className="text-sm text-muted-foreground mb-1">Protein</p>
+          <p className="text-sm text-muted-foreground mb-1">{t('protein')}</p>
           <p className="text-3xl font-bold" style={{ color: COLORS[0] }}>
             {Math.round(currentMacros.protein)}g
           </p>
           <p className="text-xs text-muted-foreground mt-1">
-            {Math.round((currentMacros.protein * 4 / currentMacros.calories) * 100 || 0)}% of calories
+            {Math.round((currentMacros.protein * 4 / currentMacros.calories) * 100 || 0)}% {t('of_calories')}
           </p>
         </Card>
         <Card className="p-6">
-          <p className="text-sm text-muted-foreground mb-1">Carbs</p>
+          <p className="text-sm text-muted-foreground mb-1">{t('carbs')}</p>
           <p className="text-3xl font-bold" style={{ color: COLORS[1] }}>
             {Math.round(currentMacros.carbs)}g
           </p>
           <p className="text-xs text-muted-foreground mt-1">
-            {Math.round((currentMacros.carbs * 4 / currentMacros.calories) * 100 || 0)}% of calories
+            {Math.round((currentMacros.carbs * 4 / currentMacros.calories) * 100 || 0)}% {t('of_calories')}
           </p>
         </Card>
         <Card className="p-6">
-          <p className="text-sm text-muted-foreground mb-1">Fat</p>
+          <p className="text-sm text-muted-foreground mb-1">{t('fat')}</p>
           <p className="text-3xl font-bold" style={{ color: COLORS[2] }}>
             {Math.round(currentMacros.fat)}g
           </p>
           <p className="text-xs text-muted-foreground mt-1">
-            {Math.round((currentMacros.fat * 9 / currentMacros.calories) * 100 || 0)}% of calories
+            {Math.round((currentMacros.fat * 9 / currentMacros.calories) * 100 || 0)}% {t('of_calories')}
           </p>
         </Card>
       </div>
 
       {/* Pie Chart */}
       <Card className="p-6">
-        <h3 className="text-lg font-semibold mb-4">Macro Distribution</h3>
+        <h3 className="text-lg font-semibold mb-4">{t('macro_distribution')}</h3>
         {currentMacros.calories > 0 ? (
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
@@ -208,24 +210,24 @@ const MacrosDashboard = () => {
             </PieChart>
           </ResponsiveContainer>
         ) : (
-          <p className="text-center text-muted-foreground py-12">No nutrition data yet</p>
+          <p className="text-center text-muted-foreground py-12">{t('no_nutrition_data')}</p>
         )}
       </Card>
 
       {/* Trend Chart */}
       {weeklyData.length > 0 && (
         <Card className="p-6">
-          <h3 className="text-lg font-semibold mb-4">Weekly Trends</h3>
+          <h3 className="text-lg font-semibold mb-4">{t('weekly_trends')}</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={weeklyData}>
               <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
               <XAxis dataKey="date" className="text-xs" />
-              <YAxis className="text-xs" label={{ value: 'Grams', angle: -90, position: 'insideLeft' }} />
+              <YAxis className="text-xs" label={{ value: t('grams'), angle: -90, position: 'insideLeft' }} />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="protein" stroke={COLORS[0]} name="Protein" />
-              <Line type="monotone" dataKey="carbs" stroke={COLORS[1]} name="Carbs" />
-              <Line type="monotone" dataKey="fat" stroke={COLORS[2]} name="Fat" />
+              <Line type="monotone" dataKey="protein" stroke={COLORS[0]} name={t('protein')} />
+              <Line type="monotone" dataKey="carbs" stroke={COLORS[1]} name={t('carbs')} />
+              <Line type="monotone" dataKey="fat" stroke={COLORS[2]} name={t('fat')} />
             </LineChart>
           </ResponsiveContainer>
         </Card>

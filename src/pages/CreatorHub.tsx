@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -10,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 
 const CreatorHub = () => {
   const { toast } = useToast();
+  const { t } = useTranslation('creator');
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState("overview");
 
@@ -72,7 +74,7 @@ const CreatorHub = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["creator-content"] });
-      toast({ title: "Content updated successfully" });
+      toast({ title: t('content_updated') });
     },
   });
 
@@ -80,19 +82,19 @@ const CreatorHub = () => {
     <div className="container mx-auto p-6 space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">Creator Hub</h1>
-          <p className="text-muted-foreground">Manage your content and grow your audience</p>
+          <h1 className="text-3xl font-bold">{t('creator_hub')}</h1>
+          <p className="text-muted-foreground">{t('manage_content')}</p>
         </div>
         <Button>
           <Plus className="w-4 h-4 mr-2" />
-          Create Content
+          {t('create_content')}
         </Button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Content</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('total_content')}</CardTitle>
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -102,7 +104,7 @@ const CreatorHub = () => {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Followers</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('followers')}</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -112,7 +114,7 @@ const CreatorHub = () => {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Views</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('total_views')}</CardTitle>
             <Eye className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -122,7 +124,7 @@ const CreatorHub = () => {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Likes</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('total_likes')}</CardTitle>
             <Heart className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -133,21 +135,20 @@ const CreatorHub = () => {
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList>
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="content">My Content</TabsTrigger>
-          <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsTrigger value="overview">{t('overview')}</TabsTrigger>
+          <TabsTrigger value="content">{t('my_content')}</TabsTrigger>
+          <TabsTrigger value="analytics">{t('analytics')}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle>Getting Started</CardTitle>
-              <CardDescription>Start creating and sharing content with your audience</CardDescription>
+              <CardTitle>{t('getting_started')}</CardTitle>
+              <CardDescription>{t('getting_started_desc')}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
               <p className="text-sm text-muted-foreground">
-                Welcome to the Creator Hub! Here you can create workout programs, recipes, meal plans, and articles
-                to share with the community.
+                {t('welcome_message')}
               </p>
             </CardContent>
           </Card>
@@ -161,7 +162,7 @@ const CreatorHub = () => {
                   <div className="flex justify-between items-start">
                     <CardTitle className="text-lg">{item.title}</CardTitle>
                     <Badge variant={item.is_published ? "default" : "secondary"}>
-                      {item.is_published ? "Published" : "Draft"}
+                      {item.is_published ? t('published') : t('draft')}
                     </Badge>
                   </div>
                   <CardDescription className="capitalize">{item.content_type}</CardDescription>
@@ -182,7 +183,7 @@ const CreatorHub = () => {
                     className="w-full"
                     onClick={() => togglePublish.mutate({ id: item.id, isPublished: item.is_published })}
                   >
-                    {item.is_published ? "Unpublish" : "Publish"}
+                    {item.is_published ? t('unpublish') : t('publish')}
                   </Button>
                 </CardContent>
               </Card>
@@ -193,11 +194,11 @@ const CreatorHub = () => {
         <TabsContent value="analytics">
           <Card>
             <CardHeader>
-              <CardTitle>Analytics</CardTitle>
-              <CardDescription>Track your content performance</CardDescription>
+              <CardTitle>{t('analytics')}</CardTitle>
+              <CardDescription>{t('track_performance')}</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">Detailed analytics coming soon!</p>
+              <p className="text-sm text-muted-foreground">{t('analytics_coming_soon')}</p>
             </CardContent>
           </Card>
         </TabsContent>

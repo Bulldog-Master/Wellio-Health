@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,7 @@ import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
 const Search = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation('search');
   const queryClient = useQueryClient();
   const [searchQuery, setSearchQuery] = useState("");
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
@@ -111,7 +113,7 @@ const Search = () => {
         queryClient.setQueryData(["user-follows"], context.previousFollows);
       }
       toast({
-        title: "Error",
+        title: t('error'),
         description: err.message,
         variant: "destructive",
       });
@@ -119,7 +121,7 @@ const Search = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user-follows"] });
       queryClient.invalidateQueries({ queryKey: ["user-search"] });
-      toast({ title: "Follow status updated" });
+      toast({ title: t('follow_status_updated') });
     },
   });
 
@@ -191,8 +193,8 @@ const Search = () => {
   return (
     <div className="container mx-auto p-6 max-w-4xl space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Search & Discover</h1>
-        <p className="text-muted-foreground">Find users, posts, and trending topics</p>
+        <h1 className="text-3xl font-bold">{t('search_discover')}</h1>
+        <p className="text-muted-foreground">{t('find_users_posts')}</p>
       </div>
 
       {/* Search Bar */}
@@ -201,7 +203,7 @@ const Search = () => {
           <div className="relative">
             <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
             <Input
-              placeholder="Search users, posts, or hashtags..."
+              placeholder={t('search_placeholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10"
@@ -216,23 +218,23 @@ const Search = () => {
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="users" className="gap-2">
               <User className="h-4 w-4" />
-              Users
+              {t('users')}
             </TabsTrigger>
             <TabsTrigger value="posts" className="gap-2">
               <FileText className="h-4 w-4" />
-              Posts
+              {t('posts')}
             </TabsTrigger>
             <TabsTrigger value="hashtags" className="gap-2">
               <Hash className="h-4 w-4" />
-              Hashtags
+              {t('hashtags')}
             </TabsTrigger>
           </TabsList>
 
           {/* Users Tab */}
           <TabsContent value="users" className="mt-4">
-            <h2 className="text-xl font-semibold mb-4">Users</h2>
+            <h2 className="text-xl font-semibold mb-4">{t('users')}</h2>
           {isLoading ? (
-            <p className="text-muted-foreground">Searching...</p>
+            <p className="text-muted-foreground">{t('searching')}</p>
           ) : searchResults && searchResults.length > 0 ? (
             <div className="space-y-3">
               {searchResults.map((user) => (
@@ -250,21 +252,21 @@ const Search = () => {
                           </AvatarFallback>
                         </Avatar>
                         <div className="flex-1">
-                          <p className="font-semibold">{user.full_name || "Anonymous"}</p>
+                          <p className="font-semibold">{user.full_name || t('anonymous')}</p>
                           {user.username && (
                             <p className="text-sm text-muted-foreground">@{user.username}</p>
                           )}
                           <div className="flex items-center gap-3 mt-1">
                             <Badge variant="secondary" className="text-xs">
                               <Trophy className="h-3 w-3 mr-1" />
-                              {user.total_points} pts
+                              {user.total_points} {t('pts')}
                             </Badge>
                             <Badge variant="secondary" className="text-xs">
                               <TrendingUp className="h-3 w-3 mr-1" />
-                              {user.current_streak} day streak
+                              {user.current_streak} {t('day_streak')}
                             </Badge>
                             <span className="text-xs text-muted-foreground">
-                              {user.followers_count} followers
+                              {user.followers_count} {t('followers')}
                             </span>
                           </div>
                         </div>
@@ -277,12 +279,12 @@ const Search = () => {
                         {isFollowing(user.id) ? (
                           <>
                             <UserCheck className="h-4 w-4 mr-2" />
-                            Following
+                            {t('following')}
                           </>
                         ) : (
                           <>
                             <UserPlus className="h-4 w-4 mr-2" />
-                            Follow
+                            {t('follow')}
                           </>
                         )}
                       </Button>
@@ -294,7 +296,7 @@ const Search = () => {
           ) : (
             <Card>
               <CardContent className="p-8 text-center text-muted-foreground">
-                No users found matching "{searchQuery}"
+                {t('no_users_found', { query: searchQuery })}
               </CardContent>
             </Card>
           )}
@@ -302,7 +304,7 @@ const Search = () => {
 
           {/* Posts Tab */}
           <TabsContent value="posts" className="mt-4">
-            <h2 className="text-xl font-semibold mb-4">Posts</h2>
+            <h2 className="text-xl font-semibold mb-4">{t('posts')}</h2>
             {searchPosts && searchPosts.length > 0 ? (
               <div className="space-y-3">
                 {searchPosts.map((post: any) => (
@@ -321,7 +323,7 @@ const Search = () => {
                         </Avatar>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1">
-                            <p className="font-semibold">{post.profiles?.full_name || "Anonymous"}</p>
+                            <p className="font-semibold">{post.profiles?.full_name || t('anonymous')}</p>
                             {post.profiles?.username && (
                               <p className="text-sm text-muted-foreground">@{post.profiles.username}</p>
                             )}
@@ -352,7 +354,7 @@ const Search = () => {
             ) : (
               <Card>
                 <CardContent className="p-8 text-center text-muted-foreground">
-                  No posts found matching "{searchQuery}"
+                  {t('no_posts_found', { query: searchQuery })}
                 </CardContent>
               </Card>
             )}
@@ -360,7 +362,7 @@ const Search = () => {
 
           {/* Hashtags Tab */}
           <TabsContent value="hashtags" className="mt-4">
-            <h2 className="text-xl font-semibold mb-4">Hashtags</h2>
+            <h2 className="text-xl font-semibold mb-4">{t('hashtags')}</h2>
             {searchHashtags && searchHashtags.length > 0 ? (
               <div className="grid gap-3">
                 {searchHashtags.map((item: any) => (
@@ -381,12 +383,12 @@ const Search = () => {
                           <div>
                             <p className="font-semibold">#{item.hashtag}</p>
                             <p className="text-sm text-muted-foreground">
-                              {item.count} {item.count === 1 ? 'post' : 'posts'}
+                              {item.count} {item.count === 1 ? t('post') : t('posts')}
                             </p>
                           </div>
                         </div>
                         <Button variant="ghost" size="sm">
-                          View Posts
+                          {t('view_posts')}
                         </Button>
                       </div>
                     </CardContent>
@@ -396,7 +398,7 @@ const Search = () => {
             ) : (
               <Card>
                 <CardContent className="p-8 text-center text-muted-foreground">
-                  No hashtags found matching "{searchQuery}"
+                  {t('no_hashtags_found', { query: searchQuery })}
                 </CardContent>
               </Card>
             )}
@@ -407,7 +409,7 @@ const Search = () => {
       {/* Top Users */}
       {!searchQuery.trim() && (
         <div>
-          <h2 className="text-xl font-semibold mb-4">Top Users</h2>
+          <h2 className="text-xl font-semibold mb-4">{t('top_users')}</h2>
           {topUsers && topUsers.length > 0 ? (
             <div className="space-y-3">
               {topUsers.map((user, index) => (
@@ -432,21 +434,21 @@ const Search = () => {
                           )}
                         </div>
                         <div className="flex-1">
-                          <p className="font-semibold">{user.full_name || "Anonymous"}</p>
+                          <p className="font-semibold">{user.full_name || t('anonymous')}</p>
                           {user.username && (
                             <p className="text-sm text-muted-foreground">@{user.username}</p>
                           )}
                           <div className="flex items-center gap-3 mt-1">
                             <Badge variant="secondary" className="text-xs">
                               <Trophy className="h-3 w-3 mr-1" />
-                              {user.total_points} pts
+                              {user.total_points} {t('pts')}
                             </Badge>
                             <Badge variant="secondary" className="text-xs">
                               <TrendingUp className="h-3 w-3 mr-1" />
-                              {user.current_streak} day streak
+                              {user.current_streak} {t('day_streak')}
                             </Badge>
                             <span className="text-xs text-muted-foreground">
-                              {user.followers_count} followers
+                              {user.followers_count} {t('followers')}
                             </span>
                           </div>
                         </div>
@@ -459,12 +461,12 @@ const Search = () => {
                         {isFollowing(user.id) ? (
                           <>
                             <UserCheck className="h-4 w-4 mr-2" />
-                            Following
+                            {t('following')}
                           </>
                         ) : (
                           <>
                             <UserPlus className="h-4 w-4 mr-2" />
-                            Follow
+                            {t('follow')}
                           </>
                         )}
                       </Button>
@@ -473,13 +475,7 @@ const Search = () => {
                 </Card>
               ))}
             </div>
-          ) : (
-            <Card>
-              <CardContent className="p-8 text-center text-muted-foreground">
-                No users to display
-              </CardContent>
-            </Card>
-          )}
+          ) : null}
         </div>
       )}
     </div>

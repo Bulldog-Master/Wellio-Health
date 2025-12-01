@@ -1,0 +1,13 @@
+{
+  "loading_session": "Loading session...",
+  "leave": "Leave",
+  "video_coming_soon": "Video streaming coming soon",
+  "live_chat": "Live Chat",
+  "type_message": "Type a message...",
+  "participants": "Participants",
+  "host": "Host",
+  "unknown": "Unknown",
+  "error": "Error",
+  "failed_to_load": "Failed to load session",
+  "failed_to_send": "Failed to send message"
+}
