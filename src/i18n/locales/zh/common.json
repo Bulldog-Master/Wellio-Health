@@ -82,10 +82,13 @@
   "no_data": "无数据",
   "nav": {
     "feed": "动态",
+    "food": "食物",
     "workout": "锻炼",
     "nutrition": "营养",
     "social": "社交",
+    "socials": "社交",
     "activity": "活动",
-    "connect": "连接"
+    "connect": "连接",
+    "fundraisers": "募款"
   }
 }

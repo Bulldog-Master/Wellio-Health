@@ -82,10 +82,13 @@
   "no_data": "Sem dados",
   "nav": {
     "feed": "Feed",
+    "food": "Comida",
     "workout": "Treino",
     "nutrition": "Nutrição",
     "social": "Social",
+    "socials": "Redes",
     "activity": "Atividade",
-    "connect": "Conectar"
+    "connect": "Conectar",
+    "fundraisers": "Arrecadações"
   }
 }
