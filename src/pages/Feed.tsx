@@ -26,7 +26,7 @@ const Feed = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { t } = useTranslation('social');
+  const { t } = useTranslation(['social', 'feed']);
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedHashtag = searchParams.get("hashtag");
   const [postContent, setPostContent] = useState("");
@@ -286,7 +286,7 @@ const Feed = () => {
       setPostContent("");
       setUploadedImage(null);
       setImagePreview(null);
-      toast({ title: "Post created!" });
+      toast({ title: t('feed:post_created') });
     },
   });
 
@@ -416,8 +416,8 @@ const Feed = () => {
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
         toast({
-          title: "File too large",
-          description: "Please select an image under 5MB",
+          title: t('feed:file_too_large'),
+          description: t('feed:select_image_under'),
           variant: "destructive",
         });
         return;
@@ -453,7 +453,7 @@ const Feed = () => {
     if (platform === 'copy') {
       navigator.clipboard.writeText(shareUrl);
       setCopiedPostId(postId);
-      toast({ title: "Link copied to clipboard!" });
+      toast({ title: t('feed:link_copied') });
       setTimeout(() => setCopiedPostId(null), 2000);
     } else if (platform === 'twitter') {
       window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}`, '_blank');
@@ -487,7 +487,7 @@ const Feed = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user-bookmarks"] });
-      toast({ title: "Bookmark updated" });
+      toast({ title: t('feed:bookmark_updated') });
     },
   });
 
@@ -551,7 +551,7 @@ const Feed = () => {
       queryClient.invalidateQueries({ queryKey: ["feed-posts"] });
       setEditingPostId(null);
       setEditContent("");
-      toast({ title: "Post updated!" });
+      toast({ title: t('feed:post_updated') });
     },
   });
 
@@ -575,7 +575,7 @@ const Feed = () => {
       setReportPostId(null);
       setReportReason("");
       setReportDetails("");
-      toast({ title: "Report submitted", description: "Thank you for helping keep our community safe." });
+      toast({ title: t('feed:report_submitted'), description: t('feed:thanks_community') });
     },
   });
 
@@ -591,7 +591,7 @@ const Feed = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["feed-posts"] });
-      toast({ title: "User blocked" });
+      toast({ title: t('feed:user_blocked') });
     },
   });
 

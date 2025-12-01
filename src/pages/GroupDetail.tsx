@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,6 +17,7 @@ const GroupDetail = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { t } = useTranslation('groups');
   const [postContent, setPostContent] = useState("");
 
   const { data: group } = useQuery({
@@ -123,7 +125,7 @@ const GroupDetail = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["group-posts", groupId] });
       setPostContent("");
-      toast({ title: "Post created!" });
+      toast({ title: t('post_created') });
     },
   });
 
@@ -144,17 +146,17 @@ const GroupDetail = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["is-group-member", groupId] });
       queryClient.invalidateQueries({ queryKey: ["group", groupId] });
-      toast({ title: "Joined group!" });
+      toast({ title: t('joined_group') });
     },
   });
 
-  if (!group) return <div className="container mx-auto p-6">Loading...</div>;
+  if (!group) return <div className="container mx-auto p-6">{t('loading')}</div>;
 
   return (
     <div className="container mx-auto p-6 max-w-4xl">
       <Button variant="ghost" onClick={() => navigate("/groups")} className="mb-4">
         <ArrowLeft className="w-4 h-4 mr-2" />
-        Back to Groups
+        {t('back_to_groups')}
       </Button>
 
       <Card className="mb-6">
@@ -177,16 +179,16 @@ const GroupDetail = () => {
                       </AvatarFallback>
                     )}
                   </Avatar>
-                  <span className="text-sm">Created by {group.creator?.full_name || "Anonymous"}</span>
+                  <span className="text-sm">{t('created_by')} {group.creator?.full_name || t('anonymous')}</span>
                 </div>
                 <Badge variant="secondary">
                   <Users className="w-3 h-3 mr-1" />
-                  {group.members_count} {group.members_count === 1 ? "member" : "members"}
+                  {group.members_count} {group.members_count === 1 ? t('member') : t('members')}
                 </Badge>
               </div>
             </div>
             {!isMember && (
-              <Button onClick={() => joinGroup.mutate()}>Join Group</Button>
+              <Button onClick={() => joinGroup.mutate()}>{t('join_group')}</Button>
             )}
           </div>
         </CardHeader>
@@ -197,7 +199,7 @@ const GroupDetail = () => {
           <Card className="mb-6">
             <CardContent className="pt-6 space-y-4">
               <Textarea
-                placeholder="Share something with the group..."
+                placeholder={t('share_with_group')}
                 value={postContent}
                 onChange={(e) => setPostContent(e.target.value)}
                 rows={3}
@@ -208,7 +210,7 @@ const GroupDetail = () => {
                   disabled={!postContent.trim() || createPost.isPending}
                 >
                   <Send className="w-4 h-4 mr-2" />
-                  {createPost.isPending ? "Posting..." : "Post"}
+                  {createPost.isPending ? t('posting') : t('post')}
                 </Button>
               </div>
             </CardContent>
@@ -229,7 +231,7 @@ const GroupDetail = () => {
                       )}
                     </Avatar>
                     <div>
-                      <p className="font-semibold">{post.profile?.full_name || "Anonymous"}</p>
+                      <p className="font-semibold">{post.profile?.full_name || t('anonymous')}</p>
                       <p className="text-sm text-muted-foreground">
                         {formatDistanceToNow(new Date(post.created_at), { addSuffix: true })}
                       </p>
@@ -244,7 +246,7 @@ const GroupDetail = () => {
 
             {posts?.length === 0 && (
               <div className="text-center py-12">
-                <p className="text-muted-foreground">No posts yet. Be the first to share!</p>
+                <p className="text-muted-foreground">{t('no_posts_yet')}</p>
               </div>
             )}
           </div>

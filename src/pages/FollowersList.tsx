@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -16,6 +17,7 @@ const FollowersList = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { t } = useTranslation('followers');
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"followers" | "following" | "requests">("followers");
 
@@ -187,7 +189,7 @@ const FollowersList = () => {
         queryClient.setQueryData(["user-follows"], context.previousFollows);
       }
       toast({
-        title: "Error",
+        title: t('error'),
         description: err.message,
         variant: "destructive",
       });
@@ -196,7 +198,7 @@ const FollowersList = () => {
       queryClient.invalidateQueries({ queryKey: ["user-follows"] });
       queryClient.invalidateQueries({ queryKey: ["followers"] });
       queryClient.invalidateQueries({ queryKey: ["following"] });
-      toast({ title: "Follow status updated" });
+      toast({ title: t('follow_status_updated') });
     },
   });
 
@@ -224,7 +226,7 @@ const FollowersList = () => {
       queryClient.invalidateQueries({ queryKey: ["follow-requests"] });
       queryClient.invalidateQueries({ queryKey: ["followers"] });
       queryClient.invalidateQueries({ queryKey: ["profile"] });
-      toast({ title: "Follow request accepted" });
+      toast({ title: t('follow_request_accepted') });
     },
   });
 
@@ -237,7 +239,7 @@ const FollowersList = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["follow-requests"] });
-      toast({ title: "Follow request rejected" });
+      toast({ title: t('follow_request_rejected') });
     },
   });
 
@@ -256,21 +258,21 @@ const FollowersList = () => {
               </AvatarFallback>
             </Avatar>
             <div className="flex-1">
-              <p className="font-semibold">{user.full_name || "Anonymous"}</p>
+              <p className="font-semibold">{user.full_name || t('anonymous')}</p>
               {user.username && (
                 <p className="text-sm text-muted-foreground">@{user.username}</p>
               )}
               <div className="flex items-center gap-3 mt-1">
                 <Badge variant="secondary" className="text-xs">
                   <Trophy className="h-3 w-3 mr-1" />
-                  {user.total_points} pts
+                  {user.total_points} {t('pts')}
                 </Badge>
                 <Badge variant="secondary" className="text-xs">
                   <TrendingUp className="h-3 w-3 mr-1" />
-                  {user.current_streak} day streak
+                  {user.current_streak} {t('day_streak')}
                 </Badge>
                 <span className="text-xs text-muted-foreground">
-                  {user.followers_count} followers
+                  {user.followers_count} {t('followers')}
                 </span>
               </div>
             </div>
@@ -284,12 +286,12 @@ const FollowersList = () => {
               {isFollowing(user.id) ? (
                 <>
                   <UserCheck className="h-4 w-4 mr-2" />
-                  Following
+                  {t('following_tab')}
                 </>
               ) : (
                 <>
                   <UserPlus className="h-4 w-4 mr-2" />
-                  Follow
+                  {t('follow')}
                 </>
               )}
             </Button>
@@ -311,10 +313,10 @@ const FollowersList = () => {
         </Button>
         <div>
           <h1 className="text-3xl font-bold">
-            {profile?.full_name || "User"}'s Connections
+            {t('connections', { name: profile?.full_name || 'User' })}
           </h1>
           <p className="text-muted-foreground">
-            {profile?.followers_count || 0} followers · {profile?.following_count || 0} following
+            {profile?.followers_count || 0} {t('followers')} · {profile?.following_count || 0} {t('following')}
           </p>
         </div>
       </div>
@@ -322,14 +324,14 @@ const FollowersList = () => {
       <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "followers" | "following" | "requests")}>
         <TabsList className={`grid w-full ${userId === currentUserId ? 'grid-cols-3' : 'grid-cols-2'}`}>
           <TabsTrigger value="followers">
-            Followers ({followers?.length || 0})
+            {t('followers_tab')} ({followers?.length || 0})
           </TabsTrigger>
           <TabsTrigger value="following">
-            Following ({following?.length || 0})
+            {t('following_tab')} ({following?.length || 0})
           </TabsTrigger>
           {userId === currentUserId && (
             <TabsTrigger value="requests">
-              Requests ({followRequests?.length || 0})
+              {t('requests')} ({followRequests?.length || 0})
             </TabsTrigger>
           )}
         </TabsList>
@@ -340,7 +342,7 @@ const FollowersList = () => {
           ) : (
             <Card>
               <CardContent className="p-8 text-center text-muted-foreground">
-                No followers yet
+                {t('no_followers_yet')}
               </CardContent>
             </Card>
           )}
@@ -352,7 +354,7 @@ const FollowersList = () => {
           ) : (
             <Card>
               <CardContent className="p-8 text-center text-muted-foreground">
-                Not following anyone yet
+                {t('not_following_anyone')}
               </CardContent>
             </Card>
           )}
@@ -376,7 +378,7 @@ const FollowersList = () => {
                           </AvatarFallback>
                         </Avatar>
                         <div className="flex-1">
-                          <p className="font-semibold">{request.profile.full_name || "Anonymous"}</p>
+                          <p className="font-semibold">{request.profile.full_name || t('anonymous')}</p>
                           {request.profile.username && (
                             <p className="text-sm text-muted-foreground">@{request.profile.username}</p>
                           )}
@@ -390,7 +392,7 @@ const FollowersList = () => {
                           disabled={handleAcceptRequest.isPending}
                         >
                           <Check className="h-4 w-4 mr-2" />
-                          Accept
+                          {t('accept')}
                         </Button>
                         <Button
                           variant="outline"
@@ -399,7 +401,7 @@ const FollowersList = () => {
                           disabled={handleRejectRequest.isPending}
                         >
                           <X className="h-4 w-4 mr-2" />
-                          Reject
+                          {t('reject')}
                         </Button>
                       </div>
                     </div>
@@ -409,7 +411,7 @@ const FollowersList = () => {
             ) : (
               <Card>
                 <CardContent className="p-8 text-center text-muted-foreground">
-                  No pending follow requests
+                  {t('no_pending_requests')}
                 </CardContent>
               </Card>
             )}

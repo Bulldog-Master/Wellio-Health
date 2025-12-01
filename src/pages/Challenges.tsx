@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -15,6 +16,7 @@ const Challenges = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { t } = useTranslation('challenges_page');
   const [activeTab, setActiveTab] = useState("daily");
 
   // Fetch user profile with stats
@@ -86,7 +88,7 @@ const Challenges = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["challenge-completions"] });
       queryClient.invalidateQueries({ queryKey: ["profile-stats"] });
-      toast({ title: "Challenge completed!", description: "Points have been awarded!" });
+      toast({ title: t('challenge_completed'), description: t('points_awarded') });
     },
   });
 
@@ -110,19 +112,19 @@ const Challenges = () => {
     <div className="container mx-auto p-6 space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">Challenges</h1>
-          <p className="text-muted-foreground">Complete challenges to earn points and badges</p>
+          <h1 className="text-3xl font-bold">{t('challenges')}</h1>
+          <p className="text-muted-foreground">{t('complete_challenges')}</p>
         </div>
         <Button onClick={() => navigate('/progress-challenges')}>
           <Plus className="mr-2 h-4 w-4" />
-          Custom Challenges
+          {t('custom_challenges')}
         </Button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Points</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('total_points')}</CardTitle>
             <Trophy className="h-4 w-4 text-warning" />
           </CardHeader>
           <CardContent>
@@ -132,31 +134,31 @@ const Challenges = () => {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Current Streak</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('current_streak')}</CardTitle>
             <Flame className="h-4 w-4 text-destructive" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{profile?.current_streak || 0} days</div>
+            <div className="text-2xl font-bold">{profile?.current_streak || 0} {t('days')}</div>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Longest Streak</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('longest_streak')}</CardTitle>
             <Award className="h-4 w-4 text-success" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{profile?.longest_streak || 0} days</div>
+            <div className="text-2xl font-bold">{profile?.longest_streak || 0} {t('days')}</div>
           </CardContent>
         </Card>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList>
-          <TabsTrigger value="daily">Daily</TabsTrigger>
-          <TabsTrigger value="weekly">Weekly</TabsTrigger>
-          <TabsTrigger value="monthly">Monthly</TabsTrigger>
-          <TabsTrigger value="milestone">Milestones</TabsTrigger>
+          <TabsTrigger value="daily">{t('daily')}</TabsTrigger>
+          <TabsTrigger value="weekly">{t('weekly')}</TabsTrigger>
+          <TabsTrigger value="monthly">{t('monthly')}</TabsTrigger>
+          <TabsTrigger value="milestone">{t('milestones')}</TabsTrigger>
         </TabsList>
 
         <TabsContent value={activeTab} className="space-y-4">
@@ -184,7 +186,7 @@ const Challenges = () => {
                   <CardContent className="space-y-3">
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-muted-foreground">
-                        Target: {challenge.target_value} {challenge.target_unit}
+                        {t('target')}: {challenge.target_value} {challenge.target_unit}
                       </span>
                       <Badge variant="secondary" className="capitalize">
                         {challenge.category}
@@ -193,10 +195,10 @@ const Challenges = () => {
 
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-muted-foreground">
-                        Ends: {format(new Date(challenge.end_date), "MMM dd, yyyy")}
+                        {t('ends')}: {format(new Date(challenge.end_date), "MMM dd, yyyy")}
                       </span>
                       <span className="font-medium text-warning">
-                        +{challenge.points_reward} points
+                        +{challenge.points_reward} {t('points')}
                       </span>
                     </div>
 
@@ -211,7 +213,7 @@ const Challenges = () => {
                         }
                         disabled={completeChallenge.isPending}
                       >
-                        Mark Complete
+                        {t('mark_complete')}
                       </Button>
                     )}
                   </CardContent>
@@ -222,7 +224,7 @@ const Challenges = () => {
 
           {challenges?.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-muted-foreground">No {activeTab} challenges available</p>
+              <p className="text-muted-foreground">{t('no_challenges', { type: activeTab })}</p>
             </div>
           )}
         </TabsContent>

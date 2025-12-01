@@ -1,0 +1,20 @@
+{
+  "challenges": "Challenges",
+  "complete_challenges": "Complete challenges to earn points and badges",
+  "custom_challenges": "Custom Challenges",
+  "total_points": "Total Points",
+  "current_streak": "Current Streak",
+  "longest_streak": "Longest Streak",
+  "days": "days",
+  "daily": "Daily",
+  "weekly": "Weekly",
+  "monthly": "Monthly",
+  "milestones": "Milestones",
+  "target": "Target",
+  "ends": "Ends",
+  "points": "points",
+  "mark_complete": "Mark Complete",
+  "no_challenges": "No {{type}} challenges available",
+  "challenge_completed": "Challenge completed!",
+  "points_awarded": "Points have been awarded!"
+}
