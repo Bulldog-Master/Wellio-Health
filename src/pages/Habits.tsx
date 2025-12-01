@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { habitSchema, validateAndSanitize } from "@/lib/validationSchemas";
+import { useTranslation } from "react-i18next";
 
 interface Habit {
   id: string;
@@ -28,6 +29,8 @@ interface HabitCompletion {
 }
 
 const Habits = () => {
+  const { t } = useTranslation('fitness');
+  const { t: tCommon } = useTranslation('common');
   const { toast } = useToast();
   const navigate = useNavigate();
   const [habits, setHabits] = useState<Habit[]>([]);
@@ -103,7 +106,7 @@ const Habits = () => {
 
       if (validation.success === false) {
         toast({
-          title: "Validation Error",
+          title: t('validation_error'),
           description: validation.error,
           variant: "destructive",
         });
@@ -120,8 +123,8 @@ const Habits = () => {
       if (error) throw error;
 
       toast({
-        title: "Habit created",
-        description: `${formData.name} has been added to your habits.`,
+        title: t('habit_created'),
+        description: `${formData.name} ${t('habit_added_message')}`,
       });
 
       setFormData({ name: "", description: "", target_frequency: "daily", target_count: "1" });
@@ -130,8 +133,8 @@ const Habits = () => {
     } catch (error) {
       console.error('Error adding habit:', error);
       toast({
-        title: "Error",
-        description: "Failed to add habit. Please try again.",
+        title: tCommon('error'),
+        description: tCommon('error'),
         variant: "destructive",
       });
     }
@@ -152,16 +155,16 @@ const Habits = () => {
       if (error) throw error;
 
       toast({
-        title: "Habit completed",
-        description: "Great job staying consistent!",
+        title: t('habit_completed'),
+        description: t('great_job_consistent'),
       });
 
       fetchTodayCompletions();
     } catch (error) {
       console.error('Error completing habit:', error);
       toast({
-        title: "Error",
-        description: "Failed to complete habit.",
+        title: tCommon('error'),
+        description: tCommon('error'),
         variant: "destructive",
       });
     }
@@ -177,16 +180,16 @@ const Habits = () => {
       if (error) throw error;
 
       toast({
-        title: "Habit removed",
-        description: "The habit has been removed from your list.",
+        title: t('habit_removed'),
+        description: t('habit_removed_message'),
       });
 
       fetchHabits();
     } catch (error) {
       console.error('Error deleting habit:', error);
       toast({
-        title: "Error",
-        description: "Failed to delete habit.",
+        title: tCommon('error'),
+        description: tCommon('error'),
         variant: "destructive",
       });
     }
@@ -205,7 +208,7 @@ const Habits = () => {
         className="gap-2 mb-2"
       >
         <ArrowLeft className="w-4 h-4" />
-        Back to Activity
+        {t('back_to_activity')}
       </Button>
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-3">
@@ -213,13 +216,13 @@ const Habits = () => {
             <Target className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold">Habit Tracker</h1>
-            <p className="text-muted-foreground mt-1">Build consistent healthy habits</p>
+            <h1 className="text-3xl font-bold">{t('habit_tracker')}</h1>
+            <p className="text-muted-foreground mt-1">{t('build_consistent_habits')}</p>
           </div>
         </div>
         <Button onClick={() => setShowAddForm(!showAddForm)} className="gap-2">
           <Plus className="w-4 h-4" />
-          Add Habit
+          {t('add_habit')}
         </Button>
       </div>
 
@@ -229,32 +232,32 @@ const Habits = () => {
             <div className="p-2 bg-primary/10 rounded-xl">
               <Plus className="w-5 h-5 text-primary" />
             </div>
-            <h3 className="text-lg font-semibold">New Habit</h3>
+            <h3 className="text-lg font-semibold">{t('new_habit')}</h3>
           </div>
           <div className="space-y-4">
             <div>
-              <Label htmlFor="habit-name">Habit Name</Label>
+              <Label htmlFor="habit-name">{t('habit_name')}</Label>
               <Input
                 id="habit-name"
-                placeholder="e.g., Drink 8 glasses of water"
+                placeholder={t('habit_name_placeholder')}
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="mt-1.5"
               />
             </div>
             <div>
-              <Label htmlFor="habit-description">Description (optional)</Label>
+              <Label htmlFor="habit-description">{t('description_optional')}</Label>
               <Textarea
                 id="habit-description"
-                placeholder="Add any details..."
+                placeholder={t('add_details')}
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 className="mt-1.5 min-h-20"
               />
             </div>
             <div className="flex gap-2">
-              <Button onClick={handleAddHabit}>Create Habit</Button>
-              <Button variant="outline" onClick={() => setShowAddForm(false)}>Cancel</Button>
+              <Button onClick={handleAddHabit}>{t('create_habit')}</Button>
+              <Button variant="outline" onClick={() => setShowAddForm(false)}>{tCommon('cancel')}</Button>
             </div>
           </div>
         </Card>
@@ -265,11 +268,11 @@ const Habits = () => {
           <div className="p-2 bg-primary/10 rounded-xl">
             <Target className="w-5 h-5 text-primary" />
           </div>
-          <h3 className="text-lg font-semibold">Today's Habits</h3>
+          <h3 className="text-lg font-semibold">{t('todays_habits')}</h3>
         </div>
         <div className="space-y-3">
           {isLoading ? (
-            <p className="text-center text-muted-foreground py-8">Loading...</p>
+            <p className="text-center text-muted-foreground py-8">{t('loading')}</p>
           ) : habits.length > 0 ? (
             habits.map((habit) => {
               const completed = isHabitCompleted(habit.id);
@@ -304,7 +307,7 @@ const Habits = () => {
             })
           ) : (
             <p className="text-center text-muted-foreground py-8">
-              No habits yet. Create one to get started!
+              {t('no_habits_yet')}
             </p>
           )}
         </div>

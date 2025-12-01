@@ -795,7 +795,7 @@ const IntervalTimer = () => {
           className="gap-2"
         >
           <ArrowLeft className="h-4 w-4" />
-          {currentFolderId ? "Back to Library" : "Back to Activity"}
+          {currentFolderId ? t('back_to_library') : t('back_to_activity')}
         </Button>
       </div>
 
@@ -813,7 +813,7 @@ const IntervalTimer = () => {
               </div>
 
               <h1 className="text-xl font-semibold text-foreground absolute left-1/2 transform -translate-x-1/2">
-                Your library
+                {t('your_library')}
               </h1>
 
               <button 
@@ -832,11 +832,11 @@ const IntervalTimer = () => {
                 }}
                 className="text-primary text-lg"
               >
-                Done
+                {t('done')}
               </button>
 
               <h1 className="text-xl font-semibold text-foreground absolute left-1/2 transform -translate-x-1/2">
-                {selectedMoveTimerId ? 'Drag to reorder' : 'Select a timer'}
+                {selectedMoveTimerId ? t('drag_to_reorder') : t('select_timer')}
               </h1>
 
               <div className="w-16"></div>
@@ -850,11 +850,11 @@ const IntervalTimer = () => {
                 }}
                 className="text-primary text-lg"
               >
-                Cancel
+                {t('cancel')}
               </button>
 
               <h1 className="text-xl font-semibold text-foreground absolute left-1/2 transform -translate-x-1/2">
-                Select timers
+                {t('select_timers')}
               </h1>
 
               <button
@@ -867,7 +867,7 @@ const IntervalTimer = () => {
                 className={`text-lg ${selectedTimerIds.length > 0 ? 'text-primary' : 'text-muted-foreground'}`}
                 disabled={selectedTimerIds.length === 0}
               >
-                Next
+                {t('next')}
               </button>
             </>
           ) : isEditMode ? (
@@ -888,14 +888,14 @@ const IntervalTimer = () => {
               <h1 className="text-xl font-semibold text-foreground absolute left-1/2 transform -translate-x-1/2">
                 {currentFolderId 
                   ? folders.find(f => f.id === currentFolderId)?.name || 'Folder'
-                  : 'Your library'}
+                  : t('your_library')}
               </h1>
 
               <button
                 onClick={() => setIsEditMode(false)}
                 className="text-primary text-lg"
               >
-                Done
+                {t('done')}
               </button>
             </>
           ) : null}
@@ -907,7 +907,7 @@ const IntervalTimer = () => {
         {!currentFolderId && folders.length > 0 && (
           <>
             <h2 className="text-sm font-semibold text-muted-foreground mb-3">
-              FOLDERS
+              {t('folders')}
             </h2>
             <div className="space-y-0 divide-y divide-border mb-6">
               {folders.map((folder: any) => (
@@ -941,13 +941,13 @@ const IntervalTimer = () => {
         )}
 
         <h2 className="text-sm font-semibold text-muted-foreground mb-3">
-          TIMERS
+          {t('timers')}
         </h2>
 
         <div className="space-y-0 divide-y divide-border">
           {timers.length === 0 ? (
             <p className="text-muted-foreground py-8 text-center">
-              No timers yet. Create a folder to get started!
+              {t('no_timers_yet')}
             </p>
           ) : (
             timers.map((timer, index) => (

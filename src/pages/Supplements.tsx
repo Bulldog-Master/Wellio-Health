@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,6 +10,7 @@ import { Pill, ListChecks, TrendingUp, ArrowLeft, Plus, Trash2 } from "lucide-re
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "react-i18next";
 
 interface Supplement {
   id: string;
@@ -33,6 +34,8 @@ const popularSupplements = [
 ];
 
 const Supplements = () => {
+  const { t } = useTranslation('fitness');
+  const { t: tCommon } = useTranslation('common');
   const navigate = useNavigate();
   const { toast } = useToast();
   const [supplements, setSupplements] = useState<Supplement[]>([]);
@@ -72,8 +75,8 @@ const Supplements = () => {
     } catch (error) {
       console.error('Error fetching supplements:', error);
       toast({
-        title: "Error",
-        description: "Failed to load supplements.",
+        title: tCommon('error'),
+        description: t('failed_to_load_supplements'),
         variant: "destructive",
       });
     } finally {
@@ -112,8 +115,8 @@ const Supplements = () => {
   const handleSave = async () => {
     if (!formData.name) {
       toast({
-        title: "Name required",
-        description: "Please enter a supplement name.",
+        title: t('name_required'),
+        description: t('name_required_error'),
         variant: "destructive",
       });
       return;
@@ -124,8 +127,8 @@ const Supplements = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         toast({
-          title: "Authentication required",
-          description: "Please log in to add supplements.",
+          title: t('authentication_required'),
+          description: t('login_to_save'),
           variant: "destructive",
         });
         return;
@@ -147,8 +150,8 @@ const Supplements = () => {
       if (error) throw error;
 
       toast({
-        title: "Success",
-        description: "Supplement added to your list.",
+        title: tCommon('success'),
+        description: t('supplement_added'),
       });
 
       setIsDialogOpen(false);
@@ -156,8 +159,8 @@ const Supplements = () => {
     } catch (error) {
       console.error('Error saving supplement:', error);
       toast({
-        title: "Error",
-        description: "Failed to save supplement.",
+        title: tCommon('error'),
+        description: t('failed_to_save_supplement'),
         variant: "destructive",
       });
     } finally {
@@ -175,16 +178,16 @@ const Supplements = () => {
       if (error) throw error;
 
       toast({
-        title: "Deleted",
-        description: "Supplement removed from your list.",
+        title: tCommon('deleted'),
+        description: t('supplement_deleted'),
       });
 
       fetchSupplements();
     } catch (error) {
       console.error('Error deleting supplement:', error);
       toast({
-        title: "Error",
-        description: "Failed to delete supplement.",
+        title: tCommon('error'),
+        description: t('failed_to_delete_supplement'),
         variant: "destructive",
       });
     }
@@ -198,8 +201,8 @@ const Supplements = () => {
             <Pill className="w-6 h-6 text-primary" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold">Supplements</h1>
-            <p className="text-muted-foreground">Track and discover supplements</p>
+            <h1 className="text-3xl font-bold">{t('supplements_title')}</h1>
+            <p className="text-muted-foreground">{t('track_discover_supplements')}</p>
           </div>
         </div>
         <Button 
@@ -208,7 +211,7 @@ const Supplements = () => {
           className="gap-2"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Activity
+          {t('back_to_activity')}
         </Button>
       </div>
 
@@ -216,25 +219,25 @@ const Supplements = () => {
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="personal" className="gap-2">
             <ListChecks className="w-4 h-4" />
-            Personal List
+            {t('personal_list')}
           </TabsTrigger>
           <TabsTrigger value="popular" className="gap-2">
             <TrendingUp className="w-4 h-4" />
-            Popular
+            {t('popular')}
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="personal" className="space-y-4 mt-6">
           <Card className="p-6 bg-gradient-card shadow-md">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold">My Supplements</h3>
+              <h3 className="text-lg font-semibold">{t('my_supplements')}</h3>
               <Button size="sm" className="gap-2" onClick={handleCustomAdd}>
                 <Plus className="w-4 h-4" />
-                Add Supplement
+                {t('add_supplement')}
               </Button>
             </div>
             {isLoading ? (
-              <div className="text-center text-muted-foreground py-8">Loading...</div>
+              <div className="text-center text-muted-foreground py-8">{t('loading')}</div>
             ) : supplements.length > 0 ? (
               <div className="space-y-3">
                 {supplements.map((supplement) => (
@@ -260,12 +263,12 @@ const Supplements = () => {
                         <div className="grid grid-cols-2 gap-2 text-sm">
                           {supplement.dosage && (
                             <div>
-                              <span className="font-medium">Dosage:</span> {supplement.dosage}
+                              <span className="font-medium">{t('dosage')}:</span> {supplement.dosage}
                             </div>
                           )}
                           {supplement.frequency && (
                             <div>
-                              <span className="font-medium">Frequency:</span> {supplement.frequency}
+                              <span className="font-medium">{t('frequency')}:</span> {supplement.frequency}
                             </div>
                           )}
                         </div>
@@ -276,7 +279,7 @@ const Supplements = () => {
                             rel="noopener noreferrer"
                             className="text-sm text-primary hover:underline mt-2 inline-block"
                           >
-                            View Product
+                            {t('view_product')}
                           </a>
                         )}
                         {supplement.notes && (
@@ -297,8 +300,8 @@ const Supplements = () => {
               </div>
             ) : (
               <div className="text-center text-muted-foreground py-8">
-                <p>No supplements added yet.</p>
-                <p className="text-sm mt-2">Start adding supplements to track your intake.</p>
+                <p>{t('no_supplements_yet')}</p>
+                <p className="text-sm mt-2">{t('start_adding_supplements')}</p>
               </div>
             )}
           </Card>
@@ -307,10 +310,10 @@ const Supplements = () => {
         <TabsContent value="popular" className="space-y-4 mt-6">
           <Card className="p-6 bg-gradient-card shadow-md">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold">Popular Supplements</h3>
+              <h3 className="text-lg font-semibold">{t('popular_supplements')}</h3>
               <Button size="sm" className="gap-2" onClick={handleCustomAdd}>
                 <Plus className="w-4 h-4" />
-                Add Custom
+                {t('add_custom')}
               </Button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -342,54 +345,54 @@ const Supplements = () => {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle>Add Supplement</DialogTitle>
+            <DialogTitle>{t('add_supplement_title')}</DialogTitle>
             <DialogDescription>
-              {selectedSupplement ? "Add this supplement to your personal list" : "Add a custom supplement"}
+              {selectedSupplement ? t('add_to_personal_list') : t('add_custom_supplement')}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
             <div>
-              <Label htmlFor="name">Name *</Label>
+              <Label htmlFor="name">{t('name_required')}</Label>
               <Input
                 id="name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                placeholder="Supplement name"
+                placeholder={t('supplement_name_placeholder')}
                 className="mt-1.5"
               />
             </div>
             <div>
-              <Label htmlFor="category">Category</Label>
+              <Label htmlFor="category">{t('category')}</Label>
               <Input
                 id="category"
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                placeholder="e.g., Vitamin, Mineral"
+                placeholder={t('category_placeholder')}
                 className="mt-1.5"
               />
             </div>
             <div>
-              <Label htmlFor="dosage">Dosage</Label>
+              <Label htmlFor="dosage">{t('dosage')}</Label>
               <Input
                 id="dosage"
                 value={formData.dosage}
                 onChange={(e) => setFormData({ ...formData, dosage: e.target.value })}
-                placeholder="e.g., 1000mg"
+                placeholder={t('dosage_placeholder')}
                 className="mt-1.5"
               />
             </div>
             <div>
-              <Label htmlFor="frequency">Frequency</Label>
+              <Label htmlFor="frequency">{t('frequency')}</Label>
               <Input
                 id="frequency"
                 value={formData.frequency}
                 onChange={(e) => setFormData({ ...formData, frequency: e.target.value })}
-                placeholder="e.g., Once daily"
+                placeholder={t('frequency_placeholder')}
                 className="mt-1.5"
               />
             </div>
             <div>
-              <Label htmlFor="product_link">Product Link</Label>
+              <Label htmlFor="product_link">{t('product_link')}</Label>
               <Input
                 id="product_link"
                 type="url"
@@ -400,33 +403,33 @@ const Supplements = () => {
               />
             </div>
             <div>
-              <Label htmlFor="description">Description</Label>
+              <Label htmlFor="description">{t('description')}</Label>
               <Textarea
                 id="description"
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                placeholder="Benefits and usage notes"
+                placeholder={t('benefits_usage')}
                 className="mt-1.5"
                 rows={2}
               />
             </div>
             <div>
-              <Label htmlFor="notes">Notes</Label>
+              <Label htmlFor="notes">{t('notes')}</Label>
               <Textarea
                 id="notes"
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                placeholder="Personal notes"
+                placeholder={t('personal_notes')}
                 className="mt-1.5"
                 rows={2}
               />
             </div>
             <div className="flex gap-2">
               <Button onClick={handleSave} disabled={isSaving} className="flex-1">
-                {isSaving ? "Saving..." : "Save Supplement"}
+                {isSaving ? t('saving') : t('save_supplement')}
               </Button>
               <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
-                Cancel
+                {tCommon('cancel')}
               </Button>
             </div>
           </div>

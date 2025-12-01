@@ -5,5 +5,16 @@
   "cancel": "Cancelar",
   "create_session": "Crear Sesión",
   "create_challenge": "Crear Desafío",
-  "new_timer": "Nuevo Temporizador"
+  "new_timer": "Nuevo Temporizador",
+  "back_to_activity": "Volver a Actividad",
+  "back_to_library": "Volver a Biblioteca",
+  "your_library": "Tu biblioteca",
+  "timers": "TEMPORIZADORES",
+  "folders": "CARPETAS",
+  "no_timers_yet": "Aún no hay temporizadores. ¡Crea una carpeta para comenzar!",
+  "done": "Listo",
+  "drag_to_reorder": "Arrastra para reordenar",
+  "select_timer": "Selecciona un temporizador",
+  "select_timers": "Seleccionar temporizadores",
+  "next": "Siguiente"
 }
