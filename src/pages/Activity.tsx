@@ -5,12 +5,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import { formatDistance } from "@/lib/unitConversion";
 import { format, subDays, startOfDay } from "date-fns";
+import { es } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface ActivityLog {
   id: string;
@@ -32,6 +34,8 @@ interface WearableData {
 }
 
 const Activity = () => {
+  const { t, i18n } = useTranslation('fitness');
+  const { t: tCommon } = useTranslation('common');
   const { toast } = useToast();
   const navigate = useNavigate();
   const { preferredUnit } = useUserPreferences();
@@ -50,6 +54,9 @@ const Activity = () => {
     dataDate: format(new Date(), 'yyyy-MM-dd'),
   });
 
+  const isSpanish = i18n.language?.startsWith('es');
+  const dateLocale = isSpanish ? es : undefined;
+
   const commonDevices = [
     { value: "fitbit", label: "Fitbit" },
     { value: "apple_watch", label: "Apple Watch" },
@@ -57,7 +64,7 @@ const Activity = () => {
     { value: "samsung_health", label: "Samsung Health" },
     { value: "whoop", label: "Whoop" },
     { value: "oura", label: "Oura Ring" },
-    { value: "custom", label: "Custom Device" },
+    { value: "custom", label: t('custom_device') },
   ];
 
   useEffect(() => {
@@ -119,8 +126,8 @@ const Activity = () => {
   const handleSaveWearableData = async () => {
     if (!wearableForm.steps && !wearableForm.caloriesBurned && !wearableForm.heartRate && !wearableForm.sleepHours) {
       toast({
-        title: "No data entered",
-        description: "Please enter at least one metric.",
+        title: t('no_data_entered'),
+        description: t('enter_at_least_one_metric'),
         variant: "destructive",
       });
       return;
@@ -131,8 +138,8 @@ const Activity = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         toast({
-          title: "Authentication required",
-          description: "Please log in to save wearable data.",
+          title: t('authentication_required'),
+          description: t('login_to_save'),
           variant: "destructive",
         });
         return;
@@ -157,8 +164,8 @@ const Activity = () => {
       if (error) throw error;
 
       toast({
-        title: "Data saved",
-        description: "Wearable data has been logged successfully.",
+        title: t('data_saved'),
+        description: t('wearable_data_logged'),
       });
 
       // Reset form
@@ -176,8 +183,8 @@ const Activity = () => {
     } catch (error) {
       console.error('Error saving wearable data:', error);
       toast({
-        title: "Error",
-        description: "Failed to save wearable data.",
+        title: tCommon('error'),
+        description: t('failed_to_save_wearable'),
         variant: "destructive",
       });
     } finally {
@@ -192,8 +199,8 @@ const Activity = () => {
           <ActivityIcon className="w-6 h-6 text-primary" />
         </div>
         <div>
-          <h1 className="text-3xl font-bold">Activity</h1>
-          <p className="text-muted-foreground">Track fitness, weight, workouts, and habits</p>
+          <h1 className="text-3xl font-bold">{t('activity')}</h1>
+          <p className="text-muted-foreground">{t('activity_description')}</p>
         </div>
       </div>
 
@@ -207,8 +214,8 @@ const Activity = () => {
               <Scale className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold">Weight</h3>
-              <p className="text-sm text-muted-foreground">Track your weight progress</p>
+              <h3 className="text-lg font-semibold">{t('weight')}</h3>
+              <p className="text-sm text-muted-foreground">{t('track_weight_progress')}</p>
             </div>
           </div>
         </Card>
@@ -222,8 +229,8 @@ const Activity = () => {
               <Footprints className="w-6 h-6 text-success" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold">Step Count</h3>
-              <p className="text-sm text-muted-foreground">Daily steps & distance</p>
+              <h3 className="text-lg font-semibold">{t('step_count')}</h3>
+              <p className="text-sm text-muted-foreground">{t('daily_steps_distance')}</p>
             </div>
           </div>
         </Card>
@@ -237,8 +244,8 @@ const Activity = () => {
               <Dumbbell className="w-6 h-6 text-secondary" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold">Workout</h3>
-              <p className="text-sm text-muted-foreground">Log and plan workouts</p>
+              <h3 className="text-lg font-semibold">{t('workout')}</h3>
+              <p className="text-sm text-muted-foreground">{t('log_plan_workouts')}</p>
             </div>
           </div>
         </Card>
@@ -252,8 +259,8 @@ const Activity = () => {
               <CheckSquare className="w-6 h-6 text-accent" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold">Habits</h3>
-              <p className="text-sm text-muted-foreground">Build and track habits</p>
+              <h3 className="text-lg font-semibold">{t('habits')}</h3>
+              <p className="text-sm text-muted-foreground">{t('build_track_habits')}</p>
             </div>
           </div>
         </Card>
@@ -267,8 +274,8 @@ const Activity = () => {
               <Pill className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold">Supplements</h3>
-              <p className="text-sm text-muted-foreground">Manage your supplements</p>
+              <h3 className="text-lg font-semibold">{t('supplements')}</h3>
+              <p className="text-sm text-muted-foreground">{t('manage_supplements')}</p>
             </div>
           </div>
         </Card>
@@ -282,8 +289,8 @@ const Activity = () => {
               <Timer className="w-6 h-6 text-accent" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold">Interval Timer</h3>
-              <p className="text-sm text-muted-foreground">Custom workout timers</p>
+              <h3 className="text-lg font-semibold">{t('interval_timer')}</h3>
+              <p className="text-sm text-muted-foreground">{t('custom_workout_timers')}</p>
             </div>
           </div>
         </Card>
@@ -297,8 +304,8 @@ const Activity = () => {
               <ActivityIcon className="w-6 h-6 text-accent" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold">Live Workout Sessions</h3>
-              <p className="text-sm text-muted-foreground">Join or host live workouts</p>
+              <h3 className="text-lg font-semibold">{t('live_workout_sessions')}</h3>
+              <p className="text-sm text-muted-foreground">{t('join_host_live_workouts')}</p>
             </div>
           </div>
         </Card>
@@ -308,34 +315,34 @@ const Activity = () => {
         <Card className="p-6 bg-gradient-card shadow-md">
           <div className="flex items-center gap-2 mb-2">
             <Calendar className="w-5 h-5 text-primary" />
-            <h3 className="font-semibold">Workouts</h3>
+            <h3 className="font-semibold">{t('workouts')}</h3>
           </div>
           <p className="text-3xl font-bold text-primary">{weeklyStats.workoutCount}</p>
-          <p className="text-sm text-muted-foreground">This week</p>
+          <p className="text-sm text-muted-foreground">{t('this_week')}</p>
         </Card>
 
         <Card className="p-6 bg-gradient-primary text-primary-foreground shadow-glow">
           <div className="flex items-center gap-2 mb-2">
             <Flame className="w-5 h-5" />
-            <h3 className="font-semibold">Calories</h3>
+            <h3 className="font-semibold">{t('calories')}</h3>
           </div>
           <p className="text-3xl font-bold">{weeklyStats.totalCalories}</p>
-          <p className="text-sm opacity-90">Burned this week</p>
+          <p className="text-sm opacity-90">{t('burned_this_week')}</p>
         </Card>
 
         <Card className="p-6 bg-gradient-card shadow-md">
           <div className="flex items-center gap-2 mb-2">
             <ActivityIcon className="w-5 h-5 text-secondary" />
-            <h3 className="font-semibold">Duration</h3>
+            <h3 className="font-semibold">{t('duration')}</h3>
           </div>
           <p className="text-3xl font-bold text-secondary">{weeklyStats.totalDuration}</p>
-          <p className="text-sm text-muted-foreground">Minutes</p>
+          <p className="text-sm text-muted-foreground">{t('minutes')}</p>
         </Card>
 
         <Card className="p-6 bg-gradient-card shadow-md">
           <div className="flex items-center gap-2 mb-2">
             <TrendingUp className="w-5 h-5 text-accent" />
-            <h3 className="font-semibold">Distance</h3>
+            <h3 className="font-semibold">{t('distance')}</h3>
           </div>
           <p className="text-3xl font-bold text-accent">
             {preferredUnit === 'metric' 
@@ -349,11 +356,11 @@ const Activity = () => {
       <Card className="p-6 bg-gradient-card shadow-md">
         <div className="flex items-center gap-2 mb-6">
           <Plus className="w-5 h-5 text-primary" />
-          <h3 className="text-lg font-semibold">Log Wearable Data</h3>
+          <h3 className="text-lg font-semibold">{t('log_wearable_data')}</h3>
         </div>
         <div className="space-y-4">
           <div>
-            <Label htmlFor="deviceName">Device</Label>
+            <Label htmlFor="deviceName">{t('device')}</Label>
             <Select 
               value={wearableForm.deviceName} 
               onValueChange={(value) => setWearableForm({ ...wearableForm, deviceName: value })}
@@ -373,19 +380,19 @@ const Activity = () => {
 
           {wearableForm.deviceName === "custom" && (
             <div>
-              <Label htmlFor="customDevice">Custom Device Name</Label>
+              <Label htmlFor="customDevice">{t('custom_device_name')}</Label>
               <Input
                 id="customDevice"
                 value={wearableForm.customDevice}
                 onChange={(e) => setWearableForm({ ...wearableForm, customDevice: e.target.value })}
-                placeholder="Enter device name"
+                placeholder={t('enter_device_name')}
                 className="mt-1.5"
               />
             </div>
           )}
 
           <div>
-            <Label htmlFor="dataDate">Date</Label>
+            <Label htmlFor="dataDate">{t('date')}</Label>
             <Input
               id="dataDate"
               type="date"
@@ -397,7 +404,7 @@ const Activity = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="steps">Steps</Label>
+              <Label htmlFor="steps">{t('steps')}</Label>
               <Input
                 id="steps"
                 type="number"
@@ -409,7 +416,7 @@ const Activity = () => {
             </div>
 
             <div>
-              <Label htmlFor="caloriesBurned">Calories Burned</Label>
+              <Label htmlFor="caloriesBurned">{t('calories_burned')}</Label>
               <Input
                 id="caloriesBurned"
                 type="number"
@@ -421,7 +428,7 @@ const Activity = () => {
             </div>
 
             <div>
-              <Label htmlFor="heartRate">Heart Rate (bpm)</Label>
+              <Label htmlFor="heartRate">{t('heart_rate_bpm')}</Label>
               <Input
                 id="heartRate"
                 type="number"
@@ -433,7 +440,7 @@ const Activity = () => {
             </div>
 
             <div>
-              <Label htmlFor="sleepHours">Sleep Hours</Label>
+              <Label htmlFor="sleepHours">{t('sleep_hours')}</Label>
               <Input
                 id="sleepHours"
                 type="number"
@@ -452,7 +459,7 @@ const Activity = () => {
             disabled={isSaving}
           >
             <Plus className="w-4 h-4" />
-            {isSaving ? "Saving..." : "Save Wearable Data"}
+            {isSaving ? t('saving') : t('save_wearable_data')}
           </Button>
         </div>
       </Card>
@@ -460,7 +467,7 @@ const Activity = () => {
       <Card className="p-6 bg-gradient-card shadow-md">
         <div className="flex items-center gap-2 mb-4">
           <Watch className="w-5 h-5 text-primary" />
-          <h3 className="text-lg font-semibold">Wearable Device Data</h3>
+          <h3 className="text-lg font-semibold">{t('wearable_device_data')}</h3>
         </div>
         <div className="space-y-3">
           {wearableData.length > 0 ? (
@@ -470,7 +477,7 @@ const Activity = () => {
                   <div>
                     <h4 className="font-semibold">{data.device_name}</h4>
                     <p className="text-sm text-muted-foreground">
-                      {format(new Date(data.data_date), "PPP")}
+                      {format(new Date(data.data_date), "PPP", { locale: dateLocale })}
                     </p>
                   </div>
                 </div>
@@ -478,25 +485,25 @@ const Activity = () => {
                   {data.steps && (
                     <div className="flex items-center gap-2 text-sm">
                       <Footprints className="w-4 h-4 text-primary" />
-                      <span>{data.steps.toLocaleString()} steps</span>
+                      <span>{data.steps.toLocaleString()} {t('steps_label')}</span>
                     </div>
                   )}
                   {data.calories_burned && (
                     <div className="flex items-center gap-2 text-sm">
                       <Flame className="w-4 h-4 text-accent" />
-                      <span>{data.calories_burned} cal</span>
+                      <span>{data.calories_burned} {t('cal_label')}</span>
                     </div>
                   )}
                   {data.heart_rate && (
                     <div className="flex items-center gap-2 text-sm">
                       <Heart className="w-4 h-4 text-red-500" />
-                      <span>{data.heart_rate} bpm</span>
+                      <span>{data.heart_rate} {t('bpm_label')}</span>
                     </div>
                   )}
                   {data.sleep_hours && (
                     <div className="flex items-center gap-2 text-sm">
                       <Moon className="w-4 h-4 text-blue-500" />
-                      <span>{data.sleep_hours}h sleep</span>
+                      <span>{data.sleep_hours}{t('h_sleep')}</span>
                     </div>
                   )}
                 </div>
@@ -504,17 +511,17 @@ const Activity = () => {
             ))
           ) : (
             <p className="text-center text-muted-foreground py-8">
-              No wearable data synced yet. Connect your fitness device to track steps, heart rate, and more!
+              {t('no_wearable_data')}
             </p>
           )}
         </div>
       </Card>
 
       <Card className="p-6 bg-gradient-card shadow-md">
-        <h3 className="text-lg font-semibold mb-4">Recent Activities (Last 7 Days)</h3>
+        <h3 className="text-lg font-semibold mb-4">{t('recent_activities')}</h3>
         <div className="space-y-3">
           {isLoading ? (
-            <p className="text-center text-muted-foreground py-8">Loading...</p>
+            <p className="text-center text-muted-foreground py-8">{tCommon('loading')}</p>
           ) : activityLogs.length > 0 ? (
             activityLogs.map((log) => (
               <div key={log.id} className="p-4 bg-secondary rounded-lg">
@@ -522,15 +529,15 @@ const Activity = () => {
                   <div>
                     <h4 className="font-semibold text-lg">{log.activity_type}</h4>
                     <p className="text-sm text-muted-foreground">
-                      {format(new Date(log.logged_at), "PPp")}
+                      {format(new Date(log.logged_at), "PPp", { locale: dateLocale })}
                     </p>
                   </div>
                   {log.calories_burned && (
-                    <span className="font-bold text-accent">{log.calories_burned} cal</span>
+                    <span className="font-bold text-accent">{log.calories_burned} {t('cal_label')}</span>
                   )}
                 </div>
                 <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <span>{log.duration_minutes} min</span>
+                  <span>{log.duration_minutes} {t('min_label')}</span>
                   {log.distance_miles && (
                     <span>{formatDistance(log.distance_miles, preferredUnit)}</span>
                   )}
@@ -539,7 +546,7 @@ const Activity = () => {
             ))
           ) : (
             <p className="text-center text-muted-foreground py-8">
-              No activities in the last 7 days. Start logging your workouts!
+              {t('no_activities')}
             </p>
           )}
         </div>
