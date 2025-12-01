@@ -108,6 +108,7 @@ const resources = {
   },
 };
 
+// Initialize i18n asynchronously for Safari compatibility
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -128,11 +129,12 @@ i18n
     },
 
     react: {
-      useSuspense: true,
+      useSuspense: false, // Changed to false for Safari compatibility
     },
 
     load: 'languageOnly',
     cleanCode: true,
+    initImmediate: false, // Async init for Safari
   });
 
 export default i18n;
