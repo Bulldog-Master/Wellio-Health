@@ -527,16 +527,16 @@ const Activity = () => {
               <div key={log.id} className="p-4 bg-secondary rounded-lg">
                 <div className="flex items-start justify-between mb-2">
                   <div>
-                    <h4 className="font-semibold text-lg">{log.activity_type}</h4>
-                    <p className="text-sm text-muted-foreground">
+                    <h4 className="font-semibold text-lg text-secondary-foreground">{log.activity_type}</h4>
+                    <p className="text-sm text-secondary-foreground/80">
                       {format(new Date(log.logged_at), "PPp", { locale: dateLocale })}
                     </p>
                   </div>
                   {log.calories_burned && (
-                    <span className="font-bold text-accent">{log.calories_burned} {t('cal_label')}</span>
+                    <span className="font-bold text-secondary-foreground">{log.calories_burned} {t('cal_label')}</span>
                   )}
                 </div>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                <div className="flex items-center gap-4 text-sm text-secondary-foreground/70">
                   <span>{log.duration_minutes} {t('min_label')}</span>
                   {log.distance_miles && (
                     <span>{formatDistance(log.distance_miles, preferredUnit)}</span>
