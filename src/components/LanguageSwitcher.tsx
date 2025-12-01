@@ -31,12 +31,10 @@ export const LanguageSwitcher = () => {
       <DropdownMenuTrigger asChild>
         <Button 
           variant="ghost" 
-          size="sm"
-          className="gap-2 font-medium hover:bg-accent/50"
+          size="icon"
+          className="hover:bg-sidebar-accent text-sidebar-foreground"
         >
           <Languages className="w-5 h-5" />
-          <span className="hidden sm:inline">{currentLanguage.flag} {currentLanguage.name}</span>
-          <span className="sm:hidden">{currentLanguage.flag}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
