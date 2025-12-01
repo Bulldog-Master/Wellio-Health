@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { User, MessageSquare } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
+import { useTranslation } from "react-i18next";
 
 interface ConversationWithDetails {
   id: string;
@@ -29,6 +30,7 @@ interface ConversationWithDetails {
 export const MessagesSidebar = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { t } = useTranslation('social');
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -159,11 +161,11 @@ export const MessagesSidebar = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <MessageSquare className="w-5 h-5" />
-            Active Conversations
+            {t('active_conversations')}
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground">Loading...</p>
+          <p className="text-sm text-muted-foreground">{t('loading')}</p>
         </CardContent>
       </Card>
     );
@@ -175,12 +177,12 @@ export const MessagesSidebar = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <MessageSquare className="w-5 h-5" />
-            Active Conversations
+            {t('active_conversations')}
           </CardTitle>
         </CardHeader>
         <CardContent className="text-center">
           <MessageSquare className="h-8 w-8 mx-auto mb-2 opacity-50 text-muted-foreground" />
-          <p className="text-sm text-muted-foreground">No active conversations</p>
+          <p className="text-sm text-muted-foreground">{t('no_active_conversations')}</p>
         </CardContent>
       </Card>
     );
@@ -192,13 +194,13 @@ export const MessagesSidebar = () => {
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2">
             <MessageSquare className="w-5 h-5" />
-            Active Conversations
+            {t('active_conversations')}
           </CardTitle>
           <button
             onClick={() => navigate("/messages")}
             className="text-sm text-primary hover:underline"
           >
-            View all
+            {t('view_all')}
           </button>
         </div>
       </CardHeader>

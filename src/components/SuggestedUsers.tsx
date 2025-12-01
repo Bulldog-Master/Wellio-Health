@@ -9,7 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 
 export const SuggestedUsers = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('social');
   const navigate = useNavigate();
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -135,7 +135,7 @@ export const SuggestedUsers = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg">Suggested For You</CardTitle>
+        <CardTitle className="text-lg">{t('suggested_for_you')}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         {suggestedUsers.map((user) => {
@@ -163,7 +163,7 @@ export const SuggestedUsers = () => {
                   {user.full_name || user.username}
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  {user.goal || user.fitness_level || `${user.followers_count} followers`}
+                  {user.goal || user.fitness_level || `${user.followers_count} ${t('followers')}`}
                 </p>
               </div>
               <Button
@@ -172,7 +172,7 @@ export const SuggestedUsers = () => {
                 onClick={() => handleToggleFollow(user.id)}
               >
                 <UserPlus className="w-4 h-4 mr-1" />
-                {isFollowing ? "Following" : "Follow"}
+                {isFollowing ? t('following') : t('follow')}
               </Button>
             </div>
           );
