@@ -52,10 +52,16 @@
   "reward_1_year_pro_desc": "Unlock Pro features for 1 year",
   "reward_elite_trainer": "Elite Trainer Badge",
   "reward_elite_trainer_desc": "Show you're a top trainer in the community",
+  "reward_elite_trainer_badge": "Elite Trainer Badge",
+  "reward_elite_trainer_badge_desc": "Show you're a top trainer in the community",
   "reward_community_leader": "Community Leader Badge",
   "reward_community_leader_desc": "Recognize your contribution to the community",
+  "reward_community_leader_badge": "Community Leader Badge",
+  "reward_community_leader_badge_desc": "Recognize your contribution to the community",
   "reward_advanced_analytics": "Advanced Analytics",
   "reward_advanced_analytics_desc": "Unlock advanced analytics permanently",
   "reward_premium_trainer": "Premium Trainer Status",
-  "reward_premium_trainer_desc": "Premium trainer badge and benefits permanently"
+  "reward_premium_trainer_desc": "Premium trainer badge and benefits permanently",
+  "reward_premium_trainer_status": "Premium Trainer Status",
+  "reward_premium_trainer_status_desc": "Premium trainer badge and benefits permanently"
 }
