@@ -14,6 +14,7 @@ import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { useSubscription } from "@/hooks/useSubscription";
 import { UpgradePrompt } from "@/components/UpgradePrompt";
+import { useTranslation } from "react-i18next";
 
 interface Challenge {
   id: string;
@@ -37,6 +38,7 @@ const ProgressChallenges = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const { hasFeature } = useSubscription();
+  const { t } = useTranslation(['challenges', 'common']);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -96,8 +98,8 @@ const ProgressChallenges = () => {
     } catch (error) {
       console.error('Error fetching challenges:', error);
       toast({
-        title: "Error",
-        description: "Failed to load challenges",
+        title: t('challenges:error'),
+        description: t('challenges:failed_to_load'),
         variant: "destructive",
       });
     } finally {

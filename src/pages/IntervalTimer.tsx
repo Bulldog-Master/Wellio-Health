@@ -27,6 +27,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
+import { useTranslation } from "react-i18next";
 
 interface IntervalTimer {
   id: string;
@@ -37,6 +38,7 @@ interface IntervalTimer {
 }
 
 const IntervalTimer = () => {
+  const { t } = useTranslation(['timer']);
   const [isFolderDialogOpen, setIsFolderDialogOpen] = useState(false);
   const [isNewTimerOpen, setIsNewTimerOpen] = useState(false);
   const [isSoundPickerOpen, setIsSoundPickerOpen] = useState(false);
@@ -1080,7 +1082,7 @@ const IntervalTimer = () => {
                 onClick={() => saveTimerMutation.mutate()}
                 disabled={!timerName.trim() || saveTimerMutation.isPending}
               >
-                {saveTimerMutation.isPending ? "Saving..." : "Save"}
+                {saveTimerMutation.isPending ? t('timer:saving') : t('timer:save')}
               </button>
             </div>
           </div>

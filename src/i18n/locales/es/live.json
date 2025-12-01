@@ -1,0 +1,10 @@
+{
+  "live_workout_sessions": "Sesiones de Entrenamiento en Vivo",
+  "join_or_host": "Únete u organiza sesiones de entrenamiento en vivo",
+  "create_session": "Crear Sesión",
+  "cancel": "Cancelar",
+  "create_new_session": "Crear Nueva Sesión",
+  "schedule_live_session": "Programa una sesión de entrenamiento en vivo",
+  "error": "Error",
+  "failed_to_load": "Error al cargar sesiones de entrenamiento"
+}

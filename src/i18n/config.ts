@@ -18,6 +18,14 @@ import referralEN from './locales/en/referral.json';
 import privacyEN from './locales/en/privacy.json';
 import pointsEN from './locales/en/points.json';
 import profileEN from './locales/en/profile.json';
+import achievementsEN from './locales/en/achievements.json';
+import calendarEN from './locales/en/calendar.json';
+import recordsEN from './locales/en/records.json';
+import voiceEN from './locales/en/voice.json';
+import medicalEN from './locales/en/medical.json';
+import timerEN from './locales/en/timer.json';
+import liveEN from './locales/en/live.json';
+import challengesEN from './locales/en/challenges.json';
 
 import commonES from './locales/es/common.json';
 import authES from './locales/es/auth.json';
@@ -37,6 +45,14 @@ import weightES from './locales/es/weight.json';
 import referralES from './locales/es/referral.json';
 import privacyES from './locales/es/privacy.json';
 import pointsES from './locales/es/points.json';
+import achievementsES from './locales/es/achievements.json';
+import calendarES from './locales/es/calendar.json';
+import recordsES from './locales/es/records.json';
+import voiceES from './locales/es/voice.json';
+import medicalES from './locales/es/medical.json';
+import timerES from './locales/es/timer.json';
+import liveES from './locales/es/live.json';
+import challengesES from './locales/es/challenges.json';
 
 import commonPT from './locales/pt/common.json';
 import authPT from './locales/pt/auth.json';
@@ -79,6 +95,14 @@ const resources = {
     privacy: privacyEN,
     points: pointsEN,
     profile: profileEN,
+    achievements: achievementsEN,
+    calendar: calendarEN,
+    records: recordsEN,
+    voice: voiceEN,
+    medical: medicalEN,
+    timer: timerEN,
+    live: liveEN,
+    challenges: challengesEN,
   },
   es: {
     common: commonES,
@@ -99,6 +123,14 @@ const resources = {
     referral: referralES,
     privacy: privacyES,
     points: pointsES,
+    achievements: achievementsES,
+    calendar: calendarES,
+    records: recordsES,
+    voice: voiceES,
+    medical: medicalES,
+    timer: timerES,
+    live: liveES,
+    challenges: challengesES,
   },
   pt: {
     common: commonPT,
@@ -138,7 +170,7 @@ i18n
     resources,
     fallbackLng: 'en',
     defaultNS: 'common',
-    ns: ['common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 'notifications', 'errors', 'rewards', 'subscription', 'food', 'workout', 'settings', 'weight', 'referral', 'privacy', 'points'],
+    ns: ['common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 'notifications', 'errors', 'rewards', 'subscription', 'food', 'workout', 'settings', 'weight', 'referral', 'privacy', 'points', 'achievements', 'calendar', 'records', 'voice', 'medical', 'timer', 'live', 'challenges'],
     
     interpolation: {
       escapeValue: false,
