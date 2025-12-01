@@ -17,6 +17,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 const emailSchema = z.string().email("Invalid email address");
 const passwordSchema = z.string().min(6, "Password must be at least 6 characters");
@@ -777,6 +778,11 @@ const Auth = () => {
       {/* Right side - Auth Form */}
       <div className="flex items-center justify-center p-8 bg-background">
         <div className="w-full max-w-md">
+          {/* Language Switcher */}
+          <div className="flex justify-end mb-4">
+            <LanguageSwitcher />
+          </div>
+          
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center">
