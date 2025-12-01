@@ -88,5 +88,14 @@
   "data_saved": "Datos guardados",
   "wearable_data_logged": "Datos del dispositivo guardados exitosamente.",
   "failed_to_save_wearable": "Error al guardar datos del dispositivo.",
-  "custom_device": "Dispositivo Personalizado"
+  "custom_device": "Dispositivo Personalizado",
+  "summary": "Resumen",
+  "activity_ring": "Anillo de Actividad",
+  "move": "Movimiento",
+  "coming_soon": "¡Próximamente!",
+  "step_count_description": "El seguimiento automático de pasos con integración de dispositivos portátiles está en camino. Rastrea tus pasos diarios, distancia y patrones de actividad.",
+  "step_distance": "Distancia de Pasos",
+  "step_distance_description": "Ve tus distancias de caminata y carrera calculadas a partir de tu conteo de pasos durante el día.",
+  "sessions": "Sesiones",
+  "no_sessions_recorded": "Sin sesiones registradas."
 }

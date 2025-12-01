@@ -212,6 +212,7 @@
   "groupCreated": "Group created!",
   "joinedGroup": "Joined group!",
   "backToDashboard": "Back to Dashboard",
+  "back_to_activity": "Back to Activity",
   "anonymous": "Anonymous",
   "unfollowed": "Unfollowed",
   "follow_request_sent": "Follow request sent!",

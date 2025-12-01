@@ -88,5 +88,13 @@
   "data_saved": "Data saved",
   "wearable_data_logged": "Wearable data has been logged successfully.",
   "failed_to_save_wearable": "Failed to save wearable data.",
-  "custom_device": "Custom Device"
+  "custom_device": "Custom Device",
+  "summary": "Summary",
+  "activity_ring": "Activity Ring",
+  "move": "Move",
+  "step_count_description": "Automatic step tracking with wearable device integration is on the way. Track your daily steps, distance, and activity patterns.",
+  "step_distance": "Step Distance",
+  "step_distance_description": "View your walking and running distances calculated from your step count throughout the day.",
+  "sessions": "Sessions",
+  "no_sessions_recorded": "No sessions recorded."
 }

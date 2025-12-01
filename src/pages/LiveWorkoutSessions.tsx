@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
-import { Video, Calendar, Users, Clock, Plus } from "lucide-react";
+import { Video, Calendar, Users, Clock, Plus, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { SubscriptionGate } from "@/components/SubscriptionGate";
@@ -184,6 +184,15 @@ const LiveWorkoutSessions = () => {
     <Layout>
       <SubscriptionGate feature="live_sessions">
         <div className="container mx-auto p-6 space-y-6">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigate("/activity")}
+          className="gap-2 mb-2"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          {t('live:back_to_activity')}
+        </Button>
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-bold">{t('live:live_workout_sessions')}</h1>
