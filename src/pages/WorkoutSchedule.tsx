@@ -9,8 +9,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Calendar as CalendarIcon, Plus, ChevronLeft, ChevronRight, CheckCircle2, Circle, Edit, Trash2, List, CalendarDays, Clock, Dumbbell } from "lucide-react";
+import { ArrowLeft, Calendar as CalendarIcon, Plus, ChevronLeft, ChevronRight, CheckCircle2, Circle, Edit, Trash2, List, CalendarDays, Clock, Dumbbell } from "lucide-react";
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, addMonths, subMonths, parseISO, startOfWeek, endOfWeek, addWeeks, subWeeks, isWithinInterval } from "date-fns";
+import { es } from "date-fns/locale";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -38,9 +39,11 @@ interface WorkoutTemplate {
 }
 
 const WorkoutSchedule = () => {
-  const { t } = useTranslation('workout');
+  const { t, i18n } = useTranslation('workout');
   const { toast } = useToast();
   const navigate = useNavigate();
+  
+  const dateLocale = i18n.language === 'es' ? es : undefined;
   
   const timeOfDayOptions = [
     { value: "morning", label: `${t('morning')} (6AM - 12PM)`, icon: "🌅" },
@@ -328,9 +331,19 @@ const WorkoutSchedule = () => {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto p-6 max-w-7xl">
         <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-4xl font-bold text-foreground mb-2">{t('workout_schedule')}</h1>
-            <p className="text-muted-foreground">{t('plan_workouts_track')}</p>
+          <div className="flex items-center gap-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => navigate("/workout")}
+              className="hover:bg-accent"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </Button>
+            <div>
+              <h1 className="text-4xl font-bold text-foreground mb-2">{t('workout_schedule')}</h1>
+              <p className="text-muted-foreground">{t('plan_workouts_track')}</p>
+            </div>
           </div>
           <Button onClick={() => { resetForm(); setIsDialogOpen(true); }}>
             <Plus className="mr-2 h-4 w-4" /> {t('schedule_workout')}
@@ -355,7 +368,7 @@ const WorkoutSchedule = () => {
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <CardTitle className="text-2xl">
-                    {format(currentDate, "MMMM yyyy")}
+                    {format(currentDate, "MMMM yyyy", { locale: dateLocale })}
                   </CardTitle>
                   <Button variant="outline" onClick={() => setCurrentDate(addMonths(currentDate, 1))}>
                     <ChevronRight className="h-4 w-4" />
@@ -364,7 +377,7 @@ const WorkoutSchedule = () => {
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-7 gap-2">
-                  {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(day => (
+                  {[t('sun'), t('mon'), t('tue'), t('wed'), t('thu'), t('fri'), t('sat')].map(day => (
                     <div key={day} className="text-center font-semibold text-muted-foreground p-2">
                       {day}
                     </div>
@@ -415,7 +428,7 @@ const WorkoutSchedule = () => {
                     <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <CardTitle className="text-2xl">
-                    {format(startOfWeek(currentDate, { weekStartsOn: 0 }), "MMM d")} - {format(endOfWeek(currentDate, { weekStartsOn: 0 }), "MMM d, yyyy")}
+                    {format(startOfWeek(currentDate, { weekStartsOn: 0 }), "MMM d", { locale: dateLocale })} - {format(endOfWeek(currentDate, { weekStartsOn: 0 }), "MMM d, yyyy", { locale: dateLocale })}
                   </CardTitle>
                   <Button variant="outline" onClick={() => setCurrentDate(addWeeks(currentDate, 1))}>
                     <ChevronRight className="h-4 w-4" />
@@ -447,7 +460,7 @@ const WorkoutSchedule = () => {
                                   <div className="space-y-1 text-sm text-muted-foreground">
                                     <div className="flex items-center gap-2">
                                       <CalendarIcon className="h-4 w-4" />
-                                      {format(parseISO(workout.start_time), "EEEE, MMM d, yyyy")}
+                                      {format(parseISO(workout.start_time), "EEEE, MMM d, yyyy", { locale: dateLocale })}
                                     </div>
                                     {timeOption && (
                                       <div className="flex items-center gap-2">
@@ -458,7 +471,7 @@ const WorkoutSchedule = () => {
                                     {metadata.duration && (
                                       <div className="flex items-center gap-2">
                                         <Dumbbell className="h-4 w-4" />
-                                        {metadata.duration} minutes
+                                        {metadata.duration} {t('minutes')}
                                       </div>
                                     )}
                                   </div>
@@ -495,15 +508,15 @@ const WorkoutSchedule = () => {
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle>{editingWorkout ? "Edit" : "Schedule"} Workout</DialogTitle>
+              <DialogTitle>{editingWorkout ? t('edit_workout') : t('schedule_workout')}</DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
               {templates.length > 0 && (
                 <div>
-                  <Label>Load from Template</Label>
+                  <Label>{t('load_from_template')}</Label>
                   <Select value={formData.templateId} onValueChange={handleLoadTemplate}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select a template" />
+                      <SelectValue placeholder={t('select_template')} />
                     </SelectTrigger>
                     <SelectContent>
                       {templates.map(template => (
@@ -517,17 +530,17 @@ const WorkoutSchedule = () => {
               )}
 
               <div>
-                <Label>Workout Title *</Label>
+                <Label>{t('workout_title')} *</Label>
                 <Input
                   value={formData.title}
                   onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
-                  placeholder="e.g., Upper Body Strength"
+                  placeholder={t('upper_body_strength')}
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label>Date *</Label>
+                  <Label>{t('date')} *</Label>
                   <Input
                     type="date"
                     value={formData.date}
@@ -535,7 +548,7 @@ const WorkoutSchedule = () => {
                   />
                 </div>
                 <div>
-                  <Label>Time of Day *</Label>
+                  <Label>{t('time_of_day')} *</Label>
                   <Select value={formData.timeOfDay} onValueChange={(v) => setFormData(prev => ({ ...prev, timeOfDay: v }))}>
                     <SelectTrigger>
                       <SelectValue />
@@ -553,15 +566,15 @@ const WorkoutSchedule = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label>Exercise Type</Label>
+                  <Label>{t('exercise_type')}</Label>
                   <Input
                     value={formData.exerciseType}
                     onChange={(e) => setFormData(prev => ({ ...prev, exerciseType: e.target.value }))}
-                    placeholder="e.g., Weightlifting, Cardio"
+                    placeholder={t('weightlifting_cardio')}
                   />
                 </div>
                 <div>
-                  <Label>Duration (minutes)</Label>
+                  <Label>{t('duration_minutes')}</Label>
                   <Input
                     type="number"
                     value={formData.duration}
@@ -572,7 +585,7 @@ const WorkoutSchedule = () => {
               </div>
 
               <div>
-                <Label htmlFor="workout-intensity">Intensity</Label>
+                <Label htmlFor="workout-intensity">{t('intensity')}</Label>
                 <Select 
                   value={formData.intensity} 
                   onValueChange={(value) => setFormData(prev => ({ ...prev, intensity: value }))}
@@ -581,26 +594,26 @@ const WorkoutSchedule = () => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="low">Low</SelectItem>
-                    <SelectItem value="medium">Medium</SelectItem>
-                    <SelectItem value="high">High</SelectItem>
-                    <SelectItem value="intense">Intense</SelectItem>
+                    <SelectItem value="low">{t('low')}</SelectItem>
+                    <SelectItem value="medium">{t('medium')}</SelectItem>
+                    <SelectItem value="high">{t('high')}</SelectItem>
+                    <SelectItem value="intense">{t('intense')}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               <div>
-                <Label>Notes</Label>
+                <Label>{t('notes')}</Label>
                 <Textarea
                   value={formData.description}
                   onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-                  placeholder="Add workout details, exercises, etc."
+                  placeholder={t('add_workout_details')}
                   rows={4}
                 />
               </div>
 
               <Button onClick={handleScheduleWorkout} className="w-full">
-                {editingWorkout ? "Update" : "Schedule"} Workout
+                {editingWorkout ? t('update') : t('schedule_workout')}
               </Button>
             </div>
           </DialogContent>
