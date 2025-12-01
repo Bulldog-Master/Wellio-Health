@@ -1,6 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import { logMissingKey, validateTranslations } from '@/lib/translationUtils';
 
 // Import translation files
 import commonEN from './locales/en/common.json';
@@ -249,6 +250,21 @@ i18n
     load: 'languageOnly',
     cleanCode: true,
     initImmediate: false, // Async init for Safari
+    
+    // Missing key handler - logs warnings in development
+    saveMissing: true,
+    missingKeyHandler: (lngs, ns, key) => {
+      lngs.forEach(lng => logMissingKey(lng, ns, key));
+    },
   });
 
+// Validate translation parity in development
+if (import.meta.env.DEV) {
+  // Run after a short delay to let i18n initialize
+  setTimeout(() => {
+    validateTranslations(resources, 'en', 'es');
+  }, 1000);
+}
+
+export { resources };
 export default i18n;
