@@ -161,8 +161,8 @@ const Socials = () => {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => navigate("/")}
-            aria-label={t('back_to_dashboard')}
+            onClick={() => navigate("/connect")}
+            aria-label={t('back_to_connect')}
           >
             <ArrowLeft className="w-5 h-5" />
           </Button>
