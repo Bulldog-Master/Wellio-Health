@@ -19,7 +19,7 @@ import { useTranslation } from "react-i18next";
 const Dashboard = () => {
   const { t } = useTranslation(['common', 'fitness']);
   const navigate = useNavigate();
-  const { tier, hasFullAccess, isVIP, isAdmin } = useSubscription();
+  const { tier, hasFullAccess, isVIP, isAdmin, isLoading: subLoading } = useSubscription();
   const [currentWeight, setCurrentWeight] = useState(0);
   const [targetWeight, setTargetWeight] = useState(0);
   const [caloriesConsumed, setCaloriesConsumed] = useState(1450);
@@ -147,12 +147,12 @@ const Dashboard = () => {
       </div>
 
       {/* Upgrade Prompt for Free Users - Hidden for VIP/Admin */}
-      {tier === 'free' && !hasFullAccess && (
+      {!subLoading && tier === 'free' && !hasFullAccess && (
         <UpgradePrompt compact feature={t('advanced_features')} />
       )}
       
       {/* VIP/Admin Status Banner */}
-      {hasFullAccess && (
+      {!subLoading && hasFullAccess && (
         <div className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 border border-primary/30">
           <div className="p-2 rounded-full bg-primary/20">
             <Zap className="w-5 h-5 text-primary" />
