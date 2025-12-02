@@ -3814,6 +3814,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_session_participant: {
+        Args: { _session_id: string; _user_id: string }
+        Returns: boolean
+      }
       log_medical_read: { Args: never; Returns: undefined }
       redeem_reward: { Args: { _reward_id: string }; Returns: string }
       revoke_vip_pass: { Args: { _user_id: string }; Returns: boolean }
