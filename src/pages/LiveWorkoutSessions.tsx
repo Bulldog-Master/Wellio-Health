@@ -187,11 +187,11 @@ const LiveWorkoutSessions = () => {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => navigate("/premium")}
+          onClick={() => navigate("/activity")}
           className="gap-2 mb-2"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
-          {t('live:back_to_premium')}
+          {t('common:back')}
         </Button>
         <div className="flex justify-between items-center">
           <div>
