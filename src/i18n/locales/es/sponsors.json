@@ -1,0 +1,33 @@
+{
+  "title": "Nuestros Patrocinadores",
+  "subtitle": "Apoyados con orgullo por líderes de la industria",
+  "tiers": {
+    "platinum": "Platino",
+    "gold": "Oro",
+    "silver": "Plata",
+    "bronze": "Bronce"
+  },
+  "visit_website": "Visitar Sitio Web",
+  "no_sponsors": "No hay patrocinadores para mostrar en este momento",
+  "become_sponsor": "Conviértete en Patrocinador",
+  "become_sponsor_desc": "Asóciate con nosotros para llegar a entusiastas del fitness en todo el mundo",
+  "contact_us": "Contáctanos",
+  "admin": {
+    "manage_sponsors": "Gestionar Patrocinadores",
+    "add_sponsor": "Añadir Patrocinador",
+    "edit_sponsor": "Editar Patrocinador",
+    "delete_sponsor": "Eliminar Patrocinador",
+    "sponsor_name": "Nombre del Patrocinador",
+    "logo_url": "URL del Logo",
+    "website_url": "URL del Sitio Web",
+    "description": "Descripción",
+    "description_es": "Descripción (Español)",
+    "tier": "Nivel",
+    "display_order": "Orden de Visualización",
+    "is_active": "Activo",
+    "sponsor_added": "Patrocinador añadido exitosamente",
+    "sponsor_updated": "Patrocinador actualizado exitosamente",
+    "sponsor_deleted": "Patrocinador eliminado exitosamente",
+    "confirm_delete": "¿Estás seguro de que quieres eliminar este patrocinador?"
+  }
+}
