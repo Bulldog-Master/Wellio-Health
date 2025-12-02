@@ -54,6 +54,7 @@ import premiumEN from './locales/en/premium.json';
 import videosEN from './locales/en/videos.json';
 import chatEN from './locales/en/chat.json';
 import celebrationsEN from './locales/en/celebrations.json';
+import newsEN from './locales/en/news.json';
 
 // Spanish
 import commonES from './locales/es/common.json';
@@ -106,6 +107,7 @@ import premiumES from './locales/es/premium.json';
 import videosES from './locales/es/videos.json';
 import chatES from './locales/es/chat.json';
 import celebrationsES from './locales/es/celebrations.json';
+import newsES from './locales/es/news.json';
 
 // Portuguese
 import commonPT from './locales/pt/common.json';
@@ -124,6 +126,7 @@ import videosPT from './locales/pt/videos.json';
 import feedPT from './locales/pt/feed.json';
 import chatPT from './locales/pt/chat.json';
 import celebrationsPT from './locales/pt/celebrations.json';
+import newsPT from './locales/pt/news.json';
 
 // French
 import commonFR from './locales/fr/common.json';
@@ -142,6 +145,7 @@ import videosFR from './locales/fr/videos.json';
 import feedFR from './locales/fr/feed.json';
 import chatFR from './locales/fr/chat.json';
 import celebrationsFR from './locales/fr/celebrations.json';
+import newsFR from './locales/fr/news.json';
 
 // German
 import commonDE from './locales/de/common.json';
@@ -160,6 +164,7 @@ import videosDE from './locales/de/videos.json';
 import feedDE from './locales/de/feed.json';
 import chatDE from './locales/de/chat.json';
 import celebrationsDE from './locales/de/celebrations.json';
+import newsDE from './locales/de/news.json';
 
 // Chinese
 import commonZH from './locales/zh/common.json';
@@ -178,6 +183,7 @@ import videosZH from './locales/zh/videos.json';
 import feedZH from './locales/zh/feed.json';
 import chatZH from './locales/zh/chat.json';
 import celebrationsZH from './locales/zh/celebrations.json';
+import newsZH from './locales/zh/news.json';
 
 // All namespaces - used for ns array and type safety
 export const allNamespaces = [
@@ -187,7 +193,7 @@ export const allNamespaces = [
   'calendar', 'records', 'voice', 'medical', 'timer', 'live', 'challenges', 
   'fundraisers', 'macros', 'install', 'search', 'creator', 'ai', 'measurements', 
   'trainer', 'session', 'bookmarks', 'challenges_page', 'feed', 'groups', 
-  'followers', 'schedule', 'seo', 'units', 'a11y', 'plurals', 'admin', 'premium', 'videos', 'chat', 'celebrations'
+  'followers', 'schedule', 'seo', 'units', 'a11y', 'plurals', 'admin', 'premium', 'videos', 'chat', 'celebrations', 'news'
 ] as const;
 
 export type TranslationNamespace = typeof allNamespaces[number];
@@ -244,6 +250,7 @@ const resources = {
     videos: videosEN,
     chat: chatEN,
     celebrations: celebrationsEN,
+    news: newsEN,
   },
   es: {
     common: commonES,
@@ -296,6 +303,7 @@ const resources = {
     videos: videosES,
     chat: chatES,
     celebrations: celebrationsES,
+    news: newsES,
   },
   pt: {
     common: commonPT,
@@ -314,6 +322,7 @@ const resources = {
     feed: feedPT,
     chat: chatPT,
     celebrations: celebrationsPT,
+    news: newsPT,
   },
   fr: {
     common: commonFR,
@@ -332,6 +341,7 @@ const resources = {
     feed: feedFR,
     chat: chatFR,
     celebrations: celebrationsFR,
+    news: newsFR,
   },
   de: {
     common: commonDE,
@@ -350,6 +360,7 @@ const resources = {
     feed: feedDE,
     chat: chatDE,
     celebrations: celebrationsDE,
+    news: newsDE,
   },
   zh: {
     common: commonZH,
@@ -368,6 +379,7 @@ const resources = {
     feed: feedZH,
     chat: chatZH,
     celebrations: celebrationsZH,
+    news: newsZH,
   },
 };
 
