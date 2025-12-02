@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Brain, RefreshCw, TrendingUp, Activity, Apple, Dumbbell } from "lucide-react";
+import { Brain, RefreshCw, TrendingUp, Activity, Apple, Dumbbell, ArrowLeft } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SubscriptionGate } from "@/components/SubscriptionGate";
+import { useNavigate } from "react-router-dom";
 
 interface AIInsight {
   id: string;
@@ -20,12 +21,24 @@ interface AIInsight {
 const AIInsights = () => {
   const { toast } = useToast();
   const { t } = useTranslation('ai');
+  const navigate = useNavigate();
   const [insights, setInsights] = useState<AIInsight[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isGeneratingWorkouts, setIsGeneratingWorkouts] = useState(false);
   const [isGeneratingMeals, setIsGeneratingMeals] = useState(false);
   const [activeTab, setActiveTab] = useState<string>("all");
+
+  const getInsightTypeLabel = (type: string): string => {
+    const typeMap: Record<string, string> = {
+      'meal_suggestions': t('insight_type_meal_suggestions'),
+      'workout_recommendations': t('insight_type_workout_recommendations'),
+      'weight': t('insight_type_weight'),
+      'activity': t('insight_type_activity'),
+      'nutrition': t('insight_type_nutrition'),
+    };
+    return typeMap[type] || t('insight_type_general');
+  };
 
   useEffect(() => {
     fetchInsights();
@@ -172,6 +185,14 @@ const AIInsights = () => {
       <div className="space-y-6 max-w-4xl">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate('/premium')}
+            className="shrink-0"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
           <div className="p-3 bg-primary/10 rounded-xl">
             <Brain className="w-6 h-6 text-primary" />
           </div>
@@ -265,7 +286,7 @@ const AIInsights = () => {
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="font-semibold text-lg capitalize">
-                        {insight.insight_type.replace(/_/g, ' ')}
+                        {getInsightTypeLabel(insight.insight_type)}
                       </h3>
                       {insight.generated_at && (
                         <span className="text-sm text-muted-foreground">

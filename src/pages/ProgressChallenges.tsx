@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
-import { Trophy, Plus, Users, Calendar, Target, Award } from "lucide-react";
+import { Trophy, Plus, Users, Calendar, Target, Award, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
@@ -124,8 +124,8 @@ const ProgressChallenges = () => {
       if (error) throw error;
 
       toast({
-        title: "Success",
-        description: "Challenge created successfully",
+        title: t('challenges:success'),
+        description: t('challenges:challenge_created'),
       });
 
       setShowCreateForm(false);
@@ -149,8 +149,8 @@ const ProgressChallenges = () => {
     } catch (error) {
       console.error('Error creating challenge:', error);
       toast({
-        title: "Error",
-        description: "Failed to create challenge",
+        title: t('challenges:error'),
+        description: t('challenges:failed_to_create'),
         variant: "destructive",
       });
     }
@@ -170,9 +170,19 @@ const ProgressChallenges = () => {
     <Layout>
       <div className="container mx-auto p-6 space-y-6">
         <div className="flex justify-between items-center">
-          <div>
-            <h1 className="text-3xl font-bold">Progress Challenges</h1>
-            <p className="text-muted-foreground">Create and join custom fitness challenges with milestones</p>
+          <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => navigate('/premium')}
+              className="shrink-0"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+            <div>
+              <h1 className="text-3xl font-bold">{t('challenges:progress_challenges')}</h1>
+              <p className="text-muted-foreground">{t('challenges:progress_challenges_desc')}</p>
+            </div>
           </div>
           <Button 
             onClick={() => {
@@ -184,7 +194,7 @@ const ProgressChallenges = () => {
             }}
           >
             <Plus className="mr-2 h-4 w-4" />
-            {showCreateForm ? "Cancel" : "Create Challenge"}
+            {showCreateForm ? t('challenges:cancel') : t('challenges:create_challenge')}
           </Button>
         </div>
 
@@ -195,58 +205,58 @@ const ProgressChallenges = () => {
         {showCreateForm && hasFeature('custom_challenges') && (
           <Card>
             <CardHeader>
-              <CardTitle>Create New Challenge</CardTitle>
-              <CardDescription>Set up a custom challenge with milestones and rewards</CardDescription>
+              <CardTitle>{t('challenges:create_new_challenge')}</CardTitle>
+              <CardDescription>{t('challenges:setup_custom_challenge')}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="title">Challenge Title</Label>
+                <Label htmlFor="title">{t('challenges:challenge_title')}</Label>
                 <Input
                   id="title"
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  placeholder="30 Day Workout Challenge"
+                  placeholder={t('challenges:challenge_title_placeholder')}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="description">Description</Label>
+                <Label htmlFor="description">{t('challenges:description')}</Label>
                 <Textarea
                   id="description"
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="Complete 30 workouts in 30 days..."
+                  placeholder={t('challenges:description_placeholder')}
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="challenge_type">Challenge Type</Label>
+                  <Label htmlFor="challenge_type">{t('challenges:challenge_type')}</Label>
                   <Select value={formData.challenge_type} onValueChange={(value) => setFormData({ ...formData, challenge_type: value })}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="workout_count">Workout Count</SelectItem>
-                      <SelectItem value="distance">Distance</SelectItem>
-                      <SelectItem value="weight_loss">Weight Loss</SelectItem>
-                      <SelectItem value="streak">Streak</SelectItem>
-                      <SelectItem value="custom">Custom</SelectItem>
+                      <SelectItem value="workout_count">{t('challenges:workout_count')}</SelectItem>
+                      <SelectItem value="distance">{t('challenges:distance')}</SelectItem>
+                      <SelectItem value="weight_loss">{t('challenges:weight_loss')}</SelectItem>
+                      <SelectItem value="streak">{t('challenges:streak')}</SelectItem>
+                      <SelectItem value="custom">{t('challenges:custom')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="difficulty">Difficulty</Label>
+                  <Label htmlFor="difficulty">{t('challenges:difficulty')}</Label>
                   <Select value={formData.difficulty_level} onValueChange={(value) => setFormData({ ...formData, difficulty_level: value })}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="easy">Easy</SelectItem>
-                      <SelectItem value="medium">Medium</SelectItem>
-                      <SelectItem value="hard">Hard</SelectItem>
-                      <SelectItem value="extreme">Extreme</SelectItem>
+                      <SelectItem value="easy">{t('challenges:easy')}</SelectItem>
+                      <SelectItem value="medium">{t('challenges:medium')}</SelectItem>
+                      <SelectItem value="hard">{t('challenges:hard')}</SelectItem>
+                      <SelectItem value="extreme">{t('challenges:extreme')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -254,7 +264,7 @@ const ProgressChallenges = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="target_value">Target Value</Label>
+                  <Label htmlFor="target_value">{t('challenges:target_value')}</Label>
                   <Input
                     id="target_value"
                     type="number"
@@ -263,19 +273,19 @@ const ProgressChallenges = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="target_unit">Unit</Label>
+                  <Label htmlFor="target_unit">{t('challenges:unit')}</Label>
                   <Input
                     id="target_unit"
                     value={formData.target_unit}
                     onChange={(e) => setFormData({ ...formData, target_unit: e.target.value })}
-                    placeholder="workouts, miles, lbs"
+                    placeholder={t('challenges:unit_placeholder')}
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="start_date">Start Date</Label>
+                  <Label htmlFor="start_date">{t('challenges:start_date')}</Label>
                   <Input
                     id="start_date"
                     type="date"
@@ -284,7 +294,7 @@ const ProgressChallenges = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="end_date">End Date</Label>
+                  <Label htmlFor="end_date">{t('challenges:end_date')}</Label>
                   <Input
                     id="end_date"
                     type="date"
@@ -295,7 +305,7 @@ const ProgressChallenges = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="points_reward">Points Reward</Label>
+                <Label htmlFor="points_reward">{t('challenges:points_reward')}</Label>
                 <Input
                   id="points_reward"
                   type="number"
@@ -305,7 +315,7 @@ const ProgressChallenges = () => {
               </div>
 
               <Button onClick={createChallenge} className="w-full">
-                Create Challenge
+                {t('challenges:create_challenge')}
               </Button>
             </CardContent>
           </Card>
@@ -313,9 +323,9 @@ const ProgressChallenges = () => {
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {loading ? (
-            <p className="text-muted-foreground">Loading challenges...</p>
+            <p className="text-muted-foreground">{t('challenges:loading_challenges')}</p>
           ) : challenges.length === 0 ? (
-            <p className="text-muted-foreground">No challenges available</p>
+            <p className="text-muted-foreground">{t('challenges:no_challenges')}</p>
           ) : (
             challenges.map((challenge) => (
               <Card key={challenge.id} className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(`/progress-challenge/${challenge.id}`)}>
@@ -323,7 +333,7 @@ const ProgressChallenges = () => {
                   <div className="flex justify-between items-start">
                     <CardTitle className="text-xl">{challenge.title}</CardTitle>
                     <Badge className={getDifficultyColor(challenge.difficulty_level)}>
-                      {challenge.difficulty_level}
+                      {t(`challenges:${challenge.difficulty_level}`)}
                     </Badge>
                   </div>
                   <CardDescription className="line-clamp-2">{challenge.description}</CardDescription>
@@ -339,11 +349,11 @@ const ProgressChallenges = () => {
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Users className="h-4 w-4" />
-                    {challenge.participants_count} participants
+                    {challenge.participants_count} {t('challenges:participants')}
                   </div>
                   <div className="flex items-center gap-2 text-sm">
                     <Award className="h-4 w-4 text-primary" />
-                    <span className="font-semibold">{challenge.points_reward} points</span>
+                    <span className="font-semibold">{challenge.points_reward} {t('challenges:points')}</span>
                   </div>
                   <div className="pt-2">
                     <Badge variant="outline" className="capitalize">
