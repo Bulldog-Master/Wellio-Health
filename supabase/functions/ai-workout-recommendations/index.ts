@@ -142,8 +142,8 @@ Format each recommendation as:
     const data = await response.json();
     const recommendations = data.choices[0].message.content;
 
-    // Store recommendations
-    await supabaseClient
+    // Store recommendations using admin client to bypass RLS
+    const { error: insertError } = await supabaseAdmin
       .from('ai_insights')
       .insert({
         user_id: user.id,
@@ -155,6 +155,10 @@ Format each recommendation as:
           personal_records: personalRecords?.length || 0
         }
       });
+    
+    if (insertError) {
+      console.error('Error storing workout recommendations:', insertError);
+    }
 
     return new Response(
       JSON.stringify({ recommendations }),
