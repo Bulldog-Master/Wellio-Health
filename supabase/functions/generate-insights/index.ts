@@ -15,32 +15,42 @@ serve(async (req) => {
 
   try {
     const supabaseUrl = Deno.env.get("SUPABASE_URL");
-    const supabaseKey = Deno.env.get("SUPABASE_ANON_KEY");
+    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
     const authHeader = req.headers.get("Authorization");
     
-    console.log("[generate-insights] Env check - URL exists:", !!supabaseUrl, "Key exists:", !!supabaseKey, "Auth exists:", !!authHeader);
+    console.log("[generate-insights] Env check - URL exists:", !!supabaseUrl, "ServiceKey exists:", !!serviceRoleKey, "Auth exists:", !!authHeader);
     
-    if (!supabaseUrl || !supabaseKey) {
+    if (!supabaseUrl || !serviceRoleKey) {
       throw new Error("Missing Supabase configuration");
     }
+
+    // Create admin client to verify the JWT
+    const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
     
+    // Extract JWT from Authorization header
+    const token = authHeader?.replace("Bearer ", "");
+    if (!token) {
+      return new Response(JSON.stringify({ error: "No authorization token" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    console.log("[generate-insights] Getting user from token...");
+    const { data: { user }, error: userError } = await supabaseAdmin.auth.getUser(token);
+
+    console.log("[generate-insights] User result:", user?.id || "no user", "Error:", userError?.message || "none");
+    
+    // Create a client for data access using the user's context
     const supabaseClient = createClient(
       supabaseUrl,
-      supabaseKey,
+      Deno.env.get("SUPABASE_ANON_KEY") || "",
       {
         global: {
           headers: { Authorization: authHeader || "" },
         },
       }
     );
-
-    console.log("[generate-insights] Getting user...");
-    const {
-      data: { user },
-      error: userError,
-    } = await supabaseClient.auth.getUser();
-
-    console.log("[generate-insights] User result:", user?.id || "no user", "Error:", userError?.message || "none");
 
     if (!user) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
