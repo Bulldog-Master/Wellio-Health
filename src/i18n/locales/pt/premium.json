@@ -10,5 +10,16 @@
   "unlimited_access": "Acesso Ilimitado",
   "medical_records": "Registros Médicos",
   "access_premium": "Acessar Premium",
-  "premium_hub": "Hub Premium"
+  "premium_hub": "Hub Premium",
+  "full_access_description": "Você tem acesso total a todos os recursos premium",
+  "feature_ai_insights": "Insights de IA",
+  "feature_advanced_analytics": "Análises Avançadas",
+  "feature_trainer_search": "Marketplace de Treinadores",
+  "feature_custom_challenges": "Desafios Personalizados",
+  "feature_live_sessions": "Sessões ao Vivo",
+  "feature_unlimited_workouts": "Treinos Ilimitados",
+  "feature_custom_programs": "Programas Personalizados",
+  "feature_priority_support": "Suporte Prioritário",
+  "feature_team_collaboration": "Colaboração em Equipe",
+  "feature_api_access": "Acesso à API"
 }

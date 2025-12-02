@@ -90,5 +90,8 @@
     "activity": "Atividade",
     "connect": "Conectar",
     "fundraisers": "Arrecadações"
-  }
+  },
+  "admin_access": "Acesso Admin",
+  "vip_access": "Acesso VIP",
+  "full_features_unlocked": "Todos os recursos desbloqueados"
 }
