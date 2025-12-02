@@ -51,11 +51,11 @@ const Navigation = () => {
 
   return (
     <nav 
-      className="fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border md:relative md:border-0 md:bg-transparent"
+      className="fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border md:relative md:border-0 md:bg-transparent md:flex md:flex-col md:flex-1"
       aria-label="Main navigation"
       role="navigation"
     >
-      <div className="flex justify-around md:flex-col md:gap-2 md:p-4">
+      <div className="flex justify-around md:flex-col md:gap-2">
         {navItems.map(({ to, icon: Icon, label, color, hoverColor, showBadge }) => (
           <NavLink
             key={to}
@@ -91,18 +91,19 @@ const Navigation = () => {
             </span>
           </NavLink>
         ))}
-        
-        {/* Premium Features - Only visible to VIP/Admin/Upgraded users */}
-        {hasPremiumAccess && (
+      </div>
+      
+      {/* Premium Features - Only visible to VIP/Admin/Upgraded users - Pushed to bottom on desktop */}
+      {hasPremiumAccess && (
+        <div className="hidden md:block md:mt-auto md:border-t md:border-border md:pt-4 md:pb-4">
           <NavLink
             to="/premium"
             className={cn(
-              "group relative flex flex-col md:flex-row items-center gap-1 md:gap-3 px-4 py-3 md:px-4 md:py-3",
+              "group relative flex flex-row items-center gap-3 px-4 py-3",
               "transition-all duration-300 ease-out",
-              "md:rounded-lg md:hover:bg-sidebar-accent/50",
-              "md:mt-auto md:border-t md:border-border md:pt-4"
+              "rounded-lg hover:bg-sidebar-accent/50"
             )}
-            activeClassName="font-medium md:bg-sidebar-accent/30"
+            activeClassName="font-medium bg-sidebar-accent/30"
             aria-label={`Navigate to ${t('premium:premium_hub')}`}
           >
             <div className="relative">
@@ -116,14 +117,14 @@ const Navigation = () => {
               />
             </div>
             <span className={cn(
-              "text-xs md:text-sm transition-colors duration-300",
+              "text-sm transition-colors duration-300",
               "text-muted-foreground group-hover:text-foreground"
             )}>
               {t('premium:premium_hub')}
             </span>
           </NavLink>
-        )}
-      </div>
+        </div>
+      )}
     </nav>
   );
 };
