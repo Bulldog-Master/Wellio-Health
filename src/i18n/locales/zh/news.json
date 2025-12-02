@@ -31,6 +31,10 @@
     "ultra_endurance": "超级耐力",
     "ultra_endurance_desc": "超级马拉松、极限赛事和耐力活动",
     "global_events": "全球赛事",
-    "global_events_desc": "奥运会、世界锦标赛和国际比赛"
+    "global_events_desc": "奥运会、世界锦标赛和国际比赛",
+    "biohacker": "生物黑客",
+    "biohacker_desc": "生物黑客、长寿科学和性能优化",
+    "medical": "医学",
+    "medical_desc": "医学突破、健康研究和运动医学"
   }
 }

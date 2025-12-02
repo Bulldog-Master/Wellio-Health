@@ -35,7 +35,11 @@
     "ultra_endurance": "Ultra Endurance",
     "ultra_endurance_desc": "Ultra marathons, extreme races, and endurance events",
     "global_events": "Global Events",
-    "global_events_desc": "Olympics, World Championships, and international competitions"
+    "global_events_desc": "Olympics, World Championships, and international competitions",
+    "biohacker": "Biohacker",
+    "biohacker_desc": "Biohacking, longevity science, and performance optimization",
+    "medical": "Medical",
+    "medical_desc": "Medical breakthroughs, health research, and fitness medicine"
   },
   "items": {
     "latest": {
@@ -97,6 +101,16 @@
       "item1": "Paris 2024 Olympic Legacy Programs",
       "item2": "LA 2028 Olympics Venue Updates",
       "item3": "World Games 2025 Schedule Released"
+    },
+    "biohacker": {
+      "item1": "Cold Plunge Benefits: Latest Research on Ice Baths",
+      "item2": "Red Light Therapy: Optimizing Recovery & Performance",
+      "item3": "Nootropics & Cognitive Enhancement for Athletes"
+    },
+    "medical": {
+      "item1": "New Guidelines for Exercise After Heart Surgery",
+      "item2": "Sports Medicine Advances: PRP & Stem Cell Treatments",
+      "item3": "Sleep Science: How Rest Impacts Athletic Performance"
     }
   },
   "dates": {
@@ -159,6 +173,16 @@
       "item1": "Ongoing",
       "item2": "2028",
       "item3": "Aug 2025"
+    },
+    "biohacker": {
+      "item1": "Nov 2024",
+      "item2": "Dec 2024",
+      "item3": "2025"
+    },
+    "medical": {
+      "item1": "Dec 2024",
+      "item2": "Nov 2024",
+      "item3": "2025"
     }
   },
   "urls": {
@@ -221,6 +245,16 @@
       "item1": "https://olympics.com/en/paris-2024",
       "item2": "https://la28.org/",
       "item3": "https://www.theworldgames.org/"
+    },
+    "biohacker": {
+      "item1": "https://www.foundmyfitness.com/",
+      "item2": "https://www.hubermanlab.com/",
+      "item3": "https://www.biohackingcongress.com/"
+    },
+    "medical": {
+      "item1": "https://www.mayoclinic.org/healthy-lifestyle/fitness",
+      "item2": "https://www.webmd.com/fitness-exercise/",
+      "item3": "https://www.health.harvard.edu/exercise-and-fitness"
     }
   }
 }

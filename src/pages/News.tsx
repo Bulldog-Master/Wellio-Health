@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Newspaper, Trophy, Dumbbell, Bike, Footprints, Waves, Mountain, Heart, Swords, Globe, Flame, Medal, Timer, Calendar, ChevronDown, ChevronUp, ExternalLink, Plus, Pencil, Trash2, X, Check } from "lucide-react";
+import { ArrowLeft, Newspaper, Trophy, Dumbbell, Bike, Footprints, Waves, Mountain, Heart, Swords, Globe, Flame, Medal, Timer, Calendar, ChevronDown, ChevronUp, ExternalLink, Plus, Pencil, Trash2, X, Check, Zap, Stethoscope } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
@@ -184,6 +184,8 @@ const News = () => {
     { id: 'swimming', icon: Waves, titleKey: 'news:categories.swimming', descKey: 'news:categories.swimming_desc', color: 'text-sky-500', bgColor: 'bg-sky-500/10' },
     { id: 'ultra', icon: Flame, titleKey: 'news:categories.ultra_endurance', descKey: 'news:categories.ultra_endurance_desc', color: 'text-rose-500', bgColor: 'bg-rose-500/10' },
     { id: 'global', icon: Globe, titleKey: 'news:categories.global_events', descKey: 'news:categories.global_events_desc', color: 'text-emerald-500', bgColor: 'bg-emerald-500/10' },
+    { id: 'biohacker', icon: Zap, titleKey: 'news:categories.biohacker', descKey: 'news:categories.biohacker_desc', color: 'text-violet-500', bgColor: 'bg-violet-500/10' },
+    { id: 'medical', icon: Stethoscope, titleKey: 'news:categories.medical', descKey: 'news:categories.medical_desc', color: 'text-teal-500', bgColor: 'bg-teal-500/10' },
   ];
 
   const getBadgeVariant = (type: string | null) => {
