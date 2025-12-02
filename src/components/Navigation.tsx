@@ -1,13 +1,18 @@
-import { Home, Utensils, Activity, Users, Settings, Sparkles, Heart } from "lucide-react";
+import { Home, Utensils, Activity, Users, Settings, Sparkles, Heart, Crown } from "lucide-react";
 import { NavLink } from "./NavLink";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "react-i18next";
+import { useSubscription } from "@/hooks/useSubscription";
 
 const Navigation = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'premium']);
   const [showRewardsBadge, setShowRewardsBadge] = useState(false);
+  const { hasFullAccess, tier } = useSubscription();
+  
+  // Show premium link for VIP, Admin, or paid subscribers (pro/enterprise)
+  const hasPremiumAccess = hasFullAccess || tier === 'pro' || tier === 'enterprise';
 
   useEffect(() => {
     checkRewardsStatus();
@@ -86,6 +91,38 @@ const Navigation = () => {
             </span>
           </NavLink>
         ))}
+        
+        {/* Premium Features - Only visible to VIP/Admin/Upgraded users */}
+        {hasPremiumAccess && (
+          <NavLink
+            to="/premium"
+            className={cn(
+              "group relative flex flex-col md:flex-row items-center gap-1 md:gap-3 px-4 py-3 md:px-4 md:py-3",
+              "transition-all duration-300 ease-out",
+              "md:rounded-lg md:hover:bg-sidebar-accent/50",
+              "md:mt-auto md:border-t md:border-border md:pt-4"
+            )}
+            activeClassName="font-medium md:bg-sidebar-accent/30"
+            aria-label={`Navigate to ${t('premium:premium_hub')}`}
+          >
+            <div className="relative">
+              <Crown 
+                className={cn(
+                  "w-5 h-5 transition-all duration-300",
+                  "text-primary",
+                  "group-hover:drop-shadow-[0_0_8px_hsl(var(--primary))]"
+                )} 
+                aria-hidden="true" 
+              />
+            </div>
+            <span className={cn(
+              "text-xs md:text-sm transition-colors duration-300",
+              "text-muted-foreground group-hover:text-foreground"
+            )}>
+              {t('premium:premium_hub')}
+            </span>
+          </NavLink>
+        )}
       </div>
     </nav>
   );
