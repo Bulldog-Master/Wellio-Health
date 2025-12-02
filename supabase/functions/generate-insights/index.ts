@@ -7,17 +7,29 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
+  console.log("[generate-insights] Request received:", req.method);
+  
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const supabaseKey = Deno.env.get("SUPABASE_ANON_KEY");
+    const authHeader = req.headers.get("Authorization");
+    
+    console.log("[generate-insights] Env check - URL exists:", !!supabaseUrl, "Key exists:", !!supabaseKey, "Auth exists:", !!authHeader);
+    
+    if (!supabaseUrl || !supabaseKey) {
+      throw new Error("Missing Supabase configuration");
+    }
+    
     const supabaseClient = createClient(
-      Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_ANON_KEY") ?? "",
+      supabaseUrl,
+      supabaseKey,
       {
         global: {
-          headers: { Authorization: req.headers.get("Authorization")! },
+          headers: { Authorization: authHeader || "" },
         },
       }
     );
