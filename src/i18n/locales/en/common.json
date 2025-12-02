@@ -262,5 +262,9 @@
   "admin_access": "Admin Access",
   "vip_access": "VIP Access",
   "full_features_unlocked": "Full features unlocked",
-  "ai_coach": "AI Coach"
+  "ai_coach": "AI Coach",
+  "add": "Add",
+  "saved": "Saved successfully",
+  "deleted": "Deleted successfully",
+  "no_data": "No data available"
 }

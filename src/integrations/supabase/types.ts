@@ -1650,6 +1650,54 @@ export type Database = {
           },
         ]
       }
+      news_items: {
+        Row: {
+          badge_type: string | null
+          category: string
+          created_at: string
+          created_by: string | null
+          event_date: string | null
+          event_date_es: string | null
+          id: string
+          is_active: boolean | null
+          sort_order: number | null
+          title: string
+          title_es: string | null
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          badge_type?: string | null
+          category: string
+          created_at?: string
+          created_by?: string | null
+          event_date?: string | null
+          event_date_es?: string | null
+          id?: string
+          is_active?: boolean | null
+          sort_order?: number | null
+          title: string
+          title_es?: string | null
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          badge_type?: string | null
+          category?: string
+          created_at?: string
+          created_by?: string | null
+          event_date?: string | null
+          event_date_es?: string | null
+          id?: string
+          is_active?: boolean | null
+          sort_order?: number | null
+          title?: string
+          title_es?: string | null
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
+      }
       notifications: {
         Row: {
           actor_id: string
