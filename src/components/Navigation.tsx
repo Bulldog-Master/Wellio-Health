@@ -51,7 +51,7 @@ const Navigation = () => {
 
   return (
     <nav 
-      className="fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border md:relative md:border-0 md:bg-transparent md:flex md:flex-col md:flex-1"
+      className="fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border md:relative md:border-0 md:bg-transparent"
       aria-label="Main navigation"
       role="navigation"
     >
@@ -92,15 +92,17 @@ const Navigation = () => {
           </NavLink>
         ))}
         
-        {/* Premium Hub - Mobile/Tablet bottom nav - Only for VIP/Admin/Upgraded */}
+        {/* Premium Hub - Visible for VIP/Admin/Upgraded users on all devices */}
         {hasPremiumAccess && (
           <NavLink
             to="/premium"
             className={cn(
-              "group relative flex flex-col items-center gap-1 px-4 py-3 md:hidden",
-              "transition-all duration-300 ease-out"
+              "group relative flex flex-col md:flex-row items-center gap-1 md:gap-3 px-4 py-3 md:px-4 md:py-3",
+              "transition-all duration-300 ease-out",
+              "md:rounded-lg md:hover:bg-sidebar-accent/50",
+              "md:mt-4 md:border-t md:border-border md:pt-4"
             )}
-            activeClassName="font-medium"
+            activeClassName="font-medium md:bg-sidebar-accent/30"
             aria-label={`Navigate to ${t('premium:premium_hub')}`}
           >
             <div className="relative">
@@ -114,7 +116,7 @@ const Navigation = () => {
               />
             </div>
             <span className={cn(
-              "text-xs transition-colors duration-300",
+              "text-xs md:text-sm transition-colors duration-300",
               "text-muted-foreground group-hover:text-foreground"
             )}>
               {t('premium:premium_hub')}
@@ -122,39 +124,6 @@ const Navigation = () => {
           </NavLink>
         )}
       </div>
-      
-      {/* Premium Features - Desktop sidebar bottom - Only for VIP/Admin/Upgraded */}
-      {hasPremiumAccess && (
-        <div className="hidden md:block md:mt-auto md:border-t md:border-border md:pt-4 md:pb-4">
-          <NavLink
-            to="/premium"
-            className={cn(
-              "group relative flex flex-row items-center gap-3 px-4 py-3",
-              "transition-all duration-300 ease-out",
-              "rounded-lg hover:bg-sidebar-accent/50"
-            )}
-            activeClassName="font-medium bg-sidebar-accent/30"
-            aria-label={`Navigate to ${t('premium:premium_hub')}`}
-          >
-            <div className="relative">
-              <Crown 
-                className={cn(
-                  "w-5 h-5 transition-all duration-300",
-                  "text-primary",
-                  "group-hover:drop-shadow-[0_0_8px_hsl(var(--primary))]"
-                )} 
-                aria-hidden="true" 
-              />
-            </div>
-            <span className={cn(
-              "text-sm transition-colors duration-300",
-              "text-muted-foreground group-hover:text-foreground"
-            )}>
-              {t('premium:premium_hub')}
-            </span>
-          </NavLink>
-        </div>
-      )}
     </nav>
   );
 };
