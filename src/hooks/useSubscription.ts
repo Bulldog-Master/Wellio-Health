@@ -25,6 +25,8 @@ export const useSubscription = () => {
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [features, setFeatures] = useState<SubscriptionFeature[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isVIP, setIsVIP] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     fetchSubscription();
@@ -37,6 +39,19 @@ export const useSubscription = () => {
         setIsLoading(false);
         return;
       }
+
+      // Check VIP/Admin status using secure database function
+      const { data: hasVIP } = await supabase.rpc('has_active_vip', {
+        _user_id: user.id
+      });
+      setIsVIP(hasVIP || false);
+
+      // Check admin status
+      const { data: hasAdmin } = await supabase.rpc('has_role', {
+        _user_id: user.id,
+        _role: 'admin'
+      });
+      setIsAdmin(hasAdmin || false);
 
       // SECURITY: Only select safe fields, never expose Stripe IDs
       const { data: subData, error: subError } = await supabase
@@ -69,11 +84,17 @@ export const useSubscription = () => {
   };
 
   const hasFeature = (featureKey: string): boolean => {
+    // VIP and Admin users have access to all features
+    if (isVIP || isAdmin) return true;
+    
     const feature = features.find(f => f.feature_key === featureKey);
     return feature?.feature_value === 'true';
   };
 
   const getFeatureValue = (featureKey: string): string | null => {
+    // VIP and Admin users get unlimited/max values
+    if (isVIP || isAdmin) return 'unlimited';
+    
     const feature = features.find(f => f.feature_key === featureKey);
     return feature?.feature_value || null;
   };
@@ -85,6 +106,9 @@ export const useSubscription = () => {
     hasFeature,
     getFeatureValue,
     tier: subscription?.tier || 'free',
+    isVIP,
+    isAdmin,
+    hasFullAccess: isVIP || isAdmin,
     refetch: fetchSubscription,
   };
 };

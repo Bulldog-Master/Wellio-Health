@@ -49,6 +49,7 @@ import pluralsEN from './locales/en/plurals.json';
 import messagesEN from './locales/en/messages.json';
 import notificationsEN from './locales/en/notifications.json';
 import errorsEN from './locales/en/errors.json';
+import adminEN from './locales/en/admin.json';
 
 // Spanish
 import commonES from './locales/es/common.json';
@@ -96,6 +97,7 @@ import seoES from './locales/es/seo.json';
 import unitsES from './locales/es/units.json';
 import a11yES from './locales/es/a11y.json';
 import pluralsES from './locales/es/plurals.json';
+import adminES from './locales/es/admin.json';
 
 // Portuguese
 import commonPT from './locales/pt/common.json';
@@ -107,6 +109,7 @@ import seoPT from './locales/pt/seo.json';
 import unitsPT from './locales/pt/units.json';
 import a11yPT from './locales/pt/a11y.json';
 import pluralsPT from './locales/pt/plurals.json';
+import adminPT from './locales/pt/admin.json';
 
 // French
 import commonFR from './locales/fr/common.json';
@@ -118,6 +121,7 @@ import seoFR from './locales/fr/seo.json';
 import unitsFR from './locales/fr/units.json';
 import a11yFR from './locales/fr/a11y.json';
 import pluralsFR from './locales/fr/plurals.json';
+import adminFR from './locales/fr/admin.json';
 
 // German
 import commonDE from './locales/de/common.json';
@@ -129,6 +133,7 @@ import seoDE from './locales/de/seo.json';
 import unitsDE from './locales/de/units.json';
 import a11yDE from './locales/de/a11y.json';
 import pluralsDE from './locales/de/plurals.json';
+import adminDE from './locales/de/admin.json';
 
 // Chinese
 import commonZH from './locales/zh/common.json';
@@ -140,6 +145,7 @@ import seoZH from './locales/zh/seo.json';
 import unitsZH from './locales/zh/units.json';
 import a11yZH from './locales/zh/a11y.json';
 import pluralsZH from './locales/zh/plurals.json';
+import adminZH from './locales/zh/admin.json';
 
 // All namespaces - used for ns array and type safety
 export const allNamespaces = [
@@ -149,7 +155,7 @@ export const allNamespaces = [
   'calendar', 'records', 'voice', 'medical', 'timer', 'live', 'challenges', 
   'fundraisers', 'macros', 'install', 'search', 'creator', 'ai', 'measurements', 
   'trainer', 'session', 'bookmarks', 'challenges_page', 'feed', 'groups', 
-  'followers', 'schedule', 'seo', 'units', 'a11y', 'plurals'
+  'followers', 'schedule', 'seo', 'units', 'a11y', 'plurals', 'admin'
 ] as const;
 
 export type TranslationNamespace = typeof allNamespaces[number];
@@ -201,6 +207,7 @@ const resources = {
     messages: messagesEN,
     notifications: notificationsEN,
     errors: errorsEN,
+    admin: adminEN,
   },
   es: {
     common: commonES,
@@ -248,6 +255,7 @@ const resources = {
     units: unitsES,
     a11y: a11yES,
     plurals: pluralsES,
+    admin: adminES,
   },
   pt: {
     common: commonPT,
@@ -259,6 +267,7 @@ const resources = {
     units: unitsPT,
     a11y: a11yPT,
     plurals: pluralsPT,
+    admin: adminPT,
   },
   fr: {
     common: commonFR,
@@ -270,6 +279,7 @@ const resources = {
     units: unitsFR,
     a11y: a11yFR,
     plurals: pluralsFR,
+    admin: adminFR,
   },
   de: {
     common: commonDE,
@@ -281,6 +291,7 @@ const resources = {
     units: unitsDE,
     a11y: a11yDE,
     plurals: pluralsDE,
+    admin: adminDE,
   },
   zh: {
     common: commonZH,
@@ -292,6 +303,7 @@ const resources = {
     units: unitsZH,
     a11y: a11yZH,
     plurals: pluralsZH,
+    admin: adminZH,
   },
 };
 

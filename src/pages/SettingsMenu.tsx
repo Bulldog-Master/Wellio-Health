@@ -11,8 +11,8 @@ import { useTranslation } from "react-i18next";
 
 const SettingsMenu = () => {
   const navigate = useNavigate();
-  const { tier } = useSubscription();
-  const { t } = useTranslation(['settings']);
+  const { tier, isAdmin, isVIP, hasFullAccess } = useSubscription();
+  const { t } = useTranslation(['settings', 'admin']);
   const [referralStats, setReferralStats] = useState({
     points: 0,
     totalReferrals: 0,
@@ -53,14 +53,27 @@ const SettingsMenu = () => {
   };
 
   const settingsItems = [
+    // Admin panel - only shown to admins
+    ...(isAdmin ? [{
+      title: t('admin:admin_panel'),
+      description: t('admin:admin_panel_desc'),
+      icon: Shield,
+      iconBg: "bg-yellow-500/20",
+      iconColor: "text-yellow-500",
+      path: "/admin/vip",
+      badge: "Admin",
+      badgeVariant: "default" as const,
+    }] : []),
     {
       title: t('subscription'),
-      description: t('subscription_desc', { tier: tier.toUpperCase() }),
+      description: hasFullAccess 
+        ? (isVIP ? 'VIP Access' : 'Admin Access')
+        : t('subscription_desc', { tier: tier.toUpperCase() }),
       icon: Crown,
       iconBg: "bg-primary/20",
       iconColor: "text-primary",
       path: "/subscription",
-      badge: tier !== 'free' ? tier : undefined,
+      badge: hasFullAccess ? (isVIP ? 'VIP' : 'Admin') : (tier !== 'free' ? tier : undefined),
     },
     {
       title: t('referral_program'),
