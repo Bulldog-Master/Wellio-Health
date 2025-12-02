@@ -10,5 +10,16 @@
   "unlimited_access": "Unbegrenzter Zugang",
   "medical_records": "Medizinische Aufzeichnungen",
   "access_premium": "Premium zugreifen",
-  "premium_hub": "Premium-Hub"
+  "premium_hub": "Premium-Hub",
+  "full_access_description": "Sie haben vollen Zugang zu allen Premium-Funktionen",
+  "feature_ai_insights": "KI-Insights",
+  "feature_advanced_analytics": "Erweiterte Analysen",
+  "feature_trainer_search": "Trainer-Marktplatz",
+  "feature_custom_challenges": "Benutzerdefinierte Challenges",
+  "feature_live_sessions": "Live-Sessions",
+  "feature_unlimited_workouts": "Unbegrenzte Trainings",
+  "feature_custom_programs": "Benutzerdefinierte Programme",
+  "feature_priority_support": "Prioritäts-Support",
+  "feature_team_collaboration": "Team-Zusammenarbeit",
+  "feature_api_access": "API-Zugang"
 }

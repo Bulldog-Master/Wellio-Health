@@ -90,5 +90,8 @@
     "activity": "活动",
     "connect": "连接",
     "fundraisers": "募款"
-  }
+  },
+  "admin_access": "管理员访问",
+  "vip_access": "VIP访问",
+  "full_features_unlocked": "所有功能已解锁"
 }

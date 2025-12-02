@@ -10,5 +10,16 @@
   "unlimited_access": "无限访问",
   "medical_records": "医疗记录",
   "access_premium": "访问高级功能",
-  "premium_hub": "高级中心"
+  "premium_hub": "高级中心",
+  "full_access_description": "您可以完全访问所有高级功能",
+  "feature_ai_insights": "AI洞察",
+  "feature_advanced_analytics": "高级分析",
+  "feature_trainer_search": "教练市场",
+  "feature_custom_challenges": "自定义挑战",
+  "feature_live_sessions": "实时课程",
+  "feature_unlimited_workouts": "无限训练",
+  "feature_custom_programs": "自定义计划",
+  "feature_priority_support": "优先支持",
+  "feature_team_collaboration": "团队协作",
+  "feature_api_access": "API访问"
 }

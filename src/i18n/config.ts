@@ -113,6 +113,7 @@ import a11yPT from './locales/pt/a11y.json';
 import pluralsPT from './locales/pt/plurals.json';
 import adminPT from './locales/pt/admin.json';
 import premiumPT from './locales/pt/premium.json';
+import subscriptionPT from './locales/pt/subscription.json';
 
 // French
 import commonFR from './locales/fr/common.json';
@@ -126,6 +127,7 @@ import a11yFR from './locales/fr/a11y.json';
 import pluralsFR from './locales/fr/plurals.json';
 import adminFR from './locales/fr/admin.json';
 import premiumFR from './locales/fr/premium.json';
+import subscriptionFR from './locales/fr/subscription.json';
 
 // German
 import commonDE from './locales/de/common.json';
@@ -139,6 +141,7 @@ import a11yDE from './locales/de/a11y.json';
 import pluralsDE from './locales/de/plurals.json';
 import adminDE from './locales/de/admin.json';
 import premiumDE from './locales/de/premium.json';
+import subscriptionDE from './locales/de/subscription.json';
 
 // Chinese
 import commonZH from './locales/zh/common.json';
@@ -152,6 +155,7 @@ import a11yZH from './locales/zh/a11y.json';
 import pluralsZH from './locales/zh/plurals.json';
 import adminZH from './locales/zh/admin.json';
 import premiumZH from './locales/zh/premium.json';
+import subscriptionZH from './locales/zh/subscription.json';
 
 // All namespaces - used for ns array and type safety
 export const allNamespaces = [
@@ -277,6 +281,7 @@ const resources = {
     plurals: pluralsPT,
     admin: adminPT,
     premium: premiumPT,
+    subscription: subscriptionPT,
   },
   fr: {
     common: commonFR,
@@ -290,6 +295,7 @@ const resources = {
     plurals: pluralsFR,
     admin: adminFR,
     premium: premiumFR,
+    subscription: subscriptionFR,
   },
   de: {
     common: commonDE,
@@ -303,6 +309,7 @@ const resources = {
     plurals: pluralsDE,
     admin: adminDE,
     premium: premiumDE,
+    subscription: subscriptionDE,
   },
   zh: {
     common: commonZH,
@@ -316,6 +323,7 @@ const resources = {
     plurals: pluralsZH,
     admin: adminZH,
     premium: premiumZH,
+    subscription: subscriptionZH,
   },
 };
 

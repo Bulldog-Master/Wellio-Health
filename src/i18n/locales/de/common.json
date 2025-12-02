@@ -90,5 +90,8 @@
     "activity": "Aktivität",
     "connect": "Verbinden",
     "fundraisers": "Spendenaktionen"
-  }
+  },
+  "admin_access": "Admin-Zugang",
+  "vip_access": "VIP-Zugang",
+  "full_features_unlocked": "Alle Funktionen freigeschaltet"
 }

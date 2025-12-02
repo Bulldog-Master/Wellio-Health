@@ -1,0 +1,23 @@
+{
+  "current_plan": "Aktueller Plan",
+  "free_plan": "Kostenloser Plan",
+  "pro_plan": "Pro Plan",
+  "enterprise_plan": "Enterprise Plan",
+  "features_included": "Enthaltene Funktionen",
+  "basic_tracking": "Grundlegendes Fitness-Tracking",
+  "limited_workouts": "Begrenzte Trainings",
+  "community_access": "Community-Zugang",
+  "unlimited_workouts": "Unbegrenzte Trainings",
+  "ai_insights": "KI-Insights",
+  "advanced_analytics": "Erweiterte Analysen",
+  "priority_support": "Prioritäts-Support",
+  "all_pro_features": "Alle Pro-Funktionen",
+  "team_features": "Team-Funktionen",
+  "api_access": "API-Zugang",
+  "dedicated_support": "Dedizierter Support",
+  "upgrade_to_pro": "Auf Pro upgraden",
+  "contact_sales": "Vertrieb kontaktieren",
+  "vip_access": "VIP-Zugang",
+  "admin_access": "Admin-Zugang",
+  "full_features_unlocked": "Alle Funktionen freigeschaltet"
+}
