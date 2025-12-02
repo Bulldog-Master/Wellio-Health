@@ -57,5 +57,9 @@
   "locations": {
     "title": "Fitness Locations - Wellio",
     "description": "Find gyms, studios, and fitness centers worldwide with reviews and directions."
+  },
+  "products": {
+    "title": "Recommended Products - Wellio",
+    "description": "Discover personally vetted and approved fitness products, supplements, and gear."
   }
 }

@@ -88,6 +88,7 @@ const News = lazy(() => import("@/pages/News"));
 const Sponsors = lazy(() => import("@/pages/Sponsors"));
 const FitnessLocations = lazy(() => import("@/pages/FitnessLocations"));
 const AdminAdvertisements = lazy(() => import("@/pages/AdminAdvertisements"));
+const RecommendedProducts = lazy(() => import("@/pages/RecommendedProducts"));
 
 /**
  * Application route configuration
@@ -199,6 +200,7 @@ export const AppRoutes = () => (
     <Route path="/news" element={<RouteErrorBoundary><ProtectedRoute><Layout><News /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/sponsors" element={<RouteErrorBoundary><ProtectedRoute><Layout><Sponsors /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/locations" element={<RouteErrorBoundary><ProtectedRoute><Layout><FitnessLocations /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/products" element={<RouteErrorBoundary><ProtectedRoute><Layout><RecommendedProducts /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     
     {/* 404 */}
     <Route path="*" element={<NotFound />} />

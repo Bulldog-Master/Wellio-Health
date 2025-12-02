@@ -2838,6 +2838,63 @@ export type Database = {
         }
         Relationships: []
       }
+      recommended_products: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          description_es: string | null
+          display_order: number | null
+          id: string
+          image_url: string | null
+          is_active: boolean
+          is_bulldogz_approved: boolean
+          name: string
+          name_es: string | null
+          personal_endorsement: string | null
+          personal_endorsement_es: string | null
+          price_range: string | null
+          purchase_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          description_es?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          is_bulldogz_approved?: boolean
+          name: string
+          name_es?: string | null
+          personal_endorsement?: string | null
+          personal_endorsement_es?: string | null
+          price_range?: string | null
+          purchase_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          description_es?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          is_bulldogz_approved?: boolean
+          name?: string
+          name_es?: string | null
+          personal_endorsement?: string | null
+          personal_endorsement_es?: string | null
+          price_range?: string | null
+          purchase_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       referrals: {
         Row: {
           completed_at: string | null
