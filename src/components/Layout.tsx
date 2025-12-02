@@ -7,6 +7,7 @@ import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
 import { Badge } from "./ui/badge";
 import { useUnreadNotificationCount } from "@/hooks/useNotifications";
+import QuickActionsButton from "./QuickActionsButton";
 
 interface LayoutProps {
   children: ReactNode;
@@ -95,6 +96,9 @@ const Layout = ({ children }: LayoutProps) => {
         <div className="md:hidden">
           <Navigation />
         </div>
+
+        {/* Floating Quick Actions Button */}
+        <QuickActionsButton />
       </div>
     </div>
   );
