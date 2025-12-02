@@ -175,5 +175,7 @@
   "of_goal": "of goal",
   "nutrition": "Nutrition",
   "video_tutorials": "Video Tutorials",
-  "exercise_video_tutorials": "Learn proper form with video guides"
+  "exercise_video_tutorials": "Learn proper form with video guides",
+  "ai_fitness_chat": "AI Fitness Assistant",
+  "ai_fitness_chat_desc": "Get personalized fitness advice"
 }
