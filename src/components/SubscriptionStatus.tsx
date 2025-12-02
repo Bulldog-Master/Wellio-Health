@@ -7,12 +7,64 @@ import { useSubscription } from '@/hooks/useSubscription';
 
 export const SubscriptionStatus = () => {
   const navigate = useNavigate();
-  const { tier, subscription, isLoading } = useSubscription();
+  const { tier, subscription, isLoading, isVIP, isAdmin, hasFullAccess } = useSubscription();
 
   if (isLoading) {
     return (
       <Card className="p-4 animate-pulse">
         <div className="h-20 bg-muted rounded" />
+      </Card>
+    );
+  }
+
+  // Show special card for Admin/VIP users
+  if (hasFullAccess) {
+    return (
+      <Card className="p-6 border-primary bg-primary/5">
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <Crown className="w-5 h-5 text-primary" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <h3 className="font-semibold text-lg">
+                  {isAdmin ? 'Admin Access' : 'VIP Access'}
+                </h3>
+                <Badge className="bg-primary text-primary-foreground">
+                  {isAdmin ? 'ADMIN' : 'VIP'}
+                </Badge>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                All features unlocked
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-2 mb-4">
+          <div className="flex items-center gap-2 text-sm">
+            <Check className="w-4 h-4 text-primary shrink-0" />
+            <span className="text-muted-foreground">Unlimited workouts</span>
+          </div>
+          <div className="flex items-center gap-2 text-sm">
+            <Check className="w-4 h-4 text-primary shrink-0" />
+            <span className="text-muted-foreground">AI-powered insights</span>
+          </div>
+          <div className="flex items-center gap-2 text-sm">
+            <Check className="w-4 h-4 text-primary shrink-0" />
+            <span className="text-muted-foreground">All premium features</span>
+          </div>
+        </div>
+
+        <Button
+          variant="outline"
+          className="w-full gap-2"
+          onClick={() => navigate('/subscription')}
+        >
+          View Plans
+          <ArrowRight className="w-4 h-4" />
+        </Button>
       </Card>
     );
   }

@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 const Subscription = () => {
   const navigate = useNavigate();
-  const { subscription, isLoading, tier } = useSubscription();
+  const { subscription, isLoading, tier, isVIP, isAdmin, hasFullAccess } = useSubscription();
   const { t } = useTranslation('subscription');
 
   const plans = [
@@ -91,7 +91,26 @@ const Subscription = () => {
             <p className="text-muted-foreground text-lg">
               {t('unlock_potential')}
             </p>
-            {subscription && (
+            
+            {/* Admin/VIP Full Access Banner */}
+            {hasFullAccess && (
+              <Card className="mt-6 p-6 border-primary bg-primary/5">
+                <div className="flex items-center justify-center gap-3 mb-2">
+                  <Crown className="w-8 h-8 text-primary" />
+                  <h2 className="text-2xl font-bold text-primary">
+                    {isAdmin ? t('admin_access') : t('vip_access')}
+                  </h2>
+                </div>
+                <p className="text-muted-foreground">
+                  {t('full_access_description')}
+                </p>
+                <Badge className="mt-3 bg-primary text-primary-foreground px-4 py-1">
+                  {t('all_features_unlocked')}
+                </Badge>
+              </Card>
+            )}
+            
+            {!hasFullAccess && subscription && (
               <div className="mt-4">
                 <Badge variant="secondary" className="text-lg px-4 py-2">
                   {t('current_plan')}: {tier.toUpperCase()}
