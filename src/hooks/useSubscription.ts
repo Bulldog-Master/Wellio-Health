@@ -21,12 +21,38 @@ export interface SubscriptionFeature {
   feature_value: string;
 }
 
+// Cache keys for localStorage
+const CACHE_KEY_VIP = 'subscription_isVIP';
+const CACHE_KEY_ADMIN = 'subscription_isAdmin';
+const CACHE_KEY_TIER = 'subscription_tier';
+
+// Read cached values for instant UI
+const getCachedBoolean = (key: string): boolean => {
+  try {
+    return localStorage.getItem(key) === 'true';
+  } catch {
+    return false;
+  }
+};
+
+const getCachedTier = (): SubscriptionTier => {
+  try {
+    const cached = localStorage.getItem(CACHE_KEY_TIER);
+    if (cached === 'pro' || cached === 'enterprise') return cached;
+    return 'free';
+  } catch {
+    return 'free';
+  }
+};
+
 export const useSubscription = () => {
+  // Initialize from cache for instant UI
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [features, setFeatures] = useState<SubscriptionFeature[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isVIP, setIsVIP] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isVIP, setIsVIP] = useState(() => getCachedBoolean(CACHE_KEY_VIP));
+  const [isAdmin, setIsAdmin] = useState(() => getCachedBoolean(CACHE_KEY_ADMIN));
+  const [tier, setTier] = useState<SubscriptionTier>(() => getCachedTier());
 
   useEffect(() => {
     fetchSubscription();
@@ -36,6 +62,15 @@ export const useSubscription = () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
+        // Clear cache on logout
+        try {
+          localStorage.removeItem(CACHE_KEY_VIP);
+          localStorage.removeItem(CACHE_KEY_ADMIN);
+          localStorage.removeItem(CACHE_KEY_TIER);
+        } catch {}
+        setIsVIP(false);
+        setIsAdmin(false);
+        setTier('free');
         setIsLoading(false);
         return;
       }
@@ -44,14 +79,22 @@ export const useSubscription = () => {
       const { data: hasVIP } = await supabase.rpc('has_active_vip', {
         _user_id: user.id
       });
-      setIsVIP(hasVIP || false);
+      const vipStatus = hasVIP || false;
+      setIsVIP(vipStatus);
 
       // Check admin status
       const { data: hasAdmin } = await supabase.rpc('has_role', {
         _user_id: user.id,
         _role: 'admin'
       });
-      setIsAdmin(hasAdmin || false);
+      const adminStatus = hasAdmin || false;
+      setIsAdmin(adminStatus);
+
+      // Cache the values for instant UI on next mount
+      try {
+        localStorage.setItem(CACHE_KEY_VIP, String(vipStatus));
+        localStorage.setItem(CACHE_KEY_ADMIN, String(adminStatus));
+      } catch {}
 
       // SECURITY: Only select safe fields, never expose Stripe IDs
       const { data: subData, error: subError } = await supabase
@@ -66,6 +109,12 @@ export const useSubscription = () => {
 
       if (subData) {
         setSubscription(subData as Subscription);
+        setTier(subData.tier as SubscriptionTier);
+        
+        // Cache tier
+        try {
+          localStorage.setItem(CACHE_KEY_TIER, subData.tier);
+        } catch {}
 
         const { data: featuresData } = await supabase
           .from('subscription_features')
@@ -75,6 +124,11 @@ export const useSubscription = () => {
         if (featuresData) {
           setFeatures(featuresData);
         }
+      } else {
+        setTier('free');
+        try {
+          localStorage.setItem(CACHE_KEY_TIER, 'free');
+        } catch {}
       }
     } catch (error) {
       console.error('Error in fetchSubscription:', error);
@@ -105,7 +159,7 @@ export const useSubscription = () => {
     isLoading,
     hasFeature,
     getFeatureValue,
-    tier: subscription?.tier || 'free',
+    tier,
     isVIP,
     isAdmin,
     hasFullAccess: isVIP || isAdmin,
