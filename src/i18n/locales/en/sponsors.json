@@ -1,0 +1,33 @@
+{
+  "title": "Our Sponsors",
+  "subtitle": "Proudly supported by industry leaders",
+  "tiers": {
+    "platinum": "Platinum",
+    "gold": "Gold",
+    "silver": "Silver",
+    "bronze": "Bronze"
+  },
+  "visit_website": "Visit Website",
+  "no_sponsors": "No sponsors to display at this time",
+  "become_sponsor": "Become a Sponsor",
+  "become_sponsor_desc": "Partner with us to reach fitness enthusiasts worldwide",
+  "contact_us": "Contact Us",
+  "admin": {
+    "manage_sponsors": "Manage Sponsors",
+    "add_sponsor": "Add Sponsor",
+    "edit_sponsor": "Edit Sponsor",
+    "delete_sponsor": "Delete Sponsor",
+    "sponsor_name": "Sponsor Name",
+    "logo_url": "Logo URL",
+    "website_url": "Website URL",
+    "description": "Description",
+    "description_es": "Description (Spanish)",
+    "tier": "Tier",
+    "display_order": "Display Order",
+    "is_active": "Active",
+    "sponsor_added": "Sponsor added successfully",
+    "sponsor_updated": "Sponsor updated successfully",
+    "sponsor_deleted": "Sponsor deleted successfully",
+    "confirm_delete": "Are you sure you want to delete this sponsor?"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "sponsored": "Patrocinado",
+  "learn_more": "Saber Más",
+  "advertisement": "Publicidad",
+  "dismiss": "Cerrar",
+  "admin": {
+    "manage_ads": "Gestionar Publicidad",
+    "add_ad": "Añadir Publicidad",
+    "edit_ad": "Editar Publicidad",
+    "delete_ad": "Eliminar Publicidad",
+    "title": "Título",
+    "title_es": "Título (Español)",
+    "description": "Descripción",
+    "description_es": "Descripción (Español)",
+    "image_url": "URL de la Imagen",
+    "link_url": "URL del Enlace",
+    "placement": "Ubicación",
+    "placements": {
+      "dashboard": "Panel Principal",
+      "activity": "Actividad",
+      "feed": "Feed",
+      "news": "Noticias",
+      "global": "Global (Todas las Páginas)"
+    },
+    "start_date": "Fecha de Inicio",
+    "end_date": "Fecha de Fin",
+    "is_active": "Activo",
+    "clicks": "Clics",
+    "impressions": "Impresiones",
+    "ad_added": "Publicidad añadida exitosamente",
+    "ad_updated": "Publicidad actualizada exitosamente",
+    "ad_deleted": "Publicidad eliminada exitosamente",
+    "confirm_delete": "¿Estás seguro de que quieres eliminar esta publicidad?"
+  }
+}

@@ -83,6 +83,60 @@ export type Database = {
         }
         Relationships: []
       }
+      advertisements: {
+        Row: {
+          click_count: number | null
+          created_at: string
+          description: string | null
+          description_es: string | null
+          end_date: string | null
+          id: string
+          image_url: string | null
+          impression_count: number | null
+          is_active: boolean
+          link_url: string | null
+          placement: string
+          start_date: string | null
+          title: string
+          title_es: string | null
+          updated_at: string
+        }
+        Insert: {
+          click_count?: number | null
+          created_at?: string
+          description?: string | null
+          description_es?: string | null
+          end_date?: string | null
+          id?: string
+          image_url?: string | null
+          impression_count?: number | null
+          is_active?: boolean
+          link_url?: string | null
+          placement?: string
+          start_date?: string | null
+          title: string
+          title_es?: string | null
+          updated_at?: string
+        }
+        Update: {
+          click_count?: number | null
+          created_at?: string
+          description?: string | null
+          description_es?: string | null
+          end_date?: string | null
+          id?: string
+          image_url?: string | null
+          impression_count?: number | null
+          is_active?: boolean
+          link_url?: string | null
+          placement?: string
+          start_date?: string | null
+          title?: string
+          title_es?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       ai_insights: {
         Row: {
           data_summary: Json | null
@@ -884,6 +938,87 @@ export type Database = {
         }
         Relationships: []
       }
+      fitness_locations: {
+        Row: {
+          address: string | null
+          amenities: string[] | null
+          average_rating: number | null
+          category: string
+          city: string
+          country: string
+          created_at: string
+          description: string | null
+          hours_of_operation: Json | null
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          is_verified: boolean | null
+          latitude: number | null
+          longitude: number | null
+          name: string
+          phone: string | null
+          postal_code: string | null
+          price_range: string | null
+          state: string | null
+          submitted_by: string | null
+          total_reviews: number | null
+          updated_at: string
+          website_url: string | null
+        }
+        Insert: {
+          address?: string | null
+          amenities?: string[] | null
+          average_rating?: number | null
+          category: string
+          city: string
+          country: string
+          created_at?: string
+          description?: string | null
+          hours_of_operation?: Json | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          is_verified?: boolean | null
+          latitude?: number | null
+          longitude?: number | null
+          name: string
+          phone?: string | null
+          postal_code?: string | null
+          price_range?: string | null
+          state?: string | null
+          submitted_by?: string | null
+          total_reviews?: number | null
+          updated_at?: string
+          website_url?: string | null
+        }
+        Update: {
+          address?: string | null
+          amenities?: string[] | null
+          average_rating?: number | null
+          category?: string
+          city?: string
+          country?: string
+          created_at?: string
+          description?: string | null
+          hours_of_operation?: Json | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          is_verified?: boolean | null
+          latitude?: number | null
+          longitude?: number | null
+          name?: string
+          phone?: string | null
+          postal_code?: string | null
+          price_range?: string | null
+          state?: string | null
+          submitted_by?: string | null
+          total_reviews?: number | null
+          updated_at?: string
+          website_url?: string | null
+        }
+        Relationships: []
+      }
       follow_requests: {
         Row: {
           created_at: string
@@ -1353,6 +1488,50 @@ export type Database = {
           workout_type?: string | null
         }
         Relationships: []
+      }
+      location_reviews: {
+        Row: {
+          content: string | null
+          created_at: string
+          id: string
+          location_id: string
+          rating: number
+          title: string | null
+          updated_at: string
+          user_id: string
+          visit_date: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          id?: string
+          location_id: string
+          rating: number
+          title?: string | null
+          updated_at?: string
+          user_id: string
+          visit_date?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          id?: string
+          location_id?: string
+          rating?: number
+          title?: string | null
+          updated_at?: string
+          user_id?: string
+          visit_date?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "location_reviews_location_id_fkey"
+            columns: ["location_id"]
+            isOneToOne: false
+            referencedRelation: "fitness_locations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       meal_plans: {
         Row: {
@@ -3016,6 +3195,48 @@ export type Database = {
           profile_url?: string | null
           user_id?: string
           username?: string
+        }
+        Relationships: []
+      }
+      sponsors: {
+        Row: {
+          created_at: string
+          description: string | null
+          description_es: string | null
+          display_order: number | null
+          id: string
+          is_active: boolean
+          logo_url: string | null
+          name: string
+          tier: string
+          updated_at: string
+          website_url: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          description_es?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean
+          logo_url?: string | null
+          name: string
+          tier?: string
+          updated_at?: string
+          website_url?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          description_es?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean
+          logo_url?: string | null
+          name?: string
+          tier?: string
+          updated_at?: string
+          website_url?: string | null
         }
         Relationships: []
       }

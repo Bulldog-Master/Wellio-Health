@@ -1,0 +1,35 @@
+{
+  "sponsored": "Sponsored",
+  "learn_more": "Learn More",
+  "advertisement": "Advertisement",
+  "dismiss": "Dismiss",
+  "admin": {
+    "manage_ads": "Manage Advertisements",
+    "add_ad": "Add Advertisement",
+    "edit_ad": "Edit Advertisement",
+    "delete_ad": "Delete Advertisement",
+    "title": "Title",
+    "title_es": "Title (Spanish)",
+    "description": "Description",
+    "description_es": "Description (Spanish)",
+    "image_url": "Image URL",
+    "link_url": "Link URL",
+    "placement": "Placement",
+    "placements": {
+      "dashboard": "Dashboard",
+      "activity": "Activity",
+      "feed": "Feed",
+      "news": "News",
+      "global": "Global (All Pages)"
+    },
+    "start_date": "Start Date",
+    "end_date": "End Date",
+    "is_active": "Active",
+    "clicks": "Clicks",
+    "impressions": "Impressions",
+    "ad_added": "Advertisement added successfully",
+    "ad_updated": "Advertisement updated successfully",
+    "ad_deleted": "Advertisement deleted successfully",
+    "confirm_delete": "Are you sure you want to delete this advertisement?"
+  }
+}
