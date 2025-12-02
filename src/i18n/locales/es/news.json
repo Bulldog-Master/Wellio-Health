@@ -160,5 +160,67 @@
       "item2": "2028",
       "item3": "Ago 2025"
     }
+  },
+  "urls": {
+    "latest": {
+      "item1": "https://www.healthline.com/health/fitness",
+      "item2": "https://www.forbes.com/health/fitness/",
+      "item3": "https://www.wired.com/tag/fitness/"
+    },
+    "crossfit": {
+      "item1": "https://games.crossfit.com/",
+      "item2": "https://games.crossfit.com/open",
+      "item3": "https://www.crossfit.com/"
+    },
+    "marathons": {
+      "item1": "https://www.baa.org/races/boston-marathon",
+      "item2": "https://www.nyrr.org/tcsnycmarathon",
+      "item3": "https://www.marathon.tokyo/"
+    },
+    "triathlons": {
+      "item1": "https://www.ironman.com/im-world-championship",
+      "item2": "https://triathlon.org/",
+      "item3": "https://www.ironman.com/im703-world-championship"
+    },
+    "cycling": {
+      "item1": "https://www.letour.fr/",
+      "item2": "https://www.giroditalia.it/",
+      "item3": "https://www.uci.org/"
+    },
+    "obstacle": {
+      "item1": "https://www.spartan.com/",
+      "item2": "https://toughmudder.com/",
+      "item3": "https://hyrox.com/"
+    },
+    "mma": {
+      "item1": "https://www.ufc.com/",
+      "item2": "https://www.bellator.com/",
+      "item3": "https://www.pflmma.com/"
+    },
+    "bodybuilding": {
+      "item1": "https://mrolympia.com/",
+      "item2": "https://arnoldsportsfestival.com/",
+      "item3": "https://www.ifbbpro.com/"
+    },
+    "yoga": {
+      "item1": "https://www.un.org/en/observances/yoga-day",
+      "item2": "https://www.yogajournal.com/",
+      "item3": "https://www.headspace.com/"
+    },
+    "swimming": {
+      "item1": "https://www.worldaquatics.com/",
+      "item2": "https://www.fina.org/",
+      "item3": "https://olympics.com/en/sports/swimming"
+    },
+    "ultra": {
+      "item1": "https://www.wser.org/",
+      "item2": "https://utmbmontblanc.com/",
+      "item3": "https://www.badwater.com/"
+    },
+    "global": {
+      "item1": "https://olympics.com/en/paris-2024",
+      "item2": "https://la28.org/",
+      "item3": "https://www.theworldgames.org/"
+    }
   }
 }
