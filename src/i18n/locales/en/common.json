@@ -257,5 +257,8 @@
   "workout_removed": "Workout removed from schedule",
   "joined_group": "Joined group!",
   "join_fitness_community": "Join Our Fitness Community!",
-  "start_fitness_journey_text": "Start your fitness journey with me - track workouts, nutrition, and health goals!"
+  "start_fitness_journey_text": "Start your fitness journey with me - track workouts, nutrition, and health goals!",
+  "admin_access": "Admin Access",
+  "vip_access": "VIP Access",
+  "full_features_unlocked": "Full features unlocked"
 }

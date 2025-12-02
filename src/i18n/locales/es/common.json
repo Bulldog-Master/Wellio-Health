@@ -261,5 +261,8 @@
   "workout_removed": "Entrenamiento eliminado del horario",
   "joined_group": "¡Te uniste al grupo!",
   "join_fitness_community": "¡Únete a Nuestra Comunidad Fitness!",
-  "start_fitness_journey_text": "Comienza tu viaje fitness conmigo - ¡rastrea entrenamientos, nutrición y metas de salud!"
+  "start_fitness_journey_text": "Comienza tu viaje fitness conmigo - ¡rastrea entrenamientos, nutrición y metas de salud!",
+  "admin_access": "Acceso de Administrador",
+  "vip_access": "Acceso VIP",
+  "full_features_unlocked": "Todas las funciones desbloqueadas"
 }
