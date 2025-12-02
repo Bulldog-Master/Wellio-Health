@@ -3428,6 +3428,39 @@ export type Database = {
         }
         Relationships: []
       }
+      vip_passes: {
+        Row: {
+          created_at: string | null
+          expires_at: string | null
+          granted_by: string | null
+          id: string
+          is_active: boolean | null
+          reason: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          expires_at?: string | null
+          granted_by?: string | null
+          id?: string
+          is_active?: boolean | null
+          reason?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          expires_at?: string | null
+          granted_by?: string | null
+          id?: string
+          is_active?: boolean | null
+          reason?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       voice_notes: {
         Row: {
           audio_url: string
@@ -3765,10 +3798,15 @@ export type Database = {
         Args: { _user_id: string }
         Returns: Database["public"]["Enums"]["app_role"][]
       }
+      grant_vip_pass: {
+        Args: { _expires_at?: string; _reason?: string; _user_id: string }
+        Returns: string
+      }
       has_active_reward: {
         Args: { _feature_type: string; _user_id: string }
         Returns: boolean
       }
+      has_active_vip: { Args: { _user_id: string }; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -3778,6 +3816,7 @@ export type Database = {
       }
       log_medical_read: { Args: never; Returns: undefined }
       redeem_reward: { Args: { _reward_id: string }; Returns: string }
+      revoke_vip_pass: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
       app_role: "user" | "trainer" | "creator" | "admin"

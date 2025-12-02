@@ -4,7 +4,7 @@ import { useSubscription } from '@/hooks/useSubscription';
 import { supabase } from '@/integrations/supabase/client';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Lock, Sparkles } from 'lucide-react';
+import { Lock, Sparkles, Crown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 interface SubscriptionGateProps {
@@ -15,7 +15,7 @@ interface SubscriptionGateProps {
 
 export const SubscriptionGate = ({ feature, children, fallback }: SubscriptionGateProps) => {
   const { t } = useTranslation('subscription');
-  const { hasFeature, isLoading, tier } = useSubscription();
+  const { hasFeature, isLoading, tier, hasFullAccess, isVIP, isAdmin } = useSubscription();
   const navigate = useNavigate();
   const [hasRewardAccess, setHasRewardAccess] = useState(false);
   const [checkingRewards, setCheckingRewards] = useState(true);
@@ -51,31 +51,31 @@ export const SubscriptionGate = ({ feature, children, fallback }: SubscriptionGa
     );
   }
 
-  // Allow access if user has the feature OR has an active reward
-  if (!hasFeature(feature) && !hasRewardAccess) {
-    if (fallback) {
-      return <>{fallback}</>;
-    }
-
-    return (
-      <Card className="p-8 text-center max-w-2xl mx-auto mt-8">
-        <Lock className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-        <h2 className="text-2xl font-bold mb-4">{t('premium_feature')}</h2>
-        <p className="text-muted-foreground mb-6">
-          {t('premium_description')} <strong>{tier.toUpperCase()}</strong>
-        </p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Button onClick={() => navigate('/subscription')}>
-            {t('upgrade_now')}
-          </Button>
-          <Button variant="outline" onClick={() => navigate('/rewards')} className="gap-2">
-            <Sparkles className="w-4 h-4" />
-            {t('use_points')}
-          </Button>
-        </div>
-      </Card>
-    );
+  // Allow access if user has VIP/Admin status, the feature, OR has an active reward
+  if (hasFullAccess || hasFeature(feature) || hasRewardAccess) {
+    return <>{children}</>;
   }
 
-  return <>{children}</>;
+  if (fallback) {
+    return <>{fallback}</>;
+  }
+
+  return (
+    <Card className="p-8 text-center max-w-2xl mx-auto mt-8">
+      <Lock className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
+      <h2 className="text-2xl font-bold mb-4">{t('premium_feature')}</h2>
+      <p className="text-muted-foreground mb-6">
+        {t('premium_description')} <strong>{tier.toUpperCase()}</strong>
+      </p>
+      <div className="flex flex-col sm:flex-row gap-3 justify-center">
+        <Button onClick={() => navigate('/subscription')}>
+          {t('upgrade_now')}
+        </Button>
+        <Button variant="outline" onClick={() => navigate('/rewards')} className="gap-2">
+          <Sparkles className="w-4 h-4" />
+          {t('use_points')}
+        </Button>
+      </div>
+    </Card>
+  );
 };
