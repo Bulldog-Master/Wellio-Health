@@ -51,6 +51,7 @@ import notificationsEN from './locales/en/notifications.json';
 import errorsEN from './locales/en/errors.json';
 import adminEN from './locales/en/admin.json';
 import premiumEN from './locales/en/premium.json';
+import videosEN from './locales/en/videos.json';
 
 // Spanish
 import commonES from './locales/es/common.json';
@@ -100,6 +101,7 @@ import a11yES from './locales/es/a11y.json';
 import pluralsES from './locales/es/plurals.json';
 import adminES from './locales/es/admin.json';
 import premiumES from './locales/es/premium.json';
+import videosES from './locales/es/videos.json';
 
 // Portuguese
 import commonPT from './locales/pt/common.json';
@@ -114,6 +116,7 @@ import pluralsPT from './locales/pt/plurals.json';
 import adminPT from './locales/pt/admin.json';
 import premiumPT from './locales/pt/premium.json';
 import subscriptionPT from './locales/pt/subscription.json';
+import videosPT from './locales/pt/videos.json';
 
 // French
 import commonFR from './locales/fr/common.json';
@@ -128,6 +131,7 @@ import pluralsFR from './locales/fr/plurals.json';
 import adminFR from './locales/fr/admin.json';
 import premiumFR from './locales/fr/premium.json';
 import subscriptionFR from './locales/fr/subscription.json';
+import videosFR from './locales/fr/videos.json';
 
 // German
 import commonDE from './locales/de/common.json';
@@ -142,6 +146,7 @@ import pluralsDE from './locales/de/plurals.json';
 import adminDE from './locales/de/admin.json';
 import premiumDE from './locales/de/premium.json';
 import subscriptionDE from './locales/de/subscription.json';
+import videosDE from './locales/de/videos.json';
 
 // Chinese
 import commonZH from './locales/zh/common.json';
@@ -156,6 +161,7 @@ import pluralsZH from './locales/zh/plurals.json';
 import adminZH from './locales/zh/admin.json';
 import premiumZH from './locales/zh/premium.json';
 import subscriptionZH from './locales/zh/subscription.json';
+import videosZH from './locales/zh/videos.json';
 
 // All namespaces - used for ns array and type safety
 export const allNamespaces = [
@@ -165,7 +171,7 @@ export const allNamespaces = [
   'calendar', 'records', 'voice', 'medical', 'timer', 'live', 'challenges', 
   'fundraisers', 'macros', 'install', 'search', 'creator', 'ai', 'measurements', 
   'trainer', 'session', 'bookmarks', 'challenges_page', 'feed', 'groups', 
-  'followers', 'schedule', 'seo', 'units', 'a11y', 'plurals', 'admin', 'premium'
+  'followers', 'schedule', 'seo', 'units', 'a11y', 'plurals', 'admin', 'premium', 'videos'
 ] as const;
 
 export type TranslationNamespace = typeof allNamespaces[number];
@@ -219,6 +225,7 @@ const resources = {
     errors: errorsEN,
     admin: adminEN,
     premium: premiumEN,
+    videos: videosEN,
   },
   es: {
     common: commonES,
@@ -268,6 +275,7 @@ const resources = {
     plurals: pluralsES,
     admin: adminES,
     premium: premiumES,
+    videos: videosES,
   },
   pt: {
     common: commonPT,
@@ -282,6 +290,7 @@ const resources = {
     admin: adminPT,
     premium: premiumPT,
     subscription: subscriptionPT,
+    videos: videosPT,
   },
   fr: {
     common: commonFR,
@@ -296,6 +305,7 @@ const resources = {
     admin: adminFR,
     premium: premiumFR,
     subscription: subscriptionFR,
+    videos: videosFR,
   },
   de: {
     common: commonDE,
@@ -310,6 +320,7 @@ const resources = {
     admin: adminDE,
     premium: premiumDE,
     subscription: subscriptionDE,
+    videos: videosDE,
   },
   zh: {
     common: commonZH,
@@ -324,6 +335,7 @@ const resources = {
     admin: adminZH,
     premium: premiumZH,
     subscription: subscriptionZH,
+    videos: videosZH,
   },
 };
 

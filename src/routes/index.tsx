@@ -82,6 +82,7 @@ const FundraiserDetail = lazy(() => import("@/pages/FundraiserDetail"));
 const Subscription = lazy(() => import("@/pages/Subscription"));
 const AdminVIP = lazy(() => import("@/pages/AdminVIP"));
 const PremiumFeatures = lazy(() => import("@/pages/PremiumFeatures"));
+const ExerciseLibrary = lazy(() => import("@/pages/ExerciseLibrary"));
 
 /**
  * Application route configuration
@@ -187,6 +188,7 @@ export const AppRoutes = () => (
     <Route path="/subscription" element={<ProtectedRoute><Layout><Subscription /></Layout></ProtectedRoute>} />
     <Route path="/admin/vip" element={<RouteErrorBoundary><ProtectedRoute><Layout><AdminVIP /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/premium" element={<RouteErrorBoundary><ProtectedRoute><Layout><PremiumFeatures /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/exercise-library" element={<RouteErrorBoundary><ProtectedRoute><Layout><ExerciseLibrary /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     
     {/* 404 */}
     <Route path="*" element={<NotFound />} />
