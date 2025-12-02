@@ -173,8 +173,8 @@ const IntervalTimer = () => {
       // Invalidate all timer queries to refresh the data
       queryClient.invalidateQueries({ queryKey: ["interval-timers"] });
       toast({
-        title: "Success",
-        description: `Moved ${selectedTimerIds.length} timer(s)`,
+        title: t('toast_success'),
+        description: t('toast_timers_moved', { count: selectedTimerIds.length }),
       });
       setSelectedTimerIds([]);
       setIsSelectMoveMode(false);
@@ -182,8 +182,8 @@ const IntervalTimer = () => {
     },
     onError: (error) => {
       toast({
-        title: "Error",
-        description: "Failed to move timers. Please try again.",
+        title: t('toast_error'),
+        description: t('toast_move_failed'),
         variant: "destructive",
       });
       console.error("Error moving timers:", error);
@@ -225,8 +225,8 @@ const IntervalTimer = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["interval-timers"] });
       toast({
-        title: "Timer saved",
-        description: `"${timerName}" has been saved to your library.`,
+        title: t('toast_timer_saved'),
+        description: t('toast_timer_saved_desc', { name: timerName }),
       });
       setIsNewTimerOpen(false);
       // Reset form
@@ -262,8 +262,8 @@ const IntervalTimer = () => {
     },
     onError: (error) => {
       toast({
-        title: "Error",
-        description: "Failed to save timer. Please try again.",
+        title: t('toast_error'),
+        description: t('toast_save_failed'),
         variant: "destructive",
       });
       console.error("Error saving timer:", error);
@@ -282,14 +282,14 @@ const IntervalTimer = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["interval-timers"] });
       toast({
-        title: "Timer deleted",
-        description: "Timer has been removed from your library.",
+        title: t('toast_timer_deleted'),
+        description: t('toast_timer_deleted_desc'),
       });
     },
     onError: (error) => {
       toast({
-        title: "Error",
-        description: "Failed to delete timer. Please try again.",
+        title: t('toast_error'),
+        description: t('toast_delete_failed'),
         variant: "destructive",
       });
       console.error("Error deleting timer:", error);
@@ -318,15 +318,15 @@ const IntervalTimer = () => {
       queryClient.invalidateQueries({ queryKey: ["interval-timers"] });
       queryClient.invalidateQueries({ queryKey: ["timer-folders"] });
       toast({
-        title: "Folder deleted",
-        description: "Folder and all its contents have been removed.",
+        title: t('toast_folder_deleted'),
+        description: t('toast_folder_deleted_desc'),
       });
       setDeleteFolderId(null);
     },
     onError: (error) => {
       toast({
-        title: "Error",
-        description: "Failed to delete folder. Please try again.",
+        title: t('toast_error'),
+        description: t('toast_folder_delete_failed'),
         variant: "destructive",
       });
       console.error("Error deleting folder:", error);
@@ -367,8 +367,8 @@ const IntervalTimer = () => {
   const handleAddInterval = () => {
     if (!newIntervalName || !newIntervalDuration) {
       toast({
-        title: "Error",
-        description: "Please enter both name and duration for the interval",
+        title: t('toast_error'),
+        description: t('toast_interval_error'),
         variant: "destructive",
       });
       return;
@@ -387,8 +387,8 @@ const IntervalTimer = () => {
     setNewIntervalColor("#3B82F6");
     
     toast({
-      title: "Interval Added",
-      description: `${newIntervalName} added successfully`,
+      title: t('toast_interval_added'),
+      description: t('toast_interval_added_desc', { name: newIntervalName }),
     });
   };
 
@@ -419,8 +419,8 @@ const IntervalTimer = () => {
   const handleSaveEditInterval = () => {
     if (!editIntervalName.trim()) {
       toast({
-        title: "Error",
-        description: "Please enter an interval name",
+        title: t('toast_error'),
+        description: t('toast_interval_name_error'),
         variant: "destructive",
       });
       return;
@@ -433,8 +433,8 @@ const IntervalTimer = () => {
 
     if (totalSeconds === 0 && !editIntervalRepBased) {
       toast({
-        title: "Error",
-        description: "Duration must be greater than 0 or enable rep-based interval",
+        title: t('toast_error'),
+        description: t('toast_duration_error'),
         variant: "destructive",
       });
       return;
@@ -456,8 +456,8 @@ const IntervalTimer = () => {
 
     setIsEditIntervalOpen(false);
     toast({
-      title: "Interval updated",
-      description: `${editIntervalName} has been updated`,
+      title: t('toast_interval_updated'),
+      description: t('toast_interval_updated_desc', { name: editIntervalName }),
     });
   };
 
@@ -760,8 +760,8 @@ const IntervalTimer = () => {
       if (error) throw error;
 
       toast({
-        title: "Success",
-        description: "Folder created successfully",
+        title: t('toast_success'),
+        description: t('toast_folder_created'),
       });
 
       setFolderName("");
@@ -769,8 +769,8 @@ const IntervalTimer = () => {
     } catch (error) {
       console.error("Error creating folder:", error);
       toast({
-        title: "Error",
-        description: "Failed to create folder",
+        title: t('toast_error'),
+        description: t('toast_folder_create_failed'),
         variant: "destructive",
       });
     }

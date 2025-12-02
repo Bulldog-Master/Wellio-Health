@@ -9,6 +9,10 @@
   "2fa_enabled": "2FA is enabled",
   "setup_2fa": "Set Up 2FA",
   "disable_2fa": "Disable 2FA",
+  "scan_qr_code": "Scan QR Code",
+  "scan_qr_description": "Scan this QR code with your authenticator app",
+  "enter_verification_code": "Enter Verification Code",
+  "verify_enable": "Verify & Enable",
   
   "passkey_webauthn": "Passkey (WebAuthn)",
   "passkey_description": "Use biometric authentication or security keys for passwordless login",
@@ -19,6 +23,7 @@
   "active": "Active",
   "rename": "Rename",
   "delete": "Delete",
+  "browser_no_passkeys": "Your browser doesn't support passkeys. Please use a modern browser like Chrome, Safari, or Edge.",
   
   "email_address": "Email Address",
   "email_description": "Update your email address",
@@ -27,6 +32,7 @@
   "new_email": "New Email",
   "password": "Password",
   "enter_password": "Enter your password",
+  "email_change_description": "Enter your new email and password to confirm the change. You'll receive a verification email at your new address.",
   
   "password_section": "Password",
   "password_description": "Change your account password",
@@ -36,6 +42,7 @@
   "confirm_password": "Confirm New Password",
   "update_password": "Update Password",
   "updating": "Updating...",
+  "password_change_description": "Enter your current password and choose a new one",
   
   "privacy_settings": "Privacy Settings",
   "private_account": "Private Account",
@@ -58,12 +65,26 @@
   "continue": "Continue",
   
   "rename_passkey": "Rename Passkey",
+  "rename_passkey_description": "Give this passkey a custom name to easily identify it.",
   "new_name": "New Name",
   "save": "Save",
   "saving": "Saving...",
   
+  "save_backup_codes": "Save Your Backup Codes",
+  "backup_codes_description": "Store these backup codes in a safe place. Each code can only be used once if you lose access to your authenticator app.",
+  "download_codes": "Download Codes",
+  "copy_all": "Copy All",
+  "saved_codes": "I've Saved My Codes",
+  
   "update_email": "Update Email Address",
   "verification_sent": "Verification email sent! Please check your new email address to confirm the change.",
+  
+  "placeholder_6digit": "Enter 6-digit code",
+  "placeholder_new_email": "Enter new email address",
+  "placeholder_current_password": "Enter current password",
+  "placeholder_new_password": "Enter new password (min 6 characters)",
+  "placeholder_confirm_password": "Confirm new password",
+  "placeholder_passkey_name": "e.g., My iPad, Work iPhone",
   
   "toast_passkey_registered": "Passkey registered successfully!",
   "toast_passkey_renamed": "Passkey renamed successfully",
@@ -84,5 +105,22 @@
   "toast_different_email": "New email must be different from current email",
   "toast_account_deletion": "Account deletion must be requested through support",
   "toast_error": "Error",
-  "toast_failed": "Failed"
+  "toast_failed": "Failed",
+  "toast_exporting": "Exporting your data...",
+  "toast_follow_prompts": "Follow the prompts to add your passkey...",
+  "toast_passkey_added": "Passkey added successfully!",
+  "toast_codes_copied": "Backup codes copied to clipboard",
+  "toast_browser_no_support": "Your browser doesn't support passkeys",
+  "toast_user_email_not_found": "User email not found",
+  "toast_failed_register_passkey": "Failed to register passkey",
+  "toast_failed_remove_passkey": "Failed to remove passkey",
+  "toast_failed_rename_passkey": "Failed to rename passkey",
+  "toast_failed_update_settings": "Failed to update settings",
+  "toast_failed_setup_2fa": "Failed to set up 2FA",
+  "toast_failed_verify_2fa": "Failed to verify 2FA code. Please try again.",
+  "toast_failed_disable_2fa": "Failed to disable 2FA. Please try again.",
+  "toast_failed_change_password": "Failed to change password",
+  "toast_failed_change_email": "Failed to change email",
+  "toast_failed_export": "Failed to export data",
+  "toast_failed_delete": "Failed to delete account"
 }

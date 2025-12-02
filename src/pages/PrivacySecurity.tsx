@@ -520,9 +520,9 @@ const PrivacySecurity = () => {
           {show2FASetup && (
             <div className="space-y-4 pt-4 border-t">
               <div className="space-y-2">
-                <Label>Scan QR Code</Label>
+                <Label>{t('scan_qr_code')}</Label>
                 <p className="text-sm text-muted-foreground">
-                  Scan this QR code with your authenticator app
+                  {t('scan_qr_description')}
                 </p>
                 {qrCodeUrl && (
                   <div className="flex justify-center p-4 bg-white rounded-lg">
@@ -536,11 +536,11 @@ const PrivacySecurity = () => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="totp-token">Enter Verification Code</Label>
+                <Label htmlFor="totp-token">{t('enter_verification_code')}</Label>
                 <Input
                   id="totp-token"
                   type="text"
-                  placeholder="Enter 6-digit code"
+                  placeholder={t('placeholder_6digit')}
                   maxLength={6}
                   value={totpToken}
                   onChange={(e) => setTotpToken(e.target.value.replace(/\D/g, ''))}
@@ -549,7 +549,7 @@ const PrivacySecurity = () => {
 
               <div className="flex gap-2">
                 <Button onClick={handleVerify2FA} disabled={totpToken.length !== 6}>
-                  Verify & Enable
+                  {t('verify_enable')}
                 </Button>
                 <Button 
                   variant="outline" 
@@ -558,7 +558,7 @@ const PrivacySecurity = () => {
                     setTotpToken("");
                   }}
                 >
-                  Cancel
+                  {t('cancel')}
                 </Button>
               </div>
             </div>
@@ -584,7 +584,7 @@ const PrivacySecurity = () => {
         <CardContent className="space-y-4">
           {!isWebAuthnSupported() && (
             <p className="text-sm text-destructive">
-              Your browser doesn't support passkeys. Please use a modern browser like Chrome, Safari, or Edge.
+              {t('browser_no_passkeys')}
             </p>
           )}
 
@@ -809,14 +809,14 @@ const PrivacySecurity = () => {
           <AlertDialogHeader>
             <AlertDialogTitle>{t('rename_passkey')}</AlertDialogTitle>
             <AlertDialogDescription>
-              Give this passkey a custom name to easily identify it.
+              {t('rename_passkey_description')}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <div className="py-4">
             <Input
               value={newPasskeyName}
               onChange={(e) => setNewPasskeyName(e.target.value)}
-              placeholder="e.g., My iPad, Work iPhone"
+              placeholder={t('placeholder_passkey_name')}
               onKeyDown={(e) => e.key === 'Enter' && handleRenamePasskey()}
               autoFocus
             />
@@ -836,10 +836,10 @@ const PrivacySecurity = () => {
           <AlertDialogHeader>
             <AlertDialogTitle className="flex items-center gap-2">
               <Key className="w-5 h-5" />
-              Save Your Backup Codes
+              {t('save_backup_codes')}
             </AlertDialogTitle>
             <AlertDialogDescription>
-              Store these backup codes in a safe place. Each code can only be used once if you lose access to your authenticator app.
+              {t('backup_codes_description')}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <div className="py-4">
@@ -868,23 +868,23 @@ const PrivacySecurity = () => {
                 className="flex-1"
               >
                 <Download className="w-4 h-4 mr-2" />
-                Download Codes
+                {t('download_codes')}
               </Button>
               <Button
                 onClick={() => {
                   navigator.clipboard.writeText(backupCodes.join('\n'));
-                  toast.success("Backup codes copied to clipboard");
+                  toast.success(t('toast_codes_copied'));
                 }}
                 variant="outline"
                 className="flex-1"
               >
-                Copy All
+                {t('copy_all')}
               </Button>
             </div>
           </div>
           <AlertDialogFooter>
             <AlertDialogAction onClick={() => setShowBackupCodes(false)}>
-              I've Saved My Codes
+              {t('saved_codes')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -896,7 +896,7 @@ const PrivacySecurity = () => {
           <DialogHeader>
             <DialogTitle>{t('update_email')}</DialogTitle>
             <DialogDescription>
-              Enter your new email and password to confirm the change. You'll receive a verification email at your new address.
+              {t('email_change_description')}
             </DialogDescription>
           </DialogHeader>
           
@@ -906,7 +906,7 @@ const PrivacySecurity = () => {
               <Input
                 id="new-email"
                 type="email"
-                placeholder="Enter new email address"
+                placeholder={t('placeholder_new_email')}
                 value={newEmail}
                 onChange={(e) => setNewEmail(e.target.value)}
               />
@@ -962,7 +962,7 @@ const PrivacySecurity = () => {
           <DialogHeader>
             <DialogTitle>{t('change_password')}</DialogTitle>
             <DialogDescription>
-              Enter your current password and choose a new one
+              {t('password_change_description')}
             </DialogDescription>
           </DialogHeader>
           
@@ -973,7 +973,7 @@ const PrivacySecurity = () => {
                 <Input
                   id="current-password"
                   type={showCurrentPassword ? "text" : "password"}
-                  placeholder="Enter current password"
+                  placeholder={t('placeholder_current_password')}
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
                   className="pr-10"
@@ -994,7 +994,7 @@ const PrivacySecurity = () => {
                 <Input
                   id="new-password"
                   type={showNewPassword ? "text" : "password"}
-                  placeholder="Enter new password (min 6 characters)"
+                  placeholder={t('placeholder_new_password')}
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   className="pr-10"
@@ -1015,7 +1015,7 @@ const PrivacySecurity = () => {
                 <Input
                   id="confirm-new-password"
                   type={showConfirmPassword ? "text" : "password"}
-                  placeholder="Re-enter new password"
+                  placeholder={t('placeholder_confirm_password')}
                   value={confirmNewPassword}
                   onChange={(e) => setConfirmNewPassword(e.target.value)}
                   className="pr-10"
