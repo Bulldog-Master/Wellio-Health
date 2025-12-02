@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { TrendingUp, TrendingDown, Activity, Target } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface DataPoint {
   date: string;
@@ -17,6 +18,7 @@ interface AdvancedMetricsProps {
 }
 
 export const AdvancedMetrics = ({ data, title, metric, unit, goal }: AdvancedMetricsProps) => {
+  const { t } = useTranslation('fitness');
   // Calculate trend
   const trend = data.length >= 2 
     ? ((data[data.length - 1].value - data[0].value) / data[0].value) * 100 
@@ -96,13 +98,13 @@ export const AdvancedMetrics = ({ data, title, metric, unit, goal }: AdvancedMet
         {/* Stats Grid */}
         <div className="grid grid-cols-3 gap-4">
           <div className="space-y-1">
-            <p className="text-xs text-muted-foreground">Current</p>
+            <p className="text-xs text-muted-foreground">{t('current')}</p>
             <p className="text-lg font-bold">
               {data[data.length - 1]?.value.toFixed(1)} {unit}
             </p>
           </div>
           <div className="space-y-1">
-            <p className="text-xs text-muted-foreground">Average</p>
+            <p className="text-xs text-muted-foreground">{t('average')}</p>
             <p className="text-lg font-bold">
               {(data.reduce((sum, d) => sum + d.value, 0) / data.length).toFixed(1)} {unit}
             </p>
@@ -111,7 +113,7 @@ export const AdvancedMetrics = ({ data, title, metric, unit, goal }: AdvancedMet
             <div className="space-y-1">
               <p className="text-xs text-muted-foreground flex items-center gap-1">
                 <Target className="w-3 h-3" />
-                Goal
+                {t('goal')}
               </p>
               <p className="text-lg font-bold">
                 {goal} {unit}
@@ -123,13 +125,13 @@ export const AdvancedMetrics = ({ data, title, metric, unit, goal }: AdvancedMet
         {/* Prediction */}
         {predictions.length > 0 && (
           <div className="p-3 bg-muted rounded-lg">
-            <p className="text-sm font-medium mb-1">7-Day Prediction</p>
+            <p className="text-sm font-medium mb-1">{t('seven_day_prediction')}</p>
             <p className="text-xs text-muted-foreground">
-              Based on current trend, you're projected to reach{" "}
+              {t('prediction_text')}{" "}
               <span className="font-semibold text-foreground">
                 {predictions[predictions.length - 1].prediction?.toFixed(1)} {unit}
               </span>
-              {goal && ` (${((predictions[predictions.length - 1].prediction || 0) / goal * 100).toFixed(0)}% of goal)`}
+              {goal && ` (${((predictions[predictions.length - 1].prediction || 0) / goal * 100).toFixed(0)}% ${t('of_goal')})`}
             </p>
           </div>
         )}

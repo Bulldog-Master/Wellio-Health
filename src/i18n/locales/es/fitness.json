@@ -153,5 +153,25 @@
   "failed_to_save_supplement": "Error al guardar suplemento.",
   "failed_to_delete_supplement": "Error al eliminar suplemento.",
   "name_required_error": "Por favor ingresa un nombre de suplemento.",
-  "view_product": "Ver Producto"
+  "view_product": "Ver Producto",
+
+  "advanced_analytics": "Análisis Avanzado",
+  "analytics_description": "Información detallada de tu progreso fitness con predicciones y correlaciones",
+  "overview": "Resumen",
+  "weight_trend": "Tendencia de Peso",
+  "activity_duration": "Duración de Actividad",
+  "weight_analysis": "Análisis de Peso",
+  "activity_duration_analysis": "Análisis de Duración de Actividad",
+  "calories_burned_over_time": "Calorías Quemadas a lo Largo del Tiempo",
+  "macro_breakdown": "Desglose de Macros",
+  "weight_vs_activity": "Correlación Peso vs Actividad",
+  "activity_duration_label": "Duración de Actividad (min)",
+  "weight_label": "Peso (lbs)",
+  "current": "Actual",
+  "average": "Promedio",
+  "goal": "Objetivo",
+  "seven_day_prediction": "Predicción a 7 Días",
+  "prediction_text": "Según la tendencia actual, se proyecta que alcanzarás",
+  "of_goal": "del objetivo",
+  "nutrition": "Nutrición"
 }

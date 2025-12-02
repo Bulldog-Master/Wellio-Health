@@ -153,5 +153,25 @@
   "failed_to_save_supplement": "Failed to save supplement.",
   "failed_to_delete_supplement": "Failed to delete supplement.",
   "name_required_error": "Please enter a supplement name.",
-  "view_product": "View Product"
+  "view_product": "View Product",
+
+  "advanced_analytics": "Advanced Analytics",
+  "analytics_description": "Deep insights into your fitness journey with predictions and correlations",
+  "overview": "Overview",
+  "weight_trend": "Weight Trend",
+  "activity_duration": "Activity Duration",
+  "weight_analysis": "Weight Analysis",
+  "activity_duration_analysis": "Activity Duration Analysis",
+  "calories_burned_over_time": "Calories Burned Over Time",
+  "macro_breakdown": "Macro Breakdown",
+  "weight_vs_activity": "Weight vs Activity Correlation",
+  "activity_duration_label": "Activity Duration (min)",
+  "weight_label": "Weight (lbs)",
+  "current": "Current",
+  "average": "Average",
+  "goal": "Goal",
+  "seven_day_prediction": "7-Day Prediction",
+  "prediction_text": "Based on current trend, you're projected to reach",
+  "of_goal": "of goal",
+  "nutrition": "Nutrition"
 }
