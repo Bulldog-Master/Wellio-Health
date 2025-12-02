@@ -22,7 +22,8 @@ const PremiumFeatures = () => {
   const { t } = useTranslation(['subscription', 'common', 'medical']);
   const { hasFullAccess, isVIP, isAdmin, isLoading } = useSubscription();
 
-  // Redirect non-premium users
+  // Redirect non-premium users only after loading completes and no access
+  // Use cached values to allow immediate render for premium users
   if (!isLoading && !hasFullAccess) {
     navigate('/subscription');
     return null;
@@ -79,7 +80,9 @@ const PremiumFeatures = () => {
     },
   ];
 
-  if (isLoading) {
+  // Show content immediately if we have cached access, even while loading fresh data
+  // Only show loading spinner if no cached access AND still loading
+  if (isLoading && !hasFullAccess) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>

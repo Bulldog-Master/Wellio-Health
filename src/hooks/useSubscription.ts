@@ -75,19 +75,21 @@ export const useSubscription = () => {
         return;
       }
 
-      // Check VIP/Admin status using secure database function
-      const { data: hasVIP } = await supabase.rpc('has_active_vip', {
-        _user_id: user.id
-      });
-      const vipStatus = hasVIP || false;
-      setIsVIP(vipStatus);
+      // Run all queries in parallel for faster loading
+      const [vipResult, adminResult, subResult] = await Promise.all([
+        supabase.rpc('has_active_vip', { _user_id: user.id }),
+        supabase.rpc('has_role', { _user_id: user.id, _role: 'admin' }),
+        supabase
+          .from('subscriptions')
+          .select('id, user_id, tier, status, current_period_start, current_period_end, cancel_at_period_end, created_at, updated_at')
+          .eq('user_id', user.id)
+          .maybeSingle()
+      ]);
 
-      // Check admin status
-      const { data: hasAdmin } = await supabase.rpc('has_role', {
-        _user_id: user.id,
-        _role: 'admin'
-      });
-      const adminStatus = hasAdmin || false;
+      const vipStatus = vipResult.data || false;
+      const adminStatus = adminResult.data || false;
+      
+      setIsVIP(vipStatus);
       setIsAdmin(adminStatus);
 
       // Cache the values for instant UI on next mount
@@ -96,30 +98,23 @@ export const useSubscription = () => {
         localStorage.setItem(CACHE_KEY_ADMIN, String(adminStatus));
       } catch {}
 
-      // SECURITY: Only select safe fields, never expose Stripe IDs
-      const { data: subData, error: subError } = await supabase
-        .from('subscriptions')
-        .select('id, user_id, tier, status, current_period_start, current_period_end, cancel_at_period_end, created_at, updated_at')
-        .eq('user_id', user.id)
-        .single();
-
-      if (subError && subError.code !== 'PGRST116') {
-        console.error('Error fetching subscription:', subError);
+      if (subResult.error && subResult.error.code !== 'PGRST116') {
+        console.error('Error fetching subscription:', subResult.error);
       }
 
-      if (subData) {
-        setSubscription(subData as Subscription);
-        setTier(subData.tier as SubscriptionTier);
+      if (subResult.data) {
+        setSubscription(subResult.data as Subscription);
+        setTier(subResult.data.tier as SubscriptionTier);
         
         // Cache tier
         try {
-          localStorage.setItem(CACHE_KEY_TIER, subData.tier);
+          localStorage.setItem(CACHE_KEY_TIER, subResult.data.tier);
         } catch {}
 
         const { data: featuresData } = await supabase
           .from('subscription_features')
           .select('feature_key, feature_value')
-          .eq('tier', subData.tier);
+          .eq('tier', subResult.data.tier);
 
         if (featuresData) {
           setFeatures(featuresData);
