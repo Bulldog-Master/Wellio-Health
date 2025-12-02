@@ -28,5 +28,12 @@
   "error": "Error",
   "failed_to_generate": "Failed to generate insights. Please try again.",
   "rate_limit_exceeded": "AI rate limit exceeded. Please try again later.",
-  "credits_exhausted": "AI credits exhausted. Please add credits to continue."
+  "credits_exhausted": "AI credits exhausted. Please add credits to continue.",
+  "back_to_premium": "Back to Premium",
+  "insight_type_meal_suggestions": "Meal Suggestions",
+  "insight_type_workout_recommendations": "Workout Recommendations",
+  "insight_type_weight": "Weight",
+  "insight_type_activity": "Activity",
+  "insight_type_nutrition": "Nutrition",
+  "insight_type_general": "General"
 }

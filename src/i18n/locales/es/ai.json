@@ -28,5 +28,12 @@
   "error": "Error",
   "failed_to_generate": "Error al generar insights. Por favor intenta de nuevo.",
   "rate_limit_exceeded": "Límite de IA excedido. Por favor intenta más tarde.",
-  "credits_exhausted": "Créditos de IA agotados. Por favor añade créditos para continuar."
+  "credits_exhausted": "Créditos de IA agotados. Por favor añade créditos para continuar.",
+  "back_to_premium": "Volver a Premium",
+  "insight_type_meal_suggestions": "Sugerencias de Comidas",
+  "insight_type_workout_recommendations": "Recomendaciones de Entrenamiento",
+  "insight_type_weight": "Peso",
+  "insight_type_activity": "Actividad",
+  "insight_type_nutrition": "Nutrición",
+  "insight_type_general": "General"
 }
