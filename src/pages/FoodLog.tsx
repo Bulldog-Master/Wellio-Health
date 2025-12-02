@@ -76,6 +76,7 @@ const FoodLog = () => {
     { value: "lunch", label: t('food:lunch') },
     { value: "dinner", label: t('food:dinner') },
     { value: "snack", label: t('food:snack') },
+    { value: "fast", label: t('food:fast') },
   ];
 
   useEffect(() => {
