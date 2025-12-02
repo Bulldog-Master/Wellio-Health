@@ -31,5 +31,7 @@
   "success": "Success",
   "session_created": "Workout session created successfully",
   "failed_to_create": "Failed to create workout session",
-  "failed_to_join": "Failed to join session"
+  "failed_to_join": "Failed to join session",
+  "title_placeholder": "HIIT Cardio Blast",
+  "description_placeholder": "High intensity interval training session..."
 }

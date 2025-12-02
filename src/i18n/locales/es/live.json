@@ -31,5 +31,7 @@
   "success": "Éxito",
   "session_created": "Sesión de entrenamiento creada exitosamente",
   "failed_to_create": "Error al crear sesión de entrenamiento",
-  "failed_to_join": "Error al unirse a la sesión"
+  "failed_to_join": "Error al unirse a la sesión",
+  "title_placeholder": "HIIT Cardio Explosivo",
+  "description_placeholder": "Sesión de entrenamiento de intervalos de alta intensidad..."
 }
