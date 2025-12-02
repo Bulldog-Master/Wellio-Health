@@ -19,7 +19,7 @@ import { useTranslation } from "react-i18next";
 const Dashboard = () => {
   const { t } = useTranslation(['common', 'fitness']);
   const navigate = useNavigate();
-  const { tier } = useSubscription();
+  const { tier, hasFullAccess, isVIP, isAdmin } = useSubscription();
   const [currentWeight, setCurrentWeight] = useState(0);
   const [targetWeight, setTargetWeight] = useState(0);
   const [caloriesConsumed, setCaloriesConsumed] = useState(1450);
@@ -146,9 +146,26 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Upgrade Prompt for Free Users */}
-      {tier === 'free' && (
+      {/* Upgrade Prompt for Free Users - Hidden for VIP/Admin */}
+      {tier === 'free' && !hasFullAccess && (
         <UpgradePrompt compact feature={t('advanced_features')} />
+      )}
+      
+      {/* VIP/Admin Status Banner */}
+      {hasFullAccess && (
+        <div className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 border border-primary/30">
+          <div className="p-2 rounded-full bg-primary/20">
+            <Zap className="w-5 h-5 text-primary" />
+          </div>
+          <div>
+            <p className="font-semibold text-foreground">
+              {isAdmin ? t('admin_access') : t('vip_access')}
+            </p>
+            <p className="text-sm text-muted-foreground">
+              {t('full_features_unlocked')}
+            </p>
+          </div>
+        </div>
       )}
 
       {/* Dashboard Mini-Charts */}
