@@ -4,7 +4,7 @@
     "connect": "Conectar",
     "food": "Comida",
     "fundraisers": "Recaudaciones",
-    "locations": "Ubicaciones",
+    "locations": "Instalaciones",
     "news": "Noticias",
     "sponsors": "Patrocinadores"
   },
@@ -94,17 +94,12 @@
   "workouts_7_days": "Entrenamientos (7 Días)",
   "duration": "Duración",
   "no_data": "Sin datos",
-  "nav": {
-    "food": "Comida",
+  "nav_extra": {
     "feed": "Publicaciones",
     "workout": "Entrenamiento",
     "nutrition": "Nutrición",
     "social": "Social",
-    "socials": "Sociales",
-    "activity": "Actividad",
-    "connect": "Conectar",
-    "fundraisers": "Recaudaciones",
-    "news": "Noticias"
+    "socials": "Sociales"
   },
   "post_created": "¡Publicación creada!",
   "link_copied_clipboard": "¡Enlace copiado al portapapeles!",

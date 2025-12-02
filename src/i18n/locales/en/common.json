@@ -4,7 +4,7 @@
     "connect": "Connect",
     "food": "Food",
     "fundraisers": "Fundraisers",
-    "locations": "Locations",
+    "locations": "Facility Locations",
     "news": "News",
     "sponsors": "Sponsors"
   },
@@ -65,17 +65,12 @@
   "unlock_advanced_features": "Unlock advanced features",
   "advanced_features": "advanced features",
   "upgrade": "Upgrade",
-  "nav": {
-    "food": "Food",
+  "nav_extra": {
     "feed": "Feed",
     "workout": "Workout",
     "nutrition": "Nutrition",
     "social": "Social",
-    "socials": "Socials",
-    "activity": "Activity",
-    "connect": "Connect",
-    "fundraisers": "Fundraisers",
-    "news": "News"
+    "socials": "Socials"
   },
   "sleepTracking": "Sleep Tracking",
   "monitorSleepPatterns": "Monitor your sleep patterns",
