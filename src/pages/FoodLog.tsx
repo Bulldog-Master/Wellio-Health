@@ -657,198 +657,208 @@ const FoodLog = () => {
             </div>
           </div>
 
-          <div className="space-y-3">
-            <Label htmlFor="search">{t('food:search_food_database')}</Label>
-            <div className="flex gap-2">
-              <Input
-                id="search"
-                placeholder={t('food:search_placeholder')}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSearchFood()}
-              />
-              <Button
-                onClick={handleSearchFood}
-                disabled={isSearching || !searchQuery.trim()}
-                variant="secondary"
-              >
-                {isSearching ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                ) : (
-                  <Search className="w-4 h-4" />
-                )}
-              </Button>
-            </div>
-            {searchResults.length > 0 && (
-              <div className="border rounded-lg max-h-60 overflow-y-auto">
-                {searchResults.map((food) => (
-                  <button
-                    key={food.fdcId}
-                    onClick={() => handleSelectFood(food)}
-                    className="w-full p-3 hover:bg-accent text-left border-b last:border-b-0 transition-colors"
-                  >
-                    <div className="flex justify-between items-start">
-                      <div className="flex-1">
-                        <p className="font-medium">{food.description}</p>
-                        <p className="text-xs text-muted-foreground">{food.brandOwner}</p>
-                      </div>
-                      <div className="text-right text-sm">
-                        <p className="font-semibold">{food.calories} cal</p>
-                        <p className="text-xs text-muted-foreground">
-                          P: {food.protein}g | C: {food.carbs}g | F: {food.fat}g
-                        </p>
-                      </div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">
-                {t('food:or_describe_manually')}
-              </span>
-            </div>
-          </div>
-
-          <div>
-            <Label htmlFor="meal">{t('food:what_did_you_eat')}</Label>
-            <Textarea
-              id="meal"
-              placeholder={t('food:meal_placeholder')}
-              value={mealDescription}
-              onChange={(e) => setMealDescription(e.target.value)}
-              className="mt-1.5"
-              rows={3}
-            />
-          </div>
-
-          <div>
-            <Label>{t('food:or_upload_photo')}</Label>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="hidden"
-            />
-            <Button
-              variant="outline"
-              onClick={() => fileInputRef.current?.click()}
-              className="w-full mt-1.5 gap-2"
-            >
-              <Camera className="w-4 h-4" />
-              {imagePreview ? t('food:choose_file') : t('food:choose_file')}
-            </Button>
-            {imagePreview && (
-              <div className="space-y-2 mt-2">
-                <div className="relative">
-                  <img src={imagePreview} alt="Meal preview" className="w-full h-40 object-cover rounded-md" />
+          {selectedMeal !== 'fast' && (
+            <>
+              <div className="space-y-3">
+                <Label htmlFor="search">{t('food:search_food_database')}</Label>
+                <div className="flex gap-2">
+                  <Input
+                    id="search"
+                    placeholder={t('food:search_placeholder')}
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleSearchFood()}
+                  />
                   <Button
-                    variant="destructive"
-                    size="sm"
-                    className="absolute top-2 right-2"
-                    onClick={() => {
-                      setImagePreview(null);
-                      setSaveImage(false);
-                      if (fileInputRef.current) fileInputRef.current.value = '';
-                    }}
+                    onClick={handleSearchFood}
+                    disabled={isSearching || !searchQuery.trim()}
+                    variant="secondary"
                   >
-                    {t('food:remove')}
+                    {isSearching ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Search className="w-4 h-4" />
+                    )}
                   </Button>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="saveImage"
-                    checked={saveImage}
-                    onCheckedChange={(checked) => setSaveImage(checked as boolean)}
-                  />
-                  <Label htmlFor="saveImage" className="text-sm cursor-pointer">
-                    {t('food:save_photo_with_meal')}
-                  </Label>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <Button
-            onClick={handleAnalyzeMeal}
-            className="w-full gap-2"
-            disabled={isAnalyzing || (!mealDescription.trim() && !imagePreview)}
-          >
-            {isAnalyzing ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-                {t('food:analyzing_with_ai')}
-              </>
-            ) : (
-              <>
-                <Sparkles className="w-4 h-4" />
-                {t('food:analyze_with_ai')}
-              </>
-            )}
-          </Button>
-
-          <div className="flex gap-2">
-            <Dialog open={showSavedMeals} onOpenChange={setShowSavedMeals}>
-              <DialogTrigger asChild>
-                <Button variant="outline" className="flex-1 gap-2">
-                  <Bookmark className="w-4 h-4" />
-                  {t('food:load_saved_meal')} ({savedMeals.length})
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
-                <DialogHeader>
-                  <DialogTitle>{t('food:your_saved_meals')}</DialogTitle>
-                </DialogHeader>
-                {savedMeals.length === 0 ? (
-                  <p className="text-center text-muted-foreground py-8">
-                    {t('food:no_saved_meals_yet')}
-                  </p>
-                ) : (
-                  <div className="space-y-2">
-                    {savedMeals.map((meal) => (
-                      <Card key={meal.id} className="p-4 hover:bg-accent/5 cursor-pointer" onClick={() => handleLoadSavedMeal(meal)}>
-                        <div className="flex items-start justify-between gap-4">
+                {searchResults.length > 0 && (
+                  <div className="border rounded-lg max-h-60 overflow-y-auto">
+                    {searchResults.map((food) => (
+                      <button
+                        key={food.fdcId}
+                        onClick={() => handleSelectFood(food)}
+                        className="w-full p-3 hover:bg-accent text-left border-b last:border-b-0 transition-colors"
+                      >
+                        <div className="flex justify-between items-start">
                           <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <h5 className="font-medium">{meal.meal_name}</h5>
-                              <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">
-                                {mealTypes.find(m => m.value === meal.meal_type)?.label}
-                              </span>
-                            </div>
-                            <div className="flex gap-4 text-sm">
-                              <span className="text-accent font-medium">{meal.calories} cal</span>
-                              {meal.protein_grams && <span className="text-muted-foreground">P: {meal.protein_grams}g</span>}
-                              {meal.carbs_grams && <span className="text-muted-foreground">C: {meal.carbs_grams}g</span>}
-                              {meal.fat_grams && <span className="text-muted-foreground">F: {meal.fat_grams}g</span>}
-                            </div>
+                            <p className="font-medium">{food.description}</p>
+                            <p className="text-xs text-muted-foreground">{food.brandOwner}</p>
                           </div>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDeleteSavedMeal(meal.id);
-                            }}
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
+                          <div className="text-right text-sm">
+                            <p className="font-semibold">{food.calories} cal</p>
+                            <p className="text-xs text-muted-foreground">
+                              P: {food.protein}g | C: {food.carbs}g | F: {food.fat}g
+                            </p>
+                          </div>
                         </div>
-                      </Card>
+                      </button>
                     ))}
                   </div>
                 )}
-              </DialogContent>
-            </Dialog>
-          </div>
+              </div>
 
-          {nutritionData && (
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-background px-2 text-muted-foreground">
+                    {t('food:or_describe_manually')}
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="meal">{t('food:what_did_you_eat')}</Label>
+                <Textarea
+                  id="meal"
+                  placeholder={t('food:meal_placeholder')}
+                  value={mealDescription}
+                  onChange={(e) => setMealDescription(e.target.value)}
+                  className="mt-1.5"
+                  rows={3}
+                />
+              </div>
+
+              <div>
+                <Label>{t('food:or_upload_photo')}</Label>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                />
+                <Button
+                  variant="outline"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="w-full mt-1.5 gap-2"
+                >
+                  <Camera className="w-4 h-4" />
+                  {imagePreview ? t('food:choose_file') : t('food:choose_file')}
+                </Button>
+                {imagePreview && (
+                  <div className="space-y-2 mt-2">
+                    <div className="relative">
+                      <img src={imagePreview} alt="Meal preview" className="w-full h-40 object-cover rounded-md" />
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        className="absolute top-2 right-2"
+                        onClick={() => {
+                          setImagePreview(null);
+                          setSaveImage(false);
+                          if (fileInputRef.current) fileInputRef.current.value = '';
+                        }}
+                      >
+                        {t('food:remove')}
+                      </Button>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        id="saveImage"
+                        checked={saveImage}
+                        onCheckedChange={(checked) => setSaveImage(checked as boolean)}
+                      />
+                      <Label htmlFor="saveImage" className="text-sm cursor-pointer">
+                        {t('food:save_photo_with_meal')}
+                      </Label>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <Button
+                onClick={handleAnalyzeMeal}
+                className="w-full gap-2"
+                disabled={isAnalyzing || (!mealDescription.trim() && !imagePreview)}
+              >
+                {isAnalyzing ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    {t('food:analyzing_with_ai')}
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="w-4 h-4" />
+                    {t('food:analyze_with_ai')}
+                  </>
+                )}
+              </Button>
+
+              <div className="flex gap-2">
+                <Dialog open={showSavedMeals} onOpenChange={setShowSavedMeals}>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" className="flex-1 gap-2">
+                      <Bookmark className="w-4 h-4" />
+                      {t('food:load_saved_meal')} ({savedMeals.length})
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle>{t('food:your_saved_meals')}</DialogTitle>
+                    </DialogHeader>
+                    {savedMeals.length === 0 ? (
+                      <p className="text-center text-muted-foreground py-8">
+                        {t('food:no_saved_meals_yet')}
+                      </p>
+                    ) : (
+                      <div className="space-y-2">
+                        {savedMeals.map((meal) => (
+                          <Card key={meal.id} className="p-4 hover:bg-accent/5 cursor-pointer" onClick={() => handleLoadSavedMeal(meal)}>
+                            <div className="flex items-start justify-between gap-4">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                  <h5 className="font-medium">{meal.meal_name}</h5>
+                                  <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">
+                                    {mealTypes.find(m => m.value === meal.meal_type)?.label}
+                                  </span>
+                                </div>
+                                <div className="flex gap-4 text-sm">
+                                  <span className="text-accent font-medium">{meal.calories} cal</span>
+                                  {meal.protein_grams && <span className="text-muted-foreground">P: {meal.protein_grams}g</span>}
+                                  {meal.carbs_grams && <span className="text-muted-foreground">C: {meal.carbs_grams}g</span>}
+                                  {meal.fat_grams && <span className="text-muted-foreground">F: {meal.fat_grams}g</span>}
+                                </div>
+                              </div>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleDeleteSavedMeal(meal.id);
+                                }}
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </Button>
+                            </div>
+                          </Card>
+                        ))}
+                      </div>
+                    )}
+                  </DialogContent>
+                </Dialog>
+              </div>
+            </>
+          )}
+
+          {selectedMeal === 'fast' && (
+            <Card className="p-4 bg-accent/10 border-accent text-center">
+              <p className="text-muted-foreground">{t('food:fast')} - 0 {t('food:calories')}</p>
+            </Card>
+          )}
+
+          {nutritionData && selectedMeal !== 'fast' && (
             <Card className="p-4 bg-accent/10 border-accent">
               <div className="flex items-center justify-between mb-3">
                 <h4 className="font-semibold text-accent">{t('food:estimated_nutrition')}</h4>
@@ -886,7 +896,7 @@ const FoodLog = () => {
           <Button
             onClick={handleAddMeal}
             className="w-full gap-2"
-            disabled={!nutritionData}
+            disabled={!nutritionData && selectedMeal !== 'fast'}
           >
             <Plus className="w-4 h-4" />
             {editingMeal ? t('food:update_meal') : t('food:save_meal')}
