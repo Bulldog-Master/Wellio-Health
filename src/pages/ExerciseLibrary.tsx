@@ -44,6 +44,7 @@ const ExerciseLibrary = () => {
   const [selectedDifficulty, setSelectedDifficulty] = useState("all");
 
   // Sample exercise data - in production this would come from database
+  // Using translation keys for muscles and equipment
   const exercises: Exercise[] = [
     {
       id: "1",
@@ -53,7 +54,7 @@ const ExerciseLibrary = () => {
       difficulty: "beginner",
       duration: "5 min",
       equipment: [],
-      muscles: ["Chest", "Triceps", "Shoulders"],
+      muscles: ["chest", "triceps", "shoulders"],
       thumbnailUrl: "https://images.unsplash.com/photo-1598971639058-fab3c3109a00?w=400",
       videoUrl: "#"
     },
@@ -65,7 +66,7 @@ const ExerciseLibrary = () => {
       difficulty: "beginner",
       duration: "5 min",
       equipment: [],
-      muscles: ["Quadriceps", "Glutes", "Hamstrings"],
+      muscles: ["quadriceps", "glutes", "hamstrings"],
       thumbnailUrl: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400",
       videoUrl: "#"
     },
@@ -77,7 +78,7 @@ const ExerciseLibrary = () => {
       difficulty: "beginner",
       duration: "3 min",
       equipment: [],
-      muscles: ["Core", "Shoulders", "Back"],
+      muscles: ["core", "shoulders", "back"],
       thumbnailUrl: "https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=400",
       videoUrl: "#"
     },
@@ -88,8 +89,8 @@ const ExerciseLibrary = () => {
       category: "full_body",
       difficulty: "intermediate",
       duration: "8 min",
-      equipment: ["Barbell", "Weights"],
-      muscles: ["Back", "Glutes", "Hamstrings", "Core"],
+      equipment: ["barbell", "weights"],
+      muscles: ["back", "glutes", "hamstrings", "core"],
       thumbnailUrl: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400",
       videoUrl: "#"
     },
@@ -101,7 +102,7 @@ const ExerciseLibrary = () => {
       difficulty: "intermediate",
       duration: "5 min",
       equipment: [],
-      muscles: ["Full Body"],
+      muscles: ["full_body"],
       thumbnailUrl: "https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?w=400",
       videoUrl: "#"
     },
@@ -112,8 +113,8 @@ const ExerciseLibrary = () => {
       category: "flexibility",
       difficulty: "beginner",
       duration: "10 min",
-      equipment: ["Yoga Mat"],
-      muscles: ["Full Body", "Flexibility"],
+      equipment: ["yoga_mat"],
+      muscles: ["full_body"],
       thumbnailUrl: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400",
       videoUrl: "#"
     }
@@ -247,7 +248,7 @@ const ExerciseLibrary = () => {
                 </Badge>
               </div>
               <div className="p-4">
-                <h3 className="font-semibold text-lg mb-2">{exercise.name}</h3>
+                <h3 className="font-semibold text-lg mb-2">{t(`exercises.${exercise.nameKey}`)}</h3>
                 <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
                   <span className="flex items-center gap-1">
                     <Clock className="h-4 w-4" />
@@ -255,13 +256,15 @@ const ExerciseLibrary = () => {
                   </span>
                   <span className="flex items-center gap-1">
                     <Dumbbell className="h-4 w-4" />
-                    {exercise.equipment.length > 0 ? exercise.equipment.join(", ") : t('no_equipment')}
+                    {exercise.equipment.length > 0 
+                      ? exercise.equipment.map(eq => t(`equipment.${eq}`)).join(", ") 
+                      : t('no_equipment')}
                   </span>
                 </div>
                 <div className="flex flex-wrap gap-1">
                   {exercise.muscles.slice(0, 3).map(muscle => (
                     <Badge key={muscle} variant="outline" className="text-xs">
-                      {muscle}
+                      {t(`muscles.${muscle}`)}
                     </Badge>
                   ))}
                 </div>

@@ -34,5 +34,31 @@
   "loading_exercises": "Übungen werden geladen...",
   "featured_exercises": "Empfohlene Übungen",
   "recently_added": "Kürzlich hinzugefügt",
-  "most_popular": "Am beliebtesten"
+  "most_popular": "Am beliebtesten",
+  "exercises": {
+    "pushups": "Liegestütze",
+    "squats": "Kniebeugen",
+    "plank": "Plank",
+    "deadlift": "Kreuzheben",
+    "burpees": "Burpees",
+    "sun_salutation": "Sonnengruß"
+  },
+  "muscles": {
+    "chest": "Brust",
+    "triceps": "Trizeps",
+    "shoulders": "Schultern",
+    "quadriceps": "Quadrizeps",
+    "glutes": "Gesäß",
+    "hamstrings": "Oberschenkelrückseite",
+    "back": "Rücken",
+    "core": "Core",
+    "full_body": "Ganzkörper"
+  },
+  "equipment": {
+    "barbell": "Langhantel",
+    "weights": "Gewichte",
+    "yoga_mat": "Yogamatte",
+    "dumbbells": "Kurzhanteln",
+    "resistance_bands": "Widerstandsbänder"
+  }
 }
