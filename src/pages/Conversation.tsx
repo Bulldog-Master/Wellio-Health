@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Send, User, Check, CheckCheck } from "lucide-react";
@@ -299,19 +299,21 @@ const Conversation = () => {
       </Card>
 
       {/* Input */}
-      <div className="flex gap-2">
-        <Input
+      <div className="flex gap-2 items-end">
+        <Textarea
           placeholder="Type a message..."
           value={newMessage}
           onChange={(e) => handleTyping(e.target.value)}
-          onKeyPress={(e) => {
+          onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
               handleSend();
             }
           }}
+          className="min-h-[44px] max-h-[120px] resize-none"
+          rows={1}
         />
-        <Button onClick={handleSend} disabled={!newMessage.trim() || sendMessage.isPending}>
+        <Button onClick={handleSend} disabled={!newMessage.trim() || sendMessage.isPending} className="h-[44px]">
           <Send className="h-4 w-4" />
         </Button>
       </div>
