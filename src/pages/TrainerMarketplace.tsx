@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Star, MapPin, Search, Award, DollarSign, Users, Calendar } from "lucide-react";
+import { Star, MapPin, Search, Award, DollarSign, Users, Calendar, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -130,7 +130,15 @@ const TrainerMarketplace = () => {
   return (
     <SubscriptionGate feature="trainer_search">
       <div className="space-y-6 max-w-7xl">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-4">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate('/premium')}
+          className="shrink-0"
+        >
+          <ArrowLeft className="h-5 w-5" />
+        </Button>
         <div className="p-3 bg-primary/10 rounded-xl">
           <Users className="w-6 h-6 text-primary" />
         </div>
