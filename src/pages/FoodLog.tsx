@@ -84,6 +84,13 @@ const FoodLog = () => {
     fetchSavedMeals();
   }, []);
 
+  // Auto-set nutrition data to zeros when Fast is selected
+  useEffect(() => {
+    if (selectedMeal === 'fast') {
+      setNutritionData({ calories: 0, protein: 0, carbs: 0, fat: 0 });
+    }
+  }, [selectedMeal]);
+
   const fetchMealLogs = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -279,24 +286,28 @@ const FoodLog = () => {
       return;
     }
 
-    // Validate meal data using Zod
-    const validation = validateAndSanitize(foodLogSchema, {
-      meal_type: selectedMeal as 'breakfast' | 'lunch' | 'dinner' | 'snack' | 'fast',
-      food_name: finalDescription,
-      calories: finalNutritionData?.calories ?? 0,
-      protein_grams: finalNutritionData?.protein ?? 0,
-      carbs_grams: finalNutritionData?.carbs ?? 0,
-      fat_grams: finalNutritionData?.fat ?? 0,
-      logged_at: logDate,
-    });
-
-    if (validation.success === false) {
-      toast({
-        title: t('food:validation_error'),
-        description: validation.error,
-        variant: "destructive",
+    // Skip validation for fasting - we know it's valid
+    if (!isFasting) {
+      // Validate meal data using Zod
+      const validation = validateAndSanitize(foodLogSchema, {
+        meal_type: selectedMeal as 'breakfast' | 'lunch' | 'dinner' | 'snack' | 'fast',
+        food_name: finalDescription,
+        calories: finalNutritionData?.calories ?? 0,
+        protein_grams: finalNutritionData?.protein ?? 0,
+        carbs_grams: finalNutritionData?.carbs ?? 0,
+        fat_grams: finalNutritionData?.fat ?? 0,
+        logged_at: logDate,
       });
-      return;
+
+      if (validation.success === false) {
+        console.error('Validation error:', validation.error);
+        toast({
+          title: t('food:validation_error'),
+          description: validation.error,
+          variant: "destructive",
+        });
+        return;
+      }
     }
 
     try {
