@@ -250,7 +250,12 @@ Provide 3-5 actionable insights in this exact JSON format:
       data_summary: dataSummary,
     }));
 
-    await supabaseClient.from("ai_insights").insert(insightsToStore);
+    // Store insights using admin client to bypass RLS
+    const { error: insertError } = await supabaseAdmin.from("ai_insights").insert(insightsToStore);
+    
+    if (insertError) {
+      console.error("[generate-insights] Error storing insights:", insertError);
+    }
 
     console.log("[generate-insights] Success! Returning insights.");
     return new Response(
