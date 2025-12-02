@@ -1,14 +1,25 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Newspaper, Trophy, Dumbbell, Bike, Footprints, Waves, Mountain, Heart, Swords, Globe, Flame, Medal, Timer, Calendar, ChevronRight } from "lucide-react";
+import { ArrowLeft, Newspaper, Trophy, Dumbbell, Bike, Footprints, Waves, Mountain, Heart, Swords, Globe, Flame, Medal, Timer, Calendar, ChevronDown, ChevronUp } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import SEOHead from "@/components/SEOHead";
 
 const News = () => {
   const { t } = useTranslation(['common', 'news']);
   const navigate = useNavigate();
+  const [openCategories, setOpenCategories] = useState<string[]>([]);
+
+  const toggleCategory = (id: string) => {
+    setOpenCategories(prev => 
+      prev.includes(id) 
+        ? prev.filter(c => c !== id)
+        : [...prev, id]
+    );
+  };
 
   const newsCategories = [
     { 
@@ -196,53 +207,64 @@ const News = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {newsCategories.map((category) => {
               const Icon = category.icon;
+              const isOpen = openCategories.includes(category.id);
+              
               return (
-                <Card 
+                <Collapsible
                   key={category.id}
-                  className="group cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-[1.01] border-border/50"
+                  open={isOpen}
+                  onOpenChange={() => toggleCategory(category.id)}
                 >
-                  <CardHeader className="pb-2">
-                    <div className="flex items-start justify-between">
-                      <div className={`w-12 h-12 rounded-xl ${category.bgColor} flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                        <Icon className={`h-6 w-6 ${category.color}`} />
-                      </div>
-                      <Badge variant={getBadgeVariant(category.badgeType)} className="text-xs">
-                        {getBadgeText(category.badgeType)}
-                      </Badge>
-                    </div>
-                    <CardTitle className="text-lg mt-3">{t(category.titleKey)}</CardTitle>
-                    <CardDescription className="line-clamp-1">
-                      {t(category.descKey)}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-2">
-                    {/* News Items */}
-                    <div className="space-y-2 border-t pt-3">
-                      {[1, 2, 3].map((num) => (
-                        <div 
-                          key={num}
-                          className="flex items-start gap-2 p-2 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer"
-                        >
-                          <Calendar className={`h-4 w-4 mt-0.5 ${category.color} flex-shrink-0`} />
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium line-clamp-1">
-                              {t(`news:items.${category.itemsKey}.item${num}`)}
-                            </p>
-                            <p className="text-xs text-muted-foreground">
-                              {t(`news:dates.${category.itemsKey}.item${num}`)}
-                            </p>
+                  <Card className="hover:shadow-lg transition-all duration-300 border-border/50">
+                    <CollapsibleTrigger asChild>
+                      <CardHeader className="cursor-pointer pb-2">
+                        <div className="flex items-start justify-between">
+                          <div className={`w-12 h-12 rounded-xl ${category.bgColor} flex items-center justify-center hover:scale-110 transition-transform`}>
+                            <Icon className={`h-6 w-6 ${category.color}`} />
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Badge variant={getBadgeVariant(category.badgeType)} className="text-xs">
+                              {getBadgeText(category.badgeType)}
+                            </Badge>
+                            {isOpen ? (
+                              <ChevronUp className="h-4 w-4 text-muted-foreground" />
+                            ) : (
+                              <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                            )}
                           </div>
                         </div>
-                      ))}
-                    </div>
+                        <CardTitle className="text-lg mt-3">{t(category.titleKey)}</CardTitle>
+                        <CardDescription className="line-clamp-2">
+                          {t(category.descKey)}
+                        </CardDescription>
+                      </CardHeader>
+                    </CollapsibleTrigger>
                     
-                    {/* View More */}
-                    <Button variant="ghost" size="sm" className="w-full justify-between text-muted-foreground hover:text-foreground">
-                      {t('news:view_more')}
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
-                  </CardContent>
-                </Card>
+                    <CollapsibleContent>
+                      <CardContent className="space-y-2 pt-0">
+                        {/* News Items */}
+                        <div className="space-y-2 border-t pt-3">
+                          {[1, 2, 3].map((num) => (
+                            <div 
+                              key={num}
+                              className="flex items-start gap-2 p-2 rounded-lg hover:bg-muted/50 transition-colors"
+                            >
+                              <Calendar className={`h-4 w-4 mt-0.5 ${category.color} flex-shrink-0`} />
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium">
+                                  {t(`news:items.${category.itemsKey}.item${num}`)}
+                                </p>
+                                <p className="text-xs text-muted-foreground">
+                                  {t(`news:dates.${category.itemsKey}.item${num}`)}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </CollapsibleContent>
+                  </Card>
+                </Collapsible>
               );
             })}
           </div>
