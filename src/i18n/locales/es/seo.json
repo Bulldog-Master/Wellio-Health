@@ -57,5 +57,9 @@
   "locations": {
     "title": "Ubicaciones Fitness - Wellio",
     "description": "Encuentra gimnasios, estudios y centros de fitness en todo el mundo con reseñas y direcciones."
+  },
+  "products": {
+    "title": "Productos Recomendados - Wellio",
+    "description": "Descubre productos fitness, suplementos y equipo personalmente evaluados y aprobados."
   }
 }

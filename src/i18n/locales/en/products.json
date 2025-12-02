@@ -1,0 +1,48 @@
+{
+  "title": "Recommended Products",
+  "subtitle": "Personally vetted and approved products I trust",
+  "categories": {
+    "all": "All Products",
+    "supplements": "Supplements",
+    "gear": "Gear",
+    "apparel": "Apparel",
+    "equipment": "Equipment",
+    "recovery": "Recovery",
+    "nutrition": "Nutrition",
+    "accessories": "Accessories"
+  },
+  "bulldogz_approved": "Bulldogz Approved",
+  "visit_store": "Visit Store",
+  "no_products": "No products available yet",
+  "no_products_category": "No products in this category yet",
+  "price_range": "Price Range",
+  "why_i_recommend": "Why I Recommend This",
+  "admin": {
+    "manage_products": "Manage Products",
+    "add_product": "Add Product",
+    "edit_product": "Edit Product",
+    "delete_product": "Delete Product",
+    "product_name": "Product Name",
+    "product_name_es": "Product Name (Spanish)",
+    "description": "Description",
+    "description_es": "Description (Spanish)",
+    "endorsement": "Personal Endorsement",
+    "endorsement_es": "Personal Endorsement (Spanish)",
+    "category": "Category",
+    "image_url": "Image URL",
+    "purchase_url": "Purchase URL",
+    "price_range": "Price Range",
+    "display_order": "Display Order",
+    "is_active": "Active",
+    "is_approved": "Bulldogz Approved",
+    "product_added": "Product added successfully",
+    "product_updated": "Product updated successfully",
+    "product_deleted": "Product deleted successfully",
+    "confirm_delete": "Are you sure you want to delete this product?"
+  },
+  "shopify": {
+    "store_title": "Shop",
+    "browse_store": "Browse Our Store",
+    "coming_soon": "Full store coming soon"
+  }
+}
