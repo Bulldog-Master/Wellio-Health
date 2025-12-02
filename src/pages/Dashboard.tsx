@@ -1,4 +1,4 @@
-import { Activity, Flame, Target, TrendingUp, Droplets, Moon, Camera, Zap, HeartPulse, Users } from "lucide-react";
+import { Activity, Flame, Target, TrendingUp, Droplets, Moon, Camera, Zap, HeartPulse, Users, Bot, Crown } from "lucide-react";
 import MetricCard from "@/components/MetricCard";
 import ActivityRings from "@/components/ActivityRings";
 import { StreakTracker } from "@/components/StreakTracker";
@@ -368,16 +368,16 @@ const Dashboard = () => {
             </span>
             <span className="text-sm">{t('groups')}</span>
           </Button>
-          <Button
+          <Button 
+            onClick={() => navigate('/fitness-chat')}
             variant="secondary" 
-            className="h-auto py-4 flex-col gap-2 relative cursor-not-allowed opacity-60"
-            disabled
+            className="h-auto py-4 flex-col gap-2 relative"
           >
-            <span style={{ color: 'hsl(165, 85%, 48%)' }}>
-              <Activity className="w-5 h-5" />
+            <span style={{ color: 'hsl(280, 95%, 68%)' }}>
+              <Bot className="w-5 h-5" />
             </span>
-            <span className="text-sm">{t('step_count')}</span>
-            <span className="absolute bottom-1 text-[9px] text-muted-foreground/50 font-medium">{t('coming_soon')}</span>
+            <span className="text-sm">{t('ai_coach')}</span>
+            <Crown className="absolute top-1 right-1 w-3 h-3 text-yellow-500" />
           </Button>
         </div>
       </Card>

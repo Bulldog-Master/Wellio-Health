@@ -52,6 +52,8 @@ import errorsEN from './locales/en/errors.json';
 import adminEN from './locales/en/admin.json';
 import premiumEN from './locales/en/premium.json';
 import videosEN from './locales/en/videos.json';
+import chatEN from './locales/en/chat.json';
+import celebrationsEN from './locales/en/celebrations.json';
 
 // Spanish
 import commonES from './locales/es/common.json';
@@ -102,6 +104,8 @@ import pluralsES from './locales/es/plurals.json';
 import adminES from './locales/es/admin.json';
 import premiumES from './locales/es/premium.json';
 import videosES from './locales/es/videos.json';
+import chatES from './locales/es/chat.json';
+import celebrationsES from './locales/es/celebrations.json';
 
 // Portuguese
 import commonPT from './locales/pt/common.json';
@@ -118,6 +122,8 @@ import premiumPT from './locales/pt/premium.json';
 import subscriptionPT from './locales/pt/subscription.json';
 import videosPT from './locales/pt/videos.json';
 import feedPT from './locales/pt/feed.json';
+import chatPT from './locales/pt/chat.json';
+import celebrationsPT from './locales/pt/celebrations.json';
 
 // French
 import commonFR from './locales/fr/common.json';
@@ -134,6 +140,8 @@ import premiumFR from './locales/fr/premium.json';
 import subscriptionFR from './locales/fr/subscription.json';
 import videosFR from './locales/fr/videos.json';
 import feedFR from './locales/fr/feed.json';
+import chatFR from './locales/fr/chat.json';
+import celebrationsFR from './locales/fr/celebrations.json';
 
 // German
 import commonDE from './locales/de/common.json';
@@ -150,6 +158,8 @@ import premiumDE from './locales/de/premium.json';
 import subscriptionDE from './locales/de/subscription.json';
 import videosDE from './locales/de/videos.json';
 import feedDE from './locales/de/feed.json';
+import chatDE from './locales/de/chat.json';
+import celebrationsDE from './locales/de/celebrations.json';
 
 // Chinese
 import commonZH from './locales/zh/common.json';
@@ -166,6 +176,8 @@ import premiumZH from './locales/zh/premium.json';
 import subscriptionZH from './locales/zh/subscription.json';
 import videosZH from './locales/zh/videos.json';
 import feedZH from './locales/zh/feed.json';
+import chatZH from './locales/zh/chat.json';
+import celebrationsZH from './locales/zh/celebrations.json';
 
 // All namespaces - used for ns array and type safety
 export const allNamespaces = [
@@ -175,7 +187,7 @@ export const allNamespaces = [
   'calendar', 'records', 'voice', 'medical', 'timer', 'live', 'challenges', 
   'fundraisers', 'macros', 'install', 'search', 'creator', 'ai', 'measurements', 
   'trainer', 'session', 'bookmarks', 'challenges_page', 'feed', 'groups', 
-  'followers', 'schedule', 'seo', 'units', 'a11y', 'plurals', 'admin', 'premium', 'videos'
+  'followers', 'schedule', 'seo', 'units', 'a11y', 'plurals', 'admin', 'premium', 'videos', 'chat', 'celebrations'
 ] as const;
 
 export type TranslationNamespace = typeof allNamespaces[number];
@@ -230,6 +242,8 @@ const resources = {
     admin: adminEN,
     premium: premiumEN,
     videos: videosEN,
+    chat: chatEN,
+    celebrations: celebrationsEN,
   },
   es: {
     common: commonES,
@@ -280,6 +294,8 @@ const resources = {
     admin: adminES,
     premium: premiumES,
     videos: videosES,
+    chat: chatES,
+    celebrations: celebrationsES,
   },
   pt: {
     common: commonPT,
@@ -296,6 +312,8 @@ const resources = {
     subscription: subscriptionPT,
     videos: videosPT,
     feed: feedPT,
+    chat: chatPT,
+    celebrations: celebrationsPT,
   },
   fr: {
     common: commonFR,
@@ -312,6 +330,8 @@ const resources = {
     subscription: subscriptionFR,
     videos: videosFR,
     feed: feedFR,
+    chat: chatFR,
+    celebrations: celebrationsFR,
   },
   de: {
     common: commonDE,
@@ -328,6 +348,8 @@ const resources = {
     subscription: subscriptionDE,
     videos: videosDE,
     feed: feedDE,
+    chat: chatDE,
+    celebrations: celebrationsDE,
   },
   zh: {
     common: commonZH,
@@ -344,6 +366,8 @@ const resources = {
     subscription: subscriptionZH,
     videos: videosZH,
     feed: feedZH,
+    chat: chatZH,
+    celebrations: celebrationsZH,
   },
 };
 
