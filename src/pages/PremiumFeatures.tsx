@@ -135,9 +135,13 @@ const PremiumFeatures = () => {
         {premiumFeatures.map((feature) => (
           <Card 
             key={feature.route}
-            className="p-5 hover:shadow-lg transition-all duration-300 cursor-pointer group"
+            className="p-5 hover:shadow-lg transition-all duration-300 cursor-pointer group relative overflow-hidden"
             onClick={() => navigate(feature.route)}
           >
+            <div className="absolute top-2 right-2 flex items-center gap-1 bg-primary/20 px-2 py-0.5 rounded-full">
+              <Crown className="w-3 h-3 text-primary" />
+              <span className="text-xs font-semibold text-primary">VIP</span>
+            </div>
             <div className="flex items-start gap-4">
               <div className={`p-3 rounded-xl ${feature.bgColor} group-hover:scale-110 transition-transform`}>
                 <feature.icon className={`w-6 h-6 ${feature.color}`} />

@@ -314,8 +314,9 @@ const Activity = () => {
           className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer relative overflow-hidden"
           onClick={() => navigate('/exercise-library')}
         >
-          <div className="absolute top-2 right-2">
-            <Crown className="w-4 h-4 text-primary" />
+          <div className="absolute top-2 right-2 flex items-center gap-1 bg-primary/20 px-2 py-0.5 rounded-full">
+            <Crown className="w-3 h-3 text-primary" />
+            <span className="text-xs font-semibold text-primary">VIP</span>
           </div>
           <div className="flex items-start gap-4">
             <div className="p-3 bg-primary/10 rounded-xl">
