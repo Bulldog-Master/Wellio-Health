@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Plus, Pill, Upload, FolderOpen, AlertCircle, Trash2 } from "lucide-react";
+import { FileText, Plus, Pill, Upload, FolderOpen, AlertCircle, Trash2, ArrowLeft } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -20,6 +20,7 @@ import {
 } from "@/lib/validationSchemas";
 import { uploadMedicalFile, getSignedMedicalFileUrl } from "@/lib/medicalFileStorage";
 import { useTranslation } from "react-i18next";
+import { SubscriptionGate } from "@/components/SubscriptionGate";
 
 interface Medication {
   id: string;
@@ -488,16 +489,27 @@ const MedicalHistory = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-4xl">
-      <div className="flex items-center gap-3">
-        <div className="p-3 bg-primary/10 rounded-xl">
-          <FileText className="w-6 h-6 text-primary" />
+    <SubscriptionGate feature="medical_records">
+      <div className="space-y-6 max-w-4xl pb-20 md:pb-0">
+        <div className="flex items-center gap-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate('/settings')}
+            className="shrink-0"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
+          <div className="flex items-center gap-3">
+            <div className="p-3 bg-primary/10 rounded-xl">
+              <FileText className="w-6 h-6 text-primary" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold">{t('medical:health')}</h1>
+              <p className="text-muted-foreground">{t('medical:track_medications_tests')}</p>
+            </div>
+          </div>
         </div>
-        <div>
-          <h1 className="text-3xl font-bold">{t('medical:health')}</h1>
-          <p className="text-muted-foreground">{t('medical:track_medications_tests')}</p>
-        </div>
-      </div>
 
       <Tabs defaultValue="medications" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
@@ -999,7 +1011,8 @@ const MedicalHistory = () => {
           </Card>
         </TabsContent>
       </Tabs>
-    </div>
+      </div>
+    </SubscriptionGate>
   );
 };
 

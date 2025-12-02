@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight, Heart, Crown, Gift, Award, Sparkles, Users } from "lucide-react";
+import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight, Heart, Crown, Gift, Sparkles, Users, FileText, Zap } from "lucide-react";
 import { useSubscription } from "@/hooks/useSubscription";
 import { Badge } from "@/components/ui/badge";
 import { useState, useEffect } from "react";
@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 const SettingsMenu = () => {
   const navigate = useNavigate();
   const { tier, isAdmin, isVIP, hasFullAccess } = useSubscription();
-  const { t } = useTranslation(['settings', 'admin']);
+  const { t } = useTranslation(['settings', 'admin', 'premium', 'medical']);
   const [referralStats, setReferralStats] = useState({
     points: 0,
     totalReferrals: 0,
@@ -63,6 +63,28 @@ const SettingsMenu = () => {
       path: "/admin/vip",
       badge: "Admin",
       badgeVariant: "default" as const,
+    }] : []),
+    // Premium Features hub - only for VIP/Admin
+    ...(hasFullAccess ? [{
+      title: t('premium:premium_features_title'),
+      description: t('premium:premium_features_desc'),
+      icon: Zap,
+      iconBg: "bg-gradient-to-br from-primary/20 to-secondary/20",
+      iconColor: "text-primary",
+      path: "/premium",
+      badge: isAdmin ? "Admin" : "VIP",
+      badgeVariant: "default" as const,
+    }] : []),
+    // Medical/Health - only for VIP/Admin or upgraded users
+    ...(hasFullAccess ? [{
+      title: t('medical:health'),
+      description: t('medical:track_medications_tests'),
+      icon: FileText,
+      iconBg: "bg-teal-500/20",
+      iconColor: "text-teal-500",
+      path: "/medical",
+      badge: isAdmin ? "Admin" : "VIP",
+      badgeVariant: "secondary" as const,
     }] : []),
     {
       title: t('subscription'),

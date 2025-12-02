@@ -50,6 +50,7 @@ import messagesEN from './locales/en/messages.json';
 import notificationsEN from './locales/en/notifications.json';
 import errorsEN from './locales/en/errors.json';
 import adminEN from './locales/en/admin.json';
+import premiumEN from './locales/en/premium.json';
 
 // Spanish
 import commonES from './locales/es/common.json';
@@ -98,6 +99,7 @@ import unitsES from './locales/es/units.json';
 import a11yES from './locales/es/a11y.json';
 import pluralsES from './locales/es/plurals.json';
 import adminES from './locales/es/admin.json';
+import premiumES from './locales/es/premium.json';
 
 // Portuguese
 import commonPT from './locales/pt/common.json';
@@ -110,6 +112,7 @@ import unitsPT from './locales/pt/units.json';
 import a11yPT from './locales/pt/a11y.json';
 import pluralsPT from './locales/pt/plurals.json';
 import adminPT from './locales/pt/admin.json';
+import premiumPT from './locales/pt/premium.json';
 
 // French
 import commonFR from './locales/fr/common.json';
@@ -122,6 +125,7 @@ import unitsFR from './locales/fr/units.json';
 import a11yFR from './locales/fr/a11y.json';
 import pluralsFR from './locales/fr/plurals.json';
 import adminFR from './locales/fr/admin.json';
+import premiumFR from './locales/fr/premium.json';
 
 // German
 import commonDE from './locales/de/common.json';
@@ -134,6 +138,7 @@ import unitsDE from './locales/de/units.json';
 import a11yDE from './locales/de/a11y.json';
 import pluralsDE from './locales/de/plurals.json';
 import adminDE from './locales/de/admin.json';
+import premiumDE from './locales/de/premium.json';
 
 // Chinese
 import commonZH from './locales/zh/common.json';
@@ -146,6 +151,7 @@ import unitsZH from './locales/zh/units.json';
 import a11yZH from './locales/zh/a11y.json';
 import pluralsZH from './locales/zh/plurals.json';
 import adminZH from './locales/zh/admin.json';
+import premiumZH from './locales/zh/premium.json';
 
 // All namespaces - used for ns array and type safety
 export const allNamespaces = [
@@ -155,7 +161,7 @@ export const allNamespaces = [
   'calendar', 'records', 'voice', 'medical', 'timer', 'live', 'challenges', 
   'fundraisers', 'macros', 'install', 'search', 'creator', 'ai', 'measurements', 
   'trainer', 'session', 'bookmarks', 'challenges_page', 'feed', 'groups', 
-  'followers', 'schedule', 'seo', 'units', 'a11y', 'plurals', 'admin'
+  'followers', 'schedule', 'seo', 'units', 'a11y', 'plurals', 'admin', 'premium'
 ] as const;
 
 export type TranslationNamespace = typeof allNamespaces[number];
@@ -208,6 +214,7 @@ const resources = {
     notifications: notificationsEN,
     errors: errorsEN,
     admin: adminEN,
+    premium: premiumEN,
   },
   es: {
     common: commonES,
@@ -256,6 +263,7 @@ const resources = {
     a11y: a11yES,
     plurals: pluralsES,
     admin: adminES,
+    premium: premiumES,
   },
   pt: {
     common: commonPT,
@@ -268,6 +276,7 @@ const resources = {
     a11y: a11yPT,
     plurals: pluralsPT,
     admin: adminPT,
+    premium: premiumPT,
   },
   fr: {
     common: commonFR,
@@ -280,6 +289,7 @@ const resources = {
     a11y: a11yFR,
     plurals: pluralsFR,
     admin: adminFR,
+    premium: premiumFR,
   },
   de: {
     common: commonDE,
@@ -292,6 +302,7 @@ const resources = {
     a11y: a11yDE,
     plurals: pluralsDE,
     admin: adminDE,
+    premium: premiumDE,
   },
   zh: {
     common: commonZH,
@@ -304,6 +315,7 @@ const resources = {
     a11y: a11yZH,
     plurals: pluralsZH,
     admin: adminZH,
+    premium: premiumZH,
   },
 };
 
