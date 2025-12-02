@@ -39,7 +39,7 @@ interface WorkoutTemplate {
 }
 
 const WorkoutSchedule = () => {
-  const { t, i18n } = useTranslation('workout');
+  const { t, i18n } = useTranslation(['workout', 'schedule']);
   const { toast } = useToast();
   const navigate = useNavigate();
   
@@ -102,7 +102,7 @@ const WorkoutSchedule = () => {
       if (error) throw error;
       setScheduledWorkouts(data || []);
     } catch (error: any) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({ title: t('schedule:error'), description: error.message, variant: "destructive" });
     } finally {
       setLoading(false);
     }
@@ -132,7 +132,7 @@ const WorkoutSchedule = () => {
       if (!user) throw new Error("Please log in");
 
       if (!formData.title || !formData.date) {
-        toast({ title: "Error", description: "Title and date are required", variant: "destructive" });
+        toast({ title: t('schedule:error'), description: t('schedule:title_date_required'), variant: "destructive" });
         return;
       }
 
@@ -164,7 +164,7 @@ const WorkoutSchedule = () => {
           .eq("id", editingWorkout);
 
         if (error) throw error;
-        toast({ title: "Success!", description: "Workout updated" });
+        toast({ title: t('schedule:success'), description: t('schedule:workout_updated') });
       } else {
         const { error } = await supabase
           .from("fitness_events")
@@ -179,14 +179,14 @@ const WorkoutSchedule = () => {
           });
 
         if (error) throw error;
-        toast({ title: "Success!", description: "Workout scheduled" });
+        toast({ title: t('schedule:success'), description: t('schedule:workout_scheduled') });
       }
 
       setIsDialogOpen(false);
       setEditingWorkout(null);
       resetForm();
     } catch (error: any) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({ title: t('schedule:error'), description: error.message, variant: "destructive" });
     }
   };
 
@@ -218,10 +218,10 @@ const WorkoutSchedule = () => {
 
       if (insertError) throw insertError;
 
-      toast({ title: "Great job!", description: "Workout completed and saved to history" });
+      toast({ title: t('schedule:great_job'), description: t('schedule:workout_completed_saved') });
       fetchScheduledWorkouts();
     } catch (error: any) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({ title: t('schedule:error'), description: error.message, variant: "destructive" });
     }
   };
 
@@ -233,9 +233,9 @@ const WorkoutSchedule = () => {
         .eq("id", id);
 
       if (error) throw error;
-      toast({ title: "Deleted", description: "Workout removed from schedule" });
+      toast({ title: t('schedule:deleted'), description: t('schedule:workout_removed') });
     } catch (error: any) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({ title: t('schedule:error'), description: error.message, variant: "destructive" });
     }
   };
 
