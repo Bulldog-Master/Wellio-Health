@@ -91,9 +91,39 @@ const Navigation = () => {
             </span>
           </NavLink>
         ))}
+        
+        {/* Premium Hub - Mobile/Tablet bottom nav - Only for VIP/Admin/Upgraded */}
+        {hasPremiumAccess && (
+          <NavLink
+            to="/premium"
+            className={cn(
+              "group relative flex flex-col items-center gap-1 px-4 py-3 md:hidden",
+              "transition-all duration-300 ease-out"
+            )}
+            activeClassName="font-medium"
+            aria-label={`Navigate to ${t('premium:premium_hub')}`}
+          >
+            <div className="relative">
+              <Crown 
+                className={cn(
+                  "w-5 h-5 transition-all duration-300",
+                  "text-primary",
+                  "group-hover:drop-shadow-[0_0_8px_hsl(var(--primary))]"
+                )} 
+                aria-hidden="true" 
+              />
+            </div>
+            <span className={cn(
+              "text-xs transition-colors duration-300",
+              "text-muted-foreground group-hover:text-foreground"
+            )}>
+              {t('premium:premium_hub')}
+            </span>
+          </NavLink>
+        )}
       </div>
       
-      {/* Premium Features - Only visible to VIP/Admin/Upgraded users - Pushed to bottom on desktop */}
+      {/* Premium Features - Desktop sidebar bottom - Only for VIP/Admin/Upgraded */}
       {hasPremiumAccess && (
         <div className="hidden md:block md:mt-auto md:border-t md:border-border md:pt-4 md:pb-4">
           <NavLink
