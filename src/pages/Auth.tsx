@@ -7,6 +7,29 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Activity, Mail, Lock, User as UserIcon, Sparkles, Fingerprint, Eye, EyeOff, Shield, Key, HeartPulse, Zap, Gift, Users } from "lucide-react";
+
+// Pre-fetch and cache subscription status for instant Premium Hub display
+const prefetchSubscriptionStatus = async (userId: string) => {
+  try {
+    const { data: hasVIP } = await supabase.rpc('has_active_vip', { _user_id: userId });
+    const { data: hasAdmin } = await supabase.rpc('has_role', { _user_id: userId, _role: 'admin' });
+    
+    // Cache for instant display on navigation
+    localStorage.setItem('subscription_isVIP', String(hasVIP || false));
+    localStorage.setItem('subscription_isAdmin', String(hasAdmin || false));
+    
+    // Also fetch tier
+    const { data: subData } = await supabase
+      .from('subscriptions')
+      .select('tier')
+      .eq('user_id', userId)
+      .single();
+    
+    localStorage.setItem('subscription_tier', subData?.tier || 'free');
+  } catch (error) {
+    console.error('Error prefetching subscription:', error);
+  }
+};
 import authHero from "@/assets/auth-hero-new.jpg";
 import { z } from "zod";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -107,14 +130,17 @@ const Auth = () => {
     // Don't set up auth listener if user is resetting password
     if (isResettingPassword) return;
     
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session) {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (session?.user) {
+        // Pre-fetch subscription status before navigating for instant Premium Hub display
+        await prefetchSubscriptionStatus(session.user.id);
         navigate("/");
       }
     });
 
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (session?.user) {
+        await prefetchSubscriptionStatus(session.user.id);
         navigate("/");
       }
     });
