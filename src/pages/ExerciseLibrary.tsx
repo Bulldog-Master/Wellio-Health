@@ -10,7 +10,10 @@ import {
   Clock, 
   Dumbbell,
   Filter,
-  Video
+  Video,
+  ExternalLink,
+  Youtube,
+  X
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -22,6 +25,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 interface Exercise {
   id: string;
@@ -33,7 +42,10 @@ interface Exercise {
   equipment: string[];
   muscles: string[];
   thumbnailUrl: string;
-  videoUrl: string;
+  // Video sources - can have multiple types
+  youtubeId?: string;        // YouTube video ID for embeds
+  uploadedVideoUrl?: string; // Supabase storage URL
+  externalUrl?: string;      // Link to external fitness sites
 }
 
 const ExerciseLibrary = () => {
@@ -42,6 +54,7 @@ const ExerciseLibrary = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedDifficulty, setSelectedDifficulty] = useState("all");
+  const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
 
   // Sample exercise data - in production this would come from database
   // Using translation keys for muscles and equipment
@@ -56,7 +69,8 @@ const ExerciseLibrary = () => {
       equipment: [],
       muscles: ["chest", "triceps", "shoulders"],
       thumbnailUrl: "https://images.unsplash.com/photo-1598971639058-fab3c3109a00?w=400",
-      videoUrl: "#"
+      youtubeId: "IODxDxX7oi4", // Athlean-X push-up tutorial
+      externalUrl: "https://www.muscleandstrength.com/exercises/push-up.html"
     },
     {
       id: "2",
@@ -68,7 +82,8 @@ const ExerciseLibrary = () => {
       equipment: [],
       muscles: ["quadriceps", "glutes", "hamstrings"],
       thumbnailUrl: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400",
-      videoUrl: "#"
+      youtubeId: "ultWZbUMPL8", // Squat tutorial
+      externalUrl: "https://www.muscleandstrength.com/exercises/squat.html"
     },
     {
       id: "3",
@@ -80,7 +95,8 @@ const ExerciseLibrary = () => {
       equipment: [],
       muscles: ["core", "shoulders", "back"],
       thumbnailUrl: "https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=400",
-      videoUrl: "#"
+      youtubeId: "ASdvN_XEl_c", // Plank tutorial
+      externalUrl: "https://www.muscleandstrength.com/exercises/plank.html"
     },
     {
       id: "4",
@@ -92,7 +108,8 @@ const ExerciseLibrary = () => {
       equipment: ["barbell", "weights"],
       muscles: ["back", "glutes", "hamstrings", "core"],
       thumbnailUrl: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400",
-      videoUrl: "#"
+      youtubeId: "op9kVnSso6Q", // Deadlift tutorial
+      externalUrl: "https://www.muscleandstrength.com/exercises/deadlift.html"
     },
     {
       id: "5",
@@ -104,7 +121,8 @@ const ExerciseLibrary = () => {
       equipment: [],
       muscles: ["full_body"],
       thumbnailUrl: "https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?w=400",
-      videoUrl: "#"
+      youtubeId: "dZgVxmf6jkA", // Burpees tutorial
+      externalUrl: "https://www.muscleandstrength.com/exercises/burpee.html"
     },
     {
       id: "6",
@@ -116,7 +134,8 @@ const ExerciseLibrary = () => {
       equipment: ["yoga_mat"],
       muscles: ["full_body"],
       thumbnailUrl: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400",
-      videoUrl: "#"
+      youtubeId: "73sjOu0g58M", // Sun salutation tutorial
+      externalUrl: "https://www.yogajournal.com/poses/sun-salutation/"
     }
   ];
 
@@ -231,6 +250,7 @@ const ExerciseLibrary = () => {
             <Card 
               key={exercise.id} 
               className="overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer group"
+              onClick={() => setSelectedExercise(exercise)}
             >
               <div className="relative aspect-video">
                 <img 
@@ -246,6 +266,19 @@ const ExerciseLibrary = () => {
                 <Badge className={`absolute top-2 right-2 ${getDifficultyColor(exercise.difficulty)}`}>
                   {t(exercise.difficulty)}
                 </Badge>
+                {/* Video source indicator */}
+                <div className="absolute top-2 left-2 flex gap-1">
+                  {exercise.youtubeId && (
+                    <Badge variant="secondary" className="bg-red-600 text-white text-xs">
+                      <Youtube className="h-3 w-3" />
+                    </Badge>
+                  )}
+                  {exercise.externalUrl && (
+                    <Badge variant="secondary" className="bg-blue-600 text-white text-xs">
+                      <ExternalLink className="h-3 w-3" />
+                    </Badge>
+                  )}
+                </div>
               </div>
               <div className="p-4">
                 <h3 className="font-semibold text-lg mb-2">{t(`exercises.${exercise.nameKey}`)}</h3>
@@ -279,6 +312,93 @@ const ExerciseLibrary = () => {
           <p className="text-muted-foreground">{t('try_different_filters')}</p>
         </Card>
       )}
+
+      {/* Video Player Dialog */}
+      <Dialog open={!!selectedExercise} onOpenChange={() => setSelectedExercise(null)}>
+        <DialogContent className="max-w-4xl">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Video className="h-5 w-5" />
+              {selectedExercise && t(`exercises.${selectedExercise.nameKey}`)}
+            </DialogTitle>
+          </DialogHeader>
+          
+          {selectedExercise && (
+            <div className="space-y-4">
+              {/* YouTube Embed */}
+              {selectedExercise.youtubeId && (
+                <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={`https://www.youtube.com/embed/${selectedExercise.youtubeId}`}
+                    title={t(`exercises.${selectedExercise.nameKey}`)}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              )}
+
+              {/* Uploaded Video */}
+              {selectedExercise.uploadedVideoUrl && (
+                <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                  <video
+                    controls
+                    className="w-full h-full"
+                    src={selectedExercise.uploadedVideoUrl}
+                  >
+                    {t('videos:watch_tutorial')}
+                  </video>
+                </div>
+              )}
+
+              {/* Exercise Info */}
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <h4 className="font-medium mb-2">{t('muscles_targeted')}</h4>
+                  <div className="flex flex-wrap gap-1">
+                    {selectedExercise.muscles.map(muscle => (
+                      <Badge key={muscle} variant="outline">
+                        {t(`muscles.${muscle}`)}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2">{t('equipment_needed')}</h4>
+                  <p className="text-muted-foreground">
+                    {selectedExercise.equipment.length > 0 
+                      ? selectedExercise.equipment.map(eq => t(`equipment.${eq}`)).join(", ")
+                      : t('no_equipment')}
+                  </p>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-2 pt-2">
+                {selectedExercise.externalUrl && (
+                  <Button 
+                    variant="outline" 
+                    className="flex-1"
+                    onClick={() => window.open(selectedExercise.externalUrl, '_blank')}
+                  >
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    {t('related_exercises')}
+                  </Button>
+                )}
+                <Button 
+                  variant="secondary" 
+                  className="flex-1"
+                  onClick={() => setSelectedExercise(null)}
+                >
+                  {t('common:close')}
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 
