@@ -172,12 +172,12 @@ const News = () => {
   };
 
   const newsCategories = [
+    { id: 'latest', icon: Newspaper, titleKey: 'news:categories.latest_news', descKey: 'news:categories.latest_news_desc', color: 'text-blue-500', bgColor: 'bg-blue-500/10' },
     { id: 'biohacker', icon: Zap, titleKey: 'news:categories.biohacker', descKey: 'news:categories.biohacker_desc', color: 'text-violet-500', bgColor: 'bg-violet-500/10' },
     { id: 'bodybuilding', icon: Trophy, titleKey: 'news:categories.bodybuilding', descKey: 'news:categories.bodybuilding_desc', color: 'text-purple-500', bgColor: 'bg-purple-500/10' },
     { id: 'crossfit', icon: Dumbbell, titleKey: 'news:categories.crossfit', descKey: 'news:categories.crossfit_desc', color: 'text-orange-500', bgColor: 'bg-orange-500/10' },
     { id: 'cycling', icon: Bike, titleKey: 'news:categories.cycling', descKey: 'news:categories.cycling_desc', color: 'text-yellow-500', bgColor: 'bg-yellow-500/10' },
     { id: 'global', icon: Globe, titleKey: 'news:categories.global_events', descKey: 'news:categories.global_events_desc', color: 'text-emerald-500', bgColor: 'bg-emerald-500/10' },
-    { id: 'latest', icon: Newspaper, titleKey: 'news:categories.latest_news', descKey: 'news:categories.latest_news_desc', color: 'text-blue-500', bgColor: 'bg-blue-500/10' },
     { id: 'marathons', icon: Footprints, titleKey: 'news:categories.marathons', descKey: 'news:categories.marathons_desc', color: 'text-green-500', bgColor: 'bg-green-500/10' },
     { id: 'medical', icon: Stethoscope, titleKey: 'news:categories.medical', descKey: 'news:categories.medical_desc', color: 'text-teal-500', bgColor: 'bg-teal-500/10' },
     { id: 'mma', icon: Swords, titleKey: 'news:categories.mma', descKey: 'news:categories.mma_desc', color: 'text-red-500', bgColor: 'bg-red-500/10' },
