@@ -78,7 +78,7 @@ const SettingsMenu = () => {
     {
       title: t('subscription'),
       description: hasFullAccess 
-        ? (isVIP ? 'VIP Access' : 'Admin Access')
+        ? (isVIP ? t('common:vip_access') : t('common:admin_access'))
         : t('subscription_desc', { tier: tier.toUpperCase() }),
       icon: Crown,
       iconBg: "bg-primary/20",
