@@ -141,9 +141,11 @@ Format each recommendation as:
 
     const data = await response.json();
     const recommendations = data.choices[0].message.content;
+    
+    console.log('[ai-workout-recommendations] AI response received, storing...');
 
     // Store recommendations using admin client to bypass RLS
-    const { error: insertError } = await supabaseAdmin
+    const { data: insertData, error: insertError } = await supabaseAdmin
       .from('ai_insights')
       .insert({
         user_id: user.id,
@@ -154,7 +156,10 @@ Format each recommendation as:
           recent_workouts: workouts?.length || 0,
           personal_records: personalRecords?.length || 0
         }
-      });
+      })
+      .select();
+    
+    console.log('[ai-workout-recommendations] Insert result:', insertData, 'Error:', insertError);
     
     if (insertError) {
       console.error('Error storing workout recommendations:', insertError);
