@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, Newspaper, Trophy, Dumbbell, Bike, Footprints, Waves, Mountain, Heart, Swords, Globe, Flame, Medal, Timer, Calendar, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowLeft, Newspaper, Trophy, Dumbbell, Bike, Footprints, Waves, Mountain, Heart, Swords, Globe, Flame, Medal, Timer, Calendar, ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -166,6 +166,10 @@ const News = () => {
     }
   };
 
+  const handleNewsClick = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <>
       <SEOHead 
@@ -244,22 +248,27 @@ const News = () => {
                       <CardContent className="space-y-2 pt-0">
                         {/* News Items */}
                         <div className="space-y-2 border-t pt-3">
-                          {[1, 2, 3].map((num) => (
-                            <div 
-                              key={num}
-                              className="flex items-start gap-2 p-2 rounded-lg hover:bg-muted/50 transition-colors"
-                            >
-                              <Calendar className={`h-4 w-4 mt-0.5 ${category.color} flex-shrink-0`} />
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium">
-                                  {t(`news:items.${category.itemsKey}.item${num}`)}
-                                </p>
-                                <p className="text-xs text-muted-foreground">
-                                  {t(`news:dates.${category.itemsKey}.item${num}`)}
-                                </p>
-                              </div>
-                            </div>
-                          ))}
+                          {[1, 2, 3].map((num) => {
+                            const url = t(`news:urls.${category.itemsKey}.item${num}`);
+                            return (
+                              <button
+                                key={num}
+                                onClick={() => handleNewsClick(url)}
+                                className="w-full flex items-start gap-2 p-2 rounded-lg hover:bg-muted/50 transition-colors text-left group"
+                              >
+                                <Calendar className={`h-4 w-4 mt-0.5 ${category.color} flex-shrink-0`} />
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-medium group-hover:text-primary transition-colors">
+                                    {t(`news:items.${category.itemsKey}.item${num}`)}
+                                  </p>
+                                  <p className="text-xs text-muted-foreground">
+                                    {t(`news:dates.${category.itemsKey}.item${num}`)}
+                                  </p>
+                                </div>
+                                <ExternalLink className="h-3 w-3 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-1" />
+                              </button>
+                            );
+                          })}
                         </div>
                       </CardContent>
                     </CollapsibleContent>
