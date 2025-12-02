@@ -29,8 +29,8 @@ Keep responses concise but informative. Be encouraging and supportive. If asked 
       { role: 'user', content: message }
     ];
 
-    // Use Lovable AI endpoint
-    const response = await fetch('https://api.lovable.dev/v1/ai/chat', {
+    // Use Lovable AI Gateway
+    const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -39,7 +39,6 @@ Keep responses concise but informative. Be encouraging and supportive. If asked 
       body: JSON.stringify({
         model: 'google/gemini-2.5-flash',
         messages,
-        max_tokens: 1000
       }),
     });
 
