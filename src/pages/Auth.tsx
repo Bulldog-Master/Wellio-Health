@@ -130,17 +130,18 @@ const Auth = () => {
     // Don't set up auth listener if user is resetting password
     if (isResettingPassword) return;
     
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (session?.user) {
-        // Pre-fetch subscription status before navigating for instant Premium Hub display
-        await prefetchSubscriptionStatus(session.user.id);
+        // Fire prefetch in background (non-blocking) for instant Premium Hub display
+        prefetchSubscriptionStatus(session.user.id);
         navigate("/");
       }
     });
 
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
-        await prefetchSubscriptionStatus(session.user.id);
+        // Fire prefetch in background (non-blocking)
+        prefetchSubscriptionStatus(session.user.id);
         navigate("/");
       }
     });
