@@ -144,9 +144,11 @@ Format each suggestion as:
 
     const data = await response.json();
     const suggestions = data.choices[0].message.content;
+    
+    console.log('[ai-meal-suggestions] AI response received, storing...');
 
     // Store suggestions using admin client to bypass RLS
-    const { error: insertError } = await supabaseAdmin
+    const { data: insertData, error: insertError } = await supabaseAdmin
       .from('ai_insights')
       .insert({
         user_id: user.id,
@@ -158,7 +160,10 @@ Format each suggestion as:
           avg_daily_protein: Math.round(totalProtein / days),
           recent_meals: nutritionLogs?.length || 0
         }
-      });
+      })
+      .select();
+    
+    console.log('[ai-meal-suggestions] Insert result:', insertData, 'Error:', insertError);
     
     if (insertError) {
       console.error('Error storing meal suggestions:', insertError);
