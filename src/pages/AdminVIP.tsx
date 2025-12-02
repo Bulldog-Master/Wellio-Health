@@ -13,6 +13,7 @@ import { toast } from 'sonner';
 import { ArrowLeft, Crown, UserPlus, Trash2, Shield, Loader2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { format } from 'date-fns';
+import { UserSearchCombobox } from '@/components/UserSearchCombobox';
 
 interface VIPPassWithProfile {
   id: string;
@@ -198,14 +199,14 @@ const AdminVIP = () => {
         </h2>
         <form onSubmit={handleGrantVIP} className="space-y-4">
           <div>
-            <Label htmlFor="userEmail">{t('admin:username_label')}</Label>
-            <Input
-              id="userEmail"
-              value={userEmail}
-              onChange={(e) => setUserEmail(e.target.value)}
-              placeholder={t('admin:username_placeholder')}
-              className="mt-1"
-            />
+            <Label>{t('admin:username_label')}</Label>
+            <div className="mt-1">
+              <UserSearchCombobox
+                value={userEmail}
+                onChange={setUserEmail}
+                placeholder={t('admin:username_placeholder')}
+              />
+            </div>
           </div>
           
           <div>
