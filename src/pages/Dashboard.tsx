@@ -13,6 +13,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useSubscription } from "@/hooks/useSubscription";
 import { UpgradePrompt } from "@/components/UpgradePrompt";
+import AdBanner from "@/components/AdBanner";
 import hero3d from "@/assets/hero-diverse.jpg";
 import { useTranslation } from "react-i18next";
 
@@ -167,6 +168,9 @@ const Dashboard = () => {
           </div>
         </div>
       )}
+
+      {/* Ad Banner */}
+      <AdBanner placement="dashboard" variant="banner" />
 
       {/* Dashboard Mini-Charts */}
       <DashboardCharts />

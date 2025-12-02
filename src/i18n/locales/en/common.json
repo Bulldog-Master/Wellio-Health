@@ -1,4 +1,13 @@
 {
+  "nav": {
+    "activity": "Activity",
+    "connect": "Connect",
+    "food": "Food",
+    "fundraisers": "Fundraisers",
+    "locations": "Locations",
+    "news": "News",
+    "sponsors": "Sponsors"
+  },
   "app_name": "Wellio",
   "loading": "Loading...",
   "save": "Save",
@@ -266,5 +275,7 @@
   "add": "Add",
   "saved": "Saved successfully",
   "deleted": "Deleted successfully",
-  "no_data": "No data available"
+  "no_data": "No data available",
+  "active": "Active",
+  "inactive": "Inactive"
 }

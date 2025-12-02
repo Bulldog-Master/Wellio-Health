@@ -48,5 +48,14 @@
   "notifications_description": "Mantente actualizado en tu viaje fitness con alertas, recordatorios y actualizaciones sociales.",
 
   "not_found_title": "Página No Encontrada",
-  "not_found_description": "La página que buscas no existe. Regresa al inicio de Wellio."
+  "not_found_description": "La página que buscas no existe. Regresa al inicio de Wellio.",
+
+  "sponsors": {
+    "title": "Nuestros Patrocinadores - Wellio",
+    "description": "Conoce a nuestros valiosos patrocinadores que apoyan la comunidad fitness de Wellio."
+  },
+  "locations": {
+    "title": "Ubicaciones Fitness - Wellio",
+    "description": "Encuentra gimnasios, estudios y centros de fitness en todo el mundo con reseñas y direcciones."
+  }
 }
