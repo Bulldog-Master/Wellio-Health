@@ -13,23 +13,44 @@ serve(async (req) => {
   }
 
   try {
-    const supabaseClient = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
-      {
-        global: {
-          headers: { Authorization: req.headers.get('Authorization')! },
-        },
-      }
-    );
+    const supabaseUrl = Deno.env.get('SUPABASE_URL') ?? '';
+    const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    const authHeader = req.headers.get('Authorization');
+    
+    if (!serviceRoleKey) {
+      throw new Error('Missing SUPABASE_SERVICE_ROLE_KEY');
+    }
 
-    const { data: { user } } = await supabaseClient.auth.getUser();
-    if (!user) {
+    // Create admin client to verify the JWT
+    const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey);
+    
+    // Extract JWT from Authorization header
+    const token = authHeader?.replace('Bearer ', '');
+    if (!token) {
+      return new Response(
+        JSON.stringify({ error: 'No authorization token' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const { data: { user }, error: userError } = await supabaseAdmin.auth.getUser(token);
+    if (!user || userError) {
       return new Response(
         JSON.stringify({ error: 'Unauthorized' }),
         { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
+    
+    // Create a client for data access
+    const supabaseClient = createClient(
+      supabaseUrl,
+      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+      {
+        global: {
+          headers: { Authorization: authHeader! },
+        },
+      }
+    );
 
     // Fetch user's workout history, fitness goals, and profile
     const { data: profile } = await supabaseClient
