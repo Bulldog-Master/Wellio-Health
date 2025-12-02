@@ -545,6 +545,61 @@ console.log(JSON.stringify(frenchTemplate, null, 2));
 - Hard refresh the browser (Ctrl+Shift+R)
 - Check that i18n config was rebuilt
 
+### ⚠️ COMMON ISSUE: Translations Show English Even With ES Selected
+
+**Problem:** Page shows English text even though Spanish is selected and translations exist in the JSON file.
+
+**Root Cause:** The component's `useTranslation` hook doesn't include the namespace where the translations are stored.
+
+**Example Fix:**
+```typescript
+// ❌ WRONG - Missing the 'premium' namespace where keys actually live
+const { t } = useTranslation(['subscription', 'common']);
+
+// ✅ CORRECT - Include all namespaces that contain keys you're using
+const { t } = useTranslation(['premium', 'subscription', 'common']);
+```
+
+**How to Debug:**
+1. Open browser DevTools → Console
+2. Look for `⚠️ MISSING TRANSLATION` warnings
+3. Check which namespace the missing key should be in
+4. Add that namespace to the `useTranslation` array
+
+**Best Practice - Namespace Order:**
+- Put the most specific/primary namespace FIRST in the array
+- The first namespace is the default for unqualified keys
+- Use explicit namespace prefixes for clarity: `t('premium:key_name')`
+
+```typescript
+// If page primarily uses premium keys:
+const { t } = useTranslation(['premium', 'subscription', 'common', 'medical']);
+
+// Then use keys like:
+t('premium_features_title')     // Looks in 'premium' first (default)
+t('subscription:pro_plan')      // Explicitly from subscription namespace
+t('common:save')                // Explicitly from common namespace
+```
+
+### Translation Namespace Checklist
+
+When creating or modifying a page, ensure:
+
+1. ✅ **All required namespaces are imported** in `useTranslation(['ns1', 'ns2', ...])`
+2. ✅ **Primary namespace is FIRST** in the array (used as default)
+3. ✅ **Translation keys exist** in the correct JSON file for each namespace
+4. ✅ **Keys exist in ALL languages** (en, es, etc.)
+5. ✅ **No `defaultValue` props** hiding missing translations in production
+
+**Warning about defaultValue:**
+```typescript
+// ❌ This HIDES missing translations - you won't notice the problem!
+t('missing_key', { defaultValue: 'Fallback text' })
+
+// ✅ Better - will show warning in console if key is missing
+t('premium:missing_key')
+```
+
 ---
 
 *Last Updated: December 2024*
