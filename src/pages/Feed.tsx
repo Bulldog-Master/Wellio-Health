@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Heart, MessageCircle, Send, Image as ImageIcon, User, X, Hash, TrendingUp, Share2, Copy, Check, Bookmark, Edit, MoreVertical, Flag, UserX, ArrowLeft, Users, Gift, Sparkles } from "lucide-react";
+import { Heart, MessageCircle, Send, Image as ImageIcon, User, X, Hash, TrendingUp, Share2, Copy, Check, Bookmark, Edit, MoreVertical, Flag, UserX, ArrowLeft, Users, Gift, Sparkles, Video, Crown, Lock } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -21,19 +21,24 @@ import { MessagesSidebar } from "@/components/MessagesSidebar";
 import { LazyImage } from "@/components/LazyImage";
 import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
 import { useTranslation } from "react-i18next";
+import { useSubscription } from "@/hooks/useSubscription";
 
 const Feed = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { t } = useTranslation(['social', 'feed']);
+  const { hasFullAccess, hasFeature } = useSubscription();
+  const canPostVideos = hasFullAccess || hasFeature('video_posts');
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedHashtag = searchParams.get("hashtag");
   const [postContent, setPostContent] = useState("");
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
   const [commentContent, setCommentContent] = useState("");
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
+  const [uploadedVideo, setUploadedVideo] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [videoPreview, setVideoPreview] = useState<string | null>(null);
   const [copiedPostId, setCopiedPostId] = useState<string | null>(null);
   const [editingPostId, setEditingPostId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState("");
@@ -43,6 +48,7 @@ const Feed = () => {
   const [reportDetails, setReportDetails] = useState("");
   const [animatingReaction, setAnimatingReaction] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const videoInputRef = useRef<HTMLInputElement>(null);
   const [showReferralBanner, setShowReferralBanner] = useState(() => {
     return localStorage.getItem('hideReferralBanner') !== 'true';
   });
@@ -245,10 +251,33 @@ const Feed = () => {
       }
 
       let mediaUrl = null;
+      let postType = "text";
 
+      // Upload video if present (premium only)
+      if (uploadedVideo) {
+        const fileRateLimit = await rateLimiter.check(`upload:${user.id}`, RATE_LIMITS.FILE_UPLOAD);
+        if (!fileRateLimit.allowed) {
+          throw new Error(`Uploading files too quickly. Please wait ${Math.ceil((fileRateLimit.resetAt.getTime() - Date.now()) / 60000)} minutes.`);
+        }
+
+        const fileExt = uploadedVideo.name.split(".").pop();
+        const fileName = `${user.id}/${Date.now()}.${fileExt}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from("post-images")
+          .upload(fileName, uploadedVideo);
+
+        if (uploadError) throw uploadError;
+
+        const { data } = supabase.storage
+          .from("post-images")
+          .getPublicUrl(fileName);
+
+        mediaUrl = data.publicUrl;
+        postType = "video";
+      }
       // Upload image if present
-      if (uploadedImage) {
-        // Rate limit file uploads separately
+      else if (uploadedImage) {
         const fileRateLimit = await rateLimiter.check(`upload:${user.id}`, RATE_LIMITS.FILE_UPLOAD);
         if (!fileRateLimit.allowed) {
           throw new Error(`Uploading files too quickly. Please wait ${Math.ceil((fileRateLimit.resetAt.getTime() - Date.now()) / 60000)} minutes.`);
@@ -268,6 +297,7 @@ const Feed = () => {
           .getPublicUrl(fileName);
 
         mediaUrl = data.publicUrl;
+        postType = "image";
       }
 
       const { error } = await supabase
@@ -275,7 +305,7 @@ const Feed = () => {
         .insert({
           user_id: user.id,
           content: postContent,
-          post_type: mediaUrl ? "image" : "text",
+          post_type: postType,
           media_url: mediaUrl,
         });
 
@@ -285,7 +315,9 @@ const Feed = () => {
       queryClient.invalidateQueries({ queryKey: ["feed-posts"] });
       setPostContent("");
       setUploadedImage(null);
+      setUploadedVideo(null);
       setImagePreview(null);
+      setVideoPreview(null);
       toast({ title: t('feed:post_created') });
     },
   });
@@ -436,6 +468,36 @@ const Feed = () => {
     setImagePreview(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
+    }
+  };
+
+  const handleVideoSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 50 * 1024 * 1024) {
+        toast({
+          title: t('feed:file_too_large'),
+          description: t('feed:select_video_under'),
+          variant: "destructive",
+        });
+        return;
+      }
+      setUploadedVideo(file);
+      setUploadedImage(null);
+      setImagePreview(null);
+      const videoURL = URL.createObjectURL(file);
+      setVideoPreview(videoURL);
+    }
+  };
+
+  const handleRemoveVideo = () => {
+    setUploadedVideo(null);
+    if (videoPreview) {
+      URL.revokeObjectURL(videoPreview);
+    }
+    setVideoPreview(null);
+    if (videoInputRef.current) {
+      videoInputRef.current.value = "";
     }
   };
 
@@ -753,7 +815,7 @@ const Feed = () => {
             <div className="relative">
               <img
                 src={imagePreview}
-                alt={t('upload_preview')}
+                alt={t('feed:upload_preview')}
                 className="w-full max-h-64 object-cover rounded-lg"
               />
               <Button
@@ -767,26 +829,75 @@ const Feed = () => {
             </div>
           )}
 
-          <div className="flex justify-between items-center">
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              onChange={handleImageSelect}
-              className="hidden"
-            />
-            <Button 
-              variant="ghost" 
-              size="sm"
-              onClick={() => fileInputRef.current?.click()}
-              disabled={createPost.isPending}
-            >
-              <ImageIcon className="w-4 h-4 mr-2" />
-              {t('add_photo')}
-            </Button>
+          {videoPreview && (
+            <div className="relative">
+              <video
+                src={videoPreview}
+                controls
+                className="w-full max-h-64 rounded-lg"
+              />
+              <Button
+                variant="destructive"
+                size="icon"
+                className="absolute top-2 right-2"
+                onClick={handleRemoveVideo}
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+          )}
+
+          <div className="flex justify-between items-center gap-2">
+            <div className="flex gap-2">
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleImageSelect}
+                className="hidden"
+              />
+              <input
+                ref={videoInputRef}
+                type="file"
+                accept="video/*"
+                onChange={handleVideoSelect}
+                className="hidden"
+              />
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={createPost.isPending || !!uploadedVideo}
+              >
+                <ImageIcon className="w-4 h-4 mr-2" />
+                {t('feed:add_photo')}
+              </Button>
+              {canPostVideos ? (
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => videoInputRef.current?.click()}
+                  disabled={createPost.isPending || !!uploadedImage}
+                >
+                  <Video className="w-4 h-4 mr-2" />
+                  {t('feed:add_video')}
+                </Button>
+              ) : (
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => navigate('/subscription')}
+                  className="text-muted-foreground"
+                >
+                  <Video className="w-4 h-4 mr-2" />
+                  <Crown className="w-3 h-3 mr-1 text-primary" />
+                  {t('feed:add_video')}
+                </Button>
+              )}
+            </div>
             <Button
               onClick={() => createPost.mutate()}
-              disabled={(!postContent.trim() && !uploadedImage) || createPost.isPending}
+              disabled={(!postContent.trim() && !uploadedImage && !uploadedVideo) || createPost.isPending}
             >
               <Send className="w-4 h-4 mr-2" />
               {createPost.isPending ? t('posting') : t('post')}
@@ -883,7 +994,13 @@ const Feed = () => {
                     <p className="whitespace-pre-wrap">{renderContentWithHashtags(post.content)}</p>
                   )}
 
-              {post.media_url && (
+              {post.media_url && post.post_type === 'video' ? (
+                <video
+                  src={post.media_url}
+                  controls
+                  className="rounded-lg w-full max-h-96"
+                />
+              ) : post.media_url && (
                 <LazyImage
                   src={post.media_url}
                   alt="Post media"

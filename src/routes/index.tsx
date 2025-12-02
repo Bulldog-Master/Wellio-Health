@@ -83,6 +83,7 @@ const Subscription = lazy(() => import("@/pages/Subscription"));
 const AdminVIP = lazy(() => import("@/pages/AdminVIP"));
 const PremiumFeatures = lazy(() => import("@/pages/PremiumFeatures"));
 const ExerciseLibrary = lazy(() => import("@/pages/ExerciseLibrary"));
+const FitnessChat = lazy(() => import("@/pages/FitnessChat"));
 
 /**
  * Application route configuration
@@ -189,6 +190,7 @@ export const AppRoutes = () => (
     <Route path="/admin/vip" element={<RouteErrorBoundary><ProtectedRoute><Layout><AdminVIP /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/premium" element={<RouteErrorBoundary><ProtectedRoute><Layout><PremiumFeatures /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/exercise-library" element={<RouteErrorBoundary><ProtectedRoute><Layout><ExerciseLibrary /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/fitness-chat" element={<RouteErrorBoundary><ProtectedRoute><Layout><FitnessChat /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     
     {/* 404 */}
     <Route path="*" element={<NotFound />} />

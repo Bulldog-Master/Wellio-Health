@@ -1,0 +1,21 @@
+{
+  "fitness_assistant": "Assistant Fitness",
+  "fitness_assistant_desc": "Votre coach fitness alimenté par l'IA",
+  "ask_anything": "Posez-moi des questions sur le fitness, la nutrition ou les entraînements...",
+  "type_message": "Tapez votre message...",
+  "send": "Envoyer",
+  "thinking": "Réflexion...",
+  "welcome_message": "Salut ! Je suis votre assistant fitness IA. Posez-moi des questions sur les entraînements, la nutrition, les conseils de forme ou les objectifs fitness !",
+  "example_questions": "Questions Exemples",
+  "example_1": "Quelle est une bonne routine d'entraînement pour les débutants ?",
+  "example_2": "Combien de protéines devrais-je manger par jour ?",
+  "example_3": "Quels exercices ciblent le core ?",
+  "example_4": "Comment améliorer mon endurance en course ?",
+  "clear_chat": "Effacer le chat",
+  "chat_cleared": "Chat effacé",
+  "error_sending": "Échec de l'envoi du message",
+  "premium_chat": "Chat IA Premium",
+  "unlock_ai_chat": "Obtenez des conseils fitness personnalisés de notre assistant IA",
+  "ai_assistant": "Assistant IA",
+  "you": "Vous"
+}
