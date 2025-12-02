@@ -217,7 +217,7 @@ const LiveWorkoutSessions = () => {
                   id="title"
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  placeholder="HIIT Cardio Blast"
+                  placeholder={t('live:title_placeholder')}
                 />
               </div>
 
@@ -227,7 +227,7 @@ const LiveWorkoutSessions = () => {
                   id="description"
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="High intensity interval training session..."
+                  placeholder={t('live:description_placeholder')}
                 />
               </div>
 
