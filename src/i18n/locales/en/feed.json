@@ -8,6 +8,7 @@
   "user_blocked": "User blocked",
   "file_too_large": "File too large",
   "select_image_under": "Please select an image under 5MB",
+  "select_video_under": "Please select a video under 50MB",
   "error": "Error",
   "whats_on_mind": "What's on your mind?",
   "post": "Post",
@@ -24,5 +25,11 @@
   "add_comment": "Add a comment...",
   "send": "Send",
   "filter_hashtag": "Filtering by",
-  "clear_filter": "Clear filter"
+  "clear_filter": "Clear filter",
+  "add_photo": "Add Photo",
+  "add_video": "Add Video",
+  "upload_preview": "Upload preview",
+  "video_posts_premium": "Video Posts",
+  "video_posts_premium_desc": "Share workout videos with your followers",
+  "upgrade_for_video": "Upgrade to post videos"
 }

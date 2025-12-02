@@ -117,6 +117,7 @@ import adminPT from './locales/pt/admin.json';
 import premiumPT from './locales/pt/premium.json';
 import subscriptionPT from './locales/pt/subscription.json';
 import videosPT from './locales/pt/videos.json';
+import feedPT from './locales/pt/feed.json';
 
 // French
 import commonFR from './locales/fr/common.json';
@@ -132,6 +133,7 @@ import adminFR from './locales/fr/admin.json';
 import premiumFR from './locales/fr/premium.json';
 import subscriptionFR from './locales/fr/subscription.json';
 import videosFR from './locales/fr/videos.json';
+import feedFR from './locales/fr/feed.json';
 
 // German
 import commonDE from './locales/de/common.json';
@@ -147,6 +149,7 @@ import adminDE from './locales/de/admin.json';
 import premiumDE from './locales/de/premium.json';
 import subscriptionDE from './locales/de/subscription.json';
 import videosDE from './locales/de/videos.json';
+import feedDE from './locales/de/feed.json';
 
 // Chinese
 import commonZH from './locales/zh/common.json';
@@ -162,6 +165,7 @@ import adminZH from './locales/zh/admin.json';
 import premiumZH from './locales/zh/premium.json';
 import subscriptionZH from './locales/zh/subscription.json';
 import videosZH from './locales/zh/videos.json';
+import feedZH from './locales/zh/feed.json';
 
 // All namespaces - used for ns array and type safety
 export const allNamespaces = [
@@ -291,6 +295,7 @@ const resources = {
     premium: premiumPT,
     subscription: subscriptionPT,
     videos: videosPT,
+    feed: feedPT,
   },
   fr: {
     common: commonFR,
@@ -306,6 +311,7 @@ const resources = {
     premium: premiumFR,
     subscription: subscriptionFR,
     videos: videosFR,
+    feed: feedFR,
   },
   de: {
     common: commonDE,
@@ -321,6 +327,7 @@ const resources = {
     premium: premiumDE,
     subscription: subscriptionDE,
     videos: videosDE,
+    feed: feedDE,
   },
   zh: {
     common: commonZH,
@@ -336,6 +343,7 @@ const resources = {
     premium: premiumZH,
     subscription: subscriptionZH,
     videos: videosZH,
+    feed: feedZH,
   },
 };
 

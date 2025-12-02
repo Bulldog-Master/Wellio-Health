@@ -1,0 +1,21 @@
+{
+  "fitness_assistant": "健身助手",
+  "fitness_assistant_desc": "您的AI健身教练",
+  "ask_anything": "问我任何关于健身、营养或锻炼的问题...",
+  "type_message": "输入您的消息...",
+  "send": "发送",
+  "thinking": "思考中...",
+  "welcome_message": "你好！我是你的AI健身助手。问我任何关于锻炼、营养、动作技巧或健身目标的问题！",
+  "example_questions": "示例问题",
+  "example_1": "适合初学者的锻炼计划是什么？",
+  "example_2": "我每天应该摄入多少蛋白质？",
+  "example_3": "哪些运动可以锻炼核心？",
+  "example_4": "如何提高我的跑步耐力？",
+  "clear_chat": "清除聊天",
+  "chat_cleared": "聊天已清除",
+  "error_sending": "发送消息失败",
+  "premium_chat": "高级AI聊天",
+  "unlock_ai_chat": "从我们的AI助手获取个性化的健身建议",
+  "ai_assistant": "AI助手",
+  "you": "你"
+}

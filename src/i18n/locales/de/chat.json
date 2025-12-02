@@ -1,0 +1,21 @@
+{
+  "fitness_assistant": "Fitness-Assistent",
+  "fitness_assistant_desc": "Ihr KI-gestützter Fitness-Coach",
+  "ask_anything": "Fragen Sie mich alles über Fitness, Ernährung oder Workouts...",
+  "type_message": "Nachricht eingeben...",
+  "send": "Senden",
+  "thinking": "Denke nach...",
+  "welcome_message": "Hallo! Ich bin Ihr KI-Fitness-Assistent. Fragen Sie mich alles über Workouts, Ernährung, Form-Tipps oder Fitness-Ziele!",
+  "example_questions": "Beispielfragen",
+  "example_1": "Was ist eine gute Trainingsroutine für Anfänger?",
+  "example_2": "Wie viel Protein sollte ich täglich essen?",
+  "example_3": "Welche Übungen trainieren den Core?",
+  "example_4": "Wie kann ich meine Laufausdauer verbessern?",
+  "clear_chat": "Chat löschen",
+  "chat_cleared": "Chat gelöscht",
+  "error_sending": "Nachricht konnte nicht gesendet werden",
+  "premium_chat": "Premium KI-Chat",
+  "unlock_ai_chat": "Erhalten Sie personalisierte Fitness-Beratung von unserem KI-Assistenten",
+  "ai_assistant": "KI-Assistent",
+  "you": "Sie"
+}
