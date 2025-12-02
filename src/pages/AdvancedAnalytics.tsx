@@ -3,13 +3,16 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AdvancedMetrics } from "@/components/AdvancedMetrics";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Activity, TrendingUp, Target, Zap } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Activity, TrendingUp, Target, Zap, ArrowLeft } from "lucide-react";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ScatterChart, Scatter } from "recharts";
 import { SubscriptionGate } from "@/components/SubscriptionGate";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const AdvancedAnalytics = () => {
   const { t } = useTranslation('fitness');
+  const navigate = useNavigate();
   const { data: weightData } = useQuery({
     queryKey: ["weight-analytics"],
     queryFn: async () => {
@@ -107,11 +110,21 @@ const AdvancedAnalytics = () => {
   return (
     <SubscriptionGate feature="advanced_analytics">
       <div className="container mx-auto p-6 space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold mb-2">{t('advanced_analytics')}</h1>
-        <p className="text-muted-foreground">
-          {t('analytics_description')}
-        </p>
+      <div className="flex items-center gap-4">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate('/premium')}
+          className="shrink-0"
+        >
+          <ArrowLeft className="h-5 w-5" />
+        </Button>
+        <div>
+          <h1 className="text-3xl font-bold mb-2">{t('advanced_analytics')}</h1>
+          <p className="text-muted-foreground">
+            {t('analytics_description')}
+          </p>
+        </div>
       </div>
 
       <Tabs defaultValue="overview" className="w-full">

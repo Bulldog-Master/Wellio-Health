@@ -118,8 +118,8 @@ const LiveWorkoutSessions = () => {
       if (error) throw error;
 
       toast({
-        title: "Success",
-        description: "Workout session created successfully",
+        title: t('live:success'),
+        description: t('live:session_created'),
       });
 
       setShowCreateForm(false);
@@ -136,8 +136,8 @@ const LiveWorkoutSessions = () => {
     } catch (error) {
       console.error('Error creating session:', error);
       toast({
-        title: "Error",
-        description: "Failed to create workout session",
+        title: t('live:error'),
+        description: t('live:failed_to_create'),
         variant: "destructive",
       });
     }
@@ -163,8 +163,8 @@ const LiveWorkoutSessions = () => {
         navigate(`/live-session/${sessionId}`);
       } else {
         toast({
-          title: "Error",
-          description: "Failed to join session",
+          title: t('live:error'),
+          description: t('live:failed_to_join'),
           variant: "destructive",
         });
       }
@@ -187,11 +187,11 @@ const LiveWorkoutSessions = () => {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => navigate("/activity")}
+          onClick={() => navigate("/premium")}
           className="gap-2 mb-2"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
-          {t('live:back_to_activity')}
+          {t('live:back_to_premium')}
         </Button>
         <div className="flex justify-between items-center">
           <div>
@@ -207,12 +207,12 @@ const LiveWorkoutSessions = () => {
         {showCreateForm && (
           <Card>
             <CardHeader>
-              <CardTitle>Create New Session</CardTitle>
-              <CardDescription>Schedule a live workout session</CardDescription>
+              <CardTitle>{t('live:create_new_session')}</CardTitle>
+              <CardDescription>{t('live:schedule_live_session')}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="title">Session Title</Label>
+                <Label htmlFor="title">{t('live:session_title')}</Label>
                 <Input
                   id="title"
                   value={formData.title}
@@ -222,7 +222,7 @@ const LiveWorkoutSessions = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="description">Description</Label>
+                <Label htmlFor="description">{t('live:description')}</Label>
                 <Textarea
                   id="description"
                   value={formData.description}
@@ -233,7 +233,7 @@ const LiveWorkoutSessions = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="start">Start Time</Label>
+                  <Label htmlFor="start">{t('live:start_time')}</Label>
                   <Input
                     id="start"
                     type="datetime-local"
@@ -242,7 +242,7 @@ const LiveWorkoutSessions = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="end">End Time</Label>
+                  <Label htmlFor="end">{t('live:end_time')}</Label>
                   <Input
                     id="end"
                     type="datetime-local"
@@ -254,38 +254,38 @@ const LiveWorkoutSessions = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="workout_type">Workout Type</Label>
+                  <Label htmlFor="workout_type">{t('live:workout_type')}</Label>
                   <Select value={formData.workout_type} onValueChange={(value) => setFormData({ ...formData, workout_type: value })}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="strength">Strength</SelectItem>
-                      <SelectItem value="cardio">Cardio</SelectItem>
-                      <SelectItem value="yoga">Yoga</SelectItem>
-                      <SelectItem value="hiit">HIIT</SelectItem>
-                      <SelectItem value="mobility">Mobility</SelectItem>
+                      <SelectItem value="strength">{t('live:strength')}</SelectItem>
+                      <SelectItem value="cardio">{t('live:cardio')}</SelectItem>
+                      <SelectItem value="yoga">{t('live:yoga')}</SelectItem>
+                      <SelectItem value="hiit">{t('live:hiit')}</SelectItem>
+                      <SelectItem value="mobility">{t('live:mobility')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="difficulty">Difficulty</Label>
+                  <Label htmlFor="difficulty">{t('live:difficulty')}</Label>
                   <Select value={formData.difficulty_level} onValueChange={(value) => setFormData({ ...formData, difficulty_level: value })}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="beginner">Beginner</SelectItem>
-                      <SelectItem value="intermediate">Intermediate</SelectItem>
-                      <SelectItem value="advanced">Advanced</SelectItem>
+                      <SelectItem value="beginner">{t('live:beginner')}</SelectItem>
+                      <SelectItem value="intermediate">{t('live:intermediate')}</SelectItem>
+                      <SelectItem value="advanced">{t('live:advanced')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="max_participants">Max Participants</Label>
+                <Label htmlFor="max_participants">{t('live:max_participants')}</Label>
                 <Input
                   id="max_participants"
                   type="number"
@@ -295,7 +295,7 @@ const LiveWorkoutSessions = () => {
               </div>
 
               <Button onClick={createSession} className="w-full">
-                Create Session
+                {t('live:create_session')}
               </Button>
             </CardContent>
           </Card>
@@ -303,9 +303,9 @@ const LiveWorkoutSessions = () => {
 
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {loading ? (
-            <p className="text-muted-foreground">Loading sessions...</p>
+            <p className="text-muted-foreground">{t('live:loading_sessions')}</p>
           ) : sessions.length === 0 ? (
-            <p className="text-muted-foreground">No sessions available</p>
+            <p className="text-muted-foreground">{t('live:no_sessions')}</p>
           ) : (
             sessions.map((session) => (
               <Card key={session.id} className="overflow-hidden">
@@ -329,7 +329,7 @@ const LiveWorkoutSessions = () => {
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Users className="h-4 w-4" />
-                    {session.participants_count}/{session.max_participants} participants
+                    {session.participants_count}/{session.max_participants} {t('live:participants')}
                   </div>
                   <div className="flex gap-2">
                     <span className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-xs">
@@ -345,7 +345,7 @@ const LiveWorkoutSessions = () => {
                     disabled={session.status === 'ended' || (session.participants_count || 0) >= session.max_participants}
                   >
                     <Video className="mr-2 h-4 w-4" />
-                    {session.status === 'live' ? 'Join Now' : 'Join Session'}
+                    {session.status === 'live' ? t('live:join_now') : t('live:join_session')}
                   </Button>
                 </CardContent>
               </Card>
