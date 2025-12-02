@@ -66,17 +66,28 @@ const AdminVIP = () => {
           reason,
           expires_at,
           is_active,
-          created_at,
-          profiles!vip_passes_user_id_fkey (
-            username,
-            full_name,
-            avatar_url
-          )
+          created_at
         `)
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setVipPasses((data || []) as unknown as VIPPassWithProfile[]);
+      
+      // Fetch profile info for each VIP pass
+      const passesWithProfiles: VIPPassWithProfile[] = [];
+      for (const pass of data || []) {
+        const { data: profileData } = await supabase
+          .from('profiles')
+          .select('username, full_name, avatar_url')
+          .eq('id', pass.user_id)
+          .single();
+        
+        passesWithProfiles.push({
+          ...pass,
+          profiles: profileData
+        } as VIPPassWithProfile);
+      }
+      
+      setVipPasses(passesWithProfiles);
     } catch (error) {
       console.error('Error fetching VIP passes:', error);
       toast.error(t('admin:fetch_error'));
