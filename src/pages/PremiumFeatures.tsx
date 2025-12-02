@@ -19,7 +19,7 @@ import { useTranslation } from "react-i18next";
 
 const PremiumFeatures = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation(['subscription', 'common', 'medical']);
+  const { t } = useTranslation(['premium', 'subscription', 'common', 'medical']);
   const { hasFullAccess, isVIP, isAdmin, isLoading } = useSubscription();
 
   // Redirect non-premium users only after loading completes and no access
