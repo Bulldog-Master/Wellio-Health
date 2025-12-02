@@ -175,5 +175,7 @@
   "of_goal": "del objetivo",
   "nutrition": "Nutrición",
   "video_tutorials": "Tutoriales en Video",
-  "exercise_video_tutorials": "Aprende la forma correcta con guías en video"
+  "exercise_video_tutorials": "Aprende la forma correcta con guías en video",
+  "ai_fitness_chat": "Asistente de Fitness IA",
+  "ai_fitness_chat_desc": "Obtén consejos de fitness personalizados"
 }
