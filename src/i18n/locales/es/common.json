@@ -266,5 +266,8 @@
   "admin_access": "Acceso de Administrador",
   "vip_access": "Acceso VIP",
   "full_features_unlocked": "Todas las funciones desbloqueadas",
-  "ai_coach": "Entrenador IA"
+  "ai_coach": "Entrenador IA",
+  "add": "Agregar",
+  "saved": "Guardado exitosamente",
+  "no_data": "No hay datos disponibles"
 }
