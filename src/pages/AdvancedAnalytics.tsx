@@ -6,8 +6,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Activity, TrendingUp, Target, Zap } from "lucide-react";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ScatterChart, Scatter } from "recharts";
 import { SubscriptionGate } from "@/components/SubscriptionGate";
+import { useTranslation } from "react-i18next";
 
 const AdvancedAnalytics = () => {
+  const { t } = useTranslation('fitness');
   const { data: weightData } = useQuery({
     queryKey: ["weight-analytics"],
     queryFn: async () => {
@@ -106,9 +108,9 @@ const AdvancedAnalytics = () => {
     <SubscriptionGate feature="advanced_analytics">
       <div className="container mx-auto p-6 space-y-6">
       <div>
-        <h1 className="text-3xl font-bold mb-2">Advanced Analytics</h1>
+        <h1 className="text-3xl font-bold mb-2">{t('advanced_analytics')}</h1>
         <p className="text-muted-foreground">
-          Deep insights into your fitness journey with predictions and correlations
+          {t('analytics_description')}
         </p>
       </div>
 
@@ -116,19 +118,19 @@ const AdvancedAnalytics = () => {
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="overview">
             <Activity className="w-4 h-4 mr-2" />
-            Overview
+            {t('overview')}
           </TabsTrigger>
           <TabsTrigger value="weight">
             <TrendingUp className="w-4 h-4 mr-2" />
-            Weight
+            {t('weight')}
           </TabsTrigger>
           <TabsTrigger value="activity">
             <Zap className="w-4 h-4 mr-2" />
-            Activity
+            {t('activity')}
           </TabsTrigger>
           <TabsTrigger value="nutrition">
             <Target className="w-4 h-4 mr-2" />
-            Nutrition
+            {t('nutrition')}
           </TabsTrigger>
         </TabsList>
 
@@ -137,7 +139,7 @@ const AdvancedAnalytics = () => {
             {weightData && weightData.length > 0 && (
               <AdvancedMetrics
                 data={weightData}
-                title="Weight Trend"
+                title={t('weight_trend')}
                 metric="lbs"
                 unit="lbs"
               />
@@ -145,7 +147,7 @@ const AdvancedAnalytics = () => {
             {activityData && activityData.length > 0 && (
               <AdvancedMetrics
                 data={activityData}
-                title="Activity Duration"
+                title={t('activity_duration')}
                 metric="minutes"
                 unit="min"
               />
@@ -156,7 +158,7 @@ const AdvancedAnalytics = () => {
           {correlationData && correlationData.length > 0 && (
             <Card>
               <CardHeader>
-                <CardTitle>Weight vs Activity Correlation</CardTitle>
+                <CardTitle>{t('weight_vs_activity')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -164,15 +166,15 @@ const AdvancedAnalytics = () => {
                     <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
                     <XAxis 
                       dataKey="activity" 
-                      name="Activity (min)" 
+                      name={t('activity_duration_label')} 
                       tick={{ fontSize: 12 }}
-                      label={{ value: 'Activity Duration (min)', position: 'bottom' }}
+                      label={{ value: t('activity_duration_label'), position: 'bottom' }}
                     />
                     <YAxis 
                       dataKey="weight" 
-                      name="Weight (lbs)" 
+                      name={t('weight_label')} 
                       tick={{ fontSize: 12 }}
-                      label={{ value: 'Weight (lbs)', angle: -90, position: 'left' }}
+                      label={{ value: t('weight_label'), angle: -90, position: 'left' }}
                     />
                     <Tooltip 
                       cursor={{ strokeDasharray: '3 3' }}
@@ -198,7 +200,7 @@ const AdvancedAnalytics = () => {
           {weightData && weightData.length > 0 && (
             <AdvancedMetrics
               data={weightData}
-              title="Weight Analysis"
+              title={t('weight_analysis')}
               metric="lbs"
               unit="lbs"
             />
@@ -210,14 +212,14 @@ const AdvancedAnalytics = () => {
             <div className="space-y-6">
               <AdvancedMetrics
                 data={activityData}
-                title="Activity Duration Analysis"
+                title={t('activity_duration_analysis')}
                 metric="minutes"
                 unit="min"
               />
               
               <Card>
                 <CardHeader>
-                  <CardTitle>Calories Burned Over Time</CardTitle>
+                  <CardTitle>{t('calories_burned_over_time')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={250}>
@@ -239,7 +241,7 @@ const AdvancedAnalytics = () => {
           {nutritionData && nutritionData.length > 0 && (
             <Card>
               <CardHeader>
-                <CardTitle>Macro Breakdown</CardTitle>
+                <CardTitle>{t('macro_breakdown')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
