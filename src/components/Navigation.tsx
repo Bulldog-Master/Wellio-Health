@@ -6,13 +6,31 @@ import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "react-i18next";
 import { useSubscription } from "@/hooks/useSubscription";
 
+// Read cached values directly for instant UI (before hook loads)
+const getCachedPremiumAccess = (): boolean => {
+  try {
+    const isVIP = localStorage.getItem('subscription_isVIP') === 'true';
+    const isAdmin = localStorage.getItem('subscription_isAdmin') === 'true';
+    const tier = localStorage.getItem('subscription_tier');
+    return isVIP || isAdmin || tier === 'pro' || tier === 'enterprise';
+  } catch {
+    return false;
+  }
+};
+
 const Navigation = () => {
   const { t } = useTranslation(['common', 'premium']);
   const [showRewardsBadge, setShowRewardsBadge] = useState(false);
   const { hasFullAccess, tier } = useSubscription();
   
-  // Show premium link for VIP, Admin, or paid subscribers (pro/enterprise)
-  const hasPremiumAccess = hasFullAccess || tier === 'pro' || tier === 'enterprise';
+  // Initialize from cache for instant display, then update from hook
+  const [hasPremiumAccess, setHasPremiumAccess] = useState(() => getCachedPremiumAccess());
+  
+  // Update when hook data changes
+  useEffect(() => {
+    const hookAccess = hasFullAccess || tier === 'pro' || tier === 'enterprise';
+    setHasPremiumAccess(hookAccess);
+  }, [hasFullAccess, tier]);
 
   useEffect(() => {
     checkRewardsStatus();

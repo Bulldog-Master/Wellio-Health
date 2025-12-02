@@ -9,14 +9,20 @@ import { useToast } from "@/hooks/use-toast";
 import { Activity, Mail, Lock, User as UserIcon, Sparkles, Fingerprint, Eye, EyeOff, Shield, Key, HeartPulse, Zap, Gift, Users } from "lucide-react";
 
 // Pre-fetch and cache subscription status for instant Premium Hub display
-const prefetchSubscriptionStatus = async (userId: string) => {
+const prefetchSubscriptionStatus = async (userId: string): Promise<void> => {
   try {
-    const { data: hasVIP } = await supabase.rpc('has_active_vip', { _user_id: userId });
-    const { data: hasAdmin } = await supabase.rpc('has_role', { _user_id: userId, _role: 'admin' });
+    // Run both RPC calls in parallel for speed
+    const [vipResult, adminResult] = await Promise.all([
+      supabase.rpc('has_active_vip', { _user_id: userId }),
+      supabase.rpc('has_role', { _user_id: userId, _role: 'admin' })
+    ]);
+    
+    const hasVIP = vipResult.data || false;
+    const hasAdmin = adminResult.data || false;
     
     // Cache for instant display on navigation
-    localStorage.setItem('subscription_isVIP', String(hasVIP || false));
-    localStorage.setItem('subscription_isAdmin', String(hasAdmin || false));
+    localStorage.setItem('subscription_isVIP', String(hasVIP));
+    localStorage.setItem('subscription_isAdmin', String(hasAdmin));
     
     // Also fetch tier
     const { data: subData } = await supabase
@@ -29,6 +35,14 @@ const prefetchSubscriptionStatus = async (userId: string) => {
   } catch (error) {
     console.error('Error prefetching subscription:', error);
   }
+};
+
+// Helper to prefetch with timeout (max 400ms wait)
+const prefetchWithTimeout = (userId: string): Promise<void> => {
+  return Promise.race([
+    prefetchSubscriptionStatus(userId),
+    new Promise<void>(resolve => setTimeout(resolve, 400))
+  ]);
 };
 import authHero from "@/assets/auth-hero-new.jpg";
 import { z } from "zod";
@@ -132,17 +146,19 @@ const Auth = () => {
     
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (session?.user) {
-        // Fire prefetch in background (non-blocking) for instant Premium Hub display
-        prefetchSubscriptionStatus(session.user.id);
-        navigate("/");
+        // Wait briefly for prefetch to complete before navigating
+        prefetchWithTimeout(session.user.id).then(() => {
+          navigate("/");
+        });
       }
     });
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
-        // Fire prefetch in background (non-blocking)
-        prefetchSubscriptionStatus(session.user.id);
-        navigate("/");
+        // Wait briefly for prefetch to complete before navigating
+        prefetchWithTimeout(session.user.id).then(() => {
+          navigate("/");
+        });
       }
     });
 
