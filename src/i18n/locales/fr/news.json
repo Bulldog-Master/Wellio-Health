@@ -31,6 +31,10 @@
     "ultra_endurance": "Ultra Endurance",
     "ultra_endurance_desc": "Ultra marathons, courses extrêmes et événements d'endurance",
     "global_events": "Événements Mondiaux",
-    "global_events_desc": "Jeux Olympiques, Championnats du Monde et compétitions internationales"
+    "global_events_desc": "Jeux Olympiques, Championnats du Monde et compétitions internationales",
+    "biohacker": "Biohacker",
+    "biohacker_desc": "Biohacking, science de la longévité et optimisation des performances",
+    "medical": "Médical",
+    "medical_desc": "Avancées médicales, recherche en santé et médecine du sport"
   }
 }
