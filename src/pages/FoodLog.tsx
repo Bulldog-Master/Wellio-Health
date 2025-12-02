@@ -260,7 +260,17 @@ const FoodLog = () => {
   };
 
   const handleAddMeal = async () => {
-    if (!nutritionData) {
+    // For fasting, auto-set nutrition data to zeros
+    const isFasting = selectedMeal === 'fast';
+    const finalNutritionData = isFasting 
+      ? { calories: 0, protein: 0, carbs: 0, fat: 0 }
+      : nutritionData;
+    
+    const finalDescription = isFasting && !mealDescription.trim() 
+      ? t('food:fast') 
+      : mealDescription.trim();
+
+    if (!finalNutritionData && !isFasting) {
       toast({
         title: t('food:analysis_required'),
         description: t('food:analysis_required_desc'),
@@ -271,12 +281,12 @@ const FoodLog = () => {
 
     // Validate meal data using Zod
     const validation = validateAndSanitize(foodLogSchema, {
-      meal_type: selectedMeal as 'breakfast' | 'lunch' | 'dinner' | 'snack',
-      food_name: mealDescription.trim(),
-      calories: nutritionData.calories,
-      protein_grams: nutritionData.protein,
-      carbs_grams: nutritionData.carbs,
-      fat_grams: nutritionData.fat,
+      meal_type: selectedMeal as 'breakfast' | 'lunch' | 'dinner' | 'snack' | 'fast',
+      food_name: finalDescription,
+      calories: finalNutritionData?.calories ?? 0,
+      protein_grams: finalNutritionData?.protein ?? 0,
+      carbs_grams: finalNutritionData?.carbs ?? 0,
+      fat_grams: finalNutritionData?.fat ?? 0,
       logged_at: logDate,
     });
 
@@ -337,11 +347,11 @@ const FoodLog = () => {
         // Update existing meal
         const updateData: any = {
           meal_type: selectedMeal,
-          food_name: mealDescription.trim(),
-          calories: nutritionData.calories,
-          protein_grams: nutritionData.protein,
-          carbs_grams: nutritionData.carbs,
-          fat_grams: nutritionData.fat,
+          food_name: finalDescription,
+          calories: finalNutritionData?.calories ?? 0,
+          protein_grams: finalNutritionData?.protein ?? 0,
+          carbs_grams: finalNutritionData?.carbs ?? 0,
+          fat_grams: finalNutritionData?.fat ?? 0,
         };
 
         if (uploadedImageUrl) {
@@ -367,11 +377,11 @@ const FoodLog = () => {
           .insert({
             user_id: user.id,
             meal_type: selectedMeal,
-            food_name: mealDescription.trim(),
-            calories: nutritionData.calories,
-            protein_grams: nutritionData.protein,
-            carbs_grams: nutritionData.carbs,
-            fat_grams: nutritionData.fat,
+            food_name: finalDescription,
+            calories: finalNutritionData?.calories ?? 0,
+            protein_grams: finalNutritionData?.protein ?? 0,
+            carbs_grams: finalNutritionData?.carbs ?? 0,
+            fat_grams: finalNutritionData?.fat ?? 0,
             image_url: uploadedImageUrl,
             logged_at: loggedAtTimestamp,
           });
@@ -381,8 +391,8 @@ const FoodLog = () => {
         toast({
           title: t('food:food_logged'),
           description: t('food:meal_logged_desc', {
-            name: mealDescription,
-            calories: nutritionData.calories,
+            name: finalDescription,
+            calories: finalNutritionData?.calories ?? 0,
             mealType: mealTypes.find(m => m.value === selectedMeal)?.label
           }),
         });

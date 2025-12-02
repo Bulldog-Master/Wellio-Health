@@ -148,11 +148,10 @@ export const symptomSchema = z.object({
 
 // ============= NUTRITION SCHEMAS =============
 export const foodLogSchema = z.object({
-  meal_type: z.enum(['breakfast', 'lunch', 'dinner', 'snack']),
+  meal_type: z.enum(['breakfast', 'lunch', 'dinner', 'snack', 'fast']),
   food_name: z
     .string()
     .trim()
-    .min(1, "Food description is required")
     .max(500, "Description must be less than 500 characters"),
   calories: z
     .number()
