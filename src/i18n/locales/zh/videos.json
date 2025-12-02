@@ -34,5 +34,31 @@
   "loading_exercises": "加载练习中...",
   "featured_exercises": "精选练习",
   "recently_added": "最近添加",
-  "most_popular": "最受欢迎"
+  "most_popular": "最受欢迎",
+  "exercises": {
+    "pushups": "俯卧撑",
+    "squats": "深蹲",
+    "plank": "平板支撑",
+    "deadlift": "硬拉",
+    "burpees": "波比跳",
+    "sun_salutation": "瑜伽拜日式"
+  },
+  "muscles": {
+    "chest": "胸部",
+    "triceps": "三头肌",
+    "shoulders": "肩部",
+    "quadriceps": "股四头肌",
+    "glutes": "臀部",
+    "hamstrings": "腿后肌群",
+    "back": "背部",
+    "core": "核心",
+    "full_body": "全身"
+  },
+  "equipment": {
+    "barbell": "杠铃",
+    "weights": "哑铃片",
+    "yoga_mat": "瑜伽垫",
+    "dumbbells": "哑铃",
+    "resistance_bands": "弹力带"
+  }
 }

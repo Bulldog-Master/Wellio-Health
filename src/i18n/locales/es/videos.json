@@ -34,5 +34,31 @@
   "loading_exercises": "Cargando ejercicios...",
   "featured_exercises": "Ejercicios Destacados",
   "recently_added": "Agregados Recientemente",
-  "most_popular": "Más Populares"
+  "most_popular": "Más Populares",
+  "exercises": {
+    "pushups": "Flexiones",
+    "squats": "Sentadillas",
+    "plank": "Plancha",
+    "deadlift": "Peso Muerto",
+    "burpees": "Burpees",
+    "sun_salutation": "Saludo al Sol"
+  },
+  "muscles": {
+    "chest": "Pecho",
+    "triceps": "Tríceps",
+    "shoulders": "Hombros",
+    "quadriceps": "Cuádriceps",
+    "glutes": "Glúteos",
+    "hamstrings": "Isquiotibiales",
+    "back": "Espalda",
+    "core": "Core",
+    "full_body": "Cuerpo Completo"
+  },
+  "equipment": {
+    "barbell": "Barra",
+    "weights": "Pesas",
+    "yoga_mat": "Tapete de Yoga",
+    "dumbbells": "Mancuernas",
+    "resistance_bands": "Bandas de Resistencia"
+  }
 }

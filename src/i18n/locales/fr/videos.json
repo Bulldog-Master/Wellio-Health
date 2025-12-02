@@ -34,5 +34,31 @@
   "loading_exercises": "Chargement des exercices...",
   "featured_exercises": "Exercices en Vedette",
   "recently_added": "Récemment Ajoutés",
-  "most_popular": "Les Plus Populaires"
+  "most_popular": "Les Plus Populaires",
+  "exercises": {
+    "pushups": "Pompes",
+    "squats": "Squats",
+    "plank": "Planche",
+    "deadlift": "Soulevé de terre",
+    "burpees": "Burpees",
+    "sun_salutation": "Salutation au soleil"
+  },
+  "muscles": {
+    "chest": "Poitrine",
+    "triceps": "Triceps",
+    "shoulders": "Épaules",
+    "quadriceps": "Quadriceps",
+    "glutes": "Fessiers",
+    "hamstrings": "Ischio-jambiers",
+    "back": "Dos",
+    "core": "Core",
+    "full_body": "Corps Entier"
+  },
+  "equipment": {
+    "barbell": "Barre",
+    "weights": "Poids",
+    "yoga_mat": "Tapis de yoga",
+    "dumbbells": "Haltères",
+    "resistance_bands": "Bandes de résistance"
+  }
 }

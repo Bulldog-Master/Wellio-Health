@@ -34,5 +34,31 @@
   "loading_exercises": "Loading exercises...",
   "featured_exercises": "Featured Exercises",
   "recently_added": "Recently Added",
-  "most_popular": "Most Popular"
+  "most_popular": "Most Popular",
+  "exercises": {
+    "pushups": "Push-ups",
+    "squats": "Squats",
+    "plank": "Plank",
+    "deadlift": "Deadlift",
+    "burpees": "Burpees",
+    "sun_salutation": "Yoga Sun Salutation"
+  },
+  "muscles": {
+    "chest": "Chest",
+    "triceps": "Triceps",
+    "shoulders": "Shoulders",
+    "quadriceps": "Quadriceps",
+    "glutes": "Glutes",
+    "hamstrings": "Hamstrings",
+    "back": "Back",
+    "core": "Core",
+    "full_body": "Full Body"
+  },
+  "equipment": {
+    "barbell": "Barbell",
+    "weights": "Weights",
+    "yoga_mat": "Yoga Mat",
+    "dumbbells": "Dumbbells",
+    "resistance_bands": "Resistance Bands"
+  }
 }
