@@ -34,9 +34,13 @@ serve(async (req) => {
       }
     );
 
+    console.log("[generate-insights] Getting user...");
     const {
       data: { user },
+      error: userError,
     } = await supabaseClient.auth.getUser();
+
+    console.log("[generate-insights] User result:", user?.id || "no user", "Error:", userError?.message || "none");
 
     if (!user) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
@@ -47,66 +51,79 @@ serve(async (req) => {
 
     console.log("[generate-insights] Starting insight generation for user:", user.id);
 
-    // Fetch user's health data
+    // Fetch user's health data with individual error handling
     console.log("[generate-insights] Fetching health data...");
-    const [
-      { data: weightLogs },
-      { data: activityLogs },
-      { data: nutritionLogs },
-      { data: symptoms },
-      { data: habits },
-    ] = await Promise.all([
-      supabaseClient
-        .from("weight_logs")
-        .select("*")
-        .eq("user_id", user.id)
-        .order("logged_at", { ascending: false })
-        .limit(30),
-      supabaseClient
-        .from("activity_logs")
-        .select("*")
-        .eq("user_id", user.id)
-        .order("logged_at", { ascending: false })
-        .limit(30),
-      supabaseClient
-        .from("nutrition_logs")
-        .select("*")
-        .eq("user_id", user.id)
-        .order("logged_at", { ascending: false })
-        .limit(30),
-      supabaseClient
-        .from("symptoms")
-        .select("*")
-        .eq("user_id", user.id)
-        .order("logged_at", { ascending: false })
-        .limit(30),
-      supabaseClient
-        .from("habits")
-        .select("*, habit_completions(*)")
-        .eq("user_id", user.id)
-        .eq("is_active", true),
-    ]);
+    
+    let weightLogs: any[] = [];
+    let activityLogs: any[] = [];
+    let nutritionLogs: any[] = [];
+    let symptoms: any[] = [];
+    let habits: any[] = [];
+
+    try {
+      const [weightRes, activityRes, nutritionRes, symptomsRes, habitsRes] = await Promise.all([
+        supabaseClient
+          .from("weight_logs")
+          .select("*")
+          .eq("user_id", user.id)
+          .order("logged_at", { ascending: false })
+          .limit(30),
+        supabaseClient
+          .from("activity_logs")
+          .select("*")
+          .eq("user_id", user.id)
+          .order("logged_at", { ascending: false })
+          .limit(30),
+        supabaseClient
+          .from("nutrition_logs")
+          .select("*")
+          .eq("user_id", user.id)
+          .order("logged_at", { ascending: false })
+          .limit(30),
+        supabaseClient
+          .from("symptoms")
+          .select("*")
+          .eq("user_id", user.id)
+          .order("logged_at", { ascending: false })
+          .limit(30),
+        supabaseClient
+          .from("habits")
+          .select("*")
+          .eq("user_id", user.id)
+          .eq("is_active", true),
+      ]);
+
+      weightLogs = weightRes.data || [];
+      activityLogs = activityRes.data || [];
+      nutritionLogs = nutritionRes.data || [];
+      symptoms = symptomsRes.data || [];
+      habits = habitsRes.data || [];
+    } catch (fetchError) {
+      console.error("[generate-insights] Error fetching data:", fetchError);
+    }
 
     console.log("[generate-insights] Data fetched:", {
-      weightLogs: weightLogs?.length,
-      activityLogs: activityLogs?.length,
-      nutritionLogs: nutritionLogs?.length,
-      symptoms: symptoms?.length,
-      habits: habits?.length,
+      weightLogs: weightLogs.length,
+      activityLogs: activityLogs.length,
+      nutritionLogs: nutritionLogs.length,
+      symptoms: symptoms.length,
+      habits: habits.length,
     });
 
     // Build context for AI
     const dataSummary = {
-      weight_logs_count: weightLogs?.length || 0,
-      activity_logs_count: activityLogs?.length || 0,
-      nutrition_logs_count: nutritionLogs?.length || 0,
-      symptoms_count: symptoms?.length || 0,
-      active_habits_count: habits?.length || 0,
-      total_activity_minutes: activityLogs?.reduce((sum, log) => sum + (log.duration_minutes || 0), 0) || 0,
-      average_calories_consumed: nutritionLogs
-        ? Math.round(nutritionLogs.reduce((sum, log) => sum + (log.calories || 0), 0) / (nutritionLogs.length || 1))
+      weight_logs_count: weightLogs.length,
+      activity_logs_count: activityLogs.length,
+      nutrition_logs_count: nutritionLogs.length,
+      symptoms_count: symptoms.length,
+      active_habits_count: habits.length,
+      total_activity_minutes: activityLogs.reduce((sum: number, log: any) => sum + (log.duration_minutes || 0), 0),
+      average_calories_consumed: nutritionLogs.length > 0
+        ? Math.round(nutritionLogs.reduce((sum: number, log: any) => sum + (log.calories || 0), 0) / nutritionLogs.length)
         : 0,
     };
+
+    console.log("[generate-insights] Data summary built:", dataSummary);
 
     const prompt = `As a health and wellness AI assistant, analyze the following user health data and provide 3-5 personalized insights, recommendations, or observations. Be encouraging and specific.
 
@@ -117,8 +134,8 @@ Data Summary:
 - Symptoms tracked: ${dataSummary.symptoms_count} entries
 - Active habits: ${dataSummary.active_habits_count}
 
-Recent Activity: ${activityLogs?.slice(0, 5).map(a => `${a.activity_type} for ${a.duration_minutes} min`).join(", ") || "No recent activity"}
-Recent Symptoms: ${symptoms?.slice(0, 3).map(s => `${s.symptom_name} (severity ${s.severity}/10)`).join(", ") || "No recent symptoms"}
+Recent Activity: ${activityLogs.slice(0, 5).map((a: any) => `${a.activity_type} for ${a.duration_minutes} min`).join(", ") || "No recent activity"}
+Recent Symptoms: ${symptoms.slice(0, 3).map((s: any) => `${s.symptom_name} (severity ${s.severity}/10)`).join(", ") || "No recent symptoms"}
 
 Provide 3-5 actionable insights in this exact JSON format:
 {
