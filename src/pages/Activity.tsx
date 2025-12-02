@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Activity as ActivityIcon, TrendingUp, Calendar, Flame, Watch, Heart, Moon, Footprints, Plus, Scale, Dumbbell, CheckSquare, Pill, Timer } from "lucide-react";
+import { Activity as ActivityIcon, TrendingUp, Calendar, Flame, Watch, Heart, Moon, Footprints, Plus, Scale, Dumbbell, CheckSquare, Pill, Timer, Video, Crown } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
@@ -306,6 +306,24 @@ const Activity = () => {
             <div>
               <h3 className="text-lg font-semibold">{t('live_workout_sessions')}</h3>
               <p className="text-sm text-muted-foreground">{t('join_host_live_workouts')}</p>
+            </div>
+          </div>
+        </Card>
+
+        <Card 
+          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer relative overflow-hidden"
+          onClick={() => navigate('/exercise-library')}
+        >
+          <div className="absolute top-2 right-2">
+            <Crown className="w-4 h-4 text-primary" />
+          </div>
+          <div className="flex items-start gap-4">
+            <div className="p-3 bg-primary/10 rounded-xl">
+              <Video className="w-6 h-6 text-primary" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">{t('video_tutorials')}</h3>
+              <p className="text-sm text-muted-foreground">{t('exercise_video_tutorials')}</p>
             </div>
           </div>
         </Card>
