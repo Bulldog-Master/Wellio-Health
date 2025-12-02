@@ -112,8 +112,8 @@ const News = () => {
   return (
     <>
       <SEOHead 
-        titleKey="news.page_title"
-        descriptionKey="news.page_description"
+        titleKey="page_title"
+        descriptionKey="page_description"
         namespace="news"
       />
       <div className="min-h-screen bg-background p-4 md:p-6 pb-24 md:pb-6">
