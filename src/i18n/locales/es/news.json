@@ -7,6 +7,10 @@
   "updated_daily": "Actualizado Diariamente",
   "coming_soon_title": "Feed de Noticias Completo Próximamente",
   "coming_soon_desc": "Estamos construyendo un agregador de noticias completo con las últimas historias, cobertura de eventos y actualizaciones de la comunidad fitness global.",
+  "view_more": "Ver Más",
+  "upcoming": "Próximo",
+  "recent": "Reciente",
+  "live": "En Vivo",
   "categories": {
     "latest_news": "Últimas Noticias",
     "latest_news_desc": "Noticias de última hora y tendencias del mundo fitness",
@@ -32,5 +36,129 @@
     "ultra_endurance_desc": "Ultra maratones, carreras extremas y eventos de resistencia",
     "global_events": "Eventos Globales",
     "global_events_desc": "Olimpiadas, Campeonatos Mundiales y competiciones internacionales"
+  },
+  "items": {
+    "latest": {
+      "item1": "Nuevo Estudio: Entrenamiento HIIT Mejora la Salud Cardíaca un 25%",
+      "item2": "Industria del Fitness Alcanzará $100B para 2026",
+      "item3": "Revolución en Tecnología Wearable: Rastreadores con IA"
+    },
+    "crossfit": {
+      "item1": "CrossFit Games 2025 - Madison, Wisconsin",
+      "item2": "Inscripciones Abiertas para CrossFit Open",
+      "item3": "Nuevas Metodologías de Entrenamiento para Competición"
+    },
+    "marathons": {
+      "item1": "Maratón de Boston 2025 - 21 de Abril",
+      "item2": "Resultados Maratón NYC: Tiempos Récord",
+      "item3": "Maratón de Tokio 2025 - 2 de Marzo"
+    },
+    "triathlons": {
+      "item1": "Campeonato Mundial Ironman - Kona 2025",
+      "item2": "Clasificatorios Olímpicos de Triatlón Anunciados",
+      "item3": "Vista Previa del Campeonato Mundial 70.3"
+    },
+    "cycling": {
+      "item1": "Ruta del Tour de Francia 2025 Revelada",
+      "item2": "Ganadores de Etapa del Giro de Italia",
+      "item3": "Actualización Campeonatos Mundiales UCI"
+    },
+    "obstacle": {
+      "item1": "Campeonato Mundial Spartan 2025",
+      "item2": "Fechas de la Serie Tough Mudder Classic",
+      "item3": "Resultados Campeonato Mundial HYROX"
+    },
+    "mma": {
+      "item1": "Cartelera UFC 310 Anunciada",
+      "item2": "Finales Grand Prix Bellator",
+      "item3": "Vista Previa Temporada PFL Championship"
+    },
+    "bodybuilding": {
+      "item1": "Mr. Olympia 2025 - Las Vegas",
+      "item2": "Resultados y Destacados del Arnold Classic",
+      "item3": "Nuevas Divisiones de la Liga Pro IFBB"
+    },
+    "yoga": {
+      "item1": "Eventos del Día Internacional del Yoga",
+      "item2": "Mejores Retiros de Bienestar para 2025",
+      "item3": "Apps de Mindfulness: Resumen del Año"
+    },
+    "swimming": {
+      "item1": "Campeonatos Mundiales de Natación 2025",
+      "item2": "Copa Mundial de Natación en Aguas Abiertas",
+      "item3": "Récords Olímpicos de Piscina Rotos"
+    },
+    "ultra": {
+      "item1": "Western States 100 Carrera de Resistencia",
+      "item2": "Ultra-Trail du Mont-Blanc 2025",
+      "item3": "Badwater 135 Desafío del Desierto"
+    },
+    "global": {
+      "item1": "Programas de Legado Olímpico París 2024",
+      "item2": "Actualizaciones de Sedes Olimpiadas LA 2028",
+      "item3": "Calendario de los Juegos Mundiales 2025"
+    }
+  },
+  "dates": {
+    "latest": {
+      "item1": "1 Dic 2025",
+      "item2": "28 Nov 2025",
+      "item3": "25 Nov 2025"
+    },
+    "crossfit": {
+      "item1": "1-4 Ago 2025",
+      "item2": "15 Feb 2025",
+      "item3": "10 Ene 2025"
+    },
+    "marathons": {
+      "item1": "21 Abr 2025",
+      "item2": "3 Nov 2024",
+      "item3": "2 Mar 2025"
+    },
+    "triathlons": {
+      "item1": "11 Oct 2025",
+      "item2": "15 Jun 2025",
+      "item3": "7 Sep 2025"
+    },
+    "cycling": {
+      "item1": "5-27 Jul 2025",
+      "item2": "May 2024",
+      "item3": "Sep 2025"
+    },
+    "obstacle": {
+      "item1": "7 Dic 2025",
+      "item2": "Mar-Oct 2025",
+      "item3": "Nov 2024"
+    },
+    "mma": {
+      "item1": "7 Dic 2024",
+      "item2": "Feb 2025",
+      "item3": "Temporada 2025"
+    },
+    "bodybuilding": {
+      "item1": "10-12 Oct 2025",
+      "item2": "Mar 2025",
+      "item3": "2025"
+    },
+    "yoga": {
+      "item1": "21 Jun 2025",
+      "item2": "2025",
+      "item3": "Dic 2024"
+    },
+    "swimming": {
+      "item1": "Jul 2025",
+      "item2": "Temporada 2025",
+      "item3": "2024"
+    },
+    "ultra": {
+      "item1": "28-29 Jun 2025",
+      "item2": "25 Ago 2025",
+      "item3": "Jul 2025"
+    },
+    "global": {
+      "item1": "En Curso",
+      "item2": "2028",
+      "item3": "Ago 2025"
+    }
   }
 }

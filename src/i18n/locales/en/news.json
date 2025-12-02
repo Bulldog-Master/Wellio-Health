@@ -7,6 +7,10 @@
   "updated_daily": "Updated Daily",
   "coming_soon_title": "Full News Feed Coming Soon",
   "coming_soon_desc": "We're building a comprehensive news aggregator featuring the latest stories, event coverage, and updates from the global fitness community.",
+  "view_more": "View More",
+  "upcoming": "Upcoming",
+  "recent": "Recent",
+  "live": "Live",
   "categories": {
     "latest_news": "Latest News",
     "latest_news_desc": "Breaking news and trending stories from the fitness world",
@@ -32,5 +36,129 @@
     "ultra_endurance_desc": "Ultra marathons, extreme races, and endurance events",
     "global_events": "Global Events",
     "global_events_desc": "Olympics, World Championships, and international competitions"
+  },
+  "items": {
+    "latest": {
+      "item1": "New Study: HIIT Training Improves Heart Health by 25%",
+      "item2": "Global Fitness Industry Expected to Reach $100B by 2026",
+      "item3": "Wearable Tech Revolution: AI-Powered Fitness Trackers"
+    },
+    "crossfit": {
+      "item1": "2025 CrossFit Games - Madison, Wisconsin",
+      "item2": "CrossFit Open Registration Now Live",
+      "item3": "New Training Methodologies for Competition Prep"
+    },
+    "marathons": {
+      "item1": "Boston Marathon 2025 - April 21",
+      "item2": "NYC Marathon Results: Record-Breaking Times",
+      "item3": "Tokyo Marathon 2025 - March 2"
+    },
+    "triathlons": {
+      "item1": "Ironman World Championship - Kona 2025",
+      "item2": "Olympic Triathlon Qualifiers Announced",
+      "item3": "70.3 World Championship Preview"
+    },
+    "cycling": {
+      "item1": "Tour de France 2025 Route Revealed",
+      "item2": "Giro d'Italia Stage Winners",
+      "item3": "UCI World Championships Update"
+    },
+    "obstacle": {
+      "item1": "Spartan World Championship 2025",
+      "item2": "Tough Mudder Classic Series Dates",
+      "item3": "HYROX World Championship Results"
+    },
+    "mma": {
+      "item1": "UFC 310 Fight Card Announced",
+      "item2": "Bellator Grand Prix Finals",
+      "item3": "PFL Championship Season Preview"
+    },
+    "bodybuilding": {
+      "item1": "Mr. Olympia 2025 - Las Vegas",
+      "item2": "Arnold Classic Results & Highlights",
+      "item3": "IFBB Pro League New Divisions"
+    },
+    "yoga": {
+      "item1": "International Yoga Day Events Worldwide",
+      "item2": "Top Wellness Retreats for 2025",
+      "item3": "Mindfulness Apps: Year in Review"
+    },
+    "swimming": {
+      "item1": "World Aquatics Championships 2025",
+      "item2": "Open Water Swimming World Cup",
+      "item3": "Olympic Pool Records Broken"
+    },
+    "ultra": {
+      "item1": "Western States 100 Endurance Run",
+      "item2": "Ultra-Trail du Mont-Blanc 2025",
+      "item3": "Badwater 135 Desert Challenge"
+    },
+    "global": {
+      "item1": "Paris 2024 Olympic Legacy Programs",
+      "item2": "LA 2028 Olympics Venue Updates",
+      "item3": "World Games 2025 Schedule Released"
+    }
+  },
+  "dates": {
+    "latest": {
+      "item1": "Dec 1, 2025",
+      "item2": "Nov 28, 2025",
+      "item3": "Nov 25, 2025"
+    },
+    "crossfit": {
+      "item1": "Aug 1-4, 2025",
+      "item2": "Feb 15, 2025",
+      "item3": "Jan 10, 2025"
+    },
+    "marathons": {
+      "item1": "Apr 21, 2025",
+      "item2": "Nov 3, 2024",
+      "item3": "Mar 2, 2025"
+    },
+    "triathlons": {
+      "item1": "Oct 11, 2025",
+      "item2": "Jun 15, 2025",
+      "item3": "Sep 7, 2025"
+    },
+    "cycling": {
+      "item1": "Jul 5-27, 2025",
+      "item2": "May 2024",
+      "item3": "Sep 2025"
+    },
+    "obstacle": {
+      "item1": "Dec 7, 2025",
+      "item2": "Mar-Oct 2025",
+      "item3": "Nov 2024"
+    },
+    "mma": {
+      "item1": "Dec 7, 2024",
+      "item2": "Feb 2025",
+      "item3": "2025 Season"
+    },
+    "bodybuilding": {
+      "item1": "Oct 10-12, 2025",
+      "item2": "Mar 2025",
+      "item3": "2025"
+    },
+    "yoga": {
+      "item1": "Jun 21, 2025",
+      "item2": "2025",
+      "item3": "Dec 2024"
+    },
+    "swimming": {
+      "item1": "Jul 2025",
+      "item2": "2025 Season",
+      "item3": "2024"
+    },
+    "ultra": {
+      "item1": "Jun 28-29, 2025",
+      "item2": "Aug 25, 2025",
+      "item3": "Jul 2025"
+    },
+    "global": {
+      "item1": "Ongoing",
+      "item2": "2028",
+      "item3": "Aug 2025"
+    }
   }
 }
