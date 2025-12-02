@@ -22,6 +22,7 @@ import { LazyImage } from "@/components/LazyImage";
 import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
 import { useTranslation } from "react-i18next";
 import { useSubscription } from "@/hooks/useSubscription";
+import AdBanner from "@/components/AdBanner";
 
 const Feed = () => {
   const { toast } = useToast();
@@ -800,6 +801,9 @@ const Feed = () => {
               </div>
             </Card>
           )}
+
+          {/* Ad Banner */}
+          <AdBanner placement="feed" variant="card" />
 
           {/* Create Post */}
           <Card className="hover:shadow-xl transition-all duration-300">

@@ -87,6 +87,7 @@ const FitnessChat = lazy(() => import("@/pages/FitnessChat"));
 const News = lazy(() => import("@/pages/News"));
 const Sponsors = lazy(() => import("@/pages/Sponsors"));
 const FitnessLocations = lazy(() => import("@/pages/FitnessLocations"));
+const AdminAdvertisements = lazy(() => import("@/pages/AdminAdvertisements"));
 
 /**
  * Application route configuration
@@ -191,6 +192,7 @@ export const AppRoutes = () => (
     <Route path="/pwa-features" element={<ProtectedRoute><Layout><PWAFeatures /></Layout></ProtectedRoute>} />
     <Route path="/subscription" element={<ProtectedRoute><Layout><Subscription /></Layout></ProtectedRoute>} />
     <Route path="/admin/vip" element={<RouteErrorBoundary><ProtectedRoute><Layout><AdminVIP /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/admin/ads" element={<RouteErrorBoundary><ProtectedRoute><Layout><AdminAdvertisements /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/premium" element={<RouteErrorBoundary><ProtectedRoute><Layout><PremiumFeatures /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/exercise-library" element={<RouteErrorBoundary><ProtectedRoute><Layout><ExerciseLibrary /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/fitness-chat" element={<RouteErrorBoundary><ProtectedRoute><Layout><FitnessChat /></Layout></ProtectedRoute></RouteErrorBoundary>} />

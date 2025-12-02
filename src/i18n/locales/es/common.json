@@ -1,4 +1,13 @@
 {
+  "nav": {
+    "activity": "Actividad",
+    "connect": "Conectar",
+    "food": "Comida",
+    "fundraisers": "Recaudaciones",
+    "locations": "Ubicaciones",
+    "news": "Noticias",
+    "sponsors": "Patrocinadores"
+  },
   "app_name": "Wellio",
   "loading": "Cargando...",
   "save": "Guardar",
@@ -269,5 +278,7 @@
   "ai_coach": "Entrenador IA",
   "add": "Agregar",
   "saved": "Guardado exitosamente",
-  "no_data": "No hay datos disponibles"
+  "no_data": "No hay datos disponibles",
+  "active": "Activo",
+  "inactive": "Inactivo"
 }

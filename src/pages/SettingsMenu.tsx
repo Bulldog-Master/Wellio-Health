@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight, Heart, Crown, Gift, Sparkles, Users, FileText } from "lucide-react";
+import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight, Heart, Crown, Gift, Sparkles, Users, FileText, Megaphone } from "lucide-react";
 import { useSubscription } from "@/hooks/useSubscription";
 import { Badge } from "@/components/ui/badge";
 import { useState, useEffect } from "react";
@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 const SettingsMenu = () => {
   const navigate = useNavigate();
   const { tier, isAdmin, isVIP, hasFullAccess } = useSubscription();
-  const { t } = useTranslation(['settings', 'admin', 'premium', 'medical']);
+  const { t } = useTranslation(['settings', 'admin', 'premium', 'medical', 'ads']);
   const [referralStats, setReferralStats] = useState({
     points: 0,
     totalReferrals: 0,
@@ -61,6 +61,16 @@ const SettingsMenu = () => {
       iconBg: "bg-yellow-500/20",
       iconColor: "text-yellow-500",
       path: "/admin/vip",
+      badge: "Admin",
+      badgeVariant: "default" as const,
+    },
+    {
+      title: t('ads:admin.manage_ads'),
+      description: t('settings:manage_ads_desc'),
+      icon: Megaphone,
+      iconBg: "bg-orange-500/20",
+      iconColor: "text-orange-500",
+      path: "/admin/ads",
       badge: "Admin",
       badgeVariant: "default" as const,
     }] : []),

@@ -15,6 +15,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAdminStatus } from "@/hooks/useAdminStatus";
 import SEOHead from "@/components/SEOHead";
+import AdBanner from "@/components/AdBanner";
 
 interface NewsItem {
   id: string;
@@ -243,6 +244,9 @@ const News = () => {
               </Button>
             )}
           </div>
+
+          {/* Ad Banner */}
+          <AdBanner placement="news" variant="minimal" />
 
           {/* Global Badge */}
           <div className="flex items-center gap-2">

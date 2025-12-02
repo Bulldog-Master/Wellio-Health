@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import AdBanner from "@/components/AdBanner";
 
 interface ActivityLog {
   id: string;
@@ -203,6 +204,8 @@ const Activity = () => {
           <p className="text-muted-foreground">{t('activity_description')}</p>
         </div>
       </div>
+
+      <AdBanner placement="activity" variant="card" />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card 
