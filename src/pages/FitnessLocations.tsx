@@ -199,18 +199,19 @@ const FitnessLocations = () => {
   const [isSubmitDialogOpen, setIsSubmitDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [editingLocation, setEditingLocation] = useState<FitnessLocation | null>(null);
+  
+  // Location state
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [locationName, setLocationName] = useState<string>('');
   const [nearMeMode, setNearMeMode] = useState(false);
   const [locationLoading, setLocationLoading] = useState(false);
   const [locationError, setLocationError] = useState<string | null>(null);
-  const [manualLocationQuery, setManualLocationQuery] = useState('');
-  const [isManualLocationDialogOpen, setIsManualLocationDialogOpen] = useState(false);
+  const [locationInput, setLocationInput] = useState('');
+  const [isLocationDialogOpen, setIsLocationDialogOpen] = useState(false);
   const [geocodeLoading, setGeocodeLoading] = useState(false);
-  const [nearMeCategoryFilter, setNearMeCategoryFilter] = useState<string>('all');
   
-  // Discover mode state
+  // Discover mode state  
   const [discoverMode, setDiscoverMode] = useState(false);
-  const [discoverQuery, setDiscoverQuery] = useState('');
   const [discoverCategory, setDiscoverCategory] = useState<string>('all');
   const [discoverLoading, setDiscoverLoading] = useState(false);
   const [discoveredGyms, setDiscoveredGyms] = useState<any[]>([]);
@@ -241,11 +242,10 @@ const FitnessLocations = () => {
     website_url: '',
   });
 
-  // Find Near Me handler - with fallback to manual entry
+  // Find Near Me handler - tries GPS first, fallback to manual entry
   const handleFindNearMe = () => {
     if (!('geolocation' in navigator)) {
-      // Show manual location dialog as fallback
-      setIsManualLocationDialogOpen(true);
+      setIsLocationDialogOpen(true);
       return;
     }
     
@@ -253,119 +253,109 @@ const FitnessLocations = () => {
     setLocationError(null);
     
     navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setUserLocation({
+      async (position) => {
+        const coords = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
-        });
+        };
+        setUserLocation(coords);
         setNearMeMode(true);
+        setDiscoverMode(true); // Also enable discover to search for new facilities
+        setSearchQuery('');
+        
+        // Reverse geocode to get location name
+        try {
+          const { data } = await supabase.functions.invoke('geocode-location', {
+            body: { query: `${coords.lat}, ${coords.lng}` }
+          });
+          if (data?.results?.[0]?.display_name) {
+            const name = data.results[0].display_name.split(',').slice(0, 2).join(',');
+            setLocationName(name);
+            setLocationInput(name);
+          } else {
+            setLocationName(t('locations:your_location'));
+          }
+        } catch {
+          setLocationName(t('locations:your_location'));
+        }
+        
         setLocationLoading(false);
-        setSearchQuery(''); // Clear search when using near me
+        
+        // Auto-discover facilities at this location
+        handleDiscoverAtLocation(coords.lat, coords.lng);
       },
       (error) => {
         setLocationLoading(false);
-        // Instead of just showing error, offer manual entry
-        setIsManualLocationDialogOpen(true);
+        setIsLocationDialogOpen(true);
       },
       { enableHighAccuracy: true, timeout: 10000 }
     );
   };
 
-  // Geocode a location string to coordinates via edge function
-  const handleManualLocationSearch = async () => {
-    if (!manualLocationQuery.trim()) return;
+  // Search for location by name and set coordinates
+  const handleLocationSearch = async () => {
+    if (!locationInput.trim()) return;
     
     setGeocodeLoading(true);
     try {
-      console.log('Starting geocode search for:', manualLocationQuery);
-      
       const { data, error } = await supabase.functions.invoke('geocode-location', {
-        body: { query: manualLocationQuery }
+        body: { query: locationInput }
       });
       
-      console.log('Geocode response - data:', data, 'error:', error);
-      
-      if (error) {
-        console.error('Geocoding error:', error);
+      if (error || !data?.results?.length) {
         toast.error(t('locations:location_not_found'));
         setGeocodeLoading(false);
         return;
       }
       
-      if (!data) {
-        console.error('No data returned from geocode');
+      const result = data.results[0];
+      const lat = parseFloat(result.lat);
+      const lng = parseFloat(result.lon);
+      
+      if (isNaN(lat) || isNaN(lng)) {
         toast.error(t('locations:location_not_found'));
         setGeocodeLoading(false);
         return;
       }
       
-      if (data.results && Array.isArray(data.results) && data.results.length > 0) {
-        const result = data.results[0];
-        const lat = parseFloat(result.lat);
-        const lng = parseFloat(result.lon);
-        
-        if (isNaN(lat) || isNaN(lng)) {
-          console.error('Invalid coordinates:', result.lat, result.lon);
-          toast.error(t('locations:location_not_found'));
-          setGeocodeLoading(false);
-          return;
-        }
-        
-        console.log('Setting user location:', { lat, lng });
-        
-        setUserLocation({ lat, lng });
-        setNearMeMode(true);
-        setDiscoverMode(false);
-        // Apply category filter if specified
-        if (nearMeCategoryFilter !== 'all') {
-          setSelectedCategory(nearMeCategoryFilter);
-        }
-        setIsManualLocationDialogOpen(false);
-        setManualLocationQuery('');
-        setNearMeCategoryFilter('all');
-        toast.success(t('locations:location_found'));
-      } else {
-        console.log('No results in geocode response:', data);
-        toast.error(t('locations:location_not_found'));
-      }
+      setUserLocation({ lat, lng });
+      setLocationName(locationInput);
+      setNearMeMode(true);
+      setDiscoverMode(true);
+      setIsLocationDialogOpen(false);
+      toast.success(t('locations:location_found'));
+      
+      // Auto-discover facilities at this location
+      handleDiscoverAtLocation(lat, lng);
     } catch (error) {
-      console.error('Geocoding catch error:', error);
+      console.error('Geocoding error:', error);
       toast.error(t('locations:location_not_found'));
     } finally {
       setGeocodeLoading(false);
     }
   };
 
-  // Discover facilities from external sources (OpenStreetMap)
-  const handleDiscoverGyms = async () => {
-    if (!discoverQuery.trim()) return;
-    
+  // Discover facilities at specific coordinates
+  const handleDiscoverAtLocation = async (lat: number, lng: number) => {
     setDiscoverLoading(true);
     setDiscoveredGyms([]);
     
     try {
-      console.log('Discovering facilities in:', discoverQuery, 'category:', discoverCategory);
-      
       const { data, error } = await supabase.functions.invoke('discover-gyms', {
-        body: { query: discoverQuery, radius: 15000, category: discoverCategory }
+        body: { lat, lon: lng, radius: 15000, category: discoverCategory }
       });
       
       if (error) {
-        console.error('Discover facilities error:', error);
-        toast.error(t('locations:no_locations'));
+        console.error('Discover error:', error);
         return;
       }
       
-      if (data?.results && data.results.length > 0) {
-        console.log('Discovered facilities:', data.results.length);
+      if (data?.results?.length > 0) {
         setDiscoveredGyms(data.results);
         toast.success(t('locations:discover_found', { count: data.results.length }));
-      } else {
-        toast.info(t('locations:no_locations'));
       }
     } catch (error) {
-      console.error('Discover facilities catch error:', error);
-      toast.error(t('common:error'));
+      console.error('Discover error:', error);
     } finally {
       setDiscoverLoading(false);
     }
@@ -841,22 +831,30 @@ const FitnessLocations = () => {
             </Button>
           </div>
           
-          {/* Discover Mode Search */}
-          {discoverMode && (
+          {/* Near Me / Discover Location Bar */}
+          {(nearMeMode || discoverMode) && (
             <Card className="p-4 bg-primary/5 border-primary/20">
               <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-2 text-sm">
+                  <Locate className="h-4 w-4 text-primary" />
+                  <span className="font-medium">{t('locations:searching_near')}:</span>
+                  <span className="text-muted-foreground">{locationName || t('locations:your_location')}</span>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={() => setIsLocationDialogOpen(true)}
+                    className="ml-auto"
+                  >
+                    {t('locations:change_location')}
+                  </Button>
+                </div>
                 <div className="flex flex-col md:flex-row gap-3">
-                  <div className="relative flex-1">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      placeholder={t('locations:discover_placeholder')}
-                      value={discoverQuery}
-                      onChange={(e) => setDiscoverQuery(e.target.value)}
-                      onKeyDown={(e) => e.key === 'Enter' && handleDiscoverGyms()}
-                      className="pl-10"
-                    />
-                  </div>
-                  <Select value={discoverCategory} onValueChange={setDiscoverCategory}>
+                  <Select value={discoverCategory} onValueChange={(val) => {
+                    setDiscoverCategory(val);
+                    if (userLocation) {
+                      handleDiscoverAtLocation(userLocation.lat, userLocation.lng);
+                    }
+                  }}>
                     <SelectTrigger className="w-full md:w-48">
                       <Filter className="h-4 w-4 mr-2" />
                       <SelectValue placeholder={t('locations:filter_category')} />
@@ -870,21 +868,19 @@ const FitnessLocations = () => {
                     </SelectContent>
                   </Select>
                   <Button
-                    onClick={handleDiscoverGyms}
-                    disabled={discoverLoading || !discoverQuery.trim()}
+                    onClick={() => userLocation && handleDiscoverAtLocation(userLocation.lat, userLocation.lng)}
+                    disabled={discoverLoading || !userLocation}
+                    variant="outline"
                   >
                     {discoverLoading ? (
                       <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                     ) : (
                       <Search className="h-4 w-4 mr-2" />
                     )}
-                    {t('locations:discover_search')}
+                    {t('locations:refresh_search')}
                   </Button>
                 </div>
               </div>
-              <p className="text-xs text-muted-foreground mt-2">
-                {t('locations:discover_hint')}
-              </p>
             </Card>
           )}
           
@@ -1015,7 +1011,7 @@ const FitnessLocations = () => {
                   })}
                 </div>
               </>
-            ) : discoverQuery && !discoverLoading ? (
+            ) : userLocation && !discoverLoading ? (
               <Card className="p-8 text-center">
                 <CardContent>
                   <MapPin className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
@@ -1026,9 +1022,17 @@ const FitnessLocations = () => {
             ) : (
               <Card className="p-8 text-center">
                 <CardContent>
-                  <Search className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                  <Locate className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
                   <h3 className="text-lg font-semibold mb-2">{t('locations:discover_title')}</h3>
-                  <p className="text-muted-foreground">{t('locations:discover_desc')}</p>
+                  <p className="text-muted-foreground mb-4">{t('locations:discover_desc')}</p>
+                  <Button onClick={handleFindNearMe} disabled={locationLoading}>
+                    {locationLoading ? (
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    ) : (
+                      <Locate className="h-4 w-4 mr-2" />
+                    )}
+                    {t('locations:find_near_me')}
+                  </Button>
                 </CardContent>
               </Card>
             )}
@@ -1449,8 +1453,8 @@ const FitnessLocations = () => {
           </DialogContent>
         </Dialog>
 
-        {/* Manual Location Dialog */}
-        <Dialog open={isManualLocationDialogOpen} onOpenChange={setIsManualLocationDialogOpen}>
+        {/* Location Dialog */}
+        <Dialog open={isLocationDialogOpen} onOpenChange={setIsLocationDialogOpen}>
           <DialogContent className="max-w-md">
             <DialogHeader>
               <DialogTitle>{t('locations:enter_location')}</DialogTitle>
@@ -1462,17 +1466,17 @@ const FitnessLocations = () => {
               <div>
                 <Label>{t('locations:city_or_address')}</Label>
                 <Input
-                  value={manualLocationQuery}
-                  onChange={(e) => setManualLocationQuery(e.target.value)}
+                  value={locationInput}
+                  onChange={(e) => setLocationInput(e.target.value)}
                   placeholder={t('locations:city_placeholder')}
-                  onKeyDown={(e) => e.key === 'Enter' && handleManualLocationSearch()}
+                  onKeyDown={(e) => e.key === 'Enter' && handleLocationSearch()}
                 />
               </div>
               <div>
                 <Label>{t('locations:facility_type')}</Label>
                 <Select
-                  value={nearMeCategoryFilter}
-                  onValueChange={setNearMeCategoryFilter}
+                  value={discoverCategory}
+                  onValueChange={setDiscoverCategory}
                 >
                   <SelectTrigger>
                     <SelectValue />
@@ -1487,9 +1491,9 @@ const FitnessLocations = () => {
                 </Select>
               </div>
               <Button 
-                onClick={handleManualLocationSearch} 
+                onClick={handleLocationSearch} 
                 className="w-full"
-                disabled={geocodeLoading || !manualLocationQuery.trim()}
+                disabled={geocodeLoading || !locationInput.trim()}
               >
                 {geocodeLoading ? (
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
