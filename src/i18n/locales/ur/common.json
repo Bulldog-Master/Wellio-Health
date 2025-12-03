@@ -1,4 +1,15 @@
 {
+  "nav": {
+    "activity": "سرگرمی",
+    "connect": "جڑیں",
+    "food": "کھانا",
+    "fundraisers": "فنڈ ریزنگ",
+    "locations": "مقامات",
+    "news": "خبریں",
+    "recovery": "ریکوری",
+    "shop": "دکان",
+    "sponsors": "اسپانسرز"
+  },
   "app_name": "Wellio",
   "loading": "لوڈ ہو رہا ہے...",
   "error": "خرابی",

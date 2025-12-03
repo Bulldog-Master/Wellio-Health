@@ -57,6 +57,8 @@
     "climbing": "Climbing Gym",
     "boxing": "Boxing Gym",
     "pilates": "Pilates Studio",
+    "health_store": "Health & Wellness Store",
+    "restaurant": "Healthy Restaurant",
     "other": "Other"
   },
   "price_range": "Price Range",

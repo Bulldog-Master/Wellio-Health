@@ -1,4 +1,15 @@
 {
+  "nav": {
+    "activity": "活动",
+    "connect": "连接",
+    "food": "饮食",
+    "fundraisers": "募捐",
+    "locations": "场馆位置",
+    "news": "新闻",
+    "recovery": "恢复",
+    "shop": "商店",
+    "sponsors": "赞助商"
+  },
   "app_name": "Wellio",
   "loading": "加载中...",
   "save": "保存",

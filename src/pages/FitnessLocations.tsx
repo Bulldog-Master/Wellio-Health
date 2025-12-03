@@ -686,7 +686,7 @@ const FitnessLocations = () => {
 
   const categories = [
     'all', 'gym', 'crossfit', 'mma', 'yoga', 'swimming', 
-    'cycling', 'climbing', 'boxing', 'pilates', 'other'
+    'cycling', 'climbing', 'boxing', 'pilates', 'health_store', 'restaurant', 'other'
   ];
 
   const getDirectionsUrl = (location: FitnessLocation) => {

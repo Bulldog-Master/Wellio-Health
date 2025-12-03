@@ -57,6 +57,8 @@
     "climbing": "Gimnasio de Escalada",
     "boxing": "Gimnasio de Boxeo",
     "pilates": "Estudio de Pilates",
+    "health_store": "Tienda de Salud y Bienestar",
+    "restaurant": "Restaurante Saludable",
     "other": "Otro"
   },
   "price_range": "Rango de Precios",

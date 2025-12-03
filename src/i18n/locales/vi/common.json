@@ -1,4 +1,15 @@
 {
+  "nav": {
+    "activity": "Hoạt động",
+    "connect": "Kết nối",
+    "food": "Thực phẩm",
+    "fundraisers": "Gây quỹ",
+    "locations": "Địa điểm",
+    "news": "Tin tức",
+    "recovery": "Phục hồi",
+    "shop": "Cửa hàng",
+    "sponsors": "Nhà tài trợ"
+  },
   "app_name": "Wellio",
   "loading": "Đang tải...",
   "error": "Lỗi",
