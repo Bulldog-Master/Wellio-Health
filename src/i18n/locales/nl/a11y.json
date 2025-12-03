@@ -1,0 +1,32 @@
+{
+  "navigation": {
+    "main_menu": "Hoofdnavigatiemenu",
+    "skip_to_content": "Ga naar hoofdinhoud",
+    "go_back": "Ga terug naar vorige pagina",
+    "go_home": "Ga naar home",
+    "open_menu": "Open menu",
+    "close_menu": "Sluit menu"
+  },
+  "actions": {
+    "submit_form": "Formulier verzenden",
+    "cancel_action": "Actie annuleren",
+    "save_changes": "Wijzigingen opslaan",
+    "delete_item": "Item verwijderen",
+    "edit_item": "Item bewerken",
+    "close_dialog": "Dialoog sluiten"
+  },
+  "status": {
+    "loading": "Inhoud laden",
+    "error_occurred": "Er is een fout opgetreden",
+    "success_message": "Actie succesvol voltooid"
+  },
+  "theme": {
+    "toggle_theme": "Wissel donker/licht modus",
+    "dark_mode": "Schakel naar donkere modus",
+    "light_mode": "Schakel naar lichte modus"
+  },
+  "language": {
+    "change_language": "Taal wijzigen",
+    "current_language": "Huidige taal: {{language}}"
+  }
+}

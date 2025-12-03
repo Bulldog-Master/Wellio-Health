@@ -1,0 +1,23 @@
+{
+  "current_plan": "現在のプラン",
+  "free_plan": "無料プラン",
+  "pro_plan": "Proプラン",
+  "enterprise_plan": "企業プラン",
+  "features_included": "含まれる機能",
+  "basic_tracking": "基本トラッキング",
+  "limited_workouts": "限定ワークアウト",
+  "community_access": "コミュニティアクセス",
+  "unlimited_workouts": "無制限ワークアウト",
+  "ai_insights": "AIインサイト",
+  "advanced_analytics": "高度な分析",
+  "priority_support": "優先サポート",
+  "all_pro_features": "全Pro機能",
+  "team_features": "チーム機能",
+  "api_access": "APIアクセス",
+  "dedicated_support": "専用サポート",
+  "upgrade_to_pro": "Proにアップグレード",
+  "contact_sales": "営業に連絡",
+  "vip_access": "VIPアクセス",
+  "admin_access": "管理者アクセス",
+  "full_features_unlocked": "全機能アンロック"
+}

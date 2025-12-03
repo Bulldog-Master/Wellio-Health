@@ -1,0 +1,22 @@
+{
+  "workout": "ワークアウト",
+  "workout_plural": "ワークアウト",
+  "workout_count": "{{count}}ワークアウト",
+  "workout_count_plural": "{{count}}ワークアウト",
+  "point": "ポイント",
+  "point_plural": "ポイント",
+  "point_count": "{{count}}ポイント",
+  "point_count_plural": "{{count}}ポイント",
+  "follower": "フォロワー",
+  "follower_plural": "フォロワー",
+  "follower_count": "{{count}}フォロワー",
+  "follower_count_plural": "{{count}}フォロワー",
+  "day": "日",
+  "day_plural": "日",
+  "day_count": "{{count}}日",
+  "day_count_plural": "{{count}}日",
+  "message": "メッセージ",
+  "message_plural": "メッセージ",
+  "message_count": "{{count}}メッセージ",
+  "message_count_plural": "{{count}}メッセージ"
+}

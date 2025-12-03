@@ -1,0 +1,23 @@
+{
+  "current_plan": "Текущий план",
+  "free_plan": "Бесплатный",
+  "pro_plan": "Pro",
+  "enterprise_plan": "Корпоративный",
+  "features_included": "Включённые функции",
+  "basic_tracking": "Базовое отслеживание",
+  "limited_workouts": "Ограниченные тренировки",
+  "community_access": "Доступ к сообществу",
+  "unlimited_workouts": "Безлимитные тренировки",
+  "ai_insights": "ИИ аналитика",
+  "advanced_analytics": "Расширенная аналитика",
+  "priority_support": "Приоритетная поддержка",
+  "all_pro_features": "Все Pro функции",
+  "team_features": "Командные функции",
+  "api_access": "Доступ к API",
+  "dedicated_support": "Выделенная поддержка",
+  "upgrade_to_pro": "Перейти на Pro",
+  "contact_sales": "Связаться с продажами",
+  "vip_access": "VIP доступ",
+  "admin_access": "Админ доступ",
+  "full_features_unlocked": "Все функции разблокированы"
+}

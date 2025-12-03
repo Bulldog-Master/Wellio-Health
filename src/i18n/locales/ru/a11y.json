@@ -1,0 +1,32 @@
+{
+  "navigation": {
+    "main_menu": "Главное меню навигации",
+    "skip_to_content": "Перейти к основному содержимому",
+    "go_back": "Вернуться назад",
+    "go_home": "На главную",
+    "open_menu": "Открыть меню",
+    "close_menu": "Закрыть меню"
+  },
+  "actions": {
+    "submit_form": "Отправить форму",
+    "cancel_action": "Отменить действие",
+    "save_changes": "Сохранить изменения",
+    "delete_item": "Удалить элемент",
+    "edit_item": "Редактировать элемент",
+    "close_dialog": "Закрыть диалог"
+  },
+  "status": {
+    "loading": "Загрузка содержимого",
+    "error_occurred": "Произошла ошибка",
+    "success_message": "Действие успешно завершено"
+  },
+  "theme": {
+    "toggle_theme": "Переключить тему",
+    "dark_mode": "Тёмная тема",
+    "light_mode": "Светлая тема"
+  },
+  "language": {
+    "change_language": "Изменить язык",
+    "current_language": "Текущий язык: {{language}}"
+  }
+}

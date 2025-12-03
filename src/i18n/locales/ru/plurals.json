@@ -1,0 +1,22 @@
+{
+  "workout": "тренировка",
+  "workout_plural": "тренировки",
+  "workout_count": "{{count}} тренировка",
+  "workout_count_plural": "{{count}} тренировок",
+  "point": "очко",
+  "point_plural": "очки",
+  "point_count": "{{count}} очко",
+  "point_count_plural": "{{count}} очков",
+  "follower": "подписчик",
+  "follower_plural": "подписчики",
+  "follower_count": "{{count}} подписчик",
+  "follower_count_plural": "{{count}} подписчиков",
+  "day": "день",
+  "day_plural": "дни",
+  "day_count": "{{count}} день",
+  "day_count_plural": "{{count}} дней",
+  "message": "сообщение",
+  "message_plural": "сообщения",
+  "message_count": "{{count}} сообщение",
+  "message_count_plural": "{{count}} сообщений"
+}

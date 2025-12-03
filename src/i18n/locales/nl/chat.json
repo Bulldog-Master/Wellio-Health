@@ -1,0 +1,21 @@
+{
+  "fitness_assistant": "Fitness Assistent",
+  "fitness_assistant_desc": "Uw AI fitness coach",
+  "ask_anything": "Vraag me alles over fitness, voeding of trainingen...",
+  "type_message": "Typ uw bericht...",
+  "send": "Verzenden",
+  "thinking": "Aan het denken...",
+  "welcome_message": "Hallo! Ik ben uw AI fitness assistent. Vraag me alles over trainingen, voeding, vormtips of fitnessdoelen!",
+  "example_questions": "Voorbeeldvragen",
+  "example_1": "Wat is een goede trainingsroutine voor beginners?",
+  "example_2": "Hoeveel eiwit moet ik per dag eten?",
+  "example_3": "Welke oefeningen werken de core?",
+  "example_4": "Hoe kan ik mijn hardloopuithoudingsvermogen verbeteren?",
+  "clear_chat": "Chat wissen",
+  "chat_cleared": "Chat gewist",
+  "error_sending": "Bericht verzenden mislukt",
+  "premium_chat": "Premium AI Chat",
+  "unlock_ai_chat": "Krijg gepersonaliseerd fitnessadvies van onze AI assistent",
+  "ai_assistant": "AI Assistent",
+  "you": "Jij"
+}
