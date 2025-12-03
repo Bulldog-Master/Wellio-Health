@@ -419,28 +419,37 @@ toast({ title: t('common:error') });
 
 ## File Structure Reference
 
+> **📋 For complete audit details, see: `docs/TRANSLATION_AUDIT_FINAL.md`**
+
 ```
 src/i18n/
-├── config.ts                 # i18n configuration
+├── config.ts                 # i18n configuration (all imports registered)
 └── locales/
-    ├── en/                   # English (source)
-    │   ├── common.json       # Shared strings
-    │   ├── auth.json         # Authentication
-    │   ├── errors.json       # Error messages
-    │   ├── fitness.json      # Fitness features
-    │   ├── nutrition.json    # Food/nutrition
-    │   ├── social.json       # Social features
-    │   ├── settings.json     # Settings
-    │   ├── profile.json      # Profile page
-    │   ├── workout.json      # Workout page
-    │   ├── feed.json         # Feed page
-    │   └── ...
-    ├── es/                   # Spanish
-    │   └── (mirror en/)
-    ├── fr/                   # French
-    ├── de/                   # German
-    ├── pt/                   # Portuguese
-    └── zh/                   # Chinese
+    ├── en/                   # English (source) - 58 namespaces
+    ├── es/                   # Spanish - 58 namespaces (full parity)
+    ├── pt/                   # Portuguese - 21 core namespaces
+    ├── fr/                   # French - 21 core namespaces
+    ├── de/                   # German - 21 core namespaces
+    ├── zh/                   # Chinese - 21 core namespaces
+    ├── tr/                   # Turkish - 21 core namespaces
+    ├── it/                   # Italian - 21 core namespaces
+    ├── nl/                   # Dutch - 21 core namespaces
+    ├── ru/                   # Russian - 21 core namespaces
+    ├── ja/                   # Japanese - 21 core namespaces
+    ├── ko/                   # Korean - 21 core namespaces
+    ├── ar/                   # Arabic - 21 core namespaces
+    ├── hi/                   # Hindi - 21 core namespaces
+    ├── bn/                   # Bengali - 21 core namespaces
+    ├── id/                   # Indonesian - 21 core namespaces
+    ├── pcm/                  # Nigerian Pidgin - 21 core namespaces
+    └── ta/                   # Tamil - 21 core namespaces
+```
+
+### 21 Core Namespaces (All Languages)
+```
+a11y, addons, admin, auth, celebrations, chat, common, feed, fitness,
+news, nutrition, plurals, premium, professional, recovery, seo, settings,
+social, subscription, units, videos
 ```
 
 ---
