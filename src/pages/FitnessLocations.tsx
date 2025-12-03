@@ -154,15 +154,29 @@ const FitnessLocations = () => {
     setGeocodeLoading(true);
     try {
       const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(manualLocationQuery)}&limit=1`
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(manualLocationQuery)}&limit=1`,
+        {
+          headers: {
+            'Accept': 'application/json',
+          }
+        }
       );
+      
+      if (!response.ok) {
+        console.error('Geocoding response error:', response.status, response.statusText);
+        toast.error(t('locations:location_not_found'));
+        return;
+      }
+      
       const results = await response.json();
+      console.log('Geocoding results:', results);
       
       if (results && results.length > 0) {
-        setUserLocation({
-          lat: parseFloat(results[0].lat),
-          lng: parseFloat(results[0].lon),
-        });
+        const lat = parseFloat(results[0].lat);
+        const lng = parseFloat(results[0].lon);
+        console.log('Setting user location:', { lat, lng });
+        
+        setUserLocation({ lat, lng });
         setNearMeMode(true);
         // Apply category filter if specified
         if (nearMeCategoryFilter !== 'all') {
@@ -176,7 +190,8 @@ const FitnessLocations = () => {
         toast.error(t('locations:location_not_found'));
       }
     } catch (error) {
-      toast.error(t('common:error'));
+      console.error('Geocoding error:', error);
+      toast.error(t('locations:location_not_found'));
     } finally {
       setGeocodeLoading(false);
     }
