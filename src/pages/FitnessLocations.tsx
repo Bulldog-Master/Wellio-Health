@@ -147,33 +147,27 @@ const FitnessLocations = () => {
     );
   };
 
-  // Geocode a location string to coordinates
+  // Geocode a location string to coordinates via edge function
   const handleManualLocationSearch = async () => {
     if (!manualLocationQuery.trim()) return;
     
     setGeocodeLoading(true);
     try {
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(manualLocationQuery)}&limit=1`,
-        {
-          headers: {
-            'Accept': 'application/json',
-          }
-        }
-      );
+      const { data, error } = await supabase.functions.invoke('geocode-location', {
+        body: { query: manualLocationQuery }
+      });
       
-      if (!response.ok) {
-        console.error('Geocoding response error:', response.status, response.statusText);
+      if (error) {
+        console.error('Geocoding error:', error);
         toast.error(t('locations:location_not_found'));
         return;
       }
       
-      const results = await response.json();
-      console.log('Geocoding results:', results);
+      console.log('Geocoding response:', data);
       
-      if (results && results.length > 0) {
-        const lat = parseFloat(results[0].lat);
-        const lng = parseFloat(results[0].lon);
+      if (data?.results && data.results.length > 0) {
+        const lat = parseFloat(data.results[0].lat);
+        const lng = parseFloat(data.results[0].lon);
         console.log('Setting user location:', { lat, lng });
         
         setUserLocation({ lat, lng });
