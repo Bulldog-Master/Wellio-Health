@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Session } from "@supabase/supabase-js";
@@ -21,76 +21,95 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const [totpToken, setTotpToken] = useState("");
   const [verifying, setVerifying] = useState(false);
 
+  // Check onboarding only on pathname change, not on every render
+  const checkOnboardingRef = useRef(false);
+
   useEffect(() => {
     let mounted = true;
     
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log('Auth state change:', event, 'session:', !!session);
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, currentSession) => {
       if (!mounted) return;
       
-      setSession(session);
-      // Only redirect on explicit sign out, not on other events
+      // Only update session state, don't redirect unless explicitly signed out
       if (event === 'SIGNED_OUT') {
         console.log('User signed out, redirecting to auth');
+        setSession(null);
         navigate("/auth");
+      } else if (currentSession) {
+        setSession(currentSession);
       }
     });
 
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      if (!mounted) return;
-      
-      setSession(session);
-      if (!session) {
-        navigate("/auth");
-        setLoading(false);
-        return;
-      }
-
+    // Initial session check - only run once
+    const initAuth = async () => {
       try {
-        // Check onboarding status
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("onboarding_completed")
-          .eq("id", session.user.id)
-          .maybeSingle();
+        const { data: { session: initialSession } } = await supabase.auth.getSession();
+        
+        if (!mounted) return;
+        
+        if (!initialSession) {
+          navigate("/auth");
+          setLoading(false);
+          return;
+        }
 
-        // Check if 2FA is enabled
-        const { data: authSecret } = await supabase
-          .from("auth_secrets")
-          .select("two_factor_enabled")
-          .eq("user_id", session.user.id)
-          .maybeSingle();
+        setSession(initialSession);
+
+        // Check 2FA and onboarding status
+        const [profileResult, authSecretResult] = await Promise.all([
+          supabase
+            .from("profiles")
+            .select("onboarding_completed")
+            .eq("id", initialSession.user.id)
+            .maybeSingle(),
+          supabase
+            .from("auth_secrets")
+            .select("two_factor_enabled")
+            .eq("user_id", initialSession.user.id)
+            .maybeSingle()
+        ]);
 
         if (!mounted) return;
 
         // Check if 2FA is enabled and not yet verified in this session
-        const twoFactorVerified = sessionStorage.getItem(`2fa_verified_${session.user.id}`);
-        if (authSecret?.two_factor_enabled && !twoFactorVerified) {
+        const twoFactorVerified = sessionStorage.getItem(`2fa_verified_${initialSession.user.id}`);
+        if (authSecretResult.data?.two_factor_enabled && !twoFactorVerified) {
           setNeeds2FA(true);
           setLoading(false);
           return;
         }
 
         // Check if onboarding is completed (skip check for onboarding page itself)
-        if (location.pathname !== "/onboarding") {
-          if (profile && !profile.onboarding_completed) {
+        if (location.pathname !== "/onboarding" && !checkOnboardingRef.current) {
+          checkOnboardingRef.current = true;
+          if (profileResult.data && !profileResult.data.onboarding_completed) {
             navigate("/onboarding");
           }
         }
+        
+        setLoading(false);
       } catch (error) {
         console.error('Error checking auth state:', error);
+        if (mounted) {
+          setLoading(false);
+        }
       }
+    };
 
-      if (mounted) {
-        setLoading(false);
-      }
-    });
+    initAuth();
 
     return () => {
       mounted = false;
       subscription.unsubscribe();
     };
-  }, [navigate, location.pathname]);
+  }, []); // Empty dependency array - only run on mount
+
+  // Separate effect for pathname-based onboarding check
+  useEffect(() => {
+    if (session && location.pathname !== "/onboarding") {
+      checkOnboardingRef.current = false;
+    }
+  }, [location.pathname, session]);
 
   const handleVerify2FA = async () => {
     if (!totpToken || totpToken.length !== 6) {
