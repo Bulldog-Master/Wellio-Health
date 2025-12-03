@@ -43,7 +43,7 @@
   "use_my_location": "使用我的位置",
   "location_detected": "位置已检测！",
   "discover_title": "发现健康场所",
-  "discover_desc": "点击"查找附近"或输入位置以发现健身房、健康商店、餐厅等",
+  "discover_desc": "点击'查找附近'或输入位置以发现健身房、健康商店、餐厅等",
   "external_source": "OpenStreetMap",
   "add_to_directory": "添加到目录",
   "categories": {

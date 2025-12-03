@@ -1,15 +1,4 @@
 {
-  "nav": {
-    "activity": "क्रियाकलाप",
-    "connect": "जोडा",
-    "food": "अन्न",
-    "fundraisers": "निधी संकलन",
-    "wellness_directory": "कल्याण निर्देशिका",
-    "news": "बातम्या",
-    "recovery": "पुनर्प्राप्ती",
-    "shop": "दुकान",
-    "sponsors": "प्रायोजक"
-  },
   "app_name": "Wellio",
   "loading": "लोड होत आहे...",
   "error": "त्रुटी",
@@ -61,6 +50,10 @@
     "settings": "सेटिंग्ज",
     "news": "बातम्या",
     "recovery": "पुनर्प्राप्ती",
-    "locations": "ठिकाणे"
+    "locations": "ठिकाणे",
+    "fundraisers": "निधी संकलन",
+    "wellness_directory": "कल्याण निर्देशिका",
+    "shop": "दुकान",
+    "sponsors": "प्रायोजक"
   }
 }
