@@ -37,10 +37,13 @@
   "map_view": "Vista de Mapa",
   "list_view": "Vista de Lista",
   "location_submitted": "Ubicación enviada para revisión",
+  "location_deleted": "Ubicación eliminada exitosamente",
   "review_submitted": "Reseña enviada exitosamente",
   "enable_location": "Habilita el acceso a ubicación para encontrar lugares cerca de ti",
   "no_autocomplete_results": "No se encontraron coincidencias",
   "manual_entry_hint": "Puedes escribir el nombre manualmente y completar la dirección abajo",
+  "delete_location": "Eliminar Ubicación",
+  "delete_location_confirm": "¿Estás seguro de que deseas eliminar esta ubicación? Esta acción no se puede deshacer.",
   "form": {
     "name": "Nombre de la Ubicación",
     "category": "Categoría",
