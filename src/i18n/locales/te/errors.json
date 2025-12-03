@@ -1,0 +1,9 @@
+{
+  "error": "లోపం",
+  "something_went_wrong": "ఏదో తప్పు జరిగింది",
+  "try_again": "మళ్ళీ ప్రయత్నించండి",
+  "page_not_found": "పేజీ కనుగొనబడలేదు",
+  "network_error": "నెట్‌వర్క్ లోపం",
+  "unauthorized": "అనధికారం",
+  "forbidden": "నిషేధించబడింది"
+}

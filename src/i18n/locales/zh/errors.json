@@ -1,0 +1,9 @@
+{
+  "error": "错误",
+  "something_went_wrong": "出了点问题",
+  "try_again": "重试",
+  "page_not_found": "页面未找到",
+  "network_error": "网络错误",
+  "unauthorized": "未授权",
+  "forbidden": "禁止访问"
+}

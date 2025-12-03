@@ -1,0 +1,9 @@
+{
+  "error": "ত্রুটি",
+  "something_went_wrong": "কিছু ভুল হয়েছে",
+  "try_again": "আবার চেষ্টা করুন",
+  "page_not_found": "পেজ পাওয়া যায়নি",
+  "network_error": "নেটওয়ার্ক ত্রুটি",
+  "unauthorized": "অননুমোদিত",
+  "forbidden": "নিষিদ্ধ"
+}

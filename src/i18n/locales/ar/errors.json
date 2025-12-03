@@ -1,0 +1,9 @@
+{
+  "error": "خطأ",
+  "something_went_wrong": "حدث خطأ ما",
+  "try_again": "حاول مرة أخرى",
+  "page_not_found": "الصفحة غير موجودة",
+  "network_error": "خطأ في الشبكة",
+  "unauthorized": "غير مصرح",
+  "forbidden": "محظور"
+}

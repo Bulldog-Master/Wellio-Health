@@ -1,0 +1,9 @@
+{
+  "error": "Hata",
+  "something_went_wrong": "Bir şeyler yanlış gitti",
+  "try_again": "Tekrar Dene",
+  "page_not_found": "Sayfa bulunamadı",
+  "network_error": "Ağ hatası",
+  "unauthorized": "Yetkisiz",
+  "forbidden": "Erişim engellendi"
+}

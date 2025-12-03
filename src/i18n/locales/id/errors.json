@@ -1,0 +1,9 @@
+{
+  "error": "Error",
+  "something_went_wrong": "Terjadi kesalahan",
+  "try_again": "Coba lagi",
+  "page_not_found": "Halaman tidak ditemukan",
+  "network_error": "Error jaringan",
+  "unauthorized": "Tidak sah",
+  "forbidden": "Dilarang"
+}

@@ -1,0 +1,9 @@
+{
+  "error": "त्रुटि",
+  "something_went_wrong": "कुछ गलत हो गया",
+  "try_again": "फिर से कोशिश करें",
+  "page_not_found": "पेज नहीं मिला",
+  "network_error": "नेटवर्क त्रुटि",
+  "unauthorized": "अनधिकृत",
+  "forbidden": "प्रतिबंधित"
+}
