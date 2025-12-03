@@ -23,6 +23,10 @@ const languages = [
   { code: "ko", name: "한국어", flag: "🇰🇷" },
   { code: "ar", name: "العربية", flag: "🇸🇦" },
   { code: "hi", name: "हिन्दी", flag: "🇮🇳" },
+  { code: "bn", name: "বাংলা", flag: "🇧🇩" },
+  { code: "id", name: "Bahasa Indonesia", flag: "🇮🇩" },
+  { code: "pcm", name: "Naija Pidgin", flag: "🇳🇬" },
+  { code: "ta", name: "தமிழ்", flag: "🇮🇳" },
 ];
 
 export const LanguageSwitcher = () => {
