@@ -1,0 +1,23 @@
+{
+  "addon_features": "অ্যাড-অন ফিচার",
+  "addon_features_desc": "আপনার সাবস্ক্রিপশন কাস্টমাইজ করুন",
+  "ai_coach": "AI কোচ",
+  "ai_coach_desc": "ব্যক্তিগত AI ফিটনেস কোচিং",
+  "ai_analytics": "AI অ্যানালিটিক্স",
+  "ai_analytics_desc": "উন্নত AI-চালিত ইনসাইট",
+  "ai_nutrition": "AI পুষ্টি",
+  "ai_nutrition_desc": "স্মার্ট খাবার পরিকল্পনা এবং ট্র্যাকিং",
+  "trainer_access": "ট্রেনার অ্যাক্সেস",
+  "trainer_access_desc": "সার্টিফায়েড ট্রেনারদের সাথে সংযোগ করুন",
+  "practitioner_access": "প্র্যাক্টিশনার অ্যাক্সেস",
+  "practitioner_access_desc": "স্বাস্থ্য বিশেষজ্ঞদের সাথে সংযোগ করুন",
+  "recovery_pro": "রিকভারি প্রো",
+  "recovery_pro_desc": "উন্নত রিকভারি ট্র্যাকিং",
+  "live_sessions": "লাইভ সেশন",
+  "live_sessions_desc": "লাইভ ওয়ার্কআউট সেশনে যোগ দিন",
+  "per_month": "/মাস",
+  "add_addon": "যোগ করুন",
+  "remove_addon": "সরান",
+  "active": "সক্রিয়",
+  "coming_soon": "শীঘ্রই আসছে"
+}

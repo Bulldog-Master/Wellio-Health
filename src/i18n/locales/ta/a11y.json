@@ -1,0 +1,32 @@
+{
+  "navigation": {
+    "main_menu": "முதன்மை வழிசெலுத்தல் மெனு",
+    "skip_to_content": "முதன்மை உள்ளடக்கத்திற்கு செல்",
+    "go_back": "முந்தைய பக்கத்திற்கு திரும்பு",
+    "go_home": "முகப்புக்கு செல்",
+    "open_menu": "மெனு திற",
+    "close_menu": "மெனு மூடு"
+  },
+  "actions": {
+    "submit_form": "படிவம் சமர்ப்பி",
+    "cancel_action": "செயலை ரத்து செய்",
+    "save_changes": "மாற்றங்களை சேமி",
+    "delete_item": "உருப்படியை நீக்கு",
+    "edit_item": "உருப்படியை திருத்து",
+    "close_dialog": "உரையாடலை மூடு"
+  },
+  "status": {
+    "loading": "உள்ளடக்கம் ஏற்றப்படுகிறது",
+    "error_occurred": "பிழை ஏற்பட்டது",
+    "success_message": "செயல் வெற்றிகரமாக முடிந்தது"
+  },
+  "theme": {
+    "toggle_theme": "இருள்/ஒளி பயன்முறை மாற்று",
+    "dark_mode": "இருள் பயன்முறைக்கு மாறு",
+    "light_mode": "ஒளி பயன்முறைக்கு மாறு"
+  },
+  "language": {
+    "change_language": "மொழி மாற்று",
+    "current_language": "தற்போதைய மொழி: {{language}}"
+  }
+}

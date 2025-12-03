@@ -1,0 +1,32 @@
+{
+  "navigation": {
+    "main_menu": "Main navigation menu",
+    "skip_to_content": "Skip to main content",
+    "go_back": "Go back to previous page",
+    "go_home": "Go to home",
+    "open_menu": "Open menu",
+    "close_menu": "Close menu"
+  },
+  "actions": {
+    "submit_form": "Submit form",
+    "cancel_action": "Cancel action",
+    "save_changes": "Save changes",
+    "delete_item": "Delete item",
+    "edit_item": "Edit item",
+    "close_dialog": "Close dialog"
+  },
+  "status": {
+    "loading": "Content dey load",
+    "error_occurred": "Error don happen",
+    "success_message": "Action don complete successfully"
+  },
+  "theme": {
+    "toggle_theme": "Toggle dark/light mode",
+    "dark_mode": "Switch to dark mode",
+    "light_mode": "Switch to light mode"
+  },
+  "language": {
+    "change_language": "Change language",
+    "current_language": "Current language: {{language}}"
+  }
+}

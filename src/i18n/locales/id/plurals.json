@@ -1,0 +1,22 @@
+{
+  "workout": "latihan",
+  "workout_plural": "latihan",
+  "workout_count": "{{count}} latihan",
+  "workout_count_plural": "{{count}} latihan",
+  "point": "poin",
+  "point_plural": "poin",
+  "point_count": "{{count}} poin",
+  "point_count_plural": "{{count}} poin",
+  "follower": "pengikut",
+  "follower_plural": "pengikut",
+  "follower_count": "{{count}} pengikut",
+  "follower_count_plural": "{{count}} pengikut",
+  "day": "hari",
+  "day_plural": "hari",
+  "day_count": "{{count}} hari",
+  "day_count_plural": "{{count}} hari",
+  "message": "pesan",
+  "message_plural": "pesan",
+  "message_count": "{{count}} pesan",
+  "message_count_plural": "{{count}} pesan"
+}

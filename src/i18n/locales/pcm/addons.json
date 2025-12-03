@@ -1,0 +1,23 @@
+{
+  "addon_features": "Add-on features",
+  "addon_features_desc": "Customize your subscription",
+  "ai_coach": "AI Coach",
+  "ai_coach_desc": "Personal AI fitness coaching",
+  "ai_analytics": "AI Analytics",
+  "ai_analytics_desc": "Advanced AI-powered insights",
+  "ai_nutrition": "AI Nutrition",
+  "ai_nutrition_desc": "Smart meal planning and tracking",
+  "trainer_access": "Trainer access",
+  "trainer_access_desc": "Connect with certified trainers",
+  "practitioner_access": "Practitioner access",
+  "practitioner_access_desc": "Connect with health professionals",
+  "recovery_pro": "Recovery Pro",
+  "recovery_pro_desc": "Advanced recovery tracking",
+  "live_sessions": "Live sessions",
+  "live_sessions_desc": "Join live workout sessions",
+  "per_month": "/month",
+  "add_addon": "Add",
+  "remove_addon": "Remove",
+  "active": "Active",
+  "coming_soon": "Coming soon"
+}

@@ -1,0 +1,22 @@
+{
+  "workout": "பயிற்சி",
+  "workout_plural": "பயிற்சிகள்",
+  "workout_count": "{{count}} பயிற்சி",
+  "workout_count_plural": "{{count}} பயிற்சிகள்",
+  "point": "புள்ளி",
+  "point_plural": "புள்ளிகள்",
+  "point_count": "{{count}} புள்ளி",
+  "point_count_plural": "{{count}} புள்ளிகள்",
+  "follower": "பின்தொடர்பவர்",
+  "follower_plural": "பின்தொடர்பவர்கள்",
+  "follower_count": "{{count}} பின்தொடர்பவர்",
+  "follower_count_plural": "{{count}} பின்தொடர்பவர்கள்",
+  "day": "நாள்",
+  "day_plural": "நாட்கள்",
+  "day_count": "{{count}} நாள்",
+  "day_count_plural": "{{count}} நாட்கள்",
+  "message": "செய்தி",
+  "message_plural": "செய்திகள்",
+  "message_count": "{{count}} செய்தி",
+  "message_count_plural": "{{count}} செய்திகள்"
+}

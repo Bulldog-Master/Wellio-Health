@@ -1,0 +1,21 @@
+{
+  "fitness_assistant": "피트니스 어시스턴트",
+  "fitness_assistant_desc": "AI 피트니스 코치",
+  "ask_anything": "피트니스, 영양, 운동에 대해 무엇이든 물어보세요...",
+  "type_message": "메시지 입력...",
+  "send": "보내기",
+  "thinking": "생각 중...",
+  "welcome_message": "안녕하세요! AI 피트니스 어시스턴트입니다. 운동, 영양, 자세, 목표에 대해 무엇이든 물어보세요!",
+  "example_questions": "예시 질문",
+  "example_1": "초보자를 위한 좋은 운동 루틴은?",
+  "example_2": "하루에 단백질을 얼마나 섭취해야 하나요?",
+  "example_3": "코어를 강화하는 운동은?",
+  "example_4": "달리기 지구력을 어떻게 향상시킬 수 있나요?",
+  "clear_chat": "채팅 지우기",
+  "chat_cleared": "채팅이 지워졌습니다",
+  "error_sending": "메시지 전송 실패",
+  "premium_chat": "프리미엄 AI 채팅",
+  "unlock_ai_chat": "AI 어시스턴트로부터 맞춤 피트니스 조언 받기",
+  "ai_assistant": "AI 어시스턴트",
+  "you": "나"
+}

@@ -1,0 +1,22 @@
+{
+  "workout": "ওয়ার্কআউট",
+  "workout_plural": "ওয়ার্কআউট",
+  "workout_count": "{{count}}টি ওয়ার্কআউট",
+  "workout_count_plural": "{{count}}টি ওয়ার্কআউট",
+  "point": "পয়েন্ট",
+  "point_plural": "পয়েন্ট",
+  "point_count": "{{count}} পয়েন্ট",
+  "point_count_plural": "{{count}} পয়েন্ট",
+  "follower": "ফলোয়ার",
+  "follower_plural": "ফলোয়ার",
+  "follower_count": "{{count}} জন ফলোয়ার",
+  "follower_count_plural": "{{count}} জন ফলোয়ার",
+  "day": "দিন",
+  "day_plural": "দিন",
+  "day_count": "{{count}} দিন",
+  "day_count_plural": "{{count}} দিন",
+  "message": "বার্তা",
+  "message_plural": "বার্তা",
+  "message_count": "{{count}}টি বার্তা",
+  "message_count_plural": "{{count}}টি বার্তা"
+}

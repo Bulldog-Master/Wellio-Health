@@ -1,0 +1,32 @@
+{
+  "navigation": {
+    "main_menu": "প্রধান নেভিগেশন মেনু",
+    "skip_to_content": "মূল বিষয়বস্তুতে যান",
+    "go_back": "আগের পৃষ্ঠায় ফিরে যান",
+    "go_home": "হোমে যান",
+    "open_menu": "মেনু খুলুন",
+    "close_menu": "মেনু বন্ধ করুন"
+  },
+  "actions": {
+    "submit_form": "ফর্ম জমা দিন",
+    "cancel_action": "কাজ বাতিল করুন",
+    "save_changes": "পরিবর্তন সংরক্ষণ করুন",
+    "delete_item": "আইটেম মুছুন",
+    "edit_item": "আইটেম সম্পাদনা করুন",
+    "close_dialog": "ডায়ালগ বন্ধ করুন"
+  },
+  "status": {
+    "loading": "বিষয়বস্তু লোড হচ্ছে",
+    "error_occurred": "একটি ত্রুটি ঘটেছে",
+    "success_message": "কাজ সফলভাবে সম্পন্ন হয়েছে"
+  },
+  "theme": {
+    "toggle_theme": "ডার্ক/লাইট মোড টগল করুন",
+    "dark_mode": "ডার্ক মোডে স্যুইচ করুন",
+    "light_mode": "লাইট মোডে স্যুইচ করুন"
+  },
+  "language": {
+    "change_language": "ভাষা পরিবর্তন করুন",
+    "current_language": "বর্তমান ভাষা: {{language}}"
+  }
+}

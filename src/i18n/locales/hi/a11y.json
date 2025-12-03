@@ -1,0 +1,32 @@
+{
+  "navigation": {
+    "main_menu": "मुख्य नेविगेशन मेनू",
+    "skip_to_content": "मुख्य सामग्री पर जाएं",
+    "go_back": "पिछले पेज पर वापस जाएं",
+    "go_home": "होम पर जाएं",
+    "open_menu": "मेनू खोलें",
+    "close_menu": "मेनू बंद करें"
+  },
+  "actions": {
+    "submit_form": "फॉर्म सबमिट करें",
+    "cancel_action": "क्रिया रद्द करें",
+    "save_changes": "परिवर्तन सेव करें",
+    "delete_item": "आइटम हटाएं",
+    "edit_item": "आइटम संपादित करें",
+    "close_dialog": "डायलॉग बंद करें"
+  },
+  "status": {
+    "loading": "सामग्री लोड हो रही है",
+    "error_occurred": "एक त्रुटि हुई",
+    "success_message": "क्रिया सफलतापूर्वक पूर्ण हुई"
+  },
+  "theme": {
+    "toggle_theme": "डार्क/लाइट मोड टॉगल करें",
+    "dark_mode": "डार्क मोड पर स्विच करें",
+    "light_mode": "लाइट मोड पर स्विच करें"
+  },
+  "language": {
+    "change_language": "भाषा बदलें",
+    "current_language": "वर्तमान भाषा: {{language}}"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "workout": "वर्कआउट",
+  "workout_plural": "वर्कआउट",
+  "workout_count": "{{count}} वर्कआउट",
+  "workout_count_plural": "{{count}} वर्कआउट",
+  "point": "पॉइंट",
+  "point_plural": "पॉइंट",
+  "point_count": "{{count}} पॉइंट",
+  "point_count_plural": "{{count}} पॉइंट",
+  "follower": "फॉलोअर",
+  "follower_plural": "फॉलोअर्स",
+  "follower_count": "{{count}} फॉलोअर",
+  "follower_count_plural": "{{count}} फॉलोअर्स",
+  "day": "दिन",
+  "day_plural": "दिन",
+  "day_count": "{{count}} दिन",
+  "day_count_plural": "{{count}} दिन",
+  "message": "संदेश",
+  "message_plural": "संदेश",
+  "message_count": "{{count}} संदेश",
+  "message_count_plural": "{{count}} संदेश"
+}

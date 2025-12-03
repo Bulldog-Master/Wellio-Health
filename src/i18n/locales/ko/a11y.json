@@ -1,0 +1,32 @@
+{
+  "navigation": {
+    "main_menu": "메인 내비게이션 메뉴",
+    "skip_to_content": "본문으로 건너뛰기",
+    "go_back": "이전 페이지로 돌아가기",
+    "go_home": "홈으로 이동",
+    "open_menu": "메뉴 열기",
+    "close_menu": "메뉴 닫기"
+  },
+  "actions": {
+    "submit_form": "양식 제출",
+    "cancel_action": "작업 취소",
+    "save_changes": "변경사항 저장",
+    "delete_item": "항목 삭제",
+    "edit_item": "항목 수정",
+    "close_dialog": "대화상자 닫기"
+  },
+  "status": {
+    "loading": "콘텐츠 로딩 중",
+    "error_occurred": "오류가 발생했습니다",
+    "success_message": "작업이 성공적으로 완료되었습니다"
+  },
+  "theme": {
+    "toggle_theme": "다크/라이트 모드 전환",
+    "dark_mode": "다크 모드로 전환",
+    "light_mode": "라이트 모드로 전환"
+  },
+  "language": {
+    "change_language": "언어 변경",
+    "current_language": "현재 언어: {{language}}"
+  }
+}

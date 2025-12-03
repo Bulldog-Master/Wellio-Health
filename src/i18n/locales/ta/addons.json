@@ -1,0 +1,23 @@
+{
+  "addon_features": "கூடுதல் அம்சங்கள்",
+  "addon_features_desc": "உங்கள் சந்தாவை தனிப்பயனாக்குங்கள்",
+  "ai_coach": "AI பயிற்சியாளர்",
+  "ai_coach_desc": "தனிப்பயன் AI ஃபிட்னஸ் பயிற்சி",
+  "ai_analytics": "AI பகுப்பாய்வு",
+  "ai_analytics_desc": "மேம்பட்ட AI சக்தியுள்ள நுண்ணறிவுகள்",
+  "ai_nutrition": "AI ஊட்டச்சத்து",
+  "ai_nutrition_desc": "திறமையான உணவு திட்டமிடல் மற்றும் கண்காணிப்பு",
+  "trainer_access": "பயிற்சியாளர் அணுகல்",
+  "trainer_access_desc": "சான்றிதழ் பெற்ற பயிற்சியாளர்களுடன் இணைக்கவும்",
+  "practitioner_access": "மருத்துவர் அணுகல்",
+  "practitioner_access_desc": "சுகாதார நிபுணர்களுடன் இணைக்கவும்",
+  "recovery_pro": "ரிகவரி ப்ரோ",
+  "recovery_pro_desc": "மேம்பட்ட மீட்பு கண்காணிப்பு",
+  "live_sessions": "நேரடி அமர்வுகள்",
+  "live_sessions_desc": "நேரடி பயிற்சி அமர்வுகளில் சேரவும்",
+  "per_month": "/மாதம்",
+  "add_addon": "சேர்",
+  "remove_addon": "நீக்கு",
+  "active": "செயலில்",
+  "coming_soon": "விரைவில் வருகிறது"
+}
