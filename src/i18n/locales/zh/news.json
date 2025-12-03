@@ -35,6 +35,12 @@
     "biohacker": "生物黑客",
     "biohacker_desc": "生物黑客、长寿科学和性能优化",
     "medical": "医学",
-    "medical_desc": "医学突破、健康研究和运动医学"
+    "medical_desc": "医学突破、健康研究和运动医学",
+    "boxing": "拳击",
+    "boxing_desc": "职业拳击、重量级比赛和拳台新闻",
+    "trx": "TRX悬挂训练",
+    "trx_desc": "悬挂训练、自重锻炼和功能性健身",
+    "hiking": "徒步与登山",
+    "hiking_desc": "徒步冒险、山地步道和户外探索"
   }
 }

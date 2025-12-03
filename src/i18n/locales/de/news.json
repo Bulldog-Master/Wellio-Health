@@ -35,6 +35,12 @@
     "biohacker": "Biohacker",
     "biohacker_desc": "Biohacking, Langlebigkeitswissenschaft und Leistungsoptimierung",
     "medical": "Medizin",
-    "medical_desc": "Medizinische Durchbrüche, Gesundheitsforschung und Sportmedizin"
+    "medical_desc": "Medizinische Durchbrüche, Gesundheitsforschung und Sportmedizin",
+    "boxing": "Boxen",
+    "boxing_desc": "Profiboxen, Schwergewichtskämpfe und Ring-Nachrichten",
+    "trx": "TRX & Schlingentraining",
+    "trx_desc": "Schlingentraining, Körpergewichtsübungen und funktionelles Fitness",
+    "hiking": "Wandern & Trekking",
+    "hiking_desc": "Wanderabenteuer, Bergpfade und Outdoor-Erkundung"
   }
 }
