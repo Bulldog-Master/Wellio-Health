@@ -35,6 +35,12 @@
     "biohacker": "Biohacker",
     "biohacker_desc": "Biohacking, science de la longévité et optimisation des performances",
     "medical": "Médical",
-    "medical_desc": "Avancées médicales, recherche en santé et médecine du sport"
+    "medical_desc": "Avancées médicales, recherche en santé et médecine du sport",
+    "boxing": "Boxe",
+    "boxing_desc": "Boxe professionnel, combats poids lourds et actualités du ring",
+    "trx": "TRX & Suspension",
+    "trx_desc": "Entraînement en suspension, exercices au poids du corps et fitness fonctionnel",
+    "hiking": "Randonnée & Trekking",
+    "hiking_desc": "Aventures de randonnée, sentiers de montagne et exploration en plein air"
   }
 }

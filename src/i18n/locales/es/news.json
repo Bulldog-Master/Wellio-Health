@@ -39,7 +39,13 @@
     "biohacker": "Biohacker",
     "biohacker_desc": "Biohacking, ciencia de longevidad y optimización del rendimiento",
     "medical": "Médico",
-    "medical_desc": "Avances médicos, investigación de salud y medicina deportiva"
+    "medical_desc": "Avances médicos, investigación de salud y medicina deportiva",
+    "boxing": "Boxeo",
+    "boxing_desc": "Boxeo profesional, peleas de peso pesado y noticias del ring",
+    "trx": "TRX & Entrenamiento en Suspensión",
+    "trx_desc": "Entrenamiento en suspensión, ejercicios con peso corporal y fitness funcional",
+    "hiking": "Senderismo & Trekking",
+    "hiking_desc": "Aventuras de senderismo, senderos de montaña y exploración al aire libre"
   },
   "items": {
     "latest": {
@@ -111,6 +117,21 @@
       "item1": "Nuevas Guías de Ejercicio Post-Cirugía Cardíaca",
       "item2": "Avances en Medicina Deportiva: PRP y Células Madre",
       "item3": "Ciencia del Sueño: Impacto en Rendimiento Atlético"
+    },
+    "boxing": {
+      "item1": "Tyson Fury vs Oleksandr Usyk II - Revancha del Siglo",
+      "item2": "Canelo Álvarez Defiende Títulos Súper Medianos",
+      "item3": "Boxeo Olímpico: Clasificatorios París 2024"
+    },
+    "trx": {
+      "item1": "Entrenamiento TRX: Revolución del Fitness Funcional",
+      "item2": "Ejercicios de Suspensión para Fuerza Core",
+      "item3": "TRX en Casa: Guía Completa para Principiantes"
+    },
+    "hiking": {
+      "item1": "Sendero de los Apalaches: Guía Completa 2025",
+      "item2": "Trekking en el Camino de Santiago: Nuevas Rutas",
+      "item3": "Senderismo en los Pirineos: Mejores Rutas"
     }
   },
   "dates": {
@@ -183,6 +204,21 @@
       "item1": "Dic 2024",
       "item2": "Nov 2024",
       "item3": "2025"
+    },
+    "boxing": {
+      "item1": "21 Dic 2024",
+      "item2": "Sep 2025",
+      "item3": "Jul-Ago 2024"
+    },
+    "trx": {
+      "item1": "2025",
+      "item2": "Nov 2024",
+      "item3": "Dic 2024"
+    },
+    "hiking": {
+      "item1": "Temporada 2025",
+      "item2": "Todo el Año",
+      "item3": "Jun-Sep 2025"
     }
   },
   "urls": {
@@ -255,6 +291,21 @@
       "item1": "https://www.mayoclinic.org/healthy-lifestyle/fitness",
       "item2": "https://www.webmd.com/fitness-exercise/",
       "item3": "https://www.health.harvard.edu/exercise-and-fitness"
+    },
+    "boxing": {
+      "item1": "https://www.boxingscene.com/",
+      "item2": "https://www.espn.com/boxing/",
+      "item3": "https://olympics.com/en/sports/boxing"
+    },
+    "trx": {
+      "item1": "https://www.trxtraining.com/",
+      "item2": "https://www.menshealth.com/fitness/",
+      "item3": "https://www.womenshealthmag.com/fitness/"
+    },
+    "hiking": {
+      "item1": "https://www.alltrails.com/",
+      "item2": "https://www.rei.com/learn/expert-advice/hiking.html",
+      "item3": "https://www.hikingproject.com/"
     }
   }
 }
