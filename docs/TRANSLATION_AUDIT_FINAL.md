@@ -9,29 +9,29 @@
 
 | # | Language | Code | Flag | Status |
 |---|----------|------|------|--------|
-| 1 | English | en | 🇺🇸 | ✅ Source (58 namespaces) |
+| 1 | English | en | 🇺🇸 | ✅ Complete (58 namespaces) |
 | 2 | Spanish | es | 🇪🇸 | ✅ Complete (58 namespaces) |
-| 3 | Portuguese | pt | 🇧🇷 | ✅ Core (23 namespaces) |
-| 4 | French | fr | 🇫🇷 | ✅ Core (23 namespaces) |
-| 5 | German | de | 🇩🇪 | ✅ Core (23 namespaces) |
-| 6 | Chinese | zh | 🇨🇳 | ✅ Core (23 namespaces) |
-| 7 | Turkish | tr | 🇹🇷 | ✅ Core (23 namespaces) |
-| 8 | Italian | it | 🇮🇹 | ✅ Core (23 namespaces) |
-| 9 | Dutch | nl | 🇳🇱 | ✅ Core (23 namespaces) |
-| 10 | Russian | ru | 🇷🇺 | ✅ Core (23 namespaces) |
-| 11 | Japanese | ja | 🇯🇵 | ✅ Core (23 namespaces) |
-| 12 | Korean | ko | 🇰🇷 | ✅ Core (23 namespaces) |
-| 13 | Arabic | ar | 🇸🇦 | ✅ Core (23 namespaces) |
-| 14 | Hindi | hi | 🇮🇳 | ✅ Core (23 namespaces) |
-| 15 | Bengali | bn | 🇧🇩 | ✅ Core (23 namespaces) |
-| 16 | Indonesian | id | 🇮🇩 | ✅ Core (23 namespaces) |
-| 17 | Nigerian Pidgin | pcm | 🇳🇬 | ✅ Core (23 namespaces) |
-| 18 | Tamil | ta | 🇮🇳 | ✅ Core (23 namespaces) |
-| 19 | Urdu | ur | 🇵🇰 | ✅ Core (23 namespaces) |
-| 20 | Egyptian Arabic | arz | 🇪🇬 | ✅ Core (23 namespaces) |
-| 21 | Marathi | mr | 🇮🇳 | ✅ Core (23 namespaces) |
-| 22 | Telugu | te | 🇮🇳 | ✅ Core (23 namespaces) |
-| 23 | Vietnamese | vi | 🇻🇳 | ✅ Core (23 namespaces) |
+| 3 | Portuguese | pt | 🇧🇷 | ✅ Complete (58 namespaces) |
+| 4 | French | fr | 🇫🇷 | ✅ Complete (58 namespaces) |
+| 5 | German | de | 🇩🇪 | ✅ Complete (58 namespaces) |
+| 6 | Chinese | zh | 🇨🇳 | ✅ Complete (58 namespaces) |
+| 7 | Turkish | tr | 🇹🇷 | ✅ Complete (58 namespaces) |
+| 8 | Italian | it | 🇮🇹 | ✅ Complete (58 namespaces) |
+| 9 | Dutch | nl | 🇳🇱 | ✅ Complete (58 namespaces) |
+| 10 | Russian | ru | 🇷🇺 | ✅ Complete (58 namespaces) |
+| 11 | Japanese | ja | 🇯🇵 | ✅ Complete (58 namespaces) |
+| 12 | Korean | ko | 🇰🇷 | ✅ Complete (58 namespaces) |
+| 13 | Arabic | ar | 🇸🇦 | ✅ Complete (58 namespaces) |
+| 14 | Hindi | hi | 🇮🇳 | ✅ Complete (58 namespaces) |
+| 15 | Bengali | bn | 🇧🇩 | ✅ Complete (58 namespaces) |
+| 16 | Indonesian | id | 🇮🇩 | ✅ Complete (58 namespaces) |
+| 17 | Nigerian Pidgin | pcm | 🇳🇬 | ✅ Complete (58 namespaces) |
+| 18 | Tamil | ta | 🇮🇳 | ✅ Complete (58 namespaces) |
+| 19 | Urdu | ur | 🇵🇰 | ✅ Complete (58 namespaces) |
+| 20 | Egyptian Arabic | arz | 🇪🇬 | ✅ Complete (58 namespaces) |
+| 21 | Marathi | mr | 🇮🇳 | ✅ Complete (58 namespaces) |
+| 22 | Telugu | te | 🇮🇳 | ✅ Complete (58 namespaces) |
+| 23 | Vietnamese | vi | 🇻🇳 | ✅ Complete (58 namespaces) |
 
 ---
 
@@ -67,9 +67,9 @@ All 23 languages have these 23 namespaces:
 
 ---
 
-## Extended Namespaces (EN/ES Only - 35 Additional)
+## Extended Namespaces (All 23 Languages - 35 Additional)
 
-These namespaces exist only in English and Spanish:
+All 23 languages now have complete extended namespace coverage:
 
 ```
 achievements, ads, ai, bookmarks, calendar, challenges, challenges_page,
@@ -79,7 +79,7 @@ privacy, profile, records, referral, rewards, schedule, search,
 session, sponsors, timer, trainer, voice, weight, workout
 ```
 
-**Total EN/ES:** 58 namespaces each
+**Total per Language:** 58 namespaces each (23 core + 35 extended)
 
 ---
 
@@ -90,28 +90,28 @@ src/i18n/
 ├── config.ts                    # i18n configuration (all imports registered)
 └── locales/
     ├── en/                      # English - 58 files (SOURCE)
-    ├── es/                      # Spanish - 58 files (FULL PARITY)
-    ├── pt/                      # Portuguese - 23 files
-    ├── fr/                      # French - 23 files
-    ├── de/                      # German - 23 files
-    ├── zh/                      # Chinese - 23 files
-    ├── tr/                      # Turkish - 23 files
-    ├── it/                      # Italian - 23 files
-    ├── nl/                      # Dutch - 23 files
-    ├── ru/                      # Russian - 23 files
-    ├── ja/                      # Japanese - 23 files
-    ├── ko/                      # Korean - 23 files
-    ├── ar/                      # Arabic - 23 files
-    ├── hi/                      # Hindi - 23 files
-    ├── bn/                      # Bengali - 23 files
-    ├── id/                      # Indonesian - 23 files
-    ├── pcm/                     # Nigerian Pidgin - 23 files
-    ├── ta/                      # Tamil - 23 files
-    ├── ur/                      # Urdu - 23 files
-    ├── arz/                     # Egyptian Arabic - 23 files
-    ├── mr/                      # Marathi - 23 files
-    ├── te/                      # Telugu - 23 files
-    └── vi/                      # Vietnamese - 23 files
+    ├── es/                      # Spanish - 58 files
+    ├── pt/                      # Portuguese - 58 files
+    ├── fr/                      # French - 58 files
+    ├── de/                      # German - 58 files
+    ├── zh/                      # Chinese - 58 files
+    ├── tr/                      # Turkish - 58 files
+    ├── it/                      # Italian - 58 files
+    ├── nl/                      # Dutch - 58 files
+    ├── ru/                      # Russian - 58 files
+    ├── ja/                      # Japanese - 58 files
+    ├── ko/                      # Korean - 58 files
+    ├── ar/                      # Arabic - 58 files
+    ├── hi/                      # Hindi - 58 files
+    ├── bn/                      # Bengali - 58 files
+    ├── id/                      # Indonesian - 58 files
+    ├── pcm/                     # Nigerian Pidgin - 58 files
+    ├── ta/                      # Tamil - 58 files
+    ├── ur/                      # Urdu - 58 files
+    ├── arz/                     # Egyptian Arabic - 58 files
+    ├── mr/                      # Marathi - 58 files
+    ├── te/                      # Telugu - 58 files
+    └── vi/                      # Vietnamese - 58 files
 ```
 
 ---
@@ -225,9 +225,10 @@ When adding new languages:
 |--------|-------|
 | Total Languages | 23 |
 | Core Namespaces | 23 |
-| Extended Namespaces (EN/ES) | 35 |
-| Total Translation Files | ~500+ |
-| Estimated Strings | 6,000+ |
+| Extended Namespaces | 35 |
+| Total Namespaces per Language | 58 |
+| Total Translation Files | 1,334 |
+| Estimated Strings | 10,000+ |
 
 ---
 
