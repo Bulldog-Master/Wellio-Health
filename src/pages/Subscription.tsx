@@ -2,14 +2,16 @@ import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
 import { useSubscription } from '@/hooks/useSubscription';
 import { Check, Crown, Sparkles, Zap, ArrowLeft } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { SubscriptionAddons } from '@/components/SubscriptionAddons';
 
 const Subscription = () => {
   const navigate = useNavigate();
   const { subscription, isLoading, tier, isVIP, isAdmin, hasFullAccess } = useSubscription();
-  const { t } = useTranslation('subscription');
+  const { t } = useTranslation(['subscription', 'addons']);
 
   const plans = [
     {
@@ -170,6 +172,10 @@ const Subscription = () => {
             );
           })}
         </div>
+
+        {/* Add-ons Section */}
+        <Separator className="my-12" />
+        <SubscriptionAddons />
 
         <div className="mt-12 text-center">
           <p className="text-muted-foreground mb-4">
