@@ -37,10 +37,13 @@
   "map_view": "Map View",
   "list_view": "List View",
   "location_submitted": "Location submitted for review",
+  "location_deleted": "Location deleted successfully",
   "review_submitted": "Review submitted successfully",
   "enable_location": "Enable location access to find places near you",
   "no_autocomplete_results": "No matches found",
   "manual_entry_hint": "You can type the name manually and fill in the address below",
+  "delete_location": "Delete Location",
+  "delete_location_confirm": "Are you sure you want to delete this location? This action cannot be undone.",
   "form": {
     "name": "Location Name",
     "category": "Category",

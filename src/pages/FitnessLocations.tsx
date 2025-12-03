@@ -8,19 +8,20 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { Skeleton } from '@/components/ui/skeleton';
 import SEOHead from '@/components/SEOHead';
 import AddressAutocomplete from '@/components/AddressAutocomplete';
 import PhoneInput from '@/components/PhoneInput';
 import GymNameAutocomplete from '@/components/GymNameAutocomplete';
+import { useAdminStatus } from '@/hooks/useAdminStatus';
 import { 
   MapPin, Search, Plus, Star, ExternalLink, Phone, Navigation, 
-  Dumbbell, Swords, Heart, Waves, Bike, Mountain, Award, ArrowLeft,
-  List, Map, CheckCircle, Clock, DollarSign, Filter
+  Dumbbell, Swords, Heart, Waves, Bike, Mountain, ArrowLeft,
+  List, Map, CheckCircle, Filter, Trash2
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -63,6 +64,7 @@ const categoryIcons: Record<string, any> = {
 const FitnessLocations = () => {
   const { t } = useTranslation(['locations', 'common']);
   const queryClient = useQueryClient();
+  const { isAdmin } = useAdminStatus();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
@@ -155,6 +157,24 @@ const FitnessLocations = () => {
         phone: '',
         website_url: '',
       });
+    },
+    onError: () => {
+      toast.error(t('common:error'));
+    },
+  });
+
+  const deleteLocation = useMutation({
+    mutationFn: async (locationId: string) => {
+      const { error } = await supabase
+        .from('fitness_locations')
+        .delete()
+        .eq('id', locationId);
+      
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['fitness-locations'] });
+      toast.success(t('locations:location_deleted'));
     },
     onError: () => {
       toast.error(t('common:error'));
@@ -493,6 +513,33 @@ const FitnessLocations = () => {
                               {t('locations:visit_website')}
                             </a>
                           </Button>
+                        )}
+                        {isAdmin && (
+                          <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                              <Button variant="destructive" size="sm">
+                                <Trash2 className="h-3 w-3 mr-1" />
+                                {t('common:delete')}
+                              </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>{t('locations:delete_location')}</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  {t('locations:delete_location_confirm')}
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>{t('common:cancel')}</AlertDialogCancel>
+                                <AlertDialogAction
+                                  onClick={() => deleteLocation.mutate(location.id)}
+                                  className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                                >
+                                  {t('common:delete')}
+                                </AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
                         )}
                       </div>
                     </CardContent>
