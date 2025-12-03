@@ -609,6 +609,29 @@ import videosVI from './locales/vi/videos.json';
 // Chinese settings
 import settingsZH from './locales/zh/settings.json';
 
+// Locations imports for all languages
+import locationsPT from './locales/pt/locations.json';
+import locationsFR from './locales/fr/locations.json';
+import locationsDE from './locales/de/locations.json';
+import locationsZH from './locales/zh/locations.json';
+import locationsTR from './locales/tr/locations.json';
+import locationsIT from './locales/it/locations.json';
+import locationsNL from './locales/nl/locations.json';
+import locationsRU from './locales/ru/locations.json';
+import locationsJA from './locales/ja/locations.json';
+import locationsKO from './locales/ko/locations.json';
+import locationsAR from './locales/ar/locations.json';
+import locationsHI from './locales/hi/locations.json';
+import locationsBN from './locales/bn/locations.json';
+import locationsID from './locales/id/locations.json';
+import locationsPCM from './locales/pcm/locations.json';
+import locationsTA from './locales/ta/locations.json';
+import locationsUR from './locales/ur/locations.json';
+import locationsARZ from './locales/arz/locations.json';
+import locationsMR from './locales/mr/locations.json';
+import locationsTE from './locales/te/locations.json';
+import locationsVI from './locales/vi/locations.json';
+
 // All namespaces - used for ns array and type safety
 export const allNamespaces = [
   'common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 
@@ -767,6 +790,7 @@ const resources = {
     professional: professionalPT,
     recovery: recoveryPT,
     settings: settingsPT,
+    locations: locationsPT,
   },
   fr: {
     common: commonFR,
@@ -790,6 +814,7 @@ const resources = {
     professional: professionalFR,
     recovery: recoveryFR,
     settings: settingsFR,
+    locations: locationsFR,
   },
   de: {
     common: commonDE,
@@ -813,6 +838,7 @@ const resources = {
     professional: professionalDE,
     recovery: recoveryDE,
     settings: settingsDE,
+    locations: locationsDE,
   },
   zh: {
     common: commonZH,
@@ -836,6 +862,7 @@ const resources = {
     addons: addonsZH,
     professional: professionalZH,
     recovery: recoveryZH,
+    locations: locationsZH,
   },
   tr: {
     common: commonTR,
@@ -859,6 +886,7 @@ const resources = {
     plurals: pluralsTR,
     units: unitsTR,
     videos: videosTR,
+    locations: locationsTR,
   },
   it: {
     common: commonIT,
@@ -882,6 +910,7 @@ const resources = {
     plurals: pluralsIT,
     units: unitsIT,
     videos: videosIT,
+    locations: locationsIT,
   },
   nl: {
     common: commonNL,
@@ -905,6 +934,7 @@ const resources = {
     plurals: pluralsNL,
     units: unitsNL,
     videos: videosNL,
+    locations: locationsNL,
   },
   ru: {
     common: commonRU,
@@ -928,6 +958,7 @@ const resources = {
     plurals: pluralsRU,
     units: unitsRU,
     videos: videosRU,
+    locations: locationsRU,
   },
   ja: {
     common: commonJA,
@@ -951,6 +982,7 @@ const resources = {
     plurals: pluralsJA,
     units: unitsJA,
     videos: videosJA,
+    locations: locationsJA,
   },
   ko: {
     common: commonKO,
@@ -974,6 +1006,7 @@ const resources = {
     plurals: pluralsKO,
     units: unitsKO,
     videos: videosKO,
+    locations: locationsKO,
   },
   ar: {
     common: commonAR,
@@ -997,6 +1030,7 @@ const resources = {
     plurals: pluralsAR,
     units: unitsAR,
     videos: videosAR,
+    locations: locationsAR,
   },
   hi: {
     common: commonHI,
@@ -1020,6 +1054,7 @@ const resources = {
     plurals: pluralsHI,
     units: unitsHI,
     videos: videosHI,
+    locations: locationsHI,
   },
   bn: {
     common: commonBN,
@@ -1043,6 +1078,7 @@ const resources = {
     plurals: pluralsBN,
     units: unitsBN,
     videos: videosBN,
+    locations: locationsBN,
   },
   id: {
     common: commonID,
@@ -1066,6 +1102,7 @@ const resources = {
     plurals: pluralsID,
     units: unitsID,
     videos: videosID,
+    locations: locationsID,
   },
   pcm: {
     common: commonPCM,
@@ -1089,6 +1126,7 @@ const resources = {
     plurals: pluralsPCM,
     units: unitsPCM,
     videos: videosPCM,
+    locations: locationsPCM,
   },
   ta: {
     common: commonTA,
@@ -1112,6 +1150,7 @@ const resources = {
     plurals: pluralsTA,
     units: unitsTA,
     videos: videosTA,
+    locations: locationsTA,
   },
   ur: {
     common: commonUR,
@@ -1135,6 +1174,7 @@ const resources = {
     plurals: pluralsUR,
     units: unitsUR,
     videos: videosUR,
+    locations: locationsUR,
   },
   arz: {
     common: commonARZ,
@@ -1158,6 +1198,7 @@ const resources = {
     plurals: pluralsARZ,
     units: unitsARZ,
     videos: videosARZ,
+    locations: locationsARZ,
   },
   mr: {
     common: commonMR,
@@ -1181,6 +1222,7 @@ const resources = {
     plurals: pluralsMR,
     units: unitsMR,
     videos: videosMR,
+    locations: locationsMR,
   },
   te: {
     common: commonTE,
@@ -1204,6 +1246,7 @@ const resources = {
     plurals: pluralsTE,
     units: unitsTE,
     videos: videosTE,
+    locations: locationsTE,
   },
   vi: {
     common: commonVI,
@@ -1227,6 +1270,7 @@ const resources = {
     plurals: pluralsVI,
     units: unitsVI,
     videos: videosVI,
+    locations: locationsVI,
   },
 };
 

@@ -1,15 +1,4 @@
 {
-  "nav": {
-    "activity": "نشاط",
-    "connect": "اتصل",
-    "food": "أكل",
-    "fundraisers": "جمع تبرعات",
-    "wellness_directory": "دليل العافية",
-    "news": "أخبار",
-    "recovery": "راحة",
-    "shop": "محل",
-    "sponsors": "رعاة"
-  },
   "app_name": "Wellio",
   "loading": "بيحمّل...",
   "error": "غلط",
@@ -84,6 +73,10 @@
     "settings": "الإعدادات",
     "news": "الأخبار",
     "recovery": "الاستشفاء",
-    "locations": "الأماكن"
+    "locations": "الأماكن",
+    "fundraisers": "جمع تبرعات",
+    "wellness_directory": "دليل العافية",
+    "shop": "محل",
+    "sponsors": "رعاة"
   }
 }
