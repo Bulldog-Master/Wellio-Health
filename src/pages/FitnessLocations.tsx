@@ -16,6 +16,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import SEOHead from '@/components/SEOHead';
 import AddressAutocomplete from '@/components/AddressAutocomplete';
 import PhoneInput from '@/components/PhoneInput';
+import GymNameAutocomplete from '@/components/GymNameAutocomplete';
 import { 
   MapPin, Search, Plus, Star, ExternalLink, Phone, Navigation, 
   Dumbbell, Swords, Heart, Waves, Bike, Mountain, Award, ArrowLeft,
@@ -231,10 +232,20 @@ const FitnessLocations = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <Label>{t('locations:form.name')}</Label>
-                  <Input
+                  <GymNameAutocomplete
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    required
+                    onChange={(value) => setFormData({ ...formData, name: value })}
+                    onPlaceSelect={(place) => {
+                      setFormData(prev => ({
+                        ...prev,
+                        name: place.name,
+                        address: place.street || prev.address,
+                        city: place.city || prev.city,
+                        state: place.state || prev.state,
+                        country: place.country || prev.country,
+                        postal_code: place.postalCode || prev.postal_code,
+                      }));
+                    }}
                   />
                 </div>
                 <div>
