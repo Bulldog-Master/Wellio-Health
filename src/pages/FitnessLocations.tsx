@@ -249,17 +249,13 @@ const FitnessLocations = () => {
   // Use GPS location handler - always searches immediately
   const handleUseGpsLocation = (fromDialog = false) => {
     console.log('handleUseGpsLocation called, fromDialog:', fromDialog);
-    toast.info('Getting your location...');
     
     if (!('geolocation' in navigator)) {
-      if (fromDialog) {
-        toast.error(t('locations:location_not_supported'));
-      } else {
-        setIsLocationDialogOpen(true);
-      }
+      toast.error(t('locations:location_not_supported'));
       return;
     }
     
+    toast.info(t('locations:getting_location'));
     setLocationLoading(true);
     setLocationError(null);
     
@@ -270,7 +266,8 @@ const FitnessLocations = () => {
           lng: position.coords.longitude,
         };
         
-        console.log('GPS coordinates:', coords);
+        console.log('GPS coordinates obtained:', coords);
+        toast.success(`${t('locations:location_coords_found')}: ${coords.lat.toFixed(4)}, ${coords.lng.toFixed(4)}`);
         
         setUserLocation(coords);
         setNearMeMode(true);
@@ -1089,10 +1086,22 @@ const FitnessLocations = () => {
               </>
             ) : userLocation && !discoverLoading ? (
               <Card className="p-8 text-center">
-                <CardContent>
+                <CardContent className="space-y-4">
                   <MapPin className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
                   <h3 className="text-lg font-semibold mb-2">{t('locations:no_locations')}</h3>
                   <p className="text-muted-foreground">{t('locations:discover_no_results')}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {t('locations:osm_coverage_note')}
+                  </p>
+                  <div className="flex gap-2 justify-center">
+                    <Button variant="outline" onClick={() => setIsLocationDialogOpen(true)}>
+                      {t('locations:increase_radius')}
+                    </Button>
+                    <Button onClick={() => setIsSubmitDialogOpen(true)}>
+                      <Plus className="h-4 w-4 mr-2" />
+                      {t('locations:add_location')}
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             ) : (
@@ -1596,7 +1605,9 @@ const FitnessLocations = () => {
                 <div className="flex gap-2">
                   <Select
                     value={searchRadius.toString()}
-                    onValueChange={(val) => setSearchRadius(parseInt(val))}
+                    onValueChange={(val) => {
+                      setSearchRadius(parseInt(val));
+                    }}
                   >
                     <SelectTrigger className="flex-1">
                       <SelectValue />
