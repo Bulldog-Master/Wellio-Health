@@ -1,0 +1,21 @@
+{
+  "fitness_assistant": "フィットネスアシスタント",
+  "fitness_assistant_desc": "AIフィットネスコーチ",
+  "ask_anything": "フィットネス、栄養、ワークアウトについて何でも聞いてください...",
+  "type_message": "メッセージを入力...",
+  "send": "送信",
+  "thinking": "考え中...",
+  "welcome_message": "こんにちは！AIフィットネスアシスタントです。ワークアウト、栄養、フォーム、目標について何でも聞いてください！",
+  "example_questions": "質問例",
+  "example_1": "初心者向けのトレーニングは？",
+  "example_2": "1日にどのくらいタンパク質が必要？",
+  "example_3": "体幹を鍛えるエクササイズは？",
+  "example_4": "ランニングの持久力を上げるには？",
+  "clear_chat": "チャットをクリア",
+  "chat_cleared": "チャットをクリアしました",
+  "error_sending": "送信に失敗しました",
+  "premium_chat": "プレミアムAIチャット",
+  "unlock_ai_chat": "AIアシスタントからパーソナライズされたアドバイスを受け取る",
+  "ai_assistant": "AIアシスタント",
+  "you": "あなた"
+}

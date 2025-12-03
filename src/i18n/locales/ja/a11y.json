@@ -1,0 +1,32 @@
+{
+  "navigation": {
+    "main_menu": "メインナビゲーションメニュー",
+    "skip_to_content": "メインコンテンツへスキップ",
+    "go_back": "前のページに戻る",
+    "go_home": "ホームへ",
+    "open_menu": "メニューを開く",
+    "close_menu": "メニューを閉じる"
+  },
+  "actions": {
+    "submit_form": "フォームを送信",
+    "cancel_action": "アクションをキャンセル",
+    "save_changes": "変更を保存",
+    "delete_item": "アイテムを削除",
+    "edit_item": "アイテムを編集",
+    "close_dialog": "ダイアログを閉じる"
+  },
+  "status": {
+    "loading": "コンテンツを読み込み中",
+    "error_occurred": "エラーが発生しました",
+    "success_message": "アクションが正常に完了しました"
+  },
+  "theme": {
+    "toggle_theme": "ダーク/ライトモードを切り替え",
+    "dark_mode": "ダークモードに切り替え",
+    "light_mode": "ライトモードに切り替え"
+  },
+  "language": {
+    "change_language": "言語を変更",
+    "current_language": "現在の言語: {{language}}"
+  }
+}

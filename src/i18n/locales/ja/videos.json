@@ -1,0 +1,20 @@
+{
+  "exercise_library": "エクササイズライブラリ",
+  "exercise_library_desc": "正しいテクニックを学ぶビデオチュートリアル",
+  "video_tutorials": "ビデオチュートリアル",
+  "watch_video": "ビデオを見る",
+  "duration": "時間",
+  "difficulty": "難易度",
+  "beginner": "初心者",
+  "intermediate": "中級",
+  "advanced": "上級",
+  "muscle_groups": "筋肉群",
+  "equipment_needed": "必要な器具",
+  "no_equipment": "器具不要",
+  "instructions": "手順",
+  "tips": "ヒント",
+  "common_mistakes": "よくある間違い",
+  "related_exercises": "関連エクササイズ",
+  "premium_videos": "プレミアムビデオ",
+  "unlock_videos": "すべてのビデオチュートリアルにアクセスするにはアップグレード"
+}
