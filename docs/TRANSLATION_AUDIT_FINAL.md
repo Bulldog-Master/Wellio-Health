@@ -5,7 +5,7 @@
 
 ---
 
-## Supported Languages (18 Total)
+## Supported Languages (23 Total)
 
 | # | Language | Code | Flag | Status |
 |---|----------|------|------|--------|
@@ -27,12 +27,17 @@
 | 16 | Indonesian | id | 🇮🇩 | ✅ Core (21 namespaces) |
 | 17 | Nigerian Pidgin | pcm | 🇳🇬 | ✅ Core (21 namespaces) |
 | 18 | Tamil | ta | 🇮🇳 | ✅ Core (21 namespaces) |
+| 19 | Urdu | ur | 🇵🇰 | ✅ Core (21 namespaces) |
+| 20 | Egyptian Arabic | arz | 🇪🇬 | ✅ Core (21 namespaces) |
+| 21 | Marathi | mr | 🇮🇳 | ✅ Core (21 namespaces) |
+| 22 | Telugu | te | 🇮🇳 | ✅ Core (21 namespaces) |
+| 23 | Vietnamese | vi | 🇻🇳 | ✅ Core (21 namespaces) |
 
 ---
 
 ## Core Namespaces (21 Files per Language)
 
-All 18 languages have these 21 namespaces:
+All 23 languages have these 21 namespaces:
 
 | Namespace | Purpose |
 |-----------|---------|
@@ -99,7 +104,12 @@ src/i18n/
     ├── bn/                      # Bengali - 21 files
     ├── id/                      # Indonesian - 21 files
     ├── pcm/                     # Nigerian Pidgin - 21 files
-    └── ta/                      # Tamil - 21 files
+    ├── ta/                      # Tamil - 21 files
+    ├── ur/                      # Urdu - 21 files
+    ├── arz/                     # Egyptian Arabic - 21 files
+    ├── mr/                      # Marathi - 21 files
+    ├── te/                      # Telugu - 21 files
+    └── vi/                      # Vietnamese - 21 files
 ```
 
 ---
@@ -211,11 +221,11 @@ When adding new languages:
 
 | Metric | Count |
 |--------|-------|
-| Total Languages | 18 |
+| Total Languages | 23 |
 | Core Namespaces | 21 |
 | Extended Namespaces (EN/ES) | 37 |
-| Total Translation Files | ~400+ |
-| Estimated Strings | 5,000+ |
+| Total Translation Files | ~500+ |
+| Estimated Strings | 6,000+ |
 
 ---
 
