@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/ui/input';
-import { Dumbbell, Loader2, MapPin } from 'lucide-react';
+import { Dumbbell, Loader2, MapPin, Database, Globe } from 'lucide-react';
 import { useDebounce } from '@/hooks/useDebounce';
 import { cn } from '@/lib/utils';
+import { supabase } from '@/integrations/supabase/client';
 
 interface PlaceSuggestion {
+  id?: string;
   display_name: string;
   name: string;
   address: {
@@ -18,8 +20,9 @@ interface PlaceSuggestion {
     country?: string;
     postcode?: string;
   };
-  type: string;
-  class: string;
+  phone?: string;
+  website_url?: string;
+  source: 'database' | 'external';
 }
 
 interface GymNameAutocompleteProps {
@@ -32,6 +35,8 @@ interface GymNameAutocompleteProps {
     state: string;
     country: string;
     postalCode: string;
+    phone?: string;
+    website?: string;
   }) => void;
   placeholder?: string;
   className?: string;
@@ -60,43 +65,66 @@ export const GymNameAutocomplete = ({
 
       setIsLoading(true);
       try {
-        // Search for fitness-related places
-        const searchTerms = [
-          `${debouncedValue} gym`,
-          `${debouncedValue} fitness`,
-          `${debouncedValue} crossfit`,
-          `${debouncedValue} studio`,
-        ];
-        
-        // Try searching with fitness keywords
-        const response = await fetch(
-          `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=8&q=${encodeURIComponent(debouncedValue)}&extratags=1`,
-          {
-            headers: {
-              'Accept-Language': 'en',
-            },
-          }
-        );
-        const data = await response.json();
-        
-        // Filter for relevant places (gyms, fitness centers, sports facilities)
-        const relevantTypes = ['gym', 'fitness', 'sports', 'leisure', 'amenity'];
-        const filtered = data.filter((place: any) => {
-          const isRelevant = relevantTypes.some(type => 
-            place.type?.toLowerCase().includes(type) ||
-            place.class?.toLowerCase().includes(type) ||
-            place.display_name?.toLowerCase().includes('gym') ||
-            place.display_name?.toLowerCase().includes('fitness') ||
-            place.display_name?.toLowerCase().includes('crossfit') ||
-            place.display_name?.toLowerCase().includes('studio') ||
-            place.display_name?.toLowerCase().includes('box') ||
-            place.display_name?.toLowerCase().includes('yoga')
-          );
-          return isRelevant || data.length <= 3; // If few results, show all
-        });
+        // First, search local database for existing locations
+        const { data: dbResults } = await supabase
+          .from('fitness_locations')
+          .select('id, name, address, city, state, country, postal_code, phone, website_url')
+          .ilike('name', `%${debouncedValue}%`)
+          .eq('is_active', true)
+          .limit(5);
 
-        // If no filtered results, just show top results
-        setSuggestions(filtered.length > 0 ? filtered : data.slice(0, 5));
+        const dbSuggestions: PlaceSuggestion[] = (dbResults || []).map(loc => ({
+          id: loc.id,
+          display_name: `${loc.name}, ${loc.city}, ${loc.country}`,
+          name: loc.name,
+          address: {
+            road: loc.address || '',
+            city: loc.city,
+            state: loc.state || '',
+            country: loc.country,
+            postcode: loc.postal_code || '',
+          },
+          phone: loc.phone || '',
+          website_url: loc.website_url || '',
+          source: 'database' as const,
+        }));
+
+        // Also search external API for additional results
+        let externalSuggestions: PlaceSuggestion[] = [];
+        try {
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=5&q=${encodeURIComponent(debouncedValue + ' gym')}&extratags=1`,
+            {
+              headers: {
+                'Accept-Language': 'en',
+              },
+            }
+          );
+          const data = await response.json();
+          
+          externalSuggestions = data
+            .filter((place: any) => {
+              const displayLower = place.display_name?.toLowerCase() || '';
+              return displayLower.includes('gym') ||
+                displayLower.includes('fitness') ||
+                displayLower.includes('crossfit') ||
+                displayLower.includes('yoga') ||
+                displayLower.includes('sport');
+            })
+            .slice(0, 3)
+            .map((place: any) => ({
+              display_name: place.display_name,
+              name: place.name || place.display_name.split(',')[0].trim(),
+              address: place.address || {},
+              source: 'external' as const,
+            }));
+        } catch {
+          // External API failed, continue with database results only
+        }
+
+        // Combine results - database first, then external
+        const combined = [...dbSuggestions, ...externalSuggestions];
+        setSuggestions(combined);
         setShowSuggestions(true);
       } catch (error) {
         console.error('Gym search error:', error);
@@ -122,10 +150,11 @@ export const GymNameAutocomplete = ({
 
   const handleSelect = (suggestion: PlaceSuggestion) => {
     const addr = suggestion.address;
-    const street = [addr.house_number, addr.road].filter(Boolean).join(' ');
+    const street = suggestion.source === 'database' 
+      ? (addr.road || '') 
+      : [addr.house_number, addr.road].filter(Boolean).join(' ');
     const city = addr.city || addr.town || addr.village || '';
     
-    // Extract the name from display_name (usually the first part before the comma)
     const name = suggestion.name || suggestion.display_name.split(',')[0].trim();
     
     onChange(name);
@@ -139,6 +168,8 @@ export const GymNameAutocomplete = ({
         state: addr.state || '',
         country: addr.country || '',
         postalCode: addr.postcode || '',
+        phone: suggestion.phone || '',
+        website: suggestion.website_url || '',
       });
     }
   };
@@ -180,21 +211,31 @@ export const GymNameAutocomplete = ({
               {suggestions.map((suggestion, index) => {
                 const name = suggestion.name || suggestion.display_name.split(',')[0].trim();
                 const location = getLocationPreview(suggestion);
+                const isFromDb = suggestion.source === 'database';
                 return (
                   <button
-                    key={index}
+                    key={`${suggestion.source}-${index}`}
                     type="button"
                     className="w-full px-3 py-2 text-left hover:bg-accent hover:text-accent-foreground transition-colors"
                     onClick={() => handleSelect(suggestion)}
                   >
                     <div className="flex items-start gap-2">
-                      <Dumbbell className="h-4 w-4 mt-0.5 flex-shrink-0 text-primary" />
+                      {isFromDb ? (
+                        <Database className="h-4 w-4 mt-0.5 flex-shrink-0 text-green-500" />
+                      ) : (
+                        <Globe className="h-4 w-4 mt-0.5 flex-shrink-0 text-blue-500" />
+                      )}
                       <div className="flex-1 min-w-0">
                         <p className="font-medium text-sm truncate">{name}</p>
                         {location && (
                           <p className="text-xs text-muted-foreground flex items-center gap-1 truncate">
                             <MapPin className="h-3 w-3 flex-shrink-0" />
                             {location}
+                          </p>
+                        )}
+                        {isFromDb && (
+                          <p className="text-xs text-green-600 dark:text-green-400">
+                            {t('locations:verified', 'Already registered')}
                           </p>
                         )}
                       </div>
