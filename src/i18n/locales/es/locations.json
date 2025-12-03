@@ -36,6 +36,7 @@
   "miles": "millas",
   "km": "km",
   "use_my_location": "Usar Mi Ubicación",
+  "location_detected": "¡Ubicación detectada!",
   "discover_title": "Descubre Instalaciones de Fitness",
   "discover_desc": "Haz clic en 'Buscar Cerca de Mí' o ingresa una ubicación para descubrir gimnasios, estudios de yoga, piscinas y más",
   "external_source": "OpenStreetMap",
