@@ -11,6 +11,13 @@
   "miles_away": "{{distance}} mi away",
   "no_nearby": "No facilities found within 50 miles",
   "no_nearby_desc": "Try submitting a location or searching by name",
+  "enter_location": "Enter Your Location",
+  "enter_location_desc": "GPS access was denied. Enter a city or address to find facilities near you.",
+  "city_or_address": "City or Address",
+  "city_placeholder": "e.g. Toronto, Canada",
+  "search_location": "Search",
+  "location_found": "Location found! Showing nearby facilities.",
+  "location_not_found": "Could not find that location. Please try a different city or address.",
   "categories": {
     "all": "All Categories",
     "gym": "Gym",
