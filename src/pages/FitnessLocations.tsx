@@ -266,21 +266,23 @@ const FitnessLocations = () => {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
+        
+        console.log('GPS coordinates:', coords);
+        
         setUserLocation(coords);
         setNearMeMode(true);
         setDiscoverMode(true);
         setSearchQuery('');
         
-        // Close dialog if from dialog
+        // Close dialog immediately if from dialog
         if (fromDialog) {
           setIsLocationDialogOpen(false);
         }
         
-        // Reverse geocode to get location name
-        try {
-          const { data } = await supabase.functions.invoke('geocode-location', {
-            body: { query: `${coords.lat}, ${coords.lng}` }
-          });
+        // Reverse geocode to get location name (don't wait for this)
+        supabase.functions.invoke('geocode-location', {
+          body: { query: `${coords.lat}, ${coords.lng}` }
+        }).then(({ data }) => {
           if (data?.results?.[0]?.display_name) {
             const name = data.results[0].display_name.split(',').slice(0, 2).join(',');
             setLocationName(name);
@@ -289,17 +291,48 @@ const FitnessLocations = () => {
             setLocationName(t('locations:your_location'));
             setLocationInput(t('locations:your_location'));
           }
-        } catch {
+        }).catch(() => {
           setLocationName(t('locations:your_location'));
           setLocationInput(t('locations:your_location'));
-        }
+        });
         
         setLocationLoading(false);
         
-        // Always search immediately
-        handleDiscoverAtLocation(coords.lat, coords.lng);
+        // Immediately search with GPS coordinates - inline the discover logic
+        setDiscoverLoading(true);
+        setDiscoveredGyms([]);
+        
+        const radiusInMeters = radiusUnit === 'miles' 
+          ? searchRadius * 1609.34 
+          : searchRadius * 1000;
+        
+        console.log('Searching with:', { lat: coords.lat, lng: coords.lng, radius: radiusInMeters, category: discoverCategory });
+        
+        try {
+          const { data, error } = await supabase.functions.invoke('discover-gyms', {
+            body: { lat: coords.lat, lon: coords.lng, radius: radiusInMeters, category: discoverCategory }
+          });
+          
+          console.log('Discover response:', data, error);
+          
+          if (error) {
+            console.error('Discover error:', error);
+            toast.error(t('common:error'));
+          } else if (data?.results?.length > 0) {
+            setDiscoveredGyms(data.results);
+            toast.success(t('locations:discover_found', { count: data.results.length }));
+          } else {
+            toast.info(t('locations:discover_no_results'));
+          }
+        } catch (error) {
+          console.error('Discover error:', error);
+          toast.error(t('common:error'));
+        } finally {
+          setDiscoverLoading(false);
+        }
       },
       (error) => {
+        console.error('GPS error:', error);
         setLocationLoading(false);
         if (!fromDialog) {
           setIsLocationDialogOpen(true);
