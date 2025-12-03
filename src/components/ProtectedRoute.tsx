@@ -26,22 +26,36 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
   useEffect(() => {
     let mounted = true;
+    let initialCheckDone = false;
     
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, currentSession) => {
       if (!mounted) return;
       
-      // Only update session state, don't redirect unless explicitly signed out
+      console.log('Auth state change:', event, !!currentSession);
+      
+      // Only redirect on explicit sign out event
       if (event === 'SIGNED_OUT') {
         console.log('User signed out, redirecting to auth');
         setSession(null);
+        setLoading(false);
         navigate("/auth");
-      } else if (currentSession) {
+        return;
+      }
+      
+      // For all other events, just update session if we have one
+      // Don't treat TOKEN_REFRESHED or other events as sign-out
+      if (currentSession) {
         setSession(currentSession);
       }
+      // Important: Don't set session to null on other events - 
+      // this prevents logout during API calls
     });
 
     // Initial session check - only run once
     const initAuth = async () => {
+      if (initialCheckDone) return;
+      initialCheckDone = true;
+      
       try {
         const { data: { session: initialSession } } = await supabase.auth.getSession();
         
