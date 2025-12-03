@@ -286,6 +286,33 @@ import authAR from './locales/ar/auth.json';
 // Hindi
 import commonHI from './locales/hi/common.json';
 import authHI from './locales/hi/auth.json';
+import settingsHI from './locales/hi/settings.json';
+
+// Bengali
+import commonBN from './locales/bn/common.json';
+import authBN from './locales/bn/auth.json';
+import settingsBN from './locales/bn/settings.json';
+
+// Indonesian
+import commonID from './locales/id/common.json';
+import authID from './locales/id/auth.json';
+import settingsID from './locales/id/settings.json';
+
+// Nigerian Pidgin
+import commonPCM from './locales/pcm/common.json';
+import authPCM from './locales/pcm/auth.json';
+import settingsPCM from './locales/pcm/settings.json';
+
+// Tamil
+import commonTA from './locales/ta/common.json';
+import authTA from './locales/ta/auth.json';
+import settingsTA from './locales/ta/settings.json';
+
+// Japanese settings
+import settingsJA from './locales/ja/settings.json';
+
+// Korean settings
+import settingsKO from './locales/ko/settings.json';
 
 // All namespaces - used for ns array and type safety
 export const allNamespaces = [
@@ -573,10 +600,12 @@ const resources = {
   ja: {
     common: commonJA,
     auth: authJA,
+    settings: settingsJA,
   },
   ko: {
     common: commonKO,
     auth: authKO,
+    settings: settingsKO,
   },
   ar: {
     common: commonAR,
@@ -585,6 +614,27 @@ const resources = {
   hi: {
     common: commonHI,
     auth: authHI,
+    settings: settingsHI,
+  },
+  bn: {
+    common: commonBN,
+    auth: authBN,
+    settings: settingsBN,
+  },
+  id: {
+    common: commonID,
+    auth: authID,
+    settings: settingsID,
+  },
+  pcm: {
+    common: commonPCM,
+    auth: authPCM,
+    settings: settingsPCM,
+  },
+  ta: {
+    common: commonTA,
+    auth: authTA,
+    settings: settingsTA,
   },
 };
 
