@@ -217,6 +217,10 @@ const FitnessLocations = () => {
   const [discoveredGyms, setDiscoveredGyms] = useState<any[]>([]);
   const [addingGymId, setAddingGymId] = useState<string | null>(null);
   
+  // Search radius state
+  const [searchRadius, setSearchRadius] = useState(10);
+  const [radiusUnit, setRadiusUnit] = useState<'miles' | 'km'>('miles');
+  
   const [formData, setFormData] = useState({
     name: '',
     category: 'gym',
@@ -340,9 +344,14 @@ const FitnessLocations = () => {
     setDiscoverLoading(true);
     setDiscoveredGyms([]);
     
+    // Convert radius to meters
+    const radiusInMeters = radiusUnit === 'miles' 
+      ? searchRadius * 1609.34 
+      : searchRadius * 1000;
+    
     try {
       const { data, error } = await supabase.functions.invoke('discover-gyms', {
-        body: { lat, lon: lng, radius: 15000, category: discoverCategory }
+        body: { lat, lon: lng, radius: radiusInMeters, category: discoverCategory }
       });
       
       if (error) {
@@ -1489,6 +1498,38 @@ const FitnessLocations = () => {
                     ))}
                   </SelectContent>
                 </Select>
+              </div>
+              <div>
+                <Label>{t('locations:search_radius')}</Label>
+                <div className="flex gap-2">
+                  <Select
+                    value={searchRadius.toString()}
+                    onValueChange={(val) => setSearchRadius(parseInt(val))}
+                  >
+                    <SelectTrigger className="flex-1">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[1, 2, 5, 10, 15, 25, 50].map((r) => (
+                        <SelectItem key={r} value={r.toString()}>
+                          {r}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Select
+                    value={radiusUnit}
+                    onValueChange={(val) => setRadiusUnit(val as 'miles' | 'km')}
+                  >
+                    <SelectTrigger className="w-24">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="miles">{t('locations:miles')}</SelectItem>
+                      <SelectItem value="km">{t('locations:km')}</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
               <Button 
                 onClick={handleLocationSearch} 
