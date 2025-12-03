@@ -5,39 +5,39 @@
 
 ---
 
-## Supported Languages (23 Total, 22 Core Namespaces Each)
+## Supported Languages (23 Total, 23 Core Namespaces Each)
 
 | # | Language | Code | Flag | Status |
 |---|----------|------|------|--------|
 | 1 | English | en | 🇺🇸 | ✅ Source (58 namespaces) |
 | 2 | Spanish | es | 🇪🇸 | ✅ Complete (58 namespaces) |
-| 3 | Portuguese | pt | 🇧🇷 | ✅ Core (21 namespaces) |
-| 4 | French | fr | 🇫🇷 | ✅ Core (21 namespaces) |
-| 5 | German | de | 🇩🇪 | ✅ Core (21 namespaces) |
-| 6 | Chinese | zh | 🇨🇳 | ✅ Core (21 namespaces) |
-| 7 | Turkish | tr | 🇹🇷 | ✅ Core (21 namespaces) |
-| 8 | Italian | it | 🇮🇹 | ✅ Core (21 namespaces) |
-| 9 | Dutch | nl | 🇳🇱 | ✅ Core (21 namespaces) |
-| 10 | Russian | ru | 🇷🇺 | ✅ Core (21 namespaces) |
-| 11 | Japanese | ja | 🇯🇵 | ✅ Core (21 namespaces) |
-| 12 | Korean | ko | 🇰🇷 | ✅ Core (21 namespaces) |
-| 13 | Arabic | ar | 🇸🇦 | ✅ Core (21 namespaces) |
-| 14 | Hindi | hi | 🇮🇳 | ✅ Core (21 namespaces) |
-| 15 | Bengali | bn | 🇧🇩 | ✅ Core (21 namespaces) |
-| 16 | Indonesian | id | 🇮🇩 | ✅ Core (21 namespaces) |
-| 17 | Nigerian Pidgin | pcm | 🇳🇬 | ✅ Core (21 namespaces) |
-| 18 | Tamil | ta | 🇮🇳 | ✅ Core (21 namespaces) |
-| 19 | Urdu | ur | 🇵🇰 | ✅ Core (21 namespaces) |
-| 20 | Egyptian Arabic | arz | 🇪🇬 | ✅ Core (21 namespaces) |
-| 21 | Marathi | mr | 🇮🇳 | ✅ Core (21 namespaces) |
-| 22 | Telugu | te | 🇮🇳 | ✅ Core (21 namespaces) |
-| 23 | Vietnamese | vi | 🇻🇳 | ✅ Core (21 namespaces) |
+| 3 | Portuguese | pt | 🇧🇷 | ✅ Core (23 namespaces) |
+| 4 | French | fr | 🇫🇷 | ✅ Core (23 namespaces) |
+| 5 | German | de | 🇩🇪 | ✅ Core (23 namespaces) |
+| 6 | Chinese | zh | 🇨🇳 | ✅ Core (23 namespaces) |
+| 7 | Turkish | tr | 🇹🇷 | ✅ Core (23 namespaces) |
+| 8 | Italian | it | 🇮🇹 | ✅ Core (23 namespaces) |
+| 9 | Dutch | nl | 🇳🇱 | ✅ Core (23 namespaces) |
+| 10 | Russian | ru | 🇷🇺 | ✅ Core (23 namespaces) |
+| 11 | Japanese | ja | 🇯🇵 | ✅ Core (23 namespaces) |
+| 12 | Korean | ko | 🇰🇷 | ✅ Core (23 namespaces) |
+| 13 | Arabic | ar | 🇸🇦 | ✅ Core (23 namespaces) |
+| 14 | Hindi | hi | 🇮🇳 | ✅ Core (23 namespaces) |
+| 15 | Bengali | bn | 🇧🇩 | ✅ Core (23 namespaces) |
+| 16 | Indonesian | id | 🇮🇩 | ✅ Core (23 namespaces) |
+| 17 | Nigerian Pidgin | pcm | 🇳🇬 | ✅ Core (23 namespaces) |
+| 18 | Tamil | ta | 🇮🇳 | ✅ Core (23 namespaces) |
+| 19 | Urdu | ur | 🇵🇰 | ✅ Core (23 namespaces) |
+| 20 | Egyptian Arabic | arz | 🇪🇬 | ✅ Core (23 namespaces) |
+| 21 | Marathi | mr | 🇮🇳 | ✅ Core (23 namespaces) |
+| 22 | Telugu | te | 🇮🇳 | ✅ Core (23 namespaces) |
+| 23 | Vietnamese | vi | 🇻🇳 | ✅ Core (23 namespaces) |
 
 ---
 
-## Core Namespaces (22 Files per Language)
+## Core Namespaces (23 Files per Language)
 
-All 23 languages have these 22 namespaces:
+All 23 languages have these 23 namespaces:
 
 | Namespace | Purpose |
 |-----------|---------|
@@ -50,10 +50,12 @@ All 23 languages have these 22 namespaces:
 | `common.json` | Shared UI strings (buttons, labels, etc.) |
 | `feed.json` | Social feed and posts |
 | `fitness.json` | General fitness terms |
+| `locations.json` | Wellness directory locations |
 | `news.json` | News channel categories |
 | `nutrition.json` | Food and nutrition tracking |
 | `plurals.json` | Plural forms (workouts, points, days) |
 | `premium.json` | Premium features descriptions |
+| `products.json` | Recommended products and shop |
 | `professional.json` | Trainer/practitioner portals |
 | `recovery.json` | Recovery hub and therapies |
 | `seo.json` | SEO meta tags and descriptions |
@@ -62,11 +64,10 @@ All 23 languages have these 22 namespaces:
 | `subscription.json` | Subscription plans |
 | `units.json` | Units of measurement |
 | `videos.json` | Exercise video library |
-| `locations.json` | Wellness directory locations |
 
 ---
 
-## Extended Namespaces (EN/ES Only - 36 Additional)
+## Extended Namespaces (EN/ES Only - 35 Additional)
 
 These namespaces exist only in English and Spanish:
 
@@ -74,7 +75,7 @@ These namespaces exist only in English and Spanish:
 achievements, ads, ai, bookmarks, calendar, challenges, challenges_page,
 creator, errors, followers, food, fundraisers, groups, install, live,
 macros, measurements, medical, messages, notifications, points,
-privacy, products, profile, records, referral, rewards, schedule, search,
+privacy, profile, records, referral, rewards, schedule, search,
 session, sponsors, timer, trainer, voice, weight, workout
 ```
 
@@ -90,27 +91,27 @@ src/i18n/
 └── locales/
     ├── en/                      # English - 58 files (SOURCE)
     ├── es/                      # Spanish - 58 files (FULL PARITY)
-    ├── pt/                      # Portuguese - 21 files
-    ├── fr/                      # French - 21 files
-    ├── de/                      # German - 21 files
-    ├── zh/                      # Chinese - 21 files
-    ├── tr/                      # Turkish - 21 files
-    ├── it/                      # Italian - 21 files
-    ├── nl/                      # Dutch - 21 files
-    ├── ru/                      # Russian - 21 files
-    ├── ja/                      # Japanese - 21 files
-    ├── ko/                      # Korean - 21 files
-    ├── ar/                      # Arabic - 21 files
-    ├── hi/                      # Hindi - 21 files
-    ├── bn/                      # Bengali - 21 files
-    ├── id/                      # Indonesian - 21 files
-    ├── pcm/                     # Nigerian Pidgin - 21 files
-    ├── ta/                      # Tamil - 21 files
-    ├── ur/                      # Urdu - 21 files
-    ├── arz/                     # Egyptian Arabic - 21 files
-    ├── mr/                      # Marathi - 21 files
-    ├── te/                      # Telugu - 21 files
-    └── vi/                      # Vietnamese - 21 files
+    ├── pt/                      # Portuguese - 23 files
+    ├── fr/                      # French - 23 files
+    ├── de/                      # German - 23 files
+    ├── zh/                      # Chinese - 23 files
+    ├── tr/                      # Turkish - 23 files
+    ├── it/                      # Italian - 23 files
+    ├── nl/                      # Dutch - 23 files
+    ├── ru/                      # Russian - 23 files
+    ├── ja/                      # Japanese - 23 files
+    ├── ko/                      # Korean - 23 files
+    ├── ar/                      # Arabic - 23 files
+    ├── hi/                      # Hindi - 23 files
+    ├── bn/                      # Bengali - 23 files
+    ├── id/                      # Indonesian - 23 files
+    ├── pcm/                     # Nigerian Pidgin - 23 files
+    ├── ta/                      # Tamil - 23 files
+    ├── ur/                      # Urdu - 23 files
+    ├── arz/                     # Egyptian Arabic - 23 files
+    ├── mr/                      # Marathi - 23 files
+    ├── te/                      # Telugu - 23 files
+    └── vi/                      # Vietnamese - 23 files
 ```
 
 ---
@@ -125,11 +126,11 @@ src/i18n/
 ### Example for adding a new language:
 
 ```typescript
-// 1. Import all 21 core namespaces
+// 1. Import all 23 core namespaces
 import commonXX from './locales/xx/common.json';
 import authXX from './locales/xx/auth.json';
 import settingsXX from './locales/xx/settings.json';
-// ... import all 21 files
+// ... import all 23 files
 
 // 2. Add to resources object
 const resources = {
@@ -138,7 +139,7 @@ const resources = {
     common: commonXX,
     auth: authXX,
     settings: settingsXX,
-    // ... all 21 namespaces
+    // ... all 23 namespaces
   },
 };
 ```
@@ -173,7 +174,7 @@ Total keys missing in es: 1
 ### Required Steps:
 
 1. Create folder: `src/i18n/locales/[code]/`
-2. Copy all 21 core JSON files from English
+2. Copy all 23 core JSON files from English
 3. Translate all content
 4. Import all files in `config.ts`
 5. Register in resources object
@@ -205,12 +206,12 @@ Total keys missing in es: 1
 When adding new features:
 - [ ] Add keys to EN JSON first
 - [ ] Add keys to ES JSON (full parity required)
-- [ ] Add keys to 21 core namespaces for other languages if applicable
+- [ ] Add keys to 23 core namespaces for other languages if applicable
 - [ ] Check console for missing key warnings
 - [ ] Run parity report on app startup
 
 When adding new languages:
-- [ ] Create all 21 core namespace files
+- [ ] Create all 23 core namespace files
 - [ ] Import ALL files in config.ts
 - [ ] Register ALL namespaces in resources object
 - [ ] Add to LanguageSwitcher component
@@ -223,8 +224,8 @@ When adding new languages:
 | Metric | Count |
 |--------|-------|
 | Total Languages | 23 |
-| Core Namespaces | 22 |
-| Extended Namespaces (EN/ES) | 36 |
+| Core Namespaces | 23 |
+| Extended Namespaces (EN/ES) | 35 |
 | Total Translation Files | ~500+ |
 | Estimated Strings | 6,000+ |
 
