@@ -59,6 +59,7 @@ import sponsorsEN from './locales/en/sponsors.json';
 import locationsEN from './locales/en/locations.json';
 import adsEN from './locales/en/ads.json';
 import productsEN from './locales/en/products.json';
+import recoveryEN from './locales/en/recovery.json';
 
 // Spanish
 import commonES from './locales/es/common.json';
@@ -116,6 +117,7 @@ import sponsorsES from './locales/es/sponsors.json';
 import locationsES from './locales/es/locations.json';
 import adsES from './locales/es/ads.json';
 import productsES from './locales/es/products.json';
+import recoveryES from './locales/es/recovery.json';
 
 // Portuguese
 import commonPT from './locales/pt/common.json';
@@ -201,7 +203,7 @@ export const allNamespaces = [
   'calendar', 'records', 'voice', 'medical', 'timer', 'live', 'challenges', 
   'fundraisers', 'macros', 'install', 'search', 'creator', 'ai', 'measurements', 
   'trainer', 'session', 'bookmarks', 'challenges_page', 'feed', 'groups', 
-  'followers', 'schedule', 'seo', 'units', 'a11y', 'plurals', 'admin', 'premium', 'videos', 'chat', 'celebrations', 'news', 'sponsors', 'locations', 'ads', 'products'
+  'followers', 'schedule', 'seo', 'units', 'a11y', 'plurals', 'admin', 'premium', 'videos', 'chat', 'celebrations', 'news', 'sponsors', 'locations', 'ads', 'products', 'recovery'
 ] as const;
 
 export type TranslationNamespace = typeof allNamespaces[number];
@@ -263,6 +265,7 @@ const resources = {
     locations: locationsEN,
     ads: adsEN,
     products: productsEN,
+    recovery: recoveryEN,
   },
   es: {
     common: commonES,
@@ -320,6 +323,7 @@ const resources = {
     locations: locationsES,
     ads: adsES,
     products: productsES,
+    recovery: recoveryES,
   },
   pt: {
     common: commonPT,
