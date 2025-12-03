@@ -1,0 +1,63 @@
+{
+  "trainer_portal": "Portal do Treinador",
+  "trainer_portal_desc": "Gerencie seus clientes e programas de treinamento",
+  "practitioner_portal": "Portal do Profissional",
+  "practitioner_portal_desc": "Gerencie seus pacientes e serviços de saúde",
+  
+  "apply_now": "Candidatar-se agora",
+  "application_pending": "Candidatura pendente",
+  "application_rejected": "Candidatura rejeitada",
+  "approved": "Aprovado",
+  
+  "application_form": "Formulário de candidatura",
+  "full_name": "Nome completo",
+  "email": "E-mail",
+  "phone": "Telefone",
+  "years_experience": "Anos de experiência",
+  "bio": "Biografia",
+  "bio_placeholder": "Conte-nos sobre sua experiência e abordagem...",
+  "specialties": "Especialidades",
+  "certifications": "Certificações",
+  "upload_documents": "Enviar documentos",
+  "upload_certifications": "Enviar certificações e comprovantes",
+  "submit_application": "Enviar candidatura",
+  "submitting": "Enviando...",
+  
+  "application_submitted": "Candidatura enviada",
+  "application_submitted_desc": "Sua candidatura está sendo analisada",
+  "application_error": "Erro na candidatura",
+  
+  "my_clients": "Meus clientes",
+  "my_schedule": "Minha agenda",
+  "my_earnings": "Meus ganhos",
+  "profile_settings": "Configurações do perfil",
+  
+  "no_clients": "Ainda sem clientes",
+  "no_clients_desc": "Seus clientes aparecerão aqui",
+  
+  "trainer_specialties": "Especialidades do treinador",
+  "specialty_strength": "Musculação",
+  "specialty_cardio": "Cardio",
+  "specialty_yoga": "Yoga",
+  "specialty_pilates": "Pilates",
+  "specialty_hiit": "HIIT",
+  "specialty_crossfit": "CrossFit",
+  "specialty_nutrition": "Nutrição",
+  "specialty_weight_loss": "Perda de peso",
+  "specialty_muscle_gain": "Ganho muscular",
+  "specialty_flexibility": "Flexibilidade",
+  
+  "practitioner_specialties": "Especialidades do profissional",
+  "specialty_physical_therapy": "Fisioterapia",
+  "specialty_sports_medicine": "Medicina esportiva",
+  "specialty_nutrition_counseling": "Aconselhamento nutricional",
+  "specialty_mental_health": "Saúde mental",
+  "specialty_chiropractic": "Quiropraxia",
+  "specialty_massage_therapy": "Massoterapia",
+  "specialty_acupuncture": "Acupuntura",
+  "specialty_naturopathy": "Naturopatia",
+  
+  "premium_required": "Premium necessário",
+  "premium_required_desc": "Atualize para acessar o portal profissional",
+  "upgrade_now": "Atualizar agora"
+}
