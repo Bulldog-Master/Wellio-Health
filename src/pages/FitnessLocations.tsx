@@ -1590,7 +1590,7 @@ const FitnessLocations = () => {
               <Button 
                 onClick={handleLocationSearch} 
                 className="w-full"
-                disabled={geocodeLoading || !locationInput.trim()}
+                disabled={geocodeLoading || (!locationInput.trim() && !userLocation)}
               >
                 {geocodeLoading ? (
                   <Loader2 className="h-4 w-4 mr-2 animate-spin" />
