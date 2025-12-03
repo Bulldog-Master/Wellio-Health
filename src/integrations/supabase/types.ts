@@ -2895,6 +2895,48 @@ export type Database = {
         }
         Relationships: []
       }
+      recovery_sessions: {
+        Row: {
+          cost: number | null
+          created_at: string
+          duration_minutes: number
+          id: string
+          intensity: string | null
+          location: string | null
+          notes: string | null
+          session_date: string
+          temperature: string | null
+          therapy_type: string
+          user_id: string
+        }
+        Insert: {
+          cost?: number | null
+          created_at?: string
+          duration_minutes: number
+          id?: string
+          intensity?: string | null
+          location?: string | null
+          notes?: string | null
+          session_date?: string
+          temperature?: string | null
+          therapy_type: string
+          user_id: string
+        }
+        Update: {
+          cost?: number | null
+          created_at?: string
+          duration_minutes?: number
+          id?: string
+          intensity?: string | null
+          location?: string | null
+          notes?: string | null
+          session_date?: string
+          temperature?: string | null
+          therapy_type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       referrals: {
         Row: {
           completed_at: string | null
