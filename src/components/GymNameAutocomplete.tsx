@@ -173,33 +173,42 @@ export const GymNameAutocomplete = ({
         )}
       </div>
 
-      {showSuggestions && suggestions.length > 0 && (
+      {showSuggestions && (
         <div className="absolute z-50 w-full mt-1 bg-popover border border-border rounded-md shadow-lg max-h-60 overflow-y-auto">
-          {suggestions.map((suggestion, index) => {
-            const name = suggestion.name || suggestion.display_name.split(',')[0].trim();
-            const location = getLocationPreview(suggestion);
-            return (
-              <button
-                key={index}
-                type="button"
-                className="w-full px-3 py-2 text-left hover:bg-accent hover:text-accent-foreground transition-colors"
-                onClick={() => handleSelect(suggestion)}
-              >
-                <div className="flex items-start gap-2">
-                  <Dumbbell className="h-4 w-4 mt-0.5 flex-shrink-0 text-primary" />
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm truncate">{name}</p>
-                    {location && (
-                      <p className="text-xs text-muted-foreground flex items-center gap-1 truncate">
-                        <MapPin className="h-3 w-3 flex-shrink-0" />
-                        {location}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </button>
-            );
-          })}
+          {suggestions.length > 0 ? (
+            <>
+              {suggestions.map((suggestion, index) => {
+                const name = suggestion.name || suggestion.display_name.split(',')[0].trim();
+                const location = getLocationPreview(suggestion);
+                return (
+                  <button
+                    key={index}
+                    type="button"
+                    className="w-full px-3 py-2 text-left hover:bg-accent hover:text-accent-foreground transition-colors"
+                    onClick={() => handleSelect(suggestion)}
+                  >
+                    <div className="flex items-start gap-2">
+                      <Dumbbell className="h-4 w-4 mt-0.5 flex-shrink-0 text-primary" />
+                      <div className="flex-1 min-w-0">
+                        <p className="font-medium text-sm truncate">{name}</p>
+                        {location && (
+                          <p className="text-xs text-muted-foreground flex items-center gap-1 truncate">
+                            <MapPin className="h-3 w-3 flex-shrink-0" />
+                            {location}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
+            </>
+          ) : !isLoading && value.length >= 2 ? (
+            <div className="px-3 py-3 text-sm text-muted-foreground">
+              <p className="font-medium">{t('locations:no_autocomplete_results', 'No matches found')}</p>
+              <p className="text-xs mt-1">{t('locations:manual_entry_hint', 'You can type the name manually and fill in the address below')}</p>
+            </div>
+          ) : null}
         </div>
       )}
     </div>
