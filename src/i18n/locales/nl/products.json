@@ -1,0 +1,48 @@
+{
+  "title": "Aanbevolen Producten",
+  "subtitle": "Persoonlijk geverifieerde en goedgekeurde producten die ik vertrouw",
+  "categories": {
+    "all": "Alle Producten",
+    "supplements": "Supplementen",
+    "gear": "Uitrusting",
+    "apparel": "Kleding",
+    "equipment": "Apparatuur",
+    "recovery": "Herstel",
+    "nutrition": "Voeding",
+    "accessories": "Accessoires"
+  },
+  "bulldogz_approved": "Bulldogz Goedgekeurd",
+  "visit_store": "Bezoek Winkel",
+  "no_products": "Nog geen producten beschikbaar",
+  "no_products_category": "Nog geen producten in deze categorie",
+  "price_range": "Prijsklasse",
+  "why_i_recommend": "Waarom ik dit aanbeveel",
+  "admin": {
+    "manage_products": "Producten Beheren",
+    "add_product": "Product Toevoegen",
+    "edit_product": "Product Bewerken",
+    "delete_product": "Product Verwijderen",
+    "product_name": "Productnaam",
+    "product_name_es": "Productnaam (Spaans)",
+    "description": "Beschrijving",
+    "description_es": "Beschrijving (Spaans)",
+    "endorsement": "Persoonlijke Aanbeveling",
+    "endorsement_es": "Persoonlijke Aanbeveling (Spaans)",
+    "category": "Categorie",
+    "image_url": "Afbeelding URL",
+    "purchase_url": "Aankoop URL",
+    "price_range": "Prijsklasse",
+    "display_order": "Weergavevolgorde",
+    "is_active": "Actief",
+    "is_approved": "Bulldogz Goedgekeurd",
+    "product_added": "Product succesvol toegevoegd",
+    "product_updated": "Product succesvol bijgewerkt",
+    "product_deleted": "Product succesvol verwijderd",
+    "confirm_delete": "Weet je zeker dat je dit product wilt verwijderen?"
+  },
+  "shopify": {
+    "store_title": "Winkel",
+    "browse_store": "Blader door Winkel",
+    "coming_soon": "Volledige winkel binnenkort"
+  }
+}

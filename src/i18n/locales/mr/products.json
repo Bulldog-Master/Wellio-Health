@@ -1,0 +1,48 @@
+{
+  "title": "शिफारस केलेली उत्पादने",
+  "subtitle": "वैयक्तिकरित्या तपासलेली आणि विश्वासार्ह उत्पादने",
+  "categories": {
+    "all": "सर्व उत्पादने",
+    "supplements": "सप्लिमेंट्स",
+    "gear": "गियर",
+    "apparel": "कपडे",
+    "equipment": "उपकरणे",
+    "recovery": "रिकव्हरी",
+    "nutrition": "पोषण",
+    "accessories": "अॅक्सेसरीज"
+  },
+  "bulldogz_approved": "Bulldogz मान्य",
+  "visit_store": "स्टोअरला भेट द्या",
+  "no_products": "अजून कोणतीही उत्पादने नाहीत",
+  "no_products_category": "या श्रेणीत अजून उत्पादने नाहीत",
+  "price_range": "किंमत श्रेणी",
+  "why_i_recommend": "मी का शिफारस करतो",
+  "admin": {
+    "manage_products": "उत्पादने व्यवस्थापित करा",
+    "add_product": "उत्पादन जोडा",
+    "edit_product": "उत्पादन संपादित करा",
+    "delete_product": "उत्पादन हटवा",
+    "product_name": "उत्पादनाचे नाव",
+    "product_name_es": "उत्पादनाचे नाव (स्पॅनिश)",
+    "description": "वर्णन",
+    "description_es": "वर्णन (स्पॅनिश)",
+    "endorsement": "वैयक्तिक शिफारस",
+    "endorsement_es": "वैयक्तिक शिफारस (स्पॅनिश)",
+    "category": "श्रेणी",
+    "image_url": "प्रतिमा URL",
+    "purchase_url": "खरेदी URL",
+    "price_range": "किंमत श्रेणी",
+    "display_order": "प्रदर्शन क्रम",
+    "is_active": "सक्रिय",
+    "is_approved": "Bulldogz मान्य",
+    "product_added": "उत्पादन यशस्वीरित्या जोडले",
+    "product_updated": "उत्पादन यशस्वीरित्या अपडेट केले",
+    "product_deleted": "उत्पादन यशस्वीरित्या हटवले",
+    "confirm_delete": "तुम्हाला खात्री आहे की हे उत्पादन हटवायचे आहे?"
+  },
+  "shopify": {
+    "store_title": "स्टोअर",
+    "browse_store": "स्टोअर ब्राउझ करा",
+    "coming_soon": "पूर्ण स्टोअर लवकरच"
+  }
+}

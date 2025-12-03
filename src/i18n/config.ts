@@ -61,6 +61,27 @@ import locationsEN from './locales/en/locations.json';
 import adsEN from './locales/en/ads.json';
 import productsEN from './locales/en/products.json';
 import recoveryEN from './locales/en/recovery.json';
+import productsPT from './locales/pt/products.json';
+import productsFR from './locales/fr/products.json';
+import productsDE from './locales/de/products.json';
+import productsZH from './locales/zh/products.json';
+import productsTR from './locales/tr/products.json';
+import productsIT from './locales/it/products.json';
+import productsNL from './locales/nl/products.json';
+import productsRU from './locales/ru/products.json';
+import productsJA from './locales/ja/products.json';
+import productsKO from './locales/ko/products.json';
+import productsAR from './locales/ar/products.json';
+import productsHI from './locales/hi/products.json';
+import productsBN from './locales/bn/products.json';
+import productsID from './locales/id/products.json';
+import productsPCM from './locales/pcm/products.json';
+import productsTA from './locales/ta/products.json';
+import productsUR from './locales/ur/products.json';
+import productsARZ from './locales/arz/products.json';
+import productsMR from './locales/mr/products.json';
+import productsTE from './locales/te/products.json';
+import productsVI from './locales/vi/products.json';
 import addonsEN from './locales/en/addons.json';
 import professionalEN from './locales/en/professional.json';
 
@@ -791,6 +812,7 @@ const resources = {
     recovery: recoveryPT,
     settings: settingsPT,
     locations: locationsPT,
+    products: productsPT,
   },
   fr: {
     common: commonFR,
@@ -815,6 +837,7 @@ const resources = {
     recovery: recoveryFR,
     settings: settingsFR,
     locations: locationsFR,
+    products: productsFR,
   },
   de: {
     common: commonDE,
@@ -839,6 +862,7 @@ const resources = {
     recovery: recoveryDE,
     settings: settingsDE,
     locations: locationsDE,
+    products: productsDE,
   },
   zh: {
     common: commonZH,
@@ -863,6 +887,7 @@ const resources = {
     professional: professionalZH,
     recovery: recoveryZH,
     locations: locationsZH,
+    products: productsZH,
   },
   tr: {
     common: commonTR,
@@ -887,6 +912,7 @@ const resources = {
     units: unitsTR,
     videos: videosTR,
     locations: locationsTR,
+    products: productsTR,
   },
   it: {
     common: commonIT,
@@ -911,6 +937,7 @@ const resources = {
     units: unitsIT,
     videos: videosIT,
     locations: locationsIT,
+    products: productsIT,
   },
   nl: {
     common: commonNL,
@@ -935,6 +962,7 @@ const resources = {
     units: unitsNL,
     videos: videosNL,
     locations: locationsNL,
+    products: productsNL,
   },
   ru: {
     common: commonRU,
@@ -959,6 +987,7 @@ const resources = {
     units: unitsRU,
     videos: videosRU,
     locations: locationsRU,
+    products: productsRU,
   },
   ja: {
     common: commonJA,
@@ -983,6 +1012,7 @@ const resources = {
     units: unitsJA,
     videos: videosJA,
     locations: locationsJA,
+    products: productsJA,
   },
   ko: {
     common: commonKO,
@@ -1007,6 +1037,7 @@ const resources = {
     units: unitsKO,
     videos: videosKO,
     locations: locationsKO,
+    products: productsKO,
   },
   ar: {
     common: commonAR,
@@ -1031,6 +1062,7 @@ const resources = {
     units: unitsAR,
     videos: videosAR,
     locations: locationsAR,
+    products: productsAR,
   },
   hi: {
     common: commonHI,
@@ -1055,6 +1087,7 @@ const resources = {
     units: unitsHI,
     videos: videosHI,
     locations: locationsHI,
+    products: productsHI,
   },
   bn: {
     common: commonBN,
@@ -1079,6 +1112,7 @@ const resources = {
     units: unitsBN,
     videos: videosBN,
     locations: locationsBN,
+    products: productsBN,
   },
   id: {
     common: commonID,
@@ -1103,6 +1137,7 @@ const resources = {
     units: unitsID,
     videos: videosID,
     locations: locationsID,
+    products: productsID,
   },
   pcm: {
     common: commonPCM,
@@ -1127,6 +1162,7 @@ const resources = {
     units: unitsPCM,
     videos: videosPCM,
     locations: locationsPCM,
+    products: productsPCM,
   },
   ta: {
     common: commonTA,
@@ -1151,6 +1187,7 @@ const resources = {
     units: unitsTA,
     videos: videosTA,
     locations: locationsTA,
+    products: productsTA,
   },
   ur: {
     common: commonUR,
@@ -1175,6 +1212,7 @@ const resources = {
     units: unitsUR,
     videos: videosUR,
     locations: locationsUR,
+    products: productsUR,
   },
   arz: {
     common: commonARZ,
@@ -1199,6 +1237,7 @@ const resources = {
     units: unitsARZ,
     videos: videosARZ,
     locations: locationsARZ,
+    products: productsARZ,
   },
   mr: {
     common: commonMR,
@@ -1223,6 +1262,7 @@ const resources = {
     units: unitsMR,
     videos: videosMR,
     locations: locationsMR,
+    products: productsMR,
   },
   te: {
     common: commonTE,
@@ -1247,6 +1287,7 @@ const resources = {
     units: unitsTE,
     videos: videosTE,
     locations: locationsTE,
+    products: productsTE,
   },
   vi: {
     common: commonVI,
@@ -1271,6 +1312,7 @@ const resources = {
     units: unitsVI,
     videos: videosVI,
     locations: locationsVI,
+    products: productsVI,
   },
 };
 

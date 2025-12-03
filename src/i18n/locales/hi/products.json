@@ -1,0 +1,48 @@
+{
+  "title": "अनुशंसित उत्पाद",
+  "subtitle": "व्यक्तिगत रूप से सत्यापित और भरोसेमंद उत्पाद",
+  "categories": {
+    "all": "सभी उत्पाद",
+    "supplements": "सप्लीमेंट",
+    "gear": "गियर",
+    "apparel": "कपड़े",
+    "equipment": "उपकरण",
+    "recovery": "रिकवरी",
+    "nutrition": "पोषण",
+    "accessories": "एक्सेसरीज"
+  },
+  "bulldogz_approved": "Bulldogz स्वीकृत",
+  "visit_store": "स्टोर पर जाएं",
+  "no_products": "अभी तक कोई उत्पाद उपलब्ध नहीं",
+  "no_products_category": "इस श्रेणी में अभी तक कोई उत्पाद नहीं",
+  "price_range": "मूल्य सीमा",
+  "why_i_recommend": "मैं इसकी सिफारिश क्यों करता हूं",
+  "admin": {
+    "manage_products": "उत्पाद प्रबंधन",
+    "add_product": "उत्पाद जोड़ें",
+    "edit_product": "उत्पाद संपादित करें",
+    "delete_product": "उत्पाद हटाएं",
+    "product_name": "उत्पाद का नाम",
+    "product_name_es": "उत्पाद का नाम (स्पेनिश)",
+    "description": "विवरण",
+    "description_es": "विवरण (स्पेनिश)",
+    "endorsement": "व्यक्तिगत अनुशंसा",
+    "endorsement_es": "व्यक्तिगत अनुशंसा (स्पेनिश)",
+    "category": "श्रेणी",
+    "image_url": "छवि URL",
+    "purchase_url": "खरीद URL",
+    "price_range": "मूल्य सीमा",
+    "display_order": "प्रदर्शन क्रम",
+    "is_active": "सक्रिय",
+    "is_approved": "Bulldogz स्वीकृत",
+    "product_added": "उत्पाद सफलतापूर्वक जोड़ा गया",
+    "product_updated": "उत्पाद सफलतापूर्वक अपडेट किया गया",
+    "product_deleted": "उत्पाद सफलतापूर्वक हटाया गया",
+    "confirm_delete": "क्या आप इस उत्पाद को हटाना चाहते हैं?"
+  },
+  "shopify": {
+    "store_title": "स्टोर",
+    "browse_store": "स्टोर देखें",
+    "coming_soon": "पूर्ण स्टोर जल्द आ रहा है"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "title": "Produk Rekomendasi",
+  "subtitle": "Produk yang saya verifikasi dan percaya secara pribadi",
+  "categories": {
+    "all": "Semua Produk",
+    "supplements": "Suplemen",
+    "gear": "Perlengkapan",
+    "apparel": "Pakaian",
+    "equipment": "Peralatan",
+    "recovery": "Pemulihan",
+    "nutrition": "Nutrisi",
+    "accessories": "Aksesori"
+  },
+  "bulldogz_approved": "Disetujui Bulldogz",
+  "visit_store": "Kunjungi Toko",
+  "no_products": "Belum ada produk tersedia",
+  "no_products_category": "Belum ada produk di kategori ini",
+  "price_range": "Rentang Harga",
+  "why_i_recommend": "Mengapa Saya Merekomendasikan",
+  "admin": {
+    "manage_products": "Kelola Produk",
+    "add_product": "Tambah Produk",
+    "edit_product": "Edit Produk",
+    "delete_product": "Hapus Produk",
+    "product_name": "Nama Produk",
+    "product_name_es": "Nama Produk (Spanyol)",
+    "description": "Deskripsi",
+    "description_es": "Deskripsi (Spanyol)",
+    "endorsement": "Rekomendasi Pribadi",
+    "endorsement_es": "Rekomendasi Pribadi (Spanyol)",
+    "category": "Kategori",
+    "image_url": "URL Gambar",
+    "purchase_url": "URL Pembelian",
+    "price_range": "Rentang Harga",
+    "display_order": "Urutan Tampilan",
+    "is_active": "Aktif",
+    "is_approved": "Disetujui Bulldogz",
+    "product_added": "Produk berhasil ditambahkan",
+    "product_updated": "Produk berhasil diperbarui",
+    "product_deleted": "Produk berhasil dihapus",
+    "confirm_delete": "Apakah Anda yakin ingin menghapus produk ini?"
+  },
+  "shopify": {
+    "store_title": "Toko",
+    "browse_store": "Jelajahi Toko",
+    "coming_soon": "Toko lengkap segera hadir"
+  }
+}

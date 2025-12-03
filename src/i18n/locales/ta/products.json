@@ -1,0 +1,48 @@
+{
+  "title": "பரிந்துரைக்கப்பட்ட தயாரிப்புகள்",
+  "subtitle": "நான் தனிப்பட்ட முறையில் சரிபார்த்து நம்பும் தயாரிப்புகள்",
+  "categories": {
+    "all": "அனைத்து தயாரிப்புகள்",
+    "supplements": "சப்ளிமெண்ட்ஸ்",
+    "gear": "கியர்",
+    "apparel": "ஆடை",
+    "equipment": "உபகரணங்கள்",
+    "recovery": "மீட்பு",
+    "nutrition": "ஊட்டச்சத்து",
+    "accessories": "துணைக்கருவிகள்"
+  },
+  "bulldogz_approved": "Bulldogz அங்கீகரிக்கப்பட்டது",
+  "visit_store": "கடைக்கு செல்",
+  "no_products": "தயாரிப்புகள் இன்னும் இல்லை",
+  "no_products_category": "இந்த வகையில் தயாரிப்புகள் இல்லை",
+  "price_range": "விலை வரம்பு",
+  "why_i_recommend": "நான் ஏன் பரிந்துரைக்கிறேன்",
+  "admin": {
+    "manage_products": "தயாரிப்புகளை நிர்வகி",
+    "add_product": "தயாரிப்பு சேர்",
+    "edit_product": "தயாரிப்பை திருத்து",
+    "delete_product": "தயாரிப்பை நீக்கு",
+    "product_name": "தயாரிப்பு பெயர்",
+    "product_name_es": "தயாரிப்பு பெயர் (ஸ்பானிஷ்)",
+    "description": "விவரம்",
+    "description_es": "விவரம் (ஸ்பானிஷ்)",
+    "endorsement": "தனிப்பட்ட பரிந்துரை",
+    "endorsement_es": "தனிப்பட்ட பரிந்துரை (ஸ்பானிஷ்)",
+    "category": "வகை",
+    "image_url": "படம் URL",
+    "purchase_url": "வாங்க URL",
+    "price_range": "விலை வரம்பு",
+    "display_order": "காட்சி வரிசை",
+    "is_active": "செயலில்",
+    "is_approved": "Bulldogz அங்கீகரிக்கப்பட்டது",
+    "product_added": "தயாரிப்பு வெற்றிகரமாக சேர்க்கப்பட்டது",
+    "product_updated": "தயாரிப்பு வெற்றிகரமாக புதுப்பிக்கப்பட்டது",
+    "product_deleted": "தயாரிப்பு வெற்றிகரமாக நீக்கப்பட்டது",
+    "confirm_delete": "இந்த தயாரிப்பை நீக்க விரும்புகிறீர்களா?"
+  },
+  "shopify": {
+    "store_title": "கடை",
+    "browse_store": "கடையை பார்வையிடு",
+    "coming_soon": "முழு கடை விரைவில்"
+  }
+}
