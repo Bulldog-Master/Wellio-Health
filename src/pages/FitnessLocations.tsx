@@ -91,6 +91,7 @@ const FitnessLocations = () => {
   const [manualLocationQuery, setManualLocationQuery] = useState('');
   const [isManualLocationDialogOpen, setIsManualLocationDialogOpen] = useState(false);
   const [geocodeLoading, setGeocodeLoading] = useState(false);
+  const [nearMeCategoryFilter, setNearMeCategoryFilter] = useState<string>('all');
   const [formData, setFormData] = useState({
     name: '',
     category: 'gym',
@@ -163,8 +164,13 @@ const FitnessLocations = () => {
           lng: parseFloat(results[0].lon),
         });
         setNearMeMode(true);
+        // Apply category filter if specified
+        if (nearMeCategoryFilter !== 'all') {
+          setSelectedCategory(nearMeCategoryFilter);
+        }
         setIsManualLocationDialogOpen(false);
         setManualLocationQuery('');
+        setNearMeCategoryFilter('all');
         toast.success(t('locations:location_found'));
       } else {
         toast.error(t('locations:location_not_found'));
@@ -916,6 +922,24 @@ const FitnessLocations = () => {
                   placeholder={t('locations:city_placeholder')}
                   onKeyDown={(e) => e.key === 'Enter' && handleManualLocationSearch()}
                 />
+              </div>
+              <div>
+                <Label>{t('locations:facility_type')}</Label>
+                <Select
+                  value={nearMeCategoryFilter}
+                  onValueChange={setNearMeCategoryFilter}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {categories.map((cat) => (
+                      <SelectItem key={cat} value={cat}>
+                        {t(`locations:categories.${cat}`)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <Button 
                 onClick={handleManualLocationSearch} 
