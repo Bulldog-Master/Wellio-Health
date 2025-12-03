@@ -2,10 +2,21 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { Scale, Utensils, Dumbbell, Footprints, Heart, Trophy, Target, TrendingUp, Calendar, Activity as ActivityIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+
+// Helper to parse date-only fields without timezone shift
+const parseDateOnly = (dateStr: string): Date => {
+  // If it's a date-only field (YYYY-MM-DD or midnight UTC), treat as local date
+  if (dateStr.includes('T00:00:00') || dateStr.match(/^\d{4}-\d{2}-\d{2}$/)) {
+    const datePart = dateStr.split('T')[0];
+    const [year, month, day] = datePart.split('-').map(Number);
+    return new Date(year, month - 1, day, 12, 0, 0); // Noon local time to avoid any timezone issues
+  }
+  return parseISO(dateStr);
+};
 
 interface TimelineEvent {
   id: string;
@@ -78,12 +89,14 @@ export const ActivityTimeline = () => {
         .limit(5);
 
       nutrition?.forEach(n => {
+        // Use created_at for actual timestamp, logged_at is date-only
+        const timestamp = n.created_at || n.logged_at;
         allEvents.push({
           id: n.id,
           type: 'nutrition',
           title: t('meal_logged'),
           description: `${n.food_name} - ${n.calories || 0} cal`,
-          timestamp: n.logged_at || n.created_at,
+          timestamp: timestamp,
           icon: Utensils,
           color: 'text-success',
           link: '/food'
