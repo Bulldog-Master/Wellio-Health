@@ -1,0 +1,12 @@
+{
+  "messages": "Сообщения",
+  "new_message": "Новое сообщение",
+  "send_message": "Отправить сообщение",
+  "type_message": "Введите сообщение...",
+  "no_messages": "Нет сообщений",
+  "no_conversations": "Нет диалогов",
+  "search_messages": "Поиск сообщений",
+  "delete_message": "Удалить сообщение",
+  "message_sent": "Сообщение отправлено",
+  "message_deleted": "Сообщение удалено"
+}

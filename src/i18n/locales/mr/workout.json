@@ -1,0 +1,18 @@
+{
+  "workout_details": "व्यायाम तपशील",
+  "workout_type": "व्यायाम प्रकार",
+  "workout_name": "व्यायाम नाव",
+  "workout_duration": "कालावधी",
+  "workout_calories": "कॅलरीज",
+  "workout_notes": "नोट्स",
+  "start_workout": "व्यायाम सुरू करा",
+  "end_workout": "व्यायाम संपवा",
+  "pause_workout": "थांबा",
+  "resume_workout": "पुढे चालू ठेवा",
+  "save_workout": "व्यायाम जतन करा",
+  "delete_workout": "व्यायाम हटवा",
+  "workout_history": "व्यायाम इतिहास",
+  "no_workouts": "व्यायाम नाहीत",
+  "workout_complete": "व्यायाम पूर्ण!",
+  "great_job": "छान काम!"
+}

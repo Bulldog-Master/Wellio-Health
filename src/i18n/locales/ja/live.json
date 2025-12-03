@@ -1,0 +1,19 @@
+{
+  "live_sessions": "ライブセッション",
+  "live_workout": "ライブワークアウト",
+  "join_session": "セッションに参加",
+  "create_session": "セッション作成",
+  "session_title": "セッションタイトル",
+  "session_description": "セッション説明",
+  "session_date": "日付",
+  "session_time": "時間",
+  "session_duration": "時間",
+  "max_participants": "最大参加者数",
+  "participants": "参加者",
+  "host": "ホスト",
+  "upcoming_sessions": "今後のセッション",
+  "past_sessions": "過去のセッション",
+  "no_sessions": "セッションがありません",
+  "session_full": "満員",
+  "session_ended": "セッション終了"
+}

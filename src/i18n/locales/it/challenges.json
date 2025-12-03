@@ -1,0 +1,16 @@
+{
+  "challenges": "Sfide",
+  "active_challenges": "Sfide Attive",
+  "completed_challenges": "Sfide Completate",
+  "join_challenge": "Partecipa alla Sfida",
+  "leave_challenge": "Abbandona Sfida",
+  "create_challenge": "Crea Sfida",
+  "challenge_details": "Dettagli Sfida",
+  "challenge_progress": "Progresso",
+  "challenge_leaderboard": "Classifica",
+  "days_remaining": "Giorni Rimanenti",
+  "participants": "Partecipanti",
+  "your_rank": "La Tua Posizione",
+  "challenge_complete": "Sfida Completata!",
+  "no_challenges": "Nessuna sfida"
+}

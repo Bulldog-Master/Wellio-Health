@@ -1,0 +1,16 @@
+{
+  "challenges": "Meydan Okumalar",
+  "active_challenges": "Aktif Meydan Okumalar",
+  "completed_challenges": "Tamamlanan Meydan Okumalar",
+  "join_challenge": "Meydan Okumaya Katıl",
+  "leave_challenge": "Meydan Okumadan Ayrıl",
+  "create_challenge": "Meydan Okuma Oluştur",
+  "challenge_details": "Meydan Okuma Detayları",
+  "challenge_progress": "İlerleme",
+  "challenge_leaderboard": "Liderlik Tablosu",
+  "days_remaining": "Kalan Gün",
+  "participants": "Katılımcılar",
+  "your_rank": "Sıralamanız",
+  "challenge_complete": "Meydan Okuma Tamamlandı!",
+  "no_challenges": "Meydan okuma yok"
+}

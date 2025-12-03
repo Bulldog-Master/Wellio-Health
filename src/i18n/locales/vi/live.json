@@ -1,0 +1,19 @@
+{
+  "live_sessions": "Phiên trực tiếp",
+  "live_workout": "Bài tập trực tiếp",
+  "join_session": "Tham gia phiên",
+  "create_session": "Tạo phiên",
+  "session_title": "Tiêu đề phiên",
+  "session_description": "Mô tả phiên",
+  "session_date": "Ngày",
+  "session_time": "Giờ",
+  "session_duration": "Thời lượng",
+  "max_participants": "Số người tối đa",
+  "participants": "Người tham gia",
+  "host": "Chủ trì",
+  "upcoming_sessions": "Phiên sắp tới",
+  "past_sessions": "Phiên đã qua",
+  "no_sessions": "Không có phiên",
+  "session_full": "Phiên đã đầy",
+  "session_ended": "Phiên đã kết thúc"
+}

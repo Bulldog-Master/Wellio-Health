@@ -1,0 +1,12 @@
+{
+  "messages": "Messaggi",
+  "new_message": "Nuovo Messaggio",
+  "send_message": "Invia Messaggio",
+  "type_message": "Scrivi un messaggio...",
+  "no_messages": "Nessun messaggio",
+  "no_conversations": "Nessuna conversazione",
+  "search_messages": "Cerca Messaggi",
+  "delete_message": "Elimina Messaggio",
+  "message_sent": "Messaggio inviato",
+  "message_deleted": "Messaggio eliminato"
+}

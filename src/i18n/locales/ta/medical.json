@@ -1,0 +1,14 @@
+{
+  "medical_history": "மருத்துவ வரலாறு",
+  "medical_records": "மருத்துவ பதிவுகள்",
+  "add_record": "பதிவு சேர்",
+  "medications": "மருந்துகள்",
+  "allergies": "ஒவ்வாமைகள்",
+  "conditions": "உடல்நிலைகள்",
+  "vaccinations": "தடுப்பூசிகள்",
+  "lab_results": "ஆய்வக முடிவுகள்",
+  "doctor_visits": "மருத்துவர் சந்திப்புகள்",
+  "emergency_contact": "அவசர தொடர்பு",
+  "blood_type": "இரத்த வகை",
+  "no_records": "பதிவுகள் இல்லை"
+}

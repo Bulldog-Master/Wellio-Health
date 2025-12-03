@@ -1,0 +1,18 @@
+{
+  "workout_details": "ওয়ার্কআউট বিবরণ",
+  "workout_type": "ওয়ার্কআউটের ধরন",
+  "workout_name": "ওয়ার্কআউটের নাম",
+  "workout_duration": "সময়কাল",
+  "workout_calories": "ক্যালোরি",
+  "workout_notes": "নোট",
+  "start_workout": "ওয়ার্কআউট শুরু করুন",
+  "end_workout": "ওয়ার্কআউট শেষ করুন",
+  "pause_workout": "বিরতি",
+  "resume_workout": "পুনরায় শুরু",
+  "save_workout": "ওয়ার্কআউট সংরক্ষণ করুন",
+  "delete_workout": "ওয়ার্কআউট মুছুন",
+  "workout_history": "ওয়ার্কআউট ইতিহাস",
+  "no_workouts": "কোনো ওয়ার্কআউট নেই",
+  "workout_complete": "ওয়ার্কআউট সম্পূর্ণ!",
+  "great_job": "দারুণ কাজ!"
+}

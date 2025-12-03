@@ -1,0 +1,19 @@
+{
+  "live_sessions": "لائیو سیشنز",
+  "live_workout": "لائیو ورزش",
+  "join_session": "سیشن میں شامل ہوں",
+  "create_session": "سیشن بنائیں",
+  "session_title": "سیشن کا عنوان",
+  "session_description": "سیشن کی تفصیل",
+  "session_date": "تاریخ",
+  "session_time": "وقت",
+  "session_duration": "دورانیہ",
+  "max_participants": "زیادہ سے زیادہ شرکاء",
+  "participants": "شرکاء",
+  "host": "میزبان",
+  "upcoming_sessions": "آنے والے سیشنز",
+  "past_sessions": "گزشتہ سیشنز",
+  "no_sessions": "کوئی سیشن نہیں",
+  "session_full": "سیشن بھرا ہوا",
+  "session_ended": "سیشن ختم"
+}

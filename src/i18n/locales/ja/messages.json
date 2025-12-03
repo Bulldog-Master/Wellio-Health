@@ -1,0 +1,12 @@
+{
+  "messages": "メッセージ",
+  "new_message": "新しいメッセージ",
+  "send_message": "メッセージを送信",
+  "type_message": "メッセージを入力...",
+  "no_messages": "メッセージがありません",
+  "no_conversations": "会話がありません",
+  "search_messages": "メッセージを検索",
+  "delete_message": "メッセージを削除",
+  "message_sent": "メッセージを送信しました",
+  "message_deleted": "メッセージを削除しました"
+}

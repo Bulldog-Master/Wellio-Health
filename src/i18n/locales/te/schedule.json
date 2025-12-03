@@ -1,0 +1,17 @@
+{
+  "schedule": "షెడ్యూల్",
+  "workout_schedule": "వ్యాయామ షెడ్యూల్",
+  "add_event": "ఈవెంట్ జోడించండి",
+  "edit_event": "ఈవెంట్ సవరించండి",
+  "delete_event": "ఈవెంట్ తొలగించండి",
+  "event_title": "ఈవెంట్ శీర్షిక",
+  "event_date": "తేదీ",
+  "event_time": "సమయం",
+  "event_type": "ఈవెంట్ రకం",
+  "recurring": "పునరావృతం",
+  "reminder": "రిమైండర్",
+  "no_events": "ఈవెంట్లు లేవు",
+  "today": "ఈ రోజు",
+  "this_week": "ఈ వారం",
+  "this_month": "ఈ నెల"
+}

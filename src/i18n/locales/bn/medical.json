@@ -1,0 +1,14 @@
+{
+  "medical_history": "চিকিৎসা ইতিহাস",
+  "medical_records": "চিকিৎসা রেকর্ড",
+  "add_record": "রেকর্ড যোগ করুন",
+  "medications": "ওষুধ",
+  "allergies": "অ্যালার্জি",
+  "conditions": "স্বাস্থ্য অবস্থা",
+  "vaccinations": "টিকা",
+  "lab_results": "ল্যাব ফলাফল",
+  "doctor_visits": "ডাক্তার ভিজিট",
+  "emergency_contact": "জরুরি যোগাযোগ",
+  "blood_type": "রক্তের গ্রুপ",
+  "no_records": "কোনো রেকর্ড নেই"
+}

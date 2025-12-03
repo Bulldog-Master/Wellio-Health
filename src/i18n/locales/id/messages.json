@@ -1,0 +1,12 @@
+{
+  "messages": "Pesan",
+  "new_message": "Pesan Baru",
+  "send_message": "Kirim Pesan",
+  "type_message": "Ketik pesan...",
+  "no_messages": "Tidak ada pesan",
+  "no_conversations": "Tidak ada percakapan",
+  "search_messages": "Cari Pesan",
+  "delete_message": "Hapus Pesan",
+  "message_sent": "Pesan terkirim",
+  "message_deleted": "Pesan dihapus"
+}

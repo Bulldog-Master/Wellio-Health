@@ -1,0 +1,17 @@
+{
+  "schedule": "शेड्यूल",
+  "workout_schedule": "वर्कआउट शेड्यूल",
+  "add_event": "इवेंट जोड़ें",
+  "edit_event": "इवेंट संपादित करें",
+  "delete_event": "इवेंट हटाएं",
+  "event_title": "इवेंट शीर्षक",
+  "event_date": "तारीख",
+  "event_time": "समय",
+  "event_type": "इवेंट प्रकार",
+  "recurring": "दोहराव",
+  "reminder": "रिमाइंडर",
+  "no_events": "कोई इवेंट नहीं",
+  "today": "आज",
+  "this_week": "इस सप्ताह",
+  "this_month": "इस महीने"
+}

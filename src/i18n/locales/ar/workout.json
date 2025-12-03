@@ -1,0 +1,18 @@
+{
+  "workout_details": "تفاصيل التمرين",
+  "workout_type": "نوع التمرين",
+  "workout_name": "اسم التمرين",
+  "workout_duration": "المدة",
+  "workout_calories": "السعرات الحرارية",
+  "workout_notes": "ملاحظات",
+  "start_workout": "بدء التمرين",
+  "end_workout": "إنهاء التمرين",
+  "pause_workout": "إيقاف مؤقت",
+  "resume_workout": "استئناف",
+  "save_workout": "حفظ التمرين",
+  "delete_workout": "حذف التمرين",
+  "workout_history": "سجل التمارين",
+  "no_workouts": "لا توجد تمارين",
+  "workout_complete": "اكتمل التمرين!",
+  "great_job": "عمل رائع!"
+}

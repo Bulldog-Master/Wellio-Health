@@ -1,0 +1,18 @@
+{
+  "workout_details": "உடற்பயிற்சி விவரங்கள்",
+  "workout_type": "உடற்பயிற்சி வகை",
+  "workout_name": "உடற்பயிற்சி பெயர்",
+  "workout_duration": "கால அளவு",
+  "workout_calories": "கலோரிகள்",
+  "workout_notes": "குறிப்புகள்",
+  "start_workout": "உடற்பயிற்சி தொடங்கு",
+  "end_workout": "உடற்பயிற்சி முடி",
+  "pause_workout": "இடைநிறுத்து",
+  "resume_workout": "தொடர்",
+  "save_workout": "உடற்பயிற்சி சேமி",
+  "delete_workout": "உடற்பயிற்சி நீக்கு",
+  "workout_history": "உடற்பயிற்சி வரலாறு",
+  "no_workouts": "உடற்பயிற்சிகள் இல்லை",
+  "workout_complete": "உடற்பயிற்சி முடிந்தது!",
+  "great_job": "அருமையான வேலை!"
+}

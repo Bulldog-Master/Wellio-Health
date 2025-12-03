@@ -1,0 +1,18 @@
+{
+  "workout_details": "Antrenman Detayları",
+  "workout_type": "Antrenman Türü",
+  "workout_name": "Antrenman Adı",
+  "workout_duration": "Süre",
+  "workout_calories": "Kalori",
+  "workout_notes": "Notlar",
+  "start_workout": "Antrenmanı Başlat",
+  "end_workout": "Antrenmanı Bitir",
+  "pause_workout": "Duraklat",
+  "resume_workout": "Devam Et",
+  "save_workout": "Antrenmanı Kaydet",
+  "delete_workout": "Antrenmanı Sil",
+  "workout_history": "Antrenman Geçmişi",
+  "no_workouts": "Henüz antrenman yok",
+  "workout_complete": "Antrenman Tamamlandı!",
+  "great_job": "Harika İş!"
+}

@@ -1,0 +1,14 @@
+{
+  "medical_history": "История болезни",
+  "medical_records": "Медицинские записи",
+  "add_record": "Добавить запись",
+  "medications": "Лекарства",
+  "allergies": "Аллергии",
+  "conditions": "Заболевания",
+  "vaccinations": "Прививки",
+  "lab_results": "Результаты анализов",
+  "doctor_visits": "Визиты к врачу",
+  "emergency_contact": "Экстренный контакт",
+  "blood_type": "Группа крови",
+  "no_records": "Нет записей"
+}

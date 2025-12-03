@@ -1,0 +1,16 @@
+{
+  "challenges": "சவால்கள்",
+  "active_challenges": "செயலில் உள்ள சவால்கள்",
+  "completed_challenges": "முடிந்த சவால்கள்",
+  "join_challenge": "சவாலில் சேர்",
+  "leave_challenge": "சவாலை விடு",
+  "create_challenge": "சவால் உருவாக்கு",
+  "challenge_details": "சவால் விவரங்கள்",
+  "challenge_progress": "முன்னேற்றம்",
+  "challenge_leaderboard": "தரவரிசை",
+  "days_remaining": "மீதமுள்ள நாட்கள்",
+  "participants": "பங்கேற்பாளர்கள்",
+  "your_rank": "உங்கள் தரவரிசை",
+  "challenge_complete": "சவால் முடிந்தது!",
+  "no_challenges": "சவால்கள் இல்லை"
+}

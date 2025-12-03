@@ -1,0 +1,19 @@
+{
+  "live_sessions": "直播课程",
+  "live_workout": "直播锻炼",
+  "join_session": "加入课程",
+  "create_session": "创建课程",
+  "session_title": "课程标题",
+  "session_description": "课程描述",
+  "session_date": "日期",
+  "session_time": "时间",
+  "session_duration": "持续时间",
+  "max_participants": "最大参与人数",
+  "participants": "参与者",
+  "host": "主持人",
+  "upcoming_sessions": "即将开始",
+  "past_sessions": "历史课程",
+  "no_sessions": "暂无课程",
+  "session_full": "课程已满",
+  "session_ended": "课程已结束"
+}

@@ -1,0 +1,18 @@
+{
+  "workout_details": "ورزش کی تفصیلات",
+  "workout_type": "ورزش کی قسم",
+  "workout_name": "ورزش کا نام",
+  "workout_duration": "دورانیہ",
+  "workout_calories": "کیلوریز",
+  "workout_notes": "نوٹس",
+  "start_workout": "ورزش شروع کریں",
+  "end_workout": "ورزش ختم کریں",
+  "pause_workout": "روکیں",
+  "resume_workout": "جاری رکھیں",
+  "save_workout": "ورزش محفوظ کریں",
+  "delete_workout": "ورزش حذف کریں",
+  "workout_history": "ورزش کی تاریخ",
+  "no_workouts": "کوئی ورزش نہیں",
+  "workout_complete": "ورزش مکمل!",
+  "great_job": "شاباش!"
+}

@@ -1,0 +1,19 @@
+{
+  "live_sessions": "நேரடி அமர்வுகள்",
+  "live_workout": "நேரடி உடற்பயிற்சி",
+  "join_session": "அமர்வில் சேர்",
+  "create_session": "அமர்வு உருவாக்கு",
+  "session_title": "அமர்வு தலைப்பு",
+  "session_description": "அமர்வு விளக்கம்",
+  "session_date": "தேதி",
+  "session_time": "நேரம்",
+  "session_duration": "கால அளவு",
+  "max_participants": "அதிகபட்ச பங்கேற்பாளர்கள்",
+  "participants": "பங்கேற்பாளர்கள்",
+  "host": "தொகுப்பாளர்",
+  "upcoming_sessions": "வரவிருக்கும் அமர்வுகள்",
+  "past_sessions": "கடந்த அமர்வுகள்",
+  "no_sessions": "அமர்வுகள் இல்லை",
+  "session_full": "அமர்வு நிரம்பியது",
+  "session_ended": "அமர்வு முடிந்தது"
+}

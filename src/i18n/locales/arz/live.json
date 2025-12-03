@@ -1,0 +1,19 @@
+{
+  "live_sessions": "جلسات لايف",
+  "live_workout": "تمرين لايف",
+  "join_session": "انضم للجلسة",
+  "create_session": "اعمل جلسة",
+  "session_title": "عنوان الجلسة",
+  "session_description": "وصف الجلسة",
+  "session_date": "التاريخ",
+  "session_time": "الوقت",
+  "session_duration": "المدة",
+  "max_participants": "أقصى عدد",
+  "participants": "المشاركين",
+  "host": "المضيف",
+  "upcoming_sessions": "الجلسات الجاية",
+  "past_sessions": "الجلسات اللي فاتت",
+  "no_sessions": "مفيش جلسات",
+  "session_full": "الجلسة مليانة",
+  "session_ended": "الجلسة خلصت"
+}

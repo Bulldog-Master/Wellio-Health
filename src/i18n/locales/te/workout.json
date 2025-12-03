@@ -1,0 +1,18 @@
+{
+  "workout_details": "వ్యాయామ వివరాలు",
+  "workout_type": "వ్యాయామ రకం",
+  "workout_name": "వ్యాయామ పేరు",
+  "workout_duration": "వ్యవధి",
+  "workout_calories": "కేలరీలు",
+  "workout_notes": "గమనికలు",
+  "start_workout": "వ్యాయామం ప్రారంభించండి",
+  "end_workout": "వ్యాయామం ముగించండి",
+  "pause_workout": "ఆపు",
+  "resume_workout": "కొనసాగించు",
+  "save_workout": "వ్యాయామం సేవ్ చేయండి",
+  "delete_workout": "వ్యాయామం తొలగించండి",
+  "workout_history": "వ్యాయామ చరిత్ర",
+  "no_workouts": "వ్యాయామాలు లేవు",
+  "workout_complete": "వ్యాయామం పూర్తయింది!",
+  "great_job": "అద్భుతమైన పని!"
+}

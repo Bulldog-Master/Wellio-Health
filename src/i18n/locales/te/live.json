@@ -1,0 +1,19 @@
+{
+  "live_sessions": "లైవ్ సెషన్లు",
+  "live_workout": "లైవ్ వ్యాయామం",
+  "join_session": "సెషన్‌లో చేరండి",
+  "create_session": "సెషన్ సృష్టించండి",
+  "session_title": "సెషన్ శీర్షిక",
+  "session_description": "సెషన్ వివరణ",
+  "session_date": "తేదీ",
+  "session_time": "సమయం",
+  "session_duration": "వ్యవధి",
+  "max_participants": "గరిష్ట పాల్గొనేవారు",
+  "participants": "పాల్గొనేవారు",
+  "host": "హోస్ట్",
+  "upcoming_sessions": "రాబోయే సెషన్లు",
+  "past_sessions": "గత సెషన్లు",
+  "no_sessions": "సెషన్లు లేవు",
+  "session_full": "సెషన్ నిండింది",
+  "session_ended": "సెషన్ ముగిసింది"
+}

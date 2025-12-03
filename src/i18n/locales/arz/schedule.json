@@ -1,0 +1,17 @@
+{
+  "schedule": "الجدول",
+  "workout_schedule": "جدول التمارين",
+  "add_event": "ضيف حدث",
+  "edit_event": "عدل الحدث",
+  "delete_event": "امسح الحدث",
+  "event_title": "عنوان الحدث",
+  "event_date": "التاريخ",
+  "event_time": "الوقت",
+  "event_type": "نوع الحدث",
+  "recurring": "متكرر",
+  "reminder": "تذكير",
+  "no_events": "مفيش أحداث",
+  "today": "النهارده",
+  "this_week": "الأسبوع ده",
+  "this_month": "الشهر ده"
+}

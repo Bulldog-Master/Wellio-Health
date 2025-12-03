@@ -1,0 +1,14 @@
+{
+  "medical_history": "병력",
+  "medical_records": "의료 기록",
+  "add_record": "기록 추가",
+  "medications": "약물",
+  "allergies": "알레르기",
+  "conditions": "건강 상태",
+  "vaccinations": "예방접종",
+  "lab_results": "검사 결과",
+  "doctor_visits": "진료 기록",
+  "emergency_contact": "긴급 연락처",
+  "blood_type": "혈액형",
+  "no_records": "기록이 없습니다"
+}

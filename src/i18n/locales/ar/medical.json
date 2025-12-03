@@ -1,0 +1,14 @@
+{
+  "medical_history": "التاريخ الطبي",
+  "medical_records": "السجلات الطبية",
+  "add_record": "إضافة سجل",
+  "medications": "الأدوية",
+  "allergies": "الحساسية",
+  "conditions": "الحالات الصحية",
+  "vaccinations": "التطعيمات",
+  "lab_results": "نتائج المختبر",
+  "doctor_visits": "زيارات الطبيب",
+  "emergency_contact": "جهة اتصال الطوارئ",
+  "blood_type": "فصيلة الدم",
+  "no_records": "لا توجد سجلات"
+}

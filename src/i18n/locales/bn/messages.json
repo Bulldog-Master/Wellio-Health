@@ -1,0 +1,12 @@
+{
+  "messages": "বার্তা",
+  "new_message": "নতুন বার্তা",
+  "send_message": "বার্তা পাঠান",
+  "type_message": "বার্তা লিখুন...",
+  "no_messages": "কোনো বার্তা নেই",
+  "no_conversations": "কোনো কথোপকথন নেই",
+  "search_messages": "বার্তা অনুসন্ধান করুন",
+  "delete_message": "বার্তা মুছুন",
+  "message_sent": "বার্তা পাঠানো হয়েছে",
+  "message_deleted": "বার্তা মুছে ফেলা হয়েছে"
+}

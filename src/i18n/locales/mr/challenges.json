@@ -1,0 +1,16 @@
+{
+  "challenges": "आव्हाने",
+  "active_challenges": "सक्रिय आव्हाने",
+  "completed_challenges": "पूर्ण झालेली आव्हाने",
+  "join_challenge": "आव्हानात सामील व्हा",
+  "leave_challenge": "आव्हान सोडा",
+  "create_challenge": "आव्हान तयार करा",
+  "challenge_details": "आव्हान तपशील",
+  "challenge_progress": "प्रगती",
+  "challenge_leaderboard": "क्रमवारी",
+  "days_remaining": "उरलेले दिवस",
+  "participants": "सहभागी",
+  "your_rank": "तुमची क्रमवारी",
+  "challenge_complete": "आव्हान पूर्ण!",
+  "no_challenges": "आव्हाने नाहीत"
+}

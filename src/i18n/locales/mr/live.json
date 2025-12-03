@@ -1,0 +1,19 @@
+{
+  "live_sessions": "लाइव सत्रे",
+  "live_workout": "लाइव व्यायाम",
+  "join_session": "सत्रात सामील व्हा",
+  "create_session": "सत्र तयार करा",
+  "session_title": "सत्र शीर्षक",
+  "session_description": "सत्र वर्णन",
+  "session_date": "तारीख",
+  "session_time": "वेळ",
+  "session_duration": "कालावधी",
+  "max_participants": "जास्तीत जास्त सहभागी",
+  "participants": "सहभागी",
+  "host": "होस्ट",
+  "upcoming_sessions": "येणारी सत्रे",
+  "past_sessions": "मागील सत्रे",
+  "no_sessions": "सत्रे नाहीत",
+  "session_full": "सत्र भरले",
+  "session_ended": "सत्र संपले"
+}

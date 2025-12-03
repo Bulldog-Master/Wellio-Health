@@ -1,0 +1,17 @@
+{
+  "schedule": "वेळापत्रक",
+  "workout_schedule": "व्यायाम वेळापत्रक",
+  "add_event": "कार्यक्रम जोडा",
+  "edit_event": "कार्यक्रम संपादित करा",
+  "delete_event": "कार्यक्रम हटवा",
+  "event_title": "कार्यक्रम शीर्षक",
+  "event_date": "तारीख",
+  "event_time": "वेळ",
+  "event_type": "कार्यक्रम प्रकार",
+  "recurring": "पुनरावृत्ती",
+  "reminder": "स्मरणपत्र",
+  "no_events": "कार्यक्रम नाहीत",
+  "today": "आज",
+  "this_week": "या आठवड्यात",
+  "this_month": "या महिन्यात"
+}

@@ -1,0 +1,12 @@
+{
+  "messages": "Tin nhắn",
+  "new_message": "Tin nhắn mới",
+  "send_message": "Gửi tin nhắn",
+  "type_message": "Nhập tin nhắn...",
+  "no_messages": "Không có tin nhắn",
+  "no_conversations": "Không có cuộc trò chuyện",
+  "search_messages": "Tìm kiếm tin nhắn",
+  "delete_message": "Xóa tin nhắn",
+  "message_sent": "Đã gửi tin nhắn",
+  "message_deleted": "Đã xóa tin nhắn"
+}

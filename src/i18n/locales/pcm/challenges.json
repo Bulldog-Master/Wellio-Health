@@ -1,0 +1,16 @@
+{
+  "challenges": "Challenges",
+  "active_challenges": "Challenges Wey Dey Active",
+  "completed_challenges": "Challenges Wey Don Finish",
+  "join_challenge": "Join Challenge",
+  "leave_challenge": "Leave Challenge",
+  "create_challenge": "Create Challenge",
+  "challenge_details": "Challenge Details",
+  "challenge_progress": "Progress",
+  "challenge_leaderboard": "Leaderboard",
+  "days_remaining": "Days Wey Remain",
+  "participants": "People Wey Dey",
+  "your_rank": "Your Position",
+  "challenge_complete": "Challenge Don Complete!",
+  "no_challenges": "No challenge dey"
+}

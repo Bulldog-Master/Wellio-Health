@@ -1,0 +1,14 @@
+{
+  "medical_history": "Medische Geschiedenis",
+  "medical_records": "Medische Dossiers",
+  "add_record": "Record Toevoegen",
+  "medications": "Medicijnen",
+  "allergies": "Allergieën",
+  "conditions": "Aandoeningen",
+  "vaccinations": "Vaccinaties",
+  "lab_results": "Labresultaten",
+  "doctor_visits": "Doktersbezoeken",
+  "emergency_contact": "Noodcontact",
+  "blood_type": "Bloedgroep",
+  "no_records": "Geen records"
+}

@@ -1,0 +1,17 @@
+{
+  "schedule": "شیڈول",
+  "workout_schedule": "ورزش کا شیڈول",
+  "add_event": "ایونٹ شامل کریں",
+  "edit_event": "ایونٹ میں ترمیم کریں",
+  "delete_event": "ایونٹ حذف کریں",
+  "event_title": "ایونٹ کا عنوان",
+  "event_date": "تاریخ",
+  "event_time": "وقت",
+  "event_type": "ایونٹ کی قسم",
+  "recurring": "دہرایا جانے والا",
+  "reminder": "یاد دہانی",
+  "no_events": "کوئی ایونٹ نہیں",
+  "today": "آج",
+  "this_week": "اس ہفتے",
+  "this_month": "اس مہینے"
+}

@@ -1,0 +1,18 @@
+{
+  "workout_details": "Training Details",
+  "workout_type": "Type Training",
+  "workout_name": "Naam Training",
+  "workout_duration": "Duur",
+  "workout_calories": "Calorieën",
+  "workout_notes": "Notities",
+  "start_workout": "Start Training",
+  "end_workout": "Beëindig Training",
+  "pause_workout": "Pauzeer",
+  "resume_workout": "Hervat",
+  "save_workout": "Bewaar Training",
+  "delete_workout": "Verwijder Training",
+  "workout_history": "Trainingsgeschiedenis",
+  "no_workouts": "Geen trainingen",
+  "workout_complete": "Training Voltooid!",
+  "great_job": "Goed Gedaan!"
+}

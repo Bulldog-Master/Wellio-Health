@@ -1,0 +1,16 @@
+{
+  "challenges": "Tantangan",
+  "active_challenges": "Tantangan Aktif",
+  "completed_challenges": "Tantangan Selesai",
+  "join_challenge": "Gabung Tantangan",
+  "leave_challenge": "Keluar Tantangan",
+  "create_challenge": "Buat Tantangan",
+  "challenge_details": "Detail Tantangan",
+  "challenge_progress": "Kemajuan",
+  "challenge_leaderboard": "Papan Peringkat",
+  "days_remaining": "Hari Tersisa",
+  "participants": "Peserta",
+  "your_rank": "Peringkat Anda",
+  "challenge_complete": "Tantangan Selesai!",
+  "no_challenges": "Tidak ada tantangan"
+}

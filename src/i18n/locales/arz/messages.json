@@ -1,0 +1,12 @@
+{
+  "messages": "الرسايل",
+  "new_message": "رسالة جديدة",
+  "send_message": "ابعت رسالة",
+  "type_message": "اكتب رسالة...",
+  "no_messages": "مفيش رسايل",
+  "no_conversations": "مفيش محادثات",
+  "search_messages": "دور في الرسايل",
+  "delete_message": "امسح الرسالة",
+  "message_sent": "الرسالة اتبعتت",
+  "message_deleted": "الرسالة اتمسحت"
+}

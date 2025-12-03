@@ -1,0 +1,19 @@
+{
+  "live_sessions": "লাইভ সেশন",
+  "live_workout": "লাইভ ওয়ার্কআউট",
+  "join_session": "সেশনে যোগ দিন",
+  "create_session": "সেশন তৈরি করুন",
+  "session_title": "সেশন শিরোনাম",
+  "session_description": "সেশন বিবরণ",
+  "session_date": "তারিখ",
+  "session_time": "সময়",
+  "session_duration": "সময়কাল",
+  "max_participants": "সর্বোচ্চ অংশগ্রহণকারী",
+  "participants": "অংশগ্রহণকারী",
+  "host": "হোস্ট",
+  "upcoming_sessions": "আসন্ন সেশন",
+  "past_sessions": "আগের সেশন",
+  "no_sessions": "কোনো সেশন নেই",
+  "session_full": "সেশন পূর্ণ",
+  "session_ended": "সেশন শেষ"
+}

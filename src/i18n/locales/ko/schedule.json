@@ -1,0 +1,17 @@
+{
+  "schedule": "일정",
+  "workout_schedule": "운동 일정",
+  "add_event": "이벤트 추가",
+  "edit_event": "이벤트 편집",
+  "delete_event": "이벤트 삭제",
+  "event_title": "이벤트 제목",
+  "event_date": "날짜",
+  "event_time": "시간",
+  "event_type": "이벤트 유형",
+  "recurring": "반복",
+  "reminder": "알림",
+  "no_events": "이벤트가 없습니다",
+  "today": "오늘",
+  "this_week": "이번 주",
+  "this_month": "이번 달"
+}

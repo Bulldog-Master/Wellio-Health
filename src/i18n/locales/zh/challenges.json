@@ -1,0 +1,16 @@
+{
+  "challenges": "挑战",
+  "active_challenges": "进行中的挑战",
+  "completed_challenges": "已完成的挑战",
+  "join_challenge": "加入挑战",
+  "leave_challenge": "退出挑战",
+  "create_challenge": "创建挑战",
+  "challenge_details": "挑战详情",
+  "challenge_progress": "挑战进度",
+  "challenge_leaderboard": "排行榜",
+  "days_remaining": "剩余天数",
+  "participants": "参与者",
+  "your_rank": "您的排名",
+  "challenge_complete": "挑战完成！",
+  "no_challenges": "暂无挑战"
+}

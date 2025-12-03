@@ -1,0 +1,17 @@
+{
+  "schedule": "அட்டவணை",
+  "workout_schedule": "உடற்பயிற்சி அட்டவணை",
+  "add_event": "நிகழ்வு சேர்",
+  "edit_event": "நிகழ்வு திருத்து",
+  "delete_event": "நிகழ்வு நீக்கு",
+  "event_title": "நிகழ்வு தலைப்பு",
+  "event_date": "தேதி",
+  "event_time": "நேரம்",
+  "event_type": "நிகழ்வு வகை",
+  "recurring": "மீண்டும்",
+  "reminder": "நினைவூட்டல்",
+  "no_events": "நிகழ்வுகள் இல்லை",
+  "today": "இன்று",
+  "this_week": "இந்த வாரம்",
+  "this_month": "இந்த மாதம்"
+}

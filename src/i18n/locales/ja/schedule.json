@@ -1,0 +1,17 @@
+{
+  "schedule": "スケジュール",
+  "workout_schedule": "ワークアウトスケジュール",
+  "add_event": "イベント追加",
+  "edit_event": "イベント編集",
+  "delete_event": "イベント削除",
+  "event_title": "イベントタイトル",
+  "event_date": "日付",
+  "event_time": "時間",
+  "event_type": "イベントタイプ",
+  "recurring": "繰り返し",
+  "reminder": "リマインダー",
+  "no_events": "イベントがありません",
+  "today": "今日",
+  "this_week": "今週",
+  "this_month": "今月"
+}

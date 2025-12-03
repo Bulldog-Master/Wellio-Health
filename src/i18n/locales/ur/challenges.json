@@ -1,0 +1,16 @@
+{
+  "challenges": "چیلنجز",
+  "active_challenges": "فعال چیلنجز",
+  "completed_challenges": "مکمل چیلنجز",
+  "join_challenge": "چیلنج میں شامل ہوں",
+  "leave_challenge": "چیلنج چھوڑیں",
+  "create_challenge": "چیلنج بنائیں",
+  "challenge_details": "چیلنج کی تفصیلات",
+  "challenge_progress": "پیشرفت",
+  "challenge_leaderboard": "لیڈربورڈ",
+  "days_remaining": "باقی دن",
+  "participants": "شرکاء",
+  "your_rank": "آپ کی درجہ بندی",
+  "challenge_complete": "چیلنج مکمل!",
+  "no_challenges": "کوئی چیلنج نہیں"
+}

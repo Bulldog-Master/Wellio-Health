@@ -1,0 +1,12 @@
+{
+  "messages": "Berichten",
+  "new_message": "Nieuw Bericht",
+  "send_message": "Verstuur Bericht",
+  "type_message": "Typ een bericht...",
+  "no_messages": "Geen berichten",
+  "no_conversations": "Geen gesprekken",
+  "search_messages": "Zoek Berichten",
+  "delete_message": "Verwijder Bericht",
+  "message_sent": "Bericht verzonden",
+  "message_deleted": "Bericht verwijderd"
+}

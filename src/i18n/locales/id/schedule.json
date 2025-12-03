@@ -1,0 +1,17 @@
+{
+  "schedule": "Jadwal",
+  "workout_schedule": "Jadwal Latihan",
+  "add_event": "Tambah Acara",
+  "edit_event": "Edit Acara",
+  "delete_event": "Hapus Acara",
+  "event_title": "Judul Acara",
+  "event_date": "Tanggal",
+  "event_time": "Waktu",
+  "event_type": "Jenis Acara",
+  "recurring": "Berulang",
+  "reminder": "Pengingat",
+  "no_events": "Tidak ada acara",
+  "today": "Hari Ini",
+  "this_week": "Minggu Ini",
+  "this_month": "Bulan Ini"
+}

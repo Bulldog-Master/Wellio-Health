@@ -1,0 +1,16 @@
+{
+  "challenges": "Вызовы",
+  "active_challenges": "Активные вызовы",
+  "completed_challenges": "Завершённые вызовы",
+  "join_challenge": "Присоединиться к вызову",
+  "leave_challenge": "Покинуть вызов",
+  "create_challenge": "Создать вызов",
+  "challenge_details": "Детали вызова",
+  "challenge_progress": "Прогресс",
+  "challenge_leaderboard": "Рейтинг",
+  "days_remaining": "Осталось дней",
+  "participants": "Участники",
+  "your_rank": "Ваша позиция",
+  "challenge_complete": "Вызов выполнен!",
+  "no_challenges": "Нет вызовов"
+}

@@ -1,0 +1,16 @@
+{
+  "challenges": "चुनौतियां",
+  "active_challenges": "सक्रिय चुनौतियां",
+  "completed_challenges": "पूर्ण चुनौतियां",
+  "join_challenge": "चुनौती में शामिल हों",
+  "leave_challenge": "चुनौती छोड़ें",
+  "create_challenge": "चुनौती बनाएं",
+  "challenge_details": "चुनौती विवरण",
+  "challenge_progress": "प्रगति",
+  "challenge_leaderboard": "लीडरबोर्ड",
+  "days_remaining": "शेष दिन",
+  "participants": "प्रतिभागी",
+  "your_rank": "आपकी रैंक",
+  "challenge_complete": "चुनौती पूर्ण!",
+  "no_challenges": "कोई चुनौती नहीं"
+}

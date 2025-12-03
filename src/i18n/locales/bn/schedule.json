@@ -1,0 +1,17 @@
+{
+  "schedule": "সময়সূচি",
+  "workout_schedule": "ওয়ার্কআউট সময়সূচি",
+  "add_event": "ইভেন্ট যোগ করুন",
+  "edit_event": "ইভেন্ট সম্পাদনা করুন",
+  "delete_event": "ইভেন্ট মুছুন",
+  "event_title": "ইভেন্ট শিরোনাম",
+  "event_date": "তারিখ",
+  "event_time": "সময়",
+  "event_type": "ইভেন্টের ধরন",
+  "recurring": "পুনরাবৃত্তি",
+  "reminder": "রিমাইন্ডার",
+  "no_events": "কোনো ইভেন্ট নেই",
+  "today": "আজ",
+  "this_week": "এই সপ্তাহ",
+  "this_month": "এই মাস"
+}
