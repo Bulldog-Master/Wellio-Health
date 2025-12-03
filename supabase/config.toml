@@ -26,3 +26,24 @@ verify_jwt = true
 
 [functions.ai-meal-suggestions]
 verify_jwt = true
+
+[functions.geocode-location]
+verify_jwt = true
+
+[functions.suunto-sync]
+verify_jwt = true
+
+[functions.fitness-chat]
+verify_jwt = true
+
+[functions.totp-setup]
+verify_jwt = true
+
+[functions.totp-verify]
+verify_jwt = true
+
+[functions.totp-login-verify]
+verify_jwt = false
+
+[functions.totp-disable]
+verify_jwt = true
