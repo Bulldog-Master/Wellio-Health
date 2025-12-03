@@ -207,6 +207,14 @@ const FitnessLocations = () => {
   const [isManualLocationDialogOpen, setIsManualLocationDialogOpen] = useState(false);
   const [geocodeLoading, setGeocodeLoading] = useState(false);
   const [nearMeCategoryFilter, setNearMeCategoryFilter] = useState<string>('all');
+  
+  // Discover mode state
+  const [discoverMode, setDiscoverMode] = useState(false);
+  const [discoverQuery, setDiscoverQuery] = useState('');
+  const [discoverLoading, setDiscoverLoading] = useState(false);
+  const [discoveredGyms, setDiscoveredGyms] = useState<any[]>([]);
+  const [addingGymId, setAddingGymId] = useState<string | null>(null);
+  
   const [formData, setFormData] = useState({
     name: '',
     category: 'gym',
@@ -306,6 +314,7 @@ const FitnessLocations = () => {
         
         setUserLocation({ lat, lng });
         setNearMeMode(true);
+        setDiscoverMode(false);
         // Apply category filter if specified
         if (nearMeCategoryFilter !== 'all') {
           setSelectedCategory(nearMeCategoryFilter);
@@ -323,6 +332,81 @@ const FitnessLocations = () => {
       toast.error(t('locations:location_not_found'));
     } finally {
       setGeocodeLoading(false);
+    }
+  };
+
+  // Discover gyms from external sources (OpenStreetMap)
+  const handleDiscoverGyms = async () => {
+    if (!discoverQuery.trim()) return;
+    
+    setDiscoverLoading(true);
+    setDiscoveredGyms([]);
+    
+    try {
+      console.log('Discovering gyms in:', discoverQuery);
+      
+      const { data, error } = await supabase.functions.invoke('discover-gyms', {
+        body: { query: discoverQuery, radius: 15000 } // 15km radius
+      });
+      
+      if (error) {
+        console.error('Discover gyms error:', error);
+        toast.error(t('locations:no_locations'));
+        return;
+      }
+      
+      if (data?.results && data.results.length > 0) {
+        console.log('Discovered gyms:', data.results.length);
+        setDiscoveredGyms(data.results);
+        toast.success(t('locations:discover_found', { count: data.results.length }));
+      } else {
+        toast.info(t('locations:no_locations'));
+      }
+    } catch (error) {
+      console.error('Discover gyms catch error:', error);
+      toast.error(t('common:error'));
+    } finally {
+      setDiscoverLoading(false);
+    }
+  };
+
+  // Add discovered gym to database
+  const handleAddDiscoveredGym = async (gym: any) => {
+    setAddingGymId(gym.osm_id);
+    
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error('Not authenticated');
+
+      const { error } = await supabase
+        .from('fitness_locations')
+        .insert([{
+          name: gym.name,
+          category: gym.category || 'gym',
+          address: gym.address,
+          city: gym.city || '',
+          state: gym.state,
+          country: gym.country || '',
+          postal_code: gym.postal_code,
+          phone: gym.phone,
+          website_url: gym.website,
+          latitude: gym.lat,
+          longitude: gym.lon,
+          submitted_by: user.id,
+        }]);
+      
+      if (error) throw error;
+      
+      queryClient.invalidateQueries({ queryKey: ['fitness-locations'] });
+      toast.success(t('locations:location_submitted'));
+      
+      // Remove from discovered list
+      setDiscoveredGyms(prev => prev.filter(g => g.osm_id !== gym.osm_id));
+    } catch (error) {
+      console.error('Add gym error:', error);
+      toast.error(t('common:error'));
+    } finally {
+      setAddingGymId(null);
     }
   };
 
@@ -723,11 +807,11 @@ const FitnessLocations = () => {
 
         {/* Search and Filters */}
         <div className="flex flex-col gap-4">
-          {/* Near Me / All Locations Toggle */}
-          <div className="flex gap-2">
+          {/* Mode Toggle: All Locations / Near Me / Discover */}
+          <div className="flex flex-wrap gap-2">
             <Button
-              variant={nearMeMode ? 'outline' : 'default'}
-              onClick={() => setNearMeMode(false)}
+              variant={!nearMeMode && !discoverMode ? 'default' : 'outline'}
+              onClick={() => { setNearMeMode(false); setDiscoverMode(false); }}
               className="flex-1 md:flex-none"
             >
               <List className="h-4 w-4 mr-2" />
@@ -735,7 +819,7 @@ const FitnessLocations = () => {
             </Button>
             <Button
               variant={nearMeMode ? 'default' : 'outline'}
-              onClick={handleFindNearMe}
+              onClick={() => { handleFindNearMe(); setDiscoverMode(false); }}
               disabled={locationLoading}
               className="flex-1 md:flex-none"
             >
@@ -746,10 +830,50 @@ const FitnessLocations = () => {
               )}
               {t('locations:find_near_me')}
             </Button>
+            <Button
+              variant={discoverMode ? 'default' : 'outline'}
+              onClick={() => { setDiscoverMode(true); setNearMeMode(false); }}
+              className="flex-1 md:flex-none"
+            >
+              <Search className="h-4 w-4 mr-2" />
+              {t('locations:discover_gyms')}
+            </Button>
           </div>
           
+          {/* Discover Mode Search */}
+          {discoverMode && (
+            <Card className="p-4 bg-primary/5 border-primary/20">
+              <div className="flex flex-col md:flex-row gap-3">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    placeholder={t('locations:discover_placeholder')}
+                    value={discoverQuery}
+                    onChange={(e) => setDiscoverQuery(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleDiscoverGyms()}
+                    className="pl-10"
+                  />
+                </div>
+                <Button
+                  onClick={handleDiscoverGyms}
+                  disabled={discoverLoading || !discoverQuery.trim()}
+                >
+                  {discoverLoading ? (
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  ) : (
+                    <Search className="h-4 w-4 mr-2" />
+                  )}
+                  {t('locations:discover_search')}
+                </Button>
+              </div>
+              <p className="text-xs text-muted-foreground mt-2">
+                {t('locations:discover_hint')}
+              </p>
+            </Card>
+          )}
+          
           <div className="flex flex-col md:flex-row gap-4">
-            {!nearMeMode && (
+            {!nearMeMode && !discoverMode && (
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
@@ -760,40 +884,143 @@ const FitnessLocations = () => {
                 />
               </div>
             )}
-            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className={nearMeMode ? "w-full md:w-64" : "w-full md:w-48"}>
-                <Filter className="h-4 w-4 mr-2" />
-                <SelectValue placeholder={t('locations:filter_category')} />
-              </SelectTrigger>
-              <SelectContent>
-                {categories.map((cat) => (
-                  <SelectItem key={cat} value={cat}>
-                    {t(`locations:categories.${cat}`)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <div className="flex gap-2">
-              <Button
-                variant={viewMode === 'list' ? 'default' : 'outline'}
-                size="icon"
-                onClick={() => setViewMode('list')}
-              >
-                <List className="h-4 w-4" />
-              </Button>
-              <Button
-                variant={viewMode === 'map' ? 'default' : 'outline'}
-                size="icon"
-                onClick={() => setViewMode('map')}
-              >
-                <Map className="h-4 w-4" />
-              </Button>
-            </div>
+            {!discoverMode && (
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <SelectTrigger className={nearMeMode ? "w-full md:w-64" : "w-full md:w-48"}>
+                  <Filter className="h-4 w-4 mr-2" />
+                  <SelectValue placeholder={t('locations:filter_category')} />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((cat) => (
+                    <SelectItem key={cat} value={cat}>
+                      {t(`locations:categories.${cat}`)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+            {!discoverMode && (
+              <div className="flex gap-2">
+                <Button
+                  variant={viewMode === 'list' ? 'default' : 'outline'}
+                  size="icon"
+                  onClick={() => setViewMode('list')}
+                >
+                  <List className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant={viewMode === 'map' ? 'default' : 'outline'}
+                  size="icon"
+                  onClick={() => setViewMode('map')}
+                >
+                  <Map className="h-4 w-4" />
+                </Button>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Locations */}
-        {isLoading ? (
+        {/* Discover Mode Results */}
+        {discoverMode && (
+          <div className="space-y-4">
+            {discoverLoading ? (
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <Skeleton key={i} className="h-48" />
+                ))}
+              </div>
+            ) : discoveredGyms.length > 0 ? (
+              <>
+                <div className="flex items-center justify-between">
+                  <p className="text-muted-foreground">
+                    {t('locations:discover_results', { count: discoveredGyms.length })}
+                  </p>
+                </div>
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {discoveredGyms.map((gym) => {
+                    const CategoryIcon = categoryIcons[gym.category] || MapPin;
+                    return (
+                      <Card key={gym.osm_id} className="overflow-hidden hover:shadow-lg transition-shadow border-primary/20">
+                        <CardHeader className="pb-2">
+                          <div className="flex items-start justify-between">
+                            <div className="flex items-center gap-2">
+                              <CategoryIcon className="h-5 w-5 text-primary" />
+                              <CardTitle className="text-lg">{gym.name}</CardTitle>
+                            </div>
+                            <Badge variant="outline" className="text-xs bg-blue-500/10 text-blue-500">
+                              {t('locations:external_source')}
+                            </Badge>
+                          </div>
+                          {(gym.city || gym.address) && (
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <MapPin className="h-3 w-3" />
+                              {gym.address || gym.city}{gym.country ? `, ${gym.country}` : ''}
+                            </div>
+                          )}
+                        </CardHeader>
+                        <CardContent className="space-y-3">
+                          <Badge variant="outline">
+                            {t(`locations:categories.${gym.category}`)}
+                          </Badge>
+                          
+                          <div className="flex flex-wrap gap-2 pt-2">
+                            {gym.website && (
+                              <Button variant="outline" size="sm" asChild>
+                                <a href={gym.website} target="_blank" rel="noopener noreferrer">
+                                  <ExternalLink className="h-3 w-3 mr-1" />
+                                  {t('locations:visit_website')}
+                                </a>
+                              </Button>
+                            )}
+                            {gym.phone && (
+                              <Button variant="outline" size="sm" asChild>
+                                <a href={`tel:${gym.phone}`}>
+                                  <Phone className="h-3 w-3 mr-1" />
+                                  {t('locations:call')}
+                                </a>
+                              </Button>
+                            )}
+                            <Button 
+                              size="sm"
+                              onClick={() => handleAddDiscoveredGym(gym)}
+                              disabled={addingGymId === gym.osm_id}
+                            >
+                              {addingGymId === gym.osm_id ? (
+                                <Loader2 className="h-3 w-3 mr-1 animate-spin" />
+                              ) : (
+                                <Plus className="h-3 w-3 mr-1" />
+                              )}
+                              {t('locations:add_to_directory')}
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </>
+            ) : discoverQuery && !discoverLoading ? (
+              <Card className="p-8 text-center">
+                <CardContent>
+                  <MapPin className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                  <h3 className="text-lg font-semibold mb-2">{t('locations:no_locations')}</h3>
+                  <p className="text-muted-foreground">{t('locations:discover_no_results')}</p>
+                </CardContent>
+              </Card>
+            ) : (
+              <Card className="p-8 text-center">
+                <CardContent>
+                  <Search className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                  <h3 className="text-lg font-semibold mb-2">{t('locations:discover_title')}</h3>
+                  <p className="text-muted-foreground">{t('locations:discover_desc')}</p>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        )}
+
+        {/* Saved Locations */}
+        {!discoverMode && (isLoading ? (
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <Skeleton key={i} className="h-64" />
@@ -1086,7 +1313,7 @@ const FitnessLocations = () => {
               </Button>
             </CardContent>
           </Card>
-        )}
+        ))}
 
         {/* Submit Location CTA */}
         <Card className="bg-gradient-to-r from-primary/10 to-secondary/10 border-primary/20">

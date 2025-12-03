@@ -47,3 +47,6 @@ verify_jwt = false
 
 [functions.totp-disable]
 verify_jwt = true
+
+[functions.discover-gyms]
+verify_jwt = true
