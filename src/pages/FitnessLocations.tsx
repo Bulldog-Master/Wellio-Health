@@ -88,6 +88,9 @@ const FitnessLocations = () => {
   const [nearMeMode, setNearMeMode] = useState(false);
   const [locationLoading, setLocationLoading] = useState(false);
   const [locationError, setLocationError] = useState<string | null>(null);
+  const [manualLocationQuery, setManualLocationQuery] = useState('');
+  const [isManualLocationDialogOpen, setIsManualLocationDialogOpen] = useState(false);
+  const [geocodeLoading, setGeocodeLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     category: 'gym',
@@ -113,10 +116,11 @@ const FitnessLocations = () => {
     website_url: '',
   });
 
-  // Find Near Me handler
+  // Find Near Me handler - with fallback to manual entry
   const handleFindNearMe = () => {
     if (!('geolocation' in navigator)) {
-      toast.error(t('locations:location_not_supported'));
+      // Show manual location dialog as fallback
+      setIsManualLocationDialogOpen(true);
       return;
     }
     
@@ -135,11 +139,41 @@ const FitnessLocations = () => {
       },
       (error) => {
         setLocationLoading(false);
-        setLocationError(t('locations:location_denied'));
-        toast.error(t('locations:location_denied'));
+        // Instead of just showing error, offer manual entry
+        setIsManualLocationDialogOpen(true);
       },
       { enableHighAccuracy: true, timeout: 10000 }
     );
+  };
+
+  // Geocode a location string to coordinates
+  const handleManualLocationSearch = async () => {
+    if (!manualLocationQuery.trim()) return;
+    
+    setGeocodeLoading(true);
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(manualLocationQuery)}&limit=1`
+      );
+      const results = await response.json();
+      
+      if (results && results.length > 0) {
+        setUserLocation({
+          lat: parseFloat(results[0].lat),
+          lng: parseFloat(results[0].lon),
+        });
+        setNearMeMode(true);
+        setIsManualLocationDialogOpen(false);
+        setManualLocationQuery('');
+        toast.success(t('locations:location_found'));
+      } else {
+        toast.error(t('locations:location_not_found'));
+      }
+    } catch (error) {
+      toast.error(t('common:error'));
+    } finally {
+      setGeocodeLoading(false);
+    }
   };
 
   const { data: locations, isLoading } = useQuery({
@@ -861,6 +895,41 @@ const FitnessLocations = () => {
                 {t('locations:form.save_changes')}
               </Button>
             </form>
+          </DialogContent>
+        </Dialog>
+
+        {/* Manual Location Dialog */}
+        <Dialog open={isManualLocationDialogOpen} onOpenChange={setIsManualLocationDialogOpen}>
+          <DialogContent className="max-w-md">
+            <DialogHeader>
+              <DialogTitle>{t('locations:enter_location')}</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4">
+              <p className="text-sm text-muted-foreground">
+                {t('locations:enter_location_desc')}
+              </p>
+              <div>
+                <Label>{t('locations:city_or_address')}</Label>
+                <Input
+                  value={manualLocationQuery}
+                  onChange={(e) => setManualLocationQuery(e.target.value)}
+                  placeholder={t('locations:city_placeholder')}
+                  onKeyDown={(e) => e.key === 'Enter' && handleManualLocationSearch()}
+                />
+              </div>
+              <Button 
+                onClick={handleManualLocationSearch} 
+                className="w-full"
+                disabled={geocodeLoading || !manualLocationQuery.trim()}
+              >
+                {geocodeLoading ? (
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                ) : (
+                  <Search className="h-4 w-4 mr-2" />
+                )}
+                {t('locations:search_location')}
+              </Button>
+            </div>
           </DialogContent>
         </Dialog>
       </div>

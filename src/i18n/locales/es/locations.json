@@ -11,6 +11,13 @@
   "miles_away": "{{distance}} mi de distancia",
   "no_nearby": "No se encontraron instalaciones dentro de 50 millas",
   "no_nearby_desc": "Intenta enviar una ubicación o buscar por nombre",
+  "enter_location": "Ingresa Tu Ubicación",
+  "enter_location_desc": "El acceso GPS fue denegado. Ingresa una ciudad o dirección para encontrar instalaciones cerca de ti.",
+  "city_or_address": "Ciudad o Dirección",
+  "city_placeholder": "ej. Toronto, Canadá",
+  "search_location": "Buscar",
+  "location_found": "¡Ubicación encontrada! Mostrando instalaciones cercanas.",
+  "location_not_found": "No se pudo encontrar esa ubicación. Por favor intenta con otra ciudad o dirección.",
   "categories": {
     "all": "Todas las Categorías",
     "gym": "Gimnasio",
