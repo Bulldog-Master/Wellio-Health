@@ -1,0 +1,23 @@
+{
+  "addon_features": "الميزات الإضافية",
+  "addon_features_desc": "خصص اشتراكك",
+  "ai_coach": "مدرب AI",
+  "ai_coach_desc": "تدريب لياقة شخصي بالذكاء الاصطناعي",
+  "ai_analytics": "تحليلات AI",
+  "ai_analytics_desc": "رؤى متقدمة بالذكاء الاصطناعي",
+  "ai_nutrition": "تغذية AI",
+  "ai_nutrition_desc": "تخطيط وتتبع الوجبات الذكي",
+  "trainer_access": "الوصول للمدرب",
+  "trainer_access_desc": "تواصل مع مدربين معتمدين",
+  "practitioner_access": "الوصول للممارس",
+  "practitioner_access_desc": "تواصل مع متخصصي الصحة",
+  "recovery_pro": "ريكفري برو",
+  "recovery_pro_desc": "تتبع التعافي المتقدم",
+  "live_sessions": "جلسات مباشرة",
+  "live_sessions_desc": "انضم لجلسات التمرين المباشرة",
+  "per_month": "/شهر",
+  "add_addon": "إضافة",
+  "remove_addon": "إزالة",
+  "active": "نشط",
+  "coming_soon": "قريباً"
+}

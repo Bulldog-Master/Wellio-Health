@@ -1,0 +1,22 @@
+{
+  "workout": "تمرين",
+  "workout_plural": "تمارين",
+  "workout_count": "{{count}} تمرين",
+  "workout_count_plural": "{{count}} تمرين",
+  "point": "نقطة",
+  "point_plural": "نقاط",
+  "point_count": "{{count}} نقطة",
+  "point_count_plural": "{{count}} نقطة",
+  "follower": "متابع",
+  "follower_plural": "متابعون",
+  "follower_count": "{{count}} متابع",
+  "follower_count_plural": "{{count}} متابع",
+  "day": "يوم",
+  "day_plural": "أيام",
+  "day_count": "{{count}} يوم",
+  "day_count_plural": "{{count}} يوم",
+  "message": "رسالة",
+  "message_plural": "رسائل",
+  "message_count": "{{count}} رسالة",
+  "message_count_plural": "{{count}} رسالة"
+}
