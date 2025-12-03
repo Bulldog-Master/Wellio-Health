@@ -21,9 +21,22 @@ import { useAdminStatus } from '@/hooks/useAdminStatus';
 import { 
   MapPin, Search, Plus, Star, ExternalLink, Phone, Navigation, 
   Dumbbell, Swords, Heart, Waves, Bike, Mountain, ArrowLeft,
-  List, Map, CheckCircle, Filter, Trash2, Pencil
+  List, Map, CheckCircle, Filter, Trash2, Pencil, Locate, Loader2
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
+// Haversine formula to calculate distance between two coordinates
+const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
+  const R = 3959; // Earth's radius in miles
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
+};
 
 interface FitnessLocation {
   id: string;
@@ -72,6 +85,9 @@ const FitnessLocations = () => {
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [editingLocation, setEditingLocation] = useState<FitnessLocation | null>(null);
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [nearMeMode, setNearMeMode] = useState(false);
+  const [locationLoading, setLocationLoading] = useState(false);
+  const [locationError, setLocationError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     category: 'gym',
@@ -97,43 +113,78 @@ const FitnessLocations = () => {
     website_url: '',
   });
 
-  // Get user's location
-  useEffect(() => {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-        },
-        () => {
-          // User denied location or error
-        }
-      );
+  // Find Near Me handler
+  const handleFindNearMe = () => {
+    if (!('geolocation' in navigator)) {
+      toast.error(t('locations:location_not_supported'));
+      return;
     }
-  }, []);
+    
+    setLocationLoading(true);
+    setLocationError(null);
+    
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setUserLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+        setNearMeMode(true);
+        setLocationLoading(false);
+        setSearchQuery(''); // Clear search when using near me
+      },
+      (error) => {
+        setLocationLoading(false);
+        setLocationError(t('locations:location_denied'));
+        toast.error(t('locations:location_denied'));
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  };
 
   const { data: locations, isLoading } = useQuery({
-    queryKey: ['fitness-locations', selectedCategory, searchQuery],
+    queryKey: ['fitness-locations', selectedCategory, searchQuery, nearMeMode, userLocation?.lat, userLocation?.lng],
     queryFn: async () => {
       let query = supabase
         .from('fitness_locations')
         .select('*')
-        .eq('is_active', true)
-        .order('name', { ascending: true });
+        .eq('is_active', true);
 
       if (selectedCategory !== 'all') {
         query = query.eq('category', selectedCategory);
       }
 
-      if (searchQuery) {
+      if (searchQuery && !nearMeMode) {
         query = query.or(`name.ilike.%${searchQuery}%,city.ilike.%${searchQuery}%`);
+      }
+
+      // For near me mode, only get locations with coordinates
+      if (nearMeMode) {
+        query = query.not('latitude', 'is', null).not('longitude', 'is', null);
       }
 
       const { data, error } = await query;
       if (error) throw error;
-      return data as FitnessLocation[];
+      
+      let results = data as FitnessLocation[];
+      
+      // If near me mode, calculate distance and sort by it
+      if (nearMeMode && userLocation) {
+        results = results
+          .map(loc => ({
+            ...loc,
+            distance: loc.latitude && loc.longitude 
+              ? calculateDistance(userLocation.lat, userLocation.lng, loc.latitude, loc.longitude)
+              : null
+          }))
+          .filter(loc => loc.distance !== null && loc.distance <= 50) // Within 50 miles
+          .sort((a, b) => (a.distance || 0) - (b.distance || 0)) as FitnessLocation[];
+      } else {
+        // Sort alphabetically when not in near me mode
+        results = results.sort((a, b) => a.name.localeCompare(b.name));
+      }
+      
+      return results;
     },
   });
 
@@ -440,44 +491,73 @@ const FitnessLocations = () => {
         </div>
 
         {/* Search and Filters */}
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder={t('locations:search_placeholder')}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10"
-            />
-          </div>
-          <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-            <SelectTrigger className="w-full md:w-48">
-              <Filter className="h-4 w-4 mr-2" />
-              <SelectValue placeholder={t('locations:filter_category')} />
-            </SelectTrigger>
-            <SelectContent>
-              {categories.map((cat) => (
-                <SelectItem key={cat} value={cat}>
-                  {t(`locations:categories.${cat}`)}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+        <div className="flex flex-col gap-4">
+          {/* Near Me / All Locations Toggle */}
           <div className="flex gap-2">
             <Button
-              variant={viewMode === 'list' ? 'default' : 'outline'}
-              size="icon"
-              onClick={() => setViewMode('list')}
+              variant={nearMeMode ? 'outline' : 'default'}
+              onClick={() => setNearMeMode(false)}
+              className="flex-1 md:flex-none"
             >
-              <List className="h-4 w-4" />
+              <List className="h-4 w-4 mr-2" />
+              {t('locations:all_locations')}
             </Button>
             <Button
-              variant={viewMode === 'map' ? 'default' : 'outline'}
-              size="icon"
-              onClick={() => setViewMode('map')}
+              variant={nearMeMode ? 'default' : 'outline'}
+              onClick={handleFindNearMe}
+              disabled={locationLoading}
+              className="flex-1 md:flex-none"
             >
-              <Map className="h-4 w-4" />
+              {locationLoading ? (
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              ) : (
+                <Locate className="h-4 w-4 mr-2" />
+              )}
+              {t('locations:find_near_me')}
             </Button>
+          </div>
+          
+          <div className="flex flex-col md:flex-row gap-4">
+            {!nearMeMode && (
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder={t('locations:search_placeholder')}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+            )}
+            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+              <SelectTrigger className={nearMeMode ? "w-full md:w-64" : "w-full md:w-48"}>
+                <Filter className="h-4 w-4 mr-2" />
+                <SelectValue placeholder={t('locations:filter_category')} />
+              </SelectTrigger>
+              <SelectContent>
+                {categories.map((cat) => (
+                  <SelectItem key={cat} value={cat}>
+                    {t(`locations:categories.${cat}`)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <div className="flex gap-2">
+              <Button
+                variant={viewMode === 'list' ? 'default' : 'outline'}
+                size="icon"
+                onClick={() => setViewMode('list')}
+              >
+                <List className="h-4 w-4" />
+              </Button>
+              <Button
+                variant={viewMode === 'map' ? 'default' : 'outline'}
+                size="icon"
+                onClick={() => setViewMode('map')}
+              >
+                <Map className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
         </div>
 
@@ -517,9 +597,17 @@ const FitnessLocations = () => {
                           </Badge>
                         )}
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <MapPin className="h-3 w-3" />
-                        {location.city}, {location.country}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <MapPin className="h-3 w-3" />
+                          {location.city}, {location.country}
+                        </div>
+                        {nearMeMode && (location as any).distance !== undefined && (
+                          <Badge variant="outline" className="text-xs bg-primary/10">
+                            <Locate className="h-3 w-3 mr-1" />
+                            {t('locations:miles_away', { distance: ((location as any).distance as number).toFixed(1) })}
+                          </Badge>
+                        )}
                       </div>
                     </CardHeader>
                     <CardContent className="space-y-3">
@@ -644,8 +732,12 @@ const FitnessLocations = () => {
           <Card className="text-center py-12">
             <CardContent>
               <MapPin className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
-              <h3 className="text-xl font-semibold mb-2">{t('locations:no_locations')}</h3>
-              <p className="text-muted-foreground mb-4">{t('locations:no_locations_desc')}</p>
+              <h3 className="text-xl font-semibold mb-2">
+                {nearMeMode ? t('locations:no_nearby') : t('locations:no_locations')}
+              </h3>
+              <p className="text-muted-foreground mb-4">
+                {nearMeMode ? t('locations:no_nearby_desc') : t('locations:no_locations_desc')}
+              </p>
               <Button onClick={() => setIsSubmitDialogOpen(true)}>
                 <Plus className="h-4 w-4 mr-2" />
                 {t('locations:submit_location')}
