@@ -211,51 +211,72 @@ const FitnessLocations = () => {
     }
   };
 
-  const { data: locations, isLoading } = useQuery({
+  const { data: locations, isLoading, error: locationsError } = useQuery({
     queryKey: ['fitness-locations', selectedCategory, searchQuery, nearMeMode, userLocation?.lat, userLocation?.lng],
     queryFn: async () => {
-      let query = supabase
-        .from('fitness_locations')
-        .select('*')
-        .eq('is_active', true);
+      try {
+        console.log('Fetching locations with params:', { selectedCategory, searchQuery, nearMeMode, userLocation });
+        
+        let query = supabase
+          .from('fitness_locations')
+          .select('*')
+          .eq('is_active', true);
 
-      if (selectedCategory !== 'all') {
-        query = query.eq('category', selectedCategory);
-      }
+        if (selectedCategory !== 'all') {
+          query = query.eq('category', selectedCategory);
+        }
 
-      if (searchQuery && !nearMeMode) {
-        query = query.or(`name.ilike.%${searchQuery}%,city.ilike.%${searchQuery}%`);
-      }
+        if (searchQuery && !nearMeMode) {
+          query = query.or(`name.ilike.%${searchQuery}%,city.ilike.%${searchQuery}%`);
+        }
 
-      // For near me mode, only get locations with coordinates
-      if (nearMeMode) {
-        query = query.not('latitude', 'is', null).not('longitude', 'is', null);
-      }
+        // For near me mode, only get locations with coordinates
+        if (nearMeMode) {
+          query = query.not('latitude', 'is', null).not('longitude', 'is', null);
+        }
 
-      const { data, error } = await query;
-      if (error) throw error;
-      
-      let results = data as FitnessLocation[];
-      
-      // If near me mode, calculate distance and sort by it
-      if (nearMeMode && userLocation) {
-        results = results
-          .map(loc => ({
-            ...loc,
-            distance: loc.latitude && loc.longitude 
-              ? calculateDistance(userLocation.lat, userLocation.lng, loc.latitude, loc.longitude)
-              : null
-          }))
-          .filter(loc => loc.distance !== null && loc.distance <= 50) // Within 50 miles
-          .sort((a, b) => (a.distance || 0) - (b.distance || 0)) as FitnessLocation[];
-      } else {
-        // Sort alphabetically when not in near me mode
-        results = results.sort((a, b) => a.name.localeCompare(b.name));
+        const { data, error } = await query;
+        
+        if (error) {
+          console.error('Supabase query error:', error);
+          throw error;
+        }
+        
+        console.log('Locations fetched:', data?.length || 0);
+        
+        let results = (data || []) as FitnessLocation[];
+        
+        // If near me mode, calculate distance and sort by it
+        if (nearMeMode && userLocation) {
+          results = results
+            .map(loc => ({
+              ...loc,
+              distance: loc.latitude && loc.longitude 
+                ? calculateDistance(userLocation.lat, userLocation.lng, loc.latitude, loc.longitude)
+                : null
+            }))
+            .filter(loc => loc.distance !== null && loc.distance <= 50) // Within 50 miles
+            .sort((a, b) => (a.distance || 0) - (b.distance || 0)) as FitnessLocation[];
+          
+          console.log('Filtered locations within 50 miles:', results.length);
+        } else {
+          // Sort alphabetically when not in near me mode
+          results = results.sort((a, b) => a.name.localeCompare(b.name));
+        }
+        
+        return results;
+      } catch (err) {
+        console.error('Query function error:', err);
+        return [];
       }
-      
-      return results;
     },
+    retry: false,
   });
+
+  // Log any query errors
+  if (locationsError) {
+    console.error('useQuery error:', locationsError);
+  }
 
   const submitLocation = useMutation({
     mutationFn: async (location: typeof formData) => {
