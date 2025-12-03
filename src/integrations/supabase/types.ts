@@ -1606,7 +1606,9 @@ export type Database = {
         Row: {
           category: string
           created_at: string
+          encryption_version: number | null
           file_url: string | null
+          file_url_encrypted: string | null
           id: string
           last_accessed_at: string | null
           notes: string | null
@@ -1617,7 +1619,9 @@ export type Database = {
         Insert: {
           category: string
           created_at?: string
+          encryption_version?: number | null
           file_url?: string | null
+          file_url_encrypted?: string | null
           id?: string
           last_accessed_at?: string | null
           notes?: string | null
@@ -1628,7 +1632,9 @@ export type Database = {
         Update: {
           category?: string
           created_at?: string
+          encryption_version?: number | null
           file_url?: string | null
+          file_url_encrypted?: string | null
           id?: string
           last_accessed_at?: string | null
           notes?: string | null
@@ -1641,7 +1647,9 @@ export type Database = {
       medical_test_results: {
         Row: {
           created_at: string | null
+          encryption_version: number | null
           file_url: string | null
+          file_url_encrypted: string | null
           id: string
           last_accessed_at: string | null
           notes: string | null
@@ -1653,7 +1661,9 @@ export type Database = {
         }
         Insert: {
           created_at?: string | null
+          encryption_version?: number | null
           file_url?: string | null
+          file_url_encrypted?: string | null
           id?: string
           last_accessed_at?: string | null
           notes?: string | null
@@ -1665,7 +1675,9 @@ export type Database = {
         }
         Update: {
           created_at?: string | null
+          encryption_version?: number | null
           file_url?: string | null
+          file_url_encrypted?: string | null
           id?: string
           last_accessed_at?: string | null
           notes?: string | null
@@ -4148,31 +4160,40 @@ export type Database = {
       wearable_connections: {
         Row: {
           access_token: string
+          access_token_encrypted: string | null
           created_at: string
+          encryption_version: number | null
           expires_at: string | null
           id: string
           provider: string
           refresh_token: string | null
+          refresh_token_encrypted: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
           access_token: string
+          access_token_encrypted?: string | null
           created_at?: string
+          encryption_version?: number | null
           expires_at?: string | null
           id?: string
           provider: string
           refresh_token?: string | null
+          refresh_token_encrypted?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
           access_token?: string
+          access_token_encrypted?: string | null
           created_at?: string
+          encryption_version?: number | null
           expires_at?: string | null
           id?: string
           provider?: string
           refresh_token?: string | null
+          refresh_token_encrypted?: string | null
           updated_at?: string
           user_id?: string
         }
