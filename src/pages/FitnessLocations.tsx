@@ -211,6 +211,7 @@ const FitnessLocations = () => {
   // Discover mode state
   const [discoverMode, setDiscoverMode] = useState(false);
   const [discoverQuery, setDiscoverQuery] = useState('');
+  const [discoverCategory, setDiscoverCategory] = useState<string>('all');
   const [discoverLoading, setDiscoverLoading] = useState(false);
   const [discoveredGyms, setDiscoveredGyms] = useState<any[]>([]);
   const [addingGymId, setAddingGymId] = useState<string | null>(null);
@@ -335,7 +336,7 @@ const FitnessLocations = () => {
     }
   };
 
-  // Discover gyms from external sources (OpenStreetMap)
+  // Discover facilities from external sources (OpenStreetMap)
   const handleDiscoverGyms = async () => {
     if (!discoverQuery.trim()) return;
     
@@ -343,27 +344,27 @@ const FitnessLocations = () => {
     setDiscoveredGyms([]);
     
     try {
-      console.log('Discovering gyms in:', discoverQuery);
+      console.log('Discovering facilities in:', discoverQuery, 'category:', discoverCategory);
       
       const { data, error } = await supabase.functions.invoke('discover-gyms', {
-        body: { query: discoverQuery, radius: 15000 } // 15km radius
+        body: { query: discoverQuery, radius: 15000, category: discoverCategory }
       });
       
       if (error) {
-        console.error('Discover gyms error:', error);
+        console.error('Discover facilities error:', error);
         toast.error(t('locations:no_locations'));
         return;
       }
       
       if (data?.results && data.results.length > 0) {
-        console.log('Discovered gyms:', data.results.length);
+        console.log('Discovered facilities:', data.results.length);
         setDiscoveredGyms(data.results);
         toast.success(t('locations:discover_found', { count: data.results.length }));
       } else {
         toast.info(t('locations:no_locations'));
       }
     } catch (error) {
-      console.error('Discover gyms catch error:', error);
+      console.error('Discover facilities catch error:', error);
       toast.error(t('common:error'));
     } finally {
       setDiscoverLoading(false);
@@ -843,28 +844,43 @@ const FitnessLocations = () => {
           {/* Discover Mode Search */}
           {discoverMode && (
             <Card className="p-4 bg-primary/5 border-primary/20">
-              <div className="flex flex-col md:flex-row gap-3">
-                <div className="relative flex-1">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    placeholder={t('locations:discover_placeholder')}
-                    value={discoverQuery}
-                    onChange={(e) => setDiscoverQuery(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && handleDiscoverGyms()}
-                    className="pl-10"
-                  />
+              <div className="flex flex-col gap-3">
+                <div className="flex flex-col md:flex-row gap-3">
+                  <div className="relative flex-1">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      placeholder={t('locations:discover_placeholder')}
+                      value={discoverQuery}
+                      onChange={(e) => setDiscoverQuery(e.target.value)}
+                      onKeyDown={(e) => e.key === 'Enter' && handleDiscoverGyms()}
+                      className="pl-10"
+                    />
+                  </div>
+                  <Select value={discoverCategory} onValueChange={setDiscoverCategory}>
+                    <SelectTrigger className="w-full md:w-48">
+                      <Filter className="h-4 w-4 mr-2" />
+                      <SelectValue placeholder={t('locations:filter_category')} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {categories.map((cat) => (
+                        <SelectItem key={cat} value={cat}>
+                          {t(`locations:categories.${cat}`)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Button
+                    onClick={handleDiscoverGyms}
+                    disabled={discoverLoading || !discoverQuery.trim()}
+                  >
+                    {discoverLoading ? (
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    ) : (
+                      <Search className="h-4 w-4 mr-2" />
+                    )}
+                    {t('locations:discover_search')}
+                  </Button>
                 </div>
-                <Button
-                  onClick={handleDiscoverGyms}
-                  disabled={discoverLoading || !discoverQuery.trim()}
-                >
-                  {discoverLoading ? (
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  ) : (
-                    <Search className="h-4 w-4 mr-2" />
-                  )}
-                  {t('locations:discover_search')}
-                </Button>
               </div>
               <p className="text-xs text-muted-foreground mt-2">
                 {t('locations:discover_hint')}
