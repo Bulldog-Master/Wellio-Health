@@ -208,7 +208,9 @@ export const allNamespaces = [
   'calendar', 'records', 'voice', 'medical', 'timer', 'live', 'challenges', 
   'fundraisers', 'macros', 'install', 'search', 'creator', 'ai', 'measurements', 
   'trainer', 'session', 'bookmarks', 'challenges_page', 'feed', 'groups', 
-  'followers', 'schedule', 'seo', 'units', 'a11y', 'plurals', 'admin', 'premium', 'videos', 'chat', 'celebrations', 'news', 'sponsors', 'locations', 'ads', 'products', 'recovery'
+  'followers', 'schedule', 'seo', 'units', 'a11y', 'plurals', 'admin', 'premium', 
+  'videos', 'chat', 'celebrations', 'news', 'sponsors', 'locations', 'ads', 
+  'products', 'recovery', 'addons', 'professional'
 ] as const;
 
 export type TranslationNamespace = typeof allNamespaces[number];
@@ -271,6 +273,8 @@ const resources = {
     ads: adsEN,
     products: productsEN,
     recovery: recoveryEN,
+    addons: addonsEN,
+    professional: professionalEN,
   },
   es: {
     common: commonES,
@@ -329,6 +333,8 @@ const resources = {
     ads: adsES,
     products: productsES,
     recovery: recoveryES,
+    addons: addonsES,
+    professional: professionalES,
   },
   pt: {
     common: commonPT,

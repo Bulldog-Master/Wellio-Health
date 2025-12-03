@@ -13,37 +13,66 @@ interface SubscriptionGateProps {
   fallback?: ReactNode;
 }
 
+// Map feature names to addon keys
+const featureToAddonMap: Record<string, string> = {
+  'trainer_portal': 'trainer_access',
+  'practitioner_portal': 'practitioner_access',
+  'ai_coach': 'ai_coach',
+  'ai_analytics': 'ai_analytics',
+  'ai_nutrition': 'ai_nutrition',
+  'recovery_tracking': 'recovery_tracking',
+  'live_sessions': 'live_sessions',
+};
+
 export const SubscriptionGate = ({ feature, children, fallback }: SubscriptionGateProps) => {
   const { t } = useTranslation('subscription');
   const { hasFeature, isLoading, tier, hasFullAccess, isVIP, isAdmin } = useSubscription();
   const navigate = useNavigate();
   const [hasRewardAccess, setHasRewardAccess] = useState(false);
-  const [checkingRewards, setCheckingRewards] = useState(true);
+  const [hasAddonAccess, setHasAddonAccess] = useState(false);
+  const [checkingAccess, setCheckingAccess] = useState(true);
 
   useEffect(() => {
-    checkRewardAccess();
-  }, []);
+    checkAccess();
+  }, [feature]);
 
-  const checkRewardAccess = async () => {
+  const checkAccess = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+      if (!user) {
+        setCheckingAccess(false);
+        return;
+      }
 
       // Check for active pro subscription reward
-      const { data } = await supabase.rpc('has_active_reward', {
+      const { data: rewardData } = await supabase.rpc('has_active_reward', {
         _user_id: user.id,
         _feature_type: 'pro_subscription'
       });
 
-      setHasRewardAccess(data || false);
+      setHasRewardAccess(rewardData || false);
+
+      // Check for addon access
+      const addonKey = featureToAddonMap[feature];
+      if (addonKey) {
+        const { data: addonData } = await supabase
+          .from('user_addons')
+          .select('id, subscription_addons!inner(addon_key)')
+          .eq('user_id', user.id)
+          .eq('status', 'active')
+          .eq('subscription_addons.addon_key', addonKey)
+          .maybeSingle();
+
+        setHasAddonAccess(!!addonData);
+      }
     } catch (error) {
-      console.error('Error checking reward access:', error);
+      console.error('Error checking access:', error);
     } finally {
-      setCheckingRewards(false);
+      setCheckingAccess(false);
     }
   };
 
-  if (isLoading || checkingRewards) {
+  if (isLoading || checkingAccess) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
@@ -51,8 +80,8 @@ export const SubscriptionGate = ({ feature, children, fallback }: SubscriptionGa
     );
   }
 
-  // Allow access if user has VIP/Admin status, the feature, OR has an active reward
-  if (hasFullAccess || hasFeature(feature) || hasRewardAccess) {
+  // Allow access if user has VIP/Admin status, the feature, addon, OR has an active reward
+  if (hasFullAccess || hasFeature(feature) || hasRewardAccess || hasAddonAccess) {
     return <>{children}</>;
   }
 

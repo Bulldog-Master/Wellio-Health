@@ -92,6 +92,7 @@ const RecommendedProducts = lazy(() => import("@/pages/RecommendedProducts"));
 const Recovery = lazy(() => import("@/pages/Recovery"));
 const TrainerPortal = lazy(() => import("@/pages/TrainerPortal"));
 const PractitionerPortal = lazy(() => import("@/pages/PractitionerPortal"));
+const AdminProfessionals = lazy(() => import("@/pages/AdminProfessionals"));
 
 /**
  * Application route configuration
@@ -207,6 +208,7 @@ export const AppRoutes = () => (
     <Route path="/recovery" element={<RouteErrorBoundary><ProtectedRoute><Layout><Recovery /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/trainer-portal" element={<RouteErrorBoundary><ProtectedRoute><Layout><TrainerPortal /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/practitioner-portal" element={<RouteErrorBoundary><ProtectedRoute><Layout><PractitionerPortal /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/admin/professionals" element={<RouteErrorBoundary><ProtectedRoute><Layout><AdminProfessionals /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     
     {/* 404 */}
     <Route path="*" element={<NotFound />} />
