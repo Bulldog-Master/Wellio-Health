@@ -4447,6 +4447,35 @@ export type Database = {
         Returns: string
       }
       generate_referral_code: { Args: never; Returns: string }
+      get_fitness_locations_safe: {
+        Args: never
+        Returns: {
+          address: string
+          amenities: string[]
+          average_rating: number
+          category: string
+          city: string
+          country: string
+          created_at: string
+          description: string
+          hours_of_operation: Json
+          id: string
+          image_url: string
+          is_active: boolean
+          is_verified: boolean
+          latitude: number
+          longitude: number
+          name: string
+          phone: string
+          postal_code: string
+          price_range: string
+          state: string
+          submitted_by_visible: string
+          total_reviews: number
+          updated_at: string
+          website_url: string
+        }[]
+      }
       get_fundraiser_donations: {
         Args: { _fundraiser_id: string }
         Returns: {
@@ -4458,6 +4487,24 @@ export type Database = {
           message: string
         }[]
       }
+      get_news_items_safe: {
+        Args: never
+        Returns: {
+          badge_type: string
+          category: string
+          created_at: string
+          created_by_visible: string
+          event_date: string
+          event_date_es: string
+          id: string
+          is_active: boolean
+          sort_order: number
+          title: string
+          title_es: string
+          updated_at: string
+          url: string
+        }[]
+      }
       get_story_view_count: { Args: { _story_id: string }; Returns: number }
       get_user_role: {
         Args: { _user_id: string }
@@ -4466,6 +4513,18 @@ export type Database = {
       get_user_roles: {
         Args: { _user_id: string }
         Returns: Database["public"]["Enums"]["app_role"][]
+      }
+      get_wearable_connections_safe: {
+        Args: { _user_id: string }
+        Returns: {
+          created_at: string
+          expires_at: string
+          id: string
+          is_connected: boolean
+          provider: string
+          updated_at: string
+          user_id: string
+        }[]
       }
       grant_vip_pass: {
         Args: { _expires_at?: string; _reason?: string; _user_id: string }
