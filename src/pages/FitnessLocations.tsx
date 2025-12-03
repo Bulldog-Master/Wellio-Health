@@ -14,6 +14,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { Skeleton } from '@/components/ui/skeleton';
 import SEOHead from '@/components/SEOHead';
+import AddressAutocomplete from '@/components/AddressAutocomplete';
+import PhoneInput from '@/components/PhoneInput';
 import { 
   MapPin, Search, Plus, Star, ExternalLink, Phone, Navigation, 
   Dumbbell, Swords, Heart, Waves, Bike, Mountain, Award, ArrowLeft,
@@ -263,9 +265,19 @@ const FitnessLocations = () => {
                 </div>
                 <div>
                   <Label>{t('locations:form.address')}</Label>
-                  <Input
+                  <AddressAutocomplete
                     value={formData.address}
-                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                    onChange={(value) => setFormData({ ...formData, address: value })}
+                    onAddressSelect={(addr) => {
+                      setFormData(prev => ({
+                        ...prev,
+                        address: addr.street,
+                        city: addr.city || prev.city,
+                        state: addr.state || prev.state,
+                        country: addr.country || prev.country,
+                        postal_code: addr.postalCode || prev.postal_code,
+                      }));
+                    }}
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
@@ -304,10 +316,10 @@ const FitnessLocations = () => {
                 </div>
                 <div>
                   <Label>{t('locations:form.phone')}</Label>
-                  <Input
+                  <PhoneInput
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    type="tel"
+                    onChange={(value) => setFormData({ ...formData, phone: value })}
+                    country={formData.country}
                   />
                 </div>
                 <div>
