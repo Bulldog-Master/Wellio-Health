@@ -19,6 +19,8 @@
   "search_location": "Search",
   "location_found": "Location found! Showing nearby facilities.",
   "location_not_found": "Could not find that location. Please try a different city or address.",
+  "location": "location",
+  "locations_count": "locations",
   "categories": {
     "all": "All Categories",
     "gym": "Gym",

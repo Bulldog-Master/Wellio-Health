@@ -19,6 +19,8 @@
   "search_location": "Buscar",
   "location_found": "¡Ubicación encontrada! Mostrando instalaciones cercanas.",
   "location_not_found": "No se pudo encontrar esa ubicación. Por favor intenta con otra ciudad o dirección.",
+  "location": "ubicación",
+  "locations_count": "ubicaciones",
   "categories": {
     "all": "Todas las Categorías",
     "gym": "Gimnasio",
