@@ -246,7 +246,7 @@ const FitnessLocations = () => {
     website_url: '',
   });
 
-  // Use GPS location handler - when fromDialog=true, just populate the field without searching
+  // Use GPS location handler - always searches immediately
   const handleUseGpsLocation = (fromDialog = false) => {
     if (!('geolocation' in navigator)) {
       if (fromDialog) {
@@ -267,6 +267,14 @@ const FitnessLocations = () => {
           lng: position.coords.longitude,
         };
         setUserLocation(coords);
+        setNearMeMode(true);
+        setDiscoverMode(true);
+        setSearchQuery('');
+        
+        // Close dialog if from dialog
+        if (fromDialog) {
+          setIsLocationDialogOpen(false);
+        }
         
         // Reverse geocode to get location name
         try {
@@ -288,16 +296,8 @@ const FitnessLocations = () => {
         
         setLocationLoading(false);
         
-        // If from dialog, just populate the field - user will click Search
-        // If from main button, auto-search
-        if (!fromDialog) {
-          setNearMeMode(true);
-          setDiscoverMode(true);
-          setSearchQuery('');
-          handleDiscoverAtLocation(coords.lat, coords.lng);
-        } else {
-          toast.success(t('locations:location_detected'));
-        }
+        // Always search immediately
+        handleDiscoverAtLocation(coords.lat, coords.lng);
       },
       (error) => {
         setLocationLoading(false);
