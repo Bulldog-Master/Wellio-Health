@@ -248,6 +248,9 @@ const FitnessLocations = () => {
 
   // Use GPS location handler - always searches immediately
   const handleUseGpsLocation = (fromDialog = false) => {
+    console.log('handleUseGpsLocation called, fromDialog:', fromDialog);
+    toast.info('Getting your location...');
+    
     if (!('geolocation' in navigator)) {
       if (fromDialog) {
         toast.error(t('locations:location_not_supported'));
