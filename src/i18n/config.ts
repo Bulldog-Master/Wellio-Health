@@ -491,6 +491,121 @@ import pluralsTA from './locales/ta/plurals.json';
 import unitsTA from './locales/ta/units.json';
 import videosTA from './locales/ta/videos.json';
 
+// Urdu
+import commonUR from './locales/ur/common.json';
+import authUR from './locales/ur/auth.json';
+import settingsUR from './locales/ur/settings.json';
+import fitnessUR from './locales/ur/fitness.json';
+import nutritionUR from './locales/ur/nutrition.json';
+import socialUR from './locales/ur/social.json';
+import subscriptionUR from './locales/ur/subscription.json';
+import premiumUR from './locales/ur/premium.json';
+import feedUR from './locales/ur/feed.json';
+import chatUR from './locales/ur/chat.json';
+import celebrationsUR from './locales/ur/celebrations.json';
+import adminUR from './locales/ur/admin.json';
+import addonsUR from './locales/ur/addons.json';
+import recoveryUR from './locales/ur/recovery.json';
+import newsUR from './locales/ur/news.json';
+import professionalUR from './locales/ur/professional.json';
+import a11yUR from './locales/ur/a11y.json';
+import seoUR from './locales/ur/seo.json';
+import pluralsUR from './locales/ur/plurals.json';
+import unitsUR from './locales/ur/units.json';
+import videosUR from './locales/ur/videos.json';
+
+// Egyptian Arabic
+import commonARZ from './locales/arz/common.json';
+import authARZ from './locales/arz/auth.json';
+import settingsARZ from './locales/arz/settings.json';
+import fitnessARZ from './locales/arz/fitness.json';
+import nutritionARZ from './locales/arz/nutrition.json';
+import socialARZ from './locales/arz/social.json';
+import subscriptionARZ from './locales/arz/subscription.json';
+import premiumARZ from './locales/arz/premium.json';
+import feedARZ from './locales/arz/feed.json';
+import chatARZ from './locales/arz/chat.json';
+import celebrationsARZ from './locales/arz/celebrations.json';
+import adminARZ from './locales/arz/admin.json';
+import addonsARZ from './locales/arz/addons.json';
+import recoveryARZ from './locales/arz/recovery.json';
+import newsARZ from './locales/arz/news.json';
+import professionalARZ from './locales/arz/professional.json';
+import a11yARZ from './locales/arz/a11y.json';
+import seoARZ from './locales/arz/seo.json';
+import pluralsARZ from './locales/arz/plurals.json';
+import unitsARZ from './locales/arz/units.json';
+import videosARZ from './locales/arz/videos.json';
+
+// Marathi
+import commonMR from './locales/mr/common.json';
+import authMR from './locales/mr/auth.json';
+import settingsMR from './locales/mr/settings.json';
+import fitnessMR from './locales/mr/fitness.json';
+import nutritionMR from './locales/mr/nutrition.json';
+import socialMR from './locales/mr/social.json';
+import subscriptionMR from './locales/mr/subscription.json';
+import premiumMR from './locales/mr/premium.json';
+import feedMR from './locales/mr/feed.json';
+import chatMR from './locales/mr/chat.json';
+import celebrationsMR from './locales/mr/celebrations.json';
+import adminMR from './locales/mr/admin.json';
+import addonsMR from './locales/mr/addons.json';
+import recoveryMR from './locales/mr/recovery.json';
+import newsMR from './locales/mr/news.json';
+import professionalMR from './locales/mr/professional.json';
+import a11yMR from './locales/mr/a11y.json';
+import seoMR from './locales/mr/seo.json';
+import pluralsMR from './locales/mr/plurals.json';
+import unitsMR from './locales/mr/units.json';
+import videosMR from './locales/mr/videos.json';
+
+// Telugu
+import commonTE from './locales/te/common.json';
+import authTE from './locales/te/auth.json';
+import settingsTE from './locales/te/settings.json';
+import fitnessTE from './locales/te/fitness.json';
+import nutritionTE from './locales/te/nutrition.json';
+import socialTE from './locales/te/social.json';
+import subscriptionTE from './locales/te/subscription.json';
+import premiumTE from './locales/te/premium.json';
+import feedTE from './locales/te/feed.json';
+import chatTE from './locales/te/chat.json';
+import celebrationsTE from './locales/te/celebrations.json';
+import adminTE from './locales/te/admin.json';
+import addonsTE from './locales/te/addons.json';
+import recoveryTE from './locales/te/recovery.json';
+import newsTE from './locales/te/news.json';
+import professionalTE from './locales/te/professional.json';
+import a11yTE from './locales/te/a11y.json';
+import seoTE from './locales/te/seo.json';
+import pluralsTE from './locales/te/plurals.json';
+import unitsTE from './locales/te/units.json';
+import videosTE from './locales/te/videos.json';
+
+// Vietnamese
+import commonVI from './locales/vi/common.json';
+import authVI from './locales/vi/auth.json';
+import settingsVI from './locales/vi/settings.json';
+import fitnessVI from './locales/vi/fitness.json';
+import nutritionVI from './locales/vi/nutrition.json';
+import socialVI from './locales/vi/social.json';
+import subscriptionVI from './locales/vi/subscription.json';
+import premiumVI from './locales/vi/premium.json';
+import feedVI from './locales/vi/feed.json';
+import chatVI from './locales/vi/chat.json';
+import celebrationsVI from './locales/vi/celebrations.json';
+import adminVI from './locales/vi/admin.json';
+import addonsVI from './locales/vi/addons.json';
+import recoveryVI from './locales/vi/recovery.json';
+import newsVI from './locales/vi/news.json';
+import professionalVI from './locales/vi/professional.json';
+import a11yVI from './locales/vi/a11y.json';
+import seoVI from './locales/vi/seo.json';
+import pluralsVI from './locales/vi/plurals.json';
+import unitsVI from './locales/vi/units.json';
+import videosVI from './locales/vi/videos.json';
+
 // Chinese settings
 import settingsZH from './locales/zh/settings.json';
 
@@ -997,6 +1112,121 @@ const resources = {
     plurals: pluralsTA,
     units: unitsTA,
     videos: videosTA,
+  },
+  ur: {
+    common: commonUR,
+    auth: authUR,
+    settings: settingsUR,
+    fitness: fitnessUR,
+    nutrition: nutritionUR,
+    social: socialUR,
+    subscription: subscriptionUR,
+    premium: premiumUR,
+    feed: feedUR,
+    chat: chatUR,
+    celebrations: celebrationsUR,
+    admin: adminUR,
+    addons: addonsUR,
+    recovery: recoveryUR,
+    news: newsUR,
+    professional: professionalUR,
+    a11y: a11yUR,
+    seo: seoUR,
+    plurals: pluralsUR,
+    units: unitsUR,
+    videos: videosUR,
+  },
+  arz: {
+    common: commonARZ,
+    auth: authARZ,
+    settings: settingsARZ,
+    fitness: fitnessARZ,
+    nutrition: nutritionARZ,
+    social: socialARZ,
+    subscription: subscriptionARZ,
+    premium: premiumARZ,
+    feed: feedARZ,
+    chat: chatARZ,
+    celebrations: celebrationsARZ,
+    admin: adminARZ,
+    addons: addonsARZ,
+    recovery: recoveryARZ,
+    news: newsARZ,
+    professional: professionalARZ,
+    a11y: a11yARZ,
+    seo: seoARZ,
+    plurals: pluralsARZ,
+    units: unitsARZ,
+    videos: videosARZ,
+  },
+  mr: {
+    common: commonMR,
+    auth: authMR,
+    settings: settingsMR,
+    fitness: fitnessMR,
+    nutrition: nutritionMR,
+    social: socialMR,
+    subscription: subscriptionMR,
+    premium: premiumMR,
+    feed: feedMR,
+    chat: chatMR,
+    celebrations: celebrationsMR,
+    admin: adminMR,
+    addons: addonsMR,
+    recovery: recoveryMR,
+    news: newsMR,
+    professional: professionalMR,
+    a11y: a11yMR,
+    seo: seoMR,
+    plurals: pluralsMR,
+    units: unitsMR,
+    videos: videosMR,
+  },
+  te: {
+    common: commonTE,
+    auth: authTE,
+    settings: settingsTE,
+    fitness: fitnessTE,
+    nutrition: nutritionTE,
+    social: socialTE,
+    subscription: subscriptionTE,
+    premium: premiumTE,
+    feed: feedTE,
+    chat: chatTE,
+    celebrations: celebrationsTE,
+    admin: adminTE,
+    addons: addonsTE,
+    recovery: recoveryTE,
+    news: newsTE,
+    professional: professionalTE,
+    a11y: a11yTE,
+    seo: seoTE,
+    plurals: pluralsTE,
+    units: unitsTE,
+    videos: videosTE,
+  },
+  vi: {
+    common: commonVI,
+    auth: authVI,
+    settings: settingsVI,
+    fitness: fitnessVI,
+    nutrition: nutritionVI,
+    social: socialVI,
+    subscription: subscriptionVI,
+    premium: premiumVI,
+    feed: feedVI,
+    chat: chatVI,
+    celebrations: celebrationsVI,
+    admin: adminVI,
+    addons: addonsVI,
+    recovery: recoveryVI,
+    news: newsVI,
+    professional: professionalVI,
+    a11y: a11yVI,
+    seo: seoVI,
+    plurals: pluralsVI,
+    units: unitsVI,
+    videos: videosVI,
   },
 };
 
