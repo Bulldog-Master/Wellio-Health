@@ -1,0 +1,32 @@
+{
+  "navigation": {
+    "main_menu": "Menu navigazione principale",
+    "skip_to_content": "Salta al contenuto principale",
+    "go_back": "Torna alla pagina precedente",
+    "go_home": "Vai alla home",
+    "open_menu": "Apri menu",
+    "close_menu": "Chiudi menu"
+  },
+  "actions": {
+    "submit_form": "Invia modulo",
+    "cancel_action": "Annulla azione",
+    "save_changes": "Salva modifiche",
+    "delete_item": "Elimina elemento",
+    "edit_item": "Modifica elemento",
+    "close_dialog": "Chiudi dialogo"
+  },
+  "status": {
+    "loading": "Caricamento contenuto",
+    "error_occurred": "Si è verificato un errore",
+    "success_message": "Azione completata con successo"
+  },
+  "theme": {
+    "toggle_theme": "Cambia modalità scuro/chiaro",
+    "dark_mode": "Passa a modalità scura",
+    "light_mode": "Passa a modalità chiara"
+  },
+  "language": {
+    "change_language": "Cambia lingua",
+    "current_language": "Lingua attuale: {{language}}"
+  }
+}
