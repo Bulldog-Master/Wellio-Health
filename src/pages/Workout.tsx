@@ -1996,6 +1996,7 @@ const Workout = () => {
               <option value="Cycling">Cycling</option>
               <option value="Swimming">Swimming</option>
               <option value="Walking">Walking</option>
+              <option value="Hiking">Hiking</option>
               <option value="Weightlifting">Weightlifting</option>
               <option value="Yoga">Yoga</option>
               <option value="HIIT">HIIT</option>
@@ -2004,7 +2005,7 @@ const Workout = () => {
             <Input
               className="mt-2"
               placeholder={t('or_type_custom_activity')}
-              value={exercise && !["Running", "Cycling", "Swimming", "Walking", "Weightlifting", "Yoga", "HIIT", "Other", ""].includes(exercise) ? exercise : ""}
+              value={exercise && !["Running", "Cycling", "Swimming", "Walking", "Hiking", "Weightlifting", "Yoga", "HIIT", "Other", ""].includes(exercise) ? exercise : ""}
               onChange={(e) => setExercise(e.target.value)}
             />
           </div>
