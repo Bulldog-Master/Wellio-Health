@@ -153,21 +153,40 @@ const FitnessLocations = () => {
     
     setGeocodeLoading(true);
     try {
+      console.log('Starting geocode search for:', manualLocationQuery);
+      
       const { data, error } = await supabase.functions.invoke('geocode-location', {
         body: { query: manualLocationQuery }
       });
       
+      console.log('Geocode response - data:', data, 'error:', error);
+      
       if (error) {
         console.error('Geocoding error:', error);
         toast.error(t('locations:location_not_found'));
+        setGeocodeLoading(false);
         return;
       }
       
-      console.log('Geocoding response:', data);
+      if (!data) {
+        console.error('No data returned from geocode');
+        toast.error(t('locations:location_not_found'));
+        setGeocodeLoading(false);
+        return;
+      }
       
-      if (data?.results && data.results.length > 0) {
-        const lat = parseFloat(data.results[0].lat);
-        const lng = parseFloat(data.results[0].lon);
+      if (data.results && Array.isArray(data.results) && data.results.length > 0) {
+        const result = data.results[0];
+        const lat = parseFloat(result.lat);
+        const lng = parseFloat(result.lon);
+        
+        if (isNaN(lat) || isNaN(lng)) {
+          console.error('Invalid coordinates:', result.lat, result.lon);
+          toast.error(t('locations:location_not_found'));
+          setGeocodeLoading(false);
+          return;
+        }
+        
         console.log('Setting user location:', { lat, lng });
         
         setUserLocation({ lat, lng });
@@ -181,10 +200,11 @@ const FitnessLocations = () => {
         setNearMeCategoryFilter('all');
         toast.success(t('locations:location_found'));
       } else {
+        console.log('No results in geocode response:', data);
         toast.error(t('locations:location_not_found'));
       }
     } catch (error) {
-      console.error('Geocoding error:', error);
+      console.error('Geocoding catch error:', error);
       toast.error(t('locations:location_not_found'));
     } finally {
       setGeocodeLoading(false);
