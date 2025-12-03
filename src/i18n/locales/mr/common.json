@@ -1,4 +1,15 @@
 {
+  "nav": {
+    "activity": "क्रियाकलाप",
+    "connect": "जोडा",
+    "food": "अन्न",
+    "fundraisers": "निधी संकलन",
+    "locations": "ठिकाणे",
+    "news": "बातम्या",
+    "recovery": "पुनर्प्राप्ती",
+    "shop": "दुकान",
+    "sponsors": "प्रायोजक"
+  },
   "app_name": "Wellio",
   "loading": "लोड होत आहे...",
   "error": "त्रुटी",

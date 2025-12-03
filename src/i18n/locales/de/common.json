@@ -1,4 +1,15 @@
 {
+  "nav": {
+    "activity": "Aktivität",
+    "connect": "Verbinden",
+    "food": "Essen",
+    "fundraisers": "Spendenaktionen",
+    "locations": "Standorte",
+    "news": "Nachrichten",
+    "recovery": "Erholung",
+    "shop": "Shop",
+    "sponsors": "Sponsoren"
+  },
   "app_name": "Wellio",
   "loading": "Laden...",
   "save": "Speichern",

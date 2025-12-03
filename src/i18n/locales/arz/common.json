@@ -1,4 +1,15 @@
 {
+  "nav": {
+    "activity": "نشاط",
+    "connect": "اتصل",
+    "food": "أكل",
+    "fundraisers": "جمع تبرعات",
+    "locations": "أماكن",
+    "news": "أخبار",
+    "recovery": "راحة",
+    "shop": "محل",
+    "sponsors": "رعاة"
+  },
   "app_name": "Wellio",
   "loading": "بيحمّل...",
   "error": "غلط",

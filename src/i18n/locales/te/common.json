@@ -1,4 +1,15 @@
 {
+  "nav": {
+    "activity": "కార్యకలాపం",
+    "connect": "కనెక్ట్",
+    "food": "ఆహారం",
+    "fundraisers": "నిధుల సేకరణ",
+    "locations": "స్థానాలు",
+    "news": "వార్తలు",
+    "recovery": "రికవరీ",
+    "shop": "షాపు",
+    "sponsors": "స్పాన్సర్లు"
+  },
   "app_name": "Wellio",
   "loading": "లోడ్ అవుతోంది...",
   "error": "లోపం",
