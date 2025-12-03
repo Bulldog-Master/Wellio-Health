@@ -1,0 +1,9 @@
+{
+  "error": "エラー",
+  "something_went_wrong": "問題が発生しました",
+  "try_again": "再試行",
+  "page_not_found": "ページが見つかりません",
+  "network_error": "ネットワークエラー",
+  "unauthorized": "未認証",
+  "forbidden": "アクセス禁止"
+}

@@ -1,0 +1,9 @@
+{
+  "error": "Erreur",
+  "something_went_wrong": "Une erreur s'est produite",
+  "try_again": "Réessayer",
+  "page_not_found": "Page non trouvée",
+  "network_error": "Erreur réseau",
+  "unauthorized": "Non autorisé",
+  "forbidden": "Accès interdit"
+}

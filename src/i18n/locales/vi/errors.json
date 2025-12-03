@@ -1,0 +1,9 @@
+{
+  "error": "Lỗi",
+  "something_went_wrong": "Đã xảy ra lỗi",
+  "try_again": "Thử lại",
+  "page_not_found": "Không tìm thấy trang",
+  "network_error": "Lỗi mạng",
+  "unauthorized": "Không được phép",
+  "forbidden": "Bị cấm"
+}

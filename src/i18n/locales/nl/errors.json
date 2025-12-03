@@ -1,0 +1,9 @@
+{
+  "error": "Fout",
+  "something_went_wrong": "Er ging iets mis",
+  "try_again": "Probeer opnieuw",
+  "page_not_found": "Pagina niet gevonden",
+  "network_error": "Netwerkfout",
+  "unauthorized": "Niet geautoriseerd",
+  "forbidden": "Toegang geweigerd"
+}

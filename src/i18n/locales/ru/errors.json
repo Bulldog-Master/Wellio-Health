@@ -1,0 +1,9 @@
+{
+  "error": "Ошибка",
+  "something_went_wrong": "Что-то пошло не так",
+  "try_again": "Попробовать снова",
+  "page_not_found": "Страница не найдена",
+  "network_error": "Ошибка сети",
+  "unauthorized": "Не авторизован",
+  "forbidden": "Доступ запрещён"
+}

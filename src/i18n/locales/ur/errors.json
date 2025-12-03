@@ -1,0 +1,9 @@
+{
+  "error": "خرابی",
+  "something_went_wrong": "کچھ غلط ہو گیا",
+  "try_again": "دوبارہ کوشش کریں",
+  "page_not_found": "صفحہ نہیں ملا",
+  "network_error": "نیٹ ورک خرابی",
+  "unauthorized": "غیر مجاز",
+  "forbidden": "ممنوع"
+}
