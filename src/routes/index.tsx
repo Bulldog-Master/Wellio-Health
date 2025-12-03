@@ -90,6 +90,8 @@ const FitnessLocations = lazy(() => import("@/pages/FitnessLocations"));
 const AdminAdvertisements = lazy(() => import("@/pages/AdminAdvertisements"));
 const RecommendedProducts = lazy(() => import("@/pages/RecommendedProducts"));
 const Recovery = lazy(() => import("@/pages/Recovery"));
+const TrainerPortal = lazy(() => import("@/pages/TrainerPortal"));
+const PractitionerPortal = lazy(() => import("@/pages/PractitionerPortal"));
 
 /**
  * Application route configuration
@@ -203,6 +205,8 @@ export const AppRoutes = () => (
     <Route path="/locations" element={<RouteErrorBoundary><ProtectedRoute><Layout><FitnessLocations /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/products" element={<RouteErrorBoundary><ProtectedRoute><Layout><RecommendedProducts /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/recovery" element={<RouteErrorBoundary><ProtectedRoute><Layout><Recovery /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/trainer-portal" element={<RouteErrorBoundary><ProtectedRoute><Layout><TrainerPortal /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/practitioner-portal" element={<RouteErrorBoundary><ProtectedRoute><Layout><PractitionerPortal /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     
     {/* 404 */}
     <Route path="*" element={<NotFound />} />

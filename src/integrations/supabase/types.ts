@@ -2221,6 +2221,158 @@ export type Database = {
           },
         ]
       }
+      professional_applications: {
+        Row: {
+          bio: string | null
+          certifications: string[] | null
+          created_at: string | null
+          email: string
+          full_name: string
+          hourly_rate: number | null
+          id: string
+          location: string | null
+          phone: string | null
+          professional_type: string
+          rejection_reason: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          specialties: string[] | null
+          status: string | null
+          updated_at: string | null
+          user_id: string
+          website_url: string | null
+          years_experience: number | null
+        }
+        Insert: {
+          bio?: string | null
+          certifications?: string[] | null
+          created_at?: string | null
+          email: string
+          full_name: string
+          hourly_rate?: number | null
+          id?: string
+          location?: string | null
+          phone?: string | null
+          professional_type: string
+          rejection_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          specialties?: string[] | null
+          status?: string | null
+          updated_at?: string | null
+          user_id: string
+          website_url?: string | null
+          years_experience?: number | null
+        }
+        Update: {
+          bio?: string | null
+          certifications?: string[] | null
+          created_at?: string | null
+          email?: string
+          full_name?: string
+          hourly_rate?: number | null
+          id?: string
+          location?: string | null
+          phone?: string | null
+          professional_type?: string
+          rejection_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          specialties?: string[] | null
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string
+          website_url?: string | null
+          years_experience?: number | null
+        }
+        Relationships: []
+      }
+      professional_clients: {
+        Row: {
+          client_id: string
+          created_at: string | null
+          ended_at: string | null
+          id: string
+          notes: string | null
+          professional_id: string
+          professional_type: string
+          started_at: string | null
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          client_id: string
+          created_at?: string | null
+          ended_at?: string | null
+          id?: string
+          notes?: string | null
+          professional_id: string
+          professional_type: string
+          started_at?: string | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          client_id?: string
+          created_at?: string | null
+          ended_at?: string | null
+          id?: string
+          notes?: string | null
+          professional_id?: string
+          professional_type?: string
+          started_at?: string | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      professional_documents: {
+        Row: {
+          application_id: string | null
+          created_at: string | null
+          document_name: string
+          document_type: string
+          file_url: string
+          id: string
+          user_id: string
+          verified: boolean | null
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          application_id?: string | null
+          created_at?: string | null
+          document_name: string
+          document_type: string
+          file_url: string
+          id?: string
+          user_id: string
+          verified?: boolean | null
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          application_id?: string | null
+          created_at?: string | null
+          document_name?: string
+          document_type?: string
+          file_url?: string
+          id?: string
+          user_id?: string
+          verified?: boolean | null
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "professional_documents_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "professional_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           age: number | null
@@ -3404,6 +3556,54 @@ export type Database = {
           },
         ]
       }
+      subscription_addons: {
+        Row: {
+          addon_key: string
+          created_at: string | null
+          description: string | null
+          description_es: string | null
+          features: Json | null
+          id: string
+          is_active: boolean | null
+          name: string
+          name_es: string | null
+          price_monthly: number
+          price_yearly: number | null
+          sort_order: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          addon_key: string
+          created_at?: string | null
+          description?: string | null
+          description_es?: string | null
+          features?: Json | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          name_es?: string | null
+          price_monthly?: number
+          price_yearly?: number | null
+          sort_order?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          addon_key?: string
+          created_at?: string | null
+          description?: string | null
+          description_es?: string | null
+          features?: Json | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          name_es?: string | null
+          price_monthly?: number
+          price_yearly?: number | null
+          sort_order?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       subscription_features: {
         Row: {
           created_at: string | null
@@ -3741,6 +3941,53 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      user_addons: {
+        Row: {
+          addon_id: string | null
+          billing_cycle: string | null
+          cancelled_at: string | null
+          created_at: string | null
+          expires_at: string | null
+          id: string
+          started_at: string | null
+          status: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          addon_id?: string | null
+          billing_cycle?: string | null
+          cancelled_at?: string | null
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          started_at?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          addon_id?: string | null
+          billing_cycle?: string | null
+          cancelled_at?: string | null
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          started_at?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_addons_addon_id_fkey"
+            columns: ["addon_id"]
+            isOneToOne: false
+            referencedRelation: "subscription_addons"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_badges: {
         Row: {
@@ -4213,6 +4460,10 @@ export type Database = {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      is_approved_professional: {
+        Args: { _type: string; _user_id: string }
         Returns: boolean
       }
       is_session_participant: {

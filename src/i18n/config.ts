@@ -1,4 +1,5 @@
 import i18n from 'i18next';
+// Note: addons and professional namespaces added for subscription add-ons and professional portals
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { logMissingKey, validateTranslations } from '@/lib/translationUtils';
@@ -60,6 +61,8 @@ import locationsEN from './locales/en/locations.json';
 import adsEN from './locales/en/ads.json';
 import productsEN from './locales/en/products.json';
 import recoveryEN from './locales/en/recovery.json';
+import addonsEN from './locales/en/addons.json';
+import professionalEN from './locales/en/professional.json';
 
 // Spanish
 import commonES from './locales/es/common.json';
@@ -118,6 +121,8 @@ import locationsES from './locales/es/locations.json';
 import adsES from './locales/es/ads.json';
 import productsES from './locales/es/products.json';
 import recoveryES from './locales/es/recovery.json';
+import addonsES from './locales/es/addons.json';
+import professionalES from './locales/es/professional.json';
 
 // Portuguese
 import commonPT from './locales/pt/common.json';
