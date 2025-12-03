@@ -246,7 +246,7 @@ const FitnessLocations = () => {
     website_url: '',
   });
 
-  // Use GPS location handler
+  // Use GPS location handler - when fromDialog=true, just populate the field without searching
   const handleUseGpsLocation = (fromDialog = false) => {
     if (!('geolocation' in navigator)) {
       if (fromDialog) {
@@ -267,10 +267,6 @@ const FitnessLocations = () => {
           lng: position.coords.longitude,
         };
         setUserLocation(coords);
-        setNearMeMode(true);
-        setDiscoverMode(true);
-        setSearchQuery('');
-        if (fromDialog) setIsLocationDialogOpen(false);
         
         // Reverse geocode to get location name
         try {
@@ -283,15 +279,25 @@ const FitnessLocations = () => {
             setLocationInput(name);
           } else {
             setLocationName(t('locations:your_location'));
+            setLocationInput(t('locations:your_location'));
           }
         } catch {
           setLocationName(t('locations:your_location'));
+          setLocationInput(t('locations:your_location'));
         }
         
         setLocationLoading(false);
         
-        // Auto-discover facilities at this location
-        handleDiscoverAtLocation(coords.lat, coords.lng);
+        // If from dialog, just populate the field - user will click Search
+        // If from main button, auto-search
+        if (!fromDialog) {
+          setNearMeMode(true);
+          setDiscoverMode(true);
+          setSearchQuery('');
+          handleDiscoverAtLocation(coords.lat, coords.lng);
+        } else {
+          toast.success(t('locations:location_detected'));
+        }
       },
       (error) => {
         setLocationLoading(false);
@@ -310,45 +316,58 @@ const FitnessLocations = () => {
 
   // Search for location by name and set coordinates
   const handleLocationSearch = async () => {
-    if (!locationInput.trim()) return;
+    if (!locationInput.trim() && !userLocation) return;
     
     setGeocodeLoading(true);
-    try {
-      const { data, error } = await supabase.functions.invoke('geocode-location', {
-        body: { query: locationInput }
-      });
-      
-      if (error || !data?.results?.length) {
+    
+    let lat: number;
+    let lng: number;
+    
+    // If we already have GPS coordinates from "Use My Location", use them
+    if (userLocation && locationInput === locationName) {
+      lat = userLocation.lat;
+      lng = userLocation.lng;
+    } else {
+      // Otherwise, geocode the text input
+      try {
+        const { data, error } = await supabase.functions.invoke('geocode-location', {
+          body: { query: locationInput }
+        });
+        
+        if (error || !data?.results?.length) {
+          toast.error(t('locations:location_not_found'));
+          setGeocodeLoading(false);
+          return;
+        }
+        
+        const result = data.results[0];
+        lat = parseFloat(result.lat);
+        lng = parseFloat(result.lon);
+        
+        if (isNaN(lat) || isNaN(lng)) {
+          toast.error(t('locations:location_not_found'));
+          setGeocodeLoading(false);
+          return;
+        }
+        
+        setUserLocation({ lat, lng });
+      } catch (error) {
+        console.error('Geocoding error:', error);
         toast.error(t('locations:location_not_found'));
         setGeocodeLoading(false);
         return;
       }
-      
-      const result = data.results[0];
-      const lat = parseFloat(result.lat);
-      const lng = parseFloat(result.lon);
-      
-      if (isNaN(lat) || isNaN(lng)) {
-        toast.error(t('locations:location_not_found'));
-        setGeocodeLoading(false);
-        return;
-      }
-      
-      setUserLocation({ lat, lng });
-      setLocationName(locationInput);
-      setNearMeMode(true);
-      setDiscoverMode(true);
-      setIsLocationDialogOpen(false);
-      toast.success(t('locations:location_found'));
-      
-      // Auto-discover facilities at this location
-      handleDiscoverAtLocation(lat, lng);
-    } catch (error) {
-      console.error('Geocoding error:', error);
-      toast.error(t('locations:location_not_found'));
-    } finally {
-      setGeocodeLoading(false);
     }
+    
+    setLocationName(locationInput);
+    setNearMeMode(true);
+    setDiscoverMode(true);
+    setIsLocationDialogOpen(false);
+    setGeocodeLoading(false);
+    toast.success(t('locations:location_found'));
+    
+    // Auto-discover facilities at this location
+    handleDiscoverAtLocation(lat, lng);
   };
 
   // Discover facilities at specific coordinates
