@@ -1,0 +1,33 @@
+{
+  "title": "Nos Sponsors",
+  "subtitle": "Fièrement soutenus par les leaders de l'industrie",
+  "tiers": {
+    "platinum": "Platine",
+    "gold": "Or",
+    "silver": "Argent",
+    "bronze": "Bronze"
+  },
+  "visit_website": "Visiter le site",
+  "no_sponsors": "Aucun sponsor à afficher pour le moment",
+  "become_sponsor": "Devenir Sponsor",
+  "become_sponsor_desc": "Associez-vous à nous pour atteindre les passionnés de fitness du monde entier",
+  "contact_us": "Contactez-nous",
+  "admin": {
+    "manage_sponsors": "Gérer les sponsors",
+    "add_sponsor": "Ajouter un sponsor",
+    "edit_sponsor": "Modifier le sponsor",
+    "delete_sponsor": "Supprimer le sponsor",
+    "sponsor_name": "Nom du sponsor",
+    "logo_url": "URL du logo",
+    "website_url": "URL du site web",
+    "description": "Description",
+    "description_es": "Description (Espagnol)",
+    "tier": "Niveau",
+    "display_order": "Ordre d'affichage",
+    "is_active": "Actif",
+    "sponsor_added": "Sponsor ajouté avec succès",
+    "sponsor_updated": "Sponsor mis à jour avec succès",
+    "sponsor_deleted": "Sponsor supprimé avec succès",
+    "confirm_delete": "Voulez-vous vraiment supprimer ce sponsor?"
+  }
+}

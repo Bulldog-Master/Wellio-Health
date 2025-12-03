@@ -1,0 +1,17 @@
+{
+  "messages": "Mensagens",
+  "conversations": "Conversas",
+  "no_conversations_yet": "Ainda sem conversas",
+  "start_conversation_hint": "Inicie uma conversa visitando o perfil de um usuário",
+  "loading_conversations": "Carregando conversas...",
+  "loading_messages": "Carregando mensagens...",
+  "type_message": "Digite uma mensagem",
+  "send_message": "Enviar Mensagem",
+  "message_sent": "Mensagem enviada",
+  "message_failed": "Falha ao enviar",
+  "online": "Online",
+  "offline": "Offline",
+  "typing": "Digitando...",
+  "you": "Você",
+  "anonymous": "Anônimo"
+}

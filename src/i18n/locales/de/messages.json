@@ -1,0 +1,17 @@
+{
+  "messages": "Nachrichten",
+  "conversations": "Unterhaltungen",
+  "no_conversations_yet": "Noch keine Unterhaltungen",
+  "start_conversation_hint": "Beginne eine Unterhaltung, indem du ein Benutzerprofil besuchst",
+  "loading_conversations": "Unterhaltungen werden geladen...",
+  "loading_messages": "Nachrichten werden geladen...",
+  "type_message": "Nachricht eingeben",
+  "send_message": "Nachricht senden",
+  "message_sent": "Nachricht gesendet",
+  "message_failed": "Senden fehlgeschlagen",
+  "online": "Online",
+  "offline": "Offline",
+  "typing": "Schreibt...",
+  "you": "Du",
+  "anonymous": "Anonym"
+}

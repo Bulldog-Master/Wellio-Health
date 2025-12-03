@@ -1,0 +1,33 @@
+{
+  "title": "Unsere Sponsoren",
+  "subtitle": "Stolz unterstützt von Branchenführern",
+  "tiers": {
+    "platinum": "Platin",
+    "gold": "Gold",
+    "silver": "Silber",
+    "bronze": "Bronze"
+  },
+  "visit_website": "Website besuchen",
+  "no_sponsors": "Derzeit keine Sponsoren anzuzeigen",
+  "become_sponsor": "Sponsor werden",
+  "become_sponsor_desc": "Partner mit uns werden, um Fitness-Enthusiasten weltweit zu erreichen",
+  "contact_us": "Kontakt",
+  "admin": {
+    "manage_sponsors": "Sponsoren verwalten",
+    "add_sponsor": "Sponsor hinzufügen",
+    "edit_sponsor": "Sponsor bearbeiten",
+    "delete_sponsor": "Sponsor löschen",
+    "sponsor_name": "Sponsorname",
+    "logo_url": "Logo-URL",
+    "website_url": "Website-URL",
+    "description": "Beschreibung",
+    "description_es": "Beschreibung (Spanisch)",
+    "tier": "Stufe",
+    "display_order": "Anzeigereihenfolge",
+    "is_active": "Aktiv",
+    "sponsor_added": "Sponsor erfolgreich hinzugefügt",
+    "sponsor_updated": "Sponsor erfolgreich aktualisiert",
+    "sponsor_deleted": "Sponsor erfolgreich gelöscht",
+    "confirm_delete": "Diesen Sponsor wirklich löschen?"
+  }
+}
