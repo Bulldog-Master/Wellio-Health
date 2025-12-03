@@ -24,6 +24,16 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   // Check onboarding only on pathname change, not on every render
   const checkOnboardingRef = useRef(false);
 
+  // Check if there's a stored session in localStorage (indicates user was logged in)
+  const hasStoredSession = () => {
+    try {
+      const storedAuth = localStorage.getItem('sb-qmbshvfezrgqoyohjaac-auth-token');
+      return !!storedAuth;
+    } catch {
+      return false;
+    }
+  };
+
   useEffect(() => {
     let mounted = true;
     let initialCheckDone = false;
@@ -43,12 +53,11 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
       }
       
       // For all other events, just update session if we have one
-      // Don't treat TOKEN_REFRESHED or other events as sign-out
       if (currentSession) {
         setSession(currentSession);
+        setLoading(false);
       }
-      // Important: Don't set session to null on other events - 
-      // this prevents logout during API calls
+      // Don't set session to null on other events - prevents logout during API calls/reloads
     });
 
     // Initial session check - only run once
@@ -62,7 +71,11 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
         if (!mounted) return;
         
         if (!initialSession) {
-          navigate("/auth");
+          // Only redirect if there's NO stored session either
+          // This prevents redirect during hot reloads
+          if (!hasStoredSession()) {
+            navigate("/auth");
+          }
           setLoading(false);
           return;
         }
