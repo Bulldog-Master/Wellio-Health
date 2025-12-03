@@ -11,6 +11,53 @@ const SUUNTO_AUTH_URL = 'https://cloudapi-oauth.suunto.com/oauth/authorize';
 const SUUNTO_TOKEN_URL = 'https://cloudapi-oauth.suunto.com/oauth/token';
 const SUUNTO_API_BASE = 'https://cloudapi.suunto.com/v2';
 
+// ============= Encryption Utilities =============
+const importKey = async (keyBase64: string): Promise<CryptoKey> => {
+  const keyData = Uint8Array.from(atob(keyBase64), c => c.charCodeAt(0));
+  return crypto.subtle.importKey(
+    'raw',
+    keyData,
+    { name: 'AES-GCM', length: 256 },
+    false,
+    ['encrypt', 'decrypt']
+  );
+};
+
+const encryptData = async (data: string, keyBase64: string): Promise<string> => {
+  const key = await importKey(keyBase64);
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const encoder = new TextEncoder();
+  
+  const encrypted = await crypto.subtle.encrypt(
+    { name: 'AES-GCM', iv },
+    key,
+    encoder.encode(data)
+  );
+  
+  const combined = new Uint8Array(iv.length + new Uint8Array(encrypted).length);
+  combined.set(iv);
+  combined.set(new Uint8Array(encrypted), iv.length);
+  
+  return btoa(String.fromCharCode(...combined));
+};
+
+const decryptData = async (encryptedBase64: string, keyBase64: string): Promise<string> => {
+  const key = await importKey(keyBase64);
+  const combined = Uint8Array.from(atob(encryptedBase64), c => c.charCodeAt(0));
+  
+  const iv = combined.slice(0, 12);
+  const encryptedData = combined.slice(12);
+  
+  const decrypted = await crypto.subtle.decrypt(
+    { name: 'AES-GCM', iv },
+    key,
+    encryptedData
+  );
+  
+  return new TextDecoder().decode(decrypted);
+};
+// ============= End Encryption Utilities =============
+
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
@@ -22,6 +69,7 @@ serve(async (req) => {
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const suuntoClientId = Deno.env.get('SUUNTO_CLIENT_ID');
     const suuntoClientSecret = Deno.env.get('SUUNTO_CLIENT_SECRET');
+    const encryptionKey = Deno.env.get('DATA_ENCRYPTION_KEY');
 
     // Check if Suunto credentials are configured
     if (!suuntoClientId || !suuntoClientSecret) {
@@ -34,6 +82,14 @@ serve(async (req) => {
           status: 503, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
         }
+      );
+    }
+
+    if (!encryptionKey) {
+      console.error('DATA_ENCRYPTION_KEY not configured');
+      return new Response(
+        JSON.stringify({ error: 'Encryption not configured' }),
+        { status: 503, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
@@ -99,14 +155,21 @@ serve(async (req) => {
 
         const tokenData = await tokenResponse.json();
 
-        // Store tokens securely (you may want to encrypt these)
+        // Encrypt tokens before storing
+        const encryptedAccessToken = await encryptData(tokenData.access_token, encryptionKey);
+        const encryptedRefreshToken = tokenData.refresh_token 
+          ? await encryptData(tokenData.refresh_token, encryptionKey)
+          : null;
+
+        // Store encrypted tokens
         const { error: upsertError } = await supabaseAdmin
           .from('wearable_connections')
           .upsert({
             user_id: user.id,
             provider: 'suunto',
-            access_token: tokenData.access_token,
-            refresh_token: tokenData.refresh_token,
+            access_token_encrypted: encryptedAccessToken,
+            refresh_token_encrypted: encryptedRefreshToken,
+            encryption_version: 1,
             expires_at: new Date(Date.now() + tokenData.expires_in * 1000).toISOString(),
             updated_at: new Date().toISOString(),
           }, { onConflict: 'user_id,provider' });
@@ -126,7 +189,7 @@ serve(async (req) => {
       }
 
       case 'sync_workouts': {
-        // Get stored tokens
+        // Get stored encrypted tokens
         const { data: connection, error: connError } = await supabaseAdmin
           .from('wearable_connections')
           .select('*')
@@ -141,9 +204,44 @@ serve(async (req) => {
           );
         }
 
+        // Decrypt access token
+        let accessToken: string;
+        try {
+          if (connection.access_token_encrypted) {
+            accessToken = await decryptData(connection.access_token_encrypted, encryptionKey);
+          } else if (connection.access_token) {
+            // Fallback to unencrypted (legacy)
+            accessToken = connection.access_token;
+          } else {
+            throw new Error('No access token found');
+          }
+        } catch (decryptError) {
+          console.error('Failed to decrypt access token:', decryptError);
+          return new Response(
+            JSON.stringify({ error: 'Failed to decrypt credentials', needsReauth: true }),
+            { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
         // Check if token needs refresh
-        let accessToken = connection.access_token;
         if (new Date(connection.expires_at) < new Date()) {
+          // Decrypt refresh token
+          let refreshToken: string;
+          try {
+            if (connection.refresh_token_encrypted) {
+              refreshToken = await decryptData(connection.refresh_token_encrypted, encryptionKey);
+            } else if (connection.refresh_token) {
+              refreshToken = connection.refresh_token;
+            } else {
+              throw new Error('No refresh token');
+            }
+          } catch {
+            return new Response(
+              JSON.stringify({ error: 'Failed to refresh token', needsReauth: true }),
+              { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+            );
+          }
+
           // Refresh token
           const refreshResponse = await fetch(SUUNTO_TOKEN_URL, {
             method: 'POST',
@@ -152,7 +250,7 @@ serve(async (req) => {
             },
             body: new URLSearchParams({
               grant_type: 'refresh_token',
-              refresh_token: connection.refresh_token,
+              refresh_token: refreshToken,
               client_id: suuntoClientId,
               client_secret: suuntoClientSecret,
             }),
@@ -168,12 +266,18 @@ serve(async (req) => {
           const refreshData = await refreshResponse.json();
           accessToken = refreshData.access_token;
 
-          // Update stored tokens
+          // Encrypt and update stored tokens
+          const newEncryptedAccessToken = await encryptData(refreshData.access_token, encryptionKey);
+          const newEncryptedRefreshToken = refreshData.refresh_token
+            ? await encryptData(refreshData.refresh_token, encryptionKey)
+            : connection.refresh_token_encrypted;
+
           await supabaseAdmin
             .from('wearable_connections')
             .update({
-              access_token: refreshData.access_token,
-              refresh_token: refreshData.refresh_token || connection.refresh_token,
+              access_token_encrypted: newEncryptedAccessToken,
+              refresh_token_encrypted: newEncryptedRefreshToken,
+              encryption_version: 1,
               expires_at: new Date(Date.now() + refreshData.expires_in * 1000).toISOString(),
               updated_at: new Date().toISOString(),
             })
@@ -211,7 +315,7 @@ serve(async (req) => {
             .upsert({
               user_id: user.id,
               device_name: 'Suunto',
-              steps: workout.totalAscent ? null : null, // Suunto doesn't always provide steps
+              steps: workout.totalAscent ? null : null,
               calories_burned: workout.totalCalories || null,
               heart_rate: workout.avgHR || null,
               sleep_hours: null,
