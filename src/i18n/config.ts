@@ -145,6 +145,7 @@ import newsPT from './locales/pt/news.json';
 import addonsPT from './locales/pt/addons.json';
 import professionalPT from './locales/pt/professional.json';
 import recoveryPT from './locales/pt/recovery.json';
+import settingsPT from './locales/pt/settings.json';
 
 // French
 import commonFR from './locales/fr/common.json';
@@ -167,6 +168,7 @@ import newsFR from './locales/fr/news.json';
 import addonsFR from './locales/fr/addons.json';
 import professionalFR from './locales/fr/professional.json';
 import recoveryFR from './locales/fr/recovery.json';
+import settingsFR from './locales/fr/settings.json';
 
 // German
 import commonDE from './locales/de/common.json';
@@ -189,6 +191,7 @@ import newsDE from './locales/de/news.json';
 import addonsDE from './locales/de/addons.json';
 import professionalDE from './locales/de/professional.json';
 import recoveryDE from './locales/de/recovery.json';
+import settingsDE from './locales/de/settings.json';
 
 // Chinese
 import commonZH from './locales/zh/common.json';
