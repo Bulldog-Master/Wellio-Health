@@ -1,0 +1,13 @@
+{
+  "recovery_hub": "Trung tâm phục hồi",
+  "log_session": "Ghi phiên",
+  "session_history": "Lịch sử phiên",
+  "therapy_type": "Loại liệu pháp",
+  "duration": "Thời gian",
+  "massage": "Massage",
+  "sauna": "Xông hơi",
+  "stretching": "Giãn cơ",
+  "session_logged": "Đã ghi phiên",
+  "no_sessions": "Không có phiên",
+  "total_sessions": "Tổng số phiên"
+}

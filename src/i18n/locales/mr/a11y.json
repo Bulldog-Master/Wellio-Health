@@ -1,0 +1,17 @@
+{
+  "navigation": {
+    "main_menu": "मुख्य मेनू",
+    "skip_to_content": "मुख्य सामग्रीकडे जा",
+    "go_back": "मागे जा",
+    "go_home": "होम वर जा"
+  },
+  "actions": {
+    "submit_form": "फॉर्म सबमिट करा",
+    "cancel_action": "रद्द करा",
+    "save_changes": "बदल जतन करा"
+  },
+  "status": {
+    "loading": "लोड होत आहे",
+    "error_occurred": "त्रुटी आली"
+  }
+}

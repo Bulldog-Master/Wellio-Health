@@ -1,0 +1,17 @@
+{
+  "navigation": {
+    "main_menu": "Menu chính",
+    "skip_to_content": "Chuyển đến nội dung chính",
+    "go_back": "Quay lại",
+    "go_home": "Về trang chủ"
+  },
+  "actions": {
+    "submit_form": "Gửi biểu mẫu",
+    "cancel_action": "Hủy",
+    "save_changes": "Lưu thay đổi"
+  },
+  "status": {
+    "loading": "Đang tải",
+    "error_occurred": "Đã xảy ra lỗi"
+  }
+}
