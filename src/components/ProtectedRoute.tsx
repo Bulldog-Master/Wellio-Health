@@ -23,8 +23,10 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log('Auth state change:', event, 'session:', !!session);
       setSession(session);
-      if (!session) {
+      if (!session && event !== 'INITIAL_SESSION') {
+        console.log('Redirecting to auth - no session, event:', event);
         navigate("/auth");
       }
     });
