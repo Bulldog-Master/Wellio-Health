@@ -1,0 +1,16 @@
+{
+  "challenges": "চ্যালেঞ্জ",
+  "active_challenges": "সক্রিয় চ্যালেঞ্জ",
+  "completed_challenges": "সম্পন্ন চ্যালেঞ্জ",
+  "join_challenge": "চ্যালেঞ্জে যোগ দিন",
+  "leave_challenge": "চ্যালেঞ্জ ছাড়ুন",
+  "create_challenge": "চ্যালেঞ্জ তৈরি করুন",
+  "challenge_details": "চ্যালেঞ্জ বিবরণ",
+  "challenge_progress": "অগ্রগতি",
+  "challenge_leaderboard": "লিডারবোর্ড",
+  "days_remaining": "বাকি দিন",
+  "participants": "অংশগ্রহণকারী",
+  "your_rank": "আপনার র‌্যাঙ্ক",
+  "challenge_complete": "চ্যালেঞ্জ সম্পন্ন!",
+  "no_challenges": "কোনো চ্যালেঞ্জ নেই"
+}

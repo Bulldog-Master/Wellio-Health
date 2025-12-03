@@ -1,0 +1,14 @@
+{
+  "medical_history": "Riwayat Medis",
+  "medical_records": "Rekam Medis",
+  "add_record": "Tambah Rekam",
+  "medications": "Obat-obatan",
+  "allergies": "Alergi",
+  "conditions": "Kondisi Kesehatan",
+  "vaccinations": "Vaksinasi",
+  "lab_results": "Hasil Lab",
+  "doctor_visits": "Kunjungan Dokter",
+  "emergency_contact": "Kontak Darurat",
+  "blood_type": "Golongan Darah",
+  "no_records": "Tidak ada rekam"
+}

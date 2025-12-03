@@ -1,0 +1,19 @@
+{
+  "live_sessions": "Live Sessies",
+  "live_workout": "Live Training",
+  "join_session": "Deelnemen aan Sessie",
+  "create_session": "Sessie Aanmaken",
+  "session_title": "Sessie Titel",
+  "session_description": "Sessie Beschrijving",
+  "session_date": "Datum",
+  "session_time": "Tijd",
+  "session_duration": "Duur",
+  "max_participants": "Max Deelnemers",
+  "participants": "Deelnemers",
+  "host": "Gastheer",
+  "upcoming_sessions": "Komende Sessies",
+  "past_sessions": "Vorige Sessies",
+  "no_sessions": "Geen sessies",
+  "session_full": "Sessie vol",
+  "session_ended": "Sessie beëindigd"
+}

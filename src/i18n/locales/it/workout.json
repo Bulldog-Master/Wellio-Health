@@ -1,0 +1,18 @@
+{
+  "workout_details": "Dettagli Allenamento",
+  "workout_type": "Tipo di Allenamento",
+  "workout_name": "Nome Allenamento",
+  "workout_duration": "Durata",
+  "workout_calories": "Calorie",
+  "workout_notes": "Note",
+  "start_workout": "Inizia Allenamento",
+  "end_workout": "Termina Allenamento",
+  "pause_workout": "Pausa",
+  "resume_workout": "Riprendi",
+  "save_workout": "Salva Allenamento",
+  "delete_workout": "Elimina Allenamento",
+  "workout_history": "Cronologia Allenamenti",
+  "no_workouts": "Nessun allenamento",
+  "workout_complete": "Allenamento Completato!",
+  "great_job": "Ottimo Lavoro!"
+}

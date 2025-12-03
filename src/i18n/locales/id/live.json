@@ -1,0 +1,19 @@
+{
+  "live_sessions": "Sesi Live",
+  "live_workout": "Latihan Live",
+  "join_session": "Gabung Sesi",
+  "create_session": "Buat Sesi",
+  "session_title": "Judul Sesi",
+  "session_description": "Deskripsi Sesi",
+  "session_date": "Tanggal",
+  "session_time": "Waktu",
+  "session_duration": "Durasi",
+  "max_participants": "Maks Peserta",
+  "participants": "Peserta",
+  "host": "Host",
+  "upcoming_sessions": "Sesi Mendatang",
+  "past_sessions": "Sesi Sebelumnya",
+  "no_sessions": "Tidak ada sesi",
+  "session_full": "Sesi penuh",
+  "session_ended": "Sesi berakhir"
+}

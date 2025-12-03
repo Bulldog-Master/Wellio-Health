@@ -1,0 +1,12 @@
+{
+  "messages": "Messages",
+  "new_message": "New Message",
+  "send_message": "Send Message",
+  "type_message": "Type message...",
+  "no_messages": "No message dey",
+  "no_conversations": "No conversation dey",
+  "search_messages": "Search Messages",
+  "delete_message": "Delete Message",
+  "message_sent": "Message don send",
+  "message_deleted": "Message don delete"
+}

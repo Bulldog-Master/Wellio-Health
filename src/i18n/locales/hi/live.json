@@ -1,0 +1,19 @@
+{
+  "live_sessions": "लाइव सेशन",
+  "live_workout": "लाइव वर्कआउट",
+  "join_session": "सेशन में शामिल हों",
+  "create_session": "सेशन बनाएं",
+  "session_title": "सेशन शीर्षक",
+  "session_description": "सेशन विवरण",
+  "session_date": "तारीख",
+  "session_time": "समय",
+  "session_duration": "अवधि",
+  "max_participants": "अधिकतम प्रतिभागी",
+  "participants": "प्रतिभागी",
+  "host": "होस्ट",
+  "upcoming_sessions": "आगामी सेशन",
+  "past_sessions": "पिछले सेशन",
+  "no_sessions": "कोई सेशन नहीं",
+  "session_full": "सेशन भरा हुआ",
+  "session_ended": "सेशन समाप्त"
+}

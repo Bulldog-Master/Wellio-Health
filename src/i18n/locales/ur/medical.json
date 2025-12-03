@@ -1,0 +1,14 @@
+{
+  "medical_history": "طبی تاریخ",
+  "medical_records": "طبی ریکارڈز",
+  "add_record": "ریکارڈ شامل کریں",
+  "medications": "ادویات",
+  "allergies": "الرجی",
+  "conditions": "صحت کی حالتیں",
+  "vaccinations": "ویکسینیشنز",
+  "lab_results": "لیب نتائج",
+  "doctor_visits": "ڈاکٹر کے دورے",
+  "emergency_contact": "ایمرجنسی رابطہ",
+  "blood_type": "خون کی قسم",
+  "no_records": "کوئی ریکارڈ نہیں"
+}

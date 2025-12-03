@@ -1,0 +1,16 @@
+{
+  "challenges": "సవాళ్లు",
+  "active_challenges": "యాక్టివ్ సవాళ్లు",
+  "completed_challenges": "పూర్తయిన సవాళ్లు",
+  "join_challenge": "సవాలులో చేరండి",
+  "leave_challenge": "సవాలు విడిచిపెట్టండి",
+  "create_challenge": "సవాలు సృష్టించండి",
+  "challenge_details": "సవాలు వివరాలు",
+  "challenge_progress": "పురోగతి",
+  "challenge_leaderboard": "లీడర్‌బోర్డ్",
+  "days_remaining": "మిగిలిన రోజులు",
+  "participants": "పాల్గొనేవారు",
+  "your_rank": "మీ ర్యాంక్",
+  "challenge_complete": "సవాలు పూర్తయింది!",
+  "no_challenges": "సవాళ్లు లేవు"
+}

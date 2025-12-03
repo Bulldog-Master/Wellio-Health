@@ -1,0 +1,12 @@
+{
+  "messages": "संदेश",
+  "new_message": "नवीन संदेश",
+  "send_message": "संदेश पाठवा",
+  "type_message": "संदेश टाइप करा...",
+  "no_messages": "संदेश नाहीत",
+  "no_conversations": "संभाषणे नाहीत",
+  "search_messages": "संदेश शोधा",
+  "delete_message": "संदेश हटवा",
+  "message_sent": "संदेश पाठवला",
+  "message_deleted": "संदेश हटवला"
+}

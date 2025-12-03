@@ -1,0 +1,12 @@
+{
+  "messages": "메시지",
+  "new_message": "새 메시지",
+  "send_message": "메시지 보내기",
+  "type_message": "메시지 입력...",
+  "no_messages": "메시지가 없습니다",
+  "no_conversations": "대화가 없습니다",
+  "search_messages": "메시지 검색",
+  "delete_message": "메시지 삭제",
+  "message_sent": "메시지 전송됨",
+  "message_deleted": "메시지 삭제됨"
+}

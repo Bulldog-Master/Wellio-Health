@@ -1,0 +1,14 @@
+{
+  "medical_history": "Lịch sử y tế",
+  "medical_records": "Hồ sơ y tế",
+  "add_record": "Thêm hồ sơ",
+  "medications": "Thuốc",
+  "allergies": "Dị ứng",
+  "conditions": "Tình trạng sức khỏe",
+  "vaccinations": "Tiêm chủng",
+  "lab_results": "Kết quả xét nghiệm",
+  "doctor_visits": "Khám bác sĩ",
+  "emergency_contact": "Liên hệ khẩn cấp",
+  "blood_type": "Nhóm máu",
+  "no_records": "Không có hồ sơ"
+}

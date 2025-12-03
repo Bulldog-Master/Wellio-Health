@@ -1,0 +1,18 @@
+{
+  "workout_details": "운동 상세",
+  "workout_type": "운동 유형",
+  "workout_name": "운동 이름",
+  "workout_duration": "시간",
+  "workout_calories": "칼로리",
+  "workout_notes": "메모",
+  "start_workout": "운동 시작",
+  "end_workout": "운동 종료",
+  "pause_workout": "일시정지",
+  "resume_workout": "재개",
+  "save_workout": "운동 저장",
+  "delete_workout": "운동 삭제",
+  "workout_history": "운동 기록",
+  "no_workouts": "운동이 없습니다",
+  "workout_complete": "운동 완료!",
+  "great_job": "잘했어요!"
+}

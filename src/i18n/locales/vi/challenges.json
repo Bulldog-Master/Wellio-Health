@@ -1,0 +1,16 @@
+{
+  "challenges": "Thử thách",
+  "active_challenges": "Thử thách đang hoạt động",
+  "completed_challenges": "Thử thách đã hoàn thành",
+  "join_challenge": "Tham gia thử thách",
+  "leave_challenge": "Rời thử thách",
+  "create_challenge": "Tạo thử thách",
+  "challenge_details": "Chi tiết thử thách",
+  "challenge_progress": "Tiến độ",
+  "challenge_leaderboard": "Bảng xếp hạng",
+  "days_remaining": "Ngày còn lại",
+  "participants": "Người tham gia",
+  "your_rank": "Hạng của bạn",
+  "challenge_complete": "Hoàn thành thử thách!",
+  "no_challenges": "Không có thử thách"
+}

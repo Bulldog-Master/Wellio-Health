@@ -1,0 +1,18 @@
+{
+  "workout_details": "ワークアウト詳細",
+  "workout_type": "ワークアウトタイプ",
+  "workout_name": "ワークアウト名",
+  "workout_duration": "時間",
+  "workout_calories": "カロリー",
+  "workout_notes": "メモ",
+  "start_workout": "ワークアウト開始",
+  "end_workout": "ワークアウト終了",
+  "pause_workout": "一時停止",
+  "resume_workout": "再開",
+  "save_workout": "ワークアウトを保存",
+  "delete_workout": "ワークアウトを削除",
+  "workout_history": "ワークアウト履歴",
+  "no_workouts": "ワークアウトがありません",
+  "workout_complete": "ワークアウト完了！",
+  "great_job": "素晴らしい！"
+}

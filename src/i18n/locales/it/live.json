@@ -1,0 +1,19 @@
+{
+  "live_sessions": "Sessioni Live",
+  "live_workout": "Allenamento Live",
+  "join_session": "Unisciti alla Sessione",
+  "create_session": "Crea Sessione",
+  "session_title": "Titolo Sessione",
+  "session_description": "Descrizione Sessione",
+  "session_date": "Data",
+  "session_time": "Ora",
+  "session_duration": "Durata",
+  "max_participants": "Partecipanti Massimi",
+  "participants": "Partecipanti",
+  "host": "Host",
+  "upcoming_sessions": "Prossime Sessioni",
+  "past_sessions": "Sessioni Passate",
+  "no_sessions": "Nessuna sessione",
+  "session_full": "Sessione piena",
+  "session_ended": "Sessione terminata"
+}

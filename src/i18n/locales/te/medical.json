@@ -1,0 +1,14 @@
+{
+  "medical_history": "వైద్య చరిత్ర",
+  "medical_records": "వైద్య రికార్డులు",
+  "add_record": "రికార్డు జోడించండి",
+  "medications": "మందులు",
+  "allergies": "అలెర్జీలు",
+  "conditions": "ఆరోగ్య పరిస్థితులు",
+  "vaccinations": "వ్యాక్సినేషన్లు",
+  "lab_results": "ల్యాబ్ ఫలితాలు",
+  "doctor_visits": "డాక్టర్ సందర్శనలు",
+  "emergency_contact": "అత్యవసర సంప్రదింపు",
+  "blood_type": "రక్త రకం",
+  "no_records": "రికార్డులు లేవు"
+}

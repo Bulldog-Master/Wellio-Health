@@ -1,0 +1,16 @@
+{
+  "challenges": "チャレンジ",
+  "active_challenges": "アクティブなチャレンジ",
+  "completed_challenges": "完了したチャレンジ",
+  "join_challenge": "チャレンジに参加",
+  "leave_challenge": "チャレンジを離脱",
+  "create_challenge": "チャレンジ作成",
+  "challenge_details": "チャレンジ詳細",
+  "challenge_progress": "進捗",
+  "challenge_leaderboard": "ランキング",
+  "days_remaining": "残り日数",
+  "participants": "参加者",
+  "your_rank": "あなたの順位",
+  "challenge_complete": "チャレンジ完了！",
+  "no_challenges": "チャレンジがありません"
+}

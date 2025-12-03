@@ -1,0 +1,19 @@
+{
+  "live_sessions": "Canlı Seanslar",
+  "live_workout": "Canlı Antrenman",
+  "join_session": "Seansa Katıl",
+  "create_session": "Seans Oluştur",
+  "session_title": "Seans Başlığı",
+  "session_description": "Seans Açıklaması",
+  "session_date": "Tarih",
+  "session_time": "Saat",
+  "session_duration": "Süre",
+  "max_participants": "Maksimum Katılımcı",
+  "participants": "Katılımcılar",
+  "host": "Ev Sahibi",
+  "upcoming_sessions": "Yaklaşan Seanslar",
+  "past_sessions": "Geçmiş Seanslar",
+  "no_sessions": "Seans yok",
+  "session_full": "Seans dolu",
+  "session_ended": "Seans bitti"
+}

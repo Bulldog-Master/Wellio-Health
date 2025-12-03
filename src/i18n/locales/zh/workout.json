@@ -1,0 +1,18 @@
+{
+  "workout_details": "锻炼详情",
+  "workout_type": "锻炼类型",
+  "workout_name": "锻炼名称",
+  "workout_duration": "持续时间",
+  "workout_calories": "卡路里",
+  "workout_notes": "备注",
+  "start_workout": "开始锻炼",
+  "end_workout": "结束锻炼",
+  "pause_workout": "暂停锻炼",
+  "resume_workout": "继续锻炼",
+  "save_workout": "保存锻炼",
+  "delete_workout": "删除锻炼",
+  "workout_history": "锻炼历史",
+  "no_workouts": "尚无锻炼记录",
+  "workout_complete": "锻炼完成！",
+  "great_job": "干得好！"
+}

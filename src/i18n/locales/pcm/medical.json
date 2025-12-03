@@ -1,0 +1,14 @@
+{
+  "medical_history": "Medical History",
+  "medical_records": "Medical Records",
+  "add_record": "Add Record",
+  "medications": "Medications",
+  "allergies": "Allergies",
+  "conditions": "Health Conditions",
+  "vaccinations": "Vaccinations",
+  "lab_results": "Lab Results",
+  "doctor_visits": "Doctor Visits",
+  "emergency_contact": "Emergency Contact",
+  "blood_type": "Blood Type",
+  "no_records": "No record dey"
+}

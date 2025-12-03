@@ -1,0 +1,18 @@
+{
+  "workout_details": "Детали тренировки",
+  "workout_type": "Тип тренировки",
+  "workout_name": "Название тренировки",
+  "workout_duration": "Продолжительность",
+  "workout_calories": "Калории",
+  "workout_notes": "Заметки",
+  "start_workout": "Начать тренировку",
+  "end_workout": "Завершить тренировку",
+  "pause_workout": "Пауза",
+  "resume_workout": "Продолжить",
+  "save_workout": "Сохранить тренировку",
+  "delete_workout": "Удалить тренировку",
+  "workout_history": "История тренировок",
+  "no_workouts": "Нет тренировок",
+  "workout_complete": "Тренировка завершена!",
+  "great_job": "Отличная работа!"
+}

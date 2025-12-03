@@ -1,0 +1,12 @@
+{
+  "messages": "Mesajlar",
+  "new_message": "Yeni Mesaj",
+  "send_message": "Mesaj Gönder",
+  "type_message": "Mesajınızı yazın...",
+  "no_messages": "Mesaj yok",
+  "no_conversations": "Konuşma yok",
+  "search_messages": "Mesajlarda Ara",
+  "delete_message": "Mesajı Sil",
+  "message_sent": "Mesaj gönderildi",
+  "message_deleted": "Mesaj silindi"
+}

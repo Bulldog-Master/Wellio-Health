@@ -1,0 +1,14 @@
+{
+  "medical_history": "वैद्यकीय इतिहास",
+  "medical_records": "वैद्यकीय नोंदी",
+  "add_record": "नोंद जोडा",
+  "medications": "औषधे",
+  "allergies": "ॲलर्जी",
+  "conditions": "आरोग्य स्थिती",
+  "vaccinations": "लसीकरण",
+  "lab_results": "लॅब निकाल",
+  "doctor_visits": "डॉक्टर भेटी",
+  "emergency_contact": "आपत्कालीन संपर्क",
+  "blood_type": "रक्तगट",
+  "no_records": "नोंदी नाहीत"
+}

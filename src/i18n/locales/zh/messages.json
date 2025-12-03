@@ -1,0 +1,12 @@
+{
+  "messages": "消息",
+  "new_message": "新消息",
+  "send_message": "发送消息",
+  "type_message": "输入消息...",
+  "no_messages": "暂无消息",
+  "no_conversations": "暂无对话",
+  "search_messages": "搜索消息",
+  "delete_message": "删除消息",
+  "message_sent": "消息已发送",
+  "message_deleted": "消息已删除"
+}

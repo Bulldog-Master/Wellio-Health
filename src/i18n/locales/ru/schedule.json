@@ -1,0 +1,17 @@
+{
+  "schedule": "Расписание",
+  "workout_schedule": "Расписание тренировок",
+  "add_event": "Добавить событие",
+  "edit_event": "Редактировать событие",
+  "delete_event": "Удалить событие",
+  "event_title": "Название события",
+  "event_date": "Дата",
+  "event_time": "Время",
+  "event_type": "Тип события",
+  "recurring": "Повторяющееся",
+  "reminder": "Напоминание",
+  "no_events": "Нет событий",
+  "today": "Сегодня",
+  "this_week": "На этой неделе",
+  "this_month": "В этом месяце"
+}

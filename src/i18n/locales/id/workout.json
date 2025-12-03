@@ -1,0 +1,18 @@
+{
+  "workout_details": "Detail Latihan",
+  "workout_type": "Jenis Latihan",
+  "workout_name": "Nama Latihan",
+  "workout_duration": "Durasi",
+  "workout_calories": "Kalori",
+  "workout_notes": "Catatan",
+  "start_workout": "Mulai Latihan",
+  "end_workout": "Akhiri Latihan",
+  "pause_workout": "Jeda",
+  "resume_workout": "Lanjutkan",
+  "save_workout": "Simpan Latihan",
+  "delete_workout": "Hapus Latihan",
+  "workout_history": "Riwayat Latihan",
+  "no_workouts": "Tidak ada latihan",
+  "workout_complete": "Latihan Selesai!",
+  "great_job": "Kerja Bagus!"
+}

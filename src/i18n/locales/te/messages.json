@@ -1,0 +1,12 @@
+{
+  "messages": "సందేశాలు",
+  "new_message": "కొత్త సందేశం",
+  "send_message": "సందేశం పంపండి",
+  "type_message": "సందేశం టైప్ చేయండి...",
+  "no_messages": "సందేశాలు లేవు",
+  "no_conversations": "సంభాషణలు లేవు",
+  "search_messages": "సందేశాలు వెతకండి",
+  "delete_message": "సందేశం తొలగించండి",
+  "message_sent": "సందేశం పంపబడింది",
+  "message_deleted": "సందేశం తొలగించబడింది"
+}

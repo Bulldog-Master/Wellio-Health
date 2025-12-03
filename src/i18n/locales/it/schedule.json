@@ -1,0 +1,17 @@
+{
+  "schedule": "Programma",
+  "workout_schedule": "Programma Allenamenti",
+  "add_event": "Aggiungi Evento",
+  "edit_event": "Modifica Evento",
+  "delete_event": "Elimina Evento",
+  "event_title": "Titolo Evento",
+  "event_date": "Data",
+  "event_time": "Ora",
+  "event_type": "Tipo Evento",
+  "recurring": "Ricorrente",
+  "reminder": "Promemoria",
+  "no_events": "Nessun evento",
+  "today": "Oggi",
+  "this_week": "Questa Settimana",
+  "this_month": "Questo Mese"
+}

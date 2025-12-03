@@ -1,0 +1,18 @@
+{
+  "workout_details": "वर्कआउट विवरण",
+  "workout_type": "वर्कआउट प्रकार",
+  "workout_name": "वर्कआउट नाम",
+  "workout_duration": "अवधि",
+  "workout_calories": "कैलोरी",
+  "workout_notes": "नोट्स",
+  "start_workout": "वर्कआउट शुरू करें",
+  "end_workout": "वर्कआउट समाप्त करें",
+  "pause_workout": "रोकें",
+  "resume_workout": "जारी रखें",
+  "save_workout": "वर्कआउट सेव करें",
+  "delete_workout": "वर्कआउट हटाएं",
+  "workout_history": "वर्कआउट इतिहास",
+  "no_workouts": "कोई वर्कआउट नहीं",
+  "workout_complete": "वर्कआउट पूर्ण!",
+  "great_job": "शानदार काम!"
+}

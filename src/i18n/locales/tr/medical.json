@@ -1,0 +1,14 @@
+{
+  "medical_history": "Tıbbi Geçmiş",
+  "medical_records": "Tıbbi Kayıtlar",
+  "add_record": "Kayıt Ekle",
+  "medications": "İlaçlar",
+  "allergies": "Alerjiler",
+  "conditions": "Sağlık Durumları",
+  "vaccinations": "Aşılar",
+  "lab_results": "Laboratuvar Sonuçları",
+  "doctor_visits": "Doktor Ziyaretleri",
+  "emergency_contact": "Acil İletişim",
+  "blood_type": "Kan Grubu",
+  "no_records": "Kayıt yok"
+}

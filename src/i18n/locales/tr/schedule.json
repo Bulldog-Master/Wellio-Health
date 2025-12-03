@@ -1,0 +1,17 @@
+{
+  "schedule": "Program",
+  "workout_schedule": "Antrenman Programı",
+  "add_event": "Etkinlik Ekle",
+  "edit_event": "Etkinliği Düzenle",
+  "delete_event": "Etkinliği Sil",
+  "event_title": "Etkinlik Başlığı",
+  "event_date": "Tarih",
+  "event_time": "Saat",
+  "event_type": "Etkinlik Türü",
+  "recurring": "Tekrarlayan",
+  "reminder": "Hatırlatıcı",
+  "no_events": "Etkinlik yok",
+  "today": "Bugün",
+  "this_week": "Bu Hafta",
+  "this_month": "Bu Ay"
+}

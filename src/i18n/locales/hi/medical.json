@@ -1,0 +1,14 @@
+{
+  "medical_history": "चिकित्सा इतिहास",
+  "medical_records": "चिकित्सा रिकॉर्ड",
+  "add_record": "रिकॉर्ड जोड़ें",
+  "medications": "दवाइयां",
+  "allergies": "एलर्जी",
+  "conditions": "स्वास्थ्य स्थितियां",
+  "vaccinations": "टीकाकरण",
+  "lab_results": "लैब परिणाम",
+  "doctor_visits": "डॉक्टर के दौरे",
+  "emergency_contact": "आपातकालीन संपर्क",
+  "blood_type": "रक्त समूह",
+  "no_records": "कोई रिकॉर्ड नहीं"
+}

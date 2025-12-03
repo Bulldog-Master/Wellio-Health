@@ -1,0 +1,19 @@
+{
+  "live_sessions": "Прямые эфиры",
+  "live_workout": "Прямой эфир тренировки",
+  "join_session": "Присоединиться",
+  "create_session": "Создать сеанс",
+  "session_title": "Название сеанса",
+  "session_description": "Описание сеанса",
+  "session_date": "Дата",
+  "session_time": "Время",
+  "session_duration": "Продолжительность",
+  "max_participants": "Макс. участников",
+  "participants": "Участники",
+  "host": "Ведущий",
+  "upcoming_sessions": "Предстоящие сеансы",
+  "past_sessions": "Прошедшие сеансы",
+  "no_sessions": "Нет сеансов",
+  "session_full": "Сеанс заполнен",
+  "session_ended": "Сеанс завершён"
+}

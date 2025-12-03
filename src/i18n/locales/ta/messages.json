@@ -1,0 +1,12 @@
+{
+  "messages": "செய்திகள்",
+  "new_message": "புதிய செய்தி",
+  "send_message": "செய்தி அனுப்பு",
+  "type_message": "செய்தி தட்டச்சு செய்...",
+  "no_messages": "செய்திகள் இல்லை",
+  "no_conversations": "உரையாடல்கள் இல்லை",
+  "search_messages": "செய்திகளை தேடு",
+  "delete_message": "செய்தி நீக்கு",
+  "message_sent": "செய்தி அனுப்பப்பட்டது",
+  "message_deleted": "செய்தி நீக்கப்பட்டது"
+}

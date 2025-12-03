@@ -1,0 +1,14 @@
+{
+  "medical_history": "病史",
+  "medical_records": "医疗记录",
+  "add_record": "添加记录",
+  "medications": "药物",
+  "allergies": "过敏",
+  "conditions": "健康状况",
+  "vaccinations": "疫苗接种",
+  "lab_results": "化验结果",
+  "doctor_visits": "就诊记录",
+  "emergency_contact": "紧急联系人",
+  "blood_type": "血型",
+  "no_records": "暂无记录"
+}

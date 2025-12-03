@@ -1,0 +1,19 @@
+{
+  "live_sessions": "라이브 세션",
+  "live_workout": "라이브 운동",
+  "join_session": "세션 참가",
+  "create_session": "세션 만들기",
+  "session_title": "세션 제목",
+  "session_description": "세션 설명",
+  "session_date": "날짜",
+  "session_time": "시간",
+  "session_duration": "시간",
+  "max_participants": "최대 참가자",
+  "participants": "참가자",
+  "host": "호스트",
+  "upcoming_sessions": "예정된 세션",
+  "past_sessions": "지난 세션",
+  "no_sessions": "세션이 없습니다",
+  "session_full": "세션 마감",
+  "session_ended": "세션 종료"
+}

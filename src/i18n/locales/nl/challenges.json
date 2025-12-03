@@ -1,0 +1,16 @@
+{
+  "challenges": "Uitdagingen",
+  "active_challenges": "Actieve Uitdagingen",
+  "completed_challenges": "Voltooide Uitdagingen",
+  "join_challenge": "Deelnemen aan Uitdaging",
+  "leave_challenge": "Verlaat Uitdaging",
+  "create_challenge": "Maak Uitdaging",
+  "challenge_details": "Uitdaging Details",
+  "challenge_progress": "Voortgang",
+  "challenge_leaderboard": "Ranglijst",
+  "days_remaining": "Dagen Over",
+  "participants": "Deelnemers",
+  "your_rank": "Jouw Positie",
+  "challenge_complete": "Uitdaging Voltooid!",
+  "no_challenges": "Geen uitdagingen"
+}

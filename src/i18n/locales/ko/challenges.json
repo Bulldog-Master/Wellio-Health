@@ -1,0 +1,16 @@
+{
+  "challenges": "챌린지",
+  "active_challenges": "진행 중인 챌린지",
+  "completed_challenges": "완료된 챌린지",
+  "join_challenge": "챌린지 참가",
+  "leave_challenge": "챌린지 탈퇴",
+  "create_challenge": "챌린지 만들기",
+  "challenge_details": "챌린지 상세",
+  "challenge_progress": "진행률",
+  "challenge_leaderboard": "순위표",
+  "days_remaining": "남은 일수",
+  "participants": "참가자",
+  "your_rank": "내 순위",
+  "challenge_complete": "챌린지 완료!",
+  "no_challenges": "챌린지가 없습니다"
+}

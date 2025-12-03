@@ -1,0 +1,14 @@
+{
+  "medical_history": "病歴",
+  "medical_records": "医療記録",
+  "add_record": "記録を追加",
+  "medications": "薬",
+  "allergies": "アレルギー",
+  "conditions": "健康状態",
+  "vaccinations": "予防接種",
+  "lab_results": "検査結果",
+  "doctor_visits": "診察記録",
+  "emergency_contact": "緊急連絡先",
+  "blood_type": "血液型",
+  "no_records": "記録がありません"
+}

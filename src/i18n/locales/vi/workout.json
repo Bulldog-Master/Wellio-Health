@@ -1,0 +1,18 @@
+{
+  "workout_details": "Chi tiết bài tập",
+  "workout_type": "Loại bài tập",
+  "workout_name": "Tên bài tập",
+  "workout_duration": "Thời lượng",
+  "workout_calories": "Calo",
+  "workout_notes": "Ghi chú",
+  "start_workout": "Bắt đầu bài tập",
+  "end_workout": "Kết thúc bài tập",
+  "pause_workout": "Tạm dừng",
+  "resume_workout": "Tiếp tục",
+  "save_workout": "Lưu bài tập",
+  "delete_workout": "Xóa bài tập",
+  "workout_history": "Lịch sử bài tập",
+  "no_workouts": "Không có bài tập",
+  "workout_complete": "Hoàn thành bài tập!",
+  "great_job": "Tuyệt vời!"
+}

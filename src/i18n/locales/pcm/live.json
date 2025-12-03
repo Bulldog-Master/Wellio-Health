@@ -1,0 +1,19 @@
+{
+  "live_sessions": "Live Sessions",
+  "live_workout": "Live Workout",
+  "join_session": "Join Session",
+  "create_session": "Create Session",
+  "session_title": "Session Title",
+  "session_description": "Session Description",
+  "session_date": "Date",
+  "session_time": "Time",
+  "session_duration": "How Long",
+  "max_participants": "Max People",
+  "participants": "People Wey Dey",
+  "host": "Host",
+  "upcoming_sessions": "Sessions Wey Dey Come",
+  "past_sessions": "Sessions Wey Don Pass",
+  "no_sessions": "No session dey",
+  "session_full": "Session don full",
+  "session_ended": "Session don finish"
+}

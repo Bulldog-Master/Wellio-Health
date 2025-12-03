@@ -1,0 +1,18 @@
+{
+  "workout_details": "Workout Details",
+  "workout_type": "Workout Type",
+  "workout_name": "Workout Name",
+  "workout_duration": "How Long",
+  "workout_calories": "Calories",
+  "workout_notes": "Notes",
+  "start_workout": "Start Workout",
+  "end_workout": "Finish Workout",
+  "pause_workout": "Pause",
+  "resume_workout": "Continue",
+  "save_workout": "Save Workout",
+  "delete_workout": "Delete Workout",
+  "workout_history": "Workout History",
+  "no_workouts": "No workout dey",
+  "workout_complete": "Workout Don Complete!",
+  "great_job": "You do well!"
+}

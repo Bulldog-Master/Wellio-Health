@@ -1,0 +1,17 @@
+{
+  "schedule": "Schema",
+  "workout_schedule": "Trainingsschema",
+  "add_event": "Evenement Toevoegen",
+  "edit_event": "Evenement Bewerken",
+  "delete_event": "Evenement Verwijderen",
+  "event_title": "Evenement Titel",
+  "event_date": "Datum",
+  "event_time": "Tijd",
+  "event_type": "Type Evenement",
+  "recurring": "Herhalend",
+  "reminder": "Herinnering",
+  "no_events": "Geen evenementen",
+  "today": "Vandaag",
+  "this_week": "Deze Week",
+  "this_month": "Deze Maand"
+}

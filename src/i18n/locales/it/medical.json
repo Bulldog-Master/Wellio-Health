@@ -1,0 +1,14 @@
+{
+  "medical_history": "Storia Medica",
+  "medical_records": "Cartelle Mediche",
+  "add_record": "Aggiungi Record",
+  "medications": "Farmaci",
+  "allergies": "Allergie",
+  "conditions": "Condizioni",
+  "vaccinations": "Vaccinazioni",
+  "lab_results": "Risultati di Laboratorio",
+  "doctor_visits": "Visite Mediche",
+  "emergency_contact": "Contatto di Emergenza",
+  "blood_type": "Gruppo Sanguigno",
+  "no_records": "Nessun record"
+}

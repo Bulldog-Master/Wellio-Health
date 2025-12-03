@@ -1,0 +1,17 @@
+{
+  "schedule": "Schedule",
+  "workout_schedule": "Workout Schedule",
+  "add_event": "Add Event",
+  "edit_event": "Edit Event",
+  "delete_event": "Delete Event",
+  "event_title": "Event Title",
+  "event_date": "Date",
+  "event_time": "Time",
+  "event_type": "Event Type",
+  "recurring": "Repeat",
+  "reminder": "Reminder",
+  "no_events": "No event dey",
+  "today": "Today",
+  "this_week": "This Week",
+  "this_month": "This Month"
+}

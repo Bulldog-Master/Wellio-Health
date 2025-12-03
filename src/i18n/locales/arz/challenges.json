@@ -1,0 +1,16 @@
+{
+  "challenges": "التحديات",
+  "active_challenges": "التحديات النشطة",
+  "completed_challenges": "التحديات اللي خلصت",
+  "join_challenge": "انضم للتحدي",
+  "leave_challenge": "سيب التحدي",
+  "create_challenge": "اعمل تحدي",
+  "challenge_details": "تفاصيل التحدي",
+  "challenge_progress": "التقدم",
+  "challenge_leaderboard": "الترتيب",
+  "days_remaining": "الأيام الباقية",
+  "participants": "المشاركين",
+  "your_rank": "ترتيبك",
+  "challenge_complete": "التحدي خلص!",
+  "no_challenges": "مفيش تحديات"
+}

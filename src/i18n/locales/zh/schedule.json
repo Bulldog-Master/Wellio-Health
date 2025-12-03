@@ -1,0 +1,17 @@
+{
+  "schedule": "日程",
+  "workout_schedule": "锻炼日程",
+  "add_event": "添加事件",
+  "edit_event": "编辑事件",
+  "delete_event": "删除事件",
+  "event_title": "事件标题",
+  "event_date": "日期",
+  "event_time": "时间",
+  "event_type": "事件类型",
+  "recurring": "重复",
+  "reminder": "提醒",
+  "no_events": "暂无事件",
+  "today": "今天",
+  "this_week": "本周",
+  "this_month": "本月"
+}

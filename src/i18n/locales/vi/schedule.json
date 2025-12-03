@@ -1,0 +1,17 @@
+{
+  "schedule": "Lịch trình",
+  "workout_schedule": "Lịch tập luyện",
+  "add_event": "Thêm sự kiện",
+  "edit_event": "Sửa sự kiện",
+  "delete_event": "Xóa sự kiện",
+  "event_title": "Tiêu đề sự kiện",
+  "event_date": "Ngày",
+  "event_time": "Giờ",
+  "event_type": "Loại sự kiện",
+  "recurring": "Lặp lại",
+  "reminder": "Nhắc nhở",
+  "no_events": "Không có sự kiện",
+  "today": "Hôm nay",
+  "this_week": "Tuần này",
+  "this_month": "Tháng này"
+}
