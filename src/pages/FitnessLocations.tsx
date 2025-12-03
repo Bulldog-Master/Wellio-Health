@@ -398,10 +398,36 @@ const FitnessLocations = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error('Not authenticated');
 
+      // Geocode the address to get coordinates
+      let latitude: number | null = null;
+      let longitude: number | null = null;
+      
+      const addressQuery = [location.address, location.city, location.state, location.country]
+        .filter(Boolean)
+        .join(', ');
+      
+      if (addressQuery) {
+        try {
+          const { data: geoData } = await supabase.functions.invoke('geocode-location', {
+            body: { query: addressQuery }
+          });
+          
+          if (geoData?.results?.[0]) {
+            latitude = parseFloat(geoData.results[0].lat);
+            longitude = parseFloat(geoData.results[0].lon);
+          }
+        } catch (geoError) {
+          console.error('Geocoding failed:', geoError);
+          // Continue without coordinates
+        }
+      }
+
       const { data, error } = await supabase
         .from('fitness_locations')
         .insert([{
           ...location,
+          latitude,
+          longitude,
           submitted_by: user.id,
         }])
         .select()
