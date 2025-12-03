@@ -38,6 +38,8 @@
   "list_view": "List View",
   "location_submitted": "Location submitted for review",
   "location_deleted": "Location deleted successfully",
+  "location_updated": "Location updated successfully",
+  "edit_location": "Edit Location",
   "review_submitted": "Review submitted successfully",
   "enable_location": "Enable location access to find places near you",
   "no_autocomplete_results": "No matches found",
@@ -55,7 +57,8 @@
     "postal_code": "Postal Code",
     "phone": "Phone Number",
     "website": "Website URL",
-    "submit": "Submit Location"
+    "submit": "Submit Location",
+    "save_changes": "Save Changes"
   },
   "review_form": {
     "rating": "Your Rating",

@@ -21,7 +21,7 @@ import { useAdminStatus } from '@/hooks/useAdminStatus';
 import { 
   MapPin, Search, Plus, Star, ExternalLink, Phone, Navigation, 
   Dumbbell, Swords, Heart, Waves, Bike, Mountain, ArrowLeft,
-  List, Map, CheckCircle, Filter, Trash2
+  List, Map, CheckCircle, Filter, Trash2, Pencil
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -69,8 +69,22 @@ const FitnessLocations = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
   const [isSubmitDialogOpen, setIsSubmitDialogOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [editingLocation, setEditingLocation] = useState<FitnessLocation | null>(null);
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [formData, setFormData] = useState({
+    name: '',
+    category: 'gym',
+    description: '',
+    address: '',
+    city: '',
+    state: '',
+    country: '',
+    postal_code: '',
+    phone: '',
+    website_url: '',
+  });
+  const [editFormData, setEditFormData] = useState({
     name: '',
     category: 'gym',
     description: '',
@@ -179,6 +193,61 @@ const FitnessLocations = () => {
       toast.error(t('common:error'));
     },
   });
+
+  const updateLocation = useMutation({
+    mutationFn: async ({ id, data }: { id: string; data: typeof editFormData }) => {
+      const { error } = await supabase
+        .from('fitness_locations')
+        .update({
+          name: data.name,
+          category: data.category,
+          description: data.description || null,
+          address: data.address || null,
+          city: data.city,
+          state: data.state || null,
+          country: data.country,
+          postal_code: data.postal_code || null,
+          phone: data.phone || null,
+          website_url: data.website_url || null,
+        })
+        .eq('id', id);
+      
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['fitness-locations'] });
+      toast.success(t('locations:location_updated'));
+      setIsEditDialogOpen(false);
+      setEditingLocation(null);
+    },
+    onError: () => {
+      toast.error(t('common:error'));
+    },
+  });
+
+  const handleEdit = (location: FitnessLocation) => {
+    setEditingLocation(location);
+    setEditFormData({
+      name: location.name,
+      category: location.category,
+      description: location.description || '',
+      address: location.address || '',
+      city: location.city,
+      state: location.state || '',
+      country: location.country,
+      postal_code: location.postal_code || '',
+      phone: location.phone || '',
+      website_url: location.website_url || '',
+    });
+    setIsEditDialogOpen(true);
+  };
+
+  const handleEditSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (editingLocation) {
+      updateLocation.mutate({ id: editingLocation.id, data: editFormData });
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -516,31 +585,41 @@ const FitnessLocations = () => {
                           </Button>
                         )}
                         {isAdmin && (
-                          <AlertDialog>
-                            <AlertDialogTrigger asChild>
-                              <Button variant="destructive" size="sm">
-                                <Trash2 className="h-3 w-3 mr-1" />
-                                {t('common:delete')}
-                              </Button>
-                            </AlertDialogTrigger>
-                            <AlertDialogContent>
-                              <AlertDialogHeader>
-                                <AlertDialogTitle>{t('locations:delete_location')}</AlertDialogTitle>
-                                <AlertDialogDescription>
-                                  {t('locations:delete_location_confirm')}
-                                </AlertDialogDescription>
-                              </AlertDialogHeader>
-                              <AlertDialogFooter>
-                                <AlertDialogCancel>{t('common:cancel')}</AlertDialogCancel>
-                                <AlertDialogAction
-                                  onClick={() => deleteLocation.mutate(location.id)}
-                                  className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                                >
+                          <>
+                            <Button 
+                              variant="outline" 
+                              size="sm"
+                              onClick={() => handleEdit(location)}
+                            >
+                              <Pencil className="h-3 w-3 mr-1" />
+                              {t('common:edit')}
+                            </Button>
+                            <AlertDialog>
+                              <AlertDialogTrigger asChild>
+                                <Button variant="destructive" size="sm">
+                                  <Trash2 className="h-3 w-3 mr-1" />
                                   {t('common:delete')}
-                                </AlertDialogAction>
-                              </AlertDialogFooter>
-                            </AlertDialogContent>
-                          </AlertDialog>
+                                </Button>
+                              </AlertDialogTrigger>
+                              <AlertDialogContent>
+                                <AlertDialogHeader>
+                                  <AlertDialogTitle>{t('locations:delete_location')}</AlertDialogTitle>
+                                  <AlertDialogDescription>
+                                    {t('locations:delete_location_confirm')}
+                                  </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                  <AlertDialogCancel>{t('common:cancel')}</AlertDialogCancel>
+                                  <AlertDialogAction
+                                    onClick={() => deleteLocation.mutate(location.id)}
+                                    className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                                  >
+                                    {t('common:delete')}
+                                  </AlertDialogAction>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialog>
+                          </>
                         )}
                       </div>
                     </CardContent>
@@ -588,6 +667,110 @@ const FitnessLocations = () => {
             </Button>
           </CardContent>
         </Card>
+
+        {/* Edit Dialog */}
+        <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+          <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>{t('locations:edit_location')}</DialogTitle>
+            </DialogHeader>
+            <form onSubmit={handleEditSubmit} className="space-y-4">
+              <div>
+                <Label>{t('locations:form.name')}</Label>
+                <Input
+                  value={editFormData.name}
+                  onChange={(e) => setEditFormData({ ...editFormData, name: e.target.value })}
+                  required
+                />
+              </div>
+              <div>
+                <Label>{t('locations:form.category')}</Label>
+                <Select
+                  value={editFormData.category}
+                  onValueChange={(value) => setEditFormData({ ...editFormData, category: value })}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {categories.filter(c => c !== 'all').map((cat) => (
+                      <SelectItem key={cat} value={cat}>
+                        {t(`locations:categories.${cat}`)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label>{t('locations:form.description')}</Label>
+                <Textarea
+                  value={editFormData.description}
+                  onChange={(e) => setEditFormData({ ...editFormData, description: e.target.value })}
+                  rows={3}
+                />
+              </div>
+              <div>
+                <Label>{t('locations:form.address')}</Label>
+                <Input
+                  value={editFormData.address}
+                  onChange={(e) => setEditFormData({ ...editFormData, address: e.target.value })}
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label>{t('locations:form.city')}</Label>
+                  <Input
+                    value={editFormData.city}
+                    onChange={(e) => setEditFormData({ ...editFormData, city: e.target.value })}
+                    required
+                  />
+                </div>
+                <div>
+                  <Label>{t('locations:form.state')}</Label>
+                  <Input
+                    value={editFormData.state}
+                    onChange={(e) => setEditFormData({ ...editFormData, state: e.target.value })}
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label>{t('locations:form.country')}</Label>
+                  <Input
+                    value={editFormData.country}
+                    onChange={(e) => setEditFormData({ ...editFormData, country: e.target.value })}
+                    required
+                  />
+                </div>
+                <div>
+                  <Label>{t('locations:form.postal_code')}</Label>
+                  <Input
+                    value={editFormData.postal_code}
+                    onChange={(e) => setEditFormData({ ...editFormData, postal_code: e.target.value })}
+                  />
+                </div>
+              </div>
+              <div>
+                <Label>{t('locations:form.phone')}</Label>
+                <Input
+                  value={editFormData.phone}
+                  onChange={(e) => setEditFormData({ ...editFormData, phone: e.target.value })}
+                />
+              </div>
+              <div>
+                <Label>{t('locations:form.website')}</Label>
+                <Input
+                  value={editFormData.website_url}
+                  onChange={(e) => setEditFormData({ ...editFormData, website_url: e.target.value })}
+                  placeholder="https://..."
+                />
+              </div>
+              <Button type="submit" className="w-full" disabled={updateLocation.isPending}>
+                {t('locations:form.save_changes')}
+              </Button>
+            </form>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );

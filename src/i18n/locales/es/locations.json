@@ -38,6 +38,8 @@
   "list_view": "Vista de Lista",
   "location_submitted": "Ubicación enviada para revisión",
   "location_deleted": "Ubicación eliminada exitosamente",
+  "location_updated": "Ubicación actualizada exitosamente",
+  "edit_location": "Editar Ubicación",
   "review_submitted": "Reseña enviada exitosamente",
   "enable_location": "Habilita el acceso a ubicación para encontrar lugares cerca de ti",
   "no_autocomplete_results": "No se encontraron coincidencias",
@@ -55,7 +57,8 @@
     "postal_code": "Código Postal",
     "phone": "Número de Teléfono",
     "website": "URL del Sitio Web",
-    "submit": "Enviar Ubicación"
+    "submit": "Enviar Ubicación",
+    "save_changes": "Guardar Cambios"
   },
   "review_form": {
     "rating": "Tu Calificación",
