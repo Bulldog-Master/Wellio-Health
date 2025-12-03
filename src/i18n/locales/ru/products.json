@@ -1,0 +1,48 @@
+{
+  "title": "Рекомендуемые товары",
+  "subtitle": "Лично проверенные и одобренные товары, которым я доверяю",
+  "categories": {
+    "all": "Все товары",
+    "supplements": "Добавки",
+    "gear": "Снаряжение",
+    "apparel": "Одежда",
+    "equipment": "Оборудование",
+    "recovery": "Восстановление",
+    "nutrition": "Питание",
+    "accessories": "Аксессуары"
+  },
+  "bulldogz_approved": "Одобрено Bulldogz",
+  "visit_store": "Посетить магазин",
+  "no_products": "Товары пока недоступны",
+  "no_products_category": "В этой категории пока нет товаров",
+  "price_range": "Ценовой диапазон",
+  "why_i_recommend": "Почему я рекомендую",
+  "admin": {
+    "manage_products": "Управление товарами",
+    "add_product": "Добавить товар",
+    "edit_product": "Редактировать товар",
+    "delete_product": "Удалить товар",
+    "product_name": "Название товара",
+    "product_name_es": "Название товара (испанский)",
+    "description": "Описание",
+    "description_es": "Описание (испанский)",
+    "endorsement": "Личная рекомендация",
+    "endorsement_es": "Личная рекомендация (испанский)",
+    "category": "Категория",
+    "image_url": "URL изображения",
+    "purchase_url": "URL покупки",
+    "price_range": "Ценовой диапазон",
+    "display_order": "Порядок отображения",
+    "is_active": "Активен",
+    "is_approved": "Одобрено Bulldogz",
+    "product_added": "Товар успешно добавлен",
+    "product_updated": "Товар успешно обновлен",
+    "product_deleted": "Товар успешно удален",
+    "confirm_delete": "Вы уверены, что хотите удалить этот товар?"
+  },
+  "shopify": {
+    "store_title": "Магазин",
+    "browse_store": "Просмотреть магазин",
+    "coming_soon": "Полный магазин скоро"
+  }
+}

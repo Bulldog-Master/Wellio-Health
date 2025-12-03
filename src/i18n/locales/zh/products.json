@@ -1,0 +1,48 @@
+{
+  "title": "推荐产品",
+  "subtitle": "我亲自审核和信任的产品",
+  "categories": {
+    "all": "所有产品",
+    "supplements": "补充剂",
+    "gear": "装备",
+    "apparel": "服装",
+    "equipment": "设备",
+    "recovery": "恢复",
+    "nutrition": "营养",
+    "accessories": "配件"
+  },
+  "bulldogz_approved": "Bulldogz推荐",
+  "visit_store": "访问商店",
+  "no_products": "暂无产品",
+  "no_products_category": "此类别暂无产品",
+  "price_range": "价格范围",
+  "why_i_recommend": "为什么我推荐这个",
+  "admin": {
+    "manage_products": "管理产品",
+    "add_product": "添加产品",
+    "edit_product": "编辑产品",
+    "delete_product": "删除产品",
+    "product_name": "产品名称",
+    "product_name_es": "产品名称（西班牙语）",
+    "description": "描述",
+    "description_es": "描述（西班牙语）",
+    "endorsement": "个人推荐",
+    "endorsement_es": "个人推荐（西班牙语）",
+    "category": "类别",
+    "image_url": "图片URL",
+    "purchase_url": "购买URL",
+    "price_range": "价格范围",
+    "display_order": "显示顺序",
+    "is_active": "活跃",
+    "is_approved": "Bulldogz推荐",
+    "product_added": "产品添加成功",
+    "product_updated": "产品更新成功",
+    "product_deleted": "产品删除成功",
+    "confirm_delete": "确定要删除此产品吗？"
+  },
+  "shopify": {
+    "store_title": "商店",
+    "browse_store": "浏览商店",
+    "coming_soon": "完整商店即将推出"
+  }
+}

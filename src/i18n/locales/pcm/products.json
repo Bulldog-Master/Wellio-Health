@@ -1,0 +1,48 @@
+{
+  "title": "Products Wey I Recommend",
+  "subtitle": "Products wey I don check and trust myself",
+  "categories": {
+    "all": "All Products",
+    "supplements": "Supplements",
+    "gear": "Gear",
+    "apparel": "Cloth",
+    "equipment": "Equipment",
+    "recovery": "Recovery",
+    "nutrition": "Food & Nutrition",
+    "accessories": "Accessories"
+  },
+  "bulldogz_approved": "Bulldogz Approve Am",
+  "visit_store": "Visit Store",
+  "no_products": "No products dey yet",
+  "no_products_category": "No products dey for this category yet",
+  "price_range": "Price Range",
+  "why_i_recommend": "Why I Recommend Am",
+  "admin": {
+    "manage_products": "Manage Products",
+    "add_product": "Add Product",
+    "edit_product": "Edit Product",
+    "delete_product": "Delete Product",
+    "product_name": "Product Name",
+    "product_name_es": "Product Name (Spanish)",
+    "description": "Description",
+    "description_es": "Description (Spanish)",
+    "endorsement": "Personal Recommendation",
+    "endorsement_es": "Personal Recommendation (Spanish)",
+    "category": "Category",
+    "image_url": "Image URL",
+    "purchase_url": "Buy URL",
+    "price_range": "Price Range",
+    "display_order": "Display Order",
+    "is_active": "Active",
+    "is_approved": "Bulldogz Approve Am",
+    "product_added": "Product don add successfully",
+    "product_updated": "Product don update successfully",
+    "product_deleted": "Product don delete successfully",
+    "confirm_delete": "You sure say you wan delete this product?"
+  },
+  "shopify": {
+    "store_title": "Store",
+    "browse_store": "Browse Store",
+    "coming_soon": "Full store dey come soon"
+  }
+}

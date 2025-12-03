@@ -1,0 +1,48 @@
+{
+  "title": "প্রস্তাবিত পণ্য",
+  "subtitle": "ব্যক্তিগতভাবে যাচাইকৃত এবং বিশ্বস্ত পণ্য",
+  "categories": {
+    "all": "সব পণ্য",
+    "supplements": "সাপ্লিমেন্ট",
+    "gear": "গিয়ার",
+    "apparel": "পোশাক",
+    "equipment": "সরঞ্জাম",
+    "recovery": "পুনরুদ্ধার",
+    "nutrition": "পুষ্টি",
+    "accessories": "আনুষাঙ্গিক"
+  },
+  "bulldogz_approved": "Bulldogz অনুমোদিত",
+  "visit_store": "স্টোর দেখুন",
+  "no_products": "এখনো কোনো পণ্য নেই",
+  "no_products_category": "এই বিভাগে এখনো কোনো পণ্য নেই",
+  "price_range": "মূল্য সীমা",
+  "why_i_recommend": "কেন আমি সুপারিশ করি",
+  "admin": {
+    "manage_products": "পণ্য পরিচালনা",
+    "add_product": "পণ্য যোগ করুন",
+    "edit_product": "পণ্য সম্পাদনা",
+    "delete_product": "পণ্য মুছুন",
+    "product_name": "পণ্যের নাম",
+    "product_name_es": "পণ্যের নাম (স্প্যানিশ)",
+    "description": "বিবরণ",
+    "description_es": "বিবরণ (স্প্যানিশ)",
+    "endorsement": "ব্যক্তিগত সুপারিশ",
+    "endorsement_es": "ব্যক্তিগত সুপারিশ (স্প্যানিশ)",
+    "category": "বিভাগ",
+    "image_url": "ছবির URL",
+    "purchase_url": "ক্রয় URL",
+    "price_range": "মূল্য সীমা",
+    "display_order": "প্রদর্শন ক্রম",
+    "is_active": "সক্রিয়",
+    "is_approved": "Bulldogz অনুমোদিত",
+    "product_added": "পণ্য সফলভাবে যোগ হয়েছে",
+    "product_updated": "পণ্য সফলভাবে আপডেট হয়েছে",
+    "product_deleted": "পণ্য সফলভাবে মুছে ফেলা হয়েছে",
+    "confirm_delete": "আপনি কি এই পণ্যটি মুছতে চান?"
+  },
+  "shopify": {
+    "store_title": "স্টোর",
+    "browse_store": "স্টোর ব্রাউজ করুন",
+    "coming_soon": "সম্পূর্ণ স্টোর শীঘ্রই আসছে"
+  }
+}

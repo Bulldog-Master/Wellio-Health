@@ -1,0 +1,48 @@
+{
+  "title": "Sản Phẩm Được Đề Xuất",
+  "subtitle": "Sản phẩm được tôi cá nhân kiểm tra và tin tưởng",
+  "categories": {
+    "all": "Tất Cả Sản Phẩm",
+    "supplements": "Thực Phẩm Bổ Sung",
+    "gear": "Dụng Cụ",
+    "apparel": "Trang Phục",
+    "equipment": "Thiết Bị",
+    "recovery": "Phục Hồi",
+    "nutrition": "Dinh Dưỡng",
+    "accessories": "Phụ Kiện"
+  },
+  "bulldogz_approved": "Được Bulldogz Chấp Thuận",
+  "visit_store": "Ghé Thăm Cửa Hàng",
+  "no_products": "Chưa có sản phẩm nào",
+  "no_products_category": "Chưa có sản phẩm trong danh mục này",
+  "price_range": "Khoảng Giá",
+  "why_i_recommend": "Tại Sao Tôi Đề Xuất",
+  "admin": {
+    "manage_products": "Quản Lý Sản Phẩm",
+    "add_product": "Thêm Sản Phẩm",
+    "edit_product": "Sửa Sản Phẩm",
+    "delete_product": "Xóa Sản Phẩm",
+    "product_name": "Tên Sản Phẩm",
+    "product_name_es": "Tên Sản Phẩm (Tiếng Tây Ban Nha)",
+    "description": "Mô Tả",
+    "description_es": "Mô Tả (Tiếng Tây Ban Nha)",
+    "endorsement": "Đề Xuất Cá Nhân",
+    "endorsement_es": "Đề Xuất Cá Nhân (Tiếng Tây Ban Nha)",
+    "category": "Danh Mục",
+    "image_url": "URL Hình Ảnh",
+    "purchase_url": "URL Mua Hàng",
+    "price_range": "Khoảng Giá",
+    "display_order": "Thứ Tự Hiển Thị",
+    "is_active": "Hoạt Động",
+    "is_approved": "Được Bulldogz Chấp Thuận",
+    "product_added": "Sản phẩm đã được thêm thành công",
+    "product_updated": "Sản phẩm đã được cập nhật thành công",
+    "product_deleted": "Sản phẩm đã được xóa thành công",
+    "confirm_delete": "Bạn có chắc muốn xóa sản phẩm này?"
+  },
+  "shopify": {
+    "store_title": "Cửa Hàng",
+    "browse_store": "Duyệt Cửa Hàng",
+    "coming_soon": "Cửa hàng đầy đủ sắp ra mắt"
+  }
+}

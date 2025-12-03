@@ -1,0 +1,48 @@
+{
+  "title": "Önerilen Ürünler",
+  "subtitle": "Kişisel olarak inceleyip güvendiğim ürünler",
+  "categories": {
+    "all": "Tüm Ürünler",
+    "supplements": "Takviyeler",
+    "gear": "Ekipman",
+    "apparel": "Giyim",
+    "equipment": "Donanım",
+    "recovery": "Toparlanma",
+    "nutrition": "Beslenme",
+    "accessories": "Aksesuarlar"
+  },
+  "bulldogz_approved": "Bulldogz Onaylı",
+  "visit_store": "Mağazayı Ziyaret Et",
+  "no_products": "Henüz ürün yok",
+  "no_products_category": "Bu kategoride henüz ürün yok",
+  "price_range": "Fiyat Aralığı",
+  "why_i_recommend": "Neden Öneriyorum",
+  "admin": {
+    "manage_products": "Ürünleri Yönet",
+    "add_product": "Ürün Ekle",
+    "edit_product": "Ürünü Düzenle",
+    "delete_product": "Ürünü Sil",
+    "product_name": "Ürün Adı",
+    "product_name_es": "Ürün Adı (İspanyolca)",
+    "description": "Açıklama",
+    "description_es": "Açıklama (İspanyolca)",
+    "endorsement": "Kişisel Tavsiye",
+    "endorsement_es": "Kişisel Tavsiye (İspanyolca)",
+    "category": "Kategori",
+    "image_url": "Resim URL",
+    "purchase_url": "Satın Alma URL",
+    "price_range": "Fiyat Aralığı",
+    "display_order": "Görüntüleme Sırası",
+    "is_active": "Aktif",
+    "is_approved": "Bulldogz Onaylı",
+    "product_added": "Ürün başarıyla eklendi",
+    "product_updated": "Ürün başarıyla güncellendi",
+    "product_deleted": "Ürün başarıyla silindi",
+    "confirm_delete": "Bu ürünü silmek istediğinizden emin misiniz?"
+  },
+  "shopify": {
+    "store_title": "Mağaza",
+    "browse_store": "Mağazayı Gez",
+    "coming_soon": "Tam mağaza yakında"
+  }
+}

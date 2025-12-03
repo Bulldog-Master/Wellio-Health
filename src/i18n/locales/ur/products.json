@@ -1,0 +1,48 @@
+{
+  "title": "تجویز کردہ مصنوعات",
+  "subtitle": "ذاتی طور پر جانچی اور بھروسہ مند مصنوعات",
+  "categories": {
+    "all": "تمام مصنوعات",
+    "supplements": "سپلیمنٹس",
+    "gear": "گیئر",
+    "apparel": "لباس",
+    "equipment": "آلات",
+    "recovery": "بحالی",
+    "nutrition": "غذائیت",
+    "accessories": "لوازمات"
+  },
+  "bulldogz_approved": "Bulldogz منظور شدہ",
+  "visit_store": "اسٹور دیکھیں",
+  "no_products": "ابھی کوئی مصنوعات نہیں",
+  "no_products_category": "اس زمرے میں ابھی کوئی مصنوعات نہیں",
+  "price_range": "قیمت کی حد",
+  "why_i_recommend": "میں کیوں تجویز کرتا ہوں",
+  "admin": {
+    "manage_products": "مصنوعات کا انتظام",
+    "add_product": "مصنوعات شامل کریں",
+    "edit_product": "مصنوعات میں ترمیم",
+    "delete_product": "مصنوعات حذف کریں",
+    "product_name": "مصنوعات کا نام",
+    "product_name_es": "مصنوعات کا نام (ہسپانوی)",
+    "description": "تفصیل",
+    "description_es": "تفصیل (ہسپانوی)",
+    "endorsement": "ذاتی سفارش",
+    "endorsement_es": "ذاتی سفارش (ہسپانوی)",
+    "category": "زمرہ",
+    "image_url": "تصویر URL",
+    "purchase_url": "خریداری URL",
+    "price_range": "قیمت کی حد",
+    "display_order": "ڈسپلے ترتیب",
+    "is_active": "فعال",
+    "is_approved": "Bulldogz منظور شدہ",
+    "product_added": "مصنوعات کامیابی سے شامل",
+    "product_updated": "مصنوعات کامیابی سے اپ ڈیٹ",
+    "product_deleted": "مصنوعات کامیابی سے حذف",
+    "confirm_delete": "کیا آپ واقعی یہ مصنوعات حذف کرنا چاہتے ہیں؟"
+  },
+  "shopify": {
+    "store_title": "اسٹور",
+    "browse_store": "اسٹور براؤز کریں",
+    "coming_soon": "مکمل اسٹور جلد آ رہا ہے"
+  }
+}

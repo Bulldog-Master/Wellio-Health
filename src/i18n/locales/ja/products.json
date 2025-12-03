@@ -1,0 +1,48 @@
+{
+  "title": "おすすめ製品",
+  "subtitle": "私が信頼する厳選された製品",
+  "categories": {
+    "all": "すべての製品",
+    "supplements": "サプリメント",
+    "gear": "ギア",
+    "apparel": "アパレル",
+    "equipment": "機器",
+    "recovery": "リカバリー",
+    "nutrition": "栄養",
+    "accessories": "アクセサリー"
+  },
+  "bulldogz_approved": "Bulldogz承認",
+  "visit_store": "ストアを訪問",
+  "no_products": "まだ製品がありません",
+  "no_products_category": "このカテゴリにはまだ製品がありません",
+  "price_range": "価格帯",
+  "why_i_recommend": "おすすめの理由",
+  "admin": {
+    "manage_products": "製品管理",
+    "add_product": "製品を追加",
+    "edit_product": "製品を編集",
+    "delete_product": "製品を削除",
+    "product_name": "製品名",
+    "product_name_es": "製品名（スペイン語）",
+    "description": "説明",
+    "description_es": "説明（スペイン語）",
+    "endorsement": "個人的なおすすめ",
+    "endorsement_es": "個人的なおすすめ（スペイン語）",
+    "category": "カテゴリ",
+    "image_url": "画像URL",
+    "purchase_url": "購入URL",
+    "price_range": "価格帯",
+    "display_order": "表示順",
+    "is_active": "アクティブ",
+    "is_approved": "Bulldogz承認",
+    "product_added": "製品が正常に追加されました",
+    "product_updated": "製品が正常に更新されました",
+    "product_deleted": "製品が正常に削除されました",
+    "confirm_delete": "この製品を削除してもよろしいですか？"
+  },
+  "shopify": {
+    "store_title": "ショップ",
+    "browse_store": "ショップを見る",
+    "coming_soon": "フルショップ近日公開"
+  }
+}

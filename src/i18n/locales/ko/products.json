@@ -1,0 +1,48 @@
+{
+  "title": "추천 제품",
+  "subtitle": "제가 직접 검증하고 신뢰하는 제품",
+  "categories": {
+    "all": "모든 제품",
+    "supplements": "보충제",
+    "gear": "장비",
+    "apparel": "의류",
+    "equipment": "기구",
+    "recovery": "회복",
+    "nutrition": "영양",
+    "accessories": "액세서리"
+  },
+  "bulldogz_approved": "Bulldogz 승인",
+  "visit_store": "스토어 방문",
+  "no_products": "아직 제품이 없습니다",
+  "no_products_category": "이 카테고리에 아직 제품이 없습니다",
+  "price_range": "가격대",
+  "why_i_recommend": "추천 이유",
+  "admin": {
+    "manage_products": "제품 관리",
+    "add_product": "제품 추가",
+    "edit_product": "제품 편집",
+    "delete_product": "제품 삭제",
+    "product_name": "제품명",
+    "product_name_es": "제품명 (스페인어)",
+    "description": "설명",
+    "description_es": "설명 (스페인어)",
+    "endorsement": "개인 추천",
+    "endorsement_es": "개인 추천 (스페인어)",
+    "category": "카테고리",
+    "image_url": "이미지 URL",
+    "purchase_url": "구매 URL",
+    "price_range": "가격대",
+    "display_order": "표시 순서",
+    "is_active": "활성",
+    "is_approved": "Bulldogz 승인",
+    "product_added": "제품이 성공적으로 추가되었습니다",
+    "product_updated": "제품이 성공적으로 업데이트되었습니다",
+    "product_deleted": "제품이 성공적으로 삭제되었습니다",
+    "confirm_delete": "이 제품을 삭제하시겠습니까?"
+  },
+  "shopify": {
+    "store_title": "스토어",
+    "browse_store": "스토어 둘러보기",
+    "coming_soon": "전체 스토어 곧 오픈"
+  }
+}

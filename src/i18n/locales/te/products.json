@@ -1,0 +1,48 @@
+{
+  "title": "సిఫార్సు చేసిన ఉత్పత్తులు",
+  "subtitle": "నేను వ్యక్తిగతంగా తనిఖీ చేసి నమ్మే ఉత్పత్తులు",
+  "categories": {
+    "all": "అన్ని ఉత్పత్తులు",
+    "supplements": "సప్లిమెంట్లు",
+    "gear": "గేర్",
+    "apparel": "దుస్తులు",
+    "equipment": "పరికరాలు",
+    "recovery": "రికవరీ",
+    "nutrition": "పోషణ",
+    "accessories": "యాక్సెసరీలు"
+  },
+  "bulldogz_approved": "Bulldogz ఆమోదించబడింది",
+  "visit_store": "స్టోర్ సందర్శించండి",
+  "no_products": "ఇంకా ఉత్పత్తులు లేవు",
+  "no_products_category": "ఈ వర్గంలో ఇంకా ఉత్పత్తులు లేవు",
+  "price_range": "ధర పరిధి",
+  "why_i_recommend": "నేను ఎందుకు సిఫార్సు చేస్తాను",
+  "admin": {
+    "manage_products": "ఉత్పత్తులను నిర్వహించండి",
+    "add_product": "ఉత్పత్తి జోడించు",
+    "edit_product": "ఉత్పత్తి సవరించు",
+    "delete_product": "ఉత్పత్తి తొలగించు",
+    "product_name": "ఉత్పత్తి పేరు",
+    "product_name_es": "ఉత్పత్తి పేరు (స్పానిష్)",
+    "description": "వివరణ",
+    "description_es": "వివరణ (స్పానిష్)",
+    "endorsement": "వ్యక్తిగత సిఫార్సు",
+    "endorsement_es": "వ్యక్తిగత సిఫార్సు (స్పానిష్)",
+    "category": "వర్గం",
+    "image_url": "చిత్రం URL",
+    "purchase_url": "కొనుగోలు URL",
+    "price_range": "ధర పరిధి",
+    "display_order": "ప్రదర్శన క్రమం",
+    "is_active": "యాక్టివ్",
+    "is_approved": "Bulldogz ఆమోదించబడింది",
+    "product_added": "ఉత్పత్తి విజయవంతంగా జోడించబడింది",
+    "product_updated": "ఉత్పత్తి విజయవంతంగా నవీకరించబడింది",
+    "product_deleted": "ఉత్పత్తి విజయవంతంగా తొలగించబడింది",
+    "confirm_delete": "మీరు ఈ ఉత్పత్తిని తొలగించాలనుకుంటున్నారా?"
+  },
+  "shopify": {
+    "store_title": "స్టోర్",
+    "browse_store": "స్టోర్ బ్రౌజ్ చేయండి",
+    "coming_soon": "పూర్తి స్టోర్ త్వరలో"
+  }
+}

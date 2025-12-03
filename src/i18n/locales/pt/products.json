@@ -1,0 +1,48 @@
+{
+  "title": "Produtos Recomendados",
+  "subtitle": "Produtos pessoalmente verificados e aprovados em que confio",
+  "categories": {
+    "all": "Todos os Produtos",
+    "supplements": "Suplementos",
+    "gear": "Equipamento",
+    "apparel": "Vestuário",
+    "equipment": "Equipamentos",
+    "recovery": "Recuperação",
+    "nutrition": "Nutrição",
+    "accessories": "Acessórios"
+  },
+  "bulldogz_approved": "Aprovado por Bulldogz",
+  "visit_store": "Visitar Loja",
+  "no_products": "Ainda não há produtos disponíveis",
+  "no_products_category": "Ainda não há produtos nesta categoria",
+  "price_range": "Faixa de Preço",
+  "why_i_recommend": "Por que eu recomendo",
+  "admin": {
+    "manage_products": "Gerenciar Produtos",
+    "add_product": "Adicionar Produto",
+    "edit_product": "Editar Produto",
+    "delete_product": "Excluir Produto",
+    "product_name": "Nome do Produto",
+    "product_name_es": "Nome do Produto (Espanhol)",
+    "description": "Descrição",
+    "description_es": "Descrição (Espanhol)",
+    "endorsement": "Recomendação Pessoal",
+    "endorsement_es": "Recomendação Pessoal (Espanhol)",
+    "category": "Categoria",
+    "image_url": "URL da Imagem",
+    "purchase_url": "URL de Compra",
+    "price_range": "Faixa de Preço",
+    "display_order": "Ordem de Exibição",
+    "is_active": "Ativo",
+    "is_approved": "Aprovado por Bulldogz",
+    "product_added": "Produto adicionado com sucesso",
+    "product_updated": "Produto atualizado com sucesso",
+    "product_deleted": "Produto excluído com sucesso",
+    "confirm_delete": "Tem certeza de que deseja excluir este produto?"
+  },
+  "shopify": {
+    "store_title": "Loja",
+    "browse_store": "Explorar Loja",
+    "coming_soon": "Loja completa em breve"
+  }
+}

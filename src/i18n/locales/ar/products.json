@@ -1,0 +1,48 @@
+{
+  "title": "المنتجات الموصى بها",
+  "subtitle": "منتجات تم فحصها شخصياً وأثق بها",
+  "categories": {
+    "all": "جميع المنتجات",
+    "supplements": "المكملات",
+    "gear": "المعدات",
+    "apparel": "الملابس",
+    "equipment": "الأجهزة",
+    "recovery": "التعافي",
+    "nutrition": "التغذية",
+    "accessories": "الإكسسوارات"
+  },
+  "bulldogz_approved": "معتمد من Bulldogz",
+  "visit_store": "زيارة المتجر",
+  "no_products": "لا توجد منتجات حتى الآن",
+  "no_products_category": "لا توجد منتجات في هذه الفئة حتى الآن",
+  "price_range": "نطاق السعر",
+  "why_i_recommend": "لماذا أنصح بهذا",
+  "admin": {
+    "manage_products": "إدارة المنتجات",
+    "add_product": "إضافة منتج",
+    "edit_product": "تعديل المنتج",
+    "delete_product": "حذف المنتج",
+    "product_name": "اسم المنتج",
+    "product_name_es": "اسم المنتج (إسباني)",
+    "description": "الوصف",
+    "description_es": "الوصف (إسباني)",
+    "endorsement": "التوصية الشخصية",
+    "endorsement_es": "التوصية الشخصية (إسباني)",
+    "category": "الفئة",
+    "image_url": "رابط الصورة",
+    "purchase_url": "رابط الشراء",
+    "price_range": "نطاق السعر",
+    "display_order": "ترتيب العرض",
+    "is_active": "نشط",
+    "is_approved": "معتمد من Bulldogz",
+    "product_added": "تمت إضافة المنتج بنجاح",
+    "product_updated": "تم تحديث المنتج بنجاح",
+    "product_deleted": "تم حذف المنتج بنجاح",
+    "confirm_delete": "هل أنت متأكد من حذف هذا المنتج؟"
+  },
+  "shopify": {
+    "store_title": "المتجر",
+    "browse_store": "تصفح المتجر",
+    "coming_soon": "المتجر الكامل قريباً"
+  }
+}
