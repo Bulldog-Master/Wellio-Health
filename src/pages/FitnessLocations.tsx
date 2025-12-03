@@ -38,6 +38,121 @@ const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: numbe
   return R * c;
 };
 
+// Country to flag emoji mapping
+const getCountryFlag = (country: string): string => {
+  const countryFlags: Record<string, string> = {
+    'Canada': '🇨🇦',
+    'United States': '🇺🇸',
+    'USA': '🇺🇸',
+    'United Kingdom': '🇬🇧',
+    'UK': '🇬🇧',
+    'Australia': '🇦🇺',
+    'Germany': '🇩🇪',
+    'France': '🇫🇷',
+    'Spain': '🇪🇸',
+    'Italy': '🇮🇹',
+    'Japan': '🇯🇵',
+    'China': '🇨🇳',
+    'Brazil': '🇧🇷',
+    'Mexico': '🇲🇽',
+    'India': '🇮🇳',
+    'Netherlands': '🇳🇱',
+    'Sweden': '🇸🇪',
+    'Norway': '🇳🇴',
+    'Denmark': '🇩🇰',
+    'Finland': '🇫🇮',
+    'Switzerland': '🇨🇭',
+    'Austria': '🇦🇹',
+    'Belgium': '🇧🇪',
+    'Portugal': '🇵🇹',
+    'Ireland': '🇮🇪',
+    'New Zealand': '🇳🇿',
+    'South Korea': '🇰🇷',
+    'Singapore': '🇸🇬',
+    'South Africa': '🇿🇦',
+    'Argentina': '🇦🇷',
+    'Chile': '🇨🇱',
+    'Colombia': '🇨🇴',
+    'Poland': '🇵🇱',
+    'Russia': '🇷🇺',
+    'Thailand': '🇹🇭',
+    'Indonesia': '🇮🇩',
+    'Philippines': '🇵🇭',
+    'Malaysia': '🇲🇾',
+    'Vietnam': '🇻🇳',
+    'UAE': '🇦🇪',
+    'United Arab Emirates': '🇦🇪',
+    'Saudi Arabia': '🇸🇦',
+    'Israel': '🇮🇱',
+    'Turkey': '🇹🇷',
+    'Greece': '🇬🇷',
+    'Czech Republic': '🇨🇿',
+    'Hungary': '🇭🇺',
+    'Romania': '🇷🇴',
+    'Ukraine': '🇺🇦',
+    'Egypt': '🇪🇬',
+    'Nigeria': '🇳🇬',
+    'Kenya': '🇰🇪',
+    'Morocco': '🇲🇦',
+    'Peru': '🇵🇪',
+    'Venezuela': '🇻🇪',
+    'Ecuador': '🇪🇨',
+    'Costa Rica': '🇨🇷',
+    'Panama': '🇵🇦',
+    'Puerto Rico': '🇵🇷',
+    'Iceland': '🇮🇸',
+    'Luxembourg': '🇱🇺',
+    'Croatia': '🇭🇷',
+    'Serbia': '🇷🇸',
+    'Bulgaria': '🇧🇬',
+    'Slovakia': '🇸🇰',
+    'Slovenia': '🇸🇮',
+    'Estonia': '🇪🇪',
+    'Latvia': '🇱🇻',
+    'Lithuania': '🇱🇹',
+    'Taiwan': '🇹🇼',
+    'Hong Kong': '🇭🇰',
+    'Pakistan': '🇵🇰',
+    'Bangladesh': '🇧🇩',
+    'Sri Lanka': '🇱🇰',
+    'Nepal': '🇳🇵',
+    'Qatar': '🇶🇦',
+    'Kuwait': '🇰🇼',
+    'Bahrain': '🇧🇭',
+    'Oman': '🇴🇲',
+    'Jordan': '🇯🇴',
+    'Lebanon': '🇱🇧',
+  };
+  
+  // Try exact match first
+  if (countryFlags[country]) {
+    return countryFlags[country];
+  }
+  
+  // Try case-insensitive match
+  const lowerCountry = country.toLowerCase();
+  for (const [key, flag] of Object.entries(countryFlags)) {
+    if (key.toLowerCase() === lowerCountry) {
+      return flag;
+    }
+  }
+  
+  // Default globe icon for unknown countries
+  return '🌍';
+};
+
+// Group locations by country
+const groupLocationsByCountry = (locations: FitnessLocation[]): Record<string, FitnessLocation[]> => {
+  return locations.reduce((acc, location) => {
+    const country = location.country || 'Unknown';
+    if (!acc[country]) {
+      acc[country] = [];
+    }
+    acc[country].push(location);
+    return acc;
+  }, {} as Record<string, FitnessLocation[]>);
+};
+
 interface FitnessLocation {
   id: string;
   name: string;
@@ -660,150 +775,261 @@ const FitnessLocations = () => {
           </div>
         ) : locations && locations.length > 0 ? (
           viewMode === 'list' ? (
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {locations.map((location) => {
-                const CategoryIcon = categoryIcons[location.category] || MapPin;
-                return (
-                  <Card key={location.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                    {location.image_url && (
-                      <div className="h-32 overflow-hidden">
-                        <img
-                          src={location.image_url}
-                          alt={location.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    )}
-                    <CardHeader className="pb-2">
-                      <div className="flex items-start justify-between">
-                        <div className="flex items-center gap-2">
-                          <CategoryIcon className="h-5 w-5 text-primary" />
-                          <CardTitle className="text-lg">{location.name}</CardTitle>
-                        </div>
-                        {location.is_verified && (
-                          <Badge variant="secondary" className="text-xs">
-                            <CheckCircle className="h-3 w-3 mr-1" />
-                            {t('locations:verified')}
-                          </Badge>
-                        )}
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <MapPin className="h-3 w-3" />
-                          {location.city}, {location.country}
-                        </div>
-                        {nearMeMode && (location as any).distance !== undefined && (
-                          <Badge variant="outline" className="text-xs bg-primary/10">
-                            <Locate className="h-3 w-3 mr-1" />
-                            {t('locations:miles_away', { distance: ((location as any).distance as number).toFixed(1) })}
-                          </Badge>
-                        )}
-                      </div>
-                    </CardHeader>
-                    <CardContent className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <Badge variant="outline">
-                          {t(`locations:categories.${location.category}`)}
+            <div className="space-y-8">
+              {/* Group by country when not in nearMe mode */}
+              {!nearMeMode ? (
+                Object.entries(groupLocationsByCountry(locations))
+                  .sort(([a], [b]) => a.localeCompare(b))
+                  .map(([country, countryLocations]) => (
+                    <div key={country} className="space-y-4">
+                      <div className="flex items-center gap-3 border-b border-border pb-2">
+                        <span className="text-2xl">{getCountryFlag(country)}</span>
+                        <h2 className="text-xl font-semibold">{country}</h2>
+                        <Badge variant="secondary" className="ml-auto">
+                          {countryLocations.length} {countryLocations.length === 1 ? t('locations:location') : t('locations:locations_count')}
                         </Badge>
-                        {location.price_range && (
-                          <span className="text-sm text-muted-foreground">
-                            {location.price_range}
-                          </span>
-                        )}
                       </div>
-                      
-                      {location.total_reviews > 0 && (
-                        <div className="flex items-center gap-2">
-                          {renderStars(location.average_rating)}
-                          <span className="text-sm text-muted-foreground">
-                            ({location.total_reviews} {t('locations:reviews')})
-                          </span>
-                        </div>
-                      )}
+                      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                        {countryLocations.map((location) => {
+                          const CategoryIcon = categoryIcons[location.category] || MapPin;
+                          return (
+                            <Card key={location.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                              {location.image_url && (
+                                <div className="h-32 overflow-hidden">
+                                  <img
+                                    src={location.image_url}
+                                    alt={location.name}
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                              )}
+                              <CardHeader className="pb-2">
+                                <div className="flex items-start justify-between">
+                                  <div className="flex items-center gap-2">
+                                    <CategoryIcon className="h-5 w-5 text-primary" />
+                                    <CardTitle className="text-lg">{location.name}</CardTitle>
+                                  </div>
+                                  {location.is_verified && (
+                                    <Badge variant="secondary" className="text-xs">
+                                      <CheckCircle className="h-3 w-3 mr-1" />
+                                      {t('locations:verified')}
+                                    </Badge>
+                                  )}
+                                </div>
+                                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                  <MapPin className="h-3 w-3" />
+                                  {location.city}{location.state ? `, ${location.state}` : ''}
+                                </div>
+                              </CardHeader>
+                              <CardContent className="space-y-3">
+                                <div className="flex items-center justify-between">
+                                  <Badge variant="outline">
+                                    {t(`locations:categories.${location.category}`)}
+                                  </Badge>
+                                  {location.price_range && (
+                                    <span className="text-sm text-muted-foreground">
+                                      {location.price_range}
+                                    </span>
+                                  )}
+                                </div>
+                                
+                                {location.total_reviews > 0 && (
+                                  <div className="flex items-center gap-2">
+                                    {renderStars(location.average_rating)}
+                                    <span className="text-sm text-muted-foreground">
+                                      ({location.total_reviews} {t('locations:reviews')})
+                                    </span>
+                                  </div>
+                                )}
 
-                      {location.description && (
-                        <p className="text-sm text-muted-foreground line-clamp-2">
-                          {location.description}
-                        </p>
-                      )}
+                                {location.description && (
+                                  <p className="text-sm text-muted-foreground line-clamp-2">
+                                    {location.description}
+                                  </p>
+                                )}
 
-                      <div className="flex flex-wrap gap-2 pt-2">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          asChild
-                        >
-                          <a
-                            href={getDirectionsUrl(location)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <Navigation className="h-3 w-3 mr-1" />
-                            {t('locations:get_directions')}
-                          </a>
-                        </Button>
-                        {location.phone && (
-                          <Button variant="outline" size="sm" asChild>
-                            <a href={`tel:${location.phone}`}>
-                              <Phone className="h-3 w-3 mr-1" />
-                              {t('locations:call')}
-                            </a>
-                          </Button>
+                                <div className="flex flex-wrap gap-2 pt-2">
+                                  <Button variant="outline" size="sm" asChild>
+                                    <a href={getDirectionsUrl(location)} target="_blank" rel="noopener noreferrer">
+                                      <Navigation className="h-3 w-3 mr-1" />
+                                      {t('locations:get_directions')}
+                                    </a>
+                                  </Button>
+                                  {location.phone && (
+                                    <Button variant="outline" size="sm" asChild>
+                                      <a href={`tel:${location.phone}`}>
+                                        <Phone className="h-3 w-3 mr-1" />
+                                        {t('locations:call')}
+                                      </a>
+                                    </Button>
+                                  )}
+                                  {location.website_url && (
+                                    <Button variant="outline" size="sm" asChild>
+                                      <a href={location.website_url} target="_blank" rel="noopener noreferrer">
+                                        <ExternalLink className="h-3 w-3 mr-1" />
+                                        {t('locations:visit_website')}
+                                      </a>
+                                    </Button>
+                                  )}
+                                  {isAdmin && (
+                                    <>
+                                      <Button variant="outline" size="sm" onClick={() => handleEdit(location)}>
+                                        <Pencil className="h-3 w-3 mr-1" />
+                                        {t('common:edit')}
+                                      </Button>
+                                      <AlertDialog>
+                                        <AlertDialogTrigger asChild>
+                                          <Button variant="destructive" size="sm">
+                                            <Trash2 className="h-3 w-3 mr-1" />
+                                            {t('common:delete')}
+                                          </Button>
+                                        </AlertDialogTrigger>
+                                        <AlertDialogContent>
+                                          <AlertDialogHeader>
+                                            <AlertDialogTitle>{t('locations:delete_location')}</AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                              {t('locations:delete_location_confirm')}
+                                            </AlertDialogDescription>
+                                          </AlertDialogHeader>
+                                          <AlertDialogFooter>
+                                            <AlertDialogCancel>{t('common:cancel')}</AlertDialogCancel>
+                                            <AlertDialogAction
+                                              onClick={() => deleteLocation.mutate(location.id)}
+                                              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                                            >
+                                              {t('common:delete')}
+                                            </AlertDialogAction>
+                                          </AlertDialogFooter>
+                                        </AlertDialogContent>
+                                      </AlertDialog>
+                                    </>
+                                  )}
+                                </div>
+                              </CardContent>
+                            </Card>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))
+              ) : (
+                // Near me mode - flat list sorted by distance
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {locations.map((location) => {
+                    const CategoryIcon = categoryIcons[location.category] || MapPin;
+                    return (
+                      <Card key={location.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                        {location.image_url && (
+                          <div className="h-32 overflow-hidden">
+                            <img src={location.image_url} alt={location.name} className="w-full h-full object-cover" />
+                          </div>
                         )}
-                        {location.website_url && (
-                          <Button variant="outline" size="sm" asChild>
-                            <a
-                              href={location.website_url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              <ExternalLink className="h-3 w-3 mr-1" />
-                              {t('locations:visit_website')}
-                            </a>
-                          </Button>
-                        )}
-                        {isAdmin && (
-                          <>
-                            <Button 
-                              variant="outline" 
-                              size="sm"
-                              onClick={() => handleEdit(location)}
-                            >
-                              <Pencil className="h-3 w-3 mr-1" />
-                              {t('common:edit')}
+                        <CardHeader className="pb-2">
+                          <div className="flex items-start justify-between">
+                            <div className="flex items-center gap-2">
+                              <CategoryIcon className="h-5 w-5 text-primary" />
+                              <CardTitle className="text-lg">{location.name}</CardTitle>
+                            </div>
+                            {location.is_verified && (
+                              <Badge variant="secondary" className="text-xs">
+                                <CheckCircle className="h-3 w-3 mr-1" />
+                                {t('locations:verified')}
+                              </Badge>
+                            )}
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <span className="text-base mr-1">{getCountryFlag(location.country)}</span>
+                              <MapPin className="h-3 w-3" />
+                              {location.city}, {location.country}
+                            </div>
+                            {(location as any).distance !== undefined && (
+                              <Badge variant="outline" className="text-xs bg-primary/10">
+                                <Locate className="h-3 w-3 mr-1" />
+                                {t('locations:miles_away', { distance: ((location as any).distance as number).toFixed(1) })}
+                              </Badge>
+                            )}
+                          </div>
+                        </CardHeader>
+                        <CardContent className="space-y-3">
+                          <div className="flex items-center justify-between">
+                            <Badge variant="outline">{t(`locations:categories.${location.category}`)}</Badge>
+                            {location.price_range && (
+                              <span className="text-sm text-muted-foreground">{location.price_range}</span>
+                            )}
+                          </div>
+                          {location.total_reviews > 0 && (
+                            <div className="flex items-center gap-2">
+                              {renderStars(location.average_rating)}
+                              <span className="text-sm text-muted-foreground">
+                                ({location.total_reviews} {t('locations:reviews')})
+                              </span>
+                            </div>
+                          )}
+                          {location.description && (
+                            <p className="text-sm text-muted-foreground line-clamp-2">{location.description}</p>
+                          )}
+                          <div className="flex flex-wrap gap-2 pt-2">
+                            <Button variant="outline" size="sm" asChild>
+                              <a href={getDirectionsUrl(location)} target="_blank" rel="noopener noreferrer">
+                                <Navigation className="h-3 w-3 mr-1" />
+                                {t('locations:get_directions')}
+                              </a>
                             </Button>
-                            <AlertDialog>
-                              <AlertDialogTrigger asChild>
-                                <Button variant="destructive" size="sm">
-                                  <Trash2 className="h-3 w-3 mr-1" />
-                                  {t('common:delete')}
+                            {location.phone && (
+                              <Button variant="outline" size="sm" asChild>
+                                <a href={`tel:${location.phone}`}>
+                                  <Phone className="h-3 w-3 mr-1" />
+                                  {t('locations:call')}
+                                </a>
+                              </Button>
+                            )}
+                            {location.website_url && (
+                              <Button variant="outline" size="sm" asChild>
+                                <a href={location.website_url} target="_blank" rel="noopener noreferrer">
+                                  <ExternalLink className="h-3 w-3 mr-1" />
+                                  {t('locations:visit_website')}
+                                </a>
+                              </Button>
+                            )}
+                            {isAdmin && (
+                              <>
+                                <Button variant="outline" size="sm" onClick={() => handleEdit(location)}>
+                                  <Pencil className="h-3 w-3 mr-1" />
+                                  {t('common:edit')}
                                 </Button>
-                              </AlertDialogTrigger>
-                              <AlertDialogContent>
-                                <AlertDialogHeader>
-                                  <AlertDialogTitle>{t('locations:delete_location')}</AlertDialogTitle>
-                                  <AlertDialogDescription>
-                                    {t('locations:delete_location_confirm')}
-                                  </AlertDialogDescription>
-                                </AlertDialogHeader>
-                                <AlertDialogFooter>
-                                  <AlertDialogCancel>{t('common:cancel')}</AlertDialogCancel>
-                                  <AlertDialogAction
-                                    onClick={() => deleteLocation.mutate(location.id)}
-                                    className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                                  >
-                                    {t('common:delete')}
-                                  </AlertDialogAction>
-                                </AlertDialogFooter>
-                              </AlertDialogContent>
-                            </AlertDialog>
-                          </>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+                                <AlertDialog>
+                                  <AlertDialogTrigger asChild>
+                                    <Button variant="destructive" size="sm">
+                                      <Trash2 className="h-3 w-3 mr-1" />
+                                      {t('common:delete')}
+                                    </Button>
+                                  </AlertDialogTrigger>
+                                  <AlertDialogContent>
+                                    <AlertDialogHeader>
+                                      <AlertDialogTitle>{t('locations:delete_location')}</AlertDialogTitle>
+                                      <AlertDialogDescription>{t('locations:delete_location_confirm')}</AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <AlertDialogFooter>
+                                      <AlertDialogCancel>{t('common:cancel')}</AlertDialogCancel>
+                                      <AlertDialogAction
+                                        onClick={() => deleteLocation.mutate(location.id)}
+                                        className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                                      >
+                                        {t('common:delete')}
+                                      </AlertDialogAction>
+                                    </AlertDialogFooter>
+                                  </AlertDialogContent>
+                                </AlertDialog>
+                              </>
+                            )}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           ) : (
             <Card className="h-96 flex items-center justify-center">
