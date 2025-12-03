@@ -50,3 +50,15 @@ verify_jwt = true
 
 [functions.discover-gyms]
 verify_jwt = true
+
+[functions.fitbit-sync]
+verify_jwt = true
+
+[functions.garmin-sync]
+verify_jwt = true
+
+[functions.whoop-sync]
+verify_jwt = true
+
+[functions.oura-sync]
+verify_jwt = true
