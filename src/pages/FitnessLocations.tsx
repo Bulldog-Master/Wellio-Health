@@ -246,10 +246,14 @@ const FitnessLocations = () => {
     website_url: '',
   });
 
-  // Find Near Me handler - tries GPS first, fallback to manual entry
-  const handleFindNearMe = () => {
+  // Use GPS location handler
+  const handleUseGpsLocation = (fromDialog = false) => {
     if (!('geolocation' in navigator)) {
-      setIsLocationDialogOpen(true);
+      if (fromDialog) {
+        toast.error(t('locations:location_not_supported'));
+      } else {
+        setIsLocationDialogOpen(true);
+      }
       return;
     }
     
@@ -264,8 +268,9 @@ const FitnessLocations = () => {
         };
         setUserLocation(coords);
         setNearMeMode(true);
-        setDiscoverMode(true); // Also enable discover to search for new facilities
+        setDiscoverMode(true);
         setSearchQuery('');
+        if (fromDialog) setIsLocationDialogOpen(false);
         
         // Reverse geocode to get location name
         try {
@@ -290,11 +295,18 @@ const FitnessLocations = () => {
       },
       (error) => {
         setLocationLoading(false);
-        setIsLocationDialogOpen(true);
+        if (!fromDialog) {
+          setIsLocationDialogOpen(true);
+        } else {
+          toast.error(t('locations:location_denied'));
+        }
       },
       { enableHighAccuracy: true, timeout: 10000 }
     );
   };
+
+  // Alias for backward compatibility
+  const handleFindNearMe = () => handleUseGpsLocation(false);
 
   // Search for location by name and set coordinates
   const handleLocationSearch = async () => {
@@ -1472,6 +1484,31 @@ const FitnessLocations = () => {
               <p className="text-sm text-muted-foreground">
                 {t('locations:enter_location_desc')}
               </p>
+              
+              {/* Use My Location Button */}
+              <Button 
+                onClick={() => handleUseGpsLocation(true)} 
+                variant="outline"
+                className="w-full"
+                disabled={locationLoading}
+              >
+                {locationLoading ? (
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                ) : (
+                  <Locate className="h-4 w-4 mr-2" />
+                )}
+                {t('locations:use_my_location')}
+              </Button>
+              
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-background px-2 text-muted-foreground">{t('common:or')}</span>
+                </div>
+              </div>
+              
               <div>
                 <Label>{t('locations:city_or_address')}</Label>
                 <Input
