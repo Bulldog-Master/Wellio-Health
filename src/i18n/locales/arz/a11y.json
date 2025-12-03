@@ -1,0 +1,32 @@
+{
+  "navigation": {
+    "main_menu": "القائمة الرئيسية",
+    "skip_to_content": "روح للمحتوى",
+    "go_back": "ارجع للصفحة السابقة",
+    "go_home": "روح للرئيسية",
+    "open_menu": "افتح القائمة",
+    "close_menu": "قفّل القائمة"
+  },
+  "actions": {
+    "submit_form": "ابعت النموذج",
+    "cancel_action": "الغي",
+    "save_changes": "احفظ التغييرات",
+    "delete_item": "امسح العنصر",
+    "edit_item": "عدّل العنصر",
+    "close_dialog": "قفّل الديالوج"
+  },
+  "status": {
+    "loading": "بيحمّل المحتوى",
+    "error_occurred": "حصل غلط",
+    "success_message": "تم بنجاح"
+  },
+  "theme": {
+    "toggle_theme": "غيّر الوضع الغامق/الفاتح",
+    "dark_mode": "حوّل للوضع الغامق",
+    "light_mode": "حوّل للوضع الفاتح"
+  },
+  "language": {
+    "change_language": "غيّر اللغة",
+    "current_language": "اللغة الحالية: {{language}}"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "navigation": {
+    "main_menu": "مرکزی نیویگیشن مینو",
+    "skip_to_content": "مرکزی مواد پر جائیں",
+    "go_back": "پچھلے صفحے پر جائیں",
+    "go_home": "ہوم پر جائیں",
+    "open_menu": "مینو کھولیں",
+    "close_menu": "مینو بند کریں"
+  },
+  "actions": {
+    "submit_form": "فارم جمع کرائیں",
+    "cancel_action": "عمل منسوخ کریں",
+    "save_changes": "تبدیلیاں محفوظ کریں",
+    "delete_item": "آئٹم حذف کریں",
+    "edit_item": "آئٹم میں ترمیم کریں",
+    "close_dialog": "ڈائیلاگ بند کریں"
+  },
+  "status": {
+    "loading": "مواد لوڈ ہو رہا ہے",
+    "error_occurred": "ایک خرابی پیش آئی",
+    "success_message": "عمل کامیابی سے مکمل ہوا"
+  },
+  "theme": {
+    "toggle_theme": "ڈارک/لائٹ موڈ ٹوگل کریں",
+    "dark_mode": "ڈارک موڈ پر سوئچ کریں",
+    "light_mode": "لائٹ موڈ پر سوئچ کریں"
+  },
+  "language": {
+    "change_language": "زبان تبدیل کریں",
+    "current_language": "موجودہ زبان: {{language}}"
+  }
+}
