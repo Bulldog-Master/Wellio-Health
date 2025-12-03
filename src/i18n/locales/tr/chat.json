@@ -1,0 +1,21 @@
+{
+  "fitness_assistant": "Fitness Asistanı",
+  "fitness_assistant_desc": "Yapay zeka destekli fitness koçunuz",
+  "ask_anything": "Fitness, beslenme veya antrenmanlar hakkında her şeyi sorun...",
+  "type_message": "Mesajınızı yazın...",
+  "send": "Gönder",
+  "thinking": "Düşünüyor...",
+  "welcome_message": "Merhaba! Ben yapay zeka fitness asistanınızım. Antrenmanlar, beslenme, form ipuçları veya fitness hedefleri hakkında her şeyi sorun!",
+  "example_questions": "Örnek Sorular",
+  "example_1": "Yeni başlayanlar için iyi bir egzersiz rutini nedir?",
+  "example_2": "Günde ne kadar protein yemeliyim?",
+  "example_3": "Hangi egzersizler core çalıştırır?",
+  "example_4": "Koşu dayanıklılığımı nasıl artırabilirim?",
+  "clear_chat": "Sohbeti Temizle",
+  "chat_cleared": "Sohbet temizlendi",
+  "error_sending": "Mesaj gönderilemedi",
+  "premium_chat": "Premium Yapay Zeka Sohbeti",
+  "unlock_ai_chat": "Yapay zeka asistanımızdan kişiselleştirilmiş fitness tavsiyeleri alın",
+  "ai_assistant": "Yapay Zeka Asistanı",
+  "you": "Siz"
+}

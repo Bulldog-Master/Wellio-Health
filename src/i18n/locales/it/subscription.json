@@ -1,0 +1,23 @@
+{
+  "current_plan": "Piano Attuale",
+  "free_plan": "Piano Gratuito",
+  "pro_plan": "Piano Pro",
+  "enterprise_plan": "Piano Enterprise",
+  "features_included": "Funzionalità Incluse",
+  "basic_tracking": "Tracciamento fitness base",
+  "limited_workouts": "Allenamenti limitati",
+  "community_access": "Accesso community",
+  "unlimited_workouts": "Allenamenti illimitati",
+  "ai_insights": "Insight AI",
+  "advanced_analytics": "Analisi Avanzate",
+  "priority_support": "Supporto Prioritario",
+  "all_pro_features": "Tutte le funzionalità Pro",
+  "team_features": "Funzionalità Team",
+  "api_access": "Accesso API",
+  "dedicated_support": "Supporto Dedicato",
+  "upgrade_to_pro": "Passa a Pro",
+  "contact_sales": "Contatta Vendite",
+  "vip_access": "Accesso VIP",
+  "admin_access": "Accesso Admin",
+  "full_features_unlocked": "Tutte le funzionalità sbloccate"
+}

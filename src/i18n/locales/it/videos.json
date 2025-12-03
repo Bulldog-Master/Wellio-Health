@@ -1,0 +1,20 @@
+{
+  "exercise_library": "Libreria Esercizi",
+  "exercise_library_desc": "Sfoglia tutorial video per imparare la tecnica corretta",
+  "video_tutorials": "Tutorial Video",
+  "watch_video": "Guarda Video",
+  "duration": "Durata",
+  "difficulty": "Difficoltà",
+  "beginner": "Principiante",
+  "intermediate": "Intermedio",
+  "advanced": "Avanzato",
+  "muscle_groups": "Gruppi Muscolari",
+  "equipment_needed": "Attrezzatura Necessaria",
+  "no_equipment": "Nessuna Attrezzatura",
+  "instructions": "Istruzioni",
+  "tips": "Consigli",
+  "common_mistakes": "Errori Comuni",
+  "related_exercises": "Esercizi Correlati",
+  "premium_videos": "Video Premium",
+  "unlock_videos": "Passa a premium per accedere a tutti i tutorial video"
+}

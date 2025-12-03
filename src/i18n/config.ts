@@ -215,6 +215,78 @@ import addonsZH from './locales/zh/addons.json';
 import professionalZH from './locales/zh/professional.json';
 import recoveryZH from './locales/zh/recovery.json';
 
+// Turkish
+import commonTR from './locales/tr/common.json';
+import authTR from './locales/tr/auth.json';
+import settingsTR from './locales/tr/settings.json';
+import fitnessTR from './locales/tr/fitness.json';
+import nutritionTR from './locales/tr/nutrition.json';
+import socialTR from './locales/tr/social.json';
+import subscriptionTR from './locales/tr/subscription.json';
+import premiumTR from './locales/tr/premium.json';
+import feedTR from './locales/tr/feed.json';
+import chatTR from './locales/tr/chat.json';
+import celebrationsTR from './locales/tr/celebrations.json';
+import adminTR from './locales/tr/admin.json';
+import addonsTR from './locales/tr/addons.json';
+import recoveryTR from './locales/tr/recovery.json';
+import newsTR from './locales/tr/news.json';
+import professionalTR from './locales/tr/professional.json';
+import a11yTR from './locales/tr/a11y.json';
+import seoTR from './locales/tr/seo.json';
+import pluralsTR from './locales/tr/plurals.json';
+import unitsTR from './locales/tr/units.json';
+import videosTR from './locales/tr/videos.json';
+
+// Italian
+import commonIT from './locales/it/common.json';
+import authIT from './locales/it/auth.json';
+import settingsIT from './locales/it/settings.json';
+import fitnessIT from './locales/it/fitness.json';
+import nutritionIT from './locales/it/nutrition.json';
+import socialIT from './locales/it/social.json';
+import subscriptionIT from './locales/it/subscription.json';
+import premiumIT from './locales/it/premium.json';
+import feedIT from './locales/it/feed.json';
+import chatIT from './locales/it/chat.json';
+import celebrationsIT from './locales/it/celebrations.json';
+import adminIT from './locales/it/admin.json';
+import addonsIT from './locales/it/addons.json';
+import recoveryIT from './locales/it/recovery.json';
+import newsIT from './locales/it/news.json';
+import professionalIT from './locales/it/professional.json';
+import a11yIT from './locales/it/a11y.json';
+import seoIT from './locales/it/seo.json';
+import pluralsIT from './locales/it/plurals.json';
+import unitsIT from './locales/it/units.json';
+import videosIT from './locales/it/videos.json';
+
+// Dutch
+import commonNL from './locales/nl/common.json';
+import authNL from './locales/nl/auth.json';
+import settingsNL from './locales/nl/settings.json';
+
+// Russian
+import commonRU from './locales/ru/common.json';
+import authRU from './locales/ru/auth.json';
+import settingsRU from './locales/ru/settings.json';
+
+// Japanese
+import commonJA from './locales/ja/common.json';
+import authJA from './locales/ja/auth.json';
+
+// Korean
+import commonKO from './locales/ko/common.json';
+import authKO from './locales/ko/auth.json';
+
+// Arabic
+import commonAR from './locales/ar/common.json';
+import authAR from './locales/ar/auth.json';
+
+// Hindi
+import commonHI from './locales/hi/common.json';
+import authHI from './locales/hi/auth.json';
+
 // All namespaces - used for ns array and type safety
 export const allNamespaces = [
   'common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 
@@ -372,6 +444,7 @@ const resources = {
     addons: addonsPT,
     professional: professionalPT,
     recovery: recoveryPT,
+    settings: settingsPT,
   },
   fr: {
     common: commonFR,
@@ -394,6 +467,7 @@ const resources = {
     addons: addonsFR,
     professional: professionalFR,
     recovery: recoveryFR,
+    settings: settingsFR,
   },
   de: {
     common: commonDE,
@@ -416,6 +490,7 @@ const resources = {
     addons: addonsDE,
     professional: professionalDE,
     recovery: recoveryDE,
+    settings: settingsDE,
   },
   zh: {
     common: commonZH,
@@ -438,6 +513,78 @@ const resources = {
     addons: addonsZH,
     professional: professionalZH,
     recovery: recoveryZH,
+  },
+  tr: {
+    common: commonTR,
+    auth: authTR,
+    settings: settingsTR,
+    fitness: fitnessTR,
+    nutrition: nutritionTR,
+    social: socialTR,
+    subscription: subscriptionTR,
+    premium: premiumTR,
+    feed: feedTR,
+    chat: chatTR,
+    celebrations: celebrationsTR,
+    admin: adminTR,
+    addons: addonsTR,
+    recovery: recoveryTR,
+    news: newsTR,
+    professional: professionalTR,
+    a11y: a11yTR,
+    seo: seoTR,
+    plurals: pluralsTR,
+    units: unitsTR,
+    videos: videosTR,
+  },
+  it: {
+    common: commonIT,
+    auth: authIT,
+    settings: settingsIT,
+    fitness: fitnessIT,
+    nutrition: nutritionIT,
+    social: socialIT,
+    subscription: subscriptionIT,
+    premium: premiumIT,
+    feed: feedIT,
+    chat: chatIT,
+    celebrations: celebrationsIT,
+    admin: adminIT,
+    addons: addonsIT,
+    recovery: recoveryIT,
+    news: newsIT,
+    professional: professionalIT,
+    a11y: a11yIT,
+    seo: seoIT,
+    plurals: pluralsIT,
+    units: unitsIT,
+    videos: videosIT,
+  },
+  nl: {
+    common: commonNL,
+    auth: authNL,
+    settings: settingsNL,
+  },
+  ru: {
+    common: commonRU,
+    auth: authRU,
+    settings: settingsRU,
+  },
+  ja: {
+    common: commonJA,
+    auth: authJA,
+  },
+  ko: {
+    common: commonKO,
+    auth: authKO,
+  },
+  ar: {
+    common: commonAR,
+    auth: authAR,
+  },
+  hi: {
+    common: commonHI,
+    auth: authHI,
   },
 };
 

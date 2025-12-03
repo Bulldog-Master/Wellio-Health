@@ -1,0 +1,32 @@
+{
+  "navigation": {
+    "main_menu": "Ana gezinme menüsü",
+    "skip_to_content": "Ana içeriğe geç",
+    "go_back": "Önceki sayfaya dön",
+    "go_home": "Ana sayfaya git",
+    "open_menu": "Menüyü aç",
+    "close_menu": "Menüyü kapat"
+  },
+  "actions": {
+    "submit_form": "Formu gönder",
+    "cancel_action": "İşlemi iptal et",
+    "save_changes": "Değişiklikleri kaydet",
+    "delete_item": "Öğeyi sil",
+    "edit_item": "Öğeyi düzenle",
+    "close_dialog": "Diyalogu kapat"
+  },
+  "status": {
+    "loading": "İçerik yükleniyor",
+    "error_occurred": "Bir hata oluştu",
+    "success_message": "İşlem başarıyla tamamlandı"
+  },
+  "theme": {
+    "toggle_theme": "Karanlık/aydınlık modu değiştir",
+    "dark_mode": "Karanlık moda geç",
+    "light_mode": "Aydınlık moda geç"
+  },
+  "language": {
+    "change_language": "Dili değiştir",
+    "current_language": "Mevcut dil: {{language}}"
+  }
+}

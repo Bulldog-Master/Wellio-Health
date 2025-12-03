@@ -1,0 +1,22 @@
+{
+  "workout": "antrenman",
+  "workout_plural": "antrenman",
+  "workout_count": "{{count}} antrenman",
+  "workout_count_plural": "{{count}} antrenman",
+  "point": "puan",
+  "point_plural": "puan",
+  "point_count": "{{count}} puan",
+  "point_count_plural": "{{count}} puan",
+  "follower": "takipçi",
+  "follower_plural": "takipçi",
+  "follower_count": "{{count}} takipçi",
+  "follower_count_plural": "{{count}} takipçi",
+  "day": "gün",
+  "day_plural": "gün",
+  "day_count": "{{count}} gün",
+  "day_count_plural": "{{count}} gün",
+  "message": "mesaj",
+  "message_plural": "mesaj",
+  "message_count": "{{count}} mesaj",
+  "message_count_plural": "{{count}} mesaj"
+}
