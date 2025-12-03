@@ -1,0 +1,20 @@
+{
+  "exercise_library": "운동 라이브러리",
+  "exercise_library_desc": "올바른 자세를 배우기 위한 비디오 튜토리얼",
+  "video_tutorials": "비디오 튜토리얼",
+  "watch_video": "비디오 보기",
+  "duration": "시간",
+  "difficulty": "난이도",
+  "beginner": "초급",
+  "intermediate": "중급",
+  "advanced": "고급",
+  "muscle_groups": "근육 그룹",
+  "equipment_needed": "필요한 장비",
+  "no_equipment": "장비 없음",
+  "instructions": "지침",
+  "tips": "팁",
+  "common_mistakes": "흔한 실수",
+  "related_exercises": "관련 운동",
+  "premium_videos": "프리미엄 비디오",
+  "unlock_videos": "모든 비디오 튜토리얼 접근을 위해 업그레이드"
+}

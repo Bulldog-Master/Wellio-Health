@@ -1,0 +1,23 @@
+{
+  "addon_features": "ऐड-ऑन फीचर",
+  "addon_features_desc": "अपनी सब्सक्रिप्शन कस्टमाइज करें",
+  "ai_coach": "AI कोच",
+  "ai_coach_desc": "व्यक्तिगत AI फिटनेस कोचिंग",
+  "ai_analytics": "AI एनालिटिक्स",
+  "ai_analytics_desc": "उन्नत AI-संचालित इनसाइट्स",
+  "ai_nutrition": "AI न्यूट्रिशन",
+  "ai_nutrition_desc": "स्मार्ट मील प्लानिंग और ट्रैकिंग",
+  "trainer_access": "ट्रेनर एक्सेस",
+  "trainer_access_desc": "प्रमाणित ट्रेनर्स से जुड़ें",
+  "practitioner_access": "प्रैक्टिशनर एक्सेस",
+  "practitioner_access_desc": "स्वास्थ्य विशेषज्ञों से जुड़ें",
+  "recovery_pro": "रिकवरी प्रो",
+  "recovery_pro_desc": "उन्नत रिकवरी ट्रैकिंग",
+  "live_sessions": "लाइव सेशन",
+  "live_sessions_desc": "लाइव वर्कआउट सेशन में शामिल हों",
+  "per_month": "/महीना",
+  "add_addon": "जोड़ें",
+  "remove_addon": "हटाएं",
+  "active": "सक्रिय",
+  "coming_soon": "जल्द आ रहा है"
+}

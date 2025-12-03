@@ -1,0 +1,22 @@
+{
+  "workout": "운동",
+  "workout_plural": "운동",
+  "workout_count": "{{count}}회 운동",
+  "workout_count_plural": "{{count}}회 운동",
+  "point": "포인트",
+  "point_plural": "포인트",
+  "point_count": "{{count}} 포인트",
+  "point_count_plural": "{{count}} 포인트",
+  "follower": "팔로워",
+  "follower_plural": "팔로워",
+  "follower_count": "{{count}}명 팔로워",
+  "follower_count_plural": "{{count}}명 팔로워",
+  "day": "일",
+  "day_plural": "일",
+  "day_count": "{{count}}일",
+  "day_count_plural": "{{count}}일",
+  "message": "메시지",
+  "message_plural": "메시지",
+  "message_count": "{{count}}개 메시지",
+  "message_count_plural": "{{count}}개 메시지"
+}

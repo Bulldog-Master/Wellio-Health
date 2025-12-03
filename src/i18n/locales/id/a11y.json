@@ -1,0 +1,32 @@
+{
+  "navigation": {
+    "main_menu": "Menu navigasi utama",
+    "skip_to_content": "Lewati ke konten utama",
+    "go_back": "Kembali ke halaman sebelumnya",
+    "go_home": "Ke beranda",
+    "open_menu": "Buka menu",
+    "close_menu": "Tutup menu"
+  },
+  "actions": {
+    "submit_form": "Kirim formulir",
+    "cancel_action": "Batalkan tindakan",
+    "save_changes": "Simpan perubahan",
+    "delete_item": "Hapus item",
+    "edit_item": "Edit item",
+    "close_dialog": "Tutup dialog"
+  },
+  "status": {
+    "loading": "Memuat konten",
+    "error_occurred": "Terjadi kesalahan",
+    "success_message": "Tindakan berhasil diselesaikan"
+  },
+  "theme": {
+    "toggle_theme": "Ganti mode gelap/terang",
+    "dark_mode": "Beralih ke mode gelap",
+    "light_mode": "Beralih ke mode terang"
+  },
+  "language": {
+    "change_language": "Ganti bahasa",
+    "current_language": "Bahasa saat ini: {{language}}"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "fitness_assistant": "Asisten Kebugaran",
+  "fitness_assistant_desc": "Pelatih kebugaran AI Anda",
+  "ask_anything": "Tanyakan apa saja tentang kebugaran, nutrisi, atau latihan...",
+  "type_message": "Ketik pesan Anda...",
+  "send": "Kirim",
+  "thinking": "Berpikir...",
+  "welcome_message": "Halo! Saya asisten kebugaran AI Anda. Tanyakan apa saja tentang latihan, nutrisi, form, atau target!",
+  "example_questions": "Contoh pertanyaan",
+  "example_1": "Apa rutinitas latihan yang baik untuk pemula?",
+  "example_2": "Berapa banyak protein yang harus saya makan sehari?",
+  "example_3": "Olahraga apa yang melatih otot inti?",
+  "example_4": "Bagaimana cara meningkatkan daya tahan lari?",
+  "clear_chat": "Hapus chat",
+  "chat_cleared": "Chat dihapus",
+  "error_sending": "Gagal mengirim pesan",
+  "premium_chat": "Chat AI Premium",
+  "unlock_ai_chat": "Dapatkan saran kebugaran personal dari asisten AI kami",
+  "ai_assistant": "Asisten AI",
+  "you": "Anda"
+}

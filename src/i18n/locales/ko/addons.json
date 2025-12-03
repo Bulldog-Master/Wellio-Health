@@ -1,0 +1,23 @@
+{
+  "addon_features": "추가 기능",
+  "addon_features_desc": "구독을 맞춤화하세요",
+  "ai_coach": "AI 코치",
+  "ai_coach_desc": "맞춤 AI 피트니스 코칭",
+  "ai_analytics": "AI 분석",
+  "ai_analytics_desc": "고급 AI 기반 인사이트",
+  "ai_nutrition": "AI 영양",
+  "ai_nutrition_desc": "스마트 식단 계획 및 추적",
+  "trainer_access": "트레이너 접근",
+  "trainer_access_desc": "인증된 트레이너와 연결",
+  "practitioner_access": "전문가 접근",
+  "practitioner_access_desc": "건강 전문가와 연결",
+  "recovery_pro": "리커버리 프로",
+  "recovery_pro_desc": "고급 리커버리 추적",
+  "live_sessions": "라이브 세션",
+  "live_sessions_desc": "라이브 운동 세션 참여",
+  "per_month": "/월",
+  "add_addon": "추가",
+  "remove_addon": "제거",
+  "active": "활성",
+  "coming_soon": "곧 출시"
+}

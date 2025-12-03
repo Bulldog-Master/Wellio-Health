@@ -1,0 +1,21 @@
+{
+  "fitness_assistant": "Fitness Assistant",
+  "fitness_assistant_desc": "Your AI fitness coach",
+  "ask_anything": "Ask me anything about fitness, nutrition, or workouts...",
+  "type_message": "Type your message...",
+  "send": "Send",
+  "thinking": "Thinking...",
+  "welcome_message": "Hello! I be your AI fitness assistant. Ask me anything about workouts, nutrition, form, or goals!",
+  "example_questions": "Example questions",
+  "example_1": "Wetin be good workout routine for beginners?",
+  "example_2": "How much protein I suppose chop per day?",
+  "example_3": "Which exercises dey work the core?",
+  "example_4": "How I fit improve my running stamina?",
+  "clear_chat": "Clear chat",
+  "chat_cleared": "Chat don clear",
+  "error_sending": "Message no fit send",
+  "premium_chat": "Premium AI Chat",
+  "unlock_ai_chat": "Get personal fitness advice from our AI assistant",
+  "ai_assistant": "AI Assistant",
+  "you": "You"
+}

@@ -1,0 +1,23 @@
+{
+  "addon_features": "Fitur tambahan",
+  "addon_features_desc": "Kustomisasi langganan Anda",
+  "ai_coach": "Pelatih AI",
+  "ai_coach_desc": "Pelatihan kebugaran AI personal",
+  "ai_analytics": "Analitik AI",
+  "ai_analytics_desc": "Insight berbasis AI tingkat lanjut",
+  "ai_nutrition": "Nutrisi AI",
+  "ai_nutrition_desc": "Perencanaan dan pelacakan makan cerdas",
+  "trainer_access": "Akses pelatih",
+  "trainer_access_desc": "Terhubung dengan pelatih bersertifikat",
+  "practitioner_access": "Akses praktisi",
+  "practitioner_access_desc": "Terhubung dengan profesional kesehatan",
+  "recovery_pro": "Recovery Pro",
+  "recovery_pro_desc": "Pelacakan pemulihan tingkat lanjut",
+  "live_sessions": "Sesi live",
+  "live_sessions_desc": "Gabung sesi latihan live",
+  "per_month": "/bulan",
+  "add_addon": "Tambah",
+  "remove_addon": "Hapus",
+  "active": "Aktif",
+  "coming_soon": "Segera hadir"
+}
