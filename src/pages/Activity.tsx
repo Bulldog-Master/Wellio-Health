@@ -63,6 +63,7 @@ const Activity = () => {
     { value: "apple_watch", label: "Apple Watch" },
     { value: "garmin", label: "Garmin" },
     { value: "samsung_health", label: "Samsung Health" },
+    { value: "suunto", label: "Suunto" },
     { value: "whoop", label: "Whoop" },
     { value: "oura", label: "Oura Ring" },
     { value: "custom", label: t('custom_device') },
