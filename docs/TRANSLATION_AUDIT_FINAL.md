@@ -5,7 +5,7 @@
 
 ---
 
-## Supported Languages (23 Total)
+## Supported Languages (23 Total, 22 Core Namespaces Each)
 
 | # | Language | Code | Flag | Status |
 |---|----------|------|------|--------|
@@ -35,9 +35,9 @@
 
 ---
 
-## Core Namespaces (21 Files per Language)
+## Core Namespaces (22 Files per Language)
 
-All 23 languages have these 21 namespaces:
+All 23 languages have these 22 namespaces:
 
 | Namespace | Purpose |
 |-----------|---------|
@@ -62,17 +62,18 @@ All 23 languages have these 21 namespaces:
 | `subscription.json` | Subscription plans |
 | `units.json` | Units of measurement |
 | `videos.json` | Exercise video library |
+| `locations.json` | Wellness directory locations |
 
 ---
 
-## Extended Namespaces (EN/ES Only - 37 Additional)
+## Extended Namespaces (EN/ES Only - 36 Additional)
 
 These namespaces exist only in English and Spanish:
 
 ```
 achievements, ads, ai, bookmarks, calendar, challenges, challenges_page,
 creator, errors, followers, food, fundraisers, groups, install, live,
-locations, macros, measurements, medical, messages, notifications, points,
+macros, measurements, medical, messages, notifications, points,
 privacy, products, profile, records, referral, rewards, schedule, search,
 session, sponsors, timer, trainer, voice, weight, workout
 ```
@@ -222,8 +223,8 @@ When adding new languages:
 | Metric | Count |
 |--------|-------|
 | Total Languages | 23 |
-| Core Namespaces | 21 |
-| Extended Namespaces (EN/ES) | 37 |
+| Core Namespaces | 22 |
+| Extended Namespaces (EN/ES) | 36 |
 | Total Translation Files | ~500+ |
 | Estimated Strings | 6,000+ |
 
