@@ -1,0 +1,22 @@
+{
+  "workout": "ورزش",
+  "workout_plural": "ورزشیں",
+  "workout_count": "{{count}} ورزش",
+  "workout_count_plural": "{{count}} ورزشیں",
+  "point": "پوائنٹ",
+  "point_plural": "پوائنٹس",
+  "point_count": "{{count}} پوائنٹ",
+  "point_count_plural": "{{count}} پوائنٹس",
+  "follower": "فالور",
+  "follower_plural": "فالورز",
+  "follower_count": "{{count}} فالور",
+  "follower_count_plural": "{{count}} فالورز",
+  "day": "دن",
+  "day_plural": "دن",
+  "day_count": "{{count}} دن",
+  "day_count_plural": "{{count}} دن",
+  "message": "پیغام",
+  "message_plural": "پیغامات",
+  "message_count": "{{count}} پیغام",
+  "message_count_plural": "{{count}} پیغامات"
+}
