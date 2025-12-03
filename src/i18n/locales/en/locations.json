@@ -39,6 +39,8 @@
   "location_submitted": "Location submitted for review",
   "review_submitted": "Review submitted successfully",
   "enable_location": "Enable location access to find places near you",
+  "no_autocomplete_results": "No matches found",
+  "manual_entry_hint": "You can type the name manually and fill in the address below",
   "form": {
     "name": "Location Name",
     "category": "Category",
