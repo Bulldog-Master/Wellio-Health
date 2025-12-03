@@ -1,0 +1,9 @@
+{
+  "admin_panel": "Bảng quản trị",
+  "vip_management": "Quản lý VIP",
+  "grant_vip": "Cấp quyền VIP",
+  "revoke_vip": "Thu hồi VIP",
+  "search_user": "Tìm người dùng",
+  "vip_granted": "Đã cấp quyền VIP thành công",
+  "no_user_found": "Không tìm thấy người dùng"
+}

@@ -1,0 +1,18 @@
+{
+  "settings": "సెట్టింగ్‌లు",
+  "settings_desc": "మీ ప్రాధాన్యతలను నిర్వహించండి",
+  "account": "ఖాతా",
+  "appearance": "రూపాలంకారం",
+  "language": "భాష",
+  "theme": "థీమ్",
+  "dark_mode": "డార్క్ మోడ్",
+  "light_mode": "లైట్ మోడ్",
+  "system": "సిస్టమ్",
+  "notifications": "నోటిఫికేషన్లు",
+  "privacy": "గోప్యత",
+  "security": "భద్రత",
+  "sign_out": "సైన్ అవుట్",
+  "subscription": "సబ్‌స్క్రిప్షన్",
+  "premium_features": "ప్రీమియం ఫీచర్లు",
+  "saved_successfully": "విజయవంతంగా సేవ్ చేయబడింది"
+}

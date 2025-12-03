@@ -1,0 +1,19 @@
+{
+  "settings": "सेटिंग्ज",
+  "settings_desc": "आपल्या प्राधान्यांचे व्यवस्थापन करा",
+  "account": "खाते",
+  "appearance": "दिसावे",
+  "language": "भाषा",
+  "theme": "थीम",
+  "dark_mode": "डार्क मोड",
+  "light_mode": "लाइट मोड",
+  "system": "सिस्टम",
+  "notifications": "सूचना",
+  "privacy": "गोपनीयता",
+  "security": "सुरक्षा",
+  "about": "बद्दल",
+  "sign_out": "साइन आउट",
+  "subscription": "सदस्यता",
+  "premium_features": "प्रीमियम वैशिष्ट्ये",
+  "saved_successfully": "यशस्वीरित्या जतन झाले"
+}

@@ -1,0 +1,18 @@
+{
+  "settings": "Cài đặt",
+  "settings_desc": "Quản lý tùy chọn của bạn",
+  "account": "Tài khoản",
+  "appearance": "Giao diện",
+  "language": "Ngôn ngữ",
+  "theme": "Chủ đề",
+  "dark_mode": "Chế độ tối",
+  "light_mode": "Chế độ sáng",
+  "system": "Hệ thống",
+  "notifications": "Thông báo",
+  "privacy": "Quyền riêng tư",
+  "security": "Bảo mật",
+  "sign_out": "Đăng xuất",
+  "subscription": "Đăng ký",
+  "premium_features": "Tính năng cao cấp",
+  "saved_successfully": "Đã lưu thành công"
+}

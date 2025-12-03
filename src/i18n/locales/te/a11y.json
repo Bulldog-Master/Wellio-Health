@@ -1,0 +1,17 @@
+{
+  "navigation": {
+    "main_menu": "ప్రధాన మెను",
+    "skip_to_content": "ప్రధాన కంటెంట్‌కు వెళ్ళండి",
+    "go_back": "వెనక్కి వెళ్ళండి",
+    "go_home": "హోమ్‌కు వెళ్ళండి"
+  },
+  "actions": {
+    "submit_form": "ఫారం సమర్పించండి",
+    "cancel_action": "రద్దు చేయండి",
+    "save_changes": "మార్పులు సేవ్ చేయండి"
+  },
+  "status": {
+    "loading": "లోడ్ అవుతోంది",
+    "error_occurred": "లోపం జరిగింది"
+  }
+}
