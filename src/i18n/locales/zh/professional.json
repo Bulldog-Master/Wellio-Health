@@ -1,0 +1,63 @@
+{
+  "trainer_portal": "教练门户",
+  "trainer_portal_desc": "管理您的客户和培训计划",
+  "practitioner_portal": "从业者门户",
+  "practitioner_portal_desc": "管理您的患者和健康服务",
+  
+  "apply_now": "立即申请",
+  "application_pending": "申请待审核",
+  "application_rejected": "申请被拒绝",
+  "approved": "已批准",
+  
+  "application_form": "申请表",
+  "full_name": "全名",
+  "email": "电子邮件",
+  "phone": "电话",
+  "years_experience": "从业年限",
+  "bio": "个人简介",
+  "bio_placeholder": "介绍您的经验和方法...",
+  "specialties": "专长",
+  "certifications": "证书",
+  "upload_documents": "上传文件",
+  "upload_certifications": "上传证书和证明",
+  "submit_application": "提交申请",
+  "submitting": "提交中...",
+  
+  "application_submitted": "申请已提交",
+  "application_submitted_desc": "您的申请正在审核中",
+  "application_error": "申请错误",
+  
+  "my_clients": "我的客户",
+  "my_schedule": "我的日程",
+  "my_earnings": "我的收入",
+  "profile_settings": "个人设置",
+  
+  "no_clients": "暂无客户",
+  "no_clients_desc": "您的客户将显示在这里",
+  
+  "trainer_specialties": "教练专长",
+  "specialty_strength": "力量训练",
+  "specialty_cardio": "有氧运动",
+  "specialty_yoga": "瑜伽",
+  "specialty_pilates": "普拉提",
+  "specialty_hiit": "高强度间歇训练",
+  "specialty_crossfit": "CrossFit",
+  "specialty_nutrition": "营养",
+  "specialty_weight_loss": "减重",
+  "specialty_muscle_gain": "增肌",
+  "specialty_flexibility": "柔韧性",
+  
+  "practitioner_specialties": "从业者专长",
+  "specialty_physical_therapy": "物理治疗",
+  "specialty_sports_medicine": "运动医学",
+  "specialty_nutrition_counseling": "营养咨询",
+  "specialty_mental_health": "心理健康",
+  "specialty_chiropractic": "脊椎指压治疗",
+  "specialty_massage_therapy": "按摩治疗",
+  "specialty_acupuncture": "针灸",
+  "specialty_naturopathy": "自然疗法",
+  
+  "premium_required": "需要高级版",
+  "premium_required_desc": "升级以访问专业门户",
+  "upgrade_now": "立即升级"
+}

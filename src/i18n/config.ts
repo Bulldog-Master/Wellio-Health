@@ -142,6 +142,9 @@ import feedPT from './locales/pt/feed.json';
 import chatPT from './locales/pt/chat.json';
 import celebrationsPT from './locales/pt/celebrations.json';
 import newsPT from './locales/pt/news.json';
+import addonsPT from './locales/pt/addons.json';
+import professionalPT from './locales/pt/professional.json';
+import recoveryPT from './locales/pt/recovery.json';
 
 // French
 import commonFR from './locales/fr/common.json';
@@ -161,6 +164,9 @@ import feedFR from './locales/fr/feed.json';
 import chatFR from './locales/fr/chat.json';
 import celebrationsFR from './locales/fr/celebrations.json';
 import newsFR from './locales/fr/news.json';
+import addonsFR from './locales/fr/addons.json';
+import professionalFR from './locales/fr/professional.json';
+import recoveryFR from './locales/fr/recovery.json';
 
 // German
 import commonDE from './locales/de/common.json';
@@ -180,6 +186,9 @@ import feedDE from './locales/de/feed.json';
 import chatDE from './locales/de/chat.json';
 import celebrationsDE from './locales/de/celebrations.json';
 import newsDE from './locales/de/news.json';
+import addonsDE from './locales/de/addons.json';
+import professionalDE from './locales/de/professional.json';
+import recoveryDE from './locales/de/recovery.json';
 
 // Chinese
 import commonZH from './locales/zh/common.json';
@@ -199,6 +208,9 @@ import feedZH from './locales/zh/feed.json';
 import chatZH from './locales/zh/chat.json';
 import celebrationsZH from './locales/zh/celebrations.json';
 import newsZH from './locales/zh/news.json';
+import addonsZH from './locales/zh/addons.json';
+import professionalZH from './locales/zh/professional.json';
+import recoveryZH from './locales/zh/recovery.json';
 
 // All namespaces - used for ns array and type safety
 export const allNamespaces = [
@@ -354,6 +366,9 @@ const resources = {
     chat: chatPT,
     celebrations: celebrationsPT,
     news: newsPT,
+    addons: addonsPT,
+    professional: professionalPT,
+    recovery: recoveryPT,
   },
   fr: {
     common: commonFR,
@@ -373,6 +388,9 @@ const resources = {
     chat: chatFR,
     celebrations: celebrationsFR,
     news: newsFR,
+    addons: addonsFR,
+    professional: professionalFR,
+    recovery: recoveryFR,
   },
   de: {
     common: commonDE,
@@ -392,6 +410,9 @@ const resources = {
     chat: chatDE,
     celebrations: celebrationsDE,
     news: newsDE,
+    addons: addonsDE,
+    professional: professionalDE,
+    recovery: recoveryDE,
   },
   zh: {
     common: commonZH,
@@ -411,6 +432,9 @@ const resources = {
     chat: chatZH,
     celebrations: celebrationsZH,
     news: newsZH,
+    addons: addonsZH,
+    professional: professionalZH,
+    recovery: recoveryZH,
   },
 };
 

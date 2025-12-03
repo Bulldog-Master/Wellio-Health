@@ -21,6 +21,11 @@ export interface SubscriptionFeature {
   feature_value: string;
 }
 
+export interface UserAddon {
+  addon_key: string;
+  status: string;
+}
+
 // Cache keys for localStorage
 const CACHE_KEY_VIP = 'subscription_isVIP';
 const CACHE_KEY_ADMIN = 'subscription_isAdmin';
@@ -49,6 +54,7 @@ export const useSubscription = () => {
   // Initialize from cache for instant UI
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [features, setFeatures] = useState<SubscriptionFeature[]>([]);
+  const [userAddons, setUserAddons] = useState<UserAddon[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isVIP, setIsVIP] = useState(() => getCachedBoolean(CACHE_KEY_VIP));
   const [isAdmin, setIsAdmin] = useState(() => getCachedBoolean(CACHE_KEY_ADMIN));
@@ -76,15 +82,31 @@ export const useSubscription = () => {
       }
 
       // Run all queries in parallel for faster loading
-      const [vipResult, adminResult, subResult] = await Promise.all([
+      const [vipResult, adminResult, subResult, addonsResult] = await Promise.all([
         supabase.rpc('has_active_vip', { _user_id: user.id }),
         supabase.rpc('has_role', { _user_id: user.id, _role: 'admin' }),
         supabase
           .from('subscriptions')
           .select('id, user_id, tier, status, current_period_start, current_period_end, cancel_at_period_end, created_at, updated_at')
           .eq('user_id', user.id)
-          .maybeSingle()
+          .maybeSingle(),
+        supabase
+          .from('user_addons')
+          .select('addon_id, status, subscription_addons(addon_key)')
+          .eq('user_id', user.id)
+          .eq('status', 'active')
       ]);
+      
+      // Set user addons - transform to include addon_key from joined table
+      if (addonsResult.data) {
+        const transformedAddons = addonsResult.data
+          .filter((a: any) => a.subscription_addons?.addon_key)
+          .map((a: any) => ({
+            addon_key: a.subscription_addons.addon_key,
+            status: a.status || 'active'
+          }));
+        setUserAddons(transformedAddons);
+      }
 
       const vipStatus = vipResult.data || false;
       const adminStatus = adminResult.data || false;
@@ -148,12 +170,29 @@ export const useSubscription = () => {
     return feature?.feature_value || null;
   };
 
+  const hasAddon = (addonKey: string): boolean => {
+    // VIP and Admin users have access to all addons
+    if (isVIP || isAdmin) return true;
+    
+    return userAddons.some(a => a.addon_key === addonKey && a.status === 'active');
+  };
+
+  const hasAddonAccess = (addonKey: string): boolean => {
+    // Check if user has addon OR has premium tier OR is VIP/Admin
+    if (isVIP || isAdmin) return true;
+    if (tier === 'pro' || tier === 'enterprise') return true;
+    return hasAddon(addonKey);
+  };
+
   return {
     subscription,
     features,
+    userAddons,
     isLoading,
     hasFeature,
     getFeatureValue,
+    hasAddon,
+    hasAddonAccess,
     tier,
     isVIP,
     isAdmin,

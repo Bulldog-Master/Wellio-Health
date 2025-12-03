@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight, Heart, Crown, Gift, Sparkles, Users, FileText, Megaphone, Dumbbell, Stethoscope } from "lucide-react";
+import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight, Heart, Crown, Gift, Sparkles, Users, FileText, Megaphone, Dumbbell, Stethoscope, UserSearch } from "lucide-react";
 import { useSubscription } from "@/hooks/useSubscription";
 import { Badge } from "@/components/ui/badge";
 import { useState, useEffect } from "react";
@@ -174,6 +174,17 @@ const SettingsMenu = () => {
       iconColor: "text-primary",
       path: "/settings/support",
     },
+    // Trainer Marketplace - for premium users to find trainers
+    ...(hasFullAccess ? [{
+      title: t('settings:trainer_marketplace'),
+      description: t('settings:trainer_marketplace_desc'),
+      icon: UserSearch,
+      iconBg: "bg-emerald-500/20",
+      iconColor: "text-emerald-500",
+      path: "/trainer-marketplace",
+      badge: "Pro",
+      badgeVariant: "secondary" as const,
+    }] : []),
     // Professional Portals - for premium users
     ...(hasFullAccess ? [{
       title: t('professional:trainer_portal'),

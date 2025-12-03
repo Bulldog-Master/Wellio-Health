@@ -4,6 +4,8 @@
   "subscription": "Suscripción",
   "subscription_desc": "Plan actual: {{tier}} - Gestiona tu suscripción",
   "manage_ads_desc": "Crear y gestionar campañas publicitarias",
+  "trainer_marketplace": "Mercado de Entrenadores",
+  "trainer_marketplace_desc": "Encuentra y reserva entrenadores certificados",
   "referral_program": "Programa de Referencias",
   "referral_loading": "Cargando tus estadísticas de referidos...",
   "referral_stats": "{{points}} puntos • {{referrals}} referidos • {{active}} activos",

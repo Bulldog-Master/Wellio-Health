@@ -4,6 +4,8 @@
   "subscription": "Subscription",
   "subscription_desc": "Current plan: {{tier}} - Manage your subscription",
   "manage_ads_desc": "Create and manage advertising campaigns",
+  "trainer_marketplace": "Trainer Marketplace",
+  "trainer_marketplace_desc": "Find and book certified fitness trainers",
   "referral_program": "Referral Program",
   "referral_loading": "Loading your referral stats...",
   "referral_stats": "{{points}} points • {{referrals}} referrals • {{active}} active",

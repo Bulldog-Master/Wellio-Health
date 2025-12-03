@@ -1,0 +1,63 @@
+{
+  "trainer_portal": "Portail Entraîneur",
+  "trainer_portal_desc": "Gérez vos clients et programmes d'entraînement",
+  "practitioner_portal": "Portail Praticien",
+  "practitioner_portal_desc": "Gérez vos patients et services de santé",
+  
+  "apply_now": "Postuler maintenant",
+  "application_pending": "Candidature en attente",
+  "application_rejected": "Candidature rejetée",
+  "approved": "Approuvé",
+  
+  "application_form": "Formulaire de candidature",
+  "full_name": "Nom complet",
+  "email": "E-mail",
+  "phone": "Téléphone",
+  "years_experience": "Années d'expérience",
+  "bio": "Biographie",
+  "bio_placeholder": "Parlez-nous de votre expérience et de votre approche...",
+  "specialties": "Spécialités",
+  "certifications": "Certifications",
+  "upload_documents": "Télécharger des documents",
+  "upload_certifications": "Télécharger certifications et preuves",
+  "submit_application": "Soumettre la candidature",
+  "submitting": "Soumission...",
+  
+  "application_submitted": "Candidature soumise",
+  "application_submitted_desc": "Votre candidature est en cours d'examen",
+  "application_error": "Erreur de candidature",
+  
+  "my_clients": "Mes clients",
+  "my_schedule": "Mon emploi du temps",
+  "my_earnings": "Mes revenus",
+  "profile_settings": "Paramètres du profil",
+  
+  "no_clients": "Pas encore de clients",
+  "no_clients_desc": "Vos clients apparaîtront ici",
+  
+  "trainer_specialties": "Spécialités d'entraîneur",
+  "specialty_strength": "Musculation",
+  "specialty_cardio": "Cardio",
+  "specialty_yoga": "Yoga",
+  "specialty_pilates": "Pilates",
+  "specialty_hiit": "HIIT",
+  "specialty_crossfit": "CrossFit",
+  "specialty_nutrition": "Nutrition",
+  "specialty_weight_loss": "Perte de poids",
+  "specialty_muscle_gain": "Gain musculaire",
+  "specialty_flexibility": "Flexibilité",
+  
+  "practitioner_specialties": "Spécialités de praticien",
+  "specialty_physical_therapy": "Physiothérapie",
+  "specialty_sports_medicine": "Médecine sportive",
+  "specialty_nutrition_counseling": "Conseil nutritionnel",
+  "specialty_mental_health": "Santé mentale",
+  "specialty_chiropractic": "Chiropratique",
+  "specialty_massage_therapy": "Massothérapie",
+  "specialty_acupuncture": "Acupuncture",
+  "specialty_naturopathy": "Naturopathie",
+  
+  "premium_required": "Premium requis",
+  "premium_required_desc": "Mettez à niveau pour accéder au portail professionnel",
+  "upgrade_now": "Mettre à niveau"
+}
