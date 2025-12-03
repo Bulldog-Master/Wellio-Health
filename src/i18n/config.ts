@@ -61,27 +61,6 @@ import locationsEN from './locales/en/locations.json';
 import adsEN from './locales/en/ads.json';
 import productsEN from './locales/en/products.json';
 import recoveryEN from './locales/en/recovery.json';
-import productsPT from './locales/pt/products.json';
-import productsFR from './locales/fr/products.json';
-import productsDE from './locales/de/products.json';
-import productsZH from './locales/zh/products.json';
-import productsTR from './locales/tr/products.json';
-import productsIT from './locales/it/products.json';
-import productsNL from './locales/nl/products.json';
-import productsRU from './locales/ru/products.json';
-import productsJA from './locales/ja/products.json';
-import productsKO from './locales/ko/products.json';
-import productsAR from './locales/ar/products.json';
-import productsHI from './locales/hi/products.json';
-import productsBN from './locales/bn/products.json';
-import productsID from './locales/id/products.json';
-import productsPCM from './locales/pcm/products.json';
-import productsTA from './locales/ta/products.json';
-import productsUR from './locales/ur/products.json';
-import productsARZ from './locales/arz/products.json';
-import productsMR from './locales/mr/products.json';
-import productsTE from './locales/te/products.json';
-import productsVI from './locales/vi/products.json';
 import addonsEN from './locales/en/addons.json';
 import professionalEN from './locales/en/professional.json';
 
@@ -145,7 +124,7 @@ import recoveryES from './locales/es/recovery.json';
 import addonsES from './locales/es/addons.json';
 import professionalES from './locales/es/professional.json';
 
-// Portuguese
+// Portuguese - Core namespaces only
 import commonPT from './locales/pt/common.json';
 import authPT from './locales/pt/auth.json';
 import fitnessPT from './locales/pt/fitness.json';
@@ -167,8 +146,10 @@ import addonsPT from './locales/pt/addons.json';
 import professionalPT from './locales/pt/professional.json';
 import recoveryPT from './locales/pt/recovery.json';
 import settingsPT from './locales/pt/settings.json';
+import locationsPT from './locales/pt/locations.json';
+import productsPT from './locales/pt/products.json';
 
-// French
+// French - Core namespaces only
 import commonFR from './locales/fr/common.json';
 import authFR from './locales/fr/auth.json';
 import fitnessFR from './locales/fr/fitness.json';
@@ -190,8 +171,10 @@ import addonsFR from './locales/fr/addons.json';
 import professionalFR from './locales/fr/professional.json';
 import recoveryFR from './locales/fr/recovery.json';
 import settingsFR from './locales/fr/settings.json';
+import locationsFR from './locales/fr/locations.json';
+import productsFR from './locales/fr/products.json';
 
-// German
+// German - Core namespaces only
 import commonDE from './locales/de/common.json';
 import authDE from './locales/de/auth.json';
 import fitnessDE from './locales/de/fitness.json';
@@ -213,8 +196,10 @@ import addonsDE from './locales/de/addons.json';
 import professionalDE from './locales/de/professional.json';
 import recoveryDE from './locales/de/recovery.json';
 import settingsDE from './locales/de/settings.json';
+import locationsDE from './locales/de/locations.json';
+import productsDE from './locales/de/products.json';
 
-// Chinese
+// Chinese - Core namespaces only
 import commonZH from './locales/zh/common.json';
 import authZH from './locales/zh/auth.json';
 import fitnessZH from './locales/zh/fitness.json';
@@ -235,8 +220,11 @@ import newsZH from './locales/zh/news.json';
 import addonsZH from './locales/zh/addons.json';
 import professionalZH from './locales/zh/professional.json';
 import recoveryZH from './locales/zh/recovery.json';
+import settingsZH from './locales/zh/settings.json';
+import locationsZH from './locales/zh/locations.json';
+import productsZH from './locales/zh/products.json';
 
-// Turkish
+// Turkish - Core namespaces only
 import commonTR from './locales/tr/common.json';
 import authTR from './locales/tr/auth.json';
 import settingsTR from './locales/tr/settings.json';
@@ -258,8 +246,10 @@ import seoTR from './locales/tr/seo.json';
 import pluralsTR from './locales/tr/plurals.json';
 import unitsTR from './locales/tr/units.json';
 import videosTR from './locales/tr/videos.json';
+import locationsTR from './locales/tr/locations.json';
+import productsTR from './locales/tr/products.json';
 
-// Italian
+// Italian - Core namespaces only
 import commonIT from './locales/it/common.json';
 import authIT from './locales/it/auth.json';
 import settingsIT from './locales/it/settings.json';
@@ -281,8 +271,10 @@ import seoIT from './locales/it/seo.json';
 import pluralsIT from './locales/it/plurals.json';
 import unitsIT from './locales/it/units.json';
 import videosIT from './locales/it/videos.json';
+import locationsIT from './locales/it/locations.json';
+import productsIT from './locales/it/products.json';
 
-// Dutch
+// Dutch - Core namespaces only
 import commonNL from './locales/nl/common.json';
 import authNL from './locales/nl/auth.json';
 import settingsNL from './locales/nl/settings.json';
@@ -304,8 +296,10 @@ import seoNL from './locales/nl/seo.json';
 import pluralsNL from './locales/nl/plurals.json';
 import unitsNL from './locales/nl/units.json';
 import videosNL from './locales/nl/videos.json';
+import locationsNL from './locales/nl/locations.json';
+import productsNL from './locales/nl/products.json';
 
-// Russian
+// Russian - Core namespaces only
 import commonRU from './locales/ru/common.json';
 import authRU from './locales/ru/auth.json';
 import settingsRU from './locales/ru/settings.json';
@@ -327,8 +321,10 @@ import seoRU from './locales/ru/seo.json';
 import pluralsRU from './locales/ru/plurals.json';
 import unitsRU from './locales/ru/units.json';
 import videosRU from './locales/ru/videos.json';
+import locationsRU from './locales/ru/locations.json';
+import productsRU from './locales/ru/products.json';
 
-// Japanese
+// Japanese - Core namespaces only
 import commonJA from './locales/ja/common.json';
 import authJA from './locales/ja/auth.json';
 import settingsJA from './locales/ja/settings.json';
@@ -350,8 +346,10 @@ import seoJA from './locales/ja/seo.json';
 import pluralsJA from './locales/ja/plurals.json';
 import unitsJA from './locales/ja/units.json';
 import videosJA from './locales/ja/videos.json';
+import locationsJA from './locales/ja/locations.json';
+import productsJA from './locales/ja/products.json';
 
-// Korean
+// Korean - Core namespaces only
 import commonKO from './locales/ko/common.json';
 import authKO from './locales/ko/auth.json';
 import settingsKO from './locales/ko/settings.json';
@@ -373,8 +371,10 @@ import seoKO from './locales/ko/seo.json';
 import pluralsKO from './locales/ko/plurals.json';
 import unitsKO from './locales/ko/units.json';
 import videosKO from './locales/ko/videos.json';
+import locationsKO from './locales/ko/locations.json';
+import productsKO from './locales/ko/products.json';
 
-// Arabic
+// Arabic - Core namespaces only
 import commonAR from './locales/ar/common.json';
 import authAR from './locales/ar/auth.json';
 import settingsAR from './locales/ar/settings.json';
@@ -396,8 +396,10 @@ import seoAR from './locales/ar/seo.json';
 import pluralsAR from './locales/ar/plurals.json';
 import unitsAR from './locales/ar/units.json';
 import videosAR from './locales/ar/videos.json';
+import locationsAR from './locales/ar/locations.json';
+import productsAR from './locales/ar/products.json';
 
-// Hindi
+// Hindi - Core namespaces only
 import commonHI from './locales/hi/common.json';
 import authHI from './locales/hi/auth.json';
 import settingsHI from './locales/hi/settings.json';
@@ -419,8 +421,10 @@ import seoHI from './locales/hi/seo.json';
 import pluralsHI from './locales/hi/plurals.json';
 import unitsHI from './locales/hi/units.json';
 import videosHI from './locales/hi/videos.json';
+import locationsHI from './locales/hi/locations.json';
+import productsHI from './locales/hi/products.json';
 
-// Bengali
+// Bengali - Core namespaces only
 import commonBN from './locales/bn/common.json';
 import authBN from './locales/bn/auth.json';
 import settingsBN from './locales/bn/settings.json';
@@ -442,8 +446,10 @@ import seoBN from './locales/bn/seo.json';
 import pluralsBN from './locales/bn/plurals.json';
 import unitsBN from './locales/bn/units.json';
 import videosBN from './locales/bn/videos.json';
+import locationsBN from './locales/bn/locations.json';
+import productsBN from './locales/bn/products.json';
 
-// Indonesian
+// Indonesian - Core namespaces only
 import commonID from './locales/id/common.json';
 import authID from './locales/id/auth.json';
 import settingsID from './locales/id/settings.json';
@@ -465,8 +471,10 @@ import seoID from './locales/id/seo.json';
 import pluralsID from './locales/id/plurals.json';
 import unitsID from './locales/id/units.json';
 import videosID from './locales/id/videos.json';
+import locationsID from './locales/id/locations.json';
+import productsID from './locales/id/products.json';
 
-// Nigerian Pidgin
+// Nigerian Pidgin - Core namespaces only
 import commonPCM from './locales/pcm/common.json';
 import authPCM from './locales/pcm/auth.json';
 import settingsPCM from './locales/pcm/settings.json';
@@ -488,8 +496,10 @@ import seoPCM from './locales/pcm/seo.json';
 import pluralsPCM from './locales/pcm/plurals.json';
 import unitsPCM from './locales/pcm/units.json';
 import videosPCM from './locales/pcm/videos.json';
+import locationsPCM from './locales/pcm/locations.json';
+import productsPCM from './locales/pcm/products.json';
 
-// Tamil
+// Tamil - Core namespaces only
 import commonTA from './locales/ta/common.json';
 import authTA from './locales/ta/auth.json';
 import settingsTA from './locales/ta/settings.json';
@@ -511,8 +521,10 @@ import seoTA from './locales/ta/seo.json';
 import pluralsTA from './locales/ta/plurals.json';
 import unitsTA from './locales/ta/units.json';
 import videosTA from './locales/ta/videos.json';
+import locationsTA from './locales/ta/locations.json';
+import productsTA from './locales/ta/products.json';
 
-// Urdu
+// Urdu - Core namespaces only
 import commonUR from './locales/ur/common.json';
 import authUR from './locales/ur/auth.json';
 import settingsUR from './locales/ur/settings.json';
@@ -534,8 +546,10 @@ import seoUR from './locales/ur/seo.json';
 import pluralsUR from './locales/ur/plurals.json';
 import unitsUR from './locales/ur/units.json';
 import videosUR from './locales/ur/videos.json';
+import locationsUR from './locales/ur/locations.json';
+import productsUR from './locales/ur/products.json';
 
-// Egyptian Arabic
+// Egyptian Arabic - Core namespaces only
 import commonARZ from './locales/arz/common.json';
 import authARZ from './locales/arz/auth.json';
 import settingsARZ from './locales/arz/settings.json';
@@ -557,8 +571,10 @@ import seoARZ from './locales/arz/seo.json';
 import pluralsARZ from './locales/arz/plurals.json';
 import unitsARZ from './locales/arz/units.json';
 import videosARZ from './locales/arz/videos.json';
+import locationsARZ from './locales/arz/locations.json';
+import productsARZ from './locales/arz/products.json';
 
-// Marathi
+// Marathi - Core namespaces only
 import commonMR from './locales/mr/common.json';
 import authMR from './locales/mr/auth.json';
 import settingsMR from './locales/mr/settings.json';
@@ -580,8 +596,10 @@ import seoMR from './locales/mr/seo.json';
 import pluralsMR from './locales/mr/plurals.json';
 import unitsMR from './locales/mr/units.json';
 import videosMR from './locales/mr/videos.json';
+import locationsMR from './locales/mr/locations.json';
+import productsMR from './locales/mr/products.json';
 
-// Telugu
+// Telugu - Core namespaces only
 import commonTE from './locales/te/common.json';
 import authTE from './locales/te/auth.json';
 import settingsTE from './locales/te/settings.json';
@@ -603,8 +621,10 @@ import seoTE from './locales/te/seo.json';
 import pluralsTE from './locales/te/plurals.json';
 import unitsTE from './locales/te/units.json';
 import videosTE from './locales/te/videos.json';
+import locationsTE from './locales/te/locations.json';
+import productsTE from './locales/te/products.json';
 
-// Vietnamese
+// Vietnamese - Core namespaces only
 import commonVI from './locales/vi/common.json';
 import authVI from './locales/vi/auth.json';
 import settingsVI from './locales/vi/settings.json';
@@ -626,34 +646,10 @@ import seoVI from './locales/vi/seo.json';
 import pluralsVI from './locales/vi/plurals.json';
 import unitsVI from './locales/vi/units.json';
 import videosVI from './locales/vi/videos.json';
-
-// Chinese settings
-import settingsZH from './locales/zh/settings.json';
-
-// Locations imports for all languages
-import locationsPT from './locales/pt/locations.json';
-import locationsFR from './locales/fr/locations.json';
-import locationsDE from './locales/de/locations.json';
-import locationsZH from './locales/zh/locations.json';
-import locationsTR from './locales/tr/locations.json';
-import locationsIT from './locales/it/locations.json';
-import locationsNL from './locales/nl/locations.json';
-import locationsRU from './locales/ru/locations.json';
-import locationsJA from './locales/ja/locations.json';
-import locationsKO from './locales/ko/locations.json';
-import locationsAR from './locales/ar/locations.json';
-import locationsHI from './locales/hi/locations.json';
-import locationsBN from './locales/bn/locations.json';
-import locationsID from './locales/id/locations.json';
-import locationsPCM from './locales/pcm/locations.json';
-import locationsTA from './locales/ta/locations.json';
-import locationsUR from './locales/ur/locations.json';
-import locationsARZ from './locales/arz/locations.json';
-import locationsMR from './locales/mr/locations.json';
-import locationsTE from './locales/te/locations.json';
 import locationsVI from './locales/vi/locations.json';
+import productsVI from './locales/vi/products.json';
 
-// All namespaces - used for ns array and type safety
+// All namespaces
 export const allNamespaces = [
   'common', 'auth', 'fitness', 'social', 'nutrition', 'profile', 'messages', 
   'notifications', 'errors', 'rewards', 'subscription', 'food', 'workout', 
@@ -670,653 +666,182 @@ export type TranslationNamespace = typeof allNamespaces[number];
 
 const resources = {
   en: {
-    common: commonEN,
-    auth: authEN,
-    fitness: fitnessEN,
-    social: socialEN,
-    nutrition: nutritionEN,
-    weight: weightEN,
-    food: foodEN,
-    workout: workoutEN,
-    settings: settingsEN,
-    subscription: subscriptionEN,
-    rewards: rewardsEN,
-    referral: referralEN,
-    privacy: privacyEN,
-    points: pointsEN,
-    profile: profileEN,
-    achievements: achievementsEN,
-    calendar: calendarEN,
-    records: recordsEN,
-    voice: voiceEN,
-    medical: medicalEN,
-    timer: timerEN,
-    live: liveEN,
-    challenges: challengesEN,
-    fundraisers: fundraisersEN,
-    macros: macrosEN,
-    install: installEN,
-    search: searchEN,
-    creator: creatorEN,
-    ai: aiEN,
-    measurements: measurementsEN,
-    trainer: trainerEN,
-    session: sessionEN,
-    bookmarks: bookmarksEN,
-    challenges_page: challengesPageEN,
-    feed: feedEN,
-    groups: groupsEN,
-    followers: followersEN,
-    schedule: scheduleEN,
-    seo: seoEN,
-    units: unitsEN,
-    a11y: a11yEN,
-    plurals: pluralsEN,
-    messages: messagesEN,
-    notifications: notificationsEN,
-    errors: errorsEN,
-    admin: adminEN,
-    premium: premiumEN,
-    videos: videosEN,
-    chat: chatEN,
-    celebrations: celebrationsEN,
-    news: newsEN,
-    sponsors: sponsorsEN,
-    locations: locationsEN,
-    ads: adsEN,
-    products: productsEN,
-    recovery: recoveryEN,
-    addons: addonsEN,
-    professional: professionalEN,
+    common: commonEN, auth: authEN, fitness: fitnessEN, social: socialEN, nutrition: nutritionEN,
+    weight: weightEN, food: foodEN, workout: workoutEN, settings: settingsEN, subscription: subscriptionEN,
+    rewards: rewardsEN, referral: referralEN, privacy: privacyEN, points: pointsEN, profile: profileEN,
+    achievements: achievementsEN, calendar: calendarEN, records: recordsEN, voice: voiceEN, medical: medicalEN,
+    timer: timerEN, live: liveEN, challenges: challengesEN, fundraisers: fundraisersEN, macros: macrosEN,
+    install: installEN, search: searchEN, creator: creatorEN, ai: aiEN, measurements: measurementsEN,
+    trainer: trainerEN, session: sessionEN, bookmarks: bookmarksEN, challenges_page: challengesPageEN,
+    feed: feedEN, groups: groupsEN, followers: followersEN, schedule: scheduleEN, seo: seoEN, units: unitsEN,
+    a11y: a11yEN, plurals: pluralsEN, messages: messagesEN, notifications: notificationsEN, errors: errorsEN,
+    admin: adminEN, premium: premiumEN, videos: videosEN, chat: chatEN, celebrations: celebrationsEN,
+    news: newsEN, sponsors: sponsorsEN, locations: locationsEN, ads: adsEN, products: productsEN,
+    recovery: recoveryEN, addons: addonsEN, professional: professionalEN,
   },
   es: {
-    common: commonES,
-    auth: authES,
-    fitness: fitnessES,
-    social: socialES,
-    nutrition: nutritionES,
-    profile: profileES,
-    messages: messagesES,
-    notifications: notificationsES,
-    errors: errorsES,
-    rewards: rewardsES,
-    subscription: subscriptionES,
-    food: foodES,
-    workout: workoutES,
-    settings: settingsES,
-    weight: weightES,
-    referral: referralES,
-    privacy: privacyES,
-    points: pointsES,
-    achievements: achievementsES,
-    calendar: calendarES,
-    records: recordsES,
-    voice: voiceES,
-    medical: medicalES,
-    timer: timerES,
-    live: liveES,
-    challenges: challengesES,
-    fundraisers: fundraisersES,
-    macros: macrosES,
-    install: installES,
-    search: searchES,
-    creator: creatorES,
-    ai: aiES,
-    measurements: measurementsES,
-    trainer: trainerES,
-    session: sessionES,
-    bookmarks: bookmarksES,
-    challenges_page: challengesPageES,
-    feed: feedES,
-    groups: groupsES,
-    followers: followersES,
-    schedule: scheduleES,
-    seo: seoES,
-    units: unitsES,
-    a11y: a11yES,
-    plurals: pluralsES,
-    admin: adminES,
-    premium: premiumES,
-    videos: videosES,
-    chat: chatES,
-    celebrations: celebrationsES,
-    news: newsES,
-    sponsors: sponsorsES,
-    locations: locationsES,
-    ads: adsES,
-    products: productsES,
-    recovery: recoveryES,
-    addons: addonsES,
-    professional: professionalES,
+    common: commonES, auth: authES, fitness: fitnessES, social: socialES, nutrition: nutritionES,
+    profile: profileES, messages: messagesES, notifications: notificationsES, errors: errorsES, rewards: rewardsES,
+    subscription: subscriptionES, food: foodES, workout: workoutES, settings: settingsES, weight: weightES,
+    referral: referralES, privacy: privacyES, points: pointsES, achievements: achievementsES, calendar: calendarES,
+    records: recordsES, voice: voiceES, medical: medicalES, timer: timerES, live: liveES, challenges: challengesES,
+    fundraisers: fundraisersES, macros: macrosES, install: installES, search: searchES, creator: creatorES,
+    ai: aiES, measurements: measurementsES, trainer: trainerES, session: sessionES, bookmarks: bookmarksES,
+    challenges_page: challengesPageES, feed: feedES, groups: groupsES, followers: followersES, schedule: scheduleES,
+    seo: seoES, units: unitsES, a11y: a11yES, plurals: pluralsES, admin: adminES, premium: premiumES,
+    videos: videosES, chat: chatES, celebrations: celebrationsES, news: newsES, sponsors: sponsorsES,
+    locations: locationsES, ads: adsES, products: productsES, recovery: recoveryES, addons: addonsES, professional: professionalES,
   },
   pt: {
-    common: commonPT,
-    auth: authPT,
-    fitness: fitnessPT,
-    social: socialPT,
-    nutrition: nutritionPT,
-    seo: seoPT,
-    units: unitsPT,
-    a11y: a11yPT,
-    plurals: pluralsPT,
-    admin: adminPT,
-    premium: premiumPT,
-    subscription: subscriptionPT,
-    videos: videosPT,
-    feed: feedPT,
-    chat: chatPT,
-    celebrations: celebrationsPT,
-    news: newsPT,
-    addons: addonsPT,
-    professional: professionalPT,
-    recovery: recoveryPT,
-    settings: settingsPT,
-    locations: locationsPT,
-    products: productsPT,
+    common: commonPT, auth: authPT, fitness: fitnessPT, social: socialPT, nutrition: nutritionPT,
+    seo: seoPT, units: unitsPT, a11y: a11yPT, plurals: pluralsPT, admin: adminPT, premium: premiumPT,
+    subscription: subscriptionPT, videos: videosPT, feed: feedPT, chat: chatPT, celebrations: celebrationsPT,
+    news: newsPT, addons: addonsPT, professional: professionalPT, recovery: recoveryPT, settings: settingsPT,
+    locations: locationsPT, products: productsPT,
   },
   fr: {
-    common: commonFR,
-    auth: authFR,
-    fitness: fitnessFR,
-    social: socialFR,
-    nutrition: nutritionFR,
-    seo: seoFR,
-    units: unitsFR,
-    a11y: a11yFR,
-    plurals: pluralsFR,
-    admin: adminFR,
-    premium: premiumFR,
-    subscription: subscriptionFR,
-    videos: videosFR,
-    feed: feedFR,
-    chat: chatFR,
-    celebrations: celebrationsFR,
-    news: newsFR,
-    addons: addonsFR,
-    professional: professionalFR,
-    recovery: recoveryFR,
-    settings: settingsFR,
-    locations: locationsFR,
-    products: productsFR,
+    common: commonFR, auth: authFR, fitness: fitnessFR, social: socialFR, nutrition: nutritionFR,
+    seo: seoFR, units: unitsFR, a11y: a11yFR, plurals: pluralsFR, admin: adminFR, premium: premiumFR,
+    subscription: subscriptionFR, videos: videosFR, feed: feedFR, chat: chatFR, celebrations: celebrationsFR,
+    news: newsFR, addons: addonsFR, professional: professionalFR, recovery: recoveryFR, settings: settingsFR,
+    locations: locationsFR, products: productsFR,
   },
   de: {
-    common: commonDE,
-    auth: authDE,
-    fitness: fitnessDE,
-    social: socialDE,
-    nutrition: nutritionDE,
-    seo: seoDE,
-    units: unitsDE,
-    a11y: a11yDE,
-    plurals: pluralsDE,
-    admin: adminDE,
-    premium: premiumDE,
-    subscription: subscriptionDE,
-    videos: videosDE,
-    feed: feedDE,
-    chat: chatDE,
-    celebrations: celebrationsDE,
-    news: newsDE,
-    addons: addonsDE,
-    professional: professionalDE,
-    recovery: recoveryDE,
-    settings: settingsDE,
-    locations: locationsDE,
-    products: productsDE,
+    common: commonDE, auth: authDE, fitness: fitnessDE, social: socialDE, nutrition: nutritionDE,
+    seo: seoDE, units: unitsDE, a11y: a11yDE, plurals: pluralsDE, admin: adminDE, premium: premiumDE,
+    subscription: subscriptionDE, videos: videosDE, feed: feedDE, chat: chatDE, celebrations: celebrationsDE,
+    news: newsDE, addons: addonsDE, professional: professionalDE, recovery: recoveryDE, settings: settingsDE,
+    locations: locationsDE, products: productsDE,
   },
   zh: {
-    common: commonZH,
-    auth: authZH,
-    settings: settingsZH,
-    fitness: fitnessZH,
-    social: socialZH,
-    nutrition: nutritionZH,
-    seo: seoZH,
-    units: unitsZH,
-    a11y: a11yZH,
-    plurals: pluralsZH,
-    admin: adminZH,
-    premium: premiumZH,
-    subscription: subscriptionZH,
-    videos: videosZH,
-    feed: feedZH,
-    chat: chatZH,
-    celebrations: celebrationsZH,
-    news: newsZH,
-    addons: addonsZH,
-    professional: professionalZH,
-    recovery: recoveryZH,
-    locations: locationsZH,
-    products: productsZH,
+    common: commonZH, auth: authZH, settings: settingsZH, fitness: fitnessZH, social: socialZH,
+    nutrition: nutritionZH, seo: seoZH, units: unitsZH, a11y: a11yZH, plurals: pluralsZH, admin: adminZH,
+    premium: premiumZH, subscription: subscriptionZH, videos: videosZH, feed: feedZH, chat: chatZH,
+    celebrations: celebrationsZH, news: newsZH, addons: addonsZH, professional: professionalZH,
+    recovery: recoveryZH, locations: locationsZH, products: productsZH,
   },
   tr: {
-    common: commonTR,
-    auth: authTR,
-    settings: settingsTR,
-    fitness: fitnessTR,
-    nutrition: nutritionTR,
-    social: socialTR,
-    subscription: subscriptionTR,
-    premium: premiumTR,
-    feed: feedTR,
-    chat: chatTR,
-    celebrations: celebrationsTR,
-    admin: adminTR,
-    addons: addonsTR,
-    recovery: recoveryTR,
-    news: newsTR,
-    professional: professionalTR,
-    a11y: a11yTR,
-    seo: seoTR,
-    plurals: pluralsTR,
-    units: unitsTR,
-    videos: videosTR,
-    locations: locationsTR,
-    products: productsTR,
+    common: commonTR, auth: authTR, settings: settingsTR, fitness: fitnessTR, nutrition: nutritionTR,
+    social: socialTR, subscription: subscriptionTR, premium: premiumTR, feed: feedTR, chat: chatTR,
+    celebrations: celebrationsTR, admin: adminTR, addons: addonsTR, recovery: recoveryTR, news: newsTR,
+    professional: professionalTR, a11y: a11yTR, seo: seoTR, plurals: pluralsTR, units: unitsTR,
+    videos: videosTR, locations: locationsTR, products: productsTR,
   },
   it: {
-    common: commonIT,
-    auth: authIT,
-    settings: settingsIT,
-    fitness: fitnessIT,
-    nutrition: nutritionIT,
-    social: socialIT,
-    subscription: subscriptionIT,
-    premium: premiumIT,
-    feed: feedIT,
-    chat: chatIT,
-    celebrations: celebrationsIT,
-    admin: adminIT,
-    addons: addonsIT,
-    recovery: recoveryIT,
-    news: newsIT,
-    professional: professionalIT,
-    a11y: a11yIT,
-    seo: seoIT,
-    plurals: pluralsIT,
-    units: unitsIT,
-    videos: videosIT,
-    locations: locationsIT,
-    products: productsIT,
+    common: commonIT, auth: authIT, settings: settingsIT, fitness: fitnessIT, nutrition: nutritionIT,
+    social: socialIT, subscription: subscriptionIT, premium: premiumIT, feed: feedIT, chat: chatIT,
+    celebrations: celebrationsIT, admin: adminIT, addons: addonsIT, recovery: recoveryIT, news: newsIT,
+    professional: professionalIT, a11y: a11yIT, seo: seoIT, plurals: pluralsIT, units: unitsIT,
+    videos: videosIT, locations: locationsIT, products: productsIT,
   },
   nl: {
-    common: commonNL,
-    auth: authNL,
-    settings: settingsNL,
-    fitness: fitnessNL,
-    nutrition: nutritionNL,
-    social: socialNL,
-    subscription: subscriptionNL,
-    premium: premiumNL,
-    feed: feedNL,
-    chat: chatNL,
-    celebrations: celebrationsNL,
-    admin: adminNL,
-    addons: addonsNL,
-    recovery: recoveryNL,
-    news: newsNL,
-    professional: professionalNL,
-    a11y: a11yNL,
-    seo: seoNL,
-    plurals: pluralsNL,
-    units: unitsNL,
-    videos: videosNL,
-    locations: locationsNL,
-    products: productsNL,
+    common: commonNL, auth: authNL, settings: settingsNL, fitness: fitnessNL, nutrition: nutritionNL,
+    social: socialNL, subscription: subscriptionNL, premium: premiumNL, feed: feedNL, chat: chatNL,
+    celebrations: celebrationsNL, admin: adminNL, addons: addonsNL, recovery: recoveryNL, news: newsNL,
+    professional: professionalNL, a11y: a11yNL, seo: seoNL, plurals: pluralsNL, units: unitsNL,
+    videos: videosNL, locations: locationsNL, products: productsNL,
   },
   ru: {
-    common: commonRU,
-    auth: authRU,
-    settings: settingsRU,
-    fitness: fitnessRU,
-    nutrition: nutritionRU,
-    social: socialRU,
-    subscription: subscriptionRU,
-    premium: premiumRU,
-    feed: feedRU,
-    chat: chatRU,
-    celebrations: celebrationsRU,
-    admin: adminRU,
-    addons: addonsRU,
-    recovery: recoveryRU,
-    news: newsRU,
-    professional: professionalRU,
-    a11y: a11yRU,
-    seo: seoRU,
-    plurals: pluralsRU,
-    units: unitsRU,
-    videos: videosRU,
-    locations: locationsRU,
-    products: productsRU,
+    common: commonRU, auth: authRU, settings: settingsRU, fitness: fitnessRU, nutrition: nutritionRU,
+    social: socialRU, subscription: subscriptionRU, premium: premiumRU, feed: feedRU, chat: chatRU,
+    celebrations: celebrationsRU, admin: adminRU, addons: addonsRU, recovery: recoveryRU, news: newsRU,
+    professional: professionalRU, a11y: a11yRU, seo: seoRU, plurals: pluralsRU, units: unitsRU,
+    videos: videosRU, locations: locationsRU, products: productsRU,
   },
   ja: {
-    common: commonJA,
-    auth: authJA,
-    settings: settingsJA,
-    fitness: fitnessJA,
-    nutrition: nutritionJA,
-    social: socialJA,
-    subscription: subscriptionJA,
-    premium: premiumJA,
-    feed: feedJA,
-    chat: chatJA,
-    celebrations: celebrationsJA,
-    admin: adminJA,
-    addons: addonsJA,
-    recovery: recoveryJA,
-    news: newsJA,
-    professional: professionalJA,
-    a11y: a11yJA,
-    seo: seoJA,
-    plurals: pluralsJA,
-    units: unitsJA,
-    videos: videosJA,
-    locations: locationsJA,
-    products: productsJA,
+    common: commonJA, auth: authJA, settings: settingsJA, fitness: fitnessJA, nutrition: nutritionJA,
+    social: socialJA, subscription: subscriptionJA, premium: premiumJA, feed: feedJA, chat: chatJA,
+    celebrations: celebrationsJA, admin: adminJA, addons: addonsJA, recovery: recoveryJA, news: newsJA,
+    professional: professionalJA, a11y: a11yJA, seo: seoJA, plurals: pluralsJA, units: unitsJA,
+    videos: videosJA, locations: locationsJA, products: productsJA,
   },
   ko: {
-    common: commonKO,
-    auth: authKO,
-    settings: settingsKO,
-    fitness: fitnessKO,
-    nutrition: nutritionKO,
-    social: socialKO,
-    subscription: subscriptionKO,
-    premium: premiumKO,
-    feed: feedKO,
-    chat: chatKO,
-    celebrations: celebrationsKO,
-    admin: adminKO,
-    addons: addonsKO,
-    recovery: recoveryKO,
-    news: newsKO,
-    professional: professionalKO,
-    a11y: a11yKO,
-    seo: seoKO,
-    plurals: pluralsKO,
-    units: unitsKO,
-    videos: videosKO,
-    locations: locationsKO,
-    products: productsKO,
+    common: commonKO, auth: authKO, settings: settingsKO, fitness: fitnessKO, nutrition: nutritionKO,
+    social: socialKO, subscription: subscriptionKO, premium: premiumKO, feed: feedKO, chat: chatKO,
+    celebrations: celebrationsKO, admin: adminKO, addons: addonsKO, recovery: recoveryKO, news: newsKO,
+    professional: professionalKO, a11y: a11yKO, seo: seoKO, plurals: pluralsKO, units: unitsKO,
+    videos: videosKO, locations: locationsKO, products: productsKO,
   },
   ar: {
-    common: commonAR,
-    auth: authAR,
-    settings: settingsAR,
-    fitness: fitnessAR,
-    nutrition: nutritionAR,
-    social: socialAR,
-    subscription: subscriptionAR,
-    premium: premiumAR,
-    feed: feedAR,
-    chat: chatAR,
-    celebrations: celebrationsAR,
-    admin: adminAR,
-    addons: addonsAR,
-    recovery: recoveryAR,
-    news: newsAR,
-    professional: professionalAR,
-    a11y: a11yAR,
-    seo: seoAR,
-    plurals: pluralsAR,
-    units: unitsAR,
-    videos: videosAR,
-    locations: locationsAR,
-    products: productsAR,
+    common: commonAR, auth: authAR, settings: settingsAR, fitness: fitnessAR, nutrition: nutritionAR,
+    social: socialAR, subscription: subscriptionAR, premium: premiumAR, feed: feedAR, chat: chatAR,
+    celebrations: celebrationsAR, admin: adminAR, addons: addonsAR, recovery: recoveryAR, news: newsAR,
+    professional: professionalAR, a11y: a11yAR, seo: seoAR, plurals: pluralsAR, units: unitsAR,
+    videos: videosAR, locations: locationsAR, products: productsAR,
   },
   hi: {
-    common: commonHI,
-    auth: authHI,
-    settings: settingsHI,
-    fitness: fitnessHI,
-    nutrition: nutritionHI,
-    social: socialHI,
-    subscription: subscriptionHI,
-    premium: premiumHI,
-    feed: feedHI,
-    chat: chatHI,
-    celebrations: celebrationsHI,
-    admin: adminHI,
-    addons: addonsHI,
-    recovery: recoveryHI,
-    news: newsHI,
-    professional: professionalHI,
-    a11y: a11yHI,
-    seo: seoHI,
-    plurals: pluralsHI,
-    units: unitsHI,
-    videos: videosHI,
-    locations: locationsHI,
-    products: productsHI,
+    common: commonHI, auth: authHI, settings: settingsHI, fitness: fitnessHI, nutrition: nutritionHI,
+    social: socialHI, subscription: subscriptionHI, premium: premiumHI, feed: feedHI, chat: chatHI,
+    celebrations: celebrationsHI, admin: adminHI, addons: addonsHI, recovery: recoveryHI, news: newsHI,
+    professional: professionalHI, a11y: a11yHI, seo: seoHI, plurals: pluralsHI, units: unitsHI,
+    videos: videosHI, locations: locationsHI, products: productsHI,
   },
   bn: {
-    common: commonBN,
-    auth: authBN,
-    settings: settingsBN,
-    fitness: fitnessBN,
-    nutrition: nutritionBN,
-    social: socialBN,
-    subscription: subscriptionBN,
-    premium: premiumBN,
-    feed: feedBN,
-    chat: chatBN,
-    celebrations: celebrationsBN,
-    admin: adminBN,
-    addons: addonsBN,
-    recovery: recoveryBN,
-    news: newsBN,
-    professional: professionalBN,
-    a11y: a11yBN,
-    seo: seoBN,
-    plurals: pluralsBN,
-    units: unitsBN,
-    videos: videosBN,
-    locations: locationsBN,
-    products: productsBN,
+    common: commonBN, auth: authBN, settings: settingsBN, fitness: fitnessBN, nutrition: nutritionBN,
+    social: socialBN, subscription: subscriptionBN, premium: premiumBN, feed: feedBN, chat: chatBN,
+    celebrations: celebrationsBN, admin: adminBN, addons: addonsBN, recovery: recoveryBN, news: newsBN,
+    professional: professionalBN, a11y: a11yBN, seo: seoBN, plurals: pluralsBN, units: unitsBN,
+    videos: videosBN, locations: locationsBN, products: productsBN,
   },
   id: {
-    common: commonID,
-    auth: authID,
-    settings: settingsID,
-    fitness: fitnessID,
-    nutrition: nutritionID,
-    social: socialID,
-    subscription: subscriptionID,
-    premium: premiumID,
-    feed: feedID,
-    chat: chatID,
-    celebrations: celebrationsID,
-    admin: adminID,
-    addons: addonsID,
-    recovery: recoveryID,
-    news: newsID,
-    professional: professionalID,
-    a11y: a11yID,
-    seo: seoID,
-    plurals: pluralsID,
-    units: unitsID,
-    videos: videosID,
-    locations: locationsID,
-    products: productsID,
+    common: commonID, auth: authID, settings: settingsID, fitness: fitnessID, nutrition: nutritionID,
+    social: socialID, subscription: subscriptionID, premium: premiumID, feed: feedID, chat: chatID,
+    celebrations: celebrationsID, admin: adminID, addons: addonsID, recovery: recoveryID, news: newsID,
+    professional: professionalID, a11y: a11yID, seo: seoID, plurals: pluralsID, units: unitsID,
+    videos: videosID, locations: locationsID, products: productsID,
   },
   pcm: {
-    common: commonPCM,
-    auth: authPCM,
-    settings: settingsPCM,
-    fitness: fitnessPCM,
-    nutrition: nutritionPCM,
-    social: socialPCM,
-    subscription: subscriptionPCM,
-    premium: premiumPCM,
-    feed: feedPCM,
-    chat: chatPCM,
-    celebrations: celebrationsPCM,
-    admin: adminPCM,
-    addons: addonsPCM,
-    recovery: recoveryPCM,
-    news: newsPCM,
-    professional: professionalPCM,
-    a11y: a11yPCM,
-    seo: seoPCM,
-    plurals: pluralsPCM,
-    units: unitsPCM,
-    videos: videosPCM,
-    locations: locationsPCM,
-    products: productsPCM,
+    common: commonPCM, auth: authPCM, settings: settingsPCM, fitness: fitnessPCM, nutrition: nutritionPCM,
+    social: socialPCM, subscription: subscriptionPCM, premium: premiumPCM, feed: feedPCM, chat: chatPCM,
+    celebrations: celebrationsPCM, admin: adminPCM, addons: addonsPCM, recovery: recoveryPCM, news: newsPCM,
+    professional: professionalPCM, a11y: a11yPCM, seo: seoPCM, plurals: pluralsPCM, units: unitsPCM,
+    videos: videosPCM, locations: locationsPCM, products: productsPCM,
   },
   ta: {
-    common: commonTA,
-    auth: authTA,
-    settings: settingsTA,
-    fitness: fitnessTA,
-    nutrition: nutritionTA,
-    social: socialTA,
-    subscription: subscriptionTA,
-    premium: premiumTA,
-    feed: feedTA,
-    chat: chatTA,
-    celebrations: celebrationsTA,
-    admin: adminTA,
-    addons: addonsTA,
-    recovery: recoveryTA,
-    news: newsTA,
-    professional: professionalTA,
-    a11y: a11yTA,
-    seo: seoTA,
-    plurals: pluralsTA,
-    units: unitsTA,
-    videos: videosTA,
-    locations: locationsTA,
-    products: productsTA,
+    common: commonTA, auth: authTA, settings: settingsTA, fitness: fitnessTA, nutrition: nutritionTA,
+    social: socialTA, subscription: subscriptionTA, premium: premiumTA, feed: feedTA, chat: chatTA,
+    celebrations: celebrationsTA, admin: adminTA, addons: addonsTA, recovery: recoveryTA, news: newsTA,
+    professional: professionalTA, a11y: a11yTA, seo: seoTA, plurals: pluralsTA, units: unitsTA,
+    videos: videosTA, locations: locationsTA, products: productsTA,
   },
   ur: {
-    common: commonUR,
-    auth: authUR,
-    settings: settingsUR,
-    fitness: fitnessUR,
-    nutrition: nutritionUR,
-    social: socialUR,
-    subscription: subscriptionUR,
-    premium: premiumUR,
-    feed: feedUR,
-    chat: chatUR,
-    celebrations: celebrationsUR,
-    admin: adminUR,
-    addons: addonsUR,
-    recovery: recoveryUR,
-    news: newsUR,
-    professional: professionalUR,
-    a11y: a11yUR,
-    seo: seoUR,
-    plurals: pluralsUR,
-    units: unitsUR,
-    videos: videosUR,
-    locations: locationsUR,
-    products: productsUR,
+    common: commonUR, auth: authUR, settings: settingsUR, fitness: fitnessUR, nutrition: nutritionUR,
+    social: socialUR, subscription: subscriptionUR, premium: premiumUR, feed: feedUR, chat: chatUR,
+    celebrations: celebrationsUR, admin: adminUR, addons: addonsUR, recovery: recoveryUR, news: newsUR,
+    professional: professionalUR, a11y: a11yUR, seo: seoUR, plurals: pluralsUR, units: unitsUR,
+    videos: videosUR, locations: locationsUR, products: productsUR,
   },
   arz: {
-    common: commonARZ,
-    auth: authARZ,
-    settings: settingsARZ,
-    fitness: fitnessARZ,
-    nutrition: nutritionARZ,
-    social: socialARZ,
-    subscription: subscriptionARZ,
-    premium: premiumARZ,
-    feed: feedARZ,
-    chat: chatARZ,
-    celebrations: celebrationsARZ,
-    admin: adminARZ,
-    addons: addonsARZ,
-    recovery: recoveryARZ,
-    news: newsARZ,
-    professional: professionalARZ,
-    a11y: a11yARZ,
-    seo: seoARZ,
-    plurals: pluralsARZ,
-    units: unitsARZ,
-    videos: videosARZ,
-    locations: locationsARZ,
-    products: productsARZ,
+    common: commonARZ, auth: authARZ, settings: settingsARZ, fitness: fitnessARZ, nutrition: nutritionARZ,
+    social: socialARZ, subscription: subscriptionARZ, premium: premiumARZ, feed: feedARZ, chat: chatARZ,
+    celebrations: celebrationsARZ, admin: adminARZ, addons: addonsARZ, recovery: recoveryARZ, news: newsARZ,
+    professional: professionalARZ, a11y: a11yARZ, seo: seoARZ, plurals: pluralsARZ, units: unitsARZ,
+    videos: videosARZ, locations: locationsARZ, products: productsARZ,
   },
   mr: {
-    common: commonMR,
-    auth: authMR,
-    settings: settingsMR,
-    fitness: fitnessMR,
-    nutrition: nutritionMR,
-    social: socialMR,
-    subscription: subscriptionMR,
-    premium: premiumMR,
-    feed: feedMR,
-    chat: chatMR,
-    celebrations: celebrationsMR,
-    admin: adminMR,
-    addons: addonsMR,
-    recovery: recoveryMR,
-    news: newsMR,
-    professional: professionalMR,
-    a11y: a11yMR,
-    seo: seoMR,
-    plurals: pluralsMR,
-    units: unitsMR,
-    videos: videosMR,
-    locations: locationsMR,
-    products: productsMR,
+    common: commonMR, auth: authMR, settings: settingsMR, fitness: fitnessMR, nutrition: nutritionMR,
+    social: socialMR, subscription: subscriptionMR, premium: premiumMR, feed: feedMR, chat: chatMR,
+    celebrations: celebrationsMR, admin: adminMR, addons: addonsMR, recovery: recoveryMR, news: newsMR,
+    professional: professionalMR, a11y: a11yMR, seo: seoMR, plurals: pluralsMR, units: unitsMR,
+    videos: videosMR, locations: locationsMR, products: productsMR,
   },
   te: {
-    common: commonTE,
-    auth: authTE,
-    settings: settingsTE,
-    fitness: fitnessTE,
-    nutrition: nutritionTE,
-    social: socialTE,
-    subscription: subscriptionTE,
-    premium: premiumTE,
-    feed: feedTE,
-    chat: chatTE,
-    celebrations: celebrationsTE,
-    admin: adminTE,
-    addons: addonsTE,
-    recovery: recoveryTE,
-    news: newsTE,
-    professional: professionalTE,
-    a11y: a11yTE,
-    seo: seoTE,
-    plurals: pluralsTE,
-    units: unitsTE,
-    videos: videosTE,
-    locations: locationsTE,
-    products: productsTE,
+    common: commonTE, auth: authTE, settings: settingsTE, fitness: fitnessTE, nutrition: nutritionTE,
+    social: socialTE, subscription: subscriptionTE, premium: premiumTE, feed: feedTE, chat: chatTE,
+    celebrations: celebrationsTE, admin: adminTE, addons: addonsTE, recovery: recoveryTE, news: newsTE,
+    professional: professionalTE, a11y: a11yTE, seo: seoTE, plurals: pluralsTE, units: unitsTE,
+    videos: videosTE, locations: locationsTE, products: productsTE,
   },
   vi: {
-    common: commonVI,
-    auth: authVI,
-    settings: settingsVI,
-    fitness: fitnessVI,
-    nutrition: nutritionVI,
-    social: socialVI,
-    subscription: subscriptionVI,
-    premium: premiumVI,
-    feed: feedVI,
-    chat: chatVI,
-    celebrations: celebrationsVI,
-    admin: adminVI,
-    addons: addonsVI,
-    recovery: recoveryVI,
-    news: newsVI,
-    professional: professionalVI,
-    a11y: a11yVI,
-    seo: seoVI,
-    plurals: pluralsVI,
-    units: unitsVI,
-    videos: videosVI,
-    locations: locationsVI,
-    products: productsVI,
+    common: commonVI, auth: authVI, settings: settingsVI, fitness: fitnessVI, nutrition: nutritionVI,
+    social: socialVI, subscription: subscriptionVI, premium: premiumVI, feed: feedVI, chat: chatVI,
+    celebrations: celebrationsVI, admin: adminVI, addons: addonsVI, recovery: recoveryVI, news: newsVI,
+    professional: professionalVI, a11y: a11yVI, seo: seoVI, plurals: pluralsVI, units: unitsVI,
+    videos: videosVI, locations: locationsVI, products: productsVI,
   },
 };
 
-// Initialize i18n asynchronously for Safari compatibility
+// Initialize i18n
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -1337,14 +862,13 @@ i18n
     },
 
     react: {
-      useSuspense: false, // Changed to false for Safari compatibility
+      useSuspense: false,
     },
 
     load: 'languageOnly',
     cleanCode: true,
-    initImmediate: false, // Async init for Safari
+    initImmediate: false,
     
-    // Missing key handler - logs warnings in development
     saveMissing: true,
     missingKeyHandler: (lngs, ns, key) => {
       lngs.forEach(lng => logMissingKey(lng, ns, key));
@@ -1353,7 +877,6 @@ i18n
 
 // Validate translation parity in development
 if (import.meta.env.DEV) {
-  // Run after a short delay to let i18n initialize
   setTimeout(() => {
     validateTranslations(resources, 'en', 'es');
   }, 1000);
