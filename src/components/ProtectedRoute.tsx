@@ -22,16 +22,23 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const [verifying, setVerifying] = useState(false);
 
   useEffect(() => {
+    let mounted = true;
+    
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       console.log('Auth state change:', event, 'session:', !!session);
+      if (!mounted) return;
+      
       setSession(session);
-      if (!session && event !== 'INITIAL_SESSION') {
-        console.log('Redirecting to auth - no session, event:', event);
+      // Only redirect on explicit sign out, not on other events
+      if (event === 'SIGNED_OUT') {
+        console.log('User signed out, redirecting to auth');
         navigate("/auth");
       }
     });
 
     supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (!mounted) return;
+      
       setSession(session);
       if (!session) {
         navigate("/auth");
@@ -39,39 +46,50 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
         return;
       }
 
-      // Check onboarding status
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("onboarding_completed")
-        .eq("id", session.user.id)
-        .single();
+      try {
+        // Check onboarding status
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("onboarding_completed")
+          .eq("id", session.user.id)
+          .maybeSingle();
 
-      // Check if 2FA is enabled
-      const { data: authSecret } = await supabase
-        .from("auth_secrets")
-        .select("two_factor_enabled")
-        .eq("user_id", session.user.id)
-        .single();
+        // Check if 2FA is enabled
+        const { data: authSecret } = await supabase
+          .from("auth_secrets")
+          .select("two_factor_enabled")
+          .eq("user_id", session.user.id)
+          .maybeSingle();
 
-      // Check if 2FA is enabled and not yet verified in this session
-      const twoFactorVerified = sessionStorage.getItem(`2fa_verified_${session.user.id}`);
-      if (authSecret?.two_factor_enabled && !twoFactorVerified) {
-        setNeeds2FA(true);
-        setLoading(false);
-        return;
-      }
+        if (!mounted) return;
 
-      // Check if onboarding is completed (skip check for onboarding page itself)
-      if (location.pathname !== "/onboarding") {
-        if (profile && !profile.onboarding_completed) {
-          navigate("/onboarding");
+        // Check if 2FA is enabled and not yet verified in this session
+        const twoFactorVerified = sessionStorage.getItem(`2fa_verified_${session.user.id}`);
+        if (authSecret?.two_factor_enabled && !twoFactorVerified) {
+          setNeeds2FA(true);
+          setLoading(false);
+          return;
         }
+
+        // Check if onboarding is completed (skip check for onboarding page itself)
+        if (location.pathname !== "/onboarding") {
+          if (profile && !profile.onboarding_completed) {
+            navigate("/onboarding");
+          }
+        }
+      } catch (error) {
+        console.error('Error checking auth state:', error);
       }
 
-      setLoading(false);
+      if (mounted) {
+        setLoading(false);
+      }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, [navigate, location.pathname]);
 
   const handleVerify2FA = async () => {
