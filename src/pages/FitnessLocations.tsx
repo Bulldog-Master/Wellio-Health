@@ -107,8 +107,7 @@ const FitnessLocations = () => {
         .from('fitness_locations')
         .select('*')
         .eq('is_active', true)
-        .order('is_verified', { ascending: false })
-        .order('average_rating', { ascending: false });
+        .order('name', { ascending: true });
 
       if (selectedCategory !== 'all') {
         query = query.eq('category', selectedCategory);
@@ -264,6 +263,8 @@ const FitnessLocations = () => {
                         state: place.state || prev.state,
                         country: place.country || prev.country,
                         postal_code: place.postalCode || prev.postal_code,
+                        phone: place.phone || prev.phone,
+                        website_url: place.website || prev.website_url,
                       }));
                     }}
                   />
