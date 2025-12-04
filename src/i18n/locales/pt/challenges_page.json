@@ -1,0 +1,20 @@
+{
+  "challenges": "Desafios",
+  "complete_challenges": "Complete desafios para ganhar pontos e distintivos",
+  "custom_challenges": "Desafios Personalizados",
+  "total_points": "Pontos Totais",
+  "current_streak": "Sequência Atual",
+  "longest_streak": "Maior Sequência",
+  "days": "dias",
+  "daily": "Diário",
+  "weekly": "Semanal",
+  "monthly": "Mensal",
+  "milestones": "Marcos",
+  "target": "Meta",
+  "ends": "Termina",
+  "points": "pontos",
+  "mark_complete": "Marcar como Concluído",
+  "no_challenges": "Nenhum desafio {{type}} disponível",
+  "challenge_completed": "Desafio concluído!",
+  "points_awarded": "Pontos foram atribuídos!"
+}

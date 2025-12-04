@@ -1,0 +1,23 @@
+{
+  "search_discover": "搜索与发现",
+  "find_users_posts": "查找用户、帖子和热门话题",
+  "search_placeholder": "搜索用户、帖子或标签...",
+  "users": "用户",
+  "posts": "帖子",
+  "hashtags": "标签",
+  "searching": "搜索中...",
+  "anonymous": "匿名",
+  "pts": "积分",
+  "day_streak": "天连续",
+  "followers": "粉丝",
+  "following": "关注中",
+  "follow": "关注",
+  "no_users_found": "未找到\"{{query}}\"相关用户",
+  "no_posts_found": "未找到\"{{query}}\"相关帖子",
+  "no_hashtags_found": "未找到\"{{query}}\"相关标签",
+  "post": "帖子",
+  "view_posts": "查看帖子",
+  "top_users": "热门用户",
+  "follow_status_updated": "关注状态已更新",
+  "error": "错误"
+}

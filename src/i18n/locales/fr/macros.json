@@ -1,0 +1,17 @@
+{
+  "macros_dashboard": "Tableau de bord des macros",
+  "track_macros": "Suivez vos protéines, glucides et lipides",
+  "back_to_dashboard": "Retour au tableau de bord",
+  "today": "Aujourd'hui",
+  "seven_days": "7 jours",
+  "total_calories": "Calories totales",
+  "kcal": "kcal",
+  "protein": "Protéines",
+  "carbs": "Glucides",
+  "fat": "Lipides",
+  "of_calories": "des calories",
+  "macro_distribution": "Distribution des macros",
+  "no_nutrition_data": "Pas encore de données nutritionnelles",
+  "weekly_trends": "Tendances hebdomadaires",
+  "grams": "Grammes"
+}
