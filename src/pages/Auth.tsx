@@ -55,11 +55,10 @@ import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import { useTheme } from "next-themes";
+// next-themes removed - using direct DOM manipulation for dark mode
 
 const Auth = () => {
   const { t } = useTranslation('auth');
-  const { setTheme } = useTheme();
   
   const emailSchema = z.string().email(t('invalid_email'));
   const passwordSchema = z.string().min(6, t('password_min_length'));
@@ -93,14 +92,13 @@ const Auth = () => {
   // Check for password reset FIRST (synchronously, before any other effects)
   const [initialCheckDone, setInitialCheckDone] = useState(false);
   
-  // Force dark mode on Auth page mount (user preference reset on login)
+  // Force dark mode on Auth page mount
   useEffect(() => {
     console.log('[Auth] Component mounted, forcing dark mode');
-    setTheme('dark');
     localStorage.setItem('theme', 'dark');
     document.documentElement.classList.add('dark');
     document.documentElement.classList.remove('light');
-  }, [setTheme]);
+  }, []);
 
   useEffect(() => {
     setPasskeySupported(isWebAuthnSupported());
@@ -151,8 +149,6 @@ const Auth = () => {
   // Helper to set dark mode on login
   const setDarkMode = () => {
     console.log('[Auth] Setting dark mode...');
-    setTheme('dark');
-    // Also set localStorage directly as backup
     localStorage.setItem('theme', 'dark');
     document.documentElement.classList.add('dark');
     document.documentElement.classList.remove('light');

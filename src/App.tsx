@@ -3,8 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
-import { Suspense } from "react";
-import { ThemeProvider } from "next-themes";
+import { Suspense, useEffect } from "react";
 import { I18nextProvider } from "react-i18next";
 import i18n from "@/i18n/config";
 import { usePushNotifications } from "@/hooks/usePushNotifications";
@@ -20,7 +19,7 @@ import { AppRoutes } from "@/routes";
 
 // Loading fallback component
 const PageLoader = () => (
-  <div className="flex items-center justify-center min-h-screen">
+  <div className="flex items-center justify-center min-h-screen bg-background">
     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
   </div>
 );
@@ -47,6 +46,13 @@ const AppContent = () => {
   useOfflineStatus();
   useBackgroundSync();
   
+  // Force dark mode on every render
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+    document.documentElement.classList.remove('light');
+    document.documentElement.style.colorScheme = 'dark';
+  }, []);
+  
   return (
     <>
       <SkipToContent />
@@ -62,25 +68,30 @@ const AppContent = () => {
 };
 
 const App = () => {
+  // Force dark mode immediately
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+    document.documentElement.classList.remove('light');
+    document.documentElement.style.colorScheme = 'dark';
+  }, []);
+
   return (
     <I18nextProvider i18n={i18n}>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark" enableSystem={false} storageKey="theme" disableTransitionOnChange>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter
-              future={{
-                v7_startTransition: true,
-                v7_relativeSplatPath: true,
-              }}
-            >
-              <Suspense fallback={<PageLoader />}>
-                <AppContent />
-              </Suspense>
-            </BrowserRouter>
-          </TooltipProvider>
-        </ThemeProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter
+            future={{
+              v7_startTransition: true,
+              v7_relativeSplatPath: true,
+            }}
+          >
+            <Suspense fallback={<PageLoader />}>
+              <AppContent />
+            </Suspense>
+          </BrowserRouter>
+        </TooltipProvider>
       </QueryClientProvider>
     </I18nextProvider>
   );
