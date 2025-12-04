@@ -63,6 +63,7 @@ import productsEN from './locales/en/products.json';
 import recoveryEN from './locales/en/recovery.json';
 import addonsEN from './locales/en/addons.json';
 import professionalEN from './locales/en/professional.json';
+import paymentsEN from './locales/en/payments.json';
 
 // Spanish
 import commonES from './locales/es/common.json';
@@ -123,6 +124,7 @@ import productsES from './locales/es/products.json';
 import recoveryES from './locales/es/recovery.json';
 import addonsES from './locales/es/addons.json';
 import professionalES from './locales/es/professional.json';
+import paymentsES from './locales/es/payments.json';
 
 // Portuguese - Core namespaces only
 import commonPT from './locales/pt/common.json';
@@ -148,6 +150,7 @@ import recoveryPT from './locales/pt/recovery.json';
 import settingsPT from './locales/pt/settings.json';
 import locationsPT from './locales/pt/locations.json';
 import productsPT from './locales/pt/products.json';
+import paymentsPT from './locales/pt/payments.json';
 
 // French - Core + Extended namespaces
 import commonFR from './locales/fr/common.json';
@@ -182,6 +185,7 @@ import rewardsFR from './locales/fr/rewards.json';
 import searchFR from './locales/fr/search.json';
 import sessionFR from './locales/fr/session.json';
 import voiceFR from './locales/fr/voice.json';
+import paymentsFR from './locales/fr/payments.json';
 
 // German - Core namespaces only
 import commonDE from './locales/de/common.json';
@@ -207,6 +211,7 @@ import recoveryDE from './locales/de/recovery.json';
 import settingsDE from './locales/de/settings.json';
 import locationsDE from './locales/de/locations.json';
 import productsDE from './locales/de/products.json';
+import paymentsDE from './locales/de/payments.json';
 
 // Chinese - Core namespaces only
 import commonZH from './locales/zh/common.json';
@@ -232,6 +237,7 @@ import recoveryZH from './locales/zh/recovery.json';
 import settingsZH from './locales/zh/settings.json';
 import locationsZH from './locales/zh/locations.json';
 import productsZH from './locales/zh/products.json';
+import paymentsZH from './locales/zh/payments.json';
 
 // Turkish - Core + Extended namespaces
 import commonTR from './locales/tr/common.json';
@@ -266,6 +272,7 @@ import rewardsTR from './locales/tr/rewards.json';
 import searchTR from './locales/tr/search.json';
 import sessionTR from './locales/tr/session.json';
 import voiceTR from './locales/tr/voice.json';
+import paymentsTR from './locales/tr/payments.json';
 
 // Italian - Core + Extended namespaces
 import commonIT from './locales/it/common.json';
@@ -300,6 +307,7 @@ import rewardsIT from './locales/it/rewards.json';
 import searchIT from './locales/it/search.json';
 import sessionIT from './locales/it/session.json';
 import voiceIT from './locales/it/voice.json';
+import paymentsIT from './locales/it/payments.json';
 
 // Dutch - Core + Extended namespaces
 import commonNL from './locales/nl/common.json';
@@ -334,6 +342,7 @@ import rewardsNL from './locales/nl/rewards.json';
 import searchNL from './locales/nl/search.json';
 import sessionNL from './locales/nl/session.json';
 import voiceNL from './locales/nl/voice.json';
+import paymentsNL from './locales/nl/payments.json';
 
 // Russian - Core + Extended namespaces
 import commonRU from './locales/ru/common.json';
@@ -368,6 +377,7 @@ import rewardsRU from './locales/ru/rewards.json';
 import searchRU from './locales/ru/search.json';
 import sessionRU from './locales/ru/session.json';
 import voiceRU from './locales/ru/voice.json';
+import paymentsRU from './locales/ru/payments.json';
 
 // Japanese - Core + Extended namespaces
 import commonJA from './locales/ja/common.json';
@@ -402,6 +412,7 @@ import rewardsJA from './locales/ja/rewards.json';
 import searchJA from './locales/ja/search.json';
 import sessionJA from './locales/ja/session.json';
 import voiceJA from './locales/ja/voice.json';
+import paymentsJA from './locales/ja/payments.json';
 
 // Korean - Core + Extended namespaces
 import commonKO from './locales/ko/common.json';
@@ -436,6 +447,7 @@ import rewardsKO from './locales/ko/rewards.json';
 import searchKO from './locales/ko/search.json';
 import sessionKO from './locales/ko/session.json';
 import voiceKO from './locales/ko/voice.json';
+import paymentsKO from './locales/ko/payments.json';
 
 // Arabic - Core + Extended namespaces
 import commonAR from './locales/ar/common.json';
@@ -470,6 +482,7 @@ import rewardsAR from './locales/ar/rewards.json';
 import searchAR from './locales/ar/search.json';
 import sessionAR from './locales/ar/session.json';
 import voiceAR from './locales/ar/voice.json';
+import paymentsAR from './locales/ar/payments.json';
 
 // Hindi - Core + Extended namespaces
 import commonHI from './locales/hi/common.json';
@@ -505,6 +518,7 @@ import searchHI from './locales/hi/search.json';
 import sessionHI from './locales/hi/session.json';
 import voiceHI from './locales/hi/voice.json';
 import workoutHI from './locales/hi/workout.json';
+import paymentsHI from './locales/hi/payments.json';
 
 // Bengali - Core + Extended namespaces
 import commonBN from './locales/bn/common.json';
@@ -539,6 +553,7 @@ import rewardsBN from './locales/bn/rewards.json';
 import searchBN from './locales/bn/search.json';
 import sessionBN from './locales/bn/session.json';
 import voiceBN from './locales/bn/voice.json';
+import paymentsBN from './locales/bn/payments.json';
 
 // Indonesian - Core + Extended namespaces
 import commonID from './locales/id/common.json';
@@ -575,6 +590,7 @@ import sessionID from './locales/id/session.json';
 import voiceID from './locales/id/voice.json';
 import challengesID from './locales/id/challenges.json';
 import liveID from './locales/id/live.json';
+import paymentsID from './locales/id/payments.json';
 
 // Nigerian Pidgin - Core + Extended namespaces
 import commonPCM from './locales/pcm/common.json';
@@ -609,6 +625,7 @@ import rewardsPCM from './locales/pcm/rewards.json';
 import searchPCM from './locales/pcm/search.json';
 import sessionPCM from './locales/pcm/session.json';
 import voicePCM from './locales/pcm/voice.json';
+import paymentsPCM from './locales/pcm/payments.json';
 
 // Tamil - Core + Extended namespaces
 import commonTA from './locales/ta/common.json';
@@ -645,6 +662,7 @@ import sessionTA from './locales/ta/session.json';
 import voiceTA from './locales/ta/voice.json';
 import challengesTA from './locales/ta/challenges.json';
 import liveTA from './locales/ta/live.json';
+import paymentsTA from './locales/ta/payments.json';
 
 // Urdu - Core + Extended namespaces
 import commonUR from './locales/ur/common.json';
@@ -679,6 +697,7 @@ import rewardsUR from './locales/ur/rewards.json';
 import searchUR from './locales/ur/search.json';
 import sessionUR from './locales/ur/session.json';
 import voiceUR from './locales/ur/voice.json';
+import paymentsUR from './locales/ur/payments.json';
 
 // Egyptian Arabic - Core + Extended namespaces
 import commonARZ from './locales/arz/common.json';
@@ -713,6 +732,7 @@ import rewardsARZ from './locales/arz/rewards.json';
 import searchARZ from './locales/arz/search.json';
 import sessionARZ from './locales/arz/session.json';
 import voiceARZ from './locales/arz/voice.json';
+import paymentsARZ from './locales/arz/payments.json';
 
 // Marathi - Core + Extended namespaces
 import commonMR from './locales/mr/common.json';
@@ -747,6 +767,7 @@ import rewardsMR from './locales/mr/rewards.json';
 import searchMR from './locales/mr/search.json';
 import sessionMR from './locales/mr/session.json';
 import voiceMR from './locales/mr/voice.json';
+import paymentsMR from './locales/mr/payments.json';
 
 // Telugu - Core + Extended namespaces
 import commonTE from './locales/te/common.json';
@@ -781,6 +802,7 @@ import rewardsTE from './locales/te/rewards.json';
 import searchTE from './locales/te/search.json';
 import sessionTE from './locales/te/session.json';
 import voiceTE from './locales/te/voice.json';
+import paymentsTE from './locales/te/payments.json';
 
 // Vietnamese - Core + Extended namespaces
 import commonVI from './locales/vi/common.json';
@@ -815,6 +837,7 @@ import rewardsVI from './locales/vi/rewards.json';
 import searchVI from './locales/vi/search.json';
 import sessionVI from './locales/vi/session.json';
 import voiceVI from './locales/vi/voice.json';
+import paymentsVI from './locales/vi/payments.json';
 
 // All namespaces
 export const allNamespaces = [
@@ -826,7 +849,7 @@ export const allNamespaces = [
   'trainer', 'session', 'bookmarks', 'challenges_page', 'feed', 'groups', 
   'followers', 'schedule', 'seo', 'units', 'a11y', 'plurals', 'admin', 'premium', 
   'videos', 'chat', 'celebrations', 'news', 'sponsors', 'locations', 'ads', 
-  'products', 'recovery', 'addons', 'professional'
+  'products', 'recovery', 'addons', 'professional', 'payments'
 ] as const;
 
 export type TranslationNamespace = typeof allNamespaces[number];
@@ -844,7 +867,7 @@ const resources = {
     a11y: a11yEN, plurals: pluralsEN, messages: messagesEN, notifications: notificationsEN, errors: errorsEN,
     admin: adminEN, premium: premiumEN, videos: videosEN, chat: chatEN, celebrations: celebrationsEN,
     news: newsEN, sponsors: sponsorsEN, locations: locationsEN, ads: adsEN, products: productsEN,
-    recovery: recoveryEN, addons: addonsEN, professional: professionalEN,
+    recovery: recoveryEN, addons: addonsEN, professional: professionalEN, payments: paymentsEN,
   },
   es: {
     common: commonES, auth: authES, fitness: fitnessES, social: socialES, nutrition: nutritionES,
@@ -857,14 +880,14 @@ const resources = {
     challenges_page: challengesPageES, feed: feedES, groups: groupsES, followers: followersES, schedule: scheduleES,
     seo: seoES, units: unitsES, a11y: a11yES, plurals: pluralsES, admin: adminES, premium: premiumES,
     videos: videosES, chat: chatES, celebrations: celebrationsES, news: newsES, sponsors: sponsorsES,
-    locations: locationsES, ads: adsES, products: productsES, recovery: recoveryES, addons: addonsES, professional: professionalES,
+    locations: locationsES, ads: adsES, products: productsES, recovery: recoveryES, addons: addonsES, professional: professionalES, payments: paymentsES,
   },
   pt: {
     common: commonPT, auth: authPT, fitness: fitnessPT, social: socialPT, nutrition: nutritionPT,
     seo: seoPT, units: unitsPT, a11y: a11yPT, plurals: pluralsPT, admin: adminPT, premium: premiumPT,
     subscription: subscriptionPT, videos: videosPT, feed: feedPT, chat: chatPT, celebrations: celebrationsPT,
     news: newsPT, addons: addonsPT, professional: professionalPT, recovery: recoveryPT, settings: settingsPT,
-    locations: locationsPT, products: productsPT,
+    locations: locationsPT, products: productsPT, payments: paymentsPT,
   },
   fr: {
     common: commonFR, auth: authFR, fitness: fitnessFR, social: socialFR, nutrition: nutritionFR,
@@ -873,21 +896,21 @@ const resources = {
     news: newsFR, addons: addonsFR, professional: professionalFR, recovery: recoveryFR, settings: settingsFR,
     locations: locationsFR, products: productsFR, challenges_page: challengesPageFR, macros: macrosFR,
     measurements: measurementsFR, records: recordsFR, referral: referralFR, rewards: rewardsFR,
-    search: searchFR, session: sessionFR, voice: voiceFR,
+    search: searchFR, session: sessionFR, voice: voiceFR, payments: paymentsFR,
   },
   de: {
     common: commonDE, auth: authDE, fitness: fitnessDE, social: socialDE, nutrition: nutritionDE,
     seo: seoDE, units: unitsDE, a11y: a11yDE, plurals: pluralsDE, admin: adminDE, premium: premiumDE,
     subscription: subscriptionDE, videos: videosDE, feed: feedDE, chat: chatDE, celebrations: celebrationsDE,
     news: newsDE, addons: addonsDE, professional: professionalDE, recovery: recoveryDE, settings: settingsDE,
-    locations: locationsDE, products: productsDE,
+    locations: locationsDE, products: productsDE, payments: paymentsDE,
   },
   zh: {
     common: commonZH, auth: authZH, settings: settingsZH, fitness: fitnessZH, social: socialZH,
     nutrition: nutritionZH, seo: seoZH, units: unitsZH, a11y: a11yZH, plurals: pluralsZH, admin: adminZH,
     premium: premiumZH, subscription: subscriptionZH, videos: videosZH, feed: feedZH, chat: chatZH,
     celebrations: celebrationsZH, news: newsZH, addons: addonsZH, professional: professionalZH,
-    recovery: recoveryZH, locations: locationsZH, products: productsZH,
+    recovery: recoveryZH, locations: locationsZH, products: productsZH, payments: paymentsZH,
   },
   tr: {
     common: commonTR, auth: authTR, settings: settingsTR, fitness: fitnessTR, nutrition: nutritionTR,
@@ -896,7 +919,7 @@ const resources = {
     professional: professionalTR, a11y: a11yTR, seo: seoTR, plurals: pluralsTR, units: unitsTR,
     videos: videosTR, locations: locationsTR, products: productsTR, challenges_page: challengesPageTR,
     macros: macrosTR, measurements: measurementsTR, records: recordsTR, referral: referralTR,
-    rewards: rewardsTR, search: searchTR, session: sessionTR, voice: voiceTR,
+    rewards: rewardsTR, search: searchTR, session: sessionTR, voice: voiceTR, payments: paymentsTR,
   },
   it: {
     common: commonIT, auth: authIT, settings: settingsIT, fitness: fitnessIT, nutrition: nutritionIT,
@@ -905,7 +928,7 @@ const resources = {
     professional: professionalIT, a11y: a11yIT, seo: seoIT, plurals: pluralsIT, units: unitsIT,
     videos: videosIT, locations: locationsIT, products: productsIT, challenges_page: challengesPageIT,
     macros: macrosIT, measurements: measurementsIT, records: recordsIT, referral: referralIT,
-    rewards: rewardsIT, search: searchIT, session: sessionIT, voice: voiceIT,
+    rewards: rewardsIT, search: searchIT, session: sessionIT, voice: voiceIT, payments: paymentsIT,
   },
   nl: {
     common: commonNL, auth: authNL, settings: settingsNL, fitness: fitnessNL, nutrition: nutritionNL,
@@ -914,7 +937,7 @@ const resources = {
     professional: professionalNL, a11y: a11yNL, seo: seoNL, plurals: pluralsNL, units: unitsNL,
     videos: videosNL, locations: locationsNL, products: productsNL, challenges_page: challengesPageNL,
     macros: macrosNL, measurements: measurementsNL, records: recordsNL, referral: referralNL,
-    rewards: rewardsNL, search: searchNL, session: sessionNL, voice: voiceNL,
+    rewards: rewardsNL, search: searchNL, session: sessionNL, voice: voiceNL, payments: paymentsNL,
   },
   ru: {
     common: commonRU, auth: authRU, settings: settingsRU, fitness: fitnessRU, nutrition: nutritionRU,
@@ -923,7 +946,7 @@ const resources = {
     professional: professionalRU, a11y: a11yRU, seo: seoRU, plurals: pluralsRU, units: unitsRU,
     videos: videosRU, locations: locationsRU, products: productsRU, challenges_page: challengesPageRU,
     macros: macrosRU, measurements: measurementsRU, records: recordsRU, referral: referralRU,
-    rewards: rewardsRU, search: searchRU, session: sessionRU, voice: voiceRU,
+    rewards: rewardsRU, search: searchRU, session: sessionRU, voice: voiceRU, payments: paymentsRU,
   },
   ja: {
     common: commonJA, auth: authJA, settings: settingsJA, fitness: fitnessJA, nutrition: nutritionJA,
@@ -932,7 +955,7 @@ const resources = {
     professional: professionalJA, a11y: a11yJA, seo: seoJA, plurals: pluralsJA, units: unitsJA,
     videos: videosJA, locations: locationsJA, products: productsJA, challenges_page: challengesPageJA,
     macros: macrosJA, measurements: measurementsJA, records: recordsJA, referral: referralJA,
-    rewards: rewardsJA, search: searchJA, session: sessionJA, voice: voiceJA,
+    rewards: rewardsJA, search: searchJA, session: sessionJA, voice: voiceJA, payments: paymentsJA,
   },
   ko: {
     common: commonKO, auth: authKO, settings: settingsKO, fitness: fitnessKO, nutrition: nutritionKO,
@@ -941,7 +964,7 @@ const resources = {
     professional: professionalKO, a11y: a11yKO, seo: seoKO, plurals: pluralsKO, units: unitsKO,
     videos: videosKO, locations: locationsKO, products: productsKO, challenges_page: challengesPageKO,
     macros: macrosKO, measurements: measurementsKO, records: recordsKO, referral: referralKO,
-    rewards: rewardsKO, search: searchKO, session: sessionKO, voice: voiceKO,
+    rewards: rewardsKO, search: searchKO, session: sessionKO, voice: voiceKO, payments: paymentsKO,
   },
   ar: {
     common: commonAR, auth: authAR, settings: settingsAR, fitness: fitnessAR, nutrition: nutritionAR,
@@ -950,7 +973,7 @@ const resources = {
     professional: professionalAR, a11y: a11yAR, seo: seoAR, plurals: pluralsAR, units: unitsAR,
     videos: videosAR, locations: locationsAR, products: productsAR, challenges_page: challengesPageAR,
     macros: macrosAR, measurements: measurementsAR, records: recordsAR, referral: referralAR,
-    rewards: rewardsAR, search: searchAR, session: sessionAR, voice: voiceAR,
+    rewards: rewardsAR, search: searchAR, session: sessionAR, voice: voiceAR, payments: paymentsAR,
   },
   hi: {
     common: commonHI, auth: authHI, settings: settingsHI, fitness: fitnessHI, nutrition: nutritionHI,
@@ -959,7 +982,7 @@ const resources = {
     professional: professionalHI, a11y: a11yHI, seo: seoHI, plurals: pluralsHI, units: unitsHI,
     videos: videosHI, locations: locationsHI, products: productsHI, challenges_page: challengesPageHI,
     macros: macrosHI, measurements: measurementsHI, records: recordsHI, referral: referralHI,
-    rewards: rewardsHI, search: searchHI, session: sessionHI, voice: voiceHI, workout: workoutHI,
+    rewards: rewardsHI, search: searchHI, session: sessionHI, voice: voiceHI, workout: workoutHI, payments: paymentsHI,
   },
   bn: {
     common: commonBN, auth: authBN, settings: settingsBN, fitness: fitnessBN, nutrition: nutritionBN,
@@ -968,7 +991,7 @@ const resources = {
     professional: professionalBN, a11y: a11yBN, seo: seoBN, plurals: pluralsBN, units: unitsBN,
     videos: videosBN, locations: locationsBN, products: productsBN, challenges_page: challengesPageBN,
     macros: macrosBN, measurements: measurementsBN, records: recordsBN, referral: referralBN,
-    rewards: rewardsBN, search: searchBN, session: sessionBN, voice: voiceBN,
+    rewards: rewardsBN, search: searchBN, session: sessionBN, voice: voiceBN, payments: paymentsBN,
   },
   id: {
     common: commonID, auth: authID, settings: settingsID, fitness: fitnessID, nutrition: nutritionID,
@@ -978,7 +1001,7 @@ const resources = {
     videos: videosID, locations: locationsID, products: productsID, challenges_page: challengesPageID,
     macros: macrosID, measurements: measurementsID, records: recordsID, referral: referralID,
     rewards: rewardsID, search: searchID, session: sessionID, voice: voiceID, challenges: challengesID,
-    live: liveID,
+    live: liveID, payments: paymentsID,
   },
   pcm: {
     common: commonPCM, auth: authPCM, settings: settingsPCM, fitness: fitnessPCM, nutrition: nutritionPCM,
@@ -987,7 +1010,7 @@ const resources = {
     professional: professionalPCM, a11y: a11yPCM, seo: seoPCM, plurals: pluralsPCM, units: unitsPCM,
     videos: videosPCM, locations: locationsPCM, products: productsPCM, challenges_page: challengesPagePCM,
     macros: macrosPCM, measurements: measurementsPCM, records: recordsPCM, referral: referralPCM,
-    rewards: rewardsPCM, search: searchPCM, session: sessionPCM, voice: voicePCM,
+    rewards: rewardsPCM, search: searchPCM, session: sessionPCM, voice: voicePCM, payments: paymentsPCM,
   },
   ta: {
     common: commonTA, auth: authTA, settings: settingsTA, fitness: fitnessTA, nutrition: nutritionTA,
@@ -997,7 +1020,7 @@ const resources = {
     videos: videosTA, locations: locationsTA, products: productsTA, challenges_page: challengesPageTA,
     macros: macrosTA, measurements: measurementsTA, records: recordsTA, referral: referralTA,
     rewards: rewardsTA, search: searchTA, session: sessionTA, voice: voiceTA, challenges: challengesTA,
-    live: liveTA,
+    live: liveTA, payments: paymentsTA,
   },
   ur: {
     common: commonUR, auth: authUR, settings: settingsUR, fitness: fitnessUR, nutrition: nutritionUR,
@@ -1006,7 +1029,7 @@ const resources = {
     professional: professionalUR, a11y: a11yUR, seo: seoUR, plurals: pluralsUR, units: unitsUR,
     videos: videosUR, locations: locationsUR, products: productsUR, challenges_page: challengesPageUR,
     macros: macrosUR, measurements: measurementsUR, records: recordsUR, referral: referralUR,
-    rewards: rewardsUR, search: searchUR, session: sessionUR, voice: voiceUR,
+    rewards: rewardsUR, search: searchUR, session: sessionUR, voice: voiceUR, payments: paymentsUR,
   },
   arz: {
     common: commonARZ, auth: authARZ, settings: settingsARZ, fitness: fitnessARZ, nutrition: nutritionARZ,
@@ -1015,7 +1038,7 @@ const resources = {
     professional: professionalARZ, a11y: a11yARZ, seo: seoARZ, plurals: pluralsARZ, units: unitsARZ,
     videos: videosARZ, locations: locationsARZ, products: productsARZ, challenges_page: challengesPageARZ,
     macros: macrosARZ, measurements: measurementsARZ, records: recordsARZ, referral: referralARZ,
-    rewards: rewardsARZ, search: searchARZ, session: sessionARZ, voice: voiceARZ,
+    rewards: rewardsARZ, search: searchARZ, session: sessionARZ, voice: voiceARZ, payments: paymentsARZ,
   },
   mr: {
     common: commonMR, auth: authMR, settings: settingsMR, fitness: fitnessMR, nutrition: nutritionMR,
@@ -1024,7 +1047,7 @@ const resources = {
     professional: professionalMR, a11y: a11yMR, seo: seoMR, plurals: pluralsMR, units: unitsMR,
     videos: videosMR, locations: locationsMR, products: productsMR, challenges_page: challengesPageMR,
     macros: macrosMR, measurements: measurementsMR, records: recordsMR, referral: referralMR,
-    rewards: rewardsMR, search: searchMR, session: sessionMR, voice: voiceMR,
+    rewards: rewardsMR, search: searchMR, session: sessionMR, voice: voiceMR, payments: paymentsMR,
   },
   te: {
     common: commonTE, auth: authTE, settings: settingsTE, fitness: fitnessTE, nutrition: nutritionTE,
@@ -1033,7 +1056,7 @@ const resources = {
     professional: professionalTE, a11y: a11yTE, seo: seoTE, plurals: pluralsTE, units: unitsTE,
     videos: videosTE, locations: locationsTE, products: productsTE, challenges_page: challengesPageTE,
     macros: macrosTE, measurements: measurementsTE, records: recordsTE, referral: referralTE,
-    rewards: rewardsTE, search: searchTE, session: sessionTE, voice: voiceTE,
+    rewards: rewardsTE, search: searchTE, session: sessionTE, voice: voiceTE, payments: paymentsTE,
   },
   vi: {
     common: commonVI, auth: authVI, settings: settingsVI, fitness: fitnessVI, nutrition: nutritionVI,
@@ -1042,7 +1065,7 @@ const resources = {
     professional: professionalVI, a11y: a11yVI, seo: seoVI, plurals: pluralsVI, units: unitsVI,
     videos: videosVI, locations: locationsVI, products: productsVI, challenges_page: challengesPageVI,
     macros: macrosVI, measurements: measurementsVI, records: recordsVI, referral: referralVI,
-    rewards: rewardsVI, search: searchVI, session: sessionVI, voice: voiceVI,
+    rewards: rewardsVI, search: searchVI, session: sessionVI, voice: voiceVI, payments: paymentsVI,
   },
 };
 
