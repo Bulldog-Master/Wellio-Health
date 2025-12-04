@@ -93,6 +93,7 @@ const Recovery = lazy(() => import("@/pages/Recovery"));
 const TrainerPortal = lazy(() => import("@/pages/TrainerPortal"));
 const PractitionerPortal = lazy(() => import("@/pages/PractitionerPortal"));
 const AdminProfessionals = lazy(() => import("@/pages/AdminProfessionals"));
+const ProfessionalHub = lazy(() => import("@/pages/ProfessionalHub"));
 
 /**
  * Application route configuration
@@ -206,6 +207,7 @@ export const AppRoutes = () => (
     <Route path="/locations" element={<RouteErrorBoundary><ProtectedRoute><Layout><FitnessLocations /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/products" element={<RouteErrorBoundary><ProtectedRoute><Layout><RecommendedProducts /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/recovery" element={<RouteErrorBoundary><ProtectedRoute><Layout><Recovery /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/professional" element={<RouteErrorBoundary><ProtectedRoute><Layout><ProfessionalHub /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/trainer-portal" element={<RouteErrorBoundary><ProtectedRoute><Layout><TrainerPortal /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/practitioner-portal" element={<RouteErrorBoundary><ProtectedRoute><Layout><PractitionerPortal /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/admin/professionals" element={<RouteErrorBoundary><ProtectedRoute><Layout><AdminProfessionals /></Layout></ProtectedRoute></RouteErrorBoundary>} />

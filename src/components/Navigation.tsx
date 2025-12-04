@@ -1,4 +1,4 @@
-import { Home, Utensils, Activity, Users, Settings, Sparkles, Heart, Crown, Newspaper, MapPin, Handshake, Leaf, ShoppingBag } from "lucide-react";
+import { Home, Utensils, Activity, Users, Settings, Sparkles, Heart, Crown, Newspaper, MapPin, Handshake, Leaf, ShoppingBag, Briefcase } from "lucide-react";
 import { NavLink } from "./NavLink";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
@@ -66,6 +66,7 @@ const Navigation = () => {
     { to: "/fundraisers", icon: Heart, label: t('nav.fundraisers'), color: "text-[hsl(var(--nav-icon-3))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-3))]" },
     { to: "/locations", icon: MapPin, label: t('nav.wellness_directory'), color: "text-[hsl(var(--nav-icon-8))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-8))]" },
     { to: "/news", icon: Newspaper, label: t('nav.news'), color: "text-[hsl(var(--nav-icon-7))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-7))]" },
+    { to: "/professional", icon: Briefcase, label: t('nav.professional'), color: "text-[hsl(var(--nav-icon-12))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-12))]" },
     { to: "/recovery", icon: Leaf, label: t('nav.recovery'), color: "text-[hsl(var(--nav-icon-10))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-10))]" },
     { to: "/products", icon: ShoppingBag, label: t('nav.shop'), color: "text-[hsl(var(--nav-icon-11))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-11))]" },
     { to: "/sponsors", icon: Handshake, label: t('nav.sponsors'), color: "text-[hsl(var(--nav-icon-9))]", hoverColor: "group-hover:drop-shadow-[0_0_8px_hsl(var(--nav-icon-9))]" },
