@@ -8,7 +8,7 @@
   "cryptocurrency": "Criptomonedas",
   "fee": "comisión",
   "canada_only": "Solo Canadá",
-  "integration_pending": "Integraciones de pago próximamente. Selecciona tu método preferido para continuar.",
+  "integration_pending": "Selecciona tu método de pago preferido para continuar.",
   "continue": "Continuar",
   "item": "Artículo",
   "billing": "Facturación",
@@ -16,7 +16,7 @@
   "yearly": "Anual",
   "total": "Total",
   "secure_payment": "Tu pago está protegido con encriptación estándar de la industria",
-  "payment_provider_pending": "La integración del proveedor de pagos estará disponible pronto. ¡Gracias por tu paciencia!",
+  "payment_provider_pending": "El procesamiento del pago comenzará después de confirmar.",
   "confirm_payment": "Confirmar Pago",
   "processing": "Procesando...",
   

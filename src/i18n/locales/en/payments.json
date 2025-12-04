@@ -8,7 +8,7 @@
   "cryptocurrency": "Cryptocurrency",
   "fee": "fee",
   "canada_only": "Canada Only",
-  "integration_pending": "Payment integrations coming soon. Select your preferred method to continue.",
+  "integration_pending": "Select your preferred payment method to continue.",
   "continue": "Continue",
   "item": "Item",
   "billing": "Billing",
@@ -16,7 +16,7 @@
   "yearly": "Yearly",
   "total": "Total",
   "secure_payment": "Your payment is secured with industry-standard encryption",
-  "payment_provider_pending": "Payment provider integration will be available soon. Thank you for your patience!",
+  "payment_provider_pending": "Payment processing will begin after you confirm.",
   "confirm_payment": "Confirm Payment",
   "processing": "Processing...",
   
