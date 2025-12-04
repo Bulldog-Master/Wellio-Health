@@ -112,20 +112,38 @@ CSS variables now contain COMPLETE hsl() values for maximum Safari compatibility
     @apply border-border;
   }
 
-  /* FORCE dark mode backgrounds */
+  /* AGGRESSIVE DARK MODE ENFORCEMENT */
   html, body, #root {
     background-color: #1e2433 !important;
     color: #fafafa !important;
+    color-scheme: dark !important;
   }
   
   body {
     @apply bg-background text-foreground;
   }
   
-  /* Glassmorphism utility classes */
+  /* Override any Tailwind light mode utilities */
+  .bg-white {
+    background-color: var(--card) !important;
+  }
+  
+  .bg-gray-50, .bg-gray-100 {
+    background-color: var(--muted) !important;
+  }
+  
+  .text-black, .text-gray-900 {
+    color: var(--foreground) !important;
+  }
+  
+  .text-gray-800, .text-gray-700, .text-gray-600 {
+    color: var(--muted-foreground) !important;
+  }
+  
+  /* Glassmorphism utility classes - DARK version */
   .glass {
     @apply backdrop-blur-xl border border-white/20;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(30, 36, 51, 0.8);
   }
   
   .glass-dark {
