@@ -207,5 +207,15 @@
   "add": "إضافة",
   "saved": "تم الحفظ",
   "active": "نشط",
-  "inactive": "غير نشط"
+  "inactive": "غير نشط",
+  "cart": "السلة",
+  "cart_empty": "سلتك فارغة",
+  "clear_all": "مسح الكل",
+  "total": "المجموع",
+  "items": "عناصر",
+  "product": "منتج",
+  "added_to_cart": "تمت الإضافة للسلة",
+  "in_cart": "في السلة",
+  "add_to_cart": "أضف للسلة",
+  "proceed_to_checkout": "متابعة الدفع"
 }

@@ -207,5 +207,15 @@
   "add": "추가",
   "saved": "저장됨",
   "active": "활성",
-  "inactive": "비활성"
+  "inactive": "비활성",
+  "cart": "장바구니",
+  "cart_empty": "장바구니가 비어있습니다",
+  "clear_all": "모두 삭제",
+  "total": "합계",
+  "items": "개 항목",
+  "product": "상품",
+  "added_to_cart": "장바구니에 추가됨",
+  "in_cart": "장바구니에 있음",
+  "add_to_cart": "장바구니에 추가",
+  "proceed_to_checkout": "결제하기"
 }

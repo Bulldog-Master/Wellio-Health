@@ -97,5 +97,15 @@
   "active": "সক্রিয়",
   "inactive": "নিষ্ক্রিয়",
   "add": "যোগ করুন",
-  "saved": "সংরক্ষিত"
+  "saved": "সংরক্ষিত",
+  "cart": "কার্ট",
+  "cart_empty": "আপনার কার্ট খালি",
+  "clear_all": "সব মুছুন",
+  "total": "মোট",
+  "items": "আইটেম",
+  "product": "পণ্য",
+  "added_to_cart": "কার্টে যোগ হয়েছে",
+  "in_cart": "কার্টে আছে",
+  "add_to_cart": "কার্টে যোগ করুন",
+  "proceed_to_checkout": "চেকআউটে যান"
 }

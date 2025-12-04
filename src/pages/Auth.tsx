@@ -137,6 +137,12 @@ const Auth = () => {
     setInitialCheckDone(true);
   }, [toast]);
 
+  // Helper to set dark mode
+  const setDarkMode = () => {
+    localStorage.setItem('theme', 'dark');
+    document.documentElement.classList.add('dark');
+  };
+
   useEffect(() => {
     // Wait for initial check to complete
     if (!initialCheckDone) return;
@@ -146,6 +152,8 @@ const Auth = () => {
     
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (session?.user) {
+        // Set dark mode as default on login
+        setDarkMode();
         // Wait briefly for prefetch to complete before navigating
         prefetchWithTimeout(session.user.id).then(() => {
           navigate("/");
@@ -155,6 +163,8 @@ const Auth = () => {
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
+        // Set dark mode as default
+        setDarkMode();
         // Wait briefly for prefetch to complete before navigating
         prefetchWithTimeout(session.user.id).then(() => {
           navigate("/");

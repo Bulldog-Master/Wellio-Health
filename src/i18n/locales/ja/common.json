@@ -207,5 +207,15 @@
   "add": "追加",
   "saved": "保存しました",
   "active": "アクティブ",
-  "inactive": "非アクティブ"
+  "inactive": "非アクティブ",
+  "cart": "カート",
+  "cart_empty": "カートは空です",
+  "clear_all": "すべて削除",
+  "total": "合計",
+  "items": "アイテム",
+  "product": "商品",
+  "added_to_cart": "カートに追加しました",
+  "in_cart": "カートに入れました",
+  "add_to_cart": "カートに追加",
+  "proceed_to_checkout": "チェックアウトへ進む"
 }

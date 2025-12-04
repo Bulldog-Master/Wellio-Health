@@ -97,5 +97,15 @@
   "active": "Active",
   "inactive": "Inactive",
   "add": "Add",
-  "saved": "E don save"
+  "saved": "E don save",
+  "cart": "Cart",
+  "cart_empty": "Your cart dey empty",
+  "clear_all": "Clear all",
+  "total": "Total",
+  "items": "items",
+  "product": "Product",
+  "added_to_cart": "E don enter cart",
+  "in_cart": "E dey cart",
+  "add_to_cart": "Add to cart",
+  "proceed_to_checkout": "Go checkout"
 }
