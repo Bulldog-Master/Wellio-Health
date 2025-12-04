@@ -286,5 +286,6 @@
   "items": "artículos",
   "product": "Producto",
   "added_to_cart": "Agregado al carrito",
-  "in_cart": "En el carrito"
+  "in_cart": "En el carrito",
+  "add_to_cart": "Agregar al carrito"
 }

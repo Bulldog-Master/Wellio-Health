@@ -271,5 +271,14 @@
   "add": "Aggiungi",
   "saved": "Salvato con successo",
   "active": "Attivo",
-  "inactive": "Inattivo"
+  "inactive": "Inattivo",
+  "cart": "Carrello",
+  "cart_empty": "Il tuo carrello è vuoto",
+  "clear_all": "Cancella tutto",
+  "total": "Totale",
+  "items": "articoli",
+  "product": "Prodotto",
+  "added_to_cart": "Aggiunto al carrello",
+  "in_cart": "Nel carrello",
+  "add_to_cart": "Aggiungi al carrello"
 }

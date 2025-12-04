@@ -271,5 +271,14 @@
   "add": "Ekle",
   "saved": "Başarıyla kaydedildi",
   "active": "Aktif",
-  "inactive": "Pasif"
+  "inactive": "Pasif",
+  "cart": "Sepet",
+  "cart_empty": "Sepetiniz boş",
+  "clear_all": "Tümünü temizle",
+  "total": "Toplam",
+  "items": "ürün",
+  "product": "Ürün",
+  "added_to_cart": "Sepete eklendi",
+  "in_cart": "Sepette",
+  "add_to_cart": "Sepete ekle"
 }
