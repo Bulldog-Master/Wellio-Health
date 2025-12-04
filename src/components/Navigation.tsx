@@ -75,7 +75,7 @@ const Navigation = () => {
 
   return (
     <nav 
-      className="fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border md:relative md:border-0 md:bg-transparent"
+      className="fixed bottom-0 left-0 right-0 z-50 bg-sidebar border-t border-border md:relative md:border-0 md:bg-transparent"
       aria-label="Main navigation"
       role="navigation"
     >

@@ -159,8 +159,27 @@ IMPORTANT: Dark mode is enforced as default. The .light class should NEVER be ad
     @apply border-border;
   }
 
+  /* FORCE dark mode backgrounds - Safari fix */
+  html, body, #root {
+    background-color: #1e2433 !important;
+    color: #fafafa !important;
+  }
+  
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* Force Card backgrounds to be dark */
+  .bg-card {
+    background-color: hsl(222 32% 18%) !important;
+  }
+  
+  .bg-sidebar {
+    background-color: hsl(222 32% 18%) !important;
+  }
+  
+  .bg-background {
+    background-color: hsl(222 35% 15%) !important;
   }
   
   /* Glassmorphism utility classes */
