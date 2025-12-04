@@ -62,3 +62,9 @@ verify_jwt = true
 
 [functions.oura-sync]
 verify_jwt = true
+
+[functions.verify-etransfer]
+verify_jwt = true
+
+[functions.verify-crypto]
+verify_jwt = true

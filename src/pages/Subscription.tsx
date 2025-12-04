@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,11 +8,14 @@ import { useSubscription } from '@/hooks/useSubscription';
 import { Check, Crown, Sparkles, Zap, ArrowLeft } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { SubscriptionAddons } from '@/components/SubscriptionAddons';
+import { CheckoutDialog } from '@/components/payments';
 
 const Subscription = () => {
   const navigate = useNavigate();
   const { subscription, isLoading, tier, isVIP, isAdmin, hasFullAccess } = useSubscription();
-  const { t } = useTranslation(['subscription', 'addons']);
+  const { t } = useTranslation(['subscription', 'addons', 'payments']);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<{ name: string; price: number; tier: string } | null>(null);
 
   const plans = [
     {
@@ -164,9 +168,19 @@ const Subscription = () => {
                 <Button
                   className="w-full"
                   variant={isCurrentPlan ? 'secondary' : 'default'}
-                  disabled={isCurrentPlan}
+                  disabled={isCurrentPlan || plan.tier === 'free'}
+                  onClick={() => {
+                    if (!isCurrentPlan && plan.tier !== 'free') {
+                      setSelectedPlan({
+                        name: plan.name,
+                        price: parseFloat(plan.price.replace('$', '')),
+                        tier: plan.tier
+                      });
+                      setCheckoutOpen(true);
+                    }
+                  }}
                 >
-                  {isCurrentPlan ? t('current_plan') : t('coming_soon')}
+                  {isCurrentPlan ? t('current_plan') : plan.tier === 'free' ? t('free_plan') : t('subscribe_now')}
                 </Button>
               </Card>
             );
@@ -186,6 +200,20 @@ const Subscription = () => {
           </Button>
         </div>
       </div>
+      {/* Checkout Dialog */}
+      {selectedPlan && (
+        <CheckoutDialog
+          open={checkoutOpen}
+          onOpenChange={(open) => {
+            setCheckoutOpen(open);
+            if (!open) setSelectedPlan(null);
+          }}
+          itemName={selectedPlan.name}
+          amount={selectedPlan.price}
+          billingCycle="monthly"
+          itemType="subscription"
+        />
+      )}
     </div>
   );
 };
