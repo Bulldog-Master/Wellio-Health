@@ -3,102 +3,100 @@
 @tailwind utilities;
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-
-IMPORTANT: Dark mode is enforced as default. The .light class should NEVER be added.
+CSS variables now contain COMPLETE hsl() values for maximum Safari compatibility.
 */
 
 @layer base {
-  /* DARK MODE ONLY - Single theme, no class switching */
+  /* DARK MODE ONLY - Complete HSL values for Safari compatibility */
   :root {
     /* Rich gradient background instead of black */
-    --background: 222, 35%, 15%;
-    --foreground: 0, 0%, 98%;
+    --background: #1e2433;
+    --foreground: #fafafa;
 
     /* Vibrant gradient cards */
-    --card: 222, 32%, 18%;
-    --card-foreground: 0, 0%, 98%;
+    --card: #252d3d;
+    --card-foreground: #fafafa;
 
-    --popover: 222, 32%, 18%;
-    --popover-foreground: 0, 0%, 98%;
+    --popover: #252d3d;
+    --popover-foreground: #fafafa;
 
-    /* Bright vibrant primary */
-    --primary: 195, 100%, 50%;
-    --primary-foreground: 0, 0%, 100%;
+    /* Bright vibrant primary - cyan */
+    --primary: #00bfff;
+    --primary-foreground: #ffffff;
 
     /* Electric purple secondary */
-    --secondary: 270, 95%, 65%;
-    --secondary-foreground: 0, 0%, 100%;
+    --secondary: #a855f7;
+    --secondary-foreground: #ffffff;
 
     /* Lighter muted with better contrast */
-    --muted: 222, 30%, 25%;
-    --muted-foreground: 220, 10%, 80%;
+    --muted: #374151;
+    --muted-foreground: #c4c9d4;
 
     /* Hot pink accent */
-    --accent: 330, 100%, 60%;
-    --accent-foreground: 0, 0%, 100%;
+    --accent: #ff3399;
+    --accent-foreground: #ffffff;
 
-    --destructive: 0, 85%, 60%;
-    --destructive-foreground: 0, 0%, 100%;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
 
     /* Lighter borders */
-    --border: 222, 30%, 28%;
-    --input: 222, 30%, 22%;
-    --ring: 195, 100%, 50%;
+    --border: #3d4657;
+    --input: #2d3545;
+    --ring: #00bfff;
 
     --radius: 1rem;
 
-    --success: 145, 80%, 50%;
-    --success-foreground: 0, 0%, 100%;
+    --success: #22c55e;
+    --success-foreground: #ffffff;
     
-    --warning: 35, 100%, 58%;
-    --warning-foreground: 0, 0%, 100%;
+    --warning: #f59e0b;
+    --warning-foreground: #ffffff;
 
-    /* Vibrant colorful gradients - use comma syntax for Safari compatibility */
-    --gradient-primary: linear-gradient(135deg, hsl(195, 100%, 50%) 0%, hsl(270, 95%, 65%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(270, 95%, 65%) 0%, hsl(330, 100%, 60%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(330, 100%, 60%) 0%, hsl(15, 100%, 60%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(195, 100%, 50%) 0%, hsl(270, 95%, 65%) 50%, hsl(330, 100%, 60%) 100%);
-    --gradient-card: linear-gradient(135deg, hsla(222, 35%, 20%, 0.9) 0%, hsla(260, 40%, 22%, 0.9) 100%);
-    --gradient-auth-bg: linear-gradient(135deg, hsl(195, 70%, 20%) 0%, hsl(270, 70%, 22%) 50%, hsl(330, 70%, 20%) 100%);
+    /* Vibrant colorful gradients */
+    --gradient-primary: linear-gradient(135deg, #00bfff 0%, #a855f7 100%);
+    --gradient-secondary: linear-gradient(135deg, #a855f7 0%, #ff3399 100%);
+    --gradient-accent: linear-gradient(135deg, #ff3399 0%, #ff6b35 100%);
+    --gradient-hero: linear-gradient(135deg, #00bfff 0%, #a855f7 50%, #ff3399 100%);
+    --gradient-card: linear-gradient(135deg, rgba(37, 45, 61, 0.9) 0%, rgba(45, 40, 70, 0.9) 100%);
+    --gradient-auth-bg: linear-gradient(135deg, #1a3a4a 0%, #2d2845 50%, #3d1a35 100%);
     
     /* Vibrant glowing shadows */
-    --shadow-sm: 0 2px 4px hsla(0, 0%, 0%, 0.3);
-    --shadow-md: 0 8px 16px hsla(0, 0%, 0%, 0.4);
-    --shadow-lg: 0 20px 40px hsla(0, 0%, 0%, 0.5);
-    --shadow-glow: 0 0 40px hsla(195, 100%, 50%, 0.5), 0 0 20px hsla(195, 100%, 50%, 0.3);
-    --shadow-glow-secondary: 0 0 40px hsla(270, 95%, 65%, 0.5), 0 0 20px hsla(270, 95%, 65%, 0.3);
-    --shadow-auth-card: 0 30px 60px -15px hsla(195, 100%, 50%, 0.4), 0 0 80px hsla(270, 95%, 65%, 0.2);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 40px rgba(0, 191, 255, 0.5), 0 0 20px rgba(0, 191, 255, 0.3);
+    --shadow-glow-secondary: 0 0 40px rgba(168, 85, 247, 0.5), 0 0 20px rgba(168, 85, 247, 0.3);
+    --shadow-auth-card: 0 30px 60px -15px rgba(0, 191, 255, 0.4), 0 0 80px rgba(168, 85, 247, 0.2);
 
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     /* Sidebar matches card background */
-    --sidebar-background: 222, 32%, 18%;
-    --sidebar-foreground: 0, 0%, 96%;
-    --sidebar-primary: 195, 100%, 50%;
-    --sidebar-primary-foreground: 0, 0%, 100%;
-    --sidebar-accent: 222, 32%, 24%;
-    --sidebar-accent-foreground: 195, 100%, 55%;
-    --sidebar-border: 222, 30%, 25%;
-    --sidebar-ring: 195, 100%, 50%;
+    --sidebar-background: #252d3d;
+    --sidebar-foreground: #f5f5f5;
+    --sidebar-primary: #00bfff;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #313b4d;
+    --sidebar-accent-foreground: #00d4ff;
+    --sidebar-border: #374151;
+    --sidebar-ring: #00bfff;
     
     /* Vibrant navigation icons */
-    --nav-icon-1: 195, 100%, 50%;
-    --nav-icon-2: 270, 95%, 65%;
-    --nav-icon-3: 330, 100%, 60%;
-    --nav-icon-4: 145, 80%, 50%;
-    --nav-icon-5: 35, 100%, 58%;
-    --nav-icon-6: 180, 95%, 50%;
-    --nav-icon-7: 290, 90%, 65%;
-    --nav-icon-8: 15, 100%, 60%;
-    --nav-icon-9: 165, 85%, 48%;
-    --nav-icon-10: 340, 100%, 62%;
-    --nav-icon-11: 200, 100%, 55%;
-    --nav-icon-12: 280, 95%, 68%;
-    --nav-icon-13: 130, 75%, 52%;
-    --nav-icon-14: 310, 100%, 65%;
-    --nav-icon-15: 160, 80%, 48%;
-    --nav-icon-16: 25, 100%, 62%;
+    --nav-icon-1: #00bfff;
+    --nav-icon-2: #a855f7;
+    --nav-icon-3: #ff3399;
+    --nav-icon-4: #22c55e;
+    --nav-icon-5: #f59e0b;
+    --nav-icon-6: #00e5ff;
+    --nav-icon-7: #c084fc;
+    --nav-icon-8: #ff6b35;
+    --nav-icon-9: #14b8a6;
+    --nav-icon-10: #f43f5e;
+    --nav-icon-11: #0ea5e9;
+    --nav-icon-12: #d946ef;
+    --nav-icon-13: #4ade80;
+    --nav-icon-14: #e879f9;
+    --nav-icon-15: #2dd4bf;
+    --nav-icon-16: #fb923c;
   }
 }
 
@@ -107,7 +105,7 @@ IMPORTANT: Dark mode is enforced as default. The .light class should NEVER be ad
     @apply border-border;
   }
 
-  /* FORCE dark mode backgrounds - Safari fix with comma-separated HSL */
+  /* FORCE dark mode backgrounds */
   html, body, #root {
     background-color: #1e2433 !important;
     color: #fafafa !important;
@@ -117,40 +115,15 @@ IMPORTANT: Dark mode is enforced as default. The .light class should NEVER be ad
     @apply bg-background text-foreground;
   }
   
-  /* Force Card backgrounds to be dark - using comma syntax for Safari */
-  .bg-card {
-    background-color: hsl(222, 32%, 18%) !important;
-  }
-  
-  .bg-sidebar {
-    background-color: hsl(222, 32%, 18%) !important;
-  }
-  
-  .bg-background {
-    background-color: hsl(222, 35%, 15%) !important;
-  }
-  
-  /* Force foreground text to be light */
-  .text-foreground {
-    color: hsl(0, 0%, 98%) !important;
-  }
-  
-  .text-card-foreground {
-    color: hsl(0, 0%, 98%) !important;
-  }
-  
-  /* Force muted foreground */
-  .text-muted-foreground {
-    color: hsl(220, 10%, 80%) !important;
-  }
-  
   /* Glassmorphism utility classes */
   .glass {
-    @apply backdrop-blur-xl bg-white/80 border border-white/20;
+    @apply backdrop-blur-xl border border-white/20;
+    background-color: rgba(255, 255, 255, 0.8);
   }
   
   .glass-dark {
-    @apply backdrop-blur-xl bg-black/40 border border-white/10;
+    @apply backdrop-blur-xl border border-white/10;
+    background-color: rgba(0, 0, 0, 0.4);
   }
   
   /* Modern card hover effects */
@@ -162,87 +135,86 @@ IMPORTANT: Dark mode is enforced as default. The .light class should NEVER be ad
   .gradient-text {
     @apply bg-gradient-hero bg-clip-text text-transparent;
   }
-
-  @keyframes ring-pulse {
-    0% {
-      r: attr(r);
-      opacity: 0.6;
-    }
-    50% {
-      r: calc(attr(r) + 10);
-      opacity: 0.3;
-    }
-    100% {
-      r: calc(attr(r) + 20);
-      opacity: 0;
-    }
+  
+  /* Animate utilities */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
   }
   
   @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
   }
   
-  @keyframes shimmer {
-    100% {
-      transform: translateX(100%);
-    }
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
   }
   
-  @keyframes glow {
-    0%, 100% {
-      box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
-    }
-    50% {
-      box-shadow: 0 0 40px hsl(var(--primary) / 0.5);
-    }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
   
-  @keyframes slide-up {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
   }
   
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
   }
   
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite;
+  /* Drop shadow glow effect */
+  .drop-shadow-glow {
+    filter: drop-shadow(0 0 8px currentColor);
   }
   
-  .animate-slide-up {
-    animation: slide-up 0.3s ease-out forwards;
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
   }
   
-  /* Smooth page transitions */
-  .page-transition {
-    @apply animate-in fade-in slide-in-from-bottom-2 duration-300;
+  ::-webkit-scrollbar-track {
+    background: #1e2433;
   }
   
-  /* Interactive button glow */
-  .btn-glow {
-    @apply relative overflow-hidden;
+  ::-webkit-scrollbar-thumb {
+    background: #374151;
+    border-radius: 4px;
   }
   
-  .btn-glow::before {
-    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent;
-    content: '';
-    transform: translateX(-100%);
-    transition: transform 0.5s ease;
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4b5563;
   }
-  
-  .btn-glow:hover::before {
-    transform: translateX(100%);
+}
+
+/* Premium glow effects */
+.premium-glow {
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.3), 0 0 40px rgba(168, 85, 247, 0.2);
+}
+
+.premium-border {
+  border: 1px solid transparent;
+  background: linear-gradient(#252d3d, #252d3d) padding-box,
+              linear-gradient(135deg, #00bfff, #a855f7) border-box;
+}
+
+/* Focus states for accessibility */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background;
+}
+
+/* Skip to content link for accessibility */
+.skip-link {
+  @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
