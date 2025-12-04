@@ -1,43 +1,20 @@
-import { Moon, Sun } from "lucide-react";
+import { Moon } from "lucide-react";
 import { Button } from "./ui/button";
-import { useState, useEffect } from "react";
 
+/**
+ * ThemeToggle - Currently disabled as app is dark-mode only
+ * Displays moon icon as visual indicator of dark mode
+ */
 const ThemeToggle = () => {
-  const [isDark, setIsDark] = useState(true);
-
-  useEffect(() => {
-    // Always force dark mode
-    document.documentElement.classList.add('dark');
-    document.documentElement.classList.remove('light');
-    setIsDark(true);
-  }, []);
-
-  const toggleTheme = () => {
-    // Theme toggle disabled - always dark mode
-    // const newIsDark = !isDark;
-    // setIsDark(newIsDark);
-    // if (newIsDark) {
-    //   document.documentElement.classList.add('dark');
-    //   document.documentElement.classList.remove('light');
-    // } else {
-    //   document.documentElement.classList.remove('dark');
-    //   document.documentElement.classList.add('light');
-    // }
-  };
-
   return (
     <Button
       variant="ghost"
       size="icon"
-      onClick={toggleTheme}
-      className="hover:bg-sidebar-accent text-sidebar-foreground h-8 w-8"
-      aria-label="Toggle theme"
+      className="hover:bg-sidebar-accent text-sidebar-foreground h-8 w-8 cursor-default"
+      aria-label="Dark mode enabled"
+      disabled
     >
-      {isDark ? (
-        <Sun className="w-4 h-4" />
-      ) : (
-        <Moon className="w-4 h-4" />
-      )}
+      <Moon className="w-4 h-4" />
     </Button>
   );
 };
