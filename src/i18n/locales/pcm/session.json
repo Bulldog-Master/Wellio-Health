@@ -1,0 +1,13 @@
+{
+  "loading_session": "Session dey load...",
+  "leave": "Leave",
+  "video_coming_soon": "Video streaming dey come soon",
+  "live_chat": "Live Chat",
+  "type_message": "Type message...",
+  "participants": "Participants",
+  "host": "Host",
+  "unknown": "Unknown",
+  "error": "Error",
+  "failed_to_load": "Session no fit load",
+  "failed_to_send": "Message no fit send"
+}

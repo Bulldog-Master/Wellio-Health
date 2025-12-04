@@ -1,0 +1,17 @@
+{
+  "macros_dashboard": "Bảng điều khiển Macro",
+  "track_macros": "Theo dõi protein, carbs và chất béo của bạn",
+  "back_to_dashboard": "Quay lại bảng điều khiển",
+  "today": "Hôm nay",
+  "seven_days": "7 ngày",
+  "total_calories": "Tổng calo",
+  "kcal": "kcal",
+  "protein": "Protein",
+  "carbs": "Carbs",
+  "fat": "Chất béo",
+  "of_calories": "của calo",
+  "macro_distribution": "Phân bố Macro",
+  "no_nutrition_data": "Chưa có dữ liệu dinh dưỡng",
+  "weekly_trends": "Xu hướng tuần",
+  "grams": "Gram"
+}

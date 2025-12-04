@@ -1,0 +1,17 @@
+{
+  "macros_dashboard": "ম্যাক্রো ড্যাশবোর্ড",
+  "track_macros": "প্রোটিন, কার্বস এবং ফ্যাট ট্র্যাক করুন",
+  "back_to_dashboard": "ড্যাশবোর্ডে ফিরে যান",
+  "today": "আজ",
+  "seven_days": "৭ দিন",
+  "total_calories": "মোট ক্যালোরি",
+  "kcal": "কিলোক্যাল",
+  "protein": "প্রোটিন",
+  "carbs": "কার্বস",
+  "fat": "ফ্যাট",
+  "of_calories": "ক্যালোরির",
+  "macro_distribution": "ম্যাক্রো বিতরণ",
+  "no_nutrition_data": "কোনো পুষ্টি ডেটা নেই",
+  "weekly_trends": "সাপ্তাহিক প্রবণতা",
+  "grams": "গ্রাম"
+}
