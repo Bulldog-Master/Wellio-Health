@@ -9,11 +9,8 @@ IMPORTANT: Dark mode is enforced as default. The .light class should NEVER be ad
 */
 
 @layer base {
-  /* DARK MODE ONLY - These are the only theme values used */
-  :root,
-  :root.dark,
-  html,
-  html.dark {
+  /* DARK MODE ONLY - Single theme, no class switching */
+  :root {
     /* Rich gradient background instead of black */
     --background: 222 35% 15%;
     --foreground: 0 0% 98%;
@@ -75,7 +72,7 @@ IMPORTANT: Dark mode is enforced as default. The .light class should NEVER be ad
 
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* Sidebar matches card background in dark mode */
+    /* Sidebar matches card background */
     --sidebar-background: 222 32% 18%;
     --sidebar-foreground: 0 0% 96%;
     --sidebar-primary: 195 100% 50%;
@@ -102,55 +99,6 @@ IMPORTANT: Dark mode is enforced as default. The .light class should NEVER be ad
     --nav-icon-14: 310 100% 65%;
     --nav-icon-15: 160 80% 48%;
     --nav-icon-16: 25 100% 62%;
-  }
-
-  /* 
-   * LIGHT MODE COMPLETELY REMOVED 
-   * Dark mode is the only theme. If light mode is needed in the future,
-   * add a .light class here with light theme values.
-   */
-
-  /* .dark selector - same as :root to ensure dark mode regardless of class presence */
-  .dark {
-    --background: 222 35% 15%;
-    --foreground: 0 0% 98%;
-    --card: 222 32% 18%;
-    --card-foreground: 0 0% 98%;
-    --popover: 222 32% 18%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 195 100% 50%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 270 95% 65%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 222 30% 25%;
-    --muted-foreground: 220 10% 80%;
-    --accent: 330 100% 60%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 85% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 222 30% 28%;
-    --input: 222 30% 22%;
-    --ring: 195 100% 50%;
-    --success: 145 80% 50%;
-    --success-foreground: 0 0% 100%;
-    --warning: 35 100% 58%;
-    --warning-foreground: 0 0% 100%;
-    --gradient-card: linear-gradient(135deg, hsl(222 35% 20% / 0.9) 0%, hsl(260 40% 22% / 0.9) 100%);
-    --gradient-auth-bg: linear-gradient(135deg, hsl(195 70% 20%) 0%, hsl(270 70% 22%) 50%, hsl(330 70% 20%) 100%);
-    --shadow-sm: 0 2px 4px hsl(0 0% 0% / 0.3);
-    --shadow-md: 0 8px 16px hsl(0 0% 0% / 0.4);
-    --shadow-lg: 0 20px 40px hsl(0 0% 0% / 0.5);
-    --shadow-glow: 0 0 40px hsl(195 100% 50% / 0.5), 0 0 20px hsl(195 100% 50% / 0.3);
-    --shadow-glow-secondary: 0 0 40px hsl(270 95% 65% / 0.5), 0 0 20px hsl(270 95% 65% / 0.3);
-    --shadow-auth-card: 0 30px 60px -15px hsl(195 100% 50% / 0.4), 0 0 80px hsl(270 95% 65% / 0.2);
-    --sidebar-background: 222 32% 18%;
-    --sidebar-foreground: 0 0% 96%;
-    --sidebar-primary: 195 100% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 222 32% 24%;
-    --sidebar-accent-foreground: 195 100% 55%;
-    --sidebar-border: 222 30% 25%;
-    --sidebar-ring: 195 100% 50%;
   }
 }
 
