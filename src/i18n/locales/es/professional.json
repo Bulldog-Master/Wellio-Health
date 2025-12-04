@@ -1,10 +1,12 @@
 {
-  "trainer_portal": "Portal de Entrenador",
+  "professional_hub": "Profesional",
+  "professional_hub_desc": "Accede a los portales de entrenador y profesional",
+  "trainer_portal": "Portal de Entrenador/Coach",
   "practitioner_portal": "Portal de Profesional",
   "trainer_portal_desc": "Administra tu negocio de entrenamiento y clientes",
   "practitioner_portal_desc": "Administra tu práctica de salud y pacientes",
   
-  "become_trainer": "Conviértete en Entrenador",
+  "become_trainer": "Conviértete en Entrenador/Coach",
   "become_practitioner": "Conviértete en Profesional",
   "apply_now": "Aplicar Ahora",
   "application_pending": "Aplicación Pendiente",

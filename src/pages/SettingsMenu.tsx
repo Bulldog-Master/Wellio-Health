@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight, Heart, Crown, Gift, Sparkles, Users, FileText, Megaphone, Dumbbell, Stethoscope, UserSearch } from "lucide-react";
+import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight, Heart, Crown, Gift, Sparkles, Users, FileText, Megaphone, UserSearch } from "lucide-react";
 import { useSubscription } from "@/hooks/useSubscription";
 import { Badge } from "@/components/ui/badge";
 import { useState, useEffect } from "react";
@@ -182,27 +182,6 @@ const SettingsMenu = () => {
       iconBg: "bg-emerald-500/20",
       iconColor: "text-emerald-500",
       path: "/trainer/marketplace",
-      badge: "Pro",
-      badgeVariant: "secondary" as const,
-    }] : []),
-    // Professional Portals - for premium users
-    ...(hasFullAccess ? [{
-      title: t('professional:trainer_portal'),
-      description: t('professional:trainer_portal_desc'),
-      icon: Dumbbell,
-      iconBg: "bg-orange-500/20",
-      iconColor: "text-orange-500",
-      path: "/trainer-portal",
-      badge: "Pro",
-      badgeVariant: "secondary" as const,
-    },
-    {
-      title: t('professional:practitioner_portal'),
-      description: t('professional:practitioner_portal_desc'),
-      icon: Stethoscope,
-      iconBg: "bg-cyan-500/20",
-      iconColor: "text-cyan-500",
-      path: "/practitioner-portal",
       badge: "Pro",
       badgeVariant: "secondary" as const,
     }] : []),
