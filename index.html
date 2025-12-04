@@ -45,6 +45,22 @@
       localStorage.setItem('theme', 'dark');
       document.documentElement.classList.add('dark');
       document.documentElement.classList.remove('light');
+      
+      // Debug: Watch for anything that changes the dark class
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            const classList = document.documentElement.classList;
+            if (!classList.contains('dark')) {
+              console.error('[THEME DEBUG] Dark class was removed! Stack:', new Error().stack);
+              // Immediately re-add dark class
+              classList.add('dark');
+              classList.remove('light');
+            }
+          }
+        });
+      });
+      observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
     </script>
     <div id="root" style="background-color: #1e2433;"></div>
     <script type="module" src="/src/main.tsx"></script>
