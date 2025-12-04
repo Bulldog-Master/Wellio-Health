@@ -17,7 +17,7 @@ import { Loader2, ShieldCheck } from 'lucide-react';
 interface CheckoutDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  itemType: 'subscription' | 'addon';
+  itemType: 'subscription' | 'addon' | 'product';
   itemName: string;
   amount: number;
   billingCycle?: 'monthly' | 'yearly';

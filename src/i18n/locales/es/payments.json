@@ -56,5 +56,17 @@
   "set_default": "Establecer como Predeterminado",
   "remove_method": "Eliminar",
   "card_ending": "Tarjeta terminada en {{last4}}",
-  "expires": "Vence {{date}}"
+  "expires": "Vence {{date}}",
+  "payment_history": "Historial de Pagos",
+  "payment_history_desc": "Ver tu historial de pagos y transacciones",
+  "view_transactions": "Ver todas tus transacciones pasadas",
+  "subscription_payment": "Pago de Suscripción",
+  "addon_purchase": "Compra de Complemento",
+  "payment": "Pago",
+  "no_transactions": "Sin transacciones aún",
+  "no_transactions_desc": "Tu historial de pagos aparecerá aquí",
+  "view_plans": "Ver Planes",
+  "verification_success": "Pago verificado exitosamente",
+  "verification_error": "Verificación fallida",
+  "proceed_to_checkout": "Proceder al Pago"
 }

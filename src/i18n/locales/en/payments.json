@@ -68,5 +68,6 @@
   "no_transactions_desc": "Your payment history will appear here",
   "view_plans": "View Plans",
   "verification_success": "Payment verified successfully",
-  "verification_error": "Verification failed"
+  "verification_error": "Verification failed",
+  "proceed_to_checkout": "Proceed to Checkout"
 }
