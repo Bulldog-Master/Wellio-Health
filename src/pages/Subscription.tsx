@@ -73,8 +73,17 @@ const Subscription = () => {
   ];
 
   const handleAddToCart = (plan: typeof plans[0]) => {
-    if (plan.tier === 'free' || tier === plan.tier) return;
+    console.log('handleAddToCart called for:', plan.tier);
+    if (plan.tier === 'free') {
+      console.log('Free tier - not adding to cart');
+      return;
+    }
+    if (tier === plan.tier) {
+      console.log('Already on this tier - not adding to cart');
+      return;
+    }
     
+    console.log('Adding to cart:', plan.name, plan.price);
     addItem({
       id: `subscription-${plan.tier}`,
       type: 'subscription',
