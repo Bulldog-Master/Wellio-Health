@@ -4,11 +4,16 @@
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
+
+IMPORTANT: Dark mode is enforced as default. The .light class should NEVER be added.
 */
 
 @layer base {
-  /* DARK MODE IS DEFAULT - prevents flash on load */
-  :root {
+  /* DARK MODE ONLY - These are the only theme values used */
+  :root,
+  :root.dark,
+  html,
+  html.dark {
     /* Rich gradient background instead of black */
     --background: 222 35% 15%;
     --foreground: 0 0% 98%;
@@ -99,8 +104,9 @@ All colors MUST be HSL.
     --nav-icon-16: 25 100% 62%;
   }
 
-  /* LIGHT MODE - only when .light class is present */
-  .light {
+  /* LIGHT MODE DISABLED - kept for reference only, should NEVER be applied */
+  /* To re-enable light mode in the future, uncomment and ensure no .dark class overrides */
+  .light:not(.dark) {
     /* Modern vibrant background with slight gradient feel */
     --background: 240 25% 98%;
     --foreground: 240 10% 15%;
