@@ -207,5 +207,15 @@
   "add": "जोड़ें",
   "saved": "सहेजा गया",
   "active": "सक्रिय",
-  "inactive": "निष्क्रिय"
+  "inactive": "निष्क्रिय",
+  "cart": "कार्ट",
+  "cart_empty": "आपका कार्ट खाली है",
+  "clear_all": "सब हटाएं",
+  "total": "कुल",
+  "items": "आइटम",
+  "product": "उत्पाद",
+  "added_to_cart": "कार्ट में जोड़ा गया",
+  "in_cart": "कार्ट में",
+  "add_to_cart": "कार्ट में जोड़ें",
+  "proceed_to_checkout": "चेकआउट करें"
 }

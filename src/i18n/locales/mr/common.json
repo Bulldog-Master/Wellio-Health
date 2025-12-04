@@ -9,7 +9,10 @@
     "professional": "व्यावसायिक",
     "recovery": "पुनर्प्राप्ती",
     "shop": "दुकान",
-    "sponsors": "प्रायोजक"
+    "sponsors": "प्रायोजक",
+    "dashboard": "डॅशबोर्ड",
+    "settings": "सेटिंग्ज",
+    "locations": "ठिकाणे"
   },
   "app_name": "Wellio",
   "loading": "लोड होत आहे...",
@@ -54,18 +57,14 @@
   "yes": "हो",
   "no": "नाही",
   "confirm": "पुष्टी करा",
-  "nav": {
-    "activity": "क्रियाकलाप",
-    "connect": "कनेक्ट",
-    "food": "अन्न",
-    "dashboard": "डॅशबोर्ड",
-    "settings": "सेटिंग्ज",
-    "news": "बातम्या",
-    "recovery": "पुनर्प्राप्ती",
-    "locations": "ठिकाणे",
-    "fundraisers": "निधी संकलन",
-    "wellness_directory": "कल्याण निर्देशिका",
-    "shop": "दुकान",
-    "sponsors": "प्रायोजक"
-  }
+  "cart": "कार्ट",
+  "cart_empty": "तुमची कार्ट रिकामी आहे",
+  "clear_all": "सर्व काढा",
+  "total": "एकूण",
+  "items": "वस्तू",
+  "product": "उत्पादन",
+  "added_to_cart": "कार्टमध्ये जोडले",
+  "in_cart": "कार्टमध्ये आहे",
+  "add_to_cart": "कार्टमध्ये जोडा",
+  "proceed_to_checkout": "चेकआउटवर जा"
 }
