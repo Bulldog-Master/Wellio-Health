@@ -86,7 +86,8 @@ const Subscription = () => {
     });
     
     toast.success(t('common:added_to_cart'), {
-      description: plan.name
+      description: plan.name,
+      position: 'top-center'
     });
   };
 

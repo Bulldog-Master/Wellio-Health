@@ -99,7 +99,8 @@ export const SubscriptionAddons = () => {
     });
     
     toast.success(t('common:added_to_cart'), {
-      description: addonName
+      description: addonName,
+      position: 'top-center'
     });
   };
 
