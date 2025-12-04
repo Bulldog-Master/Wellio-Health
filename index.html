@@ -7,11 +7,17 @@
     <meta name="description" content="Track your fitness journey with Wellio. Monitor weight, nutrition, workouts, and health goals all in one beautiful app." />
     <meta name="author" content="Wellio" />
     
-    <!-- CRITICAL: Inline dark mode styles to prevent flash - loads BEFORE external CSS -->
+    <!-- CRITICAL: Force dark mode colors BEFORE external CSS loads -->
     <style>
-      html, body, #root {
-        background-color: #1e2433 !important;
-        color: #fafafa !important;
+      :root, html, body, #root {
+        --background: 222 35% 15% !important;
+        --foreground: 0 0% 98% !important;
+        --card: 222 32% 18% !important;
+        --card-foreground: 0 0% 98% !important;
+        --sidebar-background: 222 32% 18% !important;
+        --sidebar-foreground: 0 0% 96% !important;
+        background-color: hsl(222 35% 15%) !important;
+        color: hsl(0 0% 98%) !important;
       }
     </style>
     

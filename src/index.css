@@ -104,98 +104,11 @@ IMPORTANT: Dark mode is enforced as default. The .light class should NEVER be ad
     --nav-icon-16: 25 100% 62%;
   }
 
-  /* LIGHT MODE DISABLED - kept for reference only, should NEVER be applied */
-  /* To re-enable light mode in the future, uncomment and ensure no .dark class overrides */
-  .light:not(.dark) {
-    /* Modern vibrant background with slight gradient feel */
-    --background: 240 25% 98%;
-    --foreground: 240 10% 15%;
-
-    /* Pure white cards for contrast */
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 15%;
-
-    /* Popover styling */
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 15%;
-
-    /* Primary - Electric cyan blue */
-    --primary: 195 100% 50%;
-    --primary-foreground: 0 0% 100%;
-
-    /* Secondary - Vibrant purple */
-    --secondary: 270 95% 65%;
-    --secondary-foreground: 0 0% 100%;
-
-    /* Muted elements - light with slight color */
-    --muted: 240 20% 96%;
-    --muted-foreground: 240 10% 45%;
-
-    /* Accent - Electric pink */
-    --accent: 330 100% 60%;
-    --accent-foreground: 0 0% 100%;
-
-    /* Destructive remains strong */
-    --destructive: 0 85% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    /* Borders and inputs - modern subtle */
-    --border: 240 15% 92%;
-    --input: 240 15% 94%;
-    --ring: 195 100% 50%;
-
-    /* Success - bright green */
-    --success: 145 80% 50%;
-    --success-foreground: 0 0% 100%;
-    
-    /* Warning - vibrant orange */
-    --warning: 35 100% 58%;
-    --warning-foreground: 0 0% 100%;
-
-    /* Bold modern gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(195 100% 50%) 0%, hsl(270 95% 65%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(270 95% 65%) 0%, hsl(330 100% 60%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(330 100% 60%) 0%, hsl(15 100% 60%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(195 100% 50%) 0%, hsl(270 95% 65%) 50%, hsl(330 100% 60%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100% / 0.8) 0%, hsl(240 100% 99% / 0.9) 100%);
-    --gradient-auth-bg: linear-gradient(135deg, hsl(195 80% 95%) 0%, hsl(270 70% 96%) 50%, hsl(330 80% 96%) 100%);
-    
-    /* Modern elevated shadows */
-    --shadow-sm: 0 2px 4px hsl(240 10% 15% / 0.06), 0 1px 2px hsl(240 10% 15% / 0.04);
-    --shadow-md: 0 8px 16px hsl(240 10% 15% / 0.08), 0 4px 8px hsl(240 10% 15% / 0.06);
-    --shadow-lg: 0 20px 40px hsl(240 10% 15% / 0.12), 0 8px 16px hsl(240 10% 15% / 0.08);
-    --shadow-glow: 0 0 40px hsl(195 100% 50% / 0.4), 0 0 20px hsl(195 100% 50% / 0.2);
-    --shadow-glow-secondary: 0 0 40px hsl(270 95% 65% / 0.4), 0 0 20px hsl(270 95% 65% / 0.2);
-    --shadow-auth-card: 0 30px 60px -15px hsl(195 100% 50% / 0.25), 0 12px 30px -10px hsl(270 95% 65% / 0.15);
-
-    /* Clean sidebar - matches card background */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 240 10% 25%;
-    --sidebar-primary: 195 100% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 20% 96%;
-    --sidebar-accent-foreground: 240 10% 35%;
-    --sidebar-border: 240 15% 92%;
-    --sidebar-ring: 195 100% 50%;
-    
-    /* Vibrant navigation icons */
-    --nav-icon-1: 195 100% 50%;
-    --nav-icon-2: 270 95% 65%;
-    --nav-icon-3: 330 100% 60%;
-    --nav-icon-4: 145 80% 50%;
-    --nav-icon-5: 35 100% 58%;
-    --nav-icon-6: 180 95% 50%;
-    --nav-icon-7: 290 90% 65%;
-    --nav-icon-8: 15 100% 60%;
-    --nav-icon-9: 165 85% 48%;
-    --nav-icon-10: 340 100% 62%;
-    --nav-icon-11: 200 100% 55%;
-    --nav-icon-12: 280 95% 68%;
-    --nav-icon-13: 130 75% 52%;
-    --nav-icon-14: 310 100% 65%;
-    --nav-icon-15: 160 80% 48%;
-    --nav-icon-16: 25 100% 62%;
-  }
+  /* 
+   * LIGHT MODE COMPLETELY REMOVED 
+   * Dark mode is the only theme. If light mode is needed in the future,
+   * add a .light class here with light theme values.
+   */
 
   /* .dark selector - same as :root to ensure dark mode regardless of class presence */
   .dark {
