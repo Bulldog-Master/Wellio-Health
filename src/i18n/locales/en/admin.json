@@ -27,5 +27,16 @@
   "revoke_error": "Failed to revoke VIP pass",
   "fetch_error": "Failed to load VIP passes",
   "admin_panel": "Admin Panel",
-  "admin_panel_desc": "Manage VIP passes and app settings"
+  "admin_panel_desc": "Manage VIP passes and app settings",
+  "payment_verification": "Payment Verification",
+  "payment_verification_desc": "Verify pending payments",
+  "verify_pending_payments": "Review and verify pending payment requests",
+  "approve_payment": "Approve Payment",
+  "reject_payment": "Reject Payment",
+  "approve_payment_desc": "This will activate the user's subscription or add-on.",
+  "reject_payment_desc": "This will mark the payment as failed.",
+  "notes": "Notes",
+  "add_notes": "Add any notes about this verification...",
+  "no_pending_etransfers": "No e-transfer requests",
+  "no_pending_crypto": "No crypto payment requests"
 }

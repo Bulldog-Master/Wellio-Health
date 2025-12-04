@@ -56,5 +56,17 @@
   "set_default": "Set as Default",
   "remove_method": "Remove",
   "card_ending": "Card ending in {{last4}}",
-  "expires": "Expires {{date}}"
+  "expires": "Expires {{date}}",
+
+  "payment_history": "Payment History",
+  "payment_history_desc": "View your payment history and transactions",
+  "view_transactions": "View all your past transactions",
+  "subscription_payment": "Subscription Payment",
+  "addon_purchase": "Add-on Purchase",
+  "payment": "Payment",
+  "no_transactions": "No transactions yet",
+  "no_transactions_desc": "Your payment history will appear here",
+  "view_plans": "View Plans",
+  "verification_success": "Payment verified successfully",
+  "verification_error": "Verification failed"
 }
