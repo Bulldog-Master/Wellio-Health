@@ -1,0 +1,13 @@
+{
+  "loading_session": "جاري تحميل الجلسة...",
+  "leave": "مغادرة",
+  "video_coming_soon": "بث الفيديو قريباً",
+  "live_chat": "دردشة مباشرة",
+  "type_message": "اكتب رسالة...",
+  "participants": "المشاركون",
+  "host": "المضيف",
+  "unknown": "غير معروف",
+  "error": "خطأ",
+  "failed_to_load": "فشل تحميل الجلسة",
+  "failed_to_send": "فشل إرسال الرسالة"
+}

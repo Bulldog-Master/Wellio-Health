@@ -1,0 +1,17 @@
+{
+  "macros_dashboard": "マクロダッシュボード",
+  "track_macros": "タンパク質、炭水化物、脂質を追跡",
+  "back_to_dashboard": "ダッシュボードに戻る",
+  "today": "今日",
+  "seven_days": "7日間",
+  "total_calories": "総カロリー",
+  "kcal": "kcal",
+  "protein": "タンパク質",
+  "carbs": "炭水化物",
+  "fat": "脂質",
+  "of_calories": "カロリーの",
+  "macro_distribution": "マクロ分布",
+  "no_nutrition_data": "栄養データなし",
+  "weekly_trends": "週間トレンド",
+  "grams": "グラム"
+}

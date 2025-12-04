@@ -1,0 +1,17 @@
+{
+  "macros_dashboard": "매크로 대시보드",
+  "track_macros": "단백질, 탄수화물, 지방 추적",
+  "back_to_dashboard": "대시보드로 돌아가기",
+  "today": "오늘",
+  "seven_days": "7일",
+  "total_calories": "총 칼로리",
+  "kcal": "kcal",
+  "protein": "단백질",
+  "carbs": "탄수화물",
+  "fat": "지방",
+  "of_calories": "칼로리의",
+  "macro_distribution": "매크로 분포",
+  "no_nutrition_data": "영양 데이터 없음",
+  "weekly_trends": "주간 트렌드",
+  "grams": "그램"
+}

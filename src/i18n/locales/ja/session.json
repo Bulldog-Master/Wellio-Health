@@ -1,0 +1,13 @@
+{
+  "loading_session": "セッションを読み込み中...",
+  "leave": "退出",
+  "video_coming_soon": "ビデオストリーミング近日公開",
+  "live_chat": "ライブチャット",
+  "type_message": "メッセージを入力...",
+  "participants": "参加者",
+  "host": "ホスト",
+  "unknown": "不明",
+  "error": "エラー",
+  "failed_to_load": "セッションの読み込みに失敗",
+  "failed_to_send": "メッセージの送信に失敗"
+}
