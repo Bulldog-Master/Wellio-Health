@@ -1,0 +1,13 @@
+{
+  "loading_session": "Chargement de la session...",
+  "leave": "Quitter",
+  "video_coming_soon": "Streaming vidéo bientôt disponible",
+  "live_chat": "Chat en direct",
+  "type_message": "Tapez un message...",
+  "participants": "Participants",
+  "host": "Hôte",
+  "unknown": "Inconnu",
+  "error": "Erreur",
+  "failed_to_load": "Échec du chargement de la session",
+  "failed_to_send": "Échec de l'envoi du message"
+}

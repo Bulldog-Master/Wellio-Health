@@ -1,0 +1,17 @@
+{
+  "macros_dashboard": "宏量营养素仪表板",
+  "track_macros": "追踪您的蛋白质、碳水化合物和脂肪",
+  "back_to_dashboard": "返回仪表板",
+  "today": "今天",
+  "seven_days": "7天",
+  "total_calories": "总卡路里",
+  "kcal": "千卡",
+  "protein": "蛋白质",
+  "carbs": "碳水化合物",
+  "fat": "脂肪",
+  "of_calories": "的卡路里",
+  "macro_distribution": "宏量分布",
+  "no_nutrition_data": "暂无营养数据",
+  "weekly_trends": "每周趋势",
+  "grams": "克"
+}

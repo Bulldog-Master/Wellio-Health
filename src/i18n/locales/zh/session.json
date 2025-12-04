@@ -1,0 +1,13 @@
+{
+  "loading_session": "加载会话中...",
+  "leave": "离开",
+  "video_coming_soon": "视频直播即将推出",
+  "live_chat": "实时聊天",
+  "type_message": "输入消息...",
+  "participants": "参与者",
+  "host": "主持人",
+  "unknown": "未知",
+  "error": "错误",
+  "failed_to_load": "加载会话失败",
+  "failed_to_send": "发送消息失败"
+}

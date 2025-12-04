@@ -1,0 +1,20 @@
+{
+  "challenges": "Herausforderungen",
+  "complete_challenges": "Schließe Herausforderungen ab, um Punkte und Abzeichen zu verdienen",
+  "custom_challenges": "Benutzerdefinierte Herausforderungen",
+  "total_points": "Gesamtpunkte",
+  "current_streak": "Aktuelle Serie",
+  "longest_streak": "Längste Serie",
+  "days": "Tage",
+  "daily": "Täglich",
+  "weekly": "Wöchentlich",
+  "monthly": "Monatlich",
+  "milestones": "Meilensteine",
+  "target": "Ziel",
+  "ends": "Endet",
+  "points": "Punkte",
+  "mark_complete": "Als abgeschlossen markieren",
+  "no_challenges": "Keine {{type}} Herausforderungen verfügbar",
+  "challenge_completed": "Herausforderung abgeschlossen!",
+  "points_awarded": "Punkte wurden vergeben!"
+}

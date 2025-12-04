@@ -1,0 +1,13 @@
+{
+  "loading_session": "Session wird geladen...",
+  "leave": "Verlassen",
+  "video_coming_soon": "Video-Streaming bald verfügbar",
+  "live_chat": "Live-Chat",
+  "type_message": "Nachricht eingeben...",
+  "participants": "Teilnehmer",
+  "host": "Host",
+  "unknown": "Unbekannt",
+  "error": "Fehler",
+  "failed_to_load": "Session konnte nicht geladen werden",
+  "failed_to_send": "Nachricht konnte nicht gesendet werden"
+}
