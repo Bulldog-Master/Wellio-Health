@@ -4505,7 +4505,50 @@ export type Database = {
           url: string
         }[]
       }
+      get_profile_safe: {
+        Args: { _profile_id: string }
+        Returns: {
+          age: number
+          avatar_url: string
+          created_at: string
+          current_streak: number
+          fitness_level: string
+          followers_count: number
+          following_count: number
+          full_name: string
+          gender: string
+          goal: string
+          height: number
+          id: string
+          is_private: boolean
+          longest_streak: number
+          onboarding_completed: boolean
+          referral_code: string
+          target_weight: number
+          total_points: number
+          updated_at: string
+          username: string
+          weight: number
+        }[]
+      }
       get_story_view_count: { Args: { _story_id: string }; Returns: number }
+      get_trainer_profile_safe: {
+        Args: { _trainer_user_id: string }
+        Returns: {
+          bio: string
+          certifications: string[]
+          experience_years: number
+          hourly_rate: number
+          id: string
+          is_verified: boolean
+          location: string
+          profile_image_url: string
+          rating: number
+          specialties: string[]
+          total_reviews: number
+          user_id: string
+        }[]
+      }
       get_user_role: {
         Args: { _user_id: string }
         Returns: Database["public"]["Enums"]["app_role"]
