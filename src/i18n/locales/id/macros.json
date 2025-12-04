@@ -1,0 +1,17 @@
+{
+  "macros_dashboard": "Dashboard Makro",
+  "track_macros": "Lacak protein, karbohidrat, dan lemak Anda",
+  "back_to_dashboard": "Kembali ke Dashboard",
+  "today": "Hari Ini",
+  "seven_days": "7 Hari",
+  "total_calories": "Total Kalori",
+  "kcal": "kkal",
+  "protein": "Protein",
+  "carbs": "Karbohidrat",
+  "fat": "Lemak",
+  "of_calories": "dari kalori",
+  "macro_distribution": "Distribusi Makro",
+  "no_nutrition_data": "Belum ada data nutrisi",
+  "weekly_trends": "Tren Mingguan",
+  "grams": "Gram"
+}

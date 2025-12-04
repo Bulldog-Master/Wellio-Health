@@ -1,0 +1,13 @@
+{
+  "loading_session": "Đang tải phiên...",
+  "leave": "Rời khỏi",
+  "video_coming_soon": "Video streaming sắp ra mắt",
+  "live_chat": "Chat trực tiếp",
+  "type_message": "Nhập tin nhắn...",
+  "participants": "Người tham gia",
+  "host": "Chủ phòng",
+  "unknown": "Không xác định",
+  "error": "Lỗi",
+  "failed_to_load": "Không thể tải phiên",
+  "failed_to_send": "Không thể gửi tin nhắn"
+}

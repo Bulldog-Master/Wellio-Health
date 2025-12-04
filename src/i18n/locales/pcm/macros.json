@@ -1,0 +1,17 @@
+{
+  "macros_dashboard": "Macros Dashboard",
+  "track_macros": "Track your protein, carbs, and fats",
+  "back_to_dashboard": "Go Back to Dashboard",
+  "today": "Today",
+  "seven_days": "7 Days",
+  "total_calories": "Total Calories",
+  "kcal": "kcal",
+  "protein": "Protein",
+  "carbs": "Carbs",
+  "fat": "Fat",
+  "of_calories": "of calories",
+  "macro_distribution": "Macro Distribution",
+  "no_nutrition_data": "No nutrition data yet",
+  "weekly_trends": "Weekly Trends",
+  "grams": "Grams"
+}

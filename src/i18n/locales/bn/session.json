@@ -1,0 +1,13 @@
+{
+  "loading_session": "সেশন লোড হচ্ছে...",
+  "leave": "বের হন",
+  "video_coming_soon": "ভিডিও স্ট্রিমিং শীঘ্রই আসছে",
+  "live_chat": "লাইভ চ্যাট",
+  "type_message": "মেসেজ টাইপ করুন...",
+  "participants": "অংশগ্রহণকারী",
+  "host": "হোস্ট",
+  "unknown": "অজানা",
+  "error": "ত্রুটি",
+  "failed_to_load": "সেশন লোড করতে ব্যর্থ",
+  "failed_to_send": "মেসেজ পাঠাতে ব্যর্থ"
+}
