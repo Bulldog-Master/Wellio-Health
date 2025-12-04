@@ -19,7 +19,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { weightLogSchema, validateAndSanitize } from "@/lib/validationSchemas";
 import { useTranslation } from "react-i18next";
 import Navigation from "@/components/Navigation";
-import ThemeToggle from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { User, Bell } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -443,7 +442,6 @@ const Weight = () => {
                 >
                   <User className="w-5 h-5" />
                 </Button>
-                <ThemeToggle />
               </div>
             </div>
             
@@ -478,7 +476,6 @@ const Weight = () => {
               >
                 <User className="w-5 h-5" />
               </Button>
-              <ThemeToggle />
             </div>
             
             <Button

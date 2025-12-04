@@ -1,35 +1,18 @@
 <!doctype html>
-<html lang="en" class="dark" style="background-color: #1e2433; color: #fafafa; color-scheme: dark;">
+<html lang="en" style="background:#1e2433;color:#fafafa">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="color-scheme" content="dark" />
-    
-    <!-- CRITICAL: Force dark mode BEFORE any CSS loads -->
-    <style>
-      :root, html, body, #root, * {
-        color-scheme: dark !important;
-      }
-      html, body, #root {
-        background-color: #1e2433 !important;
-        color: #fafafa !important;
-      }
-      /* Override ANY white backgrounds */
-      .bg-white, [class*="bg-white"], [style*="background-color: white"], [style*="background: white"] {
-        background-color: #252d3d !important;
-      }
-      /* Override ANY black text on potentially light backgrounds */
-      .text-black, .text-gray-900, .text-gray-800 {
-        color: #fafafa !important;
-      }
-    </style>
+    <meta name="color-scheme" content="dark only" />
+    <meta name="theme-color" content="#1e2433" />
+    <meta name="supported-color-schemes" content="dark" />
+    <style>*{background-color:#1e2433!important;color-scheme:dark!important}html,body,#root{background:#1e2433!important;color:#fafafa!important}</style>
     
     <title>Wellio - Complete Fitness & Health Tracker</title>
     <meta name="description" content="Track your fitness journey with Wellio. Monitor weight, nutrition, workouts, and health goals all in one beautiful app." />
     <meta name="author" content="Wellio" />
     
     <!-- PWA -->
-    <meta name="theme-color" content="#1e2433" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Wellio" />
@@ -52,8 +35,8 @@
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
   </head>
 
-  <body style="background-color: #1e2433; color: #fafafa;">
-    <div id="root" style="background-color: #1e2433;"></div>
+  <body style="background:#1e2433;color:#fafafa">
+    <div id="root" style="background:#1e2433"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

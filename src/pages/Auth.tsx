@@ -92,13 +92,7 @@ const Auth = () => {
   // Check for password reset FIRST (synchronously, before any other effects)
   const [initialCheckDone, setInitialCheckDone] = useState(false);
   
-  // Force dark mode on Auth page mount
-  useEffect(() => {
-    console.log('[Auth] Component mounted, forcing dark mode');
-    localStorage.setItem('theme', 'dark');
-    document.documentElement.classList.add('dark');
-    document.documentElement.classList.remove('light');
-  }, []);
+  // No theme switching needed - app is dark-only
 
   useEffect(() => {
     setPasskeySupported(isWebAuthnSupported());
@@ -146,15 +140,6 @@ const Auth = () => {
     setInitialCheckDone(true);
   }, [toast]);
 
-  // Helper to set dark mode on login
-  const setDarkMode = () => {
-    console.log('[Auth] Setting dark mode...');
-    localStorage.setItem('theme', 'dark');
-    document.documentElement.classList.add('dark');
-    document.documentElement.classList.remove('light');
-    console.log('[Auth] Dark mode set, localStorage theme:', localStorage.getItem('theme'));
-  };
-
   useEffect(() => {
     // Wait for initial check to complete
     if (!initialCheckDone) return;
@@ -164,8 +149,6 @@ const Auth = () => {
     
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (session?.user) {
-        // Set dark mode as default on login
-        setDarkMode();
         // Wait briefly for prefetch to complete before navigating
         prefetchWithTimeout(session.user.id).then(() => {
           navigate("/");
@@ -175,8 +158,6 @@ const Auth = () => {
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
-        // Set dark mode as default
-        setDarkMode();
         // Wait briefly for prefetch to complete before navigating
         prefetchWithTimeout(session.user.id).then(() => {
           navigate("/");
