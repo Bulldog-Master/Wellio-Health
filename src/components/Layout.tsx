@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import Navigation from "./Navigation";
-import ThemeToggle from "./ThemeToggle";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { User, Bell } from "lucide-react";
 import { Button } from "./ui/button";
@@ -54,7 +53,6 @@ const Layout = ({ children }: LayoutProps) => {
                 >
                   <User className="w-4 h-4" />
                 </Button>
-                <ThemeToggle />
               </div>
             </div>
             
@@ -90,7 +88,6 @@ const Layout = ({ children }: LayoutProps) => {
               >
                 <User className="w-5 h-5" />
               </Button>
-              <ThemeToggle />
             </div>
             {children}
           </div>

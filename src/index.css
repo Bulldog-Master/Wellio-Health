@@ -2,61 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-CSS variables now contain COMPLETE hsl() values for maximum Safari compatibility.
+/* 
+  DARK MODE ONLY - No light mode exists in this app.
+  All colors are hardcoded dark values.
 */
 
 @layer base {
-  /* DARK MODE ONLY - All variations point to dark colors */
-  :root,
-  :root.dark,
-  :root.light,
-  .dark,
-  .light {
-    /* Rich gradient background instead of black */
+  :root {
+    /* Core colors - DARK ONLY */
     --background: #1e2433;
     --foreground: #fafafa;
-
-    /* Vibrant gradient cards */
     --card: #252d3d;
     --card-foreground: #fafafa;
-
     --popover: #252d3d;
     --popover-foreground: #fafafa;
-
-    /* Bright vibrant primary - cyan */
     --primary: #00bfff;
     --primary-foreground: #ffffff;
-
-    /* Electric purple secondary */
     --secondary: #a855f7;
     --secondary-foreground: #ffffff;
-
-    /* Lighter muted with better contrast */
     --muted: #374151;
     --muted-foreground: #c4c9d4;
-
-    /* Hot pink accent */
     --accent: #ff3399;
     --accent-foreground: #ffffff;
-
     --destructive: #ef4444;
     --destructive-foreground: #ffffff;
-
-    /* Lighter borders */
     --border: #3d4657;
     --input: #2d3545;
     --ring: #00bfff;
-
     --radius: 1rem;
-
     --success: #22c55e;
     --success-foreground: #ffffff;
-    
     --warning: #f59e0b;
     --warning-foreground: #ffffff;
 
-    /* Vibrant colorful gradients */
+    /* Gradients */
     --gradient-primary: linear-gradient(135deg, #00bfff 0%, #a855f7 100%);
     --gradient-secondary: linear-gradient(135deg, #a855f7 0%, #ff3399 100%);
     --gradient-accent: linear-gradient(135deg, #ff3399 0%, #ff6b35 100%);
@@ -64,7 +43,7 @@ CSS variables now contain COMPLETE hsl() values for maximum Safari compatibility
     --gradient-card: linear-gradient(135deg, rgba(37, 45, 61, 0.9) 0%, rgba(45, 40, 70, 0.9) 100%);
     --gradient-auth-bg: linear-gradient(135deg, #1a3a4a 0%, #2d2845 50%, #3d1a35 100%);
     
-    /* Vibrant glowing shadows */
+    /* Shadows */
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.5);
@@ -74,7 +53,7 @@ CSS variables now contain COMPLETE hsl() values for maximum Safari compatibility
 
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* Sidebar matches card background */
+    /* Sidebar */
     --sidebar-background: #252d3d;
     --sidebar-foreground: #f5f5f5;
     --sidebar-primary: #00bfff;
@@ -84,7 +63,7 @@ CSS variables now contain COMPLETE hsl() values for maximum Safari compatibility
     --sidebar-border: #374151;
     --sidebar-ring: #00bfff;
     
-    /* Vibrant navigation icons */
+    /* Nav icons */
     --nav-icon-1: #00bfff;
     --nav-icon-2: #a855f7;
     --nav-icon-3: #ff3399;
@@ -102,119 +81,79 @@ CSS variables now contain COMPLETE hsl() values for maximum Safari compatibility
     --nav-icon-15: #2dd4bf;
     --nav-icon-16: #fb923c;
     
-    /* Safari/iOS specific overrides */
     color-scheme: dark;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
 
-  /* AGGRESSIVE DARK MODE ENFORCEMENT */
   html, body, #root {
-    background-color: #1e2433 !important;
+    background: #1e2433 !important;
     color: #fafafa !important;
-    color-scheme: dark !important;
   }
   
   body {
-    @apply bg-background text-foreground;
-  }
-  
-  /* Override any Tailwind light mode utilities */
-  .bg-white {
-    background-color: var(--card) !important;
-  }
-  
-  .bg-gray-50, .bg-gray-100 {
-    background-color: var(--muted) !important;
-  }
-  
-  .text-black, .text-gray-900 {
-    color: var(--foreground) !important;
-  }
-  
-  .text-gray-800, .text-gray-700, .text-gray-600 {
-    color: var(--muted-foreground) !important;
-  }
-  
-  /* Glassmorphism utility classes - DARK version */
-  .glass {
-    @apply backdrop-blur-xl border border-white/20;
-    background-color: rgba(30, 36, 51, 0.8);
-  }
-  
-  .glass-dark {
-    @apply backdrop-blur-xl border border-white/10;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-  
-  /* Modern card hover effects */
-  .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
-  }
-  
-  /* Gradient text */
-  .gradient-text {
-    @apply bg-gradient-hero bg-clip-text text-transparent;
-  }
-  
-  /* Animate utilities */
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
-  }
-  
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-  }
-  
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  .animate-scale-in {
-    animation: scaleIn 0.3s ease-out forwards;
-  }
-  
-  @keyframes scaleIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  
-  /* Drop shadow glow effect */
-  .drop-shadow-glow {
-    filter: drop-shadow(0 0 8px currentColor);
-  }
-  
-  /* Scrollbar styling */
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  
-  ::-webkit-scrollbar-track {
     background: #1e2433;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: #374151;
-    border-radius: 4px;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: #4b5563;
+    color: #fafafa;
   }
 }
 
-/* Premium glow effects */
+/* Force dark on common light classes */
+.bg-white { background: #252d3d !important; }
+.bg-gray-50, .bg-gray-100 { background: #374151 !important; }
+.text-black, .text-gray-900 { color: #fafafa !important; }
+.text-gray-800, .text-gray-700, .text-gray-600 { color: #c4c9d4 !important; }
+
+/* Glass effects - dark */
+.glass {
+  @apply backdrop-blur-xl border border-white/20;
+  background: rgba(30, 36, 51, 0.8);
+}
+
+.glass-dark {
+  @apply backdrop-blur-xl border border-white/10;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Card hover */
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+}
+
+/* Gradient text */
+.gradient-text {
+  @apply bg-gradient-hero bg-clip-text text-transparent;
+}
+
+/* Animations */
+.animate-float { animation: float 3s ease-in-out infinite; }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-scale-in { animation: scaleIn 0.3s ease-out forwards; }
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.drop-shadow-glow { filter: drop-shadow(0 0 8px currentColor); }
+
+/* Scrollbar - dark */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #1e2433; }
+::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+
+/* Premium effects */
 .premium-glow {
   box-shadow: 0 0 20px rgba(0, 191, 255, 0.3), 0 0 40px rgba(168, 85, 247, 0.2);
 }
@@ -225,17 +164,15 @@ CSS variables now contain COMPLETE hsl() values for maximum Safari compatibility
               linear-gradient(135deg, #00bfff, #a855f7) border-box;
 }
 
-/* Focus states for accessibility */
+/* Accessibility */
 .focus-ring {
   @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background;
 }
 
-/* Skip to content link for accessibility */
 .skip-link {
   @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md;
 }
 
-/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
