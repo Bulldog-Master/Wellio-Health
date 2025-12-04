@@ -149,7 +149,7 @@ import settingsPT from './locales/pt/settings.json';
 import locationsPT from './locales/pt/locations.json';
 import productsPT from './locales/pt/products.json';
 
-// French - Core namespaces only
+// French - Core + Extended namespaces
 import commonFR from './locales/fr/common.json';
 import authFR from './locales/fr/auth.json';
 import fitnessFR from './locales/fr/fitness.json';
@@ -173,6 +173,15 @@ import recoveryFR from './locales/fr/recovery.json';
 import settingsFR from './locales/fr/settings.json';
 import locationsFR from './locales/fr/locations.json';
 import productsFR from './locales/fr/products.json';
+import challengesPageFR from './locales/fr/challenges_page.json';
+import macrosFR from './locales/fr/macros.json';
+import measurementsFR from './locales/fr/measurements.json';
+import recordsFR from './locales/fr/records.json';
+import referralFR from './locales/fr/referral.json';
+import rewardsFR from './locales/fr/rewards.json';
+import searchFR from './locales/fr/search.json';
+import sessionFR from './locales/fr/session.json';
+import voiceFR from './locales/fr/voice.json';
 
 // German - Core namespaces only
 import commonDE from './locales/de/common.json';
@@ -224,7 +233,7 @@ import settingsZH from './locales/zh/settings.json';
 import locationsZH from './locales/zh/locations.json';
 import productsZH from './locales/zh/products.json';
 
-// Turkish - Core namespaces only
+// Turkish - Core + Extended namespaces
 import commonTR from './locales/tr/common.json';
 import authTR from './locales/tr/auth.json';
 import settingsTR from './locales/tr/settings.json';
@@ -248,8 +257,17 @@ import unitsTR from './locales/tr/units.json';
 import videosTR from './locales/tr/videos.json';
 import locationsTR from './locales/tr/locations.json';
 import productsTR from './locales/tr/products.json';
+import challengesPageTR from './locales/tr/challenges_page.json';
+import macrosTR from './locales/tr/macros.json';
+import measurementsTR from './locales/tr/measurements.json';
+import recordsTR from './locales/tr/records.json';
+import referralTR from './locales/tr/referral.json';
+import rewardsTR from './locales/tr/rewards.json';
+import searchTR from './locales/tr/search.json';
+import sessionTR from './locales/tr/session.json';
+import voiceTR from './locales/tr/voice.json';
 
-// Italian - Core namespaces only
+// Italian - Core + Extended namespaces
 import commonIT from './locales/it/common.json';
 import authIT from './locales/it/auth.json';
 import settingsIT from './locales/it/settings.json';
@@ -273,8 +291,17 @@ import unitsIT from './locales/it/units.json';
 import videosIT from './locales/it/videos.json';
 import locationsIT from './locales/it/locations.json';
 import productsIT from './locales/it/products.json';
+import challengesPageIT from './locales/it/challenges_page.json';
+import macrosIT from './locales/it/macros.json';
+import measurementsIT from './locales/it/measurements.json';
+import recordsIT from './locales/it/records.json';
+import referralIT from './locales/it/referral.json';
+import rewardsIT from './locales/it/rewards.json';
+import searchIT from './locales/it/search.json';
+import sessionIT from './locales/it/session.json';
+import voiceIT from './locales/it/voice.json';
 
-// Dutch - Core namespaces only
+// Dutch - Core + Extended namespaces
 import commonNL from './locales/nl/common.json';
 import authNL from './locales/nl/auth.json';
 import settingsNL from './locales/nl/settings.json';
@@ -298,8 +325,17 @@ import unitsNL from './locales/nl/units.json';
 import videosNL from './locales/nl/videos.json';
 import locationsNL from './locales/nl/locations.json';
 import productsNL from './locales/nl/products.json';
+import challengesPageNL from './locales/nl/challenges_page.json';
+import macrosNL from './locales/nl/macros.json';
+import measurementsNL from './locales/nl/measurements.json';
+import recordsNL from './locales/nl/records.json';
+import referralNL from './locales/nl/referral.json';
+import rewardsNL from './locales/nl/rewards.json';
+import searchNL from './locales/nl/search.json';
+import sessionNL from './locales/nl/session.json';
+import voiceNL from './locales/nl/voice.json';
 
-// Russian - Core namespaces only
+// Russian - Core + Extended namespaces
 import commonRU from './locales/ru/common.json';
 import authRU from './locales/ru/auth.json';
 import settingsRU from './locales/ru/settings.json';
@@ -323,8 +359,17 @@ import unitsRU from './locales/ru/units.json';
 import videosRU from './locales/ru/videos.json';
 import locationsRU from './locales/ru/locations.json';
 import productsRU from './locales/ru/products.json';
+import challengesPageRU from './locales/ru/challenges_page.json';
+import macrosRU from './locales/ru/macros.json';
+import measurementsRU from './locales/ru/measurements.json';
+import recordsRU from './locales/ru/records.json';
+import referralRU from './locales/ru/referral.json';
+import rewardsRU from './locales/ru/rewards.json';
+import searchRU from './locales/ru/search.json';
+import sessionRU from './locales/ru/session.json';
+import voiceRU from './locales/ru/voice.json';
 
-// Japanese - Core namespaces only
+// Japanese - Core + Extended namespaces
 import commonJA from './locales/ja/common.json';
 import authJA from './locales/ja/auth.json';
 import settingsJA from './locales/ja/settings.json';
@@ -348,8 +393,17 @@ import unitsJA from './locales/ja/units.json';
 import videosJA from './locales/ja/videos.json';
 import locationsJA from './locales/ja/locations.json';
 import productsJA from './locales/ja/products.json';
+import challengesPageJA from './locales/ja/challenges_page.json';
+import macrosJA from './locales/ja/macros.json';
+import measurementsJA from './locales/ja/measurements.json';
+import recordsJA from './locales/ja/records.json';
+import referralJA from './locales/ja/referral.json';
+import rewardsJA from './locales/ja/rewards.json';
+import searchJA from './locales/ja/search.json';
+import sessionJA from './locales/ja/session.json';
+import voiceJA from './locales/ja/voice.json';
 
-// Korean - Core namespaces only
+// Korean - Core + Extended namespaces
 import commonKO from './locales/ko/common.json';
 import authKO from './locales/ko/auth.json';
 import settingsKO from './locales/ko/settings.json';
@@ -373,8 +427,17 @@ import unitsKO from './locales/ko/units.json';
 import videosKO from './locales/ko/videos.json';
 import locationsKO from './locales/ko/locations.json';
 import productsKO from './locales/ko/products.json';
+import challengesPageKO from './locales/ko/challenges_page.json';
+import macrosKO from './locales/ko/macros.json';
+import measurementsKO from './locales/ko/measurements.json';
+import recordsKO from './locales/ko/records.json';
+import referralKO from './locales/ko/referral.json';
+import rewardsKO from './locales/ko/rewards.json';
+import searchKO from './locales/ko/search.json';
+import sessionKO from './locales/ko/session.json';
+import voiceKO from './locales/ko/voice.json';
 
-// Arabic - Core namespaces only
+// Arabic - Core + Extended namespaces
 import commonAR from './locales/ar/common.json';
 import authAR from './locales/ar/auth.json';
 import settingsAR from './locales/ar/settings.json';
@@ -398,8 +461,17 @@ import unitsAR from './locales/ar/units.json';
 import videosAR from './locales/ar/videos.json';
 import locationsAR from './locales/ar/locations.json';
 import productsAR from './locales/ar/products.json';
+import challengesPageAR from './locales/ar/challenges_page.json';
+import macrosAR from './locales/ar/macros.json';
+import measurementsAR from './locales/ar/measurements.json';
+import recordsAR from './locales/ar/records.json';
+import referralAR from './locales/ar/referral.json';
+import rewardsAR from './locales/ar/rewards.json';
+import searchAR from './locales/ar/search.json';
+import sessionAR from './locales/ar/session.json';
+import voiceAR from './locales/ar/voice.json';
 
-// Hindi - Core namespaces only
+// Hindi - Core + Extended namespaces
 import commonHI from './locales/hi/common.json';
 import authHI from './locales/hi/auth.json';
 import settingsHI from './locales/hi/settings.json';
@@ -423,8 +495,18 @@ import unitsHI from './locales/hi/units.json';
 import videosHI from './locales/hi/videos.json';
 import locationsHI from './locales/hi/locations.json';
 import productsHI from './locales/hi/products.json';
+import challengesPageHI from './locales/hi/challenges_page.json';
+import macrosHI from './locales/hi/macros.json';
+import measurementsHI from './locales/hi/measurements.json';
+import recordsHI from './locales/hi/records.json';
+import referralHI from './locales/hi/referral.json';
+import rewardsHI from './locales/hi/rewards.json';
+import searchHI from './locales/hi/search.json';
+import sessionHI from './locales/hi/session.json';
+import voiceHI from './locales/hi/voice.json';
+import workoutHI from './locales/hi/workout.json';
 
-// Bengali - Core namespaces only
+// Bengali - Core + Extended namespaces
 import commonBN from './locales/bn/common.json';
 import authBN from './locales/bn/auth.json';
 import settingsBN from './locales/bn/settings.json';
@@ -448,8 +530,17 @@ import unitsBN from './locales/bn/units.json';
 import videosBN from './locales/bn/videos.json';
 import locationsBN from './locales/bn/locations.json';
 import productsBN from './locales/bn/products.json';
+import challengesPageBN from './locales/bn/challenges_page.json';
+import macrosBN from './locales/bn/macros.json';
+import measurementsBN from './locales/bn/measurements.json';
+import recordsBN from './locales/bn/records.json';
+import referralBN from './locales/bn/referral.json';
+import rewardsBN from './locales/bn/rewards.json';
+import searchBN from './locales/bn/search.json';
+import sessionBN from './locales/bn/session.json';
+import voiceBN from './locales/bn/voice.json';
 
-// Indonesian - Core namespaces only
+// Indonesian - Core + Extended namespaces
 import commonID from './locales/id/common.json';
 import authID from './locales/id/auth.json';
 import settingsID from './locales/id/settings.json';
@@ -473,8 +564,19 @@ import unitsID from './locales/id/units.json';
 import videosID from './locales/id/videos.json';
 import locationsID from './locales/id/locations.json';
 import productsID from './locales/id/products.json';
+import challengesPageID from './locales/id/challenges_page.json';
+import macrosID from './locales/id/macros.json';
+import measurementsID from './locales/id/measurements.json';
+import recordsID from './locales/id/records.json';
+import referralID from './locales/id/referral.json';
+import rewardsID from './locales/id/rewards.json';
+import searchID from './locales/id/search.json';
+import sessionID from './locales/id/session.json';
+import voiceID from './locales/id/voice.json';
+import challengesID from './locales/id/challenges.json';
+import liveID from './locales/id/live.json';
 
-// Nigerian Pidgin - Core namespaces only
+// Nigerian Pidgin - Core + Extended namespaces
 import commonPCM from './locales/pcm/common.json';
 import authPCM from './locales/pcm/auth.json';
 import settingsPCM from './locales/pcm/settings.json';
@@ -498,8 +600,17 @@ import unitsPCM from './locales/pcm/units.json';
 import videosPCM from './locales/pcm/videos.json';
 import locationsPCM from './locales/pcm/locations.json';
 import productsPCM from './locales/pcm/products.json';
+import challengesPagePCM from './locales/pcm/challenges_page.json';
+import macrosPCM from './locales/pcm/macros.json';
+import measurementsPCM from './locales/pcm/measurements.json';
+import recordsPCM from './locales/pcm/records.json';
+import referralPCM from './locales/pcm/referral.json';
+import rewardsPCM from './locales/pcm/rewards.json';
+import searchPCM from './locales/pcm/search.json';
+import sessionPCM from './locales/pcm/session.json';
+import voicePCM from './locales/pcm/voice.json';
 
-// Tamil - Core namespaces only
+// Tamil - Core + Extended namespaces
 import commonTA from './locales/ta/common.json';
 import authTA from './locales/ta/auth.json';
 import settingsTA from './locales/ta/settings.json';
@@ -523,8 +634,19 @@ import unitsTA from './locales/ta/units.json';
 import videosTA from './locales/ta/videos.json';
 import locationsTA from './locales/ta/locations.json';
 import productsTA from './locales/ta/products.json';
+import challengesPageTA from './locales/ta/challenges_page.json';
+import macrosTA from './locales/ta/macros.json';
+import measurementsTA from './locales/ta/measurements.json';
+import recordsTA from './locales/ta/records.json';
+import referralTA from './locales/ta/referral.json';
+import rewardsTA from './locales/ta/rewards.json';
+import searchTA from './locales/ta/search.json';
+import sessionTA from './locales/ta/session.json';
+import voiceTA from './locales/ta/voice.json';
+import challengesTA from './locales/ta/challenges.json';
+import liveTA from './locales/ta/live.json';
 
-// Urdu - Core namespaces only
+// Urdu - Core + Extended namespaces
 import commonUR from './locales/ur/common.json';
 import authUR from './locales/ur/auth.json';
 import settingsUR from './locales/ur/settings.json';
@@ -548,8 +670,17 @@ import unitsUR from './locales/ur/units.json';
 import videosUR from './locales/ur/videos.json';
 import locationsUR from './locales/ur/locations.json';
 import productsUR from './locales/ur/products.json';
+import challengesPageUR from './locales/ur/challenges_page.json';
+import macrosUR from './locales/ur/macros.json';
+import measurementsUR from './locales/ur/measurements.json';
+import recordsUR from './locales/ur/records.json';
+import referralUR from './locales/ur/referral.json';
+import rewardsUR from './locales/ur/rewards.json';
+import searchUR from './locales/ur/search.json';
+import sessionUR from './locales/ur/session.json';
+import voiceUR from './locales/ur/voice.json';
 
-// Egyptian Arabic - Core namespaces only
+// Egyptian Arabic - Core + Extended namespaces
 import commonARZ from './locales/arz/common.json';
 import authARZ from './locales/arz/auth.json';
 import settingsARZ from './locales/arz/settings.json';
@@ -573,8 +704,17 @@ import unitsARZ from './locales/arz/units.json';
 import videosARZ from './locales/arz/videos.json';
 import locationsARZ from './locales/arz/locations.json';
 import productsARZ from './locales/arz/products.json';
+import challengesPageARZ from './locales/arz/challenges_page.json';
+import macrosARZ from './locales/arz/macros.json';
+import measurementsARZ from './locales/arz/measurements.json';
+import recordsARZ from './locales/arz/records.json';
+import referralARZ from './locales/arz/referral.json';
+import rewardsARZ from './locales/arz/rewards.json';
+import searchARZ from './locales/arz/search.json';
+import sessionARZ from './locales/arz/session.json';
+import voiceARZ from './locales/arz/voice.json';
 
-// Marathi - Core namespaces only
+// Marathi - Core + Extended namespaces
 import commonMR from './locales/mr/common.json';
 import authMR from './locales/mr/auth.json';
 import settingsMR from './locales/mr/settings.json';
@@ -598,8 +738,17 @@ import unitsMR from './locales/mr/units.json';
 import videosMR from './locales/mr/videos.json';
 import locationsMR from './locales/mr/locations.json';
 import productsMR from './locales/mr/products.json';
+import challengesPageMR from './locales/mr/challenges_page.json';
+import macrosMR from './locales/mr/macros.json';
+import measurementsMR from './locales/mr/measurements.json';
+import recordsMR from './locales/mr/records.json';
+import referralMR from './locales/mr/referral.json';
+import rewardsMR from './locales/mr/rewards.json';
+import searchMR from './locales/mr/search.json';
+import sessionMR from './locales/mr/session.json';
+import voiceMR from './locales/mr/voice.json';
 
-// Telugu - Core namespaces only
+// Telugu - Core + Extended namespaces
 import commonTE from './locales/te/common.json';
 import authTE from './locales/te/auth.json';
 import settingsTE from './locales/te/settings.json';
@@ -623,8 +772,17 @@ import unitsTE from './locales/te/units.json';
 import videosTE from './locales/te/videos.json';
 import locationsTE from './locales/te/locations.json';
 import productsTE from './locales/te/products.json';
+import challengesPageTE from './locales/te/challenges_page.json';
+import macrosTE from './locales/te/macros.json';
+import measurementsTE from './locales/te/measurements.json';
+import recordsTE from './locales/te/records.json';
+import referralTE from './locales/te/referral.json';
+import rewardsTE from './locales/te/rewards.json';
+import searchTE from './locales/te/search.json';
+import sessionTE from './locales/te/session.json';
+import voiceTE from './locales/te/voice.json';
 
-// Vietnamese - Core namespaces only
+// Vietnamese - Core + Extended namespaces
 import commonVI from './locales/vi/common.json';
 import authVI from './locales/vi/auth.json';
 import settingsVI from './locales/vi/settings.json';
@@ -648,6 +806,15 @@ import unitsVI from './locales/vi/units.json';
 import videosVI from './locales/vi/videos.json';
 import locationsVI from './locales/vi/locations.json';
 import productsVI from './locales/vi/products.json';
+import challengesPageVI from './locales/vi/challenges_page.json';
+import macrosVI from './locales/vi/macros.json';
+import measurementsVI from './locales/vi/measurements.json';
+import recordsVI from './locales/vi/records.json';
+import referralVI from './locales/vi/referral.json';
+import rewardsVI from './locales/vi/rewards.json';
+import searchVI from './locales/vi/search.json';
+import sessionVI from './locales/vi/session.json';
+import voiceVI from './locales/vi/voice.json';
 
 // All namespaces
 export const allNamespaces = [
@@ -704,7 +871,9 @@ const resources = {
     seo: seoFR, units: unitsFR, a11y: a11yFR, plurals: pluralsFR, admin: adminFR, premium: premiumFR,
     subscription: subscriptionFR, videos: videosFR, feed: feedFR, chat: chatFR, celebrations: celebrationsFR,
     news: newsFR, addons: addonsFR, professional: professionalFR, recovery: recoveryFR, settings: settingsFR,
-    locations: locationsFR, products: productsFR,
+    locations: locationsFR, products: productsFR, challenges_page: challengesPageFR, macros: macrosFR,
+    measurements: measurementsFR, records: recordsFR, referral: referralFR, rewards: rewardsFR,
+    search: searchFR, session: sessionFR, voice: voiceFR,
   },
   de: {
     common: commonDE, auth: authDE, fitness: fitnessDE, social: socialDE, nutrition: nutritionDE,
@@ -725,119 +894,155 @@ const resources = {
     social: socialTR, subscription: subscriptionTR, premium: premiumTR, feed: feedTR, chat: chatTR,
     celebrations: celebrationsTR, admin: adminTR, addons: addonsTR, recovery: recoveryTR, news: newsTR,
     professional: professionalTR, a11y: a11yTR, seo: seoTR, plurals: pluralsTR, units: unitsTR,
-    videos: videosTR, locations: locationsTR, products: productsTR,
+    videos: videosTR, locations: locationsTR, products: productsTR, challenges_page: challengesPageTR,
+    macros: macrosTR, measurements: measurementsTR, records: recordsTR, referral: referralTR,
+    rewards: rewardsTR, search: searchTR, session: sessionTR, voice: voiceTR,
   },
   it: {
     common: commonIT, auth: authIT, settings: settingsIT, fitness: fitnessIT, nutrition: nutritionIT,
     social: socialIT, subscription: subscriptionIT, premium: premiumIT, feed: feedIT, chat: chatIT,
     celebrations: celebrationsIT, admin: adminIT, addons: addonsIT, recovery: recoveryIT, news: newsIT,
     professional: professionalIT, a11y: a11yIT, seo: seoIT, plurals: pluralsIT, units: unitsIT,
-    videos: videosIT, locations: locationsIT, products: productsIT,
+    videos: videosIT, locations: locationsIT, products: productsIT, challenges_page: challengesPageIT,
+    macros: macrosIT, measurements: measurementsIT, records: recordsIT, referral: referralIT,
+    rewards: rewardsIT, search: searchIT, session: sessionIT, voice: voiceIT,
   },
   nl: {
     common: commonNL, auth: authNL, settings: settingsNL, fitness: fitnessNL, nutrition: nutritionNL,
     social: socialNL, subscription: subscriptionNL, premium: premiumNL, feed: feedNL, chat: chatNL,
     celebrations: celebrationsNL, admin: adminNL, addons: addonsNL, recovery: recoveryNL, news: newsNL,
     professional: professionalNL, a11y: a11yNL, seo: seoNL, plurals: pluralsNL, units: unitsNL,
-    videos: videosNL, locations: locationsNL, products: productsNL,
+    videos: videosNL, locations: locationsNL, products: productsNL, challenges_page: challengesPageNL,
+    macros: macrosNL, measurements: measurementsNL, records: recordsNL, referral: referralNL,
+    rewards: rewardsNL, search: searchNL, session: sessionNL, voice: voiceNL,
   },
   ru: {
     common: commonRU, auth: authRU, settings: settingsRU, fitness: fitnessRU, nutrition: nutritionRU,
     social: socialRU, subscription: subscriptionRU, premium: premiumRU, feed: feedRU, chat: chatRU,
     celebrations: celebrationsRU, admin: adminRU, addons: addonsRU, recovery: recoveryRU, news: newsRU,
     professional: professionalRU, a11y: a11yRU, seo: seoRU, plurals: pluralsRU, units: unitsRU,
-    videos: videosRU, locations: locationsRU, products: productsRU,
+    videos: videosRU, locations: locationsRU, products: productsRU, challenges_page: challengesPageRU,
+    macros: macrosRU, measurements: measurementsRU, records: recordsRU, referral: referralRU,
+    rewards: rewardsRU, search: searchRU, session: sessionRU, voice: voiceRU,
   },
   ja: {
     common: commonJA, auth: authJA, settings: settingsJA, fitness: fitnessJA, nutrition: nutritionJA,
     social: socialJA, subscription: subscriptionJA, premium: premiumJA, feed: feedJA, chat: chatJA,
     celebrations: celebrationsJA, admin: adminJA, addons: addonsJA, recovery: recoveryJA, news: newsJA,
     professional: professionalJA, a11y: a11yJA, seo: seoJA, plurals: pluralsJA, units: unitsJA,
-    videos: videosJA, locations: locationsJA, products: productsJA,
+    videos: videosJA, locations: locationsJA, products: productsJA, challenges_page: challengesPageJA,
+    macros: macrosJA, measurements: measurementsJA, records: recordsJA, referral: referralJA,
+    rewards: rewardsJA, search: searchJA, session: sessionJA, voice: voiceJA,
   },
   ko: {
     common: commonKO, auth: authKO, settings: settingsKO, fitness: fitnessKO, nutrition: nutritionKO,
     social: socialKO, subscription: subscriptionKO, premium: premiumKO, feed: feedKO, chat: chatKO,
     celebrations: celebrationsKO, admin: adminKO, addons: addonsKO, recovery: recoveryKO, news: newsKO,
     professional: professionalKO, a11y: a11yKO, seo: seoKO, plurals: pluralsKO, units: unitsKO,
-    videos: videosKO, locations: locationsKO, products: productsKO,
+    videos: videosKO, locations: locationsKO, products: productsKO, challenges_page: challengesPageKO,
+    macros: macrosKO, measurements: measurementsKO, records: recordsKO, referral: referralKO,
+    rewards: rewardsKO, search: searchKO, session: sessionKO, voice: voiceKO,
   },
   ar: {
     common: commonAR, auth: authAR, settings: settingsAR, fitness: fitnessAR, nutrition: nutritionAR,
     social: socialAR, subscription: subscriptionAR, premium: premiumAR, feed: feedAR, chat: chatAR,
     celebrations: celebrationsAR, admin: adminAR, addons: addonsAR, recovery: recoveryAR, news: newsAR,
     professional: professionalAR, a11y: a11yAR, seo: seoAR, plurals: pluralsAR, units: unitsAR,
-    videos: videosAR, locations: locationsAR, products: productsAR,
+    videos: videosAR, locations: locationsAR, products: productsAR, challenges_page: challengesPageAR,
+    macros: macrosAR, measurements: measurementsAR, records: recordsAR, referral: referralAR,
+    rewards: rewardsAR, search: searchAR, session: sessionAR, voice: voiceAR,
   },
   hi: {
     common: commonHI, auth: authHI, settings: settingsHI, fitness: fitnessHI, nutrition: nutritionHI,
     social: socialHI, subscription: subscriptionHI, premium: premiumHI, feed: feedHI, chat: chatHI,
     celebrations: celebrationsHI, admin: adminHI, addons: addonsHI, recovery: recoveryHI, news: newsHI,
     professional: professionalHI, a11y: a11yHI, seo: seoHI, plurals: pluralsHI, units: unitsHI,
-    videos: videosHI, locations: locationsHI, products: productsHI,
+    videos: videosHI, locations: locationsHI, products: productsHI, challenges_page: challengesPageHI,
+    macros: macrosHI, measurements: measurementsHI, records: recordsHI, referral: referralHI,
+    rewards: rewardsHI, search: searchHI, session: sessionHI, voice: voiceHI, workout: workoutHI,
   },
   bn: {
     common: commonBN, auth: authBN, settings: settingsBN, fitness: fitnessBN, nutrition: nutritionBN,
     social: socialBN, subscription: subscriptionBN, premium: premiumBN, feed: feedBN, chat: chatBN,
     celebrations: celebrationsBN, admin: adminBN, addons: addonsBN, recovery: recoveryBN, news: newsBN,
     professional: professionalBN, a11y: a11yBN, seo: seoBN, plurals: pluralsBN, units: unitsBN,
-    videos: videosBN, locations: locationsBN, products: productsBN,
+    videos: videosBN, locations: locationsBN, products: productsBN, challenges_page: challengesPageBN,
+    macros: macrosBN, measurements: measurementsBN, records: recordsBN, referral: referralBN,
+    rewards: rewardsBN, search: searchBN, session: sessionBN, voice: voiceBN,
   },
   id: {
     common: commonID, auth: authID, settings: settingsID, fitness: fitnessID, nutrition: nutritionID,
     social: socialID, subscription: subscriptionID, premium: premiumID, feed: feedID, chat: chatID,
     celebrations: celebrationsID, admin: adminID, addons: addonsID, recovery: recoveryID, news: newsID,
     professional: professionalID, a11y: a11yID, seo: seoID, plurals: pluralsID, units: unitsID,
-    videos: videosID, locations: locationsID, products: productsID,
+    videos: videosID, locations: locationsID, products: productsID, challenges_page: challengesPageID,
+    macros: macrosID, measurements: measurementsID, records: recordsID, referral: referralID,
+    rewards: rewardsID, search: searchID, session: sessionID, voice: voiceID, challenges: challengesID,
+    live: liveID,
   },
   pcm: {
     common: commonPCM, auth: authPCM, settings: settingsPCM, fitness: fitnessPCM, nutrition: nutritionPCM,
     social: socialPCM, subscription: subscriptionPCM, premium: premiumPCM, feed: feedPCM, chat: chatPCM,
     celebrations: celebrationsPCM, admin: adminPCM, addons: addonsPCM, recovery: recoveryPCM, news: newsPCM,
     professional: professionalPCM, a11y: a11yPCM, seo: seoPCM, plurals: pluralsPCM, units: unitsPCM,
-    videos: videosPCM, locations: locationsPCM, products: productsPCM,
+    videos: videosPCM, locations: locationsPCM, products: productsPCM, challenges_page: challengesPagePCM,
+    macros: macrosPCM, measurements: measurementsPCM, records: recordsPCM, referral: referralPCM,
+    rewards: rewardsPCM, search: searchPCM, session: sessionPCM, voice: voicePCM,
   },
   ta: {
     common: commonTA, auth: authTA, settings: settingsTA, fitness: fitnessTA, nutrition: nutritionTA,
     social: socialTA, subscription: subscriptionTA, premium: premiumTA, feed: feedTA, chat: chatTA,
     celebrations: celebrationsTA, admin: adminTA, addons: addonsTA, recovery: recoveryTA, news: newsTA,
     professional: professionalTA, a11y: a11yTA, seo: seoTA, plurals: pluralsTA, units: unitsTA,
-    videos: videosTA, locations: locationsTA, products: productsTA,
+    videos: videosTA, locations: locationsTA, products: productsTA, challenges_page: challengesPageTA,
+    macros: macrosTA, measurements: measurementsTA, records: recordsTA, referral: referralTA,
+    rewards: rewardsTA, search: searchTA, session: sessionTA, voice: voiceTA, challenges: challengesTA,
+    live: liveTA,
   },
   ur: {
     common: commonUR, auth: authUR, settings: settingsUR, fitness: fitnessUR, nutrition: nutritionUR,
     social: socialUR, subscription: subscriptionUR, premium: premiumUR, feed: feedUR, chat: chatUR,
     celebrations: celebrationsUR, admin: adminUR, addons: addonsUR, recovery: recoveryUR, news: newsUR,
     professional: professionalUR, a11y: a11yUR, seo: seoUR, plurals: pluralsUR, units: unitsUR,
-    videos: videosUR, locations: locationsUR, products: productsUR,
+    videos: videosUR, locations: locationsUR, products: productsUR, challenges_page: challengesPageUR,
+    macros: macrosUR, measurements: measurementsUR, records: recordsUR, referral: referralUR,
+    rewards: rewardsUR, search: searchUR, session: sessionUR, voice: voiceUR,
   },
   arz: {
     common: commonARZ, auth: authARZ, settings: settingsARZ, fitness: fitnessARZ, nutrition: nutritionARZ,
     social: socialARZ, subscription: subscriptionARZ, premium: premiumARZ, feed: feedARZ, chat: chatARZ,
     celebrations: celebrationsARZ, admin: adminARZ, addons: addonsARZ, recovery: recoveryARZ, news: newsARZ,
     professional: professionalARZ, a11y: a11yARZ, seo: seoARZ, plurals: pluralsARZ, units: unitsARZ,
-    videos: videosARZ, locations: locationsARZ, products: productsARZ,
+    videos: videosARZ, locations: locationsARZ, products: productsARZ, challenges_page: challengesPageARZ,
+    macros: macrosARZ, measurements: measurementsARZ, records: recordsARZ, referral: referralARZ,
+    rewards: rewardsARZ, search: searchARZ, session: sessionARZ, voice: voiceARZ,
   },
   mr: {
     common: commonMR, auth: authMR, settings: settingsMR, fitness: fitnessMR, nutrition: nutritionMR,
     social: socialMR, subscription: subscriptionMR, premium: premiumMR, feed: feedMR, chat: chatMR,
     celebrations: celebrationsMR, admin: adminMR, addons: addonsMR, recovery: recoveryMR, news: newsMR,
     professional: professionalMR, a11y: a11yMR, seo: seoMR, plurals: pluralsMR, units: unitsMR,
-    videos: videosMR, locations: locationsMR, products: productsMR,
+    videos: videosMR, locations: locationsMR, products: productsMR, challenges_page: challengesPageMR,
+    macros: macrosMR, measurements: measurementsMR, records: recordsMR, referral: referralMR,
+    rewards: rewardsMR, search: searchMR, session: sessionMR, voice: voiceMR,
   },
   te: {
     common: commonTE, auth: authTE, settings: settingsTE, fitness: fitnessTE, nutrition: nutritionTE,
     social: socialTE, subscription: subscriptionTE, premium: premiumTE, feed: feedTE, chat: chatTE,
     celebrations: celebrationsTE, admin: adminTE, addons: addonsTE, recovery: recoveryTE, news: newsTE,
     professional: professionalTE, a11y: a11yTE, seo: seoTE, plurals: pluralsTE, units: unitsTE,
-    videos: videosTE, locations: locationsTE, products: productsTE,
+    videos: videosTE, locations: locationsTE, products: productsTE, challenges_page: challengesPageTE,
+    macros: macrosTE, measurements: measurementsTE, records: recordsTE, referral: referralTE,
+    rewards: rewardsTE, search: searchTE, session: sessionTE, voice: voiceTE,
   },
   vi: {
     common: commonVI, auth: authVI, settings: settingsVI, fitness: fitnessVI, nutrition: nutritionVI,
     social: socialVI, subscription: subscriptionVI, premium: premiumVI, feed: feedVI, chat: chatVI,
     celebrations: celebrationsVI, admin: adminVI, addons: addonsVI, recovery: recoveryVI, news: newsVI,
     professional: professionalVI, a11y: a11yVI, seo: seoVI, plurals: pluralsVI, units: unitsVI,
-    videos: videosVI, locations: locationsVI, products: productsVI,
+    videos: videosVI, locations: locationsVI, products: productsVI, challenges_page: challengesPageVI,
+    macros: macrosVI, measurements: measurementsVI, records: recordsVI, referral: referralVI,
+    rewards: rewardsVI, search: searchVI, session: sessionVI, voice: voiceVI,
   },
 };
 
