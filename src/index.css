@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 /* 
-  DARK MODE ONLY - No light mode exists in this app.
-  All colors are hardcoded dark values.
+  DARK MODE ONLY - This app has no light mode.
+  The .dark class is always on <html> and cannot be removed.
 */
 
 @layer base {
+  /* Base dark values for :root */
   :root {
-    /* Core colors - DARK ONLY */
     --background: #1e2433;
     --foreground: #fafafa;
     --card: #252d3d;
@@ -81,6 +81,42 @@
     --nav-icon-15: #2dd4bf;
     --nav-icon-16: #fb923c;
     
+    color-scheme: dark;
+  }
+
+  /* CRITICAL: Duplicate all values for .dark selector so Tailwind dark: variants work */
+  .dark {
+    --background: #1e2433;
+    --foreground: #fafafa;
+    --card: #252d3d;
+    --card-foreground: #fafafa;
+    --popover: #252d3d;
+    --popover-foreground: #fafafa;
+    --primary: #00bfff;
+    --primary-foreground: #ffffff;
+    --secondary: #a855f7;
+    --secondary-foreground: #ffffff;
+    --muted: #374151;
+    --muted-foreground: #c4c9d4;
+    --accent: #ff3399;
+    --accent-foreground: #ffffff;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --border: #3d4657;
+    --input: #2d3545;
+    --ring: #00bfff;
+    --success: #22c55e;
+    --success-foreground: #ffffff;
+    --warning: #f59e0b;
+    --warning-foreground: #ffffff;
+    --sidebar-background: #252d3d;
+    --sidebar-foreground: #f5f5f5;
+    --sidebar-primary: #00bfff;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #313b4d;
+    --sidebar-accent-foreground: #00d4ff;
+    --sidebar-border: #374151;
+    --sidebar-ring: #00bfff;
     color-scheme: dark;
   }
 

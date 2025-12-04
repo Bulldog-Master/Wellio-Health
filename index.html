@@ -6,7 +6,32 @@
     <meta name="color-scheme" content="dark only" />
     <meta name="theme-color" content="#1e2433" />
     <meta name="supported-color-schemes" content="dark" />
-    <style>*{background-color:#1e2433!important;color-scheme:dark!important}html,body,#root{background:#1e2433!important;color:#fafafa!important}</style>
+    
+    <!-- CRITICAL: Force dark mode before anything else loads -->
+    <script>
+      // Immediately enforce dark class - runs before any other JS
+      document.documentElement.classList.add('dark');
+      document.documentElement.style.colorScheme = 'dark';
+      document.documentElement.style.backgroundColor = '#1e2433';
+      // Prevent any removal of dark class
+      Object.defineProperty(document.documentElement.classList, 'remove', {
+        value: function(cls) {
+          if (cls !== 'dark') {
+            HTMLElement.prototype.classList.remove.call(this, cls);
+          }
+        }
+      });
+    </script>
+    
+    <style>
+      /* Inline critical dark styles - loads before external CSS */
+      :root, .dark, html, body, #root {
+        background-color: #1e2433 !important;
+        color: #fafafa !important;
+        color-scheme: dark !important;
+      }
+      * { color-scheme: dark !important; }
+    </style>
     
     <title>Wellio - Complete Fitness & Health Tracker</title>
     <meta name="description" content="Track your fitness journey with Wellio. Monitor weight, nutrition, workouts, and health goals all in one beautiful app." />
