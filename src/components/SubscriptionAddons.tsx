@@ -7,6 +7,7 @@ import { Switch } from '@/components/ui/switch';
 import { Sparkles, Check, Plus, Minus } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import { CheckoutDialog } from '@/components/payments';
 
 interface Addon {
   id: string;
@@ -30,11 +31,13 @@ interface UserAddon {
 }
 
 export const SubscriptionAddons = () => {
-  const { t, i18n } = useTranslation(['addons', 'common']);
+  const { t, i18n } = useTranslation(['addons', 'common', 'payments']);
   const [addons, setAddons] = useState<Addon[]>([]);
   const [userAddons, setUserAddons] = useState<UserAddon[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [yearlyBilling, setYearlyBilling] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [selectedAddon, setSelectedAddon] = useState<Addon | null>(null);
   const isSpanish = i18n.language?.startsWith('es');
 
   useEffect(() => {
@@ -80,7 +83,40 @@ export const SubscriptionAddons = () => {
     return userAddons.some(ua => ua.addon_id === addonId);
   };
 
-  const toggleAddon = async (addon: Addon) => {
+  const handleAddAddon = (addon: Addon) => {
+    setSelectedAddon(addon);
+    setCheckoutOpen(true);
+  };
+
+  const handlePaymentSuccess = async () => {
+    if (!selectedAddon) return;
+    
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
+    const addonName = isSpanish && selectedAddon.name_es ? selectedAddon.name_es : selectedAddon.name;
+
+    const { data, error } = await supabase
+      .from('user_addons')
+      .insert({
+        user_id: user.id,
+        addon_id: selectedAddon.id,
+        billing_cycle: yearlyBilling ? 'yearly' : 'monthly'
+      })
+      .select()
+      .single();
+
+    if (!error && data) {
+      setUserAddons(prev => [...prev, data]);
+      toast.success(t('addon_added'), {
+        description: t('addon_added_desc', { name: addonName })
+      });
+    }
+    
+    setSelectedAddon(null);
+  };
+
+  const removeAddon = async (addon: Addon) => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
 
@@ -88,7 +124,6 @@ export const SubscriptionAddons = () => {
     const addonName = isSpanish && addon.name_es ? addon.name_es : addon.name;
 
     if (existing) {
-      // Remove addon
       const { error } = await supabase
         .from('user_addons')
         .update({ status: 'cancelled', cancelled_at: new Date().toISOString() })
@@ -98,24 +133,6 @@ export const SubscriptionAddons = () => {
         setUserAddons(prev => prev.filter(ua => ua.id !== existing.id));
         toast.success(t('addon_removed'), {
           description: t('addon_removed_desc', { name: addonName })
-        });
-      }
-    } else {
-      // Add addon
-      const { data, error } = await supabase
-        .from('user_addons')
-        .insert({
-          user_id: user.id,
-          addon_id: addon.id,
-          billing_cycle: yearlyBilling ? 'yearly' : 'monthly'
-        })
-        .select()
-        .single();
-
-      if (!error && data) {
-        setUserAddons(prev => [...prev, data]);
-        toast.success(t('addon_added'), {
-          description: t('addon_added_desc', { name: addonName })
         });
       }
     }
@@ -130,6 +147,12 @@ export const SubscriptionAddons = () => {
   if (isLoading) {
     return <div className="animate-pulse h-64 bg-muted rounded-lg" />;
   }
+
+  const getAddonPrice = (addon: Addon) => {
+    return yearlyBilling && addon.price_yearly 
+      ? addon.price_yearly 
+      : addon.price_monthly;
+  };
 
   return (
     <div className="space-y-6">
@@ -179,9 +202,7 @@ export const SubscriptionAddons = () => {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {addons.map(addon => {
           const isActive = hasAddon(addon.id);
-          const price = yearlyBilling && addon.price_yearly 
-            ? addon.price_yearly 
-            : addon.price_monthly;
+          const price = getAddonPrice(addon);
           const savings = calculateSavings(addon.price_monthly, addon.price_yearly);
           const name = isSpanish && addon.name_es ? addon.name_es : addon.name;
           const description = isSpanish && addon.description_es ? addon.description_es : addon.description;
@@ -226,7 +247,7 @@ export const SubscriptionAddons = () => {
                 <Button
                   className="w-full"
                   variant={isActive ? 'outline' : 'default'}
-                  onClick={() => toggleAddon(addon)}
+                  onClick={() => isActive ? removeAddon(addon) : handleAddAddon(addon)}
                 >
                   {isActive ? (
                     <>
@@ -246,12 +267,21 @@ export const SubscriptionAddons = () => {
         })}
       </div>
 
-      <Card className="bg-muted/50">
-        <CardContent className="pt-6 text-center text-muted-foreground">
-          <p>{t('coming_soon')}</p>
-          <p className="text-sm">{t('payment_integration')}</p>
-        </CardContent>
-      </Card>
+      {/* Checkout Dialog */}
+      {selectedAddon && (
+        <CheckoutDialog
+          open={checkoutOpen}
+          onOpenChange={(open) => {
+            setCheckoutOpen(open);
+            if (!open) setSelectedAddon(null);
+          }}
+          itemName={isSpanish && selectedAddon.name_es ? selectedAddon.name_es : selectedAddon.name}
+          amount={getAddonPrice(selectedAddon)}
+          billingCycle={yearlyBilling ? 'yearly' : 'monthly'}
+          itemType="addon"
+          onSuccess={handlePaymentSuccess}
+        />
+      )}
     </div>
   );
 };
