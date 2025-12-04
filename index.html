@@ -32,6 +32,11 @@
   </head>
 
   <body>
+    <script>
+      // Force dark mode before React loads to prevent flash
+      localStorage.setItem('theme', 'dark');
+      document.documentElement.classList.add('dark');
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
