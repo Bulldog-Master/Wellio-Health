@@ -184,9 +184,9 @@ export const AppRoutes = () => (
     <Route path="/fundraiser/:id" element={<ProtectedRoute><Layout><FundraiserDetail /></Layout></ProtectedRoute>} />
     
     {/* Trainer & Creator */}
-    <Route path="/trainer/marketplace" element={<ProtectedRoute><Layout><TrainerMarketplace /></Layout></ProtectedRoute>} />
-    <Route path="/trainer/setup" element={<ProtectedRoute><Layout><TrainerSetup /></Layout></ProtectedRoute>} />
-    <Route path="/creator/hub" element={<ProtectedRoute><Layout><CreatorHub /></Layout></ProtectedRoute>} />
+    <Route path="/trainer/marketplace" element={<RouteErrorBoundary><ProtectedRoute><Layout><TrainerMarketplace /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/trainer/setup" element={<RouteErrorBoundary><ProtectedRoute><Layout><TrainerSetup /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/creator/hub" element={<RouteErrorBoundary><ProtectedRoute><Layout><CreatorHub /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     
     {/* Misc */}
     <Route path="/referral" element={<ProtectedRoute><Layout><Referral /></Layout></ProtectedRoute>} />
