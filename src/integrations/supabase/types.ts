@@ -741,6 +741,56 @@ export type Database = {
         }
         Relationships: []
       }
+      crypto_payments: {
+        Row: {
+          amount_crypto: number | null
+          amount_usd: number
+          created_at: string | null
+          crypto_currency: string
+          expires_at: string | null
+          id: string
+          status: string | null
+          transaction_id: string | null
+          tx_hash: string | null
+          user_id: string
+          wallet_address: string | null
+        }
+        Insert: {
+          amount_crypto?: number | null
+          amount_usd: number
+          created_at?: string | null
+          crypto_currency: string
+          expires_at?: string | null
+          id?: string
+          status?: string | null
+          transaction_id?: string | null
+          tx_hash?: string | null
+          user_id: string
+          wallet_address?: string | null
+        }
+        Update: {
+          amount_crypto?: number | null
+          amount_usd?: number
+          created_at?: string | null
+          crypto_currency?: string
+          expires_at?: string | null
+          id?: string
+          status?: string | null
+          transaction_id?: string | null
+          tx_hash?: string | null
+          user_id?: string
+          wallet_address?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crypto_payments_transaction_id_fkey"
+            columns: ["transaction_id"]
+            isOneToOne: false
+            referencedRelation: "payment_transactions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       custom_challenges: {
         Row: {
           badge_image_url: string | null
@@ -845,6 +895,56 @@ export type Database = {
           user_id?: string | null
         }
         Relationships: []
+      }
+      etransfer_requests: {
+        Row: {
+          amount: number
+          confirmation_number: string | null
+          created_at: string | null
+          id: string
+          notes: string | null
+          reference_email: string
+          status: string | null
+          transaction_id: string | null
+          user_id: string
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          amount: number
+          confirmation_number?: string | null
+          created_at?: string | null
+          id?: string
+          notes?: string | null
+          reference_email: string
+          status?: string | null
+          transaction_id?: string | null
+          user_id: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          amount?: number
+          confirmation_number?: string | null
+          created_at?: string | null
+          id?: string
+          notes?: string | null
+          reference_email?: string
+          status?: string | null
+          transaction_id?: string | null
+          user_id?: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "etransfer_requests_transaction_id_fkey"
+            columns: ["transaction_id"]
+            isOneToOne: false
+            referencedRelation: "payment_transactions"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       event_reminders: {
         Row: {
@@ -1960,6 +2060,125 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      payment_methods: {
+        Row: {
+          config: Json | null
+          created_at: string | null
+          description: string | null
+          description_es: string | null
+          icon: string | null
+          id: string
+          is_active: boolean | null
+          max_amount: number | null
+          method_key: string
+          min_amount: number | null
+          name: string
+          name_es: string | null
+          processing_fee_fixed: number | null
+          processing_fee_percent: number | null
+          requires_region: string[] | null
+          sort_order: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          config?: Json | null
+          created_at?: string | null
+          description?: string | null
+          description_es?: string | null
+          icon?: string | null
+          id?: string
+          is_active?: boolean | null
+          max_amount?: number | null
+          method_key: string
+          min_amount?: number | null
+          name: string
+          name_es?: string | null
+          processing_fee_fixed?: number | null
+          processing_fee_percent?: number | null
+          requires_region?: string[] | null
+          sort_order?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          config?: Json | null
+          created_at?: string | null
+          description?: string | null
+          description_es?: string | null
+          icon?: string | null
+          id?: string
+          is_active?: boolean | null
+          max_amount?: number | null
+          method_key?: string
+          min_amount?: number | null
+          name?: string
+          name_es?: string | null
+          processing_fee_fixed?: number | null
+          processing_fee_percent?: number | null
+          requires_region?: string[] | null
+          sort_order?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      payment_transactions: {
+        Row: {
+          amount: number
+          completed_at: string | null
+          created_at: string | null
+          currency: string | null
+          error_message: string | null
+          external_transaction_id: string | null
+          id: string
+          metadata: Json | null
+          payment_method_id: string | null
+          reference_id: string | null
+          status: string | null
+          transaction_type: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          completed_at?: string | null
+          created_at?: string | null
+          currency?: string | null
+          error_message?: string | null
+          external_transaction_id?: string | null
+          id?: string
+          metadata?: Json | null
+          payment_method_id?: string | null
+          reference_id?: string | null
+          status?: string | null
+          transaction_type: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          completed_at?: string | null
+          created_at?: string | null
+          currency?: string | null
+          error_message?: string | null
+          external_transaction_id?: string | null
+          id?: string
+          metadata?: Json | null
+          payment_method_id?: string | null
+          reference_id?: string | null
+          status?: string | null
+          transaction_type?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_transactions_payment_method_id_fkey"
+            columns: ["payment_method_id"]
+            isOneToOne: false
+            referencedRelation: "payment_methods"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       personal_records: {
         Row: {
