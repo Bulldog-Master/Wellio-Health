@@ -181,7 +181,7 @@ const SettingsMenu = () => {
       icon: UserSearch,
       iconBg: "bg-emerald-500/20",
       iconColor: "text-emerald-500",
-      path: "/trainer-marketplace",
+      path: "/trainer/marketplace",
       badge: "Pro",
       badgeVariant: "secondary" as const,
     }] : []),
