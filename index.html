@@ -40,13 +40,32 @@
     </script>
     
     <style>
-      /* Inline critical dark styles - loads before external CSS */
-      :root, .dark, html, body, #root {
+      /* CRITICAL: Inline dark styles - Safari/iOS must respect these */
+      :root, :root.dark, html, html.dark, body, #root,
+      html[class], html[class="dark"], body[class] {
         background-color: #1e2433 !important;
         color: #fafafa !important;
         color-scheme: dark !important;
+        -webkit-appearance: none;
       }
-      * { color-scheme: dark !important; }
+      *, *::before, *::after { 
+        color-scheme: dark !important; 
+      }
+      /* Block any light mode leakage */
+      @media (prefers-color-scheme: light) {
+        :root, html, body, #root {
+          background-color: #1e2433 !important;
+          color: #fafafa !important;
+          color-scheme: dark !important;
+        }
+      }
+      /* Safari-specific dark enforcement */
+      @supports (-webkit-touch-callout: none) {
+        :root, html, body, #root {
+          background-color: #1e2433 !important;
+          color-scheme: dark !important;
+        }
+      }
     </style>
     
     <title>Wellio - Complete Fitness & Health Tracker</title>
