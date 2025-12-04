@@ -83,9 +83,11 @@ export const SubscriptionAddons = () => {
   };
 
   const handleAddAddon = (addon: Addon) => {
+    console.log('handleAddAddon called for:', addon.name);
     const price = yearlyBilling && addon.price_yearly ? addon.price_yearly : addon.price_monthly;
     const addonName = isSpanish && addon.name_es ? addon.name_es : addon.name;
     
+    console.log('Adding addon to cart:', addonName, price);
     addItem({
       id: `addon-${addon.id}`,
       type: 'addon',

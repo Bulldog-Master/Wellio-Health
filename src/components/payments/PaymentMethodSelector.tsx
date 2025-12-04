@@ -334,12 +334,6 @@ export const PaymentMethodSelector = ({
         )}
       </RadioGroup>
 
-      {/* Integration Status Notice */}
-      <Card className="bg-muted/50">
-        <CardContent className="py-4 text-center text-sm text-muted-foreground">
-          <p>{t('integration_pending')}</p>
-        </CardContent>
-      </Card>
     </div>
   );
 };
