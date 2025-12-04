@@ -1,0 +1,20 @@
+{
+  "challenges": "Uitdagingen",
+  "complete_challenges": "Voltooi uitdagingen om punten en badges te verdienen",
+  "custom_challenges": "Aangepaste Uitdagingen",
+  "total_points": "Totaal Punten",
+  "current_streak": "Huidige Reeks",
+  "longest_streak": "Langste Reeks",
+  "days": "dagen",
+  "daily": "Dagelijks",
+  "weekly": "Wekelijks",
+  "monthly": "Maandelijks",
+  "milestones": "Mijlpalen",
+  "target": "Doel",
+  "ends": "Eindigt",
+  "points": "punten",
+  "mark_complete": "Markeer als Voltooid",
+  "no_challenges": "Geen {{type}} uitdagingen beschikbaar",
+  "challenge_completed": "Uitdaging voltooid!",
+  "points_awarded": "Punten toegekend!"
+}

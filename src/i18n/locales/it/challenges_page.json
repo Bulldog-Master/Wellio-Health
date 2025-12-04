@@ -1,0 +1,20 @@
+{
+  "challenges": "Sfide",
+  "complete_challenges": "Completa sfide per guadagnare punti e badge",
+  "custom_challenges": "Sfide Personalizzate",
+  "total_points": "Punti Totali",
+  "current_streak": "Serie Attuale",
+  "longest_streak": "Serie Più Lunga",
+  "days": "giorni",
+  "daily": "Giornaliero",
+  "weekly": "Settimanale",
+  "monthly": "Mensile",
+  "milestones": "Traguardi",
+  "target": "Obiettivo",
+  "ends": "Termina",
+  "points": "punti",
+  "mark_complete": "Segna Completato",
+  "no_challenges": "Nessuna sfida {{type}} disponibile",
+  "challenge_completed": "Sfida completata!",
+  "points_awarded": "Punti assegnati!"
+}

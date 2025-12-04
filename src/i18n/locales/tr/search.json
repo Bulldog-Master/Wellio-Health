@@ -1,0 +1,23 @@
+{
+  "search_discover": "Ara ve Keşfet",
+  "find_users_posts": "Kullanıcıları, gönderileri ve trend konuları bulun",
+  "search_placeholder": "Kullanıcı, gönderi veya hashtag ara...",
+  "users": "Kullanıcılar",
+  "posts": "Gönderiler",
+  "hashtags": "Hashtagler",
+  "searching": "Aranıyor...",
+  "anonymous": "Anonim",
+  "pts": "puan",
+  "day_streak": "günlük seri",
+  "followers": "takipçi",
+  "following": "Takip Edilen",
+  "follow": "Takip Et",
+  "no_users_found": "\"{{query}}\" ile eşleşen kullanıcı bulunamadı",
+  "no_posts_found": "\"{{query}}\" ile eşleşen gönderi bulunamadı",
+  "no_hashtags_found": "\"{{query}}\" ile eşleşen hashtag bulunamadı",
+  "post": "gönderi",
+  "view_posts": "Gönderileri Görüntüle",
+  "top_users": "En İyi Kullanıcılar",
+  "follow_status_updated": "Takip durumu güncellendi",
+  "error": "Hata"
+}

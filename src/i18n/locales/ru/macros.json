@@ -1,0 +1,17 @@
+{
+  "macros_dashboard": "Панель макронутриентов",
+  "track_macros": "Отслеживайте белки, углеводы и жиры",
+  "back_to_dashboard": "Назад к панели",
+  "today": "Сегодня",
+  "seven_days": "7 дней",
+  "total_calories": "Всего калорий",
+  "kcal": "ккал",
+  "protein": "Белки",
+  "carbs": "Углеводы",
+  "fat": "Жиры",
+  "of_calories": "калорий",
+  "macro_distribution": "Распределение макросов",
+  "no_nutrition_data": "Пока нет данных о питании",
+  "weekly_trends": "Еженедельные тренды",
+  "grams": "Граммы"
+}

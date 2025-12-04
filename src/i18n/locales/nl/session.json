@@ -1,0 +1,13 @@
+{
+  "loading_session": "Sessie laden...",
+  "leave": "Verlaten",
+  "video_coming_soon": "Video streaming binnenkort",
+  "live_chat": "Live Chat",
+  "type_message": "Typ een bericht...",
+  "participants": "Deelnemers",
+  "host": "Host",
+  "unknown": "Onbekend",
+  "error": "Fout",
+  "failed_to_load": "Laden sessie mislukt",
+  "failed_to_send": "Verzenden bericht mislukt"
+}
