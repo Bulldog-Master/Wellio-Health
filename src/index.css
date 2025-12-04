@@ -7,7 +7,100 @@ All colors MUST be HSL.
 */
 
 @layer base {
+  /* DARK MODE IS DEFAULT - prevents flash on load */
   :root {
+    /* Rich gradient background instead of black */
+    --background: 222 35% 15%;
+    --foreground: 0 0% 98%;
+
+    /* Vibrant gradient cards */
+    --card: 222 32% 18%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 222 32% 18%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Bright vibrant primary */
+    --primary: 195 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Electric purple secondary */
+    --secondary: 270 95% 65%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Lighter muted with better contrast */
+    --muted: 222 30% 25%;
+    --muted-foreground: 220 10% 80%;
+
+    /* Hot pink accent */
+    --accent: 330 100% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Lighter borders */
+    --border: 222 30% 28%;
+    --input: 222 30% 22%;
+    --ring: 195 100% 50%;
+
+    --radius: 1rem;
+
+    --success: 145 80% 50%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 35 100% 58%;
+    --warning-foreground: 0 0% 100%;
+
+    /* Vibrant colorful gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(195 100% 50%) 0%, hsl(270 95% 65%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(270 95% 65%) 0%, hsl(330 100% 60%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(330 100% 60%) 0%, hsl(15 100% 60%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(195 100% 50%) 0%, hsl(270 95% 65%) 50%, hsl(330 100% 60%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(222 35% 20% / 0.9) 0%, hsl(260 40% 22% / 0.9) 100%);
+    --gradient-auth-bg: linear-gradient(135deg, hsl(195 70% 20%) 0%, hsl(270 70% 22%) 50%, hsl(330 70% 20%) 100%);
+    
+    /* Vibrant glowing shadows */
+    --shadow-sm: 0 2px 4px hsl(0 0% 0% / 0.3);
+    --shadow-md: 0 8px 16px hsl(0 0% 0% / 0.4);
+    --shadow-lg: 0 20px 40px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 40px hsl(195 100% 50% / 0.5), 0 0 20px hsl(195 100% 50% / 0.3);
+    --shadow-glow-secondary: 0 0 40px hsl(270 95% 65% / 0.5), 0 0 20px hsl(270 95% 65% / 0.3);
+    --shadow-auth-card: 0 30px 60px -15px hsl(195 100% 50% / 0.4), 0 0 80px hsl(270 95% 65% / 0.2);
+
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Sidebar matches card background in dark mode */
+    --sidebar-background: 222 32% 18%;
+    --sidebar-foreground: 0 0% 96%;
+    --sidebar-primary: 195 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 32% 24%;
+    --sidebar-accent-foreground: 195 100% 55%;
+    --sidebar-border: 222 30% 25%;
+    --sidebar-ring: 195 100% 50%;
+    
+    /* Vibrant navigation icons */
+    --nav-icon-1: 195 100% 50%;
+    --nav-icon-2: 270 95% 65%;
+    --nav-icon-3: 330 100% 60%;
+    --nav-icon-4: 145 80% 50%;
+    --nav-icon-5: 35 100% 58%;
+    --nav-icon-6: 180 95% 50%;
+    --nav-icon-7: 290 90% 65%;
+    --nav-icon-8: 15 100% 60%;
+    --nav-icon-9: 165 85% 48%;
+    --nav-icon-10: 340 100% 62%;
+    --nav-icon-11: 200 100% 55%;
+    --nav-icon-12: 280 95% 68%;
+    --nav-icon-13: 130 75% 52%;
+    --nav-icon-14: 310 100% 65%;
+    --nav-icon-15: 160 80% 48%;
+    --nav-icon-16: 25 100% 62%;
+  }
+
+  /* LIGHT MODE - only when .light class is present */
+  .light {
     /* Modern vibrant background with slight gradient feel */
     --background: 240 25% 98%;
     --foreground: 240 10% 15%;
@@ -45,8 +138,6 @@ All colors MUST be HSL.
     --input: 240 15% 94%;
     --ring: 195 100% 50%;
 
-    --radius: 1rem;
-
     /* Success - bright green */
     --success: 145 80% 50%;
     --success-foreground: 0 0% 100%;
@@ -70,107 +161,18 @@ All colors MUST be HSL.
     --shadow-glow: 0 0 40px hsl(195 100% 50% / 0.4), 0 0 20px hsl(195 100% 50% / 0.2);
     --shadow-glow-secondary: 0 0 40px hsl(270 95% 65% / 0.4), 0 0 20px hsl(270 95% 65% / 0.2);
     --shadow-auth-card: 0 30px 60px -15px hsl(195 100% 50% / 0.25), 0 12px 30px -10px hsl(270 95% 65% / 0.15);
-    
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     /* Clean sidebar - matches card background */
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 240 10% 25%;
     --sidebar-primary: 195 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 195 100% 97%;
-    --sidebar-accent-foreground: 195 100% 45%;
-    --sidebar-border: 240 10% 92%;
+    --sidebar-accent: 240 20% 96%;
+    --sidebar-accent-foreground: 240 10% 35%;
+    --sidebar-border: 240 15% 92%;
     --sidebar-ring: 195 100% 50%;
     
-    /* Navigation icons - vibrant modern palette */
-    --nav-icon-1: 195 100% 50%;  /* Electric cyan */
-    --nav-icon-2: 270 95% 65%;   /* Vibrant purple */
-    --nav-icon-3: 330 100% 60%;  /* Electric pink */
-    --nav-icon-4: 145 80% 50%;   /* Bright green */
-    --nav-icon-5: 35 100% 58%;   /* Vibrant orange */
-    --nav-icon-6: 180 95% 50%;   /* Bright teal */
-    --nav-icon-7: 290 90% 65%;   /* Neon purple */
-    --nav-icon-8: 15 100% 60%;   /* Hot coral */
-    --nav-icon-9: 165 85% 48%;   /* Emerald */
-    --nav-icon-10: 340 100% 62%; /* Magenta */
-    --nav-icon-11: 200 100% 55%; /* Sky cyan */
-    --nav-icon-12: 280 95% 68%;  /* Bright violet */
-    --nav-icon-13: 130 75% 52%;  /* Lime green */
-    --nav-icon-14: 310 100% 65%; /* Hot pink */
-    --nav-icon-15: 160 80% 48%;  /* Fresh mint */
-    --nav-icon-16: 25 100% 62%;  /* Bright orange */
-  }
-
-  .dark {
-    /* Rich gradient background instead of black */
-    --background: 222 35% 15%;
-    --foreground: 0 0% 98%;
-
-    /* Vibrant gradient cards */
-    --card: 222 32% 18%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 222 32% 18%;
-    --popover-foreground: 0 0% 98%;
-
-    /* Bright vibrant primary */
-    --primary: 195 100% 50%;
-    --primary-foreground: 0 0% 100%;
-
-    /* Electric purple secondary */
-    --secondary: 270 95% 65%;
-    --secondary-foreground: 0 0% 100%;
-
-    /* Lighter muted with better contrast */
-    --muted: 222 30% 25%;
-    --muted-foreground: 220 10% 80%;
-
-    /* Hot pink accent */
-    --accent: 330 100% 60%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 85% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    /* Lighter borders */
-    --border: 222 30% 28%;
-    --input: 222 30% 22%;
-    --ring: 195 100% 50%;
-
-    --success: 145 80% 50%;
-    --success-foreground: 0 0% 100%;
-    
-    --warning: 35 100% 58%;
-    --warning-foreground: 0 0% 100%;
-
-    /* Vibrant colorful gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(195 100% 50%) 0%, hsl(270 95% 65%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(270 95% 65%) 0%, hsl(330 100% 60%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(330 100% 60%) 0%, hsl(15 100% 60%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(195 100% 50%) 0%, hsl(270 95% 65%) 50%, hsl(330 100% 60%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(222 35% 20% / 0.9) 0%, hsl(260 40% 22% / 0.9) 100%);
-    --gradient-auth-bg: linear-gradient(135deg, hsl(195 70% 20%) 0%, hsl(270 70% 22%) 50%, hsl(330 70% 20%) 100%);
-    
-    /* Vibrant glowing shadows */
-    --shadow-sm: 0 2px 4px hsl(0 0% 0% / 0.3);
-    --shadow-md: 0 8px 16px hsl(0 0% 0% / 0.4);
-    --shadow-lg: 0 20px 40px hsl(0 0% 0% / 0.5);
-    --shadow-glow: 0 0 40px hsl(195 100% 50% / 0.5), 0 0 20px hsl(195 100% 50% / 0.3);
-    --shadow-glow-secondary: 0 0 40px hsl(270 95% 65% / 0.5), 0 0 20px hsl(270 95% 65% / 0.3);
-    --shadow-auth-card: 0 30px 60px -15px hsl(195 100% 50% / 0.4), 0 0 80px hsl(270 95% 65% / 0.2);
-
-    /* Sidebar matches card background in dark mode */
-    --sidebar-background: 222 32% 18%;
-    --sidebar-foreground: 0 0% 96%;
-    --sidebar-primary: 195 100% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 222 32% 24%;
-    --sidebar-accent-foreground: 195 100% 55%;
-    --sidebar-border: 222 30% 25%;
-    --sidebar-ring: 195 100% 50%;
-    
-    /* Vibrant navigation icons matching light mode */
+    /* Vibrant navigation icons */
     --nav-icon-1: 195 100% 50%;
     --nav-icon-2: 270 95% 65%;
     --nav-icon-3: 330 100% 60%;
@@ -187,6 +189,49 @@ All colors MUST be HSL.
     --nav-icon-14: 310 100% 65%;
     --nav-icon-15: 160 80% 48%;
     --nav-icon-16: 25 100% 62%;
+  }
+
+  /* .dark selector - same as :root to ensure dark mode regardless of class presence */
+  .dark {
+    --background: 222 35% 15%;
+    --foreground: 0 0% 98%;
+    --card: 222 32% 18%;
+    --card-foreground: 0 0% 98%;
+    --popover: 222 32% 18%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 195 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 270 95% 65%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 222 30% 25%;
+    --muted-foreground: 220 10% 80%;
+    --accent: 330 100% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 222 30% 28%;
+    --input: 222 30% 22%;
+    --ring: 195 100% 50%;
+    --success: 145 80% 50%;
+    --success-foreground: 0 0% 100%;
+    --warning: 35 100% 58%;
+    --warning-foreground: 0 0% 100%;
+    --gradient-card: linear-gradient(135deg, hsl(222 35% 20% / 0.9) 0%, hsl(260 40% 22% / 0.9) 100%);
+    --gradient-auth-bg: linear-gradient(135deg, hsl(195 70% 20%) 0%, hsl(270 70% 22%) 50%, hsl(330 70% 20%) 100%);
+    --shadow-sm: 0 2px 4px hsl(0 0% 0% / 0.3);
+    --shadow-md: 0 8px 16px hsl(0 0% 0% / 0.4);
+    --shadow-lg: 0 20px 40px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 40px hsl(195 100% 50% / 0.5), 0 0 20px hsl(195 100% 50% / 0.3);
+    --shadow-glow-secondary: 0 0 40px hsl(270 95% 65% / 0.5), 0 0 20px hsl(270 95% 65% / 0.3);
+    --shadow-auth-card: 0 30px 60px -15px hsl(195 100% 50% / 0.4), 0 0 80px hsl(270 95% 65% / 0.2);
+    --sidebar-background: 222 32% 18%;
+    --sidebar-foreground: 0 0% 96%;
+    --sidebar-primary: 195 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 32% 24%;
+    --sidebar-accent-foreground: 195 100% 55%;
+    --sidebar-border: 222 30% 25%;
+    --sidebar-ring: 195 100% 50%;
   }
 }
 
