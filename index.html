@@ -12,18 +12,31 @@
     
     <!-- CRITICAL: Force dark mode before anything else loads -->
     <script>
-      // Immediately enforce dark class - runs before any other JS
-      document.documentElement.classList.add('dark');
-      document.documentElement.style.colorScheme = 'dark';
-      document.documentElement.style.backgroundColor = '#1e2433';
-      // Prevent any removal of dark class
-      Object.defineProperty(document.documentElement.classList, 'remove', {
-        value: function(cls) {
-          if (cls !== 'dark') {
-            HTMLElement.prototype.classList.remove.call(this, cls);
+      (function() {
+        var html = document.documentElement;
+        var body = document.body;
+        
+        // Force dark immediately
+        html.classList.add('dark');
+        html.style.cssText = 'background-color:#1e2433!important;color:#fafafa!important;color-scheme:dark!important';
+        if (body) body.style.cssText = 'background-color:#1e2433!important;color:#fafafa!important';
+        
+        // MutationObserver to keep dark class forever
+        new MutationObserver(function(mutations) {
+          mutations.forEach(function(m) {
+            if (m.attributeName === 'class' && !html.classList.contains('dark')) {
+              html.classList.add('dark');
+            }
+          });
+        }).observe(html, { attributes: true, attributeFilter: ['class'] });
+        
+        // Also observe for style changes
+        new MutationObserver(function() {
+          if (html.style.backgroundColor !== '#1e2433' && html.style.backgroundColor !== 'rgb(30, 36, 51)') {
+            html.style.backgroundColor = '#1e2433';
           }
-        }
-      });
+        }).observe(html, { attributes: true, attributeFilter: ['style'] });
+      })();
     </script>
     
     <style>
