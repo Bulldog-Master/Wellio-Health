@@ -12,93 +12,93 @@ IMPORTANT: Dark mode is enforced as default. The .light class should NEVER be ad
   /* DARK MODE ONLY - Single theme, no class switching */
   :root {
     /* Rich gradient background instead of black */
-    --background: 222 35% 15%;
-    --foreground: 0 0% 98%;
+    --background: 222, 35%, 15%;
+    --foreground: 0, 0%, 98%;
 
     /* Vibrant gradient cards */
-    --card: 222 32% 18%;
-    --card-foreground: 0 0% 98%;
+    --card: 222, 32%, 18%;
+    --card-foreground: 0, 0%, 98%;
 
-    --popover: 222 32% 18%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 222, 32%, 18%;
+    --popover-foreground: 0, 0%, 98%;
 
     /* Bright vibrant primary */
-    --primary: 195 100% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 195, 100%, 50%;
+    --primary-foreground: 0, 0%, 100%;
 
     /* Electric purple secondary */
-    --secondary: 270 95% 65%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 270, 95%, 65%;
+    --secondary-foreground: 0, 0%, 100%;
 
     /* Lighter muted with better contrast */
-    --muted: 222 30% 25%;
-    --muted-foreground: 220 10% 80%;
+    --muted: 222, 30%, 25%;
+    --muted-foreground: 220, 10%, 80%;
 
     /* Hot pink accent */
-    --accent: 330 100% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 330, 100%, 60%;
+    --accent-foreground: 0, 0%, 100%;
 
-    --destructive: 0 85% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0, 85%, 60%;
+    --destructive-foreground: 0, 0%, 100%;
 
     /* Lighter borders */
-    --border: 222 30% 28%;
-    --input: 222 30% 22%;
-    --ring: 195 100% 50%;
+    --border: 222, 30%, 28%;
+    --input: 222, 30%, 22%;
+    --ring: 195, 100%, 50%;
 
     --radius: 1rem;
 
-    --success: 145 80% 50%;
-    --success-foreground: 0 0% 100%;
+    --success: 145, 80%, 50%;
+    --success-foreground: 0, 0%, 100%;
     
-    --warning: 35 100% 58%;
-    --warning-foreground: 0 0% 100%;
+    --warning: 35, 100%, 58%;
+    --warning-foreground: 0, 0%, 100%;
 
-    /* Vibrant colorful gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(195 100% 50%) 0%, hsl(270 95% 65%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(270 95% 65%) 0%, hsl(330 100% 60%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(330 100% 60%) 0%, hsl(15 100% 60%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(195 100% 50%) 0%, hsl(270 95% 65%) 50%, hsl(330 100% 60%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(222 35% 20% / 0.9) 0%, hsl(260 40% 22% / 0.9) 100%);
-    --gradient-auth-bg: linear-gradient(135deg, hsl(195 70% 20%) 0%, hsl(270 70% 22%) 50%, hsl(330 70% 20%) 100%);
+    /* Vibrant colorful gradients - use comma syntax for Safari compatibility */
+    --gradient-primary: linear-gradient(135deg, hsl(195, 100%, 50%) 0%, hsl(270, 95%, 65%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(270, 95%, 65%) 0%, hsl(330, 100%, 60%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(330, 100%, 60%) 0%, hsl(15, 100%, 60%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(195, 100%, 50%) 0%, hsl(270, 95%, 65%) 50%, hsl(330, 100%, 60%) 100%);
+    --gradient-card: linear-gradient(135deg, hsla(222, 35%, 20%, 0.9) 0%, hsla(260, 40%, 22%, 0.9) 100%);
+    --gradient-auth-bg: linear-gradient(135deg, hsl(195, 70%, 20%) 0%, hsl(270, 70%, 22%) 50%, hsl(330, 70%, 20%) 100%);
     
     /* Vibrant glowing shadows */
-    --shadow-sm: 0 2px 4px hsl(0 0% 0% / 0.3);
-    --shadow-md: 0 8px 16px hsl(0 0% 0% / 0.4);
-    --shadow-lg: 0 20px 40px hsl(0 0% 0% / 0.5);
-    --shadow-glow: 0 0 40px hsl(195 100% 50% / 0.5), 0 0 20px hsl(195 100% 50% / 0.3);
-    --shadow-glow-secondary: 0 0 40px hsl(270 95% 65% / 0.5), 0 0 20px hsl(270 95% 65% / 0.3);
-    --shadow-auth-card: 0 30px 60px -15px hsl(195 100% 50% / 0.4), 0 0 80px hsl(270 95% 65% / 0.2);
+    --shadow-sm: 0 2px 4px hsla(0, 0%, 0%, 0.3);
+    --shadow-md: 0 8px 16px hsla(0, 0%, 0%, 0.4);
+    --shadow-lg: 0 20px 40px hsla(0, 0%, 0%, 0.5);
+    --shadow-glow: 0 0 40px hsla(195, 100%, 50%, 0.5), 0 0 20px hsla(195, 100%, 50%, 0.3);
+    --shadow-glow-secondary: 0 0 40px hsla(270, 95%, 65%, 0.5), 0 0 20px hsla(270, 95%, 65%, 0.3);
+    --shadow-auth-card: 0 30px 60px -15px hsla(195, 100%, 50%, 0.4), 0 0 80px hsla(270, 95%, 65%, 0.2);
 
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     /* Sidebar matches card background */
-    --sidebar-background: 222 32% 18%;
-    --sidebar-foreground: 0 0% 96%;
-    --sidebar-primary: 195 100% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 222 32% 24%;
-    --sidebar-accent-foreground: 195 100% 55%;
-    --sidebar-border: 222 30% 25%;
-    --sidebar-ring: 195 100% 50%;
+    --sidebar-background: 222, 32%, 18%;
+    --sidebar-foreground: 0, 0%, 96%;
+    --sidebar-primary: 195, 100%, 50%;
+    --sidebar-primary-foreground: 0, 0%, 100%;
+    --sidebar-accent: 222, 32%, 24%;
+    --sidebar-accent-foreground: 195, 100%, 55%;
+    --sidebar-border: 222, 30%, 25%;
+    --sidebar-ring: 195, 100%, 50%;
     
     /* Vibrant navigation icons */
-    --nav-icon-1: 195 100% 50%;
-    --nav-icon-2: 270 95% 65%;
-    --nav-icon-3: 330 100% 60%;
-    --nav-icon-4: 145 80% 50%;
-    --nav-icon-5: 35 100% 58%;
-    --nav-icon-6: 180 95% 50%;
-    --nav-icon-7: 290 90% 65%;
-    --nav-icon-8: 15 100% 60%;
-    --nav-icon-9: 165 85% 48%;
-    --nav-icon-10: 340 100% 62%;
-    --nav-icon-11: 200 100% 55%;
-    --nav-icon-12: 280 95% 68%;
-    --nav-icon-13: 130 75% 52%;
-    --nav-icon-14: 310 100% 65%;
-    --nav-icon-15: 160 80% 48%;
-    --nav-icon-16: 25 100% 62%;
+    --nav-icon-1: 195, 100%, 50%;
+    --nav-icon-2: 270, 95%, 65%;
+    --nav-icon-3: 330, 100%, 60%;
+    --nav-icon-4: 145, 80%, 50%;
+    --nav-icon-5: 35, 100%, 58%;
+    --nav-icon-6: 180, 95%, 50%;
+    --nav-icon-7: 290, 90%, 65%;
+    --nav-icon-8: 15, 100%, 60%;
+    --nav-icon-9: 165, 85%, 48%;
+    --nav-icon-10: 340, 100%, 62%;
+    --nav-icon-11: 200, 100%, 55%;
+    --nav-icon-12: 280, 95%, 68%;
+    --nav-icon-13: 130, 75%, 52%;
+    --nav-icon-14: 310, 100%, 65%;
+    --nav-icon-15: 160, 80%, 48%;
+    --nav-icon-16: 25, 100%, 62%;
   }
 }
 
@@ -107,7 +107,7 @@ IMPORTANT: Dark mode is enforced as default. The .light class should NEVER be ad
     @apply border-border;
   }
 
-  /* FORCE dark mode backgrounds - Safari fix */
+  /* FORCE dark mode backgrounds - Safari fix with comma-separated HSL */
   html, body, #root {
     background-color: #1e2433 !important;
     color: #fafafa !important;
@@ -117,17 +117,31 @@ IMPORTANT: Dark mode is enforced as default. The .light class should NEVER be ad
     @apply bg-background text-foreground;
   }
   
-  /* Force Card backgrounds to be dark */
+  /* Force Card backgrounds to be dark - using comma syntax for Safari */
   .bg-card {
-    background-color: hsl(222 32% 18%) !important;
+    background-color: hsl(222, 32%, 18%) !important;
   }
   
   .bg-sidebar {
-    background-color: hsl(222 32% 18%) !important;
+    background-color: hsl(222, 32%, 18%) !important;
   }
   
   .bg-background {
-    background-color: hsl(222 35% 15%) !important;
+    background-color: hsl(222, 35%, 15%) !important;
+  }
+  
+  /* Force foreground text to be light */
+  .text-foreground {
+    color: hsl(0, 0%, 98%) !important;
+  }
+  
+  .text-card-foreground {
+    color: hsl(0, 0%, 98%) !important;
+  }
+  
+  /* Force muted foreground */
+  .text-muted-foreground {
+    color: hsl(220, 10%, 80%) !important;
   }
   
   /* Glassmorphism utility classes */
