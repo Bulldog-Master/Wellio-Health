@@ -7,8 +7,12 @@ CSS variables now contain COMPLETE hsl() values for maximum Safari compatibility
 */
 
 @layer base {
-  /* DARK MODE ONLY - Complete HSL values for Safari compatibility */
-  :root {
+  /* DARK MODE ONLY - All variations point to dark colors */
+  :root,
+  :root.dark,
+  :root.light,
+  .dark,
+  .light {
     /* Rich gradient background instead of black */
     --background: #1e2433;
     --foreground: #fafafa;
@@ -97,6 +101,9 @@ CSS variables now contain COMPLETE hsl() values for maximum Safari compatibility
     --nav-icon-14: #e879f9;
     --nav-icon-15: #2dd4bf;
     --nav-icon-16: #fb923c;
+    
+    /* Safari/iOS specific overrides */
+    color-scheme: dark;
   }
 }
 
