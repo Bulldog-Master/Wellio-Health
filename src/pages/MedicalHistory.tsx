@@ -40,7 +40,7 @@ interface TestResult {
   result_value: string | null;
   result_unit: string | null;
   notes: string | null;
-  file_url: string | null;
+  file_url_encrypted: string | null;
 }
 
 interface MedicalRecord {
@@ -49,7 +49,7 @@ interface MedicalRecord {
   record_date: string;
   category: string;
   notes: string | null;
-  file_url: string | null;
+  file_url_encrypted: string | null;
 }
 
 interface Symptom {
@@ -291,7 +291,7 @@ const MedicalHistory = () => {
           result_value: testFormData.result_value || null,
           result_unit: testFormData.result_unit || null,
           notes: testFormData.notes || null,
-          file_url: filePath,
+          file_url_encrypted: filePath,
         });
 
       if (error) throw error;
@@ -376,7 +376,7 @@ const MedicalHistory = () => {
           record_date: recordFormData.record_date,
           category: recordFormData.category,
           notes: recordFormData.notes || null,
-          file_url: filePath,
+          file_url_encrypted: filePath,
         });
 
       if (error) throw error;
@@ -827,14 +827,14 @@ const MedicalHistory = () => {
                     {test.notes && (
                       <p className="text-sm text-muted-foreground mt-2">{test.notes}</p>
                     )}
-                    {test.file_url && (
+                    {test.file_url_encrypted && (
                       <Button
                         variant="outline"
                         size="sm"
                         className="mt-2"
                         onClick={async () => {
                           const signedUrl = await getSignedMedicalFileUrl(
-                            test.file_url!,
+                            test.file_url_encrypted!,
                             test.id,
                             'medical_test_results'
                           );
@@ -970,14 +970,14 @@ const MedicalHistory = () => {
                     {record.notes && (
                       <p className="text-sm text-muted-foreground mt-2">{record.notes}</p>
                     )}
-                    {record.file_url && (
+                    {record.file_url_encrypted && (
                       <Button
                         variant="outline"
                         size="sm"
                         className="mt-2"
                         onClick={async () => {
                           const signedUrl = await getSignedMedicalFileUrl(
-                            record.file_url!,
+                            record.file_url_encrypted!,
                             record.id,
                             'medical_records'
                           );

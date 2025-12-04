@@ -1607,7 +1607,6 @@ export type Database = {
           category: string
           created_at: string
           encryption_version: number | null
-          file_url: string | null
           file_url_encrypted: string | null
           id: string
           last_accessed_at: string | null
@@ -1620,7 +1619,6 @@ export type Database = {
           category: string
           created_at?: string
           encryption_version?: number | null
-          file_url?: string | null
           file_url_encrypted?: string | null
           id?: string
           last_accessed_at?: string | null
@@ -1633,7 +1631,6 @@ export type Database = {
           category?: string
           created_at?: string
           encryption_version?: number | null
-          file_url?: string | null
           file_url_encrypted?: string | null
           id?: string
           last_accessed_at?: string | null
@@ -1648,7 +1645,6 @@ export type Database = {
         Row: {
           created_at: string | null
           encryption_version: number | null
-          file_url: string | null
           file_url_encrypted: string | null
           id: string
           last_accessed_at: string | null
@@ -1662,7 +1658,6 @@ export type Database = {
         Insert: {
           created_at?: string | null
           encryption_version?: number | null
-          file_url?: string | null
           file_url_encrypted?: string | null
           id?: string
           last_accessed_at?: string | null
@@ -1676,7 +1671,6 @@ export type Database = {
         Update: {
           created_at?: string | null
           encryption_version?: number | null
-          file_url?: string | null
           file_url_encrypted?: string | null
           id?: string
           last_accessed_at?: string | null
@@ -4159,40 +4153,34 @@ export type Database = {
       }
       wearable_connections: {
         Row: {
-          access_token: string
           access_token_encrypted: string | null
           created_at: string
           encryption_version: number | null
           expires_at: string | null
           id: string
           provider: string
-          refresh_token: string | null
           refresh_token_encrypted: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
-          access_token: string
           access_token_encrypted?: string | null
           created_at?: string
           encryption_version?: number | null
           expires_at?: string | null
           id?: string
           provider: string
-          refresh_token?: string | null
           refresh_token_encrypted?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
-          access_token?: string
           access_token_encrypted?: string | null
           created_at?: string
           encryption_version?: number | null
           expires_at?: string | null
           id?: string
           provider?: string
-          refresh_token?: string | null
           refresh_token_encrypted?: string | null
           updated_at?: string
           user_id?: string
@@ -4532,6 +4520,20 @@ export type Database = {
         }[]
       }
       get_story_view_count: { Args: { _story_id: string }; Returns: number }
+      get_subscription_safe: {
+        Args: { _user_id: string }
+        Returns: {
+          cancel_at_period_end: boolean
+          created_at: string
+          current_period_end: string
+          current_period_start: string
+          id: string
+          status: string
+          tier: string
+          updated_at: string
+          user_id: string
+        }[]
+      }
       get_trainer_profile_safe: {
         Args: { _trainer_user_id: string }
         Returns: {
