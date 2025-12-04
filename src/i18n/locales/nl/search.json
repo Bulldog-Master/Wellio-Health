@@ -1,0 +1,23 @@
+{
+  "search_discover": "Zoeken & Ontdekken",
+  "find_users_posts": "Vind gebruikers, posts en trending onderwerpen",
+  "search_placeholder": "Zoek gebruikers, posts of hashtags...",
+  "users": "Gebruikers",
+  "posts": "Posts",
+  "hashtags": "Hashtags",
+  "searching": "Zoeken...",
+  "anonymous": "Anoniem",
+  "pts": "punten",
+  "day_streak": "dagen reeks",
+  "followers": "volgers",
+  "following": "Volgend",
+  "follow": "Volgen",
+  "no_users_found": "Geen gebruikers gevonden voor \"{{query}}\"",
+  "no_posts_found": "Geen posts gevonden voor \"{{query}}\"",
+  "no_hashtags_found": "Geen hashtags gevonden voor \"{{query}}\"",
+  "post": "post",
+  "view_posts": "Bekijk Posts",
+  "top_users": "Top Gebruikers",
+  "follow_status_updated": "Volg status bijgewerkt",
+  "error": "Fout"
+}

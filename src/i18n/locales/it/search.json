@@ -1,0 +1,23 @@
+{
+  "search_discover": "Cerca e Scopri",
+  "find_users_posts": "Trova utenti, post e argomenti di tendenza",
+  "search_placeholder": "Cerca utenti, post o hashtag...",
+  "users": "Utenti",
+  "posts": "Post",
+  "hashtags": "Hashtag",
+  "searching": "Ricerca in corso...",
+  "anonymous": "Anonimo",
+  "pts": "punti",
+  "day_streak": "giorni di serie",
+  "followers": "follower",
+  "following": "Seguiti",
+  "follow": "Segui",
+  "no_users_found": "Nessun utente trovato per \"{{query}}\"",
+  "no_posts_found": "Nessun post trovato per \"{{query}}\"",
+  "no_hashtags_found": "Nessun hashtag trovato per \"{{query}}\"",
+  "post": "post",
+  "view_posts": "Visualizza Post",
+  "top_users": "Top Utenti",
+  "follow_status_updated": "Stato follow aggiornato",
+  "error": "Errore"
+}

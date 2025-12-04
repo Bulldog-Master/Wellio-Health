@@ -1,0 +1,20 @@
+{
+  "challenges": "Meydan Okumalar",
+  "complete_challenges": "Puan ve rozetler kazanmak için meydan okumaları tamamlayın",
+  "custom_challenges": "Özel Meydan Okumalar",
+  "total_points": "Toplam Puan",
+  "current_streak": "Mevcut Seri",
+  "longest_streak": "En Uzun Seri",
+  "days": "gün",
+  "daily": "Günlük",
+  "weekly": "Haftalık",
+  "monthly": "Aylık",
+  "milestones": "Kilometre Taşları",
+  "target": "Hedef",
+  "ends": "Bitiş",
+  "points": "puan",
+  "mark_complete": "Tamamlandı İşaretle",
+  "no_challenges": "{{type}} meydan okuması mevcut değil",
+  "challenge_completed": "Meydan okuma tamamlandı!",
+  "points_awarded": "Puanlar verildi!"
+}

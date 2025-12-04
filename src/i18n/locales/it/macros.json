@@ -1,0 +1,17 @@
+{
+  "macros_dashboard": "Dashboard Macro",
+  "track_macros": "Monitora proteine, carboidrati e grassi",
+  "back_to_dashboard": "Torna alla Dashboard",
+  "today": "Oggi",
+  "seven_days": "7 Giorni",
+  "total_calories": "Calorie Totali",
+  "kcal": "kcal",
+  "protein": "Proteine",
+  "carbs": "Carboidrati",
+  "fat": "Grassi",
+  "of_calories": "delle calorie",
+  "macro_distribution": "Distribuzione Macro",
+  "no_nutrition_data": "Nessun dato nutrizionale ancora",
+  "weekly_trends": "Tendenze Settimanali",
+  "grams": "Grammi"
+}

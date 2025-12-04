@@ -1,0 +1,20 @@
+{
+  "challenges": "Испытания",
+  "complete_challenges": "Выполняйте испытания для получения очков и значков",
+  "custom_challenges": "Пользовательские испытания",
+  "total_points": "Всего очков",
+  "current_streak": "Текущая серия",
+  "longest_streak": "Самая длинная серия",
+  "days": "дней",
+  "daily": "Ежедневно",
+  "weekly": "Еженедельно",
+  "monthly": "Ежемесячно",
+  "milestones": "Вехи",
+  "target": "Цель",
+  "ends": "Заканчивается",
+  "points": "очков",
+  "mark_complete": "Отметить выполненным",
+  "no_challenges": "Нет доступных {{type}} испытаний",
+  "challenge_completed": "Испытание выполнено!",
+  "points_awarded": "Очки начислены!"
+}

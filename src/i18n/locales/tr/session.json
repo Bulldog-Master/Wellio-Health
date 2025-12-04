@@ -1,0 +1,13 @@
+{
+  "loading_session": "Oturum yükleniyor...",
+  "leave": "Ayrıl",
+  "video_coming_soon": "Video yayını yakında",
+  "live_chat": "Canlı Sohbet",
+  "type_message": "Mesaj yazın...",
+  "participants": "Katılımcılar",
+  "host": "Ev Sahibi",
+  "unknown": "Bilinmiyor",
+  "error": "Hata",
+  "failed_to_load": "Oturum yüklenemedi",
+  "failed_to_send": "Mesaj gönderilemedi"
+}
