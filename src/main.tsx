@@ -1,3 +1,11 @@
+// CRITICAL: Force dark mode BEFORE any imports to prevent flash
+(function() {
+  document.documentElement.classList.add('dark');
+  document.documentElement.classList.remove('light');
+  document.documentElement.style.colorScheme = 'dark';
+  localStorage.setItem('theme', 'dark');
+})();
+
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
