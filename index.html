@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="dark" style="color-scheme: dark;">
+<html lang="en" class="dark" style="color-scheme: dark; background-color: #1e2433;">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -7,10 +7,18 @@
     <meta name="description" content="Track your fitness journey with Wellio. Monitor weight, nutrition, workouts, and health goals all in one beautiful app." />
     <meta name="author" content="Wellio" />
     
+    <!-- CRITICAL: Inline dark mode styles to prevent flash - loads BEFORE external CSS -->
+    <style>
+      html, body, #root {
+        background-color: #1e2433 !important;
+        color: #fafafa !important;
+      }
+    </style>
+    
     <!-- PWA -->
-    <meta name="theme-color" content="#3b82f6" />
+    <meta name="theme-color" content="#1e2433" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Wellio" />
     <link rel="apple-touch-icon" href="/icon-192.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
@@ -31,13 +39,14 @@
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
   </head>
 
-  <body>
+  <body style="background-color: #1e2433; color: #fafafa;">
     <script>
       // Force dark mode before React loads to prevent flash
       localStorage.setItem('theme', 'dark');
       document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
     </script>
-    <div id="root"></div>
+    <div id="root" style="background-color: #1e2433;"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
