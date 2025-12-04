@@ -55,9 +55,11 @@ import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useTheme } from "next-themes";
 
 const Auth = () => {
   const { t } = useTranslation('auth');
+  const { setTheme } = useTheme();
   
   const emailSchema = z.string().email(t('invalid_email'));
   const passwordSchema = z.string().min(6, t('password_min_length'));
@@ -137,10 +139,9 @@ const Auth = () => {
     setInitialCheckDone(true);
   }, [toast]);
 
-  // Helper to set dark mode
+  // Helper to set dark mode on login
   const setDarkMode = () => {
-    localStorage.setItem('theme', 'dark');
-    document.documentElement.classList.add('dark');
+    setTheme('dark');
   };
 
   useEffect(() => {
