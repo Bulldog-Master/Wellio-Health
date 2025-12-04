@@ -268,20 +268,15 @@ export const SubscriptionAddons = () => {
       </div>
 
       {/* Checkout Dialog */}
-      {selectedAddon && (
-        <CheckoutDialog
-          open={checkoutOpen}
-          onOpenChange={(open) => {
-            setCheckoutOpen(open);
-            if (!open) setSelectedAddon(null);
-          }}
-          itemName={isSpanish && selectedAddon.name_es ? selectedAddon.name_es : selectedAddon.name}
-          amount={getAddonPrice(selectedAddon)}
-          billingCycle={yearlyBilling ? 'yearly' : 'monthly'}
-          itemType="addon"
-          onSuccess={handlePaymentSuccess}
-        />
-      )}
+      <CheckoutDialog
+        open={checkoutOpen}
+        onOpenChange={setCheckoutOpen}
+        itemName={selectedAddon ? (isSpanish && selectedAddon.name_es ? selectedAddon.name_es : selectedAddon.name) : ''}
+        amount={selectedAddon ? getAddonPrice(selectedAddon) : 0}
+        billingCycle={yearlyBilling ? 'yearly' : 'monthly'}
+        itemType="addon"
+        onSuccess={handlePaymentSuccess}
+      />
     </div>
   );
 };
