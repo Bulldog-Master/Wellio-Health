@@ -4,10 +4,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
-import { Sparkles, Check, Plus, Minus } from 'lucide-react';
+import { Sparkles, Check, Plus, Minus, ShoppingCart } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
-import { CheckoutDialog } from '@/components/payments';
+import { useCartStore } from '@/stores/cartStore';
 
 interface Addon {
   id: string;
@@ -36,9 +36,8 @@ export const SubscriptionAddons = () => {
   const [userAddons, setUserAddons] = useState<UserAddon[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [yearlyBilling, setYearlyBilling] = useState(false);
-  const [checkoutOpen, setCheckoutOpen] = useState(false);
-  const [selectedAddon, setSelectedAddon] = useState<Addon | null>(null);
   const isSpanish = i18n.language?.startsWith('es');
+  const { addItem, hasItem } = useCartStore();
 
   useEffect(() => {
     fetchAddons();
@@ -84,36 +83,28 @@ export const SubscriptionAddons = () => {
   };
 
   const handleAddAddon = (addon: Addon) => {
-    setSelectedAddon(addon);
-    setCheckoutOpen(true);
+    const price = yearlyBilling && addon.price_yearly ? addon.price_yearly : addon.price_monthly;
+    const addonName = isSpanish && addon.name_es ? addon.name_es : addon.name;
+    
+    addItem({
+      id: `addon-${addon.id}`,
+      type: 'addon',
+      name: addon.name,
+      name_es: addon.name_es || undefined,
+      description: addon.description || undefined,
+      description_es: addon.description_es || undefined,
+      price,
+      billingCycle: yearlyBilling ? 'yearly' : 'monthly',
+      metadata: { addon_id: addon.id, addon_key: addon.addon_key }
+    });
+    
+    toast.success(t('common:added_to_cart'), {
+      description: addonName
+    });
   };
 
-  const handlePaymentSuccess = async () => {
-    if (!selectedAddon) return;
-    
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return;
-
-    const addonName = isSpanish && selectedAddon.name_es ? selectedAddon.name_es : selectedAddon.name;
-
-    const { data, error } = await supabase
-      .from('user_addons')
-      .insert({
-        user_id: user.id,
-        addon_id: selectedAddon.id,
-        billing_cycle: yearlyBilling ? 'yearly' : 'monthly'
-      })
-      .select()
-      .single();
-
-    if (!error && data) {
-      setUserAddons(prev => [...prev, data]);
-      toast.success(t('addon_added'), {
-        description: t('addon_added_desc', { name: addonName })
-      });
-    }
-    
-    setSelectedAddon(null);
+  const isInCart = (addonId: string) => {
+    return hasItem(`addon-${addonId}`);
   };
 
   const removeAddon = async (addon: Addon) => {
@@ -246,13 +237,19 @@ export const SubscriptionAddons = () => {
 
                 <Button
                   className="w-full"
-                  variant={isActive ? 'outline' : 'default'}
+                  variant={isActive || isInCart(addon.id) ? 'outline' : 'default'}
                   onClick={() => isActive ? removeAddon(addon) : handleAddAddon(addon)}
+                  disabled={isInCart(addon.id)}
                 >
                   {isActive ? (
                     <>
                       <Minus className="w-4 h-4 mr-2" />
                       {t('remove_addon')}
+                    </>
+                  ) : isInCart(addon.id) ? (
+                    <>
+                      <ShoppingCart className="w-4 h-4 mr-2" />
+                      {t('common:in_cart')}
                     </>
                   ) : (
                     <>
@@ -266,17 +263,6 @@ export const SubscriptionAddons = () => {
           );
         })}
       </div>
-
-      {/* Checkout Dialog */}
-      <CheckoutDialog
-        open={checkoutOpen}
-        onOpenChange={setCheckoutOpen}
-        itemName={selectedAddon ? (isSpanish && selectedAddon.name_es ? selectedAddon.name_es : selectedAddon.name) : ''}
-        amount={selectedAddon ? getAddonPrice(selectedAddon) : 0}
-        billingCycle={yearlyBilling ? 'yearly' : 'monthly'}
-        itemType="addon"
-        onSuccess={handlePaymentSuccess}
-      />
     </div>
   );
 };

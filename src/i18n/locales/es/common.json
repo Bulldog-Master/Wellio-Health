@@ -278,5 +278,13 @@
   "saved": "Guardado exitosamente",
   "no_data": "No hay datos disponibles",
   "active": "Activo",
-  "inactive": "Inactivo"
+  "inactive": "Inactivo",
+  "cart": "Carrito",
+  "cart_empty": "Tu carrito está vacío",
+  "clear_all": "Limpiar todo",
+  "total": "Total",
+  "items": "artículos",
+  "product": "Producto",
+  "added_to_cart": "Agregado al carrito",
+  "in_cart": "En el carrito"
 }

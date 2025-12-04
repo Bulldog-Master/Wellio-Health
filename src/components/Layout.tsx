@@ -8,7 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { Badge } from "./ui/badge";
 import { useUnreadNotificationCount } from "@/hooks/useNotifications";
 import QuickActionsButton from "./QuickActionsButton";
-
+import { CartButton } from "./cart/CartButton";
+import { CartDrawer } from "./cart/CartDrawer";
 interface LayoutProps {
   children: ReactNode;
 }
@@ -28,6 +29,7 @@ const Layout = ({ children }: LayoutProps) => {
               </h1>
               <div className="flex items-center gap-0.5 shrink-0">
                 <LanguageSwitcher />
+                <CartButton />
                 <Button
                   variant="ghost"
                   size="icon"
@@ -64,6 +66,7 @@ const Layout = ({ children }: LayoutProps) => {
           <div className="p-4 md:p-8">
             <div className="flex justify-end gap-2 mb-4 md:hidden">
               <LanguageSwitcher />
+              <CartButton />
               <Button
                 variant="ghost"
                 size="icon"
@@ -99,6 +102,9 @@ const Layout = ({ children }: LayoutProps) => {
 
         {/* Floating Quick Actions Button */}
         <QuickActionsButton />
+        
+        {/* Global Cart Drawer */}
+        <CartDrawer />
       </div>
     </div>
   );

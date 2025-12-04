@@ -275,5 +275,13 @@
   "deleted": "Deleted successfully",
   "no_data": "No data available",
   "active": "Active",
-  "inactive": "Inactive"
+  "inactive": "Inactive",
+  "cart": "Cart",
+  "cart_empty": "Your cart is empty",
+  "clear_all": "Clear all",
+  "total": "Total",
+  "items": "items",
+  "product": "Product",
+  "added_to_cart": "Added to cart",
+  "in_cart": "In Cart"
 }
