@@ -150,9 +150,13 @@ export const CheckoutDialog = ({
               <ShieldCheck className="w-4 h-4" />
               {t('secure_payment')}
             </div>
-            <p className="text-center py-8 text-muted-foreground">
-              {t('payment_provider_pending')}
-            </p>
+            <div className="bg-muted/50 rounded-lg p-4 text-center">
+              <p className="font-medium mb-2">{itemName}</p>
+              <p className="text-2xl font-bold">${amount.toFixed(2)} USD</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                {billingCycle === 'yearly' ? t('yearly') : t('monthly')}
+              </p>
+            </div>
             <div className="flex gap-3">
               <Button variant="outline" onClick={handleBack} className="flex-1">
                 {t('common:back')}
