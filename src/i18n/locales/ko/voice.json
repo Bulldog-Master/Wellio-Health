@@ -1,0 +1,10 @@
+{
+  "voice_notes": "음성 노트",
+  "record": "녹음",
+  "stop": "정지",
+  "play": "재생",
+  "pause": "일시정지",
+  "delete": "삭제",
+  "recording": "녹음 중...",
+  "no_voice_notes": "음성 노트 없음"
+}

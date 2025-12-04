@@ -1,0 +1,17 @@
+{
+  "macros_dashboard": "لوحة الماكرو",
+  "track_macros": "تتبع البروتين والكربوهيدرات والدهون",
+  "back_to_dashboard": "العودة للوحة التحكم",
+  "today": "اليوم",
+  "seven_days": "7 أيام",
+  "total_calories": "إجمالي السعرات",
+  "kcal": "سعرة",
+  "protein": "البروتين",
+  "carbs": "الكربوهيدرات",
+  "fat": "الدهون",
+  "of_calories": "من السعرات",
+  "macro_distribution": "توزيع الماكرو",
+  "no_nutrition_data": "لا توجد بيانات غذائية",
+  "weekly_trends": "الاتجاهات الأسبوعية",
+  "grams": "جرام"
+}
