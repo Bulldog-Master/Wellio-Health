@@ -23,5 +23,6 @@
   "subscription_active": "سبسکرپشن فعال",
   "subscription_cancelled": "سبسکرپشن منسوخ",
   "trial_period": "آزمائشی مدت",
-  "days_remaining": "{{days}} دن باقی"
+  "days_remaining": "{{days}} دن باقی",
+  "subscribe_now": "ابھی سبسکرائب کریں"
 }
