@@ -23,5 +23,6 @@
   "subscription_active": "الاشتراك فعّال",
   "subscription_cancelled": "الاشتراك ملغي",
   "trial_period": "فترة التجربة",
-  "days_remaining": "{{days}} يوم باقي"
+  "days_remaining": "{{days}} يوم باقي",
+  "subscribe_now": "اشترك دلوقتي"
 }
