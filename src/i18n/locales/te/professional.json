@@ -1,10 +1,12 @@
 {
-  "trainer_portal": "ట్రైనర్ పోర్టల్",
+  "professional_hub": "ప్రొఫెషనల్",
+  "professional_hub_desc": "ట్రైనర్ మరియు ప్రాక్టిషనర్ పోర్టల్‌లను యాక్సెస్ చేయండి",
+  "trainer_portal": "ట్రైనర్/కోచ్ పోర్టల్",
   "practitioner_portal": "ప్రాక్టిషనర్ పోర్టల్",
   "trainer_portal_desc": "మీ శిక్షణ వ్యాపారం మరియు క్లయింట్లను నిర్వహించండి",
   "practitioner_portal_desc": "మీ ఆరోగ్య అభ్యాసం మరియు రోగులను నిర్వహించండి",
   
-  "become_trainer": "ట్రైనర్ అవ్వండి",
+  "become_trainer": "ట్రైనర్/కోచ్ అవ్వండి",
   "become_practitioner": "ప్రాక్టిషనర్ అవ్వండి",
   "apply_now": "ఇప్పుడే దరఖాస్తు చేయండి",
   "application_pending": "దరఖాస్తు పెండింగ్‌లో ఉంది",

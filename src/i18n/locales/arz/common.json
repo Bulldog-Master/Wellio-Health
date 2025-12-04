@@ -1,4 +1,16 @@
 {
+  "nav": {
+    "activity": "النشاط",
+    "connect": "التواصل",
+    "food": "الاكل",
+    "fundraisers": "جمع تبرعات",
+    "wellness_directory": "دليل العافية",
+    "news": "الاخبار",
+    "professional": "احترافي",
+    "recovery": "التعافي",
+    "shop": "المحل",
+    "sponsors": "الرعاة"
+  },
   "app_name": "Wellio",
   "loading": "بيحمّل...",
   "error": "غلط",

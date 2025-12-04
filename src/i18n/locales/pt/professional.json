@@ -1,5 +1,7 @@
 {
-  "trainer_portal": "Portal do Treinador",
+  "professional_hub": "Profissional",
+  "professional_hub_desc": "Acesse os portais de treinador e profissional",
+  "trainer_portal": "Portal do Treinador/Coach",
   "trainer_portal_desc": "Gerencie seus clientes e programas de treinamento",
   "practitioner_portal": "Portal do Profissional",
   "practitioner_portal_desc": "Gerencie seus pacientes e serviços de saúde",

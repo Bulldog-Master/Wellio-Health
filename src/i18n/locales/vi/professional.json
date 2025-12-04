@@ -1,10 +1,12 @@
 {
-  "trainer_portal": "Cổng huấn luyện viên",
+  "professional_hub": "Chuyên nghiệp",
+  "professional_hub_desc": "Truy cập cổng huấn luyện viên và chuyên gia",
+  "trainer_portal": "Cổng huấn luyện viên/Coach",
   "trainer_portal_desc": "Quản lý công việc huấn luyện và khách hàng của bạn",
   "practitioner_portal": "Cổng chuyên gia",
   "practitioner_portal_desc": "Quản lý thực hành sức khỏe và bệnh nhân của bạn",
   
-  "become_trainer": "Trở thành huấn luyện viên",
+  "become_trainer": "Trở thành huấn luyện viên/Coach",
   "become_practitioner": "Trở thành chuyên gia",
   "apply_now": "Đăng ký ngay",
   "application_pending": "Đơn đang chờ",

@@ -1,10 +1,12 @@
 {
-  "trainer_portal": "ট্রেনার পোর্টাল",
+  "professional_hub": "পেশাদার",
+  "professional_hub_desc": "ট্রেনার এবং প্র্যাক্টিশনার পোর্টাল অ্যাক্সেস করুন",
+  "trainer_portal": "ট্রেনার/কোচ পোর্টাল",
   "trainer_portal_desc": "আপনার প্রশিক্ষণ ব্যবসা এবং ক্লায়েন্ট পরিচালনা করুন",
   "practitioner_portal": "প্র্যাক্টিশনার পোর্টাল",
   "practitioner_portal_desc": "আপনার স্বাস্থ্য অনুশীলন এবং রোগী পরিচালনা করুন",
   
-  "become_trainer": "ট্রেনার হন",
+  "become_trainer": "ট্রেনার/কোচ হন",
   "become_practitioner": "প্র্যাক্টিশনার হন",
   "apply_now": "এখনই আবেদন করুন",
   "application_pending": "আবেদন মুলতুবি",

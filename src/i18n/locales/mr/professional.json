@@ -1,10 +1,12 @@
 {
-  "trainer_portal": "प्रशिक्षक पोर्टल",
+  "professional_hub": "व्यावसायिक",
+  "professional_hub_desc": "प्रशिक्षक आणि प्रॅक्टिशनर पोर्टलमध्ये प्रवेश करा",
+  "trainer_portal": "प्रशिक्षक/कोच पोर्टल",
   "practitioner_portal": "प्रॅक्टिशनर पोर्टल",
   "trainer_portal_desc": "तुमचा प्रशिक्षण व्यवसाय आणि क्लायंट व्यवस्थापित करा",
   "practitioner_portal_desc": "तुमची आरोग्य पद्धत आणि रुग्ण व्यवस्थापित करा",
   
-  "become_trainer": "प्रशिक्षक व्हा",
+  "become_trainer": "प्रशिक्षक/कोच व्हा",
   "become_practitioner": "प्रॅक्टिशनर व्हा",
   "apply_now": "आता अर्ज करा",
   "application_pending": "अर्ज प्रलंबित",

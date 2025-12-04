@@ -1,10 +1,12 @@
 {
-  "trainer_portal": "Trainer Portaal",
+  "professional_hub": "Professioneel",
+  "professional_hub_desc": "Toegang tot trainer- en professional portalen",
+  "trainer_portal": "Trainer/Coach Portaal",
   "practitioner_portal": "Professional Portaal",
   "trainer_portal_desc": "Beheer uw trainingsbedrijf en klanten",
   "practitioner_portal_desc": "Beheer uw gezondheidspraktijk en patiënten",
   
-  "become_trainer": "Word Trainer",
+  "become_trainer": "Word Trainer/Coach",
   "become_practitioner": "Word Professional",
   "apply_now": "Nu Solliciteren",
   "application_pending": "Sollicitatie in Behandeling",

@@ -1,10 +1,12 @@
 {
-  "trainer_portal": "Portal Pelatih",
+  "professional_hub": "Profesional",
+  "professional_hub_desc": "Akses portal pelatih dan praktisi",
+  "trainer_portal": "Portal Pelatih/Coach",
   "practitioner_portal": "Portal Praktisi",
   "trainer_portal_desc": "Kelola bisnis pelatihan dan klien Anda",
   "practitioner_portal_desc": "Kelola praktik kesehatan dan pasien Anda",
   
-  "become_trainer": "Jadi Pelatih",
+  "become_trainer": "Jadi Pelatih/Coach",
   "become_practitioner": "Jadi Praktisi",
   "apply_now": "Daftar Sekarang",
   "application_pending": "Pendaftaran Menunggu",

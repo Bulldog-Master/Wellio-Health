@@ -1,10 +1,12 @@
 {
-  "trainer_portal": "بوابة المدرب",
+  "professional_hub": "احترافي",
+  "professional_hub_desc": "الوصول إلى بوابات المدرب والممارس",
+  "trainer_portal": "بوابة المدرب/الكوتش",
   "practitioner_portal": "بوابة الممارس",
   "trainer_portal_desc": "إدارة أعمال التدريب والعملاء",
   "practitioner_portal_desc": "إدارة ممارستك الصحية والمرضى",
   
-  "become_trainer": "كن مدرباً",
+  "become_trainer": "كن مدرباً/كوتش",
   "become_practitioner": "كن ممارساً",
   "apply_now": "قدّم الآن",
   "application_pending": "الطلب قيد الانتظار",

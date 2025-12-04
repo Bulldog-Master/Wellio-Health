@@ -1,5 +1,7 @@
 {
-  "trainer_portal": "ट्रेनर पोर्टल",
+  "professional_hub": "पेशेवर",
+  "professional_hub_desc": "ट्रेनर और प्रैक्टिशनर पोर्टल तक पहुंचें",
+  "trainer_portal": "ट्रेनर/कोच पोर्टल",
   "trainer_portal_desc": "क्लाइंट और सेशन प्रबंधित करें",
   "practitioner_portal": "प्रैक्टिशनर पोर्टल",
   "practitioner_portal_desc": "मरीज और परामर्श प्रबंधित करें",

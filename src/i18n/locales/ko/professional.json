@@ -1,10 +1,12 @@
 {
-  "trainer_portal": "트레이너 포털",
+  "professional_hub": "전문가",
+  "professional_hub_desc": "트레이너 및 전문가 포털에 접근",
+  "trainer_portal": "트레이너/코치 포털",
   "practitioner_portal": "전문가 포털",
   "trainer_portal_desc": "트레이닝 비즈니스와 클라이언트 관리",
   "practitioner_portal_desc": "건강 실무와 환자 관리",
   
-  "become_trainer": "트레이너 되기",
+  "become_trainer": "트레이너/코치 되기",
   "become_practitioner": "전문가 되기",
   "apply_now": "지금 지원",
   "application_pending": "지원서 대기 중",

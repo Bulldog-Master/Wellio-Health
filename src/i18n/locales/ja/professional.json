@@ -1,10 +1,12 @@
 {
-  "trainer_portal": "トレーナーポータル",
+  "professional_hub": "プロフェッショナル",
+  "professional_hub_desc": "トレーナーと専門家ポータルにアクセス",
+  "trainer_portal": "トレーナー/コーチポータル",
   "practitioner_portal": "専門家ポータル",
   "trainer_portal_desc": "トレーニングビジネスとクライアントを管理",
   "practitioner_portal_desc": "健康実践と患者を管理",
   
-  "become_trainer": "トレーナーになる",
+  "become_trainer": "トレーナー/コーチになる",
   "become_practitioner": "専門家になる",
   "apply_now": "今すぐ申請",
   "application_pending": "申請保留中",

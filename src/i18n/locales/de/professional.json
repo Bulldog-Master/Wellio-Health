@@ -1,10 +1,12 @@
 {
-  "trainer_portal": "Trainer-Portal",
+  "professional_hub": "Professionell",
+  "professional_hub_desc": "Zugang zu Trainer- und Praktikerportalen",
+  "trainer_portal": "Trainer/Coach-Portal",
   "practitioner_portal": "Praktiker-Portal",
   "trainer_portal_desc": "Verwalten Sie Ihr Trainingsgeschäft und Ihre Kunden",
   "practitioner_portal_desc": "Verwalten Sie Ihre Gesundheitspraxis und Patienten",
   
-  "become_trainer": "Trainer werden",
+  "become_trainer": "Trainer/Coach werden",
   "become_practitioner": "Praktiker werden",
   "apply_now": "Jetzt bewerben",
   "application_pending": "Bewerbung ausstehend",
