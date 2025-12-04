@@ -93,6 +93,15 @@ const Auth = () => {
   // Check for password reset FIRST (synchronously, before any other effects)
   const [initialCheckDone, setInitialCheckDone] = useState(false);
   
+  // Force dark mode on Auth page mount (user preference reset on login)
+  useEffect(() => {
+    console.log('[Auth] Component mounted, forcing dark mode');
+    setTheme('dark');
+    localStorage.setItem('theme', 'dark');
+    document.documentElement.classList.add('dark');
+    document.documentElement.classList.remove('light');
+  }, [setTheme]);
+
   useEffect(() => {
     setPasskeySupported(isWebAuthnSupported());
     setIsInIframe(window.self !== window.top);
@@ -141,7 +150,13 @@ const Auth = () => {
 
   // Helper to set dark mode on login
   const setDarkMode = () => {
+    console.log('[Auth] Setting dark mode...');
     setTheme('dark');
+    // Also set localStorage directly as backup
+    localStorage.setItem('theme', 'dark');
+    document.documentElement.classList.add('dark');
+    document.documentElement.classList.remove('light');
+    console.log('[Auth] Dark mode set, localStorage theme:', localStorage.getItem('theme'));
   };
 
   useEffect(() => {
