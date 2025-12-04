@@ -107,5 +107,14 @@
   "admin_access": "Admin-Zugang",
   "vip_access": "VIP-Zugang",
   "full_features_unlocked": "Alle Funktionen freigeschaltet",
-  "ai_coach": "KI-Coach"
+  "ai_coach": "KI-Coach",
+  "cart": "Warenkorb",
+  "cart_empty": "Ihr Warenkorb ist leer",
+  "clear_all": "Alles löschen",
+  "total": "Gesamt",
+  "items": "Artikel",
+  "product": "Produkt",
+  "added_to_cart": "Zum Warenkorb hinzugefügt",
+  "in_cart": "Im Warenkorb",
+  "add_to_cart": "In den Warenkorb"
 }

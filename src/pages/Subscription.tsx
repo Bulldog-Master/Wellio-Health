@@ -1,27 +1,27 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { useSubscription } from '@/hooks/useSubscription';
-import { Check, Crown, Sparkles, Zap, ArrowLeft } from 'lucide-react';
+import { Check, Crown, Sparkles, Zap, ArrowLeft, Plus, ShoppingCart } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { SubscriptionAddons } from '@/components/SubscriptionAddons';
-import { CheckoutDialog } from '@/components/payments';
+import { useCartStore } from '@/stores/cartStore';
+import { toast } from 'sonner';
 
 const Subscription = () => {
   const navigate = useNavigate();
   const { subscription, isLoading, tier, isVIP, isAdmin, hasFullAccess } = useSubscription();
-  const { t } = useTranslation(['subscription', 'addons', 'payments']);
-  const [checkoutOpen, setCheckoutOpen] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<{ name: string; price: number; tier: string } | null>(null);
+  const { t } = useTranslation(['subscription', 'addons', 'payments', 'common']);
+  const { addItem, hasItem } = useCartStore();
 
   const plans = [
     {
       name: t('free_plan'),
       tier: 'free' as const,
-      price: '$0',
+      price: 0,
+      priceDisplay: '$0',
       period: t('forever'),
       description: t('free_description'),
       features: [
@@ -37,7 +37,8 @@ const Subscription = () => {
     {
       name: t('pro_plan'),
       tier: 'pro' as const,
-      price: '$9.99',
+      price: 9.99,
+      priceDisplay: '$9.99',
       period: t('per_month'),
       description: t('pro_description'),
       features: [
@@ -54,7 +55,8 @@ const Subscription = () => {
     {
       name: t('enterprise_plan'),
       tier: 'enterprise' as const,
-      price: '$29.99',
+      price: 29.99,
+      priceDisplay: '$29.99',
       period: t('per_month'),
       description: t('enterprise_description'),
       features: [
@@ -69,6 +71,28 @@ const Subscription = () => {
       popular: false,
     },
   ];
+
+  const handleAddToCart = (plan: typeof plans[0]) => {
+    if (plan.tier === 'free' || tier === plan.tier) return;
+    
+    addItem({
+      id: `subscription-${plan.tier}`,
+      type: 'subscription',
+      name: plan.name,
+      description: plan.description,
+      price: plan.price,
+      billingCycle: 'monthly',
+      metadata: { tier: plan.tier }
+    });
+    
+    toast.success(t('common:added_to_cart'), {
+      description: plan.name
+    });
+  };
+
+  const isInCart = (planTier: string) => {
+    return hasItem(`subscription-${planTier}`);
+  };
 
   if (isLoading) {
     return (
@@ -130,6 +154,7 @@ const Subscription = () => {
           {plans.map((plan) => {
             const Icon = plan.icon;
             const isCurrentPlan = tier === plan.tier;
+            const inCart = isInCart(plan.tier);
 
             return (
               <Card
@@ -148,7 +173,7 @@ const Subscription = () => {
                   <Icon className="w-12 h-12 mx-auto mb-4 text-primary" />
                   <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
                   <div className="mb-2">
-                    <span className="text-4xl font-bold">{plan.price}</span>
+                    <span className="text-4xl font-bold">{plan.priceDisplay}</span>
                     <span className="text-muted-foreground ml-2">
                       {plan.period}
                     </span>
@@ -167,20 +192,25 @@ const Subscription = () => {
 
                 <Button
                   className="w-full"
-                  variant={isCurrentPlan ? 'secondary' : 'default'}
+                  variant={isCurrentPlan || inCart ? 'secondary' : 'default'}
                   disabled={isCurrentPlan || plan.tier === 'free'}
-                  onClick={() => {
-                    if (!isCurrentPlan && plan.tier !== 'free') {
-                      setSelectedPlan({
-                        name: plan.name,
-                        price: parseFloat(plan.price.replace('$', '')),
-                        tier: plan.tier
-                      });
-                      setCheckoutOpen(true);
-                    }
-                  }}
+                  onClick={() => handleAddToCart(plan)}
                 >
-                  {isCurrentPlan ? t('current_plan') : plan.tier === 'free' ? t('free_plan') : t('subscribe_now')}
+                  {isCurrentPlan ? (
+                    t('current_plan')
+                  ) : plan.tier === 'free' ? (
+                    t('free_plan')
+                  ) : inCart ? (
+                    <>
+                      <ShoppingCart className="w-4 h-4 mr-2" />
+                      {t('common:in_cart')}
+                    </>
+                  ) : (
+                    <>
+                      <Plus className="w-4 h-4 mr-2" />
+                      {t('common:add_to_cart')}
+                    </>
+                  )}
                 </Button>
               </Card>
             );
@@ -200,20 +230,6 @@ const Subscription = () => {
           </Button>
         </div>
       </div>
-      {/* Checkout Dialog */}
-      {selectedPlan && (
-        <CheckoutDialog
-          open={checkoutOpen}
-          onOpenChange={(open) => {
-            setCheckoutOpen(open);
-            if (!open) setSelectedPlan(null);
-          }}
-          itemName={selectedPlan.name}
-          amount={selectedPlan.price}
-          billingCycle="monthly"
-          itemType="subscription"
-        />
-      )}
     </div>
   );
 };

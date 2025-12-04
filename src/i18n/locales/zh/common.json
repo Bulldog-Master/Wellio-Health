@@ -107,5 +107,14 @@
   "admin_access": "管理员访问",
   "vip_access": "VIP访问",
   "full_features_unlocked": "所有功能已解锁",
-  "ai_coach": "AI教练"
+  "ai_coach": "AI教练",
+  "cart": "购物车",
+  "cart_empty": "您的购物车是空的",
+  "clear_all": "清空全部",
+  "total": "总计",
+  "items": "件商品",
+  "product": "产品",
+  "added_to_cart": "已添加到购物车",
+  "in_cart": "在购物车中",
+  "add_to_cart": "加入购物车"
 }

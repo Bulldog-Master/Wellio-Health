@@ -271,5 +271,14 @@
   "add": "Toevoegen",
   "saved": "Succesvol opgeslagen",
   "active": "Actief",
-  "inactive": "Inactief"
+  "inactive": "Inactief",
+  "cart": "Winkelwagen",
+  "cart_empty": "Uw winkelwagen is leeg",
+  "clear_all": "Alles wissen",
+  "total": "Totaal",
+  "items": "artikelen",
+  "product": "Product",
+  "added_to_cart": "Toegevoegd aan winkelwagen",
+  "in_cart": "In winkelwagen",
+  "add_to_cart": "In winkelwagen"
 }

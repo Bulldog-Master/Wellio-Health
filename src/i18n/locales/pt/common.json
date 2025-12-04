@@ -107,5 +107,14 @@
   "admin_access": "Acesso Admin",
   "vip_access": "Acesso VIP",
   "full_features_unlocked": "Todos os recursos desbloqueados",
-  "ai_coach": "Treinador IA"
+  "ai_coach": "Treinador IA",
+  "cart": "Carrinho",
+  "cart_empty": "Seu carrinho está vazio",
+  "clear_all": "Limpar tudo",
+  "total": "Total",
+  "items": "itens",
+  "product": "Produto",
+  "added_to_cart": "Adicionado ao carrinho",
+  "in_cart": "No carrinho",
+  "add_to_cart": "Adicionar ao carrinho"
 }
