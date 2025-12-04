@@ -5,22 +5,55 @@ import "./index.css";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { setupGlobalErrorHandlers } from "./lib/errorTracking";
 
+// FORCE dark mode immediately
+document.documentElement.classList.add('dark');
+document.documentElement.style.backgroundColor = '#1e2433';
+document.documentElement.style.colorScheme = 'dark';
+
 // Setup global error handlers for unhandled errors
 setupGlobalErrorHandlers();
 
-// Register service worker for PWA
+// Clear ALL service worker caches and force update
 if ('serviceWorker' in navigator) {
+  // Clear all caches first
+  if ('caches' in window) {
+    caches.keys().then((names) => {
+      names.forEach((name) => {
+        caches.delete(name);
+      });
+    });
+  }
+
+  // Unregister old service workers and register fresh
+  navigator.serviceWorker.getRegistrations().then((registrations) => {
+    registrations.forEach((registration) => {
+      registration.unregister();
+    });
+  });
+
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').then((registration) => {
-      // Check for updates immediately
+      // Force update check
       registration.update();
       
-      // Check for updates every hour
-      setInterval(() => {
-        registration.update();
-      }, 60 * 60 * 1000);
+      // Skip waiting if there's a new version
+      if (registration.waiting) {
+        registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+      }
+      
+      registration.addEventListener('updatefound', () => {
+        const newWorker = registration.installing;
+        if (newWorker) {
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              newWorker.postMessage({ type: 'SKIP_WAITING' });
+              window.location.reload();
+            }
+          });
+        }
+      });
     }).catch(() => {
-      // Service worker registration failed, PWA features won't be available
+      // Service worker registration failed
     });
   });
 }
