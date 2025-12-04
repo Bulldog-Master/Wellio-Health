@@ -1,5 +1,7 @@
 {
-  "trainer_portal": "教练门户",
+  "professional_hub": "专业",
+  "professional_hub_desc": "访问教练和从业者门户",
+  "trainer_portal": "教练/健身教练门户",
   "trainer_portal_desc": "管理您的客户和培训计划",
   "practitioner_portal": "从业者门户",
   "practitioner_portal_desc": "管理您的患者和健康服务",

@@ -1,10 +1,12 @@
 {
-  "trainer_portal": "Portail Entraîneur",
+  "professional_hub": "Professionnel",
+  "professional_hub_desc": "Accédez aux portails entraîneur et praticien",
+  "trainer_portal": "Portail Entraîneur/Coach",
   "practitioner_portal": "Portail Praticien",
   "trainer_portal_desc": "Gérez votre activité d'entraînement et vos clients",
   "practitioner_portal_desc": "Gérez votre pratique de santé et vos patients",
   
-  "become_trainer": "Devenir Entraîneur",
+  "become_trainer": "Devenir Entraîneur/Coach",
   "become_practitioner": "Devenir Praticien",
   "apply_now": "Postuler Maintenant",
   "application_pending": "Candidature en Attente",

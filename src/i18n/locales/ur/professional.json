@@ -1,10 +1,12 @@
 {
-  "trainer_portal": "ٹرینر پورٹل",
+  "professional_hub": "پیشہ ور",
+  "professional_hub_desc": "ٹرینر اور پریکٹیشنر پورٹلز تک رسائی حاصل کریں",
+  "trainer_portal": "ٹرینر/کوچ پورٹل",
   "trainer_portal_desc": "اپنے تربیتی کاروبار اور کلائنٹس کا انتظام کریں",
   "practitioner_portal": "پریکٹیشنر پورٹل",
   "practitioner_portal_desc": "اپنی صحت کی مشق اور مریضوں کا انتظام کریں",
   
-  "become_trainer": "ٹرینر بنیں",
+  "become_trainer": "ٹرینر/کوچ بنیں",
   "become_practitioner": "پریکٹیشنر بنیں",
   "apply_now": "ابھی درخواست دیں",
   "application_pending": "درخواست زیر التواء",

@@ -1,10 +1,12 @@
 {
-  "trainer_portal": "Портал Тренера",
+  "professional_hub": "Профессионал",
+  "professional_hub_desc": "Доступ к порталам тренера и специалиста",
+  "trainer_portal": "Портал Тренера/Коуча",
   "practitioner_portal": "Портал Специалиста",
   "trainer_portal_desc": "Управляйте своим тренерским бизнесом и клиентами",
   "practitioner_portal_desc": "Управляйте своей практикой здоровья и пациентами",
   
-  "become_trainer": "Стать Тренером",
+  "become_trainer": "Стать Тренером/Коучем",
   "become_practitioner": "Стать Специалистом",
   "apply_now": "Подать Заявку",
   "application_pending": "Заявка на Рассмотрении",

@@ -1,10 +1,12 @@
 {
-  "trainer_portal": "Eğitmen Portalı",
+  "professional_hub": "Profesyonel",
+  "professional_hub_desc": "Eğitmen ve uzman portallarına erişin",
+  "trainer_portal": "Eğitmen/Koç Portalı",
   "practitioner_portal": "Uzman Portalı",
   "trainer_portal_desc": "Eğitim işinizi ve müşterilerinizi yönetin",
   "practitioner_portal_desc": "Sağlık uygulamanızı ve hastalarınızı yönetin",
   
-  "become_trainer": "Eğitmen Ol",
+  "become_trainer": "Eğitmen/Koç Ol",
   "become_practitioner": "Uzman Ol",
   "apply_now": "Şimdi Başvur",
   "application_pending": "Başvuru Beklemede",
