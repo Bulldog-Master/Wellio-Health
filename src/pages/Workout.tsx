@@ -2075,40 +2075,39 @@ const Workout = () => {
 
           <div>
             <Label htmlFor="distance">{t('distance_optional')}</Label>
-            <div className="flex gap-2 mt-1.5">
-              <Input
-                id="distance"
-                type="number"
-                step="0.1"
-                placeholder="5.0"
-                value={distance}
-                onChange={(e) => setDistance(e.target.value)}
-                className="flex-1"
-              />
-              <div className="flex items-center rounded-lg border-2 border-cyan-500 bg-card p-1 gap-1" style={{ minWidth: '120px' }}>
-                <button
-                  type="button"
-                  className={`flex-1 px-3 py-2 text-sm font-bold rounded-md transition-all ${
-                    preferredUnit === 'metric' 
-                      ? 'bg-cyan-500 text-white' 
-                      : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200'
-                  }`}
-                  onClick={() => updatePreferredUnit('metric')}
-                >
-                  km
-                </button>
-                <button
-                  type="button"
-                  className={`flex-1 px-3 py-2 text-sm font-bold rounded-md transition-all ${
-                    preferredUnit === 'imperial' 
-                      ? 'bg-cyan-500 text-white' 
-                      : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200'
-                  }`}
-                  onClick={() => updatePreferredUnit('imperial')}
-                >
-                  mi
-                </button>
-              </div>
+            <Input
+              id="distance"
+              type="number"
+              step="0.1"
+              placeholder="5.0"
+              value={distance}
+              onChange={(e) => setDistance(e.target.value)}
+              className="mt-1.5"
+            />
+            <div className="flex items-center justify-center gap-2 mt-3 p-2 rounded-lg bg-muted">
+              <span className="text-sm text-muted-foreground mr-2">Unit:</span>
+              <button
+                type="button"
+                className={`px-6 py-2 text-sm font-bold rounded-md transition-all border-2 ${
+                  preferredUnit === 'metric' 
+                    ? 'bg-primary text-primary-foreground border-primary' 
+                    : 'bg-background text-foreground border-border hover:border-primary/50'
+                }`}
+                onClick={() => updatePreferredUnit('metric')}
+              >
+                km
+              </button>
+              <button
+                type="button"
+                className={`px-6 py-2 text-sm font-bold rounded-md transition-all border-2 ${
+                  preferredUnit === 'imperial' 
+                    ? 'bg-primary text-primary-foreground border-primary' 
+                    : 'bg-background text-foreground border-border hover:border-primary/50'
+                }`}
+                onClick={() => updatePreferredUnit('imperial')}
+              >
+                mi
+              </button>
             </div>
           </div>
 
