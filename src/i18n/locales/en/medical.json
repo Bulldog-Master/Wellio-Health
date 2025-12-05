@@ -67,5 +67,11 @@
   "failed_delete_symptom": "Failed to delete symptom.",
   "file_too_large": "File too large",
   "file_size_limit": "File must be less than 50MB",
-  "view_file": "View File"
+  "view_file": "View File",
+  "reauth_required": "Re-authentication Required",
+  "reauth_description": "For your security, please verify your identity to access medical records. Access will be granted for 15 minutes.",
+  "access_granted": "Medical access granted for 15 minutes",
+  "verify_access": "Verify Access",
+  "session_expires": "Session expires at",
+  "security_notice": "Medical data is protected with additional security. This helps prevent unauthorized access to your sensitive health information."
 }

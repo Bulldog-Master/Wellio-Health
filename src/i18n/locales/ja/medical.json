@@ -10,5 +10,11 @@
   "doctor_visits": "診察記録",
   "emergency_contact": "緊急連絡先",
   "blood_type": "血液型",
-  "no_records": "記録がありません"
+  "no_records": "記録がありません",
+  "reauth_required": "再認証が必要です",
+  "reauth_description": "セキュリティのため、医療記録にアクセスするには本人確認が必要です。アクセスは15分間許可されます。",
+  "access_granted": "医療アクセスが15分間許可されました",
+  "verify_access": "アクセスを確認",
+  "session_expires": "セッション有効期限",
+  "security_notice": "医療データは追加のセキュリティで保護されています。これは、機密性の高い健康情報への不正アクセスを防ぐのに役立ちます。"
 }

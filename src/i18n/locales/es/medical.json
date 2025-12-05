@@ -67,5 +67,11 @@
   "failed_delete_symptom": "Error al eliminar síntoma.",
   "file_too_large": "Archivo demasiado grande",
   "file_size_limit": "El archivo debe ser menor a 50MB",
-  "view_file": "Ver Archivo"
+  "view_file": "Ver Archivo",
+  "reauth_required": "Re-autenticación Requerida",
+  "reauth_description": "Por tu seguridad, verifica tu identidad para acceder a los registros médicos. El acceso se otorgará por 15 minutos.",
+  "access_granted": "Acceso médico otorgado por 15 minutos",
+  "verify_access": "Verificar Acceso",
+  "session_expires": "La sesión expira a las",
+  "security_notice": "Los datos médicos están protegidos con seguridad adicional. Esto ayuda a prevenir el acceso no autorizado a tu información de salud sensible."
 }

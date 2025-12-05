@@ -10,5 +10,11 @@
   "doctor_visits": "زيارات الدكتور",
   "emergency_contact": "رقم الطوارئ",
   "blood_type": "فصيلة الدم",
-  "no_records": "مفيش سجلات"
+  "no_records": "مفيش سجلات",
+  "reauth_required": "مطلوب إعادة المصادقة",
+  "reauth_description": "لأمانك، تحقق من هويتك للوصول للسجلات الطبية. هيتم منح الوصول لمدة 15 دقيقة.",
+  "access_granted": "تم منح الوصول الطبي لمدة 15 دقيقة",
+  "verify_access": "تحقق من الوصول",
+  "session_expires": "الجلسة هتنتهي في",
+  "security_notice": "البيانات الطبية محمية بأمان إضافي."
 }

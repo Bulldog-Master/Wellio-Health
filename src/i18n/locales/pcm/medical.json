@@ -10,5 +10,11 @@
   "doctor_visits": "Doctor Visits",
   "emergency_contact": "Emergency Contact",
   "blood_type": "Blood Type",
-  "no_records": "No record dey"
+  "no_records": "No record dey",
+  "reauth_required": "You Need To Verify Again",
+  "reauth_description": "For your security, verify your identity to access medical records. Access go dey for 15 minutes.",
+  "access_granted": "Medical access don grant for 15 minutes",
+  "verify_access": "Verify Access",
+  "session_expires": "Session go end by",
+  "security_notice": "Medical data dey protected with extra security. This go help stop unauthorized access to your health info."
 }

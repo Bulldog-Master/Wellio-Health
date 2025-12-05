@@ -10,5 +10,11 @@
   "doctor_visits": "Doktersbezoeken",
   "emergency_contact": "Noodcontact",
   "blood_type": "Bloedgroep",
-  "no_records": "Geen records"
+  "no_records": "Geen records",
+  "reauth_required": "Herauthenticatie Vereist",
+  "reauth_description": "Voor uw veiligheid, verifieer uw identiteit om medische dossiers te openen. Toegang wordt verleend voor 15 minuten.",
+  "access_granted": "Medische toegang verleend voor 15 minuten",
+  "verify_access": "Verifieer Toegang",
+  "session_expires": "Sessie verloopt om",
+  "security_notice": "Medische gegevens worden beschermd met extra beveiliging. Dit helpt ongeautoriseerde toegang tot uw gevoelige gezondheidsinformatie te voorkomen."
 }

@@ -10,5 +10,11 @@
   "doctor_visits": "Doktor Ziyaretleri",
   "emergency_contact": "Acil İletişim",
   "blood_type": "Kan Grubu",
-  "no_records": "Kayıt yok"
+  "no_records": "Kayıt yok",
+  "reauth_required": "Yeniden Kimlik Doğrulama Gerekli",
+  "reauth_description": "Güvenliğiniz için, tıbbi kayıtlara erişmek için kimliğinizi doğrulayın. Erişim 15 dakika boyunca sağlanacaktır.",
+  "access_granted": "Tıbbi erişim 15 dakika için sağlandı",
+  "verify_access": "Erişimi Doğrula",
+  "session_expires": "Oturum sona erme zamanı",
+  "security_notice": "Tıbbi veriler ek güvenlikle korunmaktadır. Bu, hassas sağlık bilgilerinize yetkisiz erişimi önlemeye yardımcı olur."
 }

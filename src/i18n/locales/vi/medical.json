@@ -10,5 +10,11 @@
   "doctor_visits": "Khám bác sĩ",
   "emergency_contact": "Liên hệ khẩn cấp",
   "blood_type": "Nhóm máu",
-  "no_records": "Không có hồ sơ"
+  "no_records": "Không có hồ sơ",
+  "reauth_required": "Yêu cầu xác thực lại",
+  "reauth_description": "Vì bảo mật của bạn, vui lòng xác minh danh tính để truy cập hồ sơ y tế. Quyền truy cập sẽ được cấp trong 15 phút.",
+  "access_granted": "Đã cấp quyền truy cập y tế trong 15 phút",
+  "verify_access": "Xác minh quyền truy cập",
+  "session_expires": "Phiên hết hạn lúc",
+  "security_notice": "Dữ liệu y tế được bảo vệ với bảo mật bổ sung. Điều này giúp ngăn chặn truy cập trái phép vào thông tin sức khỏe nhạy cảm của bạn."
 }
