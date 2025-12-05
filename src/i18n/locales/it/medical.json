@@ -10,5 +10,11 @@
   "doctor_visits": "Visite Mediche",
   "emergency_contact": "Contatto di Emergenza",
   "blood_type": "Gruppo Sanguigno",
-  "no_records": "Nessun record"
+  "no_records": "Nessun record",
+  "reauth_required": "Riautenticazione Necessaria",
+  "reauth_description": "Per la tua sicurezza, verifica la tua identità per accedere alle cartelle mediche. L'accesso sarà concesso per 15 minuti.",
+  "access_granted": "Accesso medico concesso per 15 minuti",
+  "verify_access": "Verifica Accesso",
+  "session_expires": "La sessione scade alle",
+  "security_notice": "I dati medici sono protetti con sicurezza aggiuntiva. Questo aiuta a prevenire l'accesso non autorizzato alle tue informazioni sanitarie sensibili."
 }

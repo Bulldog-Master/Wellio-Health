@@ -10,5 +10,11 @@
   "doctor_visits": "就诊记录",
   "emergency_contact": "紧急联系人",
   "blood_type": "血型",
-  "no_records": "暂无记录"
+  "no_records": "暂无记录",
+  "reauth_required": "需要重新验证",
+  "reauth_description": "为了您的安全，请验证您的身份以访问医疗记录。访问权限将授予15分钟。",
+  "access_granted": "医疗访问权限已授予15分钟",
+  "verify_access": "验证访问",
+  "session_expires": "会话到期时间",
+  "security_notice": "医疗数据受到额外安全保护。这有助于防止未经授权访问您的敏感健康信息。"
 }

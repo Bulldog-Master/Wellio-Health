@@ -10,5 +10,11 @@
   "doctor_visits": "Kunjungan Dokter",
   "emergency_contact": "Kontak Darurat",
   "blood_type": "Golongan Darah",
-  "no_records": "Tidak ada rekam"
+  "no_records": "Tidak ada rekam",
+  "reauth_required": "Diperlukan Autentikasi Ulang",
+  "reauth_description": "Untuk keamanan Anda, verifikasi identitas Anda untuk mengakses rekam medis. Akses akan diberikan selama 15 menit.",
+  "access_granted": "Akses medis diberikan selama 15 menit",
+  "verify_access": "Verifikasi Akses",
+  "session_expires": "Sesi berakhir pada",
+  "security_notice": "Data medis dilindungi dengan keamanan tambahan. Ini membantu mencegah akses tidak sah ke informasi kesehatan sensitif Anda."
 }

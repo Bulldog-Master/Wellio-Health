@@ -1669,6 +1669,30 @@ export type Database = {
         }
         Relationships: []
       }
+      medical_access_sessions: {
+        Row: {
+          authenticated_at: string
+          created_at: string
+          expires_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          authenticated_at?: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          authenticated_at?: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       medical_audit_log: {
         Row: {
           accessed_at: string
@@ -4653,6 +4677,7 @@ export type Database = {
         }
         Returns: string
       }
+      create_medical_session: { Args: { _user_id: string }; Returns: string }
       generate_referral_code: { Args: never; Returns: string }
       get_fitness_locations_safe: {
         Args: never
@@ -4806,8 +4831,16 @@ export type Database = {
         }
         Returns: boolean
       }
+      has_valid_medical_session: {
+        Args: { _user_id: string }
+        Returns: boolean
+      }
       is_approved_professional: {
         Args: { _type: string; _user_id: string }
+        Returns: boolean
+      }
+      is_following: {
+        Args: { _follower_id: string; _following_id: string }
         Returns: boolean
       }
       is_session_participant: {

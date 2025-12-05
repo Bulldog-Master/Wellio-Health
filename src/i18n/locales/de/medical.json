@@ -67,5 +67,11 @@
   "failed_delete_symptom": "Symptom löschen fehlgeschlagen.",
   "file_too_large": "Datei zu groß",
   "file_size_limit": "Datei muss kleiner als 50MB sein",
-  "view_file": "Datei ansehen"
+  "view_file": "Datei ansehen",
+  "reauth_required": "Erneute Authentifizierung Erforderlich",
+  "reauth_description": "Zu Ihrer Sicherheit, bitte bestätigen Sie Ihre Identität, um auf medizinische Unterlagen zuzugreifen. Der Zugang wird für 15 Minuten gewährt.",
+  "access_granted": "Medizinischer Zugang für 15 Minuten gewährt",
+  "verify_access": "Zugang Bestätigen",
+  "session_expires": "Sitzung endet um",
+  "security_notice": "Medizinische Daten sind mit zusätzlicher Sicherheit geschützt. Dies hilft, unbefugten Zugriff auf Ihre sensiblen Gesundheitsinformationen zu verhindern."
 }

@@ -67,5 +67,11 @@
   "failed_delete_symptom": "Échec de la suppression du symptôme.",
   "file_too_large": "Fichier trop volumineux",
   "file_size_limit": "Le fichier doit faire moins de 50Mo",
-  "view_file": "Voir le fichier"
+  "view_file": "Voir le fichier",
+  "reauth_required": "Ré-authentification Requise",
+  "reauth_description": "Pour votre sécurité, veuillez vérifier votre identité pour accéder aux dossiers médicaux. L'accès sera accordé pour 15 minutes.",
+  "access_granted": "Accès médical accordé pour 15 minutes",
+  "verify_access": "Vérifier l'Accès",
+  "session_expires": "La session expire à",
+  "security_notice": "Les données médicales sont protégées par une sécurité supplémentaire. Cela aide à prévenir l'accès non autorisé à vos informations de santé sensibles."
 }

@@ -21,6 +21,7 @@ import {
 import { uploadMedicalFile, getSignedMedicalFileUrl } from "@/lib/medicalFileStorage";
 import { useTranslation } from "react-i18next";
 import { SubscriptionGate } from "@/components/SubscriptionGate";
+import { MedicalAuthGate } from "@/components/MedicalAuthGate";
 
 interface Medication {
   id: string;
@@ -490,6 +491,7 @@ const MedicalHistory = () => {
 
   return (
     <SubscriptionGate feature="medical_records">
+      <MedicalAuthGate>
       <div className="space-y-6 max-w-4xl pb-20 md:pb-0">
         <div className="flex items-center gap-4">
           <Button
@@ -1012,6 +1014,7 @@ const MedicalHistory = () => {
         </TabsContent>
       </Tabs>
       </div>
+      </MedicalAuthGate>
     </SubscriptionGate>
   );
 };
