@@ -84,7 +84,7 @@ const Workout = () => {
   const { t } = useTranslation(['workout', 'common']);
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { preferredUnit, updatePreferredUnit } = useUserPreferences();
+  const { preferredUnit, toggleUnit } = useUserPreferences();
   const [exercise, setExercise] = useState("");
   const [duration, setDuration] = useState("");
   const [intensity, setIntensity] = useState("medium");
@@ -2087,9 +2087,9 @@ const Workout = () => {
               />
               <Button
                 type="button"
-                variant="secondary"
+                variant="outline"
                 className="min-w-[60px] font-medium"
-                onClick={() => updatePreferredUnit(preferredUnit === 'imperial' ? 'metric' : 'imperial')}
+                onClick={toggleUnit}
                 title={t('common:toggle_unit')}
               >
                 {preferredUnit === 'imperial' ? 'mi' : 'km'}

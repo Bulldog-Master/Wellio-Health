@@ -1,9 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import type { UnitSystem } from '@/lib/unitConversion';
 
 export const useUserPreferences = () => {
-  const [preferredUnit, setPreferredUnit] = useState<UnitSystem>('imperial');
+  const [preferredUnit, setPreferredUnit] = useState<UnitSystem>(() => {
+    // Check localStorage first for instant UI
+    const cached = localStorage.getItem('preferredUnit');
+    return (cached as UnitSystem) || 'imperial';
+  });
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -23,6 +27,7 @@ export const useUserPreferences = () => {
 
         if (profile?.preferred_unit) {
           setPreferredUnit(profile.preferred_unit as UnitSystem);
+          localStorage.setItem('preferredUnit', profile.preferred_unit);
         }
       } catch (error) {
         console.error('Error fetching user preferences:', error);
@@ -34,25 +39,32 @@ export const useUserPreferences = () => {
     fetchPreferences();
   }, []);
 
-  const updatePreferredUnit = async (unit: UnitSystem) => {
+  const updatePreferredUnit = useCallback(async (unit: UnitSystem) => {
+    // Optimistically update UI immediately
+    setPreferredUnit(unit);
+    localStorage.setItem('preferredUnit', unit);
+
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
       const { error } = await supabase
         .from('profiles')
-        .upsert({
-          id: user.id,
-          preferred_unit: unit,
-        });
+        .update({ preferred_unit: unit })
+        .eq('id', user.id);
 
-      if (!error) {
-        setPreferredUnit(unit);
+      if (error) {
+        console.error('Error updating preferred unit:', error);
       }
     } catch (error) {
       console.error('Error updating preferred unit:', error);
     }
-  };
+  }, []);
 
-  return { preferredUnit, updatePreferredUnit, isLoading };
+  const toggleUnit = useCallback(() => {
+    const newUnit = preferredUnit === 'imperial' ? 'metric' : 'imperial';
+    updatePreferredUnit(newUnit);
+  }, [preferredUnit, updatePreferredUnit]);
+
+  return { preferredUnit, updatePreferredUnit, toggleUnit, isLoading };
 };
