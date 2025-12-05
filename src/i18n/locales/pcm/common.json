@@ -107,5 +107,6 @@
   "added_to_cart": "E don enter cart",
   "in_cart": "E dey cart",
   "add_to_cart": "Add to cart",
-  "proceed_to_checkout": "Go checkout"
+  "proceed_to_checkout": "Go checkout",
+  "toggle_unit": "Click to change unit"
 }

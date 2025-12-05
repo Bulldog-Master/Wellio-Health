@@ -287,5 +287,6 @@
   "product": "Producto",
   "added_to_cart": "Agregado al carrito",
   "in_cart": "En el carrito",
-  "add_to_cart": "Agregar al carrito"
+  "add_to_cart": "Agregar al carrito",
+  "toggle_unit": "Clic para cambiar unidad"
 }

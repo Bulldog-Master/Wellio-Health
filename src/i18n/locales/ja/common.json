@@ -217,5 +217,6 @@
   "added_to_cart": "カートに追加しました",
   "in_cart": "カートに入れました",
   "add_to_cart": "カートに追加",
-  "proceed_to_checkout": "チェックアウトへ進む"
+  "proceed_to_checkout": "チェックアウトへ進む",
+  "toggle_unit": "クリックで単位を切り替え"
 }

@@ -280,5 +280,6 @@
   "product": "Prodotto",
   "added_to_cart": "Aggiunto al carrello",
   "in_cart": "Nel carrello",
-  "add_to_cart": "Aggiungi al carrello"
+  "add_to_cart": "Aggiungi al carrello",
+  "toggle_unit": "Clicca per cambiare unità"
 }
