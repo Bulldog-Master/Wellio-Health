@@ -280,5 +280,6 @@
   "product": "Ürün",
   "added_to_cart": "Sepete eklendi",
   "in_cart": "Sepette",
-  "add_to_cart": "Sepete ekle"
+  "add_to_cart": "Sepete ekle",
+  "toggle_unit": "Birimi değiştirmek için tıklayın"
 }

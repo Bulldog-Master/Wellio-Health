@@ -284,5 +284,6 @@
   "product": "Product",
   "added_to_cart": "Added to cart",
   "in_cart": "In Cart",
-  "add_to_cart": "Add to Cart"
+  "add_to_cart": "Add to Cart",
+  "toggle_unit": "Click to toggle unit"
 }

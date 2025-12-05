@@ -217,5 +217,6 @@
   "added_to_cart": "कार्ट में जोड़ा गया",
   "in_cart": "कार्ट में",
   "add_to_cart": "कार्ट में जोड़ें",
-  "proceed_to_checkout": "चेकआउट करें"
+  "proceed_to_checkout": "चेकआउट करें",
+  "toggle_unit": "इकाई बदलने के लिए क्लिक करें"
 }

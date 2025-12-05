@@ -280,5 +280,6 @@
   "product": "Product",
   "added_to_cart": "Toegevoegd aan winkelwagen",
   "in_cart": "In winkelwagen",
-  "add_to_cart": "In winkelwagen"
+  "add_to_cart": "In winkelwagen",
+  "toggle_unit": "Klik om eenheid te wisselen"
 }

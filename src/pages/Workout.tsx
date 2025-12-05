@@ -81,10 +81,10 @@ interface WorkoutMedia {
 }
 
 const Workout = () => {
-  const { t } = useTranslation('workout');
+  const { t } = useTranslation(['workout', 'common']);
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { preferredUnit } = useUserPreferences();
+  const { preferredUnit, updatePreferredUnit } = useUserPreferences();
   const [exercise, setExercise] = useState("");
   const [duration, setDuration] = useState("");
   const [intensity, setIntensity] = useState("medium");
@@ -2085,9 +2085,15 @@ const Workout = () => {
                 onChange={(e) => setDistance(e.target.value)}
                 className="flex-1"
               />
-              <div className="flex items-center px-3 bg-secondary rounded-md text-sm text-muted-foreground min-w-[60px] justify-center">
+              <Button
+                type="button"
+                variant="secondary"
+                className="min-w-[60px] font-medium"
+                onClick={() => updatePreferredUnit(preferredUnit === 'imperial' ? 'metric' : 'imperial')}
+                title={t('common:toggle_unit')}
+              >
                 {preferredUnit === 'imperial' ? 'mi' : 'km'}
-              </div>
+              </Button>
             </div>
           </div>
 

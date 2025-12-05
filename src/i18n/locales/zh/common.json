@@ -116,5 +116,6 @@
   "product": "产品",
   "added_to_cart": "已添加到购物车",
   "in_cart": "在购物车中",
-  "add_to_cart": "加入购物车"
+  "add_to_cart": "加入购物车",
+  "toggle_unit": "点击切换单位"
 }

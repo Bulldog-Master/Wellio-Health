@@ -217,5 +217,6 @@
   "added_to_cart": "장바구니에 추가됨",
   "in_cart": "장바구니에 있음",
   "add_to_cart": "장바구니에 추가",
-  "proceed_to_checkout": "결제하기"
+  "proceed_to_checkout": "결제하기",
+  "toggle_unit": "클릭하여 단위 전환"
 }

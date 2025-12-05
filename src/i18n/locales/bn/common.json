@@ -107,5 +107,6 @@
   "added_to_cart": "কার্টে যোগ হয়েছে",
   "in_cart": "কার্টে আছে",
   "add_to_cart": "কার্টে যোগ করুন",
-  "proceed_to_checkout": "চেকআউটে যান"
+  "proceed_to_checkout": "চেকআউটে যান",
+  "toggle_unit": "ইউনিট পরিবর্তন করতে ক্লিক করুন"
 }

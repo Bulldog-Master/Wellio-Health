@@ -217,5 +217,6 @@
   "added_to_cart": "تمت الإضافة للسلة",
   "in_cart": "في السلة",
   "add_to_cart": "أضف للسلة",
-  "proceed_to_checkout": "متابعة الدفع"
+  "proceed_to_checkout": "متابعة الدفع",
+  "toggle_unit": "انقر لتغيير الوحدة"
 }

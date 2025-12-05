@@ -116,5 +116,6 @@
   "product": "Produkt",
   "added_to_cart": "Zum Warenkorb hinzugefügt",
   "in_cart": "Im Warenkorb",
-  "add_to_cart": "In den Warenkorb"
+  "add_to_cart": "In den Warenkorb",
+  "toggle_unit": "Klicken um Einheit zu wechseln"
 }

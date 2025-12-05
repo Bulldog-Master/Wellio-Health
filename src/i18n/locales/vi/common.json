@@ -64,6 +64,7 @@
   "in_cart": "Trong giỏ hàng",
   "add_to_cart": "Thêm vào giỏ",
   "proceed_to_checkout": "Tiến hành thanh toán",
+  "toggle_unit": "Nhấp để chuyển đổi đơn vị",
   "nav": {
     "activity": "Hoạt động",
     "connect": "Kết nối",
