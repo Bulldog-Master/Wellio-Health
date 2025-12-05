@@ -2656,6 +2656,7 @@ export type Database = {
           reminder_weigh_in: boolean | null
           reminder_workout: boolean | null
           show_activity: boolean | null
+          show_health_metrics_to_followers: boolean | null
           stand_goal: number | null
           target_weight: number | null
           target_weight_unit: string | null
@@ -2698,6 +2699,7 @@ export type Database = {
           reminder_weigh_in?: boolean | null
           reminder_workout?: boolean | null
           show_activity?: boolean | null
+          show_health_metrics_to_followers?: boolean | null
           stand_goal?: number | null
           target_weight?: number | null
           target_weight_unit?: string | null
@@ -2740,6 +2742,7 @@ export type Database = {
           reminder_weigh_in?: boolean | null
           reminder_workout?: boolean | null
           show_activity?: boolean | null
+          show_health_metrics_to_followers?: boolean | null
           stand_goal?: number | null
           target_weight?: number | null
           target_weight_unit?: string | null

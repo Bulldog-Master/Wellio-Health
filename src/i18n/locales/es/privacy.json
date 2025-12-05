@@ -50,6 +50,8 @@
   "allow_mentions": "Permitir Menciones",
   "mentions_description": "Permite que otros te mencionen en publicaciones y comentarios",
   "show_activity": "Mostrar Estado de Actividad",
+  "show_health_metrics": "Compartir Métricas de Salud",
+  "health_metrics_description": "Permitir que tus seguidores vean tu peso, altura, edad y objetivos de fitness (oculto por defecto para privacidad)",
   "activity_description": "Permite que otros vean cuando estás activo",
   
   "data_export": "Exportación de Datos",

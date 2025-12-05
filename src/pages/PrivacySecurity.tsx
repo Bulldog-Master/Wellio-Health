@@ -46,6 +46,7 @@ const PrivacySecurity = () => {
   const [isPrivate, setIsPrivate] = useState(false);
   const [allowMentions, setAllowMentions] = useState(true);
   const [showActivity, setShowActivity] = useState(true);
+  const [showHealthMetrics, setShowHealthMetrics] = useState(false);
   const [showPasswordDialog, setShowPasswordDialog] = useState(false);
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -81,7 +82,7 @@ const PrivacySecurity = () => {
         // Fetch privacy settings
         const { data: profile } = await supabase
           .from('profiles')
-          .select('is_private, allow_mentions, show_activity')
+          .select('is_private, allow_mentions, show_activity, show_health_metrics_to_followers')
           .eq('id', user.id)
           .single();
         
@@ -89,6 +90,7 @@ const PrivacySecurity = () => {
           setIsPrivate(profile.is_private || false);
           setAllowMentions(profile.allow_mentions !== false);
           setShowActivity(profile.show_activity !== false);
+          setShowHealthMetrics(profile.show_health_metrics_to_followers || false);
         }
       }
     };
@@ -752,6 +754,25 @@ const PrivacySecurity = () => {
               onCheckedChange={(checked) => {
                 setShowActivity(checked);
                 updatePrivacySettings('show_activity', checked);
+              }}
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label className="flex items-center gap-2">
+                <EyeOff className="w-4 h-4" />
+                {t('show_health_metrics')}
+              </Label>
+              <p className="text-sm text-muted-foreground">
+                {t('health_metrics_description')}
+              </p>
+            </div>
+            <Switch
+              checked={showHealthMetrics}
+              onCheckedChange={(checked) => {
+                setShowHealthMetrics(checked);
+                updatePrivacySettings('show_health_metrics_to_followers', checked);
               }}
             />
           </div>
