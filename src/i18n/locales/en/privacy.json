@@ -50,6 +50,8 @@
   "allow_mentions": "Allow Mentions",
   "mentions_description": "Let others mention you in posts and comments",
   "show_activity": "Show Activity Status",
+  "show_health_metrics": "Share Health Metrics",
+  "health_metrics_description": "Allow followers to see your weight, height, age, and fitness goals (hidden by default for privacy)",
   "activity_description": "Let others see when you're active",
   
   "data_export": "Data Export",
