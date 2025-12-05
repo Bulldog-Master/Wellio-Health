@@ -2085,13 +2085,13 @@ const Workout = () => {
                 onChange={(e) => setDistance(e.target.value)}
                 className="flex-1"
               />
-              <div className="flex rounded-md overflow-hidden border border-input">
+              <div className="inline-flex rounded-lg border-2 border-border bg-muted p-1 gap-1">
                 <button
                   type="button"
-                  className={`px-3 py-2 text-sm font-medium transition-colors border-r border-input ${
+                  className={`px-4 py-2 text-sm font-semibold rounded-md transition-all ${
                     preferredUnit === 'metric' 
-                      ? 'bg-primary text-primary-foreground' 
-                      : 'bg-muted/50 text-foreground hover:bg-muted'
+                      ? 'bg-primary text-white shadow-md' 
+                      : 'bg-transparent text-foreground hover:bg-background'
                   }`}
                   onClick={() => updatePreferredUnit('metric')}
                 >
@@ -2099,10 +2099,10 @@ const Workout = () => {
                 </button>
                 <button
                   type="button"
-                  className={`px-3 py-2 text-sm font-medium transition-colors ${
+                  className={`px-4 py-2 text-sm font-semibold rounded-md transition-all ${
                     preferredUnit === 'imperial' 
-                      ? 'bg-primary text-primary-foreground' 
-                      : 'bg-muted/50 text-foreground hover:bg-muted'
+                      ? 'bg-primary text-white shadow-md' 
+                      : 'bg-transparent text-foreground hover:bg-background'
                   }`}
                   onClick={() => updatePreferredUnit('imperial')}
                 >
