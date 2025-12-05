@@ -4,7 +4,6 @@ import type { UnitSystem } from '@/lib/unitConversion';
 
 export const useUserPreferences = () => {
   const [preferredUnit, setPreferredUnit] = useState<UnitSystem>(() => {
-    // Check localStorage first for instant UI
     const cached = localStorage.getItem('preferredUnit');
     return (cached as UnitSystem) || 'imperial';
   });
@@ -13,6 +12,13 @@ export const useUserPreferences = () => {
   useEffect(() => {
     const fetchPreferences = async () => {
       try {
+        // Only fetch from DB if no local preference exists
+        const cachedUnit = localStorage.getItem('preferredUnit');
+        if (cachedUnit) {
+          setIsLoading(false);
+          return; // Use localStorage value, don't overwrite with DB
+        }
+
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) {
           setIsLoading(false);
@@ -40,7 +46,7 @@ export const useUserPreferences = () => {
   }, []);
 
   const updatePreferredUnit = useCallback(async (unit: UnitSystem) => {
-    // Optimistically update UI immediately
+    // Update UI and localStorage immediately
     setPreferredUnit(unit);
     localStorage.setItem('preferredUnit', unit);
 
