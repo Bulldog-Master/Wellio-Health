@@ -12,5 +12,11 @@
   "participants": "Partecipanti",
   "your_rank": "La Tua Posizione",
   "challenge_complete": "Sfida Completata!",
-  "no_challenges": "Nessuna sfida"
+  "no_challenges": "Nessuna sfida",
+  "social_challenges": "Sfide Sociali",
+  "joined_success": "Ti sei unito alla sfida con successo!",
+  "join_error": "Impossibile unirsi alla sfida",
+  "your_progress": "I Tuoi Progressi",
+  "leaderboard": "Classifica",
+  "points": "punti"
 }

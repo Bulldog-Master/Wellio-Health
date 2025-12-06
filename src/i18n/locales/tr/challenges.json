@@ -12,5 +12,11 @@
   "participants": "Katılımcılar",
   "your_rank": "Sıralamanız",
   "challenge_complete": "Meydan Okuma Tamamlandı!",
-  "no_challenges": "Meydan okuma yok"
+  "no_challenges": "Meydan okuma yok",
+  "social_challenges": "Sosyal Meydan Okumalar",
+  "joined_success": "Meydan okumaya başarıyla katıldınız!",
+  "join_error": "Meydan okumaya katılınamadı",
+  "your_progress": "İlerlemeniz",
+  "leaderboard": "Liderlik Tablosu",
+  "points": "puan"
 }
