@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -11,6 +12,33 @@ serve(async (req) => {
   }
 
   try {
+    // Validate authentication
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader) {
+      console.error("No authorization header provided");
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+    const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
+
+    const token = authHeader.replace('Bearer ', '');
+    const { data: { user }, error: authError } = await supabaseAdmin.auth.getUser(token);
+
+    if (authError || !user) {
+      console.error("Authentication failed:", authError?.message);
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    console.log("Authenticated user:", user.id);
+
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");
@@ -22,7 +50,7 @@ serve(async (req) => {
       throw new Error("No audio data provided");
     }
 
-    console.log("Processing voice input for log type:", logType);
+    console.log("Processing voice input for log type:", logType, "user:", user.id);
 
     // Use Gemini to transcribe and extract structured data
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
@@ -114,7 +142,7 @@ Respond ONLY with valid JSON, no markdown.`
       parsedData = { transcription: content, error: "Could not parse structured data" };
     }
 
-    console.log("Voice data extracted:", parsedData);
+    console.log("Voice data extracted for user:", user.id, parsedData);
 
     return new Response(JSON.stringify({ 
       success: true,
