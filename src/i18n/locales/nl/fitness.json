@@ -71,5 +71,32 @@
   "intermediate": "Gevorderd",
   "advanced": "Expert",
   "date_time": "Datum & Tijd",
-  "recorded_at": "Opgenomen op"
+  "recorded_at": "Opgenomen op",
+
+  "progress_comparison": "Voortgangsvergelyking",
+  "progress_comparison_desc": "Vergelijk je voortgangsfoto's naast elkaar",
+  "compare_progress_photos": "Vergelijk je transformatie in de loop van de tijd",
+  "need_more_photos": "Meer Foto's Nodig",
+  "need_at_least_two_photos": "Upload minstens 2 voortgangsfoto's om de vergelijkingstool te gebruiken",
+  "photos_count": "Je hebt {{count}} foto('s)",
+  "before_photo": "Voor",
+  "after_photo": "Na",
+  "select_photo": "Selecteer foto",
+  "days_of_progress": "{{days}} dagen vooruitgang",
+  "swap_photos": "Foto's Verwisselen",
+
+  "voice_workout_logging": "Spraakgestuurde Training Logging",
+  "voice_logging_description": "Beschrijf je training en we loggen het voor je",
+  "tap_to_record": "Tik om te beginnen met opnemen",
+  "processing_voice": "Je stem wordt verwerkt...",
+  "voice_example": "Voorbeeld:",
+  "voice_example_text": "Ik heb net 45 minuten hardgelopen en 400 calorieën verbrand",
+  "you_said": "Je zei",
+  "extracted_workout": "Gedetecteerde Training",
+  "confirm_log": "Bevestigen & Loggen",
+  "retry": "Opnieuw Proberen",
+  "workout_logged": "Training Gelogd!",
+  "voice_workout_saved": "Je training is succesvol opgeslagen",
+  "failed_to_process_voice": "Spraakopname kon niet worden verwerkt",
+  "failed_to_save": "Opslaan mislukt"
 }

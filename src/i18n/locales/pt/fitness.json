@@ -139,5 +139,32 @@
   "workout_media_gallery": "Mídia de Treino",
   "view_workout_photos_videos": "Ver suas fotos e vídeos de treino",
   "date_time": "Data e hora",
-  "recorded_at": "Gravado em"
+  "recorded_at": "Gravado em",
+
+  "progress_comparison": "Comparação de Progresso",
+  "progress_comparison_desc": "Compare suas fotos de progresso lado a lado",
+  "compare_progress_photos": "Compare sua transformação ao longo do tempo",
+  "need_more_photos": "Precisa de Mais Fotos",
+  "need_at_least_two_photos": "Envie pelo menos 2 fotos de progresso para usar a ferramenta de comparação",
+  "photos_count": "Você tem {{count}} foto(s)",
+  "before_photo": "Antes",
+  "after_photo": "Depois",
+  "select_photo": "Selecionar foto",
+  "days_of_progress": "{{days}} dias de progresso",
+  "swap_photos": "Trocar Fotos",
+
+  "voice_workout_logging": "Registro por Voz",
+  "voice_logging_description": "Descreva seu treino e nós registraremos para você",
+  "tap_to_record": "Toque para começar a gravar",
+  "processing_voice": "Processando sua voz...",
+  "voice_example": "Exemplo:",
+  "voice_example_text": "Acabei de correr 45 minutos e queimei 400 calorias",
+  "you_said": "Você disse",
+  "extracted_workout": "Treino Extraído",
+  "confirm_log": "Confirmar e Registrar",
+  "retry": "Tentar Novamente",
+  "workout_logged": "Treino Registrado!",
+  "voice_workout_saved": "Seu treino foi salvo com sucesso",
+  "failed_to_process_voice": "Falha ao processar a gravação de voz",
+  "failed_to_save": "Falha ao salvar"
 }

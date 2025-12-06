@@ -139,5 +139,32 @@
   "workout_media_gallery": "训练媒体",
   "view_workout_photos_videos": "查看您的训练照片和视频",
   "date_time": "日期和时间",
-  "recorded_at": "录制于"
+  "recorded_at": "录制于",
+
+  "progress_comparison": "进度对比",
+  "progress_comparison_desc": "并排比较您的进度照片",
+  "compare_progress_photos": "对比您的变化历程",
+  "need_more_photos": "需要更多照片",
+  "need_at_least_two_photos": "上传至少2张进度照片以使用对比工具",
+  "photos_count": "您有 {{count}} 张照片",
+  "before_photo": "之前",
+  "after_photo": "之后",
+  "select_photo": "选择照片",
+  "days_of_progress": "{{days}} 天进度",
+  "swap_photos": "交换照片",
+
+  "voice_workout_logging": "语音记录训练",
+  "voice_logging_description": "描述您的训练，我们将为您记录",
+  "tap_to_record": "点击开始录音",
+  "processing_voice": "正在处理您的语音...",
+  "voice_example": "示例：",
+  "voice_example_text": "我刚跑了45分钟，燃烧了400卡路里",
+  "you_said": "您说的",
+  "extracted_workout": "识别的训练",
+  "confirm_log": "确认并记录",
+  "retry": "重试",
+  "workout_logged": "训练已记录！",
+  "voice_workout_saved": "您的训练已成功保存",
+  "failed_to_process_voice": "语音处理失败",
+  "failed_to_save": "保存失败"
 }

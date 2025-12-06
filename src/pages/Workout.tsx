@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import gymBackground from "@/assets/gym-background.jpg";
 import workoutHero from "@/assets/workout-hero.jpg";
 import { useTranslation } from "react-i18next";
+import VoiceWorkoutLogger from "@/components/workout/VoiceWorkoutLogger";
 
 interface ActivityLog {
   id: string;
@@ -2311,6 +2312,9 @@ const Workout = () => {
           </div>
         </div>
       </Card>
+
+      {/* Voice Workout Logger */}
+      <VoiceWorkoutLogger onWorkoutLogged={() => fetchActivityLogs()} />
 
       <Card className="p-6">
         <div className="flex items-center justify-between mb-4">

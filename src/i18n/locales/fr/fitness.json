@@ -139,5 +139,32 @@
   "workout_media_gallery": "Médias d'Entraînement",
   "view_workout_photos_videos": "Voir vos photos et vidéos d'entraînement",
   "date_time": "Date et heure",
-  "recorded_at": "Enregistré le"
+  "recorded_at": "Enregistré le",
+
+  "progress_comparison": "Comparaison de Progrès",
+  "progress_comparison_desc": "Comparez vos photos de progrès côte à côte",
+  "compare_progress_photos": "Comparez votre transformation au fil du temps",
+  "need_more_photos": "Plus de Photos Nécessaires",
+  "need_at_least_two_photos": "Téléchargez au moins 2 photos de progrès pour utiliser l'outil de comparaison",
+  "photos_count": "Vous avez {{count}} photo(s)",
+  "before_photo": "Avant",
+  "after_photo": "Après",
+  "select_photo": "Sélectionner une photo",
+  "days_of_progress": "{{days}} jours de progrès",
+  "swap_photos": "Échanger les Photos",
+
+  "voice_workout_logging": "Enregistrement Vocal",
+  "voice_logging_description": "Décrivez votre entraînement et nous l'enregistrerons pour vous",
+  "tap_to_record": "Appuyez pour commencer l'enregistrement",
+  "processing_voice": "Traitement de votre voix...",
+  "voice_example": "Exemple:",
+  "voice_example_text": "Je viens de courir 45 minutes et j'ai brûlé 400 calories",
+  "you_said": "Vous avez dit",
+  "extracted_workout": "Entraînement Extrait",
+  "confirm_log": "Confirmer et Enregistrer",
+  "retry": "Réessayer",
+  "workout_logged": "Entraînement Enregistré!",
+  "voice_workout_saved": "Votre entraînement a été enregistré avec succès",
+  "failed_to_process_voice": "Échec du traitement de l'enregistrement vocal",
+  "failed_to_save": "Échec de l'enregistrement"
 }

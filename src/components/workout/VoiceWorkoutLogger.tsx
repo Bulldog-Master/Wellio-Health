@@ -86,19 +86,24 @@ const VoiceWorkoutLogger = ({ onWorkoutLogged }: VoiceWorkoutLoggerProps) => {
       // Send to voice-to-text edge function
       const { data, error } = await supabase.functions.invoke('voice-to-text', {
         body: { 
-          audio: base64Audio,
-          type: 'workout'
+          audioBase64: base64Audio,
+          logType: 'workout'
         }
       });
 
       if (error) throw error;
 
-      if (data?.text) {
-        setTranscript(data.text);
-        
-        // Parse workout data from transcription
-        const workout = parseWorkoutFromText(data.text);
-        setExtractedData(workout);
+      if (data?.success && data?.data) {
+        const workout = data.data;
+        setTranscript(workout.notes || 'Voice workout logged');
+        setExtractedData({
+          activity_type: workout.activity_type || 'General',
+          duration_minutes: workout.duration_minutes || 30,
+          calories_burned: workout.calories_burned,
+          notes: workout.notes
+        });
+      } else if (data?.error) {
+        throw new Error(data.error);
       }
     } catch (error) {
       console.error('Error processing audio:', error);
@@ -110,43 +115,6 @@ const VoiceWorkoutLogger = ({ onWorkoutLogged }: VoiceWorkoutLoggerProps) => {
     } finally {
       setIsProcessing(false);
     }
-  };
-
-  const parseWorkoutFromText = (text: string): ExtractedWorkout => {
-    const lowerText = text.toLowerCase();
-    
-    // Extract activity type
-    const activityTypes = ['running', 'walking', 'cycling', 'swimming', 'yoga', 'weightlifting', 'hiit', 'cardio'];
-    let activity_type = 'general';
-    for (const type of activityTypes) {
-      if (lowerText.includes(type)) {
-        activity_type = type.charAt(0).toUpperCase() + type.slice(1);
-        break;
-      }
-    }
-
-    // Extract duration
-    let duration_minutes = 30; // default
-    const durationMatch = lowerText.match(/(\d+)\s*(minutes?|mins?|hours?|hrs?)/);
-    if (durationMatch) {
-      const value = parseInt(durationMatch[1]);
-      const unit = durationMatch[2];
-      duration_minutes = unit.startsWith('hour') || unit.startsWith('hr') ? value * 60 : value;
-    }
-
-    // Extract calories if mentioned
-    let calories_burned: number | undefined;
-    const caloriesMatch = lowerText.match(/(\d+)\s*calories?/);
-    if (caloriesMatch) {
-      calories_burned = parseInt(caloriesMatch[1]);
-    }
-
-    return {
-      activity_type,
-      duration_minutes,
-      calories_burned,
-      notes: text
-    };
   };
 
   const confirmAndSave = async () => {

@@ -126,5 +126,32 @@
   "workout_media_gallery": "Media Allenamento",
   "view_workout_photos_videos": "Visualizza le tue foto e video di allenamento",
   "date_time": "Data e ora",
-  "recorded_at": "Registrato il"
+  "recorded_at": "Registrato il",
+
+  "progress_comparison": "Confronto Progressi",
+  "progress_comparison_desc": "Confronta le tue foto dei progressi fianco a fianco",
+  "compare_progress_photos": "Confronta la tua trasformazione nel tempo",
+  "need_more_photos": "Servono Più Foto",
+  "need_at_least_two_photos": "Carica almeno 2 foto dei progressi per usare lo strumento di confronto",
+  "photos_count": "Hai {{count}} foto",
+  "before_photo": "Prima",
+  "after_photo": "Dopo",
+  "select_photo": "Seleziona foto",
+  "days_of_progress": "{{days}} giorni di progressi",
+  "swap_photos": "Scambia Foto",
+
+  "voice_workout_logging": "Registrazione Vocale Allenamento",
+  "voice_logging_description": "Descrivi il tuo allenamento e lo registreremo per te",
+  "tap_to_record": "Tocca per iniziare la registrazione",
+  "processing_voice": "Elaborazione della tua voce...",
+  "voice_example": "Esempio:",
+  "voice_example_text": "Ho appena corso 45 minuti e bruciato 400 calorie",
+  "you_said": "Hai detto",
+  "extracted_workout": "Allenamento Rilevato",
+  "confirm_log": "Conferma e Registra",
+  "retry": "Riprova",
+  "workout_logged": "Allenamento Registrato!",
+  "voice_workout_saved": "Il tuo allenamento è stato salvato con successo",
+  "failed_to_process_voice": "Impossibile elaborare la registrazione vocale",
+  "failed_to_save": "Salvataggio fallito"
 }
