@@ -19,5 +19,20 @@
   "fat": "脂質",
   "scan_again": "再スキャン",
   "add_to_log": "記録に追加",
-  "product_added": "製品が記録に追加されました"
+  "product_added": "製品が記録に追加されました",
+
+  "scan_receipt": "レシートをスキャン",
+  "receipt_instructions": "レストランのレシートを撮影して、食事を自動的に記録します",
+  "take_photo": "写真を撮る",
+  "upload_image": "画像をアップロード",
+  "analyze_receipt": "レシートを分析",
+  "analyzing": "分析中...",
+  "receipt_analyzed": "レシート分析完了",
+  "receipt_analyzed_desc": "レシートで{{count}}件の商品が見つかりました",
+  "receipt_analysis_failed_desc": "レシートを読み取れませんでした。より鮮明な画像で再試行してください。",
+  "select_items_to_log": "記録する項目を選択",
+  "selected_total": "選択済み ({{count}}件)",
+  "no_items_selected": "項目が選択されていません",
+  "select_at_least_one": "記録する項目を1つ以上選択してください",
+  "receipt_items_logged": "レシートから{{count}}件の項目を記録に追加しました"
 }

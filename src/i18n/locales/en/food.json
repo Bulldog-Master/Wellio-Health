@@ -215,5 +215,20 @@
   "scan_again": "Scan Again",
   "add_to_log": "Add to Log",
   "product_added": "Product added to food log",
-  "fat": "Fat"
+  "fat": "Fat",
+
+  "scan_receipt": "Scan Receipt",
+  "receipt_instructions": "Take a photo of your restaurant receipt to automatically log your meal",
+  "take_photo": "Take Photo",
+  "upload_image": "Upload Image",
+  "analyze_receipt": "Analyze Receipt",
+  "analyzing": "Analyzing...",
+  "receipt_analyzed": "Receipt Analyzed",
+  "receipt_analyzed_desc": "Found {{count}} items on your receipt",
+  "receipt_analysis_failed_desc": "Could not read the receipt. Please try again with a clearer image.",
+  "select_items_to_log": "Select items to log",
+  "selected_total": "Selected ({{count}} items)",
+  "no_items_selected": "No items selected",
+  "select_at_least_one": "Please select at least one item to log",
+  "receipt_items_logged": "{{count}} items from receipt added to log"
 }

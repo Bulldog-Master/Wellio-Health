@@ -15,7 +15,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { foodLogSchema, mealSearchSchema, validateAndSanitize } from "@/lib/validationSchemas";
 import { useTranslation } from "react-i18next";
 import { BarcodeScanner, ProductInfo } from "@/components/food/BarcodeScanner";
-
+import { ReceiptScanner, ReceiptItem } from "@/components/food/ReceiptScanner";
 interface MealLog {
   id: string;
   meal_type: string;
@@ -210,6 +210,53 @@ const FoodLog = () => {
       fat: product.fat || 0,
     });
     setShowBarcodeScanner(false);
+  };
+
+  const handleReceiptItems = async (items: ReceiptItem[]) => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        toast({
+          title: t('food:auth_required'),
+          description: t('food:auth_required_desc'),
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const loggedAtTimestamp = new Date(logDate).toISOString();
+      
+      for (const item of items) {
+        const { error } = await supabase
+          .from('nutrition_logs')
+          .insert({
+            user_id: user.id,
+            meal_type: selectedMeal,
+            food_name: item.name,
+            calories: item.calories * (item.quantity || 1),
+            protein_grams: item.protein * (item.quantity || 1),
+            carbs_grams: item.carbs * (item.quantity || 1),
+            fat_grams: item.fat * (item.quantity || 1),
+            logged_at: loggedAtTimestamp,
+          });
+
+        if (error) throw error;
+      }
+
+      toast({
+        title: t('food:food_logged'),
+        description: t('food:receipt_items_logged', { count: items.length }),
+      });
+
+      fetchMealLogs();
+    } catch (error) {
+      console.error('Error logging receipt items:', error);
+      toast({
+        title: t('food:error'),
+        description: t('food:failed_to_log_meal'),
+        variant: "destructive",
+      });
+    }
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -673,17 +720,20 @@ const FoodLog = () => {
           {selectedMeal !== 'fast' && (
             <>
               <div className="space-y-3">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between flex-wrap gap-2">
                   <Label htmlFor="search">{t('food:search_food_database')}</Label>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setShowBarcodeScanner(true)}
-                    className="gap-2"
-                  >
-                    <ScanBarcode className="w-4 h-4" />
-                    {t('food:scan_barcode')}
-                  </Button>
+                  <div className="flex gap-2">
+                    <ReceiptScanner onItemsConfirmed={handleReceiptItems} />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setShowBarcodeScanner(true)}
+                      className="gap-2"
+                    >
+                      <ScanBarcode className="w-4 h-4" />
+                      {t('food:scan_barcode')}
+                    </Button>
+                  </div>
                 </div>
                 <div className="flex gap-2">
                   <Input

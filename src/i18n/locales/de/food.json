@@ -19,5 +19,20 @@
   "fat": "Fett",
   "scan_again": "Erneut Scannen",
   "add_to_log": "Zum Tagebuch Hinzufügen",
-  "product_added": "Produkt zum Tagebuch hinzugefügt"
+  "product_added": "Produkt zum Tagebuch hinzugefügt",
+
+  "scan_receipt": "Quittung Scannen",
+  "receipt_instructions": "Fotografieren Sie Ihre Restaurantquittung, um Ihre Mahlzeit automatisch zu protokollieren",
+  "take_photo": "Foto Aufnehmen",
+  "upload_image": "Bild Hochladen",
+  "analyze_receipt": "Quittung Analysieren",
+  "analyzing": "Analysiere...",
+  "receipt_analyzed": "Quittung Analysiert",
+  "receipt_analyzed_desc": "{{count}} Artikel auf Ihrer Quittung gefunden",
+  "receipt_analysis_failed_desc": "Quittung konnte nicht gelesen werden. Bitte mit einem klareren Bild erneut versuchen.",
+  "select_items_to_log": "Artikel zum Protokollieren auswählen",
+  "selected_total": "Ausgewählt ({{count}} Artikel)",
+  "no_items_selected": "Keine Artikel ausgewählt",
+  "select_at_least_one": "Bitte wählen Sie mindestens einen Artikel zum Protokollieren",
+  "receipt_items_logged": "{{count}} Artikel von der Quittung protokolliert"
 }

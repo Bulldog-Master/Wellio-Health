@@ -19,5 +19,20 @@
   "fat": "脂肪",
   "scan_again": "重新扫描",
   "add_to_log": "添加到日志",
-  "product_added": "产品已添加到日志"
+  "product_added": "产品已添加到日志",
+
+  "scan_receipt": "扫描收据",
+  "receipt_instructions": "拍摄餐厅收据照片，自动记录您的餐食",
+  "take_photo": "拍照",
+  "upload_image": "上传图片",
+  "analyze_receipt": "分析收据",
+  "analyzing": "分析中...",
+  "receipt_analyzed": "收据已分析",
+  "receipt_analyzed_desc": "在您的收据上找到了 {{count}} 个项目",
+  "receipt_analysis_failed_desc": "无法读取收据。请使用更清晰的图片重试。",
+  "select_items_to_log": "选择要记录的项目",
+  "selected_total": "已选择 ({{count}} 项)",
+  "no_items_selected": "未选择任何项目",
+  "select_at_least_one": "请至少选择一个项目进行记录",
+  "receipt_items_logged": "已将收据中的 {{count}} 个项目添加到日志"
 }
