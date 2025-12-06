@@ -14,5 +14,42 @@
   "workout_history": "Workout History",
   "no_workouts": "No workout dey",
   "workout_complete": "Workout Don Complete!",
-  "great_job": "You do well!"
+  "great_job": "You do well!",
+  "activity_types": {
+    "running": "Run",
+    "walking": "Walk",
+    "cycling": "Bicycle",
+    "swimming": "Swim",
+    "weightlifting": "Lift Weight",
+    "yoga": "Yoga",
+    "hiit": "HIIT",
+    "pilates": "Pilates",
+    "crossfit": "CrossFit",
+    "boxing": "Box",
+    "dancing": "Dance",
+    "rowing": "Row",
+    "elliptical": "Elliptical",
+    "stairclimber": "Stair Climb",
+    "jumpRope": "Skipping Rope",
+    "stretching": "Stretch",
+    "calisthenics": "Body Weight",
+    "martialArts": "Martial Arts",
+    "rockClimbing": "Rock Climb",
+    "skiing": "Ski",
+    "snowboarding": "Snowboard",
+    "surfing": "Surf",
+    "golf": "Golf",
+    "tennis": "Tennis",
+    "basketball": "Basketball",
+    "soccer": "Football",
+    "volleyball": "Volleyball",
+    "hiking": "Hike",
+    "other": "Other"
+  },
+  "intensity_levels": {
+    "low": "Small",
+    "moderate": "Medium",
+    "high": "High",
+    "very_high": "Very High"
+  }
 }

@@ -14,5 +14,42 @@
   "workout_history": "వ్యాయామ చరిత్ర",
   "no_workouts": "వ్యాయామాలు లేవు",
   "workout_complete": "వ్యాయామం పూర్తయింది!",
-  "great_job": "అద్భుతమైన పని!"
+  "great_job": "అద్భుతమైన పని!",
+  "activity_types": {
+    "running": "పరుగు",
+    "walking": "నడక",
+    "cycling": "సైక్లింగ్",
+    "swimming": "ఈత",
+    "weightlifting": "బరువులెత్తడం",
+    "yoga": "యోగా",
+    "hiit": "HIIT",
+    "pilates": "పిలాటెస్",
+    "crossfit": "క్రాస్‌ఫిట్",
+    "boxing": "బాక్సింగ్",
+    "dancing": "నృత్యం",
+    "rowing": "రోయింగ్",
+    "elliptical": "ఎలిప్టికల్",
+    "stairclimber": "మెట్లెక్కడం",
+    "jumpRope": "తాడు దూకడం",
+    "stretching": "సాగదీయడం",
+    "calisthenics": "కాలిస్తెనిక్స్",
+    "martialArts": "మార్షల్ ఆర్ట్స్",
+    "rockClimbing": "రాతి ఎక్కడం",
+    "skiing": "స్కీయింగ్",
+    "snowboarding": "స్నోబోర్డింగ్",
+    "surfing": "సర్ఫింగ్",
+    "golf": "గోల్ఫ్",
+    "tennis": "టెన్నిస్",
+    "basketball": "బాస్కెట్‌బాల్",
+    "soccer": "ఫుట్‌బాల్",
+    "volleyball": "వాలీబాల్",
+    "hiking": "కొండ నడక",
+    "other": "ఇతర"
+  },
+  "intensity_levels": {
+    "low": "తక్కువ",
+    "moderate": "మధ్యస్థం",
+    "high": "అధికం",
+    "very_high": "చాలా అధికం"
+  }
 }

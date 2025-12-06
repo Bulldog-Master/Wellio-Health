@@ -14,5 +14,42 @@
   "workout_history": "ورزش کی تاریخ",
   "no_workouts": "کوئی ورزش نہیں",
   "workout_complete": "ورزش مکمل!",
-  "great_job": "شاباش!"
+  "great_job": "شاباش!",
+  "activity_types": {
+    "running": "دوڑنا",
+    "walking": "چلنا",
+    "cycling": "سائیکلنگ",
+    "swimming": "تیراکی",
+    "weightlifting": "وزن اٹھانا",
+    "yoga": "یوگا",
+    "hiit": "HIIT",
+    "pilates": "پلیٹس",
+    "crossfit": "کراس فٹ",
+    "boxing": "باکسنگ",
+    "dancing": "ناچنا",
+    "rowing": "قایق رانی",
+    "elliptical": "ایلپٹیکل",
+    "stairclimber": "سیڑھیاں چڑھنا",
+    "jumpRope": "رسی کودنا",
+    "stretching": "اسٹریچنگ",
+    "calisthenics": "کیلیسٹینکس",
+    "martialArts": "مارشل آرٹس",
+    "rockClimbing": "چٹان چڑھنا",
+    "skiing": "اسکیئنگ",
+    "snowboarding": "سنو بورڈنگ",
+    "surfing": "سرفنگ",
+    "golf": "گولف",
+    "tennis": "ٹینس",
+    "basketball": "باسکٹ بال",
+    "soccer": "فٹ بال",
+    "volleyball": "والی بال",
+    "hiking": "پہاڑی سیر",
+    "other": "دیگر"
+  },
+  "intensity_levels": {
+    "low": "کم",
+    "moderate": "درمیانی",
+    "high": "زیادہ",
+    "very_high": "بہت زیادہ"
+  }
 }
