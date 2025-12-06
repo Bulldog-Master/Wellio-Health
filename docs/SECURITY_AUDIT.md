@@ -111,10 +111,14 @@ The following security-aware accessor functions should be used in API responses:
 - No anonymous signups allowed
 - 2FA support via auth_secrets table
 
-### Data Encryption
-- Medical records use `encryption_version` column
-- Sensitive file URLs stored encrypted
-- Access tokens encrypted in wearable connections
+### Data Encryption (Quantum-Resistant)
+- **Algorithm:** AES-256-GCM with PBKDF2-SHA-512 key derivation (600k iterations)
+- **Strategy:** Server-side encryption via `medical-encrypt` edge function
+- **Coverage:** Medical records (`file_url_encrypted`), medical test results (`file_url_encrypted`)
+- **Versioning:** `encryption_version` column tracks algorithm versions for future migrations
+- **Audit:** All encrypt/decrypt operations logged to `medical_audit_log`
+- **Key Management:** `MEDICAL_ENCRYPTION_KEY` stored as Supabase secret
+- **Future-Proofing:** Architecture designed for migration to NIST post-quantum standards (CRYSTALS-Kyber, CRYSTALS-Dilithium)
 
 ### Data Validation
 - `validate_post_metadata()` - Blocks location/tracking data in posts
