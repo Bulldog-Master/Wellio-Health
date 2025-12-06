@@ -69,5 +69,7 @@
   "difficulty_level": "Уровень сложности",
   "beginner": "Начинающий",
   "intermediate": "Средний",
-  "advanced": "Продвинутый"
+  "advanced": "Продвинутый",
+  "date_time": "Дата и время",
+  "recorded_at": "Записано"
 }

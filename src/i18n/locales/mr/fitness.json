@@ -52,5 +52,7 @@
   "difficulty_level": "कठीण पातळी",
   "beginner": "नवशिक्या",
   "intermediate": "मध्यम",
-  "advanced": "प्रगत"
+  "advanced": "प्रगत",
+  "date_time": "तारीख आणि वेळ",
+  "recorded_at": "रेकॉर्ड केले"
 }

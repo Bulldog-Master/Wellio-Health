@@ -69,5 +69,7 @@
   "difficulty_level": "Difficulty level",
   "beginner": "Beginner",
   "intermediate": "Middle",
-  "advanced": "Advanced"
+  "advanced": "Advanced",
+  "date_time": "Date & Time",
+  "recorded_at": "Dem record am"
 }

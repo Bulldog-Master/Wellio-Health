@@ -137,5 +137,7 @@
   "rest": "repos",
   "pro_tips": "Conseils Pro",
   "workout_media_gallery": "Médias d'Entraînement",
-  "view_workout_photos_videos": "Voir vos photos et vidéos d'entraînement"
+  "view_workout_photos_videos": "Voir vos photos et vidéos d'entraînement",
+  "date_time": "Date et heure",
+  "recorded_at": "Enregistré le"
 }

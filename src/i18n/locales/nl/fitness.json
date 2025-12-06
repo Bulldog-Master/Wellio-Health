@@ -69,5 +69,7 @@
   "difficulty_level": "Moeilijkheidsgraad",
   "beginner": "Beginner",
   "intermediate": "Gevorderd",
-  "advanced": "Expert"
+  "advanced": "Expert",
+  "date_time": "Datum & Tijd",
+  "recorded_at": "Opgenomen op"
 }
