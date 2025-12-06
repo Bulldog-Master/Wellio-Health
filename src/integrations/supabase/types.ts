@@ -3039,6 +3039,33 @@ export type Database = {
         }
         Relationships: []
       }
+      rate_limit_tracking: {
+        Row: {
+          action_count: number | null
+          action_type: string
+          created_at: string | null
+          id: string
+          user_id: string
+          window_start: string | null
+        }
+        Insert: {
+          action_count?: number | null
+          action_type: string
+          created_at?: string | null
+          id?: string
+          user_id: string
+          window_start?: string | null
+        }
+        Update: {
+          action_count?: number | null
+          action_type?: string
+          created_at?: string | null
+          id?: string
+          user_id?: string
+          window_start?: string | null
+        }
+        Relationships: []
+      }
       reactions: {
         Row: {
           created_at: string
@@ -4798,9 +4825,19 @@ export type Database = {
         Args: { _profile_id: string; _viewer_id: string }
         Returns: boolean
       }
+      check_rate_limit: {
+        Args: {
+          _action_type: string
+          _max_actions: number
+          _user_id: string
+          _window_minutes: number
+        }
+        Returns: boolean
+      }
       cleanup_expired_shares: { Args: never; Returns: undefined }
       cleanup_old_error_logs: { Args: never; Returns: undefined }
       cleanup_old_security_logs: { Args: never; Returns: undefined }
+      cleanup_rate_limits: { Args: never; Returns: undefined }
       create_booking: {
         Args: {
           _booking_type: string
@@ -5015,6 +5052,15 @@ export type Database = {
       }
       redeem_reward: { Args: { _reward_id: string }; Returns: string }
       revoke_vip_pass: { Args: { _user_id: string }; Returns: boolean }
+      update_challenge_leaderboard: {
+        Args: {
+          _challenge_id: string
+          _points?: number
+          _progress: number
+          _user_id: string
+        }
+        Returns: undefined
+      }
       validate_share_token: {
         Args: { token: string }
         Returns: {
