@@ -867,7 +867,7 @@ export const allNamespaces = [
   'trainer', 'session', 'bookmarks', 'challenges_page', 'feed', 'groups', 
   'followers', 'schedule', 'seo', 'units', 'a11y', 'plurals', 'admin', 'premium', 
   'videos', 'chat', 'celebrations', 'news', 'sponsors', 'locations', 'ads', 
-  'products', 'recovery', 'addons', 'professional', 'payments'
+  'products', 'recovery', 'addons', 'professional', 'payments', 'legal', 'controls'
 ] as const;
 
 export type TranslationNamespace = typeof allNamespaces[number];
