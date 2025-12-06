@@ -71,5 +71,10 @@
   "in_cart": "Trong giỏ hàng",
   "add_to_cart": "Thêm vào giỏ",
   "proceed_to_checkout": "Tiến hành thanh toán",
-  "toggle_unit": "Nhấp để chuyển đổi đơn vị"
+  "toggle_unit": "Nhấp để chuyển đổi đơn vị",
+  "share": "Chia sẻ",
+  "share_settings": "Cài đặt chia sẻ",
+  "pleaseLoginToShare": "Đăng nhập để chia sẻ",
+  "contentShared": "Nội dung đã được chia sẻ",
+  "linkCopied": "Đã sao chép liên kết"
 }

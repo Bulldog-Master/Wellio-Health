@@ -71,5 +71,10 @@
   "in_cart": "कार्टमध्ये आहे",
   "add_to_cart": "कार्टमध्ये जोडा",
   "proceed_to_checkout": "चेकआउटवर जा",
-  "toggle_unit": "युनिट बदलण्यासाठी क्लिक करा"
+  "toggle_unit": "युनिट बदलण्यासाठी क्लिक करा",
+  "share": "शेअर करा",
+  "share_settings": "शेअर सेटिंग्ज",
+  "pleaseLoginToShare": "शेअर करण्यासाठी लॉगिन करा",
+  "contentShared": "सामग्री शेअर झाली",
+  "linkCopied": "लिंक कॉपी झाली"
 }
