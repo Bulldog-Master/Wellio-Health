@@ -4,5 +4,20 @@
   "search_food": "உணவு தேடு",
   "recent_foods": "சமீபத்திய உணவுகள்",
   "favorites": "விருப்பங்கள்",
-  "nutrition_info": "ஊட்டச்சத்து தகவல்"
+  "nutrition_info": "ஊட்டச்சத்து தகவல்",
+  "scan_barcode": "பார்கோடு ஸ்கேன் செய்",
+  "scanner_instructions": "பார்கோடை ஃபிரேமில் வைக்கவும்",
+  "scanner_camera_error": "கேமரா அணுக முடியவில்லை. அனுமதிகளை சரிபார்க்கவும்.",
+  "scanner_lookup_error": "பொருள் தேடுவதில் பிழை. மீண்டும் முயற்சிக்கவும்.",
+  "product_not_found": "தரவுத்தளத்தில் பொருள் கிடைக்கவில்லை",
+  "looking_up_product": "பொருள் தேடுகிறது...",
+  "unknown_product": "அறியப்படாத பொருள்",
+  "serving_size": "சர்விங் அளவு",
+  "calories": "கலோரிகள்",
+  "protein": "புரதம்",
+  "carbs": "கார்ப்ஸ்",
+  "fat": "கொழுப்பு",
+  "scan_again": "மீண்டும் ஸ்கேன் செய்",
+  "add_to_log": "பதிவில் சேர்",
+  "product_added": "பொருள் பதிவில் சேர்க்கப்பட்டது"
 }

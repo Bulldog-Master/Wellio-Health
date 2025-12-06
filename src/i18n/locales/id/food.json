@@ -4,5 +4,20 @@
   "search_food": "Cari makanan",
   "recent_foods": "Makanan terbaru",
   "favorites": "Favorit",
-  "nutrition_info": "Info nutrisi"
+  "nutrition_info": "Info nutrisi",
+  "scan_barcode": "Scan barcode",
+  "scanner_instructions": "Arahkan barcode ke dalam bingkai",
+  "scanner_camera_error": "Tidak bisa akses kamera. Periksa izin.",
+  "scanner_lookup_error": "Error mencari produk. Coba lagi.",
+  "product_not_found": "Produk tidak ditemukan di database",
+  "looking_up_product": "Mencari produk...",
+  "unknown_product": "Produk tidak dikenal",
+  "serving_size": "Ukuran porsi",
+  "calories": "Kalori",
+  "protein": "Protein",
+  "carbs": "Karbohidrat",
+  "fat": "Lemak",
+  "scan_again": "Scan lagi",
+  "add_to_log": "Tambah ke log",
+  "product_added": "Produk ditambahkan ke log"
 }

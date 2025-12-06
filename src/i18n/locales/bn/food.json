@@ -4,5 +4,20 @@
   "search_food": "খাবার খুঁজুন",
   "recent_foods": "সাম্প্রতিক খাবার",
   "favorites": "প্রিয়",
-  "nutrition_info": "পুষ্টি তথ্য"
+  "nutrition_info": "পুষ্টি তথ্য",
+  "scan_barcode": "বারকোড স্ক্যান করুন",
+  "scanner_instructions": "বারকোড ফ্রেমে রাখুন",
+  "scanner_camera_error": "ক্যামেরা অ্যাক্সেস করা যাচ্ছে না। অনুমতি চেক করুন।",
+  "scanner_lookup_error": "পণ্য খুঁজতে সমস্যা। আবার চেষ্টা করুন।",
+  "product_not_found": "ডেটাবেসে পণ্য পাওয়া যায়নি",
+  "looking_up_product": "পণ্য খুঁজছে...",
+  "unknown_product": "অজানা পণ্য",
+  "serving_size": "সার্ভিং সাইজ",
+  "calories": "ক্যালোরি",
+  "protein": "প্রোটিন",
+  "carbs": "কার্বস",
+  "fat": "ফ্যাট",
+  "scan_again": "আবার স্ক্যান করুন",
+  "add_to_log": "লগে যোগ করুন",
+  "product_added": "পণ্য লগে যোগ হয়েছে"
 }

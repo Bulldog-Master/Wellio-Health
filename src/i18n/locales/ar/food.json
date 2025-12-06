@@ -4,5 +4,20 @@
   "search_food": "البحث عن طعام",
   "recent_foods": "الطعام الأخير",
   "favorites": "المفضلة",
-  "nutrition_info": "معلومات غذائية"
+  "nutrition_info": "معلومات غذائية",
+  "scan_barcode": "مسح الباركود",
+  "scanner_instructions": "ضع الباركود في الإطار",
+  "scanner_camera_error": "لا يمكن الوصول إلى الكاميرا. تحقق من الأذونات.",
+  "scanner_lookup_error": "خطأ في البحث عن المنتج. حاول مرة أخرى.",
+  "product_not_found": "المنتج غير موجود في قاعدة البيانات",
+  "looking_up_product": "جاري البحث عن المنتج...",
+  "unknown_product": "منتج غير معروف",
+  "serving_size": "حجم الحصة",
+  "calories": "السعرات الحرارية",
+  "protein": "البروتين",
+  "carbs": "الكربوهيدرات",
+  "fat": "الدهون",
+  "scan_again": "مسح مرة أخرى",
+  "add_to_log": "إضافة إلى السجل",
+  "product_added": "تمت إضافة المنتج إلى السجل"
 }

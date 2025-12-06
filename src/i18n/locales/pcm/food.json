@@ -4,5 +4,20 @@
   "search_food": "Find chop",
   "recent_foods": "Recent chop",
   "favorites": "Favorites",
-  "nutrition_info": "Nutrition info"
+  "nutrition_info": "Nutrition info",
+  "scan_barcode": "Scan barcode",
+  "scanner_instructions": "Put barcode for inside di frame",
+  "scanner_camera_error": "E no fit access camera. Check permission.",
+  "scanner_lookup_error": "Error dey find product. Try again.",
+  "product_not_found": "Product no dey for database",
+  "looking_up_product": "Dey find product...",
+  "unknown_product": "Unknown product",
+  "serving_size": "Serving size",
+  "calories": "Calories",
+  "protein": "Protein",
+  "carbs": "Carbs",
+  "fat": "Fat",
+  "scan_again": "Scan again",
+  "add_to_log": "Add to log",
+  "product_added": "Product don add to log"
 }

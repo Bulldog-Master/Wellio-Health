@@ -4,5 +4,20 @@
   "search_food": "Tìm thức ăn",
   "recent_foods": "Thức ăn gần đây",
   "favorites": "Yêu thích",
-  "nutrition_info": "Thông tin dinh dưỡng"
+  "nutrition_info": "Thông tin dinh dưỡng",
+  "scan_barcode": "Quét mã vạch",
+  "scanner_instructions": "Đặt mã vạch trong khung",
+  "scanner_camera_error": "Không thể truy cập camera. Kiểm tra quyền.",
+  "scanner_lookup_error": "Lỗi tìm sản phẩm. Thử lại.",
+  "product_not_found": "Không tìm thấy sản phẩm trong cơ sở dữ liệu",
+  "looking_up_product": "Đang tìm sản phẩm...",
+  "unknown_product": "Sản phẩm không xác định",
+  "serving_size": "Khẩu phần",
+  "calories": "Calo",
+  "protein": "Protein",
+  "carbs": "Carbs",
+  "fat": "Chất béo",
+  "scan_again": "Quét lại",
+  "add_to_log": "Thêm vào nhật ký",
+  "product_added": "Sản phẩm đã thêm vào nhật ký"
 }
