@@ -2083,15 +2083,16 @@ const Workout = () => {
               onChange={(e) => setDistance(e.target.value)}
               className="mt-1.5"
             />
-            <div className="flex items-center justify-center gap-3 mt-3 p-3 rounded-lg bg-muted/50 border border-border">
-              <span className="text-sm font-medium text-foreground">{t('fitness:unit')}:</span>
-              <div className="flex rounded-lg overflow-hidden border-2 border-border">
+            {/* Distance Unit Toggle - km/mi */}
+            <div className="flex items-center justify-center gap-4 mt-3 p-4 rounded-xl bg-secondary/50 border-2 border-primary/30">
+              <span className="text-sm font-semibold text-foreground">{t('fitness:unit')}:</span>
+              <div className="inline-flex rounded-xl overflow-hidden border-2 border-primary shadow-lg" role="group" aria-label="Distance unit selector">
                 <button
                   type="button"
-                  className={`px-5 py-2.5 text-sm font-bold transition-all ${
+                  className={`px-6 py-3 text-base font-bold transition-all duration-200 min-w-[60px] ${
                     preferredUnit === 'metric' 
-                      ? 'bg-primary text-primary-foreground shadow-md' 
-                      : 'bg-card text-foreground hover:bg-muted'
+                      ? 'bg-primary text-primary-foreground shadow-inner' 
+                      : 'bg-background text-foreground hover:bg-primary/20 border-r border-primary/50'
                   }`}
                   onClick={() => updatePreferredUnit('metric')}
                   aria-pressed={preferredUnit === 'metric'}
@@ -2100,10 +2101,10 @@ const Workout = () => {
                 </button>
                 <button
                   type="button"
-                  className={`px-5 py-2.5 text-sm font-bold transition-all ${
+                  className={`px-6 py-3 text-base font-bold transition-all duration-200 min-w-[60px] ${
                     preferredUnit === 'imperial' 
-                      ? 'bg-primary text-primary-foreground shadow-md' 
-                      : 'bg-card text-foreground hover:bg-muted'
+                      ? 'bg-primary text-primary-foreground shadow-inner' 
+                      : 'bg-background text-foreground hover:bg-primary/20'
                   }`}
                   onClick={() => updatePreferredUnit('imperial')}
                   aria-pressed={preferredUnit === 'imperial'}
