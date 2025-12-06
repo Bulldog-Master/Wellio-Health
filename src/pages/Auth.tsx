@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Activity, Mail, Lock, User as UserIcon, Sparkles, Fingerprint, Eye, EyeOff, Shield, Key, HeartPulse, Zap, Gift, Users } from "lucide-react";
+import { Activity, Mail, Lock, User as UserIcon, Sparkles, Fingerprint, Eye, EyeOff, Shield, Key, HeartPulse, Zap, Gift, Users, Atom } from "lucide-react";
 
 // Pre-fetch and cache subscription status for instant Premium Hub display
 const prefetchSubscriptionStatus = async (userId: string): Promise<void> => {
@@ -55,6 +55,7 @@ import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { SecurityBadges, SecurityBadgeInline } from "@/components/SecurityBadges";
 // next-themes removed - using direct DOM manipulation for dark mode
 
 const Auth = () => {
@@ -817,11 +818,27 @@ const Auth = () => {
               {t('welcome_back')}
             </h2>
           </div>
-          <p className="text-base md:text-lg text-white/95 max-w-md drop-shadow-md">
-            {t('hero_message')}
-          </p>
+            <p className="text-base md:text-lg text-white/95 max-w-md drop-shadow-md mb-6">
+              {t('hero_message')}
+            </p>
+            
+            {/* Security Badges */}
+            <div className="flex flex-wrap gap-2">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-white text-xs">
+                <Atom className="h-3.5 w-3.5 text-cyan-300" />
+                <span>{t('quantum_resistant')}</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-white text-xs">
+                <Lock className="h-3.5 w-3.5 text-green-300" />
+                <span>{t('e2e_encryption')}</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-white text-xs">
+                <Shield className="h-3.5 w-3.5 text-purple-300" />
+                <span>{t('metadata_protection')}</span>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
 
       {/* Right side - Auth Form */}
       <div className="flex items-center justify-center p-8 bg-background">
