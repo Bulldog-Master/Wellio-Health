@@ -19,9 +19,12 @@
   "error_sending": "Erreur lors de l'envoi",
   "e2e_enabled": "Chiffrement de bout en bout activé",
   "e2e_enabled_desc": "Vos messages avec cet utilisateur seront désormais chiffrés",
+  "e2e_auto_enabled_desc": "Vos clés de chiffrement ont été générées. Les messages seront chiffrés lorsque le destinataire activera également E2E.",
   "e2e_failed": "Échec de l'activation du chiffrement",
   "e2e_failed_desc": "Impossible de générer les clés de chiffrement. Réessayez.",
   "e2e_active": "Chiffré E2E",
   "peer_no_e2e": "Destinataire non sécurisé",
-  "enable_e2e": "Activer E2E"
+  "enable_e2e": "Activer E2E",
+  "encrypted_message": "[Message chiffré]",
+  "decryption_failed": "Impossible de déchiffrer le message"
 }

@@ -19,9 +19,12 @@
   "error_sending": "Erro ao enviar",
   "e2e_enabled": "Criptografia ponta a ponta habilitada",
   "e2e_enabled_desc": "Suas mensagens com este usuário agora serão criptografadas",
+  "e2e_auto_enabled_desc": "Suas chaves de criptografia foram geradas. As mensagens serão criptografadas quando o destinatário também habilitar E2E.",
   "e2e_failed": "Falha ao habilitar criptografia",
   "e2e_failed_desc": "Não foi possível gerar as chaves de criptografia. Tente novamente.",
   "e2e_active": "Criptografado E2E",
   "peer_no_e2e": "Destinatário não protegido",
-  "enable_e2e": "Habilitar E2E"
+  "enable_e2e": "Habilitar E2E",
+  "encrypted_message": "[Mensagem criptografada]",
+  "decryption_failed": "Não foi possível descriptografar a mensagem"
 }

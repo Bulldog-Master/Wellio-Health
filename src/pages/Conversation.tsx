@@ -212,21 +212,36 @@ const Conversation = () => {
         throw new Error(`${t('messages:sending_too_fast')} ${Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 1000)}s`);
       }
 
-      // Build message data - encryption enforced at DB level when E2E is used
+      // Auto-generate keys if not present (E2E enforcement)
+      let localHasKeyPair = hasKeyPair;
+      if (!localHasKeyPair) {
+        const success = await generateAndStoreKeyPair();
+        if (success) {
+          localHasKeyPair = true;
+          toast({
+            title: t('messages:e2e_enabled'),
+            description: t('messages:e2e_auto_enabled_desc'),
+          });
+        }
+      }
+
+      // Build message data
       let messageData: any = {
         conversation_id: conversationId,
         sender_id: currentUserId,
-        content: content, // DB trigger replaces with '[encrypted]' when E2E is used
+        content: content,
       };
 
-      // If E2E is available, encrypt the message
-      if (canUseE2E && conversation?.other_user?.id) {
+      // If E2E is available (both parties have keys), encrypt the message
+      const peerKey = conversation?.other_user?.id ? await getPeerPublicKey(conversation.other_user.id) : null;
+      if (localHasKeyPair && peerKey && conversation?.other_user?.id) {
         try {
           const encrypted = await encryptForPeer(content, conversation.other_user.id);
           if (encrypted) {
             messageData.content_encrypted = encrypted;
             messageData.encryption_version = 2;
-            // Note: DB trigger will replace content with '[encrypted]' placeholder
+            messageData.is_encrypted = true;
+            // DB trigger will replace content with '[encrypted]' placeholder
           }
         } catch (error) {
           console.error('Failed to encrypt message:', error);

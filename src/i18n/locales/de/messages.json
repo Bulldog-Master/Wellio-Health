@@ -19,9 +19,12 @@
   "error_sending": "Fehler beim Senden",
   "e2e_enabled": "Ende-zu-Ende-Verschlüsselung aktiviert",
   "e2e_enabled_desc": "Deine Nachrichten mit diesem Benutzer werden jetzt verschlüsselt",
+  "e2e_auto_enabled_desc": "Deine Verschlüsselungsschlüssel wurden generiert. Nachrichten werden verschlüsselt, wenn der Empfänger E2E ebenfalls aktiviert.",
   "e2e_failed": "Verschlüsselung konnte nicht aktiviert werden",
   "e2e_failed_desc": "Verschlüsselungsschlüssel konnten nicht generiert werden. Bitte erneut versuchen.",
   "e2e_active": "E2E-verschlüsselt",
   "peer_no_e2e": "Empfänger nicht gesichert",
-  "enable_e2e": "E2E aktivieren"
+  "enable_e2e": "E2E aktivieren",
+  "encrypted_message": "[Verschlüsselte Nachricht]",
+  "decryption_failed": "Nachricht konnte nicht entschlüsselt werden"
 }
