@@ -1,0 +1,119 @@
+{
+  "privacy_policy_title": "Política de Privacidad",
+  "privacy_policy_description": "Conozca cómo Wellio recopila, utiliza y protege sus datos personales",
+  "terms_title": "Términos de Servicio",
+  "terms_description": "Términos y condiciones para usar Wellio",
+  "last_updated": "Última Actualización",
+  
+  "introduction": "Introducción",
+  "intro_text": "Bienvenido a Wellio. Estamos comprometidos a proteger su información personal y su derecho a la privacidad. Esta Política de Privacidad explica cómo recopilamos, usamos, divulgamos y protegemos su información cuando usa nuestra aplicación de fitness y bienestar.",
+  
+  "data_we_collect": "Datos que Recopilamos",
+  "personal_info": "Información Personal",
+  "collect_email": "Dirección de correo electrónico y credenciales de cuenta",
+  "collect_name": "Nombre e información del perfil",
+  "collect_profile": "Foto de perfil y preferencias",
+  
+  "health_data": "Datos de Salud y Fitness",
+  "collect_fitness": "Registros de entrenamiento, rutinas de ejercicio y datos de actividad",
+  "collect_nutrition": "Registros de nutrición, planes de comidas y preferencias dietéticas",
+  "collect_medical": "Registros médicos (encriptados con cifrado resistente a cuánticos)",
+  "collect_measurements": "Medidas corporales, peso y métricas de salud",
+  
+  "usage_data": "Datos de Uso",
+  "collect_device": "Información del dispositivo y tipo de navegador",
+  "collect_usage": "Patrones de uso de la aplicación e interacciones con funciones",
+  
+  "how_we_use": "Cómo Usamos Sus Datos",
+  "use_provide_service": "Para proporcionar y mantener nuestros servicios de seguimiento de fitness",
+  "use_personalize": "Para personalizar su experiencia y recomendaciones",
+  "use_ai_insights": "Para generar información impulsada por IA (con su consentimiento)",
+  "use_communicate": "Para comunicarnos con usted sobre actualizaciones y funciones",
+  "use_improve": "Para mejorar nuestros servicios y desarrollar nuevas funciones",
+  "use_security": "Para garantizar la seguridad de su cuenta y datos",
+  
+  "data_security": "Seguridad de Datos",
+  "security_intro": "Implementamos medidas de seguridad líderes en la industria para proteger sus datos:",
+  "security_encryption": "Cifrado resistente a cuánticos (ML-KEM-768) para registros médicos",
+  "security_e2e": "Cifrado de extremo a extremo para mensajes privados",
+  "security_2fa": "Autenticación de dos factores (TOTP y passkeys WebAuthn)",
+  "security_audit": "Registro de auditoría completo para acceso a datos sensibles",
+  "security_rls": "Políticas de seguridad a nivel de fila para aislamiento de datos",
+  
+  "your_rights": "Sus Derechos",
+  "rights_intro": "Bajo el RGPD y otras regulaciones de privacidad, tiene los siguientes derechos:",
+  "right_access": "Derecho de Acceso",
+  "right_access_desc": "Solicitar una copia de todos los datos personales que tenemos sobre usted",
+  "right_rectify": "Derecho de Rectificación",
+  "right_rectify_desc": "Solicitar la corrección de datos personales inexactos",
+  "right_erasure": "Derecho de Supresión",
+  "right_erasure_desc": "Solicitar la eliminación de sus datos personales",
+  "right_portability": "Derecho a la Portabilidad",
+  "right_portability_desc": "Recibir sus datos en un formato estructurado y legible por máquina",
+  "right_withdraw": "Derecho a Retirar el Consentimiento",
+  "right_withdraw_desc": "Retirar el consentimiento para el procesamiento de datos en cualquier momento",
+  
+  "data_retention": "Retención de Datos",
+  "retention_text": "Conservamos sus datos personales solo durante el tiempo necesario para cumplir con los propósitos descritos en esta política, o según lo exija la ley. Puede configurar su período de retención de datos preferido en la configuración de Controles de Privacidad.",
+  
+  "third_parties": "Servicios de Terceros",
+  "third_parties_intro": "Podemos compartir datos con terceros de confianza para propósitos específicos:",
+  "third_party_hosting": "Proveedores de infraestructura en la nube para almacenamiento de datos (encriptado en reposo)",
+  "third_party_payments": "Procesadores de pagos para facturación de suscripciones (cumple con PCI-DSS)",
+  "third_party_analytics": "Servicios de análisis (solo con su consentimiento)",
+  
+  "contact_us": "Contáctenos",
+  "contact_text": "Si tiene preguntas sobre esta Política de Privacidad o desea ejercer sus derechos, contáctenos en:",
+  
+  "acceptance_title": "Aceptación de Términos",
+  "acceptance_text": "Al acceder o usar Wellio, acepta estar sujeto a estos Términos de Servicio. Si no está de acuerdo con estos términos, por favor no use nuestros servicios.",
+  
+  "account_terms": "Términos de la Cuenta",
+  "account_age": "Debe tener al menos 13 años para usar este servicio",
+  "account_accurate": "Debe proporcionar información precisa y completa",
+  "account_secure": "Es responsable de mantener la seguridad de su cuenta",
+  "account_responsibility": "Es responsable de todas las actividades bajo su cuenta",
+  
+  "acceptable_use": "Uso Aceptable",
+  "acceptable_intro": "Acepta usar Wellio de manera responsable y de acuerdo con estas directrices:",
+  "use_lawful": "Usar el servicio solo para propósitos legales",
+  "use_accurate_data": "Proporcionar datos de salud y fitness precisos",
+  "use_respect": "Respetar a otros usuarios en las funciones comunitarias",
+  "use_no_spam": "No enviar spam o mensajes no solicitados",
+  
+  "prohibited": "Actividades Prohibidas",
+  "prohibited_illegal": "Participar en actividades ilegales o promover violencia",
+  "prohibited_impersonate": "Hacerse pasar por otros usuarios u organizaciones",
+  "prohibited_harassment": "Acosar, intimidar o amenazar a otros usuarios",
+  "prohibited_malware": "Subir malware o contenido malicioso",
+  "prohibited_scraping": "Raspado automatizado o extracción de datos",
+  "prohibited_circumvent": "Intentar eludir medidas de seguridad",
+  
+  "payments_title": "Suscripciones y Pagos",
+  "payments_intro": "Las funciones premium requieren una suscripción de pago:",
+  "payments_billing": "Las suscripciones se facturan de forma recurrente",
+  "payments_renewal": "Las suscripciones se renuevan automáticamente a menos que se cancelen antes de la fecha de renovación",
+  "payments_cancel": "Puede cancelar su suscripción en cualquier momento desde Configuración",
+  "payments_refund": "Los reembolsos se proporcionan de acuerdo con las leyes de protección al consumidor aplicables",
+  
+  "health_disclaimer": "Aviso de Salud",
+  "health_disclaimer_text": "IMPORTANTE: Wellio es una aplicación de seguimiento de fitness y bienestar, NO un dispositivo o servicio médico.",
+  "health_not_medical": "El contenido y las funciones son solo para fines informativos",
+  "health_consult": "Siempre consulte a profesionales de la salud calificados antes de tomar decisiones de salud",
+  "health_emergency": "En caso de emergencia médica, contacte a los servicios de emergencia inmediatamente",
+  
+  "intellectual_property": "Propiedad Intelectual",
+  "ip_text": "Todo el contenido, funciones y funcionalidad de Wellio son de nuestra propiedad y están protegidos por leyes internacionales de derechos de autor, marcas registradas y otras leyes de propiedad intelectual. Usted conserva la propiedad del contenido que crea, pero nos otorga una licencia para usarlo para proporcionar nuestros servicios.",
+  
+  "termination": "Terminación",
+  "termination_text": "Podemos terminar o suspender su cuenta en cualquier momento por violaciones de estos términos. Puede eliminar su cuenta en cualquier momento a través de los Controles de Privacidad. Tras la terminación, sus datos se eliminarán de acuerdo con nuestras políticas de retención.",
+  
+  "liability": "Limitación de Responsabilidad",
+  "liability_text": "En la máxima medida permitida por la ley, Wellio no será responsable de ningún daño indirecto, incidental, especial, consecuente o punitivo que surja de su uso del servicio. Nuestra responsabilidad total no excederá la cantidad que pagó por el servicio en los últimos 12 meses.",
+  
+  "governing_law": "Ley Aplicable",
+  "governing_law_text": "Estos Términos se regirán e interpretarán de acuerdo con las leyes de la jurisdicción en la que está registrada nuestra empresa, sin tener en cuenta los principios de conflicto de leyes.",
+  
+  "changes_title": "Cambios en Estos Términos",
+  "changes_text": "Nos reservamos el derecho de modificar estos términos en cualquier momento. Le notificaremos de cambios significativos por correo electrónico o notificación en la aplicación. El uso continuado del servicio después de los cambios constituye la aceptación de los nuevos términos."
+}
