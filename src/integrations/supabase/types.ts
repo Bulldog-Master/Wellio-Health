@@ -2946,6 +2946,36 @@ export type Database = {
         }
         Relationships: []
       }
+      progress_shares: {
+        Row: {
+          allowed_data: string[]
+          created_at: string | null
+          expires_at: string
+          id: string
+          is_revoked: boolean | null
+          share_token: string
+          user_id: string
+        }
+        Insert: {
+          allowed_data: string[]
+          created_at?: string | null
+          expires_at: string
+          id?: string
+          is_revoked?: boolean | null
+          share_token: string
+          user_id: string
+        }
+        Update: {
+          allowed_data?: string[]
+          created_at?: string | null
+          expires_at?: string
+          id?: string
+          is_revoked?: boolean | null
+          share_token?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       push_subscriptions: {
         Row: {
           created_at: string
@@ -4724,6 +4754,7 @@ export type Database = {
         Args: { _profile_id: string; _viewer_id: string }
         Returns: boolean
       }
+      cleanup_expired_shares: { Args: never; Returns: undefined }
       cleanup_old_error_logs: { Args: never; Returns: undefined }
       cleanup_old_security_logs: { Args: never; Returns: undefined }
       create_booking: {
@@ -4940,6 +4971,14 @@ export type Database = {
       }
       redeem_reward: { Args: { _reward_id: string }; Returns: string }
       revoke_vip_pass: { Args: { _user_id: string }; Returns: boolean }
+      validate_share_token: {
+        Args: { token: string }
+        Returns: {
+          allowed_data: string[]
+          is_valid: boolean
+          user_id: string
+        }[]
+      }
     }
     Enums: {
       app_role: "user" | "trainer" | "creator" | "admin"
