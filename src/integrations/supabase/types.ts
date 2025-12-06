@@ -4304,28 +4304,37 @@ export type Database = {
       user_encryption_keys: {
         Row: {
           created_at: string
+          encryption_version: number | null
           id: string
+          key_type: string | null
           key_version: number
           public_key: string
           public_key_created_at: string
+          signing_public_key: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
           created_at?: string
+          encryption_version?: number | null
           id?: string
+          key_type?: string | null
           key_version?: number
           public_key: string
           public_key_created_at?: string
+          signing_public_key?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
           created_at?: string
+          encryption_version?: number | null
           id?: string
+          key_type?: string | null
           key_version?: number
           public_key?: string
           public_key_created_at?: string
+          signing_public_key?: string | null
           updated_at?: string
           user_id?: string
         }
