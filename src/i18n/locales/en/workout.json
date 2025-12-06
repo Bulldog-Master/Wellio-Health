@@ -246,5 +246,9 @@
   "no_media_desc": "Upload photos and videos during your workouts to see them here",
   "media_deleted": "Media deleted",
   "error_loading_media": "Failed to load media",
-  "error_deleting_media": "Failed to delete media"
+  "error_deleting_media": "Failed to delete media",
+  "add_media": "Add Media",
+  "add_photos_videos": "Add photos or videos to your workout",
+  "files_selected": "files selected",
+  "clear_media": "Clear Media"
 }

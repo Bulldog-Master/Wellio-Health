@@ -137,6 +137,8 @@ const Workout = () => {
   const [timeOfDay, setTimeOfDay] = useState<string>('morning');
   const [viewFilter, setViewFilter] = useState<'today' | 'week' | 'month' | 'all'>('today');
   const [showReferralPrompt, setShowReferralPrompt] = useState(false);
+  const [pendingMediaFiles, setPendingMediaFiles] = useState<File[]>([]);
+  const [mediaPreviewUrls, setMediaPreviewUrls] = useState<string[]>([]);
   const handleBrowseApps = () => {
     const userAgent = navigator.userAgent || navigator.vendor;
     const isIOS = /iPad|iPhone|iPod/.test(userAgent);
