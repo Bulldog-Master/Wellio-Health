@@ -26,5 +26,10 @@
   "peer_no_e2e": "Destinatário não protegido",
   "enable_e2e": "Habilitar E2E",
   "encrypted_message": "[Mensagem criptografada]",
-  "decryption_failed": "Não foi possível descriptografar a mensagem"
+  "decryption_failed": "Não foi possível descriptografar a mensagem",
+  "mixnet_connected": "Mixnet conectado",
+  "mixnet_disconnected": "Mixnet desconectado",
+  "full_privacy": "Privacidade total: E2E + Mixnet",
+  "partial_privacy": "Criptografia E2E (sem mixnet)",
+  "initializing_privacy": "Inicializando privacidade..."
 }

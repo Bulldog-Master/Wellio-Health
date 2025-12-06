@@ -34,5 +34,10 @@
   "peer_no_e2e": "గ్రహీత భద్రపరచబడలేదు",
   "enable_e2e": "E2E ప్రారంభించండి",
   "encrypted_message": "[ఎన్‌క్రిప్టెడ్ సందేశం]",
-  "decryption_failed": "సందేశాన్ని డీక్రిప్ట్ చేయడం సాధ్యం కాలేదు"
+  "decryption_failed": "సందేశాన్ని డీక్రిప్ట్ చేయడం సాధ్యం కాలేదు",
+  "mixnet_connected": "Mixnet కనెక్ట్ అయింది",
+  "mixnet_disconnected": "Mixnet కనెక్ట్ కాలేదు",
+  "full_privacy": "పూర్తి గోప్యత: E2E + Mixnet",
+  "partial_privacy": "E2E ఎన్‌క్రిప్టెడ్ (mixnet లేదు)",
+  "initializing_privacy": "గోప్యత ప్రారంభమవుతోంది..."
 }

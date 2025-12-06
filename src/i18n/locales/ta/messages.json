@@ -34,5 +34,10 @@
   "peer_no_e2e": "பெறுநர் பாதுகாக்கப்படவில்லை",
   "enable_e2e": "E2E இயக்கு",
   "encrypted_message": "[என்க்ரிப்டட் செய்தி]",
-  "decryption_failed": "செய்தியை டிக்ரிப்ட் செய்ய இயலவில்லை"
+  "decryption_failed": "செய்தியை டிக்ரிப்ட் செய்ய இயலவில்லை",
+  "mixnet_connected": "Mixnet இணைக்கப்பட்டது",
+  "mixnet_disconnected": "Mixnet இணைக்கப்படவில்லை",
+  "full_privacy": "முழு தனியுரிமை: E2E + Mixnet",
+  "partial_privacy": "E2E என்க்ரிப்டட் (mixnet இல்லை)",
+  "initializing_privacy": "தனியுரிமை தொடங்குகிறது..."
 }

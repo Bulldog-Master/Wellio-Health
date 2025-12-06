@@ -12,5 +12,10 @@
   "e2e_encrypted": "এন্ড-টু-এন্ড এনক্রিপ্টেড",
   "encryption_enabled": "এনক্রিপশন সক্রিয়",
   "generating_keys": "এনক্রিপশন কী তৈরি হচ্ছে...",
-  "decryption_failed": "বার্তা ডিক্রিপ্ট করা যায়নি"
+  "decryption_failed": "বার্তা ডিক্রিপ্ট করা যায়নি",
+  "mixnet_connected": "Mixnet সংযুক্ত",
+  "mixnet_disconnected": "Mixnet সংযুক্ত নয়",
+  "full_privacy": "সম্পূর্ণ গোপনীয়তা: E2E + Mixnet",
+  "partial_privacy": "E2E এনক্রিপ্টেড (mixnet নেই)",
+  "initializing_privacy": "গোপনীয়তা আরম্ভ হচ্ছে..."
 }

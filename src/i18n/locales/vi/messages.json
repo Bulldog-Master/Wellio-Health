@@ -34,5 +34,10 @@
   "peer_no_e2e": "Người nhận chưa bảo mật",
   "enable_e2e": "Bật E2E",
   "encrypted_message": "[Tin nhắn đã mã hóa]",
-  "decryption_failed": "Không thể giải mã tin nhắn"
+  "decryption_failed": "Không thể giải mã tin nhắn",
+  "mixnet_connected": "Mixnet đã kết nối",
+  "mixnet_disconnected": "Mixnet chưa kết nối",
+  "full_privacy": "Quyền riêng tư đầy đủ: E2E + Mixnet",
+  "partial_privacy": "Mã hóa E2E (không có mixnet)",
+  "initializing_privacy": "Đang khởi tạo quyền riêng tư..."
 }

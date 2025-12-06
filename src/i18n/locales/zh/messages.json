@@ -26,5 +26,10 @@
   "peer_no_e2e": "收件人未加密",
   "enable_e2e": "启用E2E",
   "encrypted_message": "[加密消息]",
-  "decryption_failed": "无法解密消息"
+  "decryption_failed": "无法解密消息",
+  "mixnet_connected": "Mixnet 已连接",
+  "mixnet_disconnected": "Mixnet 未连接",
+  "full_privacy": "完全隐私：E2E + Mixnet",
+  "partial_privacy": "E2E加密（无Mixnet）",
+  "initializing_privacy": "正在初始化隐私..."
 }

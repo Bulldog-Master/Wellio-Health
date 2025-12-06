@@ -1,7 +1,7 @@
 {
   "messages": "الرسائل",
   "new_message": "رسالة جديدة",
-  "send_message": "إرسال رسالة",
+  "send_message": "إرسال الرسالة",
   "type_message": "اكتب رسالة...",
   "no_messages": "لا توجد رسائل",
   "no_conversations": "لا توجد محادثات",
@@ -12,5 +12,10 @@
   "e2e_encrypted": "مشفرة من طرف إلى طرف",
   "encryption_enabled": "التشفير مفعل",
   "generating_keys": "جاري إنشاء مفاتيح التشفير...",
-  "decryption_failed": "فشل فك تشفير الرسالة"
+  "decryption_failed": "فشل فك تشفير الرسالة",
+  "mixnet_connected": "Mixnet متصل",
+  "mixnet_disconnected": "Mixnet غير متصل",
+  "full_privacy": "خصوصية كاملة: E2E + Mixnet",
+  "partial_privacy": "تشفير E2E (بدون mixnet)",
+  "initializing_privacy": "جاري تهيئة الخصوصية..."
 }

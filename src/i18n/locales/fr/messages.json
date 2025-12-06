@@ -26,5 +26,10 @@
   "peer_no_e2e": "Destinataire non sécurisé",
   "enable_e2e": "Activer E2E",
   "encrypted_message": "[Message chiffré]",
-  "decryption_failed": "Impossible de déchiffrer le message"
+  "decryption_failed": "Impossible de déchiffrer le message",
+  "mixnet_connected": "Mixnet connecté",
+  "mixnet_disconnected": "Mixnet déconnecté",
+  "full_privacy": "Confidentialité totale : E2E + Mixnet",
+  "partial_privacy": "Chiffrement E2E (sans mixnet)",
+  "initializing_privacy": "Initialisation de la confidentialité..."
 }

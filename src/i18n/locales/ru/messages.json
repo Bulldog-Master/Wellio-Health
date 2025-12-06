@@ -4,7 +4,7 @@
   "send_message": "Отправить сообщение",
   "type_message": "Введите сообщение...",
   "no_messages": "Нет сообщений",
-  "no_conversations": "Нет диалогов",
+  "no_conversations": "Нет разговоров",
   "search_messages": "Поиск сообщений",
   "delete_message": "Удалить сообщение",
   "message_sent": "Сообщение отправлено",
@@ -12,5 +12,10 @@
   "e2e_encrypted": "Сквозное шифрование",
   "encryption_enabled": "Шифрование включено",
   "generating_keys": "Генерация ключей шифрования...",
-  "decryption_failed": "Не удалось расшифровать сообщение"
+  "decryption_failed": "Не удалось расшифровать сообщение",
+  "mixnet_connected": "Mixnet подключён",
+  "mixnet_disconnected": "Mixnet не подключён",
+  "full_privacy": "Полная конфиденциальность: E2E + Mixnet",
+  "partial_privacy": "E2E шифрование (без Mixnet)",
+  "initializing_privacy": "Инициализация конфиденциальности..."
 }
