@@ -13,5 +13,15 @@
   "offline": "Hors ligne",
   "typing": "Écrit...",
   "you": "Vous",
-  "anonymous": "Anonyme"
+  "anonymous": "Anonyme",
+  "no_messages_yet": "Pas encore de messages. Commencez la conversation!",
+  "sending_too_fast": "Envoi trop rapide. Veuillez patienter",
+  "error_sending": "Erreur lors de l'envoi",
+  "e2e_enabled": "Chiffrement de bout en bout activé",
+  "e2e_enabled_desc": "Vos messages avec cet utilisateur seront désormais chiffrés",
+  "e2e_failed": "Échec de l'activation du chiffrement",
+  "e2e_failed_desc": "Impossible de générer les clés de chiffrement. Réessayez.",
+  "e2e_active": "Chiffré E2E",
+  "peer_no_e2e": "Destinataire non sécurisé",
+  "enable_e2e": "Activer E2E"
 }

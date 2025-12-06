@@ -13,5 +13,15 @@
   "offline": "Fuera de línea",
   "typing": "Escribiendo...",
   "you": "Tú",
-  "anonymous": "Anónimo"
+  "anonymous": "Anónimo",
+  "no_messages_yet": "Sin mensajes aún. ¡Inicia la conversación!",
+  "sending_too_fast": "Enviando mensajes demasiado rápido. Por favor espera",
+  "error_sending": "Error al enviar mensaje",
+  "e2e_enabled": "Cifrado de extremo a extremo habilitado",
+  "e2e_enabled_desc": "Tus mensajes con este usuario ahora serán cifrados",
+  "e2e_failed": "Error al habilitar cifrado",
+  "e2e_failed_desc": "No se pudieron generar las claves de cifrado. Intenta de nuevo.",
+  "e2e_active": "Cifrado E2E",
+  "peer_no_e2e": "Destinatario sin cifrado",
+  "enable_e2e": "Habilitar E2E"
 }
