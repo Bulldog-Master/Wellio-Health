@@ -215,5 +215,20 @@
   "scan_again": "Escanear de Nuevo",
   "add_to_log": "Agregar al Registro",
   "product_added": "Producto agregado al registro",
-  "fat": "Grasa"
+  "fat": "Grasa",
+
+  "scan_receipt": "Escanear Recibo",
+  "receipt_instructions": "Toma una foto de tu recibo de restaurante para registrar automáticamente tu comida",
+  "take_photo": "Tomar Foto",
+  "upload_image": "Subir Imagen",
+  "analyze_receipt": "Analizar Recibo",
+  "analyzing": "Analizando...",
+  "receipt_analyzed": "Recibo Analizado",
+  "receipt_analyzed_desc": "Se encontraron {{count}} artículos en tu recibo",
+  "receipt_analysis_failed_desc": "No se pudo leer el recibo. Por favor intenta con una imagen más clara.",
+  "select_items_to_log": "Seleccionar artículos para registrar",
+  "selected_total": "Seleccionado ({{count}} artículos)",
+  "no_items_selected": "Ningún artículo seleccionado",
+  "select_at_least_one": "Por favor selecciona al menos un artículo para registrar",
+  "receipt_items_logged": "{{count}} artículos del recibo agregados al registro"
 }

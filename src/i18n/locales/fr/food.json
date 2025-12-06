@@ -19,5 +19,20 @@
   "fat": "Lipides",
   "scan_again": "Scanner à Nouveau",
   "add_to_log": "Ajouter au Journal",
-  "product_added": "Produit ajouté au journal"
+  "product_added": "Produit ajouté au journal",
+
+  "scan_receipt": "Scanner le Reçu",
+  "receipt_instructions": "Prenez une photo de votre reçu de restaurant pour enregistrer automatiquement votre repas",
+  "take_photo": "Prendre Photo",
+  "upload_image": "Télécharger Image",
+  "analyze_receipt": "Analyser le Reçu",
+  "analyzing": "Analyse en cours...",
+  "receipt_analyzed": "Reçu Analysé",
+  "receipt_analyzed_desc": "{{count}} articles trouvés sur votre reçu",
+  "receipt_analysis_failed_desc": "Impossible de lire le reçu. Veuillez réessayer avec une image plus claire.",
+  "select_items_to_log": "Sélectionner les articles à enregistrer",
+  "selected_total": "Sélectionné ({{count}} articles)",
+  "no_items_selected": "Aucun article sélectionné",
+  "select_at_least_one": "Veuillez sélectionner au moins un article à enregistrer",
+  "receipt_items_logged": "{{count}} articles du reçu ajoutés au journal"
 }

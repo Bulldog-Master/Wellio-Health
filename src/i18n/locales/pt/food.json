@@ -19,5 +19,20 @@
   "fat": "Gordura",
   "scan_again": "Escanear Novamente",
   "add_to_log": "Adicionar ao Registro",
-  "product_added": "Produto adicionado ao registro"
+  "product_added": "Produto adicionado ao registro",
+
+  "scan_receipt": "Escanear Recibo",
+  "receipt_instructions": "Tire uma foto do seu recibo de restaurante para registrar automaticamente sua refeição",
+  "take_photo": "Tirar Foto",
+  "upload_image": "Enviar Imagem",
+  "analyze_receipt": "Analisar Recibo",
+  "analyzing": "Analisando...",
+  "receipt_analyzed": "Recibo Analisado",
+  "receipt_analyzed_desc": "{{count}} itens encontrados no seu recibo",
+  "receipt_analysis_failed_desc": "Não foi possível ler o recibo. Tente novamente com uma imagem mais clara.",
+  "select_items_to_log": "Selecionar itens para registrar",
+  "selected_total": "Selecionado ({{count}} itens)",
+  "no_items_selected": "Nenhum item selecionado",
+  "select_at_least_one": "Por favor selecione pelo menos um item para registrar",
+  "receipt_items_logged": "{{count}} itens do recibo adicionados ao registro"
 }

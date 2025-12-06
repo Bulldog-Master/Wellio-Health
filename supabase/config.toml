@@ -71,3 +71,6 @@ verify_jwt = true
 
 [functions.medical-encrypt]
 verify_jwt = true
+
+[functions.analyze-receipt]
+verify_jwt = true
