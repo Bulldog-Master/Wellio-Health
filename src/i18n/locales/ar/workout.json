@@ -14,5 +14,18 @@
   "workout_history": "سجل التمارين",
   "no_workouts": "لا توجد تمارين",
   "workout_complete": "اكتمل التمرين!",
-  "great_job": "عمل رائع!"
+  "great_job": "عمل رائع!",
+  "running": "الجري",
+  "cycling": "ركوب الدراجة",
+  "swimming": "السباحة",
+  "walking": "المشي",
+  "hiking": "التنزه",
+  "weightlifting": "رفع الأثقال",
+  "yoga": "اليوغا",
+  "hiit": "تمارين عالية الكثافة",
+  "other": "أخرى",
+  "low": "منخفض",
+  "medium": "متوسط",
+  "high": "عالي",
+  "intense": "مكثف"
 }

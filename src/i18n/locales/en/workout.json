@@ -228,5 +228,14 @@
   "https_placeholder": "https://...",
   "app_icon_url_optional": "App Icon URL (optional)",
   "cancel": "Cancel",
-  "save_app": "Save App"
+  "save_app": "Save App",
+  "running": "Running",
+  "cycling": "Cycling",
+  "swimming": "Swimming",
+  "walking": "Walking",
+  "hiking": "Hiking",
+  "weightlifting": "Weightlifting",
+  "yoga": "Yoga",
+  "hiit": "HIIT",
+  "other": "Other"
 }

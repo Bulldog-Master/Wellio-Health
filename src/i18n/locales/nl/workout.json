@@ -14,5 +14,18 @@
   "workout_history": "Trainingsgeschiedenis",
   "no_workouts": "Geen trainingen",
   "workout_complete": "Training Voltooid!",
-  "great_job": "Goed Gedaan!"
+  "great_job": "Goed Gedaan!",
+  "running": "Hardlopen",
+  "cycling": "Fietsen",
+  "swimming": "Zwemmen",
+  "walking": "Wandelen",
+  "hiking": "Hiken",
+  "weightlifting": "Gewichtheffen",
+  "yoga": "Yoga",
+  "hiit": "HIIT",
+  "other": "Anders",
+  "low": "Laag",
+  "medium": "Gemiddeld",
+  "high": "Hoog",
+  "intense": "Intensief"
 }

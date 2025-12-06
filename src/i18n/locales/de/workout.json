@@ -209,5 +209,14 @@
   "category_placeholder": "z.B. Tracking, Training",
   "app_url_optional": "App-URL oder Store-Link (optional)",
   "https_placeholder": "https://...",
-  "app_icon_url_optional": "App-Icon-URL (optional)"
+  "app_icon_url_optional": "App-Icon-URL (optional)",
+  "running": "Laufen",
+  "cycling": "Radfahren",
+  "swimming": "Schwimmen",
+  "walking": "Gehen",
+  "hiking": "Wandern",
+  "weightlifting": "Gewichtheben",
+  "yoga": "Yoga",
+  "hiit": "HIIT",
+  "other": "Andere"
 }

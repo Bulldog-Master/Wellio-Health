@@ -14,5 +14,18 @@
   "workout_history": "वर्कआउट इतिहास",
   "no_workouts": "कोई वर्कआउट नहीं",
   "workout_complete": "वर्कआउट पूर्ण!",
-  "great_job": "शानदार काम!"
+  "great_job": "शानदार काम!",
+  "running": "दौड़ना",
+  "cycling": "साइकिलिंग",
+  "swimming": "तैराकी",
+  "walking": "चलना",
+  "hiking": "लंबी पैदल यात्रा",
+  "weightlifting": "भारोत्तोलन",
+  "yoga": "योग",
+  "hiit": "HIIT",
+  "other": "अन्य",
+  "low": "कम",
+  "medium": "मध्यम",
+  "high": "उच्च",
+  "intense": "तीव्र"
 }

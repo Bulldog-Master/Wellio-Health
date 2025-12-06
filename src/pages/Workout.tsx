@@ -1985,23 +1985,22 @@ const Workout = () => {
         <div className="space-y-4">
           <div>
             <Label htmlFor="exercise">{t('activity_type')}</Label>
-            <select
-              id="exercise"
-              value={exercise}
-              onChange={(e) => setExercise(e.target.value)}
-              className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 mt-1.5"
-            >
-              <option value="">{t('select_activity_type')}</option>
-              <option value="Running">Running</option>
-              <option value="Cycling">Cycling</option>
-              <option value="Swimming">Swimming</option>
-              <option value="Walking">Walking</option>
-              <option value="Hiking">Hiking</option>
-              <option value="Weightlifting">Weightlifting</option>
-              <option value="Yoga">Yoga</option>
-              <option value="HIIT">HIIT</option>
-              <option value="Other">Other</option>
-            </select>
+            <Select value={exercise} onValueChange={setExercise}>
+              <SelectTrigger className="mt-1.5">
+                <SelectValue placeholder={t('select_activity_type')} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Running">{t('running')}</SelectItem>
+                <SelectItem value="Cycling">{t('cycling')}</SelectItem>
+                <SelectItem value="Swimming">{t('swimming')}</SelectItem>
+                <SelectItem value="Walking">{t('walking')}</SelectItem>
+                <SelectItem value="Hiking">{t('hiking')}</SelectItem>
+                <SelectItem value="Weightlifting">{t('weightlifting')}</SelectItem>
+                <SelectItem value="Yoga">{t('yoga')}</SelectItem>
+                <SelectItem value="HIIT">{t('hiit')}</SelectItem>
+                <SelectItem value="Other">{t('other')}</SelectItem>
+              </SelectContent>
+            </Select>
             <Input
               className="mt-2"
               placeholder={t('or_type_custom_activity')}
@@ -2050,17 +2049,17 @@ const Workout = () => {
             </div>
             <div>
               <Label htmlFor="intensity">{t('intensity_level')}</Label>
-              <select
-                id="intensity"
-                value={intensity}
-                onChange={(e) => setIntensity(e.target.value)}
-                className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 mt-1.5"
-              >
-                <option value="low">{t('low')}</option>
-                <option value="medium">{t('medium')}</option>
-                <option value="high">{t('high')}</option>
-                <option value="intense">{t('intense')}</option>
-              </select>
+              <Select value={intensity} onValueChange={setIntensity}>
+                <SelectTrigger className="mt-1.5">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="low">{t('low')}</SelectItem>
+                  <SelectItem value="medium">{t('medium')}</SelectItem>
+                  <SelectItem value="high">{t('high')}</SelectItem>
+                  <SelectItem value="intense">{t('intense')}</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
           
@@ -2084,30 +2083,34 @@ const Workout = () => {
               onChange={(e) => setDistance(e.target.value)}
               className="mt-1.5"
             />
-            <div className="flex items-center justify-center gap-2 mt-3 p-2 rounded-lg bg-muted">
-              <span className="text-sm text-muted-foreground mr-2">Unit:</span>
-              <button
-                type="button"
-                className={`px-6 py-2 text-sm font-bold rounded-md transition-all border-2 ${
-                  preferredUnit === 'metric' 
-                    ? 'bg-primary text-primary-foreground border-primary' 
-                    : 'bg-background text-foreground border-border hover:border-primary/50'
-                }`}
-                onClick={() => updatePreferredUnit('metric')}
-              >
-                km
-              </button>
-              <button
-                type="button"
-                className={`px-6 py-2 text-sm font-bold rounded-md transition-all border-2 ${
-                  preferredUnit === 'imperial' 
-                    ? 'bg-primary text-primary-foreground border-primary' 
-                    : 'bg-background text-foreground border-border hover:border-primary/50'
-                }`}
-                onClick={() => updatePreferredUnit('imperial')}
-              >
-                mi
-              </button>
+            <div className="flex items-center justify-center gap-3 mt-3 p-3 rounded-lg bg-muted/50 border border-border">
+              <span className="text-sm font-medium text-foreground">{t('fitness:unit')}:</span>
+              <div className="flex rounded-lg overflow-hidden border-2 border-border">
+                <button
+                  type="button"
+                  className={`px-5 py-2.5 text-sm font-bold transition-all ${
+                    preferredUnit === 'metric' 
+                      ? 'bg-primary text-primary-foreground shadow-md' 
+                      : 'bg-card text-foreground hover:bg-muted'
+                  }`}
+                  onClick={() => updatePreferredUnit('metric')}
+                  aria-pressed={preferredUnit === 'metric'}
+                >
+                  km
+                </button>
+                <button
+                  type="button"
+                  className={`px-5 py-2.5 text-sm font-bold transition-all ${
+                    preferredUnit === 'imperial' 
+                      ? 'bg-primary text-primary-foreground shadow-md' 
+                      : 'bg-card text-foreground hover:bg-muted'
+                  }`}
+                  onClick={() => updatePreferredUnit('imperial')}
+                  aria-pressed={preferredUnit === 'imperial'}
+                >
+                  mi
+                </button>
+              </div>
             </div>
           </div>
 

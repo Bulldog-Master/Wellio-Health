@@ -14,5 +14,18 @@
   "workout_history": "锻炼历史",
   "no_workouts": "尚无锻炼记录",
   "workout_complete": "锻炼完成！",
-  "great_job": "干得好！"
+  "great_job": "干得好！",
+  "running": "跑步",
+  "cycling": "骑行",
+  "swimming": "游泳",
+  "walking": "步行",
+  "hiking": "徒步",
+  "weightlifting": "举重",
+  "yoga": "瑜伽",
+  "hiit": "高强度间歇训练",
+  "other": "其他",
+  "low": "低",
+  "medium": "中",
+  "high": "高",
+  "intense": "高强度"
 }

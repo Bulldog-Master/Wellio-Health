@@ -14,5 +14,18 @@
   "workout_history": "Cronologia Allenamenti",
   "no_workouts": "Nessun allenamento",
   "workout_complete": "Allenamento Completato!",
-  "great_job": "Ottimo Lavoro!"
+  "great_job": "Ottimo Lavoro!",
+  "running": "Corsa",
+  "cycling": "Ciclismo",
+  "swimming": "Nuoto",
+  "walking": "Camminata",
+  "hiking": "Escursionismo",
+  "weightlifting": "Sollevamento Pesi",
+  "yoga": "Yoga",
+  "hiit": "HIIT",
+  "other": "Altro",
+  "low": "Basso",
+  "medium": "Medio",
+  "high": "Alto",
+  "intense": "Intenso"
 }

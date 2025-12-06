@@ -14,5 +14,18 @@
   "workout_history": "Lịch sử bài tập",
   "no_workouts": "Không có bài tập",
   "workout_complete": "Hoàn thành bài tập!",
-  "great_job": "Tuyệt vời!"
+  "great_job": "Tuyệt vời!",
+  "running": "Chạy bộ",
+  "cycling": "Đạp xe",
+  "swimming": "Bơi lội",
+  "walking": "Đi bộ",
+  "hiking": "Đi bộ đường dài",
+  "weightlifting": "Cử tạ",
+  "yoga": "Yoga",
+  "hiit": "HIIT",
+  "other": "Khác",
+  "low": "Thấp",
+  "medium": "Trung bình",
+  "high": "Cao",
+  "intense": "Cường độ cao"
 }
