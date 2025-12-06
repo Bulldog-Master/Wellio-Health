@@ -31,5 +31,10 @@
   "peer_no_e2e": "Alıcı güvenli değil",
   "enable_e2e": "E2E Etkinleştir",
   "encrypted_message": "[Şifreli mesaj]",
-  "decryption_failed": "Mesajın şifresi çözülemedi"
+  "decryption_failed": "Mesajın şifresi çözülemedi",
+  "mixnet_connected": "Mixnet bağlı",
+  "mixnet_disconnected": "Mixnet bağlı değil",
+  "full_privacy": "Tam gizlilik: E2E + Mixnet",
+  "partial_privacy": "E2E şifreli (mixnet yok)",
+  "initializing_privacy": "Gizlilik başlatılıyor..."
 }

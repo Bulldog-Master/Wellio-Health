@@ -34,5 +34,10 @@
   "peer_no_e2e": "المستلم مش مأمن",
   "enable_e2e": "فعل E2E",
   "encrypted_message": "[رسالة مشفرة]",
-  "decryption_failed": "مش قادر يفك تشفير الرسالة"
+  "decryption_failed": "مش قادر يفك تشفير الرسالة",
+  "mixnet_connected": "Mixnet متوصل",
+  "mixnet_disconnected": "Mixnet مش متوصل",
+  "full_privacy": "خصوصية كاملة: E2E + Mixnet",
+  "partial_privacy": "متشفر E2E (من غير mixnet)",
+  "initializing_privacy": "بيحضر الخصوصية..."
 }

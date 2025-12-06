@@ -12,5 +12,10 @@
   "e2e_encrypted": "एंड-टू-एंड एन्क्रिप्टेड",
   "encryption_enabled": "एन्क्रिप्शन सक्षम",
   "generating_keys": "एन्क्रिप्शन कुंजी बना रहे हैं...",
-  "decryption_failed": "संदेश डिक्रिप्ट नहीं हो सका"
+  "decryption_failed": "संदेश डिक्रिप्ट नहीं हो सका",
+  "mixnet_connected": "Mixnet कनेक्टेड",
+  "mixnet_disconnected": "Mixnet कनेक्ट नहीं",
+  "full_privacy": "पूर्ण गोपनीयता: E2E + Mixnet",
+  "partial_privacy": "E2E एन्क्रिप्टेड (mixnet नहीं)",
+  "initializing_privacy": "गोपनीयता आरंभ हो रही है..."
 }

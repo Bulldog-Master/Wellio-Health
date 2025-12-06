@@ -1,10 +1,10 @@
 {
   "messages": "メッセージ",
-  "new_message": "新しいメッセージ",
+  "new_message": "新規メッセージ",
   "send_message": "メッセージを送信",
   "type_message": "メッセージを入力...",
-  "no_messages": "メッセージがありません",
-  "no_conversations": "会話がありません",
+  "no_messages": "メッセージなし",
+  "no_conversations": "会話なし",
   "search_messages": "メッセージを検索",
   "delete_message": "メッセージを削除",
   "message_sent": "メッセージを送信しました",
@@ -12,5 +12,10 @@
   "e2e_encrypted": "エンドツーエンド暗号化",
   "encryption_enabled": "暗号化が有効",
   "generating_keys": "暗号化キーを生成中...",
-  "decryption_failed": "メッセージを復号化できませんでした"
+  "decryption_failed": "メッセージを復号化できませんでした",
+  "mixnet_connected": "Mixnet接続済み",
+  "mixnet_disconnected": "Mixnet未接続",
+  "full_privacy": "完全プライバシー: E2E + Mixnet",
+  "partial_privacy": "E2E暗号化のみ（Mixnetなし）",
+  "initializing_privacy": "プライバシーを初期化中..."
 }

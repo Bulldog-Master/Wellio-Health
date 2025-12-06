@@ -34,5 +34,10 @@
   "peer_no_e2e": "प्राप्तकर्ता सुरक्षित नाही",
   "enable_e2e": "E2E सक्षम करा",
   "encrypted_message": "[एनक्रिप्टेड संदेश]",
-  "decryption_failed": "संदेश डिक्रिप्ट करता आला नाही"
+  "decryption_failed": "संदेश डिक्रिप्ट करता आला नाही",
+  "mixnet_connected": "Mixnet कनेक्ट",
+  "mixnet_disconnected": "Mixnet कनेक्ट नाही",
+  "full_privacy": "पूर्ण गोपनीयता: E2E + Mixnet",
+  "partial_privacy": "E2E एनक्रिप्टेड (mixnet नाही)",
+  "initializing_privacy": "गोपनीयता सुरू होत आहे..."
 }

@@ -12,5 +12,10 @@
   "e2e_encrypted": "اینڈ ٹو اینڈ انکرپٹڈ",
   "encryption_enabled": "انکرپشن فعال ہے",
   "generating_keys": "انکرپشن کیز بنائی جا رہی ہیں...",
-  "decryption_failed": "پیغام ڈیکرپٹ نہیں ہو سکا"
+  "decryption_failed": "پیغام ڈیکرپٹ نہیں ہو سکا",
+  "mixnet_connected": "Mixnet منسلک ہے",
+  "mixnet_disconnected": "Mixnet منسلک نہیں",
+  "full_privacy": "مکمل رازداری: E2E + Mixnet",
+  "partial_privacy": "E2E انکرپٹڈ (mixnet نہیں)",
+  "initializing_privacy": "رازداری شروع ہو رہی ہے..."
 }

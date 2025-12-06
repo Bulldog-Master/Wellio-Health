@@ -34,5 +34,10 @@
   "peer_no_e2e": "Ontvanger niet beveiligd",
   "enable_e2e": "E2E Inschakelen",
   "encrypted_message": "[Versleuteld bericht]",
-  "decryption_failed": "Kan bericht niet ontsleutelen"
+  "decryption_failed": "Kan bericht niet ontsleutelen",
+  "mixnet_connected": "Mixnet verbonden",
+  "mixnet_disconnected": "Mixnet niet verbonden",
+  "full_privacy": "Volledige privacy: E2E + Mixnet",
+  "partial_privacy": "E2E versleuteld (geen mixnet)",
+  "initializing_privacy": "Privacy initialiseren..."
 }

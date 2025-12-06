@@ -34,5 +34,10 @@
   "peer_no_e2e": "Penerima tidak diamankan",
   "enable_e2e": "Aktifkan E2E",
   "encrypted_message": "[Pesan terenkripsi]",
-  "decryption_failed": "Tidak dapat mendekripsi pesan"
+  "decryption_failed": "Tidak dapat mendekripsi pesan",
+  "mixnet_connected": "Mixnet terhubung",
+  "mixnet_disconnected": "Mixnet tidak terhubung",
+  "full_privacy": "Privasi penuh: E2E + Mixnet",
+  "partial_privacy": "Terenkripsi E2E (tanpa mixnet)",
+  "initializing_privacy": "Menginisialisasi privasi..."
 }

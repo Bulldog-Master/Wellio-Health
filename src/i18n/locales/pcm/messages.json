@@ -34,5 +34,10 @@
   "peer_no_e2e": "Receiver no secure",
   "enable_e2e": "Enable E2E",
   "encrypted_message": "[Encrypted message]",
-  "decryption_failed": "E no fit decrypt message"
+  "decryption_failed": "E no fit decrypt message",
+  "mixnet_connected": "Mixnet don connect",
+  "mixnet_disconnected": "Mixnet no connect",
+  "full_privacy": "Full privacy: E2E + Mixnet",
+  "partial_privacy": "E2E encrypted (no mixnet)",
+  "initializing_privacy": "Dey start privacy..."
 }
