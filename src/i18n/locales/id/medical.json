@@ -16,5 +16,9 @@
   "access_granted": "Akses medis diberikan selama 15 menit",
   "verify_access": "Verifikasi Akses",
   "session_expires": "Sesi berakhir pada",
-  "security_notice": "Data medis dilindungi dengan keamanan tambahan. Ini membantu mencegah akses tidak sah ke informasi kesehatan sensitif Anda."
+  "security_notice": "Data medis dilindungi dengan keamanan tambahan. Ini membantu mencegah akses tidak sah ke informasi kesehatan sensitif Anda.",
+  "encrypted": "Terenkripsi",
+  "encryption_secure": "Enkripsi tahan kuantum",
+  "legacy_encryption": "Enkripsi lama",
+  "upgrading_encryption": "Memperbarui enkripsi..."
 }

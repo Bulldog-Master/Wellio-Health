@@ -73,5 +73,9 @@
   "access_granted": "Medizinischer Zugang für 15 Minuten gewährt",
   "verify_access": "Zugang Bestätigen",
   "session_expires": "Sitzung endet um",
-  "security_notice": "Medizinische Daten sind mit zusätzlicher Sicherheit geschützt. Dies hilft, unbefugten Zugriff auf Ihre sensiblen Gesundheitsinformationen zu verhindern."
+  "security_notice": "Medizinische Daten sind mit zusätzlicher Sicherheit geschützt. Dies hilft, unbefugten Zugriff auf Ihre sensiblen Gesundheitsinformationen zu verhindern.",
+  "encrypted": "Verschlüsselt",
+  "encryption_secure": "Quantenresistente Verschlüsselung",
+  "legacy_encryption": "Ältere Verschlüsselung",
+  "upgrading_encryption": "Verschlüsselung wird aktualisiert..."
 }

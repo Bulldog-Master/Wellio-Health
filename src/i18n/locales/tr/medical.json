@@ -16,5 +16,9 @@
   "access_granted": "Tıbbi erişim 15 dakika için sağlandı",
   "verify_access": "Erişimi Doğrula",
   "session_expires": "Oturum sona erme zamanı",
-  "security_notice": "Tıbbi veriler ek güvenlikle korunmaktadır. Bu, hassas sağlık bilgilerinize yetkisiz erişimi önlemeye yardımcı olur."
+  "security_notice": "Tıbbi veriler ek güvenlikle korunmaktadır. Bu, hassas sağlık bilgilerinize yetkisiz erişimi önlemeye yardımcı olur.",
+  "encrypted": "Şifreli",
+  "encryption_secure": "Kuantum dayanıklı şifreleme",
+  "legacy_encryption": "Eski şifreleme",
+  "upgrading_encryption": "Şifreleme güncelleniyor..."
 }

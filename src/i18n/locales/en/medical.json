@@ -73,5 +73,9 @@
   "access_granted": "Medical access granted for 15 minutes",
   "verify_access": "Verify Access",
   "session_expires": "Session expires at",
-  "security_notice": "Medical data is protected with additional security. This helps prevent unauthorized access to your sensitive health information."
+  "security_notice": "Medical data is protected with additional security. This helps prevent unauthorized access to your sensitive health information.",
+  "encrypted": "Encrypted",
+  "encryption_secure": "Quantum-resistant encryption",
+  "legacy_encryption": "Legacy encryption",
+  "upgrading_encryption": "Upgrading encryption..."
 }

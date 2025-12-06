@@ -16,5 +16,9 @@
   "access_granted": "Đã cấp quyền truy cập y tế trong 15 phút",
   "verify_access": "Xác minh quyền truy cập",
   "session_expires": "Phiên hết hạn lúc",
-  "security_notice": "Dữ liệu y tế được bảo vệ với bảo mật bổ sung. Điều này giúp ngăn chặn truy cập trái phép vào thông tin sức khỏe nhạy cảm của bạn."
+  "security_notice": "Dữ liệu y tế được bảo vệ với bảo mật bổ sung. Điều này giúp ngăn chặn truy cập trái phép vào thông tin sức khỏe nhạy cảm của bạn.",
+  "encrypted": "Đã mã hóa",
+  "encryption_secure": "Mã hóa kháng lượng tử",
+  "legacy_encryption": "Mã hóa cũ",
+  "upgrading_encryption": "Đang nâng cấp mã hóa..."
 }

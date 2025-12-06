@@ -16,5 +16,9 @@
   "access_granted": "Medical access don grant for 15 minutes",
   "verify_access": "Verify Access",
   "session_expires": "Session go end by",
-  "security_notice": "Medical data dey protected with extra security. This go help stop unauthorized access to your health info."
+  "security_notice": "Medical data dey protected with extra security. This go help stop unauthorized access to your health info.",
+  "encrypted": "E don encrypt",
+  "encryption_secure": "Quantum-strong encryption",
+  "legacy_encryption": "Old encryption",
+  "upgrading_encryption": "We dey upgrade encryption..."
 }

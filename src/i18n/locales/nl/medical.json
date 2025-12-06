@@ -16,5 +16,9 @@
   "access_granted": "Medische toegang verleend voor 15 minuten",
   "verify_access": "Verifieer Toegang",
   "session_expires": "Sessie verloopt om",
-  "security_notice": "Medische gegevens worden beschermd met extra beveiliging. Dit helpt ongeautoriseerde toegang tot uw gevoelige gezondheidsinformatie te voorkomen."
+  "security_notice": "Medische gegevens worden beschermd met extra beveiliging. Dit helpt ongeautoriseerde toegang tot uw gevoelige gezondheidsinformatie te voorkomen.",
+  "encrypted": "Versleuteld",
+  "encryption_secure": "Kwantumbestendige encryptie",
+  "legacy_encryption": "Verouderde encryptie",
+  "upgrading_encryption": "Encryptie wordt bijgewerkt..."
 }
