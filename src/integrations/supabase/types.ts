@@ -477,7 +477,7 @@ export type Database = {
           completed_at: string | null
           current_progress: number | null
           id: string
-          is_public: boolean | null
+          is_public: boolean
           joined_at: string
           status: string | null
           user_id: string
@@ -487,7 +487,7 @@ export type Database = {
           completed_at?: string | null
           current_progress?: number | null
           id?: string
-          is_public?: boolean | null
+          is_public?: boolean
           joined_at?: string
           status?: string | null
           user_id: string
@@ -497,7 +497,7 @@ export type Database = {
           completed_at?: string | null
           current_progress?: number | null
           id?: string
-          is_public?: boolean | null
+          is_public?: boolean
           joined_at?: string
           status?: string | null
           user_id?: string
@@ -2488,11 +2488,14 @@ export type Database = {
           certifications: string[] | null
           created_at: string | null
           email: string
+          email_encrypted: string | null
+          encryption_version: number | null
           full_name: string
           hourly_rate: number | null
           id: string
           location: string | null
           phone: string | null
+          phone_encrypted: string | null
           professional_type: string
           rejection_reason: string | null
           reviewed_at: string | null
@@ -2509,11 +2512,14 @@ export type Database = {
           certifications?: string[] | null
           created_at?: string | null
           email: string
+          email_encrypted?: string | null
+          encryption_version?: number | null
           full_name: string
           hourly_rate?: number | null
           id?: string
           location?: string | null
           phone?: string | null
+          phone_encrypted?: string | null
           professional_type: string
           rejection_reason?: string | null
           reviewed_at?: string | null
@@ -2530,11 +2536,14 @@ export type Database = {
           certifications?: string[] | null
           created_at?: string | null
           email?: string
+          email_encrypted?: string | null
+          encryption_version?: number | null
           full_name?: string
           hourly_rate?: number | null
           id?: string
           location?: string | null
           phone?: string | null
+          phone_encrypted?: string | null
           professional_type?: string
           rejection_reason?: string | null
           reviewed_at?: string | null
@@ -2668,7 +2677,7 @@ export type Database = {
           reminder_weigh_in: boolean | null
           reminder_workout: boolean | null
           show_activity: boolean | null
-          show_health_metrics_to_followers: boolean | null
+          show_health_metrics_to_followers: boolean
           stand_goal: number | null
           target_weight: number | null
           target_weight_unit: string | null
@@ -2711,7 +2720,7 @@ export type Database = {
           reminder_weigh_in?: boolean | null
           reminder_workout?: boolean | null
           show_activity?: boolean | null
-          show_health_metrics_to_followers?: boolean | null
+          show_health_metrics_to_followers?: boolean
           stand_goal?: number | null
           target_weight?: number | null
           target_weight_unit?: string | null
@@ -2754,7 +2763,7 @@ export type Database = {
           reminder_weigh_in?: boolean | null
           reminder_workout?: boolean | null
           show_activity?: boolean | null
-          show_health_metrics_to_followers?: boolean | null
+          show_health_metrics_to_followers?: boolean
           stand_goal?: number | null
           target_weight?: number | null
           target_weight_unit?: string | null
