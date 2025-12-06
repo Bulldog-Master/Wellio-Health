@@ -8,5 +8,9 @@
   "search_messages": "বার্তা অনুসন্ধান করুন",
   "delete_message": "বার্তা মুছুন",
   "message_sent": "বার্তা পাঠানো হয়েছে",
-  "message_deleted": "বার্তা মুছে ফেলা হয়েছে"
+  "message_deleted": "বার্তা মুছে ফেলা হয়েছে",
+  "e2e_encrypted": "এন্ড-টু-এন্ড এনক্রিপ্টেড",
+  "encryption_enabled": "এনক্রিপশন সক্রিয়",
+  "generating_keys": "এনক্রিপশন কী তৈরি হচ্ছে...",
+  "decryption_failed": "বার্তা ডিক্রিপ্ট করা যায়নি"
 }

@@ -8,5 +8,9 @@
   "search_messages": "संदेश खोजें",
   "delete_message": "संदेश हटाएं",
   "message_sent": "संदेश भेजा गया",
-  "message_deleted": "संदेश हटाया गया"
+  "message_deleted": "संदेश हटाया गया",
+  "e2e_encrypted": "एंड-टू-एंड एन्क्रिप्टेड",
+  "encryption_enabled": "एन्क्रिप्शन सक्षम",
+  "generating_keys": "एन्क्रिप्शन कुंजी बना रहे हैं...",
+  "decryption_failed": "संदेश डिक्रिप्ट नहीं हो सका"
 }

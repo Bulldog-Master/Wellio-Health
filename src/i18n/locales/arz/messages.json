@@ -8,5 +8,9 @@
   "search_messages": "دور في الرسايل",
   "delete_message": "امسح الرسالة",
   "message_sent": "الرسالة اتبعتت",
-  "message_deleted": "الرسالة اتمسحت"
+  "message_deleted": "الرسالة اتمسحت",
+  "e2e_encrypted": "مشفر من طرف لطرف",
+  "encryption_enabled": "التشفير شغال",
+  "generating_keys": "بيتعمل مفاتيح التشفير...",
+  "decryption_failed": "مش قادر يفك تشفير الرسالة"
 }

@@ -8,5 +8,9 @@
   "search_messages": "செய்திகளை தேடு",
   "delete_message": "செய்தி நீக்கு",
   "message_sent": "செய்தி அனுப்பப்பட்டது",
-  "message_deleted": "செய்தி நீக்கப்பட்டது"
+  "message_deleted": "செய்தி நீக்கப்பட்டது",
+  "e2e_encrypted": "எண்ட்-டு-எண்ட் என்க்ரிப்டட்",
+  "encryption_enabled": "என்க்ரிப்ஷன் இயக்கப்பட்டது",
+  "generating_keys": "என்க்ரிப்ஷன் விசைகளை உருவாக்குகிறது...",
+  "decryption_failed": "செய்தியை டிக்ரிப்ட் செய்ய இயலவில்லை"
 }
