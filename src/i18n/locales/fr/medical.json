@@ -73,5 +73,9 @@
   "access_granted": "Accès médical accordé pour 15 minutes",
   "verify_access": "Vérifier l'Accès",
   "session_expires": "La session expire à",
-  "security_notice": "Les données médicales sont protégées par une sécurité supplémentaire. Cela aide à prévenir l'accès non autorisé à vos informations de santé sensibles."
+  "security_notice": "Les données médicales sont protégées par une sécurité supplémentaire. Cela aide à prévenir l'accès non autorisé à vos informations de santé sensibles.",
+  "encrypted": "Chiffré",
+  "encryption_secure": "Chiffrement résistant au quantique",
+  "legacy_encryption": "Chiffrement hérité",
+  "upgrading_encryption": "Mise à niveau du chiffrement..."
 }

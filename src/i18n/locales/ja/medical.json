@@ -16,5 +16,9 @@
   "access_granted": "医療アクセスが15分間許可されました",
   "verify_access": "アクセスを確認",
   "session_expires": "セッション有効期限",
-  "security_notice": "医療データは追加のセキュリティで保護されています。これは、機密性の高い健康情報への不正アクセスを防ぐのに役立ちます。"
+  "security_notice": "医療データは追加のセキュリティで保護されています。これは、機密性の高い健康情報への不正アクセスを防ぐのに役立ちます。",
+  "encrypted": "暗号化済み",
+  "encryption_secure": "量子耐性暗号化",
+  "legacy_encryption": "レガシー暗号化",
+  "upgrading_encryption": "暗号化をアップグレード中..."
 }

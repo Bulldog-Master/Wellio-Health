@@ -16,5 +16,9 @@
   "access_granted": "15 منٹ کے لیے طبی رسائی دی گئی",
   "verify_access": "رسائی کی تصدیق کریں",
   "session_expires": "سیشن ختم ہونے کا وقت",
-  "security_notice": "طبی ڈیٹا اضافی سیکیورٹی کے ساتھ محفوظ ہے۔"
+  "security_notice": "طبی ڈیٹا اضافی سیکیورٹی کے ساتھ محفوظ ہے۔",
+  "encrypted": "خفیہ کردہ",
+  "encryption_secure": "کوانٹم مزاحم خفیہ کاری",
+  "legacy_encryption": "پرانی خفیہ کاری",
+  "upgrading_encryption": "خفیہ کاری اپ گریڈ ہو رہی ہے..."
 }

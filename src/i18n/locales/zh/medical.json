@@ -16,5 +16,9 @@
   "access_granted": "医疗访问权限已授予15分钟",
   "verify_access": "验证访问",
   "session_expires": "会话到期时间",
-  "security_notice": "医疗数据受到额外安全保护。这有助于防止未经授权访问您的敏感健康信息。"
+  "security_notice": "医疗数据受到额外安全保护。这有助于防止未经授权访问您的敏感健康信息。",
+  "encrypted": "已加密",
+  "encryption_secure": "抗量子加密",
+  "legacy_encryption": "旧版加密",
+  "upgrading_encryption": "正在升级加密..."
 }

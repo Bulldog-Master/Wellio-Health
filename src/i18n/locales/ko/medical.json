@@ -16,5 +16,9 @@
   "access_granted": "의료 접근이 15분 동안 허용되었습니다",
   "verify_access": "접근 확인",
   "session_expires": "세션 만료 시간",
-  "security_notice": "의료 데이터는 추가 보안으로 보호됩니다. 이는 민감한 건강 정보에 대한 무단 접근을 방지하는 데 도움이 됩니다."
+  "security_notice": "의료 데이터는 추가 보안으로 보호됩니다. 이는 민감한 건강 정보에 대한 무단 접근을 방지하는 데 도움이 됩니다.",
+  "encrypted": "암호화됨",
+  "encryption_secure": "양자 저항 암호화",
+  "legacy_encryption": "레거시 암호화",
+  "upgrading_encryption": "암호화 업그레이드 중..."
 }
