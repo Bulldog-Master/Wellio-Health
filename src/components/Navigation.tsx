@@ -85,14 +85,16 @@ const Navigation = () => {
             key={to}
             to={to}
             className={cn(
-              "group relative flex flex-col md:flex-row items-center gap-1 md:gap-3 px-4 py-3 md:px-4 md:py-3",
+              "group relative flex flex-col md:flex-row items-center gap-1 md:gap-3",
+              "min-h-[44px] min-w-[44px] px-3 py-2 md:px-4 md:py-3",
               "transition-all duration-300 ease-out",
-              "md:rounded-lg md:hover:bg-sidebar-accent/50"
+              "md:rounded-lg md:hover:bg-sidebar-accent/50",
+              "active:scale-95 touch-manipulation"
             )}
             activeClassName="font-medium md:bg-sidebar-accent/30"
             aria-label={`Navigate to ${label}`}
           >
-            <div className="relative">
+            <div className="relative flex items-center justify-center">
               <Icon 
                 className={cn(
                   "w-5 h-5 transition-all duration-300",
@@ -108,7 +110,7 @@ const Navigation = () => {
               )}
             </div>
             <span className={cn(
-              "text-xs md:text-sm transition-colors duration-300",
+              "text-xs md:text-sm transition-colors duration-300 leading-tight",
               "text-muted-foreground group-hover:text-foreground"
             )}>
               {label}
@@ -121,15 +123,17 @@ const Navigation = () => {
           <NavLink
             to="/premium"
             className={cn(
-              "group relative flex flex-col md:flex-row items-center gap-1 md:gap-3 px-4 py-3 md:px-4 md:py-3",
+              "group relative flex flex-col md:flex-row items-center gap-1 md:gap-3",
+              "min-h-[44px] min-w-[44px] px-3 py-2 md:px-4 md:py-3",
               "transition-all duration-300 ease-out",
               "md:rounded-lg md:hover:bg-sidebar-accent/50",
-              "md:mt-4 md:border-t md:border-border md:pt-4"
+              "md:mt-4 md:border-t md:border-border md:pt-4",
+              "active:scale-95 touch-manipulation"
             )}
             activeClassName="font-medium md:bg-sidebar-accent/30"
             aria-label={`Navigate to ${t('premium:premium_hub')}`}
           >
-            <div className="relative">
+            <div className="relative flex items-center justify-center">
               <Crown 
                 className={cn(
                   "w-5 h-5 transition-all duration-300",
@@ -140,7 +144,7 @@ const Navigation = () => {
               />
             </div>
             <span className={cn(
-              "text-xs md:text-sm transition-colors duration-300",
+              "text-xs md:text-sm transition-colors duration-300 leading-tight",
               "text-muted-foreground group-hover:text-foreground"
             )}>
               {t('premium:premium_hub')}
