@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight, Heart, Crown, Gift, Sparkles, Users, FileText, Megaphone, UserSearch } from "lucide-react";
+import { Shield, Bell, CreditCard, HelpCircle, ArrowLeft, ChevronRight, Heart, Crown, Gift, Sparkles, Users, FileText, Megaphone, UserSearch, Settings2 } from "lucide-react";
 import { useSubscription } from "@/hooks/useSubscription";
 import { Badge } from "@/components/ui/badge";
 import { useState, useEffect } from "react";
@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 const SettingsMenu = () => {
   const navigate = useNavigate();
   const { tier, isAdmin, isVIP, hasFullAccess } = useSubscription();
-  const { t } = useTranslation(['settings', 'admin', 'premium', 'medical', 'ads', 'professional']);
+  const { t } = useTranslation(['settings', 'admin', 'premium', 'medical', 'ads', 'professional', 'controls']);
   const [referralStats, setReferralStats] = useState({
     points: 0,
     totalReferrals: 0,
@@ -133,6 +133,14 @@ const SettingsMenu = () => {
       iconBg: "bg-destructive/20",
       iconColor: "text-destructive",
       path: "/settings/privacy-security",
+    },
+    {
+      title: t('controls:title'),
+      description: t('controls:data_retention_desc'),
+      icon: Settings2,
+      iconBg: "bg-cyan-500/20",
+      iconColor: "text-cyan-500",
+      path: "/privacy-controls",
     },
     {
       title: t('close_friends'),
