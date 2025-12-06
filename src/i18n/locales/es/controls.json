@@ -1,0 +1,52 @@
+{
+  "title": "Controles de Privacidad",
+  "description": "Administre sus datos, preferencias de consentimiento y configuración de privacidad",
+  
+  "data_retention": "Retención de Datos",
+  "retention_description": "Elija cuánto tiempo conservamos sus datos de fitness y salud",
+  "90_days": "90 días",
+  "180_days": "6 meses",
+  "1_year": "1 año",
+  "2_years": "2 años",
+  "indefinite": "Conservar indefinidamente",
+  
+  "consent_settings": "Configuración de Consentimiento",
+  "consent_description": "Controle cómo se usan sus datos",
+  
+  "ai_processing": "Información Impulsada por IA",
+  "ai_processing_desc": "Permitir que la IA analice sus datos para recomendaciones personalizadas",
+  
+  "analytics": "Análisis de Uso",
+  "analytics_desc": "Ayúdenos a mejorar compartiendo datos de uso anónimos",
+  
+  "marketing_emails": "Comunicaciones de Marketing",
+  "marketing_desc": "Recibir correos sobre nuevas funciones, consejos y promociones",
+  
+  "professional_sharing": "Acceso Profesional",
+  "professional_desc": "Controle quién puede acceder a sus datos de salud",
+  
+  "share_trainers": "Compartir con Entrenadores",
+  "share_trainers_desc": "Permitir que los entrenadores asignados vean sus datos de entrenamiento y progreso",
+  
+  "share_practitioners": "Compartir con Profesionales",
+  "share_practitioners_desc": "Permitir que los profesionales de salud asignados vean sus registros de salud",
+  
+  "export_description": "Descargue una copia completa de todos sus datos de Wellio en formato JSON",
+  "request_export": "Solicitar Exportación de Datos",
+  "export_requested": "¡Exportación de datos solicitada! Recibirá un correo cuando esté listo.",
+  "export_in_progress": "Su exportación de datos se está preparando...",
+  
+  "delete_description": "Elimine permanentemente su cuenta y todos los datos asociados. Esta acción se programa con 30 días de anticipación para permitirle cambiar de opinión.",
+  "delete_warning": "Su cuenta se programará para eliminación en 30 días. Durante este tiempo, puede cancelar la eliminación. Después de 30 días, todos sus datos se borrarán permanentemente y no podrán recuperarse.",
+  "deletion_reason": "Razón para irse (opcional)",
+  "reason_placeholder": "Nos encantaría saber por qué se va...",
+  "confirm_deletion": "Programar Eliminación",
+  "deletion_scheduled": "Eliminación de cuenta programada. Puede cancelar dentro de 30 días.",
+  "deletion_pending": "Cuenta programada para eliminación el {{date}}",
+  "cancel_deletion": "Cancelar Eliminación",
+  "deletion_cancelled": "Eliminación de cuenta cancelada",
+  
+  "legal_documents": "Documentos Legales",
+  "privacy_policy": "Política de Privacidad",
+  "terms_of_service": "Términos de Servicio"
+}

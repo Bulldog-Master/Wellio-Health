@@ -1,0 +1,52 @@
+{
+  "title": "Privacy Controls",
+  "description": "Manage your data, consent preferences, and privacy settings",
+  
+  "data_retention": "Data Retention",
+  "retention_description": "Choose how long we keep your fitness and health data",
+  "90_days": "90 days",
+  "180_days": "6 months",
+  "1_year": "1 year",
+  "2_years": "2 years",
+  "indefinite": "Keep indefinitely",
+  
+  "consent_settings": "Consent Settings",
+  "consent_description": "Control how your data is used",
+  
+  "ai_processing": "AI-Powered Insights",
+  "ai_processing_desc": "Allow AI to analyze your data for personalized recommendations",
+  
+  "analytics": "Usage Analytics",
+  "analytics_desc": "Help us improve by sharing anonymous usage data",
+  
+  "marketing_emails": "Marketing Communications",
+  "marketing_desc": "Receive emails about new features, tips, and promotions",
+  
+  "professional_sharing": "Professional Access",
+  "professional_desc": "Control who can access your health data",
+  
+  "share_trainers": "Share with Trainers",
+  "share_trainers_desc": "Allow assigned trainers to view your workout and progress data",
+  
+  "share_practitioners": "Share with Practitioners",
+  "share_practitioners_desc": "Allow assigned health practitioners to view your health records",
+  
+  "export_description": "Download a complete copy of all your Wellio data in JSON format",
+  "request_export": "Request Data Export",
+  "export_requested": "Data export requested! You'll receive an email when it's ready.",
+  "export_in_progress": "Your data export is being prepared...",
+  
+  "delete_description": "Permanently delete your account and all associated data. This action is scheduled 30 days in advance to allow you to change your mind.",
+  "delete_warning": "Your account will be scheduled for deletion in 30 days. During this time, you can cancel the deletion. After 30 days, all your data will be permanently erased and cannot be recovered.",
+  "deletion_reason": "Reason for leaving (optional)",
+  "reason_placeholder": "We'd love to know why you're leaving...",
+  "confirm_deletion": "Schedule Deletion",
+  "deletion_scheduled": "Account deletion scheduled. You can cancel within 30 days.",
+  "deletion_pending": "Account scheduled for deletion on {{date}}",
+  "cancel_deletion": "Cancel Deletion",
+  "deletion_cancelled": "Account deletion cancelled",
+  
+  "legal_documents": "Legal Documents",
+  "privacy_policy": "Privacy Policy",
+  "terms_of_service": "Terms of Service"
+}

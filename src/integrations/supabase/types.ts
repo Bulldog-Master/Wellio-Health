@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      account_deletion_requests: {
+        Row: {
+          completed_at: string | null
+          id: string
+          reason: string | null
+          requested_at: string
+          scheduled_deletion_at: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          id?: string
+          reason?: string | null
+          requested_at?: string
+          scheduled_deletion_at?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          id?: string
+          reason?: string | null
+          requested_at?: string
+          scheduled_deletion_at?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       achievements: {
         Row: {
           achieved_at: string
@@ -887,6 +917,36 @@ export type Database = {
           target_value?: number
           title?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      data_export_requests: {
+        Row: {
+          completed_at: string | null
+          expires_at: string | null
+          export_url: string | null
+          id: string
+          requested_at: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          expires_at?: string | null
+          export_url?: string | null
+          id?: string
+          requested_at?: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          expires_at?: string | null
+          export_url?: string | null
+          id?: string
+          requested_at?: string
+          status?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -4391,6 +4451,42 @@ export type Database = {
         }
         Relationships: []
       }
+      user_consents: {
+        Row: {
+          consent_type: string
+          created_at: string
+          granted: boolean
+          granted_at: string | null
+          id: string
+          ip_address: string | null
+          revoked_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          consent_type: string
+          created_at?: string
+          granted?: boolean
+          granted_at?: string | null
+          id?: string
+          ip_address?: string | null
+          revoked_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          consent_type?: string
+          created_at?: string
+          granted?: boolean
+          granted_at?: string | null
+          id?: string
+          ip_address?: string | null
+          revoked_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_encryption_keys: {
         Row: {
           created_at: string
@@ -4425,6 +4521,45 @@ export type Database = {
           public_key?: string
           public_key_created_at?: string
           signing_public_key?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_privacy_preferences: {
+        Row: {
+          allow_ai_processing: boolean | null
+          allow_analytics: boolean | null
+          allow_marketing_emails: boolean | null
+          created_at: string
+          data_retention_days: number | null
+          id: string
+          share_with_practitioners: boolean | null
+          share_with_trainers: boolean | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          allow_ai_processing?: boolean | null
+          allow_analytics?: boolean | null
+          allow_marketing_emails?: boolean | null
+          created_at?: string
+          data_retention_days?: number | null
+          id?: string
+          share_with_practitioners?: boolean | null
+          share_with_trainers?: boolean | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          allow_ai_processing?: boolean | null
+          allow_analytics?: boolean | null
+          allow_marketing_emails?: boolean | null
+          created_at?: string
+          data_retention_days?: number | null
+          id?: string
+          share_with_practitioners?: boolean | null
+          share_with_trainers?: boolean | null
           updated_at?: string
           user_id?: string
         }

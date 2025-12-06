@@ -1,0 +1,119 @@
+{
+  "privacy_policy_title": "Privacy Policy",
+  "privacy_policy_description": "Learn how Wellio collects, uses, and protects your personal data",
+  "terms_title": "Terms of Service",
+  "terms_description": "Terms and conditions for using Wellio",
+  "last_updated": "Last Updated",
+  
+  "introduction": "Introduction",
+  "intro_text": "Welcome to Wellio. We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our fitness and wellness application.",
+  
+  "data_we_collect": "Data We Collect",
+  "personal_info": "Personal Information",
+  "collect_email": "Email address and account credentials",
+  "collect_name": "Name and profile information",
+  "collect_profile": "Profile photo and preferences",
+  
+  "health_data": "Health & Fitness Data",
+  "collect_fitness": "Workout logs, exercise routines, and activity data",
+  "collect_nutrition": "Nutrition logs, meal plans, and dietary preferences",
+  "collect_medical": "Medical records (encrypted with quantum-resistant encryption)",
+  "collect_measurements": "Body measurements, weight, and health metrics",
+  
+  "usage_data": "Usage Data",
+  "collect_device": "Device information and browser type",
+  "collect_usage": "App usage patterns and feature interactions",
+  
+  "how_we_use": "How We Use Your Data",
+  "use_provide_service": "To provide and maintain our fitness tracking services",
+  "use_personalize": "To personalize your experience and recommendations",
+  "use_ai_insights": "To generate AI-powered fitness insights (with your consent)",
+  "use_communicate": "To communicate with you about updates and features",
+  "use_improve": "To improve our services and develop new features",
+  "use_security": "To ensure the security of your account and data",
+  
+  "data_security": "Data Security",
+  "security_intro": "We implement industry-leading security measures to protect your data:",
+  "security_encryption": "Quantum-resistant encryption (ML-KEM-768) for medical records",
+  "security_e2e": "End-to-end encryption for private messages",
+  "security_2fa": "Two-factor authentication (TOTP and WebAuthn passkeys)",
+  "security_audit": "Comprehensive audit logging for sensitive data access",
+  "security_rls": "Row-level security policies for data isolation",
+  
+  "your_rights": "Your Rights",
+  "rights_intro": "Under GDPR and other privacy regulations, you have the following rights:",
+  "right_access": "Right to Access",
+  "right_access_desc": "Request a copy of all personal data we hold about you",
+  "right_rectify": "Right to Rectification",
+  "right_rectify_desc": "Request correction of inaccurate personal data",
+  "right_erasure": "Right to Erasure",
+  "right_erasure_desc": "Request deletion of your personal data",
+  "right_portability": "Right to Data Portability",
+  "right_portability_desc": "Receive your data in a structured, machine-readable format",
+  "right_withdraw": "Right to Withdraw Consent",
+  "right_withdraw_desc": "Withdraw consent for data processing at any time",
+  
+  "data_retention": "Data Retention",
+  "retention_text": "We retain your personal data only for as long as necessary to fulfill the purposes outlined in this policy, or as required by law. You can configure your preferred data retention period in your Privacy Controls settings.",
+  
+  "third_parties": "Third-Party Services",
+  "third_parties_intro": "We may share data with trusted third parties for specific purposes:",
+  "third_party_hosting": "Cloud infrastructure providers for data storage (encrypted at rest)",
+  "third_party_payments": "Payment processors for subscription billing (PCI-DSS compliant)",
+  "third_party_analytics": "Analytics services (only with your consent)",
+  
+  "contact_us": "Contact Us",
+  "contact_text": "If you have questions about this Privacy Policy or wish to exercise your rights, please contact us at:",
+  
+  "acceptance_title": "Acceptance of Terms",
+  "acceptance_text": "By accessing or using Wellio, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.",
+  
+  "account_terms": "Account Terms",
+  "account_age": "You must be at least 13 years old to use this service",
+  "account_accurate": "You must provide accurate and complete information",
+  "account_secure": "You are responsible for maintaining the security of your account",
+  "account_responsibility": "You are responsible for all activities under your account",
+  
+  "acceptable_use": "Acceptable Use",
+  "acceptable_intro": "You agree to use Wellio responsibly and in accordance with these guidelines:",
+  "use_lawful": "Use the service only for lawful purposes",
+  "use_accurate_data": "Provide accurate health and fitness data",
+  "use_respect": "Respect other users in community features",
+  "use_no_spam": "Do not send spam or unsolicited messages",
+  
+  "prohibited": "Prohibited Activities",
+  "prohibited_illegal": "Engaging in illegal activities or promoting violence",
+  "prohibited_impersonate": "Impersonating other users or organizations",
+  "prohibited_harassment": "Harassing, bullying, or threatening other users",
+  "prohibited_malware": "Uploading malware or malicious content",
+  "prohibited_scraping": "Automated scraping or data extraction",
+  "prohibited_circumvent": "Attempting to bypass security measures",
+  
+  "payments_title": "Subscriptions & Payments",
+  "payments_intro": "Premium features require a paid subscription:",
+  "payments_billing": "Subscriptions are billed on a recurring basis",
+  "payments_renewal": "Subscriptions auto-renew unless cancelled before the renewal date",
+  "payments_cancel": "You can cancel your subscription at any time from Settings",
+  "payments_refund": "Refunds are provided in accordance with applicable consumer protection laws",
+  
+  "health_disclaimer": "Health Disclaimer",
+  "health_disclaimer_text": "IMPORTANT: Wellio is a fitness tracking and wellness application, NOT a medical device or service.",
+  "health_not_medical": "Content and features are for informational purposes only",
+  "health_consult": "Always consult qualified healthcare professionals before making health decisions",
+  "health_emergency": "In case of medical emergency, contact emergency services immediately",
+  
+  "intellectual_property": "Intellectual Property",
+  "ip_text": "All content, features, and functionality of Wellio are owned by us and protected by international copyright, trademark, and other intellectual property laws. You retain ownership of content you create but grant us a license to use it for providing our services.",
+  
+  "termination": "Termination",
+  "termination_text": "We may terminate or suspend your account at any time for violations of these terms. You may delete your account at any time through Privacy Controls. Upon termination, your data will be deleted according to our retention policies.",
+  
+  "liability": "Limitation of Liability",
+  "liability_text": "To the maximum extent permitted by law, Wellio shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the service. Our total liability shall not exceed the amount you paid for the service in the past 12 months.",
+  
+  "governing_law": "Governing Law",
+  "governing_law_text": "These Terms shall be governed by and construed in accordance with the laws of the jurisdiction in which our company is registered, without regard to conflict of law principles.",
+  
+  "changes_title": "Changes to These Terms",
+  "changes_text": "We reserve the right to modify these terms at any time. We will notify you of significant changes via email or in-app notification. Continued use of the service after changes constitutes acceptance of the new terms."
+}

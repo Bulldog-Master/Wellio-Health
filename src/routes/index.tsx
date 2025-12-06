@@ -102,6 +102,9 @@ const GoalSettingWizard = lazy(() => import("@/pages/GoalSettingWizard"));
 const AIWorkoutPlanGenerator = lazy(() => import("@/pages/AIWorkoutPlanGenerator"));
 const SocialChallenges = lazy(() => import("@/pages/SocialChallenges"));
 const ProgressComparison = lazy(() => import("@/pages/ProgressComparison"));
+const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
+const TermsOfService = lazy(() => import("@/pages/TermsOfService"));
+const PrivacyControls = lazy(() => import("@/pages/PrivacyControls"));
 
 /**
  * Application route configuration
@@ -227,6 +230,11 @@ export const AppRoutes = () => (
     <Route path="/admin/professionals" element={<RouteErrorBoundary><ProtectedRoute><Layout><AdminProfessionals /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/admin/payments" element={<RouteErrorBoundary><ProtectedRoute><Layout><AdminPayments /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/payment-history" element={<RouteErrorBoundary><ProtectedRoute><Layout><PaymentHistory /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    
+    {/* Legal & Compliance */}
+    <Route path="/privacy-policy" element={<RouteErrorBoundary><PrivacyPolicy /></RouteErrorBoundary>} />
+    <Route path="/terms" element={<RouteErrorBoundary><TermsOfService /></RouteErrorBoundary>} />
+    <Route path="/privacy-controls" element={<RouteErrorBoundary><ProtectedRoute><PrivacyControls /></ProtectedRoute></RouteErrorBoundary>} />
     
     {/* 404 */}
     <Route path="*" element={<NotFound />} />
