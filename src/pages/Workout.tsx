@@ -472,7 +472,7 @@ const Workout = () => {
         });
         setEditingWorkout(null);
       } else {
-        const { error } = await supabase
+        const { data: insertData, error } = await supabase
           .from('activity_logs')
           .insert({
             user_id: user.id,
@@ -483,9 +483,36 @@ const Workout = () => {
             notes: finalNotes || null,
             logged_at: loggedAtTimestamp,
             time_of_day: timeOfDay,
-          });
+          })
+          .select('id')
+          .single();
 
         if (error) throw error;
+
+        // Upload pending media files if any
+        if (pendingMediaFiles.length > 0 && insertData?.id) {
+          for (const file of pendingMediaFiles) {
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${user.id}/${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+
+            const { error: uploadError } = await supabase.storage
+              .from('workout-media')
+              .upload(fileName, file);
+
+            if (!uploadError) {
+              const { data: { publicUrl } } = supabase.storage
+                .from('workout-media')
+                .getPublicUrl(fileName);
+
+              await supabase.from('workout_media').insert({
+                user_id: user.id,
+                activity_log_id: insertData.id,
+                file_url: publicUrl,
+                file_type: file.type,
+              });
+            }
+          }
+        }
 
         toast({
           title: "Workout logged",
@@ -493,6 +520,11 @@ const Workout = () => {
         });
       }
 
+      // Clear pending media
+      mediaPreviewUrls.forEach(url => URL.revokeObjectURL(url));
+      setPendingMediaFiles([]);
+      setMediaPreviewUrls([]);
+      
       setExercise("");
       setDuration("");
       setIntensity("medium");
@@ -2187,8 +2219,63 @@ const Workout = () => {
                   </div>
                 ))}
               </div>
+          </div>
+        )}
+
+          {/* Media Upload Section */}
+          <div className="space-y-2">
+            <Label className="flex items-center gap-2">
+              <ImageIcon className="w-4 h-4" />
+              {t('add_media')}
+            </Label>
+            <div className="flex flex-wrap gap-2">
+              {mediaPreviewUrls.map((url, idx) => (
+                <div key={idx} className="relative w-20 h-20 rounded-lg overflow-hidden border bg-muted">
+                  {pendingMediaFiles[idx]?.type.startsWith('video/') ? (
+                    <video src={url} className="w-full h-full object-cover" />
+                  ) : (
+                    <img src={url} alt={`Preview ${idx + 1}`} className="w-full h-full object-cover" />
+                  )}
+                  <Button
+                    variant="destructive"
+                    size="icon"
+                    className="absolute top-1 right-1 w-5 h-5"
+                    onClick={() => {
+                      URL.revokeObjectURL(url);
+                      setPendingMediaFiles(prev => prev.filter((_, i) => i !== idx));
+                      setMediaPreviewUrls(prev => prev.filter((_, i) => i !== idx));
+                    }}
+                  >
+                    <Trash2 className="w-3 h-3" />
+                  </Button>
+                </div>
+              ))}
+              <label className="w-20 h-20 rounded-lg border-2 border-dashed border-muted-foreground/30 flex flex-col items-center justify-center cursor-pointer hover:border-primary/50 transition-colors">
+                <Upload className="w-5 h-5 text-muted-foreground" />
+                <span className="text-xs text-muted-foreground mt-1">{t('add_photos_videos', { ns: 'workout' })}</span>
+                <input
+                  type="file"
+                  accept="image/*,video/*"
+                  multiple
+                  className="hidden"
+                  onChange={(e) => {
+                    const files = e.target.files;
+                    if (!files) return;
+                    const newFiles = Array.from(files);
+                    setPendingMediaFiles(prev => [...prev, ...newFiles]);
+                    const newUrls = newFiles.map(f => URL.createObjectURL(f));
+                    setMediaPreviewUrls(prev => [...prev, ...newUrls]);
+                    e.target.value = '';
+                  }}
+                />
+              </label>
             </div>
-          )}
+            {pendingMediaFiles.length > 0 && (
+              <p className="text-xs text-muted-foreground">
+                {pendingMediaFiles.length} {t('files_selected', { ns: 'workout' })}
+              </p>
+            )}
+          </div>
 
           <div className="flex gap-2">
             {editingWorkout && (

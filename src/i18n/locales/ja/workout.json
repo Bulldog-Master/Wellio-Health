@@ -46,5 +46,8 @@
   "add_media": "メディアを追加",
   "add_photos_videos": "写真や動画を追加",
   "files_selected": "ファイル選択済み",
-  "clear_media": "メディアをクリア"
+  "clear_media": "メディアをクリア",
+  "add_media": "メディアを追加",
+  "add_photos_videos": "写真または動画を追加",
+  "files_selected": "件のファイルを選択"
 }
