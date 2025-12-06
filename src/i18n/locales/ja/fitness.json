@@ -71,5 +71,32 @@
   "intermediate": "中級者",
   "advanced": "上級者",
   "date_time": "日付と時刻",
-  "recorded_at": "記録日時"
+  "recorded_at": "記録日時",
+
+  "progress_comparison": "進捗比較",
+  "progress_comparison_desc": "進捗写真を並べて比較",
+  "compare_progress_photos": "時間の経過による変化を比較",
+  "need_more_photos": "もっと写真が必要",
+  "need_at_least_two_photos": "比較ツールを使用するには、少なくとも2枚の進捗写真をアップロードしてください",
+  "photos_count": "{{count}}枚の写真があります",
+  "before_photo": "ビフォー",
+  "after_photo": "アフター",
+  "select_photo": "写真を選択",
+  "days_of_progress": "{{days}}日間の進捗",
+  "swap_photos": "写真を入れ替え",
+
+  "voice_workout_logging": "音声ワークアウト記録",
+  "voice_logging_description": "ワークアウトを説明してください、記録します",
+  "tap_to_record": "タップして録音開始",
+  "processing_voice": "音声を処理中...",
+  "voice_example": "例：",
+  "voice_example_text": "45分間走って400カロリー消費しました",
+  "you_said": "あなたが言ったこと",
+  "extracted_workout": "検出されたワークアウト",
+  "confirm_log": "確認して記録",
+  "retry": "やり直し",
+  "workout_logged": "ワークアウトを記録しました！",
+  "voice_workout_saved": "ワークアウトが正常に保存されました",
+  "failed_to_process_voice": "音声録音の処理に失敗しました",
+  "failed_to_save": "保存に失敗しました"
 }
