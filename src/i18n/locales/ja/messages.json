@@ -8,5 +8,9 @@
   "search_messages": "メッセージを検索",
   "delete_message": "メッセージを削除",
   "message_sent": "メッセージを送信しました",
-  "message_deleted": "メッセージを削除しました"
+  "message_deleted": "メッセージを削除しました",
+  "e2e_encrypted": "エンドツーエンド暗号化",
+  "encryption_enabled": "暗号化が有効",
+  "generating_keys": "暗号化キーを生成中...",
+  "decryption_failed": "メッセージを復号化できませんでした"
 }
