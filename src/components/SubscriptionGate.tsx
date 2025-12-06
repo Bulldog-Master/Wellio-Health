@@ -22,6 +22,7 @@ const featureToAddonMap: Record<string, string> = {
   'ai_nutrition': 'ai_nutrition',
   'recovery_tracking': 'recovery_tracking',
   'live_sessions': 'live_sessions',
+  'ai_workout_plan': 'ai_coach',
 };
 
 export const SubscriptionGate = ({ feature, children, fallback }: SubscriptionGateProps) => {
