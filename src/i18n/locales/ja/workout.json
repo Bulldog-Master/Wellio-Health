@@ -14,5 +14,18 @@
   "workout_history": "ワークアウト履歴",
   "no_workouts": "ワークアウトがありません",
   "workout_complete": "ワークアウト完了！",
-  "great_job": "素晴らしい！"
+  "great_job": "素晴らしい！",
+  "running": "ランニング",
+  "cycling": "サイクリング",
+  "swimming": "水泳",
+  "walking": "ウォーキング",
+  "hiking": "ハイキング",
+  "weightlifting": "ウェイトリフティング",
+  "yoga": "ヨガ",
+  "hiit": "HIIT",
+  "other": "その他",
+  "low": "低",
+  "medium": "中",
+  "high": "高",
+  "intense": "激しい"
 }

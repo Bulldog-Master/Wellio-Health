@@ -14,5 +14,18 @@
   "workout_history": "Antrenman Geçmişi",
   "no_workouts": "Henüz antrenman yok",
   "workout_complete": "Antrenman Tamamlandı!",
-  "great_job": "Harika İş!"
+  "great_job": "Harika İş!",
+  "running": "Koşu",
+  "cycling": "Bisiklet",
+  "swimming": "Yüzme",
+  "walking": "Yürüyüş",
+  "hiking": "Doğa Yürüyüşü",
+  "weightlifting": "Ağırlık Kaldırma",
+  "yoga": "Yoga",
+  "hiit": "HIIT",
+  "other": "Diğer",
+  "low": "Düşük",
+  "medium": "Orta",
+  "high": "Yüksek",
+  "intense": "Yoğun"
 }

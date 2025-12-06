@@ -14,5 +14,18 @@
   "workout_history": "Riwayat Latihan",
   "no_workouts": "Tidak ada latihan",
   "workout_complete": "Latihan Selesai!",
-  "great_job": "Kerja Bagus!"
+  "great_job": "Kerja Bagus!",
+  "running": "Lari",
+  "cycling": "Bersepeda",
+  "swimming": "Renang",
+  "walking": "Jalan",
+  "hiking": "Mendaki",
+  "weightlifting": "Angkat Beban",
+  "yoga": "Yoga",
+  "hiit": "HIIT",
+  "other": "Lainnya",
+  "low": "Rendah",
+  "medium": "Sedang",
+  "high": "Tinggi",
+  "intense": "Intensif"
 }

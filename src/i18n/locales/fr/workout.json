@@ -209,5 +209,14 @@
   "category_placeholder": "ex: Suivi, Entraînement",
   "app_url_optional": "URL ou lien Store (facultatif)",
   "https_placeholder": "https://...",
-  "app_icon_url_optional": "URL de l'icône (facultatif)"
+  "app_icon_url_optional": "URL de l'icône (facultatif)",
+  "running": "Course",
+  "cycling": "Cyclisme",
+  "swimming": "Natation",
+  "walking": "Marche",
+  "hiking": "Randonnée",
+  "weightlifting": "Musculation",
+  "yoga": "Yoga",
+  "hiit": "HIIT",
+  "other": "Autre"
 }

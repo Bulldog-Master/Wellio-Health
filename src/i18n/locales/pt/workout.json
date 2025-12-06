@@ -209,5 +209,14 @@
   "category_placeholder": "ex: Monitoramento, Treino",
   "app_url_optional": "URL do App ou Link da Loja (opcional)",
   "https_placeholder": "https://...",
-  "app_icon_url_optional": "URL do Ícone do App (opcional)"
+  "app_icon_url_optional": "URL do Ícone do App (opcional)",
+  "running": "Corrida",
+  "cycling": "Ciclismo",
+  "swimming": "Natação",
+  "walking": "Caminhada",
+  "hiking": "Trilha",
+  "weightlifting": "Musculação",
+  "yoga": "Yoga",
+  "hiit": "HIIT",
+  "other": "Outro"
 }

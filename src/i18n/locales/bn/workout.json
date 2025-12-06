@@ -14,5 +14,18 @@
   "workout_history": "ওয়ার্কআউট ইতিহাস",
   "no_workouts": "কোনো ওয়ার্কআউট নেই",
   "workout_complete": "ওয়ার্কআউট সম্পূর্ণ!",
-  "great_job": "দারুণ কাজ!"
+  "great_job": "দারুণ কাজ!",
+  "running": "দৌড়ানো",
+  "cycling": "সাইক্লিং",
+  "swimming": "সাঁতার",
+  "walking": "হাঁটা",
+  "hiking": "হাইকিং",
+  "weightlifting": "ওয়েটলিফটিং",
+  "yoga": "যোগ",
+  "hiit": "HIIT",
+  "other": "অন্যান্য",
+  "low": "কম",
+  "medium": "মাঝারি",
+  "high": "উচ্চ",
+  "intense": "তীব্র"
 }

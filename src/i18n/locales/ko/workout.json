@@ -14,5 +14,18 @@
   "workout_history": "운동 기록",
   "no_workouts": "운동이 없습니다",
   "workout_complete": "운동 완료!",
-  "great_job": "잘했어요!"
+  "great_job": "잘했어요!",
+  "running": "달리기",
+  "cycling": "자전거",
+  "swimming": "수영",
+  "walking": "걷기",
+  "hiking": "등산",
+  "weightlifting": "웨이트",
+  "yoga": "요가",
+  "hiit": "HIIT",
+  "other": "기타",
+  "low": "낮음",
+  "medium": "보통",
+  "high": "높음",
+  "intense": "격렬함"
 }
