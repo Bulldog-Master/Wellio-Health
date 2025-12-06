@@ -69,5 +69,7 @@
   "difficulty_level": "கடினத்தன்மை நிலை",
   "beginner": "ஆரம்பநிலை",
   "intermediate": "இடைநிலை",
-  "advanced": "மேம்பட்ட"
+  "advanced": "மேம்பட்ட",
+  "date_time": "தேதி & நேரம்",
+  "recorded_at": "பதிவு செய்யப்பட்டது"
 }

@@ -52,5 +52,7 @@
   "difficulty_level": "Mức độ khó",
   "beginner": "Người mới",
   "intermediate": "Trung bình",
-  "advanced": "Nâng cao"
+  "advanced": "Nâng cao",
+  "date_time": "Ngày & Giờ",
+  "recorded_at": "Ghi lại lúc"
 }

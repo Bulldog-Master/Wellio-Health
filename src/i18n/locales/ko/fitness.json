@@ -69,5 +69,7 @@
   "difficulty_level": "난이도",
   "beginner": "초급",
   "intermediate": "중급",
-  "advanced": "고급"
+  "advanced": "고급",
+  "date_time": "날짜 및 시간",
+  "recorded_at": "기록 시간"
 }

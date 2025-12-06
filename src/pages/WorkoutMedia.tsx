@@ -275,7 +275,7 @@ const WorkoutMedia = () => {
                   <div className="p-2 opacity-0 group-hover:opacity-100 transition-opacity w-full">
                     <p className="text-xs text-white font-medium truncate">{item.activity_type}</p>
                     <p className="text-xs text-white/70">
-                      {item.logged_at && format(new Date(item.logged_at), 'MMM d, yyyy')}
+                      {item.logged_at && format(new Date(item.logged_at), 'MMM d, yyyy • h:mm a')}
                     </p>
                   </div>
                 </div>
@@ -312,7 +312,7 @@ const WorkoutMedia = () => {
                   <div className="flex-1 min-w-0">
                     <p className="font-medium truncate">{item.activity_type || t('workout:workout')}</p>
                     <p className="text-sm text-muted-foreground">
-                      {item.logged_at && format(new Date(item.logged_at), 'MMMM d, yyyy')}
+                      {item.logged_at && format(new Date(item.logged_at), 'MMMM d, yyyy • h:mm a')}
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
@@ -337,7 +337,7 @@ const WorkoutMedia = () => {
                   <span>{selectedMedia?.activity_type || t('workout:workout')}</span>
                   {selectedMedia?.logged_at && (
                     <span className="text-sm font-normal text-muted-foreground ml-2">
-                      {format(new Date(selectedMedia.logged_at), 'MMMM d, yyyy')}
+                      {format(new Date(selectedMedia.logged_at), 'MMMM d, yyyy • h:mm a')}
                     </span>
                   )}
                 </div>

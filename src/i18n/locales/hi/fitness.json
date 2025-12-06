@@ -69,5 +69,7 @@
   "difficulty_level": "कठिनाई स्तर",
   "beginner": "शुरुआती",
   "intermediate": "मध्यवर्ती",
-  "advanced": "उन्नत"
+  "advanced": "उन्नत",
+  "date_time": "तारीख और समय",
+  "recorded_at": "रिकॉर्ड किया गया"
 }

@@ -69,5 +69,7 @@
   "difficulty_level": "Tingkat kesulitan",
   "beginner": "Pemula",
   "intermediate": "Menengah",
-  "advanced": "Lanjutan"
+  "advanced": "Lanjutan",
+  "date_time": "Tanggal & Waktu",
+  "recorded_at": "Direkam pada"
 }

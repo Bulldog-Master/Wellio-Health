@@ -69,5 +69,7 @@
   "difficulty_level": "مستوى الصعوبة",
   "beginner": "مبتدئ",
   "intermediate": "متوسط",
-  "advanced": "متقدم"
+  "advanced": "متقدم",
+  "date_time": "التاريخ والوقت",
+  "recorded_at": "اتسجل في"
 }

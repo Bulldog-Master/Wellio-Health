@@ -52,5 +52,7 @@
   "difficulty_level": "కఠినత స్థాయి",
   "beginner": "ప్రారంభకుడు",
   "intermediate": "మధ్యస్థ",
-  "advanced": "అధునాతన"
+  "advanced": "అధునాతన",
+  "date_time": "తేదీ & సమయం",
+  "recorded_at": "రికార్డ్ చేసిన సమయం"
 }

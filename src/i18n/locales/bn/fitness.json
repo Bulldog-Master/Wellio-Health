@@ -69,5 +69,7 @@
   "difficulty_level": "কঠিনতার স্তর",
   "beginner": "শিক্ষানবিস",
   "intermediate": "মধ্যবর্তী",
-  "advanced": "উন্নত"
+  "advanced": "উন্নত",
+  "date_time": "তারিখ ও সময়",
+  "recorded_at": "রেকর্ড করা হয়েছে"
 }

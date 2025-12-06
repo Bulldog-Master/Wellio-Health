@@ -240,5 +240,7 @@
   "rest": "rest",
   "pro_tips": "Pro Tips",
   "workout_media_gallery": "Workout Media",
-  "view_workout_photos_videos": "View your workout photos and videos"
+  "view_workout_photos_videos": "View your workout photos and videos",
+  "date_time": "Date & Time",
+  "recorded_at": "Recorded at"
 }
