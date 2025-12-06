@@ -242,5 +242,32 @@
   "workout_media_gallery": "Workout Media",
   "view_workout_photos_videos": "View your workout photos and videos",
   "date_time": "Date & Time",
-  "recorded_at": "Recorded at"
+  "recorded_at": "Recorded at",
+  
+  "progress_comparison": "Progress Comparison",
+  "progress_comparison_desc": "Compare your progress photos side by side",
+  "compare_progress_photos": "Compare your transformation over time",
+  "need_more_photos": "Need More Photos",
+  "need_at_least_two_photos": "Upload at least 2 progress photos to use the comparison tool",
+  "photos_count": "You have {{count}} photo(s)",
+  "before_photo": "Before",
+  "after_photo": "After",
+  "select_photo": "Select photo",
+  "days_of_progress": "{{days}} days of progress",
+  "swap_photos": "Swap Photos",
+  
+  "voice_workout_logging": "Voice Workout Logging",
+  "voice_logging_description": "Describe your workout and we'll log it for you",
+  "tap_to_record": "Tap to start recording",
+  "processing_voice": "Processing your voice...",
+  "voice_example": "Example:",
+  "voice_example_text": "I just did 45 minutes of running and burned 400 calories",
+  "you_said": "You said",
+  "extracted_workout": "Extracted Workout",
+  "activity": "Activity",
+  "confirm_log": "Confirm & Log",
+  "retry": "Try Again",
+  "workout_logged": "Workout Logged!",
+  "voice_workout_saved": "Your workout has been saved successfully",
+  "failed_to_process_voice": "Failed to process voice recording"
 }
