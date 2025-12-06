@@ -167,7 +167,9 @@ export type Database = {
       auth_secrets: {
         Row: {
           backup_codes: Json | null
+          backup_codes_encrypted: string | null
           created_at: string | null
+          encryption_version: number | null
           id: string
           two_factor_enabled: boolean | null
           two_factor_secret: string | null
@@ -176,7 +178,9 @@ export type Database = {
         }
         Insert: {
           backup_codes?: Json | null
+          backup_codes_encrypted?: string | null
           created_at?: string | null
+          encryption_version?: number | null
           id?: string
           two_factor_enabled?: boolean | null
           two_factor_secret?: string | null
@@ -185,7 +189,9 @@ export type Database = {
         }
         Update: {
           backup_codes?: Json | null
+          backup_codes_encrypted?: string | null
           created_at?: string | null
+          encryption_version?: number | null
           id?: string
           two_factor_enabled?: boolean | null
           two_factor_secret?: string | null
@@ -1891,24 +1897,30 @@ export type Database = {
       messages: {
         Row: {
           content: string
+          content_encrypted: string | null
           conversation_id: string
           created_at: string
+          encryption_version: number | null
           id: string
           is_read: boolean
           sender_id: string
         }
         Insert: {
           content: string
+          content_encrypted?: string | null
           conversation_id: string
           created_at?: string
+          encryption_version?: number | null
           id?: string
           is_read?: boolean
           sender_id: string
         }
         Update: {
           content?: string
+          content_encrypted?: string | null
           conversation_id?: string
           created_at?: string
+          encryption_version?: number | null
           id?: string
           is_read?: boolean
           sender_id?: string
@@ -4851,6 +4863,14 @@ export type Database = {
         Returns: boolean
       }
       log_medical_read: { Args: never; Returns: undefined }
+      mark_encryption_upgraded: {
+        Args: {
+          p_new_version?: number
+          p_record_id: string
+          p_table_name: string
+        }
+        Returns: undefined
+      }
       redeem_reward: { Args: { _reward_id: string }; Returns: string }
       revoke_vip_pass: { Args: { _user_id: string }; Returns: boolean }
     }
