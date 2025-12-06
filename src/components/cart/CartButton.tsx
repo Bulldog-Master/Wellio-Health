@@ -13,7 +13,7 @@ export const CartButton = () => {
     <Button 
       variant="outline" 
       size="icon" 
-      className="relative h-9 w-9 border-2 border-primary/50 bg-background hover:bg-primary/10 hover:border-primary transition-all duration-200 hover:scale-105"
+      className="relative h-9 w-9 border-2 border-primary bg-primary/10 hover:bg-primary/20 hover:border-primary transition-all duration-200 hover:scale-105 shadow-md"
       onClick={openCart}
       aria-label={t('common:cart')}
     >

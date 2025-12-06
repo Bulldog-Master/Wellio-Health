@@ -4295,6 +4295,36 @@ export type Database = {
         }
         Relationships: []
       }
+      user_encryption_keys: {
+        Row: {
+          created_at: string
+          id: string
+          key_version: number
+          public_key: string
+          public_key_created_at: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          key_version?: number
+          public_key: string
+          public_key_created_at?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          key_version?: number
+          public_key?: string
+          public_key_created_at?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string | null
@@ -4819,6 +4849,7 @@ export type Database = {
           user_id: string
         }[]
       }
+      get_user_public_key: { Args: { _user_id: string }; Returns: string }
       get_user_role: {
         Args: { _user_id: string }
         Returns: Database["public"]["Enums"]["app_role"]
