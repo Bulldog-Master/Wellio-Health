@@ -237,5 +237,14 @@
   "weightlifting": "Pesas",
   "yoga": "Yoga",
   "hiit": "HIIT",
-  "other": "Otro"
+  "other": "Otro",
+  "media_gallery": "Galería de Medios de Entrenamiento",
+  "media_gallery_desc": "Ver todas tus fotos y videos de entrenamiento",
+  "photos": "Fotos",
+  "videos": "Videos",
+  "no_media_yet": "Aún no hay medios de entrenamiento",
+  "no_media_desc": "Sube fotos y videos durante tus entrenamientos para verlos aquí",
+  "media_deleted": "Medio eliminado",
+  "error_loading_media": "Error al cargar medios",
+  "error_deleting_media": "Error al eliminar medio"
 }

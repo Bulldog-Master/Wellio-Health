@@ -16,6 +16,7 @@ const Food = lazy(() => import("@/pages/Food"));
 const FoodLog = lazy(() => import("@/pages/FoodLog"));
 const Recipes = lazy(() => import("@/pages/Recipes"));
 const Workout = lazy(() => import("@/pages/Workout"));
+const WorkoutMedia = lazy(() => import("@/pages/WorkoutMedia"));
 const WorkoutSchedule = lazy(() => import("@/pages/WorkoutSchedule"));
 const Activity = lazy(() => import("@/pages/Activity"));
 const Habits = lazy(() => import("@/pages/Habits"));
@@ -159,6 +160,7 @@ export const AppRoutes = () => (
     <Route path="/personal-records" element={<ProtectedRoute><Layout><PersonalRecords /></Layout></ProtectedRoute>} />
     <Route path="/live-workout-sessions" element={<ProtectedRoute><Layout><LiveWorkoutSessions /></Layout></ProtectedRoute>} />
     <Route path="/live-session/:sessionId" element={<ProtectedRoute><Layout><LiveSessionRoom /></Layout></ProtectedRoute>} />
+    <Route path="/workout-media" element={<ProtectedRoute><Layout><WorkoutMedia /></Layout></ProtectedRoute>} />
     
     {/* Habits & Goals */}
     <Route path="/habits" element={<ProtectedRoute><Layout><Habits /></Layout></ProtectedRoute>} />
