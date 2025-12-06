@@ -12,5 +12,11 @@
   "participants": "参与者",
   "your_rank": "您的排名",
   "challenge_complete": "挑战完成！",
-  "no_challenges": "暂无挑战"
+  "no_challenges": "暂无挑战",
+  "social_challenges": "社交挑战",
+  "joined_success": "成功加入挑战！",
+  "join_error": "加入挑战失败",
+  "your_progress": "您的进度",
+  "leaderboard": "排行榜",
+  "points": "积分"
 }

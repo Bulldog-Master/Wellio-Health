@@ -36,5 +36,12 @@
   "success": "Sucesso",
   "challenge_created": "Desafio criado com sucesso",
   "failed_to_create": "Falha ao criar desafio",
-  "back_to_premium": "Voltar para Premium"
+  "back_to_premium": "Voltar para Premium",
+  "social_challenges": "Desafios Sociais",
+  "joined_success": "Você entrou no desafio com sucesso!",
+  "join_error": "Falha ao entrar no desafio",
+  "your_progress": "Seu Progresso",
+  "days_remaining": "dias restantes",
+  "leaderboard": "Classificação",
+  "join_challenge": "Entrar no Desafio"
 }
