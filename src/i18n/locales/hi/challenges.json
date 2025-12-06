@@ -12,5 +12,18 @@
   "participants": "प्रतिभागी",
   "your_rank": "आपकी रैंक",
   "challenge_complete": "चुनौती पूर्ण!",
-  "no_challenges": "कोई चुनौती नहीं"
+  "no_challenges": "कोई चुनौती नहीं",
+  "social_challenges": "सामाजिक चुनौतियाँ",
+  "invite_friends": "दोस्तों को आमंत्रित करें",
+  "friend_challenges": "दोस्तों की चुनौतियाँ",
+  "compete_with_friends": "दोस्तों के साथ प्रतिस्पर्धा करें",
+  "challenge_friend": "दोस्त को चुनौती दें",
+  "pending_challenges": "लंबित चुनौतियाँ",
+  "accept_challenge": "स्वीकार करें",
+  "decline_challenge": "अस्वीकार करें",
+  "challenge_sent": "चुनौती भेजी गई!",
+  "challenge_accepted": "चुनौती स्वीकार की गई!",
+  "you_won": "आप जीते!",
+  "you_lost": "आप हारे",
+  "tie": "टाई"
 }

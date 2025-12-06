@@ -12,5 +12,18 @@
   "participants": "Người tham gia",
   "your_rank": "Hạng của bạn",
   "challenge_complete": "Hoàn thành thử thách!",
-  "no_challenges": "Không có thử thách"
+  "no_challenges": "Không có thử thách",
+  "social_challenges": "Thử thách xã hội",
+  "invite_friends": "Mời bạn bè",
+  "friend_challenges": "Thử thách bạn bè",
+  "compete_with_friends": "Thi đấu với bạn bè",
+  "challenge_friend": "Thách đấu bạn",
+  "pending_challenges": "Thử thách đang chờ",
+  "accept_challenge": "Chấp nhận",
+  "decline_challenge": "Từ chối",
+  "challenge_sent": "Đã gửi thử thách!",
+  "challenge_accepted": "Thử thách được chấp nhận!",
+  "you_won": "Bạn thắng!",
+  "you_lost": "Bạn thua",
+  "tie": "Hòa"
 }

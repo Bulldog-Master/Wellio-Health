@@ -12,5 +12,18 @@
   "participants": "অংশগ্রহণকারী",
   "your_rank": "আপনার র‌্যাঙ্ক",
   "challenge_complete": "চ্যালেঞ্জ সম্পন্ন!",
-  "no_challenges": "কোনো চ্যালেঞ্জ নেই"
+  "no_challenges": "কোনো চ্যালেঞ্জ নেই",
+  "social_challenges": "সামাজিক চ্যালেঞ্জ",
+  "invite_friends": "বন্ধুদের আমন্ত্রণ",
+  "friend_challenges": "বন্ধুদের চ্যালেঞ্জ",
+  "compete_with_friends": "বন্ধুদের সাথে প্রতিযোগিতা",
+  "challenge_friend": "বন্ধুকে চ্যালেঞ্জ করুন",
+  "pending_challenges": "অপেক্ষারত চ্যালেঞ্জ",
+  "accept_challenge": "গ্রহণ করুন",
+  "decline_challenge": "প্রত্যাখ্যান করুন",
+  "challenge_sent": "চ্যালেঞ্জ পাঠানো হয়েছে!",
+  "challenge_accepted": "চ্যালেঞ্জ গৃহীত!",
+  "you_won": "আপনি জিতেছেন!",
+  "you_lost": "আপনি হেরেছেন",
+  "tie": "টাই"
 }

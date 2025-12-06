@@ -12,5 +12,18 @@
   "participants": "شرکاء",
   "your_rank": "آپ کی درجہ بندی",
   "challenge_complete": "چیلنج مکمل!",
-  "no_challenges": "کوئی چیلنج نہیں"
+  "no_challenges": "کوئی چیلنج نہیں",
+  "social_challenges": "سماجی چیلنجز",
+  "invite_friends": "دوستوں کو مدعو کریں",
+  "friend_challenges": "دوستوں کے چیلنجز",
+  "compete_with_friends": "دوستوں کے ساتھ مقابلہ کریں",
+  "challenge_friend": "دوست کو چیلنج کریں",
+  "pending_challenges": "زیر التوا چیلنجز",
+  "accept_challenge": "قبول کریں",
+  "decline_challenge": "انکار کریں",
+  "challenge_sent": "چیلنج بھیج دیا گیا!",
+  "challenge_accepted": "چیلنج قبول ہو گیا!",
+  "you_won": "آپ جیت گئے!",
+  "you_lost": "آپ ہار گئے",
+  "tie": "ٹائی"
 }
