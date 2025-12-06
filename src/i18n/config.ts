@@ -64,6 +64,8 @@ import recoveryEN from './locales/en/recovery.json';
 import addonsEN from './locales/en/addons.json';
 import professionalEN from './locales/en/professional.json';
 import paymentsEN from './locales/en/payments.json';
+import legalEN from './locales/en/legal.json';
+import controlsEN from './locales/en/controls.json';
 
 // Spanish
 import commonES from './locales/es/common.json';
@@ -125,6 +127,8 @@ import recoveryES from './locales/es/recovery.json';
 import addonsES from './locales/es/addons.json';
 import professionalES from './locales/es/professional.json';
 import paymentsES from './locales/es/payments.json';
+import legalES from './locales/es/legal.json';
+import controlsES from './locales/es/controls.json';
 
 // Portuguese - Core namespaces only
 import commonPT from './locales/pt/common.json';
@@ -151,6 +155,8 @@ import settingsPT from './locales/pt/settings.json';
 import locationsPT from './locales/pt/locations.json';
 import productsPT from './locales/pt/products.json';
 import paymentsPT from './locales/pt/payments.json';
+import legalPT from './locales/pt/legal.json';
+import controlsPT from './locales/pt/controls.json';
 
 // French - Core + Extended namespaces
 import commonFR from './locales/fr/common.json';
@@ -186,6 +192,8 @@ import searchFR from './locales/fr/search.json';
 import sessionFR from './locales/fr/session.json';
 import voiceFR from './locales/fr/voice.json';
 import paymentsFR from './locales/fr/payments.json';
+import legalFR from './locales/fr/legal.json';
+import controlsFR from './locales/fr/controls.json';
 
 // German - Core namespaces only
 import commonDE from './locales/de/common.json';
@@ -212,6 +220,8 @@ import settingsDE from './locales/de/settings.json';
 import locationsDE from './locales/de/locations.json';
 import productsDE from './locales/de/products.json';
 import paymentsDE from './locales/de/payments.json';
+import legalDE from './locales/de/legal.json';
+import controlsDE from './locales/de/controls.json';
 
 // Chinese - Core namespaces only
 import commonZH from './locales/zh/common.json';
@@ -238,6 +248,8 @@ import settingsZH from './locales/zh/settings.json';
 import locationsZH from './locales/zh/locations.json';
 import productsZH from './locales/zh/products.json';
 import paymentsZH from './locales/zh/payments.json';
+import legalZH from './locales/zh/legal.json';
+import controlsZH from './locales/zh/controls.json';
 
 // Turkish - Core + Extended namespaces
 import commonTR from './locales/tr/common.json';
@@ -273,6 +285,8 @@ import searchTR from './locales/tr/search.json';
 import sessionTR from './locales/tr/session.json';
 import voiceTR from './locales/tr/voice.json';
 import paymentsTR from './locales/tr/payments.json';
+import legalTR from './locales/tr/legal.json';
+import controlsTR from './locales/tr/controls.json';
 
 // Italian - Core + Extended namespaces
 import commonIT from './locales/it/common.json';
@@ -308,6 +322,8 @@ import searchIT from './locales/it/search.json';
 import sessionIT from './locales/it/session.json';
 import voiceIT from './locales/it/voice.json';
 import paymentsIT from './locales/it/payments.json';
+import legalIT from './locales/it/legal.json';
+import controlsIT from './locales/it/controls.json';
 
 // Dutch - Core + Extended namespaces
 import commonNL from './locales/nl/common.json';
@@ -343,6 +359,8 @@ import searchNL from './locales/nl/search.json';
 import sessionNL from './locales/nl/session.json';
 import voiceNL from './locales/nl/voice.json';
 import paymentsNL from './locales/nl/payments.json';
+import legalNL from './locales/nl/legal.json';
+import controlsNL from './locales/nl/controls.json';
 
 // Russian - Core + Extended namespaces
 import commonRU from './locales/ru/common.json';
