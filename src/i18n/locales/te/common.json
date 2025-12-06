@@ -9,7 +9,14 @@
     "professional": "ప్రొఫెషనల్",
     "recovery": "రికవరీ",
     "shop": "షాపు",
-    "sponsors": "స్పాన్సర్లు"
+    "sponsors": "స్పాన్సర్లు",
+    "fitness": "ఫిట్‌నెస్",
+    "social": "సామాజిక",
+    "discover": "అన్వేషించు",
+    "more": "మరింత",
+    "dashboard": "డాష్‌బోర్డ్",
+    "settings": "సెట్టింగ్‌లు",
+    "locations": "స్థానాలు"
   },
   "app_name": "Wellio",
   "loading": "లోడ్ అవుతోంది...",
@@ -64,15 +71,5 @@
   "in_cart": "కార్ట్‌లో ఉంది",
   "add_to_cart": "కార్ట్‌కు జోడించు",
   "proceed_to_checkout": "చెక్‌అవుట్‌కు వెళ్ళు",
-  "toggle_unit": "యూనిట్ మార్చడానికి క్లిక్ చేయండి",
-  "nav": {
-    "activity": "కార్యకలాపం",
-    "connect": "కనెక్ట్",
-    "food": "ఆహారం",
-    "dashboard": "డాష్‌బోర్డ్",
-    "settings": "సెట్టింగ్‌లు",
-    "news": "వార్తలు",
-    "recovery": "రికవరీ",
-    "locations": "స్థానాలు"
-  }
+  "toggle_unit": "యూనిట్ మార్చడానికి క్లిక్ చేయండి"
 }

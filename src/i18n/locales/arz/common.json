@@ -9,7 +9,14 @@
     "professional": "احترافي",
     "recovery": "التعافي",
     "shop": "المحل",
-    "sponsors": "الرعاة"
+    "sponsors": "الرعاة",
+    "fitness": "اللياقة",
+    "social": "السوشيال",
+    "discover": "اكتشف",
+    "more": "أكتر",
+    "dashboard": "لوحة التحكم",
+    "settings": "الإعدادات",
+    "locations": "الأماكن"
   },
   "app_name": "Wellio",
   "loading": "بيحمّل...",
@@ -88,18 +95,5 @@
   "add_to_cart": "أضف للعربية",
   "proceed_to_checkout": "كمل الدفع",
   "toggle_unit": "اضغط لتغيير الوحدة",
-  "nav": {
-    "activity": "النشاط",
-    "connect": "اتصل",
-    "food": "الأكل",
-    "dashboard": "لوحة التحكم",
-    "settings": "الإعدادات",
-    "news": "الأخبار",
-    "recovery": "الاستشفاء",
-    "locations": "الأماكن",
-    "fundraisers": "جمع تبرعات",
-    "wellness_directory": "دليل العافية",
-    "shop": "محل",
-    "sponsors": "رعاة"
-  }
+  "view_all": "شوف الكل"
 }

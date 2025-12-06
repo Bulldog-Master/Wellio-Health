@@ -9,7 +9,14 @@
     "professional": "پیشہ ور",
     "recovery": "ریکوری",
     "shop": "دکان",
-    "sponsors": "اسپانسرز"
+    "sponsors": "اسپانسرز",
+    "fitness": "فٹنس",
+    "social": "سوشل",
+    "discover": "دریافت کریں",
+    "more": "مزید",
+    "dashboard": "ڈیش بورڈ",
+    "settings": "ترتیبات",
+    "locations": "مقامات"
   },
   "app_name": "Wellio",
   "loading": "لوڈ ہو رہا ہے...",
@@ -88,14 +95,5 @@
   "add_to_cart": "کارٹ میں شامل کریں",
   "proceed_to_checkout": "چیک آؤٹ کریں",
   "toggle_unit": "یونٹ تبدیل کرنے کے لیے کلک کریں",
-  "nav": {
-    "activity": "سرگرمی",
-    "connect": "جڑیں",
-    "food": "کھانا",
-    "dashboard": "ڈیش بورڈ",
-    "settings": "ترتیبات",
-    "news": "خبریں",
-    "recovery": "بحالی",
-    "locations": "مقامات"
-  }
+  "view_all": "سب دیکھیں"
 }
