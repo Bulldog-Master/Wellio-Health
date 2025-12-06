@@ -35,22 +35,33 @@ const AuditTrail = () => {
 
       const { data, error } = await supabase
         .from('security_logs')
-        .select('id, event_type, event_data, severity, created_at')
+        .select('id, event_type, event_data, created_at')
         .eq('user_id', user.id)
         .order('created_at', { ascending: false })
         .limit(100);
 
       if (error) throw error;
       
-      const filteredData = filter === 'all' 
-        ? data 
-        : data?.filter(log => log.severity === filter);
+      // Derive severity from event_type
+      const logsWithSeverity = (data || []).map(log => {
+        const eventType = log.event_type || '';
+        let severity = 'low';
+        if (eventType.includes('failed') || eventType.includes('error')) severity = 'high';
+        else if (eventType.includes('warning') || eventType.includes('unusual')) severity = 'medium';
+        else if (eventType.includes('critical') || eventType.includes('breach')) severity = 'critical';
+        
+        return {
+          ...log,
+          severity,
+          event_data: (log.event_data as Record<string, unknown>) || {}
+        };
+      });
       
-      setLogs((filteredData || []).map(log => ({
-        ...log,
-        severity: log.severity || 'low',
-        event_data: (log.event_data as Record<string, unknown>) || {}
-      })));
+      const filteredData = filter === 'all' 
+        ? logsWithSeverity 
+        : logsWithSeverity.filter(log => log.severity === filter);
+      
+      setLogs(filteredData);
     } catch (error) {
       console.error('Error fetching security logs:', error);
     } finally {
