@@ -4,5 +4,20 @@
   "search_food": "کھانا تلاش کریں",
   "recent_foods": "حالیہ کھانے",
   "favorites": "پسندیدہ",
-  "nutrition_info": "غذائی معلومات"
+  "nutrition_info": "غذائی معلومات",
+  "scan_barcode": "بارکوڈ اسکین کریں",
+  "scanner_instructions": "بارکوڈ کو فریم میں رکھیں",
+  "scanner_camera_error": "کیمرہ تک رسائی نہیں ہو سکتی۔ اجازتیں چیک کریں۔",
+  "scanner_lookup_error": "پروڈکٹ تلاش کرنے میں خرابی۔ دوبارہ کوشش کریں۔",
+  "product_not_found": "پروڈکٹ ڈیٹابیس میں نہیں ملی",
+  "looking_up_product": "پروڈکٹ تلاش کر رہے ہیں...",
+  "unknown_product": "نامعلوم پروڈکٹ",
+  "serving_size": "سرونگ سائز",
+  "calories": "کیلوریز",
+  "protein": "پروٹین",
+  "carbs": "کاربوہائیڈریٹس",
+  "fat": "چربی",
+  "scan_again": "دوبارہ اسکین کریں",
+  "add_to_log": "لاگ میں شامل کریں",
+  "product_added": "پروڈکٹ لاگ میں شامل ہو گئی"
 }

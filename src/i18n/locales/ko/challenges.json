@@ -12,5 +12,11 @@
   "participants": "참가자",
   "your_rank": "내 순위",
   "challenge_complete": "챌린지 완료!",
-  "no_challenges": "챌린지가 없습니다"
+  "no_challenges": "챌린지가 없습니다",
+  "social_challenges": "소셜 챌린지",
+  "joined_success": "챌린지에 성공적으로 참가했습니다!",
+  "join_error": "챌린지 참가에 실패했습니다",
+  "your_progress": "내 진행률",
+  "leaderboard": "순위표",
+  "points": "포인트"
 }

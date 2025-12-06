@@ -4,5 +4,20 @@
   "search_food": "अन्न शोधा",
   "recent_foods": "अलीकडील अन्न",
   "favorites": "आवडते",
-  "nutrition_info": "पोषण माहिती"
+  "nutrition_info": "पोषण माहिती",
+  "scan_barcode": "बारकोड स्कॅन करा",
+  "scanner_instructions": "बारकोड फ्रेममध्ये ठेवा",
+  "scanner_camera_error": "कॅमेरा ऍक्सेस होत नाही. परवानग्या तपासा.",
+  "scanner_lookup_error": "उत्पादन शोधण्यात त्रुटी. पुन्हा प्रयत्न करा.",
+  "product_not_found": "उत्पादन डेटाबेसमध्ये सापडले नाही",
+  "looking_up_product": "उत्पादन शोधत आहे...",
+  "unknown_product": "अज्ञात उत्पादन",
+  "serving_size": "सर्व्हिंग आकार",
+  "calories": "कॅलरीज",
+  "protein": "प्रोटीन",
+  "carbs": "कार्ब्स",
+  "fat": "चरबी",
+  "scan_again": "पुन्हा स्कॅन करा",
+  "add_to_log": "लॉगमध्ये जोडा",
+  "product_added": "उत्पादन लॉगमध्ये जोडले"
 }
