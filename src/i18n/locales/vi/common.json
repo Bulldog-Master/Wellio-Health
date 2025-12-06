@@ -9,7 +9,14 @@
     "professional": "Chuyên nghiệp",
     "recovery": "Phục hồi",
     "shop": "Cửa hàng",
-    "sponsors": "Nhà tài trợ"
+    "sponsors": "Nhà tài trợ",
+    "fitness": "Thể hình",
+    "social": "Xã hội",
+    "discover": "Khám phá",
+    "more": "Thêm",
+    "dashboard": "Bảng điều khiển",
+    "settings": "Cài đặt",
+    "locations": "Địa điểm"
   },
   "app_name": "Wellio",
   "loading": "Đang tải...",
@@ -64,15 +71,5 @@
   "in_cart": "Trong giỏ hàng",
   "add_to_cart": "Thêm vào giỏ",
   "proceed_to_checkout": "Tiến hành thanh toán",
-  "toggle_unit": "Nhấp để chuyển đổi đơn vị",
-  "nav": {
-    "activity": "Hoạt động",
-    "connect": "Kết nối",
-    "food": "Thức ăn",
-    "dashboard": "Bảng điều khiển",
-    "settings": "Cài đặt",
-    "news": "Tin tức",
-    "recovery": "Phục hồi",
-    "locations": "Địa điểm"
-  }
+  "toggle_unit": "Nhấp để chuyển đổi đơn vị"
 }

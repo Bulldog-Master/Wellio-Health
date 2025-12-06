@@ -110,7 +110,7 @@ export const AppRoutes = () => (
     
     {/* Protected Routes */}
     <Route path="/onboarding" element={<RouteErrorBoundary><ProtectedRoute><Onboarding /></ProtectedRoute></RouteErrorBoundary>} />
-    <Route path="/" element={<RouteErrorBoundary><ProtectedRoute><Index /></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/" element={<RouteErrorBoundary><ProtectedRoute><Layout><Index /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     
     {/* Profile & Settings */}
     <Route path="/profile" element={<RouteErrorBoundary><ProtectedRoute><Layout><Profile /></Layout></ProtectedRoute></RouteErrorBoundary>} />
