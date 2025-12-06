@@ -12,5 +12,18 @@
   "participants": "పాల్గొనేవారు",
   "your_rank": "మీ ర్యాంక్",
   "challenge_complete": "సవాలు పూర్తయింది!",
-  "no_challenges": "సవాళ్లు లేవు"
+  "no_challenges": "సవాళ్లు లేవు",
+  "social_challenges": "సామాజిక సవాళ్లు",
+  "invite_friends": "స్నేహితులను ఆహ్వానించండి",
+  "friend_challenges": "స్నేహితుల సవాళ్లు",
+  "compete_with_friends": "స్నేహితులతో పోటీ పడండి",
+  "challenge_friend": "స్నేహితుడిని సవాలు చేయండి",
+  "pending_challenges": "పెండింగ్ సవాళ్లు",
+  "accept_challenge": "అంగీకరించండి",
+  "decline_challenge": "తిరస్కరించండి",
+  "challenge_sent": "సవాలు పంపబడింది!",
+  "challenge_accepted": "సవాలు అంగీకరించబడింది!",
+  "you_won": "మీరు గెలిచారు!",
+  "you_lost": "మీరు ఓడిపోయారు",
+  "tie": "టై"
 }

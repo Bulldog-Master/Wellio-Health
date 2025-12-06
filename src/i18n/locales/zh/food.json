@@ -4,5 +4,20 @@
   "search_food": "搜索食物",
   "recent_foods": "最近食物",
   "favorites": "收藏",
-  "nutrition_info": "营养信息"
+  "nutrition_info": "营养信息",
+  "scan_barcode": "扫描条形码",
+  "scanner_instructions": "将条形码放在框内",
+  "scanner_camera_error": "无法访问相机。请检查权限。",
+  "scanner_lookup_error": "查找产品时出错。请重试。",
+  "product_not_found": "数据库中未找到产品",
+  "looking_up_product": "正在查找产品...",
+  "unknown_product": "未知产品",
+  "serving_size": "份量",
+  "calories": "卡路里",
+  "protein": "蛋白质",
+  "carbs": "碳水化合物",
+  "fat": "脂肪",
+  "scan_again": "重新扫描",
+  "add_to_log": "添加到日志",
+  "product_added": "产品已添加到日志"
 }
