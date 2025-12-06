@@ -9,6 +9,7 @@ import { User, MessageSquare } from "lucide-react";
 import { useUserPresence } from "@/hooks/useUserPresence";
 import { formatDistanceToNow } from "date-fns";
 import { useTranslation } from "react-i18next";
+import { PrivacyStatusIndicator } from "@/components/messages/PrivacyStatusIndicator";
 
 interface ConversationWithDetails {
   id: string;
@@ -171,6 +172,7 @@ const Messages = () => {
     <div className="container max-w-2xl mx-auto p-4">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">{t('messages:messages')}</h1>
+        <PrivacyStatusIndicator size="md" />
       </div>
 
       {!conversations || conversations.length === 0 ? (
