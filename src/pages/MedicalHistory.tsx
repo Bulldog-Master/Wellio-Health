@@ -18,7 +18,7 @@ import {
   symptomSchema, 
   validateAndSanitize 
 } from "@/lib/validationSchemas";
-import { uploadMedicalFile, getSignedMedicalFileUrl } from "@/lib/medicalFileStorage";
+import { uploadMedicalFile, getSignedMedicalFileUrl, ENCRYPTION_VERSION } from "@/lib/medicalFileStorage";
 import { useTranslation } from "react-i18next";
 import { SubscriptionGate } from "@/components/SubscriptionGate";
 import { MedicalAuthGate } from "@/components/MedicalAuthGate";
@@ -42,6 +42,7 @@ interface TestResult {
   result_unit: string | null;
   notes: string | null;
   file_url_encrypted: string | null;
+  encryption_version: number | null;
 }
 
 interface MedicalRecord {
@@ -51,6 +52,7 @@ interface MedicalRecord {
   category: string;
   notes: string | null;
   file_url_encrypted: string | null;
+  encryption_version: number | null;
 }
 
 interface Symptom {
@@ -272,7 +274,8 @@ const MedicalHistory = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
-      let filePath = testFormData.file_url || null;
+      let encryptedFilePath: string | null = null;
+      let encryptionVersion: number | null = null;
 
       // Upload file if selected
       if (testFile) {
@@ -280,7 +283,9 @@ const MedicalHistory = () => {
         if (!uploadResult.success) {
           throw new Error(uploadResult.error || 'Failed to upload file');
         }
-        filePath = uploadResult.filePath || null;
+        // Use encrypted file path if available, otherwise use plain path
+        encryptedFilePath = uploadResult.encryptedFilePath || uploadResult.filePath || null;
+        encryptionVersion = uploadResult.encryptionVersion || null;
       }
 
       const { error } = await supabase
@@ -292,7 +297,8 @@ const MedicalHistory = () => {
           result_value: testFormData.result_value || null,
           result_unit: testFormData.result_unit || null,
           notes: testFormData.notes || null,
-          file_url_encrypted: filePath,
+          file_url_encrypted: encryptedFilePath,
+          encryption_version: encryptionVersion,
         });
 
       if (error) throw error;
@@ -358,7 +364,8 @@ const MedicalHistory = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
-      let filePath = recordFormData.file_url || null;
+      let encryptedFilePath: string | null = null;
+      let encryptionVersion: number | null = null;
 
       // Upload file if selected
       if (recordFile) {
@@ -366,7 +373,9 @@ const MedicalHistory = () => {
         if (!uploadResult.success) {
           throw new Error(uploadResult.error || 'Failed to upload file');
         }
-        filePath = uploadResult.filePath || null;
+        // Use encrypted file path if available, otherwise use plain path
+        encryptedFilePath = uploadResult.encryptedFilePath || uploadResult.filePath || null;
+        encryptionVersion = uploadResult.encryptionVersion || null;
       }
 
       const { error } = await supabase
@@ -377,7 +386,8 @@ const MedicalHistory = () => {
           record_date: recordFormData.record_date,
           category: recordFormData.category,
           notes: recordFormData.notes || null,
-          file_url_encrypted: filePath,
+          file_url_encrypted: encryptedFilePath,
+          encryption_version: encryptionVersion,
         });
 
       if (error) throw error;
@@ -835,10 +845,14 @@ const MedicalHistory = () => {
                         size="sm"
                         className="mt-2"
                         onClick={async () => {
+                          // Check if file path is encrypted (version >= 2)
+                          const isEncrypted = (test.encryption_version || 0) >= 2;
                           const signedUrl = await getSignedMedicalFileUrl(
                             test.file_url_encrypted!,
                             test.id,
-                            'medical_test_results'
+                            'medical_test_results',
+                            3600,
+                            isEncrypted
                           );
                           if (signedUrl) {
                             window.open(signedUrl, '_blank');
@@ -978,10 +992,14 @@ const MedicalHistory = () => {
                         size="sm"
                         className="mt-2"
                         onClick={async () => {
+                          // Check if file path is encrypted (version >= 2)
+                          const isEncrypted = (record.encryption_version || 0) >= 2;
                           const signedUrl = await getSignedMedicalFileUrl(
                             record.file_url_encrypted!,
                             record.id,
-                            'medical_records'
+                            'medical_records',
+                            3600,
+                            isEncrypted
                           );
                           if (signedUrl) {
                             window.open(signedUrl, '_blank');
