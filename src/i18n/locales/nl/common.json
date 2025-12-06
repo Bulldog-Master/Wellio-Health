@@ -9,7 +9,11 @@
     "professional": "Professioneel",
     "recovery": "Herstel",
     "shop": "Winkel",
-    "sponsors": "Sponsors"
+    "sponsors": "Sponsors",
+    "fitness": "Fitness",
+    "social": "Sociaal",
+    "discover": "Ontdek",
+    "more": "Meer"
   },
   "app_name": "Wellio",
   "loading": "Laden...",
