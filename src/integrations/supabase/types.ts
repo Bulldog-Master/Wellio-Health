@@ -909,7 +909,8 @@ export type Database = {
           created_at: string | null
           id: string
           notes: string | null
-          reference_email: string
+          reference_email: string | null
+          reference_email_encrypted: string | null
           status: string | null
           transaction_id: string | null
           user_id: string
@@ -922,7 +923,8 @@ export type Database = {
           created_at?: string | null
           id?: string
           notes?: string | null
-          reference_email: string
+          reference_email?: string | null
+          reference_email_encrypted?: string | null
           status?: string | null
           transaction_id?: string | null
           user_id: string
@@ -935,7 +937,8 @@ export type Database = {
           created_at?: string | null
           id?: string
           notes?: string | null
-          reference_email?: string
+          reference_email?: string | null
+          reference_email_encrypted?: string | null
           status?: string | null
           transaction_id?: string | null
           user_id?: string
@@ -1741,6 +1744,7 @@ export type Database = {
           id: string
           last_accessed_at: string | null
           notes: string | null
+          notes_encrypted: string | null
           record_date: string
           record_name: string
           user_id: string
@@ -1753,6 +1757,7 @@ export type Database = {
           id?: string
           last_accessed_at?: string | null
           notes?: string | null
+          notes_encrypted?: string | null
           record_date: string
           record_name: string
           user_id: string
@@ -1765,6 +1770,7 @@ export type Database = {
           id?: string
           last_accessed_at?: string | null
           notes?: string | null
+          notes_encrypted?: string | null
           record_date?: string
           record_name?: string
           user_id?: string
@@ -1902,6 +1908,7 @@ export type Database = {
           created_at: string
           encryption_version: number | null
           id: string
+          is_encrypted: boolean | null
           is_read: boolean
           sender_id: string
         }
@@ -1912,6 +1919,7 @@ export type Database = {
           created_at?: string
           encryption_version?: number | null
           id?: string
+          is_encrypted?: boolean | null
           is_read?: boolean
           sender_id: string
         }
@@ -1922,6 +1930,7 @@ export type Database = {
           created_at?: string
           encryption_version?: number | null
           id?: string
+          is_encrypted?: boolean | null
           is_read?: boolean
           sender_id?: string
         }
@@ -2167,6 +2176,7 @@ export type Database = {
           external_transaction_id: string | null
           id: string
           metadata: Json | null
+          metadata_encrypted: string | null
           payment_method_id: string | null
           reference_id: string | null
           status: string | null
@@ -2183,6 +2193,7 @@ export type Database = {
           external_transaction_id?: string | null
           id?: string
           metadata?: Json | null
+          metadata_encrypted?: string | null
           payment_method_id?: string | null
           reference_id?: string | null
           status?: string | null
@@ -2199,6 +2210,7 @@ export type Database = {
           external_transaction_id?: string | null
           id?: string
           metadata?: Json | null
+          metadata_encrypted?: string | null
           payment_method_id?: string | null
           reference_id?: string | null
           status?: string | null
@@ -2487,14 +2499,12 @@ export type Database = {
           bio: string | null
           certifications: string[] | null
           created_at: string | null
-          email: string
           email_encrypted: string | null
           encryption_version: number | null
           full_name: string
           hourly_rate: number | null
           id: string
           location: string | null
-          phone: string | null
           phone_encrypted: string | null
           professional_type: string
           rejection_reason: string | null
@@ -2511,14 +2521,12 @@ export type Database = {
           bio?: string | null
           certifications?: string[] | null
           created_at?: string | null
-          email: string
           email_encrypted?: string | null
           encryption_version?: number | null
           full_name: string
           hourly_rate?: number | null
           id?: string
           location?: string | null
-          phone?: string | null
           phone_encrypted?: string | null
           professional_type: string
           rejection_reason?: string | null
@@ -2535,14 +2543,12 @@ export type Database = {
           bio?: string | null
           certifications?: string[] | null
           created_at?: string | null
-          email?: string
           email_encrypted?: string | null
           encryption_version?: number | null
           full_name?: string
           hourly_rate?: number | null
           id?: string
           location?: string | null
-          phone?: string | null
           phone_encrypted?: string | null
           professional_type?: string
           rejection_reason?: string | null
@@ -4868,6 +4874,18 @@ export type Database = {
           provider: string
           updated_at: string
           user_id: string
+        }[]
+      }
+      get_wearable_data_safe: {
+        Args: { _limit?: number; _user_id: string }
+        Returns: {
+          calories_burned: number
+          data_date: string
+          device_name: string
+          heart_rate: number
+          id: string
+          sleep_hours: number
+          steps: number
         }[]
       }
       grant_vip_pass: {

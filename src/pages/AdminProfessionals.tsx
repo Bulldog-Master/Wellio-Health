@@ -17,8 +17,8 @@ interface Application {
   user_id: string;
   professional_type: 'trainer' | 'practitioner';
   full_name: string;
-  email: string;
-  phone: string | null;
+  email_encrypted: string | null;
+  phone_encrypted: string | null;
   bio: string | null;
   specialties: string[] | null;
   certifications: string[] | null;
@@ -28,6 +28,7 @@ interface Application {
   status: string;
   rejection_reason: string | null;
   created_at: string;
+  encryption_version: number | null;
 }
 
 const AdminProfessionals = () => {
@@ -225,7 +226,7 @@ const AdminProfessionals = () => {
                           <div>
                             <CardTitle className="text-lg">{app.full_name}</CardTitle>
                             <CardDescription>
-                              {app.professional_type === 'trainer' ? 'Trainer' : 'Practitioner'} • {app.email}
+                              {app.professional_type === 'trainer' ? 'Trainer' : 'Practitioner'} • {app.full_name}
                             </CardDescription>
                           </div>
                         </div>

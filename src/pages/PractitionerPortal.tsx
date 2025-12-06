@@ -77,8 +77,8 @@ const PractitionerPortal = () => {
         setApplication(appData);
         setFormData({
           full_name: appData.full_name || '',
-          email: appData.email || user.email || '',
-          phone: appData.phone || '',
+          email: user.email || '',
+          phone: '',
           bio: appData.bio || '',
           specialties: appData.specialties?.join(', ') || '',
           certifications: appData.certifications?.join(', ') || '',
