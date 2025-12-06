@@ -203,5 +203,17 @@
   "failed_load_water": "Error al cargar datos de consumo de agua",
   "failed_log_water": "Error al registrar consumo de agua",
   "water_log_deleted": "Registro de agua eliminado",
-  "failed_delete_water": "Error al eliminar registro de agua"
+  "failed_delete_water": "Error al eliminar registro de agua",
+
+  "scan_barcode": "Escanear Código de Barras",
+  "scanner_instructions": "Posiciona el código de barras dentro del marco",
+  "scanner_camera_error": "No se puede acceder a la cámara. Verifica los permisos.",
+  "scanner_lookup_error": "Error al buscar producto. Intenta de nuevo.",
+  "product_not_found": "Producto no encontrado en la base de datos",
+  "looking_up_product": "Buscando producto...",
+  "unknown_product": "Producto Desconocido",
+  "scan_again": "Escanear de Nuevo",
+  "add_to_log": "Agregar al Registro",
+  "product_added": "Producto agregado al registro",
+  "fat": "Grasa"
 }

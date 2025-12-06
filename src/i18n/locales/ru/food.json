@@ -4,5 +4,20 @@
   "search_food": "Поиск еды",
   "recent_foods": "Недавняя еда",
   "favorites": "Избранное",
-  "nutrition_info": "Пищевая ценность"
+  "nutrition_info": "Пищевая ценность",
+  "scan_barcode": "Сканировать штрих-код",
+  "scanner_instructions": "Поместите штрих-код в рамку",
+  "scanner_camera_error": "Не удается получить доступ к камере. Проверьте разрешения.",
+  "scanner_lookup_error": "Ошибка поиска продукта. Попробуйте снова.",
+  "product_not_found": "Продукт не найден в базе данных",
+  "looking_up_product": "Поиск продукта...",
+  "unknown_product": "Неизвестный продукт",
+  "serving_size": "Размер порции",
+  "calories": "Калории",
+  "protein": "Белок",
+  "carbs": "Углеводы",
+  "fat": "Жиры",
+  "scan_again": "Сканировать снова",
+  "add_to_log": "Добавить в дневник",
+  "product_added": "Продукт добавлен в дневник"
 }
