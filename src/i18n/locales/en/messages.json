@@ -19,9 +19,12 @@
   "error_sending": "Error sending message",
   "e2e_enabled": "End-to-end encryption enabled",
   "e2e_enabled_desc": "Your messages with this user will now be encrypted",
+  "e2e_auto_enabled_desc": "Your encryption keys have been generated. Messages will be encrypted when the recipient also enables E2E.",
   "e2e_failed": "Failed to enable encryption",
   "e2e_failed_desc": "Could not generate encryption keys. Please try again.",
   "e2e_active": "E2E Encrypted",
   "peer_no_e2e": "Recipient not secured",
-  "enable_e2e": "Enable E2E"
+  "enable_e2e": "Enable E2E",
+  "encrypted_message": "[Encrypted message]",
+  "decryption_failed": "Unable to decrypt message"
 }
