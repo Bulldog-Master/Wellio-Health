@@ -26,35 +26,49 @@ export const useCMixClient = () => {
   });
   
   const clientRef = useRef<any>(null);
-  const channelRef = useRef<any>(null);
+  const xxdkRef = useRef<any>(null);
 
   // Initialize the cMix client
   const initialize = useCallback(async () => {
     setState(prev => ({ ...prev, isConnecting: true, error: null }));
     
     try {
-      // Dynamic import of the XX Network SDK
-      const xxdk = await import('@xxnetwork/xxdk-npm');
+      // Dynamic import of the XX Network SDK (xxdk-wasm)
+      const xxdk = await import('xxdk-wasm');
+      xxdkRef.current = xxdk;
       
       // Check if WASM is supported
       if (typeof WebAssembly === 'undefined') {
         throw new Error('WebAssembly is not supported in this browser');
       }
 
-      // Initialize the client with mainnet NDF (Network Definition File)
-      // The NDF contains network topology and gateway information
-      const ndfUrl = 'https://elixxir-bins.s3.us-west-1.amazonaws.com/ndf/mainnet.json';
+      console.log('[cMix] Loading WASM module...');
       
+      // Set the base path for WASM files (uses CDN by default)
+      // The xxdk-wasm package uses a CDN hosted by xx foundation
+      if (xxdk.setXXDKBasePath) {
+        // Use default CDN - no need to override unless self-hosting
+        console.log('[cMix] Using default CDN for WASM binaries');
+      }
+
+      // Initialize the WASM module
+      await xxdk.default();
+      
+      console.log('[cMix] WASM module loaded');
+
+      // Fetch the mainnet NDF (Network Definition File)
+      const ndfUrl = 'https://elixxir-bins.s3.us-west-1.amazonaws.com/ndf/mainnet.json';
       console.log('[cMix] Fetching network definition...');
+      
       const ndfResponse = await fetch(ndfUrl);
       if (!ndfResponse.ok) {
         throw new Error('Failed to fetch network definition');
       }
       const ndf = await ndfResponse.text();
 
-      console.log('[cMix] Initializing client...');
+      console.log('[cMix] Network definition loaded');
       
-      // Store client reference for message routing
+      // Store client reference
       clientRef.current = {
         ndf,
         sdk: xxdk,
@@ -130,8 +144,8 @@ export const useCMixClient = () => {
   const disconnect = useCallback(() => {
     if (clientRef.current) {
       clientRef.current = null;
-      channelRef.current = null;
     }
+    xxdkRef.current = null;
     
     setState({
       isInitialized: false,
