@@ -14,5 +14,42 @@
   "workout_history": "व्यायाम इतिहास",
   "no_workouts": "व्यायाम नाहीत",
   "workout_complete": "व्यायाम पूर्ण!",
-  "great_job": "छान काम!"
+  "great_job": "छान काम!",
+  "activity_types": {
+    "running": "धावणे",
+    "walking": "चालणे",
+    "cycling": "सायकलिंग",
+    "swimming": "पोहणे",
+    "weightlifting": "वजन उचलणे",
+    "yoga": "योग",
+    "hiit": "HIIT",
+    "pilates": "पिलाटेस",
+    "crossfit": "क्रॉसफिट",
+    "boxing": "बॉक्सिंग",
+    "dancing": "नृत्य",
+    "rowing": "रोइंग",
+    "elliptical": "एलिप्टिकल",
+    "stairclimber": "पायऱ्या चढणे",
+    "jumpRope": "दोरी उडी",
+    "stretching": "ताणणे",
+    "calisthenics": "कॅलिस्थेनिक्स",
+    "martialArts": "मार्शल आर्ट्स",
+    "rockClimbing": "खडक चढाई",
+    "skiing": "स्कीइंग",
+    "snowboarding": "स्नोबोर्डिंग",
+    "surfing": "सर्फिंग",
+    "golf": "गोल्फ",
+    "tennis": "टेनिस",
+    "basketball": "बास्केटबॉल",
+    "soccer": "फुटबॉल",
+    "volleyball": "व्हॉलीबॉल",
+    "hiking": "पर्वतारोहण",
+    "other": "इतर"
+  },
+  "intensity_levels": {
+    "low": "कमी",
+    "moderate": "मध्यम",
+    "high": "उच्च",
+    "very_high": "खूप उच्च"
+  }
 }

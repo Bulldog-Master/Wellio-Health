@@ -14,5 +14,42 @@
   "workout_history": "உடற்பயிற்சி வரலாறு",
   "no_workouts": "உடற்பயிற்சிகள் இல்லை",
   "workout_complete": "உடற்பயிற்சி முடிந்தது!",
-  "great_job": "அருமையான வேலை!"
+  "great_job": "அருமையான வேலை!",
+  "activity_types": {
+    "running": "ஓட்டம்",
+    "walking": "நடை",
+    "cycling": "சைக்கிள் ஓட்டம்",
+    "swimming": "நீச்சல்",
+    "weightlifting": "எடை தூக்குதல்",
+    "yoga": "யோகா",
+    "hiit": "HIIT",
+    "pilates": "பிலாட்ஸ்",
+    "crossfit": "கிராஸ்ஃபிட்",
+    "boxing": "குத்துச்சண்டை",
+    "dancing": "நடனம்",
+    "rowing": "படகோட்டம்",
+    "elliptical": "எலிப்டிகல்",
+    "stairclimber": "படிகள் ஏறுதல்",
+    "jumpRope": "கயிறு தாண்டுதல்",
+    "stretching": "நீட்சி",
+    "calisthenics": "கலிஸ்தெனிக்ஸ்",
+    "martialArts": "தற்காப்பு கலைகள்",
+    "rockClimbing": "பாறை ஏறுதல்",
+    "skiing": "பனி சறுக்கு",
+    "snowboarding": "ஸ்னோபோர்டிங்",
+    "surfing": "சர்ஃபிங்",
+    "golf": "கோல்ஃப்",
+    "tennis": "டென்னிஸ்",
+    "basketball": "கூடைப்பந்து",
+    "soccer": "கால்பந்து",
+    "volleyball": "கைப்பந்து",
+    "hiking": "மலை நடை",
+    "other": "பிற"
+  },
+  "intensity_levels": {
+    "low": "குறைவு",
+    "moderate": "மிதமான",
+    "high": "அதிகம்",
+    "very_high": "மிக அதிகம்"
+  }
 }

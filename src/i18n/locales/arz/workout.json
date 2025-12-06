@@ -14,5 +14,42 @@
   "workout_history": "تاريخ التمارين",
   "no_workouts": "مفيش تمارين",
   "workout_complete": "التمرين خلص!",
-  "great_job": "شغل جامد!"
+  "great_job": "شغل جامد!",
+  "activity_types": {
+    "running": "جري",
+    "walking": "مشي",
+    "cycling": "عجل",
+    "swimming": "سباحة",
+    "weightlifting": "رفع أثقال",
+    "yoga": "يوجا",
+    "hiit": "HIIT",
+    "pilates": "بيلاتس",
+    "crossfit": "كروس فيت",
+    "boxing": "ملاكمة",
+    "dancing": "رقص",
+    "rowing": "تجديف",
+    "elliptical": "اليبتيكال",
+    "stairclimber": "سلالم",
+    "jumpRope": "نط الحبل",
+    "stretching": "إطالة",
+    "calisthenics": "تمارين وزن الجسم",
+    "martialArts": "فنون قتالية",
+    "rockClimbing": "تسلق صخور",
+    "skiing": "تزلج",
+    "snowboarding": "سنوبورد",
+    "surfing": "ركوب الأمواج",
+    "golf": "جولف",
+    "tennis": "تنس",
+    "basketball": "كرة سلة",
+    "soccer": "كورة",
+    "volleyball": "كرة طايرة",
+    "hiking": "مشي جبلي",
+    "other": "تاني"
+  },
+  "intensity_levels": {
+    "low": "خفيف",
+    "moderate": "متوسط",
+    "high": "عالي",
+    "very_high": "عالي جداً"
+  }
 }
