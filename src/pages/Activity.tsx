@@ -355,6 +355,70 @@ const Activity = () => {
             </div>
           </div>
         </Card>
+
+        <Card 
+          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+          onClick={() => navigate('/weekly-report')}
+        >
+          <div className="flex items-start gap-4">
+            <div className="p-3 bg-blue-500/10 rounded-xl">
+              <TrendingUp className="w-6 h-6 text-blue-500" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">{t('weekly_progress_report')}</h3>
+              <p className="text-sm text-muted-foreground">{t('view_weekly_summary')}</p>
+            </div>
+          </div>
+        </Card>
+
+        <Card 
+          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+          onClick={() => navigate('/goal-wizard')}
+        >
+          <div className="flex items-start gap-4">
+            <div className="p-3 bg-green-500/10 rounded-xl">
+              <Flame className="w-6 h-6 text-green-500" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">{t('goal_setting')}</h3>
+              <p className="text-sm text-muted-foreground">{t('set_your_goals')}</p>
+            </div>
+          </div>
+        </Card>
+
+        <Card 
+          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer relative overflow-hidden"
+          onClick={() => navigate('/ai-workout-plan')}
+        >
+          <div className="absolute top-2 right-2 flex items-center gap-1 bg-primary/20 px-2 py-0.5 rounded-full">
+            <Crown className="w-3 h-3 text-primary" />
+            <span className="text-xs font-semibold text-primary">VIP</span>
+          </div>
+          <div className="flex items-start gap-4">
+            <div className="p-3 bg-purple-500/10 rounded-xl">
+              <Dumbbell className="w-6 h-6 text-purple-500" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">{t('ai_workout_plan')}</h3>
+              <p className="text-sm text-muted-foreground">{t('generate_plan')}</p>
+            </div>
+          </div>
+        </Card>
+
+        <Card 
+          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer"
+          onClick={() => navigate('/social-challenges')}
+        >
+          <div className="flex items-start gap-4">
+            <div className="p-3 bg-yellow-500/10 rounded-xl">
+              <ActivityIcon className="w-6 h-6 text-yellow-500" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">{t('social_challenges')}</h3>
+              <p className="text-sm text-muted-foreground">{t('compete_with_community')}</p>
+            </div>
+          </div>
+        </Card>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

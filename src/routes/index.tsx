@@ -96,6 +96,10 @@ const AdminProfessionals = lazy(() => import("@/pages/AdminProfessionals"));
 const ProfessionalHub = lazy(() => import("@/pages/ProfessionalHub"));
 const PaymentHistory = lazy(() => import("@/pages/PaymentHistory"));
 const AdminPayments = lazy(() => import("@/pages/AdminPayments"));
+const WeeklyProgressReport = lazy(() => import("@/pages/WeeklyProgressReport"));
+const GoalSettingWizard = lazy(() => import("@/pages/GoalSettingWizard"));
+const AIWorkoutPlanGenerator = lazy(() => import("@/pages/AIWorkoutPlanGenerator"));
+const SocialChallenges = lazy(() => import("@/pages/SocialChallenges"));
 
 /**
  * Application route configuration
@@ -148,6 +152,10 @@ export const AppRoutes = () => (
     <Route path="/workout-programs" element={<ProtectedRoute><Layout><WorkoutPrograms /></Layout></ProtectedRoute>} />
     <Route path="/workout-templates" element={<ProtectedRoute><Layout><WorkoutTemplates /></Layout></ProtectedRoute>} />
     <Route path="/workout-template/:programId" element={<ProtectedRoute><Layout><WorkoutTemplateDetail /></Layout></ProtectedRoute>} />
+    <Route path="/weekly-report" element={<ProtectedRoute><Layout><WeeklyProgressReport /></Layout></ProtectedRoute>} />
+    <Route path="/goal-wizard" element={<ProtectedRoute><Layout><GoalSettingWizard /></Layout></ProtectedRoute>} />
+    <Route path="/ai-workout-plan" element={<ProtectedRoute><Layout><AIWorkoutPlanGenerator /></Layout></ProtectedRoute>} />
+    <Route path="/social-challenges" element={<ProtectedRoute><Layout><SocialChallenges /></Layout></ProtectedRoute>} />
     <Route path="/personal-records" element={<ProtectedRoute><Layout><PersonalRecords /></Layout></ProtectedRoute>} />
     <Route path="/live-workout-sessions" element={<ProtectedRoute><Layout><LiveWorkoutSessions /></Layout></ProtectedRoute>} />
     <Route path="/live-session/:sessionId" element={<ProtectedRoute><Layout><LiveSessionRoom /></Layout></ProtectedRoute>} />
