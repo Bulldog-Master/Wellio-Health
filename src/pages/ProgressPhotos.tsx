@@ -12,10 +12,12 @@ import { format } from "date-fns";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
 import { formatWeight } from "@/lib/unitConversion";
 import { useTranslation } from "react-i18next";
+import { ShareButton } from "@/components/sharing";
 
 interface ProgressPhoto {
   id: string;
   photo_url: string;
+  storage_path?: string;
   weight_lbs: number | null;
   notes: string | null;
   taken_at: string;
@@ -31,6 +33,12 @@ const ProgressPhotos = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [weight, setWeight] = useState("");
   const [notes, setNotes] = useState("");
+
+  // Extract storage path from photo URL
+  const getStoragePath = (photoUrl: string): string => {
+    const urlParts = photoUrl.split('/progress-photos/');
+    return urlParts.length > 1 ? urlParts[1] : photoUrl;
+  };
 
   useEffect(() => {
     fetchPhotos();
@@ -256,13 +264,21 @@ const ProgressPhotos = () => {
                         </p>
                       )}
                     </div>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleDelete(photo.id, photo.photo_url)}
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </Button>
+                    <div className="flex items-center gap-1">
+                      <ShareButton
+                        contentPath={getStoragePath(photo.photo_url)}
+                        contentType="progress_photo"
+                        contentPreview={photo.photo_url}
+                        contentTitle={format(new Date(photo.taken_at), 'MMM d, yyyy')}
+                      />
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => handleDelete(photo.id, photo.photo_url)}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
                   </div>
                   {photo.notes && (
                     <p className="text-sm text-muted-foreground">{photo.notes}</p>
