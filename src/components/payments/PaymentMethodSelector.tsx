@@ -28,8 +28,10 @@ interface PaymentMethod {
   description_es: string | null;
   icon: string;
   requires_region: string[] | null;
-  processing_fee_percent: number;
-  processing_fee_fixed: number;
+  is_active: boolean;
+  min_amount: number | null;
+  max_amount: number | null;
+  sort_order: number | null;
 }
 
 interface PaymentMethodSelectorProps {
@@ -66,14 +68,12 @@ export const PaymentMethodSelector = ({
 
   const fetchPaymentMethods = async () => {
     try {
-      const { data } = await supabase
-        .from('payment_methods')
-        .select('*')
-        .eq('is_active', true)
-        .order('sort_order');
+      // Use secure RPC function that hides fee structure
+      const { data, error } = await supabase.rpc('get_payment_methods_safe' as any);
 
+      if (error) throw error;
       if (data) {
-        setMethods(data);
+        setMethods(data as unknown as PaymentMethod[]);
       }
     } catch (error) {
       console.error('Error fetching payment methods:', error);
@@ -89,10 +89,7 @@ export const PaymentMethodSelector = ({
     return method.requires_region.includes(userRegion);
   };
 
-  const calculateFee = (method: PaymentMethod) => {
-    const percentFee = amount * (method.processing_fee_percent / 100);
-    return percentFee + method.processing_fee_fixed;
-  };
+  // Fee calculation removed - fee info now hidden from client for security
 
   const getMethodName = (method: PaymentMethod) => {
     return isSpanish && method.name_es ? method.name_es : method.name;
@@ -132,7 +129,6 @@ export const PaymentMethodSelector = ({
               {cardMethods.map(method => {
                 const Icon = getIcon(method.icon);
                 const available = isMethodAvailable(method);
-                const fee = calculateFee(method);
 
                 return (
                   <Label
@@ -164,11 +160,6 @@ export const PaymentMethodSelector = ({
                               {getMethodDescription(method)}
                             </p>
                           </div>
-                          {fee > 0 && amount > 0 && (
-                            <Badge variant="secondary" className="text-xs">
-                              +${fee.toFixed(2)} {t('fee')}
-                            </Badge>
-                          )}
                           {selectedMethod === method.method_key && (
                             <Check className="w-5 h-5 text-primary" />
                           )}
