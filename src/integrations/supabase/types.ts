@@ -945,7 +945,6 @@ export type Database = {
           created_at: string | null
           id: string
           notes: string | null
-          reference_email: string | null
           reference_email_encrypted: string | null
           status: string | null
           transaction_id: string | null
@@ -959,7 +958,6 @@ export type Database = {
           created_at?: string | null
           id?: string
           notes?: string | null
-          reference_email?: string | null
           reference_email_encrypted?: string | null
           status?: string | null
           transaction_id?: string | null
@@ -973,7 +971,6 @@ export type Database = {
           created_at?: string | null
           id?: string
           notes?: string | null
-          reference_email?: string | null
           reference_email_encrypted?: string | null
           status?: string | null
           transaction_id?: string | null

@@ -206,7 +206,7 @@ const AdminPayments = () => {
                             {t('payments:confirmation_number', 'Confirmation')}: {item.confirmation_number || 'N/A'}
                           </p>
                           <p className="text-sm text-muted-foreground">
-                            {t('payments:your_email', 'Email')}: {item.reference_email}
+                            {t('payments:your_email', 'Email')}: {item.reference_email_encrypted ? '[Encrypted]' : 'N/A'}
                           </p>
                           <p className="text-xs text-muted-foreground">
                             {format(new Date(item.created_at), 'PPP p')}
