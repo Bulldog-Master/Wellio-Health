@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { encryptMedicalData, decryptMedicalData, ENCRYPTION_VERSION } from "./medicalEncryption";
 
 // Maximum file size: 10MB for medical files
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
@@ -68,24 +69,69 @@ export function validateMedicalFile(file: File): { isValid: boolean; error?: str
 }
 
 /**
+ * Encrypts a file path using quantum-resistant encryption
+ * @param filePath - The plain text file path
+ * @param recordId - Record ID for audit logging
+ * @param tableName - Table name for audit logging
+ * @returns Encrypted file path and encryption version
+ */
+export async function encryptFilePath(
+  filePath: string,
+  recordId?: string,
+  tableName?: string
+): Promise<{ encrypted: string; version: number }> {
+  return encryptMedicalData(filePath, recordId, tableName);
+}
+
+/**
+ * Decrypts an encrypted file path
+ * @param encryptedPath - The encrypted file path
+ * @param recordId - Record ID for audit logging
+ * @param tableName - Table name for audit logging
+ * @returns Decrypted file path
+ */
+export async function decryptFilePath(
+  encryptedPath: string,
+  recordId?: string,
+  tableName?: string
+): Promise<string> {
+  return decryptMedicalData(encryptedPath, recordId, tableName);
+}
+
+/**
  * Generates a signed URL for a medical file with time-limited access
  * Logs access for audit trail (HIPAA compliance)
- * @param filePath - The path to the file in storage
+ * Now supports encrypted file paths
+ * @param filePathOrEncrypted - The path to the file in storage (encrypted or plain)
  * @param recordId - The database record ID for audit logging
  * @param tableName - The table name for audit logging
  * @param expirySeconds - URL expiry time in seconds (default: 1 hour)
+ * @param isEncrypted - Whether the file path is encrypted
  * @returns Signed URL or null if error
  */
 export async function getSignedMedicalFileUrl(
-  filePath: string,
+  filePathOrEncrypted: string,
   recordId?: string,
   tableName?: string,
-  expirySeconds: number = 3600
+  expirySeconds: number = 3600,
+  isEncrypted: boolean = false
 ): Promise<string | null> {
   try {
     // Log file access for audit trail
     if (recordId && tableName) {
       await logMedicalFileAccess(recordId, tableName, 'VIEW');
+    }
+
+    // Decrypt file path if encrypted
+    let filePath = filePathOrEncrypted;
+    if (isEncrypted) {
+      try {
+        filePath = await decryptFilePath(filePathOrEncrypted, recordId, tableName);
+      } catch (decryptError) {
+        console.error('Error decrypting file path:', decryptError);
+        // Fall back to treating it as plain text (for backward compatibility)
+        filePath = filePathOrEncrypted;
+      }
     }
 
     // Update last_accessed_at timestamp
@@ -117,31 +163,40 @@ export async function getSignedMedicalFileUrl(
  * @param filePath - The path to the file in storage
  * @param recordId - The database record ID for audit logging
  * @param tableName - The table name for audit logging
+ * @param isEncrypted - Whether the file path is encrypted
  * @returns Signed URL with 5-minute expiry
  */
 export async function getSignedMedicalDownloadUrl(
   filePath: string,
   recordId?: string,
-  tableName?: string
+  tableName?: string,
+  isEncrypted: boolean = false
 ): Promise<string | null> {
   if (recordId && tableName) {
     await logMedicalFileAccess(recordId, tableName, 'DOWNLOAD');
   }
-  return getSignedMedicalFileUrl(filePath, recordId, tableName, 300); // 5 minutes
+  return getSignedMedicalFileUrl(filePath, recordId, tableName, 300, isEncrypted); // 5 minutes
 }
 
 /**
  * Uploads a medical file to secure storage with validation
+ * Now encrypts the file path before returning
  * @param file - The file to upload
  * @param userId - The user ID for organizing files
  * @param category - Category of the medical file (test_results, records, etc.)
- * @returns Object with success status, file path, and optional error message
+ * @returns Object with success status, encrypted file path, encryption version, and optional error message
  */
 export async function uploadMedicalFile(
   file: File,
   userId: string,
   category: 'test_results' | 'medical_records'
-): Promise<{ success: boolean; filePath?: string; error?: string }> {
+): Promise<{ 
+  success: boolean; 
+  filePath?: string; 
+  encryptedFilePath?: string;
+  encryptionVersion?: number;
+  error?: string 
+}> {
   try {
     // Validate file before upload
     const validation = validateMedicalFile(file);
@@ -171,10 +226,25 @@ export async function uploadMedicalFile(
       };
     }
 
-    // Log upload action
-    await logMedicalFileAccess('new_upload', category, 'UPLOAD');
+    // Encrypt the file path using quantum-resistant encryption
+    try {
+      const encryptResult = await encryptMedicalData(filePath, 'new_upload', category);
+      
+      // Log upload action
+      await logMedicalFileAccess('new_upload', category, 'UPLOAD');
 
-    return { success: true, filePath };
+      return { 
+        success: true, 
+        filePath,
+        encryptedFilePath: encryptResult.encrypted,
+        encryptionVersion: encryptResult.version
+      };
+    } catch (encryptError) {
+      console.error('Error encrypting file path:', encryptError);
+      // Return success with plain file path as fallback
+      await logMedicalFileAccess('new_upload', category, 'UPLOAD');
+      return { success: true, filePath };
+    }
   } catch (error) {
     console.error('Error in uploadMedicalFile:', error);
     return { 
@@ -186,20 +256,34 @@ export async function uploadMedicalFile(
 
 /**
  * Deletes a medical file from storage with audit logging
- * @param filePath - The path to the file in storage
+ * Supports encrypted file paths
+ * @param filePathOrEncrypted - The path to the file in storage (encrypted or plain)
  * @param recordId - The database record ID for audit logging
  * @param tableName - The table name for audit logging
+ * @param isEncrypted - Whether the file path is encrypted
  * @returns true if successful, false otherwise
  */
 export async function deleteMedicalFile(
-  filePath: string,
+  filePathOrEncrypted: string,
   recordId?: string,
-  tableName?: string
+  tableName?: string,
+  isEncrypted: boolean = false
 ): Promise<boolean> {
   try {
     // Log deletion for audit trail
     if (recordId && tableName) {
       await logMedicalFileAccess(recordId, tableName, 'DELETE');
+    }
+
+    // Decrypt file path if encrypted
+    let filePath = filePathOrEncrypted;
+    if (isEncrypted) {
+      try {
+        filePath = await decryptFilePath(filePathOrEncrypted, recordId, tableName);
+      } catch (decryptError) {
+        console.error('Error decrypting file path for deletion:', decryptError);
+        filePath = filePathOrEncrypted;
+      }
     }
 
     const { error } = await supabase.storage
@@ -248,3 +332,8 @@ export async function getMedicalFileAccessHistory(
     return [];
   }
 }
+
+/**
+ * Export encryption version for use in database inserts
+ */
+export { ENCRYPTION_VERSION };
