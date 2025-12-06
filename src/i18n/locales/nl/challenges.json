@@ -12,5 +12,11 @@
   "participants": "Deelnemers",
   "your_rank": "Jouw Positie",
   "challenge_complete": "Uitdaging Voltooid!",
-  "no_challenges": "Geen uitdagingen"
+  "no_challenges": "Geen uitdagingen",
+  "social_challenges": "Sociale Uitdagingen",
+  "joined_success": "Succesvol deelgenomen aan uitdaging!",
+  "join_error": "Kan niet deelnemen aan uitdaging",
+  "your_progress": "Jouw Voortgang",
+  "leaderboard": "Ranglijst",
+  "points": "punten"
 }

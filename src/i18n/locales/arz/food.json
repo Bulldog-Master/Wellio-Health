@@ -4,5 +4,20 @@
   "search_food": "دور على أكل",
   "recent_foods": "أكل قريب",
   "favorites": "المفضلة",
-  "nutrition_info": "معلومات التغذية"
+  "nutrition_info": "معلومات التغذية",
+  "scan_barcode": "امسح الباركود",
+  "scanner_instructions": "حط الباركود في الإطار",
+  "scanner_camera_error": "مش قادر أوصل للكاميرا. راجع الأذونات.",
+  "scanner_lookup_error": "في مشكلة في البحث عن المنتج. حاول تاني.",
+  "product_not_found": "المنتج مش موجود في الداتا",
+  "looking_up_product": "بدور على المنتج...",
+  "unknown_product": "منتج مش معروف",
+  "serving_size": "حجم الحصة",
+  "calories": "سعرات",
+  "protein": "بروتين",
+  "carbs": "كاربوهيدرات",
+  "fat": "دهون",
+  "scan_again": "امسح تاني",
+  "add_to_log": "أضف للسجل",
+  "product_added": "المنتج اتضاف للسجل"
 }
