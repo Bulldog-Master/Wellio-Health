@@ -12,5 +12,18 @@
   "participants": "Участники",
   "your_rank": "Ваша позиция",
   "challenge_complete": "Вызов выполнен!",
-  "no_challenges": "Нет вызовов"
+  "no_challenges": "Нет вызовов",
+  "social_challenges": "Социальные челленджи",
+  "invite_friends": "Пригласить друзей",
+  "friend_challenges": "Челленджи с друзьями",
+  "compete_with_friends": "Соревнуйтесь с друзьями",
+  "challenge_friend": "Бросить вызов другу",
+  "pending_challenges": "Ожидающие челленджи",
+  "accept_challenge": "Принять",
+  "decline_challenge": "Отклонить",
+  "challenge_sent": "Вызов отправлен!",
+  "challenge_accepted": "Вызов принят!",
+  "you_won": "Вы победили!",
+  "you_lost": "Вы проиграли",
+  "tie": "Ничья"
 }

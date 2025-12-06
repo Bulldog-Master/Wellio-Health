@@ -12,5 +12,18 @@
   "participants": "参加者",
   "your_rank": "あなたの順位",
   "challenge_complete": "チャレンジ完了！",
-  "no_challenges": "チャレンジがありません"
+  "no_challenges": "チャレンジがありません",
+  "social_challenges": "ソーシャルチャレンジ",
+  "invite_friends": "友達を招待",
+  "friend_challenges": "友達とのチャレンジ",
+  "compete_with_friends": "友達と競争",
+  "challenge_friend": "友達に挑戦",
+  "pending_challenges": "保留中のチャレンジ",
+  "accept_challenge": "承諾",
+  "decline_challenge": "辞退",
+  "challenge_sent": "チャレンジを送信しました！",
+  "challenge_accepted": "チャレンジを承諾しました！",
+  "you_won": "あなたの勝利！",
+  "you_lost": "惜しかった",
+  "tie": "引き分け"
 }

@@ -12,5 +12,18 @@
   "participants": "பங்கேற்பாளர்கள்",
   "your_rank": "உங்கள் தரவரிசை",
   "challenge_complete": "சவால் முடிந்தது!",
-  "no_challenges": "சவால்கள் இல்லை"
+  "no_challenges": "சவால்கள் இல்லை",
+  "social_challenges": "சமூக சவால்கள்",
+  "invite_friends": "நண்பர்களை அழை",
+  "friend_challenges": "நண்பர் சவால்கள்",
+  "compete_with_friends": "நண்பர்களுடன் போட்டியிடு",
+  "challenge_friend": "நண்பருக்கு சவால்",
+  "pending_challenges": "நிலுவையிலுள்ள சவால்கள்",
+  "accept_challenge": "ஏற்கவும்",
+  "decline_challenge": "மறுக்கவும்",
+  "challenge_sent": "சவால் அனுப்பப்பட்டது!",
+  "challenge_accepted": "சவால் ஏற்றுக்கொள்ளப்பட்டது!",
+  "you_won": "நீங்கள் வென்றீர்கள்!",
+  "you_lost": "நீங்கள் தோற்றீர்கள்",
+  "tie": "சமநிலை"
 }

@@ -12,5 +12,18 @@
   "participants": "People Wey Dey",
   "your_rank": "Your Position",
   "challenge_complete": "Challenge Don Complete!",
-  "no_challenges": "No challenge dey"
+  "no_challenges": "No challenge dey",
+  "social_challenges": "Social Challenges",
+  "invite_friends": "Invite friends",
+  "friend_challenges": "Friend Challenges",
+  "compete_with_friends": "Compete with friends",
+  "challenge_friend": "Challenge friend",
+  "pending_challenges": "Pending Challenges",
+  "accept_challenge": "Accept",
+  "decline_challenge": "Reject",
+  "challenge_sent": "Challenge don send!",
+  "challenge_accepted": "Challenge don accept!",
+  "you_won": "You win!",
+  "you_lost": "You lose",
+  "tie": "Draw"
 }

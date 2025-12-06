@@ -12,5 +12,18 @@
   "participants": "المشاركين",
   "your_rank": "ترتيبك",
   "challenge_complete": "التحدي خلص!",
-  "no_challenges": "مفيش تحديات"
+  "no_challenges": "مفيش تحديات",
+  "social_challenges": "تحديات اجتماعية",
+  "invite_friends": "ادعي صحابك",
+  "friend_challenges": "تحديات الصحاب",
+  "compete_with_friends": "نافس صحابك",
+  "challenge_friend": "تحدي صاحبك",
+  "pending_challenges": "تحديات مستنية",
+  "accept_challenge": "اقبل",
+  "decline_challenge": "ارفض",
+  "challenge_sent": "التحدي اتبعت!",
+  "challenge_accepted": "التحدي اتقبل!",
+  "you_won": "انت كسبت!",
+  "you_lost": "انت خسرت",
+  "tie": "تعادل"
 }

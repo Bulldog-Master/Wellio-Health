@@ -12,5 +12,18 @@
   "participants": "सहभागी",
   "your_rank": "तुमची क्रमवारी",
   "challenge_complete": "आव्हान पूर्ण!",
-  "no_challenges": "आव्हाने नाहीत"
+  "no_challenges": "आव्हाने नाहीत",
+  "social_challenges": "सामाजिक आव्हाने",
+  "invite_friends": "मित्रांना आमंत्रित करा",
+  "friend_challenges": "मित्रांची आव्हाने",
+  "compete_with_friends": "मित्रांशी स्पर्धा करा",
+  "challenge_friend": "मित्राला आव्हान द्या",
+  "pending_challenges": "प्रलंबित आव्हाने",
+  "accept_challenge": "स्वीकारा",
+  "decline_challenge": "नाकारा",
+  "challenge_sent": "आव्हान पाठवले!",
+  "challenge_accepted": "आव्हान स्वीकारले!",
+  "you_won": "तुम्ही जिंकलात!",
+  "you_lost": "तुम्ही हरलात",
+  "tie": "बरोबरी"
 }
