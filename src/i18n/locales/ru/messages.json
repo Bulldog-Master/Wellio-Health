@@ -8,5 +8,9 @@
   "search_messages": "Поиск сообщений",
   "delete_message": "Удалить сообщение",
   "message_sent": "Сообщение отправлено",
-  "message_deleted": "Сообщение удалено"
+  "message_deleted": "Сообщение удалено",
+  "e2e_encrypted": "Сквозное шифрование",
+  "encryption_enabled": "Шифрование включено",
+  "generating_keys": "Генерация ключей шифрования...",
+  "decryption_failed": "Не удалось расшифровать сообщение"
 }

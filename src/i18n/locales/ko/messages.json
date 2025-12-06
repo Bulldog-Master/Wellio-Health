@@ -8,5 +8,9 @@
   "search_messages": "메시지 검색",
   "delete_message": "메시지 삭제",
   "message_sent": "메시지 전송됨",
-  "message_deleted": "메시지 삭제됨"
+  "message_deleted": "메시지 삭제됨",
+  "e2e_encrypted": "종단간 암호화",
+  "encryption_enabled": "암호화 활성화됨",
+  "generating_keys": "암호화 키 생성 중...",
+  "decryption_failed": "메시지 복호화 실패"
 }

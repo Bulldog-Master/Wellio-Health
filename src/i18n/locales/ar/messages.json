@@ -8,5 +8,9 @@
   "search_messages": "بحث في الرسائل",
   "delete_message": "حذف الرسالة",
   "message_sent": "تم إرسال الرسالة",
-  "message_deleted": "تم حذف الرسالة"
+  "message_deleted": "تم حذف الرسالة",
+  "e2e_encrypted": "مشفرة من طرف إلى طرف",
+  "encryption_enabled": "التشفير مفعل",
+  "generating_keys": "جاري إنشاء مفاتيح التشفير...",
+  "decryption_failed": "فشل فك تشفير الرسالة"
 }
