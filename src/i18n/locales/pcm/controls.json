@@ -14,6 +14,7 @@
   "data_export": "Data Export",
   "export_button": "Export",
   "export_requested": "Request sent",
+  "export_complete": "Export don finish! Download go start soon.",
   "delete_account": "Delete Account",
   "delete_warning": "E no fit reverse.",
   "delete_button": "Request deletion",

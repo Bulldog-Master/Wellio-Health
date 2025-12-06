@@ -31,10 +31,13 @@
   "share_practitioners": "Share with Practitioners",
   "share_practitioners_desc": "Allow assigned health practitioners to view your health records",
   
+  "data_export": "Data Export",
   "export_description": "Download a complete copy of all your Wellio data in JSON format",
+  "export_button": "Export My Data",
   "request_export": "Request Data Export",
   "export_requested": "Data export requested! You'll receive an email when it's ready.",
   "export_in_progress": "Your data export is being prepared...",
+  "export_complete": "Data export complete! Your download should begin shortly.",
   
   "delete_description": "Permanently delete your account and all associated data. This action is scheduled 30 days in advance to allow you to change your mind.",
   "delete_warning": "Your account will be scheduled for deletion in 30 days. During this time, you can cancel the deletion. After 30 days, all your data will be permanently erased and cannot be recovered.",

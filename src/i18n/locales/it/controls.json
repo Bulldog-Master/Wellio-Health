@@ -20,6 +20,7 @@
   "export_button": "Esporta i Miei Dati",
   "export_requested": "Esportazione Richiesta",
   "export_requested_desc": "Stiamo preparando i tuoi dati.",
+  "export_complete": "Esportazione completata! Il download dovrebbe iniziare a breve.",
   "delete_account": "Elimina Account",
   "delete_warning": "Questa azione non può essere annullata.",
   "delete_button": "Richiedi Eliminazione Account",

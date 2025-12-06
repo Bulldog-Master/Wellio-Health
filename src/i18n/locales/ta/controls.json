@@ -14,6 +14,7 @@
   "data_export": "தரவு ஏற்றுமதி",
   "export_button": "ஏற்றுமதி",
   "export_requested": "கோரிக்கை அனுப்பப்பட்டது",
+  "export_complete": "ஏற்றுமதி முடிந்தது! பதிவிறக்கம் விரைவில் தொடங்கும்.",
   "delete_account": "கணக்கு நீக்கம்",
   "delete_warning": "இதை மீட்க முடியாது.",
   "delete_button": "நீக்க கோரு",

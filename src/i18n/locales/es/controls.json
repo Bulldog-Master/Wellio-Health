@@ -31,10 +31,13 @@
   "share_practitioners": "Compartir con Profesionales",
   "share_practitioners_desc": "Permitir que los profesionales de salud asignados vean sus registros de salud",
   
+  "data_export": "Exportación de Datos",
   "export_description": "Descargue una copia completa de todos sus datos de Wellio en formato JSON",
+  "export_button": "Exportar Mis Datos",
   "request_export": "Solicitar Exportación de Datos",
   "export_requested": "¡Exportación de datos solicitada! Recibirá un correo cuando esté listo.",
   "export_in_progress": "Su exportación de datos se está preparando...",
+  "export_complete": "¡Exportación de datos completa! Su descarga debería comenzar en breve.",
   
   "delete_description": "Elimine permanentemente su cuenta y todos los datos asociados. Esta acción se programa con 30 días de anticipación para permitirle cambiar de opinión.",
   "delete_warning": "Su cuenta se programará para eliminación en 30 días. Durante este tiempo, puede cancelar la eliminación. Después de 30 días, todos sus datos se borrarán permanentemente y no podrán recuperarse.",

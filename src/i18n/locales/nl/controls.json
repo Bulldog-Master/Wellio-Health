@@ -20,6 +20,7 @@
   "export_button": "Exporteer Mijn Gegevens",
   "export_requested": "Export Aangevraagd",
   "export_requested_desc": "We bereiden je gegevens voor.",
+  "export_complete": "Export voltooid! Je download zou binnenkort moeten starten.",
   "delete_account": "Account Verwijderen",
   "delete_warning": "Deze actie kan niet ongedaan worden gemaakt.",
   "delete_button": "Vraag Accountverwijdering Aan",

@@ -20,6 +20,7 @@
   "export_button": "Экспортировать",
   "export_requested": "Запрос отправлен",
   "export_requested_desc": "Готовим данные.",
+  "export_complete": "Экспорт завершен! Загрузка начнется скоро.",
   "delete_account": "Удалить аккаунт",
   "delete_warning": "Действие необратимо.",
   "delete_button": "Запросить удаление",
