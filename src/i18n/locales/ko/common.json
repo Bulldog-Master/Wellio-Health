@@ -9,7 +9,11 @@
     "professional": "전문가",
     "recovery": "회복",
     "shop": "쇼핑",
-    "sponsors": "스폰서"
+    "sponsors": "스폰서",
+    "fitness": "피트니스",
+    "social": "소셜",
+    "discover": "발견",
+    "more": "더보기"
   },
   "app_name": "Wellio",
   "loading": "로딩 중...",

@@ -411,102 +411,102 @@ const Weight = () => {
       
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-3">
-              <div className="p-3 bg-primary/10 rounded-xl">
-                <Scale className="w-6 h-6 text-primary" />
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold">{t('weight:weight_tracking')}</h1>
-                <p className="text-muted-foreground mt-1">{t('weight:monitor_changes')}</p>
+          <div className="p-3 bg-primary/10 rounded-xl">
+            <Scale className="w-6 h-6 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold">{t('weight:weight_tracking')}</h1>
+            <p className="text-muted-foreground mt-1">{t('weight:monitor_changes')}</p>
+          </div>
+        </div>
+        
+        <div className="w-32">
+          <Select
+            value={preferredUnit}
+            onValueChange={(value) => updatePreferredUnit(value as 'imperial' | 'metric')}
+            disabled={prefsLoading}
+          >
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="imperial">lbs</SelectItem>
+              <SelectItem value="metric">kg</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-6">
+        <Card className="p-6 bg-gradient-card shadow-md">
+          <h3 className="text-lg font-semibold mb-4">{t('weight:log_weight')}</h3>
+          <div className="space-y-4">
+            <div>
+              <Label>{t('weight:select_date')}</Label>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" className="w-full justify-start mt-1">
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {format(selectedDate, "PPP", { locale: dateLocale })}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0">
+                  <Calendar
+                    mode="single"
+                    selected={selectedDate}
+                    onSelect={(date) => date && setSelectedDate(date)}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="morning">{t('weight:morning')}</Label>
+              <div className="flex gap-2">
+                <Input
+                  id="morning"
+                  type="number"
+                  step="0.1"
+                  placeholder={preferredUnit === 'imperial' ? "lbs" : "kg"}
+                  value={morning}
+                  onChange={(e) => setMorning(e.target.value)}
+                />
+                <Button onClick={() => handleLogWeight("morning")} size="icon">
+                  <Plus className="w-4 h-4" />
+                </Button>
               </div>
             </div>
-            
-            <div className="w-32">
-              <Select
-                value={preferredUnit}
-                onValueChange={(value) => updatePreferredUnit(value as 'imperial' | 'metric')}
-                disabled={prefsLoading}
-              >
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="imperial">lbs</SelectItem>
-                  <SelectItem value="metric">kg</SelectItem>
-                </SelectContent>
-              </Select>
+
+            <div className="space-y-2">
+              <Label htmlFor="evening">{t('weight:evening')}</Label>
+              <div className="flex gap-2">
+                <Input
+                  id="evening"
+                  type="number"
+                  step="0.1"
+                  placeholder={preferredUnit === 'imperial' ? "lbs" : "kg"}
+                  value={evening}
+                  onChange={(e) => setEvening(e.target.value)}
+                />
+                <Button onClick={() => handleLogWeight("evening")} size="icon">
+                  <Plus className="w-4 h-4" />
+                </Button>
+              </div>
             </div>
           </div>
+        </Card>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card className="p-6 bg-gradient-card shadow-md">
-              <h3 className="text-lg font-semibold mb-4">{t('weight:log_weight')}</h3>
-              <div className="space-y-4">
-                <div>
-                  <Label>{t('weight:select_date')}</Label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="outline" className="w-full justify-start mt-1">
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {format(selectedDate, "PPP", { locale: dateLocale })}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
-                      <Calendar
-                        mode="single"
-                        selected={selectedDate}
-                        onSelect={(date) => date && setSelectedDate(date)}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="morning">{t('weight:morning')}</Label>
-                  <div className="flex gap-2">
-                    <Input
-                      id="morning"
-                      type="number"
-                      step="0.1"
-                      placeholder={preferredUnit === 'imperial' ? "lbs" : "kg"}
-                      value={morning}
-                      onChange={(e) => setMorning(e.target.value)}
-                    />
-                    <Button onClick={() => handleLogWeight("morning")} size="icon">
-                      <Plus className="w-4 h-4" />
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="evening">{t('weight:evening')}</Label>
-                  <div className="flex gap-2">
-                    <Input
-                      id="evening"
-                      type="number"
-                      step="0.1"
-                      placeholder={preferredUnit === 'imperial' ? "lbs" : "kg"}
-                      value={evening}
-                      onChange={(e) => setEvening(e.target.value)}
-                    />
-                    <Button onClick={() => handleLogWeight("evening")} size="icon">
-                      <Plus className="w-4 h-4" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="p-6 bg-gradient-card shadow-md">
-              <h3 className="text-lg font-semibold mb-4">{t('weight:current_weight')}</h3>
-              <div className="text-center py-8">
-                <div className="text-5xl font-bold text-primary mb-2">
-                  {formatWeight(latestWeight, preferredUnit)}
-                </div>
-                <p className="text-muted-foreground">{t('weight:latest_reading')}</p>
-              </div>
-            </Card>
+        <Card className="p-6 bg-gradient-card shadow-md">
+          <h3 className="text-lg font-semibold mb-4">{t('weight:current_weight')}</h3>
+          <div className="text-center py-8">
+            <div className="text-5xl font-bold text-primary mb-2">
+              {formatWeight(latestWeight, preferredUnit)}
+            </div>
+            <p className="text-muted-foreground">{t('weight:latest_reading')}</p>
           </div>
+        </Card>
+      </div>
 
           {statistics && (
             <Card className="p-6 bg-gradient-card shadow-md">
@@ -729,7 +729,6 @@ const Weight = () => {
             </div>
           )}
         </Card>
-      </div>
     </div>
   );
 };

@@ -9,7 +9,11 @@
     "professional": "プロフェッショナル",
     "recovery": "リカバリー",
     "shop": "ショップ",
-    "sponsors": "スポンサー"
+    "sponsors": "スポンサー",
+    "fitness": "フィットネス",
+    "social": "ソーシャル",
+    "discover": "発見",
+    "more": "もっと見る"
   },
   "app_name": "Wellio",
   "loading": "読み込み中...",

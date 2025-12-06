@@ -9,7 +9,11 @@
     "professional": "专业",
     "recovery": "恢复",
     "shop": "商店",
-    "sponsors": "赞助商"
+    "sponsors": "赞助商",
+    "fitness": "健身",
+    "social": "社交",
+    "discover": "发现",
+    "more": "更多"
   },
   "app_name": "Wellio",
   "loading": "加载中...",

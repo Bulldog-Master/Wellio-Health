@@ -9,7 +9,11 @@
     "professional": "Профессионал",
     "recovery": "Восстановление",
     "shop": "Магазин",
-    "sponsors": "Спонсоры"
+    "sponsors": "Спонсоры",
+    "fitness": "Фитнес",
+    "social": "Социальное",
+    "discover": "Открыть",
+    "more": "Ещё"
   },
   "app_name": "Wellio",
   "loading": "Загрузка...",
