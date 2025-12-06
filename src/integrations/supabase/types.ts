@@ -167,6 +167,39 @@ export type Database = {
         }
         Relationships: []
       }
+      age_verifications: {
+        Row: {
+          created_at: string
+          id: string
+          ip_hash: string | null
+          is_over_13: boolean
+          is_over_18: boolean | null
+          session_id: string | null
+          user_id: string | null
+          verified_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          ip_hash?: string | null
+          is_over_13?: boolean
+          is_over_18?: boolean | null
+          session_id?: string | null
+          user_id?: string | null
+          verified_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          ip_hash?: string | null
+          is_over_13?: boolean
+          is_over_18?: boolean | null
+          session_id?: string | null
+          user_id?: string | null
+          verified_at?: string
+        }
+        Relationships: []
+      }
       ai_insights: {
         Row: {
           data_summary: Json | null
@@ -741,6 +774,39 @@ export type Database = {
         }
         Relationships: []
       }
+      cookie_consents: {
+        Row: {
+          analytics: boolean
+          consented_at: string
+          essential: boolean
+          id: string
+          marketing: boolean
+          session_id: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          analytics?: boolean
+          consented_at?: string
+          essential?: boolean
+          id?: string
+          marketing?: boolean
+          session_id?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          analytics?: boolean
+          consented_at?: string
+          essential?: boolean
+          id?: string
+          marketing?: boolean
+          session_id?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       creator_content: {
         Row: {
           content_data: Json
@@ -917,6 +983,45 @@ export type Database = {
           target_value?: number
           title?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      data_breach_notifications: {
+        Row: {
+          affected_data: string[]
+          breach_id: string
+          created_at: string
+          created_by: string | null
+          description: string
+          discovered_at: string
+          id: string
+          notified_at: string | null
+          severity: string
+          title: string
+        }
+        Insert: {
+          affected_data: string[]
+          breach_id: string
+          created_at?: string
+          created_by?: string | null
+          description: string
+          discovered_at: string
+          id?: string
+          notified_at?: string | null
+          severity: string
+          title: string
+        }
+        Update: {
+          affected_data?: string[]
+          breach_id?: string
+          created_at?: string
+          created_by?: string | null
+          description?: string
+          discovered_at?: string
+          id?: string
+          notified_at?: string | null
+          severity?: string
+          title?: string
         }
         Relationships: []
       }
@@ -4450,6 +4555,35 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      user_breach_acknowledgments: {
+        Row: {
+          acknowledged_at: string
+          breach_id: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          acknowledged_at?: string
+          breach_id: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          acknowledged_at?: string
+          breach_id?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_breach_acknowledgments_breach_id_fkey"
+            columns: ["breach_id"]
+            isOneToOne: false
+            referencedRelation: "data_breach_notifications"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_consents: {
         Row: {
