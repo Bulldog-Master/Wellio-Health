@@ -68,3 +68,6 @@ verify_jwt = true
 
 [functions.verify-crypto]
 verify_jwt = true
+
+[functions.medical-encrypt]
+verify_jwt = true
