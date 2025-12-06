@@ -180,10 +180,11 @@ serve(async (req) => {
 
       console.log('[Passkey Auth] Signature verified successfully');
     } catch (verifyError) {
-      console.error('[Passkey Auth] Signature verification error:', verifyError);
-      // In development/testing, log but continue if signature format is incompatible
-      // In production, this should return an error
-      console.warn('[Passkey Auth] Signature verification skipped due to format issues - should be fixed for production');
+      console.error('[Passkey Auth] Signature verification failed:', verifyError);
+      return new Response(
+        JSON.stringify({ error: 'Signature verification failed' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
     }
 
     // Parse authenticator data to get the counter
