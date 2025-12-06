@@ -101,6 +101,7 @@ const WeeklyProgressReport = lazy(() => import("@/pages/WeeklyProgressReport"));
 const GoalSettingWizard = lazy(() => import("@/pages/GoalSettingWizard"));
 const AIWorkoutPlanGenerator = lazy(() => import("@/pages/AIWorkoutPlanGenerator"));
 const SocialChallenges = lazy(() => import("@/pages/SocialChallenges"));
+const ProgressComparison = lazy(() => import("@/pages/ProgressComparison"));
 
 /**
  * Application route configuration
@@ -161,6 +162,7 @@ export const AppRoutes = () => (
     <Route path="/live-workout-sessions" element={<ProtectedRoute><Layout><LiveWorkoutSessions /></Layout></ProtectedRoute>} />
     <Route path="/live-session/:sessionId" element={<ProtectedRoute><Layout><LiveSessionRoom /></Layout></ProtectedRoute>} />
     <Route path="/workout-media" element={<ProtectedRoute><Layout><WorkoutMedia /></Layout></ProtectedRoute>} />
+    <Route path="/progress-comparison" element={<ProtectedRoute><Layout><ProgressComparison /></Layout></ProtectedRoute>} />
     
     {/* Habits & Goals */}
     <Route path="/habits" element={<ProtectedRoute><Layout><Habits /></Layout></ProtectedRoute>} />

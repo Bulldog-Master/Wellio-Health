@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Activity as ActivityIcon, TrendingUp, Calendar, Flame, Watch, Heart, Moon, Footprints, Plus, Scale, Dumbbell, CheckSquare, Pill, Timer, Video, Crown, MessageSquare, Image } from "lucide-react";
+import { Activity as ActivityIcon, TrendingUp, Calendar, Flame, Watch, Heart, Moon, Footprints, Plus, Scale, Dumbbell, CheckSquare, Pill, Timer, Video, Crown, MessageSquare, Image, ArrowLeftRight, Mic } from "lucide-react";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
@@ -431,6 +431,25 @@ const Activity = () => {
             <div>
               <h3 className="text-lg font-semibold">{t('workout_media_gallery')}</h3>
               <p className="text-sm text-muted-foreground">{t('view_workout_photos_videos')}</p>
+            </div>
+          </div>
+        </Card>
+
+        <Card 
+          className="p-6 bg-gradient-card shadow-md hover:shadow-lg transition-all cursor-pointer relative overflow-hidden"
+          onClick={() => navigate('/progress-comparison')}
+        >
+          <div className="absolute top-2 right-2 flex items-center gap-1 bg-primary/20 px-2 py-0.5 rounded-full">
+            <Crown className="w-3 h-3 text-primary" />
+            <span className="text-xs font-semibold text-primary">VIP</span>
+          </div>
+          <div className="flex items-start gap-4">
+            <div className="p-3 bg-teal-500/10 rounded-xl">
+              <ArrowLeftRight className="w-6 h-6 text-teal-500" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">{t('progress_comparison')}</h3>
+              <p className="text-sm text-muted-foreground">{t('compare_progress_photos')}</p>
             </div>
           </div>
         </Card>

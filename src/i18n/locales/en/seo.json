@@ -61,5 +61,7 @@
   "products": {
     "title": "Recommended Products - Wellio",
     "description": "Discover personally vetted and approved fitness products, supplements, and gear."
-  }
+  },
+  "progress_comparison_title": "Progress Photo Comparison - Wellio",
+  "progress_comparison_desc": "Compare your transformation photos side by side to track your fitness progress over time."
 }
