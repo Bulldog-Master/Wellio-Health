@@ -4,5 +4,20 @@
   "search_food": "Zoek voedsel",
   "recent_foods": "Recente voeding",
   "favorites": "Favorieten",
-  "nutrition_info": "Voedingsinfo"
+  "nutrition_info": "Voedingsinfo",
+  "scan_barcode": "Barcode Scannen",
+  "scanner_instructions": "Plaats de barcode binnen het kader",
+  "scanner_camera_error": "Geen toegang tot camera. Controleer de machtigingen.",
+  "scanner_lookup_error": "Fout bij opzoeken product. Probeer opnieuw.",
+  "product_not_found": "Product niet gevonden in database",
+  "looking_up_product": "Product opzoeken...",
+  "unknown_product": "Onbekend Product",
+  "serving_size": "Portiegrootte",
+  "calories": "Calorieën",
+  "protein": "Eiwitten",
+  "carbs": "Koolhydraten",
+  "fat": "Vet",
+  "scan_again": "Opnieuw Scannen",
+  "add_to_log": "Toevoegen aan Dagboek",
+  "product_added": "Product toegevoegd aan dagboek"
 }

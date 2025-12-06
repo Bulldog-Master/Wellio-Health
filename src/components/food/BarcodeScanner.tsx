@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { BrowserMultiFormatReader } from '@zxing/library';
+import { BrowserMultiFormatReader } from '@zxing/browser';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -32,60 +32,17 @@ export const BarcodeScanner = ({ open, onClose, onProductFound }: BarcodeScanner
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [scannedProduct, setScannedProduct] = useState<ProductInfo | null>(null);
-  const readerRef = useRef<BrowserMultiFormatReader | null>(null);
-  const streamRef = useRef<MediaStream | null>(null);
+  const controlsRef = useRef<{ stop: () => void } | null>(null);
 
   const stopScanning = useCallback(() => {
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach(track => track.stop());
-      streamRef.current = null;
+    if (controlsRef.current) {
+      controlsRef.current.stop();
+      controlsRef.current = null;
     }
-    readerRef.current = null;
     setIsScanning(false);
   }, []);
 
-  const startScanning = useCallback(async () => {
-    setError(null);
-    setScannedProduct(null);
-    setIsScanning(true);
-
-    try {
-      readerRef.current = new BrowserMultiFormatReader();
-      
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'environment' }
-      });
-      streamRef.current = stream;
-
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        await videoRef.current.play();
-
-        readerRef.current.decodeFromVideoElement(videoRef.current, (result, err) => {
-          if (result) {
-            const barcode = result.getText();
-            stopScanning();
-            lookupProduct(barcode);
-          }
-        });
-      }
-    } catch (err) {
-      console.error('Scanner error:', err);
-      setError(t('food:scanner_camera_error'));
-      setIsScanning(false);
-    }
-  }, [t, stopScanning]);
-
-  useEffect(() => {
-    if (open && !isScanning && !scannedProduct && !isLoading) {
-      startScanning();
-    }
-    return () => {
-      stopScanning();
-    };
-  }, [open]);
-
-  const lookupProduct = async (barcode: string) => {
+  const lookupProduct = useCallback(async (barcode: string) => {
     setIsLoading(true);
     setError(null);
 
@@ -121,7 +78,45 @@ export const BarcodeScanner = ({ open, onClose, onProductFound }: BarcodeScanner
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [t]);
+
+  const startScanning = useCallback(async () => {
+    setError(null);
+    setScannedProduct(null);
+    setIsScanning(true);
+
+    try {
+      const reader = new BrowserMultiFormatReader();
+      
+      if (videoRef.current) {
+        const controls = await reader.decodeFromVideoDevice(
+          undefined,
+          videoRef.current,
+          (result, err) => {
+            if (result) {
+              const barcode = result.getText();
+              stopScanning();
+              lookupProduct(barcode);
+            }
+          }
+        );
+        controlsRef.current = controls;
+      }
+    } catch (err) {
+      console.error('Scanner error:', err);
+      setError(t('food:scanner_camera_error'));
+      setIsScanning(false);
+    }
+  }, [t, stopScanning, lookupProduct]);
+
+  useEffect(() => {
+    if (open && !isScanning && !scannedProduct && !isLoading) {
+      startScanning();
+    }
+    return () => {
+      stopScanning();
+    };
+  }, [open]);
 
   const handleAddProduct = () => {
     if (scannedProduct) {
@@ -158,9 +153,6 @@ export const BarcodeScanner = ({ open, onClose, onProductFound }: BarcodeScanner
               <video
                 ref={videoRef}
                 className="w-full h-full object-cover"
-                autoPlay
-                playsInline
-                muted
               />
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <div className="w-64 h-32 border-2 border-primary rounded-lg opacity-70" />
