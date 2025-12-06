@@ -203,5 +203,17 @@
   "failed_load_water": "Failed to load water intake data",
   "failed_log_water": "Failed to log water intake",
   "water_log_deleted": "Water log deleted",
-  "failed_delete_water": "Failed to delete water log"
+  "failed_delete_water": "Failed to delete water log",
+
+  "scan_barcode": "Scan Barcode",
+  "scanner_instructions": "Position barcode within the frame",
+  "scanner_camera_error": "Unable to access camera. Please check permissions.",
+  "scanner_lookup_error": "Error looking up product. Please try again.",
+  "product_not_found": "Product not found in database",
+  "looking_up_product": "Looking up product...",
+  "unknown_product": "Unknown Product",
+  "scan_again": "Scan Again",
+  "add_to_log": "Add to Log",
+  "product_added": "Product added to food log",
+  "fat": "Fat"
 }

@@ -4,5 +4,20 @@
   "search_food": "Buscar alimento",
   "recent_foods": "Alimentos recentes",
   "favorites": "Favoritos",
-  "nutrition_info": "Info nutricional"
+  "nutrition_info": "Info nutricional",
+  "scan_barcode": "Escanear Código de Barras",
+  "scanner_instructions": "Posicione o código de barras dentro da moldura",
+  "scanner_camera_error": "Não foi possível acessar a câmera. Verifique as permissões.",
+  "scanner_lookup_error": "Erro ao buscar produto. Tente novamente.",
+  "product_not_found": "Produto não encontrado no banco de dados",
+  "looking_up_product": "Buscando produto...",
+  "unknown_product": "Produto Desconhecido",
+  "serving_size": "Tamanho da porção",
+  "calories": "Calorias",
+  "protein": "Proteína",
+  "carbs": "Carboidratos",
+  "fat": "Gordura",
+  "scan_again": "Escanear Novamente",
+  "add_to_log": "Adicionar ao Registro",
+  "product_added": "Produto adicionado ao registro"
 }
