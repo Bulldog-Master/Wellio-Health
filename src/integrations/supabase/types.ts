@@ -648,6 +648,42 @@ export type Database = {
           },
         ]
       }
+      content_shares: {
+        Row: {
+          content_path: string
+          content_type: string
+          created_at: string | null
+          expires_at: string | null
+          id: string
+          is_public: boolean | null
+          owner_id: string
+          share_token: string | null
+          shared_with_user_id: string | null
+        }
+        Insert: {
+          content_path: string
+          content_type: string
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          is_public?: boolean | null
+          owner_id: string
+          share_token?: string | null
+          shared_with_user_id?: string | null
+        }
+        Update: {
+          content_path?: string
+          content_type?: string
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          is_public?: boolean | null
+          owner_id?: string
+          share_token?: string | null
+          shared_with_user_id?: string | null
+        }
+        Relationships: []
+      }
       conversations: {
         Row: {
           created_at: string
@@ -4750,6 +4786,14 @@ export type Database = {
         }
         Returns: undefined
       }
+      can_access_shared_content: {
+        Args: {
+          _content_path: string
+          _content_type: string
+          _user_id?: string
+        }
+        Returns: boolean
+      }
       can_view_full_profile: {
         Args: { _profile_id: string; _viewer_id: string }
         Returns: boolean
@@ -4977,6 +5021,15 @@ export type Database = {
           allowed_data: string[]
           is_valid: boolean
           user_id: string
+        }[]
+      }
+      validate_share_token_for_content: {
+        Args: { _token: string }
+        Returns: {
+          content_path: string
+          content_type: string
+          is_valid: boolean
+          owner_id: string
         }[]
       }
     }
