@@ -8,5 +8,9 @@
   "search_messages": "پیغامات تلاش کریں",
   "delete_message": "پیغام حذف کریں",
   "message_sent": "پیغام بھیجا گیا",
-  "message_deleted": "پیغام حذف ہو گیا"
+  "message_deleted": "پیغام حذف ہو گیا",
+  "e2e_encrypted": "اینڈ ٹو اینڈ انکرپٹڈ",
+  "encryption_enabled": "انکرپشن فعال ہے",
+  "generating_keys": "انکرپشن کیز بنائی جا رہی ہیں...",
+  "decryption_failed": "پیغام ڈیکرپٹ نہیں ہو سکا"
 }

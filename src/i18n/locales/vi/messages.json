@@ -8,5 +8,9 @@
   "search_messages": "Tìm kiếm tin nhắn",
   "delete_message": "Xóa tin nhắn",
   "message_sent": "Đã gửi tin nhắn",
-  "message_deleted": "Đã xóa tin nhắn"
+  "message_deleted": "Đã xóa tin nhắn",
+  "e2e_encrypted": "Mã hóa đầu cuối",
+  "encryption_enabled": "Đã bật mã hóa",
+  "generating_keys": "Đang tạo khóa mã hóa...",
+  "decryption_failed": "Không thể giải mã tin nhắn"
 }

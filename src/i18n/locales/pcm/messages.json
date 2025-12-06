@@ -8,5 +8,9 @@
   "search_messages": "Search Messages",
   "delete_message": "Delete Message",
   "message_sent": "Message don send",
-  "message_deleted": "Message don delete"
+  "message_deleted": "Message don delete",
+  "e2e_encrypted": "End-to-end encrypted",
+  "encryption_enabled": "Encryption don dey on",
+  "generating_keys": "Dey generate encryption keys...",
+  "decryption_failed": "E no fit decrypt message"
 }

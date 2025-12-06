@@ -8,5 +8,9 @@
   "search_messages": "Cari Pesan",
   "delete_message": "Hapus Pesan",
   "message_sent": "Pesan terkirim",
-  "message_deleted": "Pesan dihapus"
+  "message_deleted": "Pesan dihapus",
+  "e2e_encrypted": "Enkripsi end-to-end",
+  "encryption_enabled": "Enkripsi diaktifkan",
+  "generating_keys": "Membuat kunci enkripsi...",
+  "decryption_failed": "Tidak dapat mendekripsi pesan"
 }
