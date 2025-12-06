@@ -237,5 +237,14 @@
   "weightlifting": "Weightlifting",
   "yoga": "Yoga",
   "hiit": "HIIT",
-  "other": "Other"
+  "other": "Other",
+  "media_gallery": "Workout Media Gallery",
+  "media_gallery_desc": "View all your workout photos and videos",
+  "photos": "Photos",
+  "videos": "Videos",
+  "no_media_yet": "No workout media yet",
+  "no_media_desc": "Upload photos and videos during your workouts to see them here",
+  "media_deleted": "Media deleted",
+  "error_loading_media": "Failed to load media",
+  "error_deleting_media": "Failed to delete media"
 }
