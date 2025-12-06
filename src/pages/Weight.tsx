@@ -18,11 +18,6 @@ import { ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { weightLogSchema, validateAndSanitize } from "@/lib/validationSchemas";
 import { useTranslation } from "react-i18next";
-import Navigation from "@/components/Navigation";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import { User, Bell } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { useUnreadNotificationCount } from "@/hooks/useNotifications";
 
 interface WeightLog {
   id: string;
@@ -36,7 +31,7 @@ const Weight = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const { preferredUnit, updatePreferredUnit, isLoading: prefsLoading } = useUserPreferences();
-  const { data: unreadCount } = useUnreadNotificationCount();
+  // Removed - now using shared Layout component
   const [morning, setMorning] = useState("");
   const [evening, setEvening] = useState("");
   const [weightLogs, setWeightLogs] = useState<WeightLog[]>([]);
@@ -403,93 +398,19 @@ const Weight = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-secondary/5">
-      <div className="flex min-h-screen">
-        <aside className="hidden md:block w-64 border-r border-border bg-sidebar sticky top-0 h-screen">
-          <div className="sticky top-0 p-6">
-            <div className="block mb-6">
-              <div className="flex justify-end">
-                <LanguageSwitcher />
-              </div>
-            </div>
-            
-            <div className="flex items-center justify-between pb-4 border-b-2 border-sidebar-border">
-              <h1 className="text-2xl font-bold gradient-text">
-                Wellio
-              </h1>
-              <div className="flex items-center gap-1">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => navigate("/notifications")}
-                  className="hover:bg-sidebar-accent text-sidebar-foreground relative"
-                >
-                  <Bell className="w-5 h-5" />
-                  {unreadCount && unreadCount > 0 && (
-                    <Badge 
-                      variant="destructive" 
-                      className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
-                    >
-                      {unreadCount > 9 ? "9+" : unreadCount}
-                    </Badge>
-                  )}
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => navigate("/profile")}
-                  className="hover:bg-sidebar-accent text-sidebar-foreground"
-                >
-                  <User className="w-5 h-5" />
-                </Button>
-              </div>
-            </div>
-            
-            <Navigation />
-          </div>
-        </aside>
-        
-        <div className="flex-1">
-          <div className="container mx-auto p-6 space-y-6 max-w-4xl pb-20 md:pb-6">
-            <div className="flex justify-end gap-2 mb-4 md:hidden">
-              <LanguageSwitcher />
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => navigate("/notifications")}
-                className="relative"
-              >
-                <Bell className="w-5 h-5" />
-                {unreadCount && unreadCount > 0 && (
-                  <Badge 
-                    variant="destructive" 
-                    className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
-                  >
-                    {unreadCount > 9 ? "9+" : unreadCount}
-                  </Badge>
-                )}
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => navigate("/profile")}
-              >
-                <User className="w-5 h-5" />
-              </Button>
-            </div>
-            
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => navigate("/activity")}
-              className="gap-2 mb-2"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              {t('weight:back_to_activity')}
-            </Button>
-            
-            <div className="flex items-center justify-between mb-2">
-          <div className="flex items-center gap-3">
+    <div className="space-y-6 max-w-4xl mx-auto">
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => navigate("/activity")}
+        className="gap-2 mb-2"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        {t('weight:back_to_activity')}
+      </Button>
+      
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center gap-3">
               <div className="p-3 bg-primary/10 rounded-xl">
                 <Scale className="w-6 h-6 text-primary" />
               </div>
@@ -808,12 +729,6 @@ const Weight = () => {
             </div>
           )}
         </Card>
-          </div>
-        </div>
-        
-        <div className="md:hidden">
-          <Navigation />
-        </div>
       </div>
     </div>
   );

@@ -123,12 +123,12 @@ export const AppRoutes = () => (
     <Route path="/settings/support" element={<RouteErrorBoundary><ProtectedRoute><Layout><Support /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     
     {/* Health & Fitness Tracking */}
-    <Route path="/weight" element={<ProtectedRoute><Weight /></ProtectedRoute>} />
+    <Route path="/weight" element={<ProtectedRoute><Layout><Weight /></Layout></ProtectedRoute>} />
     <Route path="/water-intake" element={<ProtectedRoute><Layout><WaterIntake /></Layout></ProtectedRoute>} />
     <Route path="/sleep-tracking" element={<ProtectedRoute><Layout><SleepTracking /></Layout></ProtectedRoute>} />
     <Route path="/progress-photos" element={<ProtectedRoute><Layout><ProgressPhotos /></Layout></ProtectedRoute>} />
     <Route path="/body-measurements" element={<ProtectedRoute><Layout><BodyMeasurements /></Layout></ProtectedRoute>} />
-    <Route path="/step-count" element={<ProtectedRoute><StepCount /></ProtectedRoute>} />
+    <Route path="/step-count" element={<ProtectedRoute><Layout><StepCount /></Layout></ProtectedRoute>} />
     <Route path="/symptoms" element={<ProtectedRoute><Layout><Symptoms /></Layout></ProtectedRoute>} />
     <Route path="/medical" element={<RouteErrorBoundary><ProtectedRoute><Layout><MedicalHistory /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     
@@ -149,8 +149,8 @@ export const AppRoutes = () => (
     <Route path="/workout-templates" element={<ProtectedRoute><Layout><WorkoutTemplates /></Layout></ProtectedRoute>} />
     <Route path="/workout-template/:programId" element={<ProtectedRoute><Layout><WorkoutTemplateDetail /></Layout></ProtectedRoute>} />
     <Route path="/personal-records" element={<ProtectedRoute><Layout><PersonalRecords /></Layout></ProtectedRoute>} />
-    <Route path="/live-workout-sessions" element={<ProtectedRoute><LiveWorkoutSessions /></ProtectedRoute>} />
-    <Route path="/live-session/:sessionId" element={<ProtectedRoute><LiveSessionRoom /></ProtectedRoute>} />
+    <Route path="/live-workout-sessions" element={<ProtectedRoute><Layout><LiveWorkoutSessions /></Layout></ProtectedRoute>} />
+    <Route path="/live-session/:sessionId" element={<ProtectedRoute><Layout><LiveSessionRoom /></Layout></ProtectedRoute>} />
     
     {/* Habits & Goals */}
     <Route path="/habits" element={<ProtectedRoute><Layout><Habits /></Layout></ProtectedRoute>} />
@@ -181,8 +181,8 @@ export const AppRoutes = () => (
     {/* Challenges & Community */}
     <Route path="/challenges" element={<ProtectedRoute><Layout><Challenges /></Layout></ProtectedRoute>} />
     <Route path="/leaderboard" element={<ProtectedRoute><Layout><Leaderboard /></Layout></ProtectedRoute>} />
-    <Route path="/progress-challenges" element={<ProtectedRoute><ProgressChallenges /></ProtectedRoute>} />
-    <Route path="/progress-challenge/:challengeId" element={<ProtectedRoute><ProgressChallengeDetail /></ProtectedRoute>} />
+    <Route path="/progress-challenges" element={<ProtectedRoute><Layout><ProgressChallenges /></Layout></ProtectedRoute>} />
+    <Route path="/progress-challenge/:challengeId" element={<ProtectedRoute><Layout><ProgressChallengeDetail /></Layout></ProtectedRoute>} />
     <Route path="/fundraisers" element={<ProtectedRoute><Layout><Fundraisers /></Layout></ProtectedRoute>} />
     <Route path="/fundraiser/:id" element={<ProtectedRoute><Layout><FundraiserDetail /></Layout></ProtectedRoute>} />
     
