@@ -24,7 +24,7 @@ interface PrivacyPreferences {
 }
 
 const PrivacyControls: React.FC = () => {
-  const { t } = useTranslation(['privacy', 'common']);
+  const { t } = useTranslation(['privacy', 'common', 'controls']);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -128,20 +128,30 @@ const PrivacyControls: React.FC = () => {
   const requestDataExport = async () => {
     setExportLoading(true);
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) throw new Error('Not authenticated');
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) throw new Error('Not authenticated');
 
-      const { error } = await supabase
-        .from('data_export_requests')
-        .insert({
-          user_id: user.id,
-          status: 'pending',
-        });
+      // Call the edge function to get the export
+      const response = await supabase.functions.invoke('export-user-data', {
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+        },
+      });
 
-      if (error) throw error;
+      if (response.error) throw response.error;
 
-      setPendingExport({ status: 'pending', requested_at: new Date().toISOString() });
-      toast.success(t('controls:export_requested'));
+      // Create blob and download
+      const blob = new Blob([JSON.stringify(response.data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `user-data-export-${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      toast.success(t('controls:export_complete'));
     } catch (error) {
       console.error('Error requesting export:', error);
       toast.error(t('privacy:toast_failed_export'));
@@ -358,26 +368,19 @@ const PrivacyControls: React.FC = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Download className="h-5 w-5 text-primary" />
-                {t('privacy:data_export')}
+                {t('controls:data_export')}
               </CardTitle>
               <CardDescription>{t('controls:export_description')}</CardDescription>
             </CardHeader>
             <CardContent>
-              {pendingExport ? (
-                <div className="flex items-center gap-2 p-4 bg-muted rounded-lg">
-                  <Loader2 className="h-5 w-5 animate-spin text-primary" />
-                  <span>{t('controls:export_in_progress')}</span>
-                </div>
-              ) : (
-                <Button onClick={requestDataExport} disabled={exportLoading}>
-                  {exportLoading ? (
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  ) : (
-                    <Download className="h-4 w-4 mr-2" />
-                  )}
-                  {t('controls:request_export')}
-                </Button>
-              )}
+              <Button onClick={requestDataExport} disabled={exportLoading}>
+                {exportLoading ? (
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                ) : (
+                  <Download className="h-4 w-4 mr-2" />
+                )}
+                {t('controls:export_button')}
+              </Button>
             </CardContent>
           </Card>
 

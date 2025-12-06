@@ -20,6 +20,7 @@
   "export_button": "निर्यात करें",
   "export_requested": "अनुरोध भेजा गया",
   "export_requested_desc": "डेटा तैयार कर रहे हैं।",
+  "export_complete": "निर्यात पूर्ण! डाउनलोड जल्द शुरू होगा।",
   "delete_account": "खाता हटाएं",
   "delete_warning": "यह पूर्ववत नहीं किया जा सकता।",
   "delete_button": "हटाने का अनुरोध करें",

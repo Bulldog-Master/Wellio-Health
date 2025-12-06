@@ -20,6 +20,7 @@
   "export_button": "エクスポート",
   "export_requested": "リクエスト送信済み",
   "export_requested_desc": "データを準備中です。",
+  "export_complete": "エクスポート完了！ダウンロードがまもなく始まります。",
   "delete_account": "アカウント削除",
   "delete_warning": "この操作は取り消せません。",
   "delete_button": "削除をリクエスト",

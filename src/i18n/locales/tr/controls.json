@@ -20,6 +20,7 @@
   "export_button": "Verilerimi Dışa Aktar",
   "export_requested": "Dışa Aktarma İstendi",
   "export_requested_desc": "Verilerinizi hazırlıyoruz.",
+  "export_complete": "Dışa aktarma tamamlandı! İndirmeniz kısa sürede başlayacak.",
   "delete_account": "Hesabı Sil",
   "delete_warning": "Bu işlem geri alınamaz.",
   "delete_button": "Hesap Silme İste",

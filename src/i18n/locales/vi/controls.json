@@ -20,6 +20,7 @@
   "export_button": "Xuất Dữ Liệu Của Tôi",
   "export_requested": "Đã Yêu Cầu Xuất",
   "export_requested_desc": "Chúng tôi đang chuẩn bị dữ liệu của bạn. Chúng tôi sẽ thông báo khi tải xuống sẵn sàng.",
+  "export_complete": "Xuất hoàn tất! Tải xuống sẽ bắt đầu sớm.",
   "delete_account": "Xóa Tài Khoản",
   "delete_warning": "Hành động này không thể hoàn tác. Tất cả dữ liệu của bạn sẽ bị xóa vĩnh viễn.",
   "delete_button": "Yêu Cầu Xóa Tài Khoản",

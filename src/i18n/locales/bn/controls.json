@@ -14,6 +14,7 @@
   "data_export": "ডেটা রপ্তানি",
   "export_button": "রপ্তানি",
   "export_requested": "অনুরোধ পাঠানো হয়েছে",
+  "export_complete": "রপ্তানি সম্পন্ন! ডাউনলোড শীঘ্রই শুরু হবে।",
   "delete_account": "অ্যাকাউন্ট মুছুন",
   "delete_warning": "এটি পূর্বাবস্থায় ফেরানো যাবে না।",
   "delete_button": "মুছে ফেলার অনুরোধ",

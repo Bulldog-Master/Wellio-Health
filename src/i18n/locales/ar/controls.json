@@ -20,6 +20,7 @@
   "export_button": "تصدير",
   "export_requested": "تم الطلب",
   "export_requested_desc": "نحضر بياناتك.",
+  "export_complete": "اكتمل التصدير! سيبدأ التنزيل قريبًا.",
   "delete_account": "حذف الحساب",
   "delete_warning": "لا يمكن التراجع عن هذا.",
   "delete_button": "طلب الحذف",

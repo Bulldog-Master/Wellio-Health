@@ -20,6 +20,7 @@
   "export_button": "Exporter Mes Données",
   "export_requested": "Exportation Demandée",
   "export_requested_desc": "Nous préparons vos données. Nous vous informerons quand le téléchargement sera prêt.",
+  "export_complete": "Exportation terminée! Votre téléchargement devrait commencer.",
   "delete_account": "Supprimer le Compte",
   "delete_warning": "Cette action ne peut pas être annulée. Toutes vos données seront définitivement supprimées.",
   "delete_button": "Demander la Suppression du Compte",

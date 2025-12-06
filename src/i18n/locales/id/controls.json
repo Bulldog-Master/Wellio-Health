@@ -14,6 +14,7 @@
   "data_export": "Ekspor Data",
   "export_button": "Ekspor",
   "export_requested": "Permintaan terkirim",
+  "export_complete": "Ekspor selesai! Unduhan akan segera dimulai.",
   "delete_account": "Hapus Akun",
   "delete_warning": "Tidak dapat dibatalkan.",
   "delete_button": "Minta penghapusan",
