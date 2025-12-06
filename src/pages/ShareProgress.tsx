@@ -83,9 +83,22 @@ const ShareProgress = () => {
 
       // Generate a unique share token
       const shareToken = crypto.randomUUID();
+      const expiresAt = getExpiryDate();
 
-      // For now, create a local share link (database table would need to be created)
-      const link = `${window.location.origin}/shared/${shareToken}?data=${[...selectedData].join(',')}&expires=${expiresIn}`;
+      // Store share token server-side for validation
+      const { error } = await supabase
+        .from('progress_shares')
+        .insert({
+          user_id: user.id,
+          share_token: shareToken,
+          allowed_data: [...selectedData],
+          expires_at: expiresAt.toISOString(),
+        });
+
+      if (error) throw error;
+
+      // Create the share link (no expiry in URL - validated server-side)
+      const link = `${window.location.origin}/shared/${shareToken}`;
       setShareLink(link);
 
       toast({
