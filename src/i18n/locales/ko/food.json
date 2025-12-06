@@ -4,5 +4,20 @@
   "search_food": "음식 검색",
   "recent_foods": "최근 음식",
   "favorites": "즐겨찾기",
-  "nutrition_info": "영양 정보"
+  "nutrition_info": "영양 정보",
+  "scan_barcode": "바코드 스캔",
+  "scanner_instructions": "바코드를 프레임 안에 위치시키세요",
+  "scanner_camera_error": "카메라에 접근할 수 없습니다. 권한을 확인하세요.",
+  "scanner_lookup_error": "제품 조회 중 오류가 발생했습니다. 다시 시도하세요.",
+  "product_not_found": "데이터베이스에서 제품을 찾을 수 없습니다",
+  "looking_up_product": "제품 조회 중...",
+  "unknown_product": "알 수 없는 제품",
+  "serving_size": "1회 제공량",
+  "calories": "칼로리",
+  "protein": "단백질",
+  "carbs": "탄수화물",
+  "fat": "지방",
+  "scan_again": "다시 스캔",
+  "add_to_log": "기록에 추가",
+  "product_added": "제품이 기록에 추가되었습니다"
 }

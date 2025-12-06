@@ -4,5 +4,20 @@
   "search_food": "食べ物を検索",
   "recent_foods": "最近の食事",
   "favorites": "お気に入り",
-  "nutrition_info": "栄養情報"
+  "nutrition_info": "栄養情報",
+  "scan_barcode": "バーコードをスキャン",
+  "scanner_instructions": "バーコードを枠内に配置してください",
+  "scanner_camera_error": "カメラにアクセスできません。権限を確認してください。",
+  "scanner_lookup_error": "製品の検索中にエラーが発生しました。もう一度お試しください。",
+  "product_not_found": "データベースに製品が見つかりません",
+  "looking_up_product": "製品を検索中...",
+  "unknown_product": "不明な製品",
+  "serving_size": "1食分量",
+  "calories": "カロリー",
+  "protein": "タンパク質",
+  "carbs": "炭水化物",
+  "fat": "脂質",
+  "scan_again": "再スキャン",
+  "add_to_log": "記録に追加",
+  "product_added": "製品が記録に追加されました"
 }

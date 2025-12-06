@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Utensils, Plus, Clock, Camera, Sparkles, Loader2, Pencil, Trash2, ArrowLeft, Search, Calendar, Bookmark, BookmarkCheck } from "lucide-react";
+import { Utensils, Plus, Clock, Camera, Sparkles, Loader2, Pencil, Trash2, ArrowLeft, Search, Calendar, Bookmark, BookmarkCheck, ScanBarcode } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { foodLogSchema, mealSearchSchema, validateAndSanitize } from "@/lib/validationSchemas";
 import { useTranslation } from "react-i18next";
+import { BarcodeScanner, ProductInfo } from "@/components/food/BarcodeScanner";
 
 interface MealLog {
   id: string;
@@ -70,6 +71,7 @@ const FoodLog = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [savedMeals, setSavedMeals] = useState<SavedMeal[]>([]);
   const [showSavedMeals, setShowSavedMeals] = useState(false);
+  const [showBarcodeScanner, setShowBarcodeScanner] = useState(false);
 
   const mealTypes = [
     { value: "breakfast", label: t('food:breakfast') },
@@ -197,6 +199,17 @@ const FoodLog = () => {
     });
     setSearchQuery("");
     setSearchResults([]);
+  };
+
+  const handleBarcodeProduct = (product: ProductInfo) => {
+    setMealDescription(product.name + (product.brand ? ` (${product.brand})` : ''));
+    setNutritionData({
+      calories: product.calories || 0,
+      protein: product.protein || 0,
+      carbs: product.carbs || 0,
+      fat: product.fat || 0,
+    });
+    setShowBarcodeScanner(false);
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -660,7 +673,18 @@ const FoodLog = () => {
           {selectedMeal !== 'fast' && (
             <>
               <div className="space-y-3">
-                <Label htmlFor="search">{t('food:search_food_database')}</Label>
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="search">{t('food:search_food_database')}</Label>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setShowBarcodeScanner(true)}
+                    className="gap-2"
+                  >
+                    <ScanBarcode className="w-4 h-4" />
+                    {t('food:scan_barcode')}
+                  </Button>
+                </div>
                 <div className="flex gap-2">
                   <Input
                     id="search"
@@ -992,6 +1016,12 @@ const FoodLog = () => {
           </div>
         )}
       </Card>
+
+      <BarcodeScanner
+        open={showBarcodeScanner}
+        onClose={() => setShowBarcodeScanner(false)}
+        onProductFound={handleBarcodeProduct}
+      />
     </div>
   );
 };

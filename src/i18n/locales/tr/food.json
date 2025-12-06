@@ -4,5 +4,20 @@
   "search_food": "Yiyecek Ara",
   "recent_foods": "Son Yiyecekler",
   "favorites": "Favoriler",
-  "nutrition_info": "Besin Bilgisi"
+  "nutrition_info": "Besin Bilgisi",
+  "scan_barcode": "Barkod Tara",
+  "scanner_instructions": "Barkodu çerçeve içine yerleştirin",
+  "scanner_camera_error": "Kameraya erişilemiyor. Lütfen izinleri kontrol edin.",
+  "scanner_lookup_error": "Ürün aranırken hata oluştu. Tekrar deneyin.",
+  "product_not_found": "Ürün veritabanında bulunamadı",
+  "looking_up_product": "Ürün aranıyor...",
+  "unknown_product": "Bilinmeyen Ürün",
+  "serving_size": "Porsiyon boyutu",
+  "calories": "Kalori",
+  "protein": "Protein",
+  "carbs": "Karbonhidrat",
+  "fat": "Yağ",
+  "scan_again": "Tekrar Tara",
+  "add_to_log": "Günlüğe Ekle",
+  "product_added": "Ürün günlüğe eklendi"
 }
