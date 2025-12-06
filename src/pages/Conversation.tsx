@@ -212,23 +212,25 @@ const Conversation = () => {
         throw new Error(`${t('messages:sending_too_fast')} ${Math.ceil((rateLimit.resetAt.getTime() - Date.now()) / 1000)}s`);
       }
 
-      // If E2E is available, encrypt the message
+      // Build message data - encryption enforced at DB level when E2E is used
       let messageData: any = {
         conversation_id: conversationId,
         sender_id: currentUserId,
-        content: content, // Always store plaintext for now as fallback
+        content: content, // DB trigger replaces with '[encrypted]' when E2E is used
       };
 
+      // If E2E is available, encrypt the message
       if (canUseE2E && conversation?.other_user?.id) {
         try {
           const encrypted = await encryptForPeer(content, conversation.other_user.id);
           if (encrypted) {
             messageData.content_encrypted = encrypted;
             messageData.encryption_version = 2;
+            // Note: DB trigger will replace content with '[encrypted]' placeholder
           }
         } catch (error) {
           console.error('Failed to encrypt message:', error);
-          // Continue with plaintext
+          // Continue with plaintext if encryption fails
         }
       }
 
