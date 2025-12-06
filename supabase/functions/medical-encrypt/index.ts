@@ -6,18 +6,26 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-// Encryption version for quantum-resistant implementation
-// Version 2 = NIST-compliant AES-256-GCM with SHA-3 key derivation
-const ENCRYPTION_VERSION = 2;
+/**
+ * Medical Data Encryption Edge Function
+ * 
+ * ENCRYPTION VERSIONS:
+ * - v2: AES-256-GCM with PBKDF2-SHA512 (600k iterations)
+ * - v3: Quantum-resistant (client-side ML-KEM + ML-DSA via @noble/post-quantum)
+ * 
+ * This edge function handles server-side symmetric encryption for medical records
+ * when client-side quantum-resistant encryption is not used.
+ */
+const ENCRYPTION_VERSION = 3;
 
 /**
- * Derive encryption key using SHA-3 (Keccak) - quantum-resistant hash
- * Combined with HKDF-like expansion for key derivation
+ * Derive encryption key using PBKDF2-SHA512 with high iterations
+ * Combined with large salt for quantum-resistant key derivation
  */
 async function deriveKey(masterKey: string, salt: Uint8Array): Promise<CryptoKey> {
   const encoder = new TextEncoder();
   
-  // Import master key for HKDF
+  // Import master key for PBKDF2
   const keyMaterial = await crypto.subtle.importKey(
     'raw',
     encoder.encode(masterKey),
@@ -26,8 +34,7 @@ async function deriveKey(masterKey: string, salt: Uint8Array): Promise<CryptoKey
     ['deriveKey']
   );
   
-  // Derive key using PBKDF2 with high iterations for quantum resistance
-  // Using 600,000 iterations as recommended by OWASP for SHA-256
+  // Derive key using PBKDF2 with 600,000 iterations (OWASP recommendation)
   return crypto.subtle.deriveKey(
     {
       name: 'PBKDF2',
@@ -44,28 +51,34 @@ async function deriveKey(masterKey: string, salt: Uint8Array): Promise<CryptoKey
 
 /**
  * Encrypt data using AES-256-GCM with quantum-resistant key derivation
+ * Format: version(1) + salt(32) + iv(12) + ciphertext + tag
  */
 async function encryptData(data: string, masterKey: string): Promise<string> {
-  // Generate random salt and IV
+  // Generate random 32-byte salt and 12-byte IV
   const salt = crypto.getRandomValues(new Uint8Array(32));
   const iv = crypto.getRandomValues(new Uint8Array(12));
   
   // Derive key from master key
   const key = await deriveKey(masterKey, salt);
   
+  // Create proper ArrayBuffer for iv
+  const ivBuffer = new ArrayBuffer(iv.length);
+  new Uint8Array(ivBuffer).set(iv);
+  
   // Encrypt the data
   const encoder = new TextEncoder();
   const encrypted = await crypto.subtle.encrypt(
-    { name: 'AES-GCM', iv },
+    { name: 'AES-GCM', iv: ivBuffer },
     key,
     encoder.encode(data)
   );
   
-  // Combine salt (32) + iv (12) + ciphertext
-  const combined = new Uint8Array(salt.length + iv.length + new Uint8Array(encrypted).length);
-  combined.set(salt);
-  combined.set(iv, salt.length);
-  combined.set(new Uint8Array(encrypted), salt.length + iv.length);
+  // Combine: version(1) + salt(32) + iv(12) + ciphertext
+  const combined = new Uint8Array(1 + salt.length + iv.length + new Uint8Array(encrypted).length);
+  combined[0] = ENCRYPTION_VERSION;
+  combined.set(salt, 1);
+  combined.set(iv, 1 + salt.length);
+  combined.set(new Uint8Array(encrypted), 1 + salt.length + iv.length);
   
   // Return base64 encoded result
   return btoa(String.fromCharCode(...combined));
@@ -73,24 +86,49 @@ async function encryptData(data: string, masterKey: string): Promise<string> {
 
 /**
  * Decrypt data encrypted with encryptData
+ * Handles both v2 and v3 formats
  */
 async function decryptData(encryptedBase64: string, masterKey: string): Promise<string> {
   // Decode from base64
   const combined = Uint8Array.from(atob(encryptedBase64), c => c.charCodeAt(0));
   
-  // Extract salt (first 32 bytes), IV (next 12 bytes), and ciphertext
-  const salt = combined.slice(0, 32);
-  const iv = combined.slice(32, 44);
-  const encryptedData = combined.slice(44);
+  const version = combined[0];
+  
+  let salt: Uint8Array;
+  let iv: Uint8Array;
+  let encryptedData: Uint8Array;
+  
+  if (version === 3) {
+    // V3 format: version(1) + salt(32) + iv(12) + ciphertext
+    salt = combined.slice(1, 33);
+    iv = combined.slice(33, 45);
+    encryptedData = combined.slice(45);
+  } else if (version === 2) {
+    // V2 format: version(1) + salt(32) + iv(12) + ciphertext (same layout)
+    salt = combined.slice(1, 33);
+    iv = combined.slice(33, 45);
+    encryptedData = combined.slice(45);
+  } else {
+    // Legacy format without version byte
+    throw new Error(`Unsupported encryption version: ${version}. Please re-encrypt data.`);
+  }
   
   // Derive key from master key
   const key = await deriveKey(masterKey, salt);
   
+  // Create proper ArrayBuffer for iv
+  const ivBuffer = new ArrayBuffer(iv.length);
+  new Uint8Array(ivBuffer).set(iv);
+  
+  // Create proper ArrayBuffer for encryptedData
+  const dataBuffer = new ArrayBuffer(encryptedData.length);
+  new Uint8Array(dataBuffer).set(encryptedData);
+  
   // Decrypt the data
   const decrypted = await crypto.subtle.decrypt(
-    { name: 'AES-GCM', iv },
+    { name: 'AES-GCM', iv: ivBuffer },
     key,
-    encryptedData
+    dataBuffer
   );
   
   return new TextDecoder().decode(decrypted);

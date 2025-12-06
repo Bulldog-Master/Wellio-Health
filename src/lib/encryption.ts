@@ -3,20 +3,29 @@
  * 
  * ENCRYPTION VERSIONS:
  * - v1: Legacy AES-GCM (deprecated)
- * - v2: Enhanced AES-256-GCM with PBKDF2 key derivation (current)
- * - v3: (Future) CRYSTALS-Kyber via edge function for true quantum resistance
+ * - v2: Enhanced AES-256-GCM with PBKDF2 key derivation
+ * - v3: NIST Post-Quantum: ML-KEM-768 (CRYSTALS-Kyber) + AES-256-GCM hybrid (current)
  * 
  * Medical records and sensitive data use encryption_version column to track algorithm.
+ * 
+ * For quantum-resistant operations, use:
+ * - Client-side: src/lib/quantumEncryption.ts (ML-KEM + ML-DSA)
+ * - Hook: src/hooks/useQuantumEncryption.ts
  */
+
+// Note: For quantum-resistant operations, import directly from:
+// - src/lib/quantumEncryption.ts (ML-KEM + ML-DSA)
+// - src/hooks/useQuantumEncryption.ts (React hook)
 
 // Encryption version constants
 export const ENCRYPTION_VERSION = {
   LEGACY_AES_GCM: 1,
   ENHANCED_AES_256_GCM: 2,
-  QUANTUM_RESISTANT: 3, // Future: via edge function
+  QUANTUM_RESISTANT: 3, // ML-KEM-768 + AES-256-GCM hybrid
 } as const;
 
-export const CURRENT_ENCRYPTION_VERSION = ENCRYPTION_VERSION.ENHANCED_AES_256_GCM;
+// Set current version to quantum-resistant
+export const CURRENT_ENCRYPTION_VERSION = ENCRYPTION_VERSION.QUANTUM_RESISTANT;
 
 // Generate a random encryption key (256-bit)
 export const generateEncryptionKey = async (): Promise<string> => {
@@ -100,7 +109,7 @@ export const encryptDataV2 = async (data: string, secret: string): Promise<strin
   // Combine version + salt + IV + encrypted data
   const encryptedArray = new Uint8Array(encrypted);
   const combined = new Uint8Array(1 + salt.length + iv.length + encryptedArray.length);
-  combined[0] = CURRENT_ENCRYPTION_VERSION; // Version byte
+  combined[0] = ENCRYPTION_VERSION.ENHANCED_AES_256_GCM; // Use V2 for symmetric encryption
   combined.set(salt, 1);
   combined.set(iv, 1 + salt.length);
   combined.set(encryptedArray, 1 + salt.length + iv.length);
