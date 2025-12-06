@@ -46,25 +46,35 @@ serve(async (req) => {
 
     const { fitnessLevel, goals, daysPerWeek, equipment, duration }: WorkoutPlanRequest = await req.json();
 
-    console.log(`Generating workout plan for user ${user.id}`, { fitnessLevel, goals, daysPerWeek });
+    console.log(`Generating AI workout plan for user ${user.id}`, { fitnessLevel, goals, daysPerWeek, equipment, duration });
 
-    // Generate workout plan based on parameters
-    const plan = generateWorkoutPlan(fitnessLevel, goals, daysPerWeek, equipment, duration);
+    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    
+    let plan;
+    
+    if (LOVABLE_API_KEY) {
+      // Use Lovable AI for personalized plan generation
+      plan = await generateAIWorkoutPlan(LOVABLE_API_KEY, fitnessLevel, goals, daysPerWeek, equipment, duration);
+    } else {
+      // Fallback to rule-based generation
+      console.log("LOVABLE_API_KEY not found, using rule-based generation");
+      plan = generateRuleBasedPlan(fitnessLevel, goals, daysPerWeek, equipment, duration);
+    }
 
-    // Save the plan to database
-    const { error: insertError } = await supabaseAdmin
-      .from('workout_plans')
-      .insert({
-        user_id: user.id,
-        plan_data: plan,
-        fitness_level: fitnessLevel,
-        goals: goals,
-        days_per_week: daysPerWeek,
-        status: 'active'
-      });
-
-    if (insertError) {
-      console.error('Error saving workout plan:', insertError);
+    // Save the plan to database (if table exists)
+    try {
+      await supabaseAdmin
+        .from('workout_plans')
+        .insert({
+          user_id: user.id,
+          plan_data: plan,
+          fitness_level: fitnessLevel,
+          goals: goals,
+          days_per_week: daysPerWeek,
+          status: 'active'
+        });
+    } catch (insertError) {
+      console.log('Note: workout_plans table may not exist, skipping save');
     }
 
     return new Response(JSON.stringify({ plan }), {
@@ -81,7 +91,120 @@ serve(async (req) => {
   }
 });
 
-function generateWorkoutPlan(
+async function generateAIWorkoutPlan(
+  apiKey: string,
+  fitnessLevel: string,
+  goals: string[],
+  daysPerWeek: number,
+  equipment: string[],
+  duration: number
+) {
+  const systemPrompt = `You are an expert personal trainer and fitness program designer. Create personalized, effective workout plans based on the user's goals, fitness level, and available equipment.
+
+Always respond with a valid JSON object in this exact format:
+{
+  "name": "string - creative plan name",
+  "fitnessLevel": "string",
+  "goals": ["array of goals"],
+  "daysPerWeek": number,
+  "weeklySchedule": [
+    {
+      "day": "Monday/Tuesday/etc",
+      "focus": "string - muscle groups or workout type (e.g., PUSH, PULL, LEGS, FULL BODY)",
+      "estimatedDuration": number (in minutes),
+      "exercises": [
+        {
+          "name": "string",
+          "sets": number,
+          "reps": "string (e.g., '8-12' or '30 seconds')",
+          "restSeconds": number
+        }
+      ]
+    }
+  ],
+  "tips": ["array of 4 personalized tips for this plan"],
+  "progressionGuide": "string - how to progress over 4-6 weeks",
+  "nutritionAdvice": "string - brief nutrition guidance for the goals"
+}
+
+Key principles:
+- Balance muscle groups appropriately
+- Include compound movements for efficiency
+- Scale difficulty to fitness level
+- Consider available equipment
+- Provide proper rest between training same muscle groups`;
+
+  const userPrompt = `Create a ${daysPerWeek}-day per week workout plan with these specifications:
+
+Fitness Level: ${fitnessLevel}
+Goals: ${goals.join(', ')}
+Available Equipment: ${equipment.length > 0 ? equipment.join(', ') : 'bodyweight only'}
+Session Duration: ${duration} minutes
+
+Design an effective program that maximizes results within the given time and equipment constraints.`;
+
+  try {
+    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "google/gemini-2.5-flash",
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt }
+        ],
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("AI gateway error:", response.status, errorText);
+      
+      if (response.status === 429) {
+        throw new Error("Rate limit exceeded. Please try again later.");
+      }
+      if (response.status === 402) {
+        throw new Error("AI credits exhausted. Please add credits.");
+      }
+      
+      // Fallback to rule-based on API error
+      console.log("Falling back to rule-based generation due to API error");
+      return generateRuleBasedPlan(fitnessLevel, goals, daysPerWeek, equipment, duration);
+    }
+
+    const data = await response.json();
+    const content = data.choices?.[0]?.message?.content;
+    
+    if (!content) {
+      throw new Error("No content in AI response");
+    }
+
+    // Parse JSON from response
+    let plan;
+    try {
+      const jsonMatch = content.match(/```json\s*([\s\S]*?)\s*```/) || 
+                       content.match(/```\s*([\s\S]*?)\s*```/) ||
+                       [null, content];
+      const jsonString = jsonMatch[1] || content;
+      plan = JSON.parse(jsonString.trim());
+    } catch (parseError) {
+      console.error("Failed to parse AI response, using rule-based fallback");
+      return generateRuleBasedPlan(fitnessLevel, goals, daysPerWeek, equipment, duration);
+    }
+
+    console.log("Successfully generated AI workout plan");
+    return plan;
+
+  } catch (error) {
+    console.error("Error calling AI gateway:", error);
+    return generateRuleBasedPlan(fitnessLevel, goals, daysPerWeek, equipment, duration);
+  }
+}
+
+function generateRuleBasedPlan(
   fitnessLevel: string,
   goals: string[],
   daysPerWeek: number,
@@ -130,18 +253,17 @@ function generateWorkoutPlan(
   }> = [];
   const dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-  // Create workout schedule based on days per week
   const workoutDays = [];
   if (daysPerWeek === 3) {
-    workoutDays.push(0, 2, 4); // Mon, Wed, Fri
+    workoutDays.push(0, 2, 4);
   } else if (daysPerWeek === 4) {
-    workoutDays.push(0, 1, 3, 4); // Mon, Tue, Thu, Fri
+    workoutDays.push(0, 1, 3, 4);
   } else if (daysPerWeek === 5) {
-    workoutDays.push(0, 1, 2, 3, 4); // Mon-Fri
+    workoutDays.push(0, 1, 2, 3, 4);
   } else if (daysPerWeek === 6) {
-    workoutDays.push(0, 1, 2, 3, 4, 5); // Mon-Sat
+    workoutDays.push(0, 1, 2, 3, 4, 5);
   } else {
-    workoutDays.push(0, 2, 4); // Default to 3 days
+    workoutDays.push(0, 2, 4);
   }
 
   const workoutTypes = goals.includes('muscle_gain') 
