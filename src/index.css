@@ -216,3 +216,37 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Accessibility preference classes */
+.high-contrast {
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #1a1a1a;
+  --card-foreground: #ffffff;
+  --primary: #ffff00;
+  --primary-foreground: #000000;
+  --secondary: #00ffff;
+  --secondary-foreground: #000000;
+  --muted: #333333;
+  --muted-foreground: #ffffff;
+  --border: #ffffff;
+}
+
+.large-text {
+  font-size: 120%;
+}
+
+.large-text h1 { font-size: 2.5rem; }
+.large-text h2 { font-size: 2rem; }
+.large-text h3 { font-size: 1.75rem; }
+.large-text p, .large-text span, .large-text label { font-size: 1.2rem; }
+.large-text button { font-size: 1.1rem; }
+
+.reduce-motion *, 
+.reduce-motion *::before, 
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}

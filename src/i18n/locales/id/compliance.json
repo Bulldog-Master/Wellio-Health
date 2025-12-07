@@ -36,5 +36,22 @@
   "high_contrast": "Kontras Tinggi",
   "large_text": "Teks Besar",
   "reduce_motion": "Kurangi Gerakan",
-  "screen_reader": "Dioptimalkan untuk Pembaca Layar"
+  "screen_reader": "Dioptimalkan untuk Pembaca Layar",
+  "ccpa_title": "Jangan Jual Informasi Pribadi Saya",
+  "ccpa_description": "Di bawah California Consumer Privacy Act, Anda berhak untuk menolak penjualan informasi pribadi Anda.",
+  "ccpa_toggle": "Jangan Jual Informasi Pribadi Saya",
+  "ccpa_notice": "Pengaturan ini mencegah penjualan informasi pribadi Anda kepada pihak ketiga.",
+  "hipaa_title": "Otorisasi HIPAA",
+  "hipaa_description": "Kelola otorisasi Anda untuk berbagi data kesehatan.",
+  "hipaa_authorize": "Otorisasi Berbagi Data",
+  "hipaa_revoke": "Cabut Otorisasi",
+  "hipaa_notice": "Ini memungkinkan berbagi informasi kesehatan Anda dengan penerima yang berwenang.",
+  "hipaa_authorized": "Terotorisasi",
+  "hipaa_not_authorized": "Tidak Terotorisasi",
+  "pipeda_title": "Persetujuan PIPEDA",
+  "pipeda_description": "Kelola persetujuan Anda untuk pemrosesan data di bawah hukum privasi Kanada.",
+  "pipeda_consent": "Saya menyetujui pemrosesan data",
+  "pipeda_notice": "Ini mematuhi Personal Information Protection and Electronic Documents Act Kanada.",
+  "accessibility_title": "Pengaturan Aksesibilitas",
+  "accessibility_description": "Sesuaikan aplikasi dengan kebutuhan Anda."
 }

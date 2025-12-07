@@ -36,5 +36,22 @@
   "high_contrast": "High Contrast",
   "large_text": "Big Text",
   "reduce_motion": "Reduce Motion",
-  "screen_reader": "Screen Reader Optimized"
+  "screen_reader": "Screen Reader Optimized",
+  "ccpa_title": "No Sell My Personal Information",
+  "ccpa_description": "Under California Consumer Privacy Act, you get right to say no to selling of your personal information.",
+  "ccpa_toggle": "No Sell My Personal Information",
+  "ccpa_notice": "Dis setting dey prevent selling of your personal information to third parties.",
+  "hipaa_title": "HIPAA Authorization",
+  "hipaa_description": "Manage your authorization for health data sharing.",
+  "hipaa_authorize": "Authorize Data Sharing",
+  "hipaa_revoke": "Revoke Authorization",
+  "hipaa_notice": "Dis one dey allow sharing of your health information with authorized recipients.",
+  "hipaa_authorized": "Authorized",
+  "hipaa_not_authorized": "Not Authorized",
+  "pipeda_title": "PIPEDA Consent",
+  "pipeda_description": "Manage your consent for data processing under Canadian privacy laws.",
+  "pipeda_consent": "I consent to data processing",
+  "pipeda_notice": "Dis one dey comply with di Canadian Personal Information Protection and Electronic Documents Act.",
+  "accessibility_title": "Accessibility Settings",
+  "accessibility_description": "Customize di app to fit your needs."
 }

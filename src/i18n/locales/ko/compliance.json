@@ -36,5 +36,22 @@
   "high_contrast": "고대비",
   "large_text": "큰 글씨",
   "reduce_motion": "모션 줄이기",
-  "screen_reader": "스크린 리더 최적화"
+  "screen_reader": "스크린 리더 최적화",
+  "ccpa_title": "내 개인정보 판매 금지",
+  "ccpa_description": "캘리포니아 소비자 개인정보 보호법에 따라 개인정보 판매를 거부할 권리가 있습니다.",
+  "ccpa_toggle": "내 개인정보 판매 금지",
+  "ccpa_notice": "이 설정은 제3자에게 개인정보 판매를 방지합니다.",
+  "hipaa_title": "HIPAA 승인",
+  "hipaa_description": "건강 데이터 공유에 대한 승인을 관리합니다.",
+  "hipaa_authorize": "데이터 공유 승인",
+  "hipaa_revoke": "승인 철회",
+  "hipaa_notice": "승인된 수신자와 건강 정보를 공유할 수 있습니다.",
+  "hipaa_authorized": "승인됨",
+  "hipaa_not_authorized": "승인되지 않음",
+  "pipeda_title": "PIPEDA 동의",
+  "pipeda_description": "캐나다 개인정보 보호법에 따라 데이터 처리에 대한 동의를 관리합니다.",
+  "pipeda_consent": "데이터 처리에 동의합니다",
+  "pipeda_notice": "이는 캐나다 개인정보 보호 및 전자문서법을 준수합니다.",
+  "accessibility_title": "접근성 설정",
+  "accessibility_description": "필요에 맞게 앱을 맞춤 설정하세요."
 }
