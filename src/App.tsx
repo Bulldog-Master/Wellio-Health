@@ -15,6 +15,7 @@ import { KeyboardShortcutsHelp } from "@/components/KeyboardShortcutsHelp";
 import { InstallPrompt } from "@/components/InstallPrompt";
 import { NetworkStatus } from "@/components/NetworkStatus";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
+import { SessionTimeoutProvider } from "@/components/SessionTimeoutProvider";
 import { AppRoutes } from "@/routes";
 import { 
   CookieConsent, 
@@ -68,9 +69,11 @@ const AppContent = () => {
       <TermsAcceptance />
       
       <AgeVerification>
-        <Suspense fallback={<PageLoader />}>
-          <AppRoutes />
-        </Suspense>
+        <SessionTimeoutProvider timeoutMinutes={30} warningMinutes={5}>
+          <Suspense fallback={<PageLoader />}>
+            <AppRoutes />
+          </Suspense>
+        </SessionTimeoutProvider>
       </AgeVerification>
     </>
   );
