@@ -113,6 +113,16 @@ const TermsOfService: React.FC = () => {
                   <li>{t('legal:payments_cancel')}</li>
                   <li>{t('legal:payments_refund')}</li>
                 </ul>
+                
+                <div className="mt-4 pt-4 border-t">
+                  <h4 className="font-semibold mb-2">{t('legal:terms_payment_section')}</h4>
+                  <p className="text-sm text-muted-foreground mb-2">{t('legal:terms_payment_intro')}</p>
+                  <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                    <li>{t('legal:terms_payment_currency')}</li>
+                    <li>{t('legal:terms_payment_taxes')}</li>
+                    <li>{t('legal:terms_payment_authorization')}</li>
+                  </ul>
+                </div>
               </CardContent>
             </Card>
 
