@@ -16,6 +16,12 @@ import { InstallPrompt } from "@/components/InstallPrompt";
 import { NetworkStatus } from "@/components/NetworkStatus";
 import { OfflineIndicator } from "@/components/OfflineIndicator";
 import { AppRoutes } from "@/routes";
+import { 
+  CookieConsent, 
+  AgeVerification, 
+  BreachNotification, 
+  HealthDisclaimer 
+} from "@/components/compliance";
 
 // Loading fallback component
 const PageLoader = () => (
@@ -53,9 +59,17 @@ const AppContent = () => {
       <InstallPrompt />
       <NetworkStatus />
       <OfflineIndicator />
-      <Suspense fallback={<PageLoader />}>
-        <AppRoutes />
-      </Suspense>
+      
+      {/* Compliance Components */}
+      <CookieConsent />
+      <BreachNotification />
+      <HealthDisclaimer />
+      
+      <AgeVerification>
+        <Suspense fallback={<PageLoader />}>
+          <AppRoutes />
+        </Suspense>
+      </AgeVerification>
     </>
   );
 };
