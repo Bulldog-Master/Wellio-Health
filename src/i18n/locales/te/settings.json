@@ -11,8 +11,22 @@
   "notifications": "నోటిఫికేషన్లు",
   "privacy": "గోప్యత",
   "security": "భద్రత",
+  "about": "గురించి",
   "sign_out": "సైన్ అవుట్",
   "subscription": "సబ్‌స్క్రిప్షన్",
   "premium_features": "ప్రీమియం ఫీచర్లు",
-  "saved_successfully": "విజయవంతంగా సేవ్ చేయబడింది"
+  "saved_successfully": "విజయవంతంగా సేవ్ చేయబడింది",
+  "rewards_store": "రివార్డ్స్ స్టోర్",
+  "points_history": "పాయింట్స్ హిస్టరీ",
+  "referral_program": "రిఫరల్ ప్రోగ్రామ్",
+  "privacy_security": "గోప్యత మరియు భద్రత",
+  "addon_features": "యాడ్-ఆన్ ఫీచర్లు",
+  "notification_settings": "నోటిఫికేషన్ సెట్టింగ్‌లు",
+  "install_app": "యాప్ ఇన్‌స్టాల్ చేయండి",
+  "two_factor_auth": "రెండు-అంశాల ప్రమాణీకరణ",
+  "two_factor_auth_desc": "మీ ఖాతాకు అదనపు భద్రతా స్థాయిని జోడించండి",
+  "session_management": "సెషన్ నిర్వహణ",
+  "session_management_desc": "మీ యాక్టివ్ సెషన్లను చూడండి మరియు నిర్వహించండి",
+  "security_audit": "సెక్యూరిటీ ఆడిట్ లాగ్",
+  "security_audit_desc": "మీ ఖాతా కోసం భద్రతా ఈవెంట్లను చూడండి"
 }

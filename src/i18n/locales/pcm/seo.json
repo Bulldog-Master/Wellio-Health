@@ -6,5 +6,15 @@
   "auth_title": "Login or Create Account",
   "auth_description": "Join Wellio to track your fitness journey, connect with others, and achieve your health goals.",
   "not_found_title": "Page No Dey",
-  "not_found_description": "The page wey you dey find no dey. Go back to Wellio home."
+  "not_found_description": "The page wey you dey find no dey. Go back to Wellio home.",
+  "accessibility_title": "Accessibility Statement",
+  "accessibility_description": "Our commitment to digital accessibility and WCAG compliance.",
+  "cookie_policy_title": "Cookie Policy",
+  "cookie_policy_description": "Learn how we use cookies and similar technologies.",
+  "ccpa_rights_title": "CCPA Rights",
+  "ccpa_rights_description": "Your California privacy rights under the CCPA.",
+  "session_management_title": "Session Management",
+  "session_management_description": "Manage your active sessions and security settings.",
+  "security_audit_title": "Security Audit Log",
+  "security_audit_description": "View security events and activity logs for your account."
 }

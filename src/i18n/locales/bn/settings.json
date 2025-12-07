@@ -22,5 +22,11 @@
   "addon_features": "অ্যাড-অন বৈশিষ্ট্য",
   "notification_settings": "বিজ্ঞপ্তি সেটিংস",
   "install_app": "অ্যাপ ইনস্টল করুন",
-  "saved_successfully": "সফলভাবে সংরক্ষিত"
+  "saved_successfully": "সফলভাবে সংরক্ষিত",
+  "two_factor_auth": "দুই-ফ্যাক্টর প্রমাণীকরণ",
+  "two_factor_auth_desc": "আপনার অ্যাকাউন্টে অতিরিক্ত সুরক্ষা স্তর যোগ করুন",
+  "session_management": "সেশন ব্যবস্থাপনা",
+  "session_management_desc": "আপনার সক্রিয় সেশন দেখুন এবং পরিচালনা করুন",
+  "security_audit": "সুরক্ষা অডিট লগ",
+  "security_audit_desc": "আপনার অ্যাকাউন্টের সুরক্ষা ইভেন্ট দেখুন"
 }

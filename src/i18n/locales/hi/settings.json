@@ -22,5 +22,11 @@
   "addon_features": "ऐड-ऑन सुविधाएं",
   "notification_settings": "सूचना सेटिंग्स",
   "install_app": "ऐप इंस्टॉल करें",
-  "saved_successfully": "सफलतापूर्वक सहेजा गया"
+  "saved_successfully": "सफलतापूर्वक सहेजा गया",
+  "two_factor_auth": "दो-कारक प्रमाणीकरण",
+  "two_factor_auth_desc": "अपने खाते में सुरक्षा की एक अतिरिक्त परत जोड़ें",
+  "session_management": "सत्र प्रबंधन",
+  "session_management_desc": "अपने सक्रिय सत्र देखें और प्रबंधित करें",
+  "security_audit": "सुरक्षा ऑडिट लॉग",
+  "security_audit_desc": "अपने खाते के सुरक्षा इवेंट देखें"
 }

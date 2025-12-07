@@ -6,5 +6,15 @@
   "auth_title": "लॉगिन करें या अकाउंट बनाएं",
   "auth_description": "Wellio में शामिल होकर अपनी फिटनेस यात्रा ट्रैक करें, दूसरों से जुड़ें, और स्वास्थ्य लक्ष्य प्राप्त करें।",
   "not_found_title": "पेज नहीं मिला",
-  "not_found_description": "आप जो पेज खोज रहे हैं वह मौजूद नहीं है। Wellio होम पर वापस जाएं।"
+  "not_found_description": "आप जो पेज खोज रहे हैं वह मौजूद नहीं है। Wellio होम पर वापस जाएं।",
+  "accessibility_title": "एक्सेसिबिलिटी स्टेटमेंट",
+  "accessibility_description": "डिजिटल एक्सेसिबिलिटी और WCAG अनुपालन के प्रति हमारी प्रतिबद्धता।",
+  "cookie_policy_title": "कुकी नीति",
+  "cookie_policy_description": "जानें कि हम कुकीज़ और समान तकनीकों का उपयोग कैसे करते हैं।",
+  "ccpa_rights_title": "CCPA अधिकार",
+  "ccpa_rights_description": "CCPA के तहत आपके कैलिफोर्निया गोपनीयता अधिकार।",
+  "session_management_title": "सत्र प्रबंधन",
+  "session_management_description": "अपने सक्रिय सत्र और सुरक्षा सेटिंग्स प्रबंधित करें।",
+  "security_audit_title": "सुरक्षा ऑडिट लॉग",
+  "security_audit_description": "अपने खाते के सुरक्षा इवेंट और गतिविधि लॉग देखें।"
 }

@@ -22,5 +22,11 @@
   "addon_features": "ایڈ آن فیچرز",
   "notification_settings": "اطلاعات کی ترتیبات",
   "install_app": "ایپ انسٹال کریں",
-  "saved_successfully": "کامیابی سے محفوظ ہو گیا"
+  "saved_successfully": "کامیابی سے محفوظ ہو گیا",
+  "two_factor_auth": "دو فیکٹر تصدیق",
+  "two_factor_auth_desc": "اپنے اکاؤنٹ میں اضافی سیکیورٹی کی تہہ شامل کریں",
+  "session_management": "سیشن مینجمنٹ",
+  "session_management_desc": "اپنے فعال سیشنز دیکھیں اور ان کا انتظام کریں",
+  "security_audit": "سیکیورٹی آڈٹ لاگ",
+  "security_audit_desc": "اپنے اکاؤنٹ کے سیکیورٹی ایونٹس دیکھیں"
 }

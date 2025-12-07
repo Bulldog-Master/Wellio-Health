@@ -15,5 +15,18 @@
   "sign_out": "साइन आउट",
   "subscription": "सदस्यता",
   "premium_features": "प्रीमियम वैशिष्ट्ये",
-  "saved_successfully": "यशस्वीरित्या जतन झाले"
+  "saved_successfully": "यशस्वीरित्या जतन झाले",
+  "rewards_store": "बक्षीस स्टोअर",
+  "points_history": "पॉइंट्स इतिहास",
+  "referral_program": "रेफरल प्रोग्राम",
+  "privacy_security": "गोपनीयता आणि सुरक्षा",
+  "addon_features": "ॲड-ऑन वैशिष्ट्ये",
+  "notification_settings": "सूचना सेटिंग्ज",
+  "install_app": "ॲप इंस्टॉल करा",
+  "two_factor_auth": "दोन-घटक प्रमाणीकरण",
+  "two_factor_auth_desc": "तुमच्या खात्यात अतिरिक्त सुरक्षा स्तर जोडा",
+  "session_management": "सत्र व्यवस्थापन",
+  "session_management_desc": "तुमचे सक्रिय सत्र पहा आणि व्यवस्थापित करा",
+  "security_audit": "सुरक्षा ऑडिट लॉग",
+  "security_audit_desc": "तुमच्या खात्यासाठी सुरक्षा कार्यक्रम पहा"
 }

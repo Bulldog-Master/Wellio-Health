@@ -11,8 +11,22 @@
   "notifications": "Thông báo",
   "privacy": "Quyền riêng tư",
   "security": "Bảo mật",
+  "about": "Giới thiệu",
   "sign_out": "Đăng xuất",
   "subscription": "Đăng ký",
   "premium_features": "Tính năng cao cấp",
-  "saved_successfully": "Đã lưu thành công"
+  "saved_successfully": "Đã lưu thành công",
+  "rewards_store": "Cửa hàng phần thưởng",
+  "points_history": "Lịch sử điểm",
+  "referral_program": "Chương trình giới thiệu",
+  "privacy_security": "Quyền riêng tư & Bảo mật",
+  "addon_features": "Tính năng bổ sung",
+  "notification_settings": "Cài đặt thông báo",
+  "install_app": "Cài đặt ứng dụng",
+  "two_factor_auth": "Xác thực hai yếu tố",
+  "two_factor_auth_desc": "Thêm lớp bảo mật bổ sung cho tài khoản của bạn",
+  "session_management": "Quản lý phiên",
+  "session_management_desc": "Xem và quản lý các phiên hoạt động của bạn",
+  "security_audit": "Nhật ký kiểm tra bảo mật",
+  "security_audit_desc": "Xem các sự kiện bảo mật cho tài khoản của bạn"
 }

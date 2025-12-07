@@ -22,5 +22,11 @@
   "addon_features": "Add-on Features",
   "notification_settings": "Notification Settings",
   "install_app": "Install App",
-  "saved_successfully": "E don save"
+  "saved_successfully": "E don save",
+  "two_factor_auth": "Two-Factor Authentication",
+  "two_factor_auth_desc": "Add extra security layer to your account",
+  "session_management": "Session Management",
+  "session_management_desc": "View and manage your active sessions",
+  "security_audit": "Security Audit Log",
+  "security_audit_desc": "View security events for your account"
 }
