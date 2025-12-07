@@ -5283,6 +5283,25 @@ export type Database = {
           url: string
         }[]
       }
+      get_payment_methods_safe: {
+        Args: never
+        Returns: {
+          description: string
+          description_es: string
+          icon: string
+          id: string
+          is_active: boolean
+          max_amount: number
+          method_key: string
+          min_amount: number
+          name: string
+          name_es: string
+          processing_fee_fixed: number
+          processing_fee_percent: number
+          requires_region: string[]
+          sort_order: number
+        }[]
+      }
       get_profile_safe: {
         Args: { _profile_id: string }
         Returns: {
