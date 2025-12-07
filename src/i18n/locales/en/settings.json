@@ -177,5 +177,27 @@
   "verify_and_enable": "Verify & Enable",
   "backup_codes_warning": "Save these codes! Each code can only be used once. Without these codes, you may lose access to your account.",
   "copy_backup_codes": "Copy All Codes",
-  "backup_codes_copied": "Backup codes copied to clipboard"
+  "backup_codes_copied": "Backup codes copied to clipboard",
+  
+  "2fa_required": "2FA Required",
+  "enable_2fa_first": "You need to enable two-factor authentication before generating backup codes.",
+  "enable_2fa_for_backup_codes": "Enable two-factor authentication to generate backup codes.",
+  "codes_generated": "Backup Codes Generated",
+  "save_codes_warning": "Make sure to save these codes in a secure location!",
+  "codes_generation_failed": "Failed to generate backup codes. Please try again.",
+  "manage_backup_codes": "Manage Backup Codes",
+  "backup_codes_desc": "Use these one-time codes if you lose access to your authenticator app.",
+  "generate_new_codes": "Generate New Backup Codes",
+  "regenerate_codes": "Regenerate Codes",
+  "verify_code": "Verify a Code",
+  "code_valid": "Code Valid",
+  "code_can_be_used": "This backup code is valid and can be used for recovery.",
+  "code_already_used": "Code Already Used",
+  "code_invalid": "Invalid Code",
+  "codes_downloaded": "Backup codes downloaded",
+  "backup_codes_info": "Backup codes allow you to access your account if you lose your authenticator device.",
+  
+  "session_expiring": "Session Expiring Soon",
+  "session_expiring_desc": "Your session will expire in {{minutes}} minutes due to inactivity.",
+  "stay_logged_in": "Stay Logged In"
 }

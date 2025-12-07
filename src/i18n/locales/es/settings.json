@@ -177,5 +177,27 @@
   "verify_and_enable": "Verificar y Habilitar",
   "backup_codes_warning": "¡Guarda estos códigos! Cada código solo puede usarse una vez. Sin estos códigos, podrías perder acceso a tu cuenta.",
   "copy_backup_codes": "Copiar Todos los Códigos",
-  "backup_codes_copied": "Códigos de respaldo copiados al portapapeles"
+  "backup_codes_copied": "Códigos de respaldo copiados al portapapeles",
+  
+  "2fa_required": "2FA Requerido",
+  "enable_2fa_first": "Necesitas habilitar la autenticación de dos factores antes de generar códigos de respaldo.",
+  "enable_2fa_for_backup_codes": "Habilita la autenticación de dos factores para generar códigos de respaldo.",
+  "codes_generated": "Códigos de Respaldo Generados",
+  "save_codes_warning": "¡Asegúrate de guardar estos códigos en un lugar seguro!",
+  "codes_generation_failed": "Error al generar códigos de respaldo. Por favor intenta de nuevo.",
+  "manage_backup_codes": "Administrar Códigos de Respaldo",
+  "backup_codes_desc": "Usa estos códigos de un solo uso si pierdes acceso a tu app autenticadora.",
+  "generate_new_codes": "Generar Nuevos Códigos de Respaldo",
+  "regenerate_codes": "Regenerar Códigos",
+  "verify_code": "Verificar un Código",
+  "code_valid": "Código Válido",
+  "code_can_be_used": "Este código de respaldo es válido y puede usarse para recuperación.",
+  "code_already_used": "Código Ya Usado",
+  "code_invalid": "Código Inválido",
+  "codes_downloaded": "Códigos de respaldo descargados",
+  "backup_codes_info": "Los códigos de respaldo te permiten acceder a tu cuenta si pierdes tu dispositivo autenticador.",
+  
+  "session_expiring": "Sesión Por Expirar",
+  "session_expiring_desc": "Tu sesión expirará en {{minutes}} minutos debido a inactividad.",
+  "stay_logged_in": "Permanecer Conectado"
 }
