@@ -91,5 +91,9 @@
   "no_photos_available": "کوئی تصویر دستیاب نہیں",
   "weight_change": "وزن میں تبدیلی",
   "time_between_photos": "تصاویر کے درمیان وقت",
-  "comparing_photos": "تصاویر کا موازنہ ہو رہا ہے"
+  "comparing_photos": "تصاویر کا موازنہ ہو رہا ہے",
+  "injury_prevention": "چوٹ کی روک تھام",
+  "injury_prevention_desc": "AI سے چلنے والا چوٹ کے خطرے کا تجزیہ اور روک تھام",
+  "emotion_fitness_engine": "جذبات-فٹنس انجن",
+  "emotion_fitness_desc": "موڈ-ورزش تعلقات اور سائیکل بصیرت کو ٹریک کریں"
 }
