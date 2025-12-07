@@ -18,5 +18,19 @@
   "join_error": "Impossibile unirsi alla sfida",
   "your_progress": "I Tuoi Progressi",
   "leaderboard": "Classifica",
-  "points": "punti"
+  "points": "punti",
+  "micro_challenges": "Micro Sfide",
+  "micro_challenges_desc": "Crea e condividi sfide virali veloci",
+  "create_micro_challenge": "Crea Micro Sfida",
+  "quick_challenge": "Sfida Rapida",
+  "minutes_challenge": "minuti di sfida",
+  "share_challenge": "Condividi Sfida",
+  "complete_challenge": "Completa Sfida",
+  "share_code": "Codice Condivisione",
+  "viral_score": "Punteggio Virale",
+  "total_completions": "Completamenti Totali",
+  "expires_in": "Scade tra",
+  "challenge_created": "Sfida creata!",
+  "challenge_completed": "Sfida completata!",
+  "copied_share_code": "Codice condivisione copiato!"
 }

@@ -25,5 +25,19 @@
   "challenge_accepted": "आव्हान स्वीकारले!",
   "you_won": "तुम्ही जिंकलात!",
   "you_lost": "तुम्ही हरलात",
-  "tie": "बरोबरी"
+  "tie": "बरोबरी",
+  "micro_challenges": "मायक्रो आव्हाने",
+  "micro_challenges_desc": "जलद व्हायरल आव्हाने तयार करा आणि शेअर करा",
+  "create_micro_challenge": "मायक्रो आव्हान तयार करा",
+  "quick_challenge": "जलद आव्हान",
+  "minutes_challenge": "मिनिटांचे आव्हान",
+  "share_challenge": "आव्हान शेअर करा",
+  "complete_challenge": "आव्हान पूर्ण करा",
+  "share_code": "शेअर कोड",
+  "viral_score": "व्हायरल स्कोअर",
+  "total_completions": "एकूण पूर्णत्व",
+  "expires_in": "मुदत संपेल",
+  "challenge_created": "आव्हान तयार झाले!",
+  "challenge_completed": "आव्हान पूर्ण झाले!",
+  "copied_share_code": "शेअर कोड कॉपी झाला!"
 }

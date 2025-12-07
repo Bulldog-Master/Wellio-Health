@@ -12,5 +12,20 @@
   "participants": "Peserta",
   "your_rank": "Peringkat Anda",
   "challenge_complete": "Tantangan Selesai!",
-  "no_challenges": "Tidak ada tantangan"
+  "no_challenges": "Tidak ada tantangan",
+  "social_challenges": "Tantangan Sosial",
+  "micro_challenges": "Tantangan Mikro",
+  "micro_challenges_desc": "Buat dan bagikan tantangan viral cepat",
+  "create_micro_challenge": "Buat Tantangan Mikro",
+  "quick_challenge": "Tantangan Cepat",
+  "minutes_challenge": "tantangan menit",
+  "share_challenge": "Bagikan Tantangan",
+  "complete_challenge": "Selesaikan Tantangan",
+  "share_code": "Kode Berbagi",
+  "viral_score": "Skor Viral",
+  "total_completions": "Total Selesai",
+  "expires_in": "Berakhir dalam",
+  "challenge_created": "Tantangan dibuat!",
+  "challenge_completed": "Tantangan selesai!",
+  "copied_share_code": "Kode berbagi disalin!"
 }

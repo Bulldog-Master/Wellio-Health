@@ -25,5 +25,19 @@
   "challenge_accepted": "চ্যালেঞ্জ গৃহীত!",
   "you_won": "আপনি জিতেছেন!",
   "you_lost": "আপনি হেরেছেন",
-  "tie": "টাই"
+  "tie": "টাই",
+  "micro_challenges": "মাইক্রো চ্যালেঞ্জ",
+  "micro_challenges_desc": "দ্রুত ভাইরাল চ্যালেঞ্জ তৈরি ও শেয়ার করুন",
+  "create_micro_challenge": "মাইক্রো চ্যালেঞ্জ তৈরি করুন",
+  "quick_challenge": "দ্রুত চ্যালেঞ্জ",
+  "minutes_challenge": "মিনিটের চ্যালেঞ্জ",
+  "share_challenge": "চ্যালেঞ্জ শেয়ার করুন",
+  "complete_challenge": "চ্যালেঞ্জ সম্পন্ন করুন",
+  "share_code": "শেয়ার কোড",
+  "viral_score": "ভাইরাল স্কোর",
+  "total_completions": "মোট সম্পন্ন",
+  "expires_in": "মেয়াদ শেষ হবে",
+  "challenge_created": "চ্যালেঞ্জ তৈরি হয়েছে!",
+  "challenge_completed": "চ্যালেঞ্জ সম্পন্ন!",
+  "copied_share_code": "শেয়ার কোড কপি হয়েছে!"
 }

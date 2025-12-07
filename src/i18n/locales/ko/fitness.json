@@ -202,5 +202,7 @@
   "hydration_notes": "수분 섭취 참고",
   "best_time_today": "오늘 최적 시간",
   "location_required": "위치 필요",
-  "enable_location": "맞춤형 날씨 추천을 위해 위치를 활성화하세요"
+  "enable_location": "맞춤형 날씨 추천을 위해 위치를 활성화하세요",
+  "micro_challenges": "마이크로 챌린지",
+  "micro_challenges_desc": "빠른 바이럴 챌린지를 만들고 공유하세요"
 }

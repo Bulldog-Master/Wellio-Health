@@ -135,5 +135,7 @@
   "hydration_notes": "ملاحظات الترطيب",
   "best_time_today": "أحسن وقت النهارده",
   "location_required": "الموقع مطلوب",
-  "enable_location": "فعّل موقعك لتوصيات طقس شخصية"
+  "enable_location": "فعّل موقعك لتوصيات طقس شخصية",
+  "micro_challenges": "تحديات سريعة",
+  "micro_challenges_desc": "اعمل وشير تحديات فيروسية سريعة"
 }

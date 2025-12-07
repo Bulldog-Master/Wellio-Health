@@ -25,5 +25,19 @@
   "challenge_accepted": "チャレンジを承諾しました！",
   "you_won": "あなたの勝利！",
   "you_lost": "惜しかった",
-  "tie": "引き分け"
+  "tie": "引き分け",
+  "micro_challenges": "マイクロチャレンジ",
+  "micro_challenges_desc": "素早くバイラルなチャレンジを作成・共有",
+  "create_micro_challenge": "マイクロチャレンジ作成",
+  "quick_challenge": "クイックチャレンジ",
+  "minutes_challenge": "分チャレンジ",
+  "share_challenge": "チャレンジを共有",
+  "complete_challenge": "チャレンジ完了",
+  "share_code": "共有コード",
+  "viral_score": "バイラルスコア",
+  "total_completions": "総完了数",
+  "expires_in": "期限まで",
+  "challenge_created": "チャレンジを作成しました！",
+  "challenge_completed": "チャレンジ完了！",
+  "copied_share_code": "共有コードをコピーしました！"
 }

@@ -265,5 +265,7 @@
   "hydration_notes": "Note sull'Idratazione",
   "best_time_today": "Miglior Momento Oggi",
   "location_required": "Posizione Richiesta",
-  "enable_location": "Abilita la tua posizione per raccomandazioni meteo personalizzate"
+  "enable_location": "Abilita la tua posizione per raccomandazioni meteo personalizzate",
+  "micro_challenges": "Micro Sfide",
+  "micro_challenges_desc": "Crea e condividi sfide virali veloci"
 }
