@@ -92,3 +92,6 @@ verify_jwt = true
 
 [functions.environmental-fitness]
 verify_jwt = true
+
+[functions.sign-achievement]
+verify_jwt = true
