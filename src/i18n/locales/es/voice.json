@@ -27,5 +27,21 @@
   "could_not_access_microphone": "No se pudo acceder al micrófono: {{error}}",
   "recording_started": "Grabación iniciada",
   "speak_into_microphone": "Habla a tu micrófono",
-  "placeholder_title": "Pensamientos del entrenamiento matutino..."
+  "placeholder_title": "Pensamientos del entrenamiento matutino...",
+  "ai_voice_coach": "Entrenador de Voz IA",
+  "coach_description": "Coaching de voz en tiempo real durante tu entrenamiento con conteo de repeticiones, consejos de forma y motivación",
+  "connected": "Conectado",
+  "coach_ready": "¡Tu entrenador IA está listo para ayudarte con tu entrenamiento!",
+  "connection_failed": "Error al conectar con el servicio de voz",
+  "start_session_prompt": "Inicia una sesión de voz para obtener coaching en tiempo real, conteo de repeticiones y motivación durante tu entrenamiento",
+  "start_session": "Iniciar Sesión de Voz",
+  "cost_notice": "Usa OpenAI Realtime API (~$0.06-0.24/min)",
+  "connecting": "Conectando con tu entrenador IA...",
+  "speaking": "Hablando",
+  "listening": "Escuchando",
+  "type_message": "Escribe un mensaje o habla...",
+  "end_session": "Terminar Sesión",
+  "session_ended": "Sesión Terminada",
+  "great_workout": "¡Gran entrenamiento! ¡Sigue así!",
+  "connection_error": "Error de conexión. Por favor intenta de nuevo."
 }
