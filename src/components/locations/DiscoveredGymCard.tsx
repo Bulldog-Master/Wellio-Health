@@ -1,21 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { MapPin, ExternalLink, Phone, Plus, Loader2, Dumbbell, Swords, Heart, Waves, Bike, Mountain } from 'lucide-react';
+import { MapPin, ExternalLink, Phone, Plus, Loader2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-
-const categoryIcons: Record<string, any> = {
-  gym: Dumbbell,
-  crossfit: Dumbbell,
-  mma: Swords,
-  yoga: Heart,
-  swimming: Waves,
-  cycling: Bike,
-  climbing: Mountain,
-  boxing: Swords,
-  pilates: Heart,
-  other: MapPin,
-};
+import { categoryIcons } from '@/lib/locationUtils';
 
 interface DiscoveredGym {
   osm_id: string;
