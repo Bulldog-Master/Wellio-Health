@@ -27,5 +27,21 @@
   "could_not_access_microphone": "Could not access microphone: {{error}}",
   "recording_started": "Recording started",
   "speak_into_microphone": "Speak into your microphone",
-  "placeholder_title": "Morning workout thoughts..."
+  "placeholder_title": "Morning workout thoughts...",
+  "ai_voice_coach": "AI Voice Coach",
+  "coach_description": "Real-time voice coaching during your workout with rep counting, form tips, and motivation",
+  "connected": "Connected",
+  "coach_ready": "Your AI coach is ready to help with your workout!",
+  "connection_failed": "Failed to connect to voice service",
+  "start_session_prompt": "Start a voice session to get real-time coaching, rep counting, and motivation during your workout",
+  "start_session": "Start Voice Session",
+  "cost_notice": "Uses OpenAI Realtime API (~$0.06-0.24/min)",
+  "connecting": "Connecting to your AI coach...",
+  "speaking": "Speaking",
+  "listening": "Listening",
+  "type_message": "Type a message or speak...",
+  "end_session": "End Session",
+  "session_ended": "Session Ended",
+  "great_workout": "Great workout! Keep up the good work!",
+  "connection_error": "Connection error. Please try again."
 }

@@ -22,6 +22,7 @@ import gymBackground from "@/assets/gym-background.jpg";
 import workoutHero from "@/assets/workout-hero.jpg";
 import { useTranslation } from "react-i18next";
 import VoiceWorkoutLogger from "@/components/workout/VoiceWorkoutLogger";
+import AIVoiceCompanion from "@/components/workout/AIVoiceCompanion";
 
 interface ActivityLog {
   id: string;
@@ -2312,6 +2313,9 @@ const Workout = () => {
           </div>
         </div>
       </Card>
+
+      {/* AI Voice Workout Companion - Premium */}
+      <AIVoiceCompanion onWorkoutComplete={(summary) => console.log('Workout session completed:', summary)} />
 
       {/* Voice Workout Logger */}
       <VoiceWorkoutLogger onWorkoutLogged={() => fetchActivityLogs()} />
