@@ -6,3 +6,4 @@ export { CCPADoNotSell } from './CCPADoNotSell';
 export { HIPAAAuthorization } from './HIPAAAuthorization';
 export { PIPEDADisclosure } from './PIPEDADisclosure';
 export { AccessibilitySettings } from './AccessibilitySettings';
+export { TermsAcceptance } from './TermsAcceptance';

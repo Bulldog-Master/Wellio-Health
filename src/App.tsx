@@ -20,7 +20,8 @@ import {
   CookieConsent, 
   AgeVerification, 
   BreachNotification, 
-  HealthDisclaimer 
+  HealthDisclaimer,
+  TermsAcceptance
 } from "@/components/compliance";
 
 // Loading fallback component
@@ -64,6 +65,7 @@ const AppContent = () => {
       <CookieConsent />
       <BreachNotification />
       <HealthDisclaimer />
+      <TermsAcceptance />
       
       <AgeVerification>
         <Suspense fallback={<PageLoader />}>

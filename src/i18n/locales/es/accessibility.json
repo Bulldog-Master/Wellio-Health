@@ -1,0 +1,44 @@
+{
+  "page_title": "Declaración de Accesibilidad",
+  "page_description": "Nuestro compromiso con la accesibilidad digital y el cumplimiento de WCAG",
+  "statement_title": "Declaración de Accesibilidad",
+  "statement_subtitle": "Nuestro compromiso de hacer Wellio accesible para todos",
+  
+  "commitment_title": "Nuestro Compromiso",
+  "commitment_text": "Wellio está comprometido a garantizar la accesibilidad digital para personas con discapacidades. Mejoramos continuamente la experiencia del usuario y aplicamos los estándares de accesibilidad relevantes para garantizar un acceso igual para todos.",
+  
+  "standards_title": "Estándares de Conformidad",
+  "standards_subtitle": "Nuestro objetivo es cumplir con las directrices WCAG 2.1 Nivel AA",
+  "wcag_perceivable": "Perceptible",
+  "wcag_perceivable_desc": "La información y los componentes de la interfaz de usuario son presentables de maneras que los usuarios pueden percibir.",
+  "wcag_operable": "Operable",
+  "wcag_operable_desc": "Los componentes de la interfaz de usuario y la navegación son operables por todos los usuarios.",
+  "wcag_understandable": "Comprensible",
+  "wcag_understandable_desc": "La información y la operación de la interfaz de usuario son comprensibles.",
+  "wcag_robust": "Robusto",
+  "wcag_robust_desc": "El contenido es lo suficientemente robusto para ser interpretado por una amplia variedad de tecnologías de asistencia.",
+  
+  "features_title": "Características de Accesibilidad",
+  "features_subtitle": "Características que hemos implementado para mejorar la accesibilidad",
+  "feature_keyboard": "Soporte completo de navegación por teclado",
+  "feature_screen_reader": "Compatibilidad con lectores de pantalla con etiquetas ARIA",
+  "feature_contrast": "Opción de modo de alto contraste",
+  "feature_resize": "Cambio de tamaño de texto hasta 200% sin pérdida de funcionalidad",
+  "feature_motion": "Opción de movimiento reducido para usuarios sensibles a las animaciones",
+  "feature_focus": "Indicadores de enfoque visibles para usuarios de teclado",
+  "feature_alt_text": "Texto alternativo para todas las imágenes significativas",
+  "feature_semantic": "Estructura HTML semántica para mejor navegación",
+  
+  "assistive_title": "Tecnologías de Asistencia",
+  "assistive_text": "Wellio está diseñado para funcionar con tecnologías de asistencia incluyendo:",
+  
+  "feedback_title": "Comentarios y Contacto",
+  "feedback_subtitle": "Agradecemos sus comentarios sobre accesibilidad",
+  "feedback_text": "Si encuentra barreras de accesibilidad en Wellio, o tiene sugerencias para mejorar la accesibilidad, contáctenos. Tomamos los comentarios sobre accesibilidad en serio y trabajaremos para resolver cualquier problema.",
+  "contact_support": "Contactar Soporte",
+  
+  "improvement_title": "Mejora Continua",
+  "improvement_text": "Estamos comprometidos a mejorar continuamente la accesibilidad de Wellio. Revisamos regularmente nuestro sitio y contenido para identificar y resolver problemas de accesibilidad.",
+  
+  "last_updated": "Última Actualización"
+}
