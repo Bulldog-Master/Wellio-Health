@@ -25,5 +25,19 @@
   "challenge_accepted": "సవాలు అంగీకరించబడింది!",
   "you_won": "మీరు గెలిచారు!",
   "you_lost": "మీరు ఓడిపోయారు",
-  "tie": "టై"
+  "tie": "టై",
+  "micro_challenges": "మైక్రో సవాళ్లు",
+  "micro_challenges_desc": "వేగవంతమైన వైరల్ సవాళ్లను సృష్టించి భాగస్వామ్యం చేయండి",
+  "create_micro_challenge": "మైక్రో సవాలు సృష్టించండి",
+  "quick_challenge": "త్వరిత సవాలు",
+  "minutes_challenge": "నిమిషాల సవాలు",
+  "share_challenge": "సవాలును షేర్ చేయండి",
+  "complete_challenge": "సవాలును పూర్తి చేయండి",
+  "share_code": "షేర్ కోడ్",
+  "viral_score": "వైరల్ స్కోర్",
+  "total_completions": "మొత్తం పూర్తయినవి",
+  "expires_in": "గడువు ముగుస్తుంది",
+  "challenge_created": "సవాలు సృష్టించబడింది!",
+  "challenge_completed": "సవాలు పూర్తయింది!",
+  "copied_share_code": "షేర్ కోడ్ కాపీ చేయబడింది!"
 }

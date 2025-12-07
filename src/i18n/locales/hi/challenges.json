@@ -25,5 +25,19 @@
   "challenge_accepted": "चुनौती स्वीकार की गई!",
   "you_won": "आप जीते!",
   "you_lost": "आप हारे",
-  "tie": "टाई"
+  "tie": "टाई",
+  "micro_challenges": "माइक्रो चुनौतियां",
+  "micro_challenges_desc": "तेज़ वायरल चुनौतियां बनाएं और साझा करें",
+  "create_micro_challenge": "माइक्रो चुनौती बनाएं",
+  "quick_challenge": "त्वरित चुनौती",
+  "minutes_challenge": "मिनट की चुनौती",
+  "share_challenge": "चुनौती साझा करें",
+  "complete_challenge": "चुनौती पूर्ण करें",
+  "share_code": "शेयर कोड",
+  "viral_score": "वायरल स्कोर",
+  "total_completions": "कुल पूर्णता",
+  "expires_in": "समाप्त होगा",
+  "challenge_created": "चुनौती बन गई!",
+  "challenge_completed": "चुनौती पूर्ण हो गई!",
+  "copied_share_code": "शेयर कोड कॉपी हो गया!"
 }

@@ -18,5 +18,19 @@
   "join_error": "Kan niet deelnemen aan uitdaging",
   "your_progress": "Jouw Voortgang",
   "leaderboard": "Ranglijst",
-  "points": "punten"
+  "points": "punten",
+  "micro_challenges": "Micro-Uitdagingen",
+  "micro_challenges_desc": "Maak en deel snelle virale uitdagingen",
+  "create_micro_challenge": "Maak Micro-Uitdaging",
+  "quick_challenge": "Snelle Uitdaging",
+  "minutes_challenge": "minuten uitdaging",
+  "share_challenge": "Deel Uitdaging",
+  "complete_challenge": "Voltooi Uitdaging",
+  "share_code": "Deelcode",
+  "viral_score": "Virale Score",
+  "total_completions": "Totaal Voltooid",
+  "expires_in": "Verloopt over",
+  "challenge_created": "Uitdaging aangemaakt!",
+  "challenge_completed": "Uitdaging voltooid!",
+  "copied_share_code": "Deelcode gekopieerd!"
 }

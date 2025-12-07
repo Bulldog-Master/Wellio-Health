@@ -209,5 +209,7 @@
   "hydration_notes": "水分補給の注意",
   "best_time_today": "今日のベストタイム",
   "location_required": "位置情報が必要",
-  "enable_location": "パーソナライズされた天気推奨のために位置情報を有効にしてください"
+  "enable_location": "パーソナライズされた天気推奨のために位置情報を有効にしてください",
+  "micro_challenges": "マイクロチャレンジ",
+  "micro_challenges_desc": "素早くバイラルなチャレンジを作成・共有"
 }

@@ -207,5 +207,7 @@
   "hydration_notes": "Hydration Notes",
   "best_time_today": "Best Time Today",
   "location_required": "Location Required",
-  "enable_location": "Enable your location for personalized weather recommendations"
+  "enable_location": "Enable your location for personalized weather recommendations",
+  "micro_challenges": "Micro Challenges",
+  "micro_challenges_desc": "Create and share quick viral challenges"
 }

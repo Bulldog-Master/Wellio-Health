@@ -25,5 +25,19 @@
   "challenge_accepted": "Challenge don accept!",
   "you_won": "You win!",
   "you_lost": "You lose",
-  "tie": "Draw"
+  "tie": "Draw",
+  "micro_challenges": "Micro Challenges",
+  "micro_challenges_desc": "Create and share quick viral challenges",
+  "create_micro_challenge": "Create Micro Challenge",
+  "quick_challenge": "Quick Challenge",
+  "minutes_challenge": "minute challenge",
+  "share_challenge": "Share Challenge",
+  "complete_challenge": "Complete Challenge",
+  "share_code": "Share Code",
+  "viral_score": "Viral Score",
+  "total_completions": "Total Completions",
+  "expires_in": "E go expire for",
+  "challenge_created": "Challenge don create!",
+  "challenge_completed": "Challenge don complete!",
+  "copied_share_code": "Share code don copy!"
 }

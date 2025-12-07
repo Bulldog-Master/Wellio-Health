@@ -25,5 +25,19 @@
   "challenge_accepted": "Thử thách được chấp nhận!",
   "you_won": "Bạn thắng!",
   "you_lost": "Bạn thua",
-  "tie": "Hòa"
+  "tie": "Hòa",
+  "micro_challenges": "Thử Thách Micro",
+  "micro_challenges_desc": "Tạo và chia sẻ thử thách viral nhanh",
+  "create_micro_challenge": "Tạo Thử Thách Micro",
+  "quick_challenge": "Thử Thách Nhanh",
+  "minutes_challenge": "thử thách phút",
+  "share_challenge": "Chia Sẻ Thử Thách",
+  "complete_challenge": "Hoàn Thành Thử Thách",
+  "share_code": "Mã Chia Sẻ",
+  "viral_score": "Điểm Viral",
+  "total_completions": "Tổng Hoàn Thành",
+  "expires_in": "Hết hạn trong",
+  "challenge_created": "Thử thách đã tạo!",
+  "challenge_completed": "Thử thách hoàn thành!",
+  "copied_share_code": "Đã sao chép mã chia sẻ!"
 }

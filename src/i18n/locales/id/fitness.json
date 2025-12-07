@@ -207,5 +207,7 @@
   "hydration_notes": "Catatan Hidrasi",
   "best_time_today": "Waktu Terbaik Hari Ini",
   "location_required": "Lokasi Diperlukan",
-  "enable_location": "Aktifkan lokasi Anda untuk rekomendasi cuaca yang dipersonalisasi"
+  "enable_location": "Aktifkan lokasi Anda untuk rekomendasi cuaca yang dipersonalisasi",
+  "micro_challenges": "Tantangan Mikro",
+  "micro_challenges_desc": "Buat dan bagikan tantangan viral cepat"
 }

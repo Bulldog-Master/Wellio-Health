@@ -18,5 +18,19 @@
   "join_error": "챌린지 참가에 실패했습니다",
   "your_progress": "내 진행률",
   "leaderboard": "순위표",
-  "points": "포인트"
+  "points": "포인트",
+  "micro_challenges": "마이크로 챌린지",
+  "micro_challenges_desc": "빠른 바이럴 챌린지를 만들고 공유하세요",
+  "create_micro_challenge": "마이크로 챌린지 만들기",
+  "quick_challenge": "퀵 챌린지",
+  "minutes_challenge": "분 챌린지",
+  "share_challenge": "챌린지 공유",
+  "complete_challenge": "챌린지 완료",
+  "share_code": "공유 코드",
+  "viral_score": "바이럴 점수",
+  "total_completions": "총 완료 수",
+  "expires_in": "만료까지",
+  "challenge_created": "챌린지가 생성되었습니다!",
+  "challenge_completed": "챌린지 완료!",
+  "copied_share_code": "공유 코드가 복사되었습니다!"
 }

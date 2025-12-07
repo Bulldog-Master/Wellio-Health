@@ -25,5 +25,19 @@
   "challenge_accepted": "சவால் ஏற்றுக்கொள்ளப்பட்டது!",
   "you_won": "நீங்கள் வென்றீர்கள்!",
   "you_lost": "நீங்கள் தோற்றீர்கள்",
-  "tie": "சமநிலை"
+  "tie": "சமநிலை",
+  "micro_challenges": "மைக்ரோ சவால்கள்",
+  "micro_challenges_desc": "விரைவான வைரல் சவால்களை உருவாக்கி பகிரவும்",
+  "create_micro_challenge": "மைக்ரோ சவால் உருவாக்கு",
+  "quick_challenge": "விரைவு சவால்",
+  "minutes_challenge": "நிமிட சவால்",
+  "share_challenge": "சவாலை பகிர்",
+  "complete_challenge": "சவாலை முடி",
+  "share_code": "பகிர்வு குறியீடு",
+  "viral_score": "வைரல் மதிப்பெண்",
+  "total_completions": "மொத்த முடிவுகள்",
+  "expires_in": "காலாவதியாகும்",
+  "challenge_created": "சவால் உருவாக்கப்பட்டது!",
+  "challenge_completed": "சவால் முடிந்தது!",
+  "copied_share_code": "பகிர்வு குறியீடு நகலெடுக்கப்பட்டது!"
 }

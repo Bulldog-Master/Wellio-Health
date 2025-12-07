@@ -18,5 +18,19 @@
   "join_error": "Meydan okumaya katılınamadı",
   "your_progress": "İlerlemeniz",
   "leaderboard": "Liderlik Tablosu",
-  "points": "puan"
+  "points": "puan",
+  "micro_challenges": "Mikro Meydan Okumalar",
+  "micro_challenges_desc": "Hızlı viral meydan okumalar oluştur ve paylaş",
+  "create_micro_challenge": "Mikro Meydan Okuma Oluştur",
+  "quick_challenge": "Hızlı Meydan Okuma",
+  "minutes_challenge": "dakika meydan okuma",
+  "share_challenge": "Meydan Okumayı Paylaş",
+  "complete_challenge": "Meydan Okumayı Tamamla",
+  "share_code": "Paylaşım Kodu",
+  "viral_score": "Viral Puan",
+  "total_completions": "Toplam Tamamlama",
+  "expires_in": "Bitiş süresi",
+  "challenge_created": "Meydan okuma oluşturuldu!",
+  "challenge_completed": "Meydan okuma tamamlandı!",
+  "copied_share_code": "Paylaşım kodu kopyalandı!"
 }

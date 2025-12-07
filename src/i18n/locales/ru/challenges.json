@@ -25,5 +25,19 @@
   "challenge_accepted": "Вызов принят!",
   "you_won": "Вы победили!",
   "you_lost": "Вы проиграли",
-  "tie": "Ничья"
+  "tie": "Ничья",
+  "micro_challenges": "Микро-Челленджи",
+  "micro_challenges_desc": "Создавай и делись быстрыми вирусными челленджами",
+  "create_micro_challenge": "Создать Микро-Челлендж",
+  "quick_challenge": "Быстрый Челлендж",
+  "minutes_challenge": "минутный челлендж",
+  "share_challenge": "Поделиться Челленджем",
+  "complete_challenge": "Завершить Челлендж",
+  "share_code": "Код для Шеринга",
+  "viral_score": "Вирусный Счёт",
+  "total_completions": "Всего Завершений",
+  "expires_in": "Истекает через",
+  "challenge_created": "Челлендж создан!",
+  "challenge_completed": "Челлендж выполнен!",
+  "copied_share_code": "Код скопирован!"
 }

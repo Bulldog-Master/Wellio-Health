@@ -25,5 +25,19 @@
   "challenge_accepted": "تم قبول التحدي!",
   "you_won": "فزت!",
   "you_lost": "خسرت",
-  "tie": "تعادل"
+  "tie": "تعادل",
+  "micro_challenges": "التحديات السريعة",
+  "micro_challenges_desc": "أنشئ وشارك تحديات فيروسية سريعة",
+  "create_micro_challenge": "إنشاء تحدي سريع",
+  "quick_challenge": "تحدي سريع",
+  "minutes_challenge": "تحدي دقائق",
+  "share_challenge": "شارك التحدي",
+  "complete_challenge": "أكمل التحدي",
+  "share_code": "رمز المشاركة",
+  "viral_score": "النتيجة الفيروسية",
+  "total_completions": "إجمالي الإكمالات",
+  "expires_in": "ينتهي في",
+  "challenge_created": "تم إنشاء التحدي!",
+  "challenge_completed": "تم إكمال التحدي!",
+  "copied_share_code": "تم نسخ رمز المشاركة!"
 }

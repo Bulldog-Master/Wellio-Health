@@ -118,5 +118,7 @@
   "hydration_notes": "Ghi chú Bổ sung Nước",
   "best_time_today": "Thời gian Tốt nhất Hôm nay",
   "location_required": "Yêu cầu Vị trí",
-  "enable_location": "Bật vị trí của bạn để nhận đề xuất thời tiết cá nhân hóa"
+  "enable_location": "Bật vị trí của bạn để nhận đề xuất thời tiết cá nhân hóa",
+  "micro_challenges": "Thử Thách Micro",
+  "micro_challenges_desc": "Tạo và chia sẻ thử thách viral nhanh"
 }

@@ -273,5 +273,7 @@
   "hydration_notes": "Hidrasyon Notları",
   "best_time_today": "Bugün En İyi Zaman",
   "location_required": "Konum Gerekli",
-  "enable_location": "Kişiselleştirilmiş hava durumu önerileri almak için konumunuzu etkinleştirin"
+  "enable_location": "Kişiselleştirilmiş hava durumu önerileri almak için konumunuzu etkinleştirin",
+  "micro_challenges": "Mikro Meydan Okumalar",
+  "micro_challenges_desc": "Hızlı viral meydan okumalar oluştur ve paylaş"
 }

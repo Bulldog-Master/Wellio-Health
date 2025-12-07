@@ -25,5 +25,19 @@
   "challenge_accepted": "چیلنج قبول ہو گیا!",
   "you_won": "آپ جیت گئے!",
   "you_lost": "آپ ہار گئے",
-  "tie": "ٹائی"
+  "tie": "ٹائی",
+  "micro_challenges": "مائیکرو چیلنجز",
+  "micro_challenges_desc": "تیز وائرل چیلنجز بنائیں اور شیئر کریں",
+  "create_micro_challenge": "مائیکرو چیلنج بنائیں",
+  "quick_challenge": "فوری چیلنج",
+  "minutes_challenge": "منٹ کا چیلنج",
+  "share_challenge": "چیلنج شیئر کریں",
+  "complete_challenge": "چیلنج مکمل کریں",
+  "share_code": "شیئر کوڈ",
+  "viral_score": "وائرل اسکور",
+  "total_completions": "کل مکملات",
+  "expires_in": "ختم ہونے میں",
+  "challenge_created": "چیلنج بن گیا!",
+  "challenge_completed": "چیلنج مکمل ہو گیا!",
+  "copied_share_code": "شیئر کوڈ کاپی ہو گیا!"
 }
