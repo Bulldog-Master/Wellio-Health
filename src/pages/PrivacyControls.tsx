@@ -13,7 +13,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, Settings, Download, Trash2, Clock, Shield, Brain, Mail, Users, Loader2, CheckCircle, AlertTriangle } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
-import { CCPADoNotSell, HIPAAAuthorization, PIPEDADisclosure, AccessibilitySettings } from '@/components/compliance';
+import { CCPADoNotSell, HIPAAAuthorization, PIPEDADisclosure, AccessibilitySettings, DoNotSellLink } from '@/components/compliance';
 import { BillingTerms } from '@/components/compliance/BillingTerms';
 
 interface PrivacyPreferences {
@@ -466,19 +466,24 @@ const PrivacyControls: React.FC = () => {
             <CardHeader>
               <CardTitle>{t('controls:legal_documents')}</CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-wrap gap-4">
-              <Button variant="outline" onClick={() => navigate('/privacy-policy')}>
-                {t('controls:privacy_policy')}
-              </Button>
-              <Button variant="outline" onClick={() => navigate('/terms')}>
-                {t('controls:terms_of_service')}
-              </Button>
-              <Button variant="outline" onClick={() => navigate('/refund-policy')}>
-                {t('controls:refund_policy')}
-              </Button>
-              <Button variant="outline" onClick={() => navigate('/accessibility')}>
-                {t('controls:accessibility_statement')}
-              </Button>
+            <CardContent className="space-y-4">
+              <div className="flex flex-wrap gap-4">
+                <Button variant="outline" onClick={() => navigate('/privacy-policy')}>
+                  {t('controls:privacy_policy')}
+                </Button>
+                <Button variant="outline" onClick={() => navigate('/terms')}>
+                  {t('controls:terms_of_service')}
+                </Button>
+                <Button variant="outline" onClick={() => navigate('/refund-policy')}>
+                  {t('controls:refund_policy')}
+                </Button>
+                <Button variant="outline" onClick={() => navigate('/accessibility')}>
+                  {t('controls:accessibility_statement')}
+                </Button>
+              </div>
+              <div className="pt-2 border-t">
+                <DoNotSellLink />
+              </div>
             </CardContent>
           </Card>
         </div>
