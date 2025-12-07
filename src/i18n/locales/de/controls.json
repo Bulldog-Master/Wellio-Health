@@ -34,5 +34,8 @@
   "consent_updated": "Einwilligung aktualisiert",
   "consent_update_failed": "Einwilligungsaktualisierung fehlgeschlagen",
   "preferences_updated": "Einstellungen aktualisiert",
-  "preferences_update_failed": "Einstellungsaktualisierung fehlgeschlagen"
+  "preferences_update_failed": "Einstellungsaktualisierung fehlgeschlagen",
+  "legal_documents": "Rechtliche Dokumente",
+  "refund_policy": "Rückerstattungsrichtlinie",
+  "accessibility_statement": "Barrierefreiheitserklärung"
 }

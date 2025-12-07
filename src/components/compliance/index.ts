@@ -7,3 +7,5 @@ export { HIPAAAuthorization } from './HIPAAAuthorization';
 export { PIPEDADisclosure } from './PIPEDADisclosure';
 export { AccessibilitySettings } from './AccessibilitySettings';
 export { TermsAcceptance } from './TermsAcceptance';
+export { DoNotSellLink } from './DoNotSellLink';
+export { DataBreachNotification } from './DataBreachNotification';

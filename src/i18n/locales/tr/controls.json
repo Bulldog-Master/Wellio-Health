@@ -34,5 +34,8 @@
   "consent_updated": "Onay güncellendi",
   "consent_update_failed": "Onay güncellenemedi",
   "preferences_updated": "Tercihler güncellendi",
-  "preferences_update_failed": "Tercihler güncellenemedi"
+  "preferences_update_failed": "Tercihler güncellenemedi",
+  "legal_documents": "Yasal Belgeler",
+  "refund_policy": "İade Politikası",
+  "accessibility_statement": "Erişilebilirlik Beyanı"
 }

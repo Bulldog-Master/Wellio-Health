@@ -34,5 +34,8 @@
   "consent_updated": "Toestemming bijgewerkt",
   "consent_update_failed": "Toestemming bijwerken mislukt",
   "preferences_updated": "Voorkeuren bijgewerkt",
-  "preferences_update_failed": "Voorkeuren bijwerken mislukt"
+  "preferences_update_failed": "Voorkeuren bijwerken mislukt",
+  "legal_documents": "Juridische Documenten",
+  "refund_policy": "Retourbeleid",
+  "accessibility_statement": "Toegankelijkheidsverklaring"
 }

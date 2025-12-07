@@ -34,5 +34,8 @@
   "consent_updated": "Consenso aggiornato",
   "consent_update_failed": "Aggiornamento consenso fallito",
   "preferences_updated": "Preferenze aggiornate",
-  "preferences_update_failed": "Aggiornamento preferenze fallito"
+  "preferences_update_failed": "Aggiornamento preferenze fallito",
+  "legal_documents": "Documenti Legali",
+  "refund_policy": "Politica di Rimborso",
+  "accessibility_statement": "Dichiarazione di Accessibilità"
 }

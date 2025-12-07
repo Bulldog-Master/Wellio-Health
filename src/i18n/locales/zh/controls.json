@@ -34,5 +34,8 @@
   "consent_updated": "同意已更新",
   "consent_update_failed": "更新同意失败",
   "preferences_updated": "偏好已更新",
-  "preferences_update_failed": "更新偏好失败"
+  "preferences_update_failed": "更新偏好失败",
+  "legal_documents": "法律文件",
+  "refund_policy": "退款政策",
+  "accessibility_statement": "无障碍声明"
 }
