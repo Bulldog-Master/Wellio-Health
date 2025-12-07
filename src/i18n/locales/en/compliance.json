@@ -98,5 +98,19 @@
   "accessibility_updated": "Accessibility preferences updated",
   "accessibility_update_failed": "Failed to update accessibility preferences",
   "wcag_compliance": "WCAG 2.1 Compliance",
-  "wcag_description": "This app strives to meet WCAG 2.1 Level AA accessibility standards."
+  "wcag_description": "This app strives to meet WCAG 2.1 Level AA accessibility standards.",
+  
+  "terms_update_title": "Terms & Privacy Update",
+  "terms_update_description": "Please review and accept our Terms of Service and Privacy Policy to continue using Wellio.",
+  "accept_tos": "I accept the Terms of Service",
+  "accept_privacy_policy": "I accept the Privacy Policy",
+  "view_tos": "Read Terms of Service",
+  "view_privacy_policy": "Read Privacy Policy",
+  "must_accept_both": "You must accept both to continue",
+  "terms_accepted": "Terms accepted successfully",
+  "accept_and_continue": "Accept & Continue",
+  "do_not_sell_label": "Do Not Sell My Personal Information",
+  "do_not_sell_desc": "When enabled, we will not sell your personal data to third parties.",
+  "ccpa_preference_updated": "Your privacy preferences have been updated",
+  "ccpa_rights_notice": "Under the California Consumer Privacy Act (CCPA), California residents have the right to opt out of the sale of their personal information. We do not sell your data, but this setting ensures your preferences are recorded."
 }

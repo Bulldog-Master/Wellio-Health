@@ -1,0 +1,44 @@
+{
+  "page_title": "Accessibility Statement",
+  "page_description": "Our commitment to digital accessibility and WCAG compliance",
+  "statement_title": "Accessibility Statement",
+  "statement_subtitle": "Our commitment to making Wellio accessible to everyone",
+  
+  "commitment_title": "Our Commitment",
+  "commitment_text": "Wellio is committed to ensuring digital accessibility for people with disabilities. We continually improve the user experience for everyone and apply the relevant accessibility standards to ensure we provide equal access to all users.",
+  
+  "standards_title": "Conformance Standards",
+  "standards_subtitle": "We aim to conform to WCAG 2.1 Level AA guidelines",
+  "wcag_perceivable": "Perceivable",
+  "wcag_perceivable_desc": "Information and user interface components are presentable to users in ways they can perceive.",
+  "wcag_operable": "Operable",
+  "wcag_operable_desc": "User interface components and navigation are operable by all users.",
+  "wcag_understandable": "Understandable",
+  "wcag_understandable_desc": "Information and the operation of user interface are understandable.",
+  "wcag_robust": "Robust",
+  "wcag_robust_desc": "Content is robust enough to be interpreted by a wide variety of user agents, including assistive technologies.",
+  
+  "features_title": "Accessibility Features",
+  "features_subtitle": "Features we've implemented to improve accessibility",
+  "feature_keyboard": "Full keyboard navigation support",
+  "feature_screen_reader": "Screen reader compatibility with ARIA labels",
+  "feature_contrast": "High contrast mode option",
+  "feature_resize": "Text resizing up to 200% without loss of functionality",
+  "feature_motion": "Reduced motion option for users sensitive to animations",
+  "feature_focus": "Visible focus indicators for keyboard users",
+  "feature_alt_text": "Alternative text for all meaningful images",
+  "feature_semantic": "Semantic HTML structure for better navigation",
+  
+  "assistive_title": "Assistive Technologies",
+  "assistive_text": "Wellio is designed to work with assistive technologies including:",
+  
+  "feedback_title": "Feedback & Contact",
+  "feedback_subtitle": "We welcome your accessibility feedback",
+  "feedback_text": "If you encounter accessibility barriers on Wellio, or have suggestions for improving accessibility, please contact us. We take accessibility feedback seriously and will work to address any issues.",
+  "contact_support": "Contact Support",
+  
+  "improvement_title": "Continuous Improvement",
+  "improvement_text": "We are committed to continually improving the accessibility of Wellio. We regularly review our site and content to identify and address accessibility issues. Our team receives ongoing training on accessibility best practices.",
+  
+  "last_updated": "Last Updated"
+}
