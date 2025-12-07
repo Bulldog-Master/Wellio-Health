@@ -6,5 +6,11 @@
   "progress": "İlerleme",
   "completed": "Tamamlandı",
   "locked": "Kilitli",
-  "no_achievements": "Henüz başarı yok"
+  "no_achievements": "Henüz başarı yok",
+  "verified_achievement": "Doğrulanmış Başarı",
+  "cryptographically_signed": "Kriptografik Olarak İmzalanmış",
+  "verification_hash": "Doğrulama Hash'i",
+  "share_verified": "Doğrulanmış Rozeti Paylaş",
+  "verify_authenticity": "Gerçekliği Doğrula",
+  "tamper_proof": "Kurcalamaya dayanıklı başarı kaydı"
 }

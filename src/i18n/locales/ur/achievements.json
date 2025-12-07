@@ -6,5 +6,11 @@
   "progress": "پیشرفت",
   "completed": "مکمل",
   "locked": "بند",
-  "no_achievements": "ابھی کوئی کامیابی نہیں"
+  "no_achievements": "ابھی کوئی کامیابی نہیں",
+  "verified_achievement": "تصدیق شدہ کامیابی",
+  "cryptographically_signed": "کرپٹوگرافک طور پر دستخط شدہ",
+  "verification_hash": "تصدیقی ہیش",
+  "share_verified": "تصدیق شدہ بیج شیئر کریں",
+  "verify_authenticity": "اصلیت کی تصدیق کریں",
+  "tamper_proof": "چھیڑ چھاڑ سے محفوظ کامیابی ریکارڈ"
 }

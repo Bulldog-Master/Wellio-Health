@@ -42,5 +42,11 @@
   "cal": "cal",
   "min": "min",
   "hrs": "hrs",
-  "lbs": "lbs"
+  "lbs": "lbs",
+  "verified_achievement": "Verified Achievement",
+  "cryptographically_signed": "Cryptographically Signed",
+  "verification_hash": "Verification Hash",
+  "share_verified": "Share Verified Badge",
+  "verify_authenticity": "Verify Authenticity",
+  "tamper_proof": "Tamper-proof achievement record"
 }

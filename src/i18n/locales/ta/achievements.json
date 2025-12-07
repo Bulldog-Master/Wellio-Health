@@ -6,5 +6,11 @@
   "progress": "முன்னேற்றம்",
   "completed": "முடிந்தது",
   "locked": "பூட்டியது",
-  "no_achievements": "இன்னும் சாதனைகள் இல்லை"
+  "no_achievements": "இன்னும் சாதனைகள் இல்லை",
+  "verified_achievement": "சரிபார்க்கப்பட்ட சாதனை",
+  "cryptographically_signed": "குறியாக்க ஒப்பமிடப்பட்டது",
+  "verification_hash": "சரிபார்ப்பு ஹாஷ்",
+  "share_verified": "சரிபார்க்கப்பட்ட பேட்ஜ் பகிரவும்",
+  "verify_authenticity": "நம்பகத்தன்மையை சரிபார்க்கவும்",
+  "tamper_proof": "சேதமுடியாத சாதனை பதிவு"
 }

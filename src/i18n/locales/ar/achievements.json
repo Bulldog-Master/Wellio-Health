@@ -6,5 +6,11 @@
   "progress": "التقدم",
   "completed": "مكتمل",
   "locked": "مقفل",
-  "no_achievements": "لا توجد إنجازات بعد"
+  "no_achievements": "لا توجد إنجازات بعد",
+  "verified_achievement": "إنجاز موثق",
+  "cryptographically_signed": "موقع تشفيرياً",
+  "verification_hash": "هاش التحقق",
+  "share_verified": "مشاركة الشارة الموثقة",
+  "verify_authenticity": "التحقق من الأصالة",
+  "tamper_proof": "سجل إنجاز مقاوم للتلاعب"
 }

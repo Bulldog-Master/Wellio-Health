@@ -6,5 +6,11 @@
   "progress": "Progression",
   "completed": "Terminé",
   "locked": "Verrouillé",
-  "no_achievements": "Pas encore de réalisations"
+  "no_achievements": "Pas encore de réalisations",
+  "verified_achievement": "Réalisation Vérifiée",
+  "cryptographically_signed": "Signé Cryptographiquement",
+  "verification_hash": "Hash de Vérification",
+  "share_verified": "Partager Badge Vérifié",
+  "verify_authenticity": "Vérifier l'Authenticité",
+  "tamper_proof": "Enregistrement de réalisation inviolable"
 }

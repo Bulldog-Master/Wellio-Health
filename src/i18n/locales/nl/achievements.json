@@ -6,5 +6,11 @@
   "progress": "Voortgang",
   "completed": "Voltooid",
   "locked": "Vergrendeld",
-  "no_achievements": "Nog geen prestaties"
+  "no_achievements": "Nog geen prestaties",
+  "verified_achievement": "Geverifieerde Prestatie",
+  "cryptographically_signed": "Cryptografisch Ondertekend",
+  "verification_hash": "Verificatie Hash",
+  "share_verified": "Deel Geverifieerde Badge",
+  "verify_authenticity": "Controleer Authenticiteit",
+  "tamper_proof": "Fraudebestendige prestatieregistratie"
 }

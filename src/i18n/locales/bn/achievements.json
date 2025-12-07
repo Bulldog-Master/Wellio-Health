@@ -6,5 +6,11 @@
   "progress": "অগ্রগতি",
   "completed": "সম্পন্ন",
   "locked": "লক করা",
-  "no_achievements": "এখনো কোনো অর্জন নেই"
+  "no_achievements": "এখনো কোনো অর্জন নেই",
+  "verified_achievement": "যাচাইকৃত অর্জন",
+  "cryptographically_signed": "ক্রিপ্টোগ্রাফিক সাক্ষরিত",
+  "verification_hash": "যাচাই হ্যাশ",
+  "share_verified": "যাচাইকৃত ব্যাজ শেয়ার করুন",
+  "verify_authenticity": "সত্যতা যাচাই করুন",
+  "tamper_proof": "টেম্পার-প্রুফ অর্জন রেকর্ড"
 }
