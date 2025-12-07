@@ -28,5 +28,13 @@
   "termination": "اختتام",
   "liability": "ذمہ داری کی حد",
   "governing_law": "حکمران قانون",
-  "changes": "شرائط میں تبدیلیاں"
+  "changes": "شرائط میں تبدیلیاں",
+  "refund_policy": "رقم کی واپسی کی پالیسی",
+  "refund_intro": "ہم چاہتے ہیں کہ آپ ہماری خدمات سے مطمئن رہیں۔",
+  "refund_digital": "ڈیجیٹل خدمات",
+  "refund_digital_text": "ڈیجیٹل خدمات کی نوعیت کی وجہ سے، بلنگ کی مدت شروع ہونے کے بعد سبسکرپشن فیس واپس نہیں کی جاتی۔",
+  "billing_terms": "بلنگ شرائط",
+  "billing_auto_renewal": "خودکار تجدید",
+  "payment_terms": "ادائیگی کی شرائط",
+  "payment_security": "ادائیگی کی حفاظت"
 }

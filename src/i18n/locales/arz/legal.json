@@ -28,5 +28,13 @@
   "termination": "الإنهاء",
   "liability": "تحديد المسؤولية",
   "governing_law": "القانون الحاكم",
-  "changes": "تغييرات الشروط"
+  "changes": "تغييرات الشروط",
+  "refund_policy": "سياسة الاسترداد",
+  "refund_intro": "إحنا عايزينك تكون راضي عن خدماتنا.",
+  "refund_digital": "الخدمات الرقمية",
+  "refund_digital_text": "بسبب طبيعة الخدمات الرقمية، مش بنرجع رسوم الاشتراك بعد ما تبدأ فترة الفوترة.",
+  "billing_terms": "شروط الفوترة",
+  "billing_auto_renewal": "التجديد التلقائي",
+  "payment_terms": "شروط الدفع",
+  "payment_security": "أمان الدفع"
 }
