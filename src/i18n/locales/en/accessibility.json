@@ -36,9 +36,25 @@
   "feedback_subtitle": "We welcome your accessibility feedback",
   "feedback_text": "If you encounter accessibility barriers on Wellio, or have suggestions for improving accessibility, please contact us. We take accessibility feedback seriously and will work to address any issues.",
   "contact_support": "Contact Support",
+  "contact_email": "Email",
   
   "improvement_title": "Continuous Improvement",
   "improvement_text": "We are committed to continually improving the accessibility of Wellio. We regularly review our site and content to identify and address accessibility issues. Our team receives ongoing training on accessibility best practices.",
+  "ongoing_title": "Ongoing Efforts",
+  "ongoing_text": "We continuously work to improve accessibility across all features. Our team regularly reviews and updates our application to meet evolving accessibility standards.",
   
-  "last_updated": "Last Updated"
+  "last_updated": "Last Updated",
+  
+  "keyboard_nav_title": "Keyboard Navigation",
+  "keyboard_nav_desc": "Full support for navigating the application using only a keyboard, with visible focus indicators.",
+  "screen_reader_title": "Screen Reader Support",
+  "screen_reader_desc": "Compatible with popular screen readers including NVDA, JAWS, and VoiceOver.",
+  "high_contrast_title": "High Contrast Mode",
+  "high_contrast_desc": "Option to enable high contrast colors for better visibility.",
+  "audio_desc_title": "Audio Descriptions",
+  "audio_desc_desc": "Video content includes audio descriptions for users who are blind or have low vision.",
+  "focus_indicators_title": "Focus Indicators",
+  "focus_indicators_desc": "Clear visual focus indicators for all interactive elements.",
+  "alt_text_title": "Alternative Text",
+  "alt_text_desc": "All meaningful images include descriptive alternative text."
 }
