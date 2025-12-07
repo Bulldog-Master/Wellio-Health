@@ -91,5 +91,9 @@
   "no_photos_available": "مفيش صور",
   "weight_change": "تغير الوزن",
   "time_between_photos": "الوقت بين الصور",
-  "comparing_photos": "بيقارن الصور"
+  "comparing_photos": "بيقارن الصور",
+  "injury_prevention": "منع الإصابات",
+  "injury_prevention_desc": "تحليل مخاطر الإصابة والوقاية بالذكاء الاصطناعي",
+  "emotion_fitness_engine": "محرك العواطف واللياقة",
+  "emotion_fitness_desc": "تتبع ارتباطات المزاج والتمرين ورؤى الدورة"
 }

@@ -74,5 +74,9 @@
   "no_photos_available": "Không có ảnh",
   "weight_change": "Thay đổi cân nặng",
   "time_between_photos": "Thời gian giữa các ảnh",
-  "comparing_photos": "Đang so sánh ảnh"
+  "comparing_photos": "Đang so sánh ảnh",
+  "injury_prevention": "Phòng ngừa chấn thương",
+  "injury_prevention_desc": "Phân tích rủi ro chấn thương và phòng ngừa bằng AI",
+  "emotion_fitness_engine": "Công cụ Cảm xúc-Thể dục",
+  "emotion_fitness_desc": "Theo dõi mối tương quan tâm trạng-tập luyện và thông tin chu kỳ"
 }
