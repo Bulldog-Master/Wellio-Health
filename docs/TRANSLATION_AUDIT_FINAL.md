@@ -5,54 +5,59 @@
 
 ---
 
-## Supported Languages (23 Total, 23 Core Namespaces Each)
+## Supported Languages (23 Total, 61 Namespaces Each)
 
 | # | Language | Code | Flag | Status |
 |---|----------|------|------|--------|
-| 1 | English | en | 🇺🇸 | ✅ Complete (58 namespaces) |
-| 2 | Spanish | es | 🇪🇸 | ✅ Complete (58 namespaces) |
-| 3 | Portuguese | pt | 🇧🇷 | ✅ Complete (58 namespaces) |
-| 4 | French | fr | 🇫🇷 | ✅ Complete (58 namespaces) |
-| 5 | German | de | 🇩🇪 | ✅ Complete (58 namespaces) |
-| 6 | Chinese | zh | 🇨🇳 | ✅ Complete (58 namespaces) |
-| 7 | Turkish | tr | 🇹🇷 | ✅ Complete (58 namespaces) |
-| 8 | Italian | it | 🇮🇹 | ✅ Complete (58 namespaces) |
-| 9 | Dutch | nl | 🇳🇱 | ✅ Complete (58 namespaces) |
-| 10 | Russian | ru | 🇷🇺 | ✅ Complete (58 namespaces) |
-| 11 | Japanese | ja | 🇯🇵 | ✅ Complete (58 namespaces) |
-| 12 | Korean | ko | 🇰🇷 | ✅ Complete (58 namespaces) |
-| 13 | Arabic | ar | 🇸🇦 | ✅ Complete (58 namespaces) |
-| 14 | Hindi | hi | 🇮🇳 | ✅ Complete (58 namespaces) |
-| 15 | Bengali | bn | 🇧🇩 | ✅ Complete (58 namespaces) |
-| 16 | Indonesian | id | 🇮🇩 | ✅ Complete (58 namespaces) |
-| 17 | Nigerian Pidgin | pcm | 🇳🇬 | ✅ Complete (58 namespaces) |
-| 18 | Tamil | ta | 🇮🇳 | ✅ Complete (58 namespaces) |
-| 19 | Urdu | ur | 🇵🇰 | ✅ Complete (58 namespaces) |
-| 20 | Egyptian Arabic | arz | 🇪🇬 | ✅ Complete (58 namespaces) |
-| 21 | Marathi | mr | 🇮🇳 | ✅ Complete (58 namespaces) |
-| 22 | Telugu | te | 🇮🇳 | ✅ Complete (58 namespaces) |
-| 23 | Vietnamese | vi | 🇻🇳 | ✅ Complete (58 namespaces) |
+| 1 | English | en | 🇺🇸 | ✅ Complete (61 namespaces) |
+| 2 | Spanish | es | 🇪🇸 | ✅ Complete (61 namespaces) |
+| 3 | Portuguese | pt | 🇧🇷 | ✅ Complete (61 namespaces) |
+| 4 | French | fr | 🇫🇷 | ✅ Complete (61 namespaces) |
+| 5 | German | de | 🇩🇪 | ✅ Complete (61 namespaces) |
+| 6 | Chinese | zh | 🇨🇳 | ✅ Complete (61 namespaces) |
+| 7 | Turkish | tr | 🇹🇷 | ✅ Complete (61 namespaces) |
+| 8 | Italian | it | 🇮🇹 | ✅ Complete (61 namespaces) |
+| 9 | Dutch | nl | 🇳🇱 | ✅ Complete (61 namespaces) |
+| 10 | Russian | ru | 🇷🇺 | ✅ Complete (61 namespaces) |
+| 11 | Japanese | ja | 🇯🇵 | ✅ Complete (61 namespaces) |
+| 12 | Korean | ko | 🇰🇷 | ✅ Complete (61 namespaces) |
+| 13 | Arabic | ar | 🇸🇦 | ✅ Complete (61 namespaces) |
+| 14 | Hindi | hi | 🇮🇳 | ✅ Complete (61 namespaces) |
+| 15 | Bengali | bn | 🇧🇩 | ✅ Complete (61 namespaces) |
+| 16 | Indonesian | id | 🇮🇩 | ✅ Complete (61 namespaces) |
+| 17 | Nigerian Pidgin | pcm | 🇳🇬 | ✅ Complete (61 namespaces) |
+| 18 | Tamil | ta | 🇮🇳 | ✅ Complete (61 namespaces) |
+| 19 | Urdu | ur | 🇵🇰 | ✅ Complete (61 namespaces) |
+| 20 | Egyptian Arabic | arz | 🇪🇬 | ✅ Complete (61 namespaces) |
+| 21 | Marathi | mr | 🇮🇳 | ✅ Complete (61 namespaces) |
+| 22 | Telugu | te | 🇮🇳 | ✅ Complete (61 namespaces) |
+| 23 | Vietnamese | vi | 🇻🇳 | ✅ Complete (61 namespaces) |
 
 ---
 
-## Core Namespaces (23 Files per Language)
+## Core Namespaces (26 Files per Language)
 
-All 23 languages have these 23 namespaces:
+All 23 languages have these 26 core namespaces:
 
 | Namespace | Purpose |
 |-----------|---------|
 | `a11y.json` | Accessibility labels and screen reader text |
+| `accessibility.json` | Accessibility statement page content |
 | `addons.json` | Subscription add-on features |
 | `admin.json` | Admin panel and VIP management |
 | `auth.json` | Authentication flows (login, signup, password) |
 | `celebrations.json` | Achievement milestones and celebrations |
 | `chat.json` | AI fitness chat assistant |
 | `common.json` | Shared UI strings (buttons, labels, etc.) |
+| `compliance.json` | GDPR, CCPA, cookie consent, breach notifications |
+| `controls.json` | Privacy controls and data management |
 | `feed.json` | Social feed and posts |
 | `fitness.json` | General fitness terms |
+| `legal.json` | Legal documents (privacy policy, terms, refund) |
 | `locations.json` | Wellness directory locations |
 | `news.json` | News channel categories |
 | `nutrition.json` | Food and nutrition tracking |
+| `payments.json` | Payment processing and checkout |
 | `plurals.json` | Plural forms (workouts, points, days) |
 | `premium.json` | Premium features descriptions |
 | `products.json` | Recommended products and shop |
@@ -79,7 +84,7 @@ privacy, profile, records, referral, rewards, schedule, search,
 session, sponsors, timer, trainer, voice, weight, workout
 ```
 
-**Total per Language:** 58 namespaces each (23 core + 35 extended)
+**Total per Language:** 61 namespaces each (26 core + 35 extended)
 
 ---
 
