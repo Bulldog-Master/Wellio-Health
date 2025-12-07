@@ -1,400 +1,65 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Scale, Plus, TrendingDown, ArrowLeft, Calendar as CalendarIcon, Pencil, Trash2 } from "lucide-react";
-import { useState, useEffect, useMemo } from "react";
-import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+import { Scale, ArrowLeft } from "lucide-react";
+import { useState } from "react";
 import { useUserPreferences } from "@/hooks/useUserPreferences";
-import { formatWeight, parseWeight } from "@/lib/unitConversion";
+import { formatWeight } from "@/lib/unitConversion";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useNavigate } from "react-router-dom";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { format, startOfMonth, startOfQuarter, startOfYear, parseISO } from "date-fns";
-import { es } from "date-fns/locale";
-import { ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { weightLogSchema, validateAndSanitize } from "@/lib/validationSchemas";
 import { useTranslation } from "react-i18next";
-
-interface WeightLog {
-  id: string;
-  weight_lbs: number;
-  period: string;
-  logged_at: string;
-}
+import { useWeightLogs, WeightLog } from "@/hooks/useWeightLogs";
+import { useWeightChartData, ChartView } from "@/hooks/useWeightChartData";
+import { 
+  WeightLogForm, 
+  WeightLogList, 
+  WeightProgressStats, 
+  WeightChartSection 
+} from "@/components/weight";
 
 const Weight = () => {
-  const { t, i18n } = useTranslation(['weight', 'common']);
-  const { toast } = useToast();
+  const { t } = useTranslation(['weight', 'common']);
   const navigate = useNavigate();
   const { preferredUnit, updatePreferredUnit, isLoading: prefsLoading } = useUserPreferences();
-  // Removed - now using shared Layout component
+  
   const [morning, setMorning] = useState("");
   const [evening, setEvening] = useState("");
-  const [weightLogs, setWeightLogs] = useState<WeightLog[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [editingLog, setEditingLog] = useState<WeightLog | null>(null);
   const [editWeight, setEditWeight] = useState("");
-  const [chartView, setChartView] = useState<"daily" | "monthly" | "quarterly" | "yearly" | "year-by-year">("monthly");
-  const [targetWeight, setTargetWeight] = useState<number | null>(null);
-  
-  // Get current locale for date formatting
-  const dateLocale = i18n.language === 'es' ? es : undefined;
+  const [chartView, setChartView] = useState<ChartView>("monthly");
 
-  useEffect(() => {
-    fetchWeightLogs();
-    fetchTargetWeight();
-  }, []);
+  const {
+    weightLogs,
+    isLoading,
+    targetWeight,
+    latestWeight,
+    statistics,
+    handleLogWeight,
+    handleEditLog,
+    handleDeleteLog,
+  } = useWeightLogs(preferredUnit);
 
-  const fetchWeightLogs = async () => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+  const { chartData, chartLines, getYAxisDomain } = useWeightChartData(
+    weightLogs,
+    chartView,
+    targetWeight
+  );
 
-      const { data, error } = await supabase
-        .from('weight_logs')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('logged_at', { ascending: true });
-
-      if (error) throw error;
-      setWeightLogs(data || []);
-    } catch (error) {
-      console.error('Error fetching weight logs:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const fetchTargetWeight = async () => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('target_weight, target_weight_unit')
-        .eq('id', user.id)
-        .single();
-
-      if (profile?.target_weight) {
-        const targetInLbs = profile.target_weight_unit === 'kg' 
-          ? profile.target_weight * 2.20462 
-          : profile.target_weight;
-        setTargetWeight(targetInLbs);
-      }
-    } catch (error) {
-      console.error('Error fetching target weight:', error);
-    }
-  };
-
-  const handleLogWeight = async (period: "morning" | "evening") => {
+  const onLogWeight = async (period: "morning" | "evening") => {
     const weight = period === "morning" ? morning : evening;
-    if (!weight) return;
-
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        toast({
-          title: t('weight:auth_required'),
-          description: t('weight:auth_required_desc'),
-          variant: "destructive",
-        });
-        return;
-      }
-
-      const weightLbs = parseWeight(weight, preferredUnit);
-
-      const validation = validateAndSanitize(weightLogSchema, {
-        weight_lbs: weightLbs,
-        period: period,
-      });
-
-      if (validation.success === false) {
-        toast({
-          title: t('weight:validation_error'),
-          description: validation.error,
-          variant: "destructive",
-        });
-        return;
-      }
-
-      const { error } = await supabase
-        .from('weight_logs')
-        .insert({
-          user_id: user.id,
-          weight_lbs: validation.data.weight_lbs,
-          period: validation.data.period,
-          logged_at: selectedDate.toISOString(),
-        });
-
-      if (error) throw error;
-
-      const periodTranslated = period === 'morning' ? t('weight:morning').toLowerCase() : t('weight:evening').toLowerCase();
-      toast({
-        title: t('weight:weight_logged'),
-        description: t('weight:weight_logged_desc', { period: periodTranslated }),
-      });
-
+    const success = await handleLogWeight(weight, period, selectedDate);
+    if (success) {
       if (period === "morning") setMorning("");
       else setEvening("");
-      
-      fetchWeightLogs();
-    } catch (error) {
-      console.error('Error logging weight:', error);
-      toast({
-        title: t('weight:error'),
-        description: t('weight:error_log'),
-        variant: "destructive",
-      });
     }
   };
 
-  const handleEditLog = async (log: WeightLog) => {
-    if (!editWeight) return;
-    
-    try {
-      const weightLbs = parseWeight(editWeight, preferredUnit);
-      
-      const { error } = await supabase
-        .from('weight_logs')
-        .update({ weight_lbs: weightLbs })
-        .eq('id', log.id);
-
-      if (error) throw error;
-
-      toast({
-        title: t('weight:weight_updated'),
-        description: t('weight:weight_updated_desc'),
-      });
-      
+  const onEditLog = async (log: WeightLog) => {
+    const success = await handleEditLog(log, editWeight);
+    if (success) {
       setEditingLog(null);
       setEditWeight("");
-      fetchWeightLogs();
-    } catch (error) {
-      console.error('Error updating weight:', error);
-      toast({
-        title: t('weight:error'),
-        description: t('weight:error_update'),
-        variant: "destructive",
-      });
     }
-  };
-
-  const handleDeleteLog = async (logId: string) => {
-    try {
-      const { error } = await supabase
-        .from('weight_logs')
-        .delete()
-        .eq('id', logId);
-
-      if (error) throw error;
-
-      toast({
-        title: t('weight:weight_deleted'),
-        description: t('weight:weight_deleted_desc'),
-      });
-      
-      fetchWeightLogs();
-    } catch (error) {
-      console.error('Error deleting weight:', error);
-      toast({
-        title: t('weight:error'),
-        description: t('weight:error_delete'),
-        variant: "destructive",
-      });
-    }
-  };
-
-  const groupedLogs = weightLogs.reduce((acc, log) => {
-    const date = new Date(log.logged_at).toLocaleDateString();
-    if (!acc[date]) acc[date] = {};
-    acc[date][log.period] = log.weight_lbs;
-    return acc;
-  }, {} as Record<string, Record<string, number>>);
-
-  const latestWeight = weightLogs.length > 0 ? weightLogs[weightLogs.length - 1].weight_lbs : 0;
-
-  const statistics = useMemo(() => {
-    if (weightLogs.length === 0) return null;
-
-    const firstWeight = weightLogs[0].weight_lbs;
-    const lastWeight = weightLogs[weightLogs.length - 1].weight_lbs;
-    const totalChange = lastWeight - firstWeight;
-    
-    const firstDate = new Date(weightLogs[0].logged_at);
-    const lastDate = new Date(weightLogs[weightLogs.length - 1].logged_at);
-    const daysDiff = Math.max(1, Math.ceil((lastDate.getTime() - firstDate.getTime()) / (1000 * 60 * 60 * 24)));
-    const avgRatePerWeek = (totalChange / daysDiff) * 7;
-
-    let progressPercentage = 0;
-    if (targetWeight && firstWeight !== targetWeight) {
-      const totalGoal = targetWeight - firstWeight;
-      const achieved = lastWeight - firstWeight;
-      progressPercentage = (achieved / totalGoal) * 100;
-    }
-
-    return {
-      totalChange,
-      avgRatePerWeek,
-      progressPercentage,
-      daysTracked: daysDiff,
-    };
-  }, [weightLogs, targetWeight]);
-
-  const chartData = useMemo(() => {
-    if (!weightLogs.length) return [];
-
-    const processData = (logs: WeightLog[]) => {
-      let result: any[] = [];
-      
-      switch (chartView) {
-        case "daily": {
-          const dailyData = logs.reduce((acc, log) => {
-            const date = format(parseISO(log.logged_at), "MMM dd", { locale: dateLocale });
-            const existing = acc.find(d => d.date === date);
-            if (existing) {
-              if (log.period === "morning") existing.morning = log.weight_lbs;
-              if (log.period === "evening") existing.evening = log.weight_lbs;
-            } else {
-              acc.push({
-                date,
-                morning: log.period === "morning" ? log.weight_lbs : null,
-                evening: log.period === "evening" ? log.weight_lbs : null,
-              });
-            }
-            return acc;
-          }, [] as any[]);
-          result = dailyData;
-          break;
-        }
-        
-        case "monthly": {
-          const monthlyData = logs.reduce((acc, log) => {
-            const month = format(startOfMonth(parseISO(log.logged_at)), "MMM yyyy", { locale: dateLocale });
-            const existing = acc.find(d => d.date === month);
-            if (existing) {
-              existing.totalWeight += log.weight_lbs;
-              existing.count += 1;
-            } else {
-              acc.push({ date: month, totalWeight: log.weight_lbs, count: 1 });
-            }
-            return acc;
-          }, [] as any[]);
-          result = monthlyData.map(d => ({ date: d.date, average: d.totalWeight / d.count }));
-          break;
-        }
-        
-        case "quarterly": {
-          const quarterlyData = logs.reduce((acc, log) => {
-            const quarter = format(startOfQuarter(parseISO(log.logged_at)), "QQQ yyyy", { locale: dateLocale });
-            const existing = acc.find(d => d.date === quarter);
-            if (existing) {
-              existing.totalWeight += log.weight_lbs;
-              existing.count += 1;
-            } else {
-              acc.push({ date: quarter, totalWeight: log.weight_lbs, count: 1 });
-            }
-            return acc;
-          }, [] as any[]);
-          result = quarterlyData.map(d => ({ date: d.date, average: d.totalWeight / d.count }));
-          break;
-        }
-        
-        case "yearly": {
-          const yearlyData = logs.reduce((acc, log) => {
-            const year = format(startOfYear(parseISO(log.logged_at)), "yyyy", { locale: dateLocale });
-            const existing = acc.find(d => d.date === year);
-            if (existing) {
-              existing.totalWeight += log.weight_lbs;
-              existing.count += 1;
-            } else {
-              acc.push({ date: year, totalWeight: log.weight_lbs, count: 1 });
-            }
-            return acc;
-          }, [] as any[]);
-          result = yearlyData.map(d => ({ date: d.date, average: d.totalWeight / d.count }));
-          break;
-        }
-        
-        case "year-by-year": {
-          const yearlyData = logs.reduce((acc, log) => {
-            const year = format(parseISO(log.logged_at), "yyyy", { locale: dateLocale });
-            const month = format(parseISO(log.logged_at), "MMM", { locale: dateLocale });
-            if (!acc[year]) acc[year] = {};
-            if (!acc[year][month]) acc[year][month] = { totalWeight: 0, count: 0 };
-            acc[year][month].totalWeight += log.weight_lbs;
-            acc[year][month].count += 1;
-            return acc;
-          }, {} as Record<string, Record<string, { totalWeight: number; count: number }>>);
-          
-          const tempResult = [];
-          for (const [year, months] of Object.entries(yearlyData)) {
-            for (const [month, data] of Object.entries(months)) {
-              tempResult.push({
-                date: month,
-                [year]: data.totalWeight / data.count,
-              });
-            }
-          }
-          
-          const consolidated = tempResult.reduce((acc, item) => {
-            const existing = acc.find(d => d.date === item.date);
-            if (existing) {
-              Object.assign(existing, item);
-            } else {
-              acc.push(item);
-            }
-            return acc;
-          }, [] as any[]);
-          
-          result = consolidated;
-          break;
-        }
-        
-        default:
-          return [];
-      }
-      
-      if (targetWeight) {
-        result = result.map(d => ({ ...d, target: targetWeight }));
-      }
-      
-      return result;
-    };
-
-    return processData(weightLogs);
-  }, [weightLogs, chartView, targetWeight]);
-
-  const chartLines = useMemo(() => {
-    if (chartView === "year-by-year" && chartData.length > 0) {
-      const years = Object.keys(chartData[0]).filter(key => key !== "date");
-      return years;
-    }
-    return [];
-  }, [chartData, chartView]);
-
-  const getYAxisDomain = () => {
-    if (!chartData.length) return [0, 100];
-    const values = chartData.flatMap(d => 
-      Object.entries(d)
-        .filter(([key]) => key !== "date")
-        .map(([, value]) => value as number)
-        .filter(v => v != null)
-    );
-    
-    if (targetWeight) {
-      values.push(targetWeight);
-    }
-    
-    const min = Math.min(...values);
-    const max = Math.max(...values);
-    const padding = (max - min) * 0.1;
-    return [Math.floor(min - padding), Math.ceil(max + padding)];
   };
 
   return (
@@ -438,64 +103,16 @@ const Weight = () => {
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
-        <Card className="p-6 bg-gradient-card shadow-md">
-          <h3 className="text-lg font-semibold mb-4">{t('weight:log_weight')}</h3>
-          <div className="space-y-4">
-            <div>
-              <Label>{t('weight:select_date')}</Label>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button variant="outline" className="w-full justify-start mt-1">
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {format(selectedDate, "PPP", { locale: dateLocale })}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
-                  <Calendar
-                    mode="single"
-                    selected={selectedDate}
-                    onSelect={(date) => date && setSelectedDate(date)}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="morning">{t('weight:morning')}</Label>
-              <div className="flex gap-2">
-                <Input
-                  id="morning"
-                  type="number"
-                  step="0.1"
-                  placeholder={preferredUnit === 'imperial' ? "lbs" : "kg"}
-                  value={morning}
-                  onChange={(e) => setMorning(e.target.value)}
-                />
-                <Button onClick={() => handleLogWeight("morning")} size="icon">
-                  <Plus className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="evening">{t('weight:evening')}</Label>
-              <div className="flex gap-2">
-                <Input
-                  id="evening"
-                  type="number"
-                  step="0.1"
-                  placeholder={preferredUnit === 'imperial' ? "lbs" : "kg"}
-                  value={evening}
-                  onChange={(e) => setEvening(e.target.value)}
-                />
-                <Button onClick={() => handleLogWeight("evening")} size="icon">
-                  <Plus className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-        </Card>
+        <WeightLogForm
+          morning={morning}
+          setMorning={setMorning}
+          evening={evening}
+          setEvening={setEvening}
+          selectedDate={selectedDate}
+          setSelectedDate={setSelectedDate}
+          preferredUnit={preferredUnit}
+          onLogWeight={onLogWeight}
+        />
 
         <Card className="p-6 bg-gradient-card shadow-md">
           <h3 className="text-lg font-semibold mb-4">{t('weight:current_weight')}</h3>
@@ -508,227 +125,34 @@ const Weight = () => {
         </Card>
       </div>
 
-          {statistics && (
-            <Card className="p-6 bg-gradient-card shadow-md">
-              <h3 className="text-lg font-semibold mb-4">{t('weight:progress_statistics')}</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">{t('weight:total_change')}</p>
-                  <p className="text-2xl font-bold" style={{ 
-                    color: statistics.totalChange < 0 ? 'hsl(142, 71%, 45%)' : 'hsl(var(--primary))' 
-                  }}>
-                    {statistics.totalChange > 0 ? '+' : ''}
-                    {formatWeight(Math.abs(statistics.totalChange), preferredUnit)}
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {t('weight:over_days', { days: statistics.daysTracked })}
-                  </p>
-                </div>
-                
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">{t('weight:avg_change_week')}</p>
-                  <p className="text-2xl font-bold">
-                    {statistics.avgRatePerWeek > 0 ? '+' : ''}
-                    {formatWeight(Math.abs(statistics.avgRatePerWeek), preferredUnit)}
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {t('weight:weekly_average')}
-                  </p>
-                </div>
-                
-                {targetWeight && (
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">{t('weight:goal_progress')}</p>
-                    <p className="text-2xl font-bold text-primary">
-                      {Math.abs(Math.round(statistics.progressPercentage))}%
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {t('weight:target', { weight: formatWeight(targetWeight, preferredUnit) })}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </Card>
-          )}
+      <WeightProgressStats
+        statistics={statistics}
+        targetWeight={targetWeight}
+        preferredUnit={preferredUnit}
+      />
 
-          <Card className="p-6 bg-gradient-card shadow-md">
-            <h3 className="text-lg font-semibold mb-6">{t('weight:weight_trends')}</h3>
-            <Tabs value={chartView} onValueChange={(v) => setChartView(v as any)} className="mb-6">
-              <TabsList className="grid w-full grid-cols-5">
-                <TabsTrigger value="daily">{t('weight:daily')}</TabsTrigger>
-                <TabsTrigger value="monthly">{t('weight:monthly')}</TabsTrigger>
-                <TabsTrigger value="quarterly">{t('weight:quarterly')}</TabsTrigger>
-                <TabsTrigger value="yearly">{t('weight:yearly')}</TabsTrigger>
-                <TabsTrigger value="year-by-year">{t('weight:year_by_year')}</TabsTrigger>
-              </TabsList>
-            </Tabs>
+      <WeightChartSection
+        chartData={chartData}
+        chartView={chartView}
+        setChartView={setChartView}
+        chartLines={chartLines}
+        targetWeight={targetWeight}
+        preferredUnit={preferredUnit}
+        isLoading={isLoading}
+        getYAxisDomain={getYAxisDomain}
+      />
 
-            {isLoading ? (
-              <p className="text-center text-muted-foreground py-8">{t('weight:loading')}</p>
-            ) : !chartData || chartData.length === 0 ? (
-              <p className="text-center text-muted-foreground py-8">{t('weight:no_chart_data')}</p>
-            ) : (
-              <ResponsiveContainer width="100%" height={400}>
-              <ComposedChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-                <XAxis 
-                  dataKey="date" 
-                  className="text-xs"
-                  tick={{ fill: 'hsl(var(--foreground))' }}
-                />
-                <YAxis 
-                  domain={getYAxisDomain()}
-                  className="text-xs"
-                  tick={{ fill: 'hsl(var(--foreground))' }}
-                  label={{ 
-                    value: preferredUnit === 'imperial' ? 'lbs' : 'kg', 
-                    angle: -90, 
-                    position: 'insideLeft',
-                    style: { fill: 'hsl(var(--foreground))' }
-                  }}
-                  tickFormatter={(value) => formatWeight(value, preferredUnit).split(' ')[0]}
-                />
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: 'hsl(var(--background))',
-                    border: '1px solid hsl(var(--border))',
-                    borderRadius: '8px'
-                  }}
-                  formatter={(value: number) => formatWeight(value, preferredUnit)}
-                />
-                <Legend 
-                  wrapperStyle={{
-                    paddingTop: '20px'
-                  }}
-                />
-                
-                {chartView === "daily" ? (
-                  <>
-                    <Bar 
-                      dataKey="morning" 
-                      fill="hsl(195, 100%, 50%)" 
-                      name={t('weight:morning')}
-                      radius={[4, 4, 0, 0]}
-                    />
-                    <Bar 
-                      dataKey="evening" 
-                      fill="hsl(270, 95%, 65%)" 
-                      name={t('weight:evening')}
-                      radius={[4, 4, 0, 0]}
-                    />
-                  </>
-                ) : chartView === "year-by-year" ? (
-                  chartLines.map((year, index) => {
-                    const colors = [
-                      'hsl(var(--primary))',
-                      'hsl(var(--secondary))',
-                      'hsl(var(--accent))',
-                      'hsl(217, 91%, 60%)',
-                      'hsl(142, 71%, 45%)',
-                      'hsl(262, 83%, 58%)',
-                    ];
-                    return (
-                      <Bar
-                        key={year}
-                        dataKey={year}
-                        fill={colors[index % colors.length]}
-                        name={year}
-                        radius={[4, 4, 0, 0]}
-                      />
-                    );
-                  })
-                ) : (
-                  <Bar 
-                    dataKey="average" 
-                    fill="hsl(var(--primary))" 
-                    name={t('weight:average')}
-                    radius={[4, 4, 0, 0]}
-                  />
-                )}
-                
-                {targetWeight && (
-                  <Line
-                    type="monotone"
-                    dataKey="target"
-                    stroke="hsl(0, 85%, 60%)"
-                    strokeWidth={2}
-                    strokeDasharray="5 5"
-                    dot={false}
-                    name={t('weight:target_weight')}
-                  />
-                )}
-              </ComposedChart>
-            </ResponsiveContainer>
-            )}
-          </Card>
-
-          <Card className="p-6 bg-gradient-card shadow-md">
-          <h3 className="text-lg font-semibold mb-4">{t('weight:recent_weights')}</h3>
-          {isLoading ? (
-            <p className="text-center text-muted-foreground py-8">{t('weight:loading')}</p>
-          ) : Object.keys(groupedLogs).length === 0 ? (
-            <p className="text-center text-muted-foreground py-8">{t('weight:no_logs_yet')}</p>
-          ) : (
-            <div className="h-[600px] overflow-y-auto pr-2 space-y-3">
-              {[...weightLogs].reverse().map((log) => (
-                <div key={log.id} className="flex items-center justify-between p-4 bg-secondary rounded-lg">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="font-semibold">
-                        {format(new Date(log.logged_at), "MMM dd, yyyy", { locale: dateLocale })}
-                      </span>
-                      <span className="text-sm text-muted-foreground">
-                        ({log.period === 'morning' ? t('weight:morning') : t('weight:evening')})
-                      </span>
-                    </div>
-                    {editingLog?.id === log.id ? (
-                      <div className="flex gap-2">
-                        <Input
-                          type="number"
-                          step="0.1"
-                          value={editWeight}
-                          onChange={(e) => setEditWeight(e.target.value)}
-                          className="w-32"
-                        />
-                        <Button size="sm" onClick={() => handleEditLog(log)}>
-                          {t('weight:save')}
-                        </Button>
-                        <Button size="sm" variant="outline" onClick={() => setEditingLog(null)}>
-                          {t('weight:cancel')}
-                        </Button>
-                      </div>
-                    ) : (
-                      <p className="text-2xl font-bold text-primary">
-                        {formatWeight(log.weight_lbs, preferredUnit)}
-                      </p>
-                    )}
-                  </div>
-                  {!editingLog && (
-                    <div className="flex gap-2">
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        onClick={() => {
-                          setEditingLog(log);
-                          setEditWeight(String(preferredUnit === 'imperial' ? log.weight_lbs : log.weight_lbs / 2.20462));
-                        }}
-                      >
-                        <Pencil className="w-4 h-4" />
-                      </Button>
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        onClick={() => handleDeleteLog(log.id)}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </Card>
+      <WeightLogList
+        weightLogs={weightLogs}
+        isLoading={isLoading}
+        preferredUnit={preferredUnit}
+        editingLog={editingLog}
+        editWeight={editWeight}
+        setEditingLog={setEditingLog}
+        setEditWeight={setEditWeight}
+        onEditLog={onEditLog}
+        onDeleteLog={handleDeleteLog}
+      />
     </div>
   );
 };
