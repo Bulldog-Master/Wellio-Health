@@ -6,5 +6,15 @@
   "auth_title": "Accedi o Crea Account",
   "auth_description": "Unisciti a Wellio per tracciare il tuo percorso fitness, connetterti con altri e raggiungere i tuoi obiettivi di salute.",
   "not_found_title": "Pagina Non Trovata",
-  "not_found_description": "La pagina che cerchi non esiste. Torna alla home di Wellio."
+  "not_found_description": "La pagina che cerchi non esiste. Torna alla home di Wellio.",
+  "accessibility_title": "Dichiarazione di Accessibilità",
+  "accessibility_description": "Il nostro impegno per l'accessibilità digitale e la conformità WCAG.",
+  "cookie_policy_title": "Politica sui Cookie",
+  "cookie_policy_description": "Scopri come utilizziamo i cookie e tecnologie simili.",
+  "ccpa_rights_title": "Diritti CCPA",
+  "ccpa_rights_description": "I tuoi diritti sulla privacy in California ai sensi del CCPA.",
+  "session_management_title": "Gestione Sessione",
+  "session_management_description": "Gestisci le tue sessioni attive e le impostazioni di sicurezza.",
+  "security_audit_title": "Registro di Audit di Sicurezza",
+  "security_audit_description": "Visualizza gli eventi di sicurezza e i log delle attività del tuo account."
 }

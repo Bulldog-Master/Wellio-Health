@@ -122,5 +122,11 @@
   "tip_streaks_title": "Costruisci le Tue Serie",
   "tip_streaks_desc": "La costanza è fondamentale! Registra le attività ogni giorno per costruire serie e guadagnare punti bonus. Serie più lunghe sbloccano achievement speciali.",
   "tip_social_title": "Unisciti alla Community",
-  "tip_social_desc": "Connettiti con altri, unisciti a sfide e condividi i tuoi progressi. La community ti mantiene responsabile e motivato!"
+  "tip_social_desc": "Connettiti con altri, unisciti a sfide e condividi i tuoi progressi. La community ti mantiene responsabile e motivato!",
+  "two_factor_auth": "Autenticazione a Due Fattori",
+  "two_factor_auth_desc": "Aggiungi un ulteriore livello di sicurezza al tuo account",
+  "session_management": "Gestione Sessione",
+  "session_management_desc": "Visualizza e gestisci le tue sessioni attive",
+  "security_audit": "Registro Audit di Sicurezza",
+  "security_audit_desc": "Visualizza gli eventi di sicurezza del tuo account"
 }

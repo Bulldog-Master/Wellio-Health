@@ -35,6 +35,7 @@
   "show_stats": "إظهار الإحصائيات",
   "allow_messages": "السماح بالرسائل",
   "two_factor_auth": "المصادقة الثنائية",
+  "two_factor_auth_desc": "أضف طبقة أمان إضافية لحسابك",
   "change_password": "تغيير كلمة المرور",
   "connected_accounts": "الحسابات المرتبطة",
   "data_export": "تصدير البيانات",
@@ -51,5 +52,9 @@
   "privacy_policy": "سياسة الخصوصية",
   "contact_support": "الاتصال بالدعم",
   "rate_app": "تقييم التطبيق",
-  "share_app": "مشاركة التطبيق"
+  "share_app": "مشاركة التطبيق",
+  "session_management": "إدارة الجلسات",
+  "session_management_desc": "عرض وإدارة جلساتك النشطة",
+  "security_audit": "سجل التدقيق الأمني",
+  "security_audit_desc": "عرض أحداث الأمان لحسابك"
 }

@@ -122,5 +122,11 @@
   "tip_streaks_title": "Bouw Je Reeksen",
   "tip_streaks_desc": "Consistentie is key! Log dagelijks activiteiten om reeksen op te bouwen en bonuspunten te verdienen. Langere reeksen ontgrendelen speciale achievements.",
   "tip_social_title": "Join de Community",
-  "tip_social_desc": "Verbind met anderen, doe mee aan uitdagingen en deel je voortgang. De community houdt je verantwoordelijk en gemotiveerd!"
+  "tip_social_desc": "Verbind met anderen, doe mee aan uitdagingen en deel je voortgang. De community houdt je verantwoordelijk en gemotiveerd!",
+  "two_factor_auth": "Tweefactorauthenticatie",
+  "two_factor_auth_desc": "Voeg een extra beveiligingslaag toe aan je account",
+  "session_management": "Sessiebeheer",
+  "session_management_desc": "Bekijk en beheer je actieve sessies",
+  "security_audit": "Beveiligingsauditlog",
+  "security_audit_desc": "Bekijk beveiligingsgebeurtenissen voor je account"
 }
