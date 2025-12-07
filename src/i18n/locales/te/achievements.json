@@ -6,5 +6,11 @@
   "progress": "పురోగతి",
   "completed": "పూర్తయింది",
   "locked": "లాక్ చేయబడింది",
-  "no_achievements": "ఇంకా సాధనలు లేవు"
+  "no_achievements": "ఇంకా సాధనలు లేవు",
+  "verified_achievement": "ధృవీకరించిన సాధన",
+  "cryptographically_signed": "క్రిప్టోగ్రాఫికల్‌గా సంతకం చేయబడింది",
+  "verification_hash": "ధృవీకరణ హాష్",
+  "share_verified": "ధృవీకరించిన బ్యాడ్జ్ షేర్ చేయండి",
+  "verify_authenticity": "ప్రామాణికతను ధృవీకరించండి",
+  "tamper_proof": "ట్యాంపర్-ప్రూఫ్ సాధన రికార్డు"
 }

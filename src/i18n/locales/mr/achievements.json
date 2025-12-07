@@ -6,5 +6,11 @@
   "progress": "प्रगती",
   "completed": "पूर्ण",
   "locked": "लॉक",
-  "no_achievements": "अजून यश नाही"
+  "no_achievements": "अजून यश नाही",
+  "verified_achievement": "सत्यापित यश",
+  "cryptographically_signed": "क्रिप्टोग्राफिक स्वाक्षरी केलेले",
+  "verification_hash": "सत्यापन हॅश",
+  "share_verified": "सत्यापित बॅज शेअर करा",
+  "verify_authenticity": "सत्यता सत्यापित करा",
+  "tamper_proof": "छेडछाड-प्रतिरोधक यश रेकॉर्ड"
 }

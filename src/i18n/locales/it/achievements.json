@@ -6,5 +6,11 @@
   "progress": "Progresso",
   "completed": "Completato",
   "locked": "Bloccato",
-  "no_achievements": "Nessun traguardo ancora"
+  "no_achievements": "Nessun traguardo ancora",
+  "verified_achievement": "Traguardo Verificato",
+  "cryptographically_signed": "Firmato Crittograficamente",
+  "verification_hash": "Hash di Verifica",
+  "share_verified": "Condividi Badge Verificato",
+  "verify_authenticity": "Verifica Autenticità",
+  "tamper_proof": "Record di traguardo a prova di manomissione"
 }

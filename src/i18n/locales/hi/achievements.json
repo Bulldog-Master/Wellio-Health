@@ -6,5 +6,11 @@
   "progress": "प्रगति",
   "completed": "पूर्ण",
   "locked": "लॉक",
-  "no_achievements": "अभी कोई उपलब्धि नहीं"
+  "no_achievements": "अभी कोई उपलब्धि नहीं",
+  "verified_achievement": "सत्यापित उपलब्धि",
+  "cryptographically_signed": "क्रिप्टोग्राफिक रूप से हस्ताक्षरित",
+  "verification_hash": "सत्यापन हैश",
+  "share_verified": "सत्यापित बैज साझा करें",
+  "verify_authenticity": "प्रामाणिकता सत्यापित करें",
+  "tamper_proof": "छेड़छाड़-रोधी उपलब्धि रिकॉर्ड"
 }

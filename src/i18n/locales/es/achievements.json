@@ -42,5 +42,11 @@
   "cal": "cal",
   "min": "min",
   "hrs": "hrs",
-  "lbs": "lbs"
+  "lbs": "lbs",
+  "verified_achievement": "Logro Verificado",
+  "cryptographically_signed": "Firmado Criptográficamente",
+  "verification_hash": "Hash de Verificación",
+  "share_verified": "Compartir Insignia Verificada",
+  "verify_authenticity": "Verificar Autenticidad",
+  "tamper_proof": "Registro de logro a prueba de manipulación"
 }

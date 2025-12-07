@@ -6,5 +6,11 @@
   "progress": "Progress",
   "completed": "Don finish",
   "locked": "E dey lock",
-  "no_achievements": "No achievement yet"
+  "no_achievements": "No achievement yet",
+  "verified_achievement": "Verified Achievement",
+  "cryptographically_signed": "Cryptographically Signed",
+  "verification_hash": "Verification Hash",
+  "share_verified": "Share Verified Badge",
+  "verify_authenticity": "Verify Authenticity",
+  "tamper_proof": "Tamper-proof achievement record"
 }

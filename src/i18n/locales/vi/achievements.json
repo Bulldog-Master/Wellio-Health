@@ -6,5 +6,11 @@
   "progress": "Tiến độ",
   "completed": "Hoàn thành",
   "locked": "Đã khóa",
-  "no_achievements": "Chưa có thành tựu"
+  "no_achievements": "Chưa có thành tựu",
+  "verified_achievement": "Thành Tựu Đã Xác Minh",
+  "cryptographically_signed": "Ký Mã Hóa",
+  "verification_hash": "Hash Xác Minh",
+  "share_verified": "Chia Sẻ Huy Hiệu Đã Xác Minh",
+  "verify_authenticity": "Xác Minh Tính Xác Thực",
+  "tamper_proof": "Bản ghi thành tựu chống giả mạo"
 }

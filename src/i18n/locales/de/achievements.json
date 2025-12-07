@@ -6,5 +6,11 @@
   "progress": "Fortschritt",
   "completed": "Abgeschlossen",
   "locked": "Gesperrt",
-  "no_achievements": "Noch keine Erfolge"
+  "no_achievements": "Noch keine Erfolge",
+  "verified_achievement": "Verifizierter Erfolg",
+  "cryptographically_signed": "Kryptographisch Signiert",
+  "verification_hash": "Verifizierungs-Hash",
+  "share_verified": "Verifiziertes Abzeichen Teilen",
+  "verify_authenticity": "Authentizität Prüfen",
+  "tamper_proof": "Manipulationssicherer Erfolgsnachweis"
 }

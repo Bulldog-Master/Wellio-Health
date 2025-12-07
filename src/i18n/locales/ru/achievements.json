@@ -6,5 +6,11 @@
   "progress": "Прогресс",
   "completed": "Завершено",
   "locked": "Заблокировано",
-  "no_achievements": "Пока нет достижений"
+  "no_achievements": "Пока нет достижений",
+  "verified_achievement": "Проверенное Достижение",
+  "cryptographically_signed": "Криптографически Подписано",
+  "verification_hash": "Хеш Верификации",
+  "share_verified": "Поделиться Проверенным Значком",
+  "verify_authenticity": "Проверить Подлинность",
+  "tamper_proof": "Защищённая от подделки запись достижения"
 }

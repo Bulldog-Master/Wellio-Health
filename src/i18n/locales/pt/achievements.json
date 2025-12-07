@@ -6,5 +6,11 @@
   "progress": "Progresso",
   "completed": "Concluído",
   "locked": "Bloqueado",
-  "no_achievements": "Nenhuma conquista ainda"
+  "no_achievements": "Nenhuma conquista ainda",
+  "verified_achievement": "Conquista Verificada",
+  "cryptographically_signed": "Assinado Criptograficamente",
+  "verification_hash": "Hash de Verificação",
+  "share_verified": "Compartilhar Distintivo Verificado",
+  "verify_authenticity": "Verificar Autenticidade",
+  "tamper_proof": "Registro de conquista à prova de adulteração"
 }

@@ -6,5 +6,11 @@
   "progress": "Kemajuan",
   "completed": "Selesai",
   "locked": "Terkunci",
-  "no_achievements": "Belum ada pencapaian"
+  "no_achievements": "Belum ada pencapaian",
+  "verified_achievement": "Pencapaian Terverifikasi",
+  "cryptographically_signed": "Ditandatangani Secara Kriptografis",
+  "verification_hash": "Hash Verifikasi",
+  "share_verified": "Bagikan Lencana Terverifikasi",
+  "verify_authenticity": "Verifikasi Keaslian",
+  "tamper_proof": "Catatan pencapaian anti-rusak"
 }
