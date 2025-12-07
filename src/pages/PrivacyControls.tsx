@@ -13,6 +13,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, Settings, Download, Trash2, Clock, Shield, Brain, Mail, Users, Loader2, CheckCircle, AlertTriangle } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
+import { CCPADoNotSell, HIPAAAuthorization, PIPEDADisclosure, AccessibilitySettings } from '@/components/compliance';
 
 interface PrivacyPreferences {
   data_retention_days: number;
@@ -24,7 +25,7 @@ interface PrivacyPreferences {
 }
 
 const PrivacyControls: React.FC = () => {
-  const { t } = useTranslation(['privacy', 'common', 'controls']);
+  const { t } = useTranslation(['privacy', 'common', 'controls', 'compliance']);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -446,6 +447,18 @@ const PrivacyControls: React.FC = () => {
               )}
             </CardContent>
           </Card>
+
+          {/* CCPA Do Not Sell */}
+          <CCPADoNotSell />
+
+          {/* HIPAA Authorization */}
+          <HIPAAAuthorization />
+
+          {/* PIPEDA Disclosure */}
+          <PIPEDADisclosure />
+
+          {/* Accessibility Settings */}
+          <AccessibilitySettings />
 
           {/* Legal Links */}
           <Card>
