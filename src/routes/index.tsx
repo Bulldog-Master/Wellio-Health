@@ -107,6 +107,11 @@ const TermsOfService = lazy(() => import("@/pages/TermsOfService"));
 const PrivacyControls = lazy(() => import("@/pages/PrivacyControls"));
 const RefundPolicy = lazy(() => import("@/pages/RefundPolicy"));
 const AccessibilityPage = lazy(() => import("@/pages/Accessibility"));
+const AccessibilityStatement = lazy(() => import("@/pages/AccessibilityStatement"));
+const CookiePolicy = lazy(() => import("@/pages/CookiePolicy"));
+const CCPARightsRequest = lazy(() => import("@/pages/CCPARightsRequest"));
+const SessionManagement = lazy(() => import("@/pages/SessionManagement"));
+const SecurityAuditLog = lazy(() => import("@/pages/SecurityAuditLog"));
 
 /**
  * Application route configuration
@@ -239,6 +244,13 @@ export const AppRoutes = () => (
     <Route path="/privacy-controls" element={<RouteErrorBoundary><ProtectedRoute><PrivacyControls /></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/refund-policy" element={<RouteErrorBoundary><RefundPolicy /></RouteErrorBoundary>} />
     <Route path="/accessibility" element={<RouteErrorBoundary><AccessibilityPage /></RouteErrorBoundary>} />
+    <Route path="/accessibility-statement" element={<RouteErrorBoundary><AccessibilityStatement /></RouteErrorBoundary>} />
+    <Route path="/cookie-policy" element={<RouteErrorBoundary><CookiePolicy /></RouteErrorBoundary>} />
+    <Route path="/ccpa-rights" element={<RouteErrorBoundary><CCPARightsRequest /></RouteErrorBoundary>} />
+    
+    {/* Security */}
+    <Route path="/sessions" element={<RouteErrorBoundary><ProtectedRoute><SessionManagement /></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/security-log" element={<RouteErrorBoundary><ProtectedRoute><SecurityAuditLog /></ProtectedRoute></RouteErrorBoundary>} />
     
     {/* 404 */}
     <Route path="*" element={<NotFound />} />

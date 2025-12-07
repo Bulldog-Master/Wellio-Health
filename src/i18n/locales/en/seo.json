@@ -63,5 +63,20 @@
     "description": "Discover personally vetted and approved fitness products, supplements, and gear."
   },
   "progress_comparison_title": "Progress Photo Comparison - Wellio",
-  "progress_comparison_desc": "Compare your transformation photos side by side to track your fitness progress over time."
+  "progress_comparison_desc": "Compare your transformation photos side by side to track your fitness progress over time.",
+  
+  "accessibility_page_title": "Accessibility Statement - Wellio",
+  "accessibility_page_description": "Our commitment to digital accessibility and WCAG 2.1 AA compliance.",
+  
+  "cookie_policy_title": "Cookie Policy - Wellio",
+  "cookie_policy_description": "Learn about the cookies we use and how to manage your preferences.",
+  
+  "ccpa_rights_title": "CCPA Rights Request - Wellio",
+  "ccpa_rights_description": "Exercise your California Consumer Privacy Act rights.",
+  
+  "session_management_title": "Session Management - Wellio",
+  "session_management_description": "View and manage your active login sessions.",
+  
+  "security_audit_log_title": "Security Audit Log - Wellio",
+  "security_audit_log_description": "View your account security activity and access history."
 }
