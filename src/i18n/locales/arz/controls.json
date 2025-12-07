@@ -22,5 +22,9 @@
   "privacy_policy": "سياسة الخصوصية",
   "terms_of_service": "شروط الخدمة",
   "consent_updated": "الموافقة اتحدثت",
-  "preferences_updated": "التفضيلات اتحدثت"
+  "preferences_updated": "التفضيلات اتحدثت",
+  "refund_policy": "سياسة الاسترداد",
+  "refund_policy_desc": "شروط الاسترداد",
+  "accessibility_statement": "بيان الوصول",
+  "accessibility_statement_desc": "التزامنا بالوصول"
 }

@@ -22,5 +22,9 @@
   "privacy_policy": "গোপনীয়তা নীতি",
   "terms_of_service": "সেবার শর্তাবলী",
   "consent_updated": "সম্মতি আপডেট হয়েছে",
-  "preferences_updated": "পছন্দ আপডেট হয়েছে"
+  "preferences_updated": "পছন্দ আপডেট হয়েছে",
+  "refund_policy": "ফেরত নীতি",
+  "refund_policy_desc": "ফেরতের শর্তাবলী",
+  "accessibility_statement": "অ্যাক্সেসিবিলিটি বিবৃতি",
+  "accessibility_statement_desc": "অ্যাক্সেসিবিলিটির প্রতি আমাদের প্রতিশ্রুতি"
 }

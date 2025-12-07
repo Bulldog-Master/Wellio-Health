@@ -34,5 +34,9 @@
   "consent_updated": "सहमति अपडेट हुई",
   "consent_update_failed": "अपडेट विफल",
   "preferences_updated": "प्राथमिकताएं अपडेट हुईं",
-  "preferences_update_failed": "प्राथमिकता अपडेट विफल"
+  "preferences_update_failed": "प्राथमिकता अपडेट विफल",
+  "refund_policy": "धनवापसी नीति",
+  "refund_policy_desc": "धनवापसी की शर्तें",
+  "accessibility_statement": "सुगम्यता विवरण",
+  "accessibility_statement_desc": "सुगम्यता के प्रति हमारी प्रतिबद्धता"
 }

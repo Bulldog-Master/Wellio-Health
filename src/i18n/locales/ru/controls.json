@@ -34,5 +34,9 @@
   "consent_updated": "Согласие обновлено",
   "consent_update_failed": "Ошибка обновления",
   "preferences_updated": "Настройки сохранены",
-  "preferences_update_failed": "Ошибка сохранения"
+  "preferences_update_failed": "Ошибка сохранения",
+  "refund_policy": "Политика возврата",
+  "refund_policy_desc": "Условия возврата средств",
+  "accessibility_statement": "Заявление о доступности",
+  "accessibility_statement_desc": "Наши обязательства по доступности"
 }

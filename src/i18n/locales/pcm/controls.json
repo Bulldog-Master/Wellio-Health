@@ -22,5 +22,9 @@
   "privacy_policy": "Privacy Policy",
   "terms_of_service": "Terms of Service",
   "consent_updated": "Consent don update",
-  "preferences_updated": "Preferences don update"
+  "preferences_updated": "Preferences don update",
+  "refund_policy": "Refund Policy",
+  "refund_policy_desc": "How refund dey work",
+  "accessibility_statement": "Accessibility Statement",
+  "accessibility_statement_desc": "We commitment to accessibility"
 }

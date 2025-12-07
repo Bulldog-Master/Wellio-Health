@@ -34,5 +34,9 @@
   "consent_updated": "تم تحديث الموافقة",
   "consent_update_failed": "فشل التحديث",
   "preferences_updated": "تم تحديث التفضيلات",
-  "preferences_update_failed": "فشل تحديث التفضيلات"
+  "preferences_update_failed": "فشل تحديث التفضيلات",
+  "refund_policy": "سياسة الاسترداد",
+  "refund_policy_desc": "شروط الاسترداد",
+  "accessibility_statement": "بيان إمكانية الوصول",
+  "accessibility_statement_desc": "التزامنا بإمكانية الوصول"
 }
