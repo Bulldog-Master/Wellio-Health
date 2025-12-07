@@ -78,5 +78,22 @@
   "injury_prevention": "दुखापत प्रतिबंध",
   "injury_prevention_desc": "AI-संचालित दुखापत जोखीम विश्लेषण आणि प्रतिबंध",
   "emotion_fitness_engine": "भावना-फिटनेस इंजिन",
-  "emotion_fitness_desc": "मूड-व्यायाम संबंध आणि सायकल अंतर्दृष्टी ट्रॅक करा"
+  "emotion_fitness_desc": "मूड-व्यायाम संबंध आणि सायकल अंतर्दृष्टी ट्रॅक करा",
+
+  "circadian_optimizer": "सर्केडियन रिदम ऑप्टिमायझर",
+  "circadian_optimizer_desc": "व्यायामासाठी तुमची नैसर्गिक झोप-जागृती चक्र ऑप्टिमाइझ करा",
+  "optimize_your_rhythm": "तुमची लय ऑप्टिमाइझ करा",
+  "circadian_intro": "सर्वोत्तम व्यायाम वेळेसाठी तुमचे झोपेचे नमुने आणि नैसर्गिक ऊर्जा पातळी विश्लेषण करा.",
+  "your_chronotype": "तुमचा क्रोनोटाइप",
+  "early_bird": "पहाटेचा पक्षी",
+  "night_owl": "रात्रीचे घुबड",
+  "intermediate_type": "मध्यम",
+  "optimal_workout_windows": "सर्वोत्तम व्यायाम वेळा",
+  "peak_energy_hours": "उच्च ऊर्जा तास",
+  "avoid_exercise_hours": "व्यायाम टाळण्याचे तास",
+  "weekly_schedule": "साप्ताहिक वेळापत्रक सूचना",
+  "sleep_quality_score": "झोपेच्या गुणवत्तेचा स्कोअर",
+  "analyze_rhythm": "लय विश्लेषण करा",
+  "analyzing_rhythm": "विश्लेषण होत आहे...",
+  "no_circadian_analysis": "अद्याप विश्लेषण नाही"
 }

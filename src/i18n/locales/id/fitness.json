@@ -167,5 +167,22 @@
   "log_emotions_first": "Catat emosi Anda untuk mendapatkan wawasan personal",
   "mood_tracking": "Pelacakan Suasana Hati",
   "mood_tracking_desc": "Catat perasaan Anda sebelum & sesudah latihan",
-  "ai_insights_mood_desc": "Dapatkan analisis AI dari pola emosi-kebugaran"
+  "ai_insights_mood_desc": "Dapatkan analisis AI dari pola emosi-kebugaran",
+
+  "circadian_optimizer": "Pengoptimal Ritme Sirkadian",
+  "circadian_optimizer_desc": "Optimalkan siklus tidur-bangun alami Anda untuk latihan",
+  "optimize_your_rhythm": "Optimalkan Ritme Anda",
+  "circadian_intro": "Analisis pola tidur dan tingkat energi alami Anda untuk waktu latihan optimal.",
+  "your_chronotype": "Kronotipe Anda",
+  "early_bird": "Burung Pagi",
+  "night_owl": "Burung Hantu Malam",
+  "intermediate_type": "Menengah",
+  "optimal_workout_windows": "Jendela Latihan Optimal",
+  "peak_energy_hours": "Jam Energi Puncak",
+  "avoid_exercise_hours": "Jam untuk Menghindari Olahraga",
+  "weekly_schedule": "Saran Jadwal Mingguan",
+  "sleep_quality_score": "Skor Kualitas Tidur",
+  "analyze_rhythm": "Analisis Ritme",
+  "analyzing_rhythm": "Menganalisis...",
+  "no_circadian_analysis": "Belum ada analisis"
 }

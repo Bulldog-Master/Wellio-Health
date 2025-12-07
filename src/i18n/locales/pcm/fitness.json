@@ -167,5 +167,22 @@
   "log_emotions_first": "Log your emotions to get personal insights",
   "mood_tracking": "Mood Tracking",
   "mood_tracking_desc": "Log how you feel before and after workouts",
-  "ai_insights_mood_desc": "Get AI analysis of emotion-fitness patterns"
+  "ai_insights_mood_desc": "Get AI analysis of emotion-fitness patterns",
+
+  "circadian_optimizer": "Circadian Rhythm Optimizer",
+  "circadian_optimizer_desc": "Make your natural sleep-wake cycle beta for workouts",
+  "optimize_your_rhythm": "Optimize Your Rhythm",
+  "circadian_intro": "Analyze your sleep patterns and natural energy levels for beta workout times.",
+  "your_chronotype": "Your Chronotype",
+  "early_bird": "Early Bird",
+  "night_owl": "Night Owl",
+  "intermediate_type": "Middle Type",
+  "optimal_workout_windows": "Beta Workout Times",
+  "peak_energy_hours": "Peak Energy Hours",
+  "avoid_exercise_hours": "Hours to Avoid Exercise",
+  "weekly_schedule": "Weekly Schedule Suggestion",
+  "sleep_quality_score": "Sleep Quality Score",
+  "analyze_rhythm": "Analyze Rhythm",
+  "analyzing_rhythm": "E dey analyze...",
+  "no_circadian_analysis": "No analysis yet"
 }

@@ -78,5 +78,22 @@
   "injury_prevention": "గాయం నివారణ",
   "injury_prevention_desc": "AI-ఆధారిత గాయ ప్రమాద విశ్లేషణ మరియు నివారణ",
   "emotion_fitness_engine": "భావోద్వేగ-ఫిట్‌నెస్ ఇంజిన్",
-  "emotion_fitness_desc": "మూడ్-వ్యాయామ సంబంధాలు మరియు సైకిల్ అంతర్దృష్టులను ట్రాక్ చేయండి"
+  "emotion_fitness_desc": "మూడ్-వ్యాయామ సంబంధాలు మరియు సైకిల్ అంతర్దృష్టులను ట్రాక్ చేయండి",
+
+  "circadian_optimizer": "సర్కాడియన్ రిథమ్ ఆప్టిమైజర్",
+  "circadian_optimizer_desc": "వ్యాయామాల కోసం మీ సహజ నిద్ర-మెలకువ చక్రాన్ని ఆప్టిమైజ్ చేయండి",
+  "optimize_your_rhythm": "మీ రిథమ్‌ను ఆప్టిమైజ్ చేయండి",
+  "circadian_intro": "ఉత్తమ వ్యాయామ సమయాల కోసం మీ నిద్ర విధానాలు మరియు సహజ శక్తి స్థాయిలను విశ్లేషించండి.",
+  "your_chronotype": "మీ క్రోనోటైప్",
+  "early_bird": "తెల్లవారు పక్షి",
+  "night_owl": "రాత్రి గుడ్లగూబ",
+  "intermediate_type": "మధ్యస్థ",
+  "optimal_workout_windows": "ఉత్తమ వ్యాయామ సమయాలు",
+  "peak_energy_hours": "అత్యధిక శక్తి గంటలు",
+  "avoid_exercise_hours": "వ్యాయామం నివారించే గంటలు",
+  "weekly_schedule": "వారపు షెడ్యూల్ సూచన",
+  "sleep_quality_score": "నిద్ర నాణ్యత స్కోర్",
+  "analyze_rhythm": "రిథమ్‌ను విశ్లేషించండి",
+  "analyzing_rhythm": "విశ్లేషిస్తోంది...",
+  "no_circadian_analysis": "ఇంకా విశ్లేషణ లేదు"
 }

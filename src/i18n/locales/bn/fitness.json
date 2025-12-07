@@ -167,5 +167,22 @@
   "log_emotions_first": "ব্যক্তিগত অন্তর্দৃষ্টি পেতে আপনার আবেগ লগ করুন",
   "mood_tracking": "মেজাজ ট্র্যাকিং",
   "mood_tracking_desc": "ওয়ার্কআউটের আগে এবং পরে কেমন অনুভব করছেন লগ করুন",
-  "ai_insights_mood_desc": "আবেগ-ফিটনেস প্যাটার্নের AI বিশ্লেষণ পান"
+  "ai_insights_mood_desc": "আবেগ-ফিটনেস প্যাটার্নের AI বিশ্লেষণ পান",
+
+  "circadian_optimizer": "সার্কাডিয়ান রিদম অপ্টিমাইজার",
+  "circadian_optimizer_desc": "ওয়ার্কআউটের জন্য আপনার প্রাকৃতিক ঘুম-জাগরণ চক্র অপ্টিমাইজ করুন",
+  "optimize_your_rhythm": "আপনার রিদম অপ্টিমাইজ করুন",
+  "circadian_intro": "সর্বোত্তম ওয়ার্কআউট সময়ের জন্য আপনার ঘুমের প্যাটার্ন এবং প্রাকৃতিক শক্তির মাত্রা বিশ্লেষণ করুন।",
+  "your_chronotype": "আপনার ক্রোনোটাইপ",
+  "early_bird": "আর্লি বার্ড",
+  "night_owl": "নাইট আউল",
+  "intermediate_type": "ইন্টারমিডিয়েট",
+  "optimal_workout_windows": "সর্বোত্তম ওয়ার্কআউট উইন্ডো",
+  "peak_energy_hours": "পিক এনার্জি আওয়ার্স",
+  "avoid_exercise_hours": "ব্যায়াম এড়ানোর সময়",
+  "weekly_schedule": "সাপ্তাহিক সময়সূচী পরামর্শ",
+  "sleep_quality_score": "ঘুমের মানের স্কোর",
+  "analyze_rhythm": "রিদম বিশ্লেষণ করুন",
+  "analyzing_rhythm": "বিশ্লেষণ হচ্ছে...",
+  "no_circadian_analysis": "এখনও কোনো বিশ্লেষণ নেই"
 }

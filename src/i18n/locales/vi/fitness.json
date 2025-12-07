@@ -78,5 +78,22 @@
   "injury_prevention": "Phòng ngừa chấn thương",
   "injury_prevention_desc": "Phân tích rủi ro chấn thương và phòng ngừa bằng AI",
   "emotion_fitness_engine": "Công cụ Cảm xúc-Thể dục",
-  "emotion_fitness_desc": "Theo dõi mối tương quan tâm trạng-tập luyện và thông tin chu kỳ"
+  "emotion_fitness_desc": "Theo dõi mối tương quan tâm trạng-tập luyện và thông tin chu kỳ",
+
+  "circadian_optimizer": "Trình Tối ưu Nhịp Sinh học",
+  "circadian_optimizer_desc": "Tối ưu hóa chu kỳ ngủ-thức tự nhiên cho việc tập luyện",
+  "optimize_your_rhythm": "Tối ưu Nhịp của Bạn",
+  "circadian_intro": "Phân tích mô hình giấc ngủ và mức năng lượng tự nhiên để có thời gian tập luyện tốt nhất.",
+  "your_chronotype": "Loại Đồng hồ Sinh học",
+  "early_bird": "Chim Sớm",
+  "night_owl": "Cú Đêm",
+  "intermediate_type": "Trung bình",
+  "optimal_workout_windows": "Thời gian Tập luyện Tối ưu",
+  "peak_energy_hours": "Giờ Năng lượng Cao điểm",
+  "avoid_exercise_hours": "Giờ Nên Tránh Tập",
+  "weekly_schedule": "Gợi ý Lịch Tuần",
+  "sleep_quality_score": "Điểm Chất lượng Giấc ngủ",
+  "analyze_rhythm": "Phân tích Nhịp",
+  "analyzing_rhythm": "Đang phân tích...",
+  "no_circadian_analysis": "Chưa có phân tích"
 }
