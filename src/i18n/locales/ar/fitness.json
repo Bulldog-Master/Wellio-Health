@@ -167,5 +167,17 @@
   "log_emotions_first": "سجل عواطفك للحصول على رؤى مخصصة",
   "mood_tracking": "تتبع المزاج",
   "mood_tracking_desc": "سجل شعورك قبل وبعد التمارين",
-  "ai_insights_mood_desc": "احصل على تحليل الذكاء الاصطناعي لأنماط العواطف واللياقة"
+  "ai_insights_mood_desc": "احصل على تحليل الذكاء الاصطناعي لأنماط العواطف واللياقة",
+  "circadian_optimizer": "محسن الإيقاع اليومي",
+  "circadian_optimizer_desc": "اكتشف أفضل أوقات التمرين بناءً على ساعتك البيولوجية",
+  "circadian_intro": "حلل أنماط نومك وتمارينك لاكتشاف متى يكون أداء جسمك الأفضل.",
+  "optimize_your_rhythm": "حسّن إيقاعك",
+  "analyze_rhythm": "تحليل إيقاعي",
+  "your_chronotype": "نوعك الزمني",
+  "optimal_workout_times": "أوقات التمرين المثلى",
+  "peak_energy_hours": "ساعات ذروة الطاقة",
+  "suggested_weekly_schedule": "الجدول الأسبوعي المقترح",
+  "personalized_recommendations": "توصيات مخصصة",
+  "avoid_exercise_hours": "تجنب التمارين المكثفة",
+  "weekly_schedule": "الجدول الأسبوعي"
 }

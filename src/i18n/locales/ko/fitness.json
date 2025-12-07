@@ -167,5 +167,17 @@
   "log_emotions_first": "맞춤형 인사이트를 위해 감정을 기록하세요",
   "mood_tracking": "기분 추적",
   "mood_tracking_desc": "운동 전후 기분 기록",
-  "ai_insights_mood_desc": "감정-피트니스 패턴의 AI 분석 얻기"
+  "ai_insights_mood_desc": "감정-피트니스 패턴의 AI 분석 얻기",
+  "circadian_optimizer": "일주기 리듬 최적화",
+  "circadian_optimizer_desc": "생체시계에 맞는 최적의 운동 시간 찾기",
+  "circadian_intro": "수면과 운동 패턴을 분석하여 몸이 최고 성능을 발휘하는 시간을 발견하세요.",
+  "optimize_your_rhythm": "리듬 최적화",
+  "analyze_rhythm": "내 리듬 분석",
+  "your_chronotype": "당신의 크로노타입",
+  "optimal_workout_times": "최적의 운동 시간",
+  "peak_energy_hours": "최고 에너지 시간",
+  "suggested_weekly_schedule": "제안 주간 일정",
+  "personalized_recommendations": "맞춤형 권장사항",
+  "avoid_exercise_hours": "격렬한 운동 피하기",
+  "weekly_schedule": "주간 일정"
 }

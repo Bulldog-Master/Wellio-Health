@@ -104,6 +104,7 @@ const SocialChallenges = lazy(() => import("@/pages/SocialChallenges"));
 const ProgressComparison = lazy(() => import("@/pages/ProgressComparison"));
 const InjuryPrevention = lazy(() => import("@/pages/InjuryPrevention"));
 const EmotionFitness = lazy(() => import("@/pages/EmotionFitness"));
+const CircadianRhythm = lazy(() => import("@/pages/CircadianRhythm"));
 const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("@/pages/TermsOfService"));
 const PrivacyControls = lazy(() => import("@/pages/PrivacyControls"));
@@ -177,6 +178,7 @@ export const AppRoutes = () => (
     <Route path="/progress-comparison" element={<ProtectedRoute><Layout><ProgressComparison /></Layout></ProtectedRoute>} />
     <Route path="/injury-prevention" element={<ProtectedRoute><InjuryPrevention /></ProtectedRoute>} />
     <Route path="/emotion-fitness" element={<ProtectedRoute><EmotionFitness /></ProtectedRoute>} />
+    <Route path="/circadian-rhythm" element={<ProtectedRoute><CircadianRhythm /></ProtectedRoute>} />
     
     {/* Habits & Goals */}
     <Route path="/habits" element={<ProtectedRoute><Layout><Habits /></Layout></ProtectedRoute>} />

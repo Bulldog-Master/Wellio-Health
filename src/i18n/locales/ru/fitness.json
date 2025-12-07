@@ -167,5 +167,18 @@
   "log_emotions_first": "Запишите эмоции для персональных инсайтов",
   "mood_tracking": "Отслеживание настроения",
   "mood_tracking_desc": "Записывайте самочувствие до и после тренировок",
-  "ai_insights_mood_desc": "ИИ-анализ паттернов эмоций и фитнеса"
+  "ai_insights_mood_desc": "ИИ-анализ паттернов эмоций и фитнеса",
+  "circadian_optimizer": "Оптимизатор Циркадного Ритма",
+  "circadian_optimizer_desc": "Найдите оптимальное время тренировок по биологическим часам",
+  "circadian_intro": "Анализируйте сон и тренировки, чтобы узнать, когда ваше тело работает лучше всего.",
+  "optimize_your_rhythm": "Оптимизируйте Свой Ритм",
+  "analyze_rhythm": "Анализировать Мой Ритм",
+  "your_chronotype": "Ваш Хронотип",
+  "sleep_quality": "Качество Сна",
+  "optimal_workout_times": "Оптимальное Время Тренировок",
+  "peak_energy_hours": "Часы Пиковой Энергии",
+  "suggested_weekly_schedule": "Предлагаемое Расписание на Неделю",
+  "personalized_recommendations": "Персональные Рекомендации",
+  "avoid_exercise_hours": "Избегать Интенсивных Тренировок",
+  "weekly_schedule": "Расписание на Неделю"
 }

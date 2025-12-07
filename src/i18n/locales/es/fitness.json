@@ -345,5 +345,18 @@
   "log_emotions_first": "Registra tus emociones para obtener perspectivas personalizadas",
   "mood_tracking": "Seguimiento del Ánimo",
   "mood_tracking_desc": "Registra cómo te sientes antes y después de entrenar",
-  "ai_insights_mood_desc": "Análisis de IA de patrones emoción-fitness"
+  "ai_insights_mood_desc": "Análisis de IA de patrones emoción-fitness",
+  "circadian_optimizer": "Optimizador de Ritmo Circadiano",
+  "circadian_optimizer_desc": "Encuentra tus horarios óptimos de entrenamiento según tu reloj biológico",
+  "circadian_intro": "Analiza tus patrones de sueño y entrenamiento para descubrir cuándo tu cuerpo rinde mejor. Obtén recomendaciones personalizadas para los mejores horarios de entrenamiento.",
+  "optimize_your_rhythm": "Optimiza Tu Ritmo",
+  "analyze_rhythm": "Analizar Mi Ritmo",
+  "your_chronotype": "Tu Cronotipo",
+  "sleep_quality": "Calidad del Sueño",
+  "optimal_workout_times": "Horarios Óptimos de Entrenamiento",
+  "peak_energy_hours": "Horas de Máxima Energía",
+  "suggested_weekly_schedule": "Horario Semanal Sugerido",
+  "personalized_recommendations": "Recomendaciones Personalizadas",
+  "avoid_exercise_hours": "Evitar Ejercicio Intenso",
+  "weekly_schedule": "Horario Semanal"
 }
