@@ -78,5 +78,8 @@ verify_jwt = true
 [functions.analyze-receipt]
 verify_jwt = true
 
+[functions.predict-injury-risk]
+verify_jwt = true
+
 [functions.realtime-voice-token]
 verify_jwt = true
