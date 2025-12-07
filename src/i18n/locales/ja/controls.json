@@ -34,5 +34,9 @@
   "consent_updated": "同意が更新されました",
   "consent_update_failed": "更新に失敗しました",
   "preferences_updated": "設定が更新されました",
-  "preferences_update_failed": "設定の更新に失敗しました"
+  "preferences_update_failed": "設定の更新に失敗しました",
+  "refund_policy": "返金ポリシー",
+  "refund_policy_desc": "返金の条件を確認",
+  "accessibility_statement": "アクセシビリティ声明",
+  "accessibility_statement_desc": "アクセシビリティへの取り組み"
 }

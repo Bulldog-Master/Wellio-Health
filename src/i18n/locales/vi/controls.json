@@ -34,5 +34,9 @@
   "consent_updated": "Đã cập nhật đồng ý",
   "consent_update_failed": "Cập nhật đồng ý thất bại",
   "preferences_updated": "Đã cập nhật tùy chọn",
-  "preferences_update_failed": "Cập nhật tùy chọn thất bại"
+  "preferences_update_failed": "Cập nhật tùy chọn thất bại",
+  "refund_policy": "Chính Sách Hoàn Tiền",
+  "refund_policy_desc": "Điều khoản hoàn tiền",
+  "accessibility_statement": "Tuyên Bố Về Khả Năng Tiếp Cận",
+  "accessibility_statement_desc": "Cam kết về khả năng tiếp cận của chúng tôi"
 }

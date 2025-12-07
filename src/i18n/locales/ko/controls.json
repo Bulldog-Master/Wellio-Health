@@ -34,5 +34,9 @@
   "consent_updated": "동의가 업데이트됨",
   "consent_update_failed": "업데이트 실패",
   "preferences_updated": "설정이 업데이트됨",
-  "preferences_update_failed": "설정 업데이트 실패"
+  "preferences_update_failed": "설정 업데이트 실패",
+  "refund_policy": "환불 정책",
+  "refund_policy_desc": "환불 조건 확인",
+  "accessibility_statement": "접근성 선언",
+  "accessibility_statement_desc": "접근성에 대한 약속"
 }

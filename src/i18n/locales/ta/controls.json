@@ -22,5 +22,9 @@
   "privacy_policy": "தனியுரிமைக் கொள்கை",
   "terms_of_service": "சேவை விதிமுறைகள்",
   "consent_updated": "ஒப்புதல் புதுப்பிக்கப்பட்டது",
-  "preferences_updated": "விருப்பங்கள் புதுப்பிக்கப்பட்டன"
+  "preferences_updated": "விருப்பங்கள் புதுப்பிக்கப்பட்டன",
+  "refund_policy": "பணத்திரும்பப் பெறும் கொள்கை",
+  "refund_policy_desc": "பணத்திரும்ப நிபந்தனைகள்",
+  "accessibility_statement": "அணுகல் அறிக்கை",
+  "accessibility_statement_desc": "அணுகல் தன்மைக்கான எங்கள் உறுதிப்பாடு"
 }

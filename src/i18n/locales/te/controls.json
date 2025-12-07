@@ -34,5 +34,9 @@
   "consent_updated": "సమ్మతి అప్‌డేట్ చేయబడింది",
   "consent_update_failed": "సమ్మతి అప్‌డేట్ విఫలమైంది",
   "preferences_updated": "ప్రాధాన్యతలు అప్‌డేట్ చేయబడ్డాయి",
-  "preferences_update_failed": "ప్రాధాన్యతలు అప్‌డేట్ విఫలమైంది"
+  "preferences_update_failed": "ప్రాధాన్యతలు అప్‌డేట్ విఫలమైంది",
+  "refund_policy": "రీఫండ్ పాలసీ",
+  "refund_policy_desc": "రీఫండ్ నిబంధనలు",
+  "accessibility_statement": "యాక్సెసిబిలిటీ స్టేట్‌మెంట్",
+  "accessibility_statement_desc": "యాక్సెసిబిలిటీ పట్ల మా నిబద్ధత"
 }
