@@ -2223,6 +2223,104 @@ export type Database = {
           },
         ]
       }
+      micro_challenge_completions: {
+        Row: {
+          challenge_id: string
+          completed_at: string
+          created_at: string
+          id: string
+          referred_by: string | null
+          shared_to_feed: boolean | null
+          time_taken_seconds: number | null
+          user_id: string
+        }
+        Insert: {
+          challenge_id: string
+          completed_at?: string
+          created_at?: string
+          id?: string
+          referred_by?: string | null
+          shared_to_feed?: boolean | null
+          time_taken_seconds?: number | null
+          user_id: string
+        }
+        Update: {
+          challenge_id?: string
+          completed_at?: string
+          created_at?: string
+          id?: string
+          referred_by?: string | null
+          shared_to_feed?: boolean | null
+          time_taken_seconds?: number | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "micro_challenge_completions_challenge_id_fkey"
+            columns: ["challenge_id"]
+            isOneToOne: false
+            referencedRelation: "micro_challenges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      micro_challenges: {
+        Row: {
+          challenge_type: string
+          created_at: string
+          creator_id: string
+          description: string | null
+          duration_minutes: number
+          expires_at: string | null
+          id: string
+          is_active: boolean | null
+          points_reward: number
+          share_code: string | null
+          target_unit: string
+          target_value: number
+          title: string
+          total_completions: number | null
+          updated_at: string
+          viral_score: number | null
+        }
+        Insert: {
+          challenge_type: string
+          created_at?: string
+          creator_id: string
+          description?: string | null
+          duration_minutes?: number
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          points_reward?: number
+          share_code?: string | null
+          target_unit?: string
+          target_value?: number
+          title: string
+          total_completions?: number | null
+          updated_at?: string
+          viral_score?: number | null
+        }
+        Update: {
+          challenge_type?: string
+          created_at?: string
+          creator_id?: string
+          description?: string | null
+          duration_minutes?: number
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          points_reward?: number
+          share_code?: string | null
+          target_unit?: string
+          target_value?: number
+          title?: string
+          total_completions?: number | null
+          updated_at?: string
+          viral_score?: number | null
+        }
+        Relationships: []
+      }
       milestone_achievements: {
         Row: {
           achieved_at: string
@@ -5225,6 +5323,7 @@ export type Database = {
       }
       create_medical_session: { Args: { _user_id: string }; Returns: string }
       generate_referral_code: { Args: never; Returns: string }
+      generate_share_code: { Args: never; Returns: string }
       get_fitness_locations_safe: {
         Args: never
         Returns: {

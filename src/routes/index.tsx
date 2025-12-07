@@ -106,6 +106,7 @@ const InjuryPrevention = lazy(() => import("@/pages/InjuryPrevention"));
 const EmotionFitness = lazy(() => import("@/pages/EmotionFitness"));
 const CircadianRhythm = lazy(() => import("@/pages/CircadianRhythm"));
 const EnvironmentalFitness = lazy(() => import("@/pages/EnvironmentalFitness"));
+const MicroChallenges = lazy(() => import("@/pages/MicroChallenges"));
 const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("@/pages/TermsOfService"));
 const PrivacyControls = lazy(() => import("@/pages/PrivacyControls"));
@@ -213,6 +214,7 @@ export const AppRoutes = () => (
     <Route path="/leaderboard" element={<ProtectedRoute><Layout><Leaderboard /></Layout></ProtectedRoute>} />
     <Route path="/progress-challenges" element={<ProtectedRoute><Layout><ProgressChallenges /></Layout></ProtectedRoute>} />
     <Route path="/progress-challenge/:challengeId" element={<ProtectedRoute><Layout><ProgressChallengeDetail /></Layout></ProtectedRoute>} />
+    <Route path="/micro-challenges" element={<ProtectedRoute><Layout><MicroChallenges /></Layout></ProtectedRoute>} />
     <Route path="/fundraisers" element={<ProtectedRoute><Layout><Fundraisers /></Layout></ProtectedRoute>} />
     <Route path="/fundraiser/:id" element={<ProtectedRoute><Layout><FundraiserDetail /></Layout></ProtectedRoute>} />
     
