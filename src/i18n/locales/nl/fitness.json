@@ -174,5 +174,18 @@
   "log_emotions_first": "Log je emoties om gepersonaliseerde inzichten te krijgen",
   "mood_tracking": "Stemmingstracking",
   "mood_tracking_desc": "Log hoe je je voelt voor en na trainingen",
-  "ai_insights_mood_desc": "Krijg AI-analyse van emotie-fitness patronen"
+  "ai_insights_mood_desc": "Krijg AI-analyse van emotie-fitness patronen",
+  "circadian_optimizer": "Circadiaan Ritme Optimizer",
+  "circadian_optimizer_desc": "Vind je optimale trainingstijden op basis van je biologische klok",
+  "circadian_intro": "Analyseer je slaap- en trainingspatronen om te ontdekken wanneer je lichaam het beste presteert.",
+  "optimize_your_rhythm": "Optimaliseer Je Ritme",
+  "analyze_rhythm": "Analyseer Mijn Ritme",
+  "your_chronotype": "Jouw Chronotype",
+  "sleep_quality": "Slaapkwaliteit",
+  "optimal_workout_times": "Optimale Trainingstijden",
+  "peak_energy_hours": "Piek Energie Uren",
+  "suggested_weekly_schedule": "Voorgesteld Weekschema",
+  "personalized_recommendations": "Gepersonaliseerde Aanbevelingen",
+  "avoid_exercise_hours": "Vermijd Intensieve Training",
+  "weekly_schedule": "Weekschema"
 }

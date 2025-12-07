@@ -242,5 +242,18 @@
   "log_emotions_first": "记录您的情绪以获取个性化洞察",
   "mood_tracking": "情绪追踪",
   "mood_tracking_desc": "记录训练前后的感受",
-  "ai_insights_mood_desc": "AI分析情绪健身模式"
+  "ai_insights_mood_desc": "AI分析情绪健身模式",
+  "circadian_optimizer": "昼夜节律优化器",
+  "circadian_optimizer_desc": "根据您的生物钟找到最佳训练时间",
+  "circadian_intro": "分析您的睡眠和训练模式，发现身体表现最佳的时间。获取个性化的最佳训练时间建议。",
+  "optimize_your_rhythm": "优化您的节律",
+  "analyze_rhythm": "分析我的节律",
+  "your_chronotype": "您的时型",
+  "sleep_quality": "睡眠质量",
+  "optimal_workout_times": "最佳训练时间",
+  "peak_energy_hours": "能量高峰时段",
+  "suggested_weekly_schedule": "建议的周计划",
+  "personalized_recommendations": "个性化建议",
+  "avoid_exercise_hours": "避免剧烈运动",
+  "weekly_schedule": "周计划"
 }

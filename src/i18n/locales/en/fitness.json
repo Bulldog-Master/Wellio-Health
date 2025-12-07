@@ -345,5 +345,18 @@
   "log_emotions_first": "Log your emotions to get personalized insights",
   "mood_tracking": "Mood Tracking",
   "mood_tracking_desc": "Log how you feel before & after workouts",
-  "ai_insights_mood_desc": "Get AI analysis of emotion-fitness patterns"
+  "ai_insights_mood_desc": "Get AI analysis of emotion-fitness patterns",
+  "circadian_optimizer": "Circadian Rhythm Optimizer",
+  "circadian_optimizer_desc": "Find your optimal workout times based on your body clock",
+  "circadian_intro": "Analyze your sleep and workout patterns to discover when your body performs best. Get personalized recommendations for optimal training times.",
+  "optimize_your_rhythm": "Optimize Your Rhythm",
+  "analyze_rhythm": "Analyze My Rhythm",
+  "your_chronotype": "Your Chronotype",
+  "sleep_quality": "Sleep Quality",
+  "optimal_workout_times": "Optimal Workout Times",
+  "peak_energy_hours": "Peak Energy Hours",
+  "suggested_weekly_schedule": "Suggested Weekly Schedule",
+  "personalized_recommendations": "Personalized Recommendations",
+  "avoid_exercise_hours": "Avoid Intense Exercise",
+  "weekly_schedule": "Weekly Schedule"
 }

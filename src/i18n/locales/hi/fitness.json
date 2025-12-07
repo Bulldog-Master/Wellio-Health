@@ -167,5 +167,17 @@
   "log_emotions_first": "व्यक्तिगत अंतर्दृष्टि के लिए अपनी भावनाएं लॉग करें",
   "mood_tracking": "मूड ट्रैकिंग",
   "mood_tracking_desc": "वर्कआउट से पहले और बाद में कैसा महसूस करते हैं लॉग करें",
-  "ai_insights_mood_desc": "भावना-फिटनेस पैटर्न का AI विश्लेषण प्राप्त करें"
+  "ai_insights_mood_desc": "भावना-फिटनेस पैटर्न का AI विश्लेषण प्राप्त करें",
+  "circadian_optimizer": "सर्कैडियन रिदम ऑप्टिमाइज़र",
+  "circadian_optimizer_desc": "अपनी जैविक घड़ी के आधार पर सर्वोत्तम वर्कआउट समय खोजें",
+  "circadian_intro": "अपनी नींद और वर्कआउट पैटर्न का विश्लेषण करें और जानें कि आपका शरीर कब सबसे अच्छा प्रदर्शन करता है।",
+  "optimize_your_rhythm": "अपनी लय को ऑप्टिमाइज़ करें",
+  "analyze_rhythm": "मेरी लय का विश्लेषण करें",
+  "your_chronotype": "आपका क्रोनोटाइप",
+  "optimal_workout_times": "इष्टतम वर्कआउट समय",
+  "peak_energy_hours": "पीक एनर्जी घंटे",
+  "suggested_weekly_schedule": "सुझाया गया साप्ताहिक कार्यक्रम",
+  "personalized_recommendations": "व्यक्तिगत सिफारिशें",
+  "avoid_exercise_hours": "तीव्र व्यायाम से बचें",
+  "weekly_schedule": "साप्ताहिक कार्यक्रम"
 }

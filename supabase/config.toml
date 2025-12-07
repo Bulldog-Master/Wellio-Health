@@ -83,3 +83,9 @@ verify_jwt = true
 
 [functions.realtime-voice-token]
 verify_jwt = true
+
+[functions.emotion-fitness-analysis]
+verify_jwt = true
+
+[functions.circadian-optimizer]
+verify_jwt = true

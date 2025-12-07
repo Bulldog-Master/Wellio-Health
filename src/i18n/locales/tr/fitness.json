@@ -237,5 +237,18 @@
   "log_emotions_first": "Kişiselleştirilmiş içgörüler almak için duygularınızı kaydedin",
   "mood_tracking": "Ruh Hali Takibi",
   "mood_tracking_desc": "Antrenman öncesi ve sonrası nasıl hissettiğinizi kaydedin",
-  "ai_insights_mood_desc": "Duygu-fitness örüntülerinin yapay zeka analizi alın"
+  "ai_insights_mood_desc": "Duygu-fitness örüntülerinin yapay zeka analizi alın",
+  "circadian_optimizer": "Sirkadiyen Ritim Optimizörü",
+  "circadian_optimizer_desc": "Vücut saatinize göre en uygun antrenman zamanlarınızı bulun",
+  "circadian_intro": "Uyku ve antrenman örüntülerinizi analiz ederek vücudunuzun en iyi performans gösterdiği zamanları keşfedin.",
+  "optimize_your_rhythm": "Ritminizi Optimize Edin",
+  "analyze_rhythm": "Ritmimi Analiz Et",
+  "your_chronotype": "Kronotipiniz",
+  "sleep_quality": "Uyku Kalitesi",
+  "optimal_workout_times": "Optimal Antrenman Zamanları",
+  "peak_energy_hours": "En Yüksek Enerji Saatleri",
+  "suggested_weekly_schedule": "Önerilen Haftalık Program",
+  "personalized_recommendations": "Kişiselleştirilmiş Öneriler",
+  "avoid_exercise_hours": "Yoğun Egzersizden Kaçının",
+  "weekly_schedule": "Haftalık Program"
 }
