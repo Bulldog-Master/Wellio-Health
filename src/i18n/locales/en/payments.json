@@ -69,5 +69,21 @@
   "view_plans": "View Plans",
   "verification_success": "Payment verified successfully",
   "verification_error": "Verification failed",
-  "proceed_to_checkout": "Proceed to Checkout"
+  "proceed_to_checkout": "Proceed to Checkout",
+  "receipt": "Receipt",
+  "receipt_number": "Receipt Number",
+  "date": "Date",
+  "bill_to": "Bill To",
+  "description": "Description",
+  "qty": "Qty",
+  "price": "Price",
+  "status": "Status",
+  "receipt_thank_you": "Thank you for your business!",
+  "receipt_questions": "Questions? Contact us at support@wellio.app",
+  "receipt_error": "Failed to load receipt",
+  "receipt_downloaded": "Receipt downloaded",
+  "no_receipt_data": "No receipt data available",
+  "status_completed": "Completed",
+  "status_pending": "Pending",
+  "status_failed": "Failed"
 }

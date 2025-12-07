@@ -53,5 +53,22 @@
   "set_default": "ডিফল্ট সেট করুন",
   "remove_method": "সরান",
   "card_ending": "{{last4}} দিয়ে শেষ কার্ড",
-  "expires": "{{date}} এ শেষ"
+  "expires": "{{date}} এ শেষ",
+  "payment_history": "পেমেন্ট ইতিহাস",
+  "receipt": "রসিদ",
+  "receipt_number": "রসিদ নম্বর",
+  "date": "তারিখ",
+  "bill_to": "বিল প্রাপক",
+  "description": "বিবরণ",
+  "qty": "পরিমাণ",
+  "price": "মূল্য",
+  "status": "অবস্থা",
+  "receipt_thank_you": "আপনার কেনাকাটার জন্য ধন্যবাদ!",
+  "receipt_questions": "প্রশ্ন? support@wellio.app এ যোগাযোগ করুন",
+  "receipt_error": "রসিদ লোড করতে ব্যর্থ",
+  "receipt_downloaded": "রসিদ ডাউনলোড হয়েছে",
+  "no_receipt_data": "কোন রসিদ ডেটা উপলব্ধ নেই",
+  "status_completed": "সম্পন্ন",
+  "status_pending": "মুলতুবি",
+  "status_failed": "ব্যর্থ"
 }

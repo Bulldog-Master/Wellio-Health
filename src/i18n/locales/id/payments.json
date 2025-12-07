@@ -53,5 +53,22 @@
   "set_default": "Jadikan Default",
   "remove_method": "Hapus",
   "card_ending": "Kartu berakhir {{last4}}",
-  "expires": "Kedaluwarsa {{date}}"
+  "expires": "Kedaluwarsa {{date}}",
+  "payment_history": "Riwayat Pembayaran",
+  "receipt": "Kwitansi",
+  "receipt_number": "Nomor Kwitansi",
+  "date": "Tanggal",
+  "bill_to": "Tagihan Kepada",
+  "description": "Deskripsi",
+  "qty": "Jml",
+  "price": "Harga",
+  "status": "Status",
+  "receipt_thank_you": "Terima kasih atas pembelian Anda!",
+  "receipt_questions": "Pertanyaan? Hubungi kami di support@wellio.app",
+  "receipt_error": "Gagal memuat kwitansi",
+  "receipt_downloaded": "Kwitansi diunduh",
+  "no_receipt_data": "Tidak ada data kwitansi tersedia",
+  "status_completed": "Selesai",
+  "status_pending": "Tertunda",
+  "status_failed": "Gagal"
 }

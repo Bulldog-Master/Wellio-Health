@@ -68,5 +68,21 @@
   "view_plans": "Ver Planes",
   "verification_success": "Pago verificado exitosamente",
   "verification_error": "Verificación fallida",
-  "proceed_to_checkout": "Proceder al Pago"
+  "proceed_to_checkout": "Proceder al Pago",
+  "receipt": "Recibo",
+  "receipt_number": "Número de Recibo",
+  "date": "Fecha",
+  "bill_to": "Facturar a",
+  "description": "Descripción",
+  "qty": "Cant.",
+  "price": "Precio",
+  "status": "Estado",
+  "receipt_thank_you": "¡Gracias por su compra!",
+  "receipt_questions": "¿Preguntas? Contáctenos en support@wellio.app",
+  "receipt_error": "Error al cargar el recibo",
+  "receipt_downloaded": "Recibo descargado",
+  "no_receipt_data": "No hay datos de recibo disponibles",
+  "status_completed": "Completado",
+  "status_pending": "Pendiente",
+  "status_failed": "Fallido"
 }

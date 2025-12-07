@@ -53,5 +53,22 @@
   "set_default": "डिफ़ॉल्ट सेट करें",
   "remove_method": "हटाएं",
   "card_ending": "{{last4}} पर समाप्त होने वाला कार्ड",
-  "expires": "{{date}} को समाप्त"
+  "expires": "{{date}} को समाप्त",
+  "payment_history": "भुगतान इतिहास",
+  "receipt": "रसीद",
+  "receipt_number": "रसीद संख्या",
+  "date": "तारीख",
+  "bill_to": "बिल प्राप्तकर्ता",
+  "description": "विवरण",
+  "qty": "मात्रा",
+  "price": "कीमत",
+  "status": "स्थिति",
+  "receipt_thank_you": "आपकी खरीदारी के लिए धन्यवाद!",
+  "receipt_questions": "प्रश्न? support@wellio.app पर संपर्क करें",
+  "receipt_error": "रसीद लोड करने में विफल",
+  "receipt_downloaded": "रसीद डाउनलोड की गई",
+  "no_receipt_data": "कोई रसीद डेटा उपलब्ध नहीं",
+  "status_completed": "पूर्ण",
+  "status_pending": "लंबित",
+  "status_failed": "विफल"
 }

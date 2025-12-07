@@ -53,5 +53,22 @@
   "set_default": "기본으로 설정",
   "remove_method": "제거",
   "card_ending": "{{last4}}로 끝나는 카드",
-  "expires": "{{date}} 만료"
+  "expires": "{{date}} 만료",
+  "payment_history": "결제 내역",
+  "receipt": "영수증",
+  "receipt_number": "영수증 번호",
+  "date": "날짜",
+  "bill_to": "청구 대상",
+  "description": "설명",
+  "qty": "수량",
+  "price": "가격",
+  "status": "상태",
+  "receipt_thank_you": "구매해 주셔서 감사합니다!",
+  "receipt_questions": "질문이 있으신가요? support@wellio.app으로 연락하세요",
+  "receipt_error": "영수증 로드 실패",
+  "receipt_downloaded": "영수증 다운로드됨",
+  "no_receipt_data": "영수증 데이터가 없습니다",
+  "status_completed": "완료됨",
+  "status_pending": "대기 중",
+  "status_failed": "실패"
 }
