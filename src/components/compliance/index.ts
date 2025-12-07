@@ -2,3 +2,7 @@ export { CookieConsent } from './CookieConsent';
 export { AgeVerification } from './AgeVerification';
 export { BreachNotification } from './BreachNotification';
 export { HealthDisclaimer } from './HealthDisclaimer';
+export { CCPADoNotSell } from './CCPADoNotSell';
+export { HIPAAAuthorization } from './HIPAAAuthorization';
+export { PIPEDADisclosure } from './PIPEDADisclosure';
+export { AccessibilitySettings } from './AccessibilitySettings';

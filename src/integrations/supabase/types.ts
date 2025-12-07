@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      accessibility_audit: {
+        Row: {
+          audited_at: string | null
+          audited_by: string | null
+          criteria_id: string
+          criteria_name: string
+          id: string
+          notes: string | null
+          page_path: string
+          remediation_date: string | null
+          status: string
+          wcag_level: string
+        }
+        Insert: {
+          audited_at?: string | null
+          audited_by?: string | null
+          criteria_id: string
+          criteria_name: string
+          id?: string
+          notes?: string | null
+          page_path: string
+          remediation_date?: string | null
+          status: string
+          wcag_level: string
+        }
+        Update: {
+          audited_at?: string | null
+          audited_by?: string | null
+          criteria_id?: string
+          criteria_name?: string
+          id?: string
+          notes?: string | null
+          page_path?: string
+          remediation_date?: string | null
+          status?: string
+          wcag_level?: string
+        }
+        Relationships: []
+      }
       account_deletion_requests: {
         Row: {
           completed_at: string | null
@@ -1634,6 +1673,48 @@ export type Database = {
           name?: string
           target_count?: number | null
           target_frequency?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      hipaa_authorizations: {
+        Row: {
+          authorization_type: string
+          authorized_data: string[]
+          authorized_recipient: string | null
+          created_at: string | null
+          expiration_date: string | null
+          id: string
+          is_revoked: boolean | null
+          purpose: string
+          revoked_at: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          authorization_type: string
+          authorized_data: string[]
+          authorized_recipient?: string | null
+          created_at?: string | null
+          expiration_date?: string | null
+          id?: string
+          is_revoked?: boolean | null
+          purpose: string
+          revoked_at?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          authorization_type?: string
+          authorized_data?: string[]
+          authorized_recipient?: string | null
+          created_at?: string | null
+          expiration_date?: string | null
+          id?: string
+          is_revoked?: boolean | null
+          purpose?: string
+          revoked_at?: string | null
+          updated_at?: string | null
           user_id?: string
         }
         Relationships: []
@@ -4662,36 +4743,54 @@ export type Database = {
       }
       user_privacy_preferences: {
         Row: {
+          accessibility_preferences: Json | null
           allow_ai_processing: boolean | null
           allow_analytics: boolean | null
           allow_marketing_emails: boolean | null
           created_at: string
           data_retention_days: number | null
+          do_not_sell_data: boolean | null
+          hipaa_authorization: boolean | null
+          hipaa_authorization_date: string | null
           id: string
+          pipeda_consent: boolean | null
+          pipeda_consent_date: string | null
           share_with_practitioners: boolean | null
           share_with_trainers: boolean | null
           updated_at: string
           user_id: string
         }
         Insert: {
+          accessibility_preferences?: Json | null
           allow_ai_processing?: boolean | null
           allow_analytics?: boolean | null
           allow_marketing_emails?: boolean | null
           created_at?: string
           data_retention_days?: number | null
+          do_not_sell_data?: boolean | null
+          hipaa_authorization?: boolean | null
+          hipaa_authorization_date?: string | null
           id?: string
+          pipeda_consent?: boolean | null
+          pipeda_consent_date?: string | null
           share_with_practitioners?: boolean | null
           share_with_trainers?: boolean | null
           updated_at?: string
           user_id: string
         }
         Update: {
+          accessibility_preferences?: Json | null
           allow_ai_processing?: boolean | null
           allow_analytics?: boolean | null
           allow_marketing_emails?: boolean | null
           created_at?: string
           data_retention_days?: number | null
+          do_not_sell_data?: boolean | null
+          hipaa_authorization?: boolean | null
+          hipaa_authorization_date?: string | null
           id?: string
+          pipeda_consent?: boolean | null
+          pipeda_consent_date?: string | null
           share_with_practitioners?: boolean | null
           share_with_trainers?: boolean | null
           updated_at?: string
