@@ -1,4 +1,21 @@
 // Location utility functions extracted from FitnessLocations.tsx
+import { 
+  Dumbbell, Swords, Heart, Waves, Bike, Mountain, MapPin, LucideIcon
+} from 'lucide-react';
+
+// Shared category icons mapping
+export const categoryIcons: Record<string, LucideIcon> = {
+  gym: Dumbbell,
+  crossfit: Dumbbell,
+  mma: Swords,
+  yoga: Heart,
+  swimming: Waves,
+  cycling: Bike,
+  climbing: Mountain,
+  boxing: Swords,
+  pilates: Heart,
+  other: MapPin,
+};
 
 /**
  * Haversine formula to calculate distance between two coordinates

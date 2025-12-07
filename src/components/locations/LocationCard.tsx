@@ -3,25 +3,11 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { 
   MapPin, Star, ExternalLink, Phone, Navigation, 
-  Dumbbell, Swords, Heart, Waves, Bike, Mountain,
   CheckCircle, Locate, Trash2, Pencil
 } from 'lucide-react';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { useTranslation } from 'react-i18next';
-import { FitnessLocation, getCountryFlag, getDirectionsUrl } from '@/lib/locationUtils';
-
-const categoryIcons: Record<string, any> = {
-  gym: Dumbbell,
-  crossfit: Dumbbell,
-  mma: Swords,
-  yoga: Heart,
-  swimming: Waves,
-  cycling: Bike,
-  climbing: Mountain,
-  boxing: Swords,
-  pilates: Heart,
-  other: MapPin,
-};
+import { FitnessLocation, getCountryFlag, getDirectionsUrl, categoryIcons } from '@/lib/locationUtils';
 
 interface LocationCardProps {
   location: FitnessLocation;
