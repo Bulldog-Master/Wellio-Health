@@ -105,6 +105,7 @@ const ProgressComparison = lazy(() => import("@/pages/ProgressComparison"));
 const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("@/pages/TermsOfService"));
 const PrivacyControls = lazy(() => import("@/pages/PrivacyControls"));
+const RefundPolicy = lazy(() => import("@/pages/RefundPolicy"));
 
 /**
  * Application route configuration
@@ -235,6 +236,7 @@ export const AppRoutes = () => (
     <Route path="/privacy-policy" element={<RouteErrorBoundary><PrivacyPolicy /></RouteErrorBoundary>} />
     <Route path="/terms" element={<RouteErrorBoundary><TermsOfService /></RouteErrorBoundary>} />
     <Route path="/privacy-controls" element={<RouteErrorBoundary><ProtectedRoute><PrivacyControls /></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/refund-policy" element={<RouteErrorBoundary><RefundPolicy /></RouteErrorBoundary>} />
     
     {/* 404 */}
     <Route path="*" element={<NotFound />} />

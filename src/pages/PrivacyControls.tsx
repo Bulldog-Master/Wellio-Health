@@ -14,6 +14,7 @@ import { ArrowLeft, Settings, Download, Trash2, Clock, Shield, Brain, Mail, User
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 import { CCPADoNotSell, HIPAAAuthorization, PIPEDADisclosure, AccessibilitySettings } from '@/components/compliance';
+import { BillingTerms } from '@/components/compliance/BillingTerms';
 
 interface PrivacyPreferences {
   data_retention_days: number;
