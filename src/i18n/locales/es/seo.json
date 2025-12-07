@@ -63,5 +63,20 @@
   "products": {
     "title": "Productos Recomendados - Wellio",
     "description": "Descubre productos fitness, suplementos y equipo personalmente evaluados y aprobados."
-  }
+  },
+  
+  "accessibility_page_title": "Declaración de Accesibilidad - Wellio",
+  "accessibility_page_description": "Nuestro compromiso con la accesibilidad digital y el cumplimiento de WCAG 2.1 AA.",
+  
+  "cookie_policy_title": "Política de Cookies - Wellio",
+  "cookie_policy_description": "Conozca las cookies que usamos y cómo gestionar sus preferencias.",
+  
+  "ccpa_rights_title": "Solicitud de Derechos CCPA - Wellio",
+  "ccpa_rights_description": "Ejerza sus derechos bajo la Ley de Privacidad del Consumidor de California.",
+  
+  "session_management_title": "Gestión de Sesiones - Wellio",
+  "session_management_description": "Vea y administre sus sesiones de inicio de sesión activas.",
+  
+  "security_audit_log_title": "Registro de Auditoría de Seguridad - Wellio",
+  "security_audit_log_description": "Vea la actividad de seguridad de su cuenta y el historial de acceso."
 }
