@@ -466,12 +466,18 @@ const PrivacyControls: React.FC = () => {
             <CardHeader>
               <CardTitle>{t('controls:legal_documents')}</CardTitle>
             </CardHeader>
-            <CardContent className="flex gap-4">
+            <CardContent className="flex flex-wrap gap-4">
               <Button variant="outline" onClick={() => navigate('/privacy-policy')}>
                 {t('controls:privacy_policy')}
               </Button>
               <Button variant="outline" onClick={() => navigate('/terms')}>
                 {t('controls:terms_of_service')}
+              </Button>
+              <Button variant="outline" onClick={() => navigate('/refund-policy')}>
+                {t('controls:refund_policy')}
+              </Button>
+              <Button variant="outline" onClick={() => navigate('/accessibility')}>
+                {t('controls:accessibility_statement')}
               </Button>
             </CardContent>
           </Card>
