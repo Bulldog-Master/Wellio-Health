@@ -89,3 +89,6 @@ verify_jwt = true
 
 [functions.circadian-optimizer]
 verify_jwt = true
+
+[functions.environmental-fitness]
+verify_jwt = true
