@@ -53,5 +53,22 @@
   "set_default": "Đặt làm mặc định",
   "remove_method": "Xóa",
   "card_ending": "Thẻ kết thúc bằng {{last4}}",
-  "expires": "Hết hạn {{date}}"
+  "expires": "Hết hạn {{date}}",
+  "payment_history": "Lịch sử thanh toán",
+  "receipt": "Biên lai",
+  "receipt_number": "Số biên lai",
+  "date": "Ngày",
+  "bill_to": "Hóa đơn cho",
+  "description": "Mô tả",
+  "qty": "SL",
+  "price": "Giá",
+  "status": "Trạng thái",
+  "receipt_thank_you": "Cảm ơn bạn đã mua hàng!",
+  "receipt_questions": "Câu hỏi? Liên hệ chúng tôi tại support@wellio.app",
+  "receipt_error": "Không tải được biên lai",
+  "receipt_downloaded": "Đã tải biên lai",
+  "no_receipt_data": "Không có dữ liệu biên lai",
+  "status_completed": "Hoàn thành",
+  "status_pending": "Đang chờ",
+  "status_failed": "Thất bại"
 }

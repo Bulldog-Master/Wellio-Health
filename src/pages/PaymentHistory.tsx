@@ -1,18 +1,20 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, CreditCard, Clock, CheckCircle, XCircle, AlertCircle, Wallet, Building } from 'lucide-react';
+import { ArrowLeft, CreditCard, Clock, CheckCircle, XCircle, AlertCircle, Wallet, Building, Receipt } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { format } from 'date-fns';
 import SEOHead from '@/components/SEOHead';
-
+import { ReceiptModal } from '@/components/payments/ReceiptModal';
 const PaymentHistory = () => {
   const navigate = useNavigate();
   const { t } = useTranslation(['payments', 'common']);
-
+  const [selectedTransactionId, setSelectedTransactionId] = useState<string | null>(null);
+  const [receiptOpen, setReceiptOpen] = useState(false);
   const { data: transactions, isLoading } = useQuery({
     queryKey: ['payment-transactions'],
     queryFn: async () => {
@@ -126,6 +128,17 @@ const PaymentHistory = () => {
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          setSelectedTransactionId(transaction.id);
+                          setReceiptOpen(true);
+                        }}
+                      >
+                        <Receipt className="w-4 h-4 mr-1" />
+                        {t('payments:receipt')}
+                      </Button>
                       <span className="text-lg font-semibold">
                         ${transaction.amount.toFixed(2)} {transaction.currency.toUpperCase()}
                       </span>
@@ -151,6 +164,12 @@ const PaymentHistory = () => {
           )}
         </div>
       </div>
+
+      <ReceiptModal
+        open={receiptOpen}
+        onOpenChange={setReceiptOpen}
+        transactionId={selectedTransactionId}
+      />
     </>
   );
 };

@@ -53,5 +53,22 @@
   "set_default": "Als Standaard Instellen",
   "remove_method": "Verwijderen",
   "card_ending": "Kaart eindigend op {{last4}}",
-  "expires": "Verloopt {{date}}"
+  "expires": "Verloopt {{date}}",
+  "payment_history": "Betalingsgeschiedenis",
+  "receipt": "Ontvangstbewijs",
+  "receipt_number": "Ontvangstbewijsnummer",
+  "date": "Datum",
+  "bill_to": "Factuur aan",
+  "description": "Beschrijving",
+  "qty": "Aantal",
+  "price": "Prijs",
+  "status": "Status",
+  "receipt_thank_you": "Bedankt voor uw aankoop!",
+  "receipt_questions": "Vragen? Neem contact op via support@wellio.app",
+  "receipt_error": "Ontvangstbewijs laden mislukt",
+  "receipt_downloaded": "Ontvangstbewijs gedownload",
+  "no_receipt_data": "Geen ontvangstbewijsgegevens beschikbaar",
+  "status_completed": "Voltooid",
+  "status_pending": "In afwachting",
+  "status_failed": "Mislukt"
 }

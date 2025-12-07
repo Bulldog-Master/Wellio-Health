@@ -53,5 +53,22 @@
   "set_default": "デフォルトに設定",
   "remove_method": "削除",
   "card_ending": "{{last4}}で終わるカード",
-  "expires": "{{date}}に期限切れ"
+  "expires": "{{date}}に期限切れ",
+  "payment_history": "支払い履歴",
+  "receipt": "領収書",
+  "receipt_number": "領収書番号",
+  "date": "日付",
+  "bill_to": "請求先",
+  "description": "説明",
+  "qty": "数量",
+  "price": "価格",
+  "status": "ステータス",
+  "receipt_thank_you": "ご購入ありがとうございます！",
+  "receipt_questions": "ご質問は？ support@wellio.app までお問い合わせください",
+  "receipt_error": "領収書の読み込みに失敗しました",
+  "receipt_downloaded": "領収書をダウンロードしました",
+  "no_receipt_data": "領収書データがありません",
+  "status_completed": "完了",
+  "status_pending": "保留中",
+  "status_failed": "失敗"
 }

@@ -53,5 +53,22 @@
   "set_default": "设为默认",
   "remove_method": "移除",
   "card_ending": "卡号末四位{{last4}}",
-  "expires": "到期{{date}}"
+  "expires": "到期{{date}}",
+  "payment_history": "支付历史",
+  "receipt": "收据",
+  "receipt_number": "收据编号",
+  "date": "日期",
+  "bill_to": "账单对象",
+  "description": "描述",
+  "qty": "数量",
+  "price": "价格",
+  "status": "状态",
+  "receipt_thank_you": "感谢您的购买！",
+  "receipt_questions": "有问题？请联系 support@wellio.app",
+  "receipt_error": "加载收据失败",
+  "receipt_downloaded": "收据已下载",
+  "no_receipt_data": "无可用收据数据",
+  "status_completed": "已完成",
+  "status_pending": "待处理",
+  "status_failed": "失败"
 }

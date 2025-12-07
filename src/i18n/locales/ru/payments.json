@@ -53,5 +53,22 @@
   "set_default": "Установить по умолчанию",
   "remove_method": "Удалить",
   "card_ending": "Карта заканчивается на {{last4}}",
-  "expires": "Истекает {{date}}"
+  "expires": "Истекает {{date}}",
+  "payment_history": "История платежей",
+  "receipt": "Квитанция",
+  "receipt_number": "Номер квитанции",
+  "date": "Дата",
+  "bill_to": "Выставить счет",
+  "description": "Описание",
+  "qty": "Кол-во",
+  "price": "Цена",
+  "status": "Статус",
+  "receipt_thank_you": "Спасибо за покупку!",
+  "receipt_questions": "Вопросы? Свяжитесь с нами: support@wellio.app",
+  "receipt_error": "Не удалось загрузить квитанцию",
+  "receipt_downloaded": "Квитанция загружена",
+  "no_receipt_data": "Данные квитанции недоступны",
+  "status_completed": "Завершено",
+  "status_pending": "В ожидании",
+  "status_failed": "Не удалось"
 }
