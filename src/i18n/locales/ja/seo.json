@@ -6,5 +6,15 @@
   "auth_title": "ログインまたはアカウント作成",
   "auth_description": "Wellioに参加してフィットネスの旅を追跡、他の人とつながり、健康目標を達成しましょう。",
   "not_found_title": "ページが見つかりません",
-  "not_found_description": "お探しのページは存在しません。Wellioのホームページに戻ります。"
+  "not_found_description": "お探しのページは存在しません。Wellioのホームページに戻ります。",
+  "accessibility_title": "アクセシビリティ声明",
+  "accessibility_description": "デジタルアクセシビリティとWCAG準拠への取り組み。",
+  "cookie_policy_title": "Cookieポリシー",
+  "cookie_policy_description": "Cookieと類似技術の使用方法について。",
+  "ccpa_rights_title": "CCPA権利",
+  "ccpa_rights_description": "CCPAに基づくカリフォルニア州でのプライバシー権利。",
+  "session_management_title": "セッション管理",
+  "session_management_description": "アクティブなセッションとセキュリティ設定を管理。",
+  "security_audit_title": "セキュリティ監査ログ",
+  "security_audit_description": "アカウントのセキュリティイベントとアクティビティログを表示。"
 }

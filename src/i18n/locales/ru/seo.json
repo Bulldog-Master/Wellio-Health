@@ -6,5 +6,15 @@
   "auth_title": "Вход или регистрация",
   "auth_description": "Присоединяйтесь к Wellio для отслеживания фитнеса и достижения целей.",
   "not_found_title": "Страница не найдена",
-  "not_found_description": "Страница не существует. Вернитесь на главную Wellio."
+  "not_found_description": "Страница не существует. Вернитесь на главную Wellio.",
+  "accessibility_title": "Заявление о доступности",
+  "accessibility_description": "Наша приверженность цифровой доступности и соответствию WCAG.",
+  "cookie_policy_title": "Политика использования файлов cookie",
+  "cookie_policy_description": "Узнайте, как мы используем файлы cookie и аналогичные технологии.",
+  "ccpa_rights_title": "Права CCPA",
+  "ccpa_rights_description": "Ваши права на конфиденциальность в Калифорнии в соответствии с CCPA.",
+  "session_management_title": "Управление сессиями",
+  "session_management_description": "Управляйте активными сессиями и настройками безопасности.",
+  "security_audit_title": "Журнал аудита безопасности",
+  "security_audit_description": "Просматривайте события безопасности и журналы активности вашего аккаунта."
 }

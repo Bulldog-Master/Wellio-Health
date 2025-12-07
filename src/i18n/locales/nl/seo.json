@@ -6,5 +6,15 @@
   "auth_title": "Inloggen of account aanmaken",
   "auth_description": "Word lid van Wellio om uw fitnessreis te volgen, met anderen te verbinden en uw gezondheidsdoelen te bereiken.",
   "not_found_title": "Pagina niet gevonden",
-  "not_found_description": "De pagina die u zoekt bestaat niet. Ga terug naar de Wellio homepage."
+  "not_found_description": "De pagina die u zoekt bestaat niet. Ga terug naar de Wellio homepage.",
+  "accessibility_title": "Toegankelijkheidsverklaring",
+  "accessibility_description": "Onze inzet voor digitale toegankelijkheid en WCAG-naleving.",
+  "cookie_policy_title": "Cookiebeleid",
+  "cookie_policy_description": "Leer hoe we cookies en vergelijkbare technologieën gebruiken.",
+  "ccpa_rights_title": "CCPA Rechten",
+  "ccpa_rights_description": "Uw privacyrechten in Californië onder de CCPA.",
+  "session_management_title": "Sessiebeheer",
+  "session_management_description": "Beheer uw actieve sessies en beveiligingsinstellingen.",
+  "security_audit_title": "Beveiligingsauditlog",
+  "security_audit_description": "Bekijk beveiligingsgebeurtenissen en activiteitenlogboeken voor uw account."
 }
