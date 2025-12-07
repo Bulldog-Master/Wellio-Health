@@ -1161,7 +1161,7 @@ const resources = {
     videos: videosMR, locations: locationsMR, products: productsMR, challenges_page: challengesPageMR,
     macros: macrosMR, measurements: measurementsMR, records: recordsMR, referral: referralMR,
     rewards: rewardsMR, search: searchMR, session: sessionMR, voice: voiceMR, payments: paymentsMR,
-    legal: legalMR, controls: controlsMR, compliance: complianceMR,
+    legal: legalMR, controls: controlsMR, compliance: complianceMR, accessibility: accessibilityMR,
   },
   te: {
     common: commonTE, auth: authTE, settings: settingsTE, fitness: fitnessTE, nutrition: nutritionTE,
@@ -1171,7 +1171,7 @@ const resources = {
     videos: videosTE, locations: locationsTE, products: productsTE, challenges_page: challengesPageTE,
     macros: macrosTE, measurements: measurementsTE, records: recordsTE, referral: referralTE,
     rewards: rewardsTE, search: searchTE, session: sessionTE, voice: voiceTE, payments: paymentsTE,
-    legal: legalTE, controls: controlsTE, compliance: complianceTE,
+    legal: legalTE, controls: controlsTE, compliance: complianceTE, accessibility: accessibilityTE,
   },
   vi: {
     common: commonVI, auth: authVI, settings: settingsVI, fitness: fitnessVI, nutrition: nutritionVI,
@@ -1181,7 +1181,7 @@ const resources = {
     videos: videosVI, locations: locationsVI, products: productsVI, challenges_page: challengesPageVI,
     macros: macrosVI, measurements: measurementsVI, records: recordsVI, referral: referralVI,
     rewards: rewardsVI, search: searchVI, session: sessionVI, voice: voiceVI, payments: paymentsVI,
-    legal: legalVI, controls: controlsVI, compliance: complianceVI,
+    legal: legalVI, controls: controlsVI, compliance: complianceVI, accessibility: accessibilityVI,
   },
 };
 
