@@ -1,7 +1,20 @@
 {
   "home_title": "Wellio - Hành trình thể dục hoàn chỉnh của bạn",
-  "home_description": "Theo dõi tập luyện, dinh dưỡng và tiến độ. Kết nối với cộng đồng thể dục.",
+  "home_description": "Theo dõi tập luyện, dinh dưỡng và tiến độ. Kết nối với cộng đồng thể dục. Đạt được mục tiêu sức khỏe với Wellio.",
   "dashboard_title": "Bảng điều khiển",
+  "dashboard_description": "Xem thống kê thể dục, theo dõi tiến độ và giữ động lực với bảng điều khiển cá nhân của bạn.",
   "auth_title": "Đăng nhập hoặc tạo tài khoản",
-  "not_found_title": "Không tìm thấy trang"
+  "auth_description": "Tham gia Wellio để theo dõi hành trình thể dục, kết nối với mọi người và đạt được mục tiêu sức khỏe.",
+  "not_found_title": "Không tìm thấy trang",
+  "not_found_description": "Trang bạn đang tìm không tồn tại. Quay lại trang chủ Wellio.",
+  "accessibility_title": "Tuyên bố về khả năng tiếp cận",
+  "accessibility_description": "Cam kết của chúng tôi về khả năng tiếp cận kỹ thuật số và tuân thủ WCAG.",
+  "cookie_policy_title": "Chính sách Cookie",
+  "cookie_policy_description": "Tìm hiểu cách chúng tôi sử dụng cookie và các công nghệ tương tự.",
+  "ccpa_rights_title": "Quyền CCPA",
+  "ccpa_rights_description": "Quyền riêng tư California của bạn theo CCPA.",
+  "session_management_title": "Quản lý phiên",
+  "session_management_description": "Quản lý các phiên hoạt động và cài đặt bảo mật của bạn.",
+  "security_audit_title": "Nhật ký kiểm tra bảo mật",
+  "security_audit_description": "Xem các sự kiện bảo mật và nhật ký hoạt động cho tài khoản của bạn."
 }

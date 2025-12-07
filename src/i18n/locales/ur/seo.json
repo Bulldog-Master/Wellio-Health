@@ -6,5 +6,15 @@
   "auth_title": "لاگ ان یا اکاؤنٹ بنائیں",
   "auth_description": "Wellio میں شامل ہوں اپنے فٹنس سفر کو ٹریک کرنے، دوسروں سے جڑنے اور صحت کے اہداف حاصل کرنے کے لیے۔",
   "not_found_title": "صفحہ نہیں ملا",
-  "not_found_description": "آپ جو صفحہ ڈھونڈ رہے ہیں وہ موجود نہیں ہے۔ Wellio ہوم پر واپس جائیں۔"
+  "not_found_description": "آپ جو صفحہ ڈھونڈ رہے ہیں وہ موجود نہیں ہے۔ Wellio ہوم پر واپس جائیں۔",
+  "accessibility_title": "رسائی کا بیان",
+  "accessibility_description": "ڈیجیٹل رسائی اور WCAG تعمیل کے لیے ہماری وابستگی۔",
+  "cookie_policy_title": "کوکی پالیسی",
+  "cookie_policy_description": "جانیں کہ ہم کوکیز اور اسی طرح کی ٹیکنالوجیز کیسے استعمال کرتے ہیں۔",
+  "ccpa_rights_title": "CCPA حقوق",
+  "ccpa_rights_description": "CCPA کے تحت آپ کے کیلیفورنیا پرائیویسی حقوق۔",
+  "session_management_title": "سیشن مینجمنٹ",
+  "session_management_description": "اپنے فعال سیشنز اور سیکیورٹی ترتیبات کا انتظام کریں۔",
+  "security_audit_title": "سیکیورٹی آڈٹ لاگ",
+  "security_audit_description": "اپنے اکاؤنٹ کے سیکیورٹی ایونٹس اور سرگرمی لاگز دیکھیں۔"
 }

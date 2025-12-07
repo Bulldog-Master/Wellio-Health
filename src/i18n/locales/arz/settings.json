@@ -22,5 +22,11 @@
   "addon_features": "الإضافات",
   "notification_settings": "إعدادات الإشعارات",
   "install_app": "نزّل التطبيق",
-  "saved_successfully": "اتحفظ بنجاح"
+  "saved_successfully": "اتحفظ بنجاح",
+  "two_factor_auth": "المصادقة الثنائية",
+  "two_factor_auth_desc": "ضيف طبقة أمان إضافية لحسابك",
+  "session_management": "إدارة الجلسات",
+  "session_management_desc": "شوف وأدير جلساتك النشطة",
+  "security_audit": "سجل تدقيق الأمان",
+  "security_audit_desc": "شوف أحداث الأمان لحسابك"
 }

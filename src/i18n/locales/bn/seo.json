@@ -6,5 +6,15 @@
   "auth_title": "লগইন বা অ্যাকাউন্ট তৈরি করুন",
   "auth_description": "Wellio-তে যোগ দিন আপনার ফিটনেস যাত্রা ট্র্যাক করতে, অন্যদের সাথে সংযুক্ত হতে এবং স্বাস্থ্য লক্ষ্য অর্জন করতে।",
   "not_found_title": "পৃষ্ঠা পাওয়া যায়নি",
-  "not_found_description": "আপনি যে পৃষ্ঠা খুঁজছেন তা বিদ্যমান নেই। Wellio হোমে ফিরে যান।"
+  "not_found_description": "আপনি যে পৃষ্ঠা খুঁজছেন তা বিদ্যমান নেই। Wellio হোমে ফিরে যান।",
+  "accessibility_title": "অ্যাক্সেসিবিলিটি বিবৃতি",
+  "accessibility_description": "ডিজিটাল অ্যাক্সেসিবিলিটি এবং WCAG সম্মতিতে আমাদের প্রতিশ্রুতি।",
+  "cookie_policy_title": "কুকি নীতি",
+  "cookie_policy_description": "আমরা কীভাবে কুকি এবং অনুরূপ প্রযুক্তি ব্যবহার করি তা জানুন।",
+  "ccpa_rights_title": "CCPA অধিকার",
+  "ccpa_rights_description": "CCPA-এর অধীনে আপনার ক্যালিফোর্নিয়া গোপনীয়তা অধিকার।",
+  "session_management_title": "সেশন ব্যবস্থাপনা",
+  "session_management_description": "আপনার সক্রিয় সেশন এবং সুরক্ষা সেটিংস পরিচালনা করুন।",
+  "security_audit_title": "সুরক্ষা অডিট লগ",
+  "security_audit_description": "আপনার অ্যাকাউন্টের সুরক্ষা ইভেন্ট এবং কার্যকলাপ লগ দেখুন।"
 }

@@ -22,5 +22,11 @@
   "addon_features": "Fitur Tambahan",
   "notification_settings": "Pengaturan Notifikasi",
   "install_app": "Instal Aplikasi",
-  "saved_successfully": "Berhasil disimpan"
+  "saved_successfully": "Berhasil disimpan",
+  "two_factor_auth": "Autentikasi Dua Faktor",
+  "two_factor_auth_desc": "Tambahkan lapisan keamanan ekstra ke akun Anda",
+  "session_management": "Manajemen Sesi",
+  "session_management_desc": "Lihat dan kelola sesi aktif Anda",
+  "security_audit": "Log Audit Keamanan",
+  "security_audit_desc": "Lihat peristiwa keamanan untuk akun Anda"
 }

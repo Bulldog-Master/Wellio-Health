@@ -6,5 +6,15 @@
   "auth_title": "Masuk atau Buat Akun",
   "auth_description": "Bergabung dengan Wellio untuk melacak perjalanan kebugaran Anda, terhubung dengan orang lain, dan mencapai target kesehatan Anda.",
   "not_found_title": "Halaman Tidak Ditemukan",
-  "not_found_description": "Halaman yang Anda cari tidak ada. Kembali ke beranda Wellio."
+  "not_found_description": "Halaman yang Anda cari tidak ada. Kembali ke beranda Wellio.",
+  "accessibility_title": "Pernyataan Aksesibilitas",
+  "accessibility_description": "Komitmen kami terhadap aksesibilitas digital dan kepatuhan WCAG.",
+  "cookie_policy_title": "Kebijakan Cookie",
+  "cookie_policy_description": "Pelajari bagaimana kami menggunakan cookie dan teknologi serupa.",
+  "ccpa_rights_title": "Hak CCPA",
+  "ccpa_rights_description": "Hak privasi California Anda di bawah CCPA.",
+  "session_management_title": "Manajemen Sesi",
+  "session_management_description": "Kelola sesi aktif dan pengaturan keamanan Anda.",
+  "security_audit_title": "Log Audit Keamanan",
+  "security_audit_description": "Lihat peristiwa keamanan dan log aktivitas untuk akun Anda."
 }
