@@ -1,2 +1,2 @@
-// Re-export from organized location for backwards compatibility
-export { default } from './common/MetricCard';
+// Re-export for backward compatibility
+export { MetricCard, default } from './fitness/MetricCard';
