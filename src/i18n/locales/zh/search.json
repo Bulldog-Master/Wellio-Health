@@ -19,5 +19,6 @@
   "view_posts": "查看帖子",
   "top_users": "热门用户",
   "follow_status_updated": "关注状态已更新",
-  "error": "错误"
+  "error": "错误",
+  "no_users_available": "暂无用户"
 }

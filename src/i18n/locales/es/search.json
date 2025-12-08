@@ -19,5 +19,6 @@
   "view_posts": "Ver Publicaciones",
   "top_users": "Usuarios Destacados",
   "follow_status_updated": "Estado de seguimiento actualizado",
-  "error": "Error"
+  "error": "Error",
+  "no_users_available": "No hay usuarios disponibles"
 }
