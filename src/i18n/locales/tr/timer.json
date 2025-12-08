@@ -69,5 +69,17 @@
   "color_green": "Yeşil",
   "color_blue": "Mavi",
   "color_purple": "Mor",
-  "color_brown": "Kahverengi"
+  "color_brown": "Kahverengi",
+  
+  "move": "Taşı",
+  "move_to_folder": "Klasöre Taşı",
+  "edit": "Düzenle",
+  "delete_folder": "Klasörü Sil",
+  "delete_folder_title": "Klasör silinsin mi?",
+  "delete_folder_description": "Bu, bu klasörü ve içindeki tüm zamanlayıcıları kalıcı olarak silecektir. Bu işlem geri alınamaz.",
+  "delete": "Sil",
+  "no_folder": "Klasör Yok (Kök)",
+  "intervals_count": "aralık",
+  "reordered": "Yeniden sıralandı",
+  "timer_position_updated": "Zamanlayıcı konumu güncellendi"
 }

@@ -69,5 +69,16 @@
   "color_green": "সবুজ",
   "color_blue": "নীল",
   "color_purple": "বেগুনি",
-  "color_brown": "বাদামী"
+  "color_brown": "বাদামী",
+  "move": "সরান",
+  "move_to_folder": "ফোল্ডারে সরান",
+  "edit": "সম্পাদনা",
+  "delete_folder": "ফোল্ডার মুছুন",
+  "delete_folder_title": "ফোল্ডার মুছবেন?",
+  "delete_folder_description": "এটি এই ফোল্ডার এবং এর সমস্ত টাইমার স্থায়ীভাবে মুছে ফেলবে।",
+  "delete": "মুছুন",
+  "no_folder": "কোনো ফোল্ডার নেই (রুট)",
+  "intervals_count": "ইন্টারভাল",
+  "reordered": "পুনর্বিন্যস্ত",
+  "timer_position_updated": "টাইমার অবস্থান আপডেট হয়েছে"
 }

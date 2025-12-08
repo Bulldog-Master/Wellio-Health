@@ -69,5 +69,17 @@
   "color_green": "緑",
   "color_blue": "青",
   "color_purple": "紫",
-  "color_brown": "茶"
+  "color_brown": "茶",
+  
+  "move": "移動",
+  "move_to_folder": "フォルダに移動",
+  "edit": "編集",
+  "delete_folder": "フォルダを削除",
+  "delete_folder_title": "フォルダを削除しますか？",
+  "delete_folder_description": "このフォルダとその中のすべてのタイマーが完全に削除されます。この操作は元に戻せません。",
+  "delete": "削除",
+  "no_folder": "フォルダなし（ルート）",
+  "intervals_count": "インターバル",
+  "reordered": "並べ替え完了",
+  "timer_position_updated": "タイマーの位置を更新しました"
 }

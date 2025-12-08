@@ -69,5 +69,16 @@
   "color_green": "اخضر",
   "color_blue": "ازرق",
   "color_purple": "بنفسجي",
-  "color_brown": "بني"
+  "color_brown": "بني",
+  "move": "نقل",
+  "move_to_folder": "نقل للفولدر",
+  "edit": "تعديل",
+  "delete_folder": "مسح الفولدر",
+  "delete_folder_title": "مسح الفولدر؟",
+  "delete_folder_description": "ده هيمسح الفولدر ده وكل التايمرات اللي جواه نهائي.",
+  "delete": "مسح",
+  "no_folder": "من غير فولدر (الجذر)",
+  "intervals_count": "فترات",
+  "reordered": "اتعاد ترتيبه",
+  "timer_position_updated": "اتحدث مكان التايمر"
 }

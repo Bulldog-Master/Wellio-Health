@@ -73,5 +73,17 @@
   "color_green": "Verde",
   "color_blue": "Azul",
   "color_purple": "Morado",
-  "color_brown": "Marrón"
+  "color_brown": "Marrón",
+  
+  "move": "Mover",
+  "move_to_folder": "Mover a Carpeta",
+  "edit": "Editar",
+  "delete_folder": "Eliminar Carpeta",
+  "delete_folder_title": "¿Eliminar Carpeta?",
+  "delete_folder_description": "Esto eliminará permanentemente esta carpeta y todos los temporizadores dentro. Esta acción no se puede deshacer.",
+  "delete": "Eliminar",
+  "no_folder": "Sin Carpeta (Raíz)",
+  "intervals_count": "intervalos",
+  "reordered": "Reordenado",
+  "timer_position_updated": "Posición del temporizador actualizada"
 }

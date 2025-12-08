@@ -69,5 +69,16 @@
   "color_green": "سبز",
   "color_blue": "نیلا",
   "color_purple": "جامنی",
-  "color_brown": "بھورا"
+  "color_brown": "بھورا",
+  "move": "منتقل کریں",
+  "move_to_folder": "فولڈر میں منتقل کریں",
+  "edit": "ترمیم",
+  "delete_folder": "فولڈر حذف کریں",
+  "delete_folder_title": "فولڈر حذف کریں؟",
+  "delete_folder_description": "یہ اس فولڈر اور اس کے تمام ٹائمرز کو مستقل طور پر حذف کر دے گا۔",
+  "delete": "حذف کریں",
+  "no_folder": "کوئی فولڈر نہیں (جڑ)",
+  "intervals_count": "وقفے",
+  "reordered": "دوبارہ ترتیب دیا گیا",
+  "timer_position_updated": "ٹائمر کی پوزیشن اپڈیٹ ہوئی"
 }

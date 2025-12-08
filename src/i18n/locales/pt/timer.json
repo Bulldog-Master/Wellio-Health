@@ -69,5 +69,17 @@
   "color_green": "Verde",
   "color_blue": "Azul",
   "color_purple": "Roxo",
-  "color_brown": "Marrom"
+  "color_brown": "Marrom",
+  
+  "move": "Mover",
+  "move_to_folder": "Mover para Pasta",
+  "edit": "Editar",
+  "delete_folder": "Excluir Pasta",
+  "delete_folder_title": "Excluir Pasta?",
+  "delete_folder_description": "Isso excluirá permanentemente esta pasta e todos os timers dentro dela. Esta ação não pode ser desfeita.",
+  "delete": "Excluir",
+  "no_folder": "Sem Pasta (Raiz)",
+  "intervals_count": "intervalos",
+  "reordered": "Reordenado",
+  "timer_position_updated": "Posição do timer atualizada"
 }

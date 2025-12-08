@@ -69,5 +69,17 @@
   "color_green": "Vert",
   "color_blue": "Bleu",
   "color_purple": "Violet",
-  "color_brown": "Marron"
+  "color_brown": "Marron",
+  
+  "move": "Déplacer",
+  "move_to_folder": "Déplacer vers le dossier",
+  "edit": "Modifier",
+  "delete_folder": "Supprimer le dossier",
+  "delete_folder_title": "Supprimer le dossier?",
+  "delete_folder_description": "Cela supprimera définitivement ce dossier et tous les minuteurs qu'il contient. Cette action ne peut pas être annulée.",
+  "delete": "Supprimer",
+  "no_folder": "Pas de dossier (Racine)",
+  "intervals_count": "intervalles",
+  "reordered": "Réorganisé",
+  "timer_position_updated": "Position du minuteur mise à jour"
 }

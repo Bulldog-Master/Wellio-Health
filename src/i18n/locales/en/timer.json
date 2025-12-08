@@ -78,5 +78,12 @@
   "move": "Move",
   "move_to_folder": "Move to Folder",
   "edit": "Edit",
-  "delete_folder": "Delete Folder"
+  "delete_folder": "Delete Folder",
+  "delete_folder_title": "Delete Folder?",
+  "delete_folder_description": "This will permanently delete this folder and all timers inside it. This action cannot be undone.",
+  "delete": "Delete",
+  "no_folder": "No Folder (Root)",
+  "intervals_count": "intervals",
+  "reordered": "Reordered",
+  "timer_position_updated": "Timer position updated"
 }
