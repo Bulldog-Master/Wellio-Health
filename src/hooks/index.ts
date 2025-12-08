@@ -31,4 +31,4 @@ export * from './utils';
 export * from './subscription';
 
 // Direct exports for subscription hook
-export { useSubscription } from './useSubscription';
+export { useSubscription } from './subscription';
