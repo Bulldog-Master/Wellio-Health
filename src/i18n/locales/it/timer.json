@@ -69,5 +69,17 @@
   "color_green": "Verde",
   "color_blue": "Blu",
   "color_purple": "Viola",
-  "color_brown": "Marrone"
+  "color_brown": "Marrone",
+  
+  "move": "Sposta",
+  "move_to_folder": "Sposta nella Cartella",
+  "edit": "Modifica",
+  "delete_folder": "Elimina Cartella",
+  "delete_folder_title": "Eliminare Cartella?",
+  "delete_folder_description": "Questo eliminerà permanentemente questa cartella e tutti i timer al suo interno. Questa azione non può essere annullata.",
+  "delete": "Elimina",
+  "no_folder": "Nessuna Cartella (Root)",
+  "intervals_count": "intervalli",
+  "reordered": "Riordinato",
+  "timer_position_updated": "Posizione timer aggiornata"
 }

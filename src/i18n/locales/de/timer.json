@@ -69,5 +69,17 @@
   "color_green": "Grün",
   "color_blue": "Blau",
   "color_purple": "Lila",
-  "color_brown": "Braun"
+  "color_brown": "Braun",
+  
+  "move": "Verschieben",
+  "move_to_folder": "In Ordner verschieben",
+  "edit": "Bearbeiten",
+  "delete_folder": "Ordner löschen",
+  "delete_folder_title": "Ordner löschen?",
+  "delete_folder_description": "Dadurch werden dieser Ordner und alle darin enthaltenen Timer dauerhaft gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.",
+  "delete": "Löschen",
+  "no_folder": "Kein Ordner (Stammverzeichnis)",
+  "intervals_count": "Intervalle",
+  "reordered": "Neu geordnet",
+  "timer_position_updated": "Timer-Position aktualisiert"
 }

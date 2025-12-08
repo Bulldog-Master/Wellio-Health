@@ -69,5 +69,17 @@
   "color_green": "绿色",
   "color_blue": "蓝色",
   "color_purple": "紫色",
-  "color_brown": "棕色"
+  "color_brown": "棕色",
+  
+  "move": "移动",
+  "move_to_folder": "移动到文件夹",
+  "edit": "编辑",
+  "delete_folder": "删除文件夹",
+  "delete_folder_title": "删除文件夹？",
+  "delete_folder_description": "这将永久删除此文件夹及其中的所有计时器。此操作无法撤消。",
+  "delete": "删除",
+  "no_folder": "无文件夹（根目录）",
+  "intervals_count": "个间隔",
+  "reordered": "已重新排序",
+  "timer_position_updated": "计时器位置已更新"
 }

@@ -1,24 +1,35 @@
 import { FolderPlus, MoreHorizontal, GripVertical, Clock } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useTranslation } from "react-i18next";
-import type { TimerInterval } from "@/types/timer.types";
+import type { TimerInterval, TimerFolder, IntervalTimerData } from "@/types/timer.types";
+import type { Json } from "@/integrations/supabase/types";
 
-interface TimerFolder {
+// Database return type (intervals are Json)
+interface DatabaseTimer {
   id: string;
   name: string;
-}
-
-interface TimerData {
-  id: string;
-  name: string;
-  intervals: TimerInterval[];
-  repeat_count?: number;
+  intervals: Json | null;
+  repeat_count: number | null;
+  folder_id: string | null;
+  user_id: string;
+  created_at: string | null;
+  updated_at?: string | null;
+  countdown_beeps: boolean | null;
+  end_with_interim: boolean | null;
+  include_reps: boolean | null;
+  include_sets: boolean | null;
+  interim_interval_seconds: number | null;
+  show_elapsed_time: boolean | null;
+  show_line_numbers: boolean | null;
+  text_to_speech: boolean | null;
+  use_for_notifications: boolean | null;
+  use_interim_interval: boolean | null;
 }
 
 interface TimerContentProps {
   currentFolderId: string | null;
   folders: TimerFolder[];
-  timers: TimerData[];
+  timers: DatabaseTimer[];
   isSelectMoveMode: boolean;
   isMoveMode: boolean;
   selectedTimerIds: string[];
@@ -26,7 +37,7 @@ interface TimerContentProps {
   draggedTimerIndex: number | null;
   onFolderClick: (folderId: string) => void;
   onFolderMenuClick: (folderId: string) => void;
-  onTimerSelect: (timer: TimerData) => void;
+  onTimerSelect: (timer: IntervalTimerData) => void;
   onTimerCheckToggle: (timerId: string) => void;
   onMoveTimerSelect: (timerId: string) => void;
   onDragStart: (index: number, timerId: string, e: React.DragEvent) => void;
@@ -34,6 +45,33 @@ interface TimerContentProps {
   onDrop: (index: number, e: React.DragEvent) => void;
   onDragEnd: () => void;
 }
+
+// Helper to safely parse intervals from Json
+const parseIntervals = (intervals: Json | null): TimerInterval[] => {
+  if (!intervals || !Array.isArray(intervals)) return [];
+  return intervals as unknown as TimerInterval[];
+};
+
+// Helper to convert database timer to IntervalTimerData
+const toIntervalTimerData = (timer: DatabaseTimer): IntervalTimerData => ({
+  id: timer.id,
+  name: timer.name,
+  user_id: timer.user_id,
+  intervals: parseIntervals(timer.intervals),
+  repeat_count: timer.repeat_count ?? 1,
+  folder_id: timer.folder_id,
+  created_at: timer.created_at ?? undefined,
+  text_to_speech: timer.text_to_speech ?? false,
+  countdown_beeps: timer.countdown_beeps ?? false,
+  use_for_notifications: timer.use_for_notifications ?? false,
+  use_interim_interval: timer.use_interim_interval ?? false,
+  interim_interval_seconds: timer.interim_interval_seconds ?? 10,
+  end_with_interim: timer.end_with_interim ?? false,
+  show_line_numbers: timer.show_line_numbers ?? false,
+  show_elapsed_time: timer.show_elapsed_time ?? false,
+  include_reps: timer.include_reps ?? false,
+  include_sets: timer.include_sets ?? false,
+});
 
 const TimerContent = ({
   currentFolderId,
@@ -63,6 +101,9 @@ const TimerContent = ({
     const seconds = totalSeconds % 60;
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
+
+  // Convert database timers to our app format
+  const convertedTimers = timers.map(toIntervalTimerData);
 
   return (
     <div className="p-4">
@@ -108,12 +149,12 @@ const TimerContent = ({
       </h2>
 
       <div className="space-y-0 divide-y divide-border">
-        {timers.length === 0 ? (
+        {convertedTimers.length === 0 ? (
           <p className="text-muted-foreground py-8 text-center">
             {t('no_timers_yet')}
           </p>
         ) : (
-          timers.map((timer, index) => (
+          convertedTimers.map((timer, index) => (
             <div
               key={timer.id}
               draggable={selectedMoveTimerId === timer.id}

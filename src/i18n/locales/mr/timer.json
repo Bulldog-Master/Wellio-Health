@@ -69,5 +69,16 @@
   "color_green": "हिरवा",
   "color_blue": "निळा",
   "color_purple": "जांभळा",
-  "color_brown": "तपकिरी"
+  "color_brown": "तपकिरी",
+  "move": "हलवा",
+  "move_to_folder": "फोल्डरमध्ये हलवा",
+  "edit": "संपादित करा",
+  "delete_folder": "फोल्डर हटवा",
+  "delete_folder_title": "फोल्डर हटवायचे?",
+  "delete_folder_description": "हे फोल्डर आणि त्यातील सर्व टायमर कायमचे हटवले जातील.",
+  "delete": "हटवा",
+  "no_folder": "फोल्डर नाही (रूट)",
+  "intervals_count": "अंतराल",
+  "reordered": "पुनर्रचना केली",
+  "timer_position_updated": "टायमर स्थान अद्यतनित"
 }

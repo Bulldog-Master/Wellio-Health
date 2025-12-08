@@ -69,5 +69,17 @@
   "color_green": "Groen",
   "color_blue": "Blauw",
   "color_purple": "Paars",
-  "color_brown": "Bruin"
+  "color_brown": "Bruin",
+  
+  "move": "Verplaatsen",
+  "move_to_folder": "Verplaatsen naar Map",
+  "edit": "Bewerken",
+  "delete_folder": "Map Verwijderen",
+  "delete_folder_title": "Map verwijderen?",
+  "delete_folder_description": "Dit zal deze map en alle timers erin permanent verwijderen. Deze actie kan niet ongedaan worden gemaakt.",
+  "delete": "Verwijderen",
+  "no_folder": "Geen Map (Root)",
+  "intervals_count": "intervallen",
+  "reordered": "Herschikt",
+  "timer_position_updated": "Timer positie bijgewerkt"
 }

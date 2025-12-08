@@ -69,5 +69,16 @@
   "color_green": "Xanh lá",
   "color_blue": "Xanh dương",
   "color_purple": "Tím",
-  "color_brown": "Nâu"
+  "color_brown": "Nâu",
+  "move": "Di chuyển",
+  "move_to_folder": "Di chuyển vào Thư mục",
+  "edit": "Chỉnh sửa",
+  "delete_folder": "Xóa Thư mục",
+  "delete_folder_title": "Xóa Thư mục?",
+  "delete_folder_description": "Điều này sẽ xóa vĩnh viễn thư mục này và tất cả bộ hẹn giờ bên trong.",
+  "delete": "Xóa",
+  "no_folder": "Không có Thư mục (Gốc)",
+  "intervals_count": "khoảng",
+  "reordered": "Đã sắp xếp lại",
+  "timer_position_updated": "Vị trí bộ hẹn giờ đã cập nhật"
 }

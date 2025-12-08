@@ -69,5 +69,16 @@
   "color_green": "பச்சை",
   "color_blue": "நீலம்",
   "color_purple": "ஊதா",
-  "color_brown": "பழுப்பு"
+  "color_brown": "பழுப்பு",
+  "move": "நகர்த்து",
+  "move_to_folder": "கோப்புறைக்கு நகர்த்து",
+  "edit": "திருத்து",
+  "delete_folder": "கோப்புறையை நீக்கு",
+  "delete_folder_title": "கோப்புறையை நீக்கவா?",
+  "delete_folder_description": "இது இந்த கோப்புறையையும் உள்ளே உள்ள அனைத்து டைமர்களையும் நிரந்தரமாக நீக்கும்.",
+  "delete": "நீக்கு",
+  "no_folder": "கோப்புறை இல்லை (ரூட்)",
+  "intervals_count": "இடைவெளிகள்",
+  "reordered": "மறுவரிசைப்படுத்தப்பட்டது",
+  "timer_position_updated": "டைமர் நிலை புதுப்பிக்கப்பட்டது"
 }

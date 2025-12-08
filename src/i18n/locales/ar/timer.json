@@ -69,5 +69,17 @@
   "color_green": "أخضر",
   "color_blue": "أزرق",
   "color_purple": "بنفسجي",
-  "color_brown": "بني"
+  "color_brown": "بني",
+  
+  "move": "نقل",
+  "move_to_folder": "نقل إلى المجلد",
+  "edit": "تعديل",
+  "delete_folder": "حذف المجلد",
+  "delete_folder_title": "حذف المجلد؟",
+  "delete_folder_description": "سيؤدي هذا إلى حذف هذا المجلد وجميع المؤقتات الموجودة فيه نهائياً. لا يمكن التراجع عن هذا الإجراء.",
+  "delete": "حذف",
+  "no_folder": "بدون مجلد (الجذر)",
+  "intervals_count": "فترات",
+  "reordered": "تم إعادة الترتيب",
+  "timer_position_updated": "تم تحديث موضع المؤقت"
 }

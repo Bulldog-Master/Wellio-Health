@@ -345,18 +345,17 @@ const IntervalTimer = () => {
         onOpenChange={state.setIsFolderSelectionOpen}
         folders={folders}
         onSelectFolder={(folderId) => moveTimersMutation.mutate(folderId)}
-        isMoving={moveTimersMutation.isPending}
+        isPending={moveTimersMutation.isPending}
       />
 
       <DeleteFolderDialog
         open={state.deleteFolderId !== null}
         onOpenChange={(open) => !open && state.setDeleteFolderId(null)}
-        onConfirm={() => {
+        onConfirmDelete={() => {
           if (state.deleteFolderId) {
             deleteFolderMutation.mutate(state.deleteFolderId);
           }
         }}
-        isDeleting={deleteFolderMutation.isPending}
       />
 
       {/* Sheets */}
@@ -380,7 +379,7 @@ const IntervalTimer = () => {
       <FolderMenuSheet
         open={state.isFolderMenuOpen}
         onOpenChange={state.setIsFolderMenuOpen}
-        onDelete={() => {
+        onDeleteFolder={() => {
           state.setIsFolderMenuOpen(false);
           if (state.selectedFolderId) {
             state.setDeleteFolderId(state.selectedFolderId);

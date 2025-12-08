@@ -69,5 +69,17 @@
   "color_green": "Зелёный",
   "color_blue": "Синий",
   "color_purple": "Фиолетовый",
-  "color_brown": "Коричневый"
+  "color_brown": "Коричневый",
+  
+  "move": "Переместить",
+  "move_to_folder": "Переместить в папку",
+  "edit": "Редактировать",
+  "delete_folder": "Удалить папку",
+  "delete_folder_title": "Удалить папку?",
+  "delete_folder_description": "Это навсегда удалит эту папку и все таймеры в ней. Это действие нельзя отменить.",
+  "delete": "Удалить",
+  "no_folder": "Без папки (Корень)",
+  "intervals_count": "интервалов",
+  "reordered": "Переупорядочено",
+  "timer_position_updated": "Позиция таймера обновлена"
 }

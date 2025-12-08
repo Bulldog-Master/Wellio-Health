@@ -69,5 +69,16 @@
   "color_green": "हरा",
   "color_blue": "नीला",
   "color_purple": "बैंगनी",
-  "color_brown": "भूरा"
+  "color_brown": "भूरा",
+  "move": "स्थानांतरित करें",
+  "move_to_folder": "फ़ोल्डर में ले जाएं",
+  "edit": "संपादित करें",
+  "delete_folder": "फ़ोल्डर हटाएं",
+  "delete_folder_title": "फ़ोल्डर हटाएं?",
+  "delete_folder_description": "यह इस फ़ोल्डर और इसके सभी टाइमर को स्थायी रूप से हटा देगा।",
+  "delete": "हटाएं",
+  "no_folder": "कोई फ़ोल्डर नहीं (मूल)",
+  "intervals_count": "अंतराल",
+  "reordered": "पुनर्क्रमित",
+  "timer_position_updated": "टाइमर स्थिति अपडेट की गई"
 }

@@ -69,5 +69,16 @@
   "color_green": "ఆకుపచ్చ",
   "color_blue": "నీలం",
   "color_purple": "ఊదా",
-  "color_brown": "గోధుమ"
+  "color_brown": "గోధుమ",
+  "move": "తరలించు",
+  "move_to_folder": "ఫోల్డర్‌కు తరలించు",
+  "edit": "సవరించు",
+  "delete_folder": "ఫోల్డర్ తొలగించు",
+  "delete_folder_title": "ఫోల్డర్ తొలగించాలా?",
+  "delete_folder_description": "ఇది ఈ ఫోల్డర్ మరియు లోపలి అన్ని టైమర్‌లను శాశ్వతంగా తొలగిస్తుంది.",
+  "delete": "తొలగించు",
+  "no_folder": "ఫోల్డర్ లేదు (రూట్)",
+  "intervals_count": "విరామాలు",
+  "reordered": "పునర్వ్యవస్థీకరించబడింది",
+  "timer_position_updated": "టైమర్ స్థానం నవీకరించబడింది"
 }
