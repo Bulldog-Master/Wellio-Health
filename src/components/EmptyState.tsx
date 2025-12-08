@@ -1,3 +1,2 @@
-// Re-export from organized location for backwards compatibility
+// Re-export from subdirectory
 export { EmptyState } from './common/EmptyState';
-export { default } from './common/EmptyState';
