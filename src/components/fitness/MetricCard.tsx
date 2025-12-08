@@ -1,2 +1,3 @@
 // Re-export for backward compatibility
-export { default as MetricCard } from '../MetricCard';
+import MetricCard from '../common/MetricCard';
+export { MetricCard };
