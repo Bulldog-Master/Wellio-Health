@@ -69,5 +69,16 @@
   "color_green": "Hijau",
   "color_blue": "Biru",
   "color_purple": "Ungu",
-  "color_brown": "Cokelat"
+  "color_brown": "Cokelat",
+  "move": "Pindahkan",
+  "move_to_folder": "Pindahkan ke Folder",
+  "edit": "Edit",
+  "delete_folder": "Hapus Folder",
+  "delete_folder_title": "Hapus Folder?",
+  "delete_folder_description": "Ini akan menghapus folder dan semua timer di dalamnya secara permanen.",
+  "delete": "Hapus",
+  "no_folder": "Tidak Ada Folder (Root)",
+  "intervals_count": "interval",
+  "reordered": "Diurutkan ulang",
+  "timer_position_updated": "Posisi timer diperbarui"
 }
