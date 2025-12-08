@@ -6,6 +6,7 @@ import { useUserPreferences } from "@/hooks/useUserPreferences";
 import { formatDistance } from "@/lib/unitConversion";
 import { useWorkoutState, useWorkoutData, useWorkoutActions, calculateCalories } from "@/hooks/workout";
 import type { ActivityLog, RoutineExercise } from "@/types/workout.types";
+import type { Json } from "@/integrations/supabase/types";
 
 // Components
 import WorkoutHero from "@/components/workout/WorkoutHero";
@@ -132,10 +133,10 @@ const Workout = () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("User not authenticated");
       if (editingRoutineId) {
-        await supabase.from('workout_routines').update({ name: routineName, description: routineDescription || null, exercises: routineExercises }).eq('id', editingRoutineId);
+        await supabase.from('workout_routines').update({ name: routineName, description: routineDescription || null, exercises: routineExercises as unknown as Json }).eq('id', editingRoutineId);
         toast({ title: "Routine updated" });
       } else {
-        await supabase.from('workout_routines').insert({ user_id: user.id, name: routineName, description: routineDescription || null, exercises: routineExercises });
+        await supabase.from('workout_routines').insert({ user_id: user.id, name: routineName, description: routineDescription || null, exercises: routineExercises as unknown as Json });
         toast({ title: "Routine saved" });
       }
       setRoutineName(""); setRoutineDescription(""); setRoutineExercises([]); setEditingRoutineId(null); setShowRoutineDialog(false);
