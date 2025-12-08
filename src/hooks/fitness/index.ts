@@ -4,3 +4,5 @@ export { useMilestoneCelebration } from './useMilestoneCelebration';
 export { useWearableForm, type WearableData, type WearableFormState } from './useWearableForm';
 export { useWeightChartData, type ChartView } from './useWeightChartData';
 export { useWeightLogs, type WeightLog } from './useWeightLogs';
+export { useWeeklyReport, type WeeklyReport } from './useWeeklyReport';
+export { useHabits, type Habit, type HabitCompletion, type HabitFormData } from './useHabits';
