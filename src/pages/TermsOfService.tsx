@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import Layout from '@/components/Layout';
-import SEOHead from '@/components/SEOHead';
+import { Layout } from '@/components/layout';
+import { SEOHead } from '@/components/common';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { FileText, Scale, AlertTriangle, CreditCard, Ban, RefreshCw } from 'lucide-react';

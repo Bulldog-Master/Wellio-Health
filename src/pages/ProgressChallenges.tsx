@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import Layout from "@/components/Layout";
+import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui/button";
 import { Trophy, Plus, ArrowLeft } from "lucide-react";
-import { useSubscription } from "@/hooks/useSubscription";
-import { UpgradePrompt } from "@/components/UpgradePrompt";
+import { useSubscription } from "@/hooks/subscription";
+import { UpgradePrompt } from "@/components/dashboard";
 import { useProgressChallenges } from "@/hooks/challenges";
 import { ChallengeCreateForm, ChallengeCard } from "@/components/challenges";
 

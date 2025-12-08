@@ -4,9 +4,8 @@ import { ArrowLeft, Newspaper, Globe, Timer, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { useAdminStatus } from '@/hooks/useAdminStatus';
-import SEOHead from '@/components/SEOHead';
-import AdBanner from '@/components/AdBanner';
+import { useAdminStatus } from '@/hooks/auth';
+import { SEOHead, AdBanner } from '@/components/common';
 import { useNews } from '@/hooks/news';
 import { newsCategories, NewsCategoryCard, NewsFormDialog } from '@/components/news';
 

@@ -3,7 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Crown, Check, ArrowRight } from 'lucide-react';
-import { useSubscription } from '@/hooks/useSubscription';
+import { useSubscription } from '@/hooks/subscription';
 import { useTranslation } from 'react-i18next';
 
 export const SubscriptionStatus = () => {

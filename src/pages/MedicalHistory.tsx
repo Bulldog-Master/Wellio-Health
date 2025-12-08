@@ -3,8 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FileText, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { SubscriptionGate } from "@/components/SubscriptionGate";
-import { MedicalAuthGate } from "@/components/MedicalAuthGate";
+import { SubscriptionGate, MedicalAuthGate } from "@/components/common";
 import { useMedicalData, useMedicalMutations } from "@/hooks/medical";
 import {
   MedicationsTab,

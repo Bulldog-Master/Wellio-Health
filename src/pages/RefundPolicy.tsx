@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { SEOHead } from '@/components/SEOHead';
-import Layout from '@/components/Layout';
+import { SEOHead } from '@/components/common';
+import { Layout } from '@/components/layout';
 
 const RefundPolicy = () => {
   const { t } = useTranslation(['legal', 'common']);

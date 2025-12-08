@@ -10,8 +10,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Checkbox } from '@/components/ui/checkbox';
 import { toast } from 'sonner';
-import SEOHead from '@/components/SEOHead';
-import Layout from '@/components/Layout';
+import { SEOHead } from '@/components/common';
+import { Layout } from '@/components/layout';
 import { supabase } from '@/integrations/supabase/client';
 
 const CCPARightsRequest = () => {

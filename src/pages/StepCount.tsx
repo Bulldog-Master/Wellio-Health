@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import Layout from '@/components/Layout';
+import { Layout } from '@/components/layout';
 
 const StepCount = () => {
   const navigate = useNavigate();

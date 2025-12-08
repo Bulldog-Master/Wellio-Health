@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AdvancedMetrics } from "@/components/AdvancedMetrics";
+import { AdvancedMetrics } from "@/components/dashboard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Activity, TrendingUp, Target, Zap, ArrowLeft } from "lucide-react";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ScatterChart, Scatter } from "recharts";
-import { SubscriptionGate } from "@/components/SubscriptionGate";
+import { SubscriptionGate } from "@/components/common";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 

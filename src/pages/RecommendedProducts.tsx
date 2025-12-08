@@ -13,9 +13,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { supabase } from '@/integrations/supabase/client';
-import { useAdminStatus } from '@/hooks/useAdminStatus';
+import { useAdminStatus } from '@/hooks/auth';
 import { toast } from 'sonner';
-import SEOHead from '@/components/SEOHead';
+import { SEOHead } from '@/components/common';
 
 interface RecommendedProduct {
   id: string;

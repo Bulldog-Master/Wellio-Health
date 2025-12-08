@@ -7,11 +7,11 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Star, MapPin, Search, Award, DollarSign, Users, Calendar, ArrowLeft } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/ui";
 import { useTranslation } from "react-i18next";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNavigate } from "react-router-dom";
-import { SubscriptionGate } from "@/components/SubscriptionGate";
+import { SubscriptionGate } from "@/components/common";
 
 interface TrainerProfile {
   id: string;

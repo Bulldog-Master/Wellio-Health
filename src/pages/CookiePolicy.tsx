@@ -3,8 +3,8 @@ import { ArrowLeft, Cookie, Shield, Settings, BarChart3, Target } from 'lucide-r
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import SEOHead from '@/components/SEOHead';
-import Layout from '@/components/Layout';
+import { SEOHead } from '@/components/common';
+import { Layout } from '@/components/layout';
 
 const CookiePolicy = () => {
   const { t } = useTranslation(['legal', 'common']);

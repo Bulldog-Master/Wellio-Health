@@ -3,8 +3,8 @@ import { ArrowLeft, Eye, Keyboard, Monitor, Volume2, MousePointer, FileText } fr
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import SEOHead from '@/components/SEOHead';
-import Layout from '@/components/Layout';
+import { SEOHead } from '@/components/common';
+import { Layout } from '@/components/layout';
 
 const AccessibilityStatement = () => {
   const { t } = useTranslation(['accessibility', 'common']);

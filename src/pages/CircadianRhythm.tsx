@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { SEOHead } from '@/components/SEOHead';
-import { SubscriptionGate } from '@/components/SubscriptionGate';
+import { SEOHead, SubscriptionGate } from '@/components/common';
 import { CircadianOptimizer } from '@/components/wellness/CircadianOptimizer';
 
 const CircadianRhythm: React.FC = () => {

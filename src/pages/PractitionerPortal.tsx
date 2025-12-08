@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Stethoscope, Loader2 } from 'lucide-react';
-import { SubscriptionGate } from '@/components/SubscriptionGate';
+import { SubscriptionGate } from '@/components/common';
 import { useProfessionalPortal } from '@/hooks/professional';
 import { ApplicationForm, ApprovedDashboard } from '@/components/professional';
 
