@@ -4,6 +4,7 @@ export type { ContentType, ContentShare } from './useContentSharing';
 export { useFeedData } from './useFeedData';
 export type { PostWithProfile, TrendingHashtag, CommentWithProfile } from './useFeedData';
 export { useFeedMutations } from './useFeedMutations';
+export { useFeedState } from './useFeedState';
 export { useNotifications, useUnreadNotificationCount } from './useNotifications';
 export { usePrivateMessaging } from './usePrivateMessaging';
 export { useRealtimePosts } from './useRealtimePosts';
