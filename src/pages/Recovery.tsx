@@ -1,168 +1,31 @@
-import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { 
-  ArrowLeft, 
-  Snowflake, 
-  Flame, 
-  Wind, 
-  Waves, 
-  Zap, 
-  Heart,
-  Plus,
-  Clock,
-  Calendar,
-  TrendingUp,
-  Crown,
-  Sparkles,
-  Activity
-} from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
+import { ArrowLeft, TrendingUp, Crown, Sparkles, Plus } from 'lucide-react';
 import { useSubscription } from '@/hooks/useSubscription';
 import { SubscriptionGate } from '@/components/SubscriptionGate';
-
-interface RecoverySession {
-  id: string;
-  user_id: string;
-  therapy_type: string;
-  duration_minutes: number;
-  intensity: string | null;
-  temperature: string | null;
-  location: string | null;
-  cost: number | null;
-  notes: string | null;
-  session_date: string;
-  created_at: string;
-}
-import { toast } from 'sonner';
-import { format } from 'date-fns';
+import { useRecovery } from '@/hooks/recovery';
+import { therapies, RecoveryFormDialog, SessionCard } from '@/components/recovery';
 
 const Recovery = () => {
   const navigate = useNavigate();
   const { t } = useTranslation(['recovery', 'common']);
-  const { hasFullAccess, isLoading: subscriptionLoading } = useSubscription();
-  const [sessions, setSessions] = useState<RecoverySession[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [selectedTherapy, setSelectedTherapy] = useState<string | null>(null);
-  
-  // Form state
-  const [duration, setDuration] = useState('');
-  const [intensity, setIntensity] = useState('medium');
-  const [temperature, setTemperature] = useState('');
-  const [location, setLocation] = useState('');
-  const [cost, setCost] = useState('');
-  const [notes, setNotes] = useState('');
+  const { isLoading: subscriptionLoading } = useSubscription();
 
-  const therapies = [
-    { id: 'massage', icon: Heart, color: 'text-pink-500 bg-pink-500/10', nameKey: 'massage_therapy', descKey: 'massage_description' },
-    { id: 'red_light', icon: Zap, color: 'text-red-500 bg-red-500/10', nameKey: 'red_light_therapy', descKey: 'red_light_description' },
-    { id: 'cold_plunge', icon: Snowflake, color: 'text-cyan-500 bg-cyan-500/10', nameKey: 'cold_plunge', descKey: 'cold_plunge_description' },
-    { id: 'sauna', icon: Flame, color: 'text-orange-500 bg-orange-500/10', nameKey: 'sauna', descKey: 'sauna_description' },
-    { id: 'oxygen', icon: Wind, color: 'text-blue-500 bg-blue-500/10', nameKey: 'oxygen_therapy', descKey: 'oxygen_description' },
-    { id: 'cryotherapy', icon: Snowflake, color: 'text-indigo-500 bg-indigo-500/10', nameKey: 'cryotherapy', descKey: 'cryo_description' },
-    { id: 'float_tank', icon: Waves, color: 'text-teal-500 bg-teal-500/10', nameKey: 'float_tank', descKey: 'float_description' },
-    { id: 'compression', icon: Activity, color: 'text-purple-500 bg-purple-500/10', nameKey: 'compression_therapy', descKey: 'compression_description' },
-    { id: 'infrared', icon: Flame, color: 'text-amber-500 bg-amber-500/10', nameKey: 'infrared_therapy', descKey: 'infrared_description' },
-    { id: 'stretching', icon: Heart, color: 'text-green-500 bg-green-500/10', nameKey: 'stretching_mobility', descKey: 'stretching_description' },
-  ];
-
-  useEffect(() => {
-    fetchSessions();
-  }, []);
-
-  const fetchSessions = async () => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-
-      const { data, error } = await supabase
-        .from('recovery_sessions' as any)
-        .select('*')
-        .eq('user_id', user.id)
-        .order('session_date', { ascending: false })
-        .limit(10);
-
-      if (error) throw error;
-      setSessions((data as unknown as RecoverySession[]) || []);
-    } catch (error) {
-      console.error('Error fetching recovery sessions:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleLogSession = async () => {
-    if (!selectedTherapy || !duration) {
-      toast.error(t('common:validation_error'));
-      return;
-    }
-
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-
-      const { error } = await supabase
-        .from('recovery_sessions' as any)
-        .insert({
-          user_id: user.id,
-          therapy_type: selectedTherapy,
-          duration_minutes: parseInt(duration),
-          intensity,
-          temperature: temperature || null,
-          location: location || null,
-          cost: cost ? parseFloat(cost) : null,
-          notes: notes || null,
-        });
-
-      if (error) throw error;
-
-      toast.success(t('session_logged'), { description: t('session_logged_desc') });
-      setDialogOpen(false);
-      resetForm();
-      fetchSessions();
-    } catch (error) {
-      console.error('Error logging session:', error);
-      toast.error(t('common:error'));
-    }
-  };
-
-  const resetForm = () => {
-    setSelectedTherapy(null);
-    setDuration('');
-    setIntensity('medium');
-    setTemperature('');
-    setLocation('');
-    setCost('');
-    setNotes('');
-  };
-
-  const getTherapyInfo = (therapyId: string) => {
-    return therapies.find(t => t.id === therapyId);
-  };
-
-  const getTherapyName = (therapyId: string) => {
-    const therapy = getTherapyInfo(therapyId);
-    return therapy ? t(therapy.nameKey) : therapyId;
-  };
-
-  // Calculate stats
-  const thisWeekSessions = sessions.filter(s => {
-    const sessionDate = new Date(s.session_date);
-    const weekAgo = new Date();
-    weekAgo.setDate(weekAgo.getDate() - 7);
-    return sessionDate >= weekAgo;
-  });
-
-  const totalMinutes = sessions.reduce((acc, s) => acc + (s.duration_minutes || 0), 0);
+  const {
+    sessions,
+    isLoading,
+    dialogOpen,
+    setDialogOpen,
+    formData,
+    setFormData,
+    handleLogSession,
+    getTherapyName,
+    thisWeekSessions,
+    totalMinutes,
+  } = useRecovery();
 
   if (subscriptionLoading) {
     return (
@@ -217,122 +80,13 @@ const Recovery = () => {
           <div className="mb-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold">{t('recovery_therapies')}</h2>
-              <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button className="gap-2">
-                    <Plus className="h-4 w-4" />
-                    {t('log_session')}
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
-                  <DialogHeader>
-                    <DialogTitle>{t('log_session')}</DialogTitle>
-                  </DialogHeader>
-                  <div className="space-y-4 py-4">
-                    {/* Therapy Selection */}
-                    <div className="space-y-2">
-                      <Label>{t('recovery_therapies')}</Label>
-                      <div className="grid grid-cols-2 gap-2">
-                        {therapies.map((therapy) => {
-                          const Icon = therapy.icon;
-                          return (
-                            <button
-                              key={therapy.id}
-                              onClick={() => setSelectedTherapy(therapy.id)}
-                              className={`p-3 rounded-lg border text-left transition-all ${
-                                selectedTherapy === therapy.id
-                                  ? 'border-primary bg-primary/10'
-                                  : 'border-border hover:border-primary/50'
-                              }`}
-                            >
-                              <Icon className={`h-5 w-5 mb-1 ${therapy.color.split(' ')[0]}`} />
-                              <div className="text-xs font-medium">{t(therapy.nameKey)}</div>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    {/* Duration */}
-                    <div className="space-y-2">
-                      <Label htmlFor="duration">{t('duration_minutes')}</Label>
-                      <Input
-                        id="duration"
-                        type="number"
-                        value={duration}
-                        onChange={(e) => setDuration(e.target.value)}
-                        placeholder="30"
-                      />
-                    </div>
-
-                    {/* Intensity */}
-                    <div className="space-y-2">
-                      <Label>{t('intensity')}</Label>
-                      <Select value={intensity} onValueChange={setIntensity}>
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="low">{t('low')}</SelectItem>
-                          <SelectItem value="medium">{t('medium')}</SelectItem>
-                          <SelectItem value="high">{t('high')}</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    {/* Temperature (optional) */}
-                    <div className="space-y-2">
-                      <Label htmlFor="temperature">{t('temperature')}</Label>
-                      <Input
-                        id="temperature"
-                        value={temperature}
-                        onChange={(e) => setTemperature(e.target.value)}
-                        placeholder={t('temperature_placeholder')}
-                      />
-                    </div>
-
-                    {/* Location */}
-                    <div className="space-y-2">
-                      <Label htmlFor="location">{t('location')}</Label>
-                      <Input
-                        id="location"
-                        value={location}
-                        onChange={(e) => setLocation(e.target.value)}
-                        placeholder={t('location_placeholder')}
-                      />
-                    </div>
-
-                    {/* Cost */}
-                    <div className="space-y-2">
-                      <Label htmlFor="cost">{t('cost')}</Label>
-                      <Input
-                        id="cost"
-                        type="number"
-                        step="0.01"
-                        value={cost}
-                        onChange={(e) => setCost(e.target.value)}
-                        placeholder={t('cost_placeholder')}
-                      />
-                    </div>
-
-                    {/* Notes */}
-                    <div className="space-y-2">
-                      <Label htmlFor="notes">{t('notes')}</Label>
-                      <Textarea
-                        id="notes"
-                        value={notes}
-                        onChange={(e) => setNotes(e.target.value)}
-                        placeholder={t('notes_placeholder')}
-                        rows={3}
-                      />
-                    </div>
-
-                    <Button onClick={handleLogSession} className="w-full">
-                      {t('log_session')}
-                    </Button>
-                  </div>
-                </DialogContent>
-              </Dialog>
+              <RecoveryFormDialog
+                isOpen={dialogOpen}
+                onOpenChange={setDialogOpen}
+                formData={formData}
+                setFormData={setFormData}
+                onSubmit={handleLogSession}
+              />
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
@@ -343,7 +97,7 @@ const Recovery = () => {
                     key={therapy.id}
                     className="p-4 hover:shadow-md transition-shadow cursor-pointer"
                     onClick={() => {
-                      setSelectedTherapy(therapy.id);
+                      setFormData({ ...formData, selectedTherapy: therapy.id });
                       setDialogOpen(true);
                     }}
                   >
@@ -382,40 +136,13 @@ const Recovery = () => {
               </Card>
             ) : (
               <div className="space-y-3">
-                {sessions.map((session) => {
-                  const therapyInfo = getTherapyInfo(session.therapy_type);
-                  const Icon = therapyInfo?.icon || Activity;
-                  return (
-                    <Card key={session.id} className="p-4">
-                      <div className="flex items-start gap-3">
-                        <div className={`w-10 h-10 rounded-full ${therapyInfo?.color || 'bg-muted'} flex items-center justify-center flex-shrink-0`}>
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between">
-                            <h3 className="font-medium">{getTherapyName(session.therapy_type)}</h3>
-                            <Badge variant="outline" className="text-xs">
-                              {session.intensity}
-                            </Badge>
-                          </div>
-                          <div className="flex items-center gap-4 mt-1 text-sm text-muted-foreground">
-                            <span className="flex items-center gap-1">
-                              <Clock className="h-3 w-3" />
-                              {session.duration_minutes} min
-                            </span>
-                            <span className="flex items-center gap-1">
-                              <Calendar className="h-3 w-3" />
-                              {format(new Date(session.session_date), 'MMM d, yyyy')}
-                            </span>
-                          </div>
-                          {session.notes && (
-                            <p className="text-xs text-muted-foreground mt-2 line-clamp-1">{session.notes}</p>
-                          )}
-                        </div>
-                      </div>
-                    </Card>
-                  );
-                })}
+                {sessions.map((session) => (
+                  <SessionCard
+                    key={session.id}
+                    session={session}
+                    getTherapyName={getTherapyName}
+                  />
+                ))}
               </div>
             )}
           </div>
