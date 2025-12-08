@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
-import { useE2EEncryption } from '../useE2EEncryption';
-import { useCMixClient, CMixMessage } from '../useCMixClient';
+import { useE2EEncryption, useCMixClient, type CMixMessage } from '../encryption';
 
 /**
  * Two-Layer Privacy Messaging Hook

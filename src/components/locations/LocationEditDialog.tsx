@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { LocationFormData } from '@/hooks/useLocationMutations';
+import { type LocationFormData } from '@/hooks/locations';
 
 interface LocationEditDialogProps {
   open: boolean;

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Send } from 'lucide-react';
-import { useUserPresence } from '@/hooks/useUserPresence';
+import { useUserPresence } from '@/hooks/social';
 import { useConversation } from '@/hooks/conversation';
 import { MessageBubble, ConversationHeader } from '@/components/conversation';
 

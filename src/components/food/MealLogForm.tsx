@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Camera, Sparkles, Loader2, Search, ScanBarcode, BookmarkCheck } from 'lucide-react';
 import { BarcodeScanner, ProductInfo } from '@/components/food/BarcodeScanner';
 import { ReceiptScanner, ReceiptItem } from '@/components/food/ReceiptScanner';
-import { NutritionData } from '@/hooks/useFoodLogMutations';
+import { type NutritionData } from '@/hooks/nutrition';
 import { SavedMealsDialog } from './SavedMealsDialog';
 
 interface MealLogFormProps {

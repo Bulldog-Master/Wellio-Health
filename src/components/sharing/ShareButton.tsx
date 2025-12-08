@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Share2 } from 'lucide-react';
 import { ShareDialog } from './ShareDialog';
-import { ContentType } from '@/hooks/useContentSharing';
+import { type ContentType } from '@/hooks/social';
 import { useTranslation } from 'react-i18next';
 
 interface ShareButtonProps {

@@ -2,13 +2,12 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Scale, ArrowLeft } from "lucide-react";
 import { useState } from "react";
-import { useUserPreferences } from "@/hooks/useUserPreferences";
+import { useUserPreferences } from "@/hooks/utils";
 import { formatWeight } from "@/lib/unitConversion";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useWeightLogs, WeightLog } from "@/hooks/useWeightLogs";
-import { useWeightChartData, ChartView } from "@/hooks/useWeightChartData";
+import { useWeightLogs, useWeightChartData, type WeightLog, type ChartView } from "@/hooks/fitness";
 import { 
   WeightLogForm, 
   WeightLogList, 
