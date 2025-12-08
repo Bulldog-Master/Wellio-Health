@@ -3,7 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { useSubscription } from '@/hooks/useSubscription';
+import { useSubscription } from '@/hooks/subscription';
 import { Check, Crown, Sparkles, Zap, ArrowLeft, Plus, ShoppingCart } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { SubscriptionAddons } from '@/components/SubscriptionAddons';

@@ -3,7 +3,7 @@ import { NavLink } from "./NavLink";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useSubscription } from "@/hooks/useSubscription";
+import { useSubscription } from "@/hooks/subscription";
 import {
   Sheet,
   SheetContent,

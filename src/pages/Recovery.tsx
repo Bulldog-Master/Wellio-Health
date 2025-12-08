@@ -4,8 +4,8 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, TrendingUp, Crown, Sparkles, Plus } from 'lucide-react';
-import { useSubscription } from '@/hooks/useSubscription';
-import { SubscriptionGate } from '@/components/SubscriptionGate';
+import { useSubscription } from '@/hooks/subscription';
+import { SubscriptionGate } from '@/components/common';
 import { useRecovery } from '@/hooks/recovery';
 import { therapies, RecoveryFormDialog, SessionCard } from '@/components/recovery';
 

@@ -4,3 +4,4 @@ export { MentionInput } from './MentionInput';
 export { SocialChallenges } from './SocialChallenges';
 export { SuggestedUsers } from './SuggestedUsers';
 export { UserSearchCombobox } from './UserSearchCombobox';
+export { MessagesSidebar } from './MessagesSidebar';

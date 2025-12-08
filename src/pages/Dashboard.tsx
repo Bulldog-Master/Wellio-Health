@@ -1,19 +1,13 @@
 import { Activity, Flame, Target, TrendingUp, Droplets, Moon, Camera, Zap, HeartPulse, Users, Bot, Crown } from "lucide-react";
-import MetricCard from "@/components/MetricCard";
-import ActivityRings from "@/components/ActivityRings";
-import { StreakTracker } from "@/components/StreakTracker";
-import { ActivityTimeline } from "@/components/ActivityTimeline";
-import { NutritionGoals } from "@/components/NutritionGoals";
-import { DashboardCharts } from "@/components/DashboardCharts";
+import { MetricCard, AdBanner } from "@/components/common";
+import { ActivityRings, StreakTracker, ActivityTimeline, DashboardCharts, NutritionGoals, UpgradePrompt } from "@/components/dashboard";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { useSubscription } from "@/hooks/useSubscription";
-import { UpgradePrompt } from "@/components/UpgradePrompt";
-import AdBanner from "@/components/AdBanner";
+import { useSubscription } from "@/hooks/subscription";
 import hero3d from "@/assets/hero-diverse.jpg";
 import { useTranslation } from "react-i18next";
 
