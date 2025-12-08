@@ -4,6 +4,8 @@ import App from "./App.tsx";
 import "./index.css";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { setupGlobalErrorHandlers } from "./lib/errorTracking";
+import { initPerformanceMonitoring } from "./lib/performanceMonitoring";
+import { initAnalytics } from "./lib/analytics";
 
 // FORCE dark mode immediately
 document.documentElement.classList.add('dark');
@@ -12,6 +14,12 @@ document.documentElement.style.colorScheme = 'dark';
 
 // Setup global error handlers for unhandled errors
 setupGlobalErrorHandlers();
+
+// Initialize performance monitoring
+initPerformanceMonitoring();
+
+// Initialize analytics
+initAnalytics();
 
 // Clear ALL service worker caches and force update
 if ('serviceWorker' in navigator) {
