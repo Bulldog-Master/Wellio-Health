@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { format, startOfWeek } from "date-fns";
 import { useToast } from "@/hooks/use-toast";
-import SEOHead from "@/components/SEOHead";
+import { SEOHead } from "@/components/common";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 interface GroceryItem {
