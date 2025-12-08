@@ -73,5 +73,10 @@
   "color_green": "Green",
   "color_blue": "Blue",
   "color_purple": "Purple",
-  "color_brown": "Brown"
+  "color_brown": "Brown",
+  
+  "move": "Move",
+  "move_to_folder": "Move to Folder",
+  "edit": "Edit",
+  "delete_folder": "Delete Folder"
 }
