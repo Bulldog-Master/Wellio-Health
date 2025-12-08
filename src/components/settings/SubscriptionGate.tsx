@@ -1,2 +1,2 @@
 // Re-export for backward compatibility
-export { SubscriptionGate } from '../SubscriptionGate';
+export { SubscriptionGate } from '../common/SubscriptionGate';

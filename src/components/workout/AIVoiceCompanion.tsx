@@ -19,7 +19,7 @@ import {
   Sparkles,
   Crown
 } from 'lucide-react';
-import { SubscriptionGate } from '@/components/SubscriptionGate';
+import { SubscriptionGate } from '@/components/common';
 
 interface Message {
   role: 'user' | 'assistant';
