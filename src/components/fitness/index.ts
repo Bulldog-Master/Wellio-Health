@@ -5,6 +5,8 @@ export { ActivityTimeline } from './ActivityTimeline';
 export { AdvancedMetrics } from './AdvancedMetrics';
 export { DashboardCharts } from './DashboardCharts';
 export { GoalSettingWizard } from './GoalSettingWizard';
+export { HabitCard } from './HabitCard';
+export { HabitForm } from './HabitForm';
 export { MetricCard } from './MetricCard';
 export { NutritionGoals } from './NutritionGoals';
 export { StreakTracker } from './StreakTracker';
