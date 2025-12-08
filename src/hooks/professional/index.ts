@@ -1,0 +1,1 @@
+export { useProfessionalPortal } from './useProfessionalPortal';
