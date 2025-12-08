@@ -1,0 +1,1 @@
+export { usePersonalRecords } from './usePersonalRecords';
