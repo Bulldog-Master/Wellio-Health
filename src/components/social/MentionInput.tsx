@@ -1,2 +1,2 @@
-// Re-export for backward compatibility
-export { MentionInput } from '../MentionInput';
+// Re-export the implementation
+export { MentionInput, default } from './MentionInputImpl';
