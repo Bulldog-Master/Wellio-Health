@@ -8,8 +8,8 @@ import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { toast } from 'sonner';
-import SEOHead from '@/components/SEOHead';
-import Layout from '@/components/Layout';
+import { SEOHead } from '@/components/common';
+import { Layout } from '@/components/layout';
 import { supabase } from '@/integrations/supabase/client';
 import { format } from 'date-fns';
 

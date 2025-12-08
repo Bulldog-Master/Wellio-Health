@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { DonationModal } from '@/components/DonationModal';
+import { DonationModal } from '@/components/social';
 import { ArrowLeft, Heart, MapPin, Calendar, BadgeCheck, Share2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { format } from 'date-fns';

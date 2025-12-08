@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ChevronRight, Dumbbell, Stethoscope, Crown } from "lucide-react";
-import { useSubscription } from "@/hooks/useSubscription";
+import { useSubscription } from "@/hooks/subscription";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "react-i18next";
-import { SubscriptionGate } from "@/components/SubscriptionGate";
+import { SubscriptionGate } from "@/components/common";
 
 const ProfessionalHub = () => {
   const navigate = useNavigate();

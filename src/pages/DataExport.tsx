@@ -7,8 +7,8 @@ import { Download, ArrowLeft, FileJson, FileSpreadsheet, Loader2 } from "lucide-
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
-import SEOHead from "@/components/SEOHead";
+import { useToast } from "@/hooks/ui";
+import { SEOHead } from "@/components/common";
 
 const DataExport = () => {
   const { t } = useTranslation(['settings', 'common']);

@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next';
-import { useAdminStatus } from '@/hooks/useAdminStatus';
+import { useAdminStatus } from '@/hooks/auth';
 import { useAdvertisements } from '@/hooks/admin';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import SEOHead from '@/components/SEOHead';
+import { SEOHead } from '@/components/common';
 import { AdFormDialog, AdCard } from '@/components/admin/advertisements';
 import { Megaphone, Plus, ArrowLeft } from 'lucide-react';
 import { Link, Navigate } from 'react-router-dom';

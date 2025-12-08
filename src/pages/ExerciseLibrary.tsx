@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { ArrowLeft, Search, Video, Filter } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { SubscriptionGate } from "@/components/SubscriptionGate";
+import { SubscriptionGate } from "@/components/common";
 import {
   Select,
   SelectContent,

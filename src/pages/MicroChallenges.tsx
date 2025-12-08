@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { MicroChallengeHub } from '@/components/challenges/MicroChallengeHub';
-import { SubscriptionGate } from '@/components/SubscriptionGate';
-import { SEOHead } from '@/components/SEOHead';
+import { SubscriptionGate, SEOHead } from '@/components/common';
 
 const MicroChallenges = () => {
   const { t } = useTranslation(['challenges', 'common', 'seo']);

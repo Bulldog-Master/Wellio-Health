@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { format } from 'date-fns';
-import SEOHead from '@/components/SEOHead';
+import { SEOHead } from '@/components/common';
 import { ReceiptModal } from '@/components/payments/ReceiptModal';
 const PaymentHistory = () => {
   const navigate = useNavigate();

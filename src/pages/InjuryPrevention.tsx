@@ -3,10 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Layout from '@/components/Layout';
-import { SubscriptionGate } from '@/components/SubscriptionGate';
+import { Layout } from '@/components/layout';
+import { SubscriptionGate, SEOHead } from '@/components/common';
 import InjuryPrevention from '@/components/workout/InjuryPrevention';
-import { SEOHead } from '@/components/SEOHead';
 
 const InjuryPreventionPage: React.FC = () => {
   const { t } = useTranslation(['fitness', 'common']);

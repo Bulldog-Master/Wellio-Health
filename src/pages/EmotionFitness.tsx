@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Brain, Heart, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { EmotionFitnessEngine } from '@/components/wellness/EmotionFitnessEngine';
-import { SubscriptionGate } from '@/components/SubscriptionGate';
-import SEOHead from '@/components/SEOHead';
+import { SubscriptionGate, SEOHead } from '@/components/common';
 
 const EmotionFitness: React.FC = () => {
   const { t } = useTranslation(['fitness', 'common', 'seo']);

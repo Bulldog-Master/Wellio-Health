@@ -14,8 +14,8 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { SubscriptionGate } from "@/components/SubscriptionGate";
-import { useToast } from "@/hooks/use-toast";
+import { SubscriptionGate } from "@/components/common";
+import { useToast } from "@/hooks/ui";
 import { supabase } from "@/integrations/supabase/client";
 
 interface Message {

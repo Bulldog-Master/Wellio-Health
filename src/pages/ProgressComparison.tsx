@@ -1,5 +1,5 @@
-import Layout from "@/components/Layout";
-import SEOHead from "@/components/SEOHead";
+import { Layout } from "@/components/layout";
+import { SEOHead } from "@/components/common";
 import ProgressPhotoComparison from "@/components/progress/ProgressPhotoComparison";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";

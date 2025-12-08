@@ -19,7 +19,7 @@ import {
   ChevronUp
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { SubscriptionGate } from "@/components/SubscriptionGate";
+import { SubscriptionGate } from "@/components/common";
 
 interface WorkoutDay {
   day: string;

@@ -14,7 +14,7 @@ import {
   Zap
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useSubscription } from "@/hooks/useSubscription";
+import { useSubscription } from "@/hooks/subscription";
 import { useTranslation } from "react-i18next";
 
 const PremiumFeatures = () => {

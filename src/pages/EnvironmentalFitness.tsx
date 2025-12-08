@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, CloudSun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { SEOHead } from '@/components/SEOHead';
-import { SubscriptionGate } from '@/components/SubscriptionGate';
+import { SEOHead, SubscriptionGate } from '@/components/common';
 import { EnvironmentalIntelligence } from '@/components/wellness/EnvironmentalIntelligence';
 
 const EnvironmentalFitness: React.FC = () => {

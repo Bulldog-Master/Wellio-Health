@@ -7,7 +7,7 @@ import { Shield, ArrowLeft, Check, X, AlertTriangle, Lock, Eye, UserX } from "lu
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
-import { SubscriptionGate } from "@/components/SubscriptionGate";
+import { SubscriptionGate } from "@/components/common";
 
 interface PrivacyCheck {
   id: string;

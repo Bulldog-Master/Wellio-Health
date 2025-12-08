@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { DonationModal } from '@/components/DonationModal';
+import { DonationModal } from '@/components/social';
 import { Heart, Search, ArrowLeft } from 'lucide-react';
 import { useFundraisers } from '@/hooks/fundraisers';
 import { FundraiserFormDialog, FundraiserCard } from '@/components/fundraisers';

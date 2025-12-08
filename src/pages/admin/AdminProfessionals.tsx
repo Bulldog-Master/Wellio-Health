@@ -10,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, CheckCircle, XCircle, Clock, Dumbbell, Stethoscope, FileText, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
-import { useSubscription } from '@/hooks/useSubscription';
+import { useSubscription } from '@/hooks/subscription';
 
 interface Application {
   id: string;

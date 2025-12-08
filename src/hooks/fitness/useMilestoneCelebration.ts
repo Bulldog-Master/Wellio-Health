@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
-import { MilestoneType } from '@/components/MilestoneCelebration';
-import { useSubscription } from '@/hooks/useSubscription';
+import { MilestoneType } from '@/components/celebrations/MilestoneCelebration';
+import { useSubscription } from '@/hooks/subscription';
 
 interface MilestoneData {
   milestone: MilestoneType;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
-import { useAdminStatus } from '@/hooks/useAdminStatus';
+import { useAdminStatus } from '@/hooks/auth';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 import { ArrowLeft, Crown, UserPlus, Trash2, Shield, Loader2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { format } from 'date-fns';
-import { UserSearchCombobox } from '@/components/UserSearchCombobox';
+import { UserSearchCombobox } from '@/components/social';
 
 interface VIPPassWithProfile {
   id: string;
