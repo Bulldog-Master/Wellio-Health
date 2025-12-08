@@ -36,8 +36,8 @@ const PageLoader = () => (
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000,
-      gcTime: 10 * 60 * 1000,
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      gcTime: 10 * 60 * 1000, // 10 minutes (formerly cacheTime)
       refetchOnWindowFocus: false,
       refetchOnReconnect: true,
       retry: 1,
@@ -45,6 +45,9 @@ const queryClient = new QueryClient({
   },
 });
 
+/**
+ * Main app content component with hooks for notifications, keyboard shortcuts, and offline detection
+ */
 const AppContent = () => {
   usePushNotifications();
   useAppKeyboardShortcuts();
@@ -58,6 +61,8 @@ const AppContent = () => {
       <InstallPrompt />
       <NetworkStatus />
       <OfflineIndicator />
+      
+      {/* Compliance Components */}
       <CookieConsent />
       <BreachNotification />
       <HealthDisclaimer />
