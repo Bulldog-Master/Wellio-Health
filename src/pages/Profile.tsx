@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Save } from "lucide-react";
-import { useSubscription } from "@/hooks/useSubscription";
-import { ProgressToReward } from "@/components/ProgressToReward";
+import { useSubscription } from "@/hooks/subscription";
+import { ProgressToReward } from "@/components/dashboard";
 import { useTranslation } from "react-i18next";
 import { useProfile } from "@/hooks/profile";
 import {

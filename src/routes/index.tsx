@@ -1,8 +1,7 @@
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-import Layout from "@/components/Layout";
-import ProtectedRoute from "@/components/ProtectedRoute";
-import { RouteErrorBoundary } from "@/components/RouteErrorBoundary";
+import { Layout } from "@/components/layout";
+import { ProtectedRoute, RouteErrorBoundary } from "@/components/common";
 
 // Eagerly loaded routes
 import Auth from "@/pages/Auth";

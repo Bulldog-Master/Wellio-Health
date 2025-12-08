@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useFeedState, useFeedData, useFeedMutations, useRealtimePosts } from "@/hooks/social";
-import { useSubscription } from "@/hooks/useSubscription";
+import { useSubscription } from "@/hooks/subscription";
 import { 
   FeedHeader, 
   CreatePostCard, 
@@ -12,9 +12,8 @@ import {
   GroupsQuickAccess, 
   ReportDialog 
 } from "@/components/feed";
-import { SuggestedUsers } from "@/components/SuggestedUsers";
-import { MessagesSidebar } from "@/components/MessagesSidebar";
-import AdBanner from "@/components/AdBanner";
+import { SuggestedUsers, MessagesSidebar } from "@/components/social";
+import { AdBanner } from "@/components/common";
 
 const Feed = () => {
   const navigate = useNavigate();

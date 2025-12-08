@@ -1,2 +1,2 @@
 // Re-export for backward compatibility
-export { MessagesSidebar } from '../MessagesSidebar';
+export { MessagesSidebar } from '@/components/social/MessagesSidebar';
