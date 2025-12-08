@@ -1,4 +1,4 @@
-import { useNetworkStatus } from '@/hooks/useNetworkStatus';
+import { useNetworkStatus } from '@/hooks/network';
 import { WifiOff } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 

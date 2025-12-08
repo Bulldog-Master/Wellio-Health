@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { useUserPreferences } from "@/hooks/useUserPreferences";
+import { useUserPreferences } from "@/hooks/utils";
 import { formatDistance } from "@/lib/unitConversion";
 import { useWorkoutState, useWorkoutData, useWorkoutActions, calculateCalories } from "@/hooks/workout";
 import type { ActivityLog, RoutineExercise } from "@/types/workout.types";

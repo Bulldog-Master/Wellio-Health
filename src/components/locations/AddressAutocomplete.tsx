@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/ui/input';
 import { MapPin, Loader2 } from 'lucide-react';
-import { useDebounce } from '@/hooks/useDebounce';
+import { useDebounce } from '@/hooks/ui';
 import { cn } from '@/lib/utils';
 
 interface AddressSuggestion {

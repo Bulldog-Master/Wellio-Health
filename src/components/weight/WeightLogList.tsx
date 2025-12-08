@@ -6,7 +6,7 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { useTranslation } from "react-i18next";
 import { formatWeight } from "@/lib/unitConversion";
-import { WeightLog } from "@/hooks/useWeightLogs";
+import { type WeightLog } from "@/hooks/fitness";
 
 interface WeightLogListProps {
   weightLogs: WeightLog[];

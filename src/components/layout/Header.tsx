@@ -2,7 +2,7 @@ import { Bell, User, Search } from "lucide-react";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 import { Badge } from "../ui/badge";
-import { useUnreadNotificationCount } from "@/hooks/useNotifications";
+import { useUnreadNotificationCount } from "@/hooks/social";
 import { LanguageSwitcher } from "../LanguageSwitcher";
 import { CartButton } from "../cart/CartButton";
 import { Input } from "../ui/input";

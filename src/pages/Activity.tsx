@@ -1,8 +1,7 @@
 import { Activity as ActivityIcon } from "lucide-react";
-import { useUserPreferences } from "@/hooks/useUserPreferences";
+import { useUserPreferences } from "@/hooks/utils";
 import { useTranslation } from "react-i18next";
-import { useActivityData } from "@/hooks/useActivityData";
-import { useWearableForm } from "@/hooks/useWearableForm";
+import { useActivityData, useWearableForm } from "@/hooks/fitness";
 import { 
   ActivityHubGrid, 
   ActivityStatsCards, 

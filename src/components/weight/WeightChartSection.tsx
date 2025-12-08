@@ -3,7 +3,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { useTranslation } from "react-i18next";
 import { formatWeight } from "@/lib/unitConversion";
-import { ChartView } from "@/hooks/useWeightChartData";
+import { type ChartView } from "@/hooks/fitness";
 
 interface WeightChartSectionProps {
   chartData: any[];

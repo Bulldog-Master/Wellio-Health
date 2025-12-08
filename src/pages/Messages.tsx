@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { User, MessageSquare } from "lucide-react";
-import { useUserPresence } from "@/hooks/useUserPresence";
+import { useUserPresence } from "@/hooks/social";
 import { formatDistanceToNow } from "date-fns";
 import { useTranslation } from "react-i18next";
 import { PrivacyStatusIndicator } from "@/components/messages/PrivacyStatusIndicator";

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/ui/input';
 import { Dumbbell, Loader2, MapPin, Database, Globe } from 'lucide-react';
-import { useDebounce } from '@/hooks/useDebounce';
+import { useDebounce } from '@/hooks/ui';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
 

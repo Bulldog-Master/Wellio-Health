@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Bookmark, Trash2 } from 'lucide-react';
-import { SavedMeal } from '@/hooks/useFoodLogMutations';
+import { type SavedMeal } from '@/hooks/nutrition';
 
 interface SavedMealsDialogProps {
   open: boolean;

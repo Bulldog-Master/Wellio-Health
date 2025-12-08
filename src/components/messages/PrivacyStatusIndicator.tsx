@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
-import { usePrivateMessaging } from '@/hooks/usePrivateMessaging';
+import { usePrivateMessaging } from '@/hooks/social';
 
 interface PrivacyStatusIndicatorProps {
   className?: string;

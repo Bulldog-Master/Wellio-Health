@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { Camera, ArrowLeft, Trash2, Upload } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
-import { useUserPreferences } from "@/hooks/useUserPreferences";
+import { useUserPreferences } from "@/hooks/utils";
 import { formatWeight } from "@/lib/unitConversion";
 import { useTranslation } from "react-i18next";
 import { ShareButton } from "@/components/sharing";

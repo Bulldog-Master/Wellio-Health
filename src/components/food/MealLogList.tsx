@@ -3,7 +3,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Pencil, Trash2, Clock, Utensils } from 'lucide-react';
-import { MealLog } from '@/hooks/useFoodLogMutations';
+import { type MealLog } from '@/hooks/nutrition';
 
 interface MealLogListProps {
   mealsByDate: Record<string, MealLog[]>;

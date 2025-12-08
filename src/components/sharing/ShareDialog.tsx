@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useContentSharing, ContentType, ContentShare } from '@/hooks/useContentSharing';
+import { useContentSharing, type ContentType, type ContentShare } from '@/hooks/social';
 import { UserSearchCombobox } from '@/components/UserSearchCombobox';
 import { useTranslation } from 'react-i18next';
 import { Copy, Link, Trash2, Users, Globe, Clock, UserPlus } from 'lucide-react';

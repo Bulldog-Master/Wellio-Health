@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { useTranslation } from "react-i18next";
 import { formatDistance } from "@/lib/unitConversion";
-import { ActivityLog } from "@/hooks/useActivityData";
+import { type ActivityLog } from "@/hooks/fitness";
 
 interface RecentActivityListProps {
   activityLogs: ActivityLog[];

@@ -9,7 +9,7 @@ import { Plus } from 'lucide-react';
 import AddressAutocomplete from '@/components/AddressAutocomplete';
 import PhoneInput from '@/components/PhoneInput';
 import GymNameAutocomplete from '@/components/GymNameAutocomplete';
-import { LocationFormData } from '@/hooks/useLocationMutations';
+import { type LocationFormData } from '@/hooks/locations';
 
 interface LocationSubmitDialogProps {
   open: boolean;
