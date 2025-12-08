@@ -7,5 +7,6 @@ export { useRealtimePosts } from './useRealtimePosts';
 export { useRealtimePresence } from './useRealtimePresence';
 export { useRealtimeStories } from './useRealtimeStories';
 export { useReferralCelebration } from './useReferralCelebration';
+export { useSearch } from './useSearch';
 export { useTypingIndicator } from './useTypingIndicator';
 export { useUserPresence } from './useUserPresence';
