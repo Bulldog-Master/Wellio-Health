@@ -19,5 +19,6 @@
   "view_posts": "Visualizza Post",
   "top_users": "Top Utenti",
   "follow_status_updated": "Stato follow aggiornato",
-  "error": "Errore"
+  "error": "Errore",
+  "no_users_available": "Nessun utente disponibile"
 }

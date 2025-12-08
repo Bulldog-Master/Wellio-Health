@@ -19,5 +19,6 @@
   "view_posts": "Bekijk Posts",
   "top_users": "Top Gebruikers",
   "follow_status_updated": "Volg status bijgewerkt",
-  "error": "Fout"
+  "error": "Fout",
+  "no_users_available": "Geen gebruikers beschikbaar"
 }

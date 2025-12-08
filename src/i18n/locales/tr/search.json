@@ -19,5 +19,6 @@
   "view_posts": "Gönderileri Görüntüle",
   "top_users": "En İyi Kullanıcılar",
   "follow_status_updated": "Takip durumu güncellendi",
-  "error": "Hata"
+  "error": "Hata",
+  "no_users_available": "Kullanıcı mevcut değil"
 }
