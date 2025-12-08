@@ -1,4 +1,4 @@
 // Nutrition hooks barrel export
-export { useFoodAnalysis } from '../useFoodAnalysis';
-export { useFoodLog } from '../useFoodLog';
-export { useFoodLogMutations } from '../useFoodLogMutations';
+export { useFoodAnalysis } from './useFoodAnalysis';
+export { useFoodLog, type MealLog, type SavedMeal, type NutritionData } from './useFoodLog';
+export { useFoodLogMutations } from './useFoodLogMutations';
