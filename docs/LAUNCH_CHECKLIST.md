@@ -85,7 +85,7 @@
 
 ### Security
 - [x] Rate limiting utility (supabase/functions/_shared/rateLimit.ts)
-- [ ] Apply rate limiting to public edge functions
+- [x] Apply rate limiting to public edge functions
 
 ### App Store Prep (if native)
 - [ ] iOS build tested
