@@ -6,6 +6,7 @@ import { ErrorBoundary } from "./components/ErrorBoundary";
 import { setupGlobalErrorHandlers } from "./lib/errorTracking";
 import { initPerformanceMonitoring } from "./lib/performanceMonitoring";
 import { initAnalytics } from "./lib/analytics";
+import { runHealthCheck, logTestResults } from "./lib/testingUtils";
 
 // FORCE dark mode immediately
 document.documentElement.classList.add('dark');
@@ -20,6 +21,11 @@ initPerformanceMonitoring();
 
 // Initialize analytics
 initAnalytics();
+
+// Run health check in development
+if (import.meta.env.DEV) {
+  runHealthCheck().then(logTestResults);
+}
 
 // Clear ALL service worker caches and force update
 if ('serviceWorker' in navigator) {
