@@ -8,12 +8,14 @@ import { I18nextProvider } from "react-i18next";
 import i18n from "@/i18n/config";
 import { usePushNotifications, useOfflineStatus, useBackgroundSync } from "@/hooks/network";
 import { useAppKeyboardShortcuts } from "@/hooks/ui";
-import { SkipToContent } from "@/components/SkipToContent";
-import { KeyboardShortcutsHelp } from "@/components/KeyboardShortcutsHelp";
-import { InstallPrompt } from "@/components/InstallPrompt";
-import { NetworkStatus } from "@/components/NetworkStatus";
-import { OfflineIndicator } from "@/components/OfflineIndicator";
-import { SessionTimeoutProvider } from "@/components/SessionTimeoutProvider";
+import { 
+  SkipToContent, 
+  InstallPrompt, 
+  NetworkStatus, 
+  OfflineIndicator,
+  SessionTimeoutProvider,
+  KeyboardShortcutsHelp
+} from "@/components/common";
 import { AppRoutes } from "@/routes";
 import { 
   CookieConsent, 

@@ -3,7 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Flame, Zap, Clock, TrendingUp } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { format, subDays } from 'date-fns';
-import { Celebration } from '@/components/Celebration';
+import { Celebration } from '@/components/celebrations';
 import { useTranslation } from 'react-i18next';
 
 interface RingData {
