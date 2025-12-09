@@ -228,6 +228,18 @@ Comprehensive documentation is available in the `/docs` directory:
 
 This project is currently in private development. Contribution guidelines will be published when the project opens for contributions.
 
+## ⚠️ Disclaimer
+
+**Wellio Health is a wellness and fitness tracking tool, not a medical device.**
+
+- This application does not provide medical diagnosis, treatment, or professional health advice
+- Always consult qualified healthcare professionals for medical decisions
+- Medical records storage is for personal organization only
+- AI-powered insights are informational suggestions, not medical recommendations
+- The app is designed to align with GDPR, HIPAA, and CCPA principles but has not undergone formal regulatory certification
+
+By using this application, you acknowledge that it is a wellness tool and not a substitute for professional medical care.
+
 ## 📄 License
 
 Proprietary. All rights reserved.
