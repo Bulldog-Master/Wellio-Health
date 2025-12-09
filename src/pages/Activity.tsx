@@ -9,7 +9,7 @@ import {
   WearableDataList, 
   RecentActivityList 
 } from "@/components/activity";
-import AdBanner from "@/components/AdBanner";
+import { AdBanner } from "@/components/common";
 
 const Activity = () => {
   const { t } = useTranslation('fitness');

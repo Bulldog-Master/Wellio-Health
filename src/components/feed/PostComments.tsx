@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User, Send } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { formatDistanceToNow } from "date-fns";
-import { MentionInput } from "@/components/MentionInput";
+import { MentionInput } from "@/components/social";
 
 interface PostCommentsProps {
   comments?: any[];

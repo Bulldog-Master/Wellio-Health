@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 import { Badge } from "../ui/badge";
 import { useUnreadNotificationCount } from "@/hooks/social";
-import { LanguageSwitcher } from "../LanguageSwitcher";
+import { LanguageSwitcher } from "@/components/common";
 import { CartButton } from "../cart/CartButton";
 import { Input } from "../ui/input";
 import { useState } from "react";

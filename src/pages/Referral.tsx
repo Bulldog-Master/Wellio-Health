@@ -7,7 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNavigate } from "react-router-dom";
-import { ProgressToReward } from "@/components/ProgressToReward";
+import { ProgressToReward } from "@/components/dashboard";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "react-i18next";
 

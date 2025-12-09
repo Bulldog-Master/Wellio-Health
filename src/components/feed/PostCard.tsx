@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
-import { MentionInput } from "@/components/MentionInput";
-import { LazyImage } from "@/components/LazyImage";
+import { MentionInput } from "@/components/social";
+import { LazyImage } from "@/components/common";
 import { PostHeader } from "./PostHeader";
 import { PostActions } from "./PostActions";
 import { PostReactions } from "./PostReactions";

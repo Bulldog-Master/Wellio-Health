@@ -6,7 +6,7 @@ import { Separator } from '@/components/ui/separator';
 import { useSubscription } from '@/hooks/subscription';
 import { Check, Crown, Sparkles, Zap, ArrowLeft, Plus, ShoppingCart } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { SubscriptionAddons } from '@/components/SubscriptionAddons';
+import { SubscriptionAddons } from '@/components/settings';
 import { useCartStore } from '@/stores/cartStore';
 import { toast } from 'sonner';
 

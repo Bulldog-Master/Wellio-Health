@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
-import { EmptyState } from "@/components/EmptyState";
+import { EmptyState } from "@/components/common";
 import { useTranslation } from "react-i18next";
 
 interface SocialConnection {

@@ -35,3 +35,4 @@ export { RouteErrorBoundary } from './RouteErrorBoundary';
 export { LazyComponent, createLazyComponent } from './LazyComponent';
 export { OptimizedImage } from './OptimizedImage';
 export { AccessibleButton } from './AccessibleButton';
+export { KeyboardShortcutsHelp } from './KeyboardShortcutsHelp';

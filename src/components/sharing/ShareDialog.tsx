@@ -20,7 +20,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useContentSharing, type ContentType, type ContentShare } from '@/hooks/social';
-import { UserSearchCombobox } from '@/components/UserSearchCombobox';
+import { UserSearchCombobox } from '@/components/social';
 import { useTranslation } from 'react-i18next';
 import { Copy, Link, Trash2, Users, Globe, Clock, UserPlus } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';

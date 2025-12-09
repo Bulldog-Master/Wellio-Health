@@ -6,9 +6,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Plus } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import AddressAutocomplete from '@/components/AddressAutocomplete';
-import PhoneInput from '@/components/PhoneInput';
-import GymNameAutocomplete from '@/components/GymNameAutocomplete';
+import { AddressAutocomplete, GymNameAutocomplete } from '@/components/locations';
+import { PhoneInput } from '@/components/common';
 import { locationCategories } from '@/lib/locationUtils';
 
 export interface LocationFormData {
