@@ -219,6 +219,9 @@ Comprehensive documentation is available in the `/docs` directory:
 
 - [Architecture Overview](docs/ARCHITECTURE.md)
 - [Security Audit](docs/SECURITY_AUDIT.md)
+- [Security FAQ](docs/SECURITY_FAQ.md) - Common security questions for reviewers
+- [AI Privacy Policy](docs/AI_PRIVACY.md)
+- [Domain Architecture](docs/DOMAIN_ARCHITECTURE.md)
 - [Launch Checklist](docs/LAUNCH_CHECKLIST.md)
 - [Translation Guide](docs/TRANSLATION_GUIDE.md)
 - [ISO Compliance](docs/ISO_COMPLIANCE.md)
