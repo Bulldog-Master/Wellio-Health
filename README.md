@@ -149,13 +149,22 @@ npm run dev
 
 ### Environment Variables
 
-Copy `.env.example` to `.env` (note: only contains publishable keys):
+> **📦 Note for Reviewers:** In Lovable projects, `.env` is auto-generated and committed to the repo.  
+> This is intentional and safe—it only contains **publishable client-side keys** (e.g., Supabase anon key).  
+> All server-side secrets are managed via **Lovable Cloud Secrets** and never exposed in the codebase.  
+> See [SECURITY_FAQ.md](docs/SECURITY_FAQ.md) for full details.
+
+Copy `.env.example` to `.env` for local development:
 
 ```bash
 cp .env.example .env
 ```
 
-The app uses Lovable Cloud for backend services. Secrets are stored securely in Lovable Cloud Secrets, not in the codebase.
+**Key distinction:**
+| Location | Contains | Exposed to Client |
+|----------|----------|-------------------|
+| `.env` (tracked) | `VITE_*` publishable keys only | ✅ Yes (by design) |
+| Lovable Cloud Secrets | Service keys, API secrets, encryption keys | ❌ Never |
 
 ### Mobile Development
 
