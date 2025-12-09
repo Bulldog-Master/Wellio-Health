@@ -5516,8 +5516,24 @@ export type Database = {
         Args: { _type: string; _user_id: string }
         Returns: boolean
       }
+      is_challenge_creator: {
+        Args: { _challenge_id: string; _user_id: string }
+        Returns: boolean
+      }
+      is_challenge_participant: {
+        Args: { _challenge_id: string; _user_id: string }
+        Returns: boolean
+      }
       is_following: {
         Args: { _follower_id: string; _following_id: string }
+        Returns: boolean
+      }
+      is_group_creator: {
+        Args: { _group_id: string; _user_id: string }
+        Returns: boolean
+      }
+      is_group_member: {
+        Args: { _group_id: string; _user_id: string }
         Returns: boolean
       }
       is_session_participant: {
