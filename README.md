@@ -215,17 +215,22 @@ npx cap open android # Opens in Android Studio
 
 ## 📚 Documentation
 
-Comprehensive documentation is available in the `/docs` directory:
+Comprehensive documentation is available in the `/docs` directory. See [**docs/INDEX.md**](docs/INDEX.md) for the complete index.
 
-- [Architecture Overview](docs/ARCHITECTURE.md)
-- [Security Audit](docs/SECURITY_AUDIT.md)
-- [Security FAQ](docs/SECURITY_FAQ.md) - Common security questions for reviewers
-- [AI Privacy Policy](docs/AI_PRIVACY.md)
-- [Domain Architecture](docs/DOMAIN_ARCHITECTURE.md)
-- [Launch Checklist](docs/LAUNCH_CHECKLIST.md)
-- [Translation Guide](docs/TRANSLATION_GUIDE.md)
-- [ISO Compliance](docs/ISO_COMPLIANCE.md)
-- [Accessibility](docs/ACCESSIBILITY.md)
+### Key Documents
+
+| Category | Documents |
+|----------|-----------|
+| **Security** | [Security Audit](docs/SECURITY_AUDIT.md) · [Security FAQ](docs/SECURITY_FAQ.md) · [AI Privacy](docs/AI_PRIVACY.md) |
+| **Architecture** | [Architecture](docs/ARCHITECTURE.md) · [Domain Architecture](docs/DOMAIN_ARCHITECTURE.md) |
+| **Launch** | [Launch Checklist](docs/LAUNCH_CHECKLIST.md) · [Testing Checklist](docs/TESTING_CHECKLIST.md) |
+| **Compliance** | [ISO Compliance](docs/ISO_COMPLIANCE.md) · [Accessibility](docs/ACCESSIBILITY.md) |
+| **i18n** | [Translation Guide](docs/TRANSLATION_GUIDE.md) · [Translation Audit](docs/TRANSLATION_AUDIT_FINAL.md) |
+
+### For External Reviewers
+
+- **Security concerns?** See [SECURITY_FAQ.md](docs/SECURITY_FAQ.md) - explains `.env` file, key management, and common questions
+- **AI/Privacy?** See [AI_PRIVACY.md](docs/AI_PRIVACY.md) - data handling, anonymization, and what's never sent to AI
 
 ## 🤝 Contributing
 
