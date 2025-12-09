@@ -7,3 +7,4 @@ export { useIntersectionObserver } from './useIntersectionObserver';
 export { useKeyboardNavigation, useAppKeyboardShortcuts } from './useKeyboardNavigation';
 export { useLoadingState, useSimpleLoading } from './useLoadingState';
 export { usePageTransition, usePageTransitionClass, useScrollAnimation } from './usePageTransition';
+export { usePageTracking } from './usePageTracking';
