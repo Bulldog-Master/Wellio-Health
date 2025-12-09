@@ -6,11 +6,24 @@
   <img src="https://img.shields.io/badge/status-active-brightgreen?style=for-the-badge" alt="Status: Active" />
   
   <!-- Build Status -->
-  <img src="https://img.shields.io/github/actions/workflow/status/yourusername/wellio-health/ci.yml?branch=main&label=build&style=for-the-badge" alt="Build Status" />
+  <img src="https://img.shields.io/github/actions/workflow/status/Bulldog-Master/Wellio-Health/ci.yml?branch=main&label=build&style=for-the-badge" alt="Build Status" />
+  
+  <!-- Security Scanning (Dynamic) -->
+  <a href="https://github.com/Bulldog-Master/Wellio-Health/security/code-scanning">
+    <img src="https://img.shields.io/github/actions/workflow/status/Bulldog-Master/Wellio-Health/codeql.yml?branch=main&label=CodeQL&style=for-the-badge&logo=github&logoColor=white" alt="CodeQL" />
+  </a>
+  
+  <!-- Snyk Badge (replace YOUR-SNYK-ORG/YOUR-REPO with actual values after Snyk setup) -->
+  <!-- To activate: Sign up at snyk.io, connect repo, then uncomment below -->
+  <!-- <a href="https://snyk.io/test/github/Bulldog-Master/Wellio-Health">
+    <img src="https://snyk.io/test/github/Bulldog-Master/Wellio-Health/badge.svg?style=for-the-badge" alt="Known Vulnerabilities" />
+  </a> -->
   
   <!-- License -->
   <img src="https://img.shields.io/badge/license-Proprietary-lightgrey?style=for-the-badge" alt="License" />
-  
+</p>
+
+<p align="center">
   <!-- Tech Stack -->
   <img src="https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React" />
   <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
@@ -18,12 +31,12 @@
   <img src="https://img.shields.io/badge/TailwindCSS-3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="TailwindCSS" />
   <img src="https://img.shields.io/badge/Supabase-Edge_Secure-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" />
   <img src="https://img.shields.io/badge/Capacitor-Mobile-119EFF?style=for-the-badge&logo=capacitor&logoColor=white" alt="Capacitor" />
+</p>
 
+<p align="center">
   <!-- Security & Privacy -->
   <img src="https://img.shields.io/badge/Encryption-Quantum_Resistant-blueviolet?style=for-the-badge&logo=shield&logoColor=white" alt="Quantum Resistant Encryption" />
   <img src="https://img.shields.io/badge/AI_Privacy-SAFE-success?style=for-the-badge&logo=lock&logoColor=white" alt="AI Privacy" />
-
-  <!-- Docs -->
   <img src="https://img.shields.io/badge/Docs-Complete-brightgreen?style=for-the-badge&logo=readme" alt="Documentation Status" />
 </p>
 
