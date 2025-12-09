@@ -5260,7 +5260,36 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      wearable_connections_safe: {
+        Row: {
+          created_at: string | null
+          encryption_version: number | null
+          expires_at: string | null
+          id: string | null
+          provider: string | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          encryption_version?: number | null
+          expires_at?: string | null
+          id?: string | null
+          provider?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          encryption_version?: number | null
+          expires_at?: string | null
+          id?: string | null
+          provider?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       award_points_and_streak: {
