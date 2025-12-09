@@ -1,2 +1,2 @@
-// Re-export for backward compatibility
-export { WeightChart } from '../WeightChart';
+// Re-export from correct location
+export { WeightChart } from '@/components/weight/WeightChart';

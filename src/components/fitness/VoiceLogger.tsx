@@ -1,2 +1,2 @@
-// Re-export for backward compatibility
-export { default as VoiceLogger } from '../VoiceLogger';
+// Re-export from correct location
+export { default as VoiceLogger } from '@/components/common/VoiceLogger';
