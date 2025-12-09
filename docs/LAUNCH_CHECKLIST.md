@@ -59,7 +59,7 @@
 - [ ] Suunto API key (wearable sync)
 
 ### Testing
-- [ ] Critical user flows tested
+- [ ] Critical user flows tested (see docs/TESTING_CHECKLIST.md)
 - [ ] Payment flow tested (sandbox)
 - [ ] Authentication tested
 - [ ] Premium features tested
@@ -72,14 +72,25 @@
 - [ ] Image optimization verified
 
 ### Monitoring
-- [ ] Error tracking configured
-- [ ] Analytics configured
-- [ ] Uptime monitoring configured
+- [x] Error tracking utility created (src/lib/errorTracking.ts)
+- [x] Analytics utility created (src/lib/analytics.ts)
+- [x] Performance monitoring created (src/lib/performanceMonitoring.ts)
+- [ ] Connect to production provider (Sentry/Mixpanel)
+
+### Documentation
+- [x] Testing checklist (docs/TESTING_CHECKLIST.md)
+- [x] Backup & recovery procedures (docs/BACKUP_RECOVERY.md)
+- [x] Incident response runbook (docs/INCIDENT_RUNBOOK.md)
+- [x] App store preparation (docs/APP_STORE_PREP.md)
+
+### Security
+- [x] Rate limiting utility (supabase/functions/_shared/rateLimit.ts)
+- [ ] Apply rate limiting to public edge functions
 
 ### App Store Prep (if native)
 - [ ] iOS build tested
 - [ ] Android build tested
-- [ ] App store listings prepared
+- [ ] App store listings prepared (see docs/APP_STORE_PREP.md)
 - [ ] Screenshots captured
 - [ ] Privacy policy URL set
 
