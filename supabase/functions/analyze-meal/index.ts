@@ -1,6 +1,7 @@
 import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { checkRateLimit, rateLimitResponse, strictRateLimit } from "../_shared/rateLimit.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -13,6 +14,14 @@ serve(async (req) => {
   }
 
   try {
+    // Apply rate limiting
+    const identifier = req.headers.get('authorization') || req.headers.get('x-forwarded-for') || 'anonymous';
+    const rateLimit = checkRateLimit(`analyze-meal:${identifier}`, strictRateLimit);
+    
+    if (!rateLimit.allowed) {
+      return rateLimitResponse(rateLimit.resetAt);
+    }
+
     // Authenticate user
     const authHeader = req.headers.get('authorization');
     if (!authHeader) {

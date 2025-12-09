@@ -1,5 +1,6 @@
 import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { checkRateLimit, rateLimitResponse, strictRateLimit } from "../_shared/rateLimit.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -12,6 +13,13 @@ serve(async (req) => {
   }
 
   try {
+    // Apply rate limiting based on IP or auth header
+    const identifier = req.headers.get('authorization') || req.headers.get('x-forwarded-for') || 'anonymous';
+    const rateLimit = checkRateLimit(`fitness-chat:${identifier}`, strictRateLimit);
+    
+    if (!rateLimit.allowed) {
+      return rateLimitResponse(rateLimit.resetAt);
+    }
     const { message, conversationHistory } = await req.json();
 
     const systemPrompt = `You are a helpful, friendly fitness assistant. You help users with:
