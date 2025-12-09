@@ -1,2 +1,2 @@
-// Re-export for backward compatibility
-export { StreakTracker } from '../StreakTracker';
+// Re-export from correct location
+export { StreakTracker } from '@/components/dashboard/StreakTracker';

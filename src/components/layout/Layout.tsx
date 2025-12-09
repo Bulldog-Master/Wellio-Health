@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import Header from "./Header";
 import SidebarNav from "./SidebarNav";
 import MobileNav from "./MobileNav";
-import QuickActionsButton from "../QuickActionsButton";
+import { QuickActionsButton } from "./QuickActionsButton";
 import { CartDrawer } from "../cart/CartDrawer";
 
 interface LayoutProps {

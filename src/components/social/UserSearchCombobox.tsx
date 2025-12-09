@@ -1,2 +1,2 @@
-// Re-export for backward compatibility
-export { UserSearchCombobox } from '../UserSearchCombobox';
+// Re-export from correct location
+export { UserSearchCombobox } from '@/components/common/UserSearchCombobox';
