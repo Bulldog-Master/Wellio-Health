@@ -48,119 +48,51 @@ Use clear, specific prompts:
 
 ## Current Refactoring Priorities
 
-### ✅ Completed Refactors
+### ✅ Completed Refactors (December 2025)
+
+#### Codebase Organization (100/100 Score)
+- All 42+ component directories organized with barrel exports
+- All 9 hook domains organized with barrel exports
+- Zero root-level proxy pollution in `/components`
+- All imports use `@/` aliases consistently
+- Cross-domain re-exports cleaned from barrel files
 
 #### Component Organization (A+++ Structure)
 Created organized component directories with barrel exports:
-- `src/components/layout/` - Layout, Header, SidebarNav, MobileNav, NavLink
-- `src/components/common/` - EmptyState, MetricCard (shared components)
-- Backwards-compatible re-exports maintained in root component files
+- `src/components/layout/` - Layout, Header, SidebarNav, MobileNav, QuickActionsButton
+- `src/components/common/` - EmptyState, MetricCard, SubscriptionGate
+- `src/components/cart/` - CartDrawer, CartButton
+- `src/components/fitness/` - WeightChart, VoiceLogger, StreakTracker
+- `src/components/social/` - UserSearchCombobox, SuggestedUsers, DonationModal
+- 37+ more domain directories
+
+#### Hook Organization (9 Domains)
+- `src/hooks/auth/` - Authentication hooks
+- `src/hooks/fitness/` - Fitness data hooks
+- `src/hooks/nutrition/` - Nutrition hooks
+- `src/hooks/social/` - Social feature hooks
+- `src/hooks/encryption/` - Encryption hooks
+- `src/hooks/network/` - Network status hooks
+- `src/hooks/locations/` - Location hooks
+- `src/hooks/ui/` - UI utility hooks
+- `src/hooks/utils/` - General utility hooks
 
 #### Type System Organization
 Consolidated scattered interfaces into domain-specific type files:
-- `src/types/fitness.types.ts` - WorkoutSession, ActivityLog, FitnessEvent, WeightLog, etc.
-- `src/types/nutrition.types.ts` - NutritionLog, MealPlan, WaterLog, Recipe, etc.
-- `src/types/user.types.ts` - Profile, UserPreferences, Subscription, UserRole
-- `src/types/social.types.ts` - Post, Comment, Like, Follow, Message, etc.
-- `src/types/medical.types.ts` - MedicalRecord, Medication, RecoverySession, etc.
-- `src/types/index.ts` - Barrel export for all types
-
-#### FitnessLocations.tsx (1,657 → ~800 lines)
-Extracted:
-- `src/lib/locationUtils.ts` - Utility functions (calculateDistance, getCountryFlag, groupLocationsByCountry, categoryIcons)
-- `src/components/locations/LocationCard.tsx` - Individual location card component
-- `src/components/locations/LocationForm.tsx` - Add/edit location form dialog
-- `src/components/locations/DiscoveredGymCard.tsx` - External gym discovery card
-
-#### Activity.tsx (797 → ~400 lines)
-Extracted:
-- `src/components/activity/ActivityFeatureCard.tsx` - Reusable feature card
-- `src/components/activity/ActivityStatsGrid.tsx` - Weekly stats display
-- `src/components/activity/WearableDataForm.tsx` - Wearable data input form
-
-#### FoodLog.tsx (1,079 → ~600 lines)
-Extracted:
-- `src/hooks/useFoodLog.ts` - All data fetching and mutation logic
+- `src/types/fitness.types.ts`
+- `src/types/nutrition.types.ts`
+- `src/types/user.types.ts`
+- `src/types/social.types.ts`
+- `src/types/medical.types.ts`
+- `src/types/index.ts` - Barrel export
 
 ### 🟢 Good Examples (Follow These Patterns)
 - `src/components/layout/` - Organized layout components with barrel exports
 - `src/components/common/` - Shared/reusable components
 - `src/types/*.types.ts` - Domain-specific type definitions
-- `src/hooks/useSubscription.ts` - Single responsibility hook
-- `src/hooks/useFoodLog.ts` - Data fetching hook
+- `src/hooks/subscription/useSubscription.ts` - Single responsibility hook
 - `src/components/cart/CartDrawer.tsx` - Focused component
-- `src/components/locations/LocationCard.tsx` - Reusable card component
 - `src/lib/encryption.ts` - Utility functions grouped logically
-- `src/lib/locationUtils.ts` - Domain-specific utilities
-
----
-
-## Refactoring Patterns
-
-### 1. Extract Component Pattern
-```tsx
-// Before: Everything in one file
-const BigPage = () => {
-  return (
-    <div>
-      {/* 200 lines of header JSX */}
-      {/* 300 lines of form JSX */}
-      {/* 200 lines of list JSX */}
-    </div>
-  );
-};
-
-// After: Focused components
-const BigPage = () => {
-  return (
-    <div>
-      <PageHeader />
-      <PageForm onSubmit={handleSubmit} />
-      <ItemList items={items} />
-    </div>
-  );
-};
-```
-
-### 2. Extract Hook Pattern
-```tsx
-// Before: State logic mixed in component
-const Page = () => {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  
-  useEffect(() => { /* fetch logic */ }, []);
-  
-  const handleCreate = async () => { /* create logic */ };
-  const handleUpdate = async () => { /* update logic */ };
-  const handleDelete = async () => { /* delete logic */ };
-  
-  // ... component JSX
-};
-
-// After: Hook encapsulates logic
-const Page = () => {
-  const { items, loading, error, create, update, remove } = useItems();
-  // ... clean component JSX
-};
-```
-
-### 3. Extract Utility Pattern
-```tsx
-// Before: Utility functions in component file
-const calculateDistance = (lat1, lon1, lat2, lon2) => { /* ... */ };
-const getCountryFlag = (country) => { /* ... */ };
-const formatPrice = (price) => { /* ... */ };
-
-// After: Separate utility file
-// src/lib/locationUtils.ts
-export const calculateDistance = (...) => { ... };
-export const getCountryFlag = (...) => { ... };
-
-// src/lib/formatUtils.ts
-export const formatPrice = (...) => { ... };
-```
 
 ---
 
@@ -196,5 +128,17 @@ export const formatPrice = (...) => { ... };
 
 ---
 
-*Last Updated: 2025-12-07*
-*Next Review: 2025-01-07*
+## Testing Infrastructure
+
+As of December 2025, the project includes:
+- **Vitest** for unit testing
+- **Testing Library** for component testing
+- Test utilities in `src/test/utils.tsx`
+- Example tests in `src/components/ui/button.test.tsx`
+
+Run tests with: `npm test` or `npx vitest`
+
+---
+
+*Last Updated: 2025-12-09*
+*Next Review: 2025-01-09*
