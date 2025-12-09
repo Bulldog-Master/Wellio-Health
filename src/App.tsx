@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import { I18nextProvider } from "react-i18next";
 import i18n from "@/i18n/config";
 import { usePushNotifications, useOfflineStatus, useBackgroundSync } from "@/hooks/network";
-import { useAppKeyboardShortcuts } from "@/hooks/ui";
+import { useAppKeyboardShortcuts, usePageTracking } from "@/hooks/ui";
 import { 
   SkipToContent, 
   InstallPrompt, 
@@ -53,6 +53,7 @@ const AppContent = () => {
   useAppKeyboardShortcuts();
   useOfflineStatus();
   useBackgroundSync();
+  usePageTracking();
   
   return (
     <>
