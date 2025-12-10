@@ -2,12 +2,10 @@ import { useState, useRef, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { 
   ArrowLeft, 
   Send, 
   Bot, 
-  User,
   Trash2,
   Sparkles,
   Dumbbell
@@ -17,6 +15,8 @@ import { useTranslation } from "react-i18next";
 import { SubscriptionGate } from "@/components/common";
 import { useToast } from "@/hooks/ui";
 import { supabase } from "@/integrations/supabase/client";
+import { useStreamingChat } from "@/hooks/ai/useStreamingChat";
+import { ChatMessage } from "@/components/chat/ChatMessage";
 
 interface Message {
   id: string;
@@ -38,8 +38,18 @@ const FitnessChat = () => {
     }
   ]);
   const [inputValue, setInputValue] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [streamingMessageId, setStreamingMessageId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const { streamMessage, isStreaming } = useStreamingChat({
+    onError: (error) => {
+      toast({
+        title: t('common:error'),
+        description: error,
+        variant: "destructive"
+      });
+    }
+  });
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -57,7 +67,7 @@ const FitnessChat = () => {
   ];
 
   const handleSend = async () => {
-    if (!inputValue.trim() || isLoading) return;
+    if (!inputValue.trim() || isStreaming) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -66,45 +76,55 @@ const FitnessChat = () => {
       timestamp: new Date()
     };
 
+    const assistantMessageId = (Date.now() + 1).toString();
+    
     setMessages(prev => [...prev, userMessage]);
     setInputValue("");
-    setIsLoading(true);
+    setStreamingMessageId(assistantMessageId);
+
+    // Add empty assistant message that will be filled by streaming
+    setMessages(prev => [...prev, {
+      id: assistantMessageId,
+      role: 'assistant',
+      content: '',
+      timestamp: new Date()
+    }]);
 
     try {
       const { data: { session } } = await supabase.auth.getSession();
       
-      const response = await supabase.functions.invoke('fitness-chat', {
-        body: { 
-          message: userMessage.content,
-          conversationHistory: messages.map(m => ({
-            role: m.role,
-            content: m.content
-          }))
+      let assistantContent = '';
+      
+      await streamMessage({
+        message: userMessage.content,
+        conversationHistory: messages.filter(m => m.id !== '1').map(m => ({
+          role: m.role,
+          content: m.content
+        })),
+        accessToken: session?.access_token || null,
+        onDelta: (delta) => {
+          assistantContent += delta;
+          setMessages(prev => prev.map(m => 
+            m.id === assistantMessageId 
+              ? { ...m, content: assistantContent }
+              : m
+          ));
         },
-        headers: session?.access_token ? {
-          Authorization: `Bearer ${session.access_token}`
-        } : undefined
+        onDone: () => {
+          setStreamingMessageId(null);
+          // If no content was received, show fallback
+          if (!assistantContent) {
+            setMessages(prev => prev.map(m => 
+              m.id === assistantMessageId 
+                ? { ...m, content: "I'm sorry, I couldn't process your request. Please try again." }
+                : m
+            ));
+          }
+        }
       });
-
-      if (response.error) throw response.error;
-
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: response.data.response || "I'm sorry, I couldn't process your request.",
-        timestamp: new Date()
-      };
-
-      setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
       console.error('Chat error:', error);
-      toast({
-        title: t('common:error'),
-        description: t('error_sending'),
-        variant: "destructive"
-      });
-    } finally {
-      setIsLoading(false);
+      setStreamingMessageId(null);
     }
   };
 
@@ -130,7 +150,7 @@ const FitnessChat = () => {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => navigate('/dashboard')}
+            onClick={() => navigate('/activity')}
             className="shrink-0"
             aria-label={t('common:back')}
           >
@@ -146,7 +166,7 @@ const FitnessChat = () => {
             </div>
           </div>
         </div>
-        <Button variant="outline" size="sm" onClick={handleClearChat}>
+        <Button variant="outline" size="sm" onClick={handleClearChat} disabled={isStreaming}>
           <Trash2 className="w-4 h-4 mr-2" />
           {t('clear_chat')}
         </Button>
@@ -156,46 +176,24 @@ const FitnessChat = () => {
       <Card className="flex-1 overflow-hidden flex flex-col">
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {messages.map((message) => (
-            <div
+            <ChatMessage
               key={message.id}
-              className={`flex gap-3 ${message.role === 'user' ? 'flex-row-reverse' : ''}`}
-            >
-              <Avatar className={`shrink-0 ${message.role === 'assistant' ? 'bg-primary/10' : 'bg-secondary'}`}>
-                <AvatarFallback>
-                  {message.role === 'assistant' ? (
-                    <Bot className="w-4 h-4 text-primary" />
-                  ) : (
-                    <User className="w-4 h-4" />
-                  )}
-                </AvatarFallback>
-              </Avatar>
-              <div
-                className={`max-w-[80%] rounded-lg p-3 ${
-                  message.role === 'user'
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted'
-                }`}
-              >
-                <p className="text-sm font-medium mb-1">
-                  {message.role === 'assistant' ? t('ai_assistant') : t('you')}
-                </p>
-                <p className="whitespace-pre-wrap">{message.content}</p>
-              </div>
-            </div>
+              role={message.role}
+              content={message.content}
+              isStreaming={message.id === streamingMessageId}
+            />
           ))}
           
-          {isLoading && (
+          {isStreaming && streamingMessageId && messages.find(m => m.id === streamingMessageId)?.content === '' && (
             <div className="flex gap-3">
-              <Avatar className="shrink-0 bg-primary/10">
-                <AvatarFallback>
-                  <Bot className="w-4 h-4 text-primary" />
-                </AvatarFallback>
-              </Avatar>
+              <div className="shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <Bot className="w-4 h-4 text-primary" />
+              </div>
               <div className="bg-muted rounded-lg p-3">
                 <p className="text-sm font-medium mb-1">{t('ai_assistant')}</p>
                 <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 animate-pulse" />
-                  <span>{t('thinking')}</span>
+                  <Sparkles className="w-4 h-4 animate-pulse text-primary" />
+                  <span className="text-muted-foreground">{t('thinking')}</span>
                 </div>
               </div>
             </div>
@@ -239,10 +237,11 @@ const FitnessChat = () => {
               }}
               className="min-h-[44px] max-h-[120px] resize-none"
               rows={1}
+              disabled={isStreaming}
             />
             <Button 
               onClick={handleSend} 
-              disabled={!inputValue.trim() || isLoading}
+              disabled={!inputValue.trim() || isStreaming}
               className="shrink-0"
             >
               <Send className="w-4 h-4" />
