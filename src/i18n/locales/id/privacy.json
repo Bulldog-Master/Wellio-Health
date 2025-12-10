@@ -3,5 +3,27 @@
   "privacy_settings": "Pengaturan privasi",
   "public_profile": "Profil publik",
   "private_account": "Akun privat",
-  "data_sharing": "Berbagi data"
+  "data_sharing": "Berbagi data",
+  
+  "who_can_see_data": "Siapa yang Bisa Melihat Data Saya?",
+  "data_access_description": "Profesional ini memiliki izin untuk melihat data kesehatan Anda",
+  "no_data_accessors": "Tidak ada yang memiliki akses ke data Anda",
+  "data_is_private": "Data kesehatan Anda sepenuhnya pribadi",
+  "coach": "Pelatih",
+  "clinician": "Klinisi",
+  "pending": "Menunggu",
+  "connected_since": "Terhubung sejak {{date}}",
+  "can_see": "Dapat melihat",
+  "can_see_functional_index": "Indeks Fungsional",
+  "can_see_workout_trends": "Tren Latihan",
+  "can_see_activity_summary": "Ringkasan Aktivitas",
+  "can_see_wellness_trends": "Tren Kesehatan",
+  "can_see_recovery_summary": "Ringkasan Pemulihan",
+  "cannot_see_note": "Mereka tidak dapat melihat catatan mentah, file medis, atau catatan pribadi Anda",
+  "revoke": "Cabut",
+  "revoke_access_title": "Cabut Akses?",
+  "revoke_access_description": "{{name}} tidak akan dapat melihat data kesehatan Anda lagi. Anda dapat mengundang mereka kembali nanti jika diperlukan.",
+  "confirm_revoke": "Ya, Cabut Akses",
+  "access_revoked": "Akses berhasil dicabut",
+  "revoke_failed": "Gagal mencabut akses"
 }

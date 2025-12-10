@@ -3,5 +3,27 @@
   "privacy_settings": "గోప్యతా సెట్టింగ్‌లు",
   "public_profile": "పబ్లిక్ ప్రొఫైల్",
   "private_account": "ప్రైవేట్ ఖాతా",
-  "data_sharing": "డేటా షేరింగ్"
+  "data_sharing": "డేటా షేరింగ్",
+  
+  "who_can_see_data": "నా డేటాను ఎవరు చూడగలరు?",
+  "data_access_description": "ఈ నిపుణులకు మీ ఆరోగ్య డేటాను చూసే అనుమతి ఉంది",
+  "no_data_accessors": "ఎవరికీ మీ డేటాకు యాక్సెస్ లేదు",
+  "data_is_private": "మీ ఆరోగ్య డేటా పూర్తిగా ప్రైవేట్",
+  "coach": "కోచ్",
+  "clinician": "వైద్యుడు",
+  "pending": "పెండింగ్",
+  "connected_since": "{{date}} నుండి కనెక్ట్ అయింది",
+  "can_see": "చూడగలరు",
+  "can_see_functional_index": "ఫంక్షనల్ ఇండెక్స్",
+  "can_see_workout_trends": "వర్కౌట్ ట్రెండ్‌లు",
+  "can_see_activity_summary": "యాక్టివిటీ సారాంశం",
+  "can_see_wellness_trends": "వెల్‌నెస్ ట్రెండ్‌లు",
+  "can_see_recovery_summary": "రికవరీ సారాంశం",
+  "cannot_see_note": "వారు మీ ముడి రికార్డులు, మెడికల్ ఫైల్‌లు లేదా ప్రైవేట్ నోట్‌లను చూడలేరు",
+  "revoke": "రద్దు చేయండి",
+  "revoke_access_title": "యాక్సెస్ రద్దు చేయాలా?",
+  "revoke_access_description": "{{name}} ఇకపై మీ ఆరోగ్య డేటాను చూడలేరు. అవసరమైతే మీరు వారిని తర్వాత మళ్ళీ ఆహ్వానించవచ్చు.",
+  "confirm_revoke": "అవును, యాక్సెస్ రద్దు చేయండి",
+  "access_revoked": "యాక్సెస్ విజయవంతంగా రద్దు చేయబడింది",
+  "revoke_failed": "యాక్సెస్ రద్దు చేయడం విఫలమైంది"
 }

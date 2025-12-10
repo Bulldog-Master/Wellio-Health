@@ -3,5 +3,27 @@
   "privacy_settings": "Privacy settings",
   "public_profile": "Public profile",
   "private_account": "Private account",
-  "data_sharing": "Data sharing"
+  "data_sharing": "Data sharing",
+  
+  "who_can_see_data": "Who Fit See My Data?",
+  "data_access_description": "Dis professionals get permission to see your health data",
+  "no_data_accessors": "Nobody get access to your data",
+  "data_is_private": "Your health data dey completely private",
+  "coach": "Coach",
+  "clinician": "Doctor",
+  "pending": "Pending",
+  "connected_since": "Connected since {{date}}",
+  "can_see": "Fit see",
+  "can_see_functional_index": "Functional Index",
+  "can_see_workout_trends": "Workout Trends",
+  "can_see_activity_summary": "Activity Summary",
+  "can_see_wellness_trends": "Wellness Trends",
+  "can_see_recovery_summary": "Recovery Summary",
+  "cannot_see_note": "Dem no fit see your raw records, medical files, or private notes",
+  "revoke": "Remove",
+  "revoke_access_title": "Remove Access?",
+  "revoke_access_description": "{{name}} no go fit see your health data again. You fit invite dem later if you want.",
+  "confirm_revoke": "Yes, Remove Access",
+  "access_revoked": "Access don remove well well",
+  "revoke_failed": "E no work to remove access"
 }
