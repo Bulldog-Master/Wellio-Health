@@ -146,5 +146,8 @@
   "revoke_access_description": "{{name}} will no longer be able to see your wellness data. You can re-invite them later if needed.",
   "confirm_revoke": "Yes, Revoke Access",
   "access_revoked": "Access revoked successfully",
-  "revoke_failed": "Failed to revoke access"
+  "revoke_failed": "Failed to revoke access",
+  "medical_records": "Medical records",
+  "personal_messages": "Personal messages",
+  "payment_info": "Payment information"
 }

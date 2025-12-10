@@ -1163,6 +1163,36 @@ export type Database = {
         }
         Relationships: []
       }
+      data_access_log: {
+        Row: {
+          access_type: string
+          accessed_at: string
+          client_id: string
+          id: string
+          ip_address: string | null
+          professional_id: string
+          user_agent: string | null
+        }
+        Insert: {
+          access_type: string
+          accessed_at?: string
+          client_id: string
+          id?: string
+          ip_address?: string | null
+          professional_id: string
+          user_agent?: string | null
+        }
+        Update: {
+          access_type?: string
+          accessed_at?: string
+          client_id?: string
+          id?: string
+          ip_address?: string | null
+          professional_id?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       data_breach_notifications: {
         Row: {
           affected_data: string[]
@@ -3160,6 +3190,89 @@ export type Database = {
             columns: ["application_id"]
             isOneToOne: false
             referencedRelation: "professional_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      professional_invite_codes: {
+        Row: {
+          code: string
+          created_at: string
+          current_uses: number | null
+          expires_at: string | null
+          id: string
+          is_active: boolean | null
+          max_uses: number | null
+          professional_id: string
+          professional_type: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          current_uses?: number | null
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          max_uses?: number | null
+          professional_id: string
+          professional_type: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          current_uses?: number | null
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          max_uses?: number | null
+          professional_id?: string
+          professional_type?: string
+        }
+        Relationships: []
+      }
+      professional_relationship_requests: {
+        Row: {
+          client_id: string
+          consent_given_at: string | null
+          consent_text: string | null
+          created_at: string
+          id: string
+          invite_code_id: string | null
+          professional_id: string
+          professional_type: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          client_id: string
+          consent_given_at?: string | null
+          consent_text?: string | null
+          created_at?: string
+          id?: string
+          invite_code_id?: string | null
+          professional_id: string
+          professional_type: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          client_id?: string
+          consent_given_at?: string | null
+          consent_text?: string | null
+          created_at?: string
+          id?: string
+          invite_code_id?: string | null
+          professional_id?: string
+          professional_type?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "professional_relationship_requests_invite_code_id_fkey"
+            columns: ["invite_code_id"]
+            isOneToOne: false
+            referencedRelation: "professional_invite_codes"
             referencedColumns: ["id"]
           },
         ]
