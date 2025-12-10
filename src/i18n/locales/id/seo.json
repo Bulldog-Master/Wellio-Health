@@ -16,5 +16,8 @@
   "session_management_title": "Manajemen Sesi",
   "session_management_description": "Kelola sesi aktif dan pengaturan keamanan Anda.",
   "security_audit_title": "Log Audit Keamanan",
-  "security_audit_description": "Lihat peristiwa keamanan dan log aktivitas untuk akun Anda."
+  "security_audit_description": "Lihat peristiwa keamanan dan log aktivitas untuk akun Anda.",
+  
+  "clinician_dashboard_title": "Dashboard Dokter - Wellio",
+  "clinician_dashboard_description": "Pantau kesejahteraan fungsional pasien dengan ringkasan bebas PHI dan peringatan risiko."
 }

@@ -16,5 +16,8 @@
   "session_management_title": "إدارة الجلسات",
   "session_management_description": "إدارة جلساتك النشطة وإعدادات الأمان.",
   "security_audit_title": "سجل تدقيق الأمان",
-  "security_audit_description": "شوف أحداث الأمان وسجلات النشاط لحسابك."
+  "security_audit_description": "شوف أحداث الأمان وسجلات النشاط لحسابك.",
+  
+  "clinician_dashboard_title": "لوحة تحكم الدكتور - Wellio",
+  "clinician_dashboard_description": "راقب صحة المرضى مع ملخصات من غير PHI وتنبيهات المخاطر."
 }

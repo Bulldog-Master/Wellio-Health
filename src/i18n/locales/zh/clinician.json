@@ -31,5 +31,10 @@
   "trend_declining": "功能指数在过去14天有所下降。",
   "trend_stable": "功能指数保持相对稳定。",
   "trend_unknown": "数据不足以确定明确趋势。",
-  "access_denied": "拒绝访问。需要临床医生角色。"
+  "access_denied": "拒绝访问。需要临床医生角色。",
+  "clinician_dashboard": "临床医生仪表板",
+  "clinician_dashboard_desc": "通过功能趋势摘要和风险警报监控患者健康状况。",
+  "clinician_access_required": "需要临床医生访问权限",
+  "clinician_access_required_desc": "您需要成为批准的临床医生或从业者才能访问此仪表板。",
+  "apply_as_practitioner": "申请成为从业者"
 }

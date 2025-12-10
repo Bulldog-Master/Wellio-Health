@@ -31,5 +31,10 @@
   "trend_declining": "El índice funcional ha declinado en los últimos 14 días.",
   "trend_stable": "El índice funcional se ha mantenido relativamente estable.",
   "trend_unknown": "Datos insuficientes para determinar una tendencia clara.",
-  "access_denied": "Acceso denegado. Se requiere rol de clínico."
+  "access_denied": "Acceso denegado. Se requiere rol de clínico.",
+  "clinician_dashboard": "Panel del Médico",
+  "clinician_dashboard_desc": "Monitoree el bienestar del paciente con resúmenes de tendencias funcionales y alertas de riesgo.",
+  "clinician_access_required": "Acceso de Médico Requerido",
+  "clinician_access_required_desc": "Necesita ser un médico o profesional aprobado para acceder a este panel.",
+  "apply_as_practitioner": "Aplicar como Profesional"
 }

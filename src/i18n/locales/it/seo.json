@@ -16,5 +16,8 @@
   "session_management_title": "Gestione Sessione",
   "session_management_description": "Gestisci le tue sessioni attive e le impostazioni di sicurezza.",
   "security_audit_title": "Registro di Audit di Sicurezza",
-  "security_audit_description": "Visualizza gli eventi di sicurezza e i log delle attività del tuo account."
+  "security_audit_description": "Visualizza gli eventi di sicurezza e i log delle attività del tuo account.",
+  
+  "clinician_dashboard_title": "Dashboard del Medico - Wellio",
+  "clinician_dashboard_description": "Monitora il benessere funzionale dei pazienti con riepiloghi senza PHI e avvisi di rischio."
 }

@@ -56,5 +56,8 @@
   "session_management_title": "Oturum Yönetimi - Wellio",
   "session_management_description": "Aktif oturum açma oturumlarınızı görüntüleyin ve yönetin.",
   "security_audit_log_title": "Güvenlik Denetim Günlüğü - Wellio",
-  "security_audit_log_description": "Hesap güvenlik etkinliğinizi ve erişim geçmişinizi görüntüleyin."
+  "security_audit_log_description": "Hesap güvenlik etkinliğinizi ve erişim geçmişinizi görüntüleyin.",
+  
+  "clinician_dashboard_title": "Klinisyen Paneli - Wellio",
+  "clinician_dashboard_description": "PHI içermeyen özetler ve risk uyarılarıyla hasta fonksiyonel sağlığını izleyin."
 }

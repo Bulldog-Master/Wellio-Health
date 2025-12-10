@@ -31,5 +31,10 @@
   "trend_declining": "Der Funktionsindex ist in den letzten 14 Tagen gesunken.",
   "trend_stable": "Der Funktionsindex ist relativ stabil geblieben.",
   "trend_unknown": "Unzureichende Daten, um einen klaren Trend zu bestimmen.",
-  "access_denied": "Zugriff verweigert. Kliniker-Rolle erforderlich."
+  "access_denied": "Zugriff verweigert. Kliniker-Rolle erforderlich.",
+  "clinician_dashboard": "Arzt-Dashboard",
+  "clinician_dashboard_desc": "Überwachen Sie das Wohlbefinden von Patienten mit funktionellen Trendzusammenfassungen und Risikowarnungen.",
+  "clinician_access_required": "Arzt-Zugang Erforderlich",
+  "clinician_access_required_desc": "Sie müssen ein zugelassener Arzt oder Praktiker sein, um auf dieses Dashboard zuzugreifen.",
+  "apply_as_practitioner": "Als Praktiker bewerben"
 }

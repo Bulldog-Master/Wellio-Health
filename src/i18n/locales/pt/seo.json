@@ -56,5 +56,8 @@
   "session_management_title": "Gerenciamento de Sessão - Wellio",
   "session_management_description": "Visualize e gerencie suas sessões de login ativas.",
   "security_audit_log_title": "Registro de Auditoria de Segurança - Wellio",
-  "security_audit_log_description": "Visualize a atividade de segurança da sua conta e histórico de acesso."
+  "security_audit_log_description": "Visualize a atividade de segurança da sua conta e histórico de acesso.",
+  
+  "clinician_dashboard_title": "Painel do Médico - Wellio",
+  "clinician_dashboard_description": "Monitore o bem-estar funcional dos pacientes com resumos sem PHI e alertas de risco."
 }

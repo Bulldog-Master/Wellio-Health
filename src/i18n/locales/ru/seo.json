@@ -16,5 +16,8 @@
   "session_management_title": "Управление сессиями",
   "session_management_description": "Управляйте активными сессиями и настройками безопасности.",
   "security_audit_title": "Журнал аудита безопасности",
-  "security_audit_description": "Просматривайте события безопасности и журналы активности вашего аккаунта."
+  "security_audit_description": "Просматривайте события безопасности и журналы активности вашего аккаунта.",
+  
+  "clinician_dashboard_title": "Панель врача - Wellio",
+  "clinician_dashboard_description": "Отслеживайте функциональное здоровье пациентов с помощью сводок без PHI и предупреждений о рисках."
 }

@@ -6,5 +6,8 @@
   "auth_title": "تسجيل الدخول أو إنشاء حساب",
   "auth_description": "انضم لـ Wellio لتتبع رحلة لياقتك، التواصل مع الآخرين، وتحقيق أهدافك الصحية.",
   "not_found_title": "الصفحة غير موجودة",
-  "not_found_description": "الصفحة التي تبحث عنها غير موجودة. عد إلى صفحة Wellio الرئيسية."
+  "not_found_description": "الصفحة التي تبحث عنها غير موجودة. عد إلى صفحة Wellio الرئيسية.",
+  
+  "clinician_dashboard_title": "لوحة تحكم الطبيب - Wellio",
+  "clinician_dashboard_description": "راقب الصحة الوظيفية للمرضى مع ملخصات خالية من PHI وتنبيهات المخاطر."
 }

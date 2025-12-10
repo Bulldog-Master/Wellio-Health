@@ -31,5 +31,10 @@
   "trend_declining": "L'indice funzionale è diminuito negli ultimi 14 giorni.",
   "trend_stable": "L'indice funzionale è rimasto relativamente stabile.",
   "trend_unknown": "Dati insufficienti per determinare una tendenza chiara.",
-  "access_denied": "Accesso negato. Ruolo clinico richiesto."
+  "access_denied": "Accesso negato. Ruolo clinico richiesto.",
+  "clinician_dashboard": "Dashboard del Medico",
+  "clinician_dashboard_desc": "Monitora il benessere dei pazienti con riepiloghi di tendenza funzionale e avvisi di rischio.",
+  "clinician_access_required": "Accesso Medico Richiesto",
+  "clinician_access_required_desc": "Devi essere un medico o professionista approvato per accedere a questa dashboard.",
+  "apply_as_practitioner": "Candidati come Professionista"
 }

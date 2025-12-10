@@ -56,5 +56,8 @@
   "session_management_title": "会话管理 - Wellio",
   "session_management_description": "查看和管理您的活动登录会话。",
   "security_audit_log_title": "安全审计日志 - Wellio",
-  "security_audit_log_description": "查看您的账户安全活动和访问历史。"
+  "security_audit_log_description": "查看您的账户安全活动和访问历史。",
+  
+  "clinician_dashboard_title": "临床医生仪表板 - Wellio",
+  "clinician_dashboard_description": "通过无PHI摘要和风险警报监控患者的功能性健康状况。"
 }

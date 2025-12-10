@@ -16,5 +16,8 @@
   "session_management_title": "セッション管理",
   "session_management_description": "アクティブなセッションとセキュリティ設定を管理。",
   "security_audit_title": "セキュリティ監査ログ",
-  "security_audit_description": "アカウントのセキュリティイベントとアクティビティログを表示。"
+  "security_audit_description": "アカウントのセキュリティイベントとアクティビティログを表示。",
+  
+  "clinician_dashboard_title": "医師ダッシュボード - Wellio",
+  "clinician_dashboard_description": "PHIを含まない要約とリスクアラートで患者の機能的健康状態を監視。"
 }
