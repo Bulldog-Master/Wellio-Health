@@ -81,5 +81,8 @@
   "security_audit_log_description": "View your account security activity and access history.",
   
   "clinician_dashboard_title": "Clinician Dashboard - Wellio",
-  "clinician_dashboard_description": "Monitor patient wellness trends and functional health indices securely."
+  "clinician_dashboard_description": "Monitor patient wellness trends and functional health indices securely.",
+  
+  "for_professionals_title": "For Professionals - Wellio",
+  "for_professionals_description": "Professional-grade coaching and clinical insight without compromising privacy. Get functional wellness signals, trend insights, and secure communication."
 }

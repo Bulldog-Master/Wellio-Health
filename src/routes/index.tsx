@@ -120,6 +120,7 @@ const SessionManagement = lazy(() => import("@/pages/SessionManagement"));
 const SecurityAuditLog = lazy(() => import("@/pages/SecurityAuditLog"));
 const CareTeam = lazy(() => import("@/pages/CareTeam"));
 const HistoryHub = lazy(() => import("@/pages/HistoryHub"));
+const ForProfessionals = lazy(() => import("@/pages/ForProfessionals"));
 
 /**
  * Application route configuration
@@ -258,6 +259,7 @@ export const AppRoutes = () => (
     <Route path="/payment-history" element={<RouteErrorBoundary><ProtectedRoute><Layout><PaymentHistory /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     
     {/* Legal & Compliance */}
+    <Route path="/for-professionals" element={<RouteErrorBoundary><ForProfessionals /></RouteErrorBoundary>} />
     <Route path="/privacy-policy" element={<RouteErrorBoundary><PrivacyPolicy /></RouteErrorBoundary>} />
     <Route path="/terms" element={<RouteErrorBoundary><TermsOfService /></RouteErrorBoundary>} />
     <Route path="/privacy-controls" element={<RouteErrorBoundary><ProtectedRoute><PrivacyControls /></ProtectedRoute></RouteErrorBoundary>} />
