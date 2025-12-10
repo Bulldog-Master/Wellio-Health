@@ -113,7 +113,7 @@ Wellio allows professionals to grow their practice safely, and individuals retai
 ### 🔐 Enterprise Security
 - **Quantum-Resistant Encryption**: ML-KEM-768 for medical records
 - **E2E Encryption**: AES-256-GCM for messages
-- **Metadata Protection**: [cMixx integration](https://xx.network) for privacy
+- **Metadata Protection**: [xx.network's cMixx](https://xx.network) routing layer for metadata elimination, preventing timing analysis, traffic correlation, or communication pattern leaks
 - **Comprehensive RLS**: Row-level security on all user data
 - **Audit Logging**: Full access tracking for sensitive data
 - **GDPR/HIPAA/CCPA Compliance**: Built-in privacy controls
@@ -284,16 +284,33 @@ Users approve every relationship from the **Care Team** screen and can revoke ac
 
 This architecture enables **clinical relevance without clinical liability**.
 
-#### Example: Trainer Care Path
+### Example: Trainer / Clinician Workflow (Happy Path)
 
-1. Trainer signs up for a Professional account and generates an invite code.
-2. Client downloads Wellio, creates an account, and adds the code from the **Care Team** tab.
-3. Wellio links their accounts and exposes only:
-   - adherence score
-   - workout readiness
-   - weekly trend summary
-4. Trainer runs live video sessions and async check-ins; all messages stay E2E encrypted with cMixx metadata protection.
-5. Billing is handled via platform subscriptions (see [SUBSCRIPTION_GUIDE.md](SUBSCRIPTION_GUIDE.md)).
+This example shows how Wellio protects privacy while still empowering coaches and clinicians.
+
+**1. Professional creates an invite code**
+- Code is unique, revocable, and one active code per role (coach/clinician).
+- No personal details are exchanged.
+
+**2. Client adds the code inside the app (Care Team tab)**
+- Wellio securely connects the two accounts.
+- No raw logs, medical documents, or PHI are shared.
+
+**3. Professional gains visibility to:**
+- ✔ Functional Wellness Index (FWI)
+- ✔ Trend behavior (improving, declining, stable)
+- ✔ Adherence indicators (sleep, meals, hydration, activity, mood)
+- ✘ Never raw journals, workout notes, or personal meal logs
+- ✘ Never medical vault content
+
+**4. Pro supports client/patient using:**
+- Live video sessions integrated in-app
+- Secure encrypted messaging (ML-KEM-768 + AES-256-GCM)
+- cMixx metadata-protected routing
+
+**5. Access is fully revocable**
+
+The client can remove a coach/clinician at any time. Professionals do not retain historical access.
 
 ## 🗺️ Roadmap
 
