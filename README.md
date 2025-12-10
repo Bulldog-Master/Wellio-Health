@@ -57,12 +57,21 @@ Wellio Health is a privacy-first wellness platform designed for individuals seek
 
 ### For Professionals (Coaches & Clinicians)
 
-- Build recurring revenue with privacy-preserving remote programs
-- Run live video sessions and asynchronous check-ins in one secure app
-- See adherence, trends, and alerts — never raw diaries or private messages
-- Offer branded programs while Wellio handles security, compliance, and storage
+Wellio is more than a consumer wellness app — it is a privacy-first professional toolkit for coaches, trainers, clinicians, and wellness practitioners.
 
-See [PROFESSIONAL_ECONOMICS.md](docs/PROFESSIONAL_ECONOMICS.md) for the full incentive model.
+Professionals use Wellio to:
+- Gain functional insight without exposing or handling PHI
+- Support clients/patients through trend analysis, not raw diaries
+- Run live video sessions and asynchronous check-ins in one secure platform
+- Send and receive post-quantum encrypted messages
+- Build stronger client relationships through measurable outcomes
+- Reduce administrative load — we handle security, storage, and compliance
+
+Wellio allows professionals to grow their practice safely, and individuals retain full privacy control over what they share.
+
+👉 See:
+- [ACCESS_MODEL.md](docs/ACCESS_MODEL.md) — who sees what
+- [PROFESSIONAL_ECONOMICS.md](docs/PROFESSIONAL_ECONOMICS.md) — incentives, tiers, revenue expansion
 
 ## ✨ Key Features
 
@@ -318,12 +327,11 @@ Comprehensive documentation is available in the `/docs` directory. See [**docs/I
 
 | Category | Documents |
 |----------|-----------|
-| **Security** | [Security Audit](docs/SECURITY_AUDIT.md) · [Security FAQ](docs/SECURITY_FAQ.md) · [AI Privacy](docs/AI_PRIVACY.md) |
-| **Architecture** | [Architecture](docs/ARCHITECTURE.md) · [Domain Architecture](docs/DOMAIN_ARCHITECTURE.md) |
-| **Care Team & Professionals** | [Access Model](docs/ACCESS_MODEL.md) · [Professional Economics](docs/PROFESSIONAL_ECONOMICS.md) · [Subscription Guide](SUBSCRIPTION_GUIDE.md) |
-| **Launch** | [Launch Checklist](docs/LAUNCH_CHECKLIST.md) · [Testing Checklist](docs/TESTING_CHECKLIST.md) |
-| **Compliance** | [ISO Compliance](docs/ISO_COMPLIANCE.md) · [Accessibility](docs/ACCESSIBILITY.md) |
-| **i18n** | [Translation Guide](docs/TRANSLATION_GUIDE.md) · [Translation Audit](docs/TRANSLATION_AUDIT_FINAL.md) |
+| **Security** | [SECURITY.md](docs/SECURITY.md) · [SECURITY_FAQ.md](docs/SECURITY_FAQ.md) · [SECURITY_AUDIT.md](docs/SECURITY_AUDIT.md) |
+| **Architecture** | [TECHNICAL_ARCHITECTURE.md](docs/ARCHITECTURE.md) · [AI_PRIVACY.md](docs/AI_PRIVACY.md) |
+| **Care Team & Professionals** | [ACCESS_MODEL.md](docs/ACCESS_MODEL.md) · [PROFESSIONAL_ECONOMICS.md](docs/PROFESSIONAL_ECONOMICS.md) · [SUBSCRIPTION_GUIDE.md](SUBSCRIPTION_GUIDE.md) |
+| **Compliance** | [REGULATORY_COMPLIANCE.md](docs/ISO_COMPLIANCE.md) |
+| **Localization** | [SPANISH_TRANSLATION_PLAN.md](docs/SPANISH_TRANSLATION_PLAN.md) · [TRANSLATION_AUDIT_ES.md](docs/TRANSLATION_AUDIT_ES.md) |
 
 ### For External Reviewers
 
