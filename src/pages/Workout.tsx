@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useUserPreferences } from "@/hooks/utils";
-import { formatDistance } from "@/lib/unitConversion";
+import { formatDistance } from "@/lib/utils";
 import { useWorkoutState, useWorkoutData, useWorkoutActions, calculateCalories } from "@/hooks/workout";
 import type { ActivityLog, RoutineExercise } from "@/types/workout.types";
 import type { Json } from "@/integrations/supabase/types";

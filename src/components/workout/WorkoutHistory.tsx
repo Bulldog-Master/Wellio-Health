@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Clock, Video, Upload, Pencil, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { format } from "date-fns";
-import { formatDistance } from "@/lib/unitConversion";
+import { formatDistance } from "@/lib/utils";
 import type { ActivityLog, WorkoutMedia } from "@/types/workout.types";
 
 interface WorkoutHistoryProps {

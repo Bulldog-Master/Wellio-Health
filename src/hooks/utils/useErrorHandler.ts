@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useToast } from '../ui/use-toast';
-import { logError } from '@/lib/errorTracking';
+import { logErrorToDatabase } from '@/lib/services';
 
 interface UseErrorHandlerOptions {
   showToast?: boolean;
@@ -27,7 +27,7 @@ export function useErrorHandler(options: UseErrorHandlerOptions = {}) {
       const err = error instanceof Error ? error : new Error(String(error));
 
       // Log error to backend
-      logError(err, undefined, context);
+      logErrorToDatabase(err, undefined, context);
 
       // Call custom error handler
       onError?.(err);

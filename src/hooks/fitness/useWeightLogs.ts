@@ -2,8 +2,8 @@ import { useState, useEffect, useMemo } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useTranslation } from 'react-i18next';
-import { parseWeight } from '@/lib/unitConversion';
-import { weightLogSchema, validateAndSanitize } from '@/lib/validationSchemas';
+import { parseWeight } from '@/lib/utils';
+import { weightLogSchema, validateAndSanitize } from '@/lib/validation';
 
 export interface WeightLog {
   id: string;

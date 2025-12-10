@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { format } from "date-fns";
-import { bodyMeasurementSchema, validateAndSanitize } from "@/lib/validationSchemas";
+import { bodyMeasurementSchema, validateAndSanitize } from "@/lib/validation";
 
 interface Measurement {
   id: string;

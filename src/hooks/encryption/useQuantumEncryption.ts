@@ -16,7 +16,7 @@ import {
   base64ToUint8Array,
   uint8ArrayToBase64,
   QUANTUM_ENCRYPTION_VERSION,
-} from '@/lib/quantumEncryption';
+} from '@/lib/encryption';
 
 const STORAGE_KEY_KEM = 'quantum_kem_keypair';
 const STORAGE_KEY_DSA = 'quantum_dsa_keypair';

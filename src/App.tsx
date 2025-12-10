@@ -8,8 +8,8 @@ import { I18nextProvider } from "react-i18next";
 import i18n from "@/i18n/config";
 import { usePushNotifications, useOfflineStatus, useBackgroundSync } from "@/hooks/network";
 import { useAppKeyboardShortcuts, usePageTracking } from "@/hooks/ui";
-import { initMonitoring } from "@/lib/monitoring";
-import { useMonitoring } from "@/hooks/useMonitoring";
+import { initMonitoring } from "@/lib/services";
+import { useMonitoring } from "@/hooks/ui";
 import { 
   SkipToContent, 
   InstallPrompt, 

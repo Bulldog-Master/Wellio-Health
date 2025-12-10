@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
-import { profileUpdateSchema, validateAndSanitize } from "@/lib/validationSchemas";
+import { profileUpdateSchema, validateAndSanitize } from "@/lib/validation";
 import { rateLimiter, RATE_LIMITS } from "@/lib/features";
 
 export interface ProfileFormData {

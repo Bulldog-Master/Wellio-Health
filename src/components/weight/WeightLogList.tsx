@@ -5,7 +5,7 @@ import { Pencil, Trash2 } from "lucide-react";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { useTranslation } from "react-i18next";
-import { formatWeight } from "@/lib/unitConversion";
+import { formatWeight } from "@/lib/utils";
 import { type WeightLog } from "@/hooks/fitness";
 
 interface WeightLogListProps {

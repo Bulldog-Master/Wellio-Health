@@ -19,7 +19,7 @@ import {
   formatRelativeTime,
   getDecimalSeparator,
   getThousandsSeparator,
-} from '@/lib/formatUtils';
+} from '@/lib/utils';
 
 export const useLocaleFormat = () => {
   const { i18n } = useTranslation();

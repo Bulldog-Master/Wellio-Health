@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { useTranslation } from "react-i18next";
-import { formatWeight } from "@/lib/unitConversion";
+import { formatWeight } from "@/lib/utils";
 
 interface WeightProgressStatsProps {
   statistics: {

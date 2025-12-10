@@ -8,3 +8,4 @@ export { useKeyboardNavigation, useAppKeyboardShortcuts } from './useKeyboardNav
 export { useLoadingState, useSimpleLoading } from './useLoadingState';
 export { usePageTransition, usePageTransitionClass, useScrollAnimation } from './usePageTransition';
 export { usePageTracking } from './usePageTracking';
+export { useMonitoring, useComponentPerformance } from './useMonitoring';

@@ -9,7 +9,7 @@ import {
   medicalRecordSchema, 
   symptomSchema, 
   validateAndSanitize 
-} from '@/lib/validationSchemas';
+} from '@/lib/validation';
 import type { MedicationFormData, TestFormData, RecordFormData } from '@/components/medical/types';
 
 export function useMedicalMutations(callbacks: {
