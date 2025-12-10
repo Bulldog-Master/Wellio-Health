@@ -1,11 +1,26 @@
 # Wellio Pitch Deck: Access Model + Professional Economics
 
+## Visual Design Guidelines
+
+**Brand Identity (B+ Design)**
+- Background: Dark charcoal #0B0B0D
+- Gradient edges: Violet-cyan (#7C3AED → #22D3EE)
+- Thin gridlines (10% opacity)
+- Futuristic, privacy-first aesthetic with clinical clarity
+
+---
+
 ## SLIDE 1 — ACCESS MODEL (SUMMARY)
 
 ### Zero-Knowledge Access Model
 **Functional insights, not raw personal data.**
 
 Wellio separates raw logs from derived functional signals, ensuring professionals only see what they need — and never what exposes the user.
+
+**Visual:** 3-layer vertical stack:
+1. **User Device (Private Data Layer)** — Icons: logbook, heart, meal, workout. Label: "Raw Data — Local Only"
+2. **Wellio Derivation Layer (glowing outline)** — FWI Gauge icon. Label: "Derived Functional Signals (FWI, Trends, Adherence)"
+3. **Professional View Layer** — Coach/Clinician icons. Label: "Limited, high-level visibility"
 
 | Role | Access |
 |------|--------|
@@ -27,8 +42,14 @@ Wellio separates raw logs from derived functional signals, ensuring professional
 ## SLIDE 2 — ACCESS MODEL (INVITE & RELATIONSHIP FLOW)
 
 ### User-Controlled Professional Access
+**Professionals Don't See More Than They Should.**
+
+**Visual:** Horizontal flow diagram with clean black → dark slate gradient (#000000 → #16161A)
 
 **Flow:**
+```
+[Generate Invite Code] → [Client Enters Code] → [Pro Accepts] → [Derived Data Shared]
+```
 
 1. **Professional creates an invite code**
    - One active code per role (coach or clinician)
@@ -46,6 +67,8 @@ Wellio separates raw logs from derived functional signals, ensuring professional
    - Immediately removes professional visibility
    - No retroactive data exposure
 
+**Callout:** Access is revocable at any moment and syncs across all devices.
+
 > **Key Advantage:** Professionals can support outcomes without inheriting liability.
 
 ---
@@ -53,6 +76,9 @@ Wellio separates raw logs from derived functional signals, ensuring professional
 ## SLIDE 3 — PROFESSIONAL ECONOMICS (COACHES)
 
 ### For Coaches: A Performance Stack to Grow Your Business
+*A Performance Stack That Differentiates Real Coaches From "Fitness Influencers."*
+
+**Visual:** Athlete silhouette with glowing trend line on left, benefits list on right
 
 **Why Coaches Promote Wellio:**
 - Higher client retention via daily FWI
@@ -67,11 +93,16 @@ Wellio separates raw logs from derived functional signals, ensuring professional
 - Unlock advanced analytics with Pro tier
 - Build a differentiated brand: *"I'm a data-driven coach — with quantum-private tooling."*
 
+**CTA:** Become a Wellio Coach →
+
 ---
 
 ## SLIDE 4 — PROFESSIONAL ECONOMICS (CLINICIANS)
 
 ### For Clinicians: Wellness Decision Support Without PHI Burden
+*Clinical Insight Without Clinical Liability.*
+
+**Visual:** Stethoscope glowing over FWI ring gauge (blue/cyan tones)
 
 **Why Clinicians Adopt Wellio:**
 - Continuous, low-risk functional indicators, not PHI
@@ -94,6 +125,8 @@ Wellio separates raw logs from derived functional signals, ensuring professional
 
 ### A Network That Grows Through Professionals
 
+**Visual:** Concentric circles spreading outward (xx.network-style)
+
 **Professionals get incentives to bring clients in:**
 - Free Pro months
 - Reduced seat pricing
@@ -109,3 +142,23 @@ Wellio separates raw logs from derived functional signals, ensuring professional
 5. Repeat
 
 > **Result:** A privacy-native wellness network that grows from professionals, not ads.
+
+**Tagline:** Coaching tools that pay for themselves — and then some.
+
+---
+
+## SEO Keywords (For Marketing Copy)
+
+- wellness coach platform
+- clinician wellness tools
+- privacy-focused coaching software
+- functional wellness insights
+- secure health coaching app
+- HIPAA alternative wellness platform
+- post-quantum health platform
+- private wellness monitoring
+- metadata-free communication
+
+---
+
+*Last updated: December 2024*

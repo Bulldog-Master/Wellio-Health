@@ -19,5 +19,8 @@
   "security_audit_description": "Xem các sự kiện bảo mật và nhật ký hoạt động cho tài khoản của bạn.",
   
   "clinician_dashboard_title": "Bảng điều khiển Bác sĩ - Wellio",
-  "clinician_dashboard_description": "Theo dõi sức khỏe chức năng của bệnh nhân với tóm tắt không có PHI và cảnh báo rủi ro."
+  "clinician_dashboard_description": "Theo dõi sức khỏe chức năng của bệnh nhân với tóm tắt không có PHI và cảnh báo rủi ro.",
+  
+  "for_professionals_title": "Cho Chuyên Gia - Wellio",
+  "for_professionals_description": "Phát triển thực hành huấn luyện hoặc lâm sàng với trí tuệ sức khỏe bảo mật lượng tử. Thông tin chức năng mà không tiết lộ dữ liệu cá nhân."
 }

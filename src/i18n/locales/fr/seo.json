@@ -59,5 +59,8 @@
   "security_audit_log_description": "Consultez l'activité de sécurité de votre compte et l'historique des accès.",
   
   "clinician_dashboard_title": "Tableau de Bord du Médecin - Wellio",
-  "clinician_dashboard_description": "Surveillez le bien-être fonctionnel des patients avec des résumés sans PHI et des alertes de risque."
+  "clinician_dashboard_description": "Surveillez le bien-être fonctionnel des patients avec des résumés sans PHI et des alertes de risque.",
+  
+  "for_professionals_title": "Pour les Professionnels - Wellio",
+  "for_professionals_description": "Développez votre pratique de coaching ou clinique avec une intelligence bien-être quantique-privée. Aperçus fonctionnels sans exposer de données personnelles."
 }

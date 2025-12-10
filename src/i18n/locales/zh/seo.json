@@ -59,5 +59,8 @@
   "security_audit_log_description": "查看您的账户安全活动和访问历史。",
   
   "clinician_dashboard_title": "临床医生仪表板 - Wellio",
-  "clinician_dashboard_description": "通过无PHI摘要和风险警报监控患者的功能性健康状况。"
+  "clinician_dashboard_description": "通过无PHI摘要和风险警报监控患者的功能性健康状况。",
+  
+  "for_professionals_title": "专业人士专区 - Wellio",
+  "for_professionals_description": "通过量子隐私健康智能发展您的教练或临床实践。功能性洞察而不暴露个人数据。"
 }

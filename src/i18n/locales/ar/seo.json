@@ -9,5 +9,8 @@
   "not_found_description": "الصفحة التي تبحث عنها غير موجودة. عد إلى صفحة Wellio الرئيسية.",
   
   "clinician_dashboard_title": "لوحة تحكم الطبيب - Wellio",
-  "clinician_dashboard_description": "راقب الصحة الوظيفية للمرضى مع ملخصات خالية من PHI وتنبيهات المخاطر."
+  "clinician_dashboard_description": "راقب الصحة الوظيفية للمرضى مع ملخصات خالية من PHI وتنبيهات المخاطر.",
+  
+  "for_professionals_title": "للمحترفين - Wellio",
+  "for_professionals_description": "طور ممارستك التدريبية أو السريرية مع ذكاء العافية الكمي الخاص. رؤى وظيفية دون كشف البيانات الشخصية."
 }

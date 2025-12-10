@@ -59,5 +59,8 @@
   "security_audit_log_description": "Visualize a atividade de segurança da sua conta e histórico de acesso.",
   
   "clinician_dashboard_title": "Painel do Médico - Wellio",
-  "clinician_dashboard_description": "Monitore o bem-estar funcional dos pacientes com resumos sem PHI e alertas de risco."
+  "clinician_dashboard_description": "Monitore o bem-estar funcional dos pacientes com resumos sem PHI e alertas de risco.",
+  
+  "for_professionals_title": "Para Profissionais - Wellio",
+  "for_professionals_description": "Expanda sua prática de coaching ou clínica com inteligência de bem-estar quântica-privada. Insights funcionais sem expor dados pessoais."
 }
