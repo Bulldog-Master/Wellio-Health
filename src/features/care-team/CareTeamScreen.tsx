@@ -9,10 +9,12 @@
 // - Explains "Who can see my data?"
 // ========================================
 
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { Loader2, ArrowRight } from 'lucide-react';
+import { Loader2, ArrowRight, UserPlus, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { supabase } from '@/integrations/supabase/client';
 import { useCareTeam } from './useCareTeam';
 import { useProfessionalStatus } from './useProfessionalStatus';
 import { CoachRow } from './CoachRow';
@@ -20,6 +22,7 @@ import { ClinicianRow } from './ClinicianRow';
 import { JoinByCode } from './JoinByCode';
 import { InviteCodePanel } from './InviteCodePanel';
 import { WhoCanSeeMyDataSection } from './WhoCanSeeMyDataSection';
+import { InviteClientDialog } from './InviteClientDialog';
 
 // ---------- PRESENTATIONAL SUBCOMPONENTS ----------
 
@@ -29,6 +32,100 @@ function SectionCard({ title, children }: { title: string; children: React.React
       <h2 className="text-sm font-semibold">{title}</h2>
       {children}
     </section>
+  );
+}
+
+interface ProfessionalToolsPanelProps {
+  professionalType: 'coach' | 'clinician';
+  isCoach: boolean;
+  isClinician: boolean;
+}
+
+function ProfessionalToolsPanel({ professionalType, isCoach, isClinician }: ProfessionalToolsPanelProps) {
+  const { t } = useTranslation(['professional', 'common']);
+  const navigate = useNavigate();
+  const [showInviteDialog, setShowInviteDialog] = useState(false);
+  const [inviteCode, setInviteCode] = useState<string | null>(null);
+
+  // Fetch invite code for dialog
+  const fetchInviteCode = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+    
+    const { data } = await supabase
+      .from('professional_invite_codes')
+      .select('code')
+      .eq('professional_id', user.id)
+      .eq('professional_type', professionalType)
+      .eq('is_active', true)
+      .maybeSingle();
+    
+    if (data?.code) {
+      setInviteCode(data.code);
+      setShowInviteDialog(true);
+    }
+  };
+
+  const roleLabel = isCoach ? 'coach' : isClinician ? 'clinician' : 'professional';
+
+  return (
+    <SectionCard title={t('professional_tools', 'Professional tools')}>
+      <p className="text-xs text-muted-foreground mb-3">
+        {t('professional_tools_desc', `As a ${professionalType}, you can view aggregated functional trends for people who connect to you from your dashboard. Secure messaging is routed via xx network's cMix for metadata protection.`)}
+      </p>
+      
+      <div className="flex flex-col sm:flex-row flex-wrap gap-2">
+        {isCoach && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => navigate('/coach')}
+            className="justify-between"
+          >
+            {t('open_coach_dashboard', 'Open Coach Dashboard')}
+            <ArrowRight className="h-4 w-4 ml-2" />
+          </Button>
+        )}
+        
+        {isClinician && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => navigate('/clinician')}
+            className="justify-between"
+          >
+            {t('open_clinician_dashboard', 'Open Clinician Dashboard')}
+            <ArrowRight className="h-4 w-4 ml-2" />
+          </Button>
+        )}
+
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={fetchInviteCode}
+        >
+          <UserPlus className="h-4 w-4 mr-2" />
+          {t('invite_client', `Invite a ${roleLabel}`)}
+        </Button>
+
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => navigate('/pro/insights')}
+          className="opacity-60"
+        >
+          <TrendingUp className="h-4 w-4 mr-2" />
+          {t('view_growth_revenue', 'View client growth & revenue')}
+        </Button>
+      </div>
+
+      {showInviteDialog && inviteCode && (
+        <InviteClientDialog
+          code={inviteCode}
+          onClose={() => setShowInviteDialog(false)}
+        />
+      )}
+    </SectionCard>
   );
 }
 
@@ -115,37 +212,11 @@ export const CareTeamScreen = () => {
             <InviteCodePanel professionalType={professionalType} />
           </SectionCard>
 
-          <SectionCard title={t('professional_tools', 'Professional tools')}>
-            <p className="text-xs text-muted-foreground mb-3">
-              {t('professional_tools_desc', `As a ${professionalType}, you can view aggregated functional trends for people who connect to you from your dashboard. Secure messaging is routed via xx network's cMix for metadata protection.`)}
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-2">
-              {isCoach && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => navigate('/coach')}
-                  className="justify-between"
-                >
-                  {t('open_coach_dashboard', 'Open Coach Dashboard')}
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              )}
-              
-              {isClinician && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => navigate('/clinician')}
-                  className="justify-between"
-                >
-                  {t('open_clinician_dashboard', 'Open Clinician Dashboard')}
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              )}
-            </div>
-          </SectionCard>
+          <ProfessionalToolsPanel 
+            professionalType={professionalType}
+            isCoach={isCoach}
+            isClinician={isClinician}
+          />
         </>
       )}
 

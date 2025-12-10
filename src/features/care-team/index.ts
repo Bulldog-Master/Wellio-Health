@@ -5,6 +5,7 @@ export { ClinicianRow } from './ClinicianRow';
 export { InviteCodePanel } from './InviteCodePanel';
 export { WhoCanSeeMyDataSection } from './WhoCanSeeMyDataSection';
 export { CareTeamBanner } from './CareTeamBanner';
+export { InviteClientDialog } from './InviteClientDialog';
 export { useCareTeam } from './useCareTeam';
 export { useProfessionalStatus } from './useProfessionalStatus';
 export type { Professional, FoundProfessional } from './types';
