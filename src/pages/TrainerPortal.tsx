@@ -59,6 +59,7 @@ const TrainerPortal = () => {
               isSubmitting={isSubmitting}
               onSubmit={handleSubmit}
               clientLabel="Client"
+              professionalType="coach"
             />
           ) : (
             <ApplicationForm

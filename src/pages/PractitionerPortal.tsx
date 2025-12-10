@@ -59,6 +59,7 @@ const PractitionerPortal = () => {
               isSubmitting={isSubmitting}
               onSubmit={handleSubmit}
               clientLabel="Patient"
+              professionalType="clinician"
             />
           ) : (
             <ApplicationForm

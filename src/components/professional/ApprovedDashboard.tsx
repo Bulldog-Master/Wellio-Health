@@ -17,6 +17,7 @@ interface ApprovedDashboardProps {
   isSubmitting: boolean;
   onSubmit: (e: React.FormEvent) => void;
   clientLabel?: string;
+  professionalType?: 'coach' | 'clinician';
 }
 
 export const ApprovedDashboard = ({
@@ -26,6 +27,7 @@ export const ApprovedDashboard = ({
   isSubmitting,
   onSubmit,
   clientLabel = 'Client',
+  professionalType = 'coach',
 }: ApprovedDashboardProps) => {
   const { t } = useTranslation(['professional', 'common']);
 
@@ -84,6 +86,14 @@ export const ApprovedDashboard = ({
             )}
           </CardContent>
         </Card>
+      </TabsContent>
+
+      <TabsContent value="invites">
+        <InviteCodeManager professionalType={professionalType} />
+      </TabsContent>
+
+      <TabsContent value="requests">
+        <PendingRequests />
       </TabsContent>
 
       <TabsContent value="schedule">
