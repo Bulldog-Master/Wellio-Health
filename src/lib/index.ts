@@ -1,60 +1,35 @@
 /**
  * Library Module Index
  * 
- * This file documents the organization of the lib/ directory.
  * Import from specific modules for best tree-shaking and code organization.
  * 
  * Directory Structure:
- * 
  * lib/
- * ├── encryption/     - Cryptographic utilities
- * │   ├── core.ts     - AES-256-GCM encryption (v2)
- * │   ├── quantum.ts  - ML-KEM + ML-DSA post-quantum (v3)
- * │   └── medical.ts  - Server-side medical encryption
- * │
+ * ├── auth/           - Authentication utilities
+ * ├── encryption/     - Cryptographic utilities  
+ * ├── features/       - Feature management
+ * ├── location/       - Location utilities
+ * ├── media/          - Media handling
  * ├── services/       - Application services
- * │   ├── analytics.ts        - Event tracking
- * │   ├── errorTracking.ts    - Error logging to database
- * │   ├── errorHandler.ts     - Error handling utilities
- * │   ├── monitoring.ts       - Unified monitoring
- * │   └── performanceMonitoring.ts - Web vitals
- * │
+ * ├── storage/        - Storage utilities
+ * ├── testing/        - Testing utilities
  * ├── utils/          - General utilities
- * │   ├── utils.ts          - Core utilities (cn)
- * │   ├── formatUtils.ts    - Locale-aware formatting
- * │   └── unitConversion.ts - Imperial/metric conversion
- * │
  * └── validation/     - Validation schemas
- *     └── validationSchemas.ts - Zod schemas
  * 
- * Usage Examples:
- * 
- * // Encryption
- * import { encryptJSON, decryptJSON } from '@/lib/encryption';
- * import { hybridEncrypt, hybridDecrypt } from '@/lib/encryption';
- * 
- * // Services
- * import { trackEvent, trackPageView } from '@/lib/services';
- * import { initMonitoring } from '@/lib/services';
- * 
- * // Utils
+ * Usage: Import from specific submodules for better tree-shaking:
  * import { cn } from '@/lib/utils';
- * import { formatNumber, formatCurrency } from '@/lib/utils';
- * import { lbsToKg, formatWeight } from '@/lib/utils';
- * 
- * // Validation
- * import { emailSchema, passwordSchema } from '@/lib/validation';
- * 
- * Note: Legacy imports (e.g., '@/lib/encryption.ts') still work for
- * backward compatibility but are deprecated.
+ * import { encryptJSON } from '@/lib/encryption';
  */
 
-// Re-export main modules for convenience
-// Use direct imports for better tree-shaking:
-// import { cn } from '@/lib/utils';
-// import { encryptJSON } from '@/lib/encryption';
-
-export * from './encryption';
+// Re-export modules
+export * from './auth';
+export * from './features';
+export * from './location';
+export * from './media';
 export * from './services';
+export * from './storage';
 export * from './utils';
 export * from './validation';
+
+// For encryption, import directly: import { ... } from '@/lib/encryption'
+// to access all encryption utilities including quantum-resistant ones
