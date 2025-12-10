@@ -88,5 +88,24 @@
   "revoke_access": "एक्सेस रद्द करें",
   "revoke_access_title": "पेशेवर एक्सेस रद्द करें",
   "revoke_access_desc": "क्या आप {{name}} के लिए एक्सेस रद्द करना चाहते हैं?",
-  "access_revoked": "एक्सेस सफलतापूर्वक रद्द किया गया"
+  "access_revoked": "एक्सेस सफलतापूर्वक रद्द किया गया",
+
+  "certification_program": "प्रमाणन कार्यक्रम",
+  "certification_title": "Wellio ट्रेनर/कोच प्रमाणन",
+  "certification_subtitle": "Wellio प्रमाणित ट्रेनर बनें और विशेष टूल्स, क्लाइंट्स और कमाई के अवसर प्राप्त करें",
+  "certification_benefit_1": "आधिकारिक बैज और Wellio डायरेक्टरी में लिस्टिंग",
+  "certification_benefit_2": "प्रीमियम एनालिटिक्स तक जल्दी पहुंच",
+  "certification_benefit_3": "क्लाइंट मैचिंग और ग्रोथ टूल्स",
+  "certification_benefit_4": "6 महीने Coach Pro मुफ्त",
+  "certification_module_1_title": "फंक्शनल वेलनेस इंडेक्स",
+  "certification_module_1_desc": "FWI को समझना और क्लाइंट गाइडेंस के लिए उपयोग करना सीखें",
+  "certification_module_2_title": "आदत पालन कोचिंग",
+  "certification_module_2_desc": "टिकाऊ आदतें बनाने की तकनीकें सीखें",
+  "certification_module_3_title": "ट्रेंड सिग्नल का उपयोग",
+  "certification_module_3_desc": "सूचित कोचिंग के लिए डेटा और ट्रेंड विज़ुअलाइज़ेशन को समझें",
+  "certification_module_4_title": "प्राइवेसी-फर्स्ट कोचिंग",
+  "certification_module_4_desc": "हमारे एन्क्रिप्शन और मेटाडेटा सुरक्षा के बारे में जानें",
+  "start_certification": "प्रमाणन शुरू करें",
+  "certification_time": "पूरा करने में ~1 घंटा",
+  "certification_free": "सभी ट्रेनरों के लिए मुफ्त"
 }

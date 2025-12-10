@@ -171,5 +171,24 @@
   "revoke_access_desc": "আপনি কি {{name}}-এর জন্য অ্যাক্সেস প্রত্যাহার করতে চান?",
   "access_revoked": "অ্যাক্সেস সফলভাবে প্রত্যাহার করা হয়েছে",
   "coach": "কোচ",
-  "clinician": "ক্লিনিশিয়ান"
+  "clinician": "ক্লিনিশিয়ান",
+
+  "certification_program": "সার্টিফিকেশন প্রোগ্রাম",
+  "certification_title": "Wellio ট্রেইনার/কোচ সার্টিফিকেশন",
+  "certification_subtitle": "Wellio সার্টিফাইড ট্রেইনার হয়ে এক্সক্লুসিভ টুলস, ক্লায়েন্ট এবং উপার্জনের সুযোগ পান",
+  "certification_benefit_1": "অফিসিয়াল ব্যাজ এবং Wellio ডিরেক্টরিতে তালিকাভুক্তি",
+  "certification_benefit_2": "প্রিমিয়াম অ্যানালিটিক্সে আগাম অ্যাক্সেস",
+  "certification_benefit_3": "ক্লায়েন্ট ম্যাচিং এবং গ্রোথ টুলস",
+  "certification_benefit_4": "6 মাস Coach Pro বিনামূল্যে",
+  "certification_module_1_title": "ফাংশনাল ওয়েলনেস ইনডেক্স",
+  "certification_module_1_desc": "FWI ব্যাখ্যা করা এবং ক্লায়েন্ট গাইডেন্সে ব্যবহার করা শিখুন",
+  "certification_module_2_title": "হ্যাবিট অ্যাডহিয়ারেন্স কোচিং",
+  "certification_module_2_desc": "টেকসই অভ্যাস তৈরির কৌশল আয়ত্ত করুন",
+  "certification_module_3_title": "ট্রেন্ড সিগন্যাল ব্যবহার",
+  "certification_module_3_desc": "তথ্যভিত্তিক কোচিংয়ের জন্য ডেটা এবং ট্রেন্ড ভিজ্যুয়ালাইজেশন বুঝুন",
+  "certification_module_4_title": "প্রাইভেসি-ফার্স্ট কোচিং",
+  "certification_module_4_desc": "আমাদের এনক্রিপশন এবং মেটাডেটা সুরক্ষা সম্পর্কে জানুন",
+  "start_certification": "সার্টিফিকেশন শুরু করুন",
+  "certification_time": "সম্পূর্ণ করতে ~১ ঘণ্টা",
+  "certification_free": "সব ট্রেইনারদের জন্য বিনামূল্যে"
 }

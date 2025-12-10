@@ -203,5 +203,24 @@
   "professional_tools": "プロフェッショナルツール",
   "professional_tools_desc": "{{role}}として、ダッシュボードからあなたに接続している人々の集約された機能的トレンドを表示できます。安全なメッセージはメタデータ保護のためにxx networkのcMix経由でルーティングされます。",
   "open_coach_dashboard": "コーチダッシュボードを開く",
-  "open_clinician_dashboard": "臨床医ダッシュボードを開く"
+  "open_clinician_dashboard": "臨床医ダッシュボードを開く",
+
+  "certification_program": "認定プログラム",
+  "certification_title": "Wellioトレーナー/コーチ認定",
+  "certification_subtitle": "Wellio認定トレーナーになり、専用ツール、クライアント、収益機会にアクセス",
+  "certification_benefit_1": "公式バッジとWellioディレクトリへの掲載",
+  "certification_benefit_2": "プレミアム分析への早期アクセス",
+  "certification_benefit_3": "クライアントマッチングと成長ツール",
+  "certification_benefit_4": "Coach Pro 6ヶ月無料",
+  "certification_module_1_title": "ファンクショナルウェルネスインデックス",
+  "certification_module_1_desc": "FWIを解釈しクライアント指導に活用する方法を学ぶ",
+  "certification_module_2_title": "習慣遵守コーチング",
+  "certification_module_2_desc": "持続可能な習慣を築くテクニックをマスター",
+  "certification_module_3_title": "トレンドシグナルの活用",
+  "certification_module_3_desc": "情報に基づいたコーチングのためのデータとトレンド可視化を理解",
+  "certification_module_4_title": "プライバシーファーストコーチング",
+  "certification_module_4_desc": "当社の暗号化とメタデータ保護について学ぶ",
+  "start_certification": "認定を開始",
+  "certification_time": "完了まで約1時間",
+  "certification_free": "全トレーナー無料"
 }

@@ -172,5 +172,24 @@
   "revoke_access": "رسائی منسوخ کریں",
   "revoke_access_title": "رسائی منسوخ کریں؟",
   "revoke_access_desc": "{{name}} آپ کے ڈیٹا تک رسائی نہیں کر سکے گا",
-  "access_revoked": "رسائی منسوخ ہو گئی"
+  "access_revoked": "رسائی منسوخ ہو گئی",
+
+  "certification_program": "سرٹیفیکیشن پروگرام",
+  "certification_title": "Wellio ٹرینر/کوچ سرٹیفیکیشن",
+  "certification_subtitle": "Wellio سرٹیفائیڈ ٹرینر بنیں اور خصوصی ٹولز، کلائنٹس اور کمائی کے مواقع حاصل کریں",
+  "certification_benefit_1": "آفیشل بیج اور Wellio ڈائریکٹری میں لسٹنگ",
+  "certification_benefit_2": "پریمیم تجزیات تک جلد رسائی",
+  "certification_benefit_3": "کلائنٹ میچنگ اور گروتھ ٹولز",
+  "certification_benefit_4": "6 ماہ Coach Pro مفت",
+  "certification_module_1_title": "فنکشنل ویلنیس انڈیکس",
+  "certification_module_1_desc": "FWI کو سمجھنا اور کلائنٹ گائیڈنس کے لیے استعمال کرنا سیکھیں",
+  "certification_module_2_title": "عادت پابندی کوچنگ",
+  "certification_module_2_desc": "پائیدار عادات بنانے کی تکنیک سیکھیں",
+  "certification_module_3_title": "ٹرینڈ سگنلز کا استعمال",
+  "certification_module_3_desc": "باخبر کوچنگ کے لیے ڈیٹا اور ٹرینڈ ویژولائزیشن کو سمجھیں",
+  "certification_module_4_title": "پرائیویسی-فرسٹ کوچنگ",
+  "certification_module_4_desc": "ہماری انکرپشن اور میٹا ڈیٹا تحفظ کے بارے میں جانیں",
+  "start_certification": "سرٹیفیکیشن شروع کریں",
+  "certification_time": "مکمل کرنے میں ~1 گھنٹہ",
+  "certification_free": "تمام ٹرینرز کے لیے مفت"
 }

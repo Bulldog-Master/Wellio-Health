@@ -172,5 +172,24 @@
   "revoke_access": "యాక్సెస్ రద్దు చేయండి",
   "revoke_access_title": "యాక్సెస్ రద్దు చేయాలా?",
   "revoke_access_desc": "{{name}} ఇకపై మీ డేటాను యాక్సెస్ చేయలేరు",
-  "access_revoked": "యాక్సెస్ రద్దు చేయబడింది"
+  "access_revoked": "యాక్సెస్ రద్దు చేయబడింది",
+
+  "certification_program": "సర్టిఫికేషన్ ప్రోగ్రామ్",
+  "certification_title": "Wellio ట్రైనర్/కోచ్ సర్టిఫికేషన్",
+  "certification_subtitle": "Wellio సర్టిఫైడ్ ట్రైనర్ అవ్వండి మరియు ప్రత్యేక టూల్స్, క్లయింట్లు మరియు ఆదాయ అవకాశాలు పొందండి",
+  "certification_benefit_1": "అధికారిక బ్యాడ్జ్ మరియు Wellio డైరెక్టరీలో లిస్టింగ్",
+  "certification_benefit_2": "ప్రీమియం అనలిటిక్స్‌కు ముందస్తు యాక్సెస్",
+  "certification_benefit_3": "క్లయింట్ మ్యాచింగ్ మరియు గ్రోత్ టూల్స్",
+  "certification_benefit_4": "6 నెలలు Coach Pro ఉచితం",
+  "certification_module_1_title": "ఫంక్షనల్ వెల్‌నెస్ ఇండెక్స్",
+  "certification_module_1_desc": "FWI ని అర్థం చేసుకోవడం మరియు క్లయింట్ గైడెన్స్‌కు ఉపయోగించడం నేర్చుకోండి",
+  "certification_module_2_title": "అలవాటు పాటింపు కోచింగ్",
+  "certification_module_2_desc": "శాశ్వత అలవాట్లను నిర్మించే టెక్నిక్‌లను మాస్టర్ చేయండి",
+  "certification_module_3_title": "ట్రెండ్ సిగ్నల్స్ ఉపయోగించడం",
+  "certification_module_3_desc": "సమాచారంతో కూడిన కోచింగ్ కోసం డేటా మరియు ట్రెండ్ విజువలైజేషన్ అర్థం చేసుకోండి",
+  "certification_module_4_title": "ప్రైవసీ-ఫస్ట్ కోచింగ్",
+  "certification_module_4_desc": "మా ఎన్‌క్రిప్షన్ మరియు మెటాడేటా ప్రొటెక్షన్ గురించి తెలుసుకోండి",
+  "start_certification": "సర్టిఫికేషన్ ప్రారంభించండి",
+  "certification_time": "పూర్తి చేయడానికి ~1 గంట",
+  "certification_free": "అన్ని ట్రైనర్‌లకు ఉచితం"
 }

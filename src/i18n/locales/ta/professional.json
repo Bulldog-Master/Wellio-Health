@@ -172,5 +172,24 @@
   "revoke_access": "அணுகலை ரத்து செய்",
   "revoke_access_title": "அணுகலை ரத்து செய்யவா?",
   "revoke_access_desc": "{{name}} உங்கள் தரவை அணுக முடியாது",
-  "access_revoked": "அணுகல் ரத்து செய்யப்பட்டது"
+  "access_revoked": "அணுகல் ரத்து செய்யப்பட்டது",
+
+  "certification_program": "சான்றிதழ் திட்டம்",
+  "certification_title": "Wellio பயிற்சியாளர்/கோச் சான்றிதழ்",
+  "certification_subtitle": "Wellio சான்றிதழ் பயிற்சியாளராகி தனித்துவமான கருவிகள், வாடிக்கையாளர்கள் மற்றும் வருமான வாய்ப்புகளைப் பெறுங்கள்",
+  "certification_benefit_1": "அதிகாரப்பூர்வ பேட்ஜ் மற்றும் Wellio அடைவில் பட்டியல்",
+  "certification_benefit_2": "பிரீமியம் பகுப்பாய்வுக்கு முன்கூட்டிய அணுகல்",
+  "certification_benefit_3": "வாடிக்கையாளர் பொருத்துதல் மற்றும் வளர்ச்சி கருவிகள்",
+  "certification_benefit_4": "6 மாதங்கள் Coach Pro இலவசம்",
+  "certification_module_1_title": "செயல்பாட்டு ஆரோக்கிய குறியீடு",
+  "certification_module_1_desc": "FWI ஐ விளக்கி வாடிக்கையாளர் வழிகாட்டுதலுக்கு பயன்படுத்த கற்றுக்கொள்ளுங்கள்",
+  "certification_module_2_title": "பழக்க இணக்க பயிற்சி",
+  "certification_module_2_desc": "நிலையான பழக்கங்களை உருவாக்கும் நுட்பங்களை மாஸ்டர் செய்யுங்கள்",
+  "certification_module_3_title": "போக்கு சமிக்ஞைகளைப் பயன்படுத்துதல்",
+  "certification_module_3_desc": "தகவலறிந்த பயிற்சிக்கான தரவு மற்றும் போக்கு காட்சிப்படுத்தலைப் புரிந்து கொள்ளுங்கள்",
+  "certification_module_4_title": "தனியுரிமை-முதல் பயிற்சி",
+  "certification_module_4_desc": "எங்கள் குறியாக்கம் மற்றும் மெட்டாடேட்டா பாதுகாப்பு பற்றி அறியுங்கள்",
+  "start_certification": "சான்றிதழை தொடங்கு",
+  "certification_time": "முடிக்க ~1 மணி நேரம்",
+  "certification_free": "அனைத்து பயிற்சியாளர்களுக்கும் இலவசம்"
 }

@@ -171,5 +171,24 @@
   "revoke_access_desc": "You sure say you wan revoke access for {{name}}?",
   "access_revoked": "Access don revoke successfully",
   "coach": "Coach",
-  "clinician": "Clinician"
+  "clinician": "Clinician",
+
+  "certification_program": "Certification Program",
+  "certification_title": "Wellio Trainer/Coach Certification",
+  "certification_subtitle": "Become Wellio Certified Trainer and get access to exclusive tools, clients, and money-making chance",
+  "certification_benefit_1": "Official badge and listing for Wellio Directory",
+  "certification_benefit_2": "Early access to premium analytics",
+  "certification_benefit_3": "Client matching and growth tools",
+  "certification_benefit_4": "6 months Coach Pro free",
+  "certification_module_1_title": "Functional Wellness Index",
+  "certification_module_1_desc": "Learn how to interpret and use FWI to guide your clients",
+  "certification_module_2_title": "Habit Adherence Coaching",
+  "certification_module_2_desc": "Master techniques to build habits wey go last",
+  "certification_module_3_title": "Using Trend Signals",
+  "certification_module_3_desc": "Understand data and trend visualization for better coaching",
+  "certification_module_4_title": "Privacy-First Coaching",
+  "certification_module_4_desc": "Learn about our encryption and metadata protection",
+  "start_certification": "Start Certification",
+  "certification_time": "~1 hour to finish",
+  "certification_free": "Free for all trainers"
 }
