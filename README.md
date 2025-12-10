@@ -13,11 +13,10 @@
     <img src="https://img.shields.io/github/actions/workflow/status/Bulldog-Master/Wellio-Health/codeql.yml?branch=main&label=CodeQL&style=for-the-badge&logo=github&logoColor=white" alt="CodeQL" />
   </a>
   
-  <!-- Snyk Badge (replace YOUR-SNYK-ORG/YOUR-REPO with actual values after Snyk setup) -->
-  <!-- To activate: Sign up at snyk.io, connect repo, then uncomment below -->
-  <!-- <a href="https://snyk.io/test/github/Bulldog-Master/Wellio-Health">
-    <img src="https://snyk.io/test/github/Bulldog-Master/Wellio-Health/badge.svg?style=for-the-badge" alt="Known Vulnerabilities" />
-  </a> -->
+  <!-- Snyk Vulnerability Scanning -->
+  <a href="https://snyk.io/test/github/Bulldog-Master/Wellio-Health">
+    <img src="https://snyk.io/test/github/Bulldog-Master/Wellio-Health/badge.svg" alt="Known Vulnerabilities" />
+  </a>
   
   <!-- License -->
   <img src="https://img.shields.io/badge/license-Proprietary-lightgrey?style=for-the-badge" alt="License" />
