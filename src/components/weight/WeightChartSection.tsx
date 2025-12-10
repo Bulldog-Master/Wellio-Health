@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { useTranslation } from "react-i18next";
-import { formatWeight } from "@/lib/unitConversion";
+import { formatWeight } from "@/lib/utils";
 import { type ChartView } from "@/hooks/fitness";
 
 interface WeightChartSectionProps {

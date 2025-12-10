@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import type { UnitSystem } from '@/lib/unitConversion';
+import type { UnitSystem } from '@/lib/utils';
 
 const STORAGE_KEY = 'wellio-preferred-unit';
 

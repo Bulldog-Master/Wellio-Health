@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useTranslation } from 'react-i18next';
-import { mealSearchSchema, validateAndSanitize } from '@/lib/validationSchemas';
+import { mealSearchSchema, validateAndSanitize } from '@/lib/validation';
 
 interface MealLog {
   id: string;

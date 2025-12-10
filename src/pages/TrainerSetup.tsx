@@ -10,7 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 import { Award, Plus, X, DollarSign, MapPin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { trainerProfileSchema, validateAndSanitize } from "@/lib/validationSchemas";
+import { trainerProfileSchema, validateAndSanitize } from "@/lib/validation";
 
 const TrainerSetup = () => {
   const [loading, setLoading] = useState(false);

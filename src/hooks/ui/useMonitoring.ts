@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { trackPageView, trackEvent } from '@/lib/monitoring';
+import { trackPageView, trackEvent } from '@/lib/services';
 
 /**
  * Hook to automatically track page views and provide event tracking

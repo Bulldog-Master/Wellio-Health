@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-import { mealSearchSchema, validateAndSanitize } from '@/lib/validationSchemas';
+import { mealSearchSchema, validateAndSanitize } from '@/lib/validation';
 import { NutritionData } from './useFoodLogMutations';
 
 export function useFoodAnalysis() {

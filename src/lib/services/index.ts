@@ -23,6 +23,7 @@ export {
 
 // Error tracking (database logging)
 export {
+  logError,
   logError as logErrorToDatabase,
   setupGlobalErrorHandlers,
   type ErrorReport,

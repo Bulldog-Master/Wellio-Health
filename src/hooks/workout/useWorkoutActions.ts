@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { parseDistance } from "@/lib/unitConversion";
+import { parseDistance } from "@/lib/utils";
 import type { ActivityLog, WorkoutRoutine } from "@/types/workout.types";
 
 interface UseWorkoutActionsProps {

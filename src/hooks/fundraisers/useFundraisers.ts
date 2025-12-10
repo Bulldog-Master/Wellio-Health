@@ -3,7 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
 import { Fundraiser, FundraiserFormData, defaultFormData } from '@/components/fundraisers/types';
-import { fundraiserSchema, validateAndSanitize } from '@/lib/validationSchemas';
+import { fundraiserSchema, validateAndSanitize } from '@/lib/validation';
 
 export const useFundraisers = () => {
   const { t } = useTranslation('fundraisers');

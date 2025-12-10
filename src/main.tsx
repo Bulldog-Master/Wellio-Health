@@ -3,9 +3,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { ErrorBoundary } from "@/components/common";
-import { setupGlobalErrorHandlers } from "./lib/errorTracking";
-import { initPerformanceMonitoring } from "./lib/performanceMonitoring";
-import { initAnalytics } from "./lib/analytics";
+import { setupGlobalErrorHandlers, initPerformanceMonitoring, initAnalytics } from "@/lib/services";
 import { runHealthCheck, logTestResults } from "./lib/testing/testingUtils";
 
 // FORCE dark mode immediately

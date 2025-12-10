@@ -1,6 +1,5 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
-import { formatWeight } from '@/lib/unitConversion';
-import type { UnitSystem } from '@/lib/unitConversion';
+import { formatWeight, type UnitSystem } from '@/lib/utils';
 
 interface WeightChartProps {
   chartData: any[];

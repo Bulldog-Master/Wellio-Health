@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Scale, ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import { useUserPreferences } from "@/hooks/utils";
-import { formatWeight } from "@/lib/unitConversion";
+import { formatWeight } from "@/lib/utils";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
