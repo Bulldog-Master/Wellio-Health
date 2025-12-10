@@ -7,6 +7,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useMemo, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { VideoSessionsPanel } from "@/features/pro";
 
 // ---------- TYPES ------------------------
 
@@ -324,6 +326,7 @@ function useClinicianPatientDetail(patientId: string) {
 // ---------- UI: MAIN DASHBOARD ------------
 
 export function ClinicianDashboardScreen() {
+  const { t } = useTranslation(['professional', 'live']);
   const { data, isLoading } = useClinicianPatients();
   const [selectedPatientId, setSelectedPatientId] = useState<string | null>(
     null
@@ -335,9 +338,11 @@ export function ClinicianDashboardScreen() {
   );
 
   return (
-    <div className="p-4 flex flex-col md:flex-row gap-4">
-      <div className="md:w-1/2 space-y-2">
-        <h1 className="text-lg font-semibold">Patients</h1>
+    <div className="p-4 space-y-4">
+      <VideoSessionsPanel />
+      <div className="flex flex-col md:flex-row gap-4">
+        <div className="md:w-1/2 space-y-2">
+          <h1 className="text-lg font-semibold">{t('professional:patients', 'Patients')}</h1>
         {isLoading && (
           <p className="text-sm text-muted-foreground">
             Loading patient overview…
@@ -398,14 +403,15 @@ export function ClinicianDashboardScreen() {
         </div>
       </div>
 
-      <div className="md:w-1/2 space-y-3">
-        {selectedPatient ? (
-          <ClinicianPatientDetailPanel patient={selectedPatient} />
-        ) : (
-          <p className="text-sm text-muted-foreground mt-6 md:mt-0">
-            Select a patient to view their functional trend summary.
-          </p>
-        )}
+        <div className="md:w-1/2 space-y-3">
+          {selectedPatient ? (
+            <ClinicianPatientDetailPanel patient={selectedPatient} />
+          ) : (
+            <p className="text-sm text-muted-foreground mt-6 md:mt-0">
+              {t('professional:select_patient', 'Select a patient to view their functional trend summary.')}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
