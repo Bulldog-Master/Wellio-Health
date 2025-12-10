@@ -59,5 +59,8 @@
   "security_audit_log_description": "Sieh deine Kontosicherheitsaktivität und Zugriffsverlauf.",
   
   "clinician_dashboard_title": "Arzt-Dashboard - Wellio",
-  "clinician_dashboard_description": "Überwachen Sie das funktionale Wohlbefinden der Patienten mit PHI-freien Zusammenfassungen und Risikowarnungen."
+  "clinician_dashboard_description": "Überwachen Sie das funktionale Wohlbefinden der Patienten mit PHI-freien Zusammenfassungen und Risikowarnungen.",
+  
+  "for_professionals_title": "Für Profis - Wellio",
+  "for_professionals_description": "Erweitern Sie Ihre Coaching- oder Klinikpraxis mit quantenprivater Wellness-Intelligenz. Funktionale Einblicke ohne persönliche Daten preiszugeben."
 }

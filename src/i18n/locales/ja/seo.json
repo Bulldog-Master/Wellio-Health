@@ -19,5 +19,8 @@
   "security_audit_description": "アカウントのセキュリティイベントとアクティビティログを表示。",
   
   "clinician_dashboard_title": "医師ダッシュボード - Wellio",
-  "clinician_dashboard_description": "PHIを含まない要約とリスクアラートで患者の機能的健康状態を監視。"
+  "clinician_dashboard_description": "PHIを含まない要約とリスクアラートで患者の機能的健康状態を監視。",
+  
+  "for_professionals_title": "プロフェッショナル向け - Wellio",
+  "for_professionals_description": "量子プライベートウェルネスインテリジェンスでコーチングまたは臨床実践を成長させましょう。個人データを公開せずに機能的な洞察を得られます。"
 }

@@ -59,5 +59,8 @@
   "security_audit_log_description": "Hesap güvenlik etkinliğinizi ve erişim geçmişinizi görüntüleyin.",
   
   "clinician_dashboard_title": "Klinisyen Paneli - Wellio",
-  "clinician_dashboard_description": "PHI içermeyen özetler ve risk uyarılarıyla hasta fonksiyonel sağlığını izleyin."
+  "clinician_dashboard_description": "PHI içermeyen özetler ve risk uyarılarıyla hasta fonksiyonel sağlığını izleyin.",
+  
+  "for_professionals_title": "Profesyoneller İçin - Wellio",
+  "for_professionals_description": "Kuantum gizli sağlık zekası ile koçluk veya klinik pratiğinizi büyütün. Kişisel verileri açığa çıkarmadan fonksiyonel içgörüler."
 }

@@ -19,5 +19,8 @@
   "security_audit_description": "Lihat peristiwa keamanan dan log aktivitas untuk akun Anda.",
   
   "clinician_dashboard_title": "Dashboard Dokter - Wellio",
-  "clinician_dashboard_description": "Pantau kesejahteraan fungsional pasien dengan ringkasan bebas PHI dan peringatan risiko."
+  "clinician_dashboard_description": "Pantau kesejahteraan fungsional pasien dengan ringkasan bebas PHI dan peringatan risiko.",
+  
+  "for_professionals_title": "Untuk Profesional - Wellio",
+  "for_professionals_description": "Kembangkan praktik coaching atau klinis Anda dengan kecerdasan wellness kuantum-privat. Wawasan fungsional tanpa mengekspos data pribadi."
 }

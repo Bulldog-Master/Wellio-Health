@@ -19,5 +19,8 @@
   "security_audit_description": "شوف أحداث الأمان وسجلات النشاط لحسابك.",
   
   "clinician_dashboard_title": "لوحة تحكم الدكتور - Wellio",
-  "clinician_dashboard_description": "راقب صحة المرضى مع ملخصات من غير PHI وتنبيهات المخاطر."
+  "clinician_dashboard_description": "راقب صحة المرضى مع ملخصات من غير PHI وتنبيهات المخاطر.",
+  
+  "for_professionals_title": "للمحترفين - Wellio",
+  "for_professionals_description": "كبّر ممارستك التدريبية أو السريرية مع ذكاء العافية الكوانتم الخاص. رؤى وظيفية من غير ما تكشف البيانات الشخصية."
 }

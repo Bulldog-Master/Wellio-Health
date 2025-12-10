@@ -19,5 +19,8 @@
   "security_audit_description": "View security events and activity logs for your account.",
   
   "clinician_dashboard_title": "Doctor Dashboard - Wellio",
-  "clinician_dashboard_description": "Monitor patient wellness with PHI-free summaries and risk alerts."
+  "clinician_dashboard_description": "Monitor patient wellness with PHI-free summaries and risk alerts.",
+  
+  "for_professionals_title": "For Professionals - Wellio",
+  "for_professionals_description": "Grow your coaching or clinical practice with quantum-private wellness intelligence. Functional insights wey no go expose personal data."
 }

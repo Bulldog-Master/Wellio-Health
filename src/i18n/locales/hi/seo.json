@@ -19,5 +19,8 @@
   "security_audit_description": "अपने खाते के सुरक्षा इवेंट और गतिविधि लॉग देखें।",
   
   "clinician_dashboard_title": "चिकित्सक डैशबोर्ड - Wellio",
-  "clinician_dashboard_description": "PHI-मुक्त सारांश और जोखिम अलर्ट के साथ रोगियों की कार्यात्मक भलाई की निगरानी करें।"
+  "clinician_dashboard_description": "PHI-मुक्त सारांश और जोखिम अलर्ट के साथ रोगियों की कार्यात्मक भलाई की निगरानी करें।",
+  
+  "for_professionals_title": "पेशेवरों के लिए - Wellio",
+  "for_professionals_description": "क्वांटम-प्राइवेट वेलनेस इंटेलिजेंस के साथ अपनी कोचिंग या क्लिनिकल प्रैक्टिस बढ़ाएं। व्यक्तिगत डेटा उजागर किए बिना कार्यात्मक अंतर्दृष्टि।"
 }

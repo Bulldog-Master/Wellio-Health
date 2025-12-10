@@ -19,5 +19,8 @@
   "security_audit_description": "Visualizza gli eventi di sicurezza e i log delle attività del tuo account.",
   
   "clinician_dashboard_title": "Dashboard del Medico - Wellio",
-  "clinician_dashboard_description": "Monitora il benessere funzionale dei pazienti con riepiloghi senza PHI e avvisi di rischio."
+  "clinician_dashboard_description": "Monitora il benessere funzionale dei pazienti con riepiloghi senza PHI e avvisi di rischio.",
+  
+  "for_professionals_title": "Per i Professionisti - Wellio",
+  "for_professionals_description": "Fai crescere la tua pratica di coaching o clinica con intelligenza del benessere quantistica-privata. Approfondimenti funzionali senza esporre dati personali."
 }
