@@ -4167,6 +4167,47 @@ export type Database = {
         }
         Relationships: []
       }
+      secure_messages: {
+        Row: {
+          ciphertext: string
+          conversation_id: string
+          created_at: string
+          id: string
+          kem_ciphertext: string | null
+          nonce: string
+          sender_id: string
+          version: number
+        }
+        Insert: {
+          ciphertext: string
+          conversation_id: string
+          created_at?: string
+          id?: string
+          kem_ciphertext?: string | null
+          nonce: string
+          sender_id: string
+          version?: number
+        }
+        Update: {
+          ciphertext?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          kem_ciphertext?: string | null
+          nonce?: string
+          sender_id?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "secure_messages_sender_id_fkey"
+            columns: ["sender_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       security_logs: {
         Row: {
           created_at: string
