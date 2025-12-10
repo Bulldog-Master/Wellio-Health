@@ -1,15 +1,6 @@
 // ========================================
 // WELLIO HEALTH - TODAY FEATURE MODULE
-// ONE FILE DROP-IN VERSION
-// ========================================
-
-// This file contains:
-// - Types
-// - Daily Score computation
-// - Supabase query hook
-// - UI components (Score Card, Actions List, AI Insight card)
-// - Main TodayScreen
-// - AI insight prompt builder
+// COMPLETE HABIT LOOP IMPLEMENTATION
 // ========================================
 
 import { useQuery } from "@tanstack/react-query";
@@ -18,36 +9,12 @@ import { Progress } from "@/components/ui/progress";
 import { useMemo, useState, useEffect } from "react";
 import type { User } from "@supabase/supabase-js";
 import { useDailyHistoryScores, TodayHistoryCard } from "./TodayHistoryFeature";
+import { StreakGoalCard, TodayNudgesCard } from "./components";
+import { buildNudgeMessages } from "./utils";
+import type { DailyInputs, DailyScoreResult, IsoDateString } from "./types";
 
-// ---------- TYPES -----------------------
-
-export type IsoDateString = string; // '2025-12-09'
-
-export interface DailyInputs {
-  date: IsoDateString;
-
-  workoutCompletion: number;     
-  mealsLoggedCompletion: number;
-  hydrationCompletion: number;   
-  moodScore: number;             
-  sleepCompletion: number;       
-
-  recoveryModifier?: number;     // optional wearable boost
-}
-
-export interface DailyScoreResult {
-  date: IsoDateString;
-  rawScore: number;
-  score: number; // 0-100
-  breakdown: {
-    workout: number;
-    meals: number;
-    hydration: number;
-    mood: number;
-    sleep: number;
-    recoveryModifier?: number;
-  };
-}
+// Re-export types
+export type { DailyInputs, DailyScoreResult, IsoDateString };
 
 // ---------- SCORE COMPUTATION -----------
 
@@ -96,7 +63,6 @@ export function useTodayStats(userId: string, today: IsoDateString) {
     queryFn: async (): Promise<DailyInputs> => {
       const clamp = (v: number) => Math.max(0, Math.min(1, v));
 
-      // Workout logs - using activity_logs table (exists in schema)
       const { data: workouts } = await supabase
         .from("activity_logs")
         .select("id")
@@ -104,10 +70,8 @@ export function useTodayStats(userId: string, today: IsoDateString) {
         .gte("logged_at", `${today}T00:00:00`)
         .lte("logged_at", `${today}T23:59:59`);
 
-      // Consider workout complete if at least one activity logged
       const workoutCompletion = (workouts?.length ?? 0) > 0 ? 1 : 0;
 
-      // Meals - using nutrition_logs table (exists in schema)
       const { data: meals } = await supabase
         .from("nutrition_logs")
         .select("id")
@@ -116,20 +80,11 @@ export function useTodayStats(userId: string, today: IsoDateString) {
         .lte("logged_at", `${today}T23:59:59`);
 
       const MEAL_TARGET = 3;
-      const mealsLoggedCompletion = Math.min(
-        1,
-        (meals?.length ?? 0) / MEAL_TARGET
-      );
+      const mealsLoggedCompletion = Math.min(1, (meals?.length ?? 0) / MEAL_TARGET);
 
-      // TODO: These tables need to be created via migration:
-      // - hydration_logs (date, user_id, total_ml, target_ml)
-      // - mood_logs (date, user_id, mood_score 1-5)
-      // - sleep_logs (date, user_id, hours_slept, hours_target)
-      // - recovery_metrics (date, user_id, recovery_modifier)
-      
-      // For now, use sensible defaults
+      // TODO: Populate from hydration_logs, mood_logs, sleep_logs tables
       const hydrationCompletion = 0;
-      const moodScore = 0.6; // neutral default
+      const moodScore = 0.6;
       const sleepCompletion = 0;
       const recoveryModifier = 0;
 
@@ -229,6 +184,8 @@ Give 1–2 actionable suggestions under 80 words. No medical claims. No identity
 
 // ---------- MAIN TODAY SCREEN ------------
 
+const MIN_SCORE_FOR_STREAK = 60;
+
 export function TodayScreen() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -244,34 +201,64 @@ export function TodayScreen() {
   }, []);
 
   const { data, isLoading } = useTodayStats(user?.id ?? "", today);
-
   const score = useMemo(() => (data ? computeDailyScore(data) : null), [data]);
-  const [aiText] = useState<string | null>(null); // plug your AI response here
+  const [aiText] = useState<string | null>(null);
+
+  const {
+    data: historyData,
+    isLoading: isHistoryLoading,
+  } = useDailyHistoryScores({ 
+    userId: user?.id ?? "", 
+    days: 7, 
+    minScoreForStreak: MIN_SCORE_FOR_STREAK,
+  });
+
+  // Build nudge messages based on current state
+  const nudgeMessages = useMemo(() => {
+    if (!score || !historyData) return [];
+    return buildNudgeMessages({
+      todayScore: score,
+      history: historyData.history,
+      streakInfo: historyData.streakInfo,
+      minScoreForStreak: MIN_SCORE_FOR_STREAK,
+    });
+  }, [score, historyData]);
 
   if (loading) return <div className="p-4">Loading…</div>;
   if (!user) return <div className="p-4">Please log in</div>;
   if (isLoading || !data || !score) return <div className="p-4">Loading…</div>;
 
-  const {
-    data: historyData,
-    isLoading: isHistoryLoading,
-  } = useDailyHistoryScores({ userId: user.id, days: 7, minScoreForStreak: 60 });
-
   return (
     <div className="p-4 space-y-4">
+      {/* 1. Score - "How am I doing today?" */}
       <TodayScoreCard score={score} />
+
+      {/* 2. Actions list - "What should I do?" */}
       <TodayActionsList {...data} />
+
       {!isHistoryLoading && historyData && (
-        <TodayHistoryCard
-          history={historyData.history}
-          streakCount={historyData.streakCount}
-        />
+        <>
+          {/* 3. Streak goal - "What am I working toward?" */}
+          <StreakGoalCard streakInfo={historyData.streakInfo} goalDays={7} />
+
+          {/* 4. History chart - "How have I been doing?" */}
+          <TodayHistoryCard
+            history={historyData.history}
+            streakInfo={historyData.streakInfo}
+            minScoreForStreak={MIN_SCORE_FOR_STREAK}
+          />
+        </>
       )}
+
+      {/* 5. Nudges - "What's the gentle push today?" */}
+      <TodayNudgesCard messages={nudgeMessages} />
+
+      {/* 6. AI insight - "What does my private coach think?" */}
       <TodayAiInsightCard text={aiText} />
     </div>
   );
 }
 
 // ========================================
-// END OF SINGLE-FILE TODAY FEATURE MODULE
+// END OF TODAY FEATURE MODULE
 // ========================================

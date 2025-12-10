@@ -6,12 +6,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { computeDailyScore, type DailyInputs } from "./TodayFeature";
-
-export interface DailyHistoryScore {
-  date: string; // ISO
-  score: number; // 0-100
-}
+import { computeDailyScore } from "./TodayFeature";
+import type { DailyInputs, DailyHistoryScore, StreakInfo } from "./types";
+import { Snowflake } from "lucide-react";
 
 // ---------- HOOK: LAST N DAYS SCORES ----
 
@@ -19,6 +16,11 @@ interface UseDailyHistoryScoresOptions {
   userId: string;
   days?: number; // default 7
   minScoreForStreak?: number; // default 60
+}
+
+interface HistoryResult {
+  history: DailyHistoryScore[];
+  streakInfo: StreakInfo;
 }
 
 export function useDailyHistoryScores({
@@ -29,10 +31,7 @@ export function useDailyHistoryScores({
   return useQuery({
     queryKey: ["dailyHistoryScores", userId, days],
     enabled: !!userId,
-    queryFn: async (): Promise<{
-      history: DailyHistoryScore[];
-      streakCount: number;
-    }> => {
+    queryFn: async (): Promise<HistoryResult> => {
       // 1) Compute date range
       const today = new Date();
       const from = new Date(today);
@@ -42,9 +41,6 @@ export function useDailyHistoryScores({
       const toStr = today.toISOString().slice(0, 10);
 
       // 2) Fetch all logs in range per table
-      // TODO: Create hydration_logs, mood_logs, sleep_logs, recovery_metrics tables via migration
-      // For now, using activity_logs and nutrition_logs which exist
-
       const [workouts, meals] = await Promise.all([
         supabase
           .from("activity_logs")
@@ -78,7 +74,7 @@ export function useDailyHistoryScores({
             workoutCompletion: 0,
             mealsLoggedCompletion: 0,
             hydrationCompletion: 0,
-            moodScore: 0.6, // neutral-ish
+            moodScore: 0.6,
             sleepCompletion: 0,
             recoveryModifier: 0,
           });
@@ -86,7 +82,7 @@ export function useDailyHistoryScores({
         return map.get(date)!;
       }
 
-      // 2a) workouts - using activity_logs
+      // 2a) workouts
       if (!workouts.error && workouts.data) {
         const byDate = new Map<string, number>();
         for (const w of workouts.data) {
@@ -97,12 +93,11 @@ export function useDailyHistoryScores({
         }
         for (const [date, count] of byDate.entries()) {
           const day = ensureDay(date);
-          // Consider workout complete if at least one activity logged
           (day as any).workoutCompletion = count > 0 ? 1 : 0;
         }
       }
 
-      // 2b) meals - using nutrition_logs
+      // 2b) meals
       if (!meals.error && meals.data) {
         const countByDate = new Map<string, number>();
         for (const m of meals.data) {
@@ -118,44 +113,8 @@ export function useDailyHistoryScores({
         }
       }
 
-      // 2c) hydration (stubbed)
-      if (!hydration.error && hydration.data) {
-        for (const h of hydration.data) {
-          const day = ensureDay(h.date);
-          const consumed = h.total_ml ?? 0;
-          const target = h.target_ml ?? 2000;
-          (day as any).hydrationCompletion =
-            target > 0 ? clamp(consumed / target) : 0;
-        }
-      }
-
-      // 2d) mood (stubbed)
-      if (!mood.error && mood.data) {
-        for (const m of mood.data) {
-          const day = ensureDay(m.date);
-          const raw = m.mood_score ?? 3;
-          (day as any).moodScore = clamp((raw - 1) / 4);
-        }
-      }
-
-      // 2e) sleep (stubbed)
-      if (!sleep.error && sleep.data) {
-        for (const s of sleep.data) {
-          const day = ensureDay(s.date);
-          const slept = s.hours_slept ?? 0;
-          const target = s.hours_target ?? 8;
-          (day as any).sleepCompletion =
-            target > 0 ? clamp(slept / target) : 0;
-        }
-      }
-
-      // 2f) recovery (stubbed)
-      if (!recovery.error && recovery.data) {
-        for (const r of recovery.data) {
-          const day = ensureDay(r.date);
-          (day as any).recoveryModifier = r.recovery_modifier ?? 0;
-        }
-      }
+      // 2c-f) hydration, mood, sleep, recovery (stubbed)
+      // These will be populated when tables are created
 
       // 3) Build a full continuous range from fromStr → toStr
       const daysArray: string[] = [];
@@ -174,18 +133,54 @@ export function useDailyHistoryScores({
           sleepCompletion: base.sleepCompletion ?? 0,
           recoveryModifier: base.recoveryModifier ?? 0,
         };
-        const score = computeDailyScore(inputs);
-        return { date, score: score.score };
+        const scoreResult = computeDailyScore(inputs);
+        return { 
+          date, 
+          score: scoreResult.score,
+          frozenDay: false, // TODO: fetch from streak_freezes table when created
+        };
       });
 
-      // 4) Compute streak from history (from most recent backwards)
-      let streakCount = 0;
+      // 4) Compute streak info
+      let currentStreak = 0;
+      let longestStreak = 0;
+      let tempStreak = 0;
+      let freezesUsed = 0;
+      let lastActiveDate: string | null = null;
+      const freezesRemaining = 1; // Default 1 freeze per week
+
       for (let i = history.length - 1; i >= 0; i--) {
-        if (history[i].score >= minScoreForStreak) streakCount++;
-        else break;
+        const day = history[i];
+        if (day.score >= minScoreForStreak) {
+          currentStreak++;
+          lastActiveDate = day.date;
+        } else if (day.frozenDay) {
+          freezesUsed++;
+          // Frozen day doesn't break streak
+        } else {
+          break;
+        }
       }
 
-      return { history, streakCount };
+      // Calculate longest streak
+      for (const day of history) {
+        if (day.score >= minScoreForStreak || day.frozenDay) {
+          tempStreak++;
+          longestStreak = Math.max(longestStreak, tempStreak);
+        } else {
+          tempStreak = 0;
+        }
+      }
+
+      const streakInfo: StreakInfo = {
+        currentStreak,
+        longestStreak,
+        freezesUsed,
+        freezesRemaining: Math.max(0, freezesRemaining - freezesUsed),
+        lastActiveDate,
+      };
+
+      return { history, streakInfo };
     },
   });
 }
@@ -193,20 +188,24 @@ export function useDailyHistoryScores({
 // ---------- UI: STREAK + TREND CARD -------
 
 function formatDateLabel(iso: string) {
-  // returns e.g. "S", "M", "T" for day of week
   const d = new Date(iso + "T00:00:00");
   return "SMTWTFS"[d.getDay()];
 }
 
-export function TodayHistoryCard(props: {
+interface TodayHistoryCardProps {
   history: DailyHistoryScore[];
-  streakCount: number;
-}) {
+  streakInfo: StreakInfo;
+  minScoreForStreak: number;
+}
+
+export function TodayHistoryCard({ 
+  history, 
+  streakInfo,
+  minScoreForStreak,
+}: TodayHistoryCardProps) {
   const maxScore = useMemo(
-    () =>
-      props.history.reduce((max, h) => (h.score > max ? h.score : max), 0) ||
-      100,
-    [props.history]
+    () => history.reduce((max, h) => (h.score > max ? h.score : max), 0) || 100,
+    [history]
   );
 
   return (
@@ -215,31 +214,44 @@ export function TodayHistoryCard(props: {
         <div>
           <p className="text-xs uppercase text-muted-foreground">Streak</p>
           <p className="text-2xl font-semibold">
-            {props.streakCount} day
-            {props.streakCount === 1 ? "" : "s"}
+            {streakInfo.currentStreak} day
+            {streakInfo.currentStreak === 1 ? "" : "s"}
           </p>
         </div>
         <p className="text-xs text-muted-foreground">
-          Days with score ≥ 60 count towards your streak.
+          Score ≥ {minScoreForStreak} keeps your streak.
         </p>
       </div>
 
       <div className="space-y-1">
         <p className="text-xs font-medium text-muted-foreground">
-          Last {props.history.length} days
+          Last {history.length} days
         </p>
         <div className="flex items-end gap-1 h-16">
-          {props.history.map((h) => {
+          {history.map((h) => {
             const height = (h.score / maxScore) * 100;
+            const isAboveThreshold = h.score >= minScoreForStreak;
+            
             return (
               <div
                 key={h.date}
                 className="flex flex-col items-center justify-end gap-1 flex-1"
               >
-                <div
-                  className="w-full rounded-t-md bg-primary/70"
-                  style={{ height: `${height || 4}%` }}
-                />
+                <div className="relative w-full">
+                  {h.frozenDay && (
+                    <Snowflake className="absolute -top-4 left-1/2 -translate-x-1/2 h-3 w-3 text-blue-400" />
+                  )}
+                  <div
+                    className={`w-full rounded-t-md ${
+                      h.frozenDay 
+                        ? "bg-blue-400/50" 
+                        : isAboveThreshold 
+                          ? "bg-primary/70" 
+                          : "bg-muted-foreground/30"
+                    }`}
+                    style={{ height: `${height || 4}%` }}
+                  />
+                </div>
                 <span className="text-[10px] text-muted-foreground">
                   {formatDateLabel(h.date)}
                 </span>
@@ -248,6 +260,13 @@ export function TodayHistoryCard(props: {
           })}
         </div>
       </div>
+
+      {streakInfo.freezesUsed > 0 && (
+        <p className="text-xs text-blue-400 flex items-center gap-1">
+          <Snowflake className="h-3 w-3" />
+          {streakInfo.freezesUsed} freeze{streakInfo.freezesUsed > 1 ? "s" : ""} used
+        </p>
+      )}
     </div>
   );
 }
