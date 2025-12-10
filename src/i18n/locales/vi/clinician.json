@@ -31,5 +31,10 @@
   "trend_declining": "Chỉ số chức năng đã giảm trong 14 ngày qua.",
   "trend_stable": "Chỉ số chức năng vẫn tương đối ổn định.",
   "trend_unknown": "Không đủ dữ liệu để xác định xu hướng rõ ràng.",
-  "access_denied": "Truy cập bị từ chối. Cần vai trò bác sĩ lâm sàng."
+  "access_denied": "Truy cập bị từ chối. Cần vai trò bác sĩ lâm sàng.",
+  "clinician_access_required": "Cần quyền truy cập bác sĩ",
+  "clinician_access_required_desc": "Bạn cần vai trò bác sĩ lâm sàng hoặc chuyên viên để truy cập bảng điều khiển này.",
+  "apply_as_practitioner": "Đăng ký làm chuyên viên",
+  "clinician_dashboard": "Bảng điều khiển bác sĩ",
+  "clinician_dashboard_desc": "Quản lý bệnh nhân của bạn và xem dữ liệu sức khỏe của họ."
 }

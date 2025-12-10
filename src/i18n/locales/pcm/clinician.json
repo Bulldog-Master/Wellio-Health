@@ -31,5 +31,10 @@
   "trend_declining": "Functional index don drop for the last 14 days.",
   "trend_stable": "Functional index don remain relatively stable.",
   "trend_unknown": "Data no enough to determine clear trend.",
-  "access_denied": "Access denied. Clinician role required."
+  "access_denied": "Access denied. Clinician role required.",
+  "clinician_access_required": "Clinician access dey required",
+  "clinician_access_required_desc": "You need clinician or practitioner role to access this dashboard.",
+  "apply_as_practitioner": "Apply as practitioner",
+  "clinician_dashboard": "Clinician Dashboard",
+  "clinician_dashboard_desc": "Manage your patients and view dia wellness data."
 }
