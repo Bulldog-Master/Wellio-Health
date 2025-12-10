@@ -6,6 +6,7 @@
 // - Lets users join a pro via invite code (JoinByCode)
 // - Shows invite code panel for professionals (coach/clinician)
 // - Links pros to their dashboards (/coach, /clinician)
+// - Explains "Who can see my data?"
 // ========================================
 
 import { useTranslation } from 'react-i18next';
@@ -18,6 +19,7 @@ import { CoachRow } from './CoachRow';
 import { ClinicianRow } from './ClinicianRow';
 import { JoinByCode } from './JoinByCode';
 import { InviteCodePanel } from './InviteCodePanel';
+import { WhoCanSeeMyDataSection } from './WhoCanSeeMyDataSection';
 
 // ---------- PRESENTATIONAL SUBCOMPONENTS ----------
 
@@ -58,6 +60,8 @@ export const CareTeamScreen = () => {
 
   const coach = coaches[0];
   const clinician = clinicians[0];
+  const hasCoach = !!coach;
+  const hasClinician = !!clinician;
 
   return (
     <div className="space-y-4">
@@ -144,6 +148,9 @@ export const CareTeamScreen = () => {
           </SectionCard>
         </>
       )}
+
+      {/* Section: "Who can see my data?" */}
+      <WhoCanSeeMyDataSection hasCoach={hasCoach} hasClinician={hasClinician} />
     </div>
   );
 };

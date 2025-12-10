@@ -211,5 +211,16 @@
   "professional_tools": "Professional tools",
   "professional_tools_desc": "As a {{role}}, you can view aggregated functional trends for people who connect to you from your dashboard. Secure messaging is routed via xx network's cMix for metadata protection.",
   "open_coach_dashboard": "Open Coach Dashboard",
-  "open_clinician_dashboard": "Open Clinician Dashboard"
+  "open_clinician_dashboard": "Open Clinician Dashboard",
+  
+  "who_can_see_my_data": "Who can see my data?",
+  "data_visibility_none": "Right now, only you can see your detailed logs and functional wellness index. If you decide to connect a coach or clinician later, you'll choose who to share with from this screen.",
+  "data_visibility_intro": "The following professionals can access your functional wellness index and high-level trends. They do not see raw meal logs, workout notes, or medical documents by default.",
+  "coach_data_access": "can view your functional scores, adherence, and trends to support your training plan.",
+  "clinician_data_access": "can view your functional index and trend summaries to support clinical decision-making, not to replace diagnosis.",
+  "data_revoke_note": "You can revoke access at any time from this Care Team screen. Secure messaging uses end-to-end encryption and xx network's cMix for metadata protection.",
+  "connected_to_coach": "Connected to a coach",
+  "connected_to_clinician": "Connected to a clinician",
+  "connected_to_both": "Connected to coach & clinician",
+  "care_team_banner_desc": "Your functional index is shared with your care team"
 }

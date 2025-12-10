@@ -12,6 +12,7 @@ import { useDailyHistoryScores, TodayHistoryCard } from "./TodayHistoryFeature";
 import { StreakGoalCard, TodayNudgesCard, OnboardingChallengeCard } from "./components";
 import { buildNudgeMessages, deriveOnboardingChallengeStatus } from "./utils";
 import { useSubscription } from "@/hooks/subscription";
+import { CareTeamBanner } from "@/features/care-team/CareTeamBanner";
 import type { DailyInputs, DailyScoreResult, IsoDateString, SubscriptionTier } from "./types";
 
 // Re-export types
@@ -262,6 +263,9 @@ export function TodayScreen() {
 
   return (
     <div className="p-4 space-y-4">
+      {/* Care Team Banner - shown when connected to coach/clinician */}
+      <CareTeamBanner />
+      
       {/* 1. Score - "How am I doing today?" */}
       <TodayScoreCard score={score} />
 

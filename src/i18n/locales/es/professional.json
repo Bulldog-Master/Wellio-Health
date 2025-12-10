@@ -211,5 +211,16 @@
   "professional_tools": "Herramientas profesionales",
   "professional_tools_desc": "Como {{role}}, puedes ver tendencias funcionales agregadas de las personas que se conectan contigo desde tu panel. Los mensajes seguros se enrutan a través de cMix de xx network para protección de metadatos.",
   "open_coach_dashboard": "Abrir Panel de Entrenador",
-  "open_clinician_dashboard": "Abrir Panel de Médico"
+  "open_clinician_dashboard": "Abrir Panel de Médico",
+  
+  "who_can_see_my_data": "¿Quién puede ver mis datos?",
+  "data_visibility_none": "Ahora mismo, solo tú puedes ver tus registros detallados e índice de bienestar funcional. Si decides conectar con un entrenador o médico más tarde, elegirás con quién compartir desde esta pantalla.",
+  "data_visibility_intro": "Los siguientes profesionales pueden acceder a tu índice de bienestar funcional y tendencias de alto nivel. No ven registros de comidas, notas de entrenamiento ni documentos médicos por defecto.",
+  "coach_data_access": "puede ver tus puntuaciones funcionales, adherencia y tendencias para apoyar tu plan de entrenamiento.",
+  "clinician_data_access": "puede ver tu índice funcional y resúmenes de tendencias para apoyar decisiones clínicas, no para reemplazar diagnósticos.",
+  "data_revoke_note": "Puedes revocar el acceso en cualquier momento desde esta pantalla de Equipo de Cuidado. Los mensajes seguros usan cifrado de extremo a extremo y cMix de xx network para protección de metadatos.",
+  "connected_to_coach": "Conectado con un entrenador",
+  "connected_to_clinician": "Conectado con un médico",
+  "connected_to_both": "Conectado con entrenador y médico",
+  "care_team_banner_desc": "Tu índice funcional se comparte con tu equipo de cuidado"
 }
