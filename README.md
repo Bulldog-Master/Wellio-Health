@@ -103,7 +103,7 @@ See [PROFESSIONAL_ECONOMICS.md](docs/PROFESSIONAL_ECONOMICS.md) for the full inc
 ### 🔐 Enterprise Security
 - **Quantum-Resistant Encryption**: ML-KEM-768 for medical records
 - **E2E Encryption**: AES-256-GCM for messages
-- **Metadata Protection**: cMix integration for privacy
+- **Metadata Protection**: [cMixx integration](https://xx.network) for privacy
 - **Comprehensive RLS**: Row-level security on all user data
 - **Audit Logging**: Full access tracking for sensitive data
 - **GDPR/HIPAA/CCPA Compliance**: Built-in privacy controls
@@ -123,7 +123,7 @@ See [PROFESSIONAL_ECONOMICS.md](docs/PROFESSIONAL_ECONOMICS.md) for the full inc
 | **State** | TanStack Query, Zustand |
 | **Backend** | Supabase (Postgres, Auth, Storage, Edge Functions) |
 | **Mobile** | Capacitor (iOS/Android) |
-| **AI** | Lovable AI (Gemini, GPT-5), OpenAI Realtime API |
+| **AI** | Lovable AI (Gemini, OpenAI models), OpenAI Realtime API |
 | **Encryption** | @noble/post-quantum (ML-KEM-768), Web Crypto API |
 | **i18n** | i18next (23 languages) |
 | **Testing** | Vitest, Testing Library |
