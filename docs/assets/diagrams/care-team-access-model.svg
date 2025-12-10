@@ -1,170 +1,43 @@
 <svg width="1600" height="1000" viewBox="0 0 1600 1000" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Gradient for derivation layer -->
-    <linearGradient id="derivationGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
     </linearGradient>
-    
-    <!-- Glow filter -->
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    
-    <!-- Drop shadow -->
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
-      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.3"/>
-    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#22D3EE"/>
+    </marker>
   </defs>
-  
-  <!-- Background -->
+
   <rect width="1600" height="1000" fill="#0A0A0C"/>
-  
-  <!-- Title -->
-  <text x="800" y="50" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="32" font-weight="bold">Care Team Access Model</text>
-  <text x="800" y="80" text-anchor="middle" fill="#a1a1aa" font-family="system-ui, sans-serif" font-size="16">How Wellio protects your data while enabling professional support</text>
 
-  <!-- ==================== LAYER 3: PROFESSIONALS (TOP) ==================== -->
-  
-  <!-- Coach View Box -->
-  <rect x="100" y="120" width="660" height="280" rx="16" fill="#1a1a24" stroke="#3f3f46" stroke-width="2" filter="url(#shadow)"/>
-  <text x="430" y="160" text-anchor="middle" fill="#22c55e" font-family="system-ui, sans-serif" font-size="24" font-weight="bold">🏋️ Coach View</text>
-  
-  <!-- Coach visible items -->
-  <rect x="130" y="185" width="280" height="45" rx="8" fill="#22c55e" fill-opacity="0.15" stroke="#22c55e" stroke-width="1"/>
-  <text x="270" y="215" text-anchor="middle" fill="#22c55e" font-family="system-ui, sans-serif" font-size="16">✓ FWI Score (0-100)</text>
-  
-  <rect x="130" y="240" width="280" height="45" rx="8" fill="#22c55e" fill-opacity="0.15" stroke="#22c55e" stroke-width="1"/>
-  <text x="270" y="270" text-anchor="middle" fill="#22c55e" font-family="system-ui, sans-serif" font-size="16">✓ Weekly Trend Sparkline</text>
-  
-  <rect x="130" y="295" width="280" height="45" rx="8" fill="#22c55e" fill-opacity="0.15" stroke="#22c55e" stroke-width="1"/>
-  <text x="270" y="325" text-anchor="middle" fill="#22c55e" font-family="system-ui, sans-serif" font-size="16">✓ Adherence Tiles</text>
-  
-  <!-- Coach blocked items -->
-  <rect x="440" y="185" width="290" height="140" rx="8" fill="#ef4444" fill-opacity="0.1" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,4"/>
-  <text x="585" y="215" text-anchor="middle" fill="#ef4444" font-family="system-ui, sans-serif" font-size="14">✗ No raw logs</text>
-  <text x="585" y="245" text-anchor="middle" fill="#ef4444" font-family="system-ui, sans-serif" font-size="14">✗ No meal notes</text>
-  <text x="585" y="275" text-anchor="middle" fill="#ef4444" font-family="system-ui, sans-serif" font-size="14">✗ No journals</text>
-  <text x="585" y="305" text-anchor="middle" fill="#ef4444" font-family="system-ui, sans-serif" font-size="14">✗ No medical documents</text>
-  
-  <text x="430" y="375" text-anchor="middle" fill="#71717a" font-family="system-ui, sans-serif" font-size="13" font-style="italic">Performance coaching with accountability — not surveillance</text>
+  <!-- User Layer -->
+  <rect x="150" y="700" width="1300" height="180" rx="20" fill="#121418" stroke="url(#accent)" stroke-width="1"/>
+  <text x="200" y="750" fill="#ffffff" font-size="30" font-family="Inter, system-ui, sans-serif">User Device (Raw Data — Never Shared)</text>
+  <text x="200" y="790" fill="#CCCCCC" font-size="20" font-family="Inter, system-ui, sans-serif">Meal logs, workouts, journals, medical documents</text>
 
-  <!-- Clinician View Box -->
-  <rect x="840" y="120" width="660" height="280" rx="16" fill="#1a1a24" stroke="#3f3f46" stroke-width="2" filter="url(#shadow)"/>
-  <text x="1170" y="160" text-anchor="middle" fill="#3b82f6" font-family="system-ui, sans-serif" font-size="24" font-weight="bold">🩺 Clinician View</text>
-  
-  <!-- Clinician visible items -->
-  <rect x="870" y="185" width="280" height="45" rx="8" fill="#3b82f6" fill-opacity="0.15" stroke="#3b82f6" stroke-width="1"/>
-  <text x="1010" y="215" text-anchor="middle" fill="#3b82f6" font-family="system-ui, sans-serif" font-size="16">✓ FWI Score (0-100)</text>
-  
-  <rect x="870" y="240" width="280" height="45" rx="8" fill="#3b82f6" fill-opacity="0.15" stroke="#3b82f6" stroke-width="1"/>
-  <text x="1010" y="270" text-anchor="middle" fill="#3b82f6" font-family="system-ui, sans-serif" font-size="16">✓ 30-Day Trend Analysis</text>
-  
-  <rect x="870" y="295" width="280" height="45" rx="8" fill="#3b82f6" fill-opacity="0.15" stroke="#3b82f6" stroke-width="1"/>
-  <text x="1010" y="325" text-anchor="middle" fill="#3b82f6" font-family="system-ui, sans-serif" font-size="16">✓ Adherence Flags</text>
-  
-  <!-- Clinician blocked items -->
-  <rect x="1180" y="185" width="290" height="140" rx="8" fill="#ef4444" fill-opacity="0.1" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,4"/>
-  <text x="1325" y="215" text-anchor="middle" fill="#ef4444" font-family="system-ui, sans-serif" font-size="14">✗ No PHI access</text>
-  <text x="1325" y="245" text-anchor="middle" fill="#ef4444" font-family="system-ui, sans-serif" font-size="14">✗ No raw diaries</text>
-  <text x="1325" y="275" text-anchor="middle" fill="#ef4444" font-family="system-ui, sans-serif" font-size="14">✗ No diagnosis data</text>
-  <text x="1325" y="305" text-anchor="middle" fill="#ef4444" font-family="system-ui, sans-serif" font-size="14">✗ No medical vault</text>
-  
-  <text x="1170" y="375" text-anchor="middle" fill="#71717a" font-family="system-ui, sans-serif" font-size="13" font-style="italic">High-level functional insights only — clinical relevance without liability</text>
+  <!-- Derivation Layer -->
+  <rect x="150" y="430" width="1300" height="180" rx="20" fill="#161A1F" stroke="url(#accent)" stroke-width="2"/>
+  <text x="200" y="480" fill="#ffffff" font-size="30" font-family="Inter, system-ui, sans-serif">Wellio Derivation Engine</text>
+  <text x="200" y="520" fill="#CCCCCC" font-size="20" font-family="Inter, system-ui, sans-serif">FWI, adherence, trends only</text>
 
-  <!-- ==================== ARROWS FROM LAYER 2 TO LAYER 3 ==================== -->
-  
-  <path d="M 430 530 L 430 410" stroke="url(#derivationGrad)" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
-  <path d="M 1170 530 L 1170 410" stroke="url(#derivationGrad)" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
-  
-  <defs>
-    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#06b6d4"/>
-    </marker>
-  </defs>
-  
-  <text x="530" y="475" text-anchor="middle" fill="#a1a1aa" font-family="system-ui, sans-serif" font-size="12">Derived signals only</text>
-  <text x="1070" y="475" text-anchor="middle" fill="#a1a1aa" font-family="system-ui, sans-serif" font-size="12">Derived signals only</text>
+  <!-- Arrow from User to Derivation -->
+  <line x1="800" y1="700" x2="800" y2="620" stroke="url(#accent)" stroke-width="4" marker-end="url(#arrow)"/>
 
-  <!-- ==================== LAYER 2: DERIVATION ENGINE (MIDDLE) ==================== -->
-  
-  <rect x="200" y="530" width="1200" height="150" rx="20" fill="#1a1a24" stroke="url(#derivationGrad)" stroke-width="3" filter="url(#glow)"/>
-  
-  <text x="800" y="580" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="26" font-weight="bold">⚡ Wellio Derivation Engine</text>
-  <text x="800" y="615" text-anchor="middle" fill="#a1a1aa" font-family="system-ui, sans-serif" font-size="16">Produces Functional Wellness Index, adherence metrics, and trend signals</text>
-  
-  <!-- Derived outputs -->
-  <rect x="280" y="635" width="140" height="30" rx="6" fill="#8b5cf6" fill-opacity="0.3"/>
-  <text x="350" y="656" text-anchor="middle" fill="#c4b5fd" font-family="system-ui, sans-serif" font-size="12">FWI Score</text>
-  
-  <rect x="440" y="635" width="140" height="30" rx="6" fill="#8b5cf6" fill-opacity="0.3"/>
-  <text x="510" y="656" text-anchor="middle" fill="#c4b5fd" font-family="system-ui, sans-serif" font-size="12">Trend Analysis</text>
-  
-  <rect x="600" y="635" width="140" height="30" rx="6" fill="#8b5cf6" fill-opacity="0.3"/>
-  <text x="670" y="656" text-anchor="middle" fill="#c4b5fd" font-family="system-ui, sans-serif" font-size="12">Adherence %</text>
-  
-  <rect x="760" y="635" width="140" height="30" rx="6" fill="#8b5cf6" fill-opacity="0.3"/>
-  <text x="830" y="656" text-anchor="middle" fill="#c4b5fd" font-family="system-ui, sans-serif" font-size="12">Risk Flags</text>
-  
-  <rect x="920" y="635" width="160" height="30" rx="6" fill="#8b5cf6" fill-opacity="0.3"/>
-  <text x="1000" y="656" text-anchor="middle" fill="#c4b5fd" font-family="system-ui, sans-serif" font-size="12">Workout Readiness</text>
-  
-  <rect x="1100" y="635" width="160" height="30" rx="6" fill="#8b5cf6" fill-opacity="0.3"/>
-  <text x="1180" y="656" text-anchor="middle" fill="#c4b5fd" font-family="system-ui, sans-serif" font-size="12">Recovery Status</text>
+  <!-- Coach View -->
+  <rect x="150" y="140" width="600" height="200" rx="20" fill="#121418" stroke="url(#accent)" stroke-width="1"/>
+  <text x="180" y="200" fill="#ffffff" font-size="26" font-family="Inter, system-ui, sans-serif">Coach View</text>
+  <text x="180" y="240" fill="#CCCCCC" font-size="18" font-family="Inter, system-ui, sans-serif">FWI · Trends · Adherence · No raw logs, notes, or PHI</text>
 
-  <!-- ==================== ARROW FROM LAYER 1 TO LAYER 2 ==================== -->
-  
-  <path d="M 800 735 L 800 690" stroke="#71717a" stroke-width="2" fill="none" marker-end="url(#arrowhead2)"/>
-  
-  <defs>
-    <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#71717a"/>
-    </marker>
-  </defs>
-  
-  <text x="800" y="725" text-anchor="middle" fill="#71717a" font-family="system-ui, sans-serif" font-size="14" font-weight="500">Local processing · Privacy by Design</text>
+  <!-- Clinician View -->
+  <rect x="850" y="140" width="600" height="200" rx="20" fill="#121418" stroke="url(#accent)" stroke-width="1"/>
+  <text x="880" y="200" fill="#ffffff" font-size="26" font-family="Inter, system-ui, sans-serif">Clinician View</text>
+  <text x="880" y="240" fill="#CCCCCC" font-size="18" font-family="Inter, system-ui, sans-serif">FWI · 30-day trends · Adherence signals · No PHI or raw journals</text>
 
-  <!-- ==================== LAYER 1: USER PRIVATE DATA (BOTTOM) ==================== -->
-  
-  <rect x="200" y="755" width="1200" height="150" rx="20" fill="#27272a" stroke="#52525b" stroke-width="2" filter="url(#shadow)"/>
-  
-  <text x="800" y="800" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="24" font-weight="bold">🔒 User Device (Raw Data — Never Shared)</text>
-  
-  <!-- Icons representing private data -->
-  <rect x="280" y="820" width="160" height="60" rx="8" fill="#3f3f46" fill-opacity="0.5"/>
-  <text x="360" y="845" text-anchor="middle" fill="#a1a1aa" font-family="system-ui, sans-serif" font-size="28">🍽️</text>
-  <text x="360" y="870" text-anchor="middle" fill="#71717a" font-family="system-ui, sans-serif" font-size="11">Meal Logs</text>
-  
-  <rect x="470" y="820" width="160" height="60" rx="8" fill="#3f3f46" fill-opacity="0.5"/>
-  <text x="550" y="845" text-anchor="middle" fill="#a1a1aa" font-family="system-ui, sans-serif" font-size="28">💪</text>
-  <text x="550" y="870" text-anchor="middle" fill="#71717a" font-family="system-ui, sans-serif" font-size="11">Workouts</text>
-  
-  <rect x="660" y="820" width="160" height="60" rx="8" fill="#3f3f46" fill-opacity="0.5"/>
-  <text x="740" y="845" text-anchor="middle" fill="#a1a1aa" font-family="system-ui, sans-serif" font-size="28">📓</text>
-  <text x="740" y="870" text-anchor="middle" fill="#71717a" font-family="system-ui, sans-serif" font-size="11">Journals</text>
-  
-  <rect x="850" y="820" width="160" height="60" rx="8" fill="#3f3f46" fill-opacity="0.5"/>
-  <text x="930" y="845" text-anchor="middle" fill="#a1a1aa" font-family="system-ui, sans-serif" font-size="28">🏥</text>
-  <text x="930" y="870" text-anchor="middle" fill="#71717a" font-family="system-ui, sans-serif" font-size="11">Medical Vault</text>
-  
-  <rect x="1040" y="820" width="160" height="60" rx="8" fill="#3f3f46" fill-opacity="0.5"/>
-  <text x="1120" y="845" text-anchor="middle" fill="#a1a1aa" font-family="system-ui, sans-serif" font-size="28">📝</text>
-  <text x="1120" y="870" text-anchor="middle" fill="#71717a" font-family="system-ui, sans-serif" font-size="11">Notes</text>
-  
-  <rect x="1230" y="820" width="140" height="60" rx="8" fill="#3f3f46" fill-opacity="0.5"/>
-  <text x="1300" y="845" text-anchor="middle" fill="#a1a1aa" font-family="system-ui, sans-serif" font-size="28">📸</text>
-  <text x="1300" y="870" text-anchor="middle" fill="#71717a" font-family="system-ui, sans-serif" font-size="11">Photos</text>
+  <!-- Arrows from Derivation to Professionals -->
+  <line x1="450" y1="430" x2="450" y2="340" stroke="url(#accent)" stroke-width="4" marker-end="url(#arrow)"/>
+  <line x1="1150" y1="430" x2="1150" y2="340" stroke="url(#accent)" stroke-width="4" marker-end="url(#arrow)"/>
 
-  <!-- ==================== SECURITY BADGE (BOTTOM RIGHT) ==================== -->
-  
-  <rect x="1200" y="920" width="380" height="70" rx="12" fill="#1a1a24" stroke="#8b5cf6" stroke-width="2"/>
-  
-  <text x="1220" y="945" fill="#c4b5fd" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">🔐 Post-Quantum Encryption (ML-KEM-768)</text>
-  <text x="1220" y="962" fill="#67e8f9" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">🌐 Metadata Protection via cMixx (xx.network)</text>
-  <text x="1220" y="979" fill="#71717a" font-family="system-ui, sans-serif" font-size="10">No identity exposure · No timing patterns · No traffic linkage</text>
-
+  <!-- PQ/cMixx badge -->
+  <text x="800" y="970" text-anchor="middle" fill="#CCCCCC" font-size="20" font-family="Inter, system-ui, sans-serif">Post-Quantum Encryption (ML-KEM-768) · Metadata Protection (cMixx)</text>
 </svg>
