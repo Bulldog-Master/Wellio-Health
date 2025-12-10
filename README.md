@@ -23,11 +23,7 @@
 </p>
 
 <p align="center">
-  <em>Security badges reflect real-time automated scans via CodeQL and Snyk on every push/PR</em>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/license-Proprietary-lightgrey?style=for-the-badge" alt="License" />
+  <sub><em>Security badges reflect real-time automated scans via <strong>CodeQL</strong> and <strong>Snyk</strong> on every push and pull request.</em></sub>
 </p>
 
 <p align="center">
