@@ -270,9 +270,20 @@ Users approve every relationship from the **Care Team** screen and can revoke ac
 - **Data minimization**: We never store plaintext logs on the server
 - **Per-relationship access**: Fine-grained consent at the user level
 - **Score versioning**: Historical data retains meaning even as formulas evolve
-- **Secure messaging**: Built for post-quantum encryption and cMix routing
+- **Secure messaging**: Built for post-quantum encryption and cMixx routing
 
 This architecture enables **clinical relevance without clinical liability**.
+
+#### Example: Trainer Care Path
+
+1. Trainer signs up for a Professional account and generates an invite code.
+2. Client downloads Wellio, creates an account, and adds the code from the **Care Team** tab.
+3. Wellio links their accounts and exposes only:
+   - adherence score
+   - workout readiness
+   - weekly trend summary
+4. Trainer runs live video sessions and async check-ins; all messages stay E2E encrypted with cMixx metadata protection.
+5. Billing is handled via platform subscriptions (see [SUBSCRIPTION_GUIDE.md](SUBSCRIPTION_GUIDE.md)).
 
 ## 🗺️ Roadmap
 
@@ -282,7 +293,7 @@ This architecture enables **clinical relevance without clinical liability**.
 - [x] Medical records with quantum-resistant encryption
 - [x] 23-language support
 - [x] E2E encrypted messaging
-- [x] cMix metadata protection integration
+- [x] cMixx metadata protection integration
 - [x] AI Voice Workout Companion
 - [x] Predictive Injury Prevention
 - [x] Comprehensive compliance framework (GDPR, HIPAA, CCPA)
