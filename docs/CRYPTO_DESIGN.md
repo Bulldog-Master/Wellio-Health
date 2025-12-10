@@ -211,7 +211,67 @@ If cMix is unavailable:
 
 ---
 
-## 7. Database Schema (Relevant Tables)
+## 7. cMixx: Metadata-Resistant Communication
+
+Wellio integrates xx.network's cMixx protocol to ensure that professional–client communication is not only encrypted, but also **unlinkable, unobservable, and resistant to traffic analysis**, even by adversaries with global visibility.
+
+### 7.1 Why cMixx?
+
+Traditional end-to-end encryption protects message contents but leaks:
+
+- **Who** is talking
+- **When** they communicate
+- **How often** exchanges occur
+- **Message sizes** and patterns
+- **Session patterns** and timing
+
+These metadata patterns can reveal:
+
+- Identity relationships
+- Health status inferences
+- Professional-client pairing
+- Sensitive moments (telehealth calls, treatment changes)
+
+**cMixx eliminates these leaks.**
+
+### 7.2 How It Works
+
+1. **Fixed batch message routing**  
+   Every message is mixed with others, breaking correlation.
+
+2. **Decentralized node groups**  
+   No single server can reconstruct sender → receiver mapping.
+
+3. **Parallelized mixing**  
+   Low latency suitable for real-time chat or even live video signaling.
+
+4. **Traffic analysis resistance**  
+   Observers cannot infer communication pairs or timing signatures.
+
+5. **Post-quantum encryption for key material**  
+   Wellio uses ML-KEM-768 for session bootstrap, ensuring future-proof confidentiality.
+
+### 7.3 Security Guarantees for Wellio Professionals
+
+| Threat | cMixx Mitigation |
+|--------|------------------|
+| Correlation of client ↔ pro | Mixed routing breaks linkability |
+| Timing analysis | Fixed-interval batching masks timing |
+| Traffic fingerprinting | Uniform message envelopes |
+| Node compromise | Multi-party cMixx chain prevents reconstruction |
+| Quantum decryption | PQ KEM used for bootstrap keys |
+
+### 7.4 Implementation Status
+
+- ✅ E2E encryption layer (ML-KEM-768 + AES-256-GCM)
+- ✅ xxdk-wasm package integrated
+- ✅ cMix transport interface defined
+- ⏳ Full cMix node connection (pending credential configuration)
+- ⏳ UI privacy status indicators
+
+---
+
+## 8. Database Schema (Relevant Tables)
 
 ### user_encryption_keys
 
