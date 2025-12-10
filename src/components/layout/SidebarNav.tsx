@@ -1,7 +1,7 @@
 import { 
   Home, Utensils, Activity, Users, Settings, Sparkles, Heart, Crown, 
   Newspaper, MapPin, Handshake, Leaf, ShoppingBag, Briefcase,
-  ChevronDown, Dumbbell, MoreHorizontal
+  ChevronDown, Dumbbell, MoreHorizontal, Stethoscope
 } from "lucide-react";
 import { NavLink } from "./NavLink";
 import { cn } from "@/lib/utils";
@@ -42,10 +42,11 @@ interface NavItem {
 }
 
 const SidebarNav = () => {
-  const { t } = useTranslation(['common', 'premium']);
+  const { t } = useTranslation(['common', 'premium', 'clinician']);
   const [showRewardsBadge, setShowRewardsBadge] = useState(false);
   const { hasFullAccess, tier } = useSubscription();
   const [hasPremiumAccess, setHasPremiumAccess] = useState(() => getCachedPremiumAccess());
+  const [isClinicianOrPractitioner, setIsClinicianOrPractitioner] = useState(false);
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
     fitness: true,
     social: false,
@@ -60,6 +61,7 @@ const SidebarNav = () => {
 
   useEffect(() => {
     checkRewardsStatus();
+    checkClinicianRole();
   }, []);
 
   const checkRewardsStatus = async () => {
@@ -77,6 +79,21 @@ const SidebarNav = () => {
       setShowRewardsBadge((profile?.referral_points || 0) > 0 || daysSinceCheck > 3);
     } catch (error) {
       console.error('Error checking rewards status:', error);
+    }
+  };
+
+  const checkClinicianRole = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      const { data: roles } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', user.id)
+        .in('role', ['clinician', 'practitioner', 'admin']);
+      setIsClinicianOrPractitioner(roles && roles.length > 0);
+    } catch (error) {
+      console.error('Error checking clinician role:', error);
     }
   };
 
@@ -170,6 +187,25 @@ const SidebarNav = () => {
             </CollapsibleContent>
           </Collapsible>
         ))}
+
+        {/* Clinician Dashboard */}
+        {isClinicianOrPractitioner && (
+          <div className="pt-2">
+            <NavLink
+              to="/clinician"
+              className={cn(
+                "group flex items-center gap-3 px-4 py-2.5 rounded-lg",
+                "transition-all duration-200 hover:bg-primary/10"
+              )}
+              activeClassName="bg-primary/20 font-medium"
+            >
+              <Stethoscope className="h-5 w-5 text-teal-500" />
+              <span className="text-sm font-medium text-teal-500">
+                {t('clinician:clinician_dashboard')}
+              </span>
+            </NavLink>
+          </div>
+        )}
 
         {/* Premium Hub */}
         {hasPremiumAccess && (
