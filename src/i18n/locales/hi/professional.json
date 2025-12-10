@@ -56,5 +56,27 @@
   "sleep_vs_goal": "नींद बनाम लक्ष्य",
   "mood_energy": "मूड / ऊर्जा",
   "secure_notes_cmix": "सुरक्षित नोट्स (cMixx-तैयार)",
-  "secure_notes_desc": "यह क्षेत्र आपके और आपके क्लाइंट के बीच मेटाडेटा-संरक्षित मैसेजिंग के लिए xx network के cMixx से जुड़ा होगा।"
+  "secure_notes_desc": "यह क्षेत्र आपके और आपके क्लाइंट के बीच मेटाडेटा-संरक्षित मैसेजिंग के लिए xx network के cMixx से जुड़ा होगा।",
+
+  "invite_codes": "आमंत्रण कोड",
+  "invite_codes_desc": "क्लाइंट से जुड़ने के लिए अपना आमंत्रण कोड साझा करें",
+  "your_invite_code": "आपका आमंत्रण कोड",
+  "code_generated": "आमंत्रण कोड बनाया गया",
+  "code_copied": "कोड कॉपी किया गया",
+  "link_copied": "लिंक कॉपी किया गया",
+  "copy_link": "लिंक कॉपी करें",
+  "generate_code": "आमंत्रण कोड बनाएं",
+  "pending_requests": "कनेक्शन अनुरोध",
+  "request_accepted": "कनेक्शन स्वीकृत",
+  "consent_required": "डेटा एक्सेस की समीक्षा करें",
+  "coach_consent_text": "स्वीकार करके, आप {{name}} (आपके कोच) को आपके फंक्शनल इंडेक्स स्कोर देखने की अनुमति देते हैं।",
+  "accept_and_connect": "स्वीकार करें और जुड़ें",
+  "join_by_code": "पेशेवर से जुड़ें",
+  "enter_code_placeholder": "कोड दर्ज करें",
+  "request_connection": "कनेक्शन अनुरोध करें",
+  "coach": "कोच",
+  "clinician": "चिकित्सक",
+  "medical_records": "मेडिकल रिकॉर्ड",
+  "personal_messages": "व्यक्तिगत संदेश",
+  "payment_info": "भुगतान जानकारी"
 }

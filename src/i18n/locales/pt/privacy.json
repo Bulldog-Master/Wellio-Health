@@ -146,5 +146,8 @@
   "revoke_access_description": "{{name}} não poderá mais ver seus dados de bem-estar. Você pode convidá-los novamente depois, se necessário.",
   "confirm_revoke": "Sim, Revogar Acesso",
   "access_revoked": "Acesso revogado com sucesso",
-  "revoke_failed": "Falha ao revogar acesso"
+  "revoke_failed": "Falha ao revogar acesso",
+  "medical_records": "Prontuários médicos",
+  "personal_messages": "Mensagens pessoais",
+  "payment_info": "Informações de pagamento"
 }
