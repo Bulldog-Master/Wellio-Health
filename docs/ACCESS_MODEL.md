@@ -2,7 +2,17 @@
 
 _Last updated: 2025-01-10_
 
-This document defines **who can see what** inside Wellio and how access is granted, with explicit attention to:
+## Master Positioning
+
+**Wellio is a next-generation Wellness APP Platform that empowers individuals to track their wellbeing privately — while optionally connecting with trainers, coaches, or clinicians through secure, limited-visibility insights. It is privacy-first, post-quantum secure, and powered by cMixx metadata protection.**
+
+## Security Statement
+
+**The APP Platform is built with a zero-trust architecture. Raw logs never leave the user's device. All communication is protected with post-quantum encryption (ML-KEM-768) and cMixx metadata-elimination technology.**
+
+---
+
+This document defines **who can see what** inside the Wellio Wellness APP Platform and how access is granted, with explicit attention to:
 
 - **Data minimization**
 - **Metadata protection**
@@ -15,11 +25,11 @@ This is the canonical reference for product, engineering, and security decisions
 
 ## 1. Roles
 
-Wellio currently defines three primary roles:
+The APP Platform currently defines three primary roles:
 
 - **Individual** – end user, owner of all personal data and derived scores.
-- **Coach** – performance professional focused on training, habits, and accountability.
-- **Clinician** – licensed healthcare professional using Wellio for wellness trends and decision support (not diagnosis).
+- **Trainer/Coach** – performance professional focused on training, habits, and accountability.
+- **Clinician** – licensed healthcare professional using the APP Platform for wellness trends and decision support (not diagnosis).
 
 Future roles (physio, dietitian, org admin, etc.) SHOULD extend this model.
 
@@ -51,11 +61,11 @@ By default, **professionals never see raw data**. They only see derived, functio
 
 ### 3.1 Summary
 
-| Role       | Functional Index | Trends & Flags | Adherence Breakdown | Raw Logs / Notes | Medical Docs | Secure Messaging       |
-|------------|------------------|----------------|---------------------|------------------|--------------|------------------------|
-| Individual | ✅ Full          | ✅ Full        | ✅ Full             | ✅ Full          | ✅ Full (if used) | ✅ Full               |
-| Coach      | ✅ Yes           | ✅ Yes         | ✅ Yes              | ❌ No (by default) | ❌ No        | ✅ Yes (E2EE, PQ+cMixx) |
-| Clinician  | ✅ Yes           | ✅ Yes         | ✅ Yes              | ❌ No (by default) | ❌ No (by default) | ✅ Yes (E2EE, PQ+cMixx) |
+| Role           | Functional Index | Trends & Flags | Adherence Breakdown | Raw Logs / Notes | Medical Docs | Secure Messaging       |
+|----------------|------------------|----------------|---------------------|------------------|--------------|------------------------|
+| Individual     | ✅ Full          | ✅ Full        | ✅ Full             | ✅ Full          | ✅ Full (if used) | ✅ Full               |
+| Trainer/Coach  | ✅ Yes           | ✅ Yes         | ✅ Yes              | ❌ No (by default) | ❌ No        | ✅ Yes (E2EE, PQ+cMixx) |
+| Clinician      | ✅ Yes           | ✅ Yes         | ✅ Yes              | ❌ No (by default) | ❌ No (by default) | ✅ Yes (E2EE, PQ+cMixx) |
 
 **Key rule:**  
 Coaches and clinicians see **functional signals**, not **raw diaries or PHI**.

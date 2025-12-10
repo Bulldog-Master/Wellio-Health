@@ -1,6 +1,8 @@
-# Wellio Health Documentation Index
+# Wellio Wellness APP Platform — Documentation Index
 
-Quick reference to all project documentation.
+Quick reference to all project documentation for the Wellio Wellness APP Platform.
+
+**Master Positioning:** Wellio is a privacy-first Wellness APP Platform for individuals, with optional support from trainers, coaches, and clinicians. Raw data stays on the user's device — only derived wellness insights can be shared, if the user chooses.
 
 ## 🔐 Security & Privacy
 

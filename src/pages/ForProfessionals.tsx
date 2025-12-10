@@ -33,12 +33,12 @@ const ForProfessionals = () => {
         <section className="relative py-20 px-4 md:px-8 lg:px-16 bg-gradient-to-br from-primary/10 via-background to-accent/10">
           <div className="max-w-5xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-              Professional-Grade Coaching & Clinical Insight
-              <span className="block text-primary mt-2">Without Compromising Privacy</span>
+              Optional Professional Extensions
+              <span className="block text-primary mt-2">For the Wellio Wellness APP Platform</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-              Wellio gives you functional wellness signals, trend insights, and secure communication — 
-              without exposing your clients' identities, raw logs, or medical history.
+              Wellio is a privacy-first Wellness APP Platform for individuals. Trainers, coaches, and clinicians 
+              can optionally support users through functional wellness signals — without accessing raw logs or personal data.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild>
@@ -62,14 +62,14 @@ const ForProfessionals = () => {
             </h2>
 
             <div className="grid md:grid-cols-2 gap-8">
-              {/* Coaches Card */}
+              {/* Trainers & Coaches Card */}
               <Card className="border-2 border-primary/20 hover:border-primary/40 transition-colors">
                 <CardContent className="p-8">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="p-3 rounded-xl bg-primary/10">
                       <Dumbbell className="h-8 w-8 text-primary" />
                     </div>
-                    <h3 className="text-2xl font-bold">Coaches</h3>
+                    <h3 className="text-2xl font-bold">Trainers & Coaches</h3>
                   </div>
                   <p className="text-lg font-medium text-primary mb-4">
                     Better results. Stronger retention. Zero liability.

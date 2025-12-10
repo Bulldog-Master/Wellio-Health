@@ -2,13 +2,15 @@
 
 ## Overview
 
-This document maps the **professional economics model** for coaches and clinicians who use Wellio to serve their clients/patients. It specifies what professionals can do **now** (Core MVP), **next** (Phase 2 capabilities), and **later** (future integrations), ensuring monetization paths remain clear and aligned with privacy-first principles.
+This document maps the **professional economics model** for trainers, coaches, and clinicians who use the Wellio Wellness APP Platform to serve their clients/patients. It specifies what professionals can do **now** (Core MVP), **next** (Phase 2 capabilities), and **later** (future integrations), ensuring monetization paths remain clear and aligned with privacy-first principles.
+
+**Master Positioning:** Wellio is a privacy-first Wellness APP Platform for individuals, with optional support from trainers, coaches, and clinicians. Raw data stays on the user's device — only derived wellness insights can be shared, if the user chooses.
 
 ---
 
 ## Revenue Model Context
 
-- Professionals pay for access to the platform (**Trainer Access** or **Practitioner Access** add-ons).
+- Professionals pay for access to the APP Platform (**Trainer Access** or **Practitioner Access** add-ons).
 - They **can** charge their clients independently outside the platform (1:1 training, consultations, etc.).
 - Future phases may enable in-app payments for services, but that's not MVP.
 
@@ -94,13 +96,15 @@ CREATE TABLE video_sessions (
 
 ## Privacy Alignment
 
-All professional features must align with Wellio's privacy-first principles:
+All professional features must align with the APP Platform's privacy-first principles:
 
 1. **No PHI in metadata** — Session labels are generic, no diagnosis/treatment info
 2. **Functional trends only** — Professionals see derived metrics, not raw health logs
 3. **E2E for notes** — All professional notes are encrypted end-to-end
-4. **cMix for messaging** — When secure chat is used, metadata is protected via xx.network mixnet
+4. **cMixx for messaging** — When secure chat is used, metadata is protected via xx.network mixnet
 5. **User control** — Clients can revoke access at any time
+
+**Security Statement:** The APP Platform is built with a zero-trust architecture. Raw logs never leave the user's device. All communication is protected with post-quantum encryption (ML-KEM-768) and cMixx metadata-elimination technology.
 
 ---
 
