@@ -241,6 +241,30 @@ npx cap open android # Opens in Android Studio
 - ✅ CSP headers and input validation
 - ✅ 2FA with backup codes
 
+## 🧑‍⚕️ Care Team Architecture
+
+Wellio is not a solo fitness app — it's a privacy-preserving human performance platform. Users can connect with coaches and clinicians who support their training and wellness goals.
+
+### What Professionals Can See
+
+| Role | Access | Restrictions |
+|------|--------|--------------|
+| **Coach** | Functional wellness index, adherence, workout readiness trends | No meal notes, raw logs, or chat metadata |
+| **Clinician** | Functional index + 30-day patterns | No diagnosis, no PHI, no raw diaries |
+
+Users approve every relationship from the **Care Team** screen and can revoke access at any time.
+
+> **No raw data or medical documents are exposed to professionals — only derived, privacy-preserving wellness indicators.**
+
+### Zero-Trust by Design
+
+- **Data minimization**: We never store plaintext logs on the server
+- **Per-relationship access**: Fine-grained consent at the user level
+- **Score versioning**: Historical data retains meaning even as formulas evolve
+- **Secure messaging**: Built for post-quantum encryption and cMix routing
+
+This architecture enables **clinical relevance without clinical liability**.
+
 ## 🗺️ Roadmap
 
 ### ✅ Completed
