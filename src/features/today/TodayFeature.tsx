@@ -9,9 +9,10 @@ import { Progress } from "@/components/ui/progress";
 import { useMemo, useState, useEffect } from "react";
 import type { User } from "@supabase/supabase-js";
 import { useDailyHistoryScores, TodayHistoryCard } from "./TodayHistoryFeature";
-import { StreakGoalCard, TodayNudgesCard } from "./components";
-import { buildNudgeMessages } from "./utils";
-import type { DailyInputs, DailyScoreResult, IsoDateString } from "./types";
+import { StreakGoalCard, TodayNudgesCard, OnboardingChallengeCard } from "./components";
+import { buildNudgeMessages, deriveOnboardingChallengeStatus } from "./utils";
+import { useSubscription } from "@/hooks/subscription";
+import type { DailyInputs, DailyScoreResult, IsoDateString, SubscriptionTier } from "./types";
 
 // Re-export types
 export type { DailyInputs, DailyScoreResult, IsoDateString };
@@ -61,8 +62,6 @@ export function useTodayStats(userId: string, today: IsoDateString) {
     queryKey: ["todayStats", today, userId],
     enabled: !!userId,
     queryFn: async (): Promise<DailyInputs> => {
-      const clamp = (v: number) => Math.max(0, Math.min(1, v));
-
       const { data: workouts } = await supabase
         .from("activity_logs")
         .select("id")
@@ -190,6 +189,9 @@ export function TodayScreen() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const today = new Date().toISOString().slice(0, 10);
+  
+  // Get subscription tier for tier-aware nudges
+  const { tier } = useSubscription();
 
   useEffect(() => {
     const getUser = async () => {
@@ -213,7 +215,18 @@ export function TodayScreen() {
     minScoreForStreak: MIN_SCORE_FOR_STREAK,
   });
 
-  // Build nudge messages based on current state
+  // Derive onboarding challenge status from history
+  const onboardingStatus = useMemo(() => {
+    if (!historyData || !score) return undefined;
+    return deriveOnboardingChallengeStatus({
+      history: historyData.history,
+      todayIso: today,
+      thresholdScore: 50,
+      requiredDaysToWin: 5,
+    });
+  }, [historyData, score, today]);
+
+  // Build nudge messages with tier awareness and onboarding context
   const nudgeMessages = useMemo(() => {
     if (!score || !historyData) return [];
     return buildNudgeMessages({
@@ -221,8 +234,10 @@ export function TodayScreen() {
       history: historyData.history,
       streakInfo: historyData.streakInfo,
       minScoreForStreak: MIN_SCORE_FOR_STREAK,
+      subscriptionTier: (tier ?? "free") as SubscriptionTier,
+      onboardingStatus,
     });
-  }, [score, historyData]);
+  }, [score, historyData, tier, onboardingStatus]);
 
   if (loading) return <div className="p-4">Loading…</div>;
   if (!user) return <div className="p-4">Please log in</div>;
@@ -236,12 +251,17 @@ export function TodayScreen() {
       {/* 2. Actions list - "What should I do?" */}
       <TodayActionsList {...data} />
 
+      {/* 3. Onboarding challenge - shown during first 7 active days */}
+      {onboardingStatus && onboardingStatus.isInOnboardingWindow && (
+        <OnboardingChallengeCard status={onboardingStatus} />
+      )}
+
       {!isHistoryLoading && historyData && (
         <>
-          {/* 3. Streak goal - "What am I working toward?" */}
+          {/* 4. Streak goal - "What am I working toward?" */}
           <StreakGoalCard streakInfo={historyData.streakInfo} goalDays={7} />
 
-          {/* 4. History chart - "How have I been doing?" */}
+          {/* 5. History chart - "How have I been doing?" */}
           <TodayHistoryCard
             history={historyData.history}
             streakInfo={historyData.streakInfo}
@@ -250,10 +270,10 @@ export function TodayScreen() {
         </>
       )}
 
-      {/* 5. Nudges - "What's the gentle push today?" */}
+      {/* 6. Nudges - "What's the gentle push today?" (now tier-aware) */}
       <TodayNudgesCard messages={nudgeMessages} />
 
-      {/* 6. AI insight - "What does my private coach think?" */}
+      {/* 7. AI insight - "What does my private coach think?" */}
       <TodayAiInsightCard text={aiText} />
     </div>
   );

@@ -48,3 +48,18 @@ export interface NudgeMessage {
   type: NudgeType;
   message: string;
 }
+
+// Re-export SubscriptionTier from subscription hook for convenience
+export type { SubscriptionTier } from "@/hooks/subscription/useSubscription";
+
+// ---------- ONBOARDING CHALLENGE TYPES ----------
+
+export interface OnboardingChallengeStatus {
+  isInOnboardingWindow: boolean; // true = user is in their first 7 active days
+  currentDayIndex: number;       // 0..6 within the window
+  completedDays: number;         // # of days with score >= threshold
+  requiredDaysToWin: number;     // threshold to "win" onboarding (e.g. 5 of 7)
+  isCompleted: boolean;          // true if challenge won
+  isFailed: boolean;             // true if window passed & not completed
+  thresholdScore: number;        // min score to count as a "good" day
+}
