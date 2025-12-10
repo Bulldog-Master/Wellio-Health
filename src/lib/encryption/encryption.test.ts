@@ -9,7 +9,7 @@ import {
   needsEncryptionUpgrade,
   encryptJSON,
   decryptJSON,
-} from '@/lib/encryption';
+} from './index';
 
 // Mock crypto for Node.js environment
 beforeAll(() => {
