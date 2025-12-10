@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { useCareTeam } from './useCareTeam';
+import { useProfessionalStatus } from './useProfessionalStatus';
 import { CoachRow } from './CoachRow';
 import { ClinicianRow } from './ClinicianRow';
 import { JoinByCode } from './JoinByCode';
+import { InviteCodePanel } from './InviteCodePanel';
 
 export const CareTeamScreen = () => {
   const { t } = useTranslation(['professional', 'common']);
@@ -13,13 +14,13 @@ export const CareTeamScreen = () => {
     clinicians,
     loading,
     revoking,
-    hasCoach,
-    hasClinician,
     fetchProfessionals,
     handleRevokeAccess
   } = useCareTeam();
 
-  if (loading) {
+  const { isProfessional, professionalType, loading: professionalLoading } = useProfessionalStatus();
+
+  if (loading || professionalLoading) {
     return (
       <div className="flex justify-center py-12">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
@@ -27,64 +28,45 @@ export const CareTeamScreen = () => {
     );
   }
 
+  const coach = coaches[0]; // User can have one coach
+  const clinician = clinicians[0]; // User can have one clinician
+
   return (
     <div className="space-y-6">
-      {/* Connected Coaches */}
-      {coaches.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">{t('my_coaches')}</CardTitle>
-            <CardDescription>{t('coaches_supporting_you')}</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {coaches.map((coach) => (
-              <CoachRow
-                key={coach.id}
-                coach={coach}
-                onRevoke={handleRevokeAccess}
-                revoking={revoking === coach.id}
-              />
-            ))}
-          </CardContent>
-        </Card>
-      )}
+      {/* Coach Section */}
+      <section className="space-y-3">
+        <h2 className="text-lg font-semibold">{t('my_coaches')}</h2>
+        {coach ? (
+          <CoachRow
+            coach={coach}
+            onRevoke={handleRevokeAccess}
+            revoking={revoking === coach.id}
+          />
+        ) : (
+          <JoinByCode role="coach" onSuccess={fetchProfessionals} />
+        )}
+      </section>
 
-      {/* Connected Clinicians */}
-      {clinicians.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">{t('my_clinicians')}</CardTitle>
-            <CardDescription>{t('clinicians_supporting_you')}</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {clinicians.map((clinician) => (
-              <ClinicianRow
-                key={clinician.id}
-                clinician={clinician}
-                onRevoke={handleRevokeAccess}
-                revoking={revoking === clinician.id}
-              />
-            ))}
-          </CardContent>
-        </Card>
-      )}
+      {/* Clinician Section */}
+      <section className="space-y-3">
+        <h2 className="text-lg font-semibold">{t('my_clinicians')}</h2>
+        {clinician ? (
+          <ClinicianRow
+            clinician={clinician}
+            onRevoke={handleRevokeAccess}
+            revoking={revoking === clinician.id}
+          />
+        ) : (
+          <JoinByCode role="clinician" onSuccess={fetchProfessionals} />
+        )}
+      </section>
 
-      {/* Empty State */}
-      {coaches.length === 0 && clinicians.length === 0 && (
-        <Card>
-          <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-            <Users className="w-12 h-12 text-muted-foreground mb-4" />
-            <h3 className="font-semibold text-lg mb-2">{t('no_professionals_connected')}</h3>
-            <p className="text-sm text-muted-foreground max-w-sm">
-              {t('connect_professional_desc')}
-            </p>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Join by Code - Show if user doesn't have both coach and clinician */}
-      {(!hasCoach || !hasClinician) && (
-        <JoinByCode onSuccess={fetchProfessionals} />
+      {/* Professional's Invite Code Panel */}
+      {isProfessional && professionalType && (
+        <section className="space-y-3 pt-4 border-t">
+          <h2 className="text-lg font-semibold">{t('your_invite_code')}</h2>
+          <InviteCodePanel professionalType={professionalType} />
+        </section>
       )}
     </div>
   );

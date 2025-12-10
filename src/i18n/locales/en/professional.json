@@ -166,6 +166,8 @@
 
   "join_by_code": "Connect with a Professional",
   "join_by_code_desc": "Enter an invite code from your coach or healthcare provider",
+  "connect_with_role": "Connect with a {{role}}",
+  "enter_code_from_role": "Enter an invite code from your {{role}}",
   "enter_code_placeholder": "Enter code (e.g., ABC123)",
   "code_not_found": "Code not found or expired",
   "request_already_pending": "You already have a pending request with this professional",
