@@ -5,10 +5,11 @@ import { ArrowLeft, Users, Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { CoachDashboardScreen } from '@/features/coach/CoachDashboardFeature';
+import { SEOHead } from '@/components/common';
 
 const CoachDashboard = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation(['professional', 'common']);
+  const { t } = useTranslation(['professional', 'common', 'seo']);
   const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -39,7 +40,7 @@ const CoachDashboard = () => {
   if (isAuthorized === null) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin" />
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
       </div>
     );
   }
@@ -47,6 +48,11 @@ const CoachDashboard = () => {
   if (!isAuthorized) {
     return (
       <div className="min-h-screen bg-background">
+        <SEOHead 
+          titleKey="coach_dashboard" 
+          descriptionKey="coach_dashboard_desc"
+          namespace="professional"
+        />
         <div className="container max-w-4xl py-8 px-4">
           <Button
             variant="ghost"
@@ -59,12 +65,12 @@ const CoachDashboard = () => {
 
           <div className="text-center py-12">
             <Users className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-            <h1 className="text-2xl font-bold mb-2">Coach Access Required</h1>
+            <h1 className="text-2xl font-bold mb-2">{t('professional:coach_access_required')}</h1>
             <p className="text-muted-foreground mb-6">
-              You need to be an approved coach or trainer to access this dashboard.
+              {t('professional:coach_access_required_desc')}
             </p>
             <Button onClick={() => navigate('/trainer-portal')}>
-              Apply as Trainer/Coach
+              {t('professional:apply_as_trainer')}
             </Button>
           </div>
         </div>
@@ -74,6 +80,11 @@ const CoachDashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        titleKey="coach_dashboard" 
+        descriptionKey="coach_dashboard_desc"
+        namespace="professional"
+      />
       <div className="container max-w-6xl py-8 px-4">
         <Button
           variant="ghost"
@@ -89,9 +100,9 @@ const CoachDashboard = () => {
             <Users className="w-8 h-8 text-primary" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold">Coach Dashboard</h1>
+            <h1 className="text-3xl font-bold">{t('professional:coach_dashboard')}</h1>
             <p className="text-muted-foreground">
-              Monitor your clients' progress and provide guidance
+              {t('professional:coach_dashboard_desc')}
             </p>
           </div>
         </div>

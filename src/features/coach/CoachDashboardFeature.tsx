@@ -6,6 +6,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export interface CoachClientSummary {
   clientId: string;
@@ -250,10 +251,9 @@ function useCoachClientDetail(clientId: string | null) {
 // ---------- UI: COACH DASHBOARD ------------
 
 export function CoachDashboardScreen() {
+  const { t } = useTranslation(['professional', 'common']);
   const { data, isLoading } = useCoachClients();
-  const [selectedClientId, setSelectedClientId] = useState<string | null>(
-    null
-  );
+  const [selectedClientId, setSelectedClientId] = useState<string | null>(null);
 
   const selectedClient = useMemo(
     () => data?.find((c) => c.clientId === selectedClientId),
@@ -261,13 +261,15 @@ export function CoachDashboardScreen() {
   );
 
   return (
-    <div className="p-4 flex flex-col md:flex-row gap-4">
+    <div className="flex flex-col md:flex-row gap-4">
       <div className="md:w-1/2 space-y-2">
-        <h1 className="text-lg font-semibold">Clients</h1>
-        {isLoading && <p className="text-sm text-muted-foreground">Loading clients…</p>}
+        <h2 className="text-lg font-semibold">{t('professional:clients')}</h2>
+        {isLoading && (
+          <p className="text-sm text-muted-foreground">{t('professional:loading_clients')}</p>
+        )}
         {!isLoading && (!data || data.length === 0) && (
           <p className="text-sm text-muted-foreground">
-            No active clients yet. Share your coach code to get started.
+            {t('professional:no_active_clients')}
           </p>
         )}
 
@@ -277,29 +279,27 @@ export function CoachDashboardScreen() {
               key={client.clientId}
               type="button"
               onClick={() => setSelectedClientId(client.clientId)}
-              className={`w-full flex items-center justify-between rounded-lg border px-3 py-2 text-left hover:bg-accent/40 ${
-                selectedClientId === client.clientId
-                  ? "border-primary"
-                  : ""
+              className={`w-full flex items-center justify-between rounded-lg border px-3 py-2 text-left hover:bg-accent/40 transition-colors ${
+                selectedClientId === client.clientId ? "border-primary bg-accent/20" : "border-border"
               }`}
             >
               <div>
                 <p className="text-sm font-medium">
-                  {client.clientName ?? "Unnamed client"}
+                  {client.clientName ?? t('professional:unnamed_client')}
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  Last:{" "}
+                  {t('professional:last_score')}:{" "}
                   {client.lastScore !== null
                     ? `${client.lastScore}/100`
-                    : "No data yet"}
+                    : t('professional:no_data_yet')}
                   {" • "}
-                  7-day avg:{" "}
+                  {t('professional:seven_day_avg')}:{" "}
                   {client.avg7 !== null ? `${client.avg7}/100` : "—"}
                 </p>
               </div>
               <div className="text-right text-xs text-muted-foreground">
                 <p>
-                  Trend:{" "}
+                  {t('professional:trend')}:{" "}
                   {client.trend === "up"
                     ? "↗"
                     : client.trend === "down"
@@ -308,10 +308,10 @@ export function CoachDashboardScreen() {
                     ? "→"
                     : "?"}
                 </p>
-                <p>Streak: {client.streakDays}d</p>
+                <p>{t('professional:streak')}: {client.streakDays}d</p>
                 {client.needsAttention && (
-                  <p className="text-[11px] text-amber-600 mt-1">
-                    Needs attention
+                  <p className="text-[11px] text-destructive mt-1">
+                    {t('professional:needs_attention')}
                   </p>
                 )}
               </div>
@@ -325,7 +325,7 @@ export function CoachDashboardScreen() {
           <CoachClientDetailPanel client={selectedClient} />
         ) : (
           <p className="text-sm text-muted-foreground mt-6 md:mt-0">
-            Select a client to view their recent trends.
+            {t('professional:select_client')}
           </p>
         )}
       </div>
@@ -334,12 +334,13 @@ export function CoachDashboardScreen() {
 }
 
 function CoachClientDetailPanel({ client }: { client: CoachClientSummary }) {
+  const { t } = useTranslation(['professional']);
   const { data, isLoading } = useCoachClientDetail(client.clientId);
 
   if (isLoading || !data) {
     return (
-      <div className="rounded-xl border bg-background p-4">
-        <p className="text-sm text-muted-foreground">Loading client details…</p>
+      <div className="rounded-xl border border-border bg-card p-4">
+        <p className="text-sm text-muted-foreground">{t('professional:loading_client_details')}</p>
       </div>
     );
   }
@@ -347,34 +348,35 @@ function CoachClientDetailPanel({ client }: { client: CoachClientSummary }) {
   const fmtPct = (v: number) => `${Math.round(v * 100)}%`;
 
   return (
-    <div className="rounded-xl border bg-background p-4 space-y-3">
+    <div className="rounded-xl border border-border bg-card p-4 space-y-4">
       <div className="flex items-baseline justify-between gap-2">
         <div>
           <p className="text-xs uppercase text-muted-foreground">
-            Client overview
+            {t('professional:client_overview')}
           </p>
           <p className="text-lg font-semibold">
-            {data.clientName ?? "Unnamed client"}
+            {data.clientName ?? t('professional:unnamed_client')}
           </p>
         </div>
         <div className="text-xs text-muted-foreground text-right">
-          <p>Last 30 days</p>
+          <p>{t('professional:last_30_days')}</p>
         </div>
       </div>
 
-      {/* Simple sparkline-style score history */}
+      {/* Sparkline-style score history */}
       <div className="space-y-1">
         <p className="text-xs font-medium text-muted-foreground">
-          Daily score trend
+          {t('professional:daily_score_trend')}
         </p>
-        <div className="flex items-end gap-1 h-16">
+        <div className="flex items-end gap-[2px] h-20 bg-muted/30 rounded-lg p-2">
           {data.scores.map((s) => {
-            const height = (s.score / 100) * 100;
+            const height = Math.max((s.score / 100) * 100, 4);
+            const color = s.score >= 70 ? 'bg-primary' : s.score >= 50 ? 'bg-yellow-500' : 'bg-destructive';
             return (
               <div
                 key={s.date}
-                className="flex-1 bg-primary/70 rounded-t"
-                style={{ height: `${height || 4}%` }}
+                className={`flex-1 ${color} rounded-t transition-all`}
+                style={{ height: `${height}%` }}
                 title={`${s.date}: ${s.score}`}
               />
             );
@@ -383,22 +385,21 @@ function CoachClientDetailPanel({ client }: { client: CoachClientSummary }) {
       </div>
 
       {/* Averages */}
-      <div className="grid grid-cols-2 gap-2 text-xs">
-        <MetricCard label="Workout adherence" value={fmtPct(data.avgWorkout)} />
-        <MetricCard label="Meals logged" value={fmtPct(data.avgMeals)} />
-        <MetricCard label="Hydration" value={fmtPct(data.avgHydration)} />
-        <MetricCard label="Sleep vs goal" value={fmtPct(data.avgSleep)} />
-        <MetricCard label="Mood / energy" value={fmtPct(data.avgMood)} />
+      <div className="grid grid-cols-2 gap-2">
+        <MetricCard label={t('professional:workout_adherence')} value={fmtPct(data.avgWorkout)} />
+        <MetricCard label={t('professional:meals_logged')} value={fmtPct(data.avgMeals)} />
+        <MetricCard label={t('professional:hydration')} value={fmtPct(data.avgHydration)} />
+        <MetricCard label={t('professional:sleep_vs_goal')} value={fmtPct(data.avgSleep)} />
+        <MetricCard label={t('professional:mood_energy')} value={fmtPct(data.avgMood)} />
       </div>
 
       {/* Placeholder for secure messaging (cMixx-ready) */}
-      <div className="rounded-lg border bg-muted/40 p-3 space-y-1">
-        <p className="text-xs uppercase text-muted-foreground">
-          Secure notes (cMixx-ready)
+      <div className="rounded-lg border border-border bg-muted/40 p-3 space-y-1">
+        <p className="text-xs uppercase text-muted-foreground font-medium">
+          {t('professional:secure_notes_cmix')}
         </p>
         <p className="text-xs text-muted-foreground">
-          This area will be wired to xx network&apos;s cMixx for
-          metadata-protected messaging between you and your client.
+          {t('professional:secure_notes_desc')}
         </p>
       </div>
     </div>
@@ -407,9 +408,9 @@ function CoachClientDetailPanel({ client }: { client: CoachClientSummary }) {
 
 function MetricCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border bg-card px-2 py-2 space-y-1">
+    <div className="rounded-lg border border-border bg-background px-3 py-2 space-y-1">
       <p className="text-[11px] text-muted-foreground">{label}</p>
-      <p className="text-sm font-medium">{value}</p>
+      <p className="text-sm font-semibold">{value}</p>
     </div>
   );
 }
