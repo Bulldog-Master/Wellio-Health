@@ -159,5 +159,18 @@
   "request_connection": "இணைப்பைக் கோரவும்",
   "connection_requested": "இணைப்பு கோரிக்கை அனுப்பப்பட்டது",
   "data_access_consent": "தரவு அணுகல் ஒப்புதல்",
-  "review_consent": "ஒப்புதலை மதிப்பாய்வு செய்யவும்"
+  "review_consent": "ஒப்புதலை மதிப்பாய்வு செய்யவும்",
+
+  "my_care_team": "என் பராமரிப்பு குழு",
+  "my_care_team_desc": "உங்கள் பயிற்சியாளர்கள் மற்றும் மருத்துவர்களை நிர்வகிக்கவும்",
+  "connected_professionals": "இணைக்கப்பட்ட நிபுணர்கள்",
+  "add_professional": "நிபுணரைச் சேர்",
+  "no_professionals_connected": "இணைக்கப்பட்ட நிபுணர்கள் இல்லை",
+  "since": "முதல்",
+  "coach": "பயிற்சியாளர்",
+  "clinician": "மருத்துவர்",
+  "revoke_access": "அணுகலை ரத்து செய்",
+  "revoke_access_title": "அணுகலை ரத்து செய்யவா?",
+  "revoke_access_desc": "{{name}} உங்கள் தரவை அணுக முடியாது",
+  "access_revoked": "அணுகல் ரத்து செய்யப்பட்டது"
 }

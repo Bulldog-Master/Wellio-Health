@@ -159,5 +159,18 @@
   "request_connection": "कनेक्शन विनंती करा",
   "connection_requested": "कनेक्शन विनंती पाठवली",
   "data_access_consent": "डेटा प्रवेश संमती",
-  "review_consent": "संमती पुनरावलोकन करा"
+  "review_consent": "संमती पुनरावलोकन करा",
+
+  "my_care_team": "माझा काळजी संघ",
+  "my_care_team_desc": "तुमचे प्रशिक्षक आणि प्रॅक्टिशनर व्यवस्थापित करा",
+  "connected_professionals": "जोडलेले व्यावसायिक",
+  "add_professional": "व्यावसायिक जोडा",
+  "no_professionals_connected": "कोणतेही व्यावसायिक जोडलेले नाहीत",
+  "since": "पासून",
+  "coach": "कोच",
+  "clinician": "वैद्यकीय तज्ञ",
+  "revoke_access": "प्रवेश रद्द करा",
+  "revoke_access_title": "प्रवेश रद्द करायचा?",
+  "revoke_access_desc": "{{name}} आता तुमच्या डेटावर प्रवेश करू शकणार नाही",
+  "access_revoked": "प्रवेश रद्द झाला"
 }

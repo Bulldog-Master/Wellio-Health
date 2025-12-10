@@ -159,5 +159,18 @@
   "request_connection": "Yêu cầu kết nối",
   "connection_requested": "Yêu cầu kết nối đã được gửi",
   "data_access_consent": "Đồng ý truy cập dữ liệu",
-  "review_consent": "Xem xét đồng ý"
+  "review_consent": "Xem xét đồng ý",
+
+  "my_care_team": "Đội ngũ chăm sóc",
+  "my_care_team_desc": "Quản lý huấn luyện viên và chuyên gia của bạn",
+  "connected_professionals": "Chuyên gia đã kết nối",
+  "add_professional": "Thêm chuyên gia",
+  "no_professionals_connected": "Chưa có chuyên gia nào được kết nối",
+  "since": "Từ",
+  "coach": "Huấn luyện viên",
+  "clinician": "Chuyên gia y tế",
+  "revoke_access": "Thu hồi quyền truy cập",
+  "revoke_access_title": "Thu hồi quyền truy cập?",
+  "revoke_access_desc": "{{name}} sẽ không còn có thể truy cập dữ liệu của bạn",
+  "access_revoked": "Đã thu hồi quyền truy cập"
 }
