@@ -50,7 +50,11 @@
  */
 
 // Re-export main modules for convenience
+// Use direct imports for better tree-shaking:
+// import { cn } from '@/lib/utils';
+// import { encryptJSON } from '@/lib/encryption';
+
 export * from './encryption';
-export * as services from './services';
-export * as utils from './utils';
-export * as validation from './validation';
+export * from './services';
+export * from './utils';
+export * from './validation';
