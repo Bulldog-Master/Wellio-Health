@@ -4,13 +4,19 @@
 
 ## Overview
 
-Wellio is the first AI-powered wellness platform built with **post-quantum security** and **metadata elimination** at its core.
+Wellio is the first AI-powered **Wellness APP Platform** built with **post-quantum security** and **metadata elimination** at its core.
 
-It combines:
-- Consumer wellness tools
-- Professional coaching platform
-- Clinician insights layer
+It is:
+- Individual-centered wellness tracking
+- Privacy-first by design
+- Optional professional extensions (trainers, coaches, clinicians)
 - Zero-knowledge privacy architecture
+
+---
+
+## Master Positioning Statement
+
+**Wellio is a next-generation Wellness APP Platform that empowers individuals to track their wellbeing privately — while optionally connecting with trainers, coaches, or clinicians through secure, limited-visibility insights. It is privacy-first, post-quantum secure, and powered by cMixx metadata protection.**
 
 ---
 
@@ -22,7 +28,7 @@ Health & wellness apps leak:
 - Behaviors
 - Metadata
 
-This destroys trust and restricts adoption by professionals and clinicians.
+This destroys trust and restricts adoption by both privacy-conscious individuals and professionals.
 
 ---
 
@@ -44,7 +50,9 @@ Wellio introduces the **Functional Wellness Index (FWI)** — a privacy-preservi
 
 ---
 
-## Technology Stack
+## Security Architecture
+
+The APP Platform is built with a zero-trust architecture. Raw logs never leave the user's device. All communication is protected with post-quantum encryption (ML-KEM-768) and cMixx metadata-elimination technology.
 
 | Technology | Purpose |
 |------------|---------|
@@ -65,7 +73,7 @@ Wellio introduces the **Functional Wellness Index (FWI)** — a privacy-preservi
 | Telehealth | $120B |
 | Professional Coaching | $20B+ |
 
-**Key Insight:** Professionals lack a private, compliant-ready platform.
+**Key Insight:** Individuals lack private wellness tools; professionals lack compliant-ready platforms.
 
 ---
 
@@ -77,7 +85,7 @@ Core features free; premium analytics subscription.
 ### 2. Professionals (SaaS)
 | Tier | Target |
 |------|--------|
-| Coach Pro | Individual trainers |
+| Coach Pro | Individual trainers/coaches |
 | Coach Team | Training teams |
 | Clinician Individual | Solo practitioners |
 | Clinician Group | Group practices |

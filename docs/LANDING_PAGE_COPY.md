@@ -10,8 +10,7 @@ Production-ready copy for Webflow, Framer, Next.js, or marketing CMS.
 **AI-powered wellness. Quantum-private by design.**
 
 ### Subheadline
-Your health stays yours.  
-Wellio gives you insights, not surveillance.
+Wellio is a privacy-first Wellness APP Platform for individuals, with optional support from trainers, coaches, and clinicians.
 
 ### CTA Buttons
 - **Get the App** (primary)
@@ -28,13 +27,13 @@ Wellio gives you insights, not surveillance.
 
 ### 🔒 Uncompromising Privacy
 Raw logs never leave your device.  
-Messages and data use post-quantum encryption + cMixx metadata elimination.
+The APP Platform is built with a zero-trust architecture using post-quantum encryption + cMixx metadata elimination.
 
 ### 📊 Functional Wellness Index (FWI)
 A single signal combining sleep, meals, hydration, workouts, mood, and recovery.
 
-### 🧑‍⚕️ Care Team (Coaches & Clinicians)
-Share only trends and insights — never journals or private notes.
+### 🧑‍⚕️ Optional Professional Support
+Trainers, coaches, and clinicians see only trends and insights — never journals or private notes.
 
 ### 🎥 Live Video + Secure Messaging
 Coaching and clinical sessions integrated directly into a privacy-preserving environment.
@@ -52,7 +51,7 @@ Coaching and clinical sessions integrated directly into a privacy-preserving env
 
 ## Section 3 — For Professionals
 
-### Coaches & Trainers
+### Trainers & Coaches
 - High-level insights into client adherence
 - Trend-based coaching
 - Live sessions + asynchronous support
@@ -69,20 +68,20 @@ Coaching and clinical sessions integrated directly into a privacy-preserving env
 
 ## Section 4 — Security
 
+### Zero-Trust Architecture
+The APP Platform is built with a zero-trust architecture. Raw logs never leave the user's device. All communication is protected with post-quantum encryption (ML-KEM-768) and cMixx metadata-elimination technology.
+
 ### Post-Quantum Encryption
 Medical and high-sensitivity data protected with ML-KEM-768.
 
 ### Metadata Elimination (cMixx)
 Your communication patterns are invisible even to network observers.
 
-### Zero-Trust Architecture
-The server never sees your raw data.
-
 ---
 
 ## Section 5 — Testimonials
 
-> "The only wellness platform I trust with my clients."  
+> "The only Wellness APP Platform I trust with my clients."  
 > — Level-3 Trainer
 
 > "Finally, something I can use without taking on compliance risk."  
@@ -102,7 +101,7 @@ The server never sees your raw data.
 ## SEO Meta Tags
 
 ```html
-<title>Wellio — AI-Powered Wellness, Quantum-Private by Design</title>
-<meta name="description" content="The first wellness platform with post-quantum encryption and metadata protection. Track health, connect with coaches and clinicians, all while keeping your data truly private.">
-<meta name="keywords" content="wellness app, quantum encryption, private health tracking, FWI, coaching platform, clinician tools, cMixx, post-quantum security">
+<title>Wellio — Privacy-First Wellness APP Platform</title>
+<meta name="description" content="Wellio is a privacy-first Wellness APP Platform for individuals, with optional support from trainers, coaches, and clinicians. Post-quantum encryption and cMixx metadata protection.">
+<meta name="keywords" content="wellness app platform, quantum encryption, private health tracking, FWI, trainer tools, clinician tools, cMixx, post-quantum security">
 ```

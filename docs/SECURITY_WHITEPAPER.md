@@ -10,9 +10,9 @@
 
 ## Executive Summary
 
-Wellio is the first wellness platform designed with **zero-knowledge participation**. Unlike traditional health apps that require users to surrender identity, metadata, and personal logs to participate, Wellio computes **derived functional signals** that are clinically useful without regulatory gravity.
+Wellio is a privacy-first Wellness APP Platform designed with **zero-knowledge participation**. Unlike traditional health apps that require users to surrender identity, metadata, and personal logs to participate, Wellio computes **derived functional signals** that are clinically useful without regulatory gravity.
 
-This whitepaper details our security architecture, encryption strategies, and privacy protections that position Wellio as the gold standard for private health tracking.
+This whitepaper details our security architecture, encryption strategies, and privacy protections that position Wellio as the gold standard for private wellness tracking.
 
 ---
 
