@@ -178,8 +178,8 @@ docs/                    # Documentation (25+ docs)
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/wellio-health.git
-cd wellio-health
+git clone https://github.com/Bulldog-Master/Wellio-Health.git
+cd Wellio-Health
 
 # Install dependencies
 npm install
