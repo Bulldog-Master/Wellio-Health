@@ -252,7 +252,10 @@ export function TodayScreen() {
   if (!user) return <div className="p-4">Please log in</div>;
   if (isLoading || !data || !score) return <div className="p-4">Loading…</div>;
 
-  const { data: historyData } = useDailyHistoryScores({ userId: user.id });
+  const {
+    data: historyData,
+    isLoading: isHistoryLoading,
+  } = useDailyHistoryScores({ userId: user.id, days: 7, minScoreForStreak: 60 });
 
   return (
     <div className="p-4 space-y-4">
