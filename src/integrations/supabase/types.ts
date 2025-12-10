@@ -268,7 +268,6 @@ export type Database = {
       }
       auth_secrets: {
         Row: {
-          backup_codes: Json | null
           backup_codes_encrypted: string | null
           created_at: string | null
           encryption_version: number | null
@@ -279,7 +278,6 @@ export type Database = {
           user_id: string
         }
         Insert: {
-          backup_codes?: Json | null
           backup_codes_encrypted?: string | null
           created_at?: string | null
           encryption_version?: number | null
@@ -290,7 +288,6 @@ export type Database = {
           user_id: string
         }
         Update: {
-          backup_codes?: Json | null
           backup_codes_encrypted?: string | null
           created_at?: string | null
           encryption_version?: number | null
