@@ -138,6 +138,11 @@
 
   "my_care_team": "Minha Equipe de Saúde",
   "my_care_team_desc": "Gerencie seus treinadores e provedores de saúde conectados",
+  "my_coaches": "Meus Treinadores",
+  "coaches_supporting_you": "Treinadores apoiando sua jornada fitness",
+  "my_clinicians": "Meus Médicos",
+  "clinicians_supporting_you": "Provedores de saúde apoiando seu bem-estar",
+  "connect_professional_desc": "Conecte-se com um treinador ou provedor de saúde usando o código de convite deles",
   "connected_professionals": "Profissionais Conectados",
   "add_professional": "Adicionar um Profissional",
   "no_professionals_connected": "Você ainda não se conectou com nenhum profissional. Digite um código de convite para começar.",
@@ -145,5 +150,10 @@
   "revoke_access": "Revogar Acesso",
   "revoke_access_title": "Revogar Acesso do Profissional",
   "revoke_access_desc": "Tem certeza de que deseja revogar o acesso de {{name}}? Eles não poderão mais ver seus dados de saúde.",
-  "access_revoked": "Acesso revogado com sucesso"
+  "access_revoked": "Acesso revogado com sucesso",
+
+  "invite_code_desc": "Compartilhe este código com clientes para conectar com eles",
+  "times_used": "Usado {{count}} vezes",
+  "active": "Ativo",
+  "inactive": "Inativo"
 }

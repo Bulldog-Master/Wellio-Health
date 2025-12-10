@@ -183,6 +183,11 @@
 
   "my_care_team": "My Care Team",
   "my_care_team_desc": "Manage your connected coaches and healthcare providers",
+  "my_coaches": "My Coaches",
+  "coaches_supporting_you": "Coaches supporting your fitness journey",
+  "my_clinicians": "My Clinicians",
+  "clinicians_supporting_you": "Healthcare providers supporting your wellness",
+  "connect_professional_desc": "Connect with a coach or healthcare provider using their invite code",
   "connected_professionals": "Connected Professionals",
   "add_professional": "Add a Professional",
   "no_professionals_connected": "You haven't connected with any professionals yet. Enter an invite code to get started.",
@@ -190,5 +195,10 @@
   "revoke_access": "Revoke Access",
   "revoke_access_title": "Revoke Professional Access",
   "revoke_access_desc": "Are you sure you want to revoke access for {{name}}? They will no longer be able to view your health data.",
-  "access_revoked": "Access revoked successfully"
+  "access_revoked": "Access revoked successfully",
+
+  "invite_code_desc": "Share this code with clients to connect with them",
+  "times_used": "Used {{count}} times",
+  "active": "Active",
+  "inactive": "Inactive"
 }

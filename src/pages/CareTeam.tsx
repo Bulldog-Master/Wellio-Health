@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Users } from 'lucide-react';
-import { CareTeamSection } from '@/components/profile/CareTeamSection';
+import { CareTeamScreen } from '@/features/care-team';
 import { SEOHead } from '@/components/common';
 
 const CareTeam = () => {
@@ -23,7 +23,7 @@ const CareTeam = () => {
           </div>
         </div>
 
-        <CareTeamSection defaultOpen={true} />
+        <CareTeamScreen />
       </div>
     </>
   );
