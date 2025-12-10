@@ -226,8 +226,13 @@ This ensures product, code, and legal language stay in sync.
 
 ---
 
-## See Also
+## Related Documents
 
-- [Professional Economics](./PROFESSIONAL_ECONOMICS.md) — Incentive model for coaches and clinicians
-- [Subscription Guide](../SUBSCRIPTION_GUIDE.md) — Tier features and payment integration
-- [Crypto Design](./CRYPTO_DESIGN.md) — Encryption architecture
+- **Professional Incentives & Monetization:**  
+  [PROFESSIONAL_ECONOMICS.md](PROFESSIONAL_ECONOMICS.md)
+
+- **Subscription Tiers for Pros:**  
+  [SUBSCRIPTION_GUIDE.md](../SUBSCRIPTION_GUIDE.md)
+
+- **High-Level Architecture:**  
+  [TECHNICAL_ARCHITECTURE.md](TECHNICAL_ARCHITECTURE.md)
