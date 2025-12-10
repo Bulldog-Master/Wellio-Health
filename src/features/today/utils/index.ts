@@ -3,3 +3,4 @@
 // ========================================
 
 export { buildNudgeMessages } from "./buildNudgeMessages";
+export { deriveOnboardingChallengeStatus } from "./deriveOnboardingChallengeStatus";
