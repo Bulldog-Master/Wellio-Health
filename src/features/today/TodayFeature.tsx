@@ -17,6 +17,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Progress } from "@/components/ui/progress";
 import { useMemo, useState, useEffect } from "react";
 import type { User } from "@supabase/supabase-js";
+import { useDailyHistoryScores, TodayHistoryCard } from "./TodayHistoryFeature";
 
 // ---------- TYPES -----------------------
 
@@ -251,9 +252,17 @@ export function TodayScreen() {
   if (!user) return <div className="p-4">Please log in</div>;
   if (isLoading || !data || !score) return <div className="p-4">Loading…</div>;
 
+  const { data: historyData } = useDailyHistoryScores({ userId: user.id });
+
   return (
     <div className="p-4 space-y-4">
       <TodayScoreCard score={score} />
+      {historyData && (
+        <TodayHistoryCard 
+          history={historyData.history} 
+          streakCount={historyData.streakCount} 
+        />
+      )}
       <TodayActionsList {...data} />
       <TodayAiInsightCard text={aiText} />
     </div>
