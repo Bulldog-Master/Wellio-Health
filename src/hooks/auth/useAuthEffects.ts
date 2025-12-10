@@ -3,9 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '@/integrations/supabase/client';
-import { isWebAuthnSupported } from '@/lib/webauthn';
-import { generateDeviceFingerprint, getStoredFingerprint, storeFingerprint } from '@/lib/deviceFingerprint';
-import { prefetchWithTimeout } from '@/lib/authUtils';
+import { isWebAuthnSupported, generateDeviceFingerprint, getStoredFingerprint, storeFingerprint, prefetchWithTimeout } from '@/lib/auth';
 
 interface UseAuthEffectsProps {
   initialCheckDone: boolean;

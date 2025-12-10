@@ -15,7 +15,7 @@ vi.mock('@/integrations/supabase/client', () => ({
 describe('Error Tracking', () => {
   it('should determine error severity correctly', async () => {
     // Import the module
-    const { logError } = await import('./errorTracking');
+    const { logError } = await import('../services/errorTracking');
     
     // Create test errors
     const authError = new Error('Authentication failed');
@@ -31,7 +31,7 @@ describe('Error Tracking', () => {
   });
 
   it('should setup global error handlers', async () => {
-    const { setupGlobalErrorHandlers } = await import('./errorTracking');
+    const { setupGlobalErrorHandlers } = await import('../services/errorTracking');
     
     // Should not throw when called
     expect(() => setupGlobalErrorHandlers()).not.toThrow();

@@ -6,7 +6,7 @@ import { ErrorBoundary } from "@/components/common";
 import { setupGlobalErrorHandlers } from "./lib/errorTracking";
 import { initPerformanceMonitoring } from "./lib/performanceMonitoring";
 import { initAnalytics } from "./lib/analytics";
-import { runHealthCheck, logTestResults } from "./lib/testingUtils";
+import { runHealthCheck, logTestResults } from "./lib/testing/testingUtils";
 
 // FORCE dark mode immediately
 document.documentElement.classList.add('dark');

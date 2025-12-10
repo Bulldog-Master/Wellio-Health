@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNetworkStatus } from './useNetworkStatus';
-import { processSyncQueue, queueSyncAction, registerBackgroundSync } from '@/lib/backgroundSync';
+import { processSyncQueue, queueSyncAction, registerBackgroundSync } from '@/lib/storage';
 import { supabase } from '@/integrations/supabase/client';
 
 /**

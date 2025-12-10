@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { registerPasskey } from "@/lib/webauthn";
+import { registerPasskey } from "@/lib/auth";
 import { usePrivacySecurityState } from "./usePrivacySecurityState";
 
 export const usePrivacySecurityHandlers = (state: ReturnType<typeof usePrivacySecurityState>) => {

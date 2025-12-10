@@ -7,7 +7,7 @@ import {
   Analytics,
   getEventQueue,
   getPageViews 
-} from './analytics';
+} from '../services/analytics';
 
 describe('Analytics', () => {
   beforeEach(() => {

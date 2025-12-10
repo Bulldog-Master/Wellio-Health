@@ -2,7 +2,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Key, Pencil, Trash2 } from "lucide-react";
-import { isWebAuthnSupported } from "@/lib/webauthn";
+import { isWebAuthnSupported } from "@/lib/auth";
 import { useTranslation } from "react-i18next";
 import { formatDistanceToNow } from "date-fns";
 

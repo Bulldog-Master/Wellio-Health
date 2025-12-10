@@ -7,7 +7,7 @@ import {
   clearAllOverrides,
   getAllFeatureFlags,
   getFeatureFlagsByCategory,
-} from '@/lib/featureFlags';
+} from '@/lib/features/featureFlags';
 
 // Mock localStorage
 const localStorageMock = (() => {

@@ -2,7 +2,7 @@ import i18n from 'i18next';
 // Note: addons and professional namespaces added for subscription add-ons and professional portals
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import { logMissingKey, validateTranslations } from '@/lib/translationUtils';
+import { logMissingKey, validateTranslations } from '@/lib/utils/translationUtils';
 
 // Import translation files - English
 import commonEN from './locales/en/common.json';

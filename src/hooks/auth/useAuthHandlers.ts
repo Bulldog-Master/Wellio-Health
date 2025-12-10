@@ -4,9 +4,8 @@ import { z } from 'zod';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useTranslation } from 'react-i18next';
-import { rateLimiter, RATE_LIMITS } from '@/lib/rateLimit';
-import { getDeviceName } from '@/lib/deviceFingerprint';
-import { isWebAuthnSupported, registerPasskey, authenticatePasskey } from '@/lib/webauthn';
+import { rateLimiter, RATE_LIMITS } from '@/lib/features';
+import { getDeviceName, isWebAuthnSupported, registerPasskey, authenticatePasskey } from '@/lib/auth';
 import { AuthMethod, UserRole } from '@/components/auth/types';
 
 interface UseAuthHandlersProps {

@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { useTranslation } from 'react-i18next';
-import { FitnessLocation, getCountryFlag, getDirectionsUrl, categoryIcons } from '@/lib/locationUtils';
+import { FitnessLocation, getCountryFlag, getDirectionsUrl, categoryIcons } from '@/lib/location';
 
 interface LocationCardProps {
   location: FitnessLocation;

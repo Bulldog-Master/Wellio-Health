@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
+import { rateLimiter, RATE_LIMITS } from "@/lib/features";
 import { useTranslation } from "react-i18next";
 
 interface CreatePostParams {
