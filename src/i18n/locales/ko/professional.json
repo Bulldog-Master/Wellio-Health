@@ -203,5 +203,24 @@
   "professional_tools": "전문 도구",
   "professional_tools_desc": "{{role}}로서 대시보드에서 귀하와 연결된 사람들의 집계된 기능적 트렌드를 볼 수 있습니다. 보안 메시지는 메타데이터 보호를 위해 xx network의 cMix를 통해 라우팅됩니다.",
   "open_coach_dashboard": "코치 대시보드 열기",
-  "open_clinician_dashboard": "임상의 대시보드 열기"
+  "open_clinician_dashboard": "임상의 대시보드 열기",
+
+  "certification_program": "인증 프로그램",
+  "certification_title": "Wellio 트레이너/코치 인증",
+  "certification_subtitle": "Wellio 인증 트레이너가 되어 독점 도구, 클라이언트 및 수익 기회에 접근하세요",
+  "certification_benefit_1": "공식 배지 및 Wellio 디렉토리 등재",
+  "certification_benefit_2": "프리미엄 분석 조기 접근",
+  "certification_benefit_3": "클라이언트 매칭 및 성장 도구",
+  "certification_benefit_4": "Coach Pro 6개월 무료",
+  "certification_module_1_title": "기능적 웰니스 지수",
+  "certification_module_1_desc": "FWI를 해석하고 클라이언트 안내에 활용하는 방법 학습",
+  "certification_module_2_title": "습관 준수 코칭",
+  "certification_module_2_desc": "지속 가능한 습관 구축 기술 마스터",
+  "certification_module_3_title": "트렌드 신호 활용",
+  "certification_module_3_desc": "정보에 기반한 코칭을 위한 데이터 및 트렌드 시각화 이해",
+  "certification_module_4_title": "프라이버시 우선 코칭",
+  "certification_module_4_desc": "암호화 및 메타데이터 보호에 대해 학습",
+  "start_certification": "인증 시작",
+  "certification_time": "완료까지 약 1시간",
+  "certification_free": "모든 트레이너 무료"
 }

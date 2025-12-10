@@ -172,5 +172,24 @@
   "revoke_access": "Thu hồi quyền truy cập",
   "revoke_access_title": "Thu hồi quyền truy cập?",
   "revoke_access_desc": "{{name}} sẽ không còn có thể truy cập dữ liệu của bạn",
-  "access_revoked": "Đã thu hồi quyền truy cập"
+  "access_revoked": "Đã thu hồi quyền truy cập",
+
+  "certification_program": "Chương trình chứng nhận",
+  "certification_title": "Chứng nhận Huấn luyện viên/Coach Wellio",
+  "certification_subtitle": "Trở thành Huấn luyện viên được Wellio chứng nhận và tiếp cận các công cụ, khách hàng và cơ hội kiếm tiền độc quyền",
+  "certification_benefit_1": "Huy hiệu chính thức và đăng ký trong Danh bạ Wellio",
+  "certification_benefit_2": "Truy cập sớm vào phân tích cao cấp",
+  "certification_benefit_3": "Ghép nối khách hàng và công cụ tăng trưởng",
+  "certification_benefit_4": "6 tháng miễn phí Coach Pro",
+  "certification_module_1_title": "Chỉ số Sức khỏe Chức năng",
+  "certification_module_1_desc": "Học cách diễn giải và sử dụng FWI để hướng dẫn khách hàng",
+  "certification_module_2_title": "Coaching Tuân thủ Thói quen",
+  "certification_module_2_desc": "Thành thạo các kỹ thuật xây dựng thói quen bền vững",
+  "certification_module_3_title": "Sử dụng Tín hiệu Xu hướng",
+  "certification_module_3_desc": "Hiểu trực quan hóa dữ liệu và xu hướng để coaching có thông tin",
+  "certification_module_4_title": "Coaching Ưu tiên Quyền riêng tư",
+  "certification_module_4_desc": "Tìm hiểu về mã hóa và bảo vệ metadata của chúng tôi",
+  "start_certification": "Bắt đầu chứng nhận",
+  "certification_time": "~1 giờ để hoàn thành",
+  "certification_free": "Miễn phí cho tất cả huấn luyện viên"
 }

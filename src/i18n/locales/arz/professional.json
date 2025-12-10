@@ -172,5 +172,24 @@
   "revoke_access": "سحب الوصول",
   "revoke_access_title": "تسحب الوصول؟",
   "revoke_access_desc": "{{name}} مش هيقدر يوصل لبياناتك تاني",
-  "access_revoked": "الوصول اتسحب"
+  "access_revoked": "الوصول اتسحب",
+
+  "certification_program": "برنامج الاعتماد",
+  "certification_title": "اعتماد مدرب/كوتش Wellio",
+  "certification_subtitle": "بقى مدرب معتمد من Wellio واحصل على أدوات وعملاء وفرص كسب حصرية",
+  "certification_benefit_1": "بادج رسمي وإدراج في دليل Wellio",
+  "certification_benefit_2": "وصول مبكر للتحليلات البريميوم",
+  "certification_benefit_3": "مطابقة العملاء وأدوات النمو",
+  "certification_benefit_4": "6 شهور Coach Pro ببلاش",
+  "certification_module_1_title": "مؤشر العافية الوظيفي",
+  "certification_module_1_desc": "اتعلم ازاي تفسر وتستخدم FWI لتوجيه العملاء",
+  "certification_module_2_title": "تدريب الالتزام بالعادات",
+  "certification_module_2_desc": "اتقن تقنيات بناء عادات مستدامة",
+  "certification_module_3_title": "استخدام إشارات الاتجاهات",
+  "certification_module_3_desc": "افهم تصور البيانات والاتجاهات للتدريب المستنير",
+  "certification_module_4_title": "التدريب مع أولوية الخصوصية",
+  "certification_module_4_desc": "اتعرف على التشفير وحماية الميتاداتا بتاعنا",
+  "start_certification": "ابدأ الاعتماد",
+  "certification_time": "~ساعة للإكمال",
+  "certification_free": "ببلاش لكل المدربين"
 }

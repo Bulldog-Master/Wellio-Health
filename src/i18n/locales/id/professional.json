@@ -171,5 +171,24 @@
   "revoke_access_desc": "Apakah Anda yakin ingin mencabut akses untuk {{name}}?",
   "access_revoked": "Akses berhasil dicabut",
   "coach": "Pelatih",
-  "clinician": "Klinisi"
+  "clinician": "Klinisi",
+
+  "certification_program": "Program Sertifikasi",
+  "certification_title": "Sertifikasi Pelatih/Coach Wellio",
+  "certification_subtitle": "Jadilah Pelatih Bersertifikat Wellio dan dapatkan akses ke alat, klien, dan peluang penghasilan eksklusif",
+  "certification_benefit_1": "Lencana resmi dan listing di Direktori Wellio",
+  "certification_benefit_2": "Akses awal ke analitik premium",
+  "certification_benefit_3": "Pencocokan klien dan alat pertumbuhan",
+  "certification_benefit_4": "6 bulan gratis Coach Pro",
+  "certification_module_1_title": "Indeks Kesehatan Fungsional",
+  "certification_module_1_desc": "Pelajari cara menginterpretasikan dan menggunakan FWI untuk panduan klien",
+  "certification_module_2_title": "Coaching Kepatuhan Kebiasaan",
+  "certification_module_2_desc": "Kuasai teknik untuk membangun kebiasaan berkelanjutan",
+  "certification_module_3_title": "Menggunakan Sinyal Tren",
+  "certification_module_3_desc": "Pahami data dan visualisasi tren untuk coaching yang terinformasi",
+  "certification_module_4_title": "Coaching Privasi-Pertama",
+  "certification_module_4_desc": "Pelajari tentang enkripsi dan perlindungan metadata kami",
+  "start_certification": "Mulai Sertifikasi",
+  "certification_time": "~1 jam untuk menyelesaikan",
+  "certification_free": "Gratis untuk semua pelatih"
 }

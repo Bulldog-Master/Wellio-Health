@@ -203,5 +203,24 @@
   "professional_tools": "Профессиональные инструменты",
   "professional_tools_desc": "Как {{role}}, вы можете просматривать агрегированные функциональные тренды людей, которые подключаются к вам, через вашу панель управления. Защищённые сообщения маршрутизируются через cMix сети xx network для защиты метаданных.",
   "open_coach_dashboard": "Открыть панель тренера",
-  "open_clinician_dashboard": "Открыть панель врача"
+  "open_clinician_dashboard": "Открыть панель врача",
+
+  "certification_program": "Программа сертификации",
+  "certification_title": "Сертификация тренера/коуча Wellio",
+  "certification_subtitle": "Станьте сертифицированным тренером Wellio и получите доступ к эксклюзивным инструментам, клиентам и возможностям заработка",
+  "certification_benefit_1": "Официальный значок и место в каталоге Wellio",
+  "certification_benefit_2": "Ранний доступ к премиум аналитике",
+  "certification_benefit_3": "Подбор клиентов и инструменты роста",
+  "certification_benefit_4": "6 месяцев Coach Pro бесплатно",
+  "certification_module_1_title": "Функциональный индекс здоровья",
+  "certification_module_1_desc": "Научитесь интерпретировать и использовать FWI для руководства клиентами",
+  "certification_module_2_title": "Коучинг по соблюдению привычек",
+  "certification_module_2_desc": "Освойте техники для создания устойчивых привычек",
+  "certification_module_3_title": "Использование сигналов трендов",
+  "certification_module_3_desc": "Понимайте визуализацию данных и трендов для информированного коучинга",
+  "certification_module_4_title": "Коучинг с приоритетом конфиденциальности",
+  "certification_module_4_desc": "Узнайте о нашем шифровании и защите метаданных",
+  "start_certification": "Начать сертификацию",
+  "certification_time": "~1 час для завершения",
+  "certification_free": "Бесплатно для всех тренеров"
 }
