@@ -77,6 +77,39 @@ Created organized component directories with barrel exports:
 - `src/hooks/ui/` - UI utility hooks
 - `src/hooks/utils/` - General utility hooks
 
+#### Pages Organization (Domain Subdirectories)
+Pages organized into domain subdirectories with barrel exports:
+- `src/pages/admin/` - Admin dashboard pages
+- `src/pages/ai/` - AI-powered feature pages
+- `src/pages/challenges/` - Challenge and competition pages
+- `src/pages/community/` - Community feature pages
+- `src/pages/core/` - Core application pages (Index, Auth, Dashboard)
+- `src/pages/fitness/` - Fitness tracking pages
+- `src/pages/legal/` - Legal document pages
+- `src/pages/medical/` - Medical and health record pages
+- `src/pages/nutrition/` - Nutrition tracking pages
+- `src/pages/payments/` - Payment and subscription pages
+- `src/pages/professional/` - Professional portal pages
+- `src/pages/settings/` - User settings pages
+- `src/pages/social/` - Social networking pages
+
+#### Features Organization (8 Domains)
+Feature modules organized for specific functionality:
+- `src/features/care-team/` - Care team management
+- `src/features/clinician/` - Clinician dashboard features
+- `src/features/coach/` - Coach dashboard features
+- `src/features/pro/` - Professional billing, video sessions
+- `src/features/professional/` - Unified professional module
+- `src/features/secure-chat/` - E2E encrypted messaging
+- `src/features/today/` - Today dashboard and FWI engine
+- `src/features/video/` - Video session management
+
+#### Edge Functions Organization
+- `supabase/functions/_shared/types.ts` - Shared type definitions
+- `supabase/functions/_shared/rateLimit.ts` - Rate limiting utilities
+- `supabase/functions/_shared/index.ts` - Barrel export
+- 40+ domain-specific edge functions
+
 #### Type System Organization
 Consolidated scattered interfaces into domain-specific type files:
 - `src/types/fitness.types.ts`
@@ -89,10 +122,12 @@ Consolidated scattered interfaces into domain-specific type files:
 ### 🟢 Good Examples (Follow These Patterns)
 - `src/components/layout/` - Organized layout components with barrel exports
 - `src/components/common/` - Shared/reusable components
+- `src/features/pro/` - Feature module with hooks, components, utils
 - `src/types/*.types.ts` - Domain-specific type definitions
 - `src/hooks/subscription/useSubscription.ts` - Single responsibility hook
 - `src/components/cart/CartDrawer.tsx` - Focused component
 - `src/lib/encryption.ts` - Utility functions grouped logically
+- `supabase/functions/_shared/` - Shared edge function utilities
 
 ---
 
@@ -140,5 +175,5 @@ Run tests with: `npm test` or `npx vitest`
 
 ---
 
-*Last Updated: 2025-12-09*
-*Next Review: 2025-01-09*
+*Last Updated: 2025-12-10*
+*Next Review: 2025-01-10*
