@@ -98,3 +98,6 @@ verify_jwt = true
 
 [functions.create-pro-checkout]
 verify_jwt = true
+
+[functions.stripe-pro-webhook]
+verify_jwt = false

@@ -3284,6 +3284,51 @@ export type Database = {
           },
         ]
       }
+      professional_subscriptions: {
+        Row: {
+          cancel_at_period_end: boolean | null
+          created_at: string
+          current_period_end: string | null
+          current_period_start: string | null
+          id: string
+          professional_type: string
+          status: string
+          stripe_customer_id: string | null
+          stripe_subscription_id: string | null
+          tier: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cancel_at_period_end?: boolean | null
+          created_at?: string
+          current_period_end?: string | null
+          current_period_start?: string | null
+          id?: string
+          professional_type: string
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          tier: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cancel_at_period_end?: boolean | null
+          created_at?: string
+          current_period_end?: string | null
+          current_period_start?: string | null
+          id?: string
+          professional_type?: string
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          tier?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           age: number | null
@@ -5861,6 +5906,10 @@ export type Database = {
           sort_order: number
         }[]
       }
+      get_professional_tier: {
+        Args: { _professional_type: string; _user_id: string }
+        Returns: string
+      }
       get_profile_safe: {
         Args: { profile_user_id: string }
         Returns: {
@@ -5953,6 +6002,10 @@ export type Database = {
         Returns: boolean
       }
       has_active_vip: { Args: { _user_id: string }; Returns: boolean }
+      has_professional_subscription: {
+        Args: { _user_id: string }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
