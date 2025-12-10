@@ -11,6 +11,7 @@ import Weight from "@/pages/Weight";
 
 // Lazy loaded routes - Core
 const NotFound = lazy(() => import("@/pages/NotFound"));
+const Landing = lazy(() => import("@/pages/Landing"));
 const Dashboard = lazy(() => import("@/pages/Dashboard"));
 const Install = lazy(() => import("@/pages/Install"));
 const PWAFeatures = lazy(() => import("@/pages/PWAFeatures"));
@@ -160,6 +161,7 @@ const AdminPayments = lazy(() => import("@/pages/admin/AdminPayments"));
 export const AppRoutes = () => (
   <Routes>
     {/* Public Routes */}
+    <Route path="/landing" element={<RouteErrorBoundary><Landing /></RouteErrorBoundary>} />
     <Route path="/auth" element={<RouteErrorBoundary><Auth /></RouteErrorBoundary>} />
     <Route path="/install" element={<RouteErrorBoundary><Install /></RouteErrorBoundary>} />
     
