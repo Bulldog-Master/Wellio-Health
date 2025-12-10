@@ -5216,6 +5216,60 @@ export type Database = {
         }
         Relationships: []
       }
+      video_sessions: {
+        Row: {
+          client_id: string
+          created_at: string
+          ended_at: string | null
+          id: string
+          label: string | null
+          meeting_url: string
+          professional_id: string
+          role: string
+          started_at: string | null
+          status: string
+        }
+        Insert: {
+          client_id: string
+          created_at?: string
+          ended_at?: string | null
+          id?: string
+          label?: string | null
+          meeting_url: string
+          professional_id: string
+          role: string
+          started_at?: string | null
+          status: string
+        }
+        Update: {
+          client_id?: string
+          created_at?: string
+          ended_at?: string | null
+          id?: string
+          label?: string | null
+          meeting_url?: string
+          professional_id?: string
+          role?: string
+          started_at?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "video_sessions_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "video_sessions_professional_id_fkey"
+            columns: ["professional_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       vip_passes: {
         Row: {
           created_at: string | null
