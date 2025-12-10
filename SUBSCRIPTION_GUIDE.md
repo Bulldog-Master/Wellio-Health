@@ -149,8 +149,9 @@ VALUES ('pro', 'new_feature_name', 'true');
 3. **Customize pricing** - Adjust prices in Subscription.tsx if needed
 4. **When ready**: Enable Stripe and go live with payments
 
-## Support
+## See Also
 
-For questions about Stripe integration, refer to:
+- [Access Model](docs/ACCESS_MODEL.md) — Who sees what, role definitions
+- [Professional Economics](docs/PROFESSIONAL_ECONOMICS.md) — Incentive model for coaches and clinicians
 - [Lovable Stripe Documentation](https://docs.lovable.dev/integrations/stripe)
 - [Stripe Documentation](https://stripe.com/docs)

@@ -92,6 +92,7 @@ See [PROFESSIONAL_ECONOMICS.md](docs/PROFESSIONAL_ECONOMICS.md) for the full inc
 - Group challenges and leaderboards
 - Fundraising campaigns
 - Trainer/Coach and Practitioner portals
+- Live video sessions for remote coaching and consultations
 - E2E encrypted messaging with metadata protection
 
 ### 🤖 AI-Powered Features
