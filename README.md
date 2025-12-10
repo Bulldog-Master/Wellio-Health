@@ -55,6 +55,15 @@ Wellio Health is a privacy-first wellness platform designed for individuals seek
 - Global users needing multi-language support (23 languages)
 - Those seeking AI-powered fitness and nutrition insights
 
+### For Professionals (Coaches & Clinicians)
+
+- Build recurring revenue with privacy-preserving remote programs
+- Run live video sessions and asynchronous check-ins in one secure app
+- See adherence, trends, and alerts — never raw diaries or private messages
+- Offer branded programs while Wellio handles security, compliance, and storage
+
+See [PROFESSIONAL_ECONOMICS.md](docs/PROFESSIONAL_ECONOMICS.md) for the full incentive model.
+
 ## ✨ Key Features
 
 ### 🏋️ Fitness & Activity
@@ -299,6 +308,7 @@ Comprehensive documentation is available in the `/docs` directory. See [**docs/I
 |----------|-----------|
 | **Security** | [Security Audit](docs/SECURITY_AUDIT.md) · [Security FAQ](docs/SECURITY_FAQ.md) · [AI Privacy](docs/AI_PRIVACY.md) |
 | **Architecture** | [Architecture](docs/ARCHITECTURE.md) · [Domain Architecture](docs/DOMAIN_ARCHITECTURE.md) |
+| **Care Team & Professionals** | [Access Model](docs/ACCESS_MODEL.md) · [Professional Economics](docs/PROFESSIONAL_ECONOMICS.md) · [Subscription Guide](SUBSCRIPTION_GUIDE.md) |
 | **Launch** | [Launch Checklist](docs/LAUNCH_CHECKLIST.md) · [Testing Checklist](docs/TESTING_CHECKLIST.md) |
 | **Compliance** | [ISO Compliance](docs/ISO_COMPLIANCE.md) · [Accessibility](docs/ACCESSIBILITY.md) |
 | **i18n** | [Translation Guide](docs/TRANSLATION_GUIDE.md) · [Translation Audit](docs/TRANSLATION_AUDIT_FINAL.md) |
