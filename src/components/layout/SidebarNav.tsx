@@ -1,7 +1,7 @@
 import { 
-  Home, Utensils, Activity, Users, Settings, Sparkles, Heart, Crown, 
-  Newspaper, MapPin, Handshake, Leaf, ShoppingBag, Briefcase,
-  ChevronDown, Dumbbell, MoreHorizontal, Stethoscope
+  Home, Settings, ChevronDown, History, Users, Activity, Utensils, 
+  Crown, Stethoscope, Weight, Footprints, Target, Trophy, Calendar,
+  Camera, BarChart3, FileText, Dumbbell, Leaf, Brain
 } from "lucide-react";
 import { NavLink } from "./NavLink";
 import { cn } from "@/lib/utils";
@@ -26,33 +26,12 @@ const getCachedPremiumAccess = (): boolean => {
   }
 };
 
-interface NavGroup {
-  label: string;
-  icon: React.ElementType;
-  items: NavItem[];
-  defaultOpen?: boolean;
-}
-
-interface NavItem {
-  to: string;
-  icon: React.ElementType;
-  label: string;
-  color: string;
-  showBadge?: boolean;
-}
-
 const SidebarNav = () => {
   const { t } = useTranslation(['common', 'premium', 'clinician']);
-  const [showRewardsBadge, setShowRewardsBadge] = useState(false);
   const { hasFullAccess, tier } = useSubscription();
   const [hasPremiumAccess, setHasPremiumAccess] = useState(() => getCachedPremiumAccess());
   const [isClinicianOrPractitioner, setIsClinicianOrPractitioner] = useState(false);
-  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
-    fitness: true,
-    social: false,
-    discover: false,
-    more: false,
-  });
+  const [historyOpen, setHistoryOpen] = useState(false);
 
   useEffect(() => {
     const hookAccess = hasFullAccess || tier === 'pro' || tier === 'enterprise';
@@ -60,27 +39,8 @@ const SidebarNav = () => {
   }, [hasFullAccess, tier]);
 
   useEffect(() => {
-    checkRewardsStatus();
     checkClinicianRole();
   }, []);
-
-  const checkRewardsStatus = async () => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('referral_points')
-        .eq('id', user.id)
-        .single();
-      const lastChecked = localStorage.getItem('lastCheckedRewards');
-      const now = Date.now();
-      const daysSinceCheck = lastChecked ? (now - parseInt(lastChecked)) / (1000 * 60 * 60 * 24) : 999;
-      setShowRewardsBadge((profile?.referral_points || 0) > 0 || daysSinceCheck > 3);
-    } catch (error) {
-      console.error('Error checking rewards status:', error);
-    }
-  };
 
   const checkClinicianRole = async () => {
     try {
@@ -97,104 +57,101 @@ const SidebarNav = () => {
     }
   };
 
-  const toggleGroup = (key: string) => {
-    setOpenGroups(prev => ({ ...prev, [key]: !prev[key] }));
-  };
-
-  const navGroups: NavGroup[] = [
-    {
-      label: t('nav.fitness'),
-      icon: Dumbbell,
-      defaultOpen: true,
-      items: [
-        { to: "/", icon: Home, label: t('dashboard'), color: "text-primary" },
-        { to: "/activity", icon: Activity, label: t('nav.activity'), color: "text-emerald-500" },
-        { to: "/food", icon: Utensils, label: t('nav.food'), color: "text-orange-500" },
-        { to: "/recovery", icon: Leaf, label: t('nav.recovery'), color: "text-green-500" },
-      ]
-    },
-    {
-      label: t('nav.social'),
-      icon: Users,
-      items: [
-        { to: "/connect", icon: Users, label: t('nav.connect'), color: "text-blue-500" },
-        { to: "/fundraisers", icon: Heart, label: t('nav.fundraisers'), color: "text-pink-500" },
-      ]
-    },
-    {
-      label: t('nav.discover'),
-      icon: MapPin,
-      items: [
-        { to: "/locations", icon: MapPin, label: t('nav.wellness_directory'), color: "text-teal-500" },
-        { to: "/news", icon: Newspaper, label: t('nav.news'), color: "text-violet-500" },
-      ]
-    },
-    {
-      label: t('nav.more'),
-      icon: MoreHorizontal,
-      items: [
-        { to: "/professional", icon: Briefcase, label: t('nav.professional'), color: "text-indigo-500" },
-        { to: "/products", icon: ShoppingBag, label: t('nav.shop'), color: "text-amber-500" },
-        { to: "/sponsors", icon: Handshake, label: t('nav.sponsors'), color: "text-cyan-500" },
-        { to: "/settings", icon: Settings, label: t('settings'), color: "text-gray-500", showBadge: showRewardsBadge },
-      ]
-    }
+  // History sub-items
+  const historyItems = [
+    { to: "/activity", icon: Activity, label: t('nav.activity') },
+    { to: "/food", icon: Utensils, label: t('nav.food') },
+    { to: "/weight", icon: Weight, label: t('nav_history.weight') },
+    { to: "/step-count", icon: Footprints, label: t('nav_history.steps') },
+    { to: "/fitness-goals", icon: Target, label: t('nav_history.goals') },
+    { to: "/achievements", icon: Trophy, label: t('nav_history.achievements') },
+    { to: "/progress-photos", icon: Camera, label: t('nav_history.photos') },
+    { to: "/advanced-analytics", icon: BarChart3, label: t('nav_history.analytics') },
+    { to: "/weekly-progress", icon: FileText, label: t('nav_history.reports') },
+    { to: "/recovery", icon: Leaf, label: t('nav.recovery') },
   ];
 
   return (
     <nav className="flex-1 overflow-y-auto py-2" aria-label="Main navigation">
       <div className="space-y-1">
-        {navGroups.map((group, groupIndex) => (
-          <Collapsible
-            key={group.label}
-            open={openGroups[Object.keys(openGroups)[groupIndex]] ?? group.defaultOpen}
-            onOpenChange={() => toggleGroup(Object.keys(openGroups)[groupIndex])}
-          >
-            <CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-sidebar-accent/50 rounded-lg transition-colors">
-              <div className="flex items-center gap-2">
-                <group.icon className="h-4 w-4" />
-                <span>{group.label}</span>
-              </div>
-              <ChevronDown className={cn(
-                "h-4 w-4 transition-transform duration-200",
-                openGroups[Object.keys(openGroups)[groupIndex]] && "rotate-180"
-              )} />
-            </CollapsibleTrigger>
-            <CollapsibleContent className="space-y-1 pl-2">
-              {group.items.map(({ to, icon: Icon, label, color, showBadge }) => (
-                <NavLink
-                  key={to}
-                  to={to}
-                  className={cn(
-                    "group flex items-center gap-3 px-4 py-2.5 rounded-lg",
-                    "transition-all duration-200 hover:bg-sidebar-accent/50"
-                  )}
-                  activeClassName="bg-sidebar-accent font-medium"
-                >
-                  <div className="relative flex items-center justify-center">
-                    <Icon className={cn("h-5 w-5", color)} />
-                    {showBadge && (
-                      <div className="absolute -top-1 -right-1">
-                        <Sparkles className="w-3 h-3 text-primary animate-pulse" />
-                      </div>
-                    )}
-                  </div>
-                  <span className="text-sm text-muted-foreground group-hover:text-foreground">
-                    {label}
-                  </span>
-                </NavLink>
-              ))}
-            </CollapsibleContent>
-          </Collapsible>
-        ))}
+        {/* Today - Main Dashboard */}
+        <NavLink
+          to="/"
+          className={cn(
+            "group flex items-center gap-3 px-4 py-3 rounded-lg",
+            "transition-all duration-200 hover:bg-sidebar-accent/50"
+          )}
+          activeClassName="bg-sidebar-accent font-medium"
+        >
+          <Home className="h-5 w-5 text-primary" />
+          <span className="text-sm font-medium">{t('nav_main.today')}</span>
+        </NavLink>
 
-        {/* Clinician Dashboard */}
+        {/* History - Expandable Group */}
+        <Collapsible open={historyOpen} onOpenChange={setHistoryOpen}>
+          <CollapsibleTrigger className="flex w-full items-center justify-between px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-sidebar-accent/50 rounded-lg transition-colors">
+            <div className="flex items-center gap-3">
+              <History className="h-5 w-5 text-emerald-500" />
+              <span>{t('nav_main.history')}</span>
+            </div>
+            <ChevronDown className={cn(
+              "h-4 w-4 transition-transform duration-200",
+              historyOpen && "rotate-180"
+            )} />
+          </CollapsibleTrigger>
+          <CollapsibleContent className="space-y-1 pl-4 pt-1">
+            {historyItems.map(({ to, icon: Icon, label }) => (
+              <NavLink
+                key={to}
+                to={to}
+                className={cn(
+                  "group flex items-center gap-3 px-4 py-2 rounded-lg",
+                  "transition-all duration-200 hover:bg-sidebar-accent/50"
+                )}
+                activeClassName="bg-sidebar-accent font-medium"
+              >
+                <Icon className="h-4 w-4 text-muted-foreground" />
+                <span className="text-sm text-muted-foreground group-hover:text-foreground">
+                  {label}
+                </span>
+              </NavLink>
+            ))}
+          </CollapsibleContent>
+        </Collapsible>
+
+        {/* Care Team */}
+        <NavLink
+          to="/care-team"
+          className={cn(
+            "group flex items-center gap-3 px-4 py-3 rounded-lg",
+            "transition-all duration-200 hover:bg-sidebar-accent/50"
+          )}
+          activeClassName="bg-sidebar-accent font-medium"
+        >
+          <Users className="h-5 w-5 text-blue-500" />
+          <span className="text-sm font-medium">{t('nav_main.care_team')}</span>
+        </NavLink>
+
+        {/* Settings */}
+        <NavLink
+          to="/settings"
+          className={cn(
+            "group flex items-center gap-3 px-4 py-3 rounded-lg",
+            "transition-all duration-200 hover:bg-sidebar-accent/50"
+          )}
+          activeClassName="bg-sidebar-accent font-medium"
+        >
+          <Settings className="h-5 w-5 text-gray-500" />
+          <span className="text-sm font-medium">{t('settings')}</span>
+        </NavLink>
+
+        {/* Clinician Dashboard - Only for approved professionals */}
         {isClinicianOrPractitioner && (
-          <div className="pt-2">
+          <div className="pt-2 mt-2 border-t border-border">
             <NavLink
               to="/clinician"
               className={cn(
-                "group flex items-center gap-3 px-4 py-2.5 rounded-lg",
+                "group flex items-center gap-3 px-4 py-3 rounded-lg",
                 "transition-all duration-200 hover:bg-primary/10"
               )}
               activeClassName="bg-primary/20 font-medium"
@@ -207,13 +164,13 @@ const SidebarNav = () => {
           </div>
         )}
 
-        {/* Premium Hub */}
+        {/* Premium Hub - Only for premium users */}
         {hasPremiumAccess && (
-          <div className="pt-4 mt-4 border-t border-border">
+          <div className="pt-2 mt-2 border-t border-border">
             <NavLink
               to="/premium"
               className={cn(
-                "group flex items-center gap-3 px-4 py-2.5 rounded-lg",
+                "group flex items-center gap-3 px-4 py-3 rounded-lg",
                 "transition-all duration-200 hover:bg-primary/10"
               )}
               activeClassName="bg-primary/20 font-medium"

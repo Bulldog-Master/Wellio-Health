@@ -15,6 +15,31 @@
     "discover": "Discover",
     "more": "More"
   },
+  "nav_main": {
+    "today": "Today",
+    "history": "History",
+    "care_team": "Care Team"
+  },
+  "nav_history": {
+    "weight": "Weight",
+    "steps": "Steps",
+    "goals": "Goals",
+    "achievements": "Achievements",
+    "photos": "Progress Photos",
+    "analytics": "Analytics",
+    "reports": "Weekly Reports",
+    "hub_desc": "View your fitness history and progress",
+    "activity_desc": "Workouts, exercises, and activities",
+    "food_desc": "Meals, nutrition, and calories",
+    "weight_desc": "Body weight tracking over time",
+    "steps_desc": "Daily step count and trends",
+    "goals_desc": "Your fitness targets and milestones",
+    "achievements_desc": "Badges and accomplishments earned",
+    "photos_desc": "Visual progress over time",
+    "analytics_desc": "Deep insights into your data",
+    "reports_desc": "Weekly summaries and trends",
+    "recovery_desc": "Recovery sessions and therapy"
+  },
   "app_name": "Wellio",
   "loading": "Loading...",
   "save": "Save",

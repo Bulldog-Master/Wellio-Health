@@ -23,11 +23,22 @@ interface Professional {
 }
 
 interface CareTeamSectionProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  defaultOpen?: boolean;
 }
 
-export const CareTeamSection = ({ open, onOpenChange }: CareTeamSectionProps) => {
+export const CareTeamSection = ({ open: controlledOpen, onOpenChange, defaultOpen = false }: CareTeamSectionProps) => {
+  const [internalOpen, setInternalOpen] = useState(defaultOpen);
+  const isControlled = controlledOpen !== undefined;
+  const open = isControlled ? controlledOpen : internalOpen;
+  
+  const handleOpenChange = (newOpen: boolean) => {
+    if (!isControlled) {
+      setInternalOpen(newOpen);
+    }
+    onOpenChange?.(newOpen);
+  };
   const { t } = useTranslation(['professional', 'profile', 'common']);
   const [professionals, setProfessionals] = useState<Professional[]>([]);
   const [loading, setLoading] = useState(true);
@@ -126,7 +137,7 @@ export const CareTeamSection = ({ open, onOpenChange }: CareTeamSectionProps) =>
   const hasClinician = professionals.some(p => p.professional_type === 'clinician');
 
   return (
-    <Collapsible open={open} onOpenChange={onOpenChange}>
+    <Collapsible open={open} onOpenChange={handleOpenChange}>
       <Card>
         <CollapsibleTrigger asChild>
           <CardHeader className="cursor-pointer hover:bg-muted/50 transition-colors">
