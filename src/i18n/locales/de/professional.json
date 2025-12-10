@@ -183,6 +183,11 @@
 
   "my_care_team": "Mein Betreuungsteam",
   "my_care_team_desc": "Verwalten Sie Ihre verbundenen Coaches und Gesundheitsanbieter",
+  "my_coaches": "Meine Coaches",
+  "coaches_supporting_you": "Coaches, die Ihre Fitnessreise unterstützen",
+  "my_clinicians": "Meine Ärzte",
+  "clinicians_supporting_you": "Gesundheitsanbieter, die Ihr Wohlbefinden unterstützen",
+  "connect_professional_desc": "Verbinden Sie sich mit einem Coach oder Gesundheitsanbieter mit deren Einladungscode",
   "connected_professionals": "Verbundene Fachleute",
   "add_professional": "Fachmann Hinzufügen",
   "no_professionals_connected": "Sie haben sich noch nicht mit Fachleuten verbunden. Geben Sie einen Einladungscode ein, um zu beginnen.",
@@ -190,5 +195,10 @@
   "revoke_access": "Zugriff Widerrufen",
   "revoke_access_title": "Zugriff des Fachmanns Widerrufen",
   "revoke_access_desc": "Sind Sie sicher, dass Sie den Zugriff für {{name}} widerrufen möchten? Sie können Ihre Gesundheitsdaten nicht mehr einsehen.",
-  "access_revoked": "Zugriff erfolgreich widerrufen"
+  "access_revoked": "Zugriff erfolgreich widerrufen",
+
+  "invite_code_desc": "Teilen Sie diesen Code mit Kunden, um sich mit ihnen zu verbinden",
+  "times_used": "{{count}} mal verwendet",
+  "active": "Aktiv",
+  "inactive": "Inaktiv"
 }
