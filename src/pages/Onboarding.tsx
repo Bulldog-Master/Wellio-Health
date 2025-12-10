@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -15,8 +16,10 @@ import {
 
 const Onboarding = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation(['onboarding']);
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [useMetric, setUseMetric] = useState(false);
   
   const [formData, setFormData] = useState({
     full_name: "",
@@ -34,11 +37,27 @@ const Onboarding = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const convertToImperial = (value: number, type: 'height' | 'weight') => {
+    if (type === 'height') return value / 2.54; // cm to inches
+    return value * 2.20462; // kg to lbs
+  };
+
   const handleComplete = async () => {
     setLoading(true);
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("No user found");
+
+      // Convert values if metric was used
+      let height = parseFloat(formData.height);
+      let weight = parseFloat(formData.weight);
+      let targetWeight = parseFloat(formData.target_weight);
+
+      if (useMetric) {
+        height = convertToImperial(height, 'height');
+        weight = convertToImperial(weight, 'weight');
+        if (targetWeight) targetWeight = convertToImperial(targetWeight, 'weight');
+      }
 
       const { error } = await supabase
         .from("profiles")
@@ -48,15 +67,15 @@ const Onboarding = () => {
           username: formData.username,
           age: parseInt(formData.age),
           gender: formData.gender,
-          height: parseFloat(formData.height),
-          weight: parseFloat(formData.weight),
-          target_weight: parseFloat(formData.target_weight),
+          height: height,
+          weight: weight,
+          target_weight: targetWeight || null,
           goal: formData.goal,
           fitness_level: formData.fitness_level,
           onboarding_completed: true,
-          height_unit: "inches",
-          weight_unit: "lbs",
-          target_weight_unit: "lbs",
+          height_unit: useMetric ? "cm" : "inches",
+          weight_unit: useMetric ? "kg" : "lbs",
+          target_weight_unit: useMetric ? "kg" : "lbs",
         }, {
           onConflict: 'id'
         });
@@ -67,11 +86,11 @@ const Onboarding = () => {
         await Notification.requestPermission();
       }
 
-      toast.success("Welcome to your fitness journey!");
+      toast.success(t('welcome_message'));
       navigate("/");
     } catch (error: any) {
       console.error("Error completing onboarding:", error);
-      toast.error(error.message || "Failed to complete onboarding");
+      toast.error(error.message || t('failed_complete'));
     } finally {
       setLoading(false);
     }
@@ -79,11 +98,11 @@ const Onboarding = () => {
 
   const nextStep = () => {
     if (step === 1 && (!formData.full_name || !formData.username || !formData.age || !formData.gender)) {
-      toast.error("Please fill in all fields");
+      toast.error(t('fill_all_fields'));
       return;
     }
     if (step === 2 && (!formData.height || !formData.weight)) {
-      toast.error("Please fill in all fields");
+      toast.error(t('fill_all_fields'));
       return;
     }
     if (step < 5) setStep(step + 1);
@@ -109,13 +128,13 @@ const Onboarding = () => {
             ))}
           </div>
           <p className="text-sm text-muted-foreground text-center">
-            Step {step} of 5
+            {t('step_of', { current: step, total: 5 })}
           </p>
         </div>
 
         {step === 1 && <OnboardingStep1 formData={formData} updateField={updateField} />}
-        {step === 2 && <OnboardingStep2 formData={formData} updateField={updateField} />}
-        {step === 3 && <OnboardingStep3 formData={formData} updateField={updateField} />}
+        {step === 2 && <OnboardingStep2 formData={formData} updateField={updateField} useMetric={useMetric} setUseMetric={setUseMetric} />}
+        {step === 3 && <OnboardingStep3 formData={formData} updateField={updateField} useMetric={useMetric} />}
         {step === 4 && <OnboardingStep4 />}
         {step === 5 && <OnboardingStep5 />}
 
@@ -124,18 +143,18 @@ const Onboarding = () => {
           {step > 1 && (
             <Button variant="outline" onClick={prevStep}>
               <ChevronLeft className="w-4 h-4 mr-2" />
-              Back
+              {t('back')}
             </Button>
           )}
           
           {step < 5 ? (
             <Button onClick={nextStep} className="ml-auto">
-              Next
+              {t('next')}
               <ChevronRight className="w-4 h-4 ml-2" />
             </Button>
           ) : (
             <Button onClick={handleComplete} disabled={loading} className="ml-auto">
-              {loading ? "Completing..." : "Get Started!"}
+              {loading ? t('completing') : t('get_started')}
             </Button>
           )}
         </div>
