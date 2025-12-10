@@ -64,4 +64,29 @@ You get **decision-ready insights** — not personal diaries.
 
 ---
 
+## 🔗 xx Foundation / Investor Narrative
+
+### Why Wellio Is a Fit for xx.network
+
+Healthcare and fitness platforms today require users to surrender identity, metadata, and personal logs to participate. This creates compliance exposure for practitioners and destroys user trust.
+
+Wellio is the first wellness system designed with **zero-knowledge participation**:
+
+- Behavior stays local
+- AI runs on the user's device
+- Messaging is encrypted end-to-end
+- Metadata disappears through cMix
+
+Instead of storing PHI, Wellio computes **derived functional signals** — clinically useful without regulatory gravity.
+
+This unlocks a new category:
+
+**A decentralized, quantum-private performance network** connecting individuals, coaches, and clinicians without exposing identity or data trails.
+
+xx.network provides the routing layer Wellio needs to prove:
+
+**Health data can be useful without being dangerous.**
+
+---
+
 *Last updated: December 2024*
