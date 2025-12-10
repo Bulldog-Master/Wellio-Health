@@ -1,7 +1,7 @@
 // ========================================
 // WELLIO HEALTH - CLINICIAN DASHBOARD FEATURE
 // Functional trend view for physicians/clinicians
-// Reuses daily_scores, no PHI exposed
+// Dark B+ Theme with FWI gauges and trend lines
 // ========================================
 
 import { useQuery } from "@tanstack/react-query";
@@ -9,16 +9,35 @@ import { supabase } from "@/integrations/supabase/client";
 import { useMemo, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { VideoSessionsPanel } from "@/features/pro";
+import { 
+  TrendingUp, 
+  TrendingDown, 
+  Minus, 
+  AlertTriangle, 
+  Eye, 
+  MessageSquare,
+  Lock,
+  Video,
+  Activity,
+  Utensils,
+  Droplets,
+  Moon,
+  Smile,
+  Shield
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 // ---------- TYPES ------------------------
 
 export interface ClinicianPatientSummary {
   patientId: string;
   patientName: string | null;
-  lastIndex: number | null;   // last functional wellness index
-  avg14: number | null;       // 14-day average
+  lastIndex: number | null;
+  avg14: number | null;
   trend14: "improving" | "declining" | "stable" | "unknown";
-  adherenceScore: number | null; // 0-100, derived from behavior components
+  adherenceScore: number | null;
   riskFlag: "none" | "watch" | "alert";
 }
 
@@ -32,6 +51,7 @@ export interface ClinicianPatientDetail {
   avgSleep: number;
   avgMood: number;
   riskNarrative: string;
+  trend14: "improving" | "declining" | "stable" | "unknown";
 }
 
 // ---------- HELPER: USER HOOK ------------
@@ -58,26 +78,109 @@ function evaluateRiskFlag(opts: {
   trend14: ClinicianPatientSummary["trend14"];
 }): "none" | "watch" | "alert" {
   const { lastIndex, avg14, trend14 } = opts;
-
   if (lastIndex === null || avg14 === null) return "none";
-
-  // Example thresholds – you can tune these
   if (lastIndex < 40 && trend14 === "declining") return "alert";
   if (lastIndex < 50 || (trend14 === "declining" && avg14 < 60)) return "watch";
   return "none";
 }
 
-function describeTrend(trend: ClinicianPatientSummary["trend14"]) {
-  switch (trend) {
-    case "improving":
-      return "Functional index has been improving over the last 14 days.";
-    case "declining":
-      return "Functional index has been declining over the last 14 days.";
-    case "stable":
-      return "Functional index has remained relatively stable.";
-    default:
-      return "Insufficient data to determine a clear trend.";
-  }
+// ---------- FWI GAUGE COMPONENT ----------
+
+function FWIGauge({ value, size = "md" }: { value: number | null; size?: "sm" | "md" | "lg" }) {
+  const sizeClasses = {
+    sm: "w-12 h-12",
+    md: "w-20 h-20",
+    lg: "w-28 h-28"
+  };
+  
+  const textClasses = {
+    sm: "text-xs",
+    md: "text-lg",
+    lg: "text-2xl"
+  };
+
+  const strokeWidth = size === "sm" ? 3 : size === "md" ? 4 : 5;
+  const displayValue = value ?? 0;
+  const circumference = 2 * Math.PI * 40;
+  const offset = circumference - (displayValue / 100) * circumference;
+  
+  // Color based on value
+  const getColor = () => {
+    if (value === null) return "hsl(var(--muted-foreground))";
+    if (value >= 70) return "hsl(var(--primary))";
+    if (value >= 50) return "hsl(142 76% 36%)"; // green
+    if (value >= 30) return "hsl(45 93% 47%)"; // amber
+    return "hsl(0 84% 60%)"; // red
+  };
+
+  return (
+    <div className={cn("relative", sizeClasses[size])}>
+      <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+        {/* Background circle */}
+        <circle
+          cx="50"
+          cy="50"
+          r="40"
+          fill="none"
+          stroke="hsl(var(--muted))"
+          strokeWidth={strokeWidth}
+        />
+        {/* Progress circle */}
+        <circle
+          cx="50"
+          cy="50"
+          r="40"
+          fill="none"
+          stroke={getColor()}
+          strokeWidth={strokeWidth}
+          strokeDasharray={circumference}
+          strokeDashoffset={offset}
+          strokeLinecap="round"
+          className="transition-all duration-500 ease-out"
+        />
+      </svg>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className={cn("font-bold", textClasses[size])}>
+          {value !== null ? value : "—"}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+// ---------- MINI TREND LINE COMPONENT ----
+
+function MiniTrendLine({ data, className }: { data: number[]; className?: string }) {
+  if (data.length === 0) return null;
+  
+  const max = Math.max(...data, 100);
+  const min = Math.min(...data, 0);
+  const range = max - min || 1;
+  
+  const points = data.map((value, index) => {
+    const x = (index / (data.length - 1 || 1)) * 100;
+    const y = 100 - ((value - min) / range) * 100;
+    return `${x},${y}`;
+  }).join(" ");
+
+  return (
+    <svg className={cn("w-full h-8", className)} viewBox="0 0 100 100" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="trendGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="hsl(180 100% 50%)" stopOpacity="0.8" />
+        </linearGradient>
+      </defs>
+      <polyline
+        points={points}
+        fill="none"
+        stroke="url(#trendGradient)"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
 }
 
 // ---------- HOOK: PATIENT LIST -----------
@@ -91,8 +194,6 @@ function useClinicianPatients() {
     queryFn: async (): Promise<ClinicianPatientSummary[]> => {
       if (!user?.id) return [];
 
-      // 1) which patients are mapped to this clinician?
-      // NOTE: clinician_patients table needs to be created via migration
       const { data: relationships, error: relError } = await (supabase
         .from("clinician_patients" as any)
         .select("patient_id, status, profiles!clinician_patients_patient_id_fkey(full_name)")
@@ -111,7 +212,6 @@ function useClinicianPatients() {
 
       const patientIds = patients.map((p) => p.id);
 
-      // 2) pull last 14 days of daily_scores for all patients
       const today = new Date();
       const from = new Date(today);
       from.setDate(today.getDate() - 13);
@@ -147,7 +247,6 @@ function useClinicianPatients() {
           continue;
         }
 
-        // sort by date ascending
         patientScores.sort((a, b) => (a.date < b.date ? -1 : 1));
         const last = patientScores[patientScores.length - 1];
         const lastIndex = last.score ?? null;
@@ -167,43 +266,21 @@ function useClinicianPatients() {
           trend14 = "unknown";
         }
 
-        // adherenceScore: derived from behavioral components
         const denom = Math.max(patientScores.length, 1);
         const avgWorkout =
-          patientScores.reduce(
-            (sum, s) => sum + (s.workout_completion ?? 0),
-            0
-          ) / denom;
+          patientScores.reduce((sum, s) => sum + (s.workout_completion ?? 0), 0) / denom;
         const avgMeals =
-          patientScores.reduce(
-            (sum, s) => sum + (s.meals_completion ?? 0),
-            0
-          ) / denom;
+          patientScores.reduce((sum, s) => sum + (s.meals_completion ?? 0), 0) / denom;
         const avgHydration =
-          patientScores.reduce(
-            (sum, s) => sum + (s.hydration_completion ?? 0),
-            0
-          ) / denom;
+          patientScores.reduce((sum, s) => sum + (s.hydration_completion ?? 0), 0) / denom;
         const avgSleep =
-          patientScores.reduce(
-            (sum, s) => sum + (s.sleep_completion ?? 0),
-            0
-          ) / denom;
+          patientScores.reduce((sum, s) => sum + (s.sleep_completion ?? 0), 0) / denom;
 
-        // simple adherence composite (0–100)
         const adherenceScore = Math.round(
-          (avgWorkout * 0.4 +
-            avgMeals * 0.25 +
-            avgHydration * 0.2 +
-            avgSleep * 0.15) *
-            100
+          (avgWorkout * 0.4 + avgMeals * 0.25 + avgHydration * 0.2 + avgSleep * 0.15) * 100
         );
 
-        const riskFlag = evaluateRiskFlag({
-          lastIndex,
-          avg14,
-          trend14,
-        });
+        const riskFlag = evaluateRiskFlag({ lastIndex, avg14, trend14 });
 
         byPatient.set(p.id, {
           patientId: p.id,
@@ -232,8 +309,6 @@ function useClinicianPatientDetail(patientId: string) {
     queryFn: async (): Promise<ClinicianPatientDetail> => {
       if (!user?.id) throw new Error("Not authenticated");
 
-      // 1) ensure clinician-patient relationship
-      // NOTE: clinician_patients table needs to be created via migration
       const { data: rel, error: relError } = await (supabase
         .from("clinician_patients" as any)
         .select("profiles!clinician_patients_patient_id_fkey(full_name)")
@@ -247,7 +322,6 @@ function useClinicianPatientDetail(patientId: string) {
 
       const patientName = (rel as any).profiles?.full_name ?? null;
 
-      // 2) fetch last 30 days of daily_scores
       const today = new Date();
       const from = new Date(today);
       from.setDate(today.getDate() - 29);
@@ -266,36 +340,16 @@ function useClinicianPatientDetail(patientId: string) {
 
       if (scoresError) throw scoresError;
 
-      const sorted = (scores ?? []).sort((a, b) =>
-        a.date < b.date ? -1 : 1
-      );
-
-      const indices = sorted.map((s) => ({
-        date: s.date,
-        value: s.score,
-      }));
+      const sorted = (scores ?? []).sort((a, b) => (a.date < b.date ? -1 : 1));
+      const indices = sorted.map((s) => ({ date: s.date, value: s.score }));
 
       const denom = Math.max(sorted.length, 1);
-      const avgWorkout =
-        sorted.reduce((sum, s) => sum + (s.workout_completion ?? 0), 0) /
-        denom;
-      const avgMeals =
-        sorted.reduce((sum, s) => sum + (s.meals_completion ?? 0), 0) /
-        denom;
-      const avgHydration =
-        sorted.reduce(
-          (sum, s) => sum + (s.hydration_completion ?? 0),
-          0
-        ) / denom;
-      const avgSleep =
-        sorted.reduce(
-          (sum, s) => sum + (s.sleep_completion ?? 0),
-          0
-        ) / denom;
-      const avgMood =
-        sorted.reduce((sum, s) => sum + (s.mood_score ?? 0), 0) / denom;
+      const avgWorkout = sorted.reduce((sum, s) => sum + (s.workout_completion ?? 0), 0) / denom;
+      const avgMeals = sorted.reduce((sum, s) => sum + (s.meals_completion ?? 0), 0) / denom;
+      const avgHydration = sorted.reduce((sum, s) => sum + (s.hydration_completion ?? 0), 0) / denom;
+      const avgSleep = sorted.reduce((sum, s) => sum + (s.sleep_completion ?? 0), 0) / denom;
+      const avgMood = sorted.reduce((sum, s) => sum + (s.mood_score ?? 0), 0) / denom;
 
-      // simple narrative based on trend
       let trend14: ClinicianPatientSummary["trend14"] = "unknown";
       if (sorted.length >= 2) {
         const first = sorted[0];
@@ -306,7 +360,13 @@ function useClinicianPatientDetail(patientId: string) {
         else trend14 = "stable";
       }
 
-      const riskNarrative = describeTrend(trend14);
+      const riskNarrative = trend14 === "improving" 
+        ? "trend_improving" 
+        : trend14 === "declining" 
+        ? "trend_declining" 
+        : trend14 === "stable" 
+        ? "trend_stable" 
+        : "trend_unknown";
 
       return {
         patientId,
@@ -318,19 +378,99 @@ function useClinicianPatientDetail(patientId: string) {
         avgSleep,
         avgMood,
         riskNarrative,
+        trend14,
       };
     },
   });
 }
 
+// ---------- UI: PATIENT CARD -------------
+
+function PatientCard({ 
+  patient, 
+  isSelected, 
+  onClick 
+}: { 
+  patient: ClinicianPatientSummary; 
+  isSelected: boolean;
+  onClick: () => void;
+}) {
+  const { t } = useTranslation(['clinician']);
+
+  const TrendIcon = patient.trend14 === "improving" 
+    ? TrendingUp 
+    : patient.trend14 === "declining" 
+    ? TrendingDown 
+    : Minus;
+
+  const trendColor = patient.trend14 === "improving" 
+    ? "text-green-500" 
+    : patient.trend14 === "declining" 
+    ? "text-red-500" 
+    : "text-muted-foreground";
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "w-full rounded-xl border bg-card/50 backdrop-blur-sm p-4 text-left transition-all hover:bg-accent/20",
+        "hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5",
+        isSelected && "border-primary bg-primary/5 shadow-lg shadow-primary/10"
+      )}
+    >
+      <div className="flex items-start gap-4">
+        {/* FWI Gauge */}
+        <FWIGauge value={patient.lastIndex} size="sm" />
+        
+        {/* Patient Info */}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2">
+            <p className="font-semibold truncate">
+              {patient.patientName ?? t('clinician:unnamed_patient')}
+            </p>
+            {patient.riskFlag === "alert" && (
+              <Badge variant="destructive" className="text-[10px] px-1.5 py-0">
+                <AlertTriangle className="w-3 h-3 mr-1" />
+                {t('clinician:high_risk')}
+              </Badge>
+            )}
+            {patient.riskFlag === "watch" && (
+              <Badge variant="secondary" className="text-[10px] px-1.5 py-0 bg-amber-500/20 text-amber-500">
+                <Eye className="w-3 h-3 mr-1" />
+                {t('clinician:watch')}
+              </Badge>
+            )}
+          </div>
+          
+          <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
+            <span>{t('clinician:functional_index')}: {patient.lastIndex ?? "—"}</span>
+            <span>•</span>
+            <span>{t('clinician:day_avg')}: {patient.avg14 ?? "—"}</span>
+          </div>
+
+          {/* Mini trend line placeholder */}
+          <div className="mt-2 flex items-center gap-2">
+            <TrendIcon className={cn("w-4 h-4", trendColor)} />
+            <span className={cn("text-xs", trendColor)}>
+              {t(`clinician:${patient.trend14}`)}
+            </span>
+            <span className="text-xs text-muted-foreground ml-auto">
+              {t('clinician:adherence')}: {patient.adherenceScore ?? "—"}%
+            </span>
+          </div>
+        </div>
+      </div>
+    </button>
+  );
+}
+
 // ---------- UI: MAIN DASHBOARD ------------
 
 export function ClinicianDashboardScreen() {
-  const { t } = useTranslation(['professional', 'live']);
+  const { t } = useTranslation(['clinician', 'professional', 'live']);
   const { data, isLoading } = useClinicianPatients();
-  const [selectedPatientId, setSelectedPatientId] = useState<string | null>(
-    null
-  );
+  const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
 
   const selectedPatient = useMemo(
     () => data?.find((p) => p.patientId === selectedPatientId),
@@ -338,78 +478,59 @@ export function ClinicianDashboardScreen() {
   );
 
   return (
-    <div className="p-4 space-y-4">
+    <div className="space-y-6">
+      {/* Video Sessions Panel */}
       <VideoSessionsPanel />
-      <div className="flex flex-col md:flex-row gap-4">
-        <div className="md:w-1/2 space-y-2">
-          <h1 className="text-lg font-semibold">{t('professional:patients', 'Patients')}</h1>
-        {isLoading && (
-          <p className="text-sm text-muted-foreground">
-            Loading patient overview…
-          </p>
-        )}
-        {!isLoading && (!data || data.length === 0) && (
-          <p className="text-sm text-muted-foreground">
-            No active patients yet. Share your clinician link or code to
-            connect.
-          </p>
-        )}
+      
+      <div className="flex flex-col lg:flex-row gap-6">
+        {/* Patients Grid */}
+        <div className="lg:w-1/2 space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-semibold">{t('clinician:patients')}</h2>
+            {data && data.length > 0 && (
+              <Badge variant="outline" className="text-xs">
+                {data.length} {t('clinician:patients').toLowerCase()}
+              </Badge>
+            )}
+          </div>
 
-        <div className="space-y-2">
-          {data?.map((p) => (
-            <button
-              key={p.patientId}
-              type="button"
-              onClick={() => setSelectedPatientId(p.patientId)}
-              className={`w-full flex items-center justify-between rounded-lg border px-3 py-2 text-left hover:bg-accent/40 ${
-                selectedPatientId === p.patientId ? "border-primary" : ""
-              }`}
-            >
-              <div>
-                <p className="text-sm font-medium">
-                  {p.patientName ?? "Unnamed patient"}
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  Functional index:{" "}
-                  {p.lastIndex !== null
-                    ? `${p.lastIndex}/100`
-                    : "No recent data"}
-                  {" • "}
-                  14-day avg:{" "}
-                  {p.avg14 !== null ? `${p.avg14}/100` : "—"}
-                </p>
-              </div>
-              <div className="text-right text-[11px] text-muted-foreground">
-                <p>
-                  Trend:{" "}
-                  {p.trend14 === "improving"
-                    ? "Improving"
-                    : p.trend14 === "declining"
-                    ? "Declining"
-                    : p.trend14 === "stable"
-                    ? "Stable"
-                    : "Unknown"}
-                </p>
-                <p>Adherence: {p.adherenceScore ?? "—"}/100</p>
-                {p.riskFlag === "alert" && (
-                  <p className="text-red-600 mt-1">⚠ High risk</p>
-                )}
-                {p.riskFlag === "watch" && (
-                  <p className="text-amber-600 mt-1">Watch</p>
-                )}
-              </div>
-            </button>
-          ))}
+          {isLoading && (
+            <div className="flex items-center gap-2 text-sm text-muted-foreground py-8">
+              <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+              {t('clinician:loading_patients')}
+            </div>
+          )}
+
+          {!isLoading && (!data || data.length === 0) && (
+            <div className="rounded-xl border border-dashed bg-muted/20 p-8 text-center">
+              <p className="text-sm text-muted-foreground">
+                {t('clinician:no_patients')}
+              </p>
+            </div>
+          )}
+
+          <div className="grid gap-3">
+            {data?.map((p) => (
+              <PatientCard
+                key={p.patientId}
+                patient={p}
+                isSelected={selectedPatientId === p.patientId}
+                onClick={() => setSelectedPatientId(p.patientId)}
+              />
+            ))}
+          </div>
         </div>
-      </div>
 
-        <div className="md:w-1/2 space-y-3">
+        {/* Patient Detail Panel */}
+        <div className="lg:w-1/2">
           {selectedPatient ? (
             <ClinicianPatientDetailPanel patient={selectedPatient} />
           ) : (
-            <p className="text-sm text-muted-foreground mt-6 md:mt-0">
-              {t('professional:select_patient', 'Select a patient to view their functional trend summary.')}
-            </p>
+            <div className="rounded-xl border border-dashed bg-muted/20 p-8 text-center h-full flex items-center justify-center">
+              <p className="text-sm text-muted-foreground">
+                {t('clinician:select_patient')}
+              </p>
+            </div>
           )}
         </div>
       </div>
@@ -419,114 +540,166 @@ export function ClinicianDashboardScreen() {
 
 // ---------- UI: PATIENT DETAIL PANEL ------
 
-function ClinicianPatientDetailPanel({
-  patient,
-}: {
-  patient: ClinicianPatientSummary;
-}) {
+function ClinicianPatientDetailPanel({ patient }: { patient: ClinicianPatientSummary }) {
+  const { t } = useTranslation(['clinician']);
   const { data, isLoading } = useClinicianPatientDetail(patient.patientId);
 
   if (isLoading || !data) {
     return (
-      <div className="rounded-xl border bg-background p-4">
-        <p className="text-sm text-muted-foreground">
-          Loading patient details…
-        </p>
+      <div className="rounded-xl border bg-card/50 backdrop-blur-sm p-6">
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+          {t('clinician:loading_details')}
+        </div>
       </div>
     );
   }
 
   const fmtPct = (v: number) => `${Math.round(v * 100)}%`;
+  const trendData = data.indices.map(i => i.value);
 
   return (
-    <div className="rounded-xl border bg-background p-4 space-y-3">
-      <div className="flex items-baseline justify-between gap-2">
+    <div className="rounded-xl border bg-card/50 backdrop-blur-sm p-6 space-y-6">
+      {/* Header */}
+      <div className="flex items-start justify-between">
         <div>
-          <p className="text-xs uppercase text-muted-foreground">
-            Functional overview
+          <p className="text-xs uppercase text-muted-foreground tracking-wider">
+            {t('clinician:functional_overview')}
           </p>
-          <p className="text-lg font-semibold">
-            {data.patientName ?? "Unnamed patient"}
+          <p className="text-xl font-bold mt-1">
+            {data.patientName ?? t('clinician:unnamed_patient')}
           </p>
         </div>
-        <div className="text-xs text-muted-foreground text-right">
-          <p>Last 30 days</p>
+        <div className="flex gap-2">
+          <Button size="sm" variant="outline" className="gap-2">
+            <MessageSquare className="w-4 h-4" />
+            <Lock className="w-3 h-3" />
+          </Button>
+          <Button size="sm" variant="outline">
+            <Video className="w-4 h-4" />
+          </Button>
         </div>
       </div>
 
-      {/* Functional index trend */}
-      <div className="space-y-1">
-        <p className="text-xs font-medium text-muted-foreground">
-          Functional wellness index (30-day trend)
+      {/* Large FWI Gauge */}
+      <div className="flex items-center gap-6">
+        <FWIGauge value={patient.lastIndex} size="lg" />
+        <div className="flex-1 space-y-2">
+          <p className="text-xs font-medium text-muted-foreground">
+            {t('clinician:functional_wellness_index')}
+          </p>
+          <MiniTrendLine data={trendData} />
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <span>{t('clinician:last_30_days')}</span>
+            <span>•</span>
+            <span className={cn(
+              data.trend14 === "improving" && "text-green-500",
+              data.trend14 === "declining" && "text-red-500"
+            )}>
+              {t(`clinician:${data.trend14}`)}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Adherence Model Grid */}
+      <div className="space-y-3">
+        <p className="text-xs uppercase text-muted-foreground tracking-wider">
+          {t('clinician:adherence')}
         </p>
-        <div className="flex items-end gap-1 h-16">
-          {data.indices.map((idx) => {
-            const height = (idx.value / 100) * 100;
-            return (
-              <div
-                key={idx.date}
-                className="flex-1 bg-primary/70 rounded-t"
-                style={{ height: `${height || 4}%` }}
-                title={`${idx.date}: ${idx.value}`}
-              />
-            );
-          })}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <AdherenceCard 
+            icon={Activity} 
+            label={t('clinician:activity_adherence')} 
+            value={fmtPct(data.avgWorkout)}
+            progress={data.avgWorkout}
+          />
+          <AdherenceCard 
+            icon={Utensils} 
+            label={t('clinician:nutrition_logging')} 
+            value={fmtPct(data.avgMeals)}
+            progress={data.avgMeals}
+          />
+          <AdherenceCard 
+            icon={Droplets} 
+            label={t('clinician:hydration_sufficiency')} 
+            value={fmtPct(data.avgHydration)}
+            progress={data.avgHydration}
+          />
+          <AdherenceCard 
+            icon={Moon} 
+            label={t('clinician:sleep_vs_goal')} 
+            value={fmtPct(data.avgSleep)}
+            progress={data.avgSleep}
+          />
+          <AdherenceCard 
+            icon={Smile} 
+            label={t('clinician:reported_mood')} 
+            value={fmtPct(data.avgMood)}
+            progress={data.avgMood}
+          />
         </div>
       </div>
 
-      {/* Behavior averages */}
-      <div className="grid grid-cols-2 gap-2 text-xs">
-        <MetricCard
-          label="Activity adherence"
-          value={fmtPct(data.avgWorkout)}
-        />
-        <MetricCard
-          label="Nutrition logging"
-          value={fmtPct(data.avgMeals)}
-        />
-        <MetricCard
-          label="Hydration sufficiency"
-          value={fmtPct(data.avgHydration)}
-        />
-        <MetricCard
-          label="Sleep vs goal"
-          value={fmtPct(data.avgSleep)}
-        />
-        <MetricCard
-          label="Reported energy/mood"
-          value={fmtPct(data.avgMood)}
-        />
+      {/* Automated Summary */}
+      <div className="rounded-lg border bg-gradient-to-br from-primary/5 to-transparent p-4 space-y-2">
+        <p className="text-xs uppercase text-muted-foreground tracking-wider">
+          {t('clinician:automated_summary')}
+        </p>
+        <p className="text-sm">{t(`clinician:${data.riskNarrative}`)}</p>
       </div>
 
-      {/* Narrative & secure notes placeholder */}
-      <div className="space-y-2">
-        <div className="rounded-lg border bg-muted/40 p-3">
-          <p className="text-xs uppercase text-muted-foreground">
-            Automated summary
+      {/* Secure Notes Placeholder */}
+      <div className="rounded-lg border bg-muted/20 p-4 space-y-2">
+        <div className="flex items-center gap-2">
+          <Shield className="w-4 h-4 text-primary" />
+          <p className="text-xs uppercase text-muted-foreground tracking-wider">
+            {t('clinician:secure_notes')}
           </p>
-          <p className="text-xs mt-1">{data.riskNarrative}</p>
+          <Badge variant="outline" className="text-[10px] ml-auto">
+            PQ + cMixx
+          </Badge>
         </div>
-
-        <div className="rounded-lg border bg-muted/40 p-3">
-          <p className="text-xs uppercase text-muted-foreground">
-            Secure notes (cMixx / quantum-ready)
-          </p>
-          <p className="text-xs text-muted-foreground mt-1">
-            This area will display encrypted notes and communication,
-            routed via xx network&apos;s cMixx for metadata protection.
-            No raw logs or documents are shown here.
-          </p>
-        </div>
+        <p className="text-xs text-muted-foreground">
+          {t('clinician:coming_soon')}
+        </p>
       </div>
     </div>
   );
 }
 
-function MetricCard({ label, value }: { label: string; value: string }) {
+// ---------- ADHERENCE CARD COMPONENT ------
+
+function AdherenceCard({ 
+  icon: Icon, 
+  label, 
+  value,
+  progress 
+}: { 
+  icon: React.ElementType; 
+  label: string; 
+  value: string;
+  progress: number;
+}) {
+  const progressColor = progress >= 0.7 
+    ? "bg-green-500" 
+    : progress >= 0.4 
+    ? "bg-amber-500" 
+    : "bg-red-500";
+
   return (
-    <div className="rounded-lg border bg-card px-2 py-2 space-y-1">
-      <p className="text-[11px] text-muted-foreground">{label}</p>
-      <p className="text-sm font-medium">{value}</p>
+    <div className="rounded-lg border bg-card/50 p-3 space-y-2">
+      <div className="flex items-center gap-2">
+        <Icon className="w-4 h-4 text-muted-foreground" />
+        <p className="text-[11px] text-muted-foreground truncate">{label}</p>
+      </div>
+      <p className="text-lg font-semibold">{value}</p>
+      <div className="h-1 bg-muted rounded-full overflow-hidden">
+        <div 
+          className={cn("h-full rounded-full transition-all", progressColor)}
+          style={{ width: `${Math.min(progress * 100, 100)}%` }}
+        />
+      </div>
     </div>
   );
 }
