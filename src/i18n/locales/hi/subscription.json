@@ -20,5 +20,18 @@
   "vip_access": "VIP एक्सेस",
   "admin_access": "एडमिन एक्सेस",
   "full_features_unlocked": "सभी फीचर अनलॉक",
-  "subscribe_now": "अभी सब्सक्राइब करें"
+  "subscribe_now": "अभी सब्सक्राइब करें",
+  "coach_free": "कोच मुफ्त",
+  "coach_pro": "कोच प्रो",
+  "coach_team": "कोच टीम",
+  "clinician_individual": "क्लिनिशियन व्यक्तिगत",
+  "clinician_practice": "समूह अभ्यास",
+  "clinician_enterprise": "एंटरप्राइज",
+  "upgrade_to_coach_pro": "कोच प्रो में अपग्रेड करें",
+  "upgrade_to_coach_team": "कोच टीम में अपग्रेड करें",
+  "upgrade_to_practice": "प्रैक्टिस में अपग्रेड करें",
+  "upgrade_to_enterprise": "एंटरप्राइज में अपग्रेड करें",
+  "billing_monthly": "मासिक",
+  "billing_yearly": "वार्षिक",
+  "save_with_yearly": "वार्षिक बिलिंग से बचाएं"
 }

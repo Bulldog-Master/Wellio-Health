@@ -20,5 +20,18 @@
   "vip_access": "VIP доступ",
   "admin_access": "Админ доступ",
   "full_features_unlocked": "Все функции разблокированы",
-  "subscribe_now": "Подписаться"
+  "subscribe_now": "Подписаться",
+  "coach_free": "Тренер Бесплатный",
+  "coach_pro": "Тренер Pro",
+  "coach_team": "Тренер Команда",
+  "clinician_individual": "Клиницист Индивидуальный",
+  "clinician_practice": "Групповая Практика",
+  "clinician_enterprise": "Корпоративный",
+  "upgrade_to_coach_pro": "Перейти на Тренер Pro",
+  "upgrade_to_coach_team": "Перейти на Тренер Команда",
+  "upgrade_to_practice": "Перейти на Практику",
+  "upgrade_to_enterprise": "Перейти на Корпоративный",
+  "billing_monthly": "Ежемесячно",
+  "billing_yearly": "Ежегодно",
+  "save_with_yearly": "Экономьте с годовой оплатой"
 }

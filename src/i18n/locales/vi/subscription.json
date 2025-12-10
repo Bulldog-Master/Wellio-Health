@@ -8,5 +8,18 @@
   "features": "Tính năng",
   "per_month": "/tháng",
   "subscribe": "Đăng ký",
-  "subscribe_now": "Đăng ký ngay"
+  "subscribe_now": "Đăng ký ngay",
+  "coach_free": "Huấn luyện viên Miễn phí",
+  "coach_pro": "Huấn luyện viên Pro",
+  "coach_team": "Huấn luyện viên Nhóm",
+  "clinician_individual": "Bác sĩ Cá nhân",
+  "clinician_practice": "Phòng khám Nhóm",
+  "clinician_enterprise": "Doanh nghiệp",
+  "upgrade_to_coach_pro": "Nâng cấp lên Coach Pro",
+  "upgrade_to_coach_team": "Nâng cấp lên Coach Team",
+  "upgrade_to_practice": "Nâng cấp lên Practice",
+  "upgrade_to_enterprise": "Nâng cấp lên Enterprise",
+  "billing_monthly": "Hàng tháng",
+  "billing_yearly": "Hàng năm",
+  "save_with_yearly": "Tiết kiệm với thanh toán năm"
 }

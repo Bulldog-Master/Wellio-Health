@@ -20,5 +20,18 @@
   "vip_access": "VIP Erişimi",
   "admin_access": "Yönetici Erişimi",
   "full_features_unlocked": "Tüm özellikler kilidi açık",
-  "subscribe_now": "Şimdi Abone Ol"
+  "subscribe_now": "Şimdi Abone Ol",
+  "coach_free": "Koç Ücretsiz",
+  "coach_pro": "Koç Pro",
+  "coach_team": "Koç Takım",
+  "clinician_individual": "Klinisyen Bireysel",
+  "clinician_practice": "Grup Muayenehanesi",
+  "clinician_enterprise": "Kurumsal",
+  "upgrade_to_coach_pro": "Koç Pro'ya Yükselt",
+  "upgrade_to_coach_team": "Koç Takım'a Yükselt",
+  "upgrade_to_practice": "Muayenehane'ye Yükselt",
+  "upgrade_to_enterprise": "Kurumsal'a Yükselt",
+  "billing_monthly": "Aylık",
+  "billing_yearly": "Yıllık",
+  "save_with_yearly": "Yıllık faturalandırma ile tasarruf edin"
 }

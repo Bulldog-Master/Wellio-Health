@@ -20,5 +20,18 @@
   "vip_access": "VIPアクセス",
   "admin_access": "管理者アクセス",
   "full_features_unlocked": "全機能アンロック",
-  "subscribe_now": "今すぐ購読"
+  "subscribe_now": "今すぐ購読",
+  "coach_free": "コーチ無料",
+  "coach_pro": "コーチPro",
+  "coach_team": "コーチチーム",
+  "clinician_individual": "クリニシャン個人",
+  "clinician_practice": "グループプラクティス",
+  "clinician_enterprise": "エンタープライズ",
+  "upgrade_to_coach_pro": "コーチProにアップグレード",
+  "upgrade_to_coach_team": "コーチチームにアップグレード",
+  "upgrade_to_practice": "プラクティスにアップグレード",
+  "upgrade_to_enterprise": "エンタープライズにアップグレード",
+  "billing_monthly": "月額",
+  "billing_yearly": "年額",
+  "save_with_yearly": "年払いでお得"
 }

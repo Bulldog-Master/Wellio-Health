@@ -20,5 +20,18 @@
   "vip_access": "VIP toegang",
   "admin_access": "Admin toegang",
   "full_features_unlocked": "Alle functies ontgrendeld",
-  "subscribe_now": "Nu abonneren"
+  "subscribe_now": "Nu abonneren",
+  "coach_free": "Coach Gratis",
+  "coach_pro": "Coach Pro",
+  "coach_team": "Coach Team",
+  "clinician_individual": "Clinicus Individueel",
+  "clinician_practice": "Groepspraktijk",
+  "clinician_enterprise": "Enterprise",
+  "upgrade_to_coach_pro": "Upgrade naar Coach Pro",
+  "upgrade_to_coach_team": "Upgrade naar Coach Team",
+  "upgrade_to_practice": "Upgrade naar Praktijk",
+  "upgrade_to_enterprise": "Upgrade naar Enterprise",
+  "billing_monthly": "Maandelijks",
+  "billing_yearly": "Jaarlijks",
+  "save_with_yearly": "Bespaar met jaarlijkse facturering"
 }

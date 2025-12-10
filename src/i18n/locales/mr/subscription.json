@@ -8,5 +8,18 @@
   "features": "वैशिष्ट्ये",
   "per_month": "/महिना",
   "subscribe": "सदस्यता घ्या",
-  "subscribe_now": "आत्ताच सदस्यता घ्या"
+  "subscribe_now": "आत्ताच सदस्यता घ्या",
+  "coach_free": "कोच मोफत",
+  "coach_pro": "कोच प्रो",
+  "coach_team": "कोच टीम",
+  "clinician_individual": "क्लिनिशियन वैयक्तिक",
+  "clinician_practice": "समूह सराव",
+  "clinician_enterprise": "एंटरप्राइज",
+  "upgrade_to_coach_pro": "कोच प्रो मध्ये अपग्रेड करा",
+  "upgrade_to_coach_team": "कोच टीम मध्ये अपग्रेड करा",
+  "upgrade_to_practice": "सरावात अपग्रेड करा",
+  "upgrade_to_enterprise": "एंटरप्राइझ मध्ये अपग्रेड करा",
+  "billing_monthly": "मासिक",
+  "billing_yearly": "वार्षिक",
+  "save_with_yearly": "वार्षिक बिलिंग सह बचत करा"
 }

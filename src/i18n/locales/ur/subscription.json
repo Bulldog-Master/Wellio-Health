@@ -24,5 +24,18 @@
   "subscription_cancelled": "سبسکرپشن منسوخ",
   "trial_period": "آزمائشی مدت",
   "days_remaining": "{{days}} دن باقی",
-  "subscribe_now": "ابھی سبسکرائب کریں"
+  "subscribe_now": "ابھی سبسکرائب کریں",
+  "coach_free": "کوچ مفت",
+  "coach_pro": "کوچ پرو",
+  "coach_team": "کوچ ٹیم",
+  "clinician_individual": "کلینشین انفرادی",
+  "clinician_practice": "گروپ پریکٹس",
+  "clinician_enterprise": "انٹرپرائز",
+  "upgrade_to_coach_pro": "کوچ پرو میں اپ گریڈ کریں",
+  "upgrade_to_coach_team": "کوچ ٹیم میں اپ گریڈ کریں",
+  "upgrade_to_practice": "پریکٹس میں اپ گریڈ کریں",
+  "upgrade_to_enterprise": "انٹرپرائز میں اپ گریڈ کریں",
+  "billing_monthly": "ماہانہ",
+  "billing_yearly": "سالانہ",
+  "save_with_yearly": "سالانہ بلنگ سے بچت کریں"
 }
