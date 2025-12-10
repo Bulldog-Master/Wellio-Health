@@ -209,5 +209,7 @@
   "coach_connect_prompt": "Have a trainer or coach? Enter their invite code to connect.",
   "clinician_connect_prompt": "Working with a doctor or clinician? Enter their invite code to share your trends.",
   "professional_tools": "Professional tools",
-  "professional_tools_desc": "As a {{role}}, you can view aggregated functional trends for people who connect to you from your dashboard. Secure messaging is routed via xx network's cMix for metadata protection."
+  "professional_tools_desc": "As a {{role}}, you can view aggregated functional trends for people who connect to you from your dashboard. Secure messaging is routed via xx network's cMix for metadata protection.",
+  "open_coach_dashboard": "Open Coach Dashboard",
+  "open_clinician_dashboard": "Open Clinician Dashboard"
 }

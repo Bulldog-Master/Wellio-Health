@@ -207,5 +207,7 @@
   "coach_connect_prompt": "Haben Sie einen Trainer oder Coach? Geben Sie deren Einladungscode ein, um sich zu verbinden.",
   "clinician_connect_prompt": "Arbeiten Sie mit einem Arzt? Geben Sie deren Einladungscode ein, um Ihre Trends zu teilen.",
   "professional_tools": "Professionelle Tools",
-  "professional_tools_desc": "Als {{role}} können Sie aggregierte funktionale Trends der Personen einsehen, die sich mit Ihnen verbinden, über Ihr Dashboard. Sichere Nachrichten werden über cMix von xx network zum Schutz von Metadaten geleitet."
+  "professional_tools_desc": "Als {{role}} können Sie aggregierte funktionale Trends der Personen einsehen, die sich mit Ihnen verbinden, über Ihr Dashboard. Sichere Nachrichten werden über cMix von xx network zum Schutz von Metadaten geleitet.",
+  "open_coach_dashboard": "Coach-Dashboard öffnen",
+  "open_clinician_dashboard": "Kliniker-Dashboard öffnen"
 }

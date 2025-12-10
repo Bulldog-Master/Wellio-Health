@@ -5,10 +5,13 @@
 // - Shows current professional relationships
 // - Lets users join a pro via invite code (JoinByCode)
 // - Shows invite code panel for professionals (coach/clinician)
+// - Links pros to their dashboards (/coach, /clinician)
 // ========================================
 
 import { useTranslation } from 'react-i18next';
-import { Loader2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Loader2, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { useCareTeam } from './useCareTeam';
 import { useProfessionalStatus } from './useProfessionalStatus';
 import { CoachRow } from './CoachRow';
@@ -31,6 +34,7 @@ function SectionCard({ title, children }: { title: string; children: React.React
 
 export const CareTeamScreen = () => {
   const { t } = useTranslation(['professional', 'common']);
+  const navigate = useNavigate();
   const {
     coaches,
     clinicians,
@@ -38,11 +42,9 @@ export const CareTeamScreen = () => {
     revoking,
     fetchProfessionals,
     handleRevokeAccess,
-    hasCoach,
-    hasClinician
   } = useCareTeam();
 
-  const { isProfessional, professionalType, loading: professionalLoading } = useProfessionalStatus();
+  const { isProfessional, professionalType, isCoach, isClinician, loading: professionalLoading } = useProfessionalStatus();
 
   const isLoading = loading || professionalLoading;
 
@@ -110,9 +112,35 @@ export const CareTeamScreen = () => {
           </SectionCard>
 
           <SectionCard title={t('professional_tools', 'Professional tools')}>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-muted-foreground mb-3">
               {t('professional_tools_desc', `As a ${professionalType}, you can view aggregated functional trends for people who connect to you from your dashboard. Secure messaging is routed via xx network's cMix for metadata protection.`)}
             </p>
+            
+            <div className="flex flex-col sm:flex-row gap-2">
+              {isCoach && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => navigate('/coach')}
+                  className="justify-between"
+                >
+                  {t('open_coach_dashboard', 'Open Coach Dashboard')}
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+              )}
+              
+              {isClinician && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => navigate('/clinician')}
+                  className="justify-between"
+                >
+                  {t('open_clinician_dashboard', 'Open Clinician Dashboard')}
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+              )}
+            </div>
           </SectionCard>
         </>
       )}

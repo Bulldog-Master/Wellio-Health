@@ -209,5 +209,7 @@
   "coach_connect_prompt": "¿Tienes un entrenador? Ingresa su código de invitación para conectarte.",
   "clinician_connect_prompt": "¿Trabajas con un médico? Ingresa su código de invitación para compartir tus tendencias.",
   "professional_tools": "Herramientas profesionales",
-  "professional_tools_desc": "Como {{role}}, puedes ver tendencias funcionales agregadas de las personas que se conectan contigo desde tu panel. Los mensajes seguros se enrutan a través de cMix de xx network para protección de metadatos."
+  "professional_tools_desc": "Como {{role}}, puedes ver tendencias funcionales agregadas de las personas que se conectan contigo desde tu panel. Los mensajes seguros se enrutan a través de cMix de xx network para protección de metadatos.",
+  "open_coach_dashboard": "Abrir Panel de Entrenador",
+  "open_clinician_dashboard": "Abrir Panel de Médico"
 }

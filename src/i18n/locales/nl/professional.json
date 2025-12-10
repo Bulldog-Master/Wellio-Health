@@ -201,5 +201,7 @@
   "coach_connect_prompt": "Heeft u een trainer of coach? Voer hun uitnodigingscode in om te verbinden.",
   "clinician_connect_prompt": "Werkt u met een arts? Voer hun uitnodigingscode in om uw trends te delen.",
   "professional_tools": "Professionele tools",
-  "professional_tools_desc": "Als {{role}} kunt u geaggregeerde functionele trends bekijken van mensen die met u verbinden via uw dashboard. Beveiligde berichten worden gerouteerd via cMix van xx network voor metadata bescherming."
+  "professional_tools_desc": "Als {{role}} kunt u geaggregeerde functionele trends bekijken van mensen die met u verbinden via uw dashboard. Beveiligde berichten worden gerouteerd via cMix van xx network voor metadata bescherming.",
+  "open_coach_dashboard": "Coach Dashboard openen",
+  "open_clinician_dashboard": "Clinicus Dashboard openen"
 }

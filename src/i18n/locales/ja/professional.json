@@ -201,5 +201,7 @@
   "coach_connect_prompt": "トレーナーやコーチがいますか？招待コードを入力して接続してください。",
   "clinician_connect_prompt": "医師と協力していますか？招待コードを入力してトレンドを共有してください。",
   "professional_tools": "プロフェッショナルツール",
-  "professional_tools_desc": "{{role}}として、ダッシュボードからあなたに接続している人々の集約された機能的トレンドを表示できます。安全なメッセージはメタデータ保護のためにxx networkのcMix経由でルーティングされます。"
+  "professional_tools_desc": "{{role}}として、ダッシュボードからあなたに接続している人々の集約された機能的トレンドを表示できます。安全なメッセージはメタデータ保護のためにxx networkのcMix経由でルーティングされます。",
+  "open_coach_dashboard": "コーチダッシュボードを開く",
+  "open_clinician_dashboard": "臨床医ダッシュボードを開く"
 }

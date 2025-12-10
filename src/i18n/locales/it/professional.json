@@ -201,5 +201,7 @@
   "coach_connect_prompt": "Hai un allenatore o coach? Inserisci il loro codice invito per connetterti.",
   "clinician_connect_prompt": "Lavori con un medico? Inserisci il loro codice invito per condividere le tue tendenze.",
   "professional_tools": "Strumenti professionali",
-  "professional_tools_desc": "Come {{role}}, puoi visualizzare le tendenze funzionali aggregate delle persone che si connettono a te dalla tua dashboard. I messaggi sicuri sono instradati tramite cMix di xx network per la protezione dei metadati."
+  "professional_tools_desc": "Come {{role}}, puoi visualizzare le tendenze funzionali aggregate delle persone che si connettono a te dalla tua dashboard. I messaggi sicuri sono instradati tramite cMix di xx network per la protezione dei metadati.",
+  "open_coach_dashboard": "Apri Dashboard Coach",
+  "open_clinician_dashboard": "Apri Dashboard Medico"
 }
