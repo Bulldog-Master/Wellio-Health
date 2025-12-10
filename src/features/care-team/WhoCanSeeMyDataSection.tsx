@@ -1,10 +1,5 @@
-import { useTranslation } from 'react-i18next';
-import { Shield, Eye, EyeOff } from 'lucide-react';
-
-interface CareTeamState {
-  hasCoach: boolean;
-  hasClinician: boolean;
-}
+import { Shield } from 'lucide-react';
+import { CareTeamRole, getVisibilityRule } from './careTeamVisibility';
 
 function SectionCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -18,48 +13,65 @@ function SectionCard({ title, children }: { title: string; children: React.React
   );
 }
 
-export function WhoCanSeeMyDataSection({ hasCoach, hasClinician }: CareTeamState) {
-  const { t } = useTranslation(['professional', 'common']);
-  const anyone = hasCoach || hasClinician;
+interface CareTeamState {
+  hasCoach: boolean;
+  hasClinician: boolean;
+}
+
+export function WhoCanSeeMyDataSection({
+  careTeam,
+}: {
+  careTeam: CareTeamState;
+}) {
+  const visibleRoles: CareTeamRole[] = [];
+  if (careTeam.hasCoach) visibleRoles.push("coach");
+  if (careTeam.hasClinician) visibleRoles.push("clinician");
+
+  const anyone = visibleRoles.length > 0;
+
+  if (!anyone) {
+    return (
+      <SectionCard title="Who can see my data?">
+        <p className="text-xs text-muted-foreground">
+          Right now, only you can see your detailed logs and Functional
+          Wellness Index. When you connect a coach or clinician from this
+          screen, they will see high-level functional trends only — not your
+          raw logs or medical documents.
+        </p>
+      </SectionCard>
+    );
+  }
 
   return (
-    <SectionCard title={t('who_can_see_my_data', 'Who can see my data?')}>
-      {!anyone ? (
-        <div className="flex items-start gap-3">
-          <EyeOff className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
-          <p className="text-xs text-muted-foreground">
-            {t('data_visibility_none', "Right now, only you can see your detailed logs and functional wellness index. If you decide to connect a coach or clinician later, you'll choose who to share with from this screen.")}
-          </p>
-        </div>
-      ) : (
-        <div className="space-y-3 text-xs text-muted-foreground">
-          <div className="flex items-start gap-3">
-            <Eye className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
-            <p>
-              {t('data_visibility_intro', 'The following professionals can access your functional wellness index and high-level trends. They do not see raw meal logs, workout notes, or medical documents by default.')}
-            </p>
-          </div>
-          
-          <ul className="list-disc pl-7 space-y-1">
-            {hasCoach && (
-              <li>
-                <span className="font-semibold">{t('common:coach')}:</span>{' '}
-                {t('coach_data_access', 'can view your functional scores, adherence, and trends to support your training plan.')}
+    <SectionCard title="Who can see my data?">
+      <div className="space-y-2 text-xs text-muted-foreground">
+        <p>
+          The following professionals can access your{" "}
+          <span className="font-semibold">Functional Wellness Index</span> and
+          high-level trends. They{" "}
+          <span className="font-semibold">do not</span> see raw meal logs,
+          workout notes, journals, or medical documents by default.
+        </p>
+
+        <ul className="list-disc pl-4 space-y-1">
+          {visibleRoles.map((role) => {
+            const rule = getVisibilityRule(role);
+            return (
+              <li key={role}>
+                <span className="font-semibold">{rule.label}:</span>{" "}
+                {rule.description}
               </li>
-            )}
-            {hasClinician && (
-              <li>
-                <span className="font-semibold">{t('common:clinician')}:</span>{' '}
-                {t('clinician_data_access', 'can view your functional index and trend summaries to support clinical decision-making, not to replace diagnosis.')}
-              </li>
-            )}
-          </ul>
-          
-          <p className="text-[11px] border-t pt-2 mt-2">
-            {t('data_revoke_note', "You can revoke access at any time from this Care Team screen. Secure messaging uses end-to-end encryption and xx network's cMix for metadata protection.")}
-          </p>
-        </div>
-      )}
+            );
+          })}
+        </ul>
+
+        <p className="text-[11px]">
+          All professional access is derived from your consent on this Care
+          Team screen. Secure messaging is designed for end-to-end
+          encryption with post-quantum key exchange and xx.network&apos;s
+          cMixx for metadata protection. You can revoke access at any time.
+        </p>
+      </div>
     </SectionCard>
   );
 }

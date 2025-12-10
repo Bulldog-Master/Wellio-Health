@@ -150,7 +150,7 @@ export const CareTeamScreen = () => {
       )}
 
       {/* Section: "Who can see my data?" */}
-      <WhoCanSeeMyDataSection hasCoach={hasCoach} hasClinician={hasClinician} />
+      <WhoCanSeeMyDataSection careTeam={{ hasCoach, hasClinician }} />
     </div>
   );
 };
