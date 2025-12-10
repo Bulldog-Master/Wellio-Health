@@ -162,5 +162,7 @@
   "coach_connect_prompt": "有私人教练吗？输入他们的邀请码进行连接。",
   "clinician_connect_prompt": "与医生合作？输入他们的邀请码来分享您的趋势。",
   "professional_tools": "专业工具",
-  "professional_tools_desc": "作为{{role}}，您可以从仪表板查看与您连接的人的汇总功能趋势。安全消息通过xx network的cMix路由以保护元数据。"
+  "professional_tools_desc": "作为{{role}}，您可以从仪表板查看与您连接的人的汇总功能趋势。安全消息通过xx network的cMix路由以保护元数据。",
+  "open_coach_dashboard": "打开教练仪表板",
+  "open_clinician_dashboard": "打开医生仪表板"
 }

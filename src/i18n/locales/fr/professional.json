@@ -207,5 +207,7 @@
   "coach_connect_prompt": "Vous avez un entraîneur ou un coach ? Entrez leur code d'invitation pour vous connecter.",
   "clinician_connect_prompt": "Vous travaillez avec un médecin ? Entrez leur code d'invitation pour partager vos tendances.",
   "professional_tools": "Outils professionnels",
-  "professional_tools_desc": "En tant que {{role}}, vous pouvez consulter les tendances fonctionnelles agrégées des personnes qui se connectent à vous depuis votre tableau de bord. La messagerie sécurisée est acheminée via cMix de xx network pour la protection des métadonnées."
+  "professional_tools_desc": "En tant que {{role}}, vous pouvez consulter les tendances fonctionnelles agrégées des personnes qui se connectent à vous depuis votre tableau de bord. La messagerie sécurisée est acheminée via cMix de xx network pour la protection des métadonnées.",
+  "open_coach_dashboard": "Ouvrir le tableau de bord Coach",
+  "open_clinician_dashboard": "Ouvrir le tableau de bord Clinicien"
 }

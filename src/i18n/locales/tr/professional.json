@@ -201,5 +201,7 @@
   "coach_connect_prompt": "Bir antrenörünüz veya koçunuz var mı? Bağlanmak için davet kodlarını girin.",
   "clinician_connect_prompt": "Bir doktorla mı çalışıyorsunuz? Trendlerinizi paylaşmak için davet kodlarını girin.",
   "professional_tools": "Profesyonel araçlar",
-  "professional_tools_desc": "Bir {{role}} olarak, kontrol panelinizden size bağlanan kişilerin toplu fonksiyonel trendlerini görüntüleyebilirsiniz. Güvenli mesajlaşma, meta veri koruması için xx network'ün cMix'i üzerinden yönlendirilir."
+  "professional_tools_desc": "Bir {{role}} olarak, kontrol panelinizden size bağlanan kişilerin toplu fonksiyonel trendlerini görüntüleyebilirsiniz. Güvenli mesajlaşma, meta veri koruması için xx network'ün cMix'i üzerinden yönlendirilir.",
+  "open_coach_dashboard": "Antrenör Panelini Aç",
+  "open_clinician_dashboard": "Klinisyen Panelini Aç"
 }
