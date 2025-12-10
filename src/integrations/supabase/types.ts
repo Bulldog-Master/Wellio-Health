@@ -5778,6 +5778,10 @@ export type Database = {
         }
         Returns: undefined
       }
+      can_access_secure_conversation: {
+        Args: { _conversation_id: string; _user_id: string }
+        Returns: boolean
+      }
       can_access_shared_content: {
         Args: {
           _content_path: string
