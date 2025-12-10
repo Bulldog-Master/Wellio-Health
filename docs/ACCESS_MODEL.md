@@ -223,3 +223,11 @@ Any change to:
 3. Update any relevant UX copy (Care Team screen, onboarding, privacy policy)
 
 This ensures product, code, and legal language stay in sync.
+
+---
+
+## See Also
+
+- [Professional Economics](./PROFESSIONAL_ECONOMICS.md) — Incentive model for coaches and clinicians
+- [Subscription Guide](../SUBSCRIPTION_GUIDE.md) — Tier features and payment integration
+- [Crypto Design](./CRYPTO_DESIGN.md) — Encryption architecture
