@@ -686,6 +686,48 @@ export type Database = {
         }
         Relationships: []
       }
+      coach_clients: {
+        Row: {
+          client_id: string
+          coach_id: string
+          created_at: string
+          id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          client_id: string
+          coach_id: string
+          created_at?: string
+          id?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          client_id?: string
+          coach_id?: string
+          created_at?: string
+          id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "coach_clients_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "coach_clients_coach_id_fkey"
+            columns: ["coach_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       comments: {
         Row: {
           content: string
@@ -1022,6 +1064,54 @@ export type Database = {
           target_value?: number
           title?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      daily_scores: {
+        Row: {
+          created_at: string
+          date: string
+          hydration_completion: number | null
+          id: string
+          meals_completion: number | null
+          mood_score: number | null
+          score: number
+          sleep_completion: number | null
+          streak_days: number
+          streak_frozen: boolean
+          updated_at: string
+          user_id: string
+          workout_completion: number | null
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          hydration_completion?: number | null
+          id?: string
+          meals_completion?: number | null
+          mood_score?: number | null
+          score: number
+          sleep_completion?: number | null
+          streak_days?: number
+          streak_frozen?: boolean
+          updated_at?: string
+          user_id: string
+          workout_completion?: number | null
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          hydration_completion?: number | null
+          id?: string
+          meals_completion?: number | null
+          mood_score?: number | null
+          score?: number
+          sleep_completion?: number | null
+          streak_days?: number
+          streak_frozen?: boolean
+          updated_at?: string
+          user_id?: string
+          workout_completion?: number | null
         }
         Relationships: []
       }
