@@ -6,3 +6,4 @@ export { useClinicianPatients, type PatientSummary } from "./hooks/useClinicianP
 export { PatientsPanel } from "./components/PatientsPanel";
 export { VideoSessionsPanel as ProVideoSessionsPanel } from "./components/VideoSessionsPanel";
 export * from "./billing";
+export * from "./utils";
