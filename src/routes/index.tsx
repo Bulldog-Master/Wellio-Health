@@ -118,6 +118,8 @@ const CookiePolicy = lazy(() => import("@/pages/CookiePolicy"));
 const CCPARightsRequest = lazy(() => import("@/pages/CCPARightsRequest"));
 const SessionManagement = lazy(() => import("@/pages/SessionManagement"));
 const SecurityAuditLog = lazy(() => import("@/pages/SecurityAuditLog"));
+const CareTeam = lazy(() => import("@/pages/CareTeam"));
+const HistoryHub = lazy(() => import("@/pages/HistoryHub"));
 
 /**
  * Application route configuration
@@ -133,6 +135,10 @@ export const AppRoutes = () => (
     {/* Protected Routes */}
     <Route path="/onboarding" element={<RouteErrorBoundary><ProtectedRoute><Onboarding /></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/" element={<RouteErrorBoundary><ProtectedRoute><Layout><Index /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/history" element={<RouteErrorBoundary><ProtectedRoute><Layout><HistoryHub /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/care-team" element={<RouteErrorBoundary><ProtectedRoute><Layout><CareTeam /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/weekly-progress" element={<RouteErrorBoundary><ProtectedRoute><Layout><WeeklyProgressReport /></Layout></ProtectedRoute></RouteErrorBoundary>} />
+    <Route path="/advanced-analytics" element={<RouteErrorBoundary><ProtectedRoute><Layout><AdvancedAnalytics /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     
     {/* Profile & Settings */}
     <Route path="/profile" element={<RouteErrorBoundary><ProtectedRoute><Layout><Profile /></Layout></ProtectedRoute></RouteErrorBoundary>} />
