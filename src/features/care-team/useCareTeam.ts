@@ -3,7 +3,13 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
 import type { Professional } from './types';
+import type { CareTeamRole } from './careTeamVisibility';
 
+export interface CareTeamVisibilityModel {
+  hasCoach: boolean;
+  hasClinician: boolean;
+  visibleRoles: CareTeamRole[];
+}
 export const useCareTeam = () => {
   const { t } = useTranslation(['professional', 'common']);
   const [professionals, setProfessionals] = useState<Professional[]>([]);
@@ -104,6 +110,15 @@ export const useCareTeam = () => {
   const hasCoach = coaches.length > 0;
   const hasClinician = clinicians.length > 0;
 
+  const visibility: CareTeamVisibilityModel = {
+    hasCoach,
+    hasClinician,
+    visibleRoles: [
+      ...(hasCoach ? (['coach'] as CareTeamRole[]) : []),
+      ...(hasClinician ? (['clinician'] as CareTeamRole[]) : []),
+    ],
+  };
+
   return {
     professionals,
     coaches,
@@ -112,6 +127,7 @@ export const useCareTeam = () => {
     revoking,
     hasCoach,
     hasClinician,
+    visibility,
     fetchProfessionals,
     handleRevokeAccess
   };
