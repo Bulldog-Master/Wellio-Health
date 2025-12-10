@@ -36,5 +36,22 @@
   "clinician_access_required_desc": "اس ڈیش بورڈ تک رسائی کے لیے آپ کو کلینیشین یا پریکٹیشنر کا کردار درکار ہے۔",
   "apply_as_practitioner": "پریکٹیشنر کے طور پر درخواست دیں",
   "clinician_dashboard": "کلینیشین ڈیش بورڈ",
-  "clinician_dashboard_desc": "اپنے مریضوں کا انتظام کریں اور ان کی صحت کا ڈیٹا دیکھیں۔"
+  "clinician_dashboard_desc": "اپنے مریضوں کا انتظام کریں اور ان کی صحت کا ڈیٹا دیکھیں۔",
+  "open_profile": "پروفائل کھولیں",
+  "start_session": "سیشن شروع کریں",
+  "schedule_session": "شیڈول",
+  "connected": "منسلک",
+  "last_updated": "آخری اپ ڈیٹ",
+  "fwi": "FWI",
+  "error_loading_patients": "مریضوں کو لوڈ نہیں کر سکے۔",
+  "loading_sessions": "ویڈیو سیشنز لوڈ ہو رہے ہیں…",
+  "error_loading_sessions": "ویڈیو سیشنز لوڈ نہیں کر سکے۔",
+  "video_sessions": "ویڈیو سیشنز",
+  "no_video_sessions": "آپ نے ابھی تک کوئی ویڈیو سیشن شیڈول نہیں کیا۔",
+  "dashboard_description": "اپنے مریضوں کے فنکشنل ویلنیس سگنلز اور رجحانات دیکھیں — ان کے خام لاگز یا طبی دستاویزات نہیں۔ میسجنگ اور ویڈیو کالز پوسٹ کوانٹم انکرپشن اور xx.network کی cMixx میٹا ڈیٹا پروٹیکشن کے لیے ڈیزائن کی گئی ہیں۔",
+  "pq_encryption": "PQ انکرپشن",
+  "cmix_protection": "cMixx محفوظ",
+  "secure_messaging": "محفوظ پیغام رسانی",
+  "secure_messaging_desc": "xx.network cMixx کے ذریعے میٹا ڈیٹا پروٹیکشن کے ساتھ اینڈ ٹو اینڈ انکرپٹڈ میسجنگ۔",
+  "open_messages": "پیغامات کھولیں"
 }
