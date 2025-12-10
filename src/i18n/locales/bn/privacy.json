@@ -3,5 +3,27 @@
   "privacy_settings": "গোপনীয়তা সেটিংস",
   "public_profile": "পাবলিক প্রোফাইল",
   "private_account": "প্রাইভেট অ্যাকাউন্ট",
-  "data_sharing": "ডেটা শেয়ারিং"
+  "data_sharing": "ডেটা শেয়ারিং",
+  
+  "who_can_see_data": "আমার ডেটা কে দেখতে পারে?",
+  "data_access_description": "এই পেশাদাররা আপনার স্বাস্থ্য ডেটা দেখার অনুমতি পেয়েছেন",
+  "no_data_accessors": "কেউ আপনার ডেটায় অ্যাক্সেস নেই",
+  "data_is_private": "আপনার স্বাস্থ্য ডেটা সম্পূর্ণ ব্যক্তিগত",
+  "coach": "কোচ",
+  "clinician": "চিকিৎসক",
+  "pending": "মুলতুবি",
+  "connected_since": "{{date}} থেকে সংযুক্ত",
+  "can_see": "দেখতে পারেন",
+  "can_see_functional_index": "কার্যকরী সূচক",
+  "can_see_workout_trends": "ওয়ার্কআউট ট্রেন্ড",
+  "can_see_activity_summary": "কার্যকলাপ সারাংশ",
+  "can_see_wellness_trends": "সুস্থতা ট্রেন্ড",
+  "can_see_recovery_summary": "পুনরুদ্ধার সারাংশ",
+  "cannot_see_note": "তারা আপনার কাঁচা রেকর্ড, মেডিকেল ফাইল বা ব্যক্তিগত নোট দেখতে পারবেন না",
+  "revoke": "প্রত্যাহার",
+  "revoke_access_title": "অ্যাক্সেস প্রত্যাহার করবেন?",
+  "revoke_access_description": "{{name}} আর আপনার স্বাস্থ্য ডেটা দেখতে পারবেন না। আপনি পরে তাদের আবার আমন্ত্রণ জানাতে পারেন।",
+  "confirm_revoke": "হ্যাঁ, অ্যাক্সেস প্রত্যাহার করুন",
+  "access_revoked": "অ্যাক্সেস সফলভাবে প্রত্যাহার করা হয়েছে",
+  "revoke_failed": "অ্যাক্সেস প্রত্যাহার ব্যর্থ"
 }

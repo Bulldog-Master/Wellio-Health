@@ -3,5 +3,27 @@
   "privacy_settings": "गोपनीयता सेटिंग्स",
   "public_profile": "सार्वजनिक प्रोफाइल",
   "private_account": "निजी खाता",
-  "data_sharing": "डेटा शेयरिंग"
+  "data_sharing": "डेटा शेयरिंग",
+  
+  "who_can_see_data": "मेरा डेटा कौन देख सकता है?",
+  "data_access_description": "इन पेशेवरों को आपकी स्वास्थ्य डेटा देखने की अनुमति है",
+  "no_data_accessors": "किसी के पास आपके डेटा तक पहुंच नहीं है",
+  "data_is_private": "आपका स्वास्थ्य डेटा पूरी तरह से निजी है",
+  "coach": "कोच",
+  "clinician": "चिकित्सक",
+  "pending": "लंबित",
+  "connected_since": "{{date}} से जुड़े",
+  "can_see": "देख सकते हैं",
+  "can_see_functional_index": "कार्यात्मक सूचकांक",
+  "can_see_workout_trends": "वर्कआउट ट्रेंड",
+  "can_see_activity_summary": "गतिविधि सारांश",
+  "can_see_wellness_trends": "कल्याण ट्रेंड",
+  "can_see_recovery_summary": "रिकवरी सारांश",
+  "cannot_see_note": "वे आपके कच्चे रिकॉर्ड, मेडिकल फाइलें या निजी नोट्स नहीं देख सकते",
+  "revoke": "रद्द करें",
+  "revoke_access_title": "पहुंच रद्द करें?",
+  "revoke_access_description": "{{name}} अब आपके स्वास्थ्य डेटा को नहीं देख पाएंगे। आप बाद में उन्हें फिर से आमंत्रित कर सकते हैं।",
+  "confirm_revoke": "हां, पहुंच रद्द करें",
+  "access_revoked": "पहुंच सफलतापूर्वक रद्द की गई",
+  "revoke_failed": "पहुंच रद्द करने में विफल"
 }

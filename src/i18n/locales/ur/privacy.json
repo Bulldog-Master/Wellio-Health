@@ -3,5 +3,27 @@
   "privacy_settings": "رازداری کی ترتیبات",
   "public_profile": "عوامی پروفائل",
   "private_account": "نجی اکاؤنٹ",
-  "data_sharing": "ڈیٹا شیئرنگ"
+  "data_sharing": "ڈیٹا شیئرنگ",
+  
+  "who_can_see_data": "میرا ڈیٹا کون دیکھ سکتا ہے؟",
+  "data_access_description": "ان پیشہ ور افراد کو آپ کے صحت کے ڈیٹا تک رسائی کی اجازت ہے",
+  "no_data_accessors": "کسی کو آپ کے ڈیٹا تک رسائی نہیں ہے",
+  "data_is_private": "آپ کا صحت کا ڈیٹا مکمل طور پر نجی ہے",
+  "coach": "کوچ",
+  "clinician": "ڈاکٹر",
+  "pending": "زیر التوا",
+  "connected_since": "{{date}} سے منسلک",
+  "can_see": "دیکھ سکتے ہیں",
+  "can_see_functional_index": "فنکشنل انڈیکس",
+  "can_see_workout_trends": "ورزش کے رجحانات",
+  "can_see_activity_summary": "سرگرمی کا خلاصہ",
+  "can_see_wellness_trends": "صحت کے رجحانات",
+  "can_see_recovery_summary": "بحالی کا خلاصہ",
+  "cannot_see_note": "وہ آپ کے خام ریکارڈز، طبی فائلیں یا نجی نوٹس نہیں دیکھ سکتے",
+  "revoke": "منسوخ کریں",
+  "revoke_access_title": "رسائی منسوخ کریں؟",
+  "revoke_access_description": "{{name}} اب آپ کا صحت کا ڈیٹا نہیں دیکھ سکے گا۔ آپ بعد میں انہیں دوبارہ مدعو کر سکتے ہیں۔",
+  "confirm_revoke": "ہاں، رسائی منسوخ کریں",
+  "access_revoked": "رسائی کامیابی سے منسوخ ہو گئی",
+  "revoke_failed": "رسائی منسوخ کرنے میں ناکام"
 }

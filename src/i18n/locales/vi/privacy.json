@@ -3,5 +3,27 @@
   "privacy_settings": "Cài đặt quyền riêng tư",
   "public_profile": "Hồ sơ công khai",
   "private_account": "Tài khoản riêng tư",
-  "data_sharing": "Chia sẻ dữ liệu"
+  "data_sharing": "Chia sẻ dữ liệu",
+  
+  "who_can_see_data": "Ai Có Thể Xem Dữ Liệu Của Tôi?",
+  "data_access_description": "Các chuyên gia này có quyền xem dữ liệu sức khỏe của bạn",
+  "no_data_accessors": "Không ai có quyền truy cập dữ liệu của bạn",
+  "data_is_private": "Dữ liệu sức khỏe của bạn hoàn toàn riêng tư",
+  "coach": "Huấn luyện viên",
+  "clinician": "Bác sĩ",
+  "pending": "Đang chờ",
+  "connected_since": "Kết nối từ {{date}}",
+  "can_see": "Có thể xem",
+  "can_see_functional_index": "Chỉ số chức năng",
+  "can_see_workout_trends": "Xu hướng tập luyện",
+  "can_see_activity_summary": "Tóm tắt hoạt động",
+  "can_see_wellness_trends": "Xu hướng sức khỏe",
+  "can_see_recovery_summary": "Tóm tắt phục hồi",
+  "cannot_see_note": "Họ không thể xem hồ sơ thô, tệp y tế hoặc ghi chú riêng của bạn",
+  "revoke": "Thu hồi",
+  "revoke_access_title": "Thu Hồi Quyền Truy Cập?",
+  "revoke_access_description": "{{name}} sẽ không còn có thể xem dữ liệu sức khỏe của bạn. Bạn có thể mời lại họ sau nếu cần.",
+  "confirm_revoke": "Có, Thu Hồi Quyền Truy Cập",
+  "access_revoked": "Đã thu hồi quyền truy cập thành công",
+  "revoke_failed": "Thu hồi quyền truy cập thất bại"
 }

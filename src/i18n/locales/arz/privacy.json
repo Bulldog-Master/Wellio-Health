@@ -3,5 +3,27 @@
   "privacy_settings": "إعدادات الخصوصية",
   "public_profile": "بروفايل عام",
   "private_account": "حساب خاص",
-  "data_sharing": "مشاركة البيانات"
+  "data_sharing": "مشاركة البيانات",
+  
+  "who_can_see_data": "مين يقدر يشوف بياناتي؟",
+  "data_access_description": "المتخصصين دول عندهم إذن يشوفوا بيانات صحتك",
+  "no_data_accessors": "محدش عنده وصول لبياناتك",
+  "data_is_private": "بيانات صحتك خاصة تماماً",
+  "coach": "مدرب",
+  "clinician": "دكتور",
+  "pending": "معلق",
+  "connected_since": "متصل من {{date}}",
+  "can_see": "يقدر يشوف",
+  "can_see_functional_index": "مؤشر الوظائف",
+  "can_see_workout_trends": "اتجاهات التمارين",
+  "can_see_activity_summary": "ملخص النشاط",
+  "can_see_wellness_trends": "اتجاهات الصحة",
+  "can_see_recovery_summary": "ملخص التعافي",
+  "cannot_see_note": "مش هيقدروا يشوفوا سجلاتك الخام أو ملفاتك الطبية أو ملاحظاتك الخاصة",
+  "revoke": "إلغاء",
+  "revoke_access_title": "تلغي الوصول؟",
+  "revoke_access_description": "{{name}} مش هيقدر يشوف بيانات صحتك تاني. ممكن تعزمهم تاني بعدين لو عايز.",
+  "confirm_revoke": "أيوه، إلغي الوصول",
+  "access_revoked": "الوصول اتلغى بنجاح",
+  "revoke_failed": "فشل إلغاء الوصول"
 }
