@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { VideoSessionsPanel } from "@/features/pro";
 
 export interface CoachClientSummary {
   clientId: string;
@@ -251,7 +252,7 @@ function useCoachClientDetail(clientId: string | null) {
 // ---------- UI: COACH DASHBOARD ------------
 
 export function CoachDashboardScreen() {
-  const { t } = useTranslation(['professional', 'common']);
+  const { t } = useTranslation(['professional', 'common', 'live']);
   const { data, isLoading } = useCoachClients();
   const [selectedClientId, setSelectedClientId] = useState<string | null>(null);
 
@@ -261,8 +262,10 @@ export function CoachDashboardScreen() {
   );
 
   return (
-    <div className="flex flex-col md:flex-row gap-4">
-      <div className="md:w-1/2 space-y-2">
+    <div className="space-y-4">
+      <VideoSessionsPanel />
+      <div className="flex flex-col md:flex-row gap-4">
+        <div className="md:w-1/2 space-y-2">
         <h2 className="text-lg font-semibold">{t('professional:clients')}</h2>
         {isLoading && (
           <p className="text-sm text-muted-foreground">{t('professional:loading_clients')}</p>
@@ -320,14 +323,15 @@ export function CoachDashboardScreen() {
         </div>
       </div>
 
-      <div className="md:w-1/2 space-y-3">
-        {selectedClient ? (
-          <CoachClientDetailPanel client={selectedClient} />
-        ) : (
-          <p className="text-sm text-muted-foreground mt-6 md:mt-0">
-            {t('professional:select_client')}
-          </p>
-        )}
+        <div className="md:w-1/2 space-y-3">
+          {selectedClient ? (
+            <CoachClientDetailPanel client={selectedClient} />
+          ) : (
+            <p className="text-sm text-muted-foreground mt-6 md:mt-0">
+              {t('professional:select_client')}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
