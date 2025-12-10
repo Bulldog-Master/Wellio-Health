@@ -260,13 +260,13 @@ export function TodayScreen() {
   return (
     <div className="p-4 space-y-4">
       <TodayScoreCard score={score} />
-      {historyData && (
-        <TodayHistoryCard 
-          history={historyData.history} 
-          streakCount={historyData.streakCount} 
+      <TodayActionsList {...data} />
+      {!isHistoryLoading && historyData && (
+        <TodayHistoryCard
+          history={historyData.history}
+          streakCount={historyData.streakCount}
         />
       )}
-      <TodayActionsList {...data} />
       <TodayAiInsightCard text={aiText} />
     </div>
   );
