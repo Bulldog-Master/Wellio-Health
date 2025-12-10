@@ -1,5 +1,9 @@
 # Wellio Pitch Deck: Access Model + Professional Economics
 
+## Master Positioning
+
+**Wellio is a next-generation Wellness APP Platform that empowers individuals to track their wellbeing privately — while optionally connecting with trainers, coaches, or clinicians through secure, limited-visibility insights. It is privacy-first, post-quantum secure, and powered by cMixx metadata protection.**
+
 ## Visual Design Guidelines
 
 **Brand Identity (B+ Design)**
@@ -15,7 +19,7 @@
 ### Zero-Knowledge Access Model
 **Functional insights, not raw personal data.**
 
-Wellio separates raw logs from derived functional signals, ensuring professionals only see what they need — and never what exposes the user.
+The APP Platform separates raw logs from derived functional signals, ensuring professionals only see what they need — and never what exposes the user.
 
 **Visual:** 3-layer vertical stack:
 1. **User Device (Private Data Layer)** — Icons: logbook, heart, meal, workout. Label: "Raw Data — Local Only"
@@ -149,13 +153,15 @@ Wellio separates raw logs from derived functional signals, ensuring professional
 
 ## SEO Keywords (For Marketing Copy)
 
-- wellness coach platform
+- wellness APP platform
+- trainer wellness tools
+- coach wellness tools
 - clinician wellness tools
-- privacy-focused coaching software
+- privacy-focused wellness APP
 - functional wellness insights
-- secure health coaching app
-- HIPAA alternative wellness platform
-- post-quantum health platform
+- secure health APP platform
+- HIPAA alternative wellness APP
+- post-quantum health APP platform
 - private wellness monitoring
 - metadata-free communication
 
