@@ -179,5 +179,16 @@
   "clinician": "Clinician",
   "medical_records": "Medical records",
   "personal_messages": "Personal messages",
-  "payment_info": "Payment information"
+  "payment_info": "Payment information",
+
+  "my_care_team": "My Care Team",
+  "my_care_team_desc": "Manage your connected coaches and healthcare providers",
+  "connected_professionals": "Connected Professionals",
+  "add_professional": "Add a Professional",
+  "no_professionals_connected": "You haven't connected with any professionals yet. Enter an invite code to get started.",
+  "since": "Since",
+  "revoke_access": "Revoke Access",
+  "revoke_access_title": "Revoke Professional Access",
+  "revoke_access_desc": "Are you sure you want to revoke access for {{name}}? They will no longer be able to view your health data.",
+  "access_revoked": "Access revoked successfully"
 }

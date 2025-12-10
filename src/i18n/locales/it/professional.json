@@ -179,5 +179,16 @@
   "clinician": "Clinico",
   "medical_records": "Cartelle cliniche",
   "personal_messages": "Messaggi personali",
-  "payment_info": "Informazioni di pagamento"
+  "payment_info": "Informazioni di pagamento",
+
+  "my_care_team": "Il Mio Team di Cura",
+  "my_care_team_desc": "Gestisci i tuoi coach e fornitori di servizi sanitari connessi",
+  "connected_professionals": "Professionisti Connessi",
+  "add_professional": "Aggiungi un Professionista",
+  "no_professionals_connected": "Non ti sei ancora connesso con nessun professionista. Inserisci un codice invito per iniziare.",
+  "since": "Da",
+  "revoke_access": "Revoca Accesso",
+  "revoke_access_title": "Revoca Accesso del Professionista",
+  "revoke_access_desc": "Sei sicuro di voler revocare l'accesso a {{name}}? Non potranno più visualizzare i tuoi dati sanitari.",
+  "access_revoked": "Accesso revocato con successo"
 }

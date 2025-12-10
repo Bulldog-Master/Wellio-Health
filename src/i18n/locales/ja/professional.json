@@ -179,5 +179,16 @@
   "clinician": "臨床医",
   "medical_records": "医療記録",
   "personal_messages": "個人メッセージ",
-  "payment_info": "支払い情報"
+  "payment_info": "支払い情報",
+
+  "my_care_team": "ケアチーム",
+  "my_care_team_desc": "接続されたコーチと医療提供者を管理する",
+  "connected_professionals": "接続されたプロフェッショナル",
+  "add_professional": "プロフェッショナルを追加",
+  "no_professionals_connected": "まだプロフェッショナルと接続していません。招待コードを入力して開始してください。",
+  "since": "以来",
+  "revoke_access": "アクセスを取り消す",
+  "revoke_access_title": "プロフェッショナルのアクセスを取り消す",
+  "revoke_access_desc": "{{name}}のアクセスを取り消してもよろしいですか？彼らはあなたの健康データを閲覧できなくなります。",
+  "access_revoked": "アクセスが正常に取り消されました"
 }

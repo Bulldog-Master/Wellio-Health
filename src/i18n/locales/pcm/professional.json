@@ -159,5 +159,17 @@
   "request_connection": "Request Connection",
   "connection_requested": "Connection Request don Send",
   "data_access_consent": "Data Access Consent",
-  "review_consent": "Review Consent"
+  "review_consent": "Review Consent",
+  "my_care_team": "My Care Team",
+  "my_care_team_desc": "Manage your connected coaches and health providers",
+  "connected_professionals": "Connected Professionals",
+  "add_professional": "Add Professional",
+  "no_professionals_connected": "You never connect with any professional yet.",
+  "since": "Since",
+  "revoke_access": "Revoke Access",
+  "revoke_access_title": "Revoke Professional Access",
+  "revoke_access_desc": "You sure say you wan revoke access for {{name}}?",
+  "access_revoked": "Access don revoke successfully",
+  "coach": "Coach",
+  "clinician": "Clinician"
 }

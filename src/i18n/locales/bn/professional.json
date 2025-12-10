@@ -159,5 +159,17 @@
   "request_connection": "সংযোগের অনুরোধ করুন",
   "connection_requested": "সংযোগের অনুরোধ পাঠানো হয়েছে",
   "data_access_consent": "ডেটা অ্যাক্সেস সম্মতি",
-  "review_consent": "সম্মতি পর্যালোচনা করুন"
+  "review_consent": "সম্মতি পর্যালোচনা করুন",
+  "my_care_team": "আমার যত্ন দল",
+  "my_care_team_desc": "আপনার সংযুক্ত কোচ এবং স্বাস্থ্যসেবা প্রদানকারীদের পরিচালনা করুন",
+  "connected_professionals": "সংযুক্ত পেশাদার",
+  "add_professional": "পেশাদার যোগ করুন",
+  "no_professionals_connected": "আপনি এখনও কোনো পেশাদারের সাথে সংযুক্ত হননি।",
+  "since": "থেকে",
+  "revoke_access": "অ্যাক্সেস প্রত্যাহার করুন",
+  "revoke_access_title": "পেশাদার অ্যাক্সেস প্রত্যাহার করুন",
+  "revoke_access_desc": "আপনি কি {{name}}-এর জন্য অ্যাক্সেস প্রত্যাহার করতে চান?",
+  "access_revoked": "অ্যাক্সেস সফলভাবে প্রত্যাহার করা হয়েছে",
+  "coach": "কোচ",
+  "clinician": "ক্লিনিশিয়ান"
 }

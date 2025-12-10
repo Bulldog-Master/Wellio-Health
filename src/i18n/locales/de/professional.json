@@ -179,5 +179,16 @@
   "clinician": "Kliniker",
   "medical_records": "Krankenakten",
   "personal_messages": "Persönliche Nachrichten",
-  "payment_info": "Zahlungsinformationen"
+  "payment_info": "Zahlungsinformationen",
+
+  "my_care_team": "Mein Betreuungsteam",
+  "my_care_team_desc": "Verwalten Sie Ihre verbundenen Coaches und Gesundheitsanbieter",
+  "connected_professionals": "Verbundene Fachleute",
+  "add_professional": "Fachmann Hinzufügen",
+  "no_professionals_connected": "Sie haben sich noch nicht mit Fachleuten verbunden. Geben Sie einen Einladungscode ein, um zu beginnen.",
+  "since": "Seit",
+  "revoke_access": "Zugriff Widerrufen",
+  "revoke_access_title": "Zugriff des Fachmanns Widerrufen",
+  "revoke_access_desc": "Sind Sie sicher, dass Sie den Zugriff für {{name}} widerrufen möchten? Sie können Ihre Gesundheitsdaten nicht mehr einsehen.",
+  "access_revoked": "Zugriff erfolgreich widerrufen"
 }

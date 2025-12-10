@@ -78,5 +78,15 @@
   "clinician": "चिकित्सक",
   "medical_records": "मेडिकल रिकॉर्ड",
   "personal_messages": "व्यक्तिगत संदेश",
-  "payment_info": "भुगतान जानकारी"
+  "payment_info": "भुगतान जानकारी",
+  "my_care_team": "मेरी देखभाल टीम",
+  "my_care_team_desc": "अपने कनेक्टेड कोच और स्वास्थ्य प्रदाताओं को प्रबंधित करें",
+  "connected_professionals": "कनेक्टेड पेशेवर",
+  "add_professional": "पेशेवर जोड़ें",
+  "no_professionals_connected": "आपने अभी तक किसी पेशेवर से कनेक्ट नहीं किया है।",
+  "since": "से",
+  "revoke_access": "एक्सेस रद्द करें",
+  "revoke_access_title": "पेशेवर एक्सेस रद्द करें",
+  "revoke_access_desc": "क्या आप {{name}} के लिए एक्सेस रद्द करना चाहते हैं?",
+  "access_revoked": "एक्सेस सफलतापूर्वक रद्द किया गया"
 }

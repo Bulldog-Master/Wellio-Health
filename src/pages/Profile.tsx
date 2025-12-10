@@ -11,7 +11,8 @@ import {
   PersonalInfoSection,
   FitnessGoalsSection,
   SettingsSection,
-  ReferralSection
+  ReferralSection,
+  CareTeamSection
 } from "@/components/profile";
 
 const Profile = () => {
@@ -31,6 +32,7 @@ const Profile = () => {
   const [openPersonalInfo, setOpenPersonalInfo] = useState(false);
   const [openFitnessGoals, setOpenFitnessGoals] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
+  const [openCareTeam, setOpenCareTeam] = useState(false);
 
   return (
     <div className="space-y-6 max-w-4xl pb-20">
@@ -53,6 +55,11 @@ const Profile = () => {
         onOpenChange={setOpenFitnessGoals}
         formData={formData}
         setFormData={setFormData}
+      />
+
+      <CareTeamSection
+        open={openCareTeam}
+        onOpenChange={setOpenCareTeam}
       />
 
       <SettingsSection

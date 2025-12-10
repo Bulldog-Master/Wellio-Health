@@ -134,5 +134,16 @@
   "clinician": "Clínico",
   "medical_records": "Prontuários médicos",
   "personal_messages": "Mensagens pessoais",
-  "payment_info": "Informações de pagamento"
+  "payment_info": "Informações de pagamento",
+
+  "my_care_team": "Minha Equipe de Saúde",
+  "my_care_team_desc": "Gerencie seus treinadores e provedores de saúde conectados",
+  "connected_professionals": "Profissionais Conectados",
+  "add_professional": "Adicionar um Profissional",
+  "no_professionals_connected": "Você ainda não se conectou com nenhum profissional. Digite um código de convite para começar.",
+  "since": "Desde",
+  "revoke_access": "Revogar Acesso",
+  "revoke_access_title": "Revogar Acesso do Profissional",
+  "revoke_access_desc": "Tem certeza de que deseja revogar o acesso de {{name}}? Eles não poderão mais ver seus dados de saúde.",
+  "access_revoked": "Acesso revogado com sucesso"
 }
