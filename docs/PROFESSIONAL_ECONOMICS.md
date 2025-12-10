@@ -120,9 +120,13 @@ All professional features must align with Wellio's privacy-first principles:
 
 ---
 
-## See Also
+## Related Documents
 
-- [Access Model](./ACCESS_MODEL.md) — Who sees what, role definitions
-- [Subscription Guide](../SUBSCRIPTION_GUIDE.md) — Tier features and payment integration
-- [Crypto Design](./CRYPTO_DESIGN.md) — Encryption architecture
-- [Architecture](./ARCHITECTURE.md) — System overview
+- **Access Rules & Data Permissions:**  
+  [ACCESS_MODEL.md](ACCESS_MODEL.md)
+
+- **Subscription Pricing & Tiers:**  
+  [SUBSCRIPTION_GUIDE.md](../SUBSCRIPTION_GUIDE.md)
+
+- **Security & Privacy Overview:**  
+  [SECURITY.md](SECURITY.md)
