@@ -190,5 +190,16 @@
   "revoke_access": "Toegang Intrekken",
   "revoke_access_title": "Toegang Professional Intrekken",
   "revoke_access_desc": "Weet u zeker dat u de toegang voor {{name}} wilt intrekken? Zij kunnen uw gezondheidsgegevens niet meer bekijken.",
-  "access_revoked": "Toegang succesvol ingetrokken"
+  "access_revoked": "Toegang succesvol ingetrokken",
+
+  "invite_code_desc": "Deel deze code met klanten om met hen te verbinden",
+  "times_used": "{{count}} keer gebruikt",
+  "active": "Actief",
+  "inactive": "Inactief",
+  "care_team_description": "Verbind met coaches en artsen die uw functionele welzijnsindex en trends kunnen zien — zonder uw ruwe gezondheidsgegevens bloot te stellen.",
+  "connections": "Verbindingen",
+  "coach_connect_prompt": "Heeft u een trainer of coach? Voer hun uitnodigingscode in om te verbinden.",
+  "clinician_connect_prompt": "Werkt u met een arts? Voer hun uitnodigingscode in om uw trends te delen.",
+  "professional_tools": "Professionele tools",
+  "professional_tools_desc": "Als {{role}} kunt u geaggregeerde functionele trends bekijken van mensen die met u verbinden via uw dashboard. Beveiligde berichten worden gerouteerd via cMix van xx network voor metadata bescherming."
 }

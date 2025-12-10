@@ -155,5 +155,12 @@
   "invite_code_desc": "Compartilhe este código com clientes para conectar com eles",
   "times_used": "Usado {{count}} vezes",
   "active": "Ativo",
-  "inactive": "Inativo"
+  "inactive": "Inativo",
+
+  "care_team_description": "Conecte-se com treinadores e médicos que podem ver seu índice de bem-estar funcional e tendências — sem expor seus registros de saúde brutos.",
+  "connections": "Conexões",
+  "coach_connect_prompt": "Tem um treinador ou coach? Digite o código de convite deles para se conectar.",
+  "clinician_connect_prompt": "Trabalha com um médico? Digite o código de convite deles para compartilhar suas tendências.",
+  "professional_tools": "Ferramentas profissionais",
+  "professional_tools_desc": "Como {{role}}, você pode visualizar tendências funcionais agregadas das pessoas que se conectam a você no seu painel. Mensagens seguras são roteadas via cMix da xx network para proteção de metadados."
 }

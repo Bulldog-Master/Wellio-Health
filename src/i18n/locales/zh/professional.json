@@ -155,5 +155,12 @@
   "invite_code_desc": "与客户分享此代码以建立连接",
   "times_used": "已使用 {{count}} 次",
   "active": "活跃",
-  "inactive": "非活跃"
+  "inactive": "非活跃",
+
+  "care_team_description": "与可以查看您功能健康指数和趋势的教练和医生建立联系——而不会暴露您的原始健康记录。",
+  "connections": "连接",
+  "coach_connect_prompt": "有私人教练吗？输入他们的邀请码进行连接。",
+  "clinician_connect_prompt": "与医生合作？输入他们的邀请码来分享您的趋势。",
+  "professional_tools": "专业工具",
+  "professional_tools_desc": "作为{{role}}，您可以从仪表板查看与您连接的人的汇总功能趋势。安全消息通过xx network的cMix路由以保护元数据。"
 }

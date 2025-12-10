@@ -190,5 +190,16 @@
   "revoke_access": "アクセスを取り消す",
   "revoke_access_title": "プロフェッショナルのアクセスを取り消す",
   "revoke_access_desc": "{{name}}のアクセスを取り消してもよろしいですか？彼らはあなたの健康データを閲覧できなくなります。",
-  "access_revoked": "アクセスが正常に取り消されました"
+  "access_revoked": "アクセスが正常に取り消されました",
+
+  "invite_code_desc": "クライアントと接続するためにこのコードを共有してください",
+  "times_used": "{{count}}回使用",
+  "active": "アクティブ",
+  "inactive": "非アクティブ",
+  "care_team_description": "機能的な健康指数とトレンドを見ることができるコーチや医師とつながりましょう — 生の健康記録を公開することなく。",
+  "connections": "接続",
+  "coach_connect_prompt": "トレーナーやコーチがいますか？招待コードを入力して接続してください。",
+  "clinician_connect_prompt": "医師と協力していますか？招待コードを入力してトレンドを共有してください。",
+  "professional_tools": "プロフェッショナルツール",
+  "professional_tools_desc": "{{role}}として、ダッシュボードからあなたに接続している人々の集約された機能的トレンドを表示できます。安全なメッセージはメタデータ保護のためにxx networkのcMix経由でルーティングされます。"
 }

@@ -190,5 +190,16 @@
   "revoke_access": "Revoca Accesso",
   "revoke_access_title": "Revoca Accesso del Professionista",
   "revoke_access_desc": "Sei sicuro di voler revocare l'accesso a {{name}}? Non potranno più visualizzare i tuoi dati sanitari.",
-  "access_revoked": "Accesso revocato con successo"
+  "access_revoked": "Accesso revocato con successo",
+
+  "invite_code_desc": "Condividi questo codice con i clienti per connetterti con loro",
+  "times_used": "Usato {{count}} volte",
+  "active": "Attivo",
+  "inactive": "Inattivo",
+  "care_team_description": "Connettiti con coach e medici che possono vedere il tuo indice di benessere funzionale e le tendenze — senza esporre i tuoi dati sanitari grezzi.",
+  "connections": "Connessioni",
+  "coach_connect_prompt": "Hai un allenatore o coach? Inserisci il loro codice invito per connetterti.",
+  "clinician_connect_prompt": "Lavori con un medico? Inserisci il loro codice invito per condividere le tue tendenze.",
+  "professional_tools": "Strumenti professionali",
+  "professional_tools_desc": "Come {{role}}, puoi visualizzare le tendenze funzionali aggregate delle persone che si connettono a te dalla tua dashboard. I messaggi sicuri sono instradati tramite cMix di xx network per la protezione dei metadati."
 }
