@@ -95,3 +95,6 @@ verify_jwt = true
 
 [functions.sign-achievement]
 verify_jwt = true
+
+[functions.create-pro-checkout]
+verify_jwt = true

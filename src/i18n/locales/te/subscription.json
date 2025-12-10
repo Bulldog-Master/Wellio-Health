@@ -8,5 +8,18 @@
   "features": "ఫీచర్లు",
   "per_month": "/నెల",
   "subscribe": "సబ్‌స్క్రైబ్ చేయండి",
-  "subscribe_now": "ఇప్పుడే సబ్‌స్క్రైబ్ చేయండి"
+  "subscribe_now": "ఇప్పుడే సబ్‌స్క్రైబ్ చేయండి",
+  "coach_free": "కోచ్ ఉచితం",
+  "coach_pro": "కోచ్ ప్రో",
+  "coach_team": "కోచ్ టీమ్",
+  "clinician_individual": "క్లినిషియన్ వ్యక్తిగత",
+  "clinician_practice": "గ్రూప్ ప్రాక్టీస్",
+  "clinician_enterprise": "ఎంటర్‌ప్రైజ్",
+  "upgrade_to_coach_pro": "కోచ్ ప్రోకి అప్‌గ్రేడ్ చేయండి",
+  "upgrade_to_coach_team": "కోచ్ టీమ్‌కి అప్‌గ్రేడ్ చేయండి",
+  "upgrade_to_practice": "ప్రాక్టీస్‌కి అప్‌గ్రేడ్ చేయండి",
+  "upgrade_to_enterprise": "ఎంటర్‌ప్రైజ్‌కి అప్‌గ్రేడ్ చేయండి",
+  "billing_monthly": "నెలవారీ",
+  "billing_yearly": "వార్షిక",
+  "save_with_yearly": "వార్షిక బిల్లింగ్‌తో ఆదా చేయండి"
 }

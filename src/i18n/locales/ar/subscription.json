@@ -20,5 +20,18 @@
   "vip_access": "وصول VIP",
   "admin_access": "وصول المشرف",
   "full_features_unlocked": "جميع الميزات مفتوحة",
-  "subscribe_now": "اشترك الآن"
+  "subscribe_now": "اشترك الآن",
+  "coach_free": "المدرب مجاني",
+  "coach_pro": "المدرب برو",
+  "coach_team": "المدرب فريق",
+  "clinician_individual": "الطبيب فردي",
+  "clinician_practice": "عيادة جماعية",
+  "clinician_enterprise": "المؤسسات",
+  "upgrade_to_coach_pro": "الترقية إلى المدرب برو",
+  "upgrade_to_coach_team": "الترقية إلى المدرب فريق",
+  "upgrade_to_practice": "الترقية إلى العيادة",
+  "upgrade_to_enterprise": "الترقية إلى المؤسسات",
+  "billing_monthly": "شهري",
+  "billing_yearly": "سنوي",
+  "save_with_yearly": "وفر مع الفوترة السنوية"
 }

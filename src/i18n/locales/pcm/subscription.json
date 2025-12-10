@@ -20,5 +20,18 @@
   "vip_access": "VIP access",
   "admin_access": "Admin access",
   "full_features_unlocked": "All features don open",
-  "subscribe_now": "Subscribe now"
+  "subscribe_now": "Subscribe now",
+  "coach_free": "Coach Free",
+  "coach_pro": "Coach Pro",
+  "coach_team": "Coach Team",
+  "clinician_individual": "Clinician Individual",
+  "clinician_practice": "Group Practice",
+  "clinician_enterprise": "Enterprise",
+  "upgrade_to_coach_pro": "Upgrade to Coach Pro",
+  "upgrade_to_coach_team": "Upgrade to Coach Team",
+  "upgrade_to_practice": "Upgrade to Practice",
+  "upgrade_to_enterprise": "Upgrade to Enterprise",
+  "billing_monthly": "Every month",
+  "billing_yearly": "Every year",
+  "save_with_yearly": "Save money with yearly billing"
 }

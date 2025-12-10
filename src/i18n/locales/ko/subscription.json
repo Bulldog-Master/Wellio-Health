@@ -20,5 +20,18 @@
   "vip_access": "VIP 접근",
   "admin_access": "관리자 접근",
   "full_features_unlocked": "모든 기능 잠금 해제",
-  "subscribe_now": "지금 구독"
+  "subscribe_now": "지금 구독",
+  "coach_free": "코치 무료",
+  "coach_pro": "코치 프로",
+  "coach_team": "코치 팀",
+  "clinician_individual": "임상의 개인",
+  "clinician_practice": "그룹 프랙티스",
+  "clinician_enterprise": "엔터프라이즈",
+  "upgrade_to_coach_pro": "코치 프로로 업그레이드",
+  "upgrade_to_coach_team": "코치 팀으로 업그레이드",
+  "upgrade_to_practice": "프랙티스로 업그레이드",
+  "upgrade_to_enterprise": "엔터프라이즈로 업그레이드",
+  "billing_monthly": "월간",
+  "billing_yearly": "연간",
+  "save_with_yearly": "연간 결제로 절약"
 }

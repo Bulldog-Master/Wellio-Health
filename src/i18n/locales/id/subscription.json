@@ -20,5 +20,18 @@
   "vip_access": "Akses VIP",
   "admin_access": "Akses admin",
   "full_features_unlocked": "Semua fitur terbuka",
-  "subscribe_now": "Berlangganan sekarang"
+  "subscribe_now": "Berlangganan sekarang",
+  "coach_free": "Coach Gratis",
+  "coach_pro": "Coach Pro",
+  "coach_team": "Coach Tim",
+  "clinician_individual": "Klinisi Individual",
+  "clinician_practice": "Praktik Grup",
+  "clinician_enterprise": "Enterprise",
+  "upgrade_to_coach_pro": "Upgrade ke Coach Pro",
+  "upgrade_to_coach_team": "Upgrade ke Coach Tim",
+  "upgrade_to_practice": "Upgrade ke Praktik",
+  "upgrade_to_enterprise": "Upgrade ke Enterprise",
+  "billing_monthly": "Bulanan",
+  "billing_yearly": "Tahunan",
+  "save_with_yearly": "Hemat dengan tagihan tahunan"
 }

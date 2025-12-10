@@ -57,5 +57,18 @@
   "manage_subscription": "Administrar Suscripción",
   "view_plans": "Ver Planes",
   "status": "Estado",
-  "use_points": "Usar Puntos"
+  "use_points": "Usar Puntos",
+  "coach_free": "Coach Gratuito",
+  "coach_pro": "Coach Pro",
+  "coach_team": "Coach Equipo",
+  "clinician_individual": "Clínico Individual",
+  "clinician_practice": "Práctica Grupal",
+  "clinician_enterprise": "Enterprise",
+  "upgrade_to_coach_pro": "Actualizar a Coach Pro",
+  "upgrade_to_coach_team": "Actualizar a Coach Equipo",
+  "upgrade_to_practice": "Actualizar a Práctica",
+  "upgrade_to_enterprise": "Actualizar a Enterprise",
+  "billing_monthly": "Mensual",
+  "billing_yearly": "Anual",
+  "save_with_yearly": "Ahorra con facturación anual"
 }

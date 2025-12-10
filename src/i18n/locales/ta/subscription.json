@@ -20,5 +20,18 @@
   "vip_access": "VIP அணுகல்",
   "admin_access": "நிர்வாக அணுகல்",
   "full_features_unlocked": "அனைத்து அம்சங்களும் திறக்கப்பட்டன",
-  "subscribe_now": "இப்போதே சந்தா செய்"
+  "subscribe_now": "இப்போதே சந்தா செய்",
+  "coach_free": "பயிற்சியாளர் இலவசம்",
+  "coach_pro": "பயிற்சியாளர் ப்ரோ",
+  "coach_team": "பயிற்சியாளர் குழு",
+  "clinician_individual": "மருத்துவர் தனிநபர்",
+  "clinician_practice": "குழு நடைமுறை",
+  "clinician_enterprise": "நிறுவனம்",
+  "upgrade_to_coach_pro": "பயிற்சியாளர் ப்ரோவிற்கு மேம்படுத்து",
+  "upgrade_to_coach_team": "பயிற்சியாளர் குழுவிற்கு மேம்படுத்து",
+  "upgrade_to_practice": "நடைமுறைக்கு மேம்படுத்து",
+  "upgrade_to_enterprise": "நிறுவனத்திற்கு மேம்படுத்து",
+  "billing_monthly": "மாதாந்திர",
+  "billing_yearly": "வருடாந்திர",
+  "save_with_yearly": "வருடாந்திர பில்லிங்கில் சேமிக்கவும்"
 }

@@ -20,5 +20,18 @@
   "vip_access": "VIP-Zugang",
   "admin_access": "Admin-Zugang",
   "full_features_unlocked": "Alle Funktionen freigeschaltet",
-  "subscribe_now": "Jetzt abonnieren"
+  "subscribe_now": "Jetzt abonnieren",
+  "coach_free": "Coach Kostenlos",
+  "coach_pro": "Coach Pro",
+  "coach_team": "Coach Team",
+  "clinician_individual": "Kliniker Einzeln",
+  "clinician_practice": "Gruppenpraxis",
+  "clinician_enterprise": "Enterprise",
+  "upgrade_to_coach_pro": "Auf Coach Pro upgraden",
+  "upgrade_to_coach_team": "Auf Coach Team upgraden",
+  "upgrade_to_practice": "Auf Praxis upgraden",
+  "upgrade_to_enterprise": "Auf Enterprise upgraden",
+  "billing_monthly": "Monatlich",
+  "billing_yearly": "Jährlich",
+  "save_with_yearly": "Sparen mit jährlicher Abrechnung"
 }

@@ -20,5 +20,18 @@
   "vip_access": "VIP访问",
   "admin_access": "管理员访问",
   "full_features_unlocked": "所有功能已解锁",
-  "subscribe_now": "立即订阅"
+  "subscribe_now": "立即订阅",
+  "coach_free": "教练免费版",
+  "coach_pro": "教练专业版",
+  "coach_team": "教练团队版",
+  "clinician_individual": "临床医生个人版",
+  "clinician_practice": "诊所版",
+  "clinician_enterprise": "企业版",
+  "upgrade_to_coach_pro": "升级到教练专业版",
+  "upgrade_to_coach_team": "升级到教练团队版",
+  "upgrade_to_practice": "升级到诊所版",
+  "upgrade_to_enterprise": "升级到企业版",
+  "billing_monthly": "月付",
+  "billing_yearly": "年付",
+  "save_with_yearly": "年付更省钱"
 }

@@ -20,5 +20,18 @@
   "vip_access": "Acesso VIP",
   "admin_access": "Acesso Admin",
   "full_features_unlocked": "Todos os recursos desbloqueados",
-  "subscribe_now": "Assinar agora"
+  "subscribe_now": "Assinar agora",
+  "coach_free": "Coach Gratuito",
+  "coach_pro": "Coach Pro",
+  "coach_team": "Coach Equipe",
+  "clinician_individual": "Clínico Individual",
+  "clinician_practice": "Prática em Grupo",
+  "clinician_enterprise": "Enterprise",
+  "upgrade_to_coach_pro": "Atualizar para Coach Pro",
+  "upgrade_to_coach_team": "Atualizar para Coach Equipe",
+  "upgrade_to_practice": "Atualizar para Prática",
+  "upgrade_to_enterprise": "Atualizar para Enterprise",
+  "billing_monthly": "Mensal",
+  "billing_yearly": "Anual",
+  "save_with_yearly": "Economize com cobrança anual"
 }

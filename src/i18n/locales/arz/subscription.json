@@ -24,5 +24,18 @@
   "subscription_cancelled": "الاشتراك ملغي",
   "trial_period": "فترة التجربة",
   "days_remaining": "{{days}} يوم باقي",
-  "subscribe_now": "اشترك دلوقتي"
+  "subscribe_now": "اشترك دلوقتي",
+  "coach_free": "المدرب مجاني",
+  "coach_pro": "المدرب برو",
+  "coach_team": "المدرب فريق",
+  "clinician_individual": "الدكتور فردي",
+  "clinician_practice": "عيادة جماعية",
+  "clinician_enterprise": "المؤسسات",
+  "upgrade_to_coach_pro": "ترقية للمدرب برو",
+  "upgrade_to_coach_team": "ترقية للمدرب فريق",
+  "upgrade_to_practice": "ترقية للعيادة",
+  "upgrade_to_enterprise": "ترقية للمؤسسات",
+  "billing_monthly": "شهري",
+  "billing_yearly": "سنوي",
+  "save_with_yearly": "وفّر مع الفاتورة السنوية"
 }
