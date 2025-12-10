@@ -20,7 +20,11 @@ interface FoundProfessional {
   };
 }
 
-export const JoinByCode = () => {
+interface JoinByCodeProps {
+  onSuccess?: () => void;
+}
+
+export const JoinByCode = ({ onSuccess }: JoinByCodeProps) => {
   const { t } = useTranslation(['professional', 'common']);
   const [code, setCode] = useState('');
   const [searching, setSearching] = useState(false);
@@ -119,6 +123,7 @@ export const JoinByCode = () => {
       toast.success(t('professional:request_sent'));
       setFound(null);
       setCode('');
+      onSuccess?.();
     } catch (err) {
       console.error('Error requesting connection:', err);
       toast.error(t('professional:request_failed'));

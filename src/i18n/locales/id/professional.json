@@ -159,5 +159,17 @@
   "request_connection": "Minta Koneksi",
   "connection_requested": "Permintaan Koneksi Terkirim",
   "data_access_consent": "Persetujuan Akses Data",
-  "review_consent": "Tinjau Persetujuan"
+  "review_consent": "Tinjau Persetujuan",
+  "my_care_team": "Tim Perawatan Saya",
+  "my_care_team_desc": "Kelola pelatih dan penyedia layanan kesehatan yang terhubung",
+  "connected_professionals": "Profesional Terhubung",
+  "add_professional": "Tambah Profesional",
+  "no_professionals_connected": "Anda belum terhubung dengan profesional mana pun.",
+  "since": "Sejak",
+  "revoke_access": "Cabut Akses",
+  "revoke_access_title": "Cabut Akses Profesional",
+  "revoke_access_desc": "Apakah Anda yakin ingin mencabut akses untuk {{name}}?",
+  "access_revoked": "Akses berhasil dicabut",
+  "coach": "Pelatih",
+  "clinician": "Klinisi"
 }

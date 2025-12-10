@@ -179,5 +179,16 @@
   "clinician": "Klinisyen",
   "medical_records": "Tıbbi kayıtlar",
   "personal_messages": "Kişisel mesajlar",
-  "payment_info": "Ödeme bilgileri"
+  "payment_info": "Ödeme bilgileri",
+
+  "my_care_team": "Bakım Ekibim",
+  "my_care_team_desc": "Bağlı koçlarınızı ve sağlık hizmeti sağlayıcılarınızı yönetin",
+  "connected_professionals": "Bağlı Profesyoneller",
+  "add_professional": "Profesyonel Ekle",
+  "no_professionals_connected": "Henüz hiçbir profesyonelle bağlantı kurmadınız. Başlamak için bir davet kodu girin.",
+  "since": "Beri",
+  "revoke_access": "Erişimi İptal Et",
+  "revoke_access_title": "Profesyonel Erişimini İptal Et",
+  "revoke_access_desc": "{{name}} için erişimi iptal etmek istediğinizden emin misiniz? Artık sağlık verilerinizi görüntüleyemeyecekler.",
+  "access_revoked": "Erişim başarıyla iptal edildi"
 }

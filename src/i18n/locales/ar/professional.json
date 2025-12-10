@@ -179,5 +179,16 @@
   "clinician": "طبيب سريري",
   "medical_records": "السجلات الطبية",
   "personal_messages": "الرسائل الشخصية",
-  "payment_info": "معلومات الدفع"
+  "payment_info": "معلومات الدفع",
+
+  "my_care_team": "فريق الرعاية الخاص بي",
+  "my_care_team_desc": "إدارة المدربين ومقدمي الرعاية الصحية المتصلين",
+  "connected_professionals": "المحترفون المتصلون",
+  "add_professional": "إضافة محترف",
+  "no_professionals_connected": "لم تتصل بأي محترف بعد. أدخل رمز الدعوة للبدء.",
+  "since": "منذ",
+  "revoke_access": "إلغاء الوصول",
+  "revoke_access_title": "إلغاء وصول المحترف",
+  "revoke_access_desc": "هل أنت متأكد من أنك تريد إلغاء وصول {{name}}؟ لن يتمكنوا من عرض بياناتك الصحية بعد الآن.",
+  "access_revoked": "تم إلغاء الوصول بنجاح"
 }

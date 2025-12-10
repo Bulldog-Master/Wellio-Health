@@ -134,5 +134,16 @@
   "clinician": "临床医生",
   "medical_records": "医疗记录",
   "personal_messages": "个人消息",
-  "payment_info": "付款信息"
+  "payment_info": "付款信息",
+
+  "my_care_team": "我的护理团队",
+  "my_care_team_desc": "管理您连接的教练和医疗服务提供者",
+  "connected_professionals": "已连接的专业人士",
+  "add_professional": "添加专业人士",
+  "no_professionals_connected": "您尚未与任何专业人士建立连接。输入邀请码开始。",
+  "since": "自",
+  "revoke_access": "撤销访问权限",
+  "revoke_access_title": "撤销专业人士访问权限",
+  "revoke_access_desc": "您确定要撤销 {{name}} 的访问权限吗？他们将无法再查看您的健康数据。",
+  "access_revoked": "访问权限已成功撤销"
 }

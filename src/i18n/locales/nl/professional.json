@@ -179,5 +179,16 @@
   "clinician": "Klinicus",
   "medical_records": "Medische dossiers",
   "personal_messages": "Persoonlijke berichten",
-  "payment_info": "Betalingsinformatie"
+  "payment_info": "Betalingsinformatie",
+
+  "my_care_team": "Mijn Zorgteam",
+  "my_care_team_desc": "Beheer uw verbonden coaches en zorgverleners",
+  "connected_professionals": "Verbonden Professionals",
+  "add_professional": "Professional Toevoegen",
+  "no_professionals_connected": "U bent nog niet verbonden met professionals. Voer een uitnodigingscode in om te beginnen.",
+  "since": "Sinds",
+  "revoke_access": "Toegang Intrekken",
+  "revoke_access_title": "Toegang Professional Intrekken",
+  "revoke_access_desc": "Weet u zeker dat u de toegang voor {{name}} wilt intrekken? Zij kunnen uw gezondheidsgegevens niet meer bekijken.",
+  "access_revoked": "Toegang succesvol ingetrokken"
 }
