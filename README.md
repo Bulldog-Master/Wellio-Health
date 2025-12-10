@@ -133,7 +133,7 @@ Wellio allows professionals to grow their practice safely, and individuals retai
 | **State** | TanStack Query, Zustand |
 | **Backend** | Supabase (Postgres, Auth, Storage, Edge Functions) |
 | **Mobile** | Capacitor (iOS/Android) |
-| **AI** | Lovable AI (Gemini, OpenAI models), OpenAI Realtime API |
+| **AI** | Lovable AI (Gemini + OpenAI models), OpenAI Realtime API |
 | **Encryption** | @noble/post-quantum (ML-KEM-768), Web Crypto API |
 | **i18n** | i18next (23 languages) |
 | **Testing** | Vitest, Testing Library |
