@@ -31,5 +31,10 @@
   "trend_declining": "Indeks fungsional telah menurun selama 14 hari terakhir.",
   "trend_stable": "Indeks fungsional relatif stabil.",
   "trend_unknown": "Data tidak cukup untuk menentukan tren yang jelas.",
-  "access_denied": "Akses ditolak. Peran klinisi diperlukan."
+  "access_denied": "Akses ditolak. Peran klinisi diperlukan.",
+  "clinician_access_required": "Akses klinisi diperlukan",
+  "clinician_access_required_desc": "Anda memerlukan peran klinisi atau praktisi untuk mengakses dasbor ini.",
+  "apply_as_practitioner": "Daftar sebagai praktisi",
+  "clinician_dashboard": "Dasbor Klinisi",
+  "clinician_dashboard_desc": "Kelola pasien Anda dan lihat data kesehatan mereka."
 }

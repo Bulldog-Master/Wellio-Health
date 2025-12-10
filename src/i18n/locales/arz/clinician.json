@@ -31,5 +31,10 @@
   "trend_declining": "المؤشر الوظيفي نزل في الـ 14 يوم اللي فاتوا.",
   "trend_stable": "المؤشر الوظيفي فضل مستقر نسبيًا.",
   "trend_unknown": "البيانات مش كافية عشان نحدد اتجاه واضح.",
-  "access_denied": "الوصول مرفوض. مطلوب دور الطبيب السريري."
+  "access_denied": "الوصول مرفوض. مطلوب دور الطبيب السريري.",
+  "clinician_access_required": "مطلوب صلاحية الطبيب",
+  "clinician_access_required_desc": "محتاج دور طبيب أو ممارس عشان توصل للوحة التحكم دي.",
+  "apply_as_practitioner": "قدم طلب كممارس",
+  "clinician_dashboard": "لوحة تحكم الطبيب",
+  "clinician_dashboard_desc": "أدر مرضاك وشوف بيانات صحتهم."
 }
