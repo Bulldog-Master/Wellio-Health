@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/assets/wellio-readme-banner.png" width="100%" alt="Wellio – Quantum-Private Wellness Platform"/>
+</p>
+
 # Wellio Health
 
 <!-- PROJECT BADGES -->
