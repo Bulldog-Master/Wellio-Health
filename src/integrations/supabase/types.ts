@@ -2087,6 +2087,13 @@ export type Database = {
             referencedRelation: "fitness_locations"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "location_reviews_location_id_fkey"
+            columns: ["location_id"]
+            isOneToOne: false
+            referencedRelation: "fitness_locations_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       meal_plans: {
@@ -5552,6 +5559,84 @@ export type Database = {
       }
     }
     Views: {
+      fitness_locations_public: {
+        Row: {
+          address: string | null
+          amenities: string[] | null
+          average_rating: number | null
+          category: string | null
+          city: string | null
+          country: string | null
+          created_at: string | null
+          description: string | null
+          hours_of_operation: Json | null
+          id: string | null
+          image_url: string | null
+          is_active: boolean | null
+          is_verified: boolean | null
+          latitude: number | null
+          longitude: number | null
+          name: string | null
+          phone: string | null
+          postal_code: string | null
+          price_range: string | null
+          state: string | null
+          total_reviews: number | null
+          updated_at: string | null
+          website_url: string | null
+        }
+        Insert: {
+          address?: string | null
+          amenities?: string[] | null
+          average_rating?: number | null
+          category?: string | null
+          city?: string | null
+          country?: string | null
+          created_at?: string | null
+          description?: string | null
+          hours_of_operation?: Json | null
+          id?: string | null
+          image_url?: string | null
+          is_active?: boolean | null
+          is_verified?: boolean | null
+          latitude?: number | null
+          longitude?: number | null
+          name?: string | null
+          phone?: string | null
+          postal_code?: string | null
+          price_range?: string | null
+          state?: string | null
+          total_reviews?: number | null
+          updated_at?: string | null
+          website_url?: string | null
+        }
+        Update: {
+          address?: string | null
+          amenities?: string[] | null
+          average_rating?: number | null
+          category?: string | null
+          city?: string | null
+          country?: string | null
+          created_at?: string | null
+          description?: string | null
+          hours_of_operation?: Json | null
+          id?: string | null
+          image_url?: string | null
+          is_active?: boolean | null
+          is_verified?: boolean | null
+          latitude?: number | null
+          longitude?: number | null
+          name?: string | null
+          phone?: string | null
+          postal_code?: string | null
+          price_range?: string | null
+          state?: string | null
+          total_reviews?: number | null
+          updated_at?: string | null
+          website_url?: string | null
+        }
+        Relationships: []
+      }
       wearable_connections_safe: {
         Row: {
           created_at: string | null
@@ -5723,27 +5808,19 @@ export type Database = {
         }[]
       }
       get_profile_safe: {
-        Args: { _profile_id: string }
+        Args: { profile_user_id: string }
         Returns: {
           age: number
           avatar_url: string
+          bio: string
           created_at: string
-          current_streak: number
-          fitness_level: string
-          followers_count: number
-          following_count: number
           full_name: string
-          gender: string
-          goal: string
           height: number
           id: string
           is_private: boolean
-          longest_streak: number
-          onboarding_completed: boolean
-          referral_code: string
+          location: string
+          show_health_metrics_to_followers: boolean
           target_weight: number
-          total_points: number
-          updated_at: string
           username: string
           weight: number
         }[]
