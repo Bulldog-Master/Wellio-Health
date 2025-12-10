@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { User, UserPlus, UserCheck, Trophy, TrendingUp, ArrowLeft, Check, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
+import { rateLimiter, RATE_LIMITS } from "@/lib/features";
 
 const FollowersList = () => {
   const { userId } = useParams<{ userId: string }>();

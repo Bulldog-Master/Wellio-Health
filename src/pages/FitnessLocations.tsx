@@ -10,7 +10,7 @@ import { SEOHead } from '@/components/common';
 import { useAdminStatus } from '@/hooks/auth';
 import { MapPin, Plus, ExternalLink, Phone, ArrowLeft, Map, Locate, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { calculateDistance, getCountryFlag, groupLocationsByCountry, categoryIcons, FitnessLocation } from '@/lib/locationUtils';
+import { calculateDistance, getCountryFlag, groupLocationsByCountry, categoryIcons, FitnessLocation } from '@/lib/location';
 import { useLocationDiscovery, useLocationMutations, initialFormData, type LocationFormData } from '@/hooks/locations';
 import { LocationCard, LocationSubmitDialog, LocationEditDialog, LocationSearchDialog, LocationFilters } from '@/components/locations';
 

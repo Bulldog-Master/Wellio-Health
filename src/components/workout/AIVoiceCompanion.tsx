@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/hooks/use-toast';
 import { useTranslation } from 'react-i18next';
-import { RealtimeChat } from '@/lib/realtimeAudio';
+import { RealtimeChat } from '@/lib/media';
 import { 
   Mic, 
   MicOff, 

@@ -1,5 +1,2 @@
-/**
- * @deprecated Import from '@/lib/services' instead
- * This file is kept for backward compatibility
- */
+// Backward compatibility - import from @/lib/services
 export * from './services/performanceMonitoring';

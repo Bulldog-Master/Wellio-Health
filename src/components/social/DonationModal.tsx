@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { Heart } from 'lucide-react';
-import { rateLimiter, RATE_LIMITS } from '@/lib/rateLimit';
+import { rateLimiter, RATE_LIMITS } from '@/lib/features';
 import { useTranslation } from 'react-i18next';
 
 interface DonationModalProps {

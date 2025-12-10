@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 import { profileUpdateSchema, validateAndSanitize } from "@/lib/validationSchemas";
-import { rateLimiter, RATE_LIMITS } from "@/lib/rateLimit";
+import { rateLimiter, RATE_LIMITS } from "@/lib/features";
 
 export interface ProfileFormData {
   name: string;

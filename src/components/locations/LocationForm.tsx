@@ -8,7 +8,7 @@ import { Plus } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { AddressAutocomplete, GymNameAutocomplete } from '@/components/locations';
 import { PhoneInput } from '@/components/common';
-import { locationCategories } from '@/lib/locationUtils';
+import { locationCategories } from '@/lib/location';
 
 export interface LocationFormData {
   name: string;

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
-import { uploadMedicalFile } from '@/lib/medicalFileStorage';
+import { uploadMedicalFile } from '@/lib/storage';
 import { 
   medicationSchema, 
   testResultSchema, 

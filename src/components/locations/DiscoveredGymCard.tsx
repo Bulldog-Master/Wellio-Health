@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { MapPin, ExternalLink, Phone, Plus, Loader2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { categoryIcons } from '@/lib/locationUtils';
+import { categoryIcons } from '@/lib/location';
 
 interface DiscoveredGym {
   osm_id: string;
