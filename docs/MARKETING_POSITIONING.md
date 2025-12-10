@@ -4,13 +4,25 @@ This document contains approved marketing copy and positioning materials for Wel
 
 ---
 
+## 🎯 Master Positioning Statement
+
+**Wellio is a next-generation Wellness APP Platform that empowers individuals to track their wellbeing privately — while optionally connecting with trainers, coaches, or clinicians through secure, limited-visibility insights. It is privacy-first, post-quantum secure, and powered by cMixx metadata protection.**
+
+---
+
+## 🔐 Master Security Statement
+
+**The APP Platform is built with a zero-trust architecture. Raw logs never leave the user's device. All communication is protected with post-quantum encryption (ML-KEM-768) and cMixx metadata-elimination technology.**
+
+---
+
 ## 🌐 Website Copy (Above the Fold)
 
 ### Hero Section
 
 # Your Health, Improved — Without Giving Up Your Data
 
-Wellio combines AI-powered coaching, clinician-friendly insights, and post-quantum privacy into a single wellness platform.
+Wellio is a privacy-first Wellness APP Platform for individuals, with optional support from trainers, coaches, and clinicians.
 
 Track your workouts, meals, sleep, hydration, and mood — and generate your **Functional Wellness Index**, a daily score that reflects how well your habits support your goals.
 
@@ -20,7 +32,7 @@ Track your workouts, meals, sleep, hydration, and mood — and generate your **F
 Invite a trainer or healthcare provider to view your high-level trends. They never see your raw logs or personal details.
 
 🔐 **End-to-end encrypted messages**
-Built with post-quantum cryptography and xx.network's cMix mixnet for metadata protection.
+Built with post-quantum cryptography and xx.network's cMixx mixnet for metadata protection.
 
 🧠 **Insights, not surveillance**
 Your data stays on your device. We analyze behaviors — not identity.
@@ -31,11 +43,11 @@ Your data stays on your device. We analyze behaviors — not identity.
 
 ---
 
-## For Coaches & Clinicians
+## For Trainers, Coaches & Clinicians
 
 Stop guessing. Wellio translates raw behavior into a **Functional Wellness Index**:
 
-- Coaches see adherence, readiness, and progress signals  
+- Trainers/Coaches see adherence, readiness, and progress signals  
 - Clinicians see risk trajectories and wellness trends  
 
 No PHI. No compliance burden. No liability surface.
@@ -48,8 +60,8 @@ You get **decision-ready insights** — not personal diaries.
 
 | Element | Statement |
 |---------|-----------|
-| **Category** | Privacy-preserving human performance platform |
-| **Target** | Privacy-conscious individuals tracking wellness + professionals supporting them |
+| **Category** | Privacy-first Wellness APP Platform |
+| **Target** | Privacy-conscious individuals + professionals supporting them |
 | **Differentiation** | Clinical relevance without clinical liability; AI coaching without data exploitation |
 | **Promise** | Health improvement through behavioral insights, not surveillance |
 
@@ -57,10 +69,10 @@ You get **decision-ready insights** — not personal diaries.
 
 ## 📣 One-Liners (for different contexts)
 
-- **Product Hunt**: "The wellness app that coaches you without tracking you."
-- **LinkedIn**: "Enterprise-grade privacy meets AI-powered fitness coaching."
+- **Product Hunt**: "The wellness APP Platform that coaches you without tracking you."
+- **LinkedIn**: "Enterprise-grade privacy meets AI-powered wellness. Built for individuals, with optional professional support."
 - **Twitter/X**: "Your health data is yours. Period. AI coaching + post-quantum encryption."
-- **Investor Deck**: "Privacy-preserving wellness platform enabling clinical collaboration without liability."
+- **Investor Deck**: "Privacy-preserving Wellness APP Platform enabling professional collaboration without liability."
 
 ---
 
@@ -75,13 +87,13 @@ Wellio is the first wellness system designed with **zero-knowledge participation
 - Behavior stays local
 - AI runs on the user's device
 - Messaging is encrypted end-to-end
-- Metadata disappears through cMix
+- Metadata disappears through cMixx
 
 Instead of storing PHI, Wellio computes **derived functional signals** — clinically useful without regulatory gravity.
 
 This unlocks a new category:
 
-**A decentralized, quantum-private performance network** connecting individuals, coaches, and clinicians without exposing identity or data trails.
+**A decentralized, quantum-private Wellness APP Platform** connecting individuals, trainers, coaches, and clinicians without exposing identity or data trails.
 
 xx.network provides the routing layer Wellio needs to prove:
 

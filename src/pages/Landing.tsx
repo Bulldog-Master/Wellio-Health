@@ -68,9 +68,9 @@ const Landing = () => {
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-              Your health stays yours. Wellio gives you insights, not surveillance. 
-              Track fitness, nutrition, sleep, and mood — all protected by post-quantum encryption 
-              and metadata-proof messaging.
+              Wellio is a privacy-first Wellness APP Platform for individuals, with optional support 
+              from trainers, coaches, and clinicians. Raw data stays on your device — only derived 
+              wellness insights can be shared, if you choose.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -112,7 +112,7 @@ const Landing = () => {
                 Why Wellio?
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Four pillars that make Wellio fundamentally different from every other wellness app.
+                Four pillars that make this Wellness APP Platform fundamentally different.
               </p>
             </div>
 
@@ -165,7 +165,7 @@ const Landing = () => {
                 Your Daily Wellness Command Center
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Everything you need to improve your health, all in one quantum-private platform.
+                Everything you need to improve your health, all in one quantum-private APP Platform.
               </p>
             </div>
 
@@ -268,10 +268,10 @@ const Landing = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Built for Professionals
+                Optional Professional Extensions
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Coaches and clinicians get powerful tools without the compliance burden.
+                Trainers, coaches, and clinicians get powerful tools without the compliance burden.
               </p>
             </div>
 
@@ -282,7 +282,7 @@ const Landing = () => {
                     <div className="p-3 rounded-xl bg-primary/10">
                       <Dumbbell className="h-8 w-8 text-primary" />
                     </div>
-                    <h3 className="text-2xl font-bold">Coaches</h3>
+                    <h3 className="text-2xl font-bold">Trainers & Coaches</h3>
                   </div>
                   <p className="text-muted-foreground mb-4">
                     See FWI trends, adherence patterns, and deliver personalized coaching — 

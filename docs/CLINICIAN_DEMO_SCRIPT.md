@@ -9,7 +9,7 @@
 
 ### Opening Frame – Wellio Logo
 
-> "Welcome to Wellio — the world's first quantum-private wellness platform built for both individuals and professionals."
+> "Welcome to Wellio — a privacy-first Wellness APP Platform with optional support for clinicians and healthcare professionals."
 
 ---
 
@@ -51,4 +51,4 @@
 
 ### Final Screen with Wellio Logo
 
-> "Wellio brings modern wellness insights together with uncompromising privacy — empowering clinicians to support patients safely, ethically, and effectively."
+> "The APP Platform is built with a zero-trust architecture. Raw logs never leave the user's device. Wellio empowers clinicians to support patients safely, ethically, and effectively."

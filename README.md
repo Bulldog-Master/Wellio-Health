@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/wellio-readme-banner.png" width="100%" alt="Wellio – Quantum-Private Wellness Platform"/>
+  <img src="docs/assets/wellio-readme-banner.png" width="100%" alt="Wellio – Quantum-Private Wellness APP Platform"/>
 </p>
 
 # Wellio Health
@@ -47,11 +47,11 @@
   <img src="https://img.shields.io/badge/Docs-Complete-brightgreen?style=for-the-badge&logo=readme" alt="Documentation Status" />
 </p>
 
-A comprehensive wellness and fitness platform with enterprise-grade security, AI-powered insights, and global accessibility.
+A privacy-first Wellness APP Platform for individuals, with optional support from trainers, coaches, and clinicians. Raw data stays on the user's device, and only derived wellness insights can be shared — if the user chooses.
 
 ## 🎯 What is Wellio Health?
 
-Wellio Health is a privacy-first wellness platform designed for individuals seeking to track, improve, and maintain their health and fitness journey. It provides comprehensive tools for fitness tracking, nutrition management, medical records, and social connection—all protected by quantum-resistant encryption.
+Wellio is a next-generation Wellness APP Platform that empowers individuals to track their wellbeing privately — while optionally connecting with trainers, coaches, or clinicians through secure, limited-visibility insights. It is privacy-first, post-quantum secure, and powered by cMixx metadata protection.
 
 **Who is it for?**
 - Individuals tracking daily wellness (workouts, nutrition, habits, sleep)
@@ -59,9 +59,9 @@ Wellio Health is a privacy-first wellness platform designed for individuals seek
 - Global users needing multi-language support (23 languages)
 - Those seeking AI-powered fitness and nutrition insights
 
-### For Professionals (Coaches & Clinicians)
+### For Professionals (Trainers, Coaches & Clinicians)
 
-Wellio is more than a consumer wellness app — it is a privacy-first professional toolkit for coaches, trainers, clinicians, and wellness practitioners.
+Wellio is more than a consumer app — it is an APP Platform with optional professional extensions for trainers, coaches, and clinicians.
 
 Professionals use Wellio to:
 - Gain functional insight without exposing or handling PHI
@@ -266,7 +266,7 @@ npx cap open android # Opens in Android Studio
 
 ## 🧑‍⚕️ Care Team Architecture
 
-Wellio is not a solo fitness app — it's a privacy-preserving human performance platform. Users can connect with coaches and clinicians who support their training and wellness goals.
+Wellio is an individual-centered APP Platform with optional professional extensions. Users can connect with trainers, coaches, and clinicians who support their training and wellness goals — but professionals only see derived insights, never raw data.
 
 ### What Professionals Can See
 

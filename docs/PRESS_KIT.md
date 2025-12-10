@@ -10,19 +10,19 @@
 
 ## B. Short Description (App Stores)
 
-> "Wellio is the first wellness platform that combines AI guidance with post-quantum encryption and metadata-proof messaging. Built for individuals, coaches, and clinicians — without compromising privacy."
+> "Wellio is a privacy-first Wellness APP Platform for individuals, with optional support from trainers, coaches, and clinicians. Raw data stays on your device — only derived wellness insights can be shared, if you choose."
 
 ---
 
 ## C. Long Description (Website / Press Kit)
 
-> Wellio is a next-generation health and wellness platform that protects user data with post-quantum encryption and xx.network's cMixx metadata elimination.
+> Wellio is a next-generation Wellness APP Platform that empowers individuals to track their wellbeing privately — while optionally connecting with trainers, coaches, or clinicians through secure, limited-visibility insights.
 >
-> Unlike traditional wellness apps, Wellio never stores raw journals, meal logs, or medical notes on its servers. Instead, Wellio derives a Functional Wellness Index (FWI) — a privacy-preserving signal that empowers coaches and clinicians without exposing personal details.
+> Unlike traditional wellness apps, Wellio never stores raw journals, meal logs, or medical notes on its servers. Instead, Wellio derives a Functional Wellness Index (FWI) — a privacy-preserving signal that empowers professionals without exposing personal details.
+>
+> The APP Platform is built with a zero-trust architecture. Raw logs never leave the user's device. All communication is protected with post-quantum encryption (ML-KEM-768) and cMixx metadata-elimination technology.
 >
 > Professionals gain powerful insights. Users retain complete control.
->
-> Wellio brings human wellness into the future — safely, ethically, and intelligently.
 
 ---
 
@@ -31,11 +31,11 @@
 ### Security Angle
 > "Wellio sets a new standard for consumer and clinical privacy — metadata elimination is the missing piece in health tech."
 
-### Clinician Angle
+### Professional Angle
 > "It's rare to see a tool that improves outcomes and reduces compliance risk. Wellio is one of them."
 
 ### Tech Angle
-> "A showcase of applied post-quantum cryptography in a consumer app."
+> "A showcase of applied post-quantum cryptography in a consumer APP Platform."
 
 ---
 

@@ -1,12 +1,15 @@
 {
-  "home_title": "Wellio - Your Complete Fitness Journey",
-  "home_description": "Track workouts, nutrition, and progress. Connect with a fitness community. Achieve your health goals with Wellio.",
+  "home_title": "Wellio - Privacy-First Wellness APP Platform",
+  "home_description": "AI-powered wellness, quantum-private by design. Track fitness, nutrition, and health privately with optional professional support.",
+  
+  "landing_title": "Wellio - Privacy-First Wellness APP Platform",
+  "landing_description": "Wellio is a privacy-first Wellness APP Platform for individuals, with optional support from trainers, coaches, and clinicians. Post-quantum secure.",
   
   "dashboard_title": "Dashboard",
   "dashboard_description": "View your fitness stats, track progress, and stay motivated with your personalized dashboard.",
   
   "auth_title": "Sign In or Create Account",
-  "auth_description": "Join Wellio to track your fitness journey, connect with others, and achieve your health goals.",
+  "auth_description": "Join Wellio to track your wellness journey privately and connect with optional professional support.",
   
   "workout_title": "Workout Tracker",
   "workout_description": "Log your exercises, track sets and reps, and monitor your fitness progress over time.",
@@ -83,6 +86,6 @@
   "clinician_dashboard_title": "Clinician Dashboard - Wellio",
   "clinician_dashboard_description": "Monitor patient wellness trends and functional health indices securely.",
   
-  "for_professionals_title": "For Professionals - Wellio",
-  "for_professionals_description": "Professional-grade coaching and clinical insight without compromising privacy. Get functional wellness signals, trend insights, and secure communication."
+  "for_professionals_title": "For Professionals - Wellio APP Platform",
+  "for_professionals_description": "Optional professional extensions for trainers, coaches, and clinicians. Functional wellness signals without raw data access. Quantum-private communication."
 }
