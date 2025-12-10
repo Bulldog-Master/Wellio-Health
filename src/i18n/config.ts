@@ -1216,6 +1216,7 @@ const resources = {
     macros: macrosTE, measurements: measurementsTE, records: recordsTE, referral: referralTE,
     rewards: rewardsTE, search: searchTE, session: sessionTE, voice: voiceTE, payments: paymentsTE,
     legal: legalTE, controls: controlsTE, compliance: complianceTE, accessibility: accessibilityTE,
+    onboarding: onboardingTE,
   },
   vi: {
     common: commonVI, auth: authVI, settings: settingsVI, fitness: fitnessVI, nutrition: nutritionVI,
@@ -1226,6 +1227,7 @@ const resources = {
     macros: macrosVI, measurements: measurementsVI, records: recordsVI, referral: referralVI,
     rewards: rewardsVI, search: searchVI, session: sessionVI, voice: voiceVI, payments: paymentsVI,
     legal: legalVI, controls: controlsVI, compliance: complianceVI, accessibility: accessibilityVI,
+    onboarding: onboardingVI,
   },
 };
 
