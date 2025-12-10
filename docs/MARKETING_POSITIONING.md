@@ -31,6 +31,19 @@ Your data stays on your device. We analyze behaviors — not identity.
 
 ---
 
+## For Coaches & Clinicians
+
+Stop guessing. Wellio translates raw behavior into a **Functional Wellness Index**:
+
+- Coaches see adherence, readiness, and progress signals  
+- Clinicians see risk trajectories and wellness trends  
+
+No PHI. No compliance burden. No liability surface.
+
+You get **decision-ready insights** — not personal diaries.
+
+---
+
 ## 🎯 Core Positioning
 
 | Element | Statement |
