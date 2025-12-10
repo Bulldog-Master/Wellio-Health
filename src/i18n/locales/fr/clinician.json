@@ -36,5 +36,22 @@
   "clinician_dashboard_desc": "Surveillez le bien-être des patients avec des résumés de tendances fonctionnelles et des alertes de risque.",
   "clinician_access_required": "Accès Médecin Requis",
   "clinician_access_required_desc": "Vous devez être un médecin ou praticien approuvé pour accéder à ce tableau de bord.",
-  "apply_as_practitioner": "Postuler comme Praticien"
+  "apply_as_practitioner": "Postuler comme Praticien",
+  "open_profile": "Ouvrir le Profil",
+  "start_session": "Démarrer la Session",
+  "schedule_session": "Planifier",
+  "connected": "connecté(s)",
+  "last_updated": "Dernière mise à jour",
+  "fwi": "IFB",
+  "error_loading_patients": "Impossible de charger les patients.",
+  "loading_sessions": "Chargement des sessions vidéo…",
+  "error_loading_sessions": "Impossible de charger les sessions vidéo.",
+  "video_sessions": "Sessions Vidéo",
+  "no_video_sessions": "Vous n'avez pas encore planifié de sessions vidéo.",
+  "dashboard_description": "Visualisez les signaux de bien-être fonctionnel et les tendances de vos patients — pas leurs journaux bruts ou documents médicaux. La messagerie et les appels vidéo sont conçus pour le chiffrement post-quantique et la protection des métadonnées via cMixx de xx.network.",
+  "pq_encryption": "Chiffrement PQ",
+  "cmix_protection": "Protection cMixx",
+  "secure_messaging": "Messagerie Sécurisée",
+  "secure_messaging_desc": "Messagerie chiffrée de bout en bout avec protection des métadonnées via xx.network cMixx.",
+  "open_messages": "Ouvrir les Messages"
 }

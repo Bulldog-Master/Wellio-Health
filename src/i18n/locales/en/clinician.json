@@ -39,5 +39,19 @@
   "apply_as_practitioner": "Apply as Practitioner",
   "open_profile": "Open Profile",
   "start_session": "Start Session",
-  "schedule_session": "Schedule"
+  "schedule_session": "Schedule",
+  "connected": "connected",
+  "last_updated": "Last updated",
+  "fwi": "FWI",
+  "error_loading_patients": "Couldn't load patients right now.",
+  "loading_sessions": "Loading video sessions…",
+  "error_loading_sessions": "Couldn't load video sessions.",
+  "video_sessions": "Video Sessions",
+  "no_video_sessions": "You haven't scheduled any video sessions yet.",
+  "dashboard_description": "View functional wellness signals and trends for your patients — not their raw logs or medical documents. Messaging and video calls are designed for post-quantum encryption and xx.network's cMixx metadata protection.",
+  "pq_encryption": "PQ Encryption",
+  "cmix_protection": "cMixx Protected",
+  "secure_messaging": "Secure Messaging",
+  "secure_messaging_desc": "End-to-end encrypted messaging with metadata protection via xx.network cMixx.",
+  "open_messages": "Open Messages"
 }

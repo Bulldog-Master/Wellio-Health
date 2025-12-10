@@ -36,5 +36,22 @@
   "clinician_dashboard_desc": "Monitora il benessere dei pazienti con riepiloghi di tendenza funzionale e avvisi di rischio.",
   "clinician_access_required": "Accesso Medico Richiesto",
   "clinician_access_required_desc": "Devi essere un medico o professionista approvato per accedere a questa dashboard.",
-  "apply_as_practitioner": "Candidati come Professionista"
+  "apply_as_practitioner": "Candidati come Professionista",
+  "open_profile": "Apri Profilo",
+  "start_session": "Avvia Sessione",
+  "schedule_session": "Programma",
+  "connected": "connesso/i",
+  "last_updated": "Ultimo aggiornamento",
+  "fwi": "IBF",
+  "error_loading_patients": "Impossibile caricare i pazienti.",
+  "loading_sessions": "Caricamento sessioni video…",
+  "error_loading_sessions": "Impossibile caricare le sessioni video.",
+  "video_sessions": "Sessioni Video",
+  "no_video_sessions": "Non hai ancora programmato sessioni video.",
+  "dashboard_description": "Visualizza i segnali di benessere funzionale e le tendenze dei tuoi pazienti — non i loro log grezzi o documenti medici. La messaggistica e le videochiamate sono progettate per la crittografia post-quantistica e la protezione dei metadati tramite cMixx di xx.network.",
+  "pq_encryption": "Crittografia PQ",
+  "cmix_protection": "Protezione cMixx",
+  "secure_messaging": "Messaggistica Sicura",
+  "secure_messaging_desc": "Messaggistica crittografata end-to-end con protezione dei metadati tramite xx.network cMixx.",
+  "open_messages": "Apri Messaggi"
 }
