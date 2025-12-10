@@ -84,6 +84,7 @@ const News = lazy(() => import("@/pages/News"));
 const TrainerPortal = lazy(() => import("@/pages/TrainerPortal"));
 const TrainerSetup = lazy(() => import("@/pages/TrainerSetup"));
 const TrainerMarketplace = lazy(() => import("@/pages/TrainerMarketplace"));
+const TrainerCoachCertification = lazy(() => import("@/pages/TrainerCoachCertification"));
 const PractitionerPortal = lazy(() => import("@/pages/PractitionerPortal"));
 const CoachDashboard = lazy(() => import("@/pages/CoachDashboard"));
 const ClinicianDashboard = lazy(() => import("@/pages/ClinicianDashboard"));
@@ -280,6 +281,7 @@ export const AppRoutes = () => (
     <Route path="/clinician/dashboard" element={<RouteErrorBoundary><ProtectedRoute><Layout><ClinicianDashboard /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/professional-hub" element={<RouteErrorBoundary><ProtectedRoute><Layout><ProfessionalHub /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     <Route path="/for-professionals" element={<RouteErrorBoundary><ForProfessionals /></RouteErrorBoundary>} />
+    <Route path="/coach-certification" element={<RouteErrorBoundary><TrainerCoachCertification /></RouteErrorBoundary>} />
     <Route path="/creator/hub" element={<RouteErrorBoundary><ProtectedRoute><Layout><CreatorHub /></Layout></ProtectedRoute></RouteErrorBoundary>} />
     
     {/* Payments & Subscriptions */}
