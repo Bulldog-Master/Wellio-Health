@@ -23,6 +23,14 @@
 </p>
 
 <p align="center">
+  <em>Security badges reflect real-time automated scans via CodeQL and Snyk on every push/PR</em>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/license-Proprietary-lightgrey?style=for-the-badge" alt="License" />
+</p>
+
+<p align="center">
   <!-- Tech Stack -->
   <img src="https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React" />
   <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
