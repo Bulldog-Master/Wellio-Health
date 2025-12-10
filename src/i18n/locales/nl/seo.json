@@ -16,5 +16,8 @@
   "session_management_title": "Sessiebeheer",
   "session_management_description": "Beheer uw actieve sessies en beveiligingsinstellingen.",
   "security_audit_title": "Beveiligingsauditlog",
-  "security_audit_description": "Bekijk beveiligingsgebeurtenissen en activiteitenlogboeken voor uw account."
+  "security_audit_description": "Bekijk beveiligingsgebeurtenissen en activiteitenlogboeken voor uw account.",
+  
+  "clinician_dashboard_title": "Arts Dashboard - Wellio",
+  "clinician_dashboard_description": "Monitor het functionele welzijn van patiënten met PHI-vrije samenvattingen en risicowaarschuwingen."
 }

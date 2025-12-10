@@ -31,5 +31,10 @@
   "trend_declining": "Functional index has been declining over the last 14 days.",
   "trend_stable": "Functional index has remained relatively stable.",
   "trend_unknown": "Insufficient data to determine a clear trend.",
-  "access_denied": "Access denied. Clinician role required."
+  "access_denied": "Access denied. Clinician role required.",
+  "clinician_dashboard": "Clinician Dashboard",
+  "clinician_dashboard_desc": "Monitor patient wellness with functional trend summaries and risk alerts.",
+  "clinician_access_required": "Clinician Access Required",
+  "clinician_access_required_desc": "You need to be an approved clinician or practitioner to access this dashboard.",
+  "apply_as_practitioner": "Apply as Practitioner"
 }

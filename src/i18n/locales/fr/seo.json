@@ -56,5 +56,8 @@
   "session_management_title": "Gestion des Sessions - Wellio",
   "session_management_description": "Visualisez et gérez vos sessions de connexion actives.",
   "security_audit_log_title": "Journal d'Audit de Sécurité - Wellio",
-  "security_audit_log_description": "Consultez l'activité de sécurité de votre compte et l'historique des accès."
+  "security_audit_log_description": "Consultez l'activité de sécurité de votre compte et l'historique des accès.",
+  
+  "clinician_dashboard_title": "Tableau de Bord du Médecin - Wellio",
+  "clinician_dashboard_description": "Surveillez le bien-être fonctionnel des patients avec des résumés sans PHI et des alertes de risque."
 }

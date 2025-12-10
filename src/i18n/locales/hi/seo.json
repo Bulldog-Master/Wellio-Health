@@ -16,5 +16,8 @@
   "session_management_title": "सत्र प्रबंधन",
   "session_management_description": "अपने सक्रिय सत्र और सुरक्षा सेटिंग्स प्रबंधित करें।",
   "security_audit_title": "सुरक्षा ऑडिट लॉग",
-  "security_audit_description": "अपने खाते के सुरक्षा इवेंट और गतिविधि लॉग देखें।"
+  "security_audit_description": "अपने खाते के सुरक्षा इवेंट और गतिविधि लॉग देखें।",
+  
+  "clinician_dashboard_title": "चिकित्सक डैशबोर्ड - Wellio",
+  "clinician_dashboard_description": "PHI-मुक्त सारांश और जोखिम अलर्ट के साथ रोगियों की कार्यात्मक भलाई की निगरानी करें।"
 }

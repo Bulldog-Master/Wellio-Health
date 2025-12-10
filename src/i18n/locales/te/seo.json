@@ -16,5 +16,8 @@
   "session_management_title": "సెషన్ నిర్వహణ",
   "session_management_description": "మీ యాక్టివ్ సెషన్లు మరియు భద్రతా సెట్టింగ్‌లను నిర్వహించండి.",
   "security_audit_title": "సెక్యూరిటీ ఆడిట్ లాగ్",
-  "security_audit_description": "మీ ఖాతా కోసం భద్రతా ఈవెంట్లు మరియు యాక్టివిటీ లాగ్‌లను చూడండి."
+  "security_audit_description": "మీ ఖాతా కోసం భద్రతా ఈవెంట్లు మరియు యాక్టివిటీ లాగ్‌లను చూడండి.",
+  
+  "clinician_dashboard_title": "డాక్టర్ డాష్‌బోర్డ్ - Wellio",
+  "clinician_dashboard_description": "PHI లేని సారాంశాలు మరియు రిస్క్ హెచ్చరికలతో రోగుల క్రియాత్మక ఆరోగ్యాన్ని పర్యవేక్షించండి."
 }

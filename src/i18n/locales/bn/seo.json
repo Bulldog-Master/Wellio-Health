@@ -16,5 +16,8 @@
   "session_management_title": "সেশন ব্যবস্থাপনা",
   "session_management_description": "আপনার সক্রিয় সেশন এবং সুরক্ষা সেটিংস পরিচালনা করুন।",
   "security_audit_title": "সুরক্ষা অডিট লগ",
-  "security_audit_description": "আপনার অ্যাকাউন্টের সুরক্ষা ইভেন্ট এবং কার্যকলাপ লগ দেখুন।"
+  "security_audit_description": "আপনার অ্যাকাউন্টের সুরক্ষা ইভেন্ট এবং কার্যকলাপ লগ দেখুন।",
+  
+  "clinician_dashboard_title": "চিকিৎসক ড্যাশবোর্ড - Wellio",
+  "clinician_dashboard_description": "PHI-মুক্ত সারসংক্ষেপ এবং ঝুঁকি সতর্কতার সাথে রোগীদের কার্যকরী স্বাস্থ্য পর্যবেক্ষণ করুন।"
 }

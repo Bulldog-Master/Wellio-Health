@@ -16,5 +16,8 @@
   "session_management_title": "سیشن مینجمنٹ",
   "session_management_description": "اپنے فعال سیشنز اور سیکیورٹی ترتیبات کا انتظام کریں۔",
   "security_audit_title": "سیکیورٹی آڈٹ لاگ",
-  "security_audit_description": "اپنے اکاؤنٹ کے سیکیورٹی ایونٹس اور سرگرمی لاگز دیکھیں۔"
+  "security_audit_description": "اپنے اکاؤنٹ کے سیکیورٹی ایونٹس اور سرگرمی لاگز دیکھیں۔",
+  
+  "clinician_dashboard_title": "ڈاکٹر ڈیش بورڈ - Wellio",
+  "clinician_dashboard_description": "PHI سے پاک خلاصوں اور خطرے کی انتباہات کے ساتھ مریضوں کی فعال صحت کی نگرانی کریں۔"
 }
