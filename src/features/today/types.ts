@@ -18,6 +18,8 @@ export interface DailyScoreResult {
   date: IsoDateString;
   rawScore: number;
   score: number; // 0-100
+  scoreVersion: number; // Algorithm version (currently 1)
+  dataCoverage: number; // 0-1 representing how much data we had
   breakdown: {
     workout: number;
     meals: number;

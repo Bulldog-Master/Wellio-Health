@@ -27,6 +27,9 @@ const WEIGHTS = {
   sleep: 0.10,
 } as const;
 
+// Current scoring algorithm version
+const SCORE_VERSION = 1;
+
 export function computeDailyScore(inputs: DailyInputs): DailyScoreResult {
   const clamp = (v: number) => Math.max(0, Math.min(1, v));
   const w = WEIGHTS;
@@ -40,10 +43,24 @@ export function computeDailyScore(inputs: DailyInputs): DailyScoreResult {
 
   const modified = clamp(weighted + (inputs.recoveryModifier ?? 0));
 
+  // Calculate data coverage: count how many behaviors have meaningful data (> 0)
+  const behaviors = [
+    inputs.workoutCompletion,
+    inputs.mealsLoggedCompletion,
+    inputs.hydrationCompletion,
+    inputs.moodScore,
+    inputs.sleepCompletion,
+  ];
+  const totalBehaviors = behaviors.length;
+  const coveredBehaviors = behaviors.filter(v => v > 0).length;
+  const dataCoverage = coveredBehaviors / totalBehaviors;
+
   return {
     date: inputs.date,
     rawScore: modified,
     score: Math.round(modified * 100),
+    scoreVersion: SCORE_VERSION,
+    dataCoverage,
     breakdown: {
       workout: clamp(inputs.workoutCompletion),
       meals: clamp(inputs.mealsLoggedCompletion),

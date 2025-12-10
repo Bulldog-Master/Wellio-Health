@@ -11,6 +11,7 @@ import {
   PrivacySettingsCard,
   AccountSecurityCard,
   DataManagementCard,
+  DataAccessPanel,
   DeleteAccountDialog,
   RenamePasskeyDialog,
   BackupCodesDialog,
@@ -133,6 +134,8 @@ const PrivacySecurity = () => {
           handlers.updatePrivacySettings('show_health_metrics_to_followers', checked);
         }}
       />
+
+      <DataAccessPanel />
 
       <DataManagementCard
         onExportData={handlers.handleExportData}
