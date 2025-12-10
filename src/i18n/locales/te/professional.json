@@ -159,5 +159,18 @@
   "request_connection": "కనెక్షన్ అభ్యర్థించండి",
   "connection_requested": "కనెక్షన్ అభ్యర్థన పంపబడింది",
   "data_access_consent": "డేటా యాక్సెస్ సమ్మతి",
-  "review_consent": "సమ్మతిని సమీక్షించండి"
+  "review_consent": "సమ్మతిని సమీక్షించండి",
+
+  "my_care_team": "నా సంరక్షణ బృందం",
+  "my_care_team_desc": "మీ ట్రైనర్లు మరియు ప్రాక్టిషనర్లను నిర్వహించండి",
+  "connected_professionals": "కనెక్ట్ అయిన ప్రొఫెషనల్స్",
+  "add_professional": "ప్రొఫెషనల్‌ని జోడించండి",
+  "no_professionals_connected": "ప్రొఫెషనల్స్ ఎవరూ కనెక్ట్ అవలేదు",
+  "since": "నుండి",
+  "coach": "కోచ్",
+  "clinician": "వైద్య నిపుణుడు",
+  "revoke_access": "యాక్సెస్ రద్దు చేయండి",
+  "revoke_access_title": "యాక్సెస్ రద్దు చేయాలా?",
+  "revoke_access_desc": "{{name}} ఇకపై మీ డేటాను యాక్సెస్ చేయలేరు",
+  "access_revoked": "యాక్సెస్ రద్దు చేయబడింది"
 }

@@ -159,5 +159,18 @@
   "request_connection": "کنکشن کی درخواست کریں",
   "connection_requested": "کنکشن کی درخواست بھیجی گئی",
   "data_access_consent": "ڈیٹا تک رسائی کی رضامندی",
-  "review_consent": "رضامندی کا جائزہ لیں"
+  "review_consent": "رضامندی کا جائزہ لیں",
+
+  "my_care_team": "میری نگہداشت ٹیم",
+  "my_care_team_desc": "اپنے ٹرینرز اور پریکٹیشنرز کا انتظام کریں",
+  "connected_professionals": "منسلک پیشہ ور",
+  "add_professional": "پیشہ ور شامل کریں",
+  "no_professionals_connected": "کوئی پیشہ ور منسلک نہیں",
+  "since": "سے",
+  "coach": "کوچ",
+  "clinician": "ماہر طب",
+  "revoke_access": "رسائی منسوخ کریں",
+  "revoke_access_title": "رسائی منسوخ کریں؟",
+  "revoke_access_desc": "{{name}} آپ کے ڈیٹا تک رسائی نہیں کر سکے گا",
+  "access_revoked": "رسائی منسوخ ہو گئی"
 }

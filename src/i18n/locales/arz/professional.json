@@ -159,5 +159,18 @@
   "request_connection": "اطلب اتصال",
   "connection_requested": "طلب الاتصال اتبعت",
   "data_access_consent": "موافقة الوصول للبيانات",
-  "review_consent": "راجع الموافقة"
+  "review_consent": "راجع الموافقة",
+
+  "my_care_team": "فريق الرعاية بتاعي",
+  "my_care_team_desc": "إدارة المدربين والممارسين بتوعك",
+  "connected_professionals": "المحترفين المتصلين",
+  "add_professional": "ضيف محترف",
+  "no_professionals_connected": "مفيش محترفين متصلين",
+  "since": "من",
+  "coach": "كوتش",
+  "clinician": "طبيب",
+  "revoke_access": "سحب الوصول",
+  "revoke_access_title": "تسحب الوصول؟",
+  "revoke_access_desc": "{{name}} مش هيقدر يوصل لبياناتك تاني",
+  "access_revoked": "الوصول اتسحب"
 }
