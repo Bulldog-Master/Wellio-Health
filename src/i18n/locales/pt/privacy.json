@@ -124,5 +124,27 @@
   "toast_failed_change_password": "Falha ao alterar senha",
   "toast_failed_change_email": "Falha ao alterar email",
   "toast_failed_export": "Falha ao exportar dados",
-  "toast_failed_delete": "Falha ao excluir conta"
+  "toast_failed_delete": "Falha ao excluir conta",
+  
+  "who_can_see_data": "Quem pode ver meus dados?",
+  "data_access_description": "Estes profissionais têm permissão para ver seus dados de bem-estar",
+  "no_data_accessors": "Ninguém tem acesso aos seus dados",
+  "data_is_private": "Seus dados de bem-estar são completamente privados",
+  "coach": "Treinador",
+  "clinician": "Clínico",
+  "pending": "Pendente",
+  "connected_since": "Conectado desde {{date}}",
+  "can_see": "Pode ver",
+  "can_see_functional_index": "Índice Funcional",
+  "can_see_workout_trends": "Tendências de Treino",
+  "can_see_activity_summary": "Resumo de Atividade",
+  "can_see_wellness_trends": "Tendências de Bem-estar",
+  "can_see_recovery_summary": "Resumo de Recuperação",
+  "cannot_see_note": "Eles não podem ver seus registros brutos, prontuários médicos ou notas privadas",
+  "revoke": "Revogar",
+  "revoke_access_title": "Revogar Acesso?",
+  "revoke_access_description": "{{name}} não poderá mais ver seus dados de bem-estar. Você pode convidá-los novamente depois, se necessário.",
+  "confirm_revoke": "Sim, Revogar Acesso",
+  "access_revoked": "Acesso revogado com sucesso",
+  "revoke_failed": "Falha ao revogar acesso"
 }

@@ -1112,12 +1112,14 @@ export type Database = {
       daily_scores: {
         Row: {
           created_at: string
+          data_coverage: number | null
           date: string
           hydration_completion: number | null
           id: string
           meals_completion: number | null
           mood_score: number | null
           score: number
+          score_version: number
           sleep_completion: number | null
           streak_days: number
           streak_frozen: boolean
@@ -1127,12 +1129,14 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          data_coverage?: number | null
           date: string
           hydration_completion?: number | null
           id?: string
           meals_completion?: number | null
           mood_score?: number | null
           score: number
+          score_version?: number
           sleep_completion?: number | null
           streak_days?: number
           streak_frozen?: boolean
@@ -1142,12 +1146,14 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          data_coverage?: number | null
           date?: string
           hydration_completion?: number | null
           id?: string
           meals_completion?: number | null
           mood_score?: number | null
           score?: number
+          score_version?: number
           sleep_completion?: number | null
           streak_days?: number
           streak_frozen?: boolean

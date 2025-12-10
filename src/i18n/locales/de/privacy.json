@@ -124,5 +124,27 @@
   "toast_failed_change_password": "Passwortänderung fehlgeschlagen",
   "toast_failed_change_email": "E-Mail-Änderung fehlgeschlagen",
   "toast_failed_export": "Datenexport fehlgeschlagen",
-  "toast_failed_delete": "Kontolöschung fehlgeschlagen"
+  "toast_failed_delete": "Kontolöschung fehlgeschlagen",
+  
+  "who_can_see_data": "Wer kann meine Daten sehen?",
+  "data_access_description": "Diese Fachleute haben die Berechtigung, Ihre Wellness-Daten einzusehen",
+  "no_data_accessors": "Niemand hat Zugriff auf Ihre Daten",
+  "data_is_private": "Ihre Wellness-Daten sind vollständig privat",
+  "coach": "Trainer",
+  "clinician": "Kliniker",
+  "pending": "Ausstehend",
+  "connected_since": "Verbunden seit {{date}}",
+  "can_see": "Kann sehen",
+  "can_see_functional_index": "Funktionsindex",
+  "can_see_workout_trends": "Trainingstrends",
+  "can_see_activity_summary": "Aktivitätsübersicht",
+  "can_see_wellness_trends": "Wellness-Trends",
+  "can_see_recovery_summary": "Erholungsübersicht",
+  "cannot_see_note": "Sie können Ihre Rohdaten, Krankenakten oder private Notizen nicht sehen",
+  "revoke": "Widerrufen",
+  "revoke_access_title": "Zugriff widerrufen?",
+  "revoke_access_description": "{{name}} kann Ihre Wellness-Daten nicht mehr sehen. Sie können sie später bei Bedarf erneut einladen.",
+  "confirm_revoke": "Ja, Zugriff widerrufen",
+  "access_revoked": "Zugriff erfolgreich widerrufen",
+  "revoke_failed": "Widerruf des Zugriffs fehlgeschlagen"
 }

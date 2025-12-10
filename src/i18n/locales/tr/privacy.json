@@ -3,5 +3,27 @@
   "privacy_settings": "Gizlilik Ayarları",
   "public_profile": "Herkese Açık Profil",
   "private_account": "Gizli Hesap",
-  "data_sharing": "Veri Paylaşımı"
+  "data_sharing": "Veri Paylaşımı",
+  
+  "who_can_see_data": "Verilerimi Kim Görebilir?",
+  "data_access_description": "Bu profesyoneller sağlık verilerinizi görme iznine sahip",
+  "no_data_accessors": "Verilerinize kimse erişemiyor",
+  "data_is_private": "Sağlık verileriniz tamamen gizli",
+  "coach": "Koç",
+  "clinician": "Klinisyen",
+  "pending": "Beklemede",
+  "connected_since": "{{date}} tarihinden beri bağlı",
+  "can_see": "Görebilir",
+  "can_see_functional_index": "İşlevsel Endeks",
+  "can_see_workout_trends": "Antrenman Trendleri",
+  "can_see_activity_summary": "Aktivite Özeti",
+  "can_see_wellness_trends": "Sağlık Trendleri",
+  "can_see_recovery_summary": "İyileşme Özeti",
+  "cannot_see_note": "Ham kayıtlarınızı, tıbbi dosyalarınızı veya özel notlarınızı göremezler",
+  "revoke": "İptal Et",
+  "revoke_access_title": "Erişimi İptal Et?",
+  "revoke_access_description": "{{name}} artık sağlık verilerinizi göremeyecek. Gerekirse daha sonra tekrar davet edebilirsiniz.",
+  "confirm_revoke": "Evet, Erişimi İptal Et",
+  "access_revoked": "Erişim başarıyla iptal edildi",
+  "revoke_failed": "Erişim iptali başarısız"
 }
