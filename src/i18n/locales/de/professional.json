@@ -200,5 +200,12 @@
   "invite_code_desc": "Teilen Sie diesen Code mit Kunden, um sich mit ihnen zu verbinden",
   "times_used": "{{count}} mal verwendet",
   "active": "Aktiv",
-  "inactive": "Inaktiv"
+  "inactive": "Inaktiv",
+
+  "care_team_description": "Verbinden Sie sich mit Trainern und Ärzten, die Ihren funktionalen Wellness-Index und Trends sehen können — ohne Ihre rohen Gesundheitsdaten preiszugeben.",
+  "connections": "Verbindungen",
+  "coach_connect_prompt": "Haben Sie einen Trainer oder Coach? Geben Sie deren Einladungscode ein, um sich zu verbinden.",
+  "clinician_connect_prompt": "Arbeiten Sie mit einem Arzt? Geben Sie deren Einladungscode ein, um Ihre Trends zu teilen.",
+  "professional_tools": "Professionelle Tools",
+  "professional_tools_desc": "Als {{role}} können Sie aggregierte funktionale Trends der Personen einsehen, die sich mit Ihnen verbinden, über Ihr Dashboard. Sichere Nachrichten werden über cMix von xx network zum Schutz von Metadaten geleitet."
 }

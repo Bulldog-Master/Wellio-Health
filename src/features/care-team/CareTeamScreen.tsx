@@ -1,3 +1,12 @@
+// ========================================
+// WELLIO HEALTH - CARE TEAM SCREEN
+// Route: /care-team
+//
+// - Shows current professional relationships
+// - Lets users join a pro via invite code (JoinByCode)
+// - Shows invite code panel for professionals (coach/clinician)
+// ========================================
+
 import { useTranslation } from 'react-i18next';
 import { Loader2 } from 'lucide-react';
 import { useCareTeam } from './useCareTeam';
@@ -7,6 +16,19 @@ import { ClinicianRow } from './ClinicianRow';
 import { JoinByCode } from './JoinByCode';
 import { InviteCodePanel } from './InviteCodePanel';
 
+// ---------- PRESENTATIONAL SUBCOMPONENTS ----------
+
+function SectionCard({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <section className="rounded-xl border bg-background p-4 space-y-2">
+      <h2 className="text-sm font-semibold">{title}</h2>
+      {children}
+    </section>
+  );
+}
+
+// ---------- MAIN SCREEN ---------------------------
+
 export const CareTeamScreen = () => {
   const { t } = useTranslation(['professional', 'common']);
   const {
@@ -15,12 +37,16 @@ export const CareTeamScreen = () => {
     loading,
     revoking,
     fetchProfessionals,
-    handleRevokeAccess
+    handleRevokeAccess,
+    hasCoach,
+    hasClinician
   } = useCareTeam();
 
   const { isProfessional, professionalType, loading: professionalLoading } = useProfessionalStatus();
 
-  if (loading || professionalLoading) {
+  const isLoading = loading || professionalLoading;
+
+  if (isLoading) {
     return (
       <div className="flex justify-center py-12">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
@@ -28,45 +54,67 @@ export const CareTeamScreen = () => {
     );
   }
 
-  const coach = coaches[0]; // User can have one coach
-  const clinician = clinicians[0]; // User can have one clinician
+  const coach = coaches[0];
+  const clinician = clinicians[0];
 
   return (
-    <div className="space-y-6">
-      {/* Coach Section */}
-      <section className="space-y-3">
-        <h2 className="text-lg font-semibold">{t('my_coaches')}</h2>
-        {coach ? (
-          <CoachRow
-            coach={coach}
-            onRevoke={handleRevokeAccess}
-            revoking={revoking === coach.id}
-          />
-        ) : (
-          <JoinByCode role="coach" onSuccess={fetchProfessionals} />
-        )}
-      </section>
+    <div className="space-y-4">
+      <header className="space-y-1">
+        <p className="text-xs text-muted-foreground">
+          {t('care_team_description', 'Connect with coaches and clinicians who can see your functional wellness index and trends — without exposing your raw health logs.')}
+        </p>
+      </header>
 
-      {/* Clinician Section */}
-      <section className="space-y-3">
-        <h2 className="text-lg font-semibold">{t('my_clinicians')}</h2>
-        {clinician ? (
-          <ClinicianRow
-            clinician={clinician}
-            onRevoke={handleRevokeAccess}
-            revoking={revoking === clinician.id}
-          />
-        ) : (
-          <JoinByCode role="clinician" onSuccess={fetchProfessionals} />
-        )}
-      </section>
+      {/* Section: Connections (user as client/patient) */}
+      <SectionCard title={t('connections', 'Connections')}>
+        <div className="space-y-3">
+          {/* Coach row or JoinByCode */}
+          {coach ? (
+            <CoachRow
+              coach={coach}
+              onRevoke={handleRevokeAccess}
+              revoking={revoking === coach.id}
+            />
+          ) : (
+            <div className="space-y-1">
+              <p className="text-xs text-muted-foreground">
+                {t('coach_connect_prompt', 'Have a trainer or coach? Enter their invite code to connect.')}
+              </p>
+              <JoinByCode role="coach" onSuccess={fetchProfessionals} />
+            </div>
+          )}
 
-      {/* Professional's Invite Code Panel */}
+          {/* Clinician row or JoinByCode */}
+          {clinician ? (
+            <ClinicianRow
+              clinician={clinician}
+              onRevoke={handleRevokeAccess}
+              revoking={revoking === clinician.id}
+            />
+          ) : (
+            <div className="space-y-1">
+              <p className="text-xs text-muted-foreground">
+                {t('clinician_connect_prompt', 'Working with a doctor or clinician? Enter their invite code to share your trends.')}
+              </p>
+              <JoinByCode role="clinician" onSuccess={fetchProfessionals} />
+            </div>
+          )}
+        </div>
+      </SectionCard>
+
+      {/* Section: Professional tools (if user is coach/clinician) */}
       {isProfessional && professionalType && (
-        <section className="space-y-3 pt-4 border-t">
-          <h2 className="text-lg font-semibold">{t('your_invite_code')}</h2>
-          <InviteCodePanel professionalType={professionalType} />
-        </section>
+        <>
+          <SectionCard title={t('your_invite_code')}>
+            <InviteCodePanel professionalType={professionalType} />
+          </SectionCard>
+
+          <SectionCard title={t('professional_tools', 'Professional tools')}>
+            <p className="text-xs text-muted-foreground">
+              {t('professional_tools_desc', `As a ${professionalType}, you can view aggregated functional trends for people who connect to you from your dashboard. Secure messaging is routed via xx network's cMix for metadata protection.`)}
+            </p>
+          </SectionCard>
+        </>
       )}
     </div>
   );

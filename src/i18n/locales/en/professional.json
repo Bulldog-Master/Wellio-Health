@@ -202,5 +202,12 @@
   "invite_code_desc": "Share this code with clients to connect with them",
   "times_used": "Used {{count}} times",
   "active": "Active",
-  "inactive": "Inactive"
+  "inactive": "Inactive",
+
+  "care_team_description": "Connect with coaches and clinicians who can see your functional wellness index and trends — without exposing your raw health logs.",
+  "connections": "Connections",
+  "coach_connect_prompt": "Have a trainer or coach? Enter their invite code to connect.",
+  "clinician_connect_prompt": "Working with a doctor or clinician? Enter their invite code to share your trends.",
+  "professional_tools": "Professional tools",
+  "professional_tools_desc": "As a {{role}}, you can view aggregated functional trends for people who connect to you from your dashboard. Secure messaging is routed via xx network's cMix for metadata protection."
 }
