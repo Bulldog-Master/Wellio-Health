@@ -4,9 +4,11 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Users, Calendar, DollarSign, FileText, Loader2 } from 'lucide-react';
+import { Users, Calendar, DollarSign, FileText, Loader2, Key, UserPlus } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { ProfessionalClient, ProfessionalFormData } from './types';
+import { InviteCodeManager } from './InviteCodeManager';
+import { PendingRequests } from './PendingRequests';
 
 interface ApprovedDashboardProps {
   clients: ProfessionalClient[];
@@ -29,10 +31,18 @@ export const ApprovedDashboard = ({
 
   return (
     <Tabs defaultValue="clients" className="space-y-6">
-      <TabsList className="grid w-full grid-cols-4">
+      <TabsList className="grid w-full grid-cols-6">
         <TabsTrigger value="clients">
           <Users className="w-4 h-4 mr-2" />
           {t('my_clients')}
+        </TabsTrigger>
+        <TabsTrigger value="invites">
+          <Key className="w-4 h-4 mr-2" />
+          {t('invite_codes')}
+        </TabsTrigger>
+        <TabsTrigger value="requests">
+          <UserPlus className="w-4 h-4 mr-2" />
+          {t('pending_requests')}
         </TabsTrigger>
         <TabsTrigger value="schedule">
           <Calendar className="w-4 h-4 mr-2" />
