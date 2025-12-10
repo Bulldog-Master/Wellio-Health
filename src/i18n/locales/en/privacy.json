@@ -124,5 +124,27 @@
   "toast_failed_change_password": "Failed to change password",
   "toast_failed_change_email": "Failed to change email",
   "toast_failed_export": "Failed to export data",
-  "toast_failed_delete": "Failed to delete account"
+  "toast_failed_delete": "Failed to delete account",
+  
+  "who_can_see_data": "Who Can See My Data?",
+  "data_access_description": "These professionals have permission to view your wellness data",
+  "no_data_accessors": "No one has access to your data",
+  "data_is_private": "Your wellness data is completely private",
+  "coach": "Coach",
+  "clinician": "Clinician",
+  "pending": "Pending",
+  "connected_since": "Connected since {{date}}",
+  "can_see": "Can see",
+  "can_see_functional_index": "Functional Index",
+  "can_see_workout_trends": "Workout Trends",
+  "can_see_activity_summary": "Activity Summary",
+  "can_see_wellness_trends": "Wellness Trends",
+  "can_see_recovery_summary": "Recovery Summary",
+  "cannot_see_note": "They cannot see your raw logs, medical records, or private notes",
+  "revoke": "Revoke",
+  "revoke_access_title": "Revoke Access?",
+  "revoke_access_description": "{{name}} will no longer be able to see your wellness data. You can re-invite them later if needed.",
+  "confirm_revoke": "Yes, Revoke Access",
+  "access_revoked": "Access revoked successfully",
+  "revoke_failed": "Failed to revoke access"
 }

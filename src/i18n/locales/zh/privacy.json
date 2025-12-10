@@ -124,5 +124,27 @@
   "toast_failed_change_password": "更改密码失败",
   "toast_failed_change_email": "更改邮箱失败",
   "toast_failed_export": "导出数据失败",
-  "toast_failed_delete": "删除账户失败"
+  "toast_failed_delete": "删除账户失败",
+  
+  "who_can_see_data": "谁可以查看我的数据？",
+  "data_access_description": "这些专业人士有权查看您的健康数据",
+  "no_data_accessors": "没有人可以访问您的数据",
+  "data_is_private": "您的健康数据完全私密",
+  "coach": "教练",
+  "clinician": "临床医生",
+  "pending": "待处理",
+  "connected_since": "自{{date}}起连接",
+  "can_see": "可以查看",
+  "can_see_functional_index": "功能指数",
+  "can_see_workout_trends": "锻炼趋势",
+  "can_see_activity_summary": "活动摘要",
+  "can_see_wellness_trends": "健康趋势",
+  "can_see_recovery_summary": "恢复摘要",
+  "cannot_see_note": "他们无法查看您的原始日志、医疗记录或私人笔记",
+  "revoke": "撤销",
+  "revoke_access_title": "撤销访问权限？",
+  "revoke_access_description": "{{name}}将无法再查看您的健康数据。如有需要，您可以稍后重新邀请他们。",
+  "confirm_revoke": "是的，撤销访问权限",
+  "access_revoked": "访问权限已成功撤销",
+  "revoke_failed": "撤销访问权限失败"
 }
