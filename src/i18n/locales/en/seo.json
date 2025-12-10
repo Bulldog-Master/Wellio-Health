@@ -78,5 +78,8 @@
   "session_management_description": "View and manage your active login sessions.",
   
   "security_audit_log_title": "Security Audit Log - Wellio",
-  "security_audit_log_description": "View your account security activity and access history."
+  "security_audit_log_description": "View your account security activity and access history.",
+  
+  "clinician_dashboard_title": "Clinician Dashboard - Wellio",
+  "clinician_dashboard_description": "Monitor patient wellness trends and functional health indices securely."
 }
