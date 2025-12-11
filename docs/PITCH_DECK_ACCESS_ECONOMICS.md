@@ -1,8 +1,23 @@
-# Wellio Pitch Deck: Access Model + Professional Economics
+# Wellio — Privacy-First Wellness APP Platform
+## Investor Pitch Deck: Access Model + Professional Economics
 
-## Master Positioning
+---
 
-**Wellio is a next-generation Wellness APP Platform that empowers individuals to track their wellbeing privately — while optionally connecting with trainers, coaches, or clinicians through secure, limited-visibility insights. It is privacy-first, post-quantum secure, and powered by cMixx metadata protection.**
+## ⭐ Master Positioning
+
+**Wellio is a privacy-first Wellness APP Platform built for individuals — with optional support from trainers, coaches, and clinicians. Raw data stays on the user's device, and only derived wellness insights can be shared, if the user chooses.**
+
+### Core Identity
+
+| Element | Description |
+|---------|-------------|
+| **APP** | An application users interact with daily |
+| **Platform** | Supports multiple user types & broader architecture |
+| **Wellness** | Functional, lifestyle, holistic health tracking |
+| **Privacy-first** | Post-quantum encryption + cMixx metadata protection |
+| **Optional professionals** | Not required but available when invited |
+
+---
 
 ## Visual Design Guidelines
 
@@ -14,12 +29,12 @@
 
 ---
 
-## SLIDE 1 — ACCESS MODEL (SUMMARY)
+## SLIDE 1 — THE APP PLATFORM ARCHITECTURE
 
 ### Zero-Knowledge Access Model
 **Functional insights, not raw personal data.**
 
-The APP Platform separates raw logs from derived functional signals, ensuring professionals only see what they need — and never what exposes the user.
+The Wellness APP Platform separates raw logs from derived functional signals, ensuring professionals only see what they need — and never what exposes the user.
 
 **Visual:** 3-layer vertical stack:
 1. **User Device (Private Data Layer)** — Icons: logbook, heart, meal, workout. Label: "Raw Data — Local Only"
@@ -28,18 +43,18 @@ The APP Platform separates raw logs from derived functional signals, ensuring pr
 
 | Role | Access |
 |------|--------|
-| **Individuals** | Full access to logs, notes, documents, trends, FWI score |
-| **Coaches** | ✔ Functional Wellness Index (FWI)<br>✔ Trend lines (14–30 days)<br>✔ Adherence categories<br>✘ No raw meal/workout logs<br>✘ No journals or medical documents |
-| **Clinicians** | ✔ Functional signals & trends<br>✔ Adherence breakdown<br>✘ No PHI / medical vault data<br>✘ Not a diagnostic system |
+| **Individuals (Primary)** | Full access to logs, notes, documents, trends, FWI score |
+| **Trainers & Coaches** | ✔ Functional Wellness Index (FWI)<br>✔ Trend lines (14–30 days)<br>✔ Adherence categories<br>✘ No raw meal/workout logs<br>✘ No journals or personal notes<br>✘ No metadata |
+| **Clinicians** | ✔ Functional signals & trends<br>✔ Adherence breakdown<br>✘ No PHI / medical vault data<br>✘ No metadata<br>✘ Not a diagnostic system |
 
-### Privacy Infrastructure
+### Security Infrastructure
 - Post-quantum key exchange (ML-KEM-768)
 - AES-256-GCM / ChaCha20-Poly1305
 - xx.network cMixx routing for metadata protection
 - E2EE for messaging & notes
 - All professional access is explicit, revocable, and derived from the Care Team model
 
-> **Tagline:** Health insights without exposing identities or private logs.
+> **Tagline:** Wellness insights without exposing identities or private logs.
 
 ---
 

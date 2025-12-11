@@ -50,39 +50,39 @@ const Landing = () => {
             <div className="flex flex-wrap justify-center gap-3 mb-8">
               <Badge variant="outline" className="px-3 py-1 text-xs">
                 <Shield className="h-3 w-3 mr-1" />
-                Post-Quantum Encryption
+                Post-Quantum Encryption (ML-KEM-768)
               </Badge>
               <Badge variant="outline" className="px-3 py-1 text-xs">
                 <Lock className="h-3 w-3 mr-1" />
-                cMixx Metadata Protection
+                Metadata Protection (cMixx)
               </Badge>
               <Badge variant="outline" className="px-3 py-1 text-xs">
-                <Globe className="h-3 w-3 mr-1" />
-                23 Languages
+                <Zap className="h-3 w-3 mr-1" />
+                Zero-Trust Architecture
               </Badge>
             </div>
             
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
-              AI-Powered Wellness.
-              <span className="block text-primary mt-2">Quantum-Private by Design.</span>
+              A Wellness APP Platform,
+              <span className="block text-primary mt-2">Reimagined for Privacy.</span>
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-              Wellio is a privacy-first Wellness APP Platform for individuals, with optional support 
-              from trainers, coaches, and clinicians. Raw data stays on your device — only derived 
-              wellness insights can be shared, if you choose.
+              Track your wellbeing privately — with optional support from trainers, coaches, or clinicians. 
+              Raw data stays on your device. Only derived wellness insights can be shared, if you choose.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="text-lg px-8" asChild>
                 <Link to="/auth">
-                  Get Started Free
+                  Get the APP
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="text-lg px-8" asChild>
                 <Link to="/for-professionals">
-                  For Professionals
+                  How Professionals Connect
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>
@@ -104,52 +104,35 @@ const Landing = () => {
           </div>
         </section>
 
-        {/* Why Wellio Section */}
+        {/* What Wellio Is */}
         <section className="py-20 px-4 md:px-8 lg:px-16 bg-muted/30">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Why Wellio?
+                A Wellness APP Platform for Individuals
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Four pillars that make this Wellness APP Platform fundamentally different.
+                Wellio gives people a private, AI-powered way to improve their health — 
+                with professionals participating only when invited.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                {
-                  icon: Brain,
-                  title: "Personal AI Coach",
-                  desc: "AI-powered insights that understand your patterns. Voice coaching, injury prevention, and personalized recommendations.",
-                  color: "text-primary",
-                },
-                {
-                  icon: Shield,
-                  title: "Privacy-First",
-                  desc: "Post-quantum encryption protects your data today and tomorrow. Raw logs never leave your device.",
-                  color: "text-green-500",
-                },
-                {
-                  icon: Activity,
-                  title: "Daily Action Engine",
-                  desc: "Your Functional Wellness Index (FWI) combines sleep, meals, workouts, hydration, and mood into one actionable score.",
-                  color: "text-blue-500",
-                },
-                {
-                  icon: Globe,
-                  title: "Global Accessibility",
-                  desc: "Available in 23 languages. Track in your native language. Share with professionals worldwide.",
-                  color: "text-purple-500",
-                },
-              ].map((pillar, i) => (
+                { icon: Activity, title: "Track Daily Habits", desc: "Sleep, meals, workouts, hydration, mood — all in one place" },
+                { icon: TrendingUp, title: "Understand Wellness Trends", desc: "Your Functional Wellness Index (FWI) shows patterns over time" },
+                { icon: Brain, title: "AI Wellness Coaching", desc: "Personalized insights and recommendations powered by AI" },
+                { icon: Heart, title: "Improve Health Behaviors", desc: "Evidence-based nudges to build lasting habits" },
+                { icon: Lock, title: "Store Notes Securely", desc: "Encrypted medical vault for sensitive health information" },
+                { icon: MessageSquare, title: "Communicate Safely", desc: "E2E encrypted messaging with metadata protection" },
+              ].map((feature, i) => (
                 <Card key={i} className="relative overflow-hidden group hover:shadow-lg transition-all">
                   <CardContent className="p-6">
-                    <div className={`w-12 h-12 rounded-xl bg-background flex items-center justify-center mb-4 ${pillar.color}`}>
-                      <pillar.icon className="h-6 w-6" />
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                      <feature.icon className="h-6 w-6 text-primary" />
                     </div>
-                    <h3 className="font-semibold text-lg mb-2">{pillar.title}</h3>
-                    <p className="text-sm text-muted-foreground">{pillar.desc}</p>
+                    <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
+                    <p className="text-sm text-muted-foreground">{feature.desc}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -157,164 +140,168 @@ const Landing = () => {
           </div>
         </section>
 
-        {/* Your Daily Wellness Command Center */}
+        {/* FWI Section */}
         <section className="py-20 px-4 md:px-8 lg:px-16">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Your Daily Wellness Command Center
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Everything you need to improve your health, all in one quantum-private APP Platform.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                { icon: Dumbbell, title: "Workout Tracking", desc: "Log workouts, programs, personal records, and live sessions" },
-                { icon: Heart, title: "Nutrition & Meals", desc: "Food logging, meal planning, recipes, and grocery lists" },
-                { icon: Activity, title: "Sleep & Recovery", desc: "Sleep tracking, recovery insights, and circadian optimization" },
-                { icon: TrendingUp, title: "Habits & Goals", desc: "Daily habits, goal setting, and progress tracking" },
-                { icon: Brain, title: "AI Insights", desc: "Personalized recommendations and injury prevention" },
-                { icon: MessageSquare, title: "Secure Messaging", desc: "E2E encrypted chat with metadata protection" },
-                { icon: Video, title: "Live Sessions", desc: "Video coaching with professionals" },
-                { icon: Users, title: "Care Team", desc: "Connect with coaches and clinicians" },
-                { icon: Lock, title: "Medical Vault", desc: "Encrypted storage for health records" },
-              ].map((feature, i) => (
-                <div key={i} className="flex items-start gap-4 p-4 rounded-lg hover:bg-muted/50 transition-colors">
-                  <div className="shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <feature.icon className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium mb-1">{feature.title}</h3>
-                    <p className="text-sm text-muted-foreground">{feature.desc}</p>
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <Badge variant="secondary" className="mb-4">Your Private Score</Badge>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  Functional Wellness Index (FWI)
+                </h2>
+                <p className="text-lg text-muted-foreground mb-6">
+                  Your daily wellness score — derived from sleep, movement, meals, hydration, mood, and recovery. 
+                  FWI lives on your device. No servers. No tracking. No data selling.
+                </p>
+                <ul className="space-y-3">
+                  {[
+                    "Weighted behavioral scoring (0-100)",
+                    "14/30-day trend analysis",
+                    "Adherence tracking across all pillars",
+                    "AI-powered insights and recommendations",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center gap-2 text-muted-foreground">
+                      <CheckCircle className="h-5 w-5 text-primary shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="relative">
+                <div className="aspect-square bg-gradient-to-br from-primary/20 via-primary/10 to-transparent rounded-3xl flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="text-7xl font-bold text-primary mb-2">87</div>
+                    <div className="text-xl text-muted-foreground">Today's FWI</div>
+                    <div className="flex items-center justify-center gap-2 mt-2 text-green-500">
+                      <TrendingUp className="h-5 w-5" />
+                      <span className="text-sm">+3 from yesterday</span>
+                    </div>
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Privacy Comparison */}
+        {/* APP Platform Architecture */}
         <section className="py-20 px-4 md:px-8 lg:px-16 bg-muted/30">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                What You Share vs. What You Keep
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                Wellio is designed for privacy by default.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* What stays private */}
-              <Card className="border-green-500/30">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2 rounded-lg bg-green-500/10">
-                      <EyeOff className="h-6 w-6 text-green-500" />
-                    </div>
-                    <h3 className="text-xl font-bold">Always Private</h3>
-                  </div>
-                  <ul className="space-y-3">
-                    {[
-                      "Raw meal logs and food photos",
-                      "Workout notes and personal journals",
-                      "Medical documents and test results",
-                      "Message content (E2E encrypted)",
-                      "Communication metadata (cMixx protected)",
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-center gap-2 text-muted-foreground">
-                        <Lock className="h-4 w-4 text-green-500 shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-
-              {/* What you can share */}
-              <Card className="border-primary/30">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2 rounded-lg bg-primary/10">
-                      <Eye className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-bold">Optional Sharing</h3>
-                  </div>
-                  <ul className="space-y-3">
-                    {[
-                      "Functional Wellness Index (FWI score)",
-                      "Trend lines (14/30-day patterns)",
-                      "Adherence metrics (workout, sleep, hydration)",
-                      "Risk alerts (with your permission)",
-                      "Secure messages to your Care Team",
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-center gap-2 text-muted-foreground">
-                        <CheckCircle className="h-4 w-4 text-primary shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* For Professionals Preview */}
-        <section className="py-20 px-4 md:px-8 lg:px-16">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Optional Professional Extensions
+                The APP Platform Architecture
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Trainers, coaches, and clinicians get powerful tools without the compliance burden.
+              <p className="text-lg text-muted-foreground">
+                Individual-centered. Optional professional layers. Zero-trust boundaries.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card className="border-2 border-primary/20 hover:border-primary/40 transition-colors">
-                <CardContent className="p-8">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-3 rounded-xl bg-primary/10">
-                      <Dumbbell className="h-8 w-8 text-primary" />
-                    </div>
-                    <h3 className="text-2xl font-bold">Trainers & Coaches</h3>
+            {/* Individual Users - Primary */}
+            <Card className="mb-8 border-2 border-primary/30">
+              <CardContent className="p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-3 rounded-xl bg-primary/10">
+                    <Smartphone className="h-8 w-8 text-primary" />
                   </div>
-                  <p className="text-muted-foreground mb-4">
-                    See FWI trends, adherence patterns, and deliver personalized coaching — 
-                    without ever seeing raw logs or personal notes.
-                  </p>
-                  <Button variant="outline" asChild>
-                    <Link to="/for-professionals">
-                      Learn More
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
+                  <div>
+                    <h3 className="text-2xl font-bold">Individuals (Primary Users)</h3>
+                    <p className="text-muted-foreground">Use Wellio independently forever</p>
+                  </div>
+                </div>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {[
+                    "Today at a Glance",
+                    "Functional Wellness Index",
+                    "Private Journaling",
+                    "Medical Vault",
+                    "AI Wellness Coaching",
+                    "Secure Messaging + Video",
+                  ].map((feature, i) => (
+                    <div key={i} className="flex items-center gap-2 text-sm">
+                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Optional Professional Extensions */}
+            <div className="text-center mb-6">
+              <Badge variant="outline">Optional — Only When the Individual Chooses to Invite</Badge>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Trainers & Coaches */}
+              <Card className="border border-primary/20">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <Dumbbell className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-bold">Trainers & Coaches</h3>
+                  </div>
+                  <div className="space-y-2 mb-4">
+                    <p className="text-sm font-medium text-primary">What they CAN see:</p>
+                    <ul className="space-y-1 text-sm text-muted-foreground">
+                      <li className="flex items-center gap-2">
+                        <Eye className="h-3 w-3 text-primary" /> View trends & FWI
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Eye className="h-3 w-3 text-primary" /> Help with adherence
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-sm font-medium text-destructive">What they CANNOT see:</p>
+                    <ul className="space-y-1 text-sm text-muted-foreground">
+                      <li className="flex items-center gap-2">
+                        <EyeOff className="h-3 w-3 text-destructive" /> Raw meal logs
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <EyeOff className="h-3 w-3 text-destructive" /> Journals & personal notes
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <EyeOff className="h-3 w-3 text-destructive" /> Metadata
+                      </li>
+                    </ul>
+                  </div>
                 </CardContent>
               </Card>
 
-              <Card className="border-2 border-accent/20 hover:border-accent/40 transition-colors">
-                <CardContent className="p-8">
+              {/* Clinicians */}
+              <Card className="border border-accent/20">
+                <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-3 rounded-xl bg-accent/10">
-                      <Stethoscope className="h-8 w-8 text-accent-foreground" />
+                    <div className="p-2 rounded-lg bg-accent/10">
+                      <Stethoscope className="h-6 w-6 text-accent-foreground" />
                     </div>
-                    <h3 className="text-2xl font-bold">Clinicians</h3>
+                    <h3 className="text-xl font-bold">Clinicians</h3>
                   </div>
-                  <p className="text-muted-foreground mb-4">
-                    Functional insights without PHI. Understand what happens between visits 
-                    with zero compliance burden.
-                  </p>
-                  <Button variant="outline" asChild>
-                    <Link to="/for-professionals">
-                      Learn More
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
+                  <div className="space-y-2 mb-4">
+                    <p className="text-sm font-medium text-primary">What they CAN see:</p>
+                    <ul className="space-y-1 text-sm text-muted-foreground">
+                      <li className="flex items-center gap-2">
+                        <Eye className="h-3 w-3 text-primary" /> Functional patterns
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Eye className="h-3 w-3 text-primary" /> Wellness trends
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="space-y-2">
+                    <p className="text-sm font-medium text-destructive">What they CANNOT see:</p>
+                    <ul className="space-y-1 text-sm text-muted-foreground">
+                      <li className="flex items-center gap-2">
+                        <EyeOff className="h-3 w-3 text-destructive" /> PHI / Medical notes
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <EyeOff className="h-3 w-3 text-destructive" /> Vault access
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <EyeOff className="h-3 w-3 text-destructive" /> Zero metadata exposure
+                      </li>
+                    </ul>
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -329,51 +316,148 @@ const Landing = () => {
                 100/100 Security Rating
               </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Security You Can Trust
+                APP Platform Security
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Built with post-quantum cryptography and zero-trust architecture.
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-3 gap-8">
+              <Card className="text-center">
+                <CardContent className="p-8">
+                  <Shield className="h-12 w-12 text-primary mx-auto mb-4" />
+                  <h3 className="text-xl font-bold mb-2">Post-Quantum Encryption</h3>
+                  <p className="text-sm text-muted-foreground">
+                    ML-KEM-768 protects the APP Platform from future quantum attacks.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center">
+                <CardContent className="p-8">
+                  <Lock className="h-12 w-12 text-primary mx-auto mb-4" />
+                  <h3 className="text-xl font-bold mb-2">Metadata Protection</h3>
+                  <p className="text-sm text-muted-foreground">
+                    cMixx hides who is talking, when, and how often.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center">
+                <CardContent className="p-8">
+                  <EyeOff className="h-12 w-12 text-primary mx-auto mb-4" />
+                  <h3 className="text-xl font-bold mb-2">Zero-Trust Architecture</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Servers cannot read user data — by design.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Why Professionals Use Wellio */}
+        <section className="py-20 px-4 md:px-8 lg:px-16">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Why Professionals Use Wellio
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Professionals use the APP Platform as an extension, not a workspace.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <Card>
+                <CardContent className="p-8">
+                  <Dumbbell className="h-10 w-10 text-primary mb-4" />
+                  <h3 className="text-xl font-bold mb-4">Trainers & Coaches</h3>
+                  <ul className="space-y-3 text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span>Support clients who already use Wellio</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span>View high-level wellness signals</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span>Conduct secure sessions</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span>Never access private logs</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-8">
+                  <Stethoscope className="h-10 w-10 text-primary mb-4" />
+                  <h3 className="text-xl font-bold mb-4">Clinicians</h3>
+                  <ul className="space-y-3 text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span>View functional behavioral patterns</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span>Stay outside PHI exposure</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span>Avoid HIPAA storage burdens</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span>Do NOT treat or diagnose within the platform</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="text-center mt-8">
+              <Button size="lg" variant="outline" asChild>
+                <Link to="/for-professionals">
+                  Learn More for Professionals
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="py-20 px-4 md:px-8 lg:px-16 bg-muted/30">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              What People Are Saying
+            </h2>
+
+            <div className="grid md:grid-cols-3 gap-6">
               {[
                 {
-                  title: "Post-Quantum Encryption",
-                  desc: "ML-KEM-768 protects your data from future quantum attacks.",
-                  icon: Shield,
+                  quote: "My clients use Wellio, and it gives me trend visibility without invading privacy.",
+                  author: "Professional Trainer",
                 },
                 {
-                  title: "Metadata Protection",
-                  desc: "cMixx mixnet routing makes communication patterns invisible.",
-                  icon: Lock,
+                  quote: "I support lifestyle changes without storing or seeing PHI.",
+                  author: "Clinician, Functional Medicine",
                 },
                 {
-                  title: "Zero-Knowledge Design",
-                  desc: "The server never sees your raw data — only encrypted ciphertext.",
-                  icon: EyeOff,
+                  quote: "The only wellness APP Platform I trust with sensitive data.",
+                  author: "Individual User",
                 },
-                {
-                  title: "E2E Encrypted Messages",
-                  desc: "AES-256-GCM encryption with perfect forward secrecy.",
-                  icon: MessageSquare,
-                },
-                {
-                  title: "Medical-Grade Storage",
-                  desc: "HIPAA-ready encrypted vault for health records.",
-                  icon: Heart,
-                },
-                {
-                  title: "Continuous Scanning",
-                  desc: "CodeQL and Snyk monitor for vulnerabilities 24/7.",
-                  icon: Zap,
-                },
-              ].map((feature, i) => (
+              ].map((testimonial, i) => (
                 <Card key={i}>
                   <CardContent className="p-6">
-                    <feature.icon className="h-8 w-8 text-primary mb-4" />
-                    <h3 className="font-semibold mb-2">{feature.title}</h3>
-                    <p className="text-sm text-muted-foreground">{feature.desc}</p>
+                    <p className="text-muted-foreground italic mb-4">"{testimonial.quote}"</p>
+                    <p className="text-sm font-medium">— {testimonial.author}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -400,32 +484,32 @@ const Landing = () => {
                   <h3 className="text-xl font-bold mb-2">Free</h3>
                   <div className="text-3xl font-bold mb-4">$0<span className="text-base font-normal text-muted-foreground">/month</span></div>
                   <ul className="space-y-2 mb-6">
-                    {["Basic tracking", "FWI score", "7-day history", "Community access"].map((item, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm">
+                    {["FWI tracking", "Basic logging", "7-day history", "Community access"].map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
                         <CheckCircle className="h-4 w-4 text-primary" />
-                        {item}
+                        {feature}
                       </li>
                     ))}
                   </ul>
-                  <Button variant="outline" className="w-full" asChild>
+                  <Button className="w-full" variant="outline" asChild>
                     <Link to="/auth">Get Started</Link>
                   </Button>
                 </CardContent>
               </Card>
 
-              {/* Pro */}
+              {/* Plus */}
               <Card className="border-2 border-primary relative">
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                   <Badge>Most Popular</Badge>
                 </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-2">Pro</h3>
+                <CardContent className="p-6 pt-8">
+                  <h3 className="text-xl font-bold mb-2">Plus</h3>
                   <div className="text-3xl font-bold mb-4">$9.99<span className="text-base font-normal text-muted-foreground">/month</span></div>
                   <ul className="space-y-2 mb-6">
-                    {["Everything in Free", "AI coaching", "Unlimited history", "Care Team access", "Medical vault", "Priority support"].map((item, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm">
+                    {["Everything in Free", "Unlimited history", "AI insights", "Medical vault", "Care Team connections"].map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
                         <CheckCircle className="h-4 w-4 text-primary" />
-                        {item}
+                        {feature}
                       </li>
                     ))}
                   </ul>
@@ -435,21 +519,21 @@ const Landing = () => {
                 </CardContent>
               </Card>
 
-              {/* Enterprise */}
+              {/* Professional */}
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-2">Enterprise</h3>
-                  <div className="text-3xl font-bold mb-4">Custom</div>
+                  <h3 className="text-xl font-bold mb-2">Professional</h3>
+                  <div className="text-3xl font-bold mb-4">$29<span className="text-base font-normal text-muted-foreground">/month</span></div>
                   <ul className="space-y-2 mb-6">
-                    {["Everything in Pro", "Team management", "SSO integration", "API access", "Dedicated support", "Custom contracts"].map((item, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm">
+                    {["Everything in Plus", "Client management", "Video sessions", "Analytics dashboard", "Priority support"].map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
                         <CheckCircle className="h-4 w-4 text-primary" />
-                        {item}
+                        {feature}
                       </li>
                     ))}
                   </ul>
-                  <Button variant="outline" className="w-full" asChild>
-                    <a href="mailto:enterprise@wellio.app">Contact Sales</a>
+                  <Button className="w-full" variant="outline" asChild>
+                    <Link to="/for-professionals">Learn More</Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -457,68 +541,67 @@ const Landing = () => {
           </div>
         </section>
 
+        {/* FAQ */}
+        <section className="py-20 px-4 md:px-8 lg:px-16 bg-muted/30">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+              Frequently Asked Questions
+            </h2>
+
+            <div className="space-y-6">
+              {[
+                {
+                  q: "Is Wellio a coaching platform?",
+                  a: "No. Wellio is a Wellness APP Platform for individuals. Professionals can connect only when invited by the user.",
+                },
+                {
+                  q: "Is Wellio a medical platform?",
+                  a: "No. Clinicians see functional signals only — no PHI. They do not treat or diagnose within the platform.",
+                },
+                {
+                  q: "Why 'APP Platform'?",
+                  a: "Because Wellio supports multiple user types (individuals, trainers/coaches, clinicians) with shared infrastructure and privacy guarantees — more than a standalone app.",
+                },
+                {
+                  q: "Can professionals see my raw data?",
+                  a: "Never. Professionals only see derived wellness signals like FWI and trends. Raw logs, journals, and notes stay private.",
+                },
+              ].map((faq, i) => (
+                <Card key={i}>
+                  <CardContent className="p-6">
+                    <h3 className="font-semibold mb-2">{faq.q}</h3>
+                    <p className="text-muted-foreground">{faq.a}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Final CTA */}
-        <section className="py-20 px-4 md:px-8 lg:px-16 bg-gradient-to-br from-primary/10 via-background to-accent/10">
+        <section className="py-20 px-4 md:px-8 lg:px-16">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Wellness Without Surveillance
             </h2>
             <p className="text-xl text-muted-foreground mb-8">
-              Join thousands who are taking control of their health — without giving up their privacy.
+              Join the privacy-first Wellness APP Platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="text-lg px-8" asChild>
                 <Link to="/auth">
-                  Get Started Free
+                  Get the APP
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
+              <Button size="lg" variant="outline" className="text-lg px-8" asChild>
+                <Link to="/for-professionals">
+                  For Professionals
+                </Link>
+              </Button>
             </div>
-            <p className="text-sm text-muted-foreground mt-4">
-              No credit card required. Cancel anytime.
-            </p>
           </div>
         </section>
-
-        {/* Footer */}
-        <footer className="py-12 px-4 md:px-8 lg:px-16 border-t">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-4 gap-8">
-              <div>
-                <h4 className="font-bold mb-4">Wellio</h4>
-                <p className="text-sm text-muted-foreground">
-                  AI-powered wellness. Quantum-private by design.
-                </p>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-4">Product</h4>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li><Link to="/for-professionals" className="hover:text-foreground">For Professionals</Link></li>
-                  <li><Link to="/subscription" className="hover:text-foreground">Pricing</Link></li>
-                  <li><Link to="/auth" className="hover:text-foreground">Get Started</Link></li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-4">Legal</h4>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li><Link to="/privacy-policy" className="hover:text-foreground">Privacy Policy</Link></li>
-                  <li><Link to="/terms" className="hover:text-foreground">Terms of Service</Link></li>
-                  <li><Link to="/accessibility-statement" className="hover:text-foreground">Accessibility</Link></li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-4">Security</h4>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li><a href="https://github.com" className="hover:text-foreground">Security Whitepaper</a></li>
-                  <li><Link to="/privacy-security" className="hover:text-foreground">Security FAQ</Link></li>
-                </ul>
-              </div>
-            </div>
-            <div className="mt-12 pt-8 border-t text-center text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Wellio Health. All rights reserved.
-            </div>
-          </div>
-        </footer>
       </div>
     </>
   );
