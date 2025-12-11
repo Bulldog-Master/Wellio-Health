@@ -1,9 +1,24 @@
 import { describe, it, expect } from "vitest";
-import { CARE_TEAM_VISIBILITY_RULES } from "./careTeamVisibility";
+import {
+  CARE_TEAM_VISIBILITY_RULES,
+  getVisibilityForRole,
+  CareTeamRole,
+} from "./careTeamVisibility";
 
 describe("CARE_TEAM_VISIBILITY_RULES", () => {
+  const roles: CareTeamRole[] = ["coach", "clinician", "supporter"];
+
+  it("all roles have a defined visibility model", () => {
+    roles.forEach((role) => {
+      const vis = CARE_TEAM_VISIBILITY_RULES[role];
+      expect(vis).toBeDefined();
+    });
+  });
+
   it("coach has correct visibility restrictions", () => {
-    const coach = CARE_TEAM_VISIBILITY_RULES.coach;
+    const coach = getVisibilityForRole("coach");
+
+    expect(coach.canSeeHighLevelWellbeing).toBe(true);
     expect(coach.canSeeFunctionalIndex).toBe(true);
     expect(coach.canSeeDerivedTrends).toBe(true);
 
@@ -15,7 +30,9 @@ describe("CARE_TEAM_VISIBILITY_RULES", () => {
   });
 
   it("clinician visibility remains restricted to functional patterns", () => {
-    const clinician = CARE_TEAM_VISIBILITY_RULES.clinician;
+    const clinician = getVisibilityForRole("clinician");
+
+    expect(clinician.canSeeHighLevelWellbeing).toBe(true);
     expect(clinician.canSeeFunctionalIndex).toBe(true);
     expect(clinician.canSeeDerivedTrends).toBe(true);
 
@@ -26,16 +43,19 @@ describe("CARE_TEAM_VISIBILITY_RULES", () => {
     expect(clinician.canSeeMedicalDocuments).toBe(false);
   });
 
-  // Optional "supporter" role (friends/family/colleagues) once implemented
   it("supporters (friends/family/colleagues) see only high-level summaries", () => {
-    const supporter = CARE_TEAM_VISIBILITY_RULES.supporter;
+    const supporter = getVisibilityForRole("supporter");
 
     expect(supporter.canSeeHighLevelWellbeing).toBe(true);
 
-    // Restrictions
+    // They must NOT see functional index or trends.
     expect(supporter.canSeeFunctionalIndex).toBe(false);
     expect(supporter.canSeeDerivedTrends).toBe(false);
+
+    // And absolutely no raw logs or medical documents.
     expect(supporter.canSeeRawLogs).toBe(false);
+    expect(supporter.canSeeMealDetails).toBe(false);
+    expect(supporter.canSeeMoodLogs).toBe(false);
     expect(supporter.canSeeMedicalDocuments).toBe(false);
   });
 });
