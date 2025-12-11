@@ -5,9 +5,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Link2, Search, UserPlus, Loader2, AlertCircle, Dumbbell, Stethoscope } from 'lucide-react';
+import { Checkbox } from '@/components/ui/checkbox';
+import { 
+  Link2, Search, UserPlus, Loader2, AlertCircle, Dumbbell, Stethoscope, 
+  Shield, Eye, EyeOff, Lock 
+} from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import { getVisibilityForRole, CareTeamRole } from './careTeamVisibility';
 import type { FoundProfessional } from './types';
 
 interface JoinByCodeProps {
@@ -16,15 +21,20 @@ interface JoinByCodeProps {
 }
 
 export const JoinByCode = ({ role, onSuccess }: JoinByCodeProps) => {
-  const { t } = useTranslation(['professional', 'common']);
+  const { t } = useTranslation(['professional', 'common', 'care_team']);
   const [code, setCode] = useState('');
   const [searching, setSearching] = useState(false);
   const [requesting, setRequesting] = useState(false);
   const [found, setFound] = useState<FoundProfessional | null>(null);
   const [error, setError] = useState('');
+  const [consentChecked, setConsentChecked] = useState(false);
 
   const roleLabel = role === 'coach' ? t('coach') : role === 'clinician' ? t('clinician') : t('professional');
   const RoleIcon = role === 'coach' ? Dumbbell : role === 'clinician' ? Stethoscope : Link2;
+
+  // Get visibility rules for the selected role
+  const visibilityRole: CareTeamRole = role === 'coach' ? 'coach' : role === 'clinician' ? 'clinician' : 'coach';
+  const visibility = getVisibilityForRole(visibilityRole);
 
   const handleSearch = async () => {
     if (!code.trim()) return;
@@ -32,6 +42,7 @@ export const JoinByCode = ({ role, onSuccess }: JoinByCodeProps) => {
     setSearching(true);
     setError('');
     setFound(null);
+    setConsentChecked(false);
 
     try {
       let query = supabase
@@ -95,7 +106,7 @@ export const JoinByCode = ({ role, onSuccess }: JoinByCodeProps) => {
   };
 
   const handleRequestConnection = async () => {
-    if (!found) return;
+    if (!found || !consentChecked) return;
     
     setRequesting(true);
     try {
@@ -123,6 +134,7 @@ export const JoinByCode = ({ role, onSuccess }: JoinByCodeProps) => {
       toast.success(t('professional:request_sent'));
       setFound(null);
       setCode('');
+      setConsentChecked(false);
       onSuccess?.();
     } catch (err) {
       console.error('Error requesting connection:', err);
@@ -171,8 +183,9 @@ export const JoinByCode = ({ role, onSuccess }: JoinByCodeProps) => {
         )}
 
         {found && (
-          <div className="p-4 rounded-lg border bg-muted/50">
-            <div className="flex items-center justify-between">
+          <div className="space-y-4">
+            {/* Professional Info */}
+            <div className="p-4 rounded-lg border bg-muted/50">
               <div className="flex items-center gap-3">
                 <Avatar>
                   <AvatarImage src={found.profile.avatar_url} />
@@ -189,15 +202,101 @@ export const JoinByCode = ({ role, onSuccess }: JoinByCodeProps) => {
                   </Badge>
                 </div>
               </div>
-              <Button onClick={handleRequestConnection} disabled={requesting} size="sm">
-                {requesting ? (
-                  <Loader2 className="h-4 w-4 mr-1 animate-spin" />
-                ) : (
-                  <UserPlus className="h-4 w-4 mr-1" />
-                )}
-                {t('request_connection')}
-              </Button>
             </div>
+
+            {/* Privacy Notice - What they WILL see */}
+            <div className="p-4 rounded-lg border border-primary/20 bg-primary/5">
+              <div className="flex items-center gap-2 mb-3">
+                <Shield className="h-4 w-4 text-primary" />
+                <span className="font-medium text-sm">
+                  {t('care_team:what_they_will_see', 'What they will see')}
+                </span>
+              </div>
+              <ul className="space-y-2 text-sm">
+                {visibility.canSeeHighLevelWellbeing && (
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <Eye className="h-3 w-3 text-green-500" />
+                    {t('care_team:high_level_wellbeing', 'High-level wellbeing status')}
+                  </li>
+                )}
+                {visibility.canSeeFunctionalIndex && (
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <Eye className="h-3 w-3 text-green-500" />
+                    {t('care_team:functional_wellness_index', 'Functional Wellness Index (FWI)')}
+                  </li>
+                )}
+                {visibility.canSeeDerivedTrends && (
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <Eye className="h-3 w-3 text-green-500" />
+                    {t('care_team:derived_trends', 'Trend patterns and adherence')}
+                  </li>
+                )}
+              </ul>
+            </div>
+
+            {/* Privacy Notice - What they will NOT see */}
+            <div className="p-4 rounded-lg border border-muted bg-muted/30">
+              <div className="flex items-center gap-2 mb-3">
+                <Lock className="h-4 w-4 text-muted-foreground" />
+                <span className="font-medium text-sm text-muted-foreground">
+                  {t('care_team:what_they_cannot_see', 'What they cannot see')}
+                </span>
+              </div>
+              <ul className="space-y-2 text-sm">
+                {!visibility.canSeeRawLogs && (
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <EyeOff className="h-3 w-3 text-red-500" />
+                    {t('care_team:raw_logs', 'Raw activity logs and entries')}
+                  </li>
+                )}
+                {!visibility.canSeeMealDetails && (
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <EyeOff className="h-3 w-3 text-red-500" />
+                    {t('care_team:meal_details', 'Specific meal details')}
+                  </li>
+                )}
+                {!visibility.canSeeMoodLogs && (
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <EyeOff className="h-3 w-3 text-red-500" />
+                    {t('care_team:mood_logs', 'Personal mood and journal entries')}
+                  </li>
+                )}
+                {!visibility.canSeeMedicalDocuments && (
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <EyeOff className="h-3 w-3 text-red-500" />
+                    {t('care_team:medical_vault', 'Medical Vault documents')}
+                  </li>
+                )}
+              </ul>
+            </div>
+
+            {/* Consent Checkbox */}
+            <div className="flex items-start gap-3 p-3 rounded-lg border">
+              <Checkbox
+                id="consent"
+                checked={consentChecked}
+                onCheckedChange={(checked) => setConsentChecked(checked === true)}
+              />
+              <label htmlFor="consent" className="text-sm cursor-pointer">
+                {t('care_team:consent_statement', 
+                  'I understand and consent to sharing my derived wellness insights with this professional. I can revoke access at any time.'
+                )}
+              </label>
+            </div>
+
+            {/* Connect Button */}
+            <Button 
+              onClick={handleRequestConnection} 
+              disabled={requesting || !consentChecked} 
+              className="w-full"
+            >
+              {requesting ? (
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              ) : (
+                <UserPlus className="h-4 w-4 mr-2" />
+              )}
+              {t('request_connection')}
+            </Button>
           </div>
         )}
       </CardContent>
