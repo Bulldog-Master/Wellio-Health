@@ -3,7 +3,7 @@ import { CARE_TEAM_VISIBILITY_RULES } from "./careTeamVisibility";
 
 describe("CARE_TEAM_VISIBILITY_RULES", () => {
   it("coach has correct visibility restrictions", () => {
-    const coach = CARE_TEAM_VISIBILITY_RULES.coach.capabilities;
+    const coach = CARE_TEAM_VISIBILITY_RULES.coach;
     expect(coach.canSeeFunctionalIndex).toBe(true);
     expect(coach.canSeeDerivedTrends).toBe(true);
 
@@ -15,7 +15,7 @@ describe("CARE_TEAM_VISIBILITY_RULES", () => {
   });
 
   it("clinician visibility remains restricted to functional patterns", () => {
-    const clinician = CARE_TEAM_VISIBILITY_RULES.clinician.capabilities;
+    const clinician = CARE_TEAM_VISIBILITY_RULES.clinician;
     expect(clinician.canSeeFunctionalIndex).toBe(true);
     expect(clinician.canSeeDerivedTrends).toBe(true);
 
@@ -28,7 +28,7 @@ describe("CARE_TEAM_VISIBILITY_RULES", () => {
 
   // Optional "supporter" role (friends/family/colleagues) once implemented
   it("supporters (friends/family/colleagues) see only high-level summaries", () => {
-    const supporter = CARE_TEAM_VISIBILITY_RULES.supporter.capabilities;
+    const supporter = CARE_TEAM_VISIBILITY_RULES.supporter;
 
     expect(supporter.canSeeHighLevelWellbeing).toBe(true);
 
