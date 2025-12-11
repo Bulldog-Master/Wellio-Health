@@ -8,13 +8,12 @@
 
 ### App Name
 ```
-Wellio — Privacy-First Wellness
+Wellio – Privacy-First Wellness APP Platform
 ```
-*(30 character limit)*
 
 ### Subtitle
 ```
-AI Health Tracking • Encrypted
+Private wellness tracking. Optional professional support.
 ```
 *(30 character limit)*
 
@@ -110,21 +109,25 @@ Version 1.0 — Launch Edition
 
 ### App Name
 ```
-Wellio: Private Wellness Tracker
+Wellio – Privacy-First Wellness APP Platform
 ```
-*(50 character limit)*
 
 ### Short Description
 ```
-AI wellness with post-quantum encryption. Your health data stays private.
+Track your wellness privately with the Functional Wellness Index (FWI).
 ```
-*(80 character limit)*
 
 ### Full Description
 ```
-WELLIO — PRIVACY-FIRST WELLNESS INTELLIGENCE
+Wellio is a privacy-first Wellness APP Platform designed for individuals who want to understand and improve their wellbeing — without giving up their personal data.
 
-Most wellness apps upload your personal health data to their servers. Wellio changes everything.
+Track sleep, meals, hydration, movement, and mood through your FWI score. Everything stays on your device and is protected with post-quantum encryption and metadata elimination using xx Network's cMixx.
+
+Invite trainers, coaches, or clinicians — they see insights, not your logs.
+
+Your health. Your privacy. Your control.
+
+---
 
 🔒 TRUE PRIVACY
 Your wellness data never leaves your device. Protected by post-quantum cryptography and cMixx metadata elimination technology.
@@ -208,14 +211,14 @@ health tracker, wellness app, fitness, mood tracker, sleep tracker, private heal
 
 ### Screenshots (Required)
 
-| Screenshot | Description | Size |
-|------------|-------------|------|
-| 1 | Today/FWI Dashboard | 1290×2796 (iPhone 14 Pro Max) |
-| 2 | Medical Vault | 1290×2796 |
-| 3 | Professional Dashboard | 1290×2796 |
-| 4 | AI Insights | 1290×2796 |
-| 5 | Security Features | 1290×2796 |
-| 6 | Onboarding | 1290×2796 |
+| Screenshot | Overlay Text | Size |
+|------------|--------------|------|
+| 1 | "Your FWI Score — Your private wellness metric." | 1290×2796 |
+| 2 | "Track sleep, meals, hydration & more — privately." | 1290×2796 |
+| 3 | "Invite professionals when you choose." | 1290×2796 |
+| 4 | "Professionals see insights, not your data." | 1290×2796 |
+| 5 | "Post-Quantum Encryption + Metadata Protection." | 1290×2796 |
+| 6 | "Your health. Your privacy. Your control." | 1290×2796 |
 
 ### App Preview Video
 - **Duration:** 15-30 seconds
@@ -255,10 +258,15 @@ health tracker, wellness app, fitness, mood tracker, sleep tracker, private heal
 
 ## ASO Optimization Tips
 
+### Keywords (Optimized for Ranking)
+```
+wellness, fwi, private health, secure wellness app, quantum resistant, cmixx, sleep tracker, meal log, coaching companion, clinician tool, wellness insights
+```
+
 ### Keywords Strategy
-- **Primary:** wellness, health tracker, privacy
-- **Secondary:** encrypted, secure, AI, coaching
-- **Long-tail:** private health app, encrypted wellness, quantum security
+- **Primary:** wellness, health tracker, privacy, fwi
+- **Secondary:** encrypted, secure, AI, coaching, cmixx
+- **Long-tail:** private health app, encrypted wellness, quantum security, quantum resistant
 
 ### Review Optimization
 - Prompt users after positive FWI trend (Day 7)
