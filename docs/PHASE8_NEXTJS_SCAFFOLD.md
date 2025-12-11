@@ -251,7 +251,32 @@ import pqLockAnimation from '@/public/animations/pq-lock.json'
 
 ---
 
-## G. SEO Configuration
+## G. Homepage Code Template
+
+```tsx
+// app/page.tsx
+import { Hero } from '@/components/Hero'
+import { FWISection } from '@/components/FWISection'
+import { ProfessionalsSection } from '@/components/ProfessionalsSection'
+import { SecuritySection } from '@/components/SecuritySection'
+import { CTA } from '@/components/CTA'
+
+export default function Home() {
+  return (
+    <main className="bg-black text-white">
+      <Hero />
+      <FWISection />
+      <ProfessionalsSection />
+      <SecuritySection />
+      <CTA />
+    </main>
+  );
+}
+```
+
+---
+
+## H. SEO Configuration
 
 ```tsx
 // app/layout.tsx
