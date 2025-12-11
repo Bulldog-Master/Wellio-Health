@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="docs/assets/wellio-readme-banner.png" width="100%" alt="Wellio – Quantum-Private Wellness APP Platform"/>
+  <img src="docs/assets/wellio-readme-banner.png" width="100%" alt="Wellio — Privacy-First Wellness APP Platform"/>
 </p>
 
-# Wellio Health
+# Wellio — Privacy-First Wellness APP Platform
 
 <!-- PROJECT BADGES -->
 <p align="center">
@@ -42,14 +42,30 @@
 
 <p align="center">
   <!-- Security & Privacy -->
-  <img src="https://img.shields.io/badge/Encryption-Quantum_Resistant-blueviolet?style=for-the-badge&logo=shield&logoColor=white" alt="Quantum Resistant Encryption" />
-  <img src="https://img.shields.io/badge/AI_Privacy-SAFE-success?style=for-the-badge&logo=lock&logoColor=white" alt="AI Privacy" />
-  <img src="https://img.shields.io/badge/Docs-Complete-brightgreen?style=for-the-badge&logo=readme" alt="Documentation Status" />
+  <img src="https://img.shields.io/badge/Encryption-Post_Quantum_(ML--KEM--768)-blueviolet?style=for-the-badge&logo=shield&logoColor=white" alt="Post-Quantum Encryption" />
+  <img src="https://img.shields.io/badge/Metadata-cMixx_Protected-success?style=for-the-badge&logo=lock&logoColor=white" alt="cMixx Metadata Protection" />
+  <img src="https://img.shields.io/badge/Architecture-Zero_Trust-brightgreen?style=for-the-badge&logo=readme" alt="Zero-Trust Architecture" />
 </p>
 
-A privacy-first Wellness APP Platform for individuals, with optional support from trainers, coaches, and clinicians. Raw data stays on the user's device, and only derived wellness insights can be shared — if the user chooses.
+---
 
-## 🎯 What is Wellio Health?
+## ⭐ Master Positioning
+
+**Wellio is a privacy-first Wellness APP Platform built for individuals — with optional support from trainers, coaches, and clinicians. Raw data stays on the user's device, and only derived wellness insights can be shared, if the user chooses.**
+
+### What This Means
+
+| Element | Description |
+|---------|-------------|
+| **APP** | An application users interact with daily |
+| **Platform** | Supports multiple user types & broader architecture |
+| **Wellness** | Functional, lifestyle, holistic health tracking |
+| **Privacy-first** | Post-quantum encryption + cMixx metadata protection |
+| **Optional professionals** | Not required but available when invited |
+
+---
+
+## 🎯 What is Wellio?
 
 Wellio is a next-generation Wellness APP Platform that empowers individuals to track their wellbeing privately — while optionally connecting with trainers, coaches, or clinicians through secure, limited-visibility insights. It is privacy-first, post-quantum secure, and powered by cMixx metadata protection.
 
