@@ -4,9 +4,10 @@
 
 ---
 
-## WELLIO
+## WELLIO — The Privacy-First Wellness APP Platform
 
-### The Privacy-First Wellness APP Platform
+**Summary:**
+Wellio gives individuals private wellness intelligence and optional support from trainers/coaches/clinicians. Built with PQ encryption and cMixx metadata protection, Wellio is the first wellness system designed for complete data sovereignty.
 
 ---
 
@@ -25,14 +26,16 @@
 
 ## THE PROBLEM
 
-- Wellness apps upload personal data to servers
-- Professionals lack safe visibility into client wellness
-- Clinicians can't engage without PHI risk
+- Wellness apps compromise privacy
+- Clinicians face PHI burden
+- Professionals need safe visibility into client wellness
 - Users feel surveilled, not supported
 
 ---
 
 ## THE SOLUTION
+
+**On-device logs + derived insights + PQ security.**
 
 **Wellio** is a Wellness APP Platform built for individuals, with optional professional support.
 

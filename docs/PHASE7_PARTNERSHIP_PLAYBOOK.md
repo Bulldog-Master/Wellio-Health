@@ -24,9 +24,10 @@
 - Yoga studios
 - Large gym chains (pilot programs)
 
-### Value to Gyms
-- **Member Engagement** — Keep members tracking between visits
-- **Trainer Enablement** — Trainers see trends without liability
+### Value Proposition for Gyms
+- **Extend coaching beyond the session** — Keep members engaged 24/7
+- **Insights without invading privacy** — Trainers see trends, not logs
+- **Easy client onboarding** — Invite code system
 - **Differentiation** — Privacy-first wellness is a selling point
 - **Retention** — Engaged members stay longer
 
@@ -76,11 +77,12 @@ Best,
 - Physical therapy centers
 - Mental health practices
 
-### Value to Clinics
-- **Lifestyle Intelligence** — Between-visit behavioral data
-- **No PHI Risk** — Derived signals only
-- **Patient Engagement** — Proactive wellness support
-- **Lower Burden** — No new compliance requirements
+### Value Proposition for Clinics
+- **PHI-free engagement** — Derived signals only
+- **Reduce clinician liability** — No raw health data
+- **Support lifestyle change programs** — Between-visit monitoring
+- **Works alongside EMRs** — Not replacing them
+- **No new compliance requirements** — Zero PHI storage
 
 ### Partnership Tiers
 
@@ -130,11 +132,12 @@ Best,
 - Employee benefit providers
 - Insurance wellness initiatives
 
-### Value to Corporations
-- **Employee Engagement** — Wellness without surveillance fears
-- **Privacy Compliance** — No employee data collection
-- **Aggregated Insights** — Anonymous program metrics
+### Value Proposition for Corporations
+- **Anonymous aggregated FWI trends** — Program-level insights only
+- **No employee data collected** — Privacy by design
+- **Supports productivity & burnout reduction** — Wellness without surveillance fears
 - **Differentiation** — Leading-edge benefit offering
+- **Trust Building** — Employees trust privacy-first tools
 
 ### Partnership Tiers
 
