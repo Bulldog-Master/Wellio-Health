@@ -321,6 +321,7 @@ import complianceTR from './locales/tr/compliance.json';
 import accessibilityTR from './locales/tr/accessibility.json';
 import onboardingTR from './locales/tr/onboarding.json';
 import clinicianTR from './locales/tr/clinician.json';
+import careTeamTR from './locales/tr/care_team.json';
 
 // Italian - Core + Extended namespaces
 import commonIT from './locales/it/common.json';
@@ -362,6 +363,7 @@ import complianceIT from './locales/it/compliance.json';
 import accessibilityIT from './locales/it/accessibility.json';
 import onboardingIT from './locales/it/onboarding.json';
 import clinicianIT from './locales/it/clinician.json';
+import careTeamIT from './locales/it/care_team.json';
 
 // Dutch - Core + Extended namespaces
 import commonNL from './locales/nl/common.json';
@@ -403,6 +405,7 @@ import complianceNL from './locales/nl/compliance.json';
 import accessibilityNL from './locales/nl/accessibility.json';
 import onboardingNL from './locales/nl/onboarding.json';
 import clinicianNL from './locales/nl/clinician.json';
+import careTeamNL from './locales/nl/care_team.json';
 
 // Russian - Core + Extended namespaces
 import commonRU from './locales/ru/common.json';
@@ -444,6 +447,7 @@ import complianceRU from './locales/ru/compliance.json';
 import accessibilityRU from './locales/ru/accessibility.json';
 import onboardingRU from './locales/ru/onboarding.json';
 import clinicianRU from './locales/ru/clinician.json';
+import careTeamRU from './locales/ru/care_team.json';
 
 // Japanese - Core + Extended namespaces
 import commonJA from './locales/ja/common.json';
@@ -485,6 +489,7 @@ import complianceJA from './locales/ja/compliance.json';
 import accessibilityJA from './locales/ja/accessibility.json';
 import onboardingJA from './locales/ja/onboarding.json';
 import clinicianJA from './locales/ja/clinician.json';
+import careTeamJA from './locales/ja/care_team.json';
 
 // Korean - Core + Extended namespaces
 import commonKO from './locales/ko/common.json';
@@ -526,6 +531,7 @@ import complianceKO from './locales/ko/compliance.json';
 import accessibilityKO from './locales/ko/accessibility.json';
 import onboardingKO from './locales/ko/onboarding.json';
 import clinicianKO from './locales/ko/clinician.json';
+import careTeamKO from './locales/ko/care_team.json';
 
 // Arabic - Core + Extended namespaces
 import commonAR from './locales/ar/common.json';
@@ -567,6 +573,7 @@ import complianceAR from './locales/ar/compliance.json';
 import accessibilityAR from './locales/ar/accessibility.json';
 import onboardingAR from './locales/ar/onboarding.json';
 import clinicianAR from './locales/ar/clinician.json';
+import careTeamAR from './locales/ar/care_team.json';
 
 // Hindi - Core + Extended namespaces
 import commonHI from './locales/hi/common.json';
@@ -609,6 +616,7 @@ import complianceHI from './locales/hi/compliance.json';
 import accessibilityHI from './locales/hi/accessibility.json';
 import onboardingHI from './locales/hi/onboarding.json';
 import clinicianHI from './locales/hi/clinician.json';
+import careTeamHI from './locales/hi/care_team.json';
 
 // Bengali - Core + Extended namespaces
 import commonBN from './locales/bn/common.json';
@@ -650,6 +658,7 @@ import complianceBN from './locales/bn/compliance.json';
 import accessibilityBN from './locales/bn/accessibility.json';
 import onboardingBN from './locales/bn/onboarding.json';
 import clinicianBN from './locales/bn/clinician.json';
+import careTeamBN from './locales/bn/care_team.json';
 
 // Indonesian - Core + Extended namespaces
 import commonID from './locales/id/common.json';
@@ -693,6 +702,7 @@ import complianceID from './locales/id/compliance.json';
 import accessibilityID from './locales/id/accessibility.json';
 import onboardingID from './locales/id/onboarding.json';
 import clinicianID from './locales/id/clinician.json';
+import careTeamID from './locales/id/care_team.json';
 
 // Nigerian Pidgin - Core + Extended namespaces
 import commonPCM from './locales/pcm/common.json';
@@ -734,6 +744,7 @@ import compliancePCM from './locales/pcm/compliance.json';
 import accessibilityPCM from './locales/pcm/accessibility.json';
 import onboardingPCM from './locales/pcm/onboarding.json';
 import clinicianPCM from './locales/pcm/clinician.json';
+import careTeamPCM from './locales/pcm/care_team.json';
 
 // Tamil - Core + Extended namespaces
 import commonTA from './locales/ta/common.json';
@@ -777,6 +788,7 @@ import complianceTA from './locales/ta/compliance.json';
 import accessibilityTA from './locales/ta/accessibility.json';
 import onboardingTA from './locales/ta/onboarding.json';
 import clinicianTA from './locales/ta/clinician.json';
+import careTeamTA from './locales/ta/care_team.json';
 
 // Urdu - Core + Extended namespaces
 import commonUR from './locales/ur/common.json';
@@ -818,6 +830,7 @@ import complianceUR from './locales/ur/compliance.json';
 import accessibilityUR from './locales/ur/accessibility.json';
 import onboardingUR from './locales/ur/onboarding.json';
 import clinicianUR from './locales/ur/clinician.json';
+import careTeamUR from './locales/ur/care_team.json';
 
 // Egyptian Arabic - Core + Extended namespaces
 import commonARZ from './locales/arz/common.json';
@@ -859,6 +872,7 @@ import complianceARZ from './locales/arz/compliance.json';
 import accessibilityARZ from './locales/arz/accessibility.json';
 import onboardingARZ from './locales/arz/onboarding.json';
 import clinicianARZ from './locales/arz/clinician.json';
+import careTeamARZ from './locales/arz/care_team.json';
 
 // Marathi - Core + Extended namespaces
 import commonMR from './locales/mr/common.json';
@@ -900,6 +914,7 @@ import complianceMR from './locales/mr/compliance.json';
 import accessibilityMR from './locales/mr/accessibility.json';
 import onboardingMR from './locales/mr/onboarding.json';
 import clinicianMR from './locales/mr/clinician.json';
+import careTeamMR from './locales/mr/care_team.json';
 
 // Telugu - Core + Extended namespaces
 import commonTE from './locales/te/common.json';
@@ -941,6 +956,7 @@ import complianceTE from './locales/te/compliance.json';
 import accessibilityTE from './locales/te/accessibility.json';
 import onboardingTE from './locales/te/onboarding.json';
 import clinicianTE from './locales/te/clinician.json';
+import careTeamTE from './locales/te/care_team.json';
 
 // Vietnamese - Core + Extended namespaces
 import commonVI from './locales/vi/common.json';
@@ -982,6 +998,7 @@ import complianceVI from './locales/vi/compliance.json';
 import accessibilityVI from './locales/vi/accessibility.json';
 import onboardingVI from './locales/vi/onboarding.json';
 import clinicianVI from './locales/vi/clinician.json';
+import careTeamVI from './locales/vi/care_team.json';
 
 // All namespaces
 export const allNamespaces = [
@@ -1029,7 +1046,7 @@ const resources = {
     videos: videosES, chat: chatES, celebrations: celebrationsES, news: newsES, sponsors: sponsorsES,
     locations: locationsES, ads: adsES, products: productsES, recovery: recoveryES, addons: addonsES, professional: professionalES, payments: paymentsES,
     legal: legalES, controls: controlsES, compliance: complianceES, accessibility: accessibilityES,
-    onboarding: onboardingES, clinician: clinicianES,
+    onboarding: onboardingES, clinician: clinicianES, care_team: careTeamES,
   },
   pt: {
     common: commonPT, auth: authPT, fitness: fitnessPT, social: socialPT, nutrition: nutritionPT,
@@ -1038,7 +1055,7 @@ const resources = {
     news: newsPT, addons: addonsPT, professional: professionalPT, recovery: recoveryPT, settings: settingsPT,
     locations: locationsPT, products: productsPT, payments: paymentsPT,
     legal: legalPT, controls: controlsPT, compliance: compliancePT, accessibility: accessibilityPT,
-    onboarding: onboardingPT, clinician: clinicianPT,
+    onboarding: onboardingPT, clinician: clinicianPT, care_team: careTeamPT,
   },
   fr: {
     common: commonFR, auth: authFR, fitness: fitnessFR, social: socialFR, nutrition: nutritionFR,
@@ -1049,7 +1066,7 @@ const resources = {
     measurements: measurementsFR, records: recordsFR, referral: referralFR, rewards: rewardsFR,
     search: searchFR, session: sessionFR, voice: voiceFR, payments: paymentsFR,
     legal: legalFR, controls: controlsFR, compliance: complianceFR, accessibility: accessibilityFR,
-    onboarding: onboardingFR, clinician: clinicianFR,
+    onboarding: onboardingFR, clinician: clinicianFR, care_team: careTeamFR,
   },
   de: {
     common: commonDE, auth: authDE, fitness: fitnessDE, social: socialDE, nutrition: nutritionDE,
@@ -1058,7 +1075,7 @@ const resources = {
     news: newsDE, addons: addonsDE, professional: professionalDE, recovery: recoveryDE, settings: settingsDE,
     locations: locationsDE, products: productsDE, payments: paymentsDE,
     legal: legalDE, controls: controlsDE, compliance: complianceDE, accessibility: accessibilityDE,
-    onboarding: onboardingDE, clinician: clinicianDE,
+    onboarding: onboardingDE, clinician: clinicianDE, care_team: careTeamDE,
   },
   zh: {
     common: commonZH, auth: authZH, settings: settingsZH, fitness: fitnessZH, social: socialZH,
@@ -1067,7 +1084,7 @@ const resources = {
     celebrations: celebrationsZH, news: newsZH, addons: addonsZH, professional: professionalZH,
     recovery: recoveryZH, locations: locationsZH, products: productsZH, payments: paymentsZH,
     legal: legalZH, controls: controlsZH, compliance: complianceZH, accessibility: accessibilityZH,
-    onboarding: onboardingZH, clinician: clinicianZH,
+    onboarding: onboardingZH, clinician: clinicianZH, care_team: careTeamZH,
   },
   tr: {
     common: commonTR, auth: authTR, settings: settingsTR, fitness: fitnessTR, nutrition: nutritionTR,
@@ -1078,7 +1095,7 @@ const resources = {
     macros: macrosTR, measurements: measurementsTR, records: recordsTR, referral: referralTR,
     rewards: rewardsTR, search: searchTR, session: sessionTR, voice: voiceTR, payments: paymentsTR,
     legal: legalTR, controls: controlsTR, compliance: complianceTR, accessibility: accessibilityTR,
-    onboarding: onboardingTR, clinician: clinicianTR,
+    onboarding: onboardingTR, clinician: clinicianTR, care_team: careTeamTR,
   },
   it: {
     common: commonIT, auth: authIT, settings: settingsIT, fitness: fitnessIT, nutrition: nutritionIT,
@@ -1089,7 +1106,7 @@ const resources = {
     macros: macrosIT, measurements: measurementsIT, records: recordsIT, referral: referralIT,
     rewards: rewardsIT, search: searchIT, session: sessionIT, voice: voiceIT, payments: paymentsIT,
     legal: legalIT, controls: controlsIT, compliance: complianceIT, accessibility: accessibilityIT,
-    onboarding: onboardingIT, clinician: clinicianIT,
+    onboarding: onboardingIT, clinician: clinicianIT, care_team: careTeamIT,
   },
   nl: {
     common: commonNL, auth: authNL, settings: settingsNL, fitness: fitnessNL, nutrition: nutritionNL,
@@ -1100,7 +1117,7 @@ const resources = {
     macros: macrosNL, measurements: measurementsNL, records: recordsNL, referral: referralNL,
     rewards: rewardsNL, search: searchNL, session: sessionNL, voice: voiceNL, payments: paymentsNL,
     legal: legalNL, controls: controlsNL, compliance: complianceNL, accessibility: accessibilityNL,
-    onboarding: onboardingNL, clinician: clinicianNL,
+    onboarding: onboardingNL, clinician: clinicianNL, care_team: careTeamNL,
   },
   ru: {
     common: commonRU, auth: authRU, settings: settingsRU, fitness: fitnessRU, nutrition: nutritionRU,
@@ -1111,7 +1128,7 @@ const resources = {
     macros: macrosRU, measurements: measurementsRU, records: recordsRU, referral: referralRU,
     rewards: rewardsRU, search: searchRU, session: sessionRU, voice: voiceRU, payments: paymentsRU,
     legal: legalRU, controls: controlsRU, compliance: complianceRU, accessibility: accessibilityRU,
-    onboarding: onboardingRU, clinician: clinicianRU,
+    onboarding: onboardingRU, clinician: clinicianRU, care_team: careTeamRU,
   },
   ja: {
     common: commonJA, auth: authJA, settings: settingsJA, fitness: fitnessJA, nutrition: nutritionJA,
@@ -1122,7 +1139,7 @@ const resources = {
     macros: macrosJA, measurements: measurementsJA, records: recordsJA, referral: referralJA,
     rewards: rewardsJA, search: searchJA, session: sessionJA, voice: voiceJA, payments: paymentsJA,
     legal: legalJA, controls: controlsJA, compliance: complianceJA, accessibility: accessibilityJA,
-    onboarding: onboardingJA, clinician: clinicianJA,
+    onboarding: onboardingJA, clinician: clinicianJA, care_team: careTeamJA,
   },
   ko: {
     common: commonKO, auth: authKO, settings: settingsKO, fitness: fitnessKO, nutrition: nutritionKO,
@@ -1133,7 +1150,7 @@ const resources = {
     macros: macrosKO, measurements: measurementsKO, records: recordsKO, referral: referralKO,
     rewards: rewardsKO, search: searchKO, session: sessionKO, voice: voiceKO, payments: paymentsKO,
     legal: legalKO, controls: controlsKO, compliance: complianceKO, accessibility: accessibilityKO,
-    onboarding: onboardingKO, clinician: clinicianKO,
+    onboarding: onboardingKO, clinician: clinicianKO, care_team: careTeamKO,
   },
   ar: {
     common: commonAR, auth: authAR, settings: settingsAR, fitness: fitnessAR, nutrition: nutritionAR,
@@ -1144,7 +1161,7 @@ const resources = {
     macros: macrosAR, measurements: measurementsAR, records: recordsAR, referral: referralAR,
     rewards: rewardsAR, search: searchAR, session: sessionAR, voice: voiceAR, payments: paymentsAR,
     legal: legalAR, controls: controlsAR, compliance: complianceAR, accessibility: accessibilityAR,
-    onboarding: onboardingAR, clinician: clinicianAR,
+    onboarding: onboardingAR, clinician: clinicianAR, care_team: careTeamAR,
   },
   hi: {
     common: commonHI, auth: authHI, settings: settingsHI, fitness: fitnessHI, nutrition: nutritionHI,
@@ -1155,7 +1172,7 @@ const resources = {
     macros: macrosHI, measurements: measurementsHI, records: recordsHI, referral: referralHI,
     rewards: rewardsHI, search: searchHI, session: sessionHI, voice: voiceHI, workout: workoutHI, payments: paymentsHI,
     legal: legalHI, controls: controlsHI, compliance: complianceHI, accessibility: accessibilityHI,
-    onboarding: onboardingHI, clinician: clinicianHI,
+    onboarding: onboardingHI, clinician: clinicianHI, care_team: careTeamHI,
   },
   bn: {
     common: commonBN, auth: authBN, settings: settingsBN, fitness: fitnessBN, nutrition: nutritionBN,
@@ -1166,7 +1183,7 @@ const resources = {
     macros: macrosBN, measurements: measurementsBN, records: recordsBN, referral: referralBN,
     rewards: rewardsBN, search: searchBN, session: sessionBN, voice: voiceBN, payments: paymentsBN,
     legal: legalBN, controls: controlsBN, compliance: complianceBN, accessibility: accessibilityBN,
-    onboarding: onboardingBN, clinician: clinicianBN,
+    onboarding: onboardingBN, clinician: clinicianBN, care_team: careTeamBN,
   },
   id: {
     common: commonID, auth: authID, settings: settingsID, fitness: fitnessID, nutrition: nutritionID,
@@ -1178,7 +1195,7 @@ const resources = {
     rewards: rewardsID, search: searchID, session: sessionID, voice: voiceID, challenges: challengesID,
     live: liveID, payments: paymentsID,
     legal: legalID, controls: controlsID, compliance: complianceID, accessibility: accessibilityID,
-    onboarding: onboardingID, clinician: clinicianID,
+    onboarding: onboardingID, clinician: clinicianID, care_team: careTeamID,
   },
   pcm: {
     common: commonPCM, auth: authPCM, settings: settingsPCM, fitness: fitnessPCM, nutrition: nutritionPCM,
@@ -1189,7 +1206,7 @@ const resources = {
     macros: macrosPCM, measurements: measurementsPCM, records: recordsPCM, referral: referralPCM,
     rewards: rewardsPCM, search: searchPCM, session: sessionPCM, voice: voicePCM, payments: paymentsPCM,
     legal: legalPCM, controls: controlsPCM, compliance: compliancePCM, accessibility: accessibilityPCM,
-    onboarding: onboardingPCM, clinician: clinicianPCM,
+    onboarding: onboardingPCM, clinician: clinicianPCM, care_team: careTeamPCM,
   },
   ta: {
     common: commonTA, auth: authTA, settings: settingsTA, fitness: fitnessTA, nutrition: nutritionTA,
@@ -1201,7 +1218,7 @@ const resources = {
     rewards: rewardsTA, search: searchTA, session: sessionTA, voice: voiceTA, challenges: challengesTA,
     live: liveTA, payments: paymentsTA,
     legal: legalTA, controls: controlsTA, compliance: complianceTA, accessibility: accessibilityTA,
-    onboarding: onboardingTA, clinician: clinicianTA,
+    onboarding: onboardingTA, clinician: clinicianTA, care_team: careTeamTA,
   },
   ur: {
     common: commonUR, auth: authUR, settings: settingsUR, fitness: fitnessUR, nutrition: nutritionUR,
@@ -1212,7 +1229,7 @@ const resources = {
     macros: macrosUR, measurements: measurementsUR, records: recordsUR, referral: referralUR,
     rewards: rewardsUR, search: searchUR, session: sessionUR, voice: voiceUR, payments: paymentsUR,
     legal: legalUR, controls: controlsUR, compliance: complianceUR, accessibility: accessibilityUR,
-    onboarding: onboardingUR, clinician: clinicianUR,
+    onboarding: onboardingUR, clinician: clinicianUR, care_team: careTeamUR,
   },
   arz: {
     common: commonARZ, auth: authARZ, settings: settingsARZ, fitness: fitnessARZ, nutrition: nutritionARZ,
@@ -1223,7 +1240,7 @@ const resources = {
     macros: macrosARZ, measurements: measurementsARZ, records: recordsARZ, referral: referralARZ,
     rewards: rewardsARZ, search: searchARZ, session: sessionARZ, voice: voiceARZ, payments: paymentsARZ,
     legal: legalARZ, controls: controlsARZ, compliance: complianceARZ, accessibility: accessibilityARZ,
-    onboarding: onboardingARZ, clinician: clinicianARZ,
+    onboarding: onboardingARZ, clinician: clinicianARZ, care_team: careTeamARZ,
   },
   mr: {
     common: commonMR, auth: authMR, settings: settingsMR, fitness: fitnessMR, nutrition: nutritionMR,
@@ -1234,7 +1251,7 @@ const resources = {
     macros: macrosMR, measurements: measurementsMR, records: recordsMR, referral: referralMR,
     rewards: rewardsMR, search: searchMR, session: sessionMR, voice: voiceMR, payments: paymentsMR,
     legal: legalMR, controls: controlsMR, compliance: complianceMR, accessibility: accessibilityMR,
-    onboarding: onboardingMR, clinician: clinicianMR,
+    onboarding: onboardingMR, clinician: clinicianMR, care_team: careTeamMR,
   },
   te: {
     common: commonTE, auth: authTE, settings: settingsTE, fitness: fitnessTE, nutrition: nutritionTE,
@@ -1245,7 +1262,7 @@ const resources = {
     macros: macrosTE, measurements: measurementsTE, records: recordsTE, referral: referralTE,
     rewards: rewardsTE, search: searchTE, session: sessionTE, voice: voiceTE, payments: paymentsTE,
     legal: legalTE, controls: controlsTE, compliance: complianceTE, accessibility: accessibilityTE,
-    onboarding: onboardingTE, clinician: clinicianTE,
+    onboarding: onboardingTE, clinician: clinicianTE, care_team: careTeamTE,
   },
   vi: {
     common: commonVI, auth: authVI, settings: settingsVI, fitness: fitnessVI, nutrition: nutritionVI,
@@ -1256,7 +1273,7 @@ const resources = {
     macros: macrosVI, measurements: measurementsVI, records: recordsVI, referral: referralVI,
     rewards: rewardsVI, search: searchVI, session: sessionVI, voice: voiceVI, payments: paymentsVI,
     legal: legalVI, controls: controlsVI, compliance: complianceVI, accessibility: accessibilityVI,
-    onboarding: onboardingVI, clinician: clinicianVI,
+    onboarding: onboardingVI, clinician: clinicianVI, care_team: careTeamVI,
   },
 };
 

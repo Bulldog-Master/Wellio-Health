@@ -5817,6 +5817,17 @@ export type Database = {
         }
         Relationships: []
       }
+      pro_billing_summary: {
+        Row: {
+          access_types_used: string[] | null
+          active_clients: number | null
+          month: string | null
+          role: string | null
+          total_access_events: number | null
+          viewer_id: string | null
+        }
+        Relationships: []
+      }
       wearable_connections_safe: {
         Row: {
           created_at: string | null
@@ -5991,6 +6002,14 @@ export type Database = {
           requires_region: string[]
           sort_order: number
         }[]
+      }
+      get_pro_active_clients: {
+        Args: { p_month?: string; p_professional_id: string }
+        Returns: number
+      }
+      get_pro_billing_tier: {
+        Args: { p_month?: string; p_professional_id: string }
+        Returns: string
       }
       get_professional_tier: {
         Args: { _professional_type: string; _user_id: string }
