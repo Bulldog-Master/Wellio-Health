@@ -2,34 +2,56 @@
 // WELLIO HEALTH - CARE TEAM SCREEN
 // Route: /care-team
 //
-// - Shows current professional relationships
-// - Lets users join a pro via invite code (JoinByCode)
-// - Shows invite code panel for professionals (coach/clinician)
-// - Links pros to their dashboards (/coach, /clinician)
-// - Explains "Who can see my data?"
+// - Shows three sections: Supporters, Trainers & Coaches, Clinicians
+// - Lets users add team members via invite codes
+// - Shows professional tools for coaches/clinicians
+// - Access log for viewing data access history
 // ========================================
 
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { Loader2, ArrowRight, UserPlus, TrendingUp } from 'lucide-react';
+import { 
+  Loader2, ArrowRight, UserPlus, TrendingUp, History,
+  Users, Dumbbell, Stethoscope, MoreHorizontal 
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { supabase } from '@/integrations/supabase/client';
 import { useCareTeam } from './useCareTeam';
 import { useProfessionalStatus } from './useProfessionalStatus';
 import { CoachRow } from './CoachRow';
 import { ClinicianRow } from './ClinicianRow';
-import { JoinByCode } from './JoinByCode';
 import { InviteCodePanel } from './InviteCodePanel';
 import { WhoCanSeeMyDataSection } from './WhoCanSeeMyDataSection';
 import { InviteClientDialog } from './InviteClientDialog';
+import { AddSupporterDialog } from './AddSupporterDialog';
+import { AddTrainerDialog } from './AddTrainerDialog';
+import { AddClinicianDialog } from './AddClinicianDialog';
+import { DataAccessLogDialog } from './DataAccessLogDialog';
 
 // ---------- PRESENTATIONAL SUBCOMPONENTS ----------
 
-function SectionCard({ title, children }: { title: string; children: React.ReactNode }) {
+function SectionCard({ 
+  title, 
+  icon: Icon,
+  children 
+}: { 
+  title: string; 
+  icon?: React.ComponentType<{ className?: string }>;
+  children: React.ReactNode;
+}) {
   return (
-    <section className="rounded-xl border bg-background p-4 space-y-2">
-      <h2 className="text-sm font-semibold">{title}</h2>
+    <section className="rounded-xl border bg-background p-4 space-y-3">
+      <h2 className="text-sm font-semibold flex items-center gap-2">
+        {Icon && <Icon className="h-4 w-4 text-muted-foreground" />}
+        {title}
+      </h2>
       {children}
     </section>
   );
@@ -71,7 +93,7 @@ function ProfessionalToolsPanel({ professionalType, isCoach, isClinician }: Prof
   return (
     <SectionCard title={t('professional_tools', 'Professional tools')}>
       <p className="text-xs text-muted-foreground mb-3">
-        {t('professional_tools_desc', `As a ${professionalType}, you can view aggregated functional trends for people who connect to you from your dashboard. Secure messaging is routed via xx network's cMix for metadata protection.`)}
+        {t('professional_tools_desc', `As a ${professionalType}, you can view aggregated functional trends for people who connect to you from your dashboard. Secure messaging is routed via xx network's cMixx for metadata protection.`)}
       </p>
       
       <div className="flex flex-col sm:flex-row flex-wrap gap-2">
@@ -132,7 +154,7 @@ function ProfessionalToolsPanel({ professionalType, isCoach, isClinician }: Prof
 // ---------- MAIN SCREEN ---------------------------
 
 export const CareTeamScreen = () => {
-  const { t } = useTranslation(['professional', 'common']);
+  const { t } = useTranslation(['care_team', 'professional', 'common']);
   const navigate = useNavigate();
   const {
     coaches,
@@ -144,6 +166,12 @@ export const CareTeamScreen = () => {
   } = useCareTeam();
 
   const { isProfessional, professionalType, isCoach, isClinician, loading: professionalLoading } = useProfessionalStatus();
+
+  // Dialog states
+  const [showAddSupporter, setShowAddSupporter] = useState(false);
+  const [showAddTrainer, setShowAddTrainer] = useState(false);
+  const [showAddClinician, setShowAddClinician] = useState(false);
+  const [showAccessLog, setShowAccessLog] = useState(false);
 
   const isLoading = loading || professionalLoading;
 
@@ -162,53 +190,102 @@ export const CareTeamScreen = () => {
 
   return (
     <div className="space-y-4">
-      <header className="space-y-1">
-        <p className="text-xs text-muted-foreground">
-          {t('care_team_description', 'Connect with coaches and clinicians who can see your functional wellness index and trends — without exposing your raw health logs.')}
-        </p>
+      {/* Header with menu */}
+      <header className="flex items-start justify-between">
+        <div className="space-y-1">
+          <h1 className="text-xl font-semibold">{t('care_team')}</h1>
+          <p className="text-sm text-muted-foreground">
+            {t('subtitle')}
+          </p>
+          <p className="text-xs text-muted-foreground whitespace-pre-line">
+            {t('body_text')}
+          </p>
+        </div>
+        
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon">
+              <MoreHorizontal className="h-5 w-5" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={() => setShowAccessLog(true)}>
+              <History className="h-4 w-4 mr-2" />
+              {t('who_viewed_data')}
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </header>
 
-      {/* Section: Connections (user as client/patient) */}
-      <SectionCard title={t('connections', 'Connections')}>
-        <div className="space-y-3">
-          {/* Coach row or JoinByCode */}
-          {coach ? (
-            <CoachRow
-              coach={coach}
-              onRevoke={handleRevokeAccess}
-              revoking={revoking === coach.id}
-            />
-          ) : (
-            <div className="space-y-1">
-              <p className="text-xs text-muted-foreground">
-                {t('coach_connect_prompt', 'Have a trainer or coach? Enter their invite code to connect.')}
-              </p>
-              <JoinByCode role="coach" onSuccess={fetchProfessionals} />
-            </div>
-          )}
+      {/* Section: Supporters */}
+      <SectionCard title={t('supporters')} icon={Users}>
+        <p className="text-xs text-muted-foreground">
+          {t('supporters_empty')}
+        </p>
+        <Button 
+          variant="outline" 
+          size="sm"
+          onClick={() => setShowAddSupporter(true)}
+        >
+          <UserPlus className="h-4 w-4 mr-2" />
+          {t('add_supporter')}
+        </Button>
+      </SectionCard>
 
-          {/* Clinician row or JoinByCode */}
-          {clinician ? (
-            <ClinicianRow
-              clinician={clinician}
-              onRevoke={handleRevokeAccess}
-              revoking={revoking === clinician.id}
-            />
-          ) : (
-            <div className="space-y-1">
-              <p className="text-xs text-muted-foreground">
-                {t('clinician_connect_prompt', 'Working with a doctor or clinician? Enter their invite code to share your trends.')}
-              </p>
-              <JoinByCode role="clinician" onSuccess={fetchProfessionals} />
-            </div>
-          )}
-        </div>
+      {/* Section: Trainers & Coaches */}
+      <SectionCard title={t('trainers_coaches')} icon={Dumbbell}>
+        {coach ? (
+          <CoachRow
+            coach={coach}
+            onRevoke={handleRevokeAccess}
+            revoking={revoking === coach.id}
+          />
+        ) : (
+          <>
+            <p className="text-xs text-muted-foreground">
+              {t('trainers_empty')}
+            </p>
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => setShowAddTrainer(true)}
+            >
+              <UserPlus className="h-4 w-4 mr-2" />
+              {t('add_trainer_coach')}
+            </Button>
+          </>
+        )}
+      </SectionCard>
+
+      {/* Section: Clinicians */}
+      <SectionCard title={t('clinicians')} icon={Stethoscope}>
+        {clinician ? (
+          <ClinicianRow
+            clinician={clinician}
+            onRevoke={handleRevokeAccess}
+            revoking={revoking === clinician.id}
+          />
+        ) : (
+          <>
+            <p className="text-xs text-muted-foreground">
+              {t('clinicians_empty')}
+            </p>
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => setShowAddClinician(true)}
+            >
+              <UserPlus className="h-4 w-4 mr-2" />
+              {t('add_clinician')}
+            </Button>
+          </>
+        )}
       </SectionCard>
 
       {/* Section: Professional tools (if user is coach/clinician) */}
       {isProfessional && professionalType && (
         <>
-          <SectionCard title={t('your_invite_code')}>
+          <SectionCard title={t('professional:your_invite_code')}>
             <InviteCodePanel professionalType={professionalType} />
           </SectionCard>
 
@@ -222,6 +299,27 @@ export const CareTeamScreen = () => {
 
       {/* Section: "Who can see my data?" */}
       <WhoCanSeeMyDataSection careTeam={{ hasCoach, hasClinician }} />
+
+      {/* Dialogs */}
+      <AddSupporterDialog 
+        open={showAddSupporter} 
+        onOpenChange={setShowAddSupporter}
+        onSuccess={fetchProfessionals}
+      />
+      <AddTrainerDialog 
+        open={showAddTrainer} 
+        onOpenChange={setShowAddTrainer}
+        onSuccess={fetchProfessionals}
+      />
+      <AddClinicianDialog 
+        open={showAddClinician} 
+        onOpenChange={setShowAddClinician}
+        onSuccess={fetchProfessionals}
+      />
+      <DataAccessLogDialog 
+        open={showAccessLog} 
+        onOpenChange={setShowAccessLog}
+      />
     </div>
   );
 };
