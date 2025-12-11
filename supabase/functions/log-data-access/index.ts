@@ -60,6 +60,15 @@ serve(async (req) => {
       );
     }
 
+    // Prevent user from "logging" access on themselves as a viewer
+    if (user.id === clientId) {
+      console.warn('[log-data-access] Viewer and subject cannot be the same');
+      return new Response(
+        JSON.stringify({ error: 'Viewer and subject cannot be the same' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     // Validate access type
     const validAccessTypes = ['fwi', 'trends', 'adherence', 'summary', 'messaging_metadata_free_view', 'profile_view', 'dashboard_view'];
     if (!validAccessTypes.includes(accessType)) {
