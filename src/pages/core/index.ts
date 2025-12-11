@@ -10,5 +10,4 @@ export { default as Support } from '../Support';
 export { default as HistoryHub } from '../HistoryHub';
 export { default as EventCalendar } from '../EventCalendar';
 export { default as ShareProgress } from '../ShareProgress';
-export { default as GoalSettingWizard } from '../GoalSettingWizard';
-export { default as VoiceNotes } from '../VoiceNotes';
+// Note: GoalSettingWizard and VoiceNotes are exported from fitness/index.ts
