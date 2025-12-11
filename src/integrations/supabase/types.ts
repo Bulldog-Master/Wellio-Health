@@ -5827,6 +5827,17 @@ export type Database = {
         }
         Relationships: []
       }
+      pro_billing_monthly_with_tiers: {
+        Row: {
+          active_clients: number | null
+          billing_month: string | null
+          billing_tier: string | null
+          role: string | null
+          total_access_events: number | null
+          viewer_id: string | null
+        }
+        Relationships: []
+      }
       pro_billing_summary: {
         Row: {
           access_types_used: string[] | null
