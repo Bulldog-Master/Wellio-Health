@@ -7,10 +7,22 @@
 ## EXPORT SPECIFICATIONS
 
 ### Document Settings
-- **Page Size:** 1920 × 1080 px (16:9)
+- **Page Size:** 3840 × 2160 px (4K artboards — scales down beautifully)
 - **Color Mode:** RGB
+- **Color Profile:** sRGB
 - **Resolution:** 300 DPI (for print), 72 DPI (for screen)
 - **Format:** PDF (primary), PPTX (editable)
+- **File Size Target:** < 12MB
+- **Primary Font:** Space Grotesk (headings)
+- **Secondary Font:** Inter (body text)
+
+### Slide Graphic Instructions
+- Use violet/cyan glow effects consistently
+- Insert device mockups at 3D tilt angle
+- Use subtle particle noise in backgrounds
+- Ensure logo always white or gradient-valid
+- Maintain consistent padding (80px margins)
+- Use drop shadows sparingly for depth
 
 ### File Naming
 ```

@@ -7,31 +7,31 @@
 ## VIDEO OVERVIEW
 
 - **Title:** "Wellio: Privacy-First Wellness"
-- **Duration:** 60 seconds
-- **Style:** Dark-to-light vertical reveal, fluid motion, violet/cyan particles
+- **Duration:** 22 seconds (condensed) / 60 seconds (full version)
+- **Aspect Ratios:** 16:9 (primary), 9:16 (vertical), 1:1 (social) — deliver 3 versions
+- **Style:** Dark-to-light vertical reveal, fluid motion, violet/cyan particles, Apple-level polish
 - **Resolution:** 4K (3840 × 2160) with 1080p exports
 - **Frame Rate:** 60 FPS
 
 ---
 
-## SCENE BREAKDOWN
+## 22-SECOND HERO ANIMATION — FINAL SCRIPT + SHOT LIST
 
-### SCENE 1 — THE PROBLEM (0:00 - 0:10)
+### SCENE 1 — THE BROKEN STATUS QUO (0:00 - 0:03)
 
 **Visual:**
-- Multiple generic app icons appear
-- Data particles (logs, health icons) float from phones
-- Particles travel to server icons
-- Red warning flash overlay
+- Scattered logs floating upward to generic "cloud" icons
+- Red alert icons pulsing
+- Dark, ominous atmosphere
 
-**Text Overlay:**
-> "Your wellness data shouldn't be uploaded."
+**Narration:** "Most wellness apps upload your personal health data…"
+
+**Text Overlay:** "Your data shouldn't leave your device."
 
 **Motion:**
-- Apps fade in from edges (0.5s each)
-- Data particles drift slowly (constant)
-- Server pulse on data arrival
-- Warning flash (0.3s)
+- Slow zoom
+- Particles floating upward
+- Warning pulses (0.3s intervals)
 
 **Audio:**
 - Low ambient tone
@@ -40,22 +40,22 @@
 
 ---
 
-### SCENE 2 — WELLIO APPEARS (0:10 - 0:20)
+### SCENE 2 — WELLIO APPEARS (0:03 - 0:07)
 
 **Visual:**
-- Dark screen clears
-- Phone mockup drifts up from bottom
-- Today Screen visible on phone
-- FWI circle glows with particle effect
-- Violet/cyan radial glow behind phone
+- Logs freeze in place
+- Lines retract back to device
+- A glowing Wellio phone rises into frame
+- Light emanates from the device
 
-**Text Overlay:**
-> "A Wellness APP Platform built for privacy."
+**Narration:** "Wellio changes everything."
+
+**Text Overlay:** "A Privacy-First Wellness APP Platform"
 
 **Motion:**
-- Phone rise: ease-out, 1.5s
-- FWI ring materializes: particle coalesce, 1s
-- Glow pulse: 2s loop
+- Phone floats up with parallax (ease-out, 1.5s)
+- Dramatic lighting shift from dark to hopeful
+- FWI ring begins to glow
 
 **Audio:**
 - Uplifting tone shift
@@ -64,48 +64,68 @@
 
 ---
 
-### SCENE 3 — APP PLATFORM ARCHITECTURE (0:20 - 0:35)
+### SCENE 3 — THE INDIVIDUAL & FWI (0:07 - 0:11)
 
 **Visual:**
-- Individual icon appears center
-- Concentric rings expand outward
-- Professional icons (Coach, Clinician) fade in at edges
-- Data lines show flow staying on-device
-- Blocked symbols on data trying to leave
+- FWI ring animates into view on phone screen
+- Colored segments fill smoothly (Sleep, Meals, Hydration, Movement, Mood)
+- Score number counts up
 
-**Text Overlay:**
-> "Professionals see insights — not your logs."
+**Narration:** "Understand your wellbeing with a private daily score."
+
+**Text Overlay:** "Your FWI Score"
 
 **Motion:**
-- Individual icon: scale in, 0.5s
-- Rings expand: 1s each, sequential
-- Professional icons: fade in, 0.5s
-- Data flow animation: continuous
+- Ring segments animate sequentially (satisfying fill animation)
+- Score counting up animation
+- Icons orbit the ring
 
 **Audio:**
 - Expanding tone
-- Connection sounds
-- Blocked sound effect
+- Segment fill sounds
+- Score completion chime
 
 ---
 
-### SCENE 4 — SECURITY SYSTEM (0:35 - 0:48)
+### SCENE 4 — OPTIONAL PROFESSIONAL SUPPORT (0:11 - 0:15)
 
 **Visual:**
-- Split into three panels
-- Panel 1: ML-KEM-768 lock icon
-- Panel 2: AES-256 vault animation
-- Panel 3: cMixx network nodes
-- Panels merge into unified shield
+- Two icons gently slide into orbit around the phone: Trainer, Clinician
+- They receive derived signals only (visualized as simplified data streams)
+- Logs remain local on device (shown staying inside phone)
 
-**Text Overlay:**
-> "Post-Quantum Encryption + Metadata Protection."
+**Narration:** "And invite professionals — without sharing your logs."
+
+**Text Overlay:** "Professionals see insights, not your data."
 
 **Motion:**
-- Panels slide in from sides: 0.5s
-- Lock animations: 1s each
-- cMixx nodes pulse and connect
-- Shield formation: 1.5s
+- Icons orbit gracefully
+- Data streams differentiate (full vs. derived)
+- Visual separation between raw and derived
+
+**Audio:**
+- Connection sounds
+- Blocked sound effect for raw data
+
+---
+
+### SCENE 5 — PQ + cMixx SECURITY (0:15 - 0:19)
+
+**Visual:**
+- PQ lock closes with satisfying click
+- cMixx nodes swirl around the phone in protective formation
+- Metadata lines dissolve into nothing
+- Shield effect surrounds device
+
+**Narration:** "Protected with post-quantum encryption and metadata elimination."
+
+**Text Overlay:** "PQ + cMixx Security"
+
+**Motion:**
+- Lock closing animation (0.5s)
+- cMixx nodes swirling (continuous)
+- Metadata dissolving (1s)
+- Shield formation (1.5s)
 
 **Audio:**
 - Lock click sounds
@@ -114,28 +134,27 @@
 
 ---
 
-### SCENE 5 — FINAL MESSAGE (0:48 - 0:60)
+### SCENE 6 — FINAL BRAND MESSAGE (0:19 - 0:22)
 
 **Visual:**
-- All elements fade to dark
-- Wellio logo materializes from particles
-- Tagline types in below
-- Security badges appear
-- Gradient background pulses
+- Wellio logo fades in center screen
+- Slogan appears elegantly beneath
+- Gradient glow background (violet → cyan)
+- Subtle particle effect
 
-**Text Overlay:**
-> "Your health. Your privacy. Your control."
+**Narration:** "Wellio."
+
+**Text Overlay:** "Your health. Your privacy. Your control."
 
 **Motion:**
-- Fade to dark: 0.5s
-- Logo particle formation: 1.5s
-- Tagline type: 0.05s per character
-- Badges fade in: 0.3s each
+- Fade to dark (0.3s)
+- Logo particle formation (1s)
+- Tagline type (elegant reveal)
+- Hold for brand recognition
 
 **Audio:**
 - Ambient resolve
 - Logo sound
-- Tagline typing sounds
 - Ending tone
 
 ---
