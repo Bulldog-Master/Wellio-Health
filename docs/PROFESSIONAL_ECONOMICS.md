@@ -2,9 +2,40 @@
 
 ## Overview
 
-This document maps the **professional economics model** for trainers, coaches, and clinicians who use the Wellio Wellness APP Platform to serve their clients/patients. It specifies what professionals can do **now** (Core MVP), **next** (Phase 2 capabilities), and **later** (future integrations), ensuring monetization paths remain clear and aligned with privacy-first principles.
+This document maps the **professional economics model** for trainers, coaches, and clinicians who use the Wellio Wellness APP Platform as an **extension** — not a workspace. Professionals join only by user invitation and see only derived wellness insights.
 
-**Master Positioning:** Wellio is a privacy-first Wellness APP Platform for individuals, with optional support from trainers, coaches, and clinicians. Raw data stays on the user's device — only derived wellness insights can be shared, if the user chooses.
+**Master Positioning:** Wellio is a privacy-first Wellness APP Platform built for individuals — with optional support from trainers, coaches, and clinicians. Raw data stays on the user's device, and only derived wellness insights can be shared, if the user chooses.
+
+---
+
+## APP Platform Structure
+
+### 1. Individual User Features (Primary)
+- FWI (Functional Wellness Index) tracking
+- Daily habit logging (sleep, meals, hydration, mood)
+- Medical vault with post-quantum encryption
+- AI wellness coaching
+- Secure messaging & video
+
+### 2. Professional Extensions (Invited Only)
+- Trainers & Coaches: See trends, FWI, adherence — not raw logs
+- Conduct secure video sessions
+- Write encrypted notes per client
+
+### 3. Clinician Extensions (Invited Only)
+- View functional patterns — not PHI
+- Monitor wellness trends between visits
+- Zero metadata exposure via cMixx
+
+### 4. APP Platform Architecture
+- Individual-centered design
+- Optional professional layers
+- Zero-trust data boundaries
+
+### 5. Security Infrastructure
+- Post-quantum encryption (ML-KEM-768)
+- cMixx metadata elimination
+- Raw data never leaves device
 
 ---
 
