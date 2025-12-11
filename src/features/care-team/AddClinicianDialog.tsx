@@ -77,7 +77,7 @@ export const AddClinicianDialog = ({ open, onOpenChange, onSuccess }: AddClinici
         <DialogHeader>
           <div className="flex items-center gap-2">
             <Stethoscope className="h-5 w-5 text-primary" />
-            <DialogTitle>{t('share_patterns_clinician')}</DialogTitle>
+            <DialogTitle>{t('share_with_clinician')}</DialogTitle>
           </div>
           <DialogDescription className="whitespace-pre-line text-sm">
             {t('clinician_explanation')}
@@ -129,7 +129,7 @@ export const AddClinicianDialog = ({ open, onOpenChange, onSuccess }: AddClinici
                 </Badge>
 
                 <p className="text-sm text-muted-foreground whitespace-pre-line">
-                  {t('clinician_code_desc')}
+                  {t('clinician_visibility_notice')}
                 </p>
               </div>
 
