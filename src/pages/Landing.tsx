@@ -182,52 +182,38 @@ const Landing = () => {
           </div>
         </section>
 
-        {/* APP Platform Architecture */}
+        {/* How the APP Platform Works */}
         <section className="py-20 px-4 md:px-8 lg:px-16 bg-muted/30">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                The APP Platform Architecture
+                How the APP Platform Works
               </h2>
-              <p className="text-lg text-muted-foreground">
-                Individual-centered. Optional professional layers. Zero-trust boundaries.
-              </p>
             </div>
 
-            {/* Individual Users - Primary */}
+            {/* Individuals - Primary Users */}
             <Card className="mb-8 border-2 border-primary/30">
               <CardContent className="p-8">
-                <div className="flex items-center gap-3 mb-6">
+                <div className="flex items-center gap-3 mb-4">
                   <div className="p-3 rounded-xl bg-primary/10">
                     <Smartphone className="h-8 w-8 text-primary" />
                   </div>
-                  <div>
-                    <h3 className="text-2xl font-bold">Individuals (Primary Users)</h3>
-                    <p className="text-muted-foreground">Use Wellio independently forever</p>
-                  </div>
+                  <h3 className="text-2xl font-bold">Individuals (Primary Users)</h3>
                 </div>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {[
-                    "Today at a Glance",
-                    "Functional Wellness Index",
-                    "Private Journaling",
-                    "Medical Vault",
-                    "AI Wellness Coaching",
-                    "Secure Messaging + Video",
-                  ].map((feature, i) => (
-                    <div key={i} className="flex items-center gap-2 text-sm">
-                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
-                      <span>{feature}</span>
-                    </div>
-                  ))}
-                </div>
+                <p className="text-lg text-muted-foreground">
+                  You use Wellio independently. All data stays on your device.
+                </p>
               </CardContent>
             </Card>
 
             {/* Optional Professional Extensions */}
             <div className="text-center mb-6">
-              <Badge variant="outline">Optional — Only When the Individual Chooses to Invite</Badge>
+              <Badge variant="outline" className="text-base px-4 py-2">Optional Professional Extensions</Badge>
             </div>
+            <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
+              You may invite a trainer/coach or clinician to view high-level derived signals. 
+              They cannot access raw logs or personal data.
+            </p>
 
             <div className="grid md:grid-cols-2 gap-6">
               {/* Trainers & Coaches */}
@@ -239,31 +225,23 @@ const Landing = () => {
                     </div>
                     <h3 className="text-xl font-bold">Trainers & Coaches</h3>
                   </div>
-                  <div className="space-y-2 mb-4">
-                    <p className="text-sm font-medium text-primary">What they CAN see:</p>
-                    <ul className="space-y-1 text-sm text-muted-foreground">
-                      <li className="flex items-center gap-2">
-                        <Eye className="h-3 w-3 text-primary" /> View trends & FWI
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Eye className="h-3 w-3 text-primary" /> Help with adherence
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="space-y-2">
-                    <p className="text-sm font-medium text-destructive">What they CANNOT see:</p>
-                    <ul className="space-y-1 text-sm text-muted-foreground">
-                      <li className="flex items-center gap-2">
-                        <EyeOff className="h-3 w-3 text-destructive" /> Raw meal logs
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <EyeOff className="h-3 w-3 text-destructive" /> Journals & personal notes
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <EyeOff className="h-3 w-3 text-destructive" /> Metadata
-                      </li>
-                    </ul>
-                  </div>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li className="flex items-center gap-2">
+                      <Eye className="h-4 w-4 text-primary shrink-0" /> Trend visibility
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Eye className="h-4 w-4 text-primary shrink-0" /> FWI guidance
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <EyeOff className="h-4 w-4 text-destructive shrink-0" /> No meal journals
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <EyeOff className="h-4 w-4 text-destructive shrink-0" /> No personal notes
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <EyeOff className="h-4 w-4 text-destructive shrink-0" /> No metadata
+                    </li>
+                  </ul>
                 </CardContent>
               </Card>
 
@@ -276,31 +254,23 @@ const Landing = () => {
                     </div>
                     <h3 className="text-xl font-bold">Clinicians</h3>
                   </div>
-                  <div className="space-y-2 mb-4">
-                    <p className="text-sm font-medium text-primary">What they CAN see:</p>
-                    <ul className="space-y-1 text-sm text-muted-foreground">
-                      <li className="flex items-center gap-2">
-                        <Eye className="h-3 w-3 text-primary" /> Functional patterns
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Eye className="h-3 w-3 text-primary" /> Wellness trends
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="space-y-2">
-                    <p className="text-sm font-medium text-destructive">What they CANNOT see:</p>
-                    <ul className="space-y-1 text-sm text-muted-foreground">
-                      <li className="flex items-center gap-2">
-                        <EyeOff className="h-3 w-3 text-destructive" /> PHI / Medical notes
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <EyeOff className="h-3 w-3 text-destructive" /> Vault access
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <EyeOff className="h-3 w-3 text-destructive" /> Zero metadata exposure
-                      </li>
-                    </ul>
-                  </div>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li className="flex items-center gap-2">
+                      <Eye className="h-4 w-4 text-primary shrink-0" /> Functional patterns only
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <EyeOff className="h-4 w-4 text-destructive shrink-0" /> No PHI exposure
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <EyeOff className="h-4 w-4 text-destructive shrink-0" /> No vault access
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-primary shrink-0" /> Reduced compliance overhead
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Lock className="h-4 w-4 text-primary shrink-0" /> Secure, PQ-protected communication
+                    </li>
+                  </ul>
                 </CardContent>
               </Card>
             </div>
