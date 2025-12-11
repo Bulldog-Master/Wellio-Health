@@ -118,7 +118,7 @@ export const DataAccessLogDialog = ({ open, onOpenChange }: DataAccessLogDialogP
             <div className="flex flex-col items-center justify-center py-12 text-center">
               <Eye className="h-10 w-10 text-muted-foreground/30 mb-4" />
               <p className="text-sm text-muted-foreground">
-                {t('access_log_empty')}
+                {t('no_access_yet')}
               </p>
             </div>
           ) : (

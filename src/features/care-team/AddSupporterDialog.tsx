@@ -88,7 +88,7 @@ export const AddSupporterDialog = ({ open, onOpenChange, onSuccess }: AddSupport
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>{t('add_supporter_title')}</DialogTitle>
+          <DialogTitle>{t('add_supporter')}</DialogTitle>
           <DialogDescription className="whitespace-pre-line text-sm">
             {t('supporter_explanation')}
           </DialogDescription>
@@ -99,7 +99,7 @@ export const AddSupporterDialog = ({ open, onOpenChange, onSuccess }: AddSupport
             <>
               {/* Step 1: Choose relationship type */}
               <div className="space-y-3">
-                <Label className="text-sm font-medium">{t('choose_relationship')}</Label>
+                <Label className="text-sm font-medium">{t('relationship_type')}</Label>
                 <RadioGroup
                   value={relationship}
                   onValueChange={(v) => setRelationship(v as RelationshipType)}

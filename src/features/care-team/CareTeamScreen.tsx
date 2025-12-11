@@ -195,10 +195,10 @@ export const CareTeamScreen = () => {
         <div className="space-y-1">
           <h1 className="text-xl font-semibold">{t('care_team')}</h1>
           <p className="text-sm text-muted-foreground">
-            {t('subtitle')}
+            {t('care_team_subtitle')}
           </p>
           <p className="text-xs text-muted-foreground whitespace-pre-line">
-            {t('body_text')}
+            {t('care_team_body')}
           </p>
         </div>
         
@@ -220,7 +220,7 @@ export const CareTeamScreen = () => {
       {/* Section: Supporters */}
       <SectionCard title={t('supporters')} icon={Users}>
         <p className="text-xs text-muted-foreground">
-          {t('supporters_empty')}
+          {t('no_supporters')}
         </p>
         <Button 
           variant="outline" 
@@ -243,7 +243,7 @@ export const CareTeamScreen = () => {
         ) : (
           <>
             <p className="text-xs text-muted-foreground">
-              {t('trainers_empty')}
+              {t('no_trainers')}
             </p>
             <Button 
               variant="outline" 
@@ -268,7 +268,7 @@ export const CareTeamScreen = () => {
         ) : (
           <>
             <p className="text-xs text-muted-foreground">
-              {t('clinicians_empty')}
+              {t('no_clinicians')}
             </p>
             <Button 
               variant="outline" 

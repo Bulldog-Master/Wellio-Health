@@ -77,7 +77,7 @@ export const AddTrainerDialog = ({ open, onOpenChange, onSuccess }: AddTrainerDi
         <DialogHeader>
           <div className="flex items-center gap-2">
             <Dumbbell className="h-5 w-5 text-primary" />
-            <DialogTitle>{t('share_trends_trainer')}</DialogTitle>
+            <DialogTitle>{t('share_with_trainer')}</DialogTitle>
           </div>
           <DialogDescription className="whitespace-pre-line text-sm">
             {t('trainer_explanation')}
@@ -125,7 +125,7 @@ export const AddTrainerDialog = ({ open, onOpenChange, onSuccess }: AddTrainerDi
                 </div>
 
                 <p className="text-sm text-muted-foreground whitespace-pre-line">
-                  {t('trainer_code_desc')}
+                  {t('trainer_visibility_notice')}
                 </p>
 
                 {/* Can see / Cannot see bullets */}
