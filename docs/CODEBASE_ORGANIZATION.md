@@ -51,18 +51,36 @@ Organized by feature domain with barrel exports:
 - `workout-programs/` - Program builder UI
 - `workout/` - Workout logging UI
 
-### `/src/hooks/` - 27 Domain Subdirectories
-Custom hooks organized by domain:
+### `/src/hooks/` - 28 Domain Subdirectories
+Custom hooks organized by domain with complete barrel exports:
+- `admin/` - Admin functionality hooks
+- `ai/` - AI/streaming hooks
 - `auth/` - Authentication hooks
+- `calendar/` - Event calendar hooks
+- `challenges/` - Challenge hooks
+- `conversation/` - Chat conversation hooks
 - `encryption/` - E2E encryption hooks
 - `fitness/` - Fitness data hooks
+- `fundraisers/` - Fundraising hooks
 - `locations/` - Location/GPS hooks
+- `medical/` - Medical data hooks
 - `network/` - Network status hooks
-- `nutrition/` - Nutrition data hooks
+- `news/` - News feed hooks
+- `nutrition/` - Nutrition/food log hooks
+- `personal-records/` - Personal records hooks
+- `privacy/` - Privacy settings hooks
+- `professional/` - Professional portal hooks
+- `profile/` - User profile hooks
+- `recipes/` - Recipe hooks
+- `recovery/` - Recovery tracking hooks
 - `social/` - Social feature hooks
 - `subscription/` - Subscription hooks
+- `supplements/` - Supplement tracking hooks
+- `timer/` - Interval timer hooks
 - `ui/` - UI utility hooks
 - `utils/` - General utility hooks
+- `workout/` - Workout hooks
+- `workout-programs/` - Workout program hooks
 
 ### `/src/pages/` - 12 Domain Subdirectories
 Pages organized by feature area with barrel exports:
