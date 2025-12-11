@@ -231,16 +231,49 @@ export function Hero() {
 
 ---
 
-## F. Hero Animation Integration
+## F. Animation Integration
+
+### Framer Motion + Lottie
+Use Framer Motion or Lottie React to embed PQ lock and cMixx animations.
 
 ### Lottie Animations
-- Use Lottie JSON for PQ lock + cMixx nodes
-- Scroll-triggered FWI animation using Framer Motion
+- PQ lock mechanism animation
+- cMixx node swirl animation
+- FWI ring draw animation
 
-### Implementation
+### Implementation Example
 ```tsx
 import Lottie from 'lottie-react'
+import { motion, useInView } from 'framer-motion'
 import pqLockAnimation from '@/public/animations/pq-lock.json'
+import cmixNodesAnimation from '@/public/animations/cmix-nodes.json'
+
+// Scroll-triggered FWI animation
+function FWISection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true })
+  
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={isInView ? { opacity: 1, scale: 1 } : {}}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
+      <Lottie animationData={fwiRingAnimation} loop={false} />
+    </motion.div>
+  )
+}
+
+// PQ Lock animation
+function SecuritySection() {
+  return (
+    <div className="flex gap-8">
+      <Lottie animationData={pqLockAnimation} loop={false} />
+      <Lottie animationData={cmixNodesAnimation} loop={true} />
+    </div>
+  )
+}
 
 <Lottie 
   animationData={pqLockAnimation}

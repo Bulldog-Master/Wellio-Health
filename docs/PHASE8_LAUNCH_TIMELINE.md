@@ -46,15 +46,15 @@
 |------|--------|-------|
 | 6:00 AM | Final system health check | Engineering |
 | 7:00 AM | App Store release triggered | Engineering |
-| 8:00 AM | Play Store release triggered | Engineering |
-| 8:30 AM | Website "Download" buttons activated | Marketing |
-| 9:00 AM | Launch announcement email sent | Marketing |
+| 8:00 AM | **Website live** | Engineering |
+| 8:30 AM | **Hero video released** | Marketing |
+| 9:00 AM | **App Store + Play Store live** | Engineering |
 | 9:15 AM | Product Hunt launch | Marketing |
-| 9:30 AM | Social media blitz begins | Marketing |
-| 10:00 AM | Press embargo lifted | PR |
+| 9:30 AM | **Email to waitlist** | Marketing |
+| 10:00 AM | **Social posts on all platforms** | Marketing |
 | 10:30 AM | Founder LinkedIn post | Founder |
 | 11:00 AM | Monitor download metrics | Analytics |
-| 12:00 PM | First community engagement | Community |
+| 12:00 PM | **Press outreach** | PR |
 | 1:00 PM | Support ticket review | Support |
 | 2:00 PM | Real-time bug triage | Engineering |
 | 3:00 PM | Social media engagement | Marketing |
@@ -64,7 +64,14 @@
 
 ---
 
-## Week 1 (Days 1-7)
+## Week 1 (Days 1-7): Awareness Blast
+
+### Key Activities
+- [ ] 20 TikToks/Reels published
+- [ ] PR push to tech and health media
+- [ ] Early trainers/coaches onboard
+- [ ] Clinician webinar announced
+- [ ] App Store reviews solicitation
 
 ### Day 1: Post-Launch Analysis
 - [ ] Review download numbers
@@ -104,9 +111,15 @@
 
 ---
 
-## Week 2 (Days 8-14)
+## Week 2 (Days 8-14): Engagement & Retention
 
-### Focus: User Retention & Feedback
+### Key Activities
+- [ ] FWI Challenge launched
+- [ ] In-app tutorial refresh
+- [ ] Partnership outreach to gyms
+- [ ] Medium article on PQ + cMixx published
+
+### Daily Breakdown
 
 | Day | Focus Area | Key Actions |
 |-----|------------|-------------|
@@ -119,9 +132,14 @@
 
 ---
 
-## Week 3 (Days 15-21)
+## Week 3 (Days 15-21): Professional Expansion
 
-### Focus: Growth & Expansion
+### Key Activities
+- [ ] Clinician onboarding sprint
+- [ ] Gym / studio partnership emails
+- [ ] Professional referral program launch
+
+### Daily Breakdown
 
 | Day | Focus Area | Key Actions |
 |-----|------------|-------------|
@@ -134,9 +152,15 @@
 
 ---
 
-## Week 4 (Days 22-30)
+## Week 4 (Days 22-30): Growth Loop
 
-### Focus: Optimization & Scale
+### Key Activities
+- [ ] First Wellio Community Challenge
+- [ ] Paid ads ramp-up
+- [ ] Big feature tease
+- [ ] Social presence solidified
+
+### Daily Breakdown
 
 | Day | Focus Area | Key Actions |
 |-----|------------|-------------|
