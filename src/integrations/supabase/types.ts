@@ -6028,6 +6028,17 @@ export type Database = {
         Args: { p_month?: string; p_professional_id: string }
         Returns: number
       }
+      get_pro_billing_current_month: {
+        Args: never
+        Returns: {
+          active_clients: number
+          billing_month: string
+          billing_tier: string
+          role: string
+          total_access_events: number
+          viewer_id: string
+        }[]
+      }
       get_pro_billing_tier: {
         Args: { p_month?: string; p_professional_id: string }
         Returns: string
