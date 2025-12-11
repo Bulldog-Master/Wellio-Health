@@ -406,7 +406,14 @@ By using this application, you acknowledge that it is a wellness tool and not a 
 
 ## 📄 License
 
-Proprietary. All rights reserved.
+UNLICENSED (Proprietary)
+
+---
+
+## 📝 Notes
+
+This repository includes a `.env` file containing **publishable** client configuration only.  
+Private secrets are handled via Lovable Cloud Secrets and are never exposed in the codebase.
 
 ---
 
