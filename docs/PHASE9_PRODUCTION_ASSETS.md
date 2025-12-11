@@ -1052,6 +1052,24 @@ Must-have screens in the APP Platform:
 </svg>
 ```
 
+### Security Badge (PQ + cMixx)
+
+```svg
+<svg width="220" height="36" viewBox="0 0 220 36" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="secGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+  </defs>
+  <rect width="220" height="36" rx="18" fill="#020617" stroke="url(#secGrad)" stroke-width="1.2"/>
+  <circle cx="20" cy="18" r="6" fill="url(#secGrad)"/>
+  <text x="36" y="22" font-family="Inter, system-ui" font-size="11" fill="#E5E7EB">
+    PQ Encryption + cMixx Metadata Protection
+  </text>
+</svg>
+```
+
 ---
 
 *Last updated: December 2024*
