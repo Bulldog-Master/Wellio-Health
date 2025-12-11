@@ -332,6 +332,19 @@ This example shows how Wellio protects privacy while still empowering coaches an
 
 The client can remove a coach/clinician at any time. Professionals do not retain historical access.
 
+## 📈 Recent Improvements
+
+| Area | Enhancement |
+|------|-------------|
+| **Performance** | Memoized callbacks, centralized query keys, optimized re-renders |
+| **Animations** | Framer Motion micro-interactions, skeleton loaders, smooth transitions |
+| **i18n** | 23-language parity verified, missing key detection, automatic validation |
+| **Security** | CSP headers, session timeout (30min), anomaly detection, backup codes |
+
+See [IMPROVEMENTS_V2.md](docs/IMPROVEMENTS_V2.md) for full engineering changelog.
+
+---
+
 ## 🗺️ Roadmap
 
 ### ✅ Completed

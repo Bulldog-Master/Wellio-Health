@@ -87,11 +87,20 @@ Quick reference to all project documentation for the Wellio Wellness APP Platfor
 | [USER_ACCESS_GUIDE.md](./USER_ACCESS_GUIDE.md) | User roles and permissions |
 | [SECURITY_APPLICATION_REQUIREMENTS.md](./SECURITY_APPLICATION_REQUIREMENTS.md) | Security requirements for professional applications |
 
+## 👥 Care Team & Professionals
+
+| Document | Description |
+|----------|-------------|
+| [ACCESS_MODEL.md](./ACCESS_MODEL.md) | Who sees what — visibility matrix and consent rules |
+| [PROFESSIONAL_ECONOMICS.md](./PROFESSIONAL_ECONOMICS.md) | Professional incentives, tiers, and revenue model |
+| [CMIXX_INTEGRATION.md](./CMIXX_INTEGRATION.md) | xx.network cMixx metadata protection integration |
+| [CARE_TEAM_PRO_TEST_PLAN.md](./CARE_TEAM_PRO_TEST_PLAN.md) | Smoke test checklist for Care Team features |
+
 ## 📊 Improvement Tracking
 
 | Document | Description |
 |----------|-------------|
-| [IMPROVEMENTS_V2.md](./IMPROVEMENTS_V2.md) | Planned improvements and enhancements |
+| [IMPROVEMENTS_V2.md](./IMPROVEMENTS_V2.md) | Latest engineering improvements (performance, animations, i18n) |
 
 ---
 
