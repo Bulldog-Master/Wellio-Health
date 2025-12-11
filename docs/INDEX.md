@@ -24,6 +24,20 @@ Quick reference to all project documentation for the Wellio Wellness APP Platfor
 | [CODEBASE_ORGANIZATION.md](./CODEBASE_ORGANIZATION.md) | File structure and naming conventions |
 | [REFACTORING_GUIDE.md](./REFACTORING_GUIDE.md) | Code refactoring patterns and best practices |
 
+## 📣 Launch & Marketing
+
+| Document | Description |
+|----------|-------------|
+| [BRAND_MESSAGING_GUIDE.md](./BRAND_MESSAGING_GUIDE.md) | Internal brand terminology and messaging |
+| [MARKETING_POSITIONING.md](./MARKETING_POSITIONING.md) | Marketing copy and positioning |
+| [PRESS_KIT.md](./PRESS_KIT.md) | Press release and media assets |
+| [APP_STORE_DESCRIPTIONS.md](./APP_STORE_DESCRIPTIONS.md) | iOS/Android app store copy |
+| [SOCIAL_CONTENT_PACK.md](./SOCIAL_CONTENT_PACK.md) | Ready-to-post social media content |
+| [FOUNDER_VIDEO_SCRIPT_V2.md](./FOUNDER_VIDEO_SCRIPT_V2.md) | Founder video script (polished) |
+| [PITCH_DECK_DESIGN_NOTES.md](./PITCH_DECK_DESIGN_NOTES.md) | Slide-by-slide deck specifications |
+| [VISUAL_SYSTEM.md](./VISUAL_SYSTEM.md) | Colors, typography, iconography |
+| [LANDING_PAGE_COPY.md](./LANDING_PAGE_COPY.md) | Website landing page structure |
+
 ## 🚀 Operations & Launch
 
 | Document | Description |

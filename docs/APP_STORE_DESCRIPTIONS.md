@@ -5,17 +5,17 @@ Production-ready copy for iOS App Store and Google Play Store submissions.
 ---
 
 ## App Name
-**Wellio - AI Wellness, Private**
+**Wellio - Wellness APP Platform**
 
 ---
 
 ## Subtitle (30 characters)
-**Track Health. Keep Privacy.**
+**Private AI Wellness Tracking**
 
 ---
 
 ## Short Description (80 characters)
-AI-powered wellness tracking with post-quantum encryption. Your data stays yours.
+Privacy-first Wellness APP Platform with post-quantum encryption. Your data stays yours.
 
 ---
 
@@ -23,9 +23,9 @@ AI-powered wellness tracking with post-quantum encryption. Your data stays yours
 
 ### iOS App Store / Google Play (4000 characters max)
 
-**AI-Powered Wellness. Quantum-Private by Design.**
+**A Wellness APP Platform, Reimagined for Privacy.**
 
-Wellio is the first wellness platform that gives you AI-powered insights without surveillance. Track your fitness, nutrition, sleep, hydration, and mood — all protected by post-quantum encryption and metadata-proof messaging.
+Wellio is a privacy-first Wellness APP Platform built for individuals — with optional support from trainers, coaches, and clinicians. Raw data stays on your device. Only derived wellness insights can be shared, if you choose.
 
 **YOUR HEALTH, YOUR CONTROL**
 

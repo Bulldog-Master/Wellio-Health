@@ -1,12 +1,12 @@
-# Wellio Health — Marketing & Positioning
+# Wellio — Marketing & Positioning
 
-This document contains approved marketing copy and positioning materials for Wellio Health.
+This document contains approved marketing copy and positioning materials for Wellio.
 
 ---
 
 ## 🎯 Master Positioning Statement
 
-**Wellio is a next-generation Wellness APP Platform that empowers individuals to track their wellbeing privately — while optionally connecting with trainers, coaches, or clinicians through secure, limited-visibility insights. It is privacy-first, post-quantum secure, and powered by cMixx metadata protection.**
+**Wellio is a privacy-first Wellness APP Platform built for individuals — with optional support from trainers, coaches, and clinicians. Raw data stays on the user's device, and only derived wellness insights can be shared, if the user chooses.**
 
 ---
 
@@ -20,26 +20,31 @@ This document contains approved marketing copy and positioning materials for Wel
 
 ### Hero Section
 
-# Your Health, Improved — Without Giving Up Your Data
+# A Wellness APP Platform, Reimagined for Privacy.
 
-Wellio is a privacy-first Wellness APP Platform for individuals, with optional support from trainers, coaches, and clinicians.
+Track your wellbeing privately — with optional support from trainers, coaches, or clinicians.
 
-Track your workouts, meals, sleep, hydration, and mood — and generate your **Functional Wellness Index**, a daily score that reflects how well your habits support your goals.
+### Subheadline
+
+Raw data stays on your device. Only derived wellness insights can be shared, if you choose.
 
 ### Key Value Props
 
-📍 **Share only what matters**
-Invite a trainer or healthcare provider to view your high-level trends. They never see your raw logs or personal details.
+📍 **Individual-Centered Design**
+Use Wellio independently forever. Professionals join only by your invitation.
 
-🔐 **End-to-end encrypted messages**
-Built with post-quantum cryptography and xx.network's cMixx mixnet for metadata protection.
+🔐 **Post-Quantum Encryption (ML-KEM-768)**
+Protects the APP Platform from future quantum attacks.
 
-🧠 **Insights, not surveillance**
-Your data stays on your device. We analyze behaviors — not identity.
+🛡️ **Metadata Protection (cMixx)**
+Hides who is talking, when, and how often.
+
+🧠 **Zero-Trust Architecture**
+Servers cannot read user data — by design.
 
 ### Tagline
 
-**AI for your health — without the tradeoffs.**
+**Wellness without surveillance.**
 
 ---
 
