@@ -63,13 +63,12 @@ const Landing = () => {
             </div>
             
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
-              A Wellness APP Platform,
-              <span className="block text-primary mt-2">Reimagined for Privacy.</span>
+              Wellio — A Privacy-First
+              <span className="block text-primary mt-2">Wellness APP Platform</span>
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-              Track your wellbeing privately — with optional support from trainers, coaches, or clinicians. 
-              Raw data stays on your device. Only derived wellness insights can be shared, if you choose.
+              Track your wellbeing privately. Connect with a trainer, coach, or clinician only if you choose.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
