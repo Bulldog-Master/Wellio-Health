@@ -1,25 +1,76 @@
 // Main hooks barrel export - organized by domain
 
+// Admin
+export * from './admin';
+
+// AI
+export * from './ai';
+
 // Auth
 export * from './auth';
 
-// Fitness
-export * from './fitness';
+// Calendar
+export * from './calendar';
 
-// Nutrition
-export * from './nutrition';
+// Challenges
+export * from './challenges';
 
-// Social
-export * from './social';
+// Conversation
+export * from './conversation';
 
 // Encryption
 export * from './encryption';
 
-// Network
-export * from './network';
+// Fitness
+export * from './fitness';
+
+// Fundraisers
+export * from './fundraisers';
 
 // Locations
 export * from './locations';
+
+// Medical
+export * from './medical';
+
+// Network
+export * from './network';
+
+// News
+export * from './news';
+
+// Nutrition
+export * from './nutrition';
+
+// Personal Records
+export * from './personal-records';
+
+// Privacy
+export * from './privacy';
+
+// Professional
+export * from './professional';
+
+// Profile
+export * from './profile';
+
+// Recipes
+export * from './recipes';
+
+// Recovery
+export * from './recovery';
+
+// Social
+export * from './social';
+
+// Subscription
+export * from './subscription';
+
+// Supplements
+export * from './supplements';
+
+// Timer
+export * from './timer';
 
 // UI
 export * from './ui';
@@ -27,8 +78,11 @@ export * from './ui';
 // Utils
 export * from './utils';
 
-// Subscription (existing)
-export * from './subscription';
+// Workout
+export * from './workout';
 
-// Direct exports for subscription hook
+// Workout Programs
+export * from './workout-programs';
+
+// Direct exports for commonly used hooks
 export { useSubscription } from './subscription';
