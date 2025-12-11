@@ -153,9 +153,13 @@ Wellio – Wellness APP Platform
 - Skip link
 
 ### Today Screen
-- FWI Ring (large, centered)
-- 5 Metric Cards (2×3 grid)
-- Today Insights carousel
+- **Artboard:** 390×844px (iPhone 14 Pro)
+- **Header:** FWI ring (210px diameter, centered top)
+- **Layout:** 5 metric cards at 2-column layout
+- **Gradient:** Violet → Cyan subtle glow behind FWI
+- **Footer:** cMixx / PQ badges
+- **Card grid:** 2 columns, 16px gap
+- **Bottom navigation:** 64px height
 - Quick action FAB
 
 ### Logs Screens (5 subscreens)
@@ -165,15 +169,18 @@ Wellio – Wellness APP Platform
 - Filter/search bar
 
 ### Medical Vault
+
 **Locked State:**
-- Lock icon (120px)
-- Biometric prompt
-- Security badge
+- Center lock: 110px
+- Button: "Unlock with Face ID"
+- Subtext: "AES-256 + ML-KEM-768 protected"
+- Background: Dark with subtle security pattern
 
 **Unlocked State:**
-- 3-column grid
-- Document tiles
-- Add document FAB
+- Layout: 3-column grid
+- File tile: 110×140px
+- Shadows: Dark + soft glow
+- Security badge visible at top
 
 ### AI Assistant
 - Chat interface
@@ -210,16 +217,17 @@ Wellio – Wellness APP Platform
 - Revoke access option
 
 ### Coach Dashboard
-- Client list
-- FWI summary cards
-- Trend graphs
-- Quick actions
+- **FWI mini ring:** 120px diameter
+- **Trend graph:** 7-day smoothing visualization
+- **Adherence dial:** Circular progress indicators
+- **Privacy indicator:** "No raw logs" badge
+- **Client list:** Avatar + FWI + trend arrow
 
 ### Clinician Dashboard
-- Patient overview
-- Derived signals only
-- Trend patterns
-- Session scheduler
+- **Pattern Graph view:** Behavioral clusters visualization
+- **Privacy badge:** "This view contains no PHI" prominent
+- **Functional signals:** Derived metrics only
+- **14-day trend:** Line chart with confidence bands
 
 ### Session View
 - Video frame (16:9)
@@ -279,6 +287,12 @@ Wellio – Wellness APP Platform
 3. Profile setup
 4. Terms acceptance
 5. Dashboard redirect
+
+---
+
+## DESIGNER TIMELINE ESTIMATE
+
+With this assembly plan, a designer can build the entire Wellio interface in **3–5 days**.
 
 ---
 

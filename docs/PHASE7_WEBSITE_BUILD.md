@@ -4,43 +4,46 @@
 
 ---
 
-## TECH STACK OPTIONS
+## TECH STACK RECOMMENDATIONS
 
-### Option 1: Next.js (Recommended)
-- **Framework:** Next.js 14+
-- **Styling:** Tailwind CSS
+### If Coding (Recommended)
+- **Framework:** Next.js 14+ (App Router)
+- **Styling:** TailwindCSS
 - **Animations:** Framer Motion
+- **Components:** shadcn/ui
+- **SEO:** Next.js Metadata API
 - **Deployment:** Vercel
 
-### Option 2: React + Vite
-- **Framework:** React 18+
-- **Bundler:** Vite
-- **Styling:** Tailwind CSS
-- **Deployment:** Netlify / Cloudflare
-
-### Option 3: Webflow (No-Code)
-- **Platform:** Webflow
-- **CMS:** Webflow CMS
-- **Animations:** Webflow Interactions
-- **Deployment:** Webflow Hosting
+### If No-Code
+- **Platform:** Webflow + Lottie animations
+- **Global gradients:** CSS custom properties
+- **CMS:** Webflow CMS for blog/updates
 
 ---
 
 ## PAGE STRUCTURE
 
 ```
-/
-├── / (Homepage)
-├── /features
-├── /security
-├── /for-professionals
-├── /pricing
-├── /about
-├── /blog
-├── /privacy-policy
-├── /terms
-└── /contact
+/                → Home (hero + features + pricing)
+/security        → Security model deep dive
+/professionals   → Trainer/Clinician overview
+/privacy         → Privacy policy
+/support         → Help center
+/download        → App store links
 ```
+
+---
+
+## ROUTE DETAILS
+
+| Route | Purpose |
+|-------|---------|
+| `/` | Homepage with hero, features, pricing |
+| `/security` | Deep dive into ML-KEM, AES-256, cMixx |
+| `/professionals` | Trainer/Clinician program overview |
+| `/privacy` | Privacy policy page |
+| `/support` | Help center / FAQ |
+| `/download` | App store links + QR codes |
 
 ---
 
