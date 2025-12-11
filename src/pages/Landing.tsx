@@ -279,19 +279,13 @@ const Landing = () => {
           </div>
         </section>
 
-        {/* Security Section */}
+        {/* Privacy & Security Section */}
         <section className="py-20 px-4 md:px-8 lg:px-16 bg-gradient-to-br from-background via-primary/5 to-background">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <Badge variant="secondary" className="mb-4">
-                100/100 Security Rating
-              </Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                APP Platform Security
+                Privacy Is the Foundation of the APP Platform
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Built with post-quantum cryptography and zero-trust architecture.
-              </p>
             </div>
 
             <div className="grid sm:grid-cols-3 gap-8">
@@ -300,7 +294,7 @@ const Landing = () => {
                   <Shield className="h-12 w-12 text-primary mx-auto mb-4" />
                   <h3 className="text-xl font-bold mb-2">Post-Quantum Encryption</h3>
                   <p className="text-sm text-muted-foreground">
-                    ML-KEM-768 protects the APP Platform from future quantum attacks.
+                    ML-KEM-768 protects your data today and against future quantum threats.
                   </p>
                 </CardContent>
               </Card>
@@ -310,7 +304,7 @@ const Landing = () => {
                   <Lock className="h-12 w-12 text-primary mx-auto mb-4" />
                   <h3 className="text-xl font-bold mb-2">Metadata Protection</h3>
                   <p className="text-sm text-muted-foreground">
-                    cMixx hides who is talking, when, and how often.
+                    cMixx eliminates sender-receiver linkage and timing correlations.
                   </p>
                 </CardContent>
               </Card>
@@ -318,9 +312,9 @@ const Landing = () => {
               <Card className="text-center">
                 <CardContent className="p-8">
                   <EyeOff className="h-12 w-12 text-primary mx-auto mb-4" />
-                  <h3 className="text-xl font-bold mb-2">Zero-Trust Architecture</h3>
+                  <h3 className="text-xl font-bold mb-2">Zero-Trust Storage</h3>
                   <p className="text-sm text-muted-foreground">
-                    Servers cannot read user data — by design.
+                    Raw logs never leave your device. Wellio servers cannot access user data.
                   </p>
                 </CardContent>
               </Card>
