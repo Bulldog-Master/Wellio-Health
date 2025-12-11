@@ -4,3 +4,4 @@ export { useSubscription, type Subscription, type SubscriptionTier, type Subscri
 export { createFeatureAccessHelpers } from './useFeatureAccess';
 export { getCachedBoolean, getCachedTier, setCachedBoolean, setCachedTier, clearSubscriptionCache } from './useSubscriptionCache';
 export { fetchSubscriptionData } from './useSubscriptionFetch';
+export { useSubscriptionIntegrity } from './useSubscriptionIntegrity';
