@@ -1,225 +1,103 @@
-# Wellio Social Content Pack
+# Wellio — Social Content Pack
 
-Ready-to-post content with corrected APP Platform terminology.
-
----
-
-## 🐦 Twitter/X Posts
-
-### Launch Announcement
-```
-Introducing Wellio — the privacy-first Wellness APP Platform.
-
-✅ Track habits privately
-✅ AI-powered insights
-✅ Post-quantum encrypted
-✅ Professionals see trends, not logs
-
-Your health data is yours. Period.
-
-🔗 wellio.app
-```
-
-### Privacy Focus
-```
-Other wellness apps sell your data.
-
-Wellio is different:
-• Raw data stays on YOUR device
-• Derived signals only (FWI)
-• Post-quantum encryption
-• cMixx metadata protection
-
-Wellness without surveillance. ✨
-
-#PrivacyFirst #WellnessApp
-```
-
-### FWI Explainer
-```
-What's your Functional Wellness Index?
-
-It's a daily score (0-100) based on:
-🏃 Workout completion
-🥗 Nutrition logging
-💧 Hydration
-😴 Sleep quality
-😊 Mood
-
-Private. Actionable. Yours.
-
-Try Wellio free → wellio.app
-```
-
-### Professional Extension
-```
-Trainers & clinicians:
-
-Wellio lets you support clients with:
-✓ Trend visibility
-✓ FWI scores
-✓ Secure video sessions
-
-What you DON'T see:
-✗ Raw logs
-✗ Personal journals
-✗ Metadata
-
-Learn more → wellio.app/for-professionals
-```
+20 ready-to-post social media messages with correct APP Platform positioning.
 
 ---
 
-## 📷 Instagram Posts
+## Twitter/X Posts (20 Posts)
 
-### Carousel: "Why Wellio?"
+### Privacy-First Messaging
 
-**Slide 1:** A Wellness APP Platform, Reimagined for Privacy.
+1. "Most wellness apps track you. Wellio protects you. The first Wellness APP Platform built around privacy."
 
-**Slide 2:** YOUR DATA, YOUR DEVICE
-Raw logs never leave your phone. Period.
+2. "Your data stays on your device. That's non-negotiable."
 
-**Slide 3:** FUNCTIONAL WELLNESS INDEX
-One daily score. Sleep. Meals. Movement. Mood.
+3. "Post-quantum encryption isn't the future — it's the baseline."
 
-**Slide 4:** OPTIONAL PROFESSIONAL SUPPORT
-Invite trainers or clinicians. They see trends, not logs.
+4. "How Wellio eliminates metadata using cMixx (explainer coming soon)."
 
-**Slide 5:** POST-QUANTUM SECURITY
-ML-KEM-768 encryption. cMixx metadata protection.
-
-**Slide 6:** Start free at wellio.app
+5. "The medical vault: encrypted, secure, yours alone."
 
 ---
 
-### Single Image Posts
+### Individual-First Positioning
 
-**Privacy Post:**
-```
-🔒 Your wellness. Your privacy.
+6. "Track your wellbeing privately — with the optional support of trainers, coaches, or clinicians."
 
-Wellio is the first Wellness APP Platform that keeps your raw data on YOUR device.
+7. "A Wellness APP Platform designed for individuals, not institutions."
 
-Professionals see trends and FWI scores — never your journals, meal logs, or personal notes.
+8. "You decide who sees your wellness signals. And how much."
 
-This is wellness without surveillance.
+9. "FWI: One private score that helps you understand your day."
 
-#PrivacyFirst #Wellness #HealthApp
-```
-
-**FWI Score Post:**
-```
-Today's FWI: 87 📈
-
-Your Functional Wellness Index is:
-• Workout: ✅
-• Hydration: ✅
-• Sleep: 7.5 hrs
-• Mood: Great
-• Meals: 3 logged
-
-Private scoring that actually helps you improve.
-
-#FunctionalWellness #HealthTracking
-```
+10. "Professionals see insights — not your logs."
 
 ---
 
-## 💼 LinkedIn Posts
+### Feature Highlights
 
-### Launch Announcement
-```
-Excited to announce Wellio — a privacy-first Wellness APP Platform.
+11. "Sleep, meals, hydration, movement, mood — one private dashboard."
 
-We built Wellio because the health tech industry has a problem: users are forced to choose between useful insights and privacy.
+12. "AI wellness guidance that never leaves your device."
 
-Wellio solves this:
-• Raw data stays on the user's device
-• Derived signals (FWI) enable professional support
-• Post-quantum encryption protects everything
-• cMixx eliminates metadata exposure
+13. "Your Functional Wellness Index: understand how your choices shape your day."
 
-For individuals: Track habits, get AI coaching, connect with professionals — all privately.
+14. "Private journaling with quantum-resistant encryption."
 
-For trainers & clinicians: See functional trends without PHI exposure or compliance burden.
-
-This is wellness without surveillance.
-
-Learn more: wellio.app
-
-#HealthTech #Privacy #WellnessApp #PostQuantum
-```
-
-### Professional Focus
-```
-To trainers, coaches, and clinicians:
-
-What if you could support clients WITHOUT:
-❌ Storing PHI
-❌ HIPAA compliance burden
-❌ Access to personal journals
-❌ Metadata exposure
-
-Wellio is a Wellness APP Platform that gives you what you need — functional trends and FWI scores — without the liability.
-
-Professionals join by invitation. Clients control access. Everyone wins.
-
-Learn more: wellio.app/for-professionals
-
-#CoachingTech #ClinicianTools #PrivacyFirst
-```
+15. "Secure messaging with cMixx metadata protection."
 
 ---
 
-## 📧 Email Subject Lines
+### Professional Extensions
 
-### Launch
-- "Introducing Wellio: Wellness Without Surveillance"
-- "Your health data is yours. Period."
-- "The privacy-first Wellness APP Platform is here"
+16. "Trainers see trends. Not your meal notes."
 
-### Feature Updates
-- "New: AI Voice Workout Companion"
-- "Your FWI just got smarter"
-- "Connect with professionals — on your terms"
+17. "Clinicians observe patterns. Without PHI exposure."
 
-### Re-engagement
-- "Miss us? Your FWI is waiting"
-- "Your wellness journey continues"
-- "Privacy hasn't changed. Your habits can."
+18. "Support your clients without compromising their privacy."
+
+19. "Professional tools that respect individual boundaries."
+
+20. "The first platform where professionals help — but never access raw data."
 
 ---
 
-## 📱 Push Notification Copy
+## LinkedIn Posts
 
-### Daily Engagement
-- "Good morning! Ready to boost your FWI today?"
-- "Your streak is on fire 🔥 Don't break it!"
-- "Quick check-in: How are you feeling?"
+### Thought Leadership
 
-### Feature Discovery
-- "Did you know? You can invite a coach to see your trends"
-- "New: AI insights are ready for you"
-- "Your medical vault is secure and waiting"
+**Post 1: The Privacy Problem**
+"Most wellness apps promise to help you get healthier. But they also collect every detail of your life — your sleep patterns, what you eat, who you talk to.
 
-### Achievement
-- "🎉 You hit 80+ FWI this week!"
-- "10-day streak! You're crushing it"
-- "New personal best: 30 workouts this month"
+Wellio takes a different approach. We built a Wellness APP Platform where your data stays on your device. Professionals can help you — but only see derived insights, never your raw logs.
 
----
+Privacy isn't a feature. It's the foundation."
 
-## 🎬 Video Script Hooks (15-30 sec)
+**Post 2: For Professionals**
+"If you're a trainer, coach, or clinician wondering how to support clients digitally without taking on compliance risk — Wellio is designed for you.
 
-### Hook 1: Problem-Solution
-"Most wellness apps sell your data. Wellio is different. [Show FWI score] Your raw logs stay on YOUR device. Professionals see trends — not journals. This is wellness without surveillance."
+Our APP Platform lets individuals share high-level wellness signals with trusted professionals. No PHI. No raw logs. No liability exposure.
 
-### Hook 2: Professional
-"Trainers: What if you could see client trends without storing their data? [Show coach dashboard] Wellio shows you FWI and adherence — never raw logs. No PHI. No liability."
-
-### Hook 3: Security
-"Post-quantum encrypted. Metadata-proof. Zero-trust. [Show security badges] Wellio is the only Wellness APP Platform built for the future of privacy."
+Privacy-first wellness support."
 
 ---
 
-*Last Updated: December 2024*
+## Instagram Captions
+
+1. "Your wellness. Your data. Your choice. 🔒"
+2. "FWI: The only wellness score that stays on your device."
+3. "Private. Secure. Individual-first. That's Wellio."
+4. "Quantum-safe encryption for your health data. 🛡️"
+5. "Connect with professionals — on your terms."
+
+---
+
+## Hashtags
+
+Primary: #WellioHealth #PrivacyFirst #WellnessAPP #FWI #QuantumSafe
+
+Secondary: #DigitalWellness #PrivateHealth #SecureWellness #AIWellness #HealthTech
+
+---
+
+*Last updated: December 2024*
