@@ -1072,4 +1072,85 @@ Must-have screens in the APP Platform:
 
 ---
 
+## 6. Polished README (Drop-In Replacement)
+
+```markdown
+# Wellio – Privacy-First Wellness APP Platform
+
+**Your health. Your privacy. Your control.**
+
+Wellio is a privacy-first Wellness APP Platform designed for individuals who want deep insight into their wellbeing without giving up their personal data.
+Users can optionally invite trainers, coaches, or clinicians to view derived signals — never raw logs, journals, or medical documents.
+
+---
+
+## 🌟 Core Principles
+
+- **Individual-first design** — Professionals are optional, not primary.
+- **On-device data sovereignty** — Logs, journals, and vault data never leave the user's device.
+- **Strict data boundaries** — Professionals only see FWI + adherence trends.
+- **Post-quantum encryption** — ML-KEM-768 key exchange + AES-256-GCM vault encryption.
+- **Metadata protection** — All professional communication routed through cMixx.
+- **Zero-trust architecture** — Servers cannot read or infer user wellness data.
+
+---
+
+## 🧠 Functional Wellness Index (FWI)
+
+FWI is your daily private wellness signal, combining:
+
+- Sleep duration & quality
+- Meal timing & balance
+- Hydration habits
+- Movement & recovery
+- Mood and stress reflections
+
+**FWI is computed entirely on-device.**
+Only if the user invites a professional will derived FWI data be shared.
+
+---
+
+## 🔐 Security Features
+
+| Feature | Description |
+|---------|-------------|
+| **Post-Quantum Encryption** | ML-KEM-768 protects against future quantum attacks |
+| **AES-256-GCM** | Local vault encryption for all sensitive files |
+| **cMixx Metadata Protection** | Prevents attackers from learning *who communicated with whom or when* |
+| **Zero-Trust Storage** | No server-side access to user logs or vault contents |
+
+---
+
+## 👥 Professional Extensions
+
+Professionals are optional layers added **only by invitation**.
+
+| Role | What They See | What They *Do Not* See |
+|------|---------------|------------------------|
+| **Trainer/Coach** | FWI, trends, adherence | Meals, journals, mood logs, vault |
+| **Clinician** | Functional patterns | PHI, notes, raw logs, vault, identifiers |
+
+Professionals never receive data unless the user explicitly shares *derived insights*.
+
+---
+
+## 📁 Project Structure
+
+```
+/app
+  /components
+  /hooks
+  /services
+  /screens
+  /professional
+  /vault
+```
+
+---
+
+*Last updated: December 2024*
+```
+
+---
+
 *Last updated: December 2024*
