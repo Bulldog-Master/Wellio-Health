@@ -146,18 +146,17 @@ const Landing = () => {
               <div>
                 <Badge variant="secondary" className="mb-4">Your Private Score</Badge>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  Functional Wellness Index (FWI)
+                  Your Daily FWI Score
                 </h2>
                 <p className="text-lg text-muted-foreground mb-6">
-                  Your daily wellness score — derived from sleep, movement, meals, hydration, mood, and recovery. 
-                  FWI lives on your device. No servers. No tracking. No data selling.
+                  FWI combines multiple wellness inputs into one private daily metric:
                 </p>
-                <ul className="space-y-3">
+                <ul className="space-y-3 mb-6">
                   {[
-                    "Weighted behavioral scoring (0-100)",
-                    "14/30-day trend analysis",
-                    "Adherence tracking across all pillars",
-                    "AI-powered insights and recommendations",
+                    "Sleep patterns",
+                    "Meals & hydration",
+                    "Movement & recovery",
+                    "Mood & stress",
                   ].map((item, i) => (
                     <li key={i} className="flex items-center gap-2 text-muted-foreground">
                       <CheckCircle className="h-5 w-5 text-primary shrink-0" />
@@ -165,6 +164,9 @@ const Landing = () => {
                     </li>
                   ))}
                 </ul>
+                <p className="text-muted-foreground">
+                  FWI helps you understand how your choices shape your day — without sending raw data anywhere.
+                </p>
               </div>
               <div className="relative">
                 <div className="aspect-square bg-gradient-to-br from-primary/20 via-primary/10 to-transparent rounded-3xl flex items-center justify-center">
