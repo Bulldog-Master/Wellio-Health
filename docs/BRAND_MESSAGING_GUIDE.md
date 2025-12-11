@@ -1,147 +1,96 @@
-# Wellio Brand Messaging Guide
+# Wellio — Brand Messaging Guide
 
-Internal reference for consistent APP Platform terminology across all communications.
-
----
-
-## ⭐ Core Identity
-
-| Element | Definition |
-|---------|------------|
-| **APP** | It is an application users interact with daily |
-| **Platform** | It supports multiple user types & a broader architecture |
-| **Wellness** | Functional, lifestyle, holistic — not medical |
-| **Privacy-first** | Post-quantum encryption + cMixx metadata protection |
-| **Optional professional extension** | Not required but available |
+Internal alignment document for consistent brand communication.
 
 ---
 
-## 🎯 Master Positioning (Use Everywhere)
+## Brand Essence
 
-> **Wellio is a privacy-first Wellness APP Platform built for individuals — with optional support from trainers, coaches, and clinicians. Raw data stays on the user's device, and only derived wellness insights can be shared, if the user chooses.**
-
-This sentence is the north star. Everything in the deck, website, docs, README, onboarding, etc. is built around this.
+**Private Wellness Empowerment**
 
 ---
 
-## ✅ Correct Terminology
+## Tagline
 
-| Use This | Not This |
-|----------|----------|
-| Wellness APP Platform | coaching platform |
-| Wellness APP Platform | fitness app |
-| Wellness APP Platform | medical platform |
-| Wellness APP Platform | health tracking app |
-| APP Platform | the app |
-| derived wellness insights | raw data |
-| derived signals | personal logs |
-| Functional Wellness Index (FWI) | health score |
-| optional professional support | professional tools |
-| professionals join by invitation | professional workspace |
+**AI-powered wellness, protected by privacy.**
 
 ---
 
-## 📝 Document Structure (All Docs)
+## Elevator Pitch
 
-All documentation sections follow this hierarchy:
-
-1. **Individual User Features** (Primary)
-2. **Professional Extensions** (Invited Only)
-3. **Clinician Extensions** (Invited Only)
-4. **APP Platform Architecture**
-5. **Security Infrastructure**
+Wellio is a privacy-first Wellness APP Platform for individuals. Users track their wellbeing, get AI-driven insights, and optionally invite trainers, coaches, or clinicians to view derived signals — never raw logs or PHI.
 
 ---
 
-## 🗣️ Voice & Tone
+## Tone of Voice
 
-### Do
-- Individual-centered language
-- Privacy as foundational, not optional
-- Empowering, not restrictive
-- Clear, direct statements
-- Technical precision when needed
-
-### Don't
-- Professional-centered language
-- Privacy as a "feature"
-- Fear-based messaging
-- Vague or marketing-speak
-- Oversimplification of security
+- **Calm** — Reassuring, not alarmist
+- **Confident** — Assertive without being aggressive
+- **Privacy-assertive** — Clear about data protection
+- **Science-driven** — Evidence-based, not hype
+- **Non-medical** — Wellness-focused, not clinical
 
 ---
 
-## 📣 Key Messages by Audience
+## Words We Use
+
+| Term | Usage |
+|------|-------|
+| APP Platform | Always capitalize, emphasizes platform nature |
+| Wellness | Core focus area |
+| Individual | Primary user, always first |
+| Derived insights | What professionals see |
+| Optional support | How professionals participate |
+| FWI | Functional Wellness Index |
+| Private | Data stays on device |
+| Post-quantum | Encryption standard |
+| cMixx | Metadata protection |
+
+---
+
+## Words We Avoid
+
+| Term | Why |
+|------|-----|
+| Coaching platform | We're individual-first, not coach-first |
+| Medical platform | We don't provide medical services |
+| PHI collection | We explicitly avoid PHI |
+| Surveillance | Opposite of our value proposition |
+| Tracking (users) | We help users track themselves, not track users |
+| Data monetization | We don't sell data |
+| Social network | We're not a social platform |
+
+---
+
+## Key Messages by Audience
 
 ### For Individuals
-- "Track your wellbeing privately"
-- "Raw data stays on your device"
-- "Only you decide what to share"
-- "Revoke access anytime"
+- "Your wellness data stays yours"
+- "Understand your day through FWI"
+- "Connect with professionals only if you choose"
 
 ### For Trainers & Coaches
-- "You are an invited extension of the user's wellness journey"
-- "You see trends — not raw logs"
-- "Support clients who already use Wellio"
+- "Support clients without accessing their private logs"
+- "See trends and insights, not raw data"
+- "Build trust through privacy"
 
 ### For Clinicians
-- "You see functional signals — not PHI"
-- "Wellio is an APP Platform, not a medical system"
-- "Zero metadata exposure"
+- "Observe patterns without PHI exposure"
+- "Reduce compliance overhead"
+- "Support lifestyle change safely"
 
 ---
 
-## 🏷️ Taglines (Approved)
+## Competitive Positioning
 
-| Context | Tagline |
-|---------|---------|
-| Primary | Wellness without surveillance |
-| Product Hunt | The wellness APP Platform that coaches you without tracking you |
-| LinkedIn | Enterprise-grade privacy meets AI-powered wellness |
-| Twitter/X | Your health data is yours. Period. |
-| Investor | Privacy-preserving Wellness APP Platform enabling professional collaboration without liability |
-
----
-
-## 🚫 Words to Avoid
-
-| Avoid | Why |
-|-------|-----|
-| "coaching platform" | Implies professional-centered design |
-| "medical platform" | Implies clinical/PHI involvement |
-| "health tracker" | Undersells the platform architecture |
-| "we collect" | Implies data centralization |
-| "your data is safe" | Too generic; specify how |
-| "secure" (alone) | Use with specifics: "post-quantum encrypted" |
+| Competitor Approach | Wellio Approach |
+|---------------------|-----------------|
+| Collect user data centrally | Data stays on device |
+| Sell insights to third parties | Zero data monetization |
+| Professional-first design | Individual-first design |
+| Standard encryption | Post-quantum encryption |
+| Expose metadata | cMixx metadata elimination |
 
 ---
 
-## ✅ FAQ Responses
-
-**Q: Is Wellio a coaching platform?**
-A: No. Wellio is a Wellness APP Platform for individuals. Professionals can connect only when invited.
-
-**Q: Is Wellio a medical platform?**
-A: No. Clinicians see functional signals only — no PHI. They do not treat or diagnose within the platform.
-
-**Q: Why "APP Platform"?**
-A: Because Wellio supports multiple user types (individuals, trainers/coaches, clinicians) with shared infrastructure and privacy guarantees — more than a standalone app.
-
-**Q: Can professionals see my raw data?**
-A: Never. Professionals only see derived wellness signals like FWI and trends. Raw logs, journals, and notes stay private.
-
----
-
-## 🔒 Security Language
-
-### Trust Badges
-- Post-Quantum Encryption (ML-KEM-768)
-- Metadata Protection (cMixx)
-- Zero-Trust Architecture
-
-### Security Statement
-> The APP Platform is built with a zero-trust architecture. Raw logs never leave the user's device. All communication is protected with post-quantum encryption (ML-KEM-768) and cMixx metadata-elimination technology.
-
----
-
-*Last Updated: December 2024*
+*Last updated: December 2024*
