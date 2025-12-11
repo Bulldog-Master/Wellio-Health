@@ -453,6 +453,39 @@ export type Database = {
           },
         ]
       }
+      care_team_invites: {
+        Row: {
+          accepted_at: string | null
+          created_at: string
+          expires_at: string
+          id: string
+          invite_code: string
+          role: string
+          subject_id: string
+          viewer_id: string | null
+        }
+        Insert: {
+          accepted_at?: string | null
+          created_at?: string
+          expires_at: string
+          id?: string
+          invite_code: string
+          role: string
+          subject_id: string
+          viewer_id?: string | null
+        }
+        Update: {
+          accepted_at?: string | null
+          created_at?: string
+          expires_at?: string
+          id?: string
+          invite_code?: string
+          role?: string
+          subject_id?: string
+          viewer_id?: string | null
+        }
+        Relationships: []
+      }
       challenge_completions: {
         Row: {
           challenge_id: string
@@ -5879,6 +5912,7 @@ export type Database = {
         Returns: string
       }
       create_medical_session: { Args: { _user_id: string }; Returns: string }
+      generate_care_team_invite_code: { Args: never; Returns: string }
       generate_referral_code: { Args: never; Returns: string }
       generate_share_code: { Args: never; Returns: string }
       get_fitness_locations_safe: {
