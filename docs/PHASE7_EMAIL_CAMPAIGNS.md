@@ -19,7 +19,9 @@
 
 ## INDIVIDUAL CAMPAIGN
 
-### Email 1: Welcome (Day 0)
+### Email 1: "Welcome to Private Wellness" (Day 0)
+
+**Key message:** "Your data stays with you."
 
 **Subject:** Welcome to Wellio — Your privacy-first wellness journey starts here
 
@@ -41,7 +43,9 @@ Ready to get started? [Download Now]
 — The Wellio Team
 ```
 
-### Email 2: FWI Introduction (Day 2)
+### Email 2: "Meet Your FWI Score" (Day 2)
+
+**Key message:** Explains the daily signal.
 
 **Subject:** One score that changes everything
 
@@ -60,7 +64,9 @@ No servers. No uploads. Just you and your wellness.
 — The Wellio Team
 ```
 
-### Email 3: Privacy Deep Dive (Day 5)
+### Email 3: "Wellness Logs Without Surveillance" (Day 5)
+
+**Key message:** Your logs stay private.
 
 **Subject:** How Wellio protects your wellness data
 
@@ -79,7 +85,9 @@ We take your privacy seriously. Here's how:
 — The Wellio Team
 ```
 
-### Email 4: Professional Option (Day 10)
+### Email 4: "Invite Professionals, Not Risks" (Day 10)
+
+**Key message:** Support without exposure.
 
 **Subject:** Want to add a coach or clinician?
 
@@ -98,7 +106,9 @@ You're always in control.
 — The Wellio Team
 ```
 
-### Email 5: Engagement Check (Day 14)
+### Email 5: "Launch Day — Let's Begin" (Day 14)
+
+**Key message:** Join the movement.
 
 **Subject:** How's your wellness journey going?
 
@@ -123,7 +133,9 @@ We'd love to hear from you.
 
 ## COACH/TRAINER CAMPAIGN
 
-### Email 1: Welcome (Day 0)
+### Email 1: "A Safer Way to Support Clients" (Day 0)
+
+**Key benefit:** Trust + simplicity.
 
 **Subject:** Welcome to Wellio for Professionals
 
@@ -151,7 +163,9 @@ Your clients stay in control. You get the insights you need.
 — The Wellio Team
 ```
 
-### Email 2: Client Visibility (Day 3)
+### Email 2: "How Derived Insights Improve Programs" (Day 3)
+
+**Key message:** See what matters, not everything.
 
 **Subject:** What you see vs. what you don't
 
@@ -180,7 +194,9 @@ This is by design. Privacy builds trust.
 — The Wellio Team
 ```
 
-### Email 3: Inviting Clients (Day 7)
+### Email 3: "Zero Logs, Max Clarity" (Day 7)
+
+**Key message:** Simple, private client connections.
 
 **Subject:** Invite your first client
 
@@ -203,7 +219,9 @@ It's that simple — and completely private.
 — The Wellio Team
 ```
 
-### Email 4: Success Stories (Day 14)
+### Email 4: "Private Sessions With Metadata Protection" (Day 14)
+
+**Key message:** cMixx protects even communication patterns.
 
 **Subject:** How coaches are using Wellio
 
@@ -224,11 +242,36 @@ Want to see more?
 — The Wellio Team
 ```
 
+### Email 5: "Start Building Your Wellio Client Base" (Day 21)
+
+**Key message:** Grow your practice privately.
+
+**Subject:** Ready to scale with privacy-first wellness?
+
+**Body:**
+```
+Hi [Name],
+
+You've experienced Wellio for three weeks. Now it's time to grow.
+
+🚀 **Scale your client base** — Invite unlimited clients
+📊 **Track progress** — See FWI trends for all clients
+🔒 **Build trust** — Privacy as your competitive advantage
+
+Your clients will thank you.
+
+[Upgrade to Pro]
+
+— The Wellio Team
+```
+
 ---
 
 ## CLINICIAN CAMPAIGN
 
-### Email 1: Welcome (Day 0)
+### Email 1: "Support Patients Without PHI Exposure" (Day 0)
+
+**Key phrase:** "Functional insights, not clinical risk."
 
 **Subject:** Welcome to Wellio Clinical Extensions
 
@@ -251,7 +294,9 @@ You can support patient lifestyle without the compliance burden.
 — The Wellio Team
 ```
 
-### Email 2: No PHI Design (Day 3)
+### Email 2: "Why cMixx Matters in Healthcare" (Day 3)
+
+**Key message:** Metadata protection for clinical communication.
 
 **Subject:** How Wellio avoids PHI
 
@@ -278,7 +323,9 @@ Wellio provides lifestyle intelligence, not medical data.
 — The Wellio Team
 ```
 
-### Email 3: Patient Connection (Day 7)
+### Email 3: "Lifestyle Data Without Liability" (Day 7)
+
+**Key message:** Engage patients without compliance burden.
 
 **Subject:** Connect with your first patient
 
@@ -300,7 +347,9 @@ Start with a pilot patient and see the difference.
 — The Wellio Team
 ```
 
-### Email 4: Use Cases (Day 14)
+### Email 4: "The Future of Patient-Wellness Interaction" (Day 14)
+
+**Key message:** Modern care, zero risk.
 
 **Subject:** Clinical use cases for Wellio
 
@@ -317,6 +366,29 @@ Clinicians are using Wellio for:
 No EMR integration required. No compliance complexity.
 
 [Schedule a Demo]
+
+— The Wellio Team
+```
+
+### Email 5: "Invite Your First Patients" (Day 21)
+
+**Key message:** Start your pilot program.
+
+**Subject:** Ready to transform patient wellness engagement?
+
+**Body:**
+```
+Hi [Name],
+
+It's time to bring Wellio to your practice.
+
+🏥 **Pilot Program** — Start with 5 patients
+📈 **Track Progress** — Functional signals between visits
+🔒 **Zero Risk** — No PHI, no compliance burden
+
+The future of patient engagement is here.
+
+[Start Your Pilot]
 
 — The Wellio Team
 ```

@@ -71,6 +71,11 @@
 - Text: `translateY(20px → 0)`, `opacity(0 → 1)`, `duration: 0.5s`, `delay: 0.2s`
 - Buttons: `translateY(20px → 0)`, `opacity(0 → 1)`, `duration: 0.5s`, `delay: 0.4s`
 
+### Hero Animation Integration
+- **Lottie JSON:** Use for PQ lock + cMixx nodes
+- **Scroll-triggered FWI:** Framer Motion for ring fill animation
+- **Particle effects:** Canvas-based or CSS keyframes
+
 ### Section 2: Features
 ```jsx
 <Features>
