@@ -82,6 +82,20 @@
 
 ---
 
+## SECURITY BADGES
+
+### Available Badges
+1. **PQ Encryption Verified** — Post-quantum encryption active
+2. **cMixx Metadata Protected** — Metadata elimination via xx Network
+3. **Zero Trust** — On-device data model
+
+### Badge Colors
+- Background: #0D0F14
+- Border: Gradient (violet → cyan)
+- Icon: White
+
+---
+
 ## PRESS QUOTES
 
 ### Security Angle

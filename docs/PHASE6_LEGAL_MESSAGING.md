@@ -182,4 +182,27 @@
 
 ---
 
+## COMPLIANCE PAGES STRUCTURE
+
+### Privacy Overview Page
+- Simple explanation of on-device model
+- Derived signals explanation
+- No PHI statement
+- Visual: Architecture diagram
+
+### Security Page
+- Deep dive into ML-KEM-768
+- AES-256-GCM explanation
+- cMixx metadata protection
+- Threat model overview
+- Visual: Security layer diagram
+
+### Professional Boundary Page
+- What coaches can see (FWI, trends, adherence)
+- What clinicians cannot see (raw logs, vault, metadata)
+- Why Wellio is not a medical system
+- Visual: Visibility comparison table
+
+---
+
 *Last updated: December 2024*
