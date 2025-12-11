@@ -4,62 +4,103 @@
 
 ---
 
-## ANIMATION 1 — "APP Platform Architecture"
+## ANIMATION STYLE
 
-### Duration: 8 seconds
-
-### Scene Flow
-```
-[0-2s] User icon appears center
-[2-4s] FWI circle materializes around user
-[4-6s] Professional layers (Coach, Clinician) fade in as outer rings
-[6-8s] PQ shield + cMixx network overlay appears
-```
-
-### Caption
-> "Your data stays private. Professionals see only what you allow."
+- **Transition:** Dark-to-light vertical reveal
+- **Particles:** Violet/cyan particles
+- **Motion:** Fluid motion lines
+- **Duration:** 30-45 seconds total
 
 ---
 
-## ANIMATION 2 — "Privacy Layer Reveal"
+## SCENE 1 — THE PROBLEM
 
-### Duration: 6 seconds
+**Visual:** Apps showing logs floating to servers (data leaving devices)
 
-### Scene Flow
-```
-[0-2s] Phone with wellness data visible
-[2-3s] Data particles attempt to leave device
-[3-4s] PQ shield blocks data exit (red flash)
-[4-6s] Shield transforms to green checkmark
-```
+**Text Overlay:**
+> "Your wellness data shouldn't be uploaded."
 
-### Caption
-> "Your data stays on your device."
+**Animation:**
+- Generic app icons emit data particles
+- Particles travel to server icons
+- Red warning flash
 
----
-
-## ANIMATION 3 — "Invite a Professional"
-
-### Duration: 7 seconds
-
-### Scene Flow
-```
-[0-2s] User taps "Invite" button
-[2-3s] Invite code generates (morphing animation)
-[3-5s] Code travels to professional
-[5-7s] Professional view shows: FWI only, "No Logs" label
-```
-
-### Caption
-> "They see insights, not your logs."
+**Duration:** 6 seconds
 
 ---
 
-## ANIMATION 4 — "FWI Score Build"
+## SCENE 2 — WELLIO APPEARS
 
-### Duration: 5 seconds
+**Visual:** Phone appears with Today Screen, glow around FWI
 
-### Scene Flow
+**Text Overlay:**
+> "A Wellness APP Platform built for privacy."
+
+**Animation:**
+- Phone drifts upward from bottom
+- FWI circle materializes with particle effect
+- Violet/cyan glow radiates
+
+**Duration:** 7 seconds
+
+---
+
+## SCENE 3 — APP PLATFORM ARCHITECTURE
+
+**Visual:** User → APP Platform layer → Trainer → Clinician
+
+**Text Overlay:**
+> "Professionals see insights — not your logs."
+
+**Animation:**
+- Individual icon appears center
+- Architecture layers expand outward
+- Professional icons fade in at edges
+- Data lines remain on-device (blocked from leaving)
+
+**Duration:** 8 seconds
+
+---
+
+## SCENE 4 — SECURITY SYSTEM
+
+**Visual:** PQ lock → cMixx nodes spinning
+
+**Text Overlay:**
+> "Post-Quantum Encryption + Metadata Protection."
+
+**Animation:**
+- PQ lock icon flashes and locks
+- cMixx network nodes pulse and connect
+- Shield forms around entire system
+
+**Duration:** 7 seconds
+
+---
+
+## SCENE 5 — FINAL MESSAGE
+
+**Visual:** Wellio logo fades in with gradient background
+
+**Text Overlay:**
+> "Your health. Your privacy. Your control."
+
+**Animation:**
+- Logo materializes from particles
+- Tagline types in
+- Security badges appear below
+
+**Duration:** 5 seconds
+
+---
+
+## ADDITIONAL ANIMATIONS
+
+### ANIMATION 6 — "FWI Score Build"
+
+**Duration:** 5 seconds
+
+**Scene Flow:**
 ```
 [0-1s] Empty circle outline
 [1-2s] Sleep segment fills (blue arc)
@@ -68,16 +109,15 @@
 [4-5s] Score number counts up to final value
 ```
 
-### Caption
-> "One score. All your wellness factors."
+**Caption:** "One score. All your wellness factors."
 
 ---
 
-## ANIMATION 5 — "cMixx Metadata Protection"
+### ANIMATION 7 — "cMixx Metadata Protection"
 
-### Duration: 8 seconds
+**Duration:** 8 seconds
 
-### Scene Flow
+**Scene Flow:**
 ```
 [0-2s] Message bubble leaves device
 [2-4s] Message enters cMixx node network (multiple paths shown)
@@ -85,16 +125,15 @@
 [6-8s] Message arrives at destination, no metadata visible
 ```
 
-### Caption
-> "Even the path of your message stays private."
+**Caption:** "Even the path of your message stays private."
 
 ---
 
-## ANIMATION 6 — "Medical Vault Security"
+### ANIMATION 8 — "Medical Vault Security"
 
-### Duration: 6 seconds
+**Duration:** 6 seconds
 
-### Scene Flow
+**Scene Flow:**
 ```
 [0-1s] Medical document icon
 [1-2s] Document wrapped in encryption layers
@@ -103,8 +142,7 @@
 [4-6s] Document stored in vault with lock
 ```
 
-### Caption
-> "Military-grade encryption. Quantum-resistant security."
+**Caption:** "Military-grade encryption. Quantum-resistant security."
 
 ---
 
@@ -114,8 +152,8 @@
 60 FPS
 
 ### Resolution
-1920 × 1080 (HD)
-3840 × 2160 (4K available)
+- 1920 × 1080 (HD)
+- 3840 × 2160 (4K available)
 
 ### Export Formats
 - MP4 (H.264)

@@ -88,6 +88,12 @@
 - Numbered steps
 - Screenshot per slide
 
+### Template Design Specs
+- **Colors:** Gradient violet (#7C3AED) → cyan (#22D3EE)
+- **Corner Radius:** 24px
+- **Shadow:** Deep modern glow (0 8px 32px rgba(124, 58, 237, 0.3))
+- **Font:** Space Grotesk (headings), Inter (body)
+
 ---
 
 ## HASHTAG STRATEGY

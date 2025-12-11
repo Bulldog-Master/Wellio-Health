@@ -4,201 +4,205 @@
 
 ---
 
-## 🎥 1. "The Wellness App That Doesn't Track You"
+## 🎥 1. "Your Wellness App Is Watching You"
 
-**Hook:** "Your wellness app is tracking you right now. Here's the one that doesn't."
+**Hook:** "Your wellness app knows when you eat, sleep, move… and it uploads everything."
 
-**Body:** Show phone → data leaving → blocked by shield → Wellio logo
+**Punchline:** "Wellio doesn't upload anything."
 
 **CTA:** "Link in bio for privacy-first wellness."
 
 ---
 
-## 🎥 2. "FWI Explained in 15 Seconds"
+## 🎥 2. "FWI Explained in 10 Seconds"
 
-**Hook:** "One private score that changes how you understand your day."
+**Hook:** "One score tells you how today is going."
 
-**Body:** Show FWI circle building → score reveal → trend arrow
+**Punchline:** "And it never leaves your device."
 
 **CTA:** "Try Wellio free."
 
 ---
 
-## 🎥 3. "Privacy Comparison"
+## 🎥 3. "What Professionals See vs Don't See"
 
-**Hook:** "What your wellness app sees vs. what Wellio sees."
+**Visual:** Split screen comparison
 
-**Body:** Split screen — Other apps see everything / Wellio sees derived signals only
+**Left side:** "Meals, logs, journal" → crossed out (❌)
 
-**CTA:** "Switch to privacy."
-
----
-
-## 🎥 4. "Professional Extension"
-
-**Hook:** "You can invite a trainer — and they STILL can't see your logs."
-
-**Body:** Show invite flow → coach dashboard → "No raw data" label
-
-**CTA:** "Privacy-first coaching is here."
-
----
-
-## 🎥 5. "Clinician Safety"
-
-**Hook:** "Clinicians: Want lifestyle insights without PHI? Here's how."
-
-**Body:** Show clinician dashboard → derived signals → no identifiers
-
-**CTA:** "Join the Wellio professional program."
-
----
-
-## 🎥 6. "Vault Security"
-
-**Hook:** "Your medical documents deserve AES-256 + PQ encryption."
-
-**Body:** Show document → encryption animation → vault door closes
-
-**CTA:** "Secure your health records."
-
----
-
-## 🎥 7. "The cMixx Advantage"
-
-**Hook:** "This is how Wellio hides your messaging patterns."
-
-**Body:** Show message → enters cMixx network → multiple paths → delivered anonymously
-
-**CTA:** "Metadata protection is real."
-
----
-
-## 🎥 8. "Why I Switched"
-
-**Hook:** "I found out my wellness app was selling my sleep data. So I switched."
-
-**Body:** POV scrolling through Wellio features
-
-**CTA:** "Your data belongs to you."
-
----
-
-## 🎥 9. "The AI That Doesn't Spy"
-
-**Hook:** "AI that improves your health without improving your data profile."
-
-**Body:** Show AI companion → insights generated → "on-device" badge
-
-**CTA:** "Private AI wellness."
-
----
-
-## 🎥 10. "Coach POV"
-
-**Hook:** "POV: You're a coach who finally has safe visibility into client wellness."
-
-**Body:** Show coach dashboard → FWI trends → adherence rings
-
-**CTA:** "Become a Wellio coach."
-
----
-
-## 🎥 11. "The Problem"
-
-**Hook:** "Every wellness app: We care about your privacy. Also every wellness app:"
-
-**Body:** Show data being uploaded → servers → third parties
-
-**CTA:** "Wellio is different."
-
----
-
-## 🎥 12. "Quantum-Proof Your Health Data"
-
-**Hook:** "Your health data will still exist when quantum computers arrive. Will it still be safe?"
-
-**Body:** Show ML-KEM-768 badge → "Quantum-resistant" label
-
-**CTA:** "Future-proof privacy."
-
----
-
-## 🎥 13. "What Coaches See"
-
-**Hook:** "What my trainer sees vs. what they don't."
-
-**Body:** Sees: FWI, trends, adherence / Doesn't see: meals, notes, location, metadata
+**Right side:** "FWI + trends" → green check (✅)
 
 **CTA:** "Privacy-safe coaching."
 
 ---
 
-## 🎥 14. "The Invite System"
+## 🎥 4. "Clinicians Love This"
 
-**Hook:** "How to add your coach to Wellio (it takes 10 seconds)."
+**Hook:** "Zero PHI. Zero risk."
 
-**Body:** Tutorial: Settings → Professionals → Generate code → Share
+**Body:** Clinicians see patterns, not records.
 
-**CTA:** "Try it now."
-
----
-
-## 🎥 15. "Clinician Reaction"
-
-**Hook:** "My doctor's reaction when I showed her Wellio."
-
-**Body:** Reaction video style → show clinician dashboard features
-
-**CTA:** "Safe for clinicians."
+**CTA:** "Join the Wellio professional program."
 
 ---
 
-## 🎥 16. "The Vault Tour"
+## 🎥 5. "The Metadata Problem"
 
-**Hook:** "Tour of my medical vault (fully encrypted)."
+**Hook:** "Even if your messages are encrypted, someone knows when and to whom you talk."
 
-**Body:** Show vault unlock → document grid → encryption badges
+**Punchline:** "Wellio fixes that with cMixx."
+
+**CTA:** "Metadata protection is real."
+
+---
+
+## 🎥 6. "Your Vault Is Actually Encrypted"
+
+**Visual:** Show AES-256 → PQ lock animation
+
+**Hook:** "No one reads your documents except you."
 
 **CTA:** "Secure your records."
 
 ---
 
-## 🎥 17. "Morning Routine"
+## 🎥 7. "Why PQ Encryption Matters"
 
-**Hook:** "My morning wellness check-in takes 30 seconds."
+**Hook:** "Quantum computers will break most encryption."
 
-**Body:** Show quick logging: sleep → mood → hydration → FWI updates
+**Punchline:** "Wellio uses encryption that survives the future."
 
-**CTA:** "Start your day right."
-
----
-
-## 🎥 18. "The Trend That Matters"
-
-**Hook:** "Forget daily numbers. This is the trend that matters."
-
-**Body:** Show 14-day FWI trend → insights generated
-
-**CTA:** "Track what matters."
+**CTA:** "Future-proof privacy."
 
 ---
 
-## 🎥 19. "Family Wellness"
+## 🎥 8. "Stop Giving Away Your Health Data"
 
-**Hook:** "How I track my family's wellness without invading their privacy."
+**Visual:** Side-by-side of typical app vs Wellio
 
-**Body:** Show family view → individual FWI scores → no log access
+**Hook:** "One uploads everything. One keeps everything private."
 
-**CTA:** "Privacy for everyone."
+**CTA:** "Switch to privacy."
 
 ---
 
-## 🎥 20. "The Future of Wellness"
+## 🎥 9. "Individual First, Professional Optional"
 
-**Hook:** "This is what wellness apps will look like in 2030."
+**Hook:** "Most platforms are built for professionals."
 
-**Body:** Show full Wellio feature set → privacy badges → professional layers
+**Punchline:** "Wellio is built for YOU."
+
+**CTA:** "Your wellness. Your control."
+
+---
+
+## 🎥 10. "What Is an APP Platform?"
+
+**Hook:** "One app. Multiple roles. One privacy model."
+
+**Body:** Individual → Coach → Clinician layers
+
+**CTA:** "Discover the Wellio APP Platform."
+
+---
+
+## 🎥 11. "What Therapists/Clinicians Actually Want"
+
+**Hook:** "Behavioral signals, not your diary."
+
+**Body:** Show clinician dashboard with trends only
+
+**CTA:** "Safe for clinicians."
+
+---
+
+## 🎥 12. "The FWI Lift Challenge"
+
+**Hook:** "Can you improve your FWI in 7 days?"
+
+**Body:** 7-day FWI improvement challenge reveal
+
+**CTA:** "Join the challenge. Link in bio."
+
+---
+
+## 🎥 13. "Hydration Hack"
+
+**Hook:** "Your FWI drops when you're dehydrated."
+
+**Body:** Show FWI + hydration behavior correlation
+
+**CTA:** "Track hydration privately."
+
+---
+
+## 🎥 14. "Better Than Journaling"
+
+**Hook:** "Journaling is great. AI insights from your mood are better."
+
+**Body:** Mood log → AI wellness insights
+
+**CTA:** "Private mood tracking."
+
+---
+
+## 🎥 15. "Vault Tour"
+
+**Hook:** "Tour of my medical vault (fully encrypted)."
+
+**Body:** Locked → biometric unlock → document grid → locked again
+
+**CTA:** "Secure your health records."
+
+---
+
+## 🎥 16. "Invite a Trainer Safely"
+
+**Hook:** "You can invite a trainer — and they still can't see your logs."
+
+**Body:** Show invite flow → coach sees FWI only
+
+**Punchline:** "No exposure, no logs, no metadata."
+
+**CTA:** "Privacy-first coaching."
+
+---
+
+## 🎥 17. "Why On-Device Matters"
+
+**Hook:** "Your data never leaves your device."
+
+**Body:** Show data staying local → blocked from servers
+
+**CTA:** "True privacy."
+
+---
+
+## 🎥 18. "Privacy Is a Feature"
+
+**Hook:** "Most apps hide their privacy. Wellio makes it visible."
+
+**Body:** Show security badges and privacy indicators
+
+**CTA:** "Transparency matters."
+
+---
+
+## 🎥 19. "The Wellness Triangle"
+
+**Hook:** "Sleep / Food / Movement — the three pillars."
+
+**Body:** Show how FWI combines all three
+
+**CTA:** "One score. Complete wellness."
+
+---
+
+## 🎥 20. "The Future of Wellness is Private"
+
+**Hook:** "In 2030, wellness apps will be private by default."
+
+**Punchline:** "Wellio is already there."
 
 **CTA:** "Get ahead of the curve."
 
@@ -218,6 +222,7 @@
 ### Captions
 - Always include captions
 - Use Wellio brand colors for text
+- Font: Bold sans-serif
 
 ### Hashtags
 ```
