@@ -138,6 +138,7 @@ import complianceES from './locales/es/compliance.json';
 import accessibilityES from './locales/es/accessibility.json';
 import onboardingES from './locales/es/onboarding.json';
 import clinicianES from './locales/es/clinician.json';
+import careTeamES from './locales/es/care_team.json';
 
 // Portuguese - Core namespaces only
 import commonPT from './locales/pt/common.json';
@@ -170,6 +171,7 @@ import compliancePT from './locales/pt/compliance.json';
 import accessibilityPT from './locales/pt/accessibility.json';
 import onboardingPT from './locales/pt/onboarding.json';
 import clinicianPT from './locales/pt/clinician.json';
+import careTeamPT from './locales/pt/care_team.json';
 
 // French - Core + Extended namespaces
 import commonFR from './locales/fr/common.json';
@@ -211,6 +213,7 @@ import complianceFR from './locales/fr/compliance.json';
 import accessibilityFR from './locales/fr/accessibility.json';
 import onboardingFR from './locales/fr/onboarding.json';
 import clinicianFR from './locales/fr/clinician.json';
+import careTeamFR from './locales/fr/care_team.json';
 
 // German - Core namespaces only
 import commonDE from './locales/de/common.json';
@@ -243,6 +246,7 @@ import complianceDE from './locales/de/compliance.json';
 import accessibilityDE from './locales/de/accessibility.json';
 import onboardingDE from './locales/de/onboarding.json';
 import clinicianDE from './locales/de/clinician.json';
+import careTeamDE from './locales/de/care_team.json';
 
 // Chinese - Core namespaces only
 import commonZH from './locales/zh/common.json';
@@ -275,6 +279,7 @@ import complianceZH from './locales/zh/compliance.json';
 import accessibilityZH from './locales/zh/accessibility.json';
 import onboardingZH from './locales/zh/onboarding.json';
 import clinicianZH from './locales/zh/clinician.json';
+import careTeamZH from './locales/zh/care_team.json';
 
 // Turkish - Core + Extended namespaces
 import commonTR from './locales/tr/common.json';
