@@ -1,124 +1,160 @@
-# cMixx Integration Guide
+# Wellio + cMixx Integration
+
+**Metadata-Private Communication Architecture**
 
 ## Overview
 
-Wellio integrates with [xx.network's cMixx](https://xx.network) to provide **metadata protection** for professional messaging. This document explains why metadata protection matters, how it works, and how it integrates with Wellio's existing security architecture.
+Wellio is a privacy-first Wellness APP Platform for individuals, with optional connections to friends, family, colleagues, trainers, coaches, and clinicians. Raw data remains strictly on-device, and only derived wellness insights may be shared.
+
+To enable truly private communication between users and their chosen supporters, Wellio integrates **xx network's cMixx protocol**. Unlike traditional encrypted messaging, cMixx removes metadata entirely—preventing adversaries from learning who is communicating, how often, or when.
 
 ---
 
-## Why Metadata Protection Matters
+## Why cMixx Is Required
 
-### The Problem with Standard E2E Encryption
+Most encrypted communication platforms still leak:
 
-Traditional end-to-end encryption (E2E) protects **message content** — an attacker cannot read what you wrote. However, E2E alone **does not protect metadata**:
+- Sender and receiver identity
+- Communication frequency
+- Timing and correlation patterns
+- Relationship structures
+- Behavioral inferences (e.g., therapy sessions, coaching engagement, relapse patterns)
 
-| What E2E Protects | What E2E Leaks |
-|-------------------|----------------|
-| ✅ Message content | ❌ Who is communicating |
-| ✅ Attachments | ❌ When messages are sent |
-| ✅ Media files | ❌ Frequency of communication |
-| | ❌ Message sizes and patterns |
-| | ❌ Network timing correlations |
+In wellness and clinical contexts, metadata is itself highly sensitive. cMixx solves this through:
 
-### Why This Matters for Wellness/Clinical Contexts
+- Sender-receiver unlinkability
+- Precomputation-based batching
+- Timing obfuscation
+- Strong anonymity sets
+- Traffic analysis resistance
+- Forward-secure PQ-safe design
 
-In health and wellness applications, metadata leakage can reveal:
+This is essential for protecting users who engage with:
 
-- **Communication patterns** — How often a user contacts their clinician (potentially revealing health anxiety or crisis periods)
-- **Timing correlations** — When users are active (sleep patterns, lifestyle indicators)
-- **Relationship mapping** — Who is connected to which professionals (health concerns by specialist type)
-- **Behavioral inference** — Frequent short messages after certain times might indicate mood patterns
-
-Even if content is encrypted, adversaries (ISPs, network observers, compromised servers) can build detailed behavioral profiles from metadata alone.
-
----
-
-## How cMixx Solves This
-
-### Mixnet Architecture
-
-cMixx is a **mixnet** (mix network) that anonymizes communication metadata through:
-
-1. **Batched message routing** — Messages from many users are collected into fixed batches
-2. **Multi-hop mixing** — Each message passes through multiple independent nodes
-3. **Timing obfuscation** — Messages are delayed and reordered to break timing correlations
-4. **Traffic analysis resistance** — Observers cannot determine who is talking to whom
-
-### Key Technical Properties
-
-| Property | Description |
-|----------|-------------|
-| **Fixed batch sizes** | All batches are identical size regardless of content |
-| **Decentralized nodes** | No single server can reconstruct message flows |
-| **Parallelized mixing** | Low-latency despite multi-hop routing |
-| **Quantum resistance** | Uses post-quantum key encapsulation |
+- Coaches
+- Clinicians
+- Mental-wellness supporters
+- Friends or colleagues in sensitive circumstances
 
 ---
 
-## Wellio Integration Architecture
+## Integration Points
 
-### Layer Model
+### 1. Derived Insight Delivery
 
-Wellio uses a **two-layer security model** for professional messaging:
+All outbound insight packets (FWI, adherence, trend summaries) are transported through cMixx.
+No timestamps, raw logs, or behavioral patterns are leaked.
 
-```
-┌─────────────────────────────────────────────────┐
-│              Layer 2: cMixx                     │
-│         (Metadata Protection)                   │
-│   Hides: who, when, how often, patterns         │
-└─────────────────────────────────────────────────┘
-                      ▲
-                      │
-┌─────────────────────────────────────────────────┐
-│              Layer 1: E2E Encryption            │
-│         (Content Protection)                    │
-│   Uses: ML-KEM-768 + AES-256-GCM               │
-└─────────────────────────────────────────────────┘
-```
+### 2. Messaging
 
-### Interface Abstractions
+Every message exchanged with supporters—personal or professional—is routed through the mixnet.
+This prevents leakage of:
 
-Wellio uses two key interfaces (defined in `ACCESS_MODEL.md`) to abstract the transport and crypto layers:
+- Communication intensity
+- Sleep/wake cycle inferences
+- Program adherence patterns
+- Therapeutic escalation windows
 
-```typescript
-interface ISecureTransport {
-  send(recipientId: string, payload: Uint8Array): Promise<void>;
-  onReceive(handler: (senderId: string, payload: Uint8Array) => void): void;
-}
+### 3. Session Scheduling
 
-interface ISecureCrypto {
-  encryptForRecipient(recipientPublicKey: string, plaintext: Uint8Array): Promise<Uint8Array>;
-  decryptFromSender(ciphertext: Uint8Array): Promise<Uint8Array>;
-}
-```
+Session reminders and check-ins are especially sensitive.
+These, too, are delivered exclusively through cMixx.
 
-These abstractions allow swapping transport implementations (direct WebSocket, cMixx, future protocols) without changing application code.
+### 4. Future Real-Time Signaling
 
-### Message Flow
-
-```
-┌─────────────┐    ┌──────────────┐    ┌─────────────┐    ┌─────────────┐
-│   Wellio    │───▶│  E2E Layer   │───▶│ xxdk WASM   │───▶│   cMixx     │
-│   Client    │    │  (encrypt)   │    │  (routing)  │    │   Network   │
-└─────────────┘    └──────────────┘    └─────────────┘    └─────────────┘
-                                                                │
-┌─────────────┐    ┌──────────────┐    ┌─────────────┐          │
-│  Recipient  │◀───│  E2E Layer   │◀───│ xxdk WASM   │◀─────────┘
-│   Client    │    │  (decrypt)   │    │  (receive)  │
-└─────────────┘    └──────────────┘    └─────────────┘
-```
+Video & voice session signaling will use cMixx for metadata elimination prior to encrypted media transport.
 
 ---
 
-## Implementation Details
+## Architecture Layers
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                   ON-DEVICE LAYER                           │
+│  • Raw logs           • Journals                            │
+│  • FWI computation    • PQ-encrypted Medical Vault          │
+│  • No cloud-stored personal data                            │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│               DERIVED INSIGHT LAYER                         │
+│  • FWI                • Trend computations                  │
+│  • Behavioral adherence metrics                             │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│                 cMixx TRANSPORT LAYER                       │
+│  • Mixnet batching    • Metadata elimination                │
+│  • Traffic unlinkability                                    │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│               RECIPIENT INSIGHT LAYER                       │
+│  • Supporters: high-level summaries                         │
+│  • Coaches/trainers: FWI + trends                           │
+│  • Clinicians: functional patterns (no PHI)                 │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### On-Device Layer
+
+| Component | Description |
+|-----------|-------------|
+| Raw logs | Personal activity, nutrition, mood data |
+| Journals | Private notes and reflections |
+| FWI computation | Functional Wellness Index calculated locally |
+| Medical Vault | PQ-encrypted (ML-KEM-768) medical records |
+
+### Derived Insight Layer
+
+| Insight | Recipients |
+|---------|------------|
+| FWI score | All authorized supporters |
+| Trend analysis | Coaches, clinicians |
+| Adherence metrics | Coaches, clinicians |
+
+### cMixx Transport Layer
+
+| Feature | Benefit |
+|---------|---------|
+| Mixnet batching | Fixed batch sizes prevent traffic analysis |
+| Timing obfuscation | Breaks temporal correlations |
+| Multi-hop routing | No single node sees full path |
+| Decentralized nodes | No central point of failure |
+
+### Recipient Insight Layer
+
+| Role | Visibility |
+|------|------------|
+| **Friends/Family/Colleagues** | High-level summaries only |
+| **Coaches/Trainers** | FWI + trends + adherence |
+| **Clinicians** | Functional patterns (no PHI) |
+
+---
+
+## Privacy Guarantees
+
+| Guarantee | Implementation |
+|-----------|----------------|
+| ✅ Raw data never leaves user device | On-device computation |
+| ✅ Derived insights shareable but anonymous | cMixx transport |
+| ✅ Communication relationships fully hidden | Sender-receiver unlinkability |
+| ✅ Timing and frequency protected | Batching + obfuscation |
+| ✅ Robust against future quantum adversaries | ML-KEM-768 + forward secrecy |
+
+---
+
+## Technical Implementation
 
 ### Dependencies
 
 ```json
 {
-  "dependencies": {
-    "xxdk-wasm": "^0.3.22"
-  }
+  "xxdk-wasm": "^0.3.22",
+  "@noble/post-quantum": "^0.5.2"
 }
 ```
 
@@ -126,37 +162,10 @@ These abstractions allow swapping transport implementations (direct WebSocket, c
 
 | Component | Location | Purpose |
 |-----------|----------|---------|
-| `useE2EEncryption` | `src/hooks/encryption/` | E2E encryption hook |
 | `useCmixConnection` | `src/hooks/network/` | cMixx network connection |
-| `SecureMessaging` | `src/components/messages/` | UI for secure messaging |
-| `user_encryption_keys` | Database table | Public key storage |
-| `secure_messages` | Database table | Encrypted message storage |
-
-### Database Schema
-
-```sql
--- User encryption keys
-CREATE TABLE user_encryption_keys (
-  id UUID PRIMARY KEY,
-  user_id UUID REFERENCES auth.users,
-  public_key TEXT NOT NULL,
-  key_type TEXT DEFAULT 'ml-kem-768',
-  created_at TIMESTAMPTZ DEFAULT now(),
-  UNIQUE(user_id)
-);
-
--- Secure messages (stores only ciphertext)
-CREATE TABLE secure_messages (
-  id UUID PRIMARY KEY,
-  conversation_id UUID NOT NULL,
-  sender_id UUID REFERENCES auth.users,
-  ciphertext TEXT NOT NULL,
-  nonce TEXT NOT NULL,
-  kem_ciphertext TEXT,
-  protocol_version INTEGER DEFAULT 1,
-  created_at TIMESTAMPTZ DEFAULT now()
-);
-```
+| `useE2EEncryption` | `src/hooks/encryption/` | E2E encryption layer |
+| `careTeamVisibility.ts` | `src/features/care-team/` | Visibility rules |
+| `secure_messages` | Database | Encrypted message storage |
 
 ### Encryption Protocol
 
@@ -166,74 +175,33 @@ CREATE TABLE secure_messages (
 
 ---
 
-## Failure Modes & Fallbacks
+## Failure Modes
 
-### Design Philosophy: Fail Closed
-
-Wellio follows a **fail-closed** model for professional messaging. If cMixx is unavailable:
+Wellio follows a **fail-closed** model:
 
 | Scenario | Behavior |
 |----------|----------|
 | cMixx network unreachable | Messages **not sent** — user notified |
-| xxdk WASM fails to load | Messaging **disabled** — fallback UI shown |
+| xxdk WASM fails to load | Messaging **disabled** |
 | Key exchange failure | Conversation **not created** |
 
-**Rationale**: Downgrading to plain WebSocket would expose metadata, which defeats the privacy promise. Users and professionals explicitly chose privacy-protected communication.
-
-### Status Indicators
-
-The UI displays connection status:
-
-- 🟢 **Full Privacy** — cMixx connected, E2E active
-- 🟡 **Partial Privacy** — E2E only (cMixx unavailable)
-- 🔴 **No Privacy** — Connection failed (messaging disabled)
+**Rationale**: Downgrading to plain WebSocket would expose metadata, defeating the privacy promise.
 
 ---
 
-## For xx Foundation / Security Reviewers
-
-### Verification Points
-
-1. **xxdk-wasm dependency** — Listed in `package.json`
-2. **ISecureTransport abstraction** — Documented in `ACCESS_MODEL.md`
-3. **Fail-closed behavior** — No WebSocket fallback for professional messages
-4. **Protocol versioning** — `protocol_version` column enables future migrations
-5. **Key storage** — Public keys only; private keys device-stored
-
-### Code Entry Points
-
-```
-src/hooks/network/useCmixConnection.ts      # cMixx connection management
-src/hooks/encryption/useE2EEncryption.ts    # E2E encryption hook
-src/lib/encryption.ts                        # Core encryption utilities
-src/features/care-team/careTeamVisibility.ts # Visibility rules
-```
-
-### Related Documentation
+## Related Documentation
 
 - [ACCESS_MODEL.md](./ACCESS_MODEL.md) — Who sees what
-- [SECURITY_AUDIT.md](./SECURITY_AUDIT.md) — Security posture assessment
 - [PROFESSIONAL_ECONOMICS.md](./PROFESSIONAL_ECONOMICS.md) — Professional incentives
+- [SECURITY_AUDIT.md](./SECURITY_AUDIT.md) — Security posture
 
 ---
 
-## Roadmap
+## Conclusion
 
-### Current State (MVP)
-- [x] E2E encryption (ML-KEM-768 + AES-256-GCM)
-- [x] xxdk-wasm dependency
-- [x] ISecureTransport/ISecureCrypto interfaces
-- [x] Privacy status indicators
+cMixx is foundational to Wellio's mission. It enables a multi-role wellness support ecosystem—friends, family, colleagues, coaches, and clinicians—without exposing relationships, behavioral cycles, or identity metadata.
 
-### Next Phase
-- [ ] Full cMixx routing activation (awaiting xx network credentials)
-- [ ] Offline message queuing
-- [ ] Group messaging with cMixx
-
-### Future
-- [ ] Cross-platform key sync
-- [ ] Hardware security key support
-- [ ] Advanced traffic analysis resistance
+Wellio becomes a flagship real-world demonstration of **metadata-private, post-quantum wellness technology** built on xx network infrastructure.
 
 ---
 
@@ -241,5 +209,5 @@ src/features/care-team/careTeamVisibility.ts # Visibility rules
 
 - [xx.network Documentation](https://xx.network/docs)
 - [cMixx Whitepaper](https://xx.network/whitepaper)
-- [@noble/post-quantum](https://github.com/paulmillr/noble-post-quantum) — ML-KEM implementation
+- [@noble/post-quantum](https://github.com/paulmillr/noble-post-quantum)
 - [NIST Post-Quantum Cryptography](https://csrc.nist.gov/projects/post-quantum-cryptography)
