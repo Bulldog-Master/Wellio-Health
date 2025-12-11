@@ -322,15 +322,16 @@ const Landing = () => {
           </div>
         </section>
 
-        {/* Why Professionals Use Wellio */}
+        {/* For Professionals */}
         <section className="py-20 px-4 md:px-8 lg:px-16">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Why Professionals Use Wellio
+                Support Your Clients or Patients — Privately
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Professionals use the APP Platform as an extension, not a workspace.
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Wellio is not a coaching platform or a medical system. It is an APP Platform that lets 
+                individuals optionally share derived wellness insights with trusted professionals.
               </p>
             </div>
 
@@ -338,50 +339,20 @@ const Landing = () => {
               <Card>
                 <CardContent className="p-8">
                   <Dumbbell className="h-10 w-10 text-primary mb-4" />
-                  <h3 className="text-xl font-bold mb-4">Trainers & Coaches</h3>
-                  <ul className="space-y-3 text-muted-foreground">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span>Support clients who already use Wellio</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span>View high-level wellness signals</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span>Conduct secure sessions</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span>Never access private logs</span>
-                    </li>
-                  </ul>
+                  <h3 className="text-xl font-bold mb-4">For Trainers & Coaches</h3>
+                  <p className="text-muted-foreground">
+                    Receive high-level data to guide client behavior safely and privately.
+                  </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardContent className="p-8">
                   <Stethoscope className="h-10 w-10 text-primary mb-4" />
-                  <h3 className="text-xl font-bold mb-4">Clinicians</h3>
-                  <ul className="space-y-3 text-muted-foreground">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span>View functional behavioral patterns</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span>Stay outside PHI exposure</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span>Avoid HIPAA storage burdens</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span>Do NOT treat or diagnose within the platform</span>
-                    </li>
-                  </ul>
+                  <h3 className="text-xl font-bold mb-4">For Clinicians</h3>
+                  <p className="text-muted-foreground">
+                    Observe patterns and support lifestyle change without PHI exposure.
+                  </p>
                 </CardContent>
               </Card>
             </div>
