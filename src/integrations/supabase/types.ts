@@ -3240,6 +3240,51 @@ export type Database = {
         }
         Relationships: []
       }
+      professional_profiles: {
+        Row: {
+          bio: string | null
+          country: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          license_id: string | null
+          organization: string | null
+          role: string
+          specialties: string[] | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bio?: string | null
+          country?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          license_id?: string | null
+          organization?: string | null
+          role: string
+          specialties?: string[] | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          bio?: string | null
+          country?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          license_id?: string | null
+          organization?: string | null
+          role?: string
+          specialties?: string[] | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       professional_relationship_requests: {
         Row: {
           client_id: string
