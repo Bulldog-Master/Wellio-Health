@@ -865,4 +865,193 @@ body {
 
 *Next.js landing page scaffold complete — ready to copy and deploy.*
 
+---
+
+## 2. Pitch Deck Content (Copy-Paste Ready)
+
+Clean, slide-by-slide content for Google Slides / Keynote:
+
+### Slide 1: Title
+**Wellio — The Privacy-First Wellness APP Platform**
+- Tagline: AI-powered wellness. Privacy by design.
+
+### Slide 2: Problem
+- Wellness apps upload raw logs
+- Professionals lack safe visibility
+- Clinicians avoid PHI exposure
+- Users lose control over their data
+
+### Slide 3: The Shift
+- Consumer privacy expectations rising
+- AI wellness guidance is mainstream
+- Remote coaching/clinical support exploding
+
+### Slide 4: What Wellio Is
+A privacy-first Wellness APP Platform for individuals, with optional support from trainers, coaches, and clinicians.
+
+### Slide 5: Individual Experience
+- FWI daily score
+- Today at a Glance
+- Sleep, meals, hydration, movement, mood logs
+- Encrypted medical vault
+- AI wellness assistant
+
+### Slide 6: FWI (Functional Wellness Index)
+- Composite of sleep, food, hydration, movement, mood, recovery
+- Computed on-device
+- Never sold, never shared by default
+
+### Slide 7: APP Platform Architecture
+- Individual at center
+- Optional professional extensions
+- Raw data on device
+- Derived insights only
+
+### Slide 8: Trainers & Coaches Layer
+- See FWI, adherence trends, patterns
+- Never see raw logs, vault, or journals
+- Support clients using Wellio, not replace their tools
+
+### Slide 9: Clinician Layer
+- See functional patterns & adherence
+- No PHI, no vault, no raw data
+- Reduced compliance exposure
+
+### Slide 10: Security Stack
+- ML-KEM-768 (post-quantum key encapsulation)
+- AES-256-GCM for vault and local storage
+- cMixx for metadata elimination
+- Zero-trust server architecture
+
+### Slide 11: Differentiation
+- Consumer-first (individual, not clinic)
+- Multi-role APP Platform
+- Post-quantum secure
+- Metadata-private
+
+### Slide 12: Market
+- $1.8T wellness
+- $120B telehealth
+- $20B+ coaching & training
+- $50B+ privacy & security
+
+### Slide 13: Go-To-Market
+- Individuals first (APP users)
+- Pros join via client invites
+- Clinician advisory + pilots
+- Privacy-focused marketing & partnerships
+
+### Slide 14: Traction
+- Users
+- Professionals
+- Active FWI engagement
+- Retention
+
+### Slide 15: Business Model
+- Free tier
+- Wellio+ subscription
+- Pro extension plans (trainer / clinician)
+- Session / program-based revenue option
+
+### Slide 16: Roadmap
+- v1 APP Platform (FWI, logs, vault, messaging)
+- Professional insights dashboard
+- Wearables integration (Suunto etc.)
+- Privacy-preserving analytics & programs
+
+### Slide 17: Technology
+- React Native
+- Supabase (or chosen backend)
+- PQ crypto libs
+- xx network cMixx integration
+
+### Slide 18: Team
+- Founder Bulldog
+- Advisors (clinicians, cryptographers, product)
+
+### Slide 19: Vision
+Become the default Wellness APP Platform for people who refuse to trade health for surveillance.
+
+### Slide 20: Ask / Contact
+- Funding ask (if using for investors)
+- Strategic intros
+- QR code / link
+
+---
+
+## 3. Hero Animation Keyframe Cheat Sheet
+
+For animator reference — key moments to hit:
+
+| Keyframe | Time | Description |
+|----------|------|-------------|
+| KF1 | 0:01 | Logs flying into "cloud" icons |
+| KF2 | 0:03 | Hard cut to dark, all logs disappear. Wellio phone appears |
+| KF3 | 0:06 | FWI ring draws from 0 → 78 with smooth easing |
+| KF4 | 0:09 | Trainer & Clinician icons slide in; lines showing only simple FWI signal graph |
+| KF5 | 0:13 | PQ lock closes around the phone |
+| KF6 | 0:16 | cMixx nodes swirl around: messaging lines become blurred, then vanish |
+| KF7 | 0:20 | Everything fades to Wellio logo + tagline: "Your health. Your privacy. Your control." |
+
+---
+
+## 4. Key App Screens Spec
+
+Must-have screens in the APP Platform:
+
+### Screen 1: Today Screen
+- FWI ring (big, prominent)
+- 5 mini-cards: Sleep, Meals, Hydration, Movement, Mood
+- Short text: "Professionals see trends only, never raw logs."
+
+### Screen 2: Logs Screen
+- Tabbed categories (Sleep, Meals, Hydration, Movement, Mood)
+- Each entry: time + summary
+- FAB button for adding new logs
+
+### Screen 3: Medical Vault
+- **Locked state:** Biometric prompt + "AES-256 + ML-KEM-768 protected"
+- **Unlocked state:** Document cards, simple view/download UI
+
+### Screen 4: Professional View (Coach/Trainer)
+- Client list with FWI + trend arrow
+- No log details, no journals, no vault
+- Labels explicitly: "Derived signals only"
+
+### Screen 5: Professional View (Clinician)
+- Similar to coach but with more emphasis on multi-week trends and patterns
+- Banner: "This view contains no PHI or raw data."
+
+### Screen 6: Messaging with cMixx
+- E2E message view
+- Banner: "Metadata protected via cMixx"
+- Optional PQ badge icon
+
+---
+
+## 5. Branding Library — Logo & Badges
+
+### Logo Wordmark (SVG)
+
+```svg
+<svg width="260" height="60" viewBox="0 0 260 60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="wellioGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+  </defs>
+  <rect width="260" height="60" rx="16" fill="#020617"/>
+  <text x="24" y="36" font-family="Inter, system-ui" font-size="24" fill="white" font-weight="600">
+    WELLIO
+  </text>
+  <rect x="140" y="18" width="96" height="24" rx="12" fill="url(#wellioGrad)" />
+  <text x="150" y="35" font-family="Inter, system-ui" font-size="11" fill="#020617" font-weight="600">
+    APP PLATFORM
+  </text>
+</svg>
+```
+
+---
+
 *Last updated: December 2024*
