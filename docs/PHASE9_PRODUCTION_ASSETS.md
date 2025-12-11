@@ -1146,6 +1146,131 @@ Professionals never receive data unless the user explicitly shares *derived insi
   /vault
 ```
 
+## 🚀 Status
+
+- Core UI complete
+- FWI engine implemented
+- Vault encryption functional
+- Professional extension model in progress
+- cMixx + PQ integration hooks prepared
+
+---
+
+## 📜 License
+
+MIT
+```
+
+---
+
+## 7. Enhanced Messaging for xx Network & cMixx
+
+### A. PUBLIC VERSION — Marketing-Safe
+
+> Wellio uses xx network's cMixx metadata-private communication to protect professional interactions. Even if messages are encrypted, most platforms still leak metadata (who talked to whom, and when).
+>
+> With cMixx, Wellio eliminates those patterns — giving users true privacy during coaching or clinical support sessions.
+
+**Use for:** Website, App Store, Press kit, Social posts
+
+### B. PARTNER VERSION — For xx Network & Collaborators
+
+> Wellio integrates cMixx as its communication layer for professional interactions, ensuring that all trainer/coach/clinician traffic is unlinkable, timing-obscured, and shielded from metadata analysis. Combined with on-device FWI computation and ML-KEM-768-based key exchanges, Wellio provides full-spectrum privacy: content confidentiality, metadata elimination, post-quantum safety, and zero-trust guarantees.
+
+**Use for:** xx network partnership, Grant applications, Dev docs, Investor meetings
+
+### C. TECHNICAL VERSION — For Whitepapers & Engineering Docs
+
+> The Wellio APP Platform uses cMixx as a metadata-resistant communication protocol. All professional communication is routed through a multi-hop, precomputation-based mixnet that eliminates packet timing correlations, sender-receiver linkage, and traffic analysis vectors.
+>
+> By combining cMixx with ML-KEM-768 for PQ-safe key establishment and AES-256-GCM for local data stores, Wellio ensures forward secrecy, quantum resistance, and elimination of metadata leakage throughout the professional extension architecture.
+
+**Use for:** Whitepaper, GitHub docs, Technical blogs
+
+---
+
+## 8. In-App Copy Library
+
+### A. Onboarding Screens
+
+**Welcome**
+> Welcome to Wellio.
+> Your health. Your privacy. Your control.
+
+**Privacy Guarantee**
+> Your data stays on your device.
+> Nothing is uploaded without your permission.
+
+**Professional Extensions**
+> You can invite a trainer, coach, or clinician later.
+> They'll see insights — not your logs.
+
+### B. Today Screen
+
+**Your FWI Score**
+> A private daily signal based on sleep, meals, hydration, movement, and mood.
+
+**Footer**
+> Professionals see patterns, not personal entries.
+
+### C. Logging Screens
+
+**Meals**
+> "Log meals privately — these entries stay on your device."
+
+**Sleep**
+> "Track sleep to improve recovery patterns."
+
+**Movement**
+> "Your steps, workouts, and movement trends — tracked with privacy."
+
+### D. Medical Vault
+
+**Locked**
+> "Encrypted with AES-256 + Post-Quantum keys."
+> "Only you can unlock your vault."
+
+**Unlocked**
+> "Securely store medical files, documents, or notes.
+> No one — not even professionals — can access these."
+
+### E. Professional Invite Screen
+
+**Header**
+> Invite a Trainer / Coach / Clinician
+> Give them access to trends and FWI only.
+> Your logs, journals, and vault remain private.
+
+**Button:** Generate Invite Code
+
+### F. Professional Dashboard
+
+**Header:** Derived Insights (No Raw Data)
+
+**Cards:**
+- FWI Trend
+- Hydration Adherence
+- Meal Regularity
+- Movement Pattern
+- Mood Stability (derived indicator only)
+
+**Footer:** "This view contains no personal entries, notes, or documents."
+
+### G. Messaging (cMixx)
+
+**Banner**
+> Metadata Protected by cMixx
+> Your identity, timing, and conversation patterns are shielded.
+
+### H. Settings → Privacy
+
+**Privacy Controls**
+- Raw logs never leave your device
+- Professionals see derived signals only
+- Vault protected with PQ encryption
+- Messaging protected with cMixx
+- Zero tracking, zero ads
+
 ---
 
 *Last updated: December 2024*
