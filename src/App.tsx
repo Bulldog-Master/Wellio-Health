@@ -10,6 +10,7 @@ import { usePushNotifications, useOfflineStatus, useBackgroundSync } from "@/hoo
 import { useAppKeyboardShortcuts, usePageTracking } from "@/hooks/ui";
 import { initMonitoring } from "@/lib/services";
 import { useMonitoring } from "@/hooks/ui";
+import { useSubscriptionIntegrity } from "@/hooks/subscription";
 import { 
   SkipToContent, 
   InstallPrompt, 
@@ -57,6 +58,7 @@ const AppContent = () => {
   useBackgroundSync();
   usePageTracking();
   useMonitoring(); // Track page views and enable event tracking
+  useSubscriptionIntegrity(); // Validate localStorage cache integrity against backend
   
   // Initialize monitoring on mount
   useEffect(() => {

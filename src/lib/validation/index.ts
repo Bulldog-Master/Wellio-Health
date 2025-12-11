@@ -5,3 +5,8 @@
  */
 
 export * from './validationSchemas';
+export { 
+  postMetadataSchema, 
+  validatePostMetadata, 
+  sanitizePostMetadata 
+} from './postMetadataSchema';
