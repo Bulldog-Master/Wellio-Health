@@ -1165,27 +1165,33 @@ export type Database = {
           access_type: string
           accessed_at: string
           client_id: string
+          context: Json | null
           id: string
           ip_address: string | null
           professional_id: string
+          role: string | null
           user_agent: string | null
         }
         Insert: {
           access_type: string
           accessed_at?: string
           client_id: string
+          context?: Json | null
           id?: string
           ip_address?: string | null
           professional_id: string
+          role?: string | null
           user_agent?: string | null
         }
         Update: {
           access_type?: string
           accessed_at?: string
           client_id?: string
+          context?: Json | null
           id?: string
           ip_address?: string | null
           professional_id?: string
+          role?: string | null
           user_agent?: string | null
         }
         Relationships: []
