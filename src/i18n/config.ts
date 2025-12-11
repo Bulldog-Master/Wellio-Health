@@ -70,6 +70,7 @@ import complianceEN from './locales/en/compliance.json';
 import accessibilityEN from './locales/en/accessibility.json';
 import onboardingEN from './locales/en/onboarding.json';
 import clinicianEN from './locales/en/clinician.json';
+import careTeamEN from './locales/en/care_team.json';
 
 // Spanish
 import commonES from './locales/es/common.json';
@@ -1008,7 +1009,7 @@ const resources = {
     news: newsEN, sponsors: sponsorsEN, locations: locationsEN, ads: adsEN, products: productsEN,
     recovery: recoveryEN, addons: addonsEN, professional: professionalEN, payments: paymentsEN,
     legal: legalEN, controls: controlsEN, compliance: complianceEN, accessibility: accessibilityEN,
-    onboarding: onboardingEN, clinician: clinicianEN,
+    onboarding: onboardingEN, clinician: clinicianEN, care_team: careTeamEN,
   },
   es: {
     common: commonES, auth: authES, fitness: fitnessES, social: socialES, nutrition: nutritionES,
