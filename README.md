@@ -1,408 +1,102 @@
-<p align="center">
-  <img src="docs/assets/wellio-readme-banner.png" width="100%" alt="Wellio — Privacy-First Wellness APP Platform"/>
-</p>
-
 # Wellio — Privacy-First Wellness APP Platform
 
-<!-- PROJECT BADGES -->
-<p align="center">
-  <!-- Status -->
-  <img src="https://img.shields.io/badge/status-active-brightgreen?style=for-the-badge" alt="Status: Active" />
-  
-  <!-- Build Status -->
-  <img src="https://img.shields.io/github/actions/workflow/status/Bulldog-Master/Wellio-Health/ci.yml?branch=main&label=build&style=for-the-badge" alt="Build Status" />
-  
-  <!-- Security Scanning (Dynamic) -->
-  <a href="https://github.com/Bulldog-Master/Wellio-Health/security/code-scanning">
-    <img src="https://img.shields.io/github/actions/workflow/status/Bulldog-Master/Wellio-Health/codeql.yml?branch=main&label=CodeQL&style=for-the-badge&logo=github&logoColor=white" alt="CodeQL" />
-  </a>
-  
-  <!-- Snyk Vulnerability Scanning -->
-  <a href="https://snyk.io/test/github/Bulldog-Master/Wellio-Health">
-    <img src="https://snyk.io/test/github/Bulldog-Master/Wellio-Health/badge.svg" alt="Known Vulnerabilities" />
-  </a>
-  
-  <!-- License -->
-  <img src="https://img.shields.io/badge/license-Proprietary-lightgrey?style=for-the-badge" alt="License" />
-</p>
+Your health. Your privacy. Your control.
 
-<p align="center">
-  <sub><em>Security badges reflect real-time automated scans via <strong>CodeQL</strong> and <strong>Snyk</strong> on every push and pull request.</em></sub>
-</p>
+Wellio is a **privacy-first Wellness APP Platform** built for **individuals**, with optional support from **friends, family, colleagues, trainers, coaches, and clinicians**. Raw data stays on the user's device. Only *derived wellness insights*—such as FWI, trend patterns, and adherence signals—may be shared, and only with explicit user consent.
 
-<p align="center">
-  <!-- Tech Stack -->
-  <img src="https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React" />
-  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Vite-5-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
-  <img src="https://img.shields.io/badge/TailwindCSS-3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="TailwindCSS" />
-  <img src="https://img.shields.io/badge/Supabase-Edge_Secure-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" />
-  <img src="https://img.shields.io/badge/Capacitor-Mobile-119EFF?style=for-the-badge&logo=capacitor&logoColor=white" alt="Capacitor" />
-</p>
-
-<p align="center">
-  <!-- Security & Privacy -->
-  <img src="https://img.shields.io/badge/Encryption-Post_Quantum_(ML--KEM--768)-blueviolet?style=for-the-badge&logo=shield&logoColor=white" alt="Post-Quantum Encryption" />
-  <img src="https://img.shields.io/badge/Metadata-cMixx_Protected-success?style=for-the-badge&logo=lock&logoColor=white" alt="cMixx Metadata Protection" />
-  <img src="https://img.shields.io/badge/Architecture-Zero_Trust-brightgreen?style=for-the-badge&logo=readme" alt="Zero-Trust Architecture" />
-</p>
+Communication with all optional supporters is protected with **post-quantum encryption (ML-KEM-768)** and **xx network's cMixx metadata-elimination protocol**.  
+This ensures that *neither content nor communication patterns* ever leak.
 
 ---
 
-## ⭐ Master Positioning
+## 🚀 Platform Highlights
 
-**Wellio is a privacy-first Wellness APP Platform built for individuals — with optional support from trainers, coaches, and clinicians. Raw data stays on the user's device, and only derived wellness insights can be shared, if the user chooses.**
+### Individual-First Design
+- Complete personal wellness dashboard  
+- Functional Wellness Index (FWI)  
+- Today-at-a-Glance insights  
+- Sleep, meals, hydration, movement, and mood logs  
+- Private Medical Vault with PQ-encrypted storage  
 
-### What This Means
+### Optional Support Network
+Invite trusted people to help you reach your goals:
+- Friends, family, and colleagues  
+- Trainers & coaches  
+- Clinicians  
 
-| Element | Description |
-|---------|-------------|
-| **APP** | An application users interact with daily |
-| **Platform** | Supports multiple user types & broader architecture |
-| **Wellness** | Functional, lifestyle, holistic health tracking |
-| **Privacy-first** | Post-quantum encryption + cMixx metadata protection |
-| **Optional professionals** | Not required but available when invited |
+Each receives strictly limited, role-appropriate **derived insights**, never raw logs or documents.
 
 ---
 
-## 🎯 What is Wellio?
+## 🔐 Security Foundation
 
-Wellio is a next-generation Wellness APP Platform that empowers individuals to track their wellbeing privately — while optionally connecting with trainers, coaches, or clinicians through secure, limited-visibility insights. It is privacy-first, post-quantum secure, and powered by cMixx metadata protection.
+| Layer | Description |
+|-------|-------------|
+| **On-Device Data** | Raw logs, journals, and vault contents never leave the device. |
+| **Post-Quantum Crypto** | ML-KEM-768 for key establishment, AES-256-GCM for local encryption. |
+| **Metadata Protection** | All outbound communication routed through xx network's cMixx. |
+| **Zero-Trust Architecture** | Servers cannot view or infer user wellness data. |
+| **Professional Access Controls** | Coaches and clinicians see trends, not personal entries. |
 
-**Who is it for?**
-- Individuals tracking daily wellness (workouts, nutrition, habits, sleep)
-- Users who prioritize privacy and security for their health data
-- Global users needing multi-language support (23 languages)
-- Those seeking AI-powered fitness and nutrition insights
+For full details, see:  
+- [`SECURITY_FAQ.md`](docs/SECURITY_FAQ.md)  
+- [`SECURITY_AUDIT.md`](docs/SECURITY_AUDIT.md)  
+- [`ACCESS_MODEL.md`](docs/ACCESS_MODEL.md)  
+- [`CMIXX_INTEGRATION.md`](docs/CMIXX_INTEGRATION.md)
 
-### For Professionals (Trainers, Coaches & Clinicians)
+---
 
-Wellio is more than a consumer app — it is an APP Platform with optional professional extensions for trainers, coaches, and clinicians.
+## 🧠 Functional Wellness Index (FWI)
 
-Professionals use Wellio to:
-- Gain functional insight without exposing or handling PHI
-- Support clients/patients through trend analysis, not raw diaries
-- Run live video sessions and asynchronous check-ins in one secure platform
-- Send and receive post-quantum encrypted messages
-- Build stronger client relationships through measurable outcomes
-- Reduce administrative load — we handle security, storage, and compliance
+FWI is computed on-device using:
+- Sleep quality & timing  
+- Meal and hydration consistency  
+- Activity & movement balance  
+- Mood and stress reflections  
 
-Wellio allows professionals to grow their practice safely, and individuals retain full privacy control over what they share.
+Only the **FWI score and derived patterns** are ever shared. No raw entries, timestamps, or vault files are exposed.
 
-👉 See:
-- [ACCESS_MODEL.md](docs/ACCESS_MODEL.md) — who sees what
-- [PROFESSIONAL_ECONOMICS.md](docs/PROFESSIONAL_ECONOMICS.md) — incentives, tiers, revenue expansion
+---
 
-## ✨ Key Features
+## 📡 Professional & Personal Network Roles
 
-### 🏋️ Fitness & Activity
-- Workout logging with exercise library and video tutorials
-- Step counting and activity tracking
-- Habit tracking with streaks and rewards
-- Interval timers and live workout sessions
-- Progress photos and workout media gallery
-- Wearable integration (Suunto, more coming)
+| Role | What They Can See | What They Cannot See |
+|------|-------------------|----------------------|
+| **Friends / Family / Colleagues** | High-level wellbeing summaries | All logs, vault, journals, PHI |
+| **Trainers / Coaches** | FWI, adherence, trend views | Raw logs, journals, vault contents |
+| **Clinicians** | Functional patterns without PHI | Vault, raw data, identifiers |
 
-### 🥗 Nutrition
-- Food logging with AI-powered analysis
-- Meal planning and recipes
-- Receipt scanner for grocery tracking
-- Supplement tracking
+Access is logged and revocable at any time.
 
-### 🏥 Medical & Recovery
-- Secure medical records storage (quantum-resistant encryption)
-- Medical test results tracking
-- Medication management
-- Recovery hub with 10+ therapy types
-- Symptom tracking
+---
 
-### 👥 Social & Community
-- Social feed with posts, likes, and comments
-- Group challenges and leaderboards
-- Fundraising campaigns
-- Trainer/Coach and Practitioner portals
-- Live video sessions for remote coaching and consultations
-- E2E encrypted messaging with metadata protection
+## 🏗️ Architecture Overview
 
-### 🤖 AI-Powered Features
-- AI Voice Workout Companion (real-time coaching)
-- Predictive Injury Prevention
-- Emotion-Fitness Correlation Engine
-- Smart nutrition insights and recommendations
+See:  
+- [`ARCHITECTURE.md`](docs/ARCHITECTURE.md)  
+- [`CMIXX_INTEGRATION.md`](docs/CMIXX_INTEGRATION.md)
 
-### 🔐 Enterprise Security
-- **Quantum-Resistant Encryption**: ML-KEM-768 for medical records
-- **E2E Encryption**: AES-256-GCM for messages
-- **Metadata Protection**: [xx.network's cMixx](https://xx.network) routing layer for metadata elimination, preventing timing analysis, traffic correlation, or communication pattern leaks
-- **Comprehensive RLS**: Row-level security on all user data
-- **Audit Logging**: Full access tracking for sensitive data
-- **GDPR/HIPAA/CCPA Compliance**: Built-in privacy controls
+The system consists of:
+- On-device data computation  
+- Derived-insight gating  
+- cMixx metadata-private transport  
+- Role-based insight receivers  
+- A unified APP Platform model
 
-### 🌍 Global Accessibility
-- 23 languages supported
-- RTL language support (Arabic, Hebrew, Urdu)
-- WCAG accessibility compliance
-- PWA + Native iOS/Android via Capacitor
+---
 
-## 🛠️ Tech Stack
-
-| Category | Technology |
-|----------|------------|
-| **Frontend** | React 18, TypeScript, Vite |
-| **Styling** | Tailwind CSS, shadcn/ui |
-| **State** | TanStack Query, Zustand |
-| **Backend** | Supabase (Postgres, Auth, Storage, Edge Functions) |
-| **Mobile** | Capacitor (iOS/Android) |
-| **AI** | Lovable AI (Gemini + OpenAI models), OpenAI Realtime API |
-| **Encryption** | @noble/post-quantum (ML-KEM-768), Web Crypto API |
-| **i18n** | i18next (23 languages) |
-| **Testing** | Vitest, Testing Library |
-
-## 📁 Project Structure
-
-```
-src/
-├── components/          # UI components (22+ domain directories)
-│   ├── activity/        # Activity tracking components
-│   ├── auth/            # Authentication components
-│   ├── dashboard/       # Dashboard widgets
-│   ├── food/            # Nutrition components
-│   ├── layout/          # Layout and navigation
-│   ├── medical/         # Medical records
-│   ├── messages/        # Messaging with E2E encryption
-│   ├── privacy/         # Privacy controls
-│   ├── social/          # Social feed components
-│   ├── subscription/    # Payment and subscription
-│   └── ui/              # shadcn/ui base components
-├── hooks/               # Custom hooks (9 domain directories)
-│   ├── auth/            # Authentication hooks
-│   ├── encryption/      # E2E encryption hooks
-│   ├── fitness/         # Fitness data hooks
-│   ├── nutrition/       # Nutrition hooks
-│   └── social/          # Social features hooks
-├── lib/                 # Utilities and helpers
-│   ├── encryption.ts    # Tiered encryption (V1-V3)
-│   ├── medicalEncryption.ts  # Quantum-resistant medical encryption
-│   └── security/        # Security utilities
-├── pages/               # Route pages (100+ pages)
-├── stores/              # Zustand stores
-├── i18n/                # Internationalization (23 languages)
-│   ├── locales/         # Translation files
-│   └── config.ts        # i18n configuration
-└── integrations/        # External service integrations
-    └── supabase/        # Supabase client and types
-
-supabase/
-├── functions/           # Edge functions (30+ functions)
-│   ├── generate-insights/
-│   ├── ai-workout-recommendations/
-│   ├── medical-encrypt/
-│   └── ...
-└── migrations/          # Database migrations
-
-docs/                    # Documentation (25+ docs)
-├── ARCHITECTURE.md
-├── SECURITY_AUDIT.md
-├── LAUNCH_CHECKLIST.md
-└── ...
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js 18+ or Bun
-- npm, yarn, or bun
-
-### Installation
+## 🧪 Development
 
 ```bash
-# Clone the repository
-git clone https://github.com/Bulldog-Master/Wellio-Health.git
-cd Wellio-Health
-
-# Install dependencies
 npm install
-# or
-bun install
-
-# Start development server
 npm run dev
+npm run build
+npm run preview
+npm run typecheck
+npm run test
 ```
-
-### Environment Variables
-
-> **📦 Note for Reviewers:** In Lovable projects, `.env` is auto-generated and committed to the repo.  
-> This is intentional and safe—it only contains **publishable client-side keys** (e.g., Supabase anon key).  
-> All server-side secrets are managed via **Lovable Cloud Secrets** and never exposed in the codebase.  
-> See [SECURITY_FAQ.md](docs/SECURITY_FAQ.md) for full details.
-
-Copy `.env.example` to `.env` for local development:
-
-```bash
-cp .env.example .env
-```
-
-**Key distinction:**
-| Location | Contains | Exposed to Client |
-|----------|----------|-------------------|
-| `.env` (tracked) | `VITE_*` publishable keys only | ✅ Yes (by design) |
-| Lovable Cloud Secrets | Service keys, API secrets, encryption keys | ❌ Never |
-
-### Mobile Development
-
-```bash
-# Add platforms
-npx cap add ios
-npx cap add android
-
-# Sync and open
-npx cap sync
-npx cap open ios     # Opens in Xcode
-npx cap open android # Opens in Android Studio
-```
-
-## 🔒 Security Architecture
-
-### Tiered Encryption Strategy
-
-| Level | Algorithm | Use Case |
-|-------|-----------|----------|
-| **V3** | ML-KEM-768 (Quantum-Resistant) | Medical records, sensitive health data |
-| **V2** | AES-256-GCM + PBKDF2 | Messages, PII, payment metadata |
-| **V1** | Standard encryption + RLS | Media files, general user content |
-
-### Key Security Features
-- ✅ RLS on all user data tables
-- ✅ `user_roles` table (not on profiles) to prevent privilege escalation
-- ✅ Medical audit logging (`medical_audit_log`)
-- ✅ Rate limiting on sensitive operations
-- ✅ Session timeout (30 min) with anomaly detection
-- ✅ CSP headers and input validation
-- ✅ 2FA with backup codes
-
-## 🧑‍⚕️ Care Team Architecture
-
-Wellio is an individual-centered APP Platform with optional professional extensions. Users can connect with trainers, coaches, and clinicians who support their training and wellness goals — but professionals only see derived insights, never raw data.
-
-### What Professionals Can See
-
-| Role | Access | Restrictions |
-|------|--------|--------------|
-| **Coach** | Functional wellness index, adherence, workout readiness trends | No meal notes, raw logs, or chat metadata |
-| **Clinician** | Functional index + 30-day patterns | No diagnosis, no PHI, no raw diaries |
-
-Users approve every relationship from the **Care Team** screen and can revoke access at any time.
-
-> **No raw data or medical documents are exposed to professionals — only derived, privacy-preserving wellness indicators.**
-
-### Zero-Trust by Design
-
-- **Data minimization**: We never store plaintext logs on the server
-- **Per-relationship access**: Fine-grained consent at the user level
-- **Score versioning**: Historical data retains meaning even as formulas evolve
-- **Secure messaging**: Built for post-quantum encryption and cMixx routing
-
-This architecture enables **clinical relevance without clinical liability**.
-
-### Example: Trainer / Clinician Workflow (Happy Path)
-
-This example shows how Wellio protects privacy while still empowering coaches and clinicians.
-
-**1. Professional creates an invite code**
-- Code is unique, revocable, and one active code per role (coach/clinician).
-- No personal details are exchanged.
-
-**2. Client adds the code inside the app (Care Team tab)**
-- Wellio securely connects the two accounts.
-- No raw logs, medical documents, or PHI are shared.
-
-**3. Professional gains visibility to:**
-- ✔ Functional Wellness Index (FWI)
-- ✔ Trend behavior (improving, declining, stable)
-- ✔ Adherence indicators (sleep, meals, hydration, activity, mood)
-- ✘ Never raw journals, workout notes, or personal meal logs
-- ✘ Never medical vault content
-
-**4. Pro supports client/patient using:**
-- Live video sessions integrated in-app
-- Secure encrypted messaging (ML-KEM-768 + AES-256-GCM)
-- cMixx metadata-protected routing
-
-**5. Access is fully revocable**
-
-The client can remove a coach/clinician at any time. Professionals do not retain historical access.
-
-## 📈 Recent Improvements
-
-| Area | Enhancement |
-|------|-------------|
-| **Performance** | Memoized callbacks, centralized query keys, optimized re-renders |
-| **Animations** | Framer Motion micro-interactions, skeleton loaders, smooth transitions |
-| **i18n** | 23-language parity verified, missing key detection, automatic validation |
-| **Security** | CSP headers, session timeout (30min), anomaly detection, backup codes |
-
-See [IMPROVEMENTS_V2.md](docs/IMPROVEMENTS_V2.md) for full engineering changelog.
 
 ---
-
-## 🗺️ Roadmap
-
-### ✅ Completed
-- [x] Core fitness tracking (workouts, steps, habits)
-- [x] Nutrition logging with AI analysis
-- [x] Medical records with quantum-resistant encryption
-- [x] 23-language support
-- [x] E2E encrypted messaging
-- [x] cMixx metadata protection integration
-- [x] AI Voice Workout Companion
-- [x] Predictive Injury Prevention
-- [x] Comprehensive compliance framework (GDPR, HIPAA, CCPA)
-
-### 🔄 In Progress
-- [ ] Suunto wearable integration (awaiting API credentials)
-- [ ] Payment provider integration (Stripe, PayPal)
-- [ ] Production monitoring setup
-
-### 📋 Planned
-- [ ] Additional wearable integrations (Garmin, Apple Health)
-- [ ] Advanced AI coaching features
-- [ ] Team/family accounts
-- [ ] Telehealth integration
-
-## 📚 Documentation
-
-Comprehensive documentation is available in the `/docs` directory. See [**docs/INDEX.md**](docs/INDEX.md) for the complete index.
-
-### Key Documents
-
-| Category | Documents |
-|----------|-----------|
-| **Security** | [SECURITY.md](docs/SECURITY.md) · [SECURITY_FAQ.md](docs/SECURITY_FAQ.md) · [SECURITY_AUDIT.md](docs/SECURITY_AUDIT.md) |
-| **Architecture** | [TECHNICAL_ARCHITECTURE.md](docs/ARCHITECTURE.md) · [AI_PRIVACY.md](docs/AI_PRIVACY.md) |
-| **Care Team & Professionals** | [ACCESS_MODEL.md](docs/ACCESS_MODEL.md) · [PROFESSIONAL_ECONOMICS.md](docs/PROFESSIONAL_ECONOMICS.md) · [SUBSCRIPTION_GUIDE.md](SUBSCRIPTION_GUIDE.md) |
-| **Compliance** | [REGULATORY_COMPLIANCE.md](docs/ISO_COMPLIANCE.md) |
-| **Localization** | [SPANISH_TRANSLATION_PLAN.md](docs/SPANISH_TRANSLATION_PLAN.md) · [TRANSLATION_AUDIT_ES.md](docs/TRANSLATION_AUDIT_ES.md) |
-
-### For External Reviewers
-
-- **Security concerns?** See [SECURITY_FAQ.md](docs/SECURITY_FAQ.md) - explains `.env` file, key management, and common questions
-- **AI/Privacy?** See [AI_PRIVACY.md](docs/AI_PRIVACY.md) - data handling, anonymization, and what's never sent to AI
-
-## 🤝 Contributing
-
-This project is currently in private development. Contribution guidelines will be published when the project opens for contributions.
-
-## ⚠️ Disclaimer
-
-**Wellio Health is a wellness and fitness tracking tool, not a medical device.**
-
-- This application does not provide medical diagnosis, treatment, or professional health advice
-- Always consult qualified healthcare professionals for medical decisions
-- Medical records storage is for personal organization only
-- AI-powered insights are informational suggestions, not medical recommendations
-- The app is designed to align with GDPR, HIPAA, and CCPA principles but has not undergone formal regulatory certification
-
-By using this application, you acknowledge that it is a wellness tool and not a substitute for professional medical care.
 
 ## 📄 License
 
@@ -414,7 +108,3 @@ UNLICENSED (Proprietary)
 
 This repository includes a `.env` file containing **publishable** client configuration only.  
 Private secrets are handled via Lovable Cloud Secrets and are never exposed in the codebase.
-
----
-
-Built with ❤️ using [Lovable](https://lovable.dev)
