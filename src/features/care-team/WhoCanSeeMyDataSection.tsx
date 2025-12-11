@@ -1,5 +1,20 @@
 import { Shield } from 'lucide-react';
-import { CareTeamRole, getVisibilityRule } from './careTeamVisibility';
+import { CareTeamRole } from './careTeamVisibility';
+
+const ROLE_LABELS: Record<CareTeamRole, { label: string; description: string }> = {
+  coach: {
+    label: "Coach",
+    description: "Sees your Functional Wellness Index, adherence, and trends to guide training and habit change.",
+  },
+  clinician: {
+    label: "Clinician",
+    description: "Sees your Functional Wellness Index and trend summaries to support clinical decision-making.",
+  },
+  supporter: {
+    label: "Supporter",
+    description: "Sees only high-level wellbeing summaries. No detailed health data is shared.",
+  },
+};
 
 function SectionCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -55,11 +70,11 @@ export function WhoCanSeeMyDataSection({
 
         <ul className="list-disc pl-4 space-y-1">
           {visibleRoles.map((role) => {
-            const rule = getVisibilityRule(role);
+            const roleInfo = ROLE_LABELS[role];
             return (
               <li key={role}>
-                <span className="font-semibold">{rule.label}:</span>{" "}
-                {rule.description}
+                <span className="font-semibold">{roleInfo.label}:</span>{" "}
+                {roleInfo.description}
               </li>
             );
           })}
