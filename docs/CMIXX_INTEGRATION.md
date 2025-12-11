@@ -2,6 +2,9 @@
 
 **Metadata-Private Communication Architecture**
 
+> 📄 Download the one-page architecture overview (PDF):  
+> [`Wellio_cMixx_Integration_Architecture_OnePager.pdf`](assets/Wellio_cMixx_Integration_Architecture_OnePager.pdf)
+
 ## Overview
 
 Wellio is a privacy-first Wellness APP Platform for individuals, with optional connections to friends, family, colleagues, trainers, coaches, and clinicians. Raw data remains strictly on-device, and only derived wellness insights may be shared.
