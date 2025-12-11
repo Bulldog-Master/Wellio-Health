@@ -103,27 +103,27 @@ const Landing = () => {
           </div>
         </section>
 
-        {/* What Wellio Is */}
+        {/* What is Wellio */}
         <section className="py-20 px-4 md:px-8 lg:px-16 bg-muted/30">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                A Wellness APP Platform for Individuals
+                A Wellness APP Platform Designed Around You
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Wellio gives people a private, AI-powered way to improve their health — 
-                with professionals participating only when invited.
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Wellio gives individuals a private, AI-powered way to understand their wellbeing 
+                through daily habit tracking, the Functional Wellness Index, and privacy-safe insights.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { icon: Activity, title: "Track Daily Habits", desc: "Sleep, meals, workouts, hydration, mood — all in one place" },
-                { icon: TrendingUp, title: "Understand Wellness Trends", desc: "Your Functional Wellness Index (FWI) shows patterns over time" },
-                { icon: Brain, title: "AI Wellness Coaching", desc: "Personalized insights and recommendations powered by AI" },
-                { icon: Heart, title: "Improve Health Behaviors", desc: "Evidence-based nudges to build lasting habits" },
-                { icon: Lock, title: "Store Notes Securely", desc: "Encrypted medical vault for sensitive health information" },
-                { icon: MessageSquare, title: "Communicate Safely", desc: "E2E encrypted messaging with metadata protection" },
+                { icon: TrendingUp, title: "FWI — Your Private Wellness Score", desc: "A daily score reflecting your sleep, meals, movement, hydration, and mood" },
+                { icon: Activity, title: "Today at a Glance Dashboard", desc: "See your wellness status and daily actions at a glance" },
+                { icon: Heart, title: "Wellness Logs", desc: "Track sleep, meals, hydration, movement, and mood privately" },
+                { icon: Lock, title: "Private Journal & Medical Vault", desc: "Encrypted storage for journals and sensitive health information" },
+                { icon: Brain, title: "AI Wellness Guidance", desc: "Personalized insights and recommendations powered by AI" },
+                { icon: MessageSquare, title: "Secure Messaging & Video", desc: "E2E encrypted communication with optional video sessions" },
               ].map((feature, i) => (
                 <Card key={i} className="relative overflow-hidden group hover:shadow-lg transition-all">
                   <CardContent className="p-6">
