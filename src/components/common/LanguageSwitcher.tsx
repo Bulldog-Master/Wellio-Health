@@ -1,4 +1,4 @@
-import { Languages } from "lucide-react";
+import { Globe } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import {
   DropdownMenu,
@@ -51,7 +51,7 @@ export const LanguageSwitcher = () => {
           size="sm"
           className="hover:bg-sidebar-accent text-sidebar-foreground gap-1 px-2 h-8"
         >
-          <Languages className="w-4 h-4" />
+          <Globe className="w-4 h-4" />
           <span className="text-xs font-medium uppercase">{currentLanguage.code}</span>
         </Button>
       </DropdownMenuTrigger>
