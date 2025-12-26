@@ -57,6 +57,22 @@ manualChunks: {
 - **Supabase API**: NetworkFirst (24-hour cache)
 - **Storage/Images**: CacheFirst (30-day cache)
 - **Static Assets**: Precached during SW install
+- **Max File Size**: 6MB (increased from default 2MB)
+
+### Build Failure Fix: maximumFileSizeToCacheInBytes
+If you encounter a build failure related to file size caching limits, increase the `maximumFileSizeToCacheInBytes` in `vite.config.ts`:
+
+```javascript
+workbox: {
+  maximumFileSizeToCacheInBytes: 6 * 1024 * 1024, // 6MB (default is 2MB)
+  // ... other config
+}
+```
+
+**Notes:**
+- This setting does NOT slow down the app - it actually improves performance for returning users
+- If you hit the limit again, increase further (e.g., 10MB) but optimize large assets as a long-term solution
+- Trade-off: Uses more device storage, but enables caching of larger bundles
 
 ## Performance Metrics to Monitor
 
